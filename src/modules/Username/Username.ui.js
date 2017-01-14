@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-
+import { Button } from 'react-toolbox/lib/button';
 import { changeUsernameValue } from './Username.action'
 
 class UsernameComponent extends Component {
@@ -32,9 +32,9 @@ class UsernameComponent extends Component {
   render () {
     return (
       <div>
-        <button type="button">Back</button>
+        <Button type="button">Back</Button>
         <input type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder="Username" />
-        <button type="button" onClick={this._handleSubmit}>Next</button>
+        <Button type="button" onClick={this._handleSubmit}>Next</Button>
       </div>
     )
   }

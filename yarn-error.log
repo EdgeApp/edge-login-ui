@@ -1,0 +1,76 @@
+Arguments: 
+  /home/bojack/.nvm/versions/node/v6.9.1/bin/node /usr/share/yarn/bin/yarn.js install
+
+PATH: 
+  /home/bojack/.nvm/versions/node/v6.9.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/bojack/Android/Sdk/platform-tools:/home/bojack/Android/Sdk/tools
+
+Yarn version: 
+  0.18.1
+
+Node version: 
+  6.9.1
+
+Platform: 
+  linux x64
+
+npm manifest: 
+  {
+    "name": "atm-operator-admin",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node server_dev.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "async": "^2.0.1",
+      "joi-browser": "^9.0.1",
+      "lodash": "^4.17.4",
+      "moment": "^2.14.1",
+      "react": "^15.2.1",
+      "react-bootstrap": "^0.30.0",
+      "react-dom": "^15.2.1",
+      "react-redux": "^4.4.5",
+      "react-router": "^2.6.0",
+      "redux": "^3.5.2",
+      "redux-auth-wrapper": "^0.6.0",
+      "redux-form": "^5.3.1",
+      "redux-thunk": "^2.1.0",
+      "socket.io-client": "^1.7.2",
+      "superagent": "^2.1.0"
+    },
+    "devDependencies": {
+      "babel": "^6.5.2",
+      "babel-core": "^6.11.4",
+      "babel-eslint": "^6.1.2",
+      "babel-loader": "^6.2.4",
+      "babel-preset-es2015": "^6.9.0",
+      "babel-preset-react": "^6.11.1",
+      "babel-preset-stage-0": "^6.5.0",
+      "css-loader": "^0.23.1",
+      "eslint": "^3.1.1",
+      "eslint-plugin-react": "^5.2.2",
+      "express": "^4.14.0",
+      "json-loader": "^0.5.4",
+      "react-hot-loader": "^1.3.0",
+      "webpack": "^1.13.1",
+      "webpack-dev-middleware": "^1.6.1",
+      "webpack-dev-server": "^1.14.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: getaddrinfo EAI_AGAIN registry.npmjs.org:80
+      at Object.exports._errnoException (util.js:1026:11)
+      at errnoException (dns.js:33:15)
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:76:26)

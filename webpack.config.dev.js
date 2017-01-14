@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -12,8 +14,16 @@ module.exports = {
         filename: 'app.bundle.js',
         publicPath: '/assets/'
     },
+    resolve: {
+        extensions: ['', '.scss', '.css', '.js', '.json'],
+        modulesDirectories: [
+            'node_modules',
+            path.resolve(__dirname, './node_modules')
+        ]
+    },    
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin('bundle.css', { allChunks: true })
     ],
     module: {
         preLoaders: [
@@ -24,8 +34,15 @@ module.exports = {
 			  test: /\.js$/,
 			  loaders: ['react-hot', 'babel'],
 			  include: path.join(__dirname, 'src')
-			},
-			{ test: /\.css$/, loader: "style-loader!css-loader" }
+            }, {
+               test: /(\.scss|\.css)$/,
+               loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+            }
 		]
-    }
+    },
+    postcss: [autoprefixer],
+    sassLoader: {
+      data: '@import "theme/_config.scss";',
+      includePaths: [path.resolve(__dirname, './src')]
+    },    
 };

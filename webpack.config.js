@@ -11,7 +11,21 @@ module.exports = {
         filename: 'app.bundle.js',
         publicPath: '/assets/'
     },
+    resolve: {
+     extensions: ['', '.scss', '.css', '.js', '.json'],
+      modulesDirectories: [
+       'node_modules',
+        path.resolve(__dirname, './node_modules')
+      ]
+    },
+
+    postcss: [autoprefixer],
+    sassLoader: {
+      data: '@import "theme/_config.scss";',
+      includePaths: [path.resolve(__dirname, './src/app')]
+    },    
     plugins: [
+      new ExtractTextPlugin('bundle.css', { allChunks: true }),
 	    new webpack.optimize.OccurenceOrderPlugin(),
 	    new webpack.optimize.DedupePlugin(),
 	    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js"),
@@ -40,8 +54,10 @@ module.exports = {
 			  test: /\.js$/,
 			  loaders: ['babel'],
 			  include: path.join(__dirname, 'src')
-			},
-			{ test: /\.css$/, loader: "style-loader!css-loader" }
+      }, {
+        test: /(\.scss|\.css)$/,
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+      }      
 		]
     }
 };
