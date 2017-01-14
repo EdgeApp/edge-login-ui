@@ -16,5 +16,5 @@ app.listen(port, '0.0.0.0', function(err) {
        console.log(err);
        return;
    }
-   console.info('  ==> 🌎 Operator Administration server on port %s. Open up with your ip and port in your browser', port, port)
+   console.info('  ==> 🌎 Administration server on port %s. Open up with your ip and port in your browser', port, port)
 });
