@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 
 import { changeUsernameValue } from './Username.action'
 
 class UsernameComponent extends Component {
 
-  handleSubmit = () => {
-    this.props.dispatch(checkUsername(this.props.username))
+  _handleSubmit = () => {
+    console.log('submit')
+    browserHistory.push('/signup/pin')
   }
 
 
@@ -31,8 +33,8 @@ class UsernameComponent extends Component {
     return (
       <div>
         <button type="button">Back</button>
-        <input type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} />
-        <button type="button" onClick="_handleSubmit">Next</button>
+        <input type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder="Username" />
+        <button type="button" onClick={this._handleSubmit}>Next</button>
       </div>
     )
   }

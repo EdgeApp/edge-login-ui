@@ -4,6 +4,7 @@ import { Router, Route, browserHistory, IndexRedirect } from 'react-router'
 
 import Container from './modules/Container'
 import Username from './modules/Username/Username.ui'
+import PinNumber from './modules/PinNumber/PinNumber.ui'
 
 export default class RouterComponent extends Component {
 
@@ -13,6 +14,7 @@ export default class RouterComponent extends Component {
           <Route path="/" component={Container}>
             <IndexRedirect to="/signup/username" />
             <Route path="/signup/username" component={Username}/>
+            <Route path="/signup/pin" component={PinNumber}/>
           </Route>
         </Router>
     )
