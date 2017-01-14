@@ -1,0 +1,202 @@
+/* ==============================================
+   III. DEMO PAGES
+	  - Global Changes
+	  
+ * This file is reserved for changes required only
+ * for the themes demo. These styles may be vital
+ * to themes appearance but often times will not
+ * be useful in a true production environment.
+ 
+ * For example each slider in sliders.html has a
+ * margin of 65px, a large number only needed 
+ * because six sliders have been stacked on top 
+ * of each other. This would most likely not 
+ * happen in a real enviroment.
+================================================= 
+ A. Global/Shared
+================================================= */
+.ajax-loading {
+  overflow-y: scroll;
+}
+
+
+.panel-tabs > li > a:hover {background-color: #f2f2f2;} 
+#return-arrow {
+    color: #555;
+    padding-left: 15px;
+    padding-top: 15px;
+    position: fixed;
+    opacity: 0.7;
+    cursor: pointer;
+    display: block;
+    z-index: 1050;
+}
+#return-arrow i.fa {
+    float: left;
+    padding-top: 2px;
+}
+#return-arrow span {
+    float: left;
+    padding-left: 15px;
+    padding-top: 0px;
+    font-size: 16px;
+}
+#return-arrow:hover { opacity: 1 }
+
+/*===============================================
+  timeline.html/timeline-single.html
+================================================= */ 
+body.timeline-page .panel-clone {
+	display: none;
+}
+
+/*===============================================
+  pages-calendar-page.html
+================================================= */ 
+.calendar-page .tray-left{
+  padding: 15px 18px;
+}
+.calendar-page .tray-left .fc-event {
+  margin-left: 2px;
+  margin-right: 2px;
+  background: #FFF;
+}
+
+/*===============================================
+  ui-icons.html
+================================================= */ 
+.icon-demo-list {
+  font-size: 12px;
+  padding-left: 0;
+  padding-bottom: 1px;
+  margin-bottom: 20px;
+  list-style: none;
+  overflow: hidden;
+}
+.icon-demo-list li {
+  float: left;
+  width: 20%;
+  height: 100px;
+  padding: 5px;
+  line-height: 1.4;
+  text-align: center;
+}
+.icon-demo-list li:hover { color: @brand-primary;}
+
+.icon-demo-list li span {
+  display: block;
+  margin: 5px auto 15px;
+  font-size: 24px;
+}
+
+.iconsweets-list li span { font-size: 32px; }
+.stateface-list li span { font-size: 36px; }
+
+/*===============================================
+  Skin Toolbox
+================================================= */ 
+#skin-toolbox {
+    z-index: 999;
+    overflow: visible !important;
+    position: fixed;
+    top: 120px;
+    right: -230px;
+    width: 230px;
+
+    -webkit-transition: right 0.1s ease-in-out;
+    -moz-transition: right 0.1s ease-in-out;
+    transition: right 0.1s ease-in-out;
+}
+#skin-toolbox.toolbox-open {right: 0;}
+#skin-toolbox .panel {
+}
+#skin-toolbox .panel-heading {
+  cursor: pointer;
+  margin-right: 30px;
+  border: 1px solid #DDD;
+  width: 274px;
+  height: 47px;
+  line-height: 42px;
+  right: 44px;
+  font-size: 14px;
+}
+#skin-toolbox .panel-heading .panel-title {
+  padding-left: 40px
+}
+#skin-toolbox .panel-body {
+  border: 1px solid #DDD;
+  border-top: 0;
+  padding: 23px;
+}
+#skin-toolbox .panel-icon {
+  font-size: 22px;
+  padding-right: 20px;
+  padding-left: 6px;
+}
+
+/*===============================================
+  Source Code Viewer 
+================================================= */ 
+// HTML Source wrapper 
+.bs-component {
+    position: relative;
+}
+
+// Source:hover button
+#source-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  font-weight: 600;
+}
+
+// Source Modal
+#source-modal {
+
+  /* source code modal styles */
+  .modal-header {
+      background-color: #fafafa;
+  }
+  .btn-clipboard {
+      letter-spacing: 0.5px;
+  }
+
+  /* highlight js styles */
+  .hljs {
+    padding: 10px 13px;
+  }
+
+}
+
+/*===============================================
+  AdminDock Example Page
+================================================= */ 
+/* Demo styles */  
+#dock-content > div {
+  display: none;
+}
+#dock-content > div.active-content {
+  display: block;
+}
+#dock-content .active-content .modal-placeholder {
+  position: relative;
+  visibility: visible;
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+}
+#dock-content .active-content .modal-placeholder:before {
+  content: "It's been sent to AdminDock!";
+}
+#dock-content .active-content .modal-placeholder:after {
+  content: "\f0a7";
+  font-family: "FontAwesome";
+  font-size: 30px;
+  position: relative;
+  top: 3px;
+  padding-left: 20px;
+  color: #999;
+}

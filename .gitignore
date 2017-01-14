@@ -1,0 +1,8 @@
+node_modules
+bower_components
+.idea
+npm-debug.log
+.DS_Store
+vendor
+./config.json
+config.json

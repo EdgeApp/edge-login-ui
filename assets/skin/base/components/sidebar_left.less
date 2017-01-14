@@ -1,0 +1,803 @@
+/* ==============================================
+   LEFT SIDEBAR
+    A. Sidebar Default/Open State
+    B. Sidebar Active Item Borders
+    C. Sidebar Misc Elements
+    D. Sidebar Widgets/Menus
+    E. Sidebar Minified State
+    F. Sidebar Default Color Settings
+    G. Sidebar Light Color Settings
+    H. Sidebar Nano Plugin Settings
+    I. Sidebar Responsive Settings
+=================================================
+  A. Default Open State
+================================================= */
+
+/* Sidebar Container */
+#sidebar_left {
+    color: #fff;
+    font-size: 13px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @sidebar-open-width;
+    min-height: 100%;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+/* Sidebar Content Container */
+.sidebar-left-content { height: 100%; }
+
+/* Sidebar-Menu */
+.sidebar-menu { padding-bottom: 20px; }
+
+/* Sidebar-Menu Top Level Items */
+.sidebar-menu > li { margin: 0; }
+.sidebar-menu > li:first-child { padding-top: 4px; }
+
+/* Sidebar Menu Links */
+.sidebar-menu > li a {}
+
+/* Sidebar-Menu Top Level Links */
+.sidebar-menu > li > a {
+    padding: 0;
+    line-height: @sidebar-item-spacing;
+    height: @sidebar-item-spacing;
+    overflow: hidden;
+}
+
+/* Sidebar-Menu Top Level - Icon */
+.sidebar-menu > li > a > span:nth-child(1) {
+    float: left;
+    top: 0;
+    line-height: @sidebar-item-spacing;
+    width: 38px;
+    font-size: 13px;
+    text-align: center;
+    padding-left: 13px;
+}
+
+/* Sidebar-Menu Top Level - Title */
+.sidebar-menu > li > a > span:nth-child(2) {
+    font-weight: 600;
+    padding-left: 6px;
+}
+
+/* Sidebar-Menu Top Level - Tray(holds labels,etc) */
+.sidebar-menu li > a > .sidebar-title-tray {
+    position: absolute;
+    right: 13px;
+    top: -2px;
+}
+
+/* Sidebar-Menu Top Level - Label */
+.sidebar-menu li > a > .sidebar-title-tray .label {
+    padding: .0em .4em .2em;
+    font-size: 11px;
+}
+
+/* Sidebar-Menu Top Level - Caret */
+.sidebar-menu li > a > span.caret {
+    position: absolute;
+    top: 45%;
+    right: 13px;
+    border-top: 5px solid;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+}
+/* Open Menu Item Caret - we simply flip the carets border */
+.sidebar-menu li > a.menu-open > span.caret {
+    border-top: 0;
+    border-bottom: 5px solid;
+}
+
+/* Sidebar-Menu Sub Level */
+.sidebar-menu > li > ul {
+    clear: both;
+    display: none;
+    width: @sidebar-open-width;
+    height: auto;
+}
+.sidebar-menu li > a.menu-open + ul { display: block; } 
+
+/* Sidebar-Menu Sub Level Items */
+.sidebar-menu > li > ul > li > a {
+    padding: 11px 20px 11px 30px;
+}
+
+/* Sidebar-Menu Sub Level - first and last items */
+.sidebar-menu > li > ul > li:first-child > a { padding-top: 14px; }
+.sidebar-menu > li > ul > li:last-child > a { padding-bottom: 17px; }
+
+/* Sidebar-Menu Sub Level Item - Title */
+.sidebar-menu > li > ul > li > a > span:nth-child(1) {
+    margin-right: 10px;
+    font-size: 11px;
+}
+
+/* Sidebar-Menu Sub Level Item - Label */
+.sidebar-menu > li > ul > li > a > span.label {
+    float: right;
+    line-height: 17px;
+}
+
+/* Sidebar-Menu Multi-level (submenu inside a submenu and so on) */
+.sidebar-menu > li > ul > li ul {
+    clear: both;
+    display: none;
+    width: @sidebar-open-width;
+    height: auto;
+}
+
+/* Sidebar-Menu Multi-level - Links */
+.sidebar-menu > li > ul > li > ul li a { padding: 9px 12px 9px 30px; }
+.sidebar-menu > li > ul > li > ul li:last-child a { padding-bottom: 13px; }
+
+/* Sidebar-Menu Multi-level - Label(xs) */
+.sidebar-menu > li > ul > li > ul li a .label.label-xs {
+    float: right;
+    line-height: 17px;
+}
+
+
+/*===============================================
+  B. Sidebar-Menu Active Item Borders
+================================================= */
+
+/* Top Level - Active Item Border */
+.sidebar-menu > li > a.menu-open:after,
+.sidebar-menu > li.active > a:after,
+.sidebar-menu > li:hover > a:after,
+.sidebar-menu > li:focus > a:after {
+   content: "";
+   position: absolute;
+   left: 0;
+   top: 0;
+   height: 100%;
+   width: 3px;
+   background: #AAA;
+}
+
+/* Sub Level - Active Item Border */
+.sidebar-menu > li > ul > li > a.menu-open:after,
+.sidebar-menu > li > ul > li.active > a:after,
+.sidebar-menu > li > ul > li:hover > a:after,
+.sidebar-menu > li > ul > li:focus > a:after {
+   content: "";
+   position: absolute;
+   left: 0;
+   top: 0;
+   height: 100%;
+   width: 3px;
+   background: #AAA;
+}
+
+/* Multi Level - Active Item Border */
+.sidebar-menu > li > ul > li > ul > li.active > a:after,
+.sidebar-menu > li > ul > li > ul > li:hover > a:after,
+.sidebar-menu > li > ul > li > ul > li:focus > a:after {
+   content: "";
+   position: absolute;
+   left: 0;
+   top: 5%;
+   height: 90%;
+   width: 3px;
+   background: #999;
+}
+
+
+/*===============================================
+  C. Sidebar Misc
+================================================= */
+
+/* Sidebar labels */
+.sidebar-menu .sidebar-label {
+    text-transform: uppercase;
+    color: #70829a;
+    font-weight: 600;
+    padding-left: 18px;
+    padding-bottom: 3px;
+    font-size: 12px;
+}
+
+/* Sidebar Project Links */
+.sidebar-menu .sidebar-proj {}
+
+/* Sidebar Progress Bars */
+.sidebar-menu .sidebar-stat .progress {
+    clear: both;
+    background-color: #AAA;
+    background-color: rgba(0,0,0,0.15);
+}
+/* Sidebar Progress Bars Titles */
+.sidebar-menu .sidebar-stat > a {
+    height: auto;
+    overflow: visible;
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle-mini {
+    width: 35px;
+    height: 32px;
+    padding: 7px 0;
+}
+.sidebar-toggle-mini a {
+    display: block;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    padding: 6px 6px 5px;
+    background: rgba(0,0,0, 0.15);
+}
+.sidebar-toggle-mini span {
+    position: relative;
+    color: #999;
+    font-size: 16px;
+
+    -webkit-transition: all ease-in-out 0.2s;
+    transition: all ease-in-out 0.2s;
+
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.sidebar-toggle-mini:hover span {
+    color: #EEE;
+}
+
+// If sidebar caret variable has been set to
+// "chevron" we use a mixin to change the style
+& when (@sidebar-caret-style = "chevron")  {
+  .sidebar-caret(@sidebar-caret-style);
+}
+
+/*===============================================
+  C. Sidebar "top" - Horizontal Menu 
+     Activated by adding the ".sidebar-top"
+     class to the "#sidebar_left" element
+================================================= */
+
+// If the horizontal sidebar variable has been set 
+// true we allow the mixin to generate the menu
+body.sb-top when (@sidebar-generate-top-style = true) {
+  .sidebar-top-variant();
+}
+
+
+/*===============================================
+  D. Sidebar Widgets
+================================================= */
+
+/* Widget Wrapper */
+.sidebar-widget {
+  position: relative;
+  padding: 8px 13px;
+  height: 51px;
+
+  + .sidebar-widget { margin-top: 18px; }
+
+  /* Author Widget */
+  &.author-widget {
+   margin-top: 15px;
+
+    .media-left img {
+      max-width: 40px;
+      border: 2px solid #888;
+      border-radius: 50%;
+    }
+    .media-links a {
+      display: inline-block;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      color: #70829a;
+      font-size: 12px;
+      text-decoration: none;
+    }
+    .media-links a:hover {
+      color: #FFF;
+    }
+    .media-body {
+      padding-left: 3px;
+      color: #FFF;
+    }
+
+    &.menu-widget-open .media-links a.sidebar-menu-toggle { color: #FFF; }
+
+  } // End Author Widget
+
+  /* Menu Widget - A Slide-Down Menu. Hidden by default */
+  &.menu-widget {
+    display: none;
+    position: relative;
+    left: 0;
+    top: 0;
+    height: 130px;
+    width: 100%;
+    padding: 10px;
+    background-color: @sb-widget-bg;
+    border-top: 1px solid darken(@sb-widget-bg, 2%);
+    border-bottom: 1px solid darken(@sb-widget-bg, 2%);
+
+    /* Menu Links */
+    a {
+      position: relative;
+      display: block;
+      padding: 12px 5px 12px;
+      margin-bottom: 3px;
+      transition: all 0.2s ease;
+    }
+    a:hover { background-color: @sb-menuwidget-item-hover; }
+
+    /* Menu Title(hidden) */
+    a h5 { display: none; }
+
+    /* Menu Icons */
+    a span {
+      color: @sb-menuwidget-icon;
+      font-size: 24px;
+      transition: all 0.3s ease;
+    }
+    a:hover span { color: @sb-menuwidget-icon-hover; }
+
+  } // End Menu Widget
+
+  // Sidebar Search Widget
+  &.search-widget {
+    height: 40px;
+    padding: 8px 6px;
+    background-color: @sb-widget-bg;
+    border-top: 1px solid darken(@sb-widget-bg, 2%);
+    border-bottom: 1px solid darken(@sb-widget-bg, 2%);
+
+    input,
+    .input-group-addon {
+      color: #70829a;
+      height: 22px;
+      padding: 3px;
+      font-size: 14px;
+      border-color: transparent;
+      background-color: transparent;
+    }
+    input {
+      padding-left: 0px;
+      border-left: 0;
+    }
+    // placeholder psuedo text styles
+    input::-webkit-input-placeholder { color: #70829a; }
+    input::-moz-placeholder { color: #70829a; }
+    input:-moz-placeholder { color: #70829a; }
+    input:-ms-input-placeholder { color: #70829a; }
+
+  } // End Search Widget
+
+
+} // End Sidebar Widget Wrapper
+
+
+// Author Widget - w/Sidebar Minified
+body.sb-l-m .author-widget .media-body,
+body.sb-l-m .author-widget .media-heading {
+    display: none;
+}
+body.sb-l-m .author-widget .media-left img {
+    max-width: 30px;
+}
+// extra small minified sidebar
+@media (max-width: 900px) {
+    body.sb-l-m .author-widget {
+        padding: 8px 7px;
+    }
+}
+
+
+
+/*====================================================
+  E. Sidebar Minified State
+====================================================== */
+
+/* Sidebar Minified State */
+body.sb-l-m #sidebar_left {
+    z-index: 1028;
+    overflow: visible;
+    width: @sidebar-minified-width;
+    height: 100%;
+    left: 0;
+    background-color: @sb-bg-color;
+}
+body.sb-l-m #sidebar_left:before { width: @sidebar-minified-width; }
+
+/* Hide Multiple Sidebar Elements */
+body.sb-l-m .sidebar-header,
+body.sb-l-m #sidebar_left .sidebar-title,
+body.sb-l-m #sidebar_left .sidebar-label,
+body.sb-l-m #sidebar_left .sidebar-title-tray,
+body.sb-l-m #sidebar_left .caret,
+body.sb-l-m #sidebar_left .sidebar-proj,
+body.sb-l-m #sidebar_left .sidebar-stat {
+    display: none;
+}
+
+/* Only Icon is showing - Modify Padding to fit */
+body.sb-l-m .sidebar-menu > li {
+    padding: 7px 0;
+}
+/* Menu will be converted to on:hover - It requires overflow */
+body.sb-l-m .sidebar-menu > li > a {
+    overflow: visible;
+}
+
+/* Sidebar-Menu Top Level - Icon */
+body.sb-l-m .sidebar-menu > li > a > span:nth-child(1) {
+    color: #ccc;
+    left: -1px;
+    width: @sidebar-minified-width;
+    font-size: 18px;
+    padding-left: 0;
+}
+
+/* Sidebar-Menu Top Level - Title */
+body.sb-l-m .sidebar-menu > li > a > .sidebar-title {
+    position: absolute;
+    left: @sidebar-minified-width;
+    top: -4px;
+    width: 180px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+    padding-left: 15px;
+    border-left: 1px solid #222;
+    background-color: transparent;
+}
+
+/* Menus have been converted to show only on:hover. Hide by default */
+body.sb-l-m .sidebar-menu > li > a.menu-open + ul {
+    display: none;
+}
+/* Menus have been converted. We display them on:hover */
+body.sb-l-m .sidebar-menu > li:hover > a + ul,
+body.sb-l-m .sidebar-menu > li:hover > a > .sidebar-title,
+body.sb-l-m .sidebar-menu > li:hover > ul .caret {
+    display: block !important;
+}
+
+/* Sidebar-Menu Sub Level */
+body.sb-l-m .sidebar-menu > li > ul {
+    position: absolute;
+    left: @sidebar-minified-width;
+    top: 38px;
+    width: 180px;
+    height: auto;
+    border-left: 1px solid #222;
+    padding-bottom: 7px;
+    overflow: hidden;
+}
+
+/* Sidebar-Menu Multi Level */
+body.sb-l-m .sidebar-menu > li > ul > li { overflow: hidden; }
+body.sb-l-m .sidebar-menu > li > ul > li ul { width: 180px; }
+
+/* Sidebar-Menu Sub Level - Link Padding */
+body.sb-l-m .sidebar-menu li > ul > li > a { padding: 8px 15px 8px 15px; }
+
+/* Sidebar-Menu Multi Level - Link Padding */
+body.sb-l-m .sidebar-menu li > ul > li > ul > li a { padding: 8px 15px 8px 20px; }
+
+
+/* Adjust Primary Content Container - Sidebar Minified */
+body.sb-l-m #content_wrapper { margin-left: @sidebar-minified-width; }
+
+/* Primary Content Container - Sidebar Hidden */
+body.sb-l-c.sb-l-m #content_wrapper { margin-left: 0; }
+
+/* Adjust Navbar Logo/Branding - Sidebar Minified */
+body.sb-l-m .navbar-branding { width: @sidebar-minified-width; }
+
+/* Adjust Navbar Logo/Branding - Sidebar Hidden */
+body.sb-l-m .navbar-brand { display: none; }
+
+
+/*=======================================================
+  F. Sidebar Default Color Settings
+========================================================= */
+
+/* Sidebar Container */
+#sidebar_left {
+    background-color: @sb-bg-color;
+}
+
+/* Menu Item - Label Color */
+.sidebar-menu .sidebar-label {
+    color: @sb-label;
+} 
+/* Menu item Caret */
+.sidebar-menu li > a > span.caret {
+    color: @sb-caret;
+}
+/* Open Menu item Caret */
+.sidebar-menu li > a.menu-open > span.caret {
+  color: @sb-caret-open;
+}
+
+/* Top Level Menu Item - Text Color */
+.sidebar-menu > li > a {
+  color: @sb-menu-text;
+}
+/* Top Level Menu Item - BG Color:hover */
+.sidebar-menu > li > a:hover,
+.sidebar-menu > li > a:focus,
+.sidebar-menu > li > a:active {
+  color: @sb-menu-text-hover;
+  background-color: @sb-menu-item-hover;
+}
+/* Top Level Item - Border Color:hover */
+.sidebar-menu > li:hover > a:after,
+.sidebar-menu > li:focus > a:after {
+  background: @sb-menu-border-hover;
+}
+/* Top Level Active Menu Item - BG/Text Color */
+.sidebar-menu > li.active > a {
+   color: @sb-active-text;
+   background-color: @sb-active-bg;
+}
+/* Top Level Active Menu Item - Icon Color */
+.sidebar-menu > li.active > a > span:nth-child(1) {
+  color: @sb-active-icon;
+}
+/* Top Level Active Item - Border Color */
+.sidebar-menu > li.active > a:after,
+.sidebar-menu > li > a.menu-open:after {
+  background: @sb-active-border;
+}
+
+/* Sub-Menu Item - BG Color */
+.sidebar-menu > li > ul {
+  background-color: @sub-menu-bg;
+}
+/* Sub-Menu Item - BG Color:hover */
+.sidebar-menu > li > ul > li > a {
+  color: @sub-menu-text;
+}
+/* Sub-Menu Item - BG Color:hover */
+.sidebar-menu > li > ul > li > a:hover,
+.sidebar-menu > li > ul > li > a:focus {
+  color: @sub-menu-text-hover;
+  background-color: @sub-menu-item-hover;
+}
+/* Sub-Menu Item - Border Color:hover */
+.sidebar-menu > li > ul > li:hover > a:after,
+.sidebar-menu > li > ul > li:focus > a:after {
+  background: @sub-menu-border-hover;
+}
+/* Sub-Menu Active Item - BG/Text Color */
+.sidebar-menu > li > ul > li.active > a {
+  color: @sb-active-text;
+  background-color: @sub-active-bg;
+}
+/* Sub-Menu Active Item - Icon Color */
+.sidebar-menu > li > ul > li.active > a > span:nth-child(1),
+.sidebar-menu > li > ul > li > a.menu-open > span:nth-child(1) {
+  color: @sub-active-icon;
+}
+/* Sub-Menu Active Item - Border Color */
+.sidebar-menu > li > ul > li.active > a:after,
+.sidebar-menu > li > ul > li > a.menu-open:after {
+  background: @sub-active-border;
+}
+
+/* Multi-Menu Item - BG Color */
+.sidebar-menu > li > ul > li ul {
+  background-color: @multi-menu-bg;
+}
+/* Multi-level Item - BG Color:hover */
+.sidebar-menu > li > ul > li > ul > li > a {
+  color: @multi-menu-text;
+}
+/* Multi-level Item - BG Color:hover */
+.sidebar-menu > li > ul > li > ul > li > a:hover,
+.sidebar-menu > li > ul > li > ul > li > a:focus {
+  color: @multi-menu-text-hover;
+  background-color: @multi-menu-item-hover;
+}
+/* Multi-level Active Item - Border Color:hover */
+.sidebar-menu > li > ul > li > ul > li:hover > a:after,
+.sidebar-menu > li > ul > li > ul > li:focus > a:after {
+  background: @multi-menu-border-hover;
+}
+/* Multi-level Active Item - BG/Text Color */
+.sidebar-menu > li > ul > li > ul > li.active > a {
+  color: @sb-active-text;
+  background: @multi-active-bg;
+}
+/* Multi-level Active Item - Icon Color */
+.sidebar-menu > li > ul > li > ul > li.active > a > span:nth-child(1),
+.sidebar-menu > li > ul > li > ul > li > a.menu-open > span:nth-child(1) {
+  color: @multi-active-icon;
+}
+/* Multi-level Active Item - Border Color */
+.sidebar-menu > li > ul > li > ul > li.active > a:after {
+  background: @multi-active-border;
+}
+
+/* Minified Sidebar - Title */
+body.sb-l-m .sidebar-menu > li > a > .sidebar-title {
+  background-color: @sub-menu-bg;
+}
+/* Minified Sidebar - Active Icon */
+body.sb-l-m .sidebar-menu > li.active > a > span:nth-child(1) {
+    color: @sb-active-icon;
+}
+
+
+
+/*=======================================================
+  G. Sidebar Light Color Settings
+     Applied via class to "#sidebar" 
+     eg: <aside id="sidebar_left" class="sidebar-light">
+========================================================= */
+
+// Mixin which creates sidebar-light
+#sidebar_left.sidebar-light {
+  .sidebar-light-variant();
+}
+
+// Manual changes added to sidebar-light 
+body.sb-l-m {
+    #sidebar_left.sidebar-light {
+        background-color: #FAFAFA;
+    }
+    #sidebar_left.sidebar-light.light {
+        background-color: #FFF;
+    }
+    #sidebar_left.sidebar-light .sidebar-menu > li > a > .sidebar-title,
+    #sidebar_left.sidebar-light .sidebar-menu > li > ul {
+        border: 1px solid #DDD;
+        border-top: 0;
+        background-color: #f8f8f8;
+        left: 59px;
+        box-shadow: none;
+    }
+    #sidebar_left.sidebar-light .sidebar-menu > li > a > .sidebar-title {
+        border-top: 1px solid #DDD;
+    }
+}
+
+
+/*==================================================
+  H. Sidebar "Nano Scroller" Settings (Core Plugin)
+==================================================== */
+#sidebar_left.nano > .nano-content {}
+#sidebar_left.nano.affix{
+  padding-bottom: 0;
+}
+#sidebar_left.affix.nano .tooltip {
+    z-index: 9999 !important;
+}
+/* If the sidebar is minified we disable nanoscroll via css
+ * otherwise nano scroll hides popout menus and the scroll is
+ * needed to see submenus with many items */
+body.sb-l-m #sidebar_left.nano {
+    position: absolute;
+}
+body.sb-l-m #sidebar_left.nano > .nano-content {
+    overflow: visible;
+    right: 0 !important;
+}
+/* If the sidebar is minified and in mobile mode we hard disable
+ * the entire plugin via a display !important */
+body.sb-l-m.mobile-view .nano > .nano-pane {
+  display: none !important;
+}
+
+
+/*==========================================================
+  I. Sidebar Responsive Settings - Added via Update v1.2.
+     If window <900px create even smaller minified sidebar
+=========================================================== */
+
+@media (max-width: 900px) {
+
+    /* Sidebar Minified State */
+    body.sb-l-m #sidebar_left { width: 45px; }
+    body.sb-l-m #sidebar_left:before { width: 45px; }
+
+    /* Sidebar-menu Top Level - Icon */
+    body.sb-l-m .sidebar-menu > li > a > span:nth-child(1) {
+        left: -1px;
+        width: 45px;
+        font-size: 18px;
+    }
+
+    /* Sidebar-menu Top Level - Title */
+    body.sb-l-m .sidebar-menu > li > a > .sidebar-title {
+        position: absolute;
+        left: 45px;
+        top: -4px;
+        width: 180px;
+        height: 44px;
+        line-height: 44px;
+        font-size: 14px;
+        padding-left: 15px;
+        border-left: 1px solid #222;
+        background-color: #282d33;
+    }
+
+    /* Sidebar-menu Sub Level */
+    body.sb-l-m .sidebar-menu > li > ul {
+        position: absolute;
+        left: 45px;
+        top: 38px;
+        width: 180px;
+        height: auto;
+        border-left: 1px solid #222;
+        padding-bottom: 7px;
+        overflow: hidden;
+    }
+
+    /* Sidebar-menu Multi Level */
+    body.sb-l-m .sidebar-menu > li > ul > li ul {
+        width: 180px;
+    }
+
+    /* Sidebar-menu Sub Level - Link Padding */
+    body.sb-l-m .sidebar-menu li > ul > li > a {
+        padding: 8px 20px 8px 20px;
+    }
+
+    /* Sidebar-menu Multi Level - Link Padding */
+    body.sb-l-m .sidebar-menu li > ul > li > ul > li a {
+        padding: 8px 20px 8px 35px;
+    }
+
+    /* Adjust Primary Content Container - Sidebar Minified */
+    body.sb-l-m #content_wrapper { margin-left: 45px; }
+
+    /* Adjust Primary Content Container - Sidebar Hidden */
+    body.sb-l-c.sb-l-m #content_wrapper { margin-left: 0; }
+
+    /* Adjust Navbar Logo/Branding - Hide Logo */
+    body.sb-l-o .navbar-brand,
+    body.sb-l-m .navbar-brand {
+        display: none;
+    }
+
+    /* Adjust Navbar Logo/Branding - Adjust Width */
+    body.sb-l-o .navbar-branding,
+    body.sb-l-m .navbar-branding {
+        max-width: 45px;
+        margin-right: 5px;
+    }
+
+    /* Adjust Navbar Toggle - Sidebar Open */
+    body.sb-l-o .navbar #toggle_sidemenu_l {
+       transform: rotate(90deg);
+    }   
+
+    /* Adjust Navbar Toggle - Sidebar Minified */
+    body.sb-l-o.sb-l-m .navbar #toggle_sidemenu_l{
+        transform: rotate(0deg);
+    }
+
+    /* Adjust Navbar Toggle - Sidebar Open + Minified */
+    body.sb-l-o .navbar #toggle_sidemenu_l,
+    body.sb-l-m .navbar #toggle_sidemenu_l {
+        width: 45px;
+    }
+
+    /* Hide sidebar user menu button when the sidebar is
+    collapsed. As it's not accessible in this mode*/
+    .sb-l-o .navbar .sidebar-menu-toggle,
+    .sb-l-c .navbar .sidebar-menu-toggle {
+        margin-left: 10px;
+        display: none;
+    }
+
+    // Right Sidemenu Button
+    #toggle_sidemenu_r { margin-top: 4px; }
+
+    // Manual Responsive changes added to sidebar-light 
+    body.sb-l-m  #sidebar_left.sidebar-light .sidebar-menu > li > a > .sidebar-title,
+    body.sb-l-m #sidebar_left.sidebar-light .sidebar-menu > li > ul {
+        left: 44px;
+    }
+
+}

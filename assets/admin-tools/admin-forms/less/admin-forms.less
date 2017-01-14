@@ -1,0 +1,32 @@
+
+// Form Mixins & Vars
+@import "skins/colors.less";
+@import "skins/mixins/admin-skins.less";
+
+// Form Core
+@import "elements.less";
+@import "plugins.less";
+
+// Bootstrap Compatibility Fixes
+@import "bootstrap_fix.less";
+
+
+// Include Form Skins
+// ---------------------------------------------------------------------------
+// All form skins are included in individual files in "admin-forms/css/skins"
+// To use a skin simply include the skins stylesheet along with the primary 
+// admin-forms.css on the page. Alternatively you can uncomment the skins below
+// that you wish to use. This will result in the skin being injected directly into
+// admin-forms.css, which will no longer require you to link a seperate skin stylesheet
+
+// @import "skins/theme-primary.less";  // Primary Skin
+// @import "skins/theme-success.less";  // Success Skin
+// @import "skins/theme-info.less";     // Info Skin
+// @import "skins/theme-warning.less";  // Warning Skin
+// @import "skins/theme-danger.less";   // Danger Skin
+// @import "skins/theme-alert.less";    // Alert Skin
+// @import "skins/theme-system.less";   // System Skin
+// @import "skins/theme-dark.less";     // Dark Skin
+
+@import "skins/all-themes.less";     // All skins. This results in a large file and is not recommended
+			
