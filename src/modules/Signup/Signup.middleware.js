@@ -7,9 +7,6 @@ import { getDetails } from '../ReviewDetails/ReviewDetails.action'
 
 import { checkCameraPermission, checkReadContactPermission } from '../../lib/permissions'
 
-import abcctx from '../../lib/abcContext'
-import t from '../../lib/LocaleStrings'
-
 export const signupUser = (username, password, pin) => {
   return dispatch => {
     dispatch(

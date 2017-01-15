@@ -8,7 +8,7 @@ const store = createStore()
 const rootElement = document.getElementById('app')
 
 render((
-    <Provider store={store}>
+  <Provider store={store}>
     <Router />
-    </Provider>
+  </Provider>
 ), rootElement)

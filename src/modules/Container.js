@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import Alert from './Alert/Alert'
 import { Dialog } from 'react-toolbox/lib/dialog';
 import { Button } from 'react-toolbox/lib/button';
+
 class Container extends Component {
+
   handleToggle = () => {
     // this.refs.loginWithAirbitz.cancelRequest()
     // if (this.refs.pinPasswordForm) {
@@ -25,6 +27,7 @@ class Container extends Component {
     { label: "Cancel", onClick: this.handleToggle },
     { label: "Save", onClick: this.handleToggle }
   ];  
+
   render() {
     return (
         

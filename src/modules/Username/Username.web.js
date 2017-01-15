@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import Button from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
+
 import { changeUsernameValue } from './Username.action'
 
 class UsernameComponent extends Component {
 
   _handleSubmit = () => {
-    console.log('submit')
+     
     browserHistory.push('/signup/pin')
   }
 
@@ -24,9 +25,9 @@ class UsernameComponent extends Component {
   //   Actions.refresh({onLeft: this.handleBack})
   // }
 
-  _handleOnChangeText = (e) => {
+  _handleOnChangeText = (username) => {
     this.props.dispatch(
-      changeUsernameValue(e.target.value)
+      changeUsernameValue(username)
     )
   }
 
