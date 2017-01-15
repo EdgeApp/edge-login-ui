@@ -1,10 +1,12 @@
 /* eslint-disable global-require */
 /* eslint-disable no-undef */
 import { createStore, applyMiddleware } from 'redux'
-import rootReducer from './rootReducer'
+import rootReducer from '../rootReducer'
 import thunk from 'redux-thunk'
+import abcContext from './abcContext'
+import t from './LocaleStrings'
 
-let middleware = [thunk]
+let middleware = [thunk.withExtraArgument({ t, abcContext })]
 
 if (__DEV__) {
   const createLogger = require('redux-logger')

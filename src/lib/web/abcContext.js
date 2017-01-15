@@ -1,4 +1,4 @@
-import {abc} from './abc.webpack'
+import {abc} from '../abc.webpack'
 
 const abcctx = function (callback) {
     const abcContext = abc.makeContext({

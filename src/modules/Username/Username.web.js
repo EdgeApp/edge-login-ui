@@ -4,12 +4,21 @@ import { browserHistory } from 'react-router'
 import Button from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
 import { changeUsernameValue } from './Username.action'
+import { openErrorModal } from '../ErrorModal/ErrorModal.action'
+import t from '../../lib/web/LocaleStrings'
 
 class UsernameComponent extends Component {
 
   _handleSubmit = () => {
-    console.log('submit')
-    browserHistory.push('/signup/pin')
+
+    if (this.props.username.length < 3) {
+      return this.props.dispatch(openErrorModal(t('activity_signup_insufficient_username_message')))
+    }
+    this.props.dispatch(checkUsername(this.props.username).then(success => {
+      if(success) {
+        browserHistory.push('/signup/pin')
+      }
+    }))
   }
 
 

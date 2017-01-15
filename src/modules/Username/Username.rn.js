@@ -8,14 +8,22 @@ import { Actions } from 'react-native-router-flux'
 import { fadeWhiteOverlay } from '../Landing.action'
 import Container from '../SignUp.ui'
 import style from './Username.style'
-import t from '../../lib/LocaleStrings'
+import t from '../../lib/native/LocaleStrings'
 import NextButton from '../NextButton/NextButton.ui'
+import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
 class UsernameComponent extends Component {
 
   handleSubmit = () => {
     this.refs.usernameInput.blur()
-    this.props.dispatch(checkUsername(this.props.username))
+    if (this.props.username.length < 3) {
+      return dispatch(openErrorModal(t('activity_signup_insufficient_username_message')))
+    }    
+    this.props.dispatch(checkUsername(this.props.username).then( success => {
+      if(success) {
+        Actions.pin()
+      }
+    }))
   }
   handleBack = () => {
     if (this.props.loader.loading === false) {
