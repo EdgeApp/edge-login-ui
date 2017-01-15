@@ -24,9 +24,9 @@ class UsernameComponent extends Component {
   //   Actions.refresh({onLeft: this.handleBack})
   // }
 
-  _handleOnChangeText = (e) => {
+  _handleOnChangeText = (value,event) => {
     this.props.dispatch(
-      changeUsernameValue(e.target.value)
+      changeUsernameValue(value)
     )
   }
 
