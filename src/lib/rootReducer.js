@@ -21,26 +21,26 @@ import { alert } from '../modules/Alert/Alert.reducer'
 const store = combineReducers({
   username,
   pin,
-  // pinDummy,
-  // password: combineReducers({
-  //   inputState: PasswordStates.inputState,
-  //   password: PasswordStates.password,
-  //   passwordRepeat: PasswordStates.passwordRepeat,
-  //   notification: PasswordStates.notification,
-  //   validation: combineReducers({
-  //     passwordValid: PasswordValidation.passwordValid,
-  //     upperCaseChar: PasswordValidation.upperCaseChar,
-  //     lowerCaseChar: PasswordValidation.lowerCaseChar,
-  //     number: PasswordValidation.number,
-  //     characterLength: PasswordValidation.characterLength
-  //   })
-  // }),
-  //
+  pinDummy,
+  password: combineReducers({
+    inputState: PasswordStates.inputState,
+    password: PasswordStates.password,
+    passwordRepeat: PasswordStates.passwordRepeat,
+    notification: PasswordStates.notification,
+    validation: combineReducers({
+      passwordValid: PasswordValidation.passwordValid,
+      upperCaseChar: PasswordValidation.upperCaseChar,
+      lowerCaseChar: PasswordValidation.lowerCaseChar,
+      number: PasswordValidation.number,
+      characterLength: PasswordValidation.characterLength
+    })
+  }),
+
   // reviewDetails: combineReducers({
   //   details: ReviewDetailsStates.details,
   //   view: ReviewDetailsStates.view
   // }),
-  //
+
   // login: combineReducers({
   //   viewPassword: Login.viewPassword,
   //   viewPIN: Login.viewPIN,
@@ -50,7 +50,7 @@ const store = combineReducers({
   //   pinDummy: Login.pinDummy,
   //   showCachedUsers: Login.showCachedUsers
   // }),
-  //
+
   // nextButtonVisible,
   // skipButtonVisible,
   // loader: combineReducers({
