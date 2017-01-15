@@ -4,9 +4,10 @@ const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+    devtool: 'inline-source-map',
     entry: [
-		'webpack-dev-server/client?http://localhost:8002', // WebpackDevServer host and port
-		'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+        'webpack-dev-server/client?http://localhost:8002', // WebpackDevServer host and port
+        'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
         './src/index'
     ],
     output: {
@@ -29,16 +30,17 @@ module.exports = {
         preLoaders: [
             { test: /\.json$/, exclude: /node_modules/, loader: 'json' },
         ],
-		loaders: [
-			{
-			  test: /\.js$/,
-			  loaders: ['react-hot', 'babel'],
-			  include: path.join(__dirname, 'src')
+        loaders: [
+            {
+              test: /\.js$/,
+              exclude: [/native/,/\.rn\.js$/],
+              loaders: ['react-hot', 'babel'],
+              include: path.join(__dirname, 'src')
             }, {
                test: /(\.scss|\.css)$/,
                loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
             }
-		]
+        ]
     },
     postcss: [autoprefixer],
     sassLoader: {

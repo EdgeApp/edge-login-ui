@@ -8,13 +8,13 @@ import * as action from './action'
 
 class ServerMaintenance extends Component {
 
-	componentDidMount () {
-		const authorization = sessionStorage.getItem('header')
-		const socket = io(`${socketAddress}?authHeader=${authorization}`)
+  componentDidMount () {
+    const authorization = sessionStorage.getItem('header')
+    const socket = io(`${socketAddress}?authHeader=${authorization}`)
     socket.on('app-info', (data) => this.props.dispatch(action.socketAppInfo(data)))
 
-		socket.on('history', (data) => this.props.dispatch(action.socketHistory(data)))
-	}
+    socket.on('history', (data) => this.props.dispatch(action.socketHistory(data)))
+  }
 
     render() { return null }
 }

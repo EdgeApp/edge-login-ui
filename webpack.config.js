@@ -52,6 +52,7 @@ module.exports = {
 		loaders: [
 			{
 			  test: /\.js$/,
+        exclude: [/native/,/\.rn\.js$/],
 			  loaders: ['babel'],
 			  include: path.join(__dirname, 'src')
       }, {

@@ -1,4 +1,4 @@
-import { SHOW_ALERT , HIDE_ALERT } from './action'
+import { SHOW_ALERT , HIDE_ALERT } from './Alert.action'
 
 const alertDefault = {
     show    : false,

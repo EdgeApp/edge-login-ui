@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import { connect } from 'react-redux'
-import { closeAlert } from './action'
+import { closeAlert } from './Alert.action'
 
 class Alert extends Component {
 

@@ -16,6 +16,7 @@ import { pin, pinDummy } from '../modules/PinNumber/PinNumber.reducer'
 // import { user } from '../modules/User/User.reducer'
 // import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 // import routes from './routesReducer'
+import { alert } from '../modules/Alert/Alert.reducer'
 
 const store = combineReducers({
   username,
@@ -79,7 +80,8 @@ const store = combineReducers({
   //   gainedFocus
   // }),
   // user,
-  // routes
+  // routes,
+  alert: alert
 })
 
 export default store

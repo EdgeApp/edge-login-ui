@@ -4,9 +4,9 @@ class Container extends Component {
   render() {
     return (
       <div className="app">
-        {this.props.children}	
+        {this.props.children}  
+        <Alert />
       </div>
-      <Alert />
     )
   }
 }
