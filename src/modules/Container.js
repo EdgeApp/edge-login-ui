@@ -12,11 +12,10 @@ class Container extends Component {
     // if (window.parent.exitCallback) {
     //   window.parent.exitCallback()
     // }
-    console.log('ok')
+    console.log('closing Airbitz login')
     if (window.parent.exitCallback) {
       window.parent.exitCallback()
     }
-    this.setState({active: !this.state.active});
   }
   state = {
     active: false
@@ -30,13 +29,11 @@ class Container extends Component {
     return (
         
       <div className="app">
-        <Button label='Show my dialog' onClick={this.handleToggle} />
         <Dialog
           action={this.actions}
-          active={this.state.active}
+          active={true}
           onEscKeyDown={this.handleToggle}
           onOverlayClick={this.handleToggle}
-          title='Airbitz'
         >
           {this.props.children}  
         </Dialog>
