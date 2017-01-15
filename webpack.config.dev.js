@@ -13,7 +13,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'app.bundle.js',
-        publicPath: '/assets/'
+        publicPath: '/'
     },
     resolve: {
         extensions: ['', '.scss', '.css', '.js', '.json'],
@@ -37,8 +37,9 @@ module.exports = {
               loaders: ['react-hot', 'babel'],
               include: path.join(__dirname, 'src')
             }, {
-               test: /(\.scss|\.css)$/,
-               loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+                test: /(\.scss|\.css)$/,
+                include: /node_modules\/react-toolbox\//,
+                loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
             }
         ]
     },

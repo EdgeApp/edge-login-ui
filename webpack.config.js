@@ -1,5 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 module.exports = {
 	devtool: 'cheap-module-source-map',
@@ -9,7 +12,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'app.bundle.js',
-        publicPath: '/assets/'
+        publicPath: '/'
     },
     resolve: {
      extensions: ['', '.scss', '.css', '.js', '.json'],
@@ -22,7 +25,7 @@ module.exports = {
     postcss: [autoprefixer],
     sassLoader: {
       data: '@import "theme/_config.scss";',
-      includePaths: [path.resolve(__dirname, './src/app')]
+      includePaths: [path.resolve(__dirname, './src')]
     },    
     plugins: [
       new ExtractTextPlugin('bundle.css', { allChunks: true }),
@@ -57,6 +60,7 @@ module.exports = {
 			  include: path.join(__dirname, 'src')
       }, {
         test: /(\.scss|\.css)$/,
+        include: /node_modules\/react-toolbox\//,
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
       }      
 		]
