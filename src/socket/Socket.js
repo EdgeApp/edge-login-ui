@@ -4,7 +4,7 @@ import io from 'socket.io-client'
 import config from '../../config.json'
 const socketAddress = config.socket
 
-import * as action from './action'
+import * as action from './Socket.action'
 
 class ServerMaintenance extends Component {
 

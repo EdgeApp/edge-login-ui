@@ -1,4 +1,4 @@
-import * as ACTION from './action'
+import * as ACTION from './Socket.action'
 
 export const appinfo = (state = {}, action ) => {
     switch(action.type) {
