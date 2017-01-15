@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import Button from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
+import { checkUsername } from './Username.middleware'
+
 import { changeUsernameValue } from './Username.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import t from '../../lib/web/LocaleStrings'
@@ -10,11 +12,10 @@ import t from '../../lib/web/LocaleStrings'
 class UsernameComponent extends Component {
 
   _handleSubmit = () => {
-
     if (this.props.username.length < 3) {
       return this.props.dispatch(openErrorModal(t('activity_signup_insufficient_username_message')))
     }
-    this.props.dispatch(checkUsername(this.props.username).then(success => {
+    this.props.dispatch(checkUsername(this.props.username, success => {
       if(success) {
         browserHistory.push('/signup/pin')
       }
@@ -33,9 +34,9 @@ class UsernameComponent extends Component {
   //   Actions.refresh({onLeft: this.handleBack})
   // }
 
-  _handleOnChangeText = (value,event) => {
+  _handleOnChangeText = (username) => {
     this.props.dispatch(
-      changeUsernameValue(value)
+      changeUsernameValue(username)
     )
   }
 

@@ -1,7 +1,10 @@
 import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
 export const checkUsername = (username,callback) => {
-  return (dispatch,getState,t,abcContext) => {
+  return (dispatch,getState,imports) => {
+    const t = imports.t
+    const abcContext = imports.abcContext
     dispatch(openLoading(t('activity_signup_checking_username')))
     setTimeout(() => {
       abcContext(context => {
@@ -11,7 +14,7 @@ export const checkUsername = (username,callback) => {
             dispatch(openErrorModal(t('activity_signup_username_unavailable')))
             return callback()
           }
-          Promise.resolve(true)
+          callback(true)
         })
       })
     }, 300)

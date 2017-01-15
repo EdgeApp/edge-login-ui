@@ -1,4 +1,4 @@
-import {abc} from '../abc.webpack'
+var abc = require('airbitz-core-js')
 
 const abcctx = function (callback) {
     const abcContext = abc.makeContext({

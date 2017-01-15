@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "airbitz-core-js": "^0.0.11",
     "async": "^2.0.1",
     "autoprefixer": "^6.6.1",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -42,14 +43,14 @@
     "eslint-plugin-react": "^5.2.2",
     "express": "^4.14.0",
     "json-loader": "^0.5.4",
-    "style-loader": "^0.13.1",
+    "node-sass": "^4.3.0",
+    "postcss-loader": "^1.2.2",
     "react-hot-loader": "^1.3.0",
-    "webpack": "^1.13.1",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-dev-server": "^1.14.1",
     "sass-lint": "^1.10.2",
     "sass-loader": "^4.1.1",
-    "node-sass": "^4.3.0",
-    "postcss-loader": "^1.2.2"
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1"
   }
 }

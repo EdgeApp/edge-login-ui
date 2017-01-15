@@ -2,12 +2,12 @@ import { combineReducers } from 'redux'
 
 import { username } from '../modules/Username/Username.reducer'
 import { pin, pinDummy } from '../modules/PinNumber/PinNumber.reducer'
+import * as PasswordStates from '../modules/Password/Password.reducer'
+import * as PasswordValidation from '../modules/Password/PasswordValidation/PasswordValidation.reducer'
 // import { nextButtonVisible } from '../modules/NextButton/NextButton.reducer'
 // import { skipButtonVisible } from '../modules/SkipButton/SkipButton.reducer'
-import * as PasswordStates from '../modules/Password/Password.reducer'
 // import { disclaimerAccepted } from '../modules/Disclaimer/Disclaimer.reducer'
 // import * as ReviewDetailsStates from '../modules/ReviewDetails/ReviewDetails.reducer'
-import * as PasswordValidation from '../modules/Password/PasswordValidation/PasswordValidation.reducer'
 // import * as Loader from '../modules/Loader/Loader.reducer'
 // import * as WarningModal from '../modules/WarningModal/WarningModal.reducer'
 // import * as ErrorModal from '../modules/ErrorModal/ErrorModal.reducer'
@@ -23,7 +23,7 @@ const store = combineReducers({
   pin,
   pinDummy,
   password: combineReducers({
-    inputState: PasswordStates.inputState,
+    // inputState: PasswordStates.inputState,
     password: PasswordStates.password,
     passwordRepeat: PasswordStates.passwordRepeat,
     notification: PasswordStates.notification,

@@ -1,4 +1,4 @@
-import {abc} from '../abc.webpack'
+import {abc} from 'abc.webpack'
 import LocalStorage from './LocalStorage'
 
 const abcctx = function (callback) {

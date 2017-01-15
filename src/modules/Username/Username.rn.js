@@ -19,7 +19,7 @@ class UsernameComponent extends Component {
     if (this.props.username.length < 3) {
       return dispatch(openErrorModal(t('activity_signup_insufficient_username_message')))
     }    
-    this.props.dispatch(checkUsername(this.props.username).then( success => {
+    this.props.dispatch(checkUsername(this.props.username, success => {
       if(success) {
         Actions.pin()
       }
