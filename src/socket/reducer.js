@@ -1,8 +1,8 @@
 import * as ACTION from './action'
 
-export const gameinfo = (state = {}, action ) => {
+export const appinfo = (state = {}, action ) => {
     switch(action.type) {
-        case ACTION.SOCKET_GAME_INFO :
+        case ACTION.SOCKET_APP_INFO :
             return action.data
         default :
             return state

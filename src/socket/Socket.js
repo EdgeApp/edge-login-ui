@@ -11,10 +11,9 @@ class ServerMaintenance extends Component {
 	componentDidMount () {
 		const authorization = sessionStorage.getItem('header')
 		const socket = io(`${socketAddress}?authHeader=${authorization}`)
+    socket.on('app-info', (data) => this.props.dispatch(action.socketAppInfo(data)))
 
-		socket.on('game-info', (data) => this.props.dispatch(action.socketGameInfo(data)))
-		socket.on('players-list', (data) => this.props.dispatch(action.socketPlayerList(data)))
-		socket.on('game-history', (data) => this.props.dispatch(action.socketGameFinished(data)))
+		socket.on('history', (data) => this.props.dispatch(action.socketHistory(data)))
 	}
 
     render() { return null }

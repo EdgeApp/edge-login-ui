@@ -1,24 +1,14 @@
-export const SOCKET_GAME_INFO 		= 'SOCKET_GAME_INFO'
-export const SOCKET_PLAYER_LIST 	= 'SOCKET_PLAYER_LIST'
-export const SOCKET_GAME_FINISHED 	= 'SOCKET_GAME_FINISHED'
-
-export const socketGameInfo = data => {
+export const SOCKET_HISTORY 		= 'SOCKET_HISTORY'
+export const SOCKET_APP_INFO = 'SOCKET_APP_INFO'
+export const socketAppInfo = data => {
     return {
-        type: SOCKET_GAME_INFO,
-		data
- 	}
+        type: SOCKET_APP_INFO,
+    data
+  }
 }
-
-export const socketPlayerList = data => {
+export const socketHistory = data => {
     return {
-        type: SOCKET_PLAYER_LIST,
-		data
- 	}
-}
-
-export const socketGameFinished = data => {
-    return {
-        type: SOCKET_GAME_FINISHED,
+        type: SOCKET_HISTORY,
 		data
  	}
 }
