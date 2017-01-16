@@ -3,12 +3,20 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
 import { changePinNumberValue } from './PinNumber.action'
-// import { checkPIN } from './PinNumber.middleware'
+import { checkPIN } from './PinNumber.middleware'
+
+import Loader from '../Loader/Loader.web'
+import ErrorModal from '../ErrorModal/ErrorModal.web'
 
 class PinComponent extends Component {
 
   _handleSubmit = () => {
-    browserHistory.push('/signup/password')
+    this.props.dispatch(
+     checkPIN(
+        this.props.pin,
+        () => browserHistory.push('/signup/password')
+      ) 
+    )
   }
 
   _handleBack = () => {
@@ -30,9 +38,6 @@ class PinComponent extends Component {
     this.props.dispatch(
       changePinNumberValue(e.target.value)
     )
-    if (e.target.value.length > 3) {
-      browserHistory.push('/signup/password')
-    }
   }
 
   // pinStyle = () => {
@@ -43,9 +48,20 @@ class PinComponent extends Component {
   render () {
     return (
       <div>
-        <button type="button" onClick={this._handleBack}>Back</button>
-        <input type="number" name="pin" onChange={this._handleOnChangeText} value={this.props.pin} placeholder="pin"/>
-        <button type="button" onClick={this._handleSubmit}>Next</button>
+        <div>
+          <button type="button" onClick={this._handleBack}>Back</button>
+        </div>
+        <div>
+          <input type="number" name="pin" onChange={this._handleOnChangeText} value={this.props.pin} placeholder="pin"/>
+        </div>
+        <div>
+          <input type="number" name="pinDummy" placeholder="pinDummy"/>
+        </div>
+        <div>
+          <button type="button" onClick={this._handleSubmit}>Next</button>
+        </div>
+        <Loader />
+        <ErrorModal />
       </div>
     )
   }

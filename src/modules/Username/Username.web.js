@@ -1,25 +1,37 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
+import nextButton from 'theme/nextButton.scss';
 import Button from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
+import t from '../../lib/web/LocaleStrings'
+
 import { checkUsername } from './Username.middleware'
-import nextButton from 'theme/nextButton.scss';
 import { changeUsernameValue } from './Username.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
-import t from '../../lib/web/LocaleStrings'
+
+import Loader from '../Loader/Loader.web'
+import ErrorModal from '../ErrorModal/ErrorModal.web'
 
 class UsernameComponent extends Component {
 
   _handleSubmit = () => {
+
     if (this.props.username.length < 3) {
-      return this.props.dispatch(openErrorModal(t('activity_signup_insufficient_username_message')))
+      return this.props.dispatch(
+        openErrorModal(t('activity_signup_insufficient_username_message'))
+      )
     }
-    this.props.dispatch(checkUsername(this.props.username, success => {
-      if(success) {
-        browserHistory.push('/signup/pin')
-      }
-    }))
+
+    if(this.props.username.length >= 3) {
+      return this.props.dispatch(
+        checkUsername(
+          this.props.username, 
+          () => browserHistory.push('/signup/pin')
+        )
+      )
+    }
+
   }
 
 
@@ -28,10 +40,6 @@ class UsernameComponent extends Component {
   //     this.props.dispatch(fadeWhiteOverlay())
   //     Actions.pop()
   //   }
-  // }
-
-  // componentWillMount = () => {
-  //   Actions.refresh({onLeft: this.handleBack})
   // }
 
   _handleOnChangeText = (username) => {
@@ -43,9 +51,13 @@ class UsernameComponent extends Component {
   render () {
     return (
       <div>
-        <Button type="button">Back</Button>
-        <Input type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder="Username" />
-        <Button type="button" theme={nextButton} onClick={this._handleSubmit}>Next</Button>
+        <div>
+          <Button type="button">Back</Button>
+          <Input type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder="Username" />
+          <Button type="button" theme={nextButton} onClick={this._handleSubmit}>Next</Button>
+        </div>
+        <Loader />
+        <ErrorModal />
       </div>
     )
   }

@@ -1,14 +1,9 @@
-
-import { Actions } from 'react-native-router-flux'
-
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { getDetails } from '../ReviewDetails/ReviewDetails.action'
 
-import { checkCameraPermission, checkReadContactPermission } from '../../lib/permissions'
-
-export const signupUser = (username, password, pin) => {
-  return dispatch => {
+export const signupUser = (username, password, pin, callback) => {
+  return dispatch( dispatch, getState, imports ) => {
     dispatch(
       getDetails({
         username: username,

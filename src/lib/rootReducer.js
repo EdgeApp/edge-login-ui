@@ -7,10 +7,10 @@ import * as PasswordValidation from '../modules/Password/PasswordValidation/Pass
 // import { nextButtonVisible } from '../modules/NextButton/NextButton.reducer'
 // import { skipButtonVisible } from '../modules/SkipButton/SkipButton.reducer'
 // import { disclaimerAccepted } from '../modules/Disclaimer/Disclaimer.reducer'
-// import * as ReviewDetailsStates from '../modules/ReviewDetails/ReviewDetails.reducer'
-// import * as Loader from '../modules/Loader/Loader.reducer'
+import * as ReviewDetailsStates from '../modules/ReviewDetails/ReviewDetails.reducer'
+import * as Loader from '../modules/Loader/Loader.reducer'
 // import * as WarningModal from '../modules/WarningModal/WarningModal.reducer'
-// import * as ErrorModal from '../modules/ErrorModal/ErrorModal.reducer'
+import * as ErrorModal from '../modules/ErrorModal/ErrorModal.reducer'
 // import * as Login from '../modules/Login/Login.reducer'
 // import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
 // import { user } from '../modules/User/User.reducer'
@@ -36,10 +36,10 @@ const store = combineReducers({
     })
   }),
 
-  // reviewDetails: combineReducers({
-  //   details: ReviewDetailsStates.details,
-  //   view: ReviewDetailsStates.view
-  // }),
+  reviewDetails: combineReducers({
+    details: ReviewDetailsStates.details,
+    view: ReviewDetailsStates.view
+  }),
 
   // login: combineReducers({
   //   viewPassword: Login.viewPassword,
@@ -53,21 +53,23 @@ const store = combineReducers({
 
   // nextButtonVisible,
   // skipButtonVisible,
-  // loader: combineReducers({
-  //   loading: Loader.loading,
-  //   message: Loader.message,
-  //   style: Loader.style
-  // }),
+
+  loader: combineReducers({
+    loading: Loader.loading,
+    message: Loader.message,
+    // style: Loader.style
+  }),
+  
   // warningModal: combineReducers({
   //   visible: WarningModal.visible,
   //   module: WarningModal.module,
   //   title: WarningModal.title,
   //   message: WarningModal.message
   // }),
-  // errorModal: combineReducers({
-  //   visible: ErrorModal.visible,
-  //   message: ErrorModal.message
-  // }),
+  errorModal: combineReducers({
+    visible: ErrorModal.visible,
+    message: ErrorModal.message
+  }),
   // cachedUsers: combineReducers({
   //   users: CachedUsers.users,
   //   selectedUserToLogin: CachedUsers.selectedUserToLogin,

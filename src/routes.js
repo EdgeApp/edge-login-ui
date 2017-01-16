@@ -6,6 +6,7 @@ import Container from './modules/Container'
 import Username from './modules/Username/Username.web'
 import PinNumber from './modules/PinNumber/PinNumber.web'
 import Password from './modules/Password/Password.ui'
+import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 
 export default class RouterComponent extends Component {
 
@@ -17,6 +18,7 @@ export default class RouterComponent extends Component {
             <Route path="/signup/username" component={Username}/>
             <Route path="/signup/pin" component={PinNumber}/>
             <Route path="/signup/password" component={Password}/>
+            <Route path="/signup/review" component={ReviewDetails}/>
           </Route>
         </Router>
     )
