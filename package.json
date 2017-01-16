@@ -19,6 +19,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.14.1",
     "react": "^15.2.1",
+    "react-css-themr": "^1.7.1",
     "react-dom": "^15.2.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.0",
