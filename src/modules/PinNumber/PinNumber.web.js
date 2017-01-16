@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
+import Button from 'react-toolbox/lib/button';
+import Input from 'react-toolbox/lib/input';
+import t from '../../lib/web/LocaleStrings'
+
+import nextButton from 'theme/nextButton.scss';
+import backButton from 'theme/backButton.scss';
+import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 
 import { changePinNumberValue } from './PinNumber.action'
 import { checkPIN } from './PinNumber.middleware'
@@ -23,46 +30,35 @@ class PinComponent extends Component {
     browserHistory.goBack()
   }
 
-  // changePinDummy = (pinDummy) => {
-  //   if (this.props.pinDummy.length < this.props.pinNumber.length) {
-  //     this.props.dispatch(changePinNumberValue(this.props.pinNumber.substr(0, this.props.pinDummy.length)))
-  //   }
-  // }
 
-  // focusPin = () => {
-  //   this.refs.signupPinDummy.blur()
-  //   this.refs.signupPin.focus()
-  // }
-
-  _handleOnChangeText = (e) => {
+  _handleOnChangeText = (value, event) => {
     this.props.dispatch(
-      changePinNumberValue(e.target.value)
+      changePinNumberValue(value)
     )
   }
 
-  // pinStyle = () => {
-  //   if(this.props.pinDummy.length > 0) return {fontSize: 110, paddingTop: 0, paddingBottom: -35}
-  //     return {}
-  // }
 
   render () {
     return (
       <div>
-        <div>
-          <button type="button" onClick={this._handleBack}>Back</button>
+        <div style={{position: 'relative'}}>
+          <Button theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type="button">{t('string_capitalize_back')}</Button>
+          <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>{t('activity_signup_pin_label')}</div>
         </div>
-        <div>
-          <input type="number" name="pin" onChange={this._handleOnChangeText} value={this.props.pin} placeholder="pin"/>
-        </div>
-        <div>
-          <input type="number" name="pinDummy" placeholder="pinDummy"/>
-        </div>
-        <div>
-          <button type="button" onClick={this._handleSubmit}>Next</button>
-        </div>
+        <Card>
+          <CardText>
+            <Input ref='signupPin' style={{fontSize:'39px'}} type="password" autoFocus name="pin" onChange={this._handleOnChangeText} value={this.props.pin} placeholder={t('activity_signup_pin_hint')}/>
+
+            <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_pin_text')}</p>
+          </CardText>
+
+          <CardActions>
+            <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
+          </CardActions>
+        </Card>  
         <Loader />
-        <ErrorModal />
-      </div>
+        <ErrorModal />            
+      </div>      
     )
   }
 }

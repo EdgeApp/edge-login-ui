@@ -56,19 +56,17 @@ class UsernameComponent extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <Button theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type="button">Back</Button>
-          <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>Sign Up</div>
+          <Button theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type="button">{t('string_capitalize_exit')}</Button>
+          <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>{t('fragment_setup_username_label')}</div>
         </div>
         <Card>
           <CardText>
-            <Input type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder="Username" />
-            <p>This is not your mama's house</p>
-            <p>So pick up yo' stuff</p>
-            <p>This is not your daddy's house. So don't be bringin' yo' girlfriends home.</p>
+            <Input autoFocus type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder={t('fragment_landing_username_hint')} />
+            <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_username_text')}</p>
           </CardText>
 
           <CardActions>
-            <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>Next</Button>
+            <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </CardActions>
         </Card>  
         <Loader />
