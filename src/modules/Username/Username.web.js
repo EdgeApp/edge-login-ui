@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router'
 import Button from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
 import { checkUsername } from './Username.middleware'
-
+import nextButton from 'theme/nextButton.scss';
 import { changeUsernameValue } from './Username.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import t from '../../lib/web/LocaleStrings'
@@ -45,7 +45,7 @@ class UsernameComponent extends Component {
       <div>
         <Button type="button">Back</Button>
         <Input type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder="Username" />
-        <Button type="button" onClick={this._handleSubmit}>Next</Button>
+        <Button type="button" theme={nextButton} onClick={this._handleSubmit}>Next</Button>
       </div>
     )
   }
