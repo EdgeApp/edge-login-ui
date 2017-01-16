@@ -1,13 +1,15 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
-import { Actions } from 'react-native-router-flux'
 
-import t from '../../lib/LocaleStrings'
-export const checkPIN = (pin, navigator) => {
-  return dispatch => {
+export const checkPIN = (pin,callback) => {
+  return ( dispatch, getState, imports ) => {
     if (pin.length === 4) {
-      Actions.password()
+      return callback()
     } else {
-      dispatch(openErrorModal(t('activity_signup_insufficient_pin')))
+      return dispatch(
+        openErrorModal(
+          imports.t('activity_signup_insufficient_pin')
+        )
+      )
     }
   }
 }

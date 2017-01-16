@@ -1,28 +1,41 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
+import nextButton from 'theme/nextButton.scss';
+import backButton from 'theme/backButton.scss';
 import Button from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
+
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 
 import { checkUsername } from './Username.middleware'
-import nextButton from 'theme/nextButton.scss';
-import backButton from 'theme/backButton.scss';
+import t from '../../lib/web/LocaleStrings'
+
 import { changeUsernameValue } from './Username.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
-import t from '../../lib/web/LocaleStrings'
+
+import Loader from '../Loader/Loader.web'
+import ErrorModal from '../ErrorModal/ErrorModal.web'
 
 class UsernameComponent extends Component {
 
   _handleSubmit = () => {
+
     if (this.props.username.length < 3) {
-      return this.props.dispatch(openErrorModal(t('activity_signup_insufficient_username_message')))
+      return this.props.dispatch(
+        openErrorModal(t('activity_signup_insufficient_username_message'))
+      )
     }
-    this.props.dispatch(checkUsername(this.props.username, success => {
-      if(success) {
-        browserHistory.push('/signup/pin')
-      }
-    }))
+
+    if(this.props.username.length >= 3) {
+      return this.props.dispatch(
+        checkUsername(
+          this.props.username, 
+          () => browserHistory.push('/signup/pin')
+        )
+      )
+    }
+
   }
 
 
@@ -31,10 +44,6 @@ class UsernameComponent extends Component {
   //     this.props.dispatch(fadeWhiteOverlay())
   //     Actions.pop()
   //   }
-  // }
-
-  // componentWillMount = () => {
-  //   Actions.refresh({onLeft: this.handleBack})
   // }
 
   _handleOnChangeText = (username) => {
@@ -61,8 +70,10 @@ class UsernameComponent extends Component {
           <CardActions>
             <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>Next</Button>
           </CardActions>
-        </Card>      
-  </div>
+        </Card>  
+        <Loader />
+        <ErrorModal />            
+      </div>
     )
   }
 }
