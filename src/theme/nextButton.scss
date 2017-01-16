@@ -2,9 +2,8 @@
   width: 100%;
 }
 .neutral:not([disabled]) {
-  background-color: #005500;
-  &.flat,
-  &.toggle {
-    color: #FF0000;
+  &.raised {
+    background-color: #80C342;
+    color: #FFF;
   }
 }
