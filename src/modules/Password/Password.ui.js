@@ -28,7 +28,7 @@ class Password extends Component {
         this.props.passwordRepeat,
         this.props.validation,
         this.props.username,
-        this.props.pinNumber,
+        this.props.pin,
         callback
       )
     )
@@ -47,7 +47,7 @@ class Password extends Component {
     this.props.dispatch(
       skipPassword(
         this.props.username, 
-        this.props.pinNumber,
+        this.props.pin,
         callback
       )
     )
@@ -98,7 +98,7 @@ export default connect(state => ({
   passwordRepeat: state.password.passwordRepeat,
   validation: state.password.validation,
   username: state.username,
-  pinNumber: state.pinNumber,
+  pin: state.pin,
   loader: state.loader
 
 }))(Password)

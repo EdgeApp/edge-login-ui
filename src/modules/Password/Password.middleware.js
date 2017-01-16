@@ -1,5 +1,6 @@
 import { passwordNotificationHide, changePasswordValue } from './Password.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
+import { signupUser } from '../Signup/Signup.middleware'
 
 export const checkPassword = (password, passwordRepeat, validation, username, pinNumber, callback) => {
   return ( dispatch, getState, imports ) => {
@@ -11,10 +12,9 @@ export const checkPassword = (password, passwordRepeat, validation, username, pi
       return dispatch(openErrorModal(t('activity_signup_passwords_dont_match')))
     }
     if (validation.upperCaseChar && validation.lowerCaseChar && validation.number && validation.characterLength && password === passwordRepeat) {
-      callback()
-      // return dispatch(
-        // signupUser(username, password, pinNumber, callback)
-      // )
+      return dispatch(
+        signupUser(username, password, pinNumber, callback)
+      )
     } else {
       return dispatch(openErrorModal(t('activity_signup_insufficient_password')))
     }
@@ -25,9 +25,8 @@ export const skipPassword = (username, pinNumber, callback) => {
   return ( dispatch, getState, imports ) => {
     dispatch(changePasswordValue(''))
     dispatch(passwordNotificationHide())
-    return callback()
-    // return dispatch(
-    //   signupUser(username, null, pinNumber, callback)
-    // )
+    return dispatch(
+      signupUser(username, null, pinNumber, callback)
+    )
   }
 }

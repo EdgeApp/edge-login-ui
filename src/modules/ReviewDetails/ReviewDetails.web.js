@@ -1,32 +1,38 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
+import { browserHistory } from 'react-router'
 
 import { showSignInDetails, hideSignInDetails } from './ReviewDetails.action'
-// import { loginWithPassword } from '../Login/Login.middleware'
+import { loginWithPassword } from '../Login/Login.middleware'
 
 import ErrorModal from '../ErrorModal/ErrorModal.web'
 import Loader from '../Loader/Loader.web'
 
 class Review extends Component {
 
-  handleHideDetails = () => {
-    if (this.props.review) {
+  _handleHideDetails = () => {
+    if (this.props.view) {
       this.props.dispatch(hideSignInDetails())
     }
   }
 
-  handleShowDetails = () => {
-    if (!this.props.review) {
+  _handleShowDetails = () => {
+    if (!this.props.view) {
       this.props.dispatch(showSignInDetails())
     }
   }
 
-  // handleFinish = () => {
-  //   const { username, password } = this.props.details
-  //   this.props.dispatch(loginWithPassword(username, password))
-  //   Actions.home()
-  // }
+  _handleFinish = () => {
+    const { username, password } = this.props.details
+    this.props.dispatch(
+      loginWithPassword(
+        username, 
+        password, 
+        () => browserHistory.push('/home')
+      )
+    )
+  }
 
   render () {
     if (this.props.view) {
@@ -38,7 +44,8 @@ class Review extends Component {
             <p>password: {this.props.details.password}</p> 
           </div>
           <div>
-            <button type="button" onClick={this.handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</button>
+            <button type="button" onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</button>
+            <button type="button" onClick={this._handleFinish}>{t('string_finish')}</button>
           </div>
           <ErrorModal />
           <Loader />
@@ -54,7 +61,8 @@ class Review extends Component {
             <p>{t('fragment_setup_writeitdown_text_warning')}</p> 
           </div>
           <div>
-            <button type="button" onClick={this.handleShowDetails}>{t('fragment_setup_writeitdown_show')}</button>
+            <button type="button" onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</button>
+            <button type="button" onClick={this._handleFinish}>{t('string_finish')}</button>
           </div>
           <ErrorModal />
           <Loader />

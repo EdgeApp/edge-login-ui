@@ -3,40 +3,36 @@ import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { getDetails } from '../ReviewDetails/ReviewDetails.action'
 
 export const signupUser = (username, password, pin, callback) => {
-  return dispatch( dispatch, getState, imports ) => {
-    dispatch(
-      getDetails({
-        username: username,
-        password: password,
-        pin: pin
-      })
-    )
-    global.localStorage.setItem('lastUser', username)
-    dispatch(checkPermissions())
-    if (username) { return }
+  return ( dispatch, getState, imports ) => {
+    const t = imports.t
+    const abcContext = imports.abcContext
+    // dispatch(
+    //   getDetails({
+    //     username: username,
+    //     password: password,
+    //     pin: pin
+    //   })
+    // )
+    // callback()
     dispatch(openLoading(t('fragment_signup_creating_account')))
-    setTimeout(() => {
-      abcctx(ctx => {
-        ctx.createAccount(username, password, pin, (err, result) => {
-          dispatch(closeLoading())
-          if (err) {
-            return dispatch(openErrorModal(t('activity_signup_failed') + ': ' + err.message))
-          }
-
-          if (!err) {
-            global.localStorage.setItem('lastUser', username)
-            dispatch(
-              getDetails({
-                username: username,
-                password: password,
-                pin: pin
-              })
-            )
-            return dispatch(checkPermissions())
-          }
-        })
+    abcContext(ctx => {
+      ctx.createAccount(username, password, pin, (err, result) => {
+        dispatch(closeLoading())
+        if (err) {
+          return dispatch(openErrorModal(t('activity_signup_failed') + ': ' + err.message))
+        }
+        if (!err) {
+          dispatch(
+            getDetails({
+              username: username,
+              password: password,
+              pin: pin
+            })
+          )
+          callback()
+        }
       })
-    }, 300)
+    })
   }
 }
 

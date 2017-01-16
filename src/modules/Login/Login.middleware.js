@@ -1,35 +1,30 @@
-
-import { Actions } from 'react-native-router-flux'
-
-import abcctx from '../../lib/abcContext'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 
 import { userLogin } from './Login.action'
 
-export const loginWithPassword = (username, password) => {
-  return dispatch => {
+export const loginWithPassword = (username, password, callback) => {
+  return ( dispatch, getState, imports ) => {
+    const abcContext = imports.abcContext
     dispatch(openLoading())
-    setTimeout(() => {
-      abcctx(context => {
-        context.loginWithPassword(username, password, null, null, (error, account) => {
-          dispatch(closeLoading())
-          if (error) {
-            dispatch(openErrorModal(error.message))
-          }
-          if (!error) {
-            global.localStorage.setItem('lastUser', username)
-            dispatch(userLogin(account))
-            Actions.home()
-          }
-        })
+    abcContext(context => {
+      context.loginWithPassword(username, password, null, null, (error, account) => {
+        dispatch(closeLoading())
+        if (error) {
+          dispatch(openErrorModal(error.message))
+        }
+        if (!error) {
+          global.localStorage.setItem('lastUser', username)
+          dispatch(userLogin(account))
+          callback()
+        }
       })
-    }, 300)
+    })
   }
 }
 
-export const loginWithPin = (username, pin) => {
-  return dispatch => {
+export const loginWithPin = (username, pin, callback) => {
+  return ( dispatch, getState, imports ) => {
     dispatch(openLoading())
     setTimeout(() => {
       abcctx(context => {
