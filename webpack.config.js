@@ -64,7 +64,12 @@ module.exports = {
         test: /(\.scss|\.css)$/,
         include: [/node_modules\/react-toolbox\//,/src\//],
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
-      }      
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i, include: /src\/img/, 
+        loader: "file-loader"
+      }
+
 		]
     }
 };

@@ -1,0 +1,8 @@
+.button {
+  width: 100%;
+}
+.neutral:not([disabled]) {
+  &.flat {
+    color: #000;
+  }
+}

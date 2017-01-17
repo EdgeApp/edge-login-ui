@@ -4,7 +4,6 @@ import { browserHistory } from 'react-router'
 import Button from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
 import t from '../../lib/web/LocaleStrings'
-
 import nextButton from 'theme/nextButton.scss';
 import backButton from 'theme/backButton.scss';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
@@ -57,7 +56,7 @@ class PinComponent extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <Button theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type="button">{t('string_capitalize_back')}</Button>
+          <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type="button">{t('string_capitalize_back')}</Button>
           <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>{t('activity_signup_pin_label')}</div>
         </div>
         <Card>

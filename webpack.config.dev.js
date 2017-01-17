@@ -16,7 +16,7 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['', '.scss', '.css', '.js', '.json'],
+        extensions: ['', '.scss', '.css', '.js', '.json', '.png', '.jpg'],
         modulesDirectories: [
             'node_modules',
             path.resolve(__dirname, './node_modules'),
@@ -43,6 +43,13 @@ module.exports = {
                 test: /(\.scss|\.css)$/,
                 include: [/node_modules\/react-toolbox\//,/src\//],
                 loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+            },
+            {
+                test: /.*\.(gif|png|jpe?g|svg)$/i,
+                include: /src\/img/,
+                loaders: [
+                  'file-loader'
+                ]
             }
         ]
     },

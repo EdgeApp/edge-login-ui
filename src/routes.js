@@ -5,7 +5,7 @@ import { Router, Route, browserHistory, IndexRedirect } from 'react-router'
 import Container from './modules/Container'
 import Username from './modules/Username/Username.web'
 import PinNumber from './modules/PinNumber/PinNumber.web'
-import Password from './modules/Password/Password.ui'
+import Password from './modules/Password/Password.web'
 import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 import Home from './modules/Home/Home.web'
 

@@ -39,12 +39,12 @@ class UsernameComponent extends Component {
   }
 
 
-  // handleBack = () => {
-  //   if (this.props.loader.loading === false) {
-  //     this.props.dispatch(fadeWhiteOverlay())
-  //     Actions.pop()
-  //   }
-  // }
+  _handleBack = () => {
+    if (this.props.loader.loading === false) {
+      this.props.dispatch(fadeWhiteOverlay())
+      browserHistory.goBack()
+    }
+  }
 
   _handleOnChangeText = (username) => {
     this.props.dispatch(
@@ -56,7 +56,7 @@ class UsernameComponent extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <Button theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type="button">{t('string_capitalize_exit')}</Button>
+          <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type="button">{t('string_capitalize_exit')}</Button>
           <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>{t('fragment_setup_username_label')}</div>
         </div>
         <Card>
