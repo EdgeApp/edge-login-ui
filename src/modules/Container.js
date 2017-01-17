@@ -19,9 +19,7 @@ class Container extends Component {
       window.parent.exitCallback()
     }
   }
-  state = {
-    active: false
-  };
+
 
   actions = [
     { label: "Cancel", onClick: this.handleToggle },
