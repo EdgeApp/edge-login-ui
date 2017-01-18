@@ -4,6 +4,15 @@ import { connect } from 'react-redux'
 import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
 import { openWarningModal } from '../WarningModal/WarningModal.action'
 import t from 'lib/web/LocaleStrings'
+import { openUserList, closeUserList } from '../Login/Login.action'
+import _ from 'lodash'
+import Button from 'react-toolbox/lib/button'
+
+import cachedUserXButton from 'theme/cachedUserXButton.scss';
+
+import cachedUserButton from 'theme/cachedUserButton.scss';
+
+import Dialog from 'react-toolbox/lib/dialog';
 
 class UserList extends Component {
 
@@ -27,16 +36,17 @@ class UserList extends Component {
   listUsers = () => {
     const checkIfLastElementStyle = index => {
       const lastIndex = this.props.users.length - 1
-      let styleArr = [style.row]
+      let styleArr = _.clone(style.row)
       if (index === 0) {
-        styleArr.push(style.topRadius)
-      }
-      if (lastIndex === index) {
-        styleArr.push(style.bottomRadius)
+        _.extend(styleArr,style.border)
+        _.extend(styleArr,style.topRadius)
+      } else if (lastIndex === index) {
+        _.extend(styleArr,style.border)
+        _.extend(styleArr,style.bottomRadius)
+        console.log(styleArr,style.bottomRadius)
       } else if (lastIndex !== index) {
-        styleArr.push(style.border)
+        _.extend(styleArr,style.border)
       }
-
       return styleArr
     }
 
@@ -44,20 +54,29 @@ class UserList extends Component {
       return (
         <div key={index} style={checkIfLastElementStyle(index)}>
           <div style={style.cachedItem}>
-            <TouchableOpacity style={style.textContainer} onPress={() => this.handleLoginUserPin(user)}>
-              <Text style={style.text}>{ user }</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handleDeleteUserCache(user)} color='#222222' style={style.xbutton}>
-              <Text style={style.xbuttontext}>X</Text>
-            </TouchableOpacity >
+            <Button theme={cachedUserButton} style={style.textContainer} onClick={() => this.handleLoginUserPin(user)}>
+              { user }
+            </Button>
+            <Button theme={cachedUserXButton} onClick={() => this.handleDeleteUserCache(user)} color='#222222' style={style.xbutton}>
+              X
+            </Button >
           </div>
         </div>
       )
     })
   }
 
+
+  showCachedUsers = () => {
+    this.props.dispatch(openUserList())
+  }
+
+  hideCachedUsers = () => {
+    this.props.dispatch(closeUserList())
+  }
   render () {
     return (
+
       <div
         style={style.container}>
         <div style={style.spacer} />
@@ -74,74 +93,82 @@ const style = {
 
   container: {
     position: 'absolute',
+    zIndex: 2,
     overflow: 'auto',
-    maxHeight: 150,
+    maxHeight: '140px',
+    backgroundColor: '#FFF',
     left: 0,
     right: 0,
-    top: 40,
+    top: '50px',
     flex: 1,
     alignSelf: 'flex-end'
   },
   contentContainer: {
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row'
   },
   spacer: {
-    flex: 0.15
+    flexBasis: '15%',
+    display: 'flex'
   },
   listContainer: {
-    flex: 0.7,
+    display: 'flex',
+    flexBasis: '70%',
     flexDirection: 'column'
   },
   topRadius: {
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4
+    borderWidth: '1px 1px 1px 1px',
+    borderRadius: '4px 4px 0px 0px'
   },
   bottomRadius: {
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4
+    borderWidth: '0px 1px 1px 1px',
+    borderRadius: '0px 0px 4px 4px'
   },
 
   row: {
+    display: 'flex',
     flexDirection: 'row',
-    paddingLeft: 10,
+    paddingLeft: '10px',
     alignItems: 'stretch',
-    height: 40,
+    height: '40px',
     backgroundColor: '#FFF'
   },
   textContainer: {
+    display: 'flex',
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    height: 40
+    fontSize: '18px',
+    padding: 0
   },
   text: {
+    display: 'flex',
     flex: 1,
     color: '#222',
-    fontSize: 18
+    fontSize: '18px'
   },
 
-  xbuttontext: {
-    fontSize: 18
-  },
   xbutton: {
-    height: 40,
+    padding:0,
+    fontSize: '18px',
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 50,
-    padding: 10
+    width: '50px'
   },
 
   border: {
-    borderBottomColor: '#AAA',
-    borderBottomWidth: 1,
+    borderWidth: '0px 1px 1px 1px',
+    borderColor: '#AAA',
     borderStyle: 'solid'
   },
 
   cachedItem: {
     flex: 1,
+    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
@@ -150,6 +177,7 @@ const style = {
 
 export default connect(state => ({
 
-  users: state.cachedUsers.users
+  users: state.cachedUsers.users,
+  showCachedUsers: state.login.showCachedUsers
 
 }))(UserList)

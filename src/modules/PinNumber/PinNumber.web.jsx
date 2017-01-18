@@ -11,9 +11,6 @@ import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { changePinNumberValue } from './PinNumber.action'
 import { checkPIN } from './PinNumber.middleware'
 
-import Loader from '../Loader/Loader.web'
-import ErrorModal from '../ErrorModal/ErrorModal.web'
-
 class PinComponent extends Component {
 
   _handleSubmit = () => {
@@ -70,9 +67,7 @@ class PinComponent extends Component {
           <CardActions>
             <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </CardActions>
-        </Card>  
-        <Loader />
-        <ErrorModal />            
+        </Card>         
       </div>      
     )
   }

@@ -10,13 +10,11 @@ import { fadeWhiteOverlay } from '../Landing.action'
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 
 import { checkUsername } from './Username.middleware'
-import t from '../../lib/web/LocaleStrings'
+import t from 'lib/web/LocaleStrings'
 
 import { changeUsernameValue } from './Username.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
-import Loader from '../Loader/Loader.web'
-import ErrorModal from '../ErrorModal/ErrorModal.web'
 
 class UsernameComponent extends Component {
 
@@ -69,9 +67,7 @@ class UsernameComponent extends Component {
           <CardActions>
             <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </CardActions>
-        </Card>  
-        <Loader />
-        <ErrorModal />            
+        </Card>       
       </div>
     )
   }

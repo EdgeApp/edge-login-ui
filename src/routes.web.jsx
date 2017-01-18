@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router'
 
-import Container from './modules/Container'
+import Container from './modules/Container.web'
 import Login from './modules/Login/Login.web'
 import Username from './modules/Username/Username.web'
 import PinNumber from './modules/PinNumber/PinNumber.web'

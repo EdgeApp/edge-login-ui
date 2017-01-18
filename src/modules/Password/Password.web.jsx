@@ -5,8 +5,6 @@ import { browserHistory } from 'react-router'
 import { validate } from './PasswordValidation/PasswordValidation.middleware'
 import { checkPassword, skipPassword } from './Password.middleware'
 
-import Loader from '../Loader/Loader.web'
-import ErrorModal from '../ErrorModal/ErrorModal.web'
 import SkipPassword from './Notification.web'
 
 import Button from 'react-toolbox/lib/button';
@@ -104,9 +102,6 @@ class Password extends Component {
             <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </CardActions>
         </Card>
-
-        <Loader />
-        <ErrorModal />
         <SkipPassword handleSubmit={this.handleSubmitSkipPassword}/>
     </div>
 

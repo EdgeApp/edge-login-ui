@@ -10,11 +10,12 @@ import { showWhiteOverlay } from '../Landing.action'
 import Button from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-import Loader from '../Loader/Loader.web'
-import ErrorModal from '../ErrorModal/ErrorModal.web'
+
 
 import signinButton from 'theme/signinButton.scss';
 import skipButton from 'theme/skipButton.scss';
+import loginUsernameInput from 'theme/loginUsernameInput.scss';
+
 class Login extends Component {
 
   submit = () => {
@@ -37,7 +38,6 @@ class Login extends Component {
     browserHistory.push('/signup/username')
   }
   changeUsername = (username) => {
-    console.log('ok',username)
     this.props.dispatch(loginUsername(username))
   }
 
@@ -46,14 +46,13 @@ class Login extends Component {
   }
   usernameFocused = () => {
     this.showCachedUsers()
-    console.log(this.refs.titleText)
-    // this.refs.titleText.transitionTo({height: 0}, 200)
+    this.refs.titleText.style.height = 0;
+    this.refs.titleText.style.margin = 0;
   }
   passwordFocused = () => {
     this.hideCachedUsers()
-    console.log(this.refs.titleText)
-
-    // this.refs.titleText.transitionTo({height: 0}, 200)
+    this.refs.titleText.style.height = 0;
+    this.refs.titleText.style.margin = 0;
   }
 
   showCachedUsers = () => {
@@ -77,7 +76,7 @@ class Login extends Component {
   render () {
     const cUsers = () => {
       if (this.props.showCachedUsers) {
-        return (<CachedUsers blurField={this.refs.loginUsername} />)
+        return (<CachedUsers blurField={this.refs.loginUsername.getWrappedInstance()} />)
       } else {
         return null
       }
@@ -93,11 +92,12 @@ class Login extends Component {
 
     return (
       <div style={style.container}>
-        <Card style={style.form}>
-          <CardTitle ref='titleText' style={{height: 40}}>
-            <div style={style.textTitle}>{t('activity_splash_with_airbitz')}</div>
-          </CardTitle>
-          <CardText ref='fieldsView' style={{
+        <div style={style.form}>
+          <div ref='titleText' style={{textAlign:'center', fontSize: '30px', padding: '0 0.8em', overflow:'hidden', margin: '10px'}}>{t('activity_splash_with_airbitz')}</div>
+
+          <div ref='fieldsView' style={{
+                padding: '0 0.8em',
+                position: 'relative',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -105,6 +105,7 @@ class Login extends Component {
                 height: heightFieldsView
               }}>
             <Input
+              theme={loginUsernameInput}
               ref='loginUsername'
               placeholder={t('fragment_landing_username_hint')}
               onChange={this.changeUsername}
@@ -124,16 +125,15 @@ class Login extends Component {
               autoCorrect={false}
               autoCapitalize={false}
         />
-          </CardText>
-          <CardActions style={{display:'flex',flexDirection:'column',alignItems:'stretch'}}>
-            <Button theme={signinButton} style={{margin: '0px 0px 10px 0px'}} raised onClick={this.submit}>{t('fragment_landing_signin_button')}</Button>
+
+            {cUsers()}
+          </div>
+          <div style={{display:'flex',flexDirection:'column',alignItems:'stretch'}}>
+            <Button theme={signinButton} style={{margin: '30px 0px 0px 0px'}} raised onClick={this.submit}>{t('fragment_landing_signin_button')}</Button>
             <div ref='fieldsBelowView' style={{height: heightBelowView}}></div>
-            <Button onClick={this.handleSignup} style={{margin: 0}} theme={signinButton} primary raised>{t('fragment_landing_signup_button')}</Button>
-          </CardActions>
-        </Card>
-        <Loader/>
-        <ErrorModal/>
-        {cUsers()}
+            <Button onClick={this.handleSignup} style={{margin: '20px 0px'}} theme={signinButton} primary raised>{t('fragment_landing_signup_button')}</Button>
+          </div>
+        </div>
       </div>
     )
   }
@@ -142,7 +142,9 @@ class Login extends Component {
 
 const style = {
 
-
+  container: {
+    padding: '0 0.4em'
+  },
   whiteTransitionFade: {
     position: 'absolute',
     backgroundColor: '#FFF',

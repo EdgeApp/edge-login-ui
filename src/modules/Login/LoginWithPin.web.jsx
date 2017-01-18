@@ -3,17 +3,14 @@ import { connect } from 'react-redux'
 
 import { openLogin, loginPIN, openUserList, closeUserList } from './Login.action'
 import { loginWithPin } from './Login.middleware'
-import CachedUsers from '../CachedUsers/CachedUsers.ui'
+import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { removeUserToLogin } from '../CachedUsers/CachedUsers.action'
-
-import { View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
-import { InputGroup, Input } from 'native-base'
 import t from '../../lib/LocaleStrings'
-import style from '../Style'
+
 class Login extends Component {
 
   submit = () => {
-    this.refs.pinInput.blur()
+    this.refs.pinInput.getWrappedInstance().blur()
     this.props.dispatch(
       loginWithPin(
         this.props.user,
@@ -23,7 +20,7 @@ class Login extends Component {
     this.props.dispatch(loginPIN(''))
   }
   handleViewPress = () => {
-    this.refs.pinInput._textInput.focus()
+    this.refs.pinInput.getWrappedInstance().focus()
   }
 
   changePin = (pin) => {
@@ -46,17 +43,11 @@ class Login extends Component {
 
   showCachedUsers = () => {
     this.props.dispatch(openUserList())
-    this.refs.pinInput.blur()
+    this.refs.pinInput.getWrappedInstance().blur()
   }
 
   hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
-  }
-  keyboardDidShow = () => {
-
-  }
-  keyboardDidHide = () => {
-    // this.props.dispatch(closeUserList())
   }
   toggleCachedUsers = () => {
     if (this.props.showCachedUsers) {
@@ -67,19 +58,11 @@ class Login extends Component {
   }
   componentDidUpdate (oldProps) {
     if (oldProps.showCachedUsers && !this.props.showCachedUsers) {
-      this.refs.pinInput._textInput.focus()
+      this.refs.pinInput.getWrappedInstance().focus()
     }
   }
 
-  componentWillMount () {
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow.bind(this))
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide.bind(this))
-  }
 
-  componentWillUnmount () {
-    this.keyboardDidShowListener.remove()
-    this.keyboardDidHideListener.remove()
-  }
   focusPin = () => {
     this.refs.pinDummyInput.blur()
     this.refs.pinInput.focus()
@@ -95,55 +78,52 @@ class Login extends Component {
   render () {
     const cUsers = () => {
       if (this.props.showCachedUsers) {
-        return (<CachedUsers blurField={this.refs.pinInput} />)
+        return (<CachedUsers blurField={this.refs.pinInput.getWrappedInstance()} />)
       } else {
         return null
       }
     }
 
     return (
-      <View style={style.container}>
-        <View style={{marginTop: 10}}>
-          <TouchableOpacity style={{backgroundColor: 'transparent'}} onPress={this.toggleCachedUsers}>
-            <Text style={{ color: 'skyblue', fontSize: 18, marginTop: 10 } }>{ this.props.user ? this.props.user : 'No User Selected' }</Text>
-          </TouchableOpacity>
+      <div style={{padding: '0 0.8em'}}>
+        <Button style={{backgroundColor: 'transparent'}} onPress={this.toggleCachedUsers}>
+          <Text style={{ color: 'skyblue', fontSize: 18, marginTop: 10 } }>{ this.props.user ? this.props.user : 'No User Selected' }</Text>
+        </Button>
 
-          <View style={{ width: 165, marginTop: 5 }}>
-            <InputGroup borderType='regular' style={{padding: 0, alignSelf: 'center'}}>
-              <Input
-                selectionColor='#FFFFFF'
-                placeholderTextColor='rgba(200,200,200,0.5)'
-                placeholder={t('fragment_landing_enter_pin')}
-                style={this.pinStyle()}
-                value={this.props.pinDummy}
-                maxLength={4}
-                autoCorrect={false}
-                onChangeText={this.changePinDummy}
-                onFocus={this.focusPin}
-                ref='pinDummyInput'
-            />
-            </InputGroup>
-          </View>
+        <div style={{ width: 165, marginTop: 5 }}>
+          
 
-          <TouchableOpacity style={{padding: 15, backgroundColor: 'transparent'}} onPress={this.viewPasswordInput}>
-            <Text style={{fontSize: 15, color: 'skyblue'}}>{ t('fragment_landing_switch_user') }</Text>
-          </TouchableOpacity>
-          <TextInput
+          <Input
             ref='pinInput'
-            style={{height: 0, width: 0}}
-            secureTextEntry
+            name="pinInput"
+            type="password"
+            style={{height: 0, opacity: 0}}
             value={this.props.pin}
-            onChangeText={this.changePin}
+            onChange={this.changePin}
             autoFocus
+            maxLength={4}
             autoCorrect={false}
-            returnKeyType='done'
-            onSubmitEditing={this.submit}
-            blurOnSubmit
             keyboardType='numeric'
           />
-        </View>
+          
+          <Input
+            type="text"
+            placeholder={t('fragment_landing_enter_pin')}
+            style={this.pinStyle()}
+            value={this.props.pinDummy}
+            maxLength={4}
+            autoCorrect={false}
+            onChange={this.changePinDummy}
+            onFocus={this.focusPin}
+            ref='pinDummyInput'
+        />
+        </div>
+
+        <Button style={{padding: 15, backgroundColor: 'transparent'}} onClick={this.viewPasswordInput}>
+          { t('fragment_landing_switch_user') }
+        </Button>
         {cUsers()}
-      </View>
+      </div>
     )
   }
 }
