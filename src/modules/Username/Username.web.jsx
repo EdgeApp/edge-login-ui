@@ -6,6 +6,7 @@ import backButton from 'theme/backButton.scss';
 import Button from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
 
+import { fadeWhiteOverlay } from '../Landing.action'
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 
 import { checkUsername } from './Username.middleware'
@@ -78,6 +79,7 @@ class UsernameComponent extends Component {
 
 export default connect(state => ({
 
-  username: state.username
+  username: state.username,
+  loader: state.loader
 
 }))(UsernameComponent)

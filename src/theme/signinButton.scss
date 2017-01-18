@@ -1,0 +1,14 @@
+.button {
+  width: 100%;
+}
+.neutral:not([disabled]) {
+  &.raised {
+    background-color: #80C342;
+    color: #FFF;
+  }
+}
+.primary:not([disabled]) {
+  &.raised {
+    color: #FFF;
+  }
+}

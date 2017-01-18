@@ -8,7 +8,7 @@ module.exports = {
     entry: [
         'webpack-dev-server/client?http://localhost:8002', // WebpackDevServer host and port
         'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-        './src/index'
+        './src/index.web'
     ],
     output: {
         path: path.join(__dirname, 'dist'),
@@ -16,7 +16,7 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['', '.scss', '.css', '.js', '.json', '.png', '.jpg'],
+        extensions: ['', '.scss', '.css', '.js', '.jsx', '.json', '.png', '.jpg'],
         modulesDirectories: [
             'node_modules',
             path.resolve(__dirname, './node_modules'),
@@ -35,7 +35,7 @@ module.exports = {
         loaders: [
             { test: /\.json$/, loader: "json-loader" },
             {
-              test: /\.js$/,
+              test: /\.jsx?$/,
               exclude: [/native/,/\.rn\.js$/],
               loaders: ['react-hot', 'babel'],
               include: path.join(__dirname, 'src')

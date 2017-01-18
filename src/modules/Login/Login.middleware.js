@@ -7,19 +7,22 @@ export const loginWithPassword = (username, password, callback) => {
   return ( dispatch, getState, imports ) => {
     const abcContext = imports.abcContext
     dispatch(openLoading())
-    abcContext(context => {
-      context.loginWithPassword(username, password, null, null, (error, account) => {
-        dispatch(closeLoading())
-        if (error) {
-          dispatch(openErrorModal(error.message))
-        }
-        if (!error) {
-          global.localStorage.setItem('lastUser', username)
-          dispatch(userLogin(account))
-          callback()
-        }
+    setTimeout(() => {
+      abcContext(context => {
+        context.loginWithPassword(username, password, null, null, (error, account) => {
+          dispatch(closeLoading())
+          if (error) {
+            dispatch(openErrorModal(error.message))
+            return callback()
+          }
+          if (!error) {
+            global.localStorage.setItem('lastUser', username)
+            dispatch(userLogin(account))
+            callback(true)
+          }
+        })
       })
-    })
+    },300)
   }
 }
 
@@ -28,21 +31,18 @@ export const loginWithPin = (username, pin, callback) => {
     dispatch(openLoading())
     setTimeout(() => {
       abcctx(context => {
-        try {
-          context.loginWithPIN(username, pin, (error, account) => {
-            dispatch(closeLoading())
-            if (error) {
-              dispatch(openErrorModal(error.message))
-            }
+        context.loginWithPIN(username, pin, (error, account) => {
+          dispatch(closeLoading())
+          if (error) {
+            dispatch(openErrorModal(error.message))
+            return callback()
+          }
 
-            if (!error) {
-              global.localStorage.setItem('lastUser', username)
-              Actions.home()
-            }
-          })
-        } catch (e) {
-          console.log(e)
-        }
+          if (!error) {
+            global.localStorage.setItem('lastUser', username)
+            return callback(true)
+          }
+        })
       })
     }, 300)
   }

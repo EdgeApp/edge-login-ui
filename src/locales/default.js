@@ -12,6 +12,7 @@ const strings = {
   activity_signup_contact_text_3: 'All tagged information is kept 100% private and encrypted by your password.',
   activity_signup_contact_text_4: 'No one, including Airbitz, has any access to this information.',
   activity_signup_password_label: 'Enter Password',
+  activity_splash_with_airbitz: 'Sign in with Airbitz',
   loading: 'Loading…',
   synchronizing: 'Synchronizing…',
 

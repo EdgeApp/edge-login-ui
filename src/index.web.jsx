@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import createStore from './lib/web/configureStore'
-import Router from './routes'
+import Router from './routes.web'
 
 const store = createStore()
 const rootElement = document.getElementById('app')

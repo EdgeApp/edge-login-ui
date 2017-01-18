@@ -4,17 +4,17 @@ import { username } from '../modules/Username/Username.reducer'
 import { pin, pinDummy } from '../modules/PinNumber/PinNumber.reducer'
 import * as PasswordStates from '../modules/Password/Password.reducer'
 import * as PasswordValidation from '../modules/Password/PasswordValidation/PasswordValidation.reducer'
-// import { nextButtonVisible } from '../modules/NextButton/NextButton.reducer'
-// import { skipButtonVisible } from '../modules/SkipButton/SkipButton.reducer'
-// import { disclaimerAccepted } from '../modules/Disclaimer/Disclaimer.reducer'
+import { nextButtonVisible } from '../modules/NextButton/NextButton.reducer'
+import { skipButtonVisible } from '../modules/SkipButton/SkipButton.reducer'
+import { disclaimerAccepted } from '../modules/Disclaimer/Disclaimer.reducer'
 import * as ReviewDetailsStates from '../modules/ReviewDetails/ReviewDetails.reducer'
 import * as Loader from '../modules/Loader/Loader.reducer'
-// import * as WarningModal from '../modules/WarningModal/WarningModal.reducer'
+import * as WarningModal from '../modules/WarningModal/WarningModal.reducer'
 import * as ErrorModal from '../modules/ErrorModal/ErrorModal.reducer'
-// import * as Login from '../modules/Login/Login.reducer'
-// import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
-// import { user } from '../modules/User/User.reducer'
-// import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
+import * as Login from '../modules/Login/Login.reducer'
+import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
+import { user } from '../modules/User/User.reducer'
+import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 // import routes from './routesReducer'
 import { alert } from '../modules/Alert/Alert.reducer'
 
@@ -41,18 +41,18 @@ const store = combineReducers({
     view: ReviewDetailsStates.view
   }),
 
-  // login: combineReducers({
-  //   viewPassword: Login.viewPassword,
-  //   viewPIN: Login.viewPIN,
-  //   username: Login.username,
-  //   password: Login.password,
-  //   pin: Login.pin,
-  //   pinDummy: Login.pinDummy,
-  //   showCachedUsers: Login.showCachedUsers
-  // }),
+  login: combineReducers({
+    viewPassword: Login.viewPassword,
+    viewPIN: Login.viewPIN,
+    username: Login.username,
+    password: Login.password,
+    pin: Login.pin,
+    pinDummy: Login.pinDummy,
+    showCachedUsers: Login.showCachedUsers
+  }),
 
-  // nextButtonVisible,
-  // skipButtonVisible,
+  nextButtonVisible,
+  skipButtonVisible,
 
   loader: combineReducers({
     loading: Loader.loading,
@@ -60,28 +60,28 @@ const store = combineReducers({
     // style: Loader.style
   }),
   
-  // warningModal: combineReducers({
-  //   visible: WarningModal.visible,
-  //   module: WarningModal.module,
-  //   title: WarningModal.title,
-  //   message: WarningModal.message
-  // }),
+  warningModal: combineReducers({
+    visible: WarningModal.visible,
+    module: WarningModal.module,
+    title: WarningModal.title,
+    message: WarningModal.message
+  }),
   errorModal: combineReducers({
     visible: ErrorModal.visible,
     message: ErrorModal.message
   }),
-  // cachedUsers: combineReducers({
-  //   users: CachedUsers.users,
-  //   selectedUserToLogin: CachedUsers.selectedUserToLogin,
-  //   userToDeleteFromUserCache: CachedUsers.userToDeleteFromUserCache
-  // }),
-  // landing: combineReducers({
-  //   disclaimerAccepted,
-  //   whiteOverlayVisible,
-  //   lostFocus,
-  //   gainedFocus
-  // }),
-  // user,
+  cachedUsers: combineReducers({
+    users: CachedUsers.users,
+    selectedUserToLogin: CachedUsers.selectedUserToLogin,
+    userToDeleteFromUserCache: CachedUsers.userToDeleteFromUserCache
+  }),
+  landing: combineReducers({
+    disclaimerAccepted,
+    whiteOverlayVisible,
+    lostFocus,
+    gainedFocus
+  }),
+  user,
   // routes,
   alert: alert
 })

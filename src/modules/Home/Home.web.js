@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import Button from 'react-toolbox/lib/button';
+import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
+import signinButton from 'theme/signinButton.scss';
+import t from 'lib/web/LocaleStrings'
 import { browserHistory } from 'react-router'
 
 class Home extends Component {
@@ -11,10 +14,11 @@ class Home extends Component {
 
   render () {
     return (
-      <div>
-        <p>Home Page</p>
-        <p><button type="button" onClick={this._handleLogout}>Log Out</button></p>
-      </div>
+      <Card>
+        <CardActions>
+        <Button theme={signinButton} type="button" onClick={this._handleLogout}>{t('drawer_logout')}</Button>
+        </CardActions>
+      </Card>
     )
   }
 

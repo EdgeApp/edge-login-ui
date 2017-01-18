@@ -96,7 +96,7 @@ class Password extends Component {
               </div>
               <p>{t('fragment_setup_password_text')}</p>
             </div>
-            <Input type="password" name="password" onChange={this._handleOnChangePassword} value={this.props.password} placeholder="Password" />
+            <Input autoFocus type="password" name="password" onChange={this._handleOnChangePassword} value={this.props.password} placeholder="Password" />
             <Input type="password" name="passwordRepeat" onChange={this._handleOnChangePasswordRepeat} value={this.props.passwordRepeat} placeholder="Re-enter Password" />
           </CardText>
           <CardActions>

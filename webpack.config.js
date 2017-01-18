@@ -7,7 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
 	devtool: 'cheap-module-source-map',
     entry: [
-        './src/index'
+        './src/index.web'
     ],
     output: {
         path: path.join(__dirname, 'dist'),
@@ -15,7 +15,7 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-      extensions: ['', '.scss', '.css', '.js', '.json'],
+      extensions: ['', '.scss', '.css', '.js', '.jsx', '.json'],
       modulesDirectories: [
         'node_modules',
         path.resolve(__dirname, './node_modules'),
@@ -56,7 +56,7 @@ module.exports = {
 		loaders: [
       { test: /\.json$/, loader: "json-loader" },
 			{
-			  test: /\.js$/,
+			  test: /\.jsx?$/,
         exclude: [/native/,/\.rn\.js$/],
 			  loaders: ['babel'],
 			  include: path.join(__dirname, 'src')

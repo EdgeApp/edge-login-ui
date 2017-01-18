@@ -3,6 +3,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router'
 
 import Container from './modules/Container'
+import Login from './modules/Login/Login.web'
 import Username from './modules/Username/Username.web'
 import PinNumber from './modules/PinNumber/PinNumber.web'
 import Password from './modules/Password/Password.web'
@@ -15,7 +16,9 @@ export default class RouterComponent extends Component {
     return (
         <Router history={browserHistory}>
           <Route path="/" component={Container}>
-            <IndexRedirect to="/signup/username" />
+            <IndexRedirect to="/login" />
+            <Route path="/login" component={Login}/>
+
             <Route path="/signup/username" component={Username}/>
             <Route path="/signup/pin" component={PinNumber}/>
             <Route path="/signup/password" component={Password}/>
