@@ -18,13 +18,13 @@ class Login extends Component {
       loginWithPin(
         this.props.user,
         this.props.pin
-      ), success => {
+      , success => {
         if(success) {
           browserHistory.push('/home')
         } else {
           is.refs.pinInput.getWrappedInstance().focus()
         }
-      }
+      })
     )
     this.props.dispatch(loginPIN(''))
   }
