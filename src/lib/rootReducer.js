@@ -13,6 +13,7 @@ import * as WarningModal from '../modules/WarningModal/WarningModal.reducer'
 import * as ErrorModal from '../modules/ErrorModal/ErrorModal.reducer'
 import * as Login from '../modules/Login/Login.reducer'
 import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
+import * as ChangePassword from '../modules/ChangePassword/ChangePassword.reducer'
 import { user } from '../modules/User/User.reducer'
 import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 // import routes from './routesReducer'
@@ -80,6 +81,12 @@ const store = combineReducers({
     whiteOverlayVisible,
     lostFocus,
     gainedFocus
+  }),
+  changePassword: combineReducers({
+    view              : ChangePassword.view,
+    oldPassword       : ChangePassword.oldPassword,
+    newPassword       : ChangePassword.newPassword,
+    newPasswordRepeat : ChangePassword.newPasswordRepeat
   }),
   user,
   // routes,
