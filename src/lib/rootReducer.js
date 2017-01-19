@@ -23,7 +23,7 @@ const store = combineReducers({
   pin,
   pinDummy,
   password: combineReducers({
-    // inputState: PasswordStates.inputState,
+    inputState: PasswordStates.inputState,
     password: PasswordStates.password,
     passwordRepeat: PasswordStates.passwordRepeat,
     notification: PasswordStates.notification,

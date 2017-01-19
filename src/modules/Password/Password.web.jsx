@@ -45,10 +45,15 @@ class Password extends Component {
   }
 
   _handleBack = () => {
+    if (this.props.loader.loading === true) {
+      return true
+    }    
     browserHistory.goBack()
   }
 
   _handlePasswordNotification = () => {
+    this.refs.signupPasswordFirst.getWrappedInstance().blur()
+    this.refs.signupPassword.getWrappedInstance().blur()    
     this.props.dispatch(passwordNotificationShow())
   }
   checkOneNumber = () => this.props.validation.number ? selected : unselected
@@ -74,6 +79,16 @@ class Password extends Component {
   _handleOnChangePasswordRepeat = (passwordRepeat) => {
     this.props.dispatch(changePasswordRepeatValue(passwordRepeat))
   }
+  toggleRevealPassword = (e) => {
+    this.refs.signupPasswordFirst.getWrappedInstance().refs.input.type = this.props.inputState ? "text" : "password"
+    if (this.props.inputState) {
+
+      this.props.dispatch(hidePassword())
+    } else {
+      this.props.dispatch(showPassword())
+    }
+    return false;
+  }
 
   render () {
     return (
@@ -94,8 +109,11 @@ class Password extends Component {
               </div>
               <p>{t('fragment_setup_password_text')}</p>
             </div>
-            <Input autoFocus type="password" name="password" onChange={this._handleOnChangePassword} value={this.props.password} placeholder="Password" />
-            <Input type="password" name="passwordRepeat" onChange={this._handleOnChangePasswordRepeat} value={this.props.passwordRepeat} placeholder="Re-enter Password" />
+            <div style={{display:'flex',flexDirection:'row',justifyContent: 'flex-start', alignItems:'center'}}>
+              <div style={{flexGrow:1}}><Input ref='signupPasswordFirst'autoFocus type="password" name="password" onChange={this._handleOnChangePassword} value={this.props.password} placeholder="Password" /></div>
+              <img onClick={this.toggleRevealPassword} src={require('img/icon_export_view.png')} style={{width:'30px',margin:'0px 15px'}}/>
+            </div>
+            <Input type="password" ref='signupPassword' name="passwordRepeat" onChange={this._handleOnChangePasswordRepeat} value={this.props.passwordRepeat} placeholder="Re-enter Password" />
           </CardText>
           <CardActions>
             <Button type="button" theme={skipButton} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
@@ -112,7 +130,7 @@ class Password extends Component {
 
 export default connect(state => ({
 
-  inputState: state.password.inputState, //not used
+  inputState: state.password.inputState,
   password: state.password.password,
   passwordRepeat: state.password.passwordRepeat,
   validation: state.password.validation,
