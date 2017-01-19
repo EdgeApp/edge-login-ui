@@ -32,7 +32,7 @@ export const loginWithPin = (username, pin, callback) => {
   return ( dispatch, getState, imports ) => {
     dispatch(openLoading())
     const localStorage = global ? global.localStorage : window.localStorage
-    const context = imports.abcContext
+    const abcctx = imports.abcContext
     
     setTimeout(() => {
       abcctx(context => {
