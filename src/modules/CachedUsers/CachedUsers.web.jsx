@@ -43,7 +43,6 @@ class UserList extends Component {
       } else if (lastIndex === index) {
         _.extend(styleArr,style.border)
         _.extend(styleArr,style.bottomRadius)
-        console.log(styleArr,style.bottomRadius)
       } else if (lastIndex !== index) {
         _.extend(styleArr,style.border)
       }
@@ -136,6 +135,7 @@ const style = {
     backgroundColor: '#FFF'
   },
   textContainer: {
+    textTransform: 'none',
     display: 'flex',
     flex: 1,
     flexDirection: 'row',

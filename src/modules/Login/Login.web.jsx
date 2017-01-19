@@ -11,7 +11,7 @@ import Button from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 
-
+import LoginWithPin from './LoginWithPin.web'
 import signinButton from 'theme/signinButton.scss';
 import skipButton from 'theme/skipButton.scss';
 import loginUsernameInput from 'theme/loginUsernameInput.scss';
@@ -74,6 +74,8 @@ class Login extends Component {
     this.props.dispatch(closeUserList())
   }
   render () {
+
+
     const cUsers = () => {
       if (this.props.showCachedUsers) {
         return (<CachedUsers blurField={this.refs.loginUsername.getWrappedInstance()} />)
@@ -89,7 +91,9 @@ class Login extends Component {
       heightFieldsView = '90px'
       opacityFieldsView = 1
     }
-
+    if(this.props.viewPIN) {
+      return (<LoginWithPin/>)
+    }
     return (
       <div style={style.container}>
         <div style={style.form}>
@@ -166,6 +170,6 @@ export default connect(state => ({
   viewPassword: state.login.viewPassword,
   whiteOverlayVisible: state.whiteOverlayVisible,
   showCachedUsers: state.login.showCachedUsers,
-  pin: state.login.pin
+  viewPIN: state.login.viewPIN
 
 }))(Login)

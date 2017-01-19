@@ -7,6 +7,7 @@ import { selectUserToLogin, setCachedUsers } from './CachedUsers/CachedUsers.act
 
 import Loader from './Loader/Loader.web'
 import ErrorModal from './ErrorModal/ErrorModal.web'
+import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
 class Container extends Component {
 
@@ -20,17 +21,23 @@ class Container extends Component {
       window.parent.exitCallback()
     }
   }
-  componentWillMount () {
+  loadData () {
     const dispatch = this.props.dispatch
     abcctx(ctx => {
       const cachedUsers = ctx.listUsernames()
-      const lastUser = global.localStorage.getItem('lastUser')
-
+      const lastUser = window.localStorage.getItem('lastUser')
       dispatch(setCachedUsers(cachedUsers))
       if (lastUser) {
         dispatch(selectUserToLogin(lastUser))
       }
     })
+
+  }
+  componentWillMount () {
+    this.loadData()
+  }
+  componentWillUpdate () {
+    this.loadData()
   }
   render() {
     return (
@@ -44,6 +51,7 @@ class Container extends Component {
           {this.props.children}
           <Loader/>
           <ErrorModal/>
+          <WarningModal />
         </Dialog>
       </div>
     )

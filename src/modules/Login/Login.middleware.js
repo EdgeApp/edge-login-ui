@@ -6,6 +6,8 @@ import { userLogin } from './Login.action'
 export const loginWithPassword = (username, password, callback) => {
   return ( dispatch, getState, imports ) => {
     const abcContext = imports.abcContext
+    const localStorage = global ? global.localStorage : window.localStorage
+
     dispatch(openLoading())
     setTimeout(() => {
       abcContext(context => {
@@ -16,7 +18,7 @@ export const loginWithPassword = (username, password, callback) => {
             return callback()
           }
           if (!error) {
-            global.localStorage.setItem('lastUser', username)
+            localStorage.setItem('lastUser', username)
             dispatch(userLogin(account))
             callback(true)
           }
@@ -29,6 +31,9 @@ export const loginWithPassword = (username, password, callback) => {
 export const loginWithPin = (username, pin, callback) => {
   return ( dispatch, getState, imports ) => {
     dispatch(openLoading())
+    const localStorage = global ? global.localStorage : window.localStorage
+    const context = imports.abcContext
+    
     setTimeout(() => {
       abcctx(context => {
         context.loginWithPIN(username, pin, (error, account) => {
@@ -39,7 +44,7 @@ export const loginWithPin = (username, pin, callback) => {
           }
 
           if (!error) {
-            global.localStorage.setItem('lastUser', username)
+            localStorage.setItem('lastUser', username)
             return callback(true)
           }
         })

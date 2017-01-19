@@ -5,8 +5,11 @@ import { openLogin, loginPIN, openUserList, closeUserList } from './Login.action
 import { loginWithPin } from './Login.middleware'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { removeUserToLogin } from '../CachedUsers/CachedUsers.action'
-import t from '../../lib/LocaleStrings'
+import t from 'lib/web/LocaleStrings'
 
+import Button from 'react-toolbox/lib/button';
+
+import Input from 'react-toolbox/lib/input';
 class Login extends Component {
 
   submit = () => {
@@ -15,7 +18,13 @@ class Login extends Component {
       loginWithPin(
         this.props.user,
         this.props.pin
-      )
+      ), success => {
+        if(success) {
+          browserHistory.push('/home')
+        } else {
+          is.refs.pinInput.getWrappedInstance().focus()
+        }
+      }
     )
     this.props.dispatch(loginPIN(''))
   }
@@ -24,6 +33,9 @@ class Login extends Component {
   }
 
   changePin = (pin) => {
+    if(pin.length > 4) {
+      pin = pin.substr(0,4)
+    }
     this.props.dispatch(loginPIN(pin))
     if (pin.length > 3) {
       setTimeout(this.submit, 200)
@@ -64,17 +76,14 @@ class Login extends Component {
 
 
   focusPin = () => {
-    this.refs.pinDummyInput.blur()
-    this.refs.pinInput.focus()
+    this.refs.pinDummyInput.getWrappedInstance().blur()
+    this.refs.pinInput.getWrappedInstance().focus()
   }
   pinStyle = () => {
-
-    if(this.props.pinDummy.length > 0) {
-      return {fontSize: 110, paddingTop: 20, paddingBottom: -20, padding: 0, marginHorizontal: 10, height: 50, marginVertical: 0, fontSize: 28, textAlign: 'center' }
-    } else {
-      return { padding: 0, marginHorizontal: 10, height: 50, marginVertical: 0, fontSize: 28, textAlign: 'center' }
-    }
+    if(this.props.pinDummy.length > 0) return {textAlign:'center',fontSize: '100px', height: '100px'}
+      return {textAlign:'center',fontSize: '35px', height: '100px'}
   }
+
   render () {
     const cUsers = () => {
       if (this.props.showCachedUsers) {
@@ -85,12 +94,12 @@ class Login extends Component {
     }
 
     return (
-      <div style={{padding: '0 0.8em'}}>
-        <Button style={{backgroundColor: 'transparent'}} onPress={this.toggleCachedUsers}>
-          <Text style={{ color: 'skyblue', fontSize: 18, marginTop: 10 } }>{ this.props.user ? this.props.user : 'No User Selected' }</Text>
+      <div style={{padding: '0 0.8em',display:'flex',flexDirection:'column', justifyContent: 'center', alignItems:'center'}}>
+        <Button raised neutral style={{textTransform: 'none', margin: '10px 0px'}} onClick={this.toggleCachedUsers}>
+          { this.props.user ? this.props.user : 'No User Selected' }
         </Button>
 
-        <div style={{ width: 165, marginTop: 5 }}>
+        <div style={{ width: '165px', marginTop: '5px' }}>
           
 
           <Input
@@ -101,9 +110,7 @@ class Login extends Component {
             value={this.props.pin}
             onChange={this.changePin}
             autoFocus
-            maxLength={4}
             autoCorrect={false}
-            keyboardType='numeric'
           />
           
           <Input
@@ -111,7 +118,6 @@ class Login extends Component {
             placeholder={t('fragment_landing_enter_pin')}
             style={this.pinStyle()}
             value={this.props.pinDummy}
-            maxLength={4}
             autoCorrect={false}
             onChange={this.changePinDummy}
             onFocus={this.focusPin}
@@ -119,7 +125,7 @@ class Login extends Component {
         />
         </div>
 
-        <Button style={{padding: 15, backgroundColor: 'transparent'}} onClick={this.viewPasswordInput}>
+        <Button raised neutral style={{margin: '10px 0px'}} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
         {cUsers()}
