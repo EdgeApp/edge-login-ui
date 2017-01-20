@@ -15,6 +15,7 @@ import * as Login from '../modules/Login/Login.reducer'
 import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
 import * as ChangePassword from '../modules/ChangePassword/ChangePassword.reducer'
 import * as ChangePin from '../modules/ChangePin/ChangePin.reducer'
+import * as PasswordRecovery from '../modules/PasswordRecovery/PasswordRecovery.reducer'
 import { user } from '../modules/User/User.reducer'
 import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 // import routes from './routesReducer'
@@ -93,6 +94,15 @@ const store = combineReducers({
     view         : ChangePin.view,
     oldPin       : ChangePin.oldPin,
     newPin       : ChangePin.newPin
+  }),
+  passwordRecovery: combineReducers({
+    view            : PasswordRecovery.view,
+    questions       : PasswordRecovery.questions,
+    firstQuestion   : PasswordRecovery.firstQuestion,
+    firstAnswer     : PasswordRecovery.firstAnswer,
+    secondQuestion  : PasswordRecovery.secondQuestion,
+    secondAnswer    : PasswordRecovery.secondAnswer,
+    password        : PasswordRecovery.password
   }),
   user,
   // routes,

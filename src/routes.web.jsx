@@ -12,6 +12,7 @@ import Home from './modules/Home/Home.web'
 
 import ChangePassword from './modules/ChangePassword/ChangePassword.web'
 import ChangePin from './modules/ChangePin/ChangePin.web'
+import PasswordRecovery from './modules/PasswordRecovery/PasswordRecovery.web'
 
 export default class RouterComponent extends Component {
 
@@ -30,6 +31,7 @@ export default class RouterComponent extends Component {
 
             <Route path="/changePassword" component={ChangePassword}/>
             <Route path="/changePin" component={ChangePin}/>
+            <Route path="/passwordRecovery" component={PasswordRecovery}/>
           </Route>
         </Router>
     )
