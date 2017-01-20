@@ -31,9 +31,10 @@ export function changeNewPasswordValue (data) {
   }
 }
 
-export function changeNewPasswordRepeatValue () {
+export function changeNewPasswordRepeatValue (data) {
   return {
-    type: CHANGE_NEW_PASSWORD_REPEAT_VALUE
+    type: CHANGE_NEW_PASSWORD_REPEAT_VALUE,
+    data
   }
 }
 

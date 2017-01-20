@@ -17,7 +17,7 @@ import * as ChangePassword from '../modules/ChangePassword/ChangePassword.reduce
 import { user } from '../modules/User/User.reducer'
 import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 // import routes from './routesReducer'
-import { alert } from '../modules/Alert/Alert.reducer'
+// import { alert } from '../modules/Alert/Alert.reducer'
 
 const store = combineReducers({
   username,
@@ -90,7 +90,7 @@ const store = combineReducers({
   }),
   user,
   // routes,
-  alert: alert
+  // alert: alert
 })
 
 export default store

@@ -10,6 +10,8 @@ import Password from './modules/Password/Password.web'
 import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 import Home from './modules/Home/Home.web'
 
+import ChangePassword from './modules/ChangePassword/ChangePassword.web'
+
 export default class RouterComponent extends Component {
 
   render () {
@@ -24,6 +26,8 @@ export default class RouterComponent extends Component {
             <Route path="/signup/password" component={Password}/>
             <Route path="/signup/review" component={ReviewDetails}/>
             <Route path="/home" component={Home}/>
+
+            <Route path="/changePassword" component={ChangePassword}/>
           </Route>
         </Router>
     )

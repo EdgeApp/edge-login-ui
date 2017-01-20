@@ -1,4 +1,4 @@
-import * as ACTION from './Password.action'
+import * as ACTION from './ChangePassword.action'
 
 export const view = (state = false, action) => {
   switch (action.type) {

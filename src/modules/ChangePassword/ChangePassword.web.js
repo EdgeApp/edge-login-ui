@@ -2,17 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
-import { changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue } from './ChangePassword.action'
+import { showPasswordView, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue } from './ChangePassword.action'
 
 class ChangePassword extends Component {
 
   _handleSubmit = () => {
   }
 
-  _handlePasswordNotification = () => {
-    this.refs.signupPasswordFirst.getWrappedInstance().blur()
-    this.refs.signupPassword.getWrappedInstance().blur()    
-    this.props.dispatch(passwordNotificationShow())
+  _handleShowChangePassword = (e) => {
+    this.props.dispatch(showPasswordView())
   }
 
   _handleOnChangeOldPassword = (e) => {
@@ -30,14 +28,24 @@ class ChangePassword extends Component {
     const newPasswordRepeat = e.target.value
     this.props.dispatch(changeNewPasswordRepeatValue(newPasswordRepeat))
   }
+
   render () {
-    return (
-		<div>
-			<input type="password" name="oldPassword" onChange="this._handleOnChangeOldPassword" value={this.props.oldPassword} placeholder="Old Password">	
-			<input type="password" name="newPassword" onChange="this._handleOnChangeOldPassword" value={this.props.newPassword} placeholder="New Password">	
-			<input type="password" name="newPasswordRepeat" onChange="this._handleOnChangeOldPassword" value={this.props.newPasswordRepeat} placeholder="Confirm New Password" >	
-		</div>
-	)
+    if(this.props.view){
+      return (
+        <div>
+          <input type="password" name="oldPassword" onChange={this._handleOnChangeOldPassword} value={this.props.oldPassword} placeholder="Old Password" />	
+          <input type="password" name="newPassword" onChange={this._handleOnChangeNewPassword} value={this.props.newPassword} placeholder="New Password" />	
+          <input type="password" name="newPasswordRepeat" onChange={this._handleOnChangeNewPasswordRepeat} value={this.props.newPasswordRepeat} placeholder="Confirm New Password" />	
+        </div>
+      )
+    }
+    if(!this.props.view){
+      return (
+        <div>
+          <button type="button" onClick={this._handleShowChangePassword}>Show</button>
+        </div>
+      )
+    }
   }
 }
 
