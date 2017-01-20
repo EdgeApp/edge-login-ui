@@ -14,6 +14,7 @@ import * as ErrorModal from '../modules/ErrorModal/ErrorModal.reducer'
 import * as Login from '../modules/Login/Login.reducer'
 import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
 import * as ChangePassword from '../modules/ChangePassword/ChangePassword.reducer'
+import * as ChangePin from '../modules/ChangePin/ChangePin.reducer'
 import { user } from '../modules/User/User.reducer'
 import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 // import routes from './routesReducer'
@@ -87,6 +88,11 @@ const store = combineReducers({
     oldPassword       : ChangePassword.oldPassword,
     newPassword       : ChangePassword.newPassword,
     newPasswordRepeat : ChangePassword.newPasswordRepeat
+  }),
+  changePin: combineReducers({
+    view         : ChangePin.view,
+    oldPin       : ChangePin.oldPin,
+    newPin       : ChangePin.newPin
   }),
   user,
   // routes,

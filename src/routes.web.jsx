@@ -11,6 +11,7 @@ import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 import Home from './modules/Home/Home.web'
 
 import ChangePassword from './modules/ChangePassword/ChangePassword.web'
+import ChangePin from './modules/ChangePin/ChangePin.web'
 
 export default class RouterComponent extends Component {
 
@@ -28,6 +29,7 @@ export default class RouterComponent extends Component {
             <Route path="/home" component={Home}/>
 
             <Route path="/changePassword" component={ChangePassword}/>
+            <Route path="/changePin" component={ChangePin}/>
           </Route>
         </Router>
     )
