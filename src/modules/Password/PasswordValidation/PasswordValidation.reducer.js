@@ -1,4 +1,6 @@
 import * as ACTION from './PasswordValidation.action'
+import { PASSWORD_CHANGED } from '../../ChangePassword/ChangePassword.action'
+import { GET_DETAILS } from '../../ReviewDetails/ReviewDetails.action'
 
 export const upperCaseChar = (state = false, action) => {
   switch (action.type) {
@@ -6,6 +8,12 @@ export const upperCaseChar = (state = false, action) => {
       return true
 
     case ACTION.UPPER_CASE_FAIL :
+      return false
+
+    case PASSWORD_CHANGED :
+      return false
+
+    case GET_DETAILS :
       return false
 
     default:
@@ -21,6 +29,12 @@ export const passwordValid = (state = false, action) => {
     case ACTION.INVALIDATE_PASSWORD :
       return false
 
+    case PASSWORD_CHANGED :
+      return false
+
+    case GET_DETAILS :
+      return false
+
     default:
       return state
   }
@@ -32,6 +46,12 @@ export const lowerCaseChar = (state = false, action) => {
       return true
 
     case ACTION.UPPER_CASE_FAIL :
+      return false
+
+    case PASSWORD_CHANGED :
+      return false
+
+    case GET_DETAILS :
       return false
 
     default:
@@ -47,6 +67,12 @@ export const number = (state = false, action) => {
     case ACTION.NUMBER_FAIL :
       return false
 
+    case PASSWORD_CHANGED :
+      return false
+
+    case GET_DETAILS :
+      return false
+
     default:
       return state
   }
@@ -58,6 +84,12 @@ export const characterLength = (state = false, action) => {
       return true
 
     case ACTION.CHARACTER_LENGTH_FAIL :
+      return false
+
+    case PASSWORD_CHANGED :
+      return false
+
+    case GET_DETAILS :
       return false
 
     default:

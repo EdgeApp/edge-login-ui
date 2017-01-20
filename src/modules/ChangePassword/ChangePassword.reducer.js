@@ -15,6 +15,8 @@ export const oldPassword = (state = '', action) => {
   switch (action.type) {
     case ACTION.CHANGE_OLD_PASSWORD_VALUE :
       return action.data
+    case ACTION.PASSWORD_CHANGED :
+      return ''
     default:
       return state
   }
@@ -24,6 +26,8 @@ export const newPassword = (state = '', action) => {
   switch (action.type) {
     case ACTION.CHANGE_NEW_PASSWORD_VALUE :
       return action.data
+    case ACTION.PASSWORD_CHANGED :
+      return ''
     default:
       return state
   }
@@ -33,6 +37,8 @@ export const newPasswordRepeat = (state = '', action) => {
   switch (action.type) {
     case ACTION.CHANGE_NEW_PASSWORD_REPEAT_VALUE :
       return action.data
+    case ACTION.PASSWORD_CHANGED :
+      return ''
     default:
       return state
   }
