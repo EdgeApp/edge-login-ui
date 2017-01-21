@@ -12,13 +12,13 @@ export const checkPin = ( password, pin, account, callback ) => {
 
     if(account.checkPassword(password)){
       account.changePIN(pin, error => {
+        if(error){
+          return dispatch(openErrorModal(t('server_error_no_connection'))) 
+        }
         if(!error){
           dispatch(hidePinView())      
           return dispatch(pinChanged())
         } 
-        if(error){
-          return dispatch(openErrorModal(t('server_error_no_connection'))) 
-        }
       })      
     }
 

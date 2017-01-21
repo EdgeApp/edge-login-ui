@@ -17,6 +17,7 @@ class ChangePassword extends Component {
         this.props.newPassword,
         this.props.newPasswordRepeat,
         this.props.validation,
+        this.props.user,
         callback
       )
     )
@@ -86,5 +87,6 @@ export default connect( state => ({
   newPassword         : state.changePassword.newPassword,
   newPasswordRepeat   : state.changePassword.newPasswordRepeat,
   validation          : state.password.validation,
+  user                : state.user,
 
 }) )(ChangePassword)
