@@ -91,9 +91,9 @@ const store = combineReducers({
     newPasswordRepeat : ChangePassword.newPasswordRepeat
   }),
   changePin: combineReducers({
-    view         : ChangePin.view,
-    oldPin       : ChangePin.oldPin,
-    newPin       : ChangePin.newPin
+    view      : ChangePin.view,
+    password  : ChangePin.password,
+    pin       : ChangePin.pin
   }),
   passwordRecovery: combineReducers({
     view            : PasswordRecovery.view,

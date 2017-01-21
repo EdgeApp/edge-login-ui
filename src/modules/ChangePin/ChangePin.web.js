@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
 
-import { showPinView, changeOldPinValue, changeNewPinValue, changeNewPinRepeatValue } from './ChangePin.action'
+import { showPinView, changePinPasswordValue, changePinValue } from './ChangePin.action'
 import { checkPin } from './ChangePin.middleware'
 
 class ChangePin extends Component {
@@ -12,8 +12,9 @@ class ChangePin extends Component {
     const callback = () => browserHistory.push('/signup/review')
     this.props.dispatch(
       checkPin(
-        this.props.oldPin,
-        this.props.newPin,
+        this.props.password,
+        this.props.pin,
+        this.props.user,
         callback
       )
     )
@@ -23,14 +24,14 @@ class ChangePin extends Component {
     this.props.dispatch(showPinView())
   }
 
-  _handleOnChangeOldPin = (e) => {
-    const oldPin = e.target.value
-    this.props.dispatch(changeOldPinValue(oldPin))
+  _handleOnChangePinPassword = (e) => {
+    const password = e.target.value
+    this.props.dispatch(changePinPasswordValue(password))
   }
 
-  _handleOnChangeNewPin = (e) => {
-    const newPin = e.target.value
-    this.props.dispatch(changeNewPinValue(newPin))
+  _handleOnChangePin = (e) => {
+    const pin = e.target.value
+    this.props.dispatch(changePinValue(pin))
   }
 
   render () {
@@ -39,10 +40,10 @@ class ChangePin extends Component {
         <div>
           <div>
             <div>
-              <input type="number" name="oldPin" onChange={this._handleOnChangeOldPin} value={this.props.oldPin} placeholder="Old Pin" />	
+              <input type="password" name="changePinPassword" onChange={this._handleOnChangePinPassword} value={this.props.password} placeholder="Current Password" />	
             </div>
             <div>
-              <input type="number" name="newPin" onChange={this._handleOnChangeNewPin} value={this.props.newPin} placeholder="New Pin" />	
+              <input type="number" name="changePin" onChange={this._handleOnChangePin} value={this.props.pin} placeholder="New Pin" />	
             </div>
             <div>
               <button type="button" onClick={this._handleSubmit}>Submit</button> 
@@ -63,8 +64,9 @@ class ChangePin extends Component {
 
 export default connect( state => ({
 
-  view           : state.changePin.view,
-  oldPin         : state.changePin.oldPin,
-  newPin         : state.changePin.newPin
+  view      : state.changePin.view,
+  password  : state.changePin.password,
+  pin       : state.changePin.pin,
+  user      : state.user
 
 }) )(ChangePin)

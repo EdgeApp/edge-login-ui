@@ -11,9 +11,9 @@ export const view = (state = false, action) => {
   }
 }
 
-export const oldPin = (state = '', action) => {
+export const password = (state = '', action) => {
   switch (action.type) {
-    case ACTION.CHANGE_OLD_PIN_VALUE :
+    case ACTION.CHANGE_PIN_PASSWORD_VALUE :
       return action.data
     case ACTION.PIN_CHANGED :
       return ''
@@ -22,9 +22,9 @@ export const oldPin = (state = '', action) => {
   }
 }
 
-export const newPin = (state = '', action) => {
+export const pin = (state = '', action) => {
   switch (action.type) {
-    case ACTION.CHANGE_NEW_PIN_VALUE :
+    case ACTION.CHANGE_PIN_VALUE :
       return action.data
     case ACTION.PIN_CHANGED :
       return ''

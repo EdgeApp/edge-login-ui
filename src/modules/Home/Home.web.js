@@ -5,6 +5,7 @@ import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import signinButton from 'theme/signinButton.scss';
 import t from 'lib/web/LocaleStrings'
 import { browserHistory } from 'react-router'
+import { Link } from 'react-router'
 
 class Home extends Component {
 
@@ -18,6 +19,11 @@ class Home extends Component {
         <CardActions>
         <Button theme={signinButton} type="button" onClick={this._handleLogout}>{t('drawer_logout')}</Button>
         </CardActions>
+        <div>
+          <p><Link to="/changePassword">Change Password</Link></p>
+          <p><Link to="/changePin">Change Pin</Link></p>
+          <p><Link to="/passwordRecovery">Password Recovery</Link></p>
+        </div>
       </Card>
     )
   }

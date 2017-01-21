@@ -1,10 +1,10 @@
-export const SHOW_CHANGE_PIN_VIEW = 'SHOW_CHANGE_PIN_VIEW'
-export const HIDE_CHANGE_PIN_VIEW = 'HIDE_CHANGE_PIN_VIEW'
+export const SHOW_CHANGE_PIN_VIEW       = 'SHOW_CHANGE_PIN_VIEW'
+export const HIDE_CHANGE_PIN_VIEW       = 'HIDE_CHANGE_PIN_VIEW'
 
-export const CHANGE_OLD_PIN_VALUE = 'CHANGE_OLD_PIN_VALUE'
-export const CHANGE_NEW_PIN_VALUE = 'CHANGE_NEW_PIN_VALUE'
+export const CHANGE_PIN_PASSWORD_VALUE  = 'CHANGE_PIN_PASSWORD_VALUE'
+export const CHANGE_PIN_VALUE           = 'CHANGE_PIN_VALUE'
 
-export const PIN_CHANGED = 'PIN_CHANGED'
+export const PIN_CHANGED                = 'PIN_CHANGED'
 
 export function showPinView () {
   return {
@@ -18,16 +18,16 @@ export function hidePinView () {
   }
 }
 
-export function changeOldPinValue (data) {
+export function changePinPasswordValue (data) {
   return {
-    type: CHANGE_OLD_PIN_VALUE,
+    type: CHANGE_PIN_PASSWORD_VALUE,
     data
   }
 }
 
-export function changeNewPinValue (data) {
+export function changePinValue (data) {
   return {
-    type: CHANGE_NEW_PIN_VALUE,
+    type: CHANGE_PIN_VALUE,
     data
   }
 }

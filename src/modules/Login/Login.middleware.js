@@ -45,6 +45,7 @@ export const loginWithPin = (username, pin, callback) => {
 
           if (!error) {
             localStorage.setItem('lastUser', username)
+            dispatch(userLogin(account))
             return callback(true)
           }
         })
