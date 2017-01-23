@@ -3,6 +3,7 @@ export const HIDE_PASSWORD_RECOVERY_VIEW = 'HIDE_PASSWORD_RECOVERY_VIEW'
 export const SHOW_PASSWORD_RECOVERY_TOKEN_VIEW = 'SHOW_PASSWORD_RECOVERY_TOKEN_VIEW'
 export const HIDE_PASSWORD_RECOVERY_TOKEN_VIEW = 'HIDE_PASSWORD_RECOVERY_TOKEN_VIEW'
 export const SHOW_PASSWORD_RECOVERY_TOKEN_BUTTON = 'SHOW_PASSWORD_RECOVERY_TOKEN_BUTTON'
+export const HIDE_PASSWORD_RECOVERY_TOKEN_BUTTON = 'HIDE_PASSWORD_RECOVERY_TOKEN_BUTTON'
 
 export const PASSWORD_RECOVERY_QUESTIONS = 'PASSWORD_RECOVERY_QUESTIONS'
 
@@ -12,7 +13,7 @@ export const CHANGE_SECOND_PASSWORD_RECOVERY_QUESTION_VALUE   = 'CHANGE_SECOND_P
 export const CHANGE_SECOND_PASSWORD_RECOVERY_ANSWER_VALUE     = 'CHANGE_SECOND_PASSWORD_RECOVERY_ANSWER_VALUE'
 export const CHANGE_PASSWORD_RECOVERY_PASSWORD                = 'CHANGE_PASSWORD_RECOVERY_PASSWORD'
 export const PASSWORD_RECOVERY_TOKEN                          = 'PASSWORD_RECOVERY_TOKEN'
-export const PASSWORD_RECOVERY_EMAIL                          = 'PASSWORD_RECOVERY_EMAIL'
+export const CHANGE_PASSWORD_RECOVERY_EMAIL                   = 'CHANGE_PASSWORD_RECOVERY_EMAIL'
 
 export const PASSWORD_RECOVERY_DONE                           = 'PASSWORD_RECOVERY_DONE'
 
@@ -43,6 +44,12 @@ export function hidePasswordRecoveryTokenView () {
 export function showPasswordRecoveryTokenButton () {
   return {
     type: SHOW_PASSWORD_RECOVERY_TOKEN_BUTTON
+  }
+}
+
+export function hidePasswordRecoveryTokenButton () {
+  return {
+    type: HIDE_PASSWORD_RECOVERY_TOKEN_BUTTON
   }
 }
 
@@ -88,16 +95,16 @@ export function changePasswordRecoveryPassword (data) {
   }
 }
 
-export function setPasswordRecoveryToken (data) {
+export function changePasswordRecoveryEmail (data) {
   return {
-    type: PASSWORD_RECOVERY_TOKEN,
+    type: CHANGE_PASSWORD_RECOVERY_EMAIL,
     data
   }
 }
 
-export function setPasswordRecoveryEmail (data) {
+export function setPasswordRecoveryToken (data) {
   return {
-    type: PASSWORD_RECOVERY_EMAIL,
+    type: PASSWORD_RECOVERY_TOKEN,
     data
   }
 }

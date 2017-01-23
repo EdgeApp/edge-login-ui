@@ -8,6 +8,8 @@ import * as action from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { checkPasswordRecovery } from './PasswordRecovery.middleware'
 
+import PasswordRecoveryToken from './PasswordRecoveryToken.web'
+
 class PasswordRecovery extends Component {
 
   componentWillMount() {
@@ -34,10 +36,14 @@ class PasswordRecovery extends Component {
     const callback = (error) => console.log(error)
     this.props.dispatch(
       checkPasswordRecovery({
-          firstQuestion : this.props.firstQuestion, 
-          firstAnswer   : this.props.firstAnswer, 
-          secondQuestion: this.props.secondQuestion, 
-          secondAnswer  : this.props.secondAnswer, 
+          questions     : [
+            this.props.firstQuestion,
+            this.props.secondQuestion
+          ],
+          answers       : [
+            this.props.firstAnswer, 
+            this.props.secondAnswer
+          ],
           password      : this.props.password,
           account       : this.props.account
         },
@@ -72,8 +78,12 @@ class PasswordRecovery extends Component {
 
   _handleOnChangePassword = (e) => {
     const password = e.target.value
-    console.log(password)
     this.props.dispatch(action.changePasswordRecoveryPassword(password))
+  }
+
+  _handleOnChangeEmail = (e) => {
+    const email = e.target.value
+    this.props.dispatch(action.changePasswordRecoveryEmail(email))
   }
 
   _renderQuestions = () => {
@@ -83,7 +93,7 @@ class PasswordRecovery extends Component {
   }
 
   render () {
-    if(this.props.view){
+    if(this.props.view && !this.props.viewToken){
       return (
         <div>
           <div>
@@ -109,25 +119,42 @@ class PasswordRecovery extends Component {
         </div>
       )
     }
-    if(!this.props.view){
+    if(!this.props.view && !this.props.viewToken){
       return(
         <div>
           <button type="button" onClick={this._handleShowPasswordRecovery}>Show</button>
         </div>
       )
     }
+    if(!this.props.view && this.props.viewToken){
+      return(
+        <PasswordRecoveryToken 
+          handleOnChangeEmail={this._handleOnChangeEmail}
+          email={this.props.email}
+          token={this.props.token}          
+          username={this.props.account.username}
+          dispatch={this.props.dispatch}
+          finishButton={this.props.finishButton}
+        />
+      )
+    }
+
   }
 }
 
 export default connect( state => ({
 
     view            : state.passwordRecovery.view,
+    viewToken       : state.passwordRecovery.viewToken,
+    finishButton    : state.passwordRecovery.finishButton,
     questions       : state.passwordRecovery.questions,
     firstQuestion   : state.passwordRecovery.firstQuestion,
     firstAnswer     : state.passwordRecovery.firstAnswer,
     secondQuestion  : state.passwordRecovery.secondQuestion,
     secondAnswer    : state.passwordRecovery.secondAnswer,
     password        : state.passwordRecovery.password,
+    token           : state.passwordRecovery.token,
+    email           : state.passwordRecovery.email,
     account         : state.user
 
 }) )(PasswordRecovery)

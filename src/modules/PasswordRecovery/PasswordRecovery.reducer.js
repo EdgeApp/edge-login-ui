@@ -6,6 +6,8 @@ export const view = (state = false, action) => {
       return true
     case ACTION.HIDE_PASSWORD_RECOVERY_VIEW :
       return false
+    case ACTION.PASSWORD_RECOVERY_DONE :
+      return false
     default:
       return state
   }
@@ -17,6 +19,8 @@ export const viewToken = (state = false, action) => {
       return true
     case ACTION.HIDE_PASSWORD_RECOVERY_TOKEN_VIEW :
       return false
+    case ACTION.PASSWORD_RECOVERY_DONE :
+      return false
     default:
       return state
   }
@@ -26,6 +30,8 @@ export const finishButton = (state = false, action) => {
   switch (action.type) {
     case ACTION.SHOW_PASSWORD_RECOVERY_TOKEN_BUTTON :
       return true
+    case ACTION.HIDE_PASSWORD_RECOVERY_TOKEN_BUTTON :
+      return false
     case ACTION.PASSWORD_RECOVERY_DONE :
       return false
     default:
@@ -112,8 +118,10 @@ export const token = (state = '', action) => {
 
 export const email = (state = '', action) => {
   switch (action.type) {
-    case ACTION.PASSWORD_RECOVERY_EMAILTOKENTOKEN :
+    case ACTION.CHANGE_PASSWORD_RECOVERY_EMAIL :
       return action.data
+    case ACTION.PASSWORD_RECOVERY_DONE :
+      return ''
     default:
       return state
   }
