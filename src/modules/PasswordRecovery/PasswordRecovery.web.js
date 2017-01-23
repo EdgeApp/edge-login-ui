@@ -39,6 +39,7 @@ class PasswordRecovery extends Component {
           secondQuestion: this.props.secondQuestion, 
           secondAnswer  : this.props.secondAnswer, 
           password      : this.props.password,
+          account       : this.props.account
         },
         callback
       )
@@ -86,21 +87,21 @@ class PasswordRecovery extends Component {
       return (
         <div>
           <div>
-            <select onChange={this._handleOnChangeFirstQuestion} value={this.props.firstQuestion}>
+            <select onChange={this._handleOnChangeFirstQuestion} value={this.props.firstQuestion} required>
               {this._renderQuestions()}
             </select>
           </div>
-            <input type="text" name="firstAnswer" onChange={this._handleOnChangeFirstAnswer} value={this.props.firstAnswer} placeholder="First Question Answer"/>	
           <div>
+            <input type="text" name="firstAnswer" onChange={this._handleOnChangeFirstAnswer} value={this.props.firstAnswer} placeholder="First Question Answer" required/>	
           </div>
-            <select onChange={this._handleOnChangeSecondQuestion} value={this.props.secondQuestion}>
+            <select onChange={this._handleOnChangeSecondQuestion} value={this.props.secondQuestion} required>
               {this._renderQuestions()}
             </select>
           <div>
-            <input type="text" name="secondAnswer" onChange={this._handleOnChangeSecondAnswer} value={this.props.secondAnswer} placeholder="Second Question Answer"/>	
+            <input type="text" name="secondAnswer" onChange={this._handleOnChangeSecondAnswer} value={this.props.secondAnswer} placeholder="Second Question Answer" required/>	
           </div>
           <div>
-            <input type="password" name="recoveryPassword" onChange={this._handleOnChangePassword} value={this.props.password} placeholder="Password" />	
+            <input type="password" name="recoveryPassword" onChange={this._handleOnChangePassword} value={this.props.password} placeholder="Password" required/>	
           </div>
           <div>
             <button type="button" onClick={this._handleSubmit}>Submit</button>
@@ -126,6 +127,7 @@ export default connect( state => ({
     firstAnswer     : state.passwordRecovery.firstAnswer,
     secondQuestion  : state.passwordRecovery.secondQuestion,
     secondAnswer    : state.passwordRecovery.secondAnswer,
-    password        : state.passwordRecovery.password
+    password        : state.passwordRecovery.password,
+    account         : state.user
 
 }) )(PasswordRecovery)
