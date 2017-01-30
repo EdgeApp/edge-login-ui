@@ -101,19 +101,7 @@ class Login extends Component {
         </Button>
 
         <div style={{ width: '165px', marginTop: '5px' }}>
-          
 
-          <Input
-            ref='pinInput'
-            name="pinInput"
-            type="password"
-            style={{height: 0, opacity: 0}}
-            value={this.props.pin}
-            onChange={this.changePin}
-            autoFocus
-            autoCorrect={false}
-          />
-          
           <Input
             type="text"
             placeholder={t('fragment_landing_enter_pin')}
@@ -123,7 +111,18 @@ class Login extends Component {
             onChange={this.changePinDummy}
             onFocus={this.focusPin}
             ref='pinDummyInput'
-        />
+          />
+
+          <Input
+            ref='pinInput'
+            name="pinInput"
+            type="password"
+            style={{height: 0, opacity: 0, zIndex: -1, marginTop: -25}}
+            value={this.props.pin}
+            onChange={this.changePin}
+            autoFocus
+            autoCorrect={false}
+          />
         </div>
 
         <Button raised neutral style={{margin: '10px 0px'}} onClick={this.viewPasswordInput}>

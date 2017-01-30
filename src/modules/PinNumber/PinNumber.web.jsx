@@ -18,7 +18,7 @@ class PinComponent extends Component {
      checkPIN(
         this.props.pin,
         () => browserHistory.push('/signup/password')
-      ) 
+      )
     )
   }
 
@@ -58,17 +58,16 @@ class PinComponent extends Component {
         </div>
         <Card>
           <CardText>
-            <Input ref='signupPin' type="password" style={{height: 0,opacity: 0}} autoFocus name="pin" onChange={this._handleOnChangeText} value={this.props.pin} placeholder={t('activity_signup_pin_hint')}/>
             <Input ref='signupPinDummy' type="text" value={this.props.pinDummy} style={this.pinStyle()} onFocus={this.focusPin} name="pinDummy" onChange={this.changePinDummy} placeholder={t('activity_signup_pin_hint')}/>
-
+            <Input ref='signupPin' type="password" style={{height: 0,opacity: 0, zIndex: -1, marginTop: -25}} autoFocus name="pin" onChange={this._handleOnChangeText} value={this.props.pin} placeholder={t('activity_signup_pin_hint')}/>
             <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_pin_text')}</p>
           </CardText>
 
           <CardActions>
             <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </CardActions>
-        </Card>         
-      </div>      
+        </Card>
+      </div>
     )
   }
 }
