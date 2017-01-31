@@ -5,8 +5,23 @@ import t from '../../lib/web/LocaleStrings'
 
 import { showPinView, changePinPasswordValue, changePinValue } from './ChangePin.action'
 import { checkPin } from './ChangePin.middleware'
+import Snackbar from 'react-toolbox/lib/snackbar';
 
 class ChangePin extends Component {
+
+  state = {
+    showNotify: false
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { pin, view } = nextProps;
+
+    if (pin && !view) {
+      this.setState({showNotify: true})
+    } else {
+      this.setState({showNotify: false})
+    }
+  }
 
   _handleSubmit = () => {
     const callback = () => browserHistory.push('/signup/review')
@@ -34,27 +49,53 @@ class ChangePin extends Component {
     this.props.dispatch(changePinValue(pin))
   }
 
+  _handleSnackbarTimeout = () => {
+    this.setState({ showNotify: false });
+  };
+
+  _handleSnackbarClick = () => {
+    this.setState({ showNotify: false });
+  };
+
+  _renderNotification = () => {
+    const { showNotify } = this.state
+    return <Snackbar
+       action='Dismiss'
+       active={showNotify}
+       label={ t('activity_signup_pin_change_good') }
+       timeout={5000}
+       type='cancel'
+       onClick={this._handleSnackbarClick}
+       onTimeout={this._handleSnackbarTimeout}>
+     </Snackbar>
+  }
+
   render () {
-    if(this.props.view){
+    const { view, pin, password } = this.props
+
+    if(view){
       return (
         <div>
+          {this._renderNotification()}
           <div>
             <div>
-              <input type="password" name="changePinPassword" onChange={this._handleOnChangePinPassword} value={this.props.password} placeholder="Current Password" />	
+              <input type="password" name="changePinPassword" onChange={this._handleOnChangePinPassword} value={password} placeholder="Current Password" />
             </div>
             <div>
-              <input type="number" name="changePin" onChange={this._handleOnChangePin} value={this.props.pin} placeholder="New Pin" />	
+              <input type="number" name="changePin" onChange={this._handleOnChangePin} value={pin} placeholder="New Pin" />
             </div>
             <div>
-              <button type="button" onClick={this._handleSubmit}>Submit</button> 
+              <button type="button" onClick={this._handleSubmit}>Submit</button>
             </div>
           </div>
         </div>
       )
     }
-    if(!this.props.view){
+
+    if(!view){
       return (
         <div>
+          {this._renderNotification()}
           <button type="button" onClick={this._handleShowChangePin}>Show</button>
         </div>
       )

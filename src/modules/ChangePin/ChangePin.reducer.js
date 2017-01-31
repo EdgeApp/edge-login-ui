@@ -28,6 +28,8 @@ export const pin = (state = '', action) => {
       return action.data
     case ACTION.PIN_CHANGED :
       return ''
+    case ACTION.NOTIFY_SUCCESS_PIN_CHANGE:
+      return true
     default:
       return state
   }
