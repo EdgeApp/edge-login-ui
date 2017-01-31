@@ -34,7 +34,7 @@ class Review extends Component {
       loginWithPassword(
         username,
         password,
-        () => browserHistory.push('/passwordRecovery')
+        () => browserHistory.push('/home')
       )
     )
   }

@@ -23,7 +23,7 @@ class Login extends Component {
       this.refs.loginUsername.getWrappedInstance().blur()
       this.refs.password.getWrappedInstance().blur()
       this.props.dispatch(loginWithPassword(this.props.username, this.props.password, success => {
-        if(success) browserHistory.push('/passwordRecovery')
+        if(success) browserHistory.push('/home')
       }))
     } else {
       this.props.dispatch(openLogin())

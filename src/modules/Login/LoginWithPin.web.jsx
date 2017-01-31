@@ -21,7 +21,7 @@ class Login extends Component {
         this.props.pin
       , success => {
         if(success) {
-          browserHistory.push('/passwordRecovery')
+          browserHistory.push('/home')
         } else {
           is.refs.pinInput.getWrappedInstance().focus()
         }
@@ -96,7 +96,7 @@ class Login extends Component {
 
     return (
       <div style={{padding: '0 0.8em',display:'flex',flexDirection:'column', justifyContent: 'center', alignItems:'center'}}>
-        <Button flat primary style={{textTransform: 'none', margin: '10px 0px'}} onClick={this.toggleCachedUsers}>
+        <Button flat neutral style={{textTransform: 'none', margin: '10px 0px'}} onClick={this.toggleCachedUsers}>
           { this.props.user ? this.props.user : 'No User Selected' }
         </Button>
 
@@ -125,7 +125,7 @@ class Login extends Component {
           />
         </div>
 
-        <Button flat primary style={{margin: '10px 0px'}} onClick={this.viewPasswordInput}>
+        <Button flat neutral style={{margin: '10px 0px'}} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
         {cUsers()}
