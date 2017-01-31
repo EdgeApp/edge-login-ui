@@ -4,25 +4,11 @@ import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
 
 import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
-import { showPasswordView, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue } from './ChangePassword.action'
+import { showPasswordView, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue, hidePasswordChangedNotification } from './ChangePassword.action'
 import { checkPassword } from './ChangePassword.middleware'
 import Snackbar from 'react-toolbox/lib/snackbar';
 
 class ChangePassword extends Component {
-
-  state = {
-    showNotify: false
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { newPassword, view } = nextProps;
-
-    if (newPassword && !view) {
-      this.setState({showNotify: true})
-    } else {
-      this.setState({showNotify: false})
-    }
-  }
 
   _handleSubmit = () => {
     const callback = () => browserHistory.push('/signup/review')
@@ -58,29 +44,21 @@ class ChangePassword extends Component {
     this.props.dispatch(changeNewPasswordRepeatValue(newPasswordRepeat))
   }
 
-  _handleSnackbarTimeout = () => {
-    this.setState({ showNotify: false });
-  };
-
-  _handleSnackbarClick = () => {
-    this.setState({ showNotify: false });
-  };
-
   _renderNotification = () => {
-    const { showNotify } = this.state
+    const { passwordChangedNotification, dispatch} = this.props
     return <Snackbar
        action='Dismiss'
-       active={showNotify}
+       active={passwordChangedNotification}
        label={ t('activity_signup_password_change_good') }
        timeout={5000}
-       type='cancel'
-       onClick={this._handleSnackbarClick}
-       onTimeout={this._handleSnackbarTimeout}>
+       type='accept'
+       onClick={() => dispatch(hidePasswordChangedNotification())}
+       onTimeout={() => dispatch(hidePasswordChangedNotification())}>
      </Snackbar>
   }
 
   render () {
-    const { view, oldPassword, newPassword, validation } = this.props
+    const { view, oldPassword, newPassword, validation, newPasswordRepeat } = this.props
     const { upperCaseChar, lowerCaseChar, number, characterLength } = validation
 
     if(this.props.view){
@@ -95,7 +73,7 @@ class ChangePassword extends Component {
               <input type="password" name="newPassword" onChange={this._handleOnChangeNewPassword} value={newPassword} placeholder="New Password" />
             </div>
             <div>
-              <input type="password" name="newPasswordRepeat" onChange={this._handleOnChangeNewPasswordRepeat} value={this.props.newPasswordRepeat} placeholder="Confirm New Password" />
+              <input type="password" name="newPasswordRepeat" onChange={this._handleOnChangeNewPasswordRepeat} value={newPasswordRepeat} placeholder="Confirm New Password" />
             </div>
             <div>
               <button type="button" onClick={this._handleSubmit}>Submit</button>
@@ -123,11 +101,11 @@ class ChangePassword extends Component {
 
 export default connect( state => ({
 
-  view                : state.changePassword.view,
-  oldPassword         : state.changePassword.oldPassword,
-  newPassword         : state.changePassword.newPassword,
-  newPasswordRepeat   : state.changePassword.newPasswordRepeat,
-  validation          : state.password.validation,
-  user                : state.user,
-
+  view                       : state.changePassword.view,
+  oldPassword                : state.changePassword.oldPassword,
+  newPassword                : state.changePassword.newPassword,
+  newPasswordRepeat          : state.changePassword.newPasswordRepeat,
+  passwordChangedNotification: state.changePassword.passwordChangedNotification,
+  validation                 : state.password.validation,
+  user                       : state.user,
 }) )(ChangePassword)

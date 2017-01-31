@@ -3,25 +3,11 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
 
-import { showPinView, changePinPasswordValue, changePinValue } from './ChangePin.action'
+import { showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification } from './ChangePin.action'
 import { checkPin } from './ChangePin.middleware'
 import Snackbar from 'react-toolbox/lib/snackbar';
 
 class ChangePin extends Component {
-
-  state = {
-    showNotify: false
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { pin, view } = nextProps;
-
-    if (pin && !view) {
-      this.setState({showNotify: true})
-    } else {
-      this.setState({showNotify: false})
-    }
-  }
 
   _handleSubmit = () => {
     const callback = () => browserHistory.push('/signup/review')
@@ -49,24 +35,17 @@ class ChangePin extends Component {
     this.props.dispatch(changePinValue(pin))
   }
 
-  _handleSnackbarTimeout = () => {
-    this.setState({ showNotify: false });
-  };
-
-  _handleSnackbarClick = () => {
-    this.setState({ showNotify: false });
-  };
-
   _renderNotification = () => {
-    const { showNotify } = this.state
+    const { pinChangedNotification, dispatch } = this.props
+
     return <Snackbar
        action='Dismiss'
-       active={showNotify}
+       active={pinChangedNotification}
        label={ t('activity_signup_pin_change_good') }
        timeout={5000}
-       type='cancel'
-       onClick={this._handleSnackbarClick}
-       onTimeout={this._handleSnackbarTimeout}>
+       type='accept'
+       onClick={() => dispatch(hidePinChangedNotification())}
+       onTimeout={() => dispatch(hidePinChangedNotification())}>
      </Snackbar>
   }
 
@@ -105,9 +84,10 @@ class ChangePin extends Component {
 
 export default connect( state => ({
 
-  view      : state.changePin.view,
-  password  : state.changePin.password,
-  pin       : state.changePin.pin,
-  user      : state.user
+  view                   : state.changePin.view,
+  password               : state.changePin.password,
+  pin                    : state.changePin.pin,
+  pinChangedNotification : state.changePin.pinChangedNotification,
+  user                   : state.user
 
 }) )(ChangePin)

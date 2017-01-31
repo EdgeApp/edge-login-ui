@@ -34,3 +34,14 @@ export const pin = (state = '', action) => {
       return state
   }
 }
+
+export const pinChangedNotification = (state = false, action) => {
+  switch (action.type) {
+    case ACTION.SHOW_PIN_CHANGED_NOTIFICATION:
+      return true
+    case ACTION.HIDE_PIN_CHANGED_NOTIFICATION:
+      return false
+    default:
+      return state
+  }
+}

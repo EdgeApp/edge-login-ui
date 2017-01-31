@@ -1,4 +1,4 @@
-import { passwordChanged, hidePasswordView, notifySuccessPasswordChanged} from './ChangePassword.action'
+import { passwordChanged, hidePasswordView, showPasswordChangedNotification} from './ChangePassword.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 // import { signupUser } from '../Signup/Signup.middleware'
 
@@ -34,7 +34,7 @@ export const checkPassword = ( oldPassword, newPassword, newPasswordRepeat, vali
         if(!error){
           dispatch(passwordChanged())
           dispatch(hidePasswordView())
-          return dispatch(notifySuccessPasswordChanged())
+          return dispatch(showPasswordChangedNotification())
         }
       })
     } else {

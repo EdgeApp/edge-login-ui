@@ -1,4 +1,4 @@
-import { pinChanged, hidePinView, notifySuccessPinChanged } from './ChangePin.action'
+import { pinChanged, hidePinView, showPinChangedNotification } from './ChangePin.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
 export const checkPin = ( password, pin, account, callback ) => {
@@ -18,7 +18,7 @@ export const checkPin = ( password, pin, account, callback ) => {
         if(!error){
           dispatch(hidePinView())
           dispatch(pinChanged())
-          return dispatch(notifySuccessPinChanged())
+          return dispatch(showPinChangedNotification())
         }
       })
     }
