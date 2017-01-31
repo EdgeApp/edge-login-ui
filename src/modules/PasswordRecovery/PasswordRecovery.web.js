@@ -25,7 +25,7 @@ class PasswordRecovery extends Component {
           dispatch(action.hidePasswordRecoveryView())
         }
         if(!error){
-          const questions = results.filter( result => result.category === 'recovery2' ).map( result => result.question ) 
+          const questions = results.filter( result => result.category === 'recovery2' ).map( result => result.question )
           dispatch(action.setPasswordRecoveryQuestions(questions))
         }
       })
@@ -41,7 +41,7 @@ class PasswordRecovery extends Component {
             this.props.secondQuestion
           ],
           answers       : [
-            this.props.firstAnswer, 
+            this.props.firstAnswer,
             this.props.secondAnswer
           ],
           password      : this.props.password,
@@ -88,8 +88,8 @@ class PasswordRecovery extends Component {
 
   _renderQuestions = () => {
     return this.props.questions.map( (question, index) => {
-      return <option key={index} value={question}>{question}</option> 
-    }) 
+      return <option key={index} value={question}>{question}</option>
+    })
   }
 
   render () {
@@ -102,16 +102,16 @@ class PasswordRecovery extends Component {
             </select>
           </div>
           <div>
-            <input type="text" name="firstAnswer" onChange={this._handleOnChangeFirstAnswer} value={this.props.firstAnswer} placeholder="First Question Answer" required/>	
+            <input type="text" name="firstAnswer" onChange={this._handleOnChangeFirstAnswer} value={this.props.firstAnswer} placeholder="First Question Answer" required/>
           </div>
             <select onChange={this._handleOnChangeSecondQuestion} value={this.props.secondQuestion} required>
               {this._renderQuestions()}
             </select>
           <div>
-            <input type="text" name="secondAnswer" onChange={this._handleOnChangeSecondAnswer} value={this.props.secondAnswer} placeholder="Second Question Answer" required/>	
+            <input type="text" name="secondAnswer" onChange={this._handleOnChangeSecondAnswer} value={this.props.secondAnswer} placeholder="Second Question Answer" required/>
           </div>
           <div>
-            <input type="password" name="recoveryPassword" onChange={this._handleOnChangePassword} value={this.props.password} placeholder="Password" required/>	
+            <input type="password" name="recoveryPassword" onChange={this._handleOnChangePassword} value={this.props.password} placeholder="Password" required/>
           </div>
           <div>
             <button type="button" onClick={this._handleSubmit}>Submit</button>
@@ -128,10 +128,10 @@ class PasswordRecovery extends Component {
     }
     if(!this.props.view && this.props.viewToken){
       return(
-        <PasswordRecoveryToken 
+        <PasswordRecoveryToken
           handleOnChangeEmail={this._handleOnChangeEmail}
           email={this.props.email}
-          token={this.props.token}          
+          token={this.props.token}
           username={this.props.account.username}
           dispatch={this.props.dispatch}
           finishButton={this.props.finishButton}

@@ -32,9 +32,9 @@ class Review extends Component {
     const { username, password } = this.props.details
     this.props.dispatch(
       loginWithPassword(
-        username, 
-        password, 
-        () => browserHistory.push('/home')
+        username,
+        password,
+        () => browserHistory.push('/passwordRecovery')
       )
     )
   }
@@ -45,9 +45,9 @@ class Review extends Component {
         <div>
           <Card>
             <CardText style={{height: '100px'}}>
-              <p>username: {this.props.details.username}</p> 
-              <p>pin: {this.props.details.pin}</p> 
-              <p>password: {this.props.details.password}</p> 
+              <p>username: {this.props.details.username}</p>
+              <p>pin: {this.props.details.pin}</p>
+              <p>password: {this.props.details.password}</p>
             </CardText>
             <CardActions>
               <Button type="button" raised primary onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</Button>
@@ -67,8 +67,8 @@ class Review extends Component {
         <div>
           <Card>
             <CardText style={{height: '100px'}}>
-              <h5>{t('fragment_setup_writeitdown_text')}</h5> 
-              <p>{t('fragment_setup_writeitdown_text_warning')}</p> 
+              <h5>{t('fragment_setup_writeitdown_text')}</h5>
+              <p>{t('fragment_setup_writeitdown_text_warning')}</p>
             </CardText>
             <CardActions>
               <Button type="button" raised primary onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</Button>

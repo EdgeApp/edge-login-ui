@@ -23,7 +23,7 @@ class Login extends Component {
       this.refs.loginUsername.getWrappedInstance().blur()
       this.refs.password.getWrappedInstance().blur()
       this.props.dispatch(loginWithPassword(this.props.username, this.props.password, success => {
-        if(success) browserHistory.push('/home')
+        if(success) browserHistory.push('/passwordRecovery')
       }))
     } else {
       this.props.dispatch(openLogin())
@@ -105,7 +105,7 @@ class Login extends Component {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                opacity: opacityFieldsView, 
+                opacity: opacityFieldsView,
                 height: heightFieldsView
               }}>
             <Input
