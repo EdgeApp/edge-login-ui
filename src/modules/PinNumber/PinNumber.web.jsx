@@ -13,7 +13,8 @@ import { checkPIN } from './PinNumber.middleware'
 
 class PinComponent extends Component {
 
-  _handleSubmit = () => {
+  _handleSubmit = (e) => {
+    e.preventDefault()
     this.props.dispatch(
      checkPIN(
         this.props.pin,
@@ -56,17 +57,19 @@ class PinComponent extends Component {
           <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type="button">{t('string_capitalize_back')}</Button>
           <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>{t('activity_signup_pin_label')}</div>
         </div>
-        <Card>
-          <CardText>
-            <Input ref='signupPinDummy' type="text" value={this.props.pinDummy} style={this.pinStyle()} onFocus={this.focusPin} name="pinDummy" onChange={this.changePinDummy} placeholder={t('activity_signup_pin_hint')}/>
-            <Input ref='signupPin' type="password" style={{height: 0,opacity: 0, zIndex: -1, marginTop: -25}} autoFocus name="pin" onChange={this._handleOnChangeText} value={this.props.pin} placeholder={t('activity_signup_pin_hint')}/>
-            <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_pin_text')}</p>
-          </CardText>
+          <Card>
+            <CardText>
+              <Input ref='signupPinDummy' type="text" value={this.props.pinDummy} style={this.pinStyle()} onFocus={this.focusPin} name="pinDummy" onChange={this.changePinDummy} placeholder={t('activity_signup_pin_hint')}/>
+              <form onSubmit={e => this._handleSubmit(e)}>
+                <Input ref='signupPin' type="password" style={{height: 0,opacity: 0, zIndex: -1, marginTop: -25}} autoFocus name="pin" onChange={this._handleOnChangeText} value={this.props.pin} placeholder={t('activity_signup_pin_hint')}/>
+              </form>
+              <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_pin_text')}</p>
+            </CardText>
 
-          <CardActions>
-            <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
-          </CardActions>
-        </Card>
+            <CardActions>
+              <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
+            </CardActions>
+          </Card>
       </div>
     )
   }

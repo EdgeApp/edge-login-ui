@@ -18,7 +18,8 @@ import loginUsernameInput from 'theme/loginUsernameInput.scss';
 
 class Login extends Component {
 
-  submit = () => {
+  submit = (e) => {
+    e.preventDefault()
     if (this.props.viewPassword) {
       this.refs.loginUsername.getWrappedInstance().blur()
       this.refs.password.getWrappedInstance().blur()
@@ -98,8 +99,7 @@ class Login extends Component {
       <div style={style.container}>
         <div style={style.form}>
           <div ref='titleText' style={{textAlign:'center', fontSize: '30px', padding: '0 0.8em', overflow:'hidden', margin: '10px'}}>{t('activity_splash_with_airbitz')}</div>
-
-          <div ref='fieldsView' style={{
+            <div ref='fieldsView' style={{
                 padding: '0 0.8em',
                 position: 'relative',
                 flexDirection: 'column',
@@ -108,30 +108,30 @@ class Login extends Component {
                 opacity: opacityFieldsView,
                 height: heightFieldsView
               }}>
-            <Input
-              theme={loginUsernameInput}
-              ref='loginUsername'
-              placeholder={t('fragment_landing_username_hint')}
-              onChange={this.changeUsername}
-              value={this.props.username}
-              onFocus={this.usernameFocused}
-              autoCorrect={false}
-              autoCapitalize={false}
-        />
-
-            <Input
-              type='password'
-              ref='password'
-              onFocus={this.passwordFocused}
-              placeholder={t('fragment_landing_password_hint')}
-              onChange={this.changePassword}
-              value={this.props.password}
-              autoCorrect={false}
-              autoCapitalize={false}
-        />
-
-            {cUsers()}
-          </div>
+                <Input
+                  theme={loginUsernameInput}
+                  ref='loginUsername'
+                  placeholder={t('fragment_landing_username_hint')}
+                  onChange={this.changeUsername}
+                  value={this.props.username}
+                  onFocus={this.usernameFocused}
+                  autoCorrect={false}
+                  autoCapitalize={false}
+                  />
+              <form onSubmit={e => this.submit(e)}>
+                <Input
+                  type='password'
+                  ref='password'
+                  onFocus={this.passwordFocused}
+                  placeholder={t('fragment_landing_password_hint')}
+                  onChange={this.changePassword}
+                  value={this.props.password}
+                  autoCorrect={false}
+                  autoCapitalize={false}
+                  />
+              </form>
+              {cUsers()}
+            </div>
           <div style={{display:'flex',flexDirection:'column',alignItems:'stretch'}}>
             <Button theme={signinButton} style={{margin: '30px 0px 0px 0px'}} raised onClick={this.submit}>{t('fragment_landing_signin_button')}</Button>
             <div ref='fieldsBelowView' style={{height: heightBelowView}}></div>

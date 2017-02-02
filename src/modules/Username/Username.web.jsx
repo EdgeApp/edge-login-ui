@@ -18,7 +18,8 @@ import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
 class UsernameComponent extends Component {
 
-  _handleSubmit = () => {
+  _handleSubmit = (e) => {
+    e.preventDefault()
 
     if (this.props.username.length < 3) {
       return this.props.dispatch(
@@ -29,12 +30,11 @@ class UsernameComponent extends Component {
     if(this.props.username.length >= 3) {
       return this.props.dispatch(
         checkUsername(
-          this.props.username, 
+          this.props.username,
           () => browserHistory.push('/signup/pin')
         )
       )
     }
-
   }
 
 
@@ -58,16 +58,18 @@ class UsernameComponent extends Component {
           <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type="button">{t('string_capitalize_exit')}</Button>
           <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>{t('fragment_setup_username_label')}</div>
         </div>
-        <Card>
-          <CardText>
-            <Input autoFocus type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder={t('fragment_landing_username_hint')} />
-            <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_username_text')}</p>
-          </CardText>
+        <form onSubmit={e => this._handleSubmit(e)}>
+          <Card>
+            <CardText>
+              <Input autoFocus type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder={t('fragment_landing_username_hint')} />
+              <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_username_text')}</p>
+            </CardText>
 
-          <CardActions>
-            <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
-          </CardActions>
-        </Card>       
+            <CardActions>
+              <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
+            </CardActions>
+          </Card>
+        </form>
       </div>
     )
   }
