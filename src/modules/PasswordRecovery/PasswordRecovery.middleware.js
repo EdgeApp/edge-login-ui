@@ -1,15 +1,14 @@
 import { validateEmail, obfuscateUsername } from '../../lib/helper'
 
-import { passwordRecoveryDone, hidePasswordRecoveryView, setPasswordRecoveryToken, showPasswordRecoveryTokenView, showPasswordRecoveryTokenButton } from './PasswordRecovery.action'
+import { hidePasswordRecoveryView, setPasswordRecoveryToken, showPasswordRecoveryTokenView, showPasswordRecoveryTokenButton } from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
 export const checkPasswordRecovery = (payload, callback) => {
-  const checkAnswersLength = (answers) => answers[0].length < 4 || answers[1].length < 4 ? false : true
-  const checkQuestions = (questions) => questions[0] === questions[1] ? false : true
+  const checkAnswersLength = (answers) => answers[0].length < 4 || answers[1].length < 4
+  const checkQuestions = (questions) => questions[0] === questions[1]
   const checkPassword = (password, account) => account.checkPassword(password)
 
   return (dispatch, getState, imports) => {
-    const abcContext = imports.abcContext
     const t = imports.t
 
     if (!checkAnswersLength(payload.answers)) {

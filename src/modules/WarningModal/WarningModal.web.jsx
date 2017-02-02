@@ -9,7 +9,7 @@ import t from 'lib/web/LocaleStrings'
 import Button from 'react-toolbox/lib/button'
 
 import Dialog from 'react-toolbox/lib/dialog'
-import { Card, CardText, CardActions } from 'react-toolbox/lib/card';
+import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
 
 class WarningModal extends Component {
 
@@ -41,18 +41,18 @@ class WarningModal extends Component {
         active={this.props.visible}
       >
         <Card>
-        <CardText>
-        <div style={[ style.textWarning, style.textLead ]}>{ this.props.title }</div>
-        <div style={style.textWarning}>{ this.props.message }</div>
-        </CardText>
-        <CardActions style={{ flexDirection: 'row' }}>
-          <Button onClick={this.handleClose}  style={style.hideModal}>
-            {t('string_cancel')}
-          </Button>
-          <Button style={style.hideModal} onClick={this.checkHandleSubmit()} >
-             {t('string_ok')}
-          </Button>
-        </CardActions>
+          <CardText>
+            <div style={[ style.textWarning, style.textLead ]}>{ this.props.title }</div>
+            <div style={style.textWarning}>{ this.props.message }</div>
+          </CardText>
+          <CardActions style={{ flexDirection: 'row' }}>
+            <Button onClick={this.handleClose} style={style.hideModal}>
+              {t('string_cancel')}
+            </Button>
+            <Button style={style.hideModal} onClick={this.checkHandleSubmit()} >
+              {t('string_ok')}
+            </Button>
+          </CardActions>
         </Card>
       </Dialog>
     )

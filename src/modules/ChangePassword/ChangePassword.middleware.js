@@ -1,10 +1,9 @@
-import { passwordChanged, hidePasswordView, showPasswordChangedNotification} from './ChangePassword.action'
+import { passwordChanged, hidePasswordView, showPasswordChangedNotification } from './ChangePassword.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 // import { signupUser } from '../Signup/Signup.middleware'
 
 export const checkPassword = (oldPassword, newPassword, newPasswordRepeat, validation, account, callback) => {
   return (dispatch, getState, imports) => {
-    const abcContext = imports.abcContext
     const t = imports.t
 
     if (!account.checkPassword(oldPassword)) {

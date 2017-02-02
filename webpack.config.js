@@ -29,10 +29,10 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('bundle.css', { allChunks: true }),
-	    new webpack.optimize.OccurenceOrderPlugin(),
-	    new webpack.optimize.DedupePlugin(),
-	    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */'vendor', /* filename= */'vendor.bundle.js'),
-	    new webpack.DefinePlugin({
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */'vendor', /* filename= */'vendor.bundle.js'),
+    new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
@@ -54,17 +54,18 @@ module.exports = {
     loaders: [
       { test: /\.json$/, loader: 'json-loader' },
       {
-			  test: /\.jsx?$/,
+        test: /\.jsx?$/,
         exclude: [/native/, /\.rn\.js$/],
-			  loaders: ['babel'],
-			  include: path.join(__dirname, 'src')
+        loaders: ['babel'],
+        include: path.join(__dirname, 'src')
       }, {
         test: /(\.scss|\.css)$/,
         include: [/node_modules\/react-toolbox\//, /src\//],
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i, include: /src\/img/,
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        include: /src\/img/,
         loader: 'file-loader'
       }
 

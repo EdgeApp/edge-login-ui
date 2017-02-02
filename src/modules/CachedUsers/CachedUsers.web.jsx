@@ -8,11 +8,9 @@ import { openUserList, closeUserList } from '../Login/Login.action'
 import _ from 'lodash'
 import Button from 'react-toolbox/lib/button'
 
-import cachedUserXButton from 'theme/cachedUserXButton.scss';
+import cachedUserXButton from 'theme/cachedUserXButton.scss'
 
-import cachedUserButton from 'theme/cachedUserButton.scss';
-
-import Dialog from 'react-toolbox/lib/dialog';
+import cachedUserButton from 'theme/cachedUserButton.scss'
 
 class UserList extends Component {
 
@@ -38,13 +36,13 @@ class UserList extends Component {
       const lastIndex = this.props.users.length - 1
       let styleArr = _.clone(style.row)
       if (index === 0) {
-        _.extend(styleArr,style.border)
-        _.extend(styleArr,style.topRadius)
+        _.extend(styleArr, style.border)
+        _.extend(styleArr, style.topRadius)
       } else if (lastIndex === index) {
-        _.extend(styleArr,style.border)
-        _.extend(styleArr,style.bottomRadius)
+        _.extend(styleArr, style.border)
+        _.extend(styleArr, style.bottomRadius)
       } else if (lastIndex !== index) {
-        _.extend(styleArr,style.border)
+        _.extend(styleArr, style.border)
       }
       return styleArr
     }
@@ -64,7 +62,6 @@ class UserList extends Component {
       )
     })
   }
-
 
   showCachedUsers = () => {
     this.props.dispatch(openUserList())
@@ -152,7 +149,7 @@ const style = {
   },
 
   xbutton: {
-    padding:0,
+    padding: 0,
     fontSize: '18px',
     display: 'flex',
     justifyContent: 'center',

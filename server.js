@@ -4,8 +4,8 @@ var express = require('express')
 var app = express()
 var port = 8002
 
-app.use('/assets', express.static(__dirname + '/assets'))
-app.use('/dist', express.static(__dirname + '/dist'))
+app.use('/assets', express.static(path.join(__dirname, '/assets')))
+app.use('/dist', express.static(path.join(__dirname, '/dist')))
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'index_prod.html'))

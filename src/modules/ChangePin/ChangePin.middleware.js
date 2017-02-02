@@ -3,7 +3,6 @@ import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
 export const checkPin = (password, pin, account, callback) => {
   return (dispatch, getState, imports) => {
-    const abcContext = imports.abcContext
     const t = imports.t
 
     if (!account.checkPassword(password)) {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { createStore, applyMiddleware } from 'redux'
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router'
 
 import Container from './modules/Container.web'
