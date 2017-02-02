@@ -16,7 +16,6 @@ String.format = function (format) {
   })
 }
 
-
 render((
   <Provider store={store}>
     <Router />

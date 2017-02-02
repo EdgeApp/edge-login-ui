@@ -3,7 +3,7 @@ import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { getDetails } from '../ReviewDetails/ReviewDetails.action'
 
 export const signupUser = (username, password, pin, callback) => {
-  return ( dispatch, getState, imports ) => {
+  return (dispatch, getState, imports) => {
     const t = imports.t
     const abcContext = imports.abcContext
     dispatch(openLoading(t('fragment_signup_creating_account')))
