@@ -117,7 +117,8 @@ class Login extends Component {
               onFocus={this.usernameFocused}
               autoCorrect={false}
               autoCapitalize={false}
-              />
+            />
+
             <form onSubmit={e => this.submit(e)}>
               <Input
                 type='password'
@@ -128,7 +129,7 @@ class Login extends Component {
                 value={this.props.password}
                 autoCorrect={false}
                 autoCapitalize={false}
-                />
+              />
             </form>
             {cUsers()}
           </div>
