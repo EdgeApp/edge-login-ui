@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
 
-import { showPinView, changePinPasswordValue, changePinValue } from './ChangePin.action'
+import { showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification } from './ChangePin.action'
 import { checkPin } from './ChangePin.middleware'
+import Snackbar from 'react-toolbox/lib/snackbar';
 
 class ChangePin extends Component {
 
@@ -34,27 +35,46 @@ class ChangePin extends Component {
     this.props.dispatch(changePinValue(pin))
   }
 
+  _renderNotification = () => {
+    const { pinChangedNotification, dispatch } = this.props
+
+    return <Snackbar
+       action='Dismiss'
+       active={pinChangedNotification}
+       label={ t('activity_signup_pin_change_good') }
+       timeout={5000}
+       type='accept'
+       onClick={() => dispatch(hidePinChangedNotification())}
+       onTimeout={() => dispatch(hidePinChangedNotification())}>
+     </Snackbar>
+  }
+
   render () {
-    if(this.props.view){
+    const { view, pin, password } = this.props
+
+    if(view){
       return (
         <div>
+          {this._renderNotification()}
           <div>
             <div>
-              <input type="password" name="changePinPassword" onChange={this._handleOnChangePinPassword} value={this.props.password} placeholder="Current Password" />	
+              <input type="password" name="changePinPassword" onChange={this._handleOnChangePinPassword} value={password} placeholder="Current Password" />
             </div>
             <div>
-              <input type="number" name="changePin" onChange={this._handleOnChangePin} value={this.props.pin} placeholder="New Pin" />	
+              <input type="number" name="changePin" onChange={this._handleOnChangePin} value={pin} placeholder="New Pin" />
             </div>
             <div>
-              <button type="button" onClick={this._handleSubmit}>Submit</button> 
+              <button type="button" onClick={this._handleSubmit}>Submit</button>
             </div>
           </div>
         </div>
       )
     }
-    if(!this.props.view){
+
+    if(!view){
       return (
         <div>
+          {this._renderNotification()}
           <button type="button" onClick={this._handleShowChangePin}>Show</button>
         </div>
       )
@@ -64,9 +84,10 @@ class ChangePin extends Component {
 
 export default connect( state => ({
 
-  view      : state.changePin.view,
-  password  : state.changePin.password,
-  pin       : state.changePin.pin,
-  user      : state.user
+  view                   : state.changePin.view,
+  password               : state.changePin.password,
+  pin                    : state.changePin.pin,
+  pinChangedNotification : state.changePin.pinChangedNotification,
+  user                   : state.user
 
 }) )(ChangePin)

@@ -1,4 +1,4 @@
-import { passwordChanged, hidePasswordView} from './ChangePassword.action'
+import { passwordChanged, hidePasswordView, showPasswordChangedNotification} from './ChangePassword.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 // import { signupUser } from '../Signup/Signup.middleware'
 
@@ -20,20 +20,21 @@ export const checkPassword = ( oldPassword, newPassword, newPasswordRepeat, vali
     }
 
 
-    if (validation.upperCaseChar && 
-        validation.lowerCaseChar && 
-        validation.number && 
-        validation.characterLength && 
+    if (validation.upperCaseChar &&
+        validation.lowerCaseChar &&
+        validation.number &&
+        validation.characterLength &&
         newPassword === newPasswordRepeat &&
-        account.checkPassword(oldPassword) 
+        account.checkPassword(oldPassword)
     ) {
       account.changePassword(newPassword, error =>{
         if(error){
-          return dispatch(openErrorModal(t('server_error_no_connection'))) 
+          return dispatch(openErrorModal(t('server_error_no_connection')))
         }
         if(!error){
           dispatch(passwordChanged())
-          return dispatch(hidePasswordView())
+          dispatch(hidePasswordView())
+          return dispatch(showPasswordChangedNotification())
         }
       })
     } else {
@@ -42,4 +43,3 @@ export const checkPassword = ( oldPassword, newPassword, newPasswordRepeat, vali
 
   }
 }
-

@@ -62,7 +62,7 @@ const store = combineReducers({
     message: Loader.message,
     // style: Loader.style
   }),
-  
+
   warningModal: combineReducers({
     visible: WarningModal.visible,
     module: WarningModal.module,
@@ -85,15 +85,17 @@ const store = combineReducers({
     gainedFocus
   }),
   changePassword: combineReducers({
-    view              : ChangePassword.view,
-    oldPassword       : ChangePassword.oldPassword,
-    newPassword       : ChangePassword.newPassword,
-    newPasswordRepeat : ChangePassword.newPasswordRepeat
+    view                        : ChangePassword.view,
+    oldPassword                 : ChangePassword.oldPassword,
+    newPassword                 : ChangePassword.newPassword,
+    newPasswordRepeat           : ChangePassword.newPasswordRepeat,
+    passwordChangedNotification : ChangePassword.passwordChangedNotification
   }),
   changePin: combineReducers({
-    view      : ChangePin.view,
-    password  : ChangePin.password,
-    pin       : ChangePin.pin
+    view                   : ChangePin.view,
+    password               : ChangePin.password,
+    pin                    : ChangePin.pin,
+    pinChangedNotification : ChangePin.pinChangedNotification
   }),
   passwordRecovery: combineReducers({
     view            : PasswordRecovery.view,

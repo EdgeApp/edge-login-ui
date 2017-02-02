@@ -5,6 +5,8 @@ export const CHANGE_PIN_PASSWORD_VALUE  = 'CHANGE_PIN_PASSWORD_VALUE'
 export const CHANGE_PIN_VALUE           = 'CHANGE_PIN_VALUE'
 
 export const PIN_CHANGED                = 'PIN_CHANGED'
+export const SHOW_PIN_CHANGED_NOTIFICATION  = 'SHOW_PIN_CHANGED_NOTIFICATION'
+export const HIDE_PIN_CHANGED_NOTIFICATION = 'HIDE_PIN_CHANGED_NOTIFICATION'
 
 export function showPinView () {
   return {
@@ -34,6 +36,17 @@ export function changePinValue (data) {
 
 export function pinChanged () {
   return {
-    type: PIN_CHANGED 
+    type: PIN_CHANGED
+  }
+}
+export function showPinChangedNotification(){
+  return {
+    type: SHOW_PIN_CHANGED_NOTIFICATION
+  }
+}
+
+export function hidePinChangedNotification(){
+  return {
+    type: HIDE_PIN_CHANGED_NOTIFICATION
   }
 }

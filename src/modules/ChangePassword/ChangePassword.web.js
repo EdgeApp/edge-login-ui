@@ -4,8 +4,9 @@ import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
 
 import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
-import { showPasswordView, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue } from './ChangePassword.action'
+import { showPasswordView, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue, hidePasswordChangedNotification } from './ChangePassword.action'
 import { checkPassword } from './ChangePassword.middleware'
+import Snackbar from 'react-toolbox/lib/snackbar';
 
 class ChangePassword extends Component {
 
@@ -43,36 +44,54 @@ class ChangePassword extends Component {
     this.props.dispatch(changeNewPasswordRepeatValue(newPasswordRepeat))
   }
 
+  _renderNotification = () => {
+    const { passwordChangedNotification, dispatch} = this.props
+    return <Snackbar
+       action='Dismiss'
+       active={passwordChangedNotification}
+       label={ t('activity_signup_password_change_good') }
+       timeout={5000}
+       type='accept'
+       onClick={() => dispatch(hidePasswordChangedNotification())}
+       onTimeout={() => dispatch(hidePasswordChangedNotification())}>
+     </Snackbar>
+  }
+
   render () {
+    const { view, oldPassword, newPassword, validation, newPasswordRepeat } = this.props
+    const { upperCaseChar, lowerCaseChar, number, characterLength } = validation
+
     if(this.props.view){
       return (
         <div>
+          {this._renderNotification()}
           <div>
             <div>
-              <input type="password" name="oldPassword" onChange={this._handleOnChangeOldPassword} value={this.props.oldPassword} placeholder="Old Password" />	
+              <input type="password" name="oldPassword" onChange={this._handleOnChangeOldPassword} value={oldPassword} placeholder="Old Password" />
             </div>
             <div>
-              <input type="password" name="newPassword" onChange={this._handleOnChangeNewPassword} value={this.props.newPassword} placeholder="New Password" />	
+              <input type="password" name="newPassword" onChange={this._handleOnChangeNewPassword} value={newPassword} placeholder="New Password" />
             </div>
             <div>
-              <input type="password" name="newPasswordRepeat" onChange={this._handleOnChangeNewPasswordRepeat} value={this.props.newPasswordRepeat} placeholder="Confirm New Password" />	
+              <input type="password" name="newPasswordRepeat" onChange={this._handleOnChangeNewPasswordRepeat} value={newPasswordRepeat} placeholder="Confirm New Password" />
             </div>
             <div>
-              <button type="button" onClick={this._handleSubmit}>Submit</button> 
+              <button type="button" onClick={this._handleSubmit}>Submit</button>
             </div>
           </div>
           <div>
-            <p>{ this.props.validation.upperCaseChar ? '' : t('password_rule_no_uppercase') }</p>
-            <p>{ this.props.validation.lowerCaseChar ? '' : t('password_rule_no_lowercase') }</p>
-            <p>{ this.props.validation.number ? '' : t('password_rule_no_number') }</p>
-            <p>{ this.props.validation.characterLength ? '' :  t('password_rule_too_short') }</p>
+            <p>{ upperCaseChar ? '' : t('password_rule_no_uppercase') }</p>
+            <p>{ lowerCaseChar ? '' : t('password_rule_no_lowercase') }</p>
+            <p>{ number ? '' : t('password_rule_no_number') }</p>
+            <p>{ characterLength ? '' :  t('password_rule_too_short') }</p>
           </div>
         </div>
       )
     }
-    if(!this.props.view){
+    if(!view){
       return (
         <div>
+          {this._renderNotification()}
           <button type="button" onClick={this._handleShowChangePassword}>Show</button>
         </div>
       )
@@ -82,11 +101,11 @@ class ChangePassword extends Component {
 
 export default connect( state => ({
 
-  view                : state.changePassword.view,
-  oldPassword         : state.changePassword.oldPassword,
-  newPassword         : state.changePassword.newPassword,
-  newPasswordRepeat   : state.changePassword.newPasswordRepeat,
-  validation          : state.password.validation,
-  user                : state.user,
-
+  view                       : state.changePassword.view,
+  oldPassword                : state.changePassword.oldPassword,
+  newPassword                : state.changePassword.newPassword,
+  newPasswordRepeat          : state.changePassword.newPasswordRepeat,
+  passwordChangedNotification: state.changePassword.passwordChangedNotification,
+  validation                 : state.password.validation,
+  user                       : state.user,
 }) )(ChangePassword)

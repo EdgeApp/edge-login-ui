@@ -28,6 +28,8 @@ export const newPassword = (state = '', action) => {
       return action.data
     case ACTION.PASSWORD_CHANGED :
       return ''
+    case ACTION.NOTIFY_SUCCESS_PASSWORD_CHANGED:
+      return true
     default:
       return state
   }
@@ -39,6 +41,17 @@ export const newPasswordRepeat = (state = '', action) => {
       return action.data
     case ACTION.PASSWORD_CHANGED :
       return ''
+    default:
+      return state
+  }
+}
+
+export const passwordChangedNotification = (state = false, action) => {
+  switch (action.type) {
+    case ACTION.SHOW_PASSWORD_CHANGED_NOTIFICATION:
+      return true
+    case ACTION.HIDE_PASSWORD_CHANGED_NOTIFICATION:
+      return false
     default:
       return state
   }

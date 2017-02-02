@@ -28,6 +28,19 @@ export const pin = (state = '', action) => {
       return action.data
     case ACTION.PIN_CHANGED :
       return ''
+    case ACTION.NOTIFY_SUCCESS_PIN_CHANGE:
+      return true
+    default:
+      return state
+  }
+}
+
+export const pinChangedNotification = (state = false, action) => {
+  switch (action.type) {
+    case ACTION.SHOW_PIN_CHANGED_NOTIFICATION:
+      return true
+    case ACTION.HIDE_PIN_CHANGED_NOTIFICATION:
+      return false
     default:
       return state
   }

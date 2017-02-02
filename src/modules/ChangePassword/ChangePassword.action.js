@@ -6,6 +6,8 @@ export const CHANGE_NEW_PASSWORD_VALUE = 'CHANGE_NEW_PASSWORD_VALUE'
 export const CHANGE_NEW_PASSWORD_REPEAT_VALUE = 'CHANGE_NEW_PASSWORD_REPEAT_VALUE'
 
 export const PASSWORD_CHANGED = 'PASSWORD_CHANGED'
+export const SHOW_PASSWORD_CHANGED_NOTIFICATION  = 'SHOW_PASSWORD_CHANGED_NOTIFICATION'
+export const HIDE_PASSWORD_CHANGED_NOTIFICATION = 'HIDE_PASSWORD_CHANGED_NOTIFICATION'
 
 export function showPasswordView () {
   return {
@@ -42,6 +44,18 @@ export function changeNewPasswordRepeatValue (data) {
 
 export function passwordChanged () {
   return {
-    type: PASSWORD_CHANGED 
+    type: PASSWORD_CHANGED
+  }
+}
+
+export function showPasswordChangedNotification(){
+  return {
+    type: SHOW_PASSWORD_CHANGED_NOTIFICATION
+  }
+}
+
+export function hidePasswordChangedNotification(){
+  return {
+    type: HIDE_PASSWORD_CHANGED_NOTIFICATION
   }
 }
