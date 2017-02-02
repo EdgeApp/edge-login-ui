@@ -105,7 +105,7 @@ class Login extends Component {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                opacity: opacityFieldsView, 
+                opacity: opacityFieldsView,
                 height: heightFieldsView
               }}>
             <Input

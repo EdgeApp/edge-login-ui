@@ -776,6 +776,7 @@ const strings = {
   disable_recovery_popup_message: 'This account already has password recovery setup. Would you like to disable it?',
   error_disabling_recovery: 'Error disabling recovery',
   recovery_disabled: 'Recovery Disabled',
+  recovery_setup_successful: 'Password recovery setup complete. Please ensure you retain a copy of the email you sent yourself. Use the link in the email to recovery your account if your password is forgotten.',
   in: 'in',
 
     //  SSO

@@ -96,7 +96,7 @@ class Login extends Component {
 
     return (
       <div style={{padding: '0 0.8em',display:'flex',flexDirection:'column', justifyContent: 'center', alignItems:'center'}}>
-        <Button raised neutral style={{textTransform: 'none', margin: '10px 0px'}} onClick={this.toggleCachedUsers}>
+        <Button flat neutral style={{textTransform: 'none', margin: '10px 0px'}} onClick={this.toggleCachedUsers}>
           { this.props.user ? this.props.user : 'No User Selected' }
         </Button>
 
@@ -125,7 +125,7 @@ class Login extends Component {
           />
         </div>
 
-        <Button raised neutral style={{margin: '10px 0px'}} onClick={this.viewPasswordInput}>
+        <Button flat neutral style={{margin: '10px 0px'}} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
         {cUsers()}
