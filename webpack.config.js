@@ -27,7 +27,7 @@ module.exports = {
     sassLoader: {
       data: '@import "theme/_config.scss";',
       includePaths: [path.resolve(__dirname, './src')]
-    },    
+    },
     plugins: [
       new ExtractTextPlugin('bundle.css', { allChunks: true }),
 	    new webpack.optimize.OccurenceOrderPlugin(),
@@ -51,7 +51,6 @@ module.exports = {
     ],
     module: {
         preLoaders: [
-            { test: /\.json$/, exclude: /node_modules/, loader: 'json' },
         ],
 		loaders: [
       { test: /\.json$/, loader: "json-loader" },
@@ -66,7 +65,7 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i, include: /src\/img/, 
+        test: /\.(jpe?g|png|gif|svg)$/i, include: /src\/img/,
         loader: "file-loader"
       }
 

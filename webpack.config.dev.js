@@ -23,14 +23,13 @@ module.exports = {
             path.resolve('./src')
 
         ]
-    },    
+    },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin('bundle.css', { allChunks: true })
     ],
     module: {
         preLoaders: [
-            { test: /\.json$/, exclude: /node_modules/, loader: 'json' },
         ],
         loaders: [
             { test: /\.json$/, loader: "json-loader" },
@@ -57,5 +56,5 @@ module.exports = {
     sassLoader: {
       data: '@import "theme/_config.scss";',
       includePaths: [path.resolve(__dirname, './src')]
-    },    
+    },
 };
