@@ -2,17 +2,22 @@ var path = require('path');
 var webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  context: path.resolve('src'),
     devtool: 'inline-source-map',
-    entry: [
-        'webpack-dev-server/client?http://localhost:8002', // WebpackDevServer host and port
-        'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-        './src/index.web'
-    ],
+    entry: {
+        bundle: 'index.web',
+        abcui: 'abcui',
+        devserver: [
+          'webpack-dev-server/client?http://localhost:8002', // WebpackDevServer host and port
+          'webpack/hot/only-dev-server' // "only" prevents reload on syntax errors
+        ]
+    },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'app.bundle.js',
+        filename: 'app.[name].js',
         publicPath: '/'
     },
     resolve: {
@@ -26,7 +31,11 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('bundle.css', { allChunks: true })
+        new ExtractTextPlugin('bundle.css', { allChunks: true }),
+        new HtmlWebpackPlugin({
+          filename: 'sample-iframe.html',
+          template: 'sample/sample-iframe.html'
+        })
     ],
     module: {
         preLoaders: [
