@@ -1,10 +1,10 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 
-import { userLogin } from './Login.action'
+import { userLogin, requestEdgeLogin } from './Login.action'
 
 export const loginWithPassword = (username, password, callback) => {
-  return ( dispatch, getState, imports ) => {
+  return (dispatch, getState, imports) => {
     const abcContext = imports.abcContext
     const localStorage = global ? global.localStorage : window.localStorage
 
@@ -24,16 +24,16 @@ export const loginWithPassword = (username, password, callback) => {
           }
         })
       })
-    },300)
+    }, 300)
   }
 }
 
 export const loginWithPin = (username, pin, callback) => {
-  return ( dispatch, getState, imports ) => {
+  return (dispatch, getState, imports) => {
     dispatch(openLoading())
     const localStorage = global ? global.localStorage : window.localStorage
     const abcctx = imports.abcContext
-    
+
     setTimeout(() => {
       abcctx(context => {
         context.loginWithPIN(username, pin, (error, account) => {
@@ -51,5 +51,25 @@ export const loginWithPin = (username, pin, callback) => {
         })
       })
     }, 300)
+  }
+}
+
+export const edgeLogin = (handleEdgeLogin, handleProcessLogin) => {
+  return (dispatch, getState, imports) => {
+    const abcContext = imports.abcContext
+    abcContext(context => {
+      context.requestEdgeLogin({
+        displayName: abcContext.vendorName,
+        displayImageUrl: abcContext.vendorImageUrl,
+        onLogin: handleProcessLogin,
+        onProcessLogin: handleProcessLogin
+      }, (error, results) => {
+        if (error) {
+          console.log(error)
+        } else if (results) {
+          dispatch(requestEdgeLogin(results))
+        }
+      })
+    })
   }
 }

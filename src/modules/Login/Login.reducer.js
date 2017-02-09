@@ -119,3 +119,29 @@ export const pinDummy = (state = '', action) => {
   }
 }
 
+export const edgeLoginResults = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.REQUEST_EDGE_LOGIN:
+      return action.data
+    default:
+      return state
+  }
+}
+
+export const edgeUsername = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.SET_EDGE_USERNAME:
+      return action.userName
+    default:
+      return state
+  }
+}
+
+export const edgeAccount = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.SET_EDGE_ACCOUNT:
+      return action.account
+    default:
+      return state
+  }
+}

@@ -2799,6 +2799,10 @@ js-yaml@~3.6.1:
     argparse "^1.0.7"
     esprima "^2.6.0"
 
+jsbarcode@^3.5.8:
+  version "3.5.8"
+  resolved "https://registry.yarnpkg.com/jsbarcode/-/jsbarcode-3.5.8.tgz#1dab5a39c80814863b229e11efb215c9cbfea81d"
+
 jsbn@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.0.tgz#650987da0dd74f4ebf5a11377a2aa2d273e97dfd"
