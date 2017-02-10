@@ -17,7 +17,8 @@ import LoginWithAirbitz from './LoginWithAirbitz.web'
 
 class Login extends Component {
 
-  submit = () => {
+  submit = (e) => {
+    e.preventDefault()
     if (this.props.viewPassword) {
       this.refs.loginUsername.getWrappedInstance().blur()
       this.refs.password.getWrappedInstance().blur()
@@ -95,17 +96,18 @@ class Login extends Component {
       <div style={style.container}>
         <LoginWithAirbitz />
         <div style={style.form}>
-          <div ref='titleText' style={{textAlign: 'center', fontSize: '30px', padding: '0 0.8em', overflow: 'hidden', margin: '10px'}}>{t('activity_splash_with_airbitz')}</div>
 
+          <div ref='titleText' style={{textAlign: 'center', fontSize: '30px', padding: '0 0.8em', overflow: 'hidden', margin: '10px'}}>{t('activity_splash_with_airbitz')}</div>
           <div ref='fieldsView' style={{
-            padding: '0 0.8em',
-            position: 'relative',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            opacity: opacityFieldsView,
-            height: heightFieldsView
-          }}>
+              padding: '0 0.8em',
+              position: 'relative',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              opacity: opacityFieldsView,
+              height: heightFieldsView
+            }}>
+
             <Input
               theme={loginUsernameInput}
               ref='loginUsername'
@@ -115,19 +117,20 @@ class Login extends Component {
               onFocus={this.usernameFocused}
               autoCorrect={false}
               autoCapitalize={false}
-        />
+            />
 
-            <Input
-              type='password'
-              ref='password'
-              onFocus={this.passwordFocused}
-              placeholder={t('fragment_landing_password_hint')}
-              onChange={this.changePassword}
-              value={this.props.password}
-              autoCorrect={false}
-              autoCapitalize={false}
-        />
-
+            <form onSubmit={e => this.submit(e)}>
+              <Input
+                type='password'
+                ref='password'
+                onFocus={this.passwordFocused}
+                placeholder={t('fragment_landing_password_hint')}
+                onChange={this.changePassword}
+                value={this.props.password}
+                autoCorrect={false}
+                autoCapitalize={false}
+              />
+            </form>
             {cUsers()}
           </div>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>

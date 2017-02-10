@@ -29,7 +29,8 @@ const selected = require('../../img/Green-check.png')
 
 class Password extends Component {
 
-  _handleSubmit = () => {
+  _handleSubmit = (e) => {
+    e.preventDefault()
     const callback = () => browserHistory.push('/signup/review')
     this.props.dispatch(
       checkPassword(
@@ -111,7 +112,9 @@ class Password extends Component {
               <div style={{flexGrow: 1}}><Input ref='signupPasswordFirst'autoFocus type='password' name='password' onChange={this._handleOnChangePassword} value={this.props.password} placeholder='Password' /></div>
               <img onClick={this.toggleRevealPassword} src={require('img/icon_export_view.png')} style={{width: '30px', margin: '0px 15px'}} />
             </div>
-            <Input type='password' ref='signupPassword' name='passwordRepeat' onChange={this._handleOnChangePasswordRepeat} value={this.props.passwordRepeat} placeholder='Re-enter Password' />
+            <form onSubmit={e => this._handleSubmit(e)}>
+              <Input type="password" ref='signupPassword' name="passwordRepeat" onChange={this._handleOnChangePasswordRepeat} value={this.props.passwordRepeat} placeholder="Re-enter Password" />
+            </form>
           </CardText>
           <CardActions>
             <Button type='button' theme={skipButton} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
