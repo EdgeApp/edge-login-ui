@@ -8,6 +8,9 @@ export const LOG_IN_PIN = 'LOG_IN_PIN'
 export const OPEN_USER_LIST = 'OPEN_USER_LIST'
 export const CLOSE_USER_LIST = 'CLOSE_USER_LIST'
 export const USER_LOGIN = 'USER_LOGIN'
+export const REQUEST_EDGE_LOGIN = 'REQUEST_EDGE_LOGIN'
+export const SET_EDGE_USERNAME = 'SET_EDGE_USERNAME'
+export const SET_EDGE_ACCOUNT = 'SET_EDGE_ACCOUNT'
 
 export function openLogin () {
   return {
@@ -70,5 +73,26 @@ export function userLogin (data) {
   return {
     type: USER_LOGIN,
     data
+  }
+}
+
+export function requestEdgeLogin (data) {
+  return {
+    type: REQUEST_EDGE_LOGIN,
+    data
+  }
+}
+
+export function setEdgeUsername (userName) {
+  return {
+    type: SET_EDGE_USERNAME,
+    userName
+  }
+}
+
+export function setEdgeAccount (account) {
+  return {
+    type: SET_EDGE_ACCOUNT,
+    account
   }
 }

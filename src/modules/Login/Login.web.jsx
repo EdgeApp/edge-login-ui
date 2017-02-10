@@ -11,8 +11,9 @@ import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 
 import LoginWithPin from './LoginWithPin.web'
-import signinButton from 'theme/signinButton.scss'
-import loginUsernameInput from 'theme/loginUsernameInput.scss'
+import signinButton from 'theme/signinButton.scss';
+import loginUsernameInput from 'theme/loginUsernameInput.scss';
+import LoginWithAirbitz from './LoginWithAirbitz.web'
 
 class Login extends Component {
 
@@ -92,6 +93,7 @@ class Login extends Component {
     }
     return (
       <div style={style.container}>
+        <LoginWithAirbitz />
         <div style={style.form}>
           <div ref='titleText' style={{textAlign: 'center', fontSize: '30px', padding: '0 0.8em', overflow: 'hidden', margin: '10px'}}>{t('activity_splash_with_airbitz')}</div>
 
