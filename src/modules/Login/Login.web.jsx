@@ -7,24 +7,23 @@ import { loginWithPassword } from './Login.middleware'
 import t from 'lib/web/LocaleStrings'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { showWhiteOverlay } from '../Landing.action'
-import Button from 'react-toolbox/lib/button';
-import Input from 'react-toolbox/lib/input';
-import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
+import Button from 'react-toolbox/lib/button'
+import Input from 'react-toolbox/lib/input'
 
 import LoginWithPin from './LoginWithPin.web'
 import signinButton from 'theme/signinButton.scss';
-import skipButton from 'theme/skipButton.scss';
 import loginUsernameInput from 'theme/loginUsernameInput.scss';
 import LoginWithAirbitz from './LoginWithAirbitz.web'
 
 class Login extends Component {
 
-  submit = () => {
+  submit = (e) => {
+    e.preventDefault()
     if (this.props.viewPassword) {
       this.refs.loginUsername.getWrappedInstance().blur()
       this.refs.password.getWrappedInstance().blur()
       this.props.dispatch(loginWithPassword(this.props.username, this.props.password, success => {
-        if(success) browserHistory.push('/home')
+        if (success) browserHistory.push('/home')
       }))
     } else {
       this.props.dispatch(openLogin())
@@ -47,13 +46,13 @@ class Login extends Component {
   }
   usernameFocused = () => {
     this.showCachedUsers()
-    this.refs.titleText.style.height = 0;
-    this.refs.titleText.style.margin = 0;
+    this.refs.titleText.style.height = 0
+    this.refs.titleText.style.margin = 0
   }
   passwordFocused = () => {
     this.hideCachedUsers()
-    this.refs.titleText.style.height = 0;
-    this.refs.titleText.style.margin = 0;
+    this.refs.titleText.style.height = 0
+    this.refs.titleText.style.margin = 0
   }
 
   showCachedUsers = () => {
@@ -66,7 +65,7 @@ class Login extends Component {
 
   renderWhiteTransition () {
     if (this.props.whiteOverlayVisible) {
-      return (<div ref='whiteOverlay' style={style.whiteTransitionFade}></div>)
+      return (<div ref='whiteOverlay' style={style.whiteTransitionFade} />)
     } else {
       return null
     }
@@ -75,8 +74,6 @@ class Login extends Component {
     this.props.dispatch(closeUserList())
   }
   render () {
-
-
     const cUsers = () => {
       if (this.props.showCachedUsers) {
         return (<CachedUsers blurField={this.refs.loginUsername.getWrappedInstance()} />)
@@ -92,24 +89,25 @@ class Login extends Component {
       heightFieldsView = '90px'
       opacityFieldsView = 1
     }
-    if(this.props.viewPIN) {
-      return (<LoginWithPin/>)
+    if (this.props.viewPIN) {
+      return (<LoginWithPin />)
     }
     return (
       <div style={style.container}>
         <LoginWithAirbitz />
         <div style={style.form}>
-          <div ref='titleText' style={{textAlign:'center', fontSize: '30px', padding: '0 0.8em', overflow:'hidden', margin: '10px'}}>{t('activity_splash_with_airbitz')}</div>
 
+          <div ref='titleText' style={{textAlign: 'center', fontSize: '30px', padding: '0 0.8em', overflow: 'hidden', margin: '10px'}}>{t('activity_splash_with_airbitz')}</div>
           <div ref='fieldsView' style={{
-                padding: '0 0.8em',
-                position: 'relative',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                opacity: opacityFieldsView,
-                height: heightFieldsView
-              }}>
+              padding: '0 0.8em',
+              position: 'relative',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              opacity: opacityFieldsView,
+              height: heightFieldsView
+            }}>
+
             <Input
               theme={loginUsernameInput}
               ref='loginUsername'
@@ -119,24 +117,25 @@ class Login extends Component {
               onFocus={this.usernameFocused}
               autoCorrect={false}
               autoCapitalize={false}
-        />
+            />
 
-            <Input
-              type='password'
-              ref='password'
-              onFocus={this.passwordFocused}
-              placeholder={t('fragment_landing_password_hint')}
-              onChange={this.changePassword}
-              value={this.props.password}
-              autoCorrect={false}
-              autoCapitalize={false}
-        />
-
+            <form onSubmit={e => this.submit(e)}>
+              <Input
+                type='password'
+                ref='password'
+                onFocus={this.passwordFocused}
+                placeholder={t('fragment_landing_password_hint')}
+                onChange={this.changePassword}
+                value={this.props.password}
+                autoCorrect={false}
+                autoCapitalize={false}
+              />
+            </form>
             {cUsers()}
           </div>
-          <div style={{display:'flex',flexDirection:'column',alignItems:'stretch'}}>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
             <Button theme={signinButton} style={{margin: '30px 0px 0px 0px'}} raised onClick={this.submit}>{t('fragment_landing_signin_button')}</Button>
-            <div ref='fieldsBelowView' style={{height: heightBelowView}}></div>
+            <div ref='fieldsBelowView' style={{height: heightBelowView}} />
             <Button onClick={this.handleSignup} style={{margin: '20px 0px'}} theme={signinButton} primary raised>{t('fragment_landing_signup_button')}</Button>
           </div>
         </div>
@@ -144,7 +143,6 @@ class Login extends Component {
     )
   }
 }
-
 
 const style = {
 

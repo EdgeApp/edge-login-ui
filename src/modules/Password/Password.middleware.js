@@ -3,7 +3,7 @@ import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { signupUser } from '../Signup/Signup.middleware'
 
 export const checkPassword = (password, passwordRepeat, validation, username, pinNumber, callback) => {
-  return ( dispatch, getState, imports ) => {
+  return (dispatch, getState, imports) => {
     const t = imports.t
     if (!validation.upperCaseChar || !validation.lowerCaseChar || !validation.number || !validation.characterLength) {
       return dispatch(openErrorModal(t('activity_signup_insufficient_password')))
@@ -22,7 +22,7 @@ export const checkPassword = (password, passwordRepeat, validation, username, pi
 }
 
 export const skipPassword = (username, pinNumber, callback) => {
-  return ( dispatch, getState, imports ) => {
+  return (dispatch, getState, imports) => {
     dispatch(changePasswordValue(''))
     dispatch(passwordNotificationHide())
     return dispatch(

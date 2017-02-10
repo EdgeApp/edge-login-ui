@@ -16,10 +16,9 @@ String.format = function (format) {
   })
 }
 
-if (rootElement) {
-  render((
-    <Provider store={store}>
-      <Router />
-    </Provider>
-  ), rootElement)
-}
+render((
+  <Provider store={store}>
+    <Router />
+  </Provider>
+), rootElement)
+

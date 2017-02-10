@@ -21,11 +21,19 @@ class ABCUI {
   }
 
   openLoginWindow () {
-    this.createIFrame('/login')
+    const frame = this.createIFrame('/login')
+
+    window.exitCallback = () => {
+      this.removeIFrame(frame)
+    }
   }
 
   openSignUpWindow () {
-    this.createIFrame('/signup/username')
+    const frame = this.createIFrame('/signup/username')
+
+    window.exitCallback = () => {
+      this.removeIFrame(frame)
+    }
   }
 }
 

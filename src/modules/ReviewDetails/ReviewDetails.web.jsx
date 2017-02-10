@@ -9,10 +9,9 @@ import { loginWithPassword } from '../Login/Login.middleware'
 import ErrorModal from '../ErrorModal/ErrorModal.web'
 import Loader from '../Loader/Loader.web'
 
-import Button from 'react-toolbox/lib/button';
-import Input from 'react-toolbox/lib/input';
-import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-import nextButton from 'theme/nextButton.scss';
+import Button from 'react-toolbox/lib/button'
+import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
+import nextButton from 'theme/nextButton.scss'
 
 class Review extends Component {
 
@@ -50,10 +49,10 @@ class Review extends Component {
               <p>password: {this.props.details.password}</p>
             </CardText>
             <CardActions>
-              <Button type="button" raised primary onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</Button>
+              <Button type='button' raised primary onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</Button>
             </CardActions>
             <CardActions>
-              <Button type="button" raised theme={nextButton} onClick={this._handleFinish}>{t('string_finish')}</Button>
+              <Button type='button' raised theme={nextButton} onClick={this._handleFinish}>{t('string_finish')}</Button>
             </CardActions>
           </Card>
           <ErrorModal />
@@ -71,10 +70,10 @@ class Review extends Component {
               <p>{t('fragment_setup_writeitdown_text_warning')}</p>
             </CardText>
             <CardActions>
-              <Button type="button" raised primary onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</Button>
+              <Button type='button' raised primary onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</Button>
             </CardActions>
             <CardActions>
-              <Button type="button" raised theme={nextButton} onClick={this._handleFinish}>{t('string_finish')}</Button>
+              <Button type='button' raised theme={nextButton} onClick={this._handleFinish}>{t('string_finish')}</Button>
             </CardActions>
           </Card>
           <ErrorModal />

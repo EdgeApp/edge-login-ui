@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Dialog } from 'react-toolbox/lib/dialog';
-import { Button } from 'react-toolbox/lib/button';
-import { removeWhiteOverlay, showWhiteOverlayComplete } from './Landing.action'
+import { Dialog } from 'react-toolbox/lib/dialog'
 import { selectUserToLogin, setCachedUsers } from './CachedUsers/CachedUsers.action'
 
 import Loader from './Loader/Loader.web'
@@ -31,7 +29,6 @@ class Container extends Component {
         dispatch(selectUserToLogin(lastUser))
       }
     })
-
   }
   componentWillMount () {
     this.loadData()
@@ -39,18 +36,18 @@ class Container extends Component {
   componentWillUpdate () {
     this.loadData()
   }
-  render() {
+  render () {
     return (
-        
-      <div className="app">
+
+      <div className='app'>
         <Dialog
-          active={true}
+          active
           onEscKeyDown={this.handleToggle}
           onOverlayClick={this.handleToggle}
         >
           {this.props.children}
-          <Loader/>
-          <ErrorModal/>
+          <Loader />
+          <ErrorModal />
           <WarningModal />
         </Dialog>
       </div>
@@ -60,7 +57,6 @@ class Container extends Component {
 
 export default connect(state => ({
 
-  loader: state.loader,
+  loader: state.loader
 
 }))(Container)
-
