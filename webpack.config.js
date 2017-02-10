@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
@@ -10,7 +11,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'app.bundle.js',
+    filename: 'app.[name].js',
     publicPath: '/'
   },
   resolve: {
@@ -46,6 +47,10 @@ module.exports = {
       mangle: {
         except: ['$super', '$', 'exports', 'require', '$q', '$ocLazyLoad']
       }
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'sample-iframe.html',
+      template: 'src/sample/sample-iframe.html'
     })
   ],
   module: {

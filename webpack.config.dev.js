@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -33,7 +33,7 @@ module.exports = {
     new ExtractTextPlugin('bundle.css', { allChunks: true }),
     new HtmlWebpackPlugin({
       filename: 'sample-iframe.html',
-      template: 'sample/sample-iframe.html'
+      template: 'src/sample/sample-iframe.html'
     })
   ],
   module: {
