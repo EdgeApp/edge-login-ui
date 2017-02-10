@@ -3,7 +3,7 @@ import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { getDetails } from '../ReviewDetails/ReviewDetails.action'
 
 export const signupUser = (username, password, pin, callback) => {
-  return ( dispatch, getState, imports ) => {
+  return (dispatch, getState, imports) => {
     const t = imports.t
     const abcContext = imports.abcContext
     dispatch(openLoading(t('fragment_signup_creating_account')))
@@ -28,34 +28,34 @@ export const signupUser = (username, password, pin, callback) => {
   }
 }
 
-const checkPermissions = () => {
-  return dispatch => {
-    checkCameraPermission((errorCamera, camera) => {
-      if (errorCamera) {
-        console.log(errorCamera)
-      }
-      if (!errorCamera) {
-        console.log('camera permissions', camera)
-
-        checkReadContactPermission((errorContact, contact) => {
-          if (errorContact) {
-            console.log(errorContact)
-          }
-          if (!errorContact) {
-            console.log('contact permissions', contact)
-          }
-          dispatch(closeLoading())
-          if (!camera) {
-            Actions.cameraNotification()
-          }
-          if (camera && !contact) {
-            Actions.contactNotification()
-          }
-          if (camera && contact) {
-            Actions.review()
-          }
-        })
-      }
-    })
-  }
-}
+// const checkPermissions = () => {
+//   return dispatch => {
+//     checkCameraPermission((errorCamera, camera) => {
+//       if (errorCamera) {
+//         console.log(errorCamera)
+//       }
+//       if (!errorCamera) {
+//         console.log('camera permissions', camera)
+//
+//         checkReadContactPermission((errorContact, contact) => {
+//           if (errorContact) {
+//             console.log(errorContact)
+//           }
+//           if (!errorContact) {
+//             console.log('contact permissions', contact)
+//           }
+//           dispatch(closeLoading())
+//           if (!camera) {
+//             Actions.cameraNotification()
+//           }
+//           if (camera && !contact) {
+//             Actions.contactNotification()
+//           }
+//           if (camera && contact) {
+//             Actions.review()
+//           }
+//         })
+//       }
+//     })
+//   }
+// }

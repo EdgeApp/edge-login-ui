@@ -1,7 +1,7 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
-export const checkPIN = (pin,callback) => {
-  return ( dispatch, getState, imports ) => {
+export const checkPIN = (pin, callback) => {
+  return (dispatch, getState, imports) => {
     if (pin.length === 4) {
       return callback()
     } else {

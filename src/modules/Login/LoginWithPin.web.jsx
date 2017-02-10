@@ -8,9 +8,9 @@ import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { removeUserToLogin } from '../CachedUsers/CachedUsers.action'
 import t from 'lib/web/LocaleStrings'
 
-import Button from 'react-toolbox/lib/button';
+import Button from 'react-toolbox/lib/button'
 
-import Input from 'react-toolbox/lib/input';
+import Input from 'react-toolbox/lib/input'
 class Login extends Component {
 
   submit = () => {
@@ -20,10 +20,10 @@ class Login extends Component {
         this.props.user,
         this.props.pin
       , success => {
-        if(success) {
+        if (success) {
           browserHistory.push('/home')
         } else {
-          is.refs.pinInput.getWrappedInstance().focus()
+          this.refs.pinInput.getWrappedInstance().focus()
         }
       })
     )
@@ -34,8 +34,8 @@ class Login extends Component {
   }
 
   changePin = (pin) => {
-    if(pin.length > 4) {
-      pin = pin.substr(0,4)
+    if (pin.length > 4) {
+      pin = pin.substr(0, 4)
     }
     this.props.dispatch(loginPIN(pin))
     if (pin.length > 3) {
@@ -75,14 +75,13 @@ class Login extends Component {
     }
   }
 
-
   focusPin = () => {
     this.refs.pinDummyInput.getWrappedInstance().blur()
     this.refs.pinInput.getWrappedInstance().focus()
   }
   pinStyle = () => {
-    if(this.props.pinDummy.length > 0) return {textAlign:'center',fontSize: '100px', height: '100px'}
-      return {textAlign:'center',fontSize: '35px', height: '100px'}
+    if (this.props.pinDummy.length > 0) return {textAlign: 'center', fontSize: '100px', height: '100px'}
+    return {textAlign: 'center', fontSize: '35px', height: '100px'}
   }
 
   render () {
@@ -95,7 +94,7 @@ class Login extends Component {
     }
 
     return (
-      <div style={{padding: '0 0.8em',display:'flex',flexDirection:'column', justifyContent: 'center', alignItems:'center'}}>
+      <div style={{padding: '0 0.8em', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <Button flat neutral style={{textTransform: 'none', margin: '10px 0px'}} onClick={this.toggleCachedUsers}>
           { this.props.user ? this.props.user : 'No User Selected' }
         </Button>
@@ -103,7 +102,7 @@ class Login extends Component {
         <div style={{ width: '165px', marginTop: '5px' }}>
 
           <Input
-            type="text"
+            type='text'
             placeholder={t('fragment_landing_enter_pin')}
             style={this.pinStyle()}
             value={this.props.pinDummy}
@@ -115,8 +114,8 @@ class Login extends Component {
 
           <Input
             ref='pinInput'
-            name="pinInput"
-            type="password"
+            name='pinInput'
+            type='password'
             style={{height: 0, opacity: 0, zIndex: -1, marginTop: -25}}
             value={this.props.pin}
             onChange={this.changePin}

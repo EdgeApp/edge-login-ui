@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
-import abcctx from '../../lib/web/abcContext'
-
 import { passwordRecoveryDone } from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { checkEmail } from './PasswordRecovery.middleware'
@@ -32,13 +28,13 @@ export default class PasswordRecovery extends Component {
   }
 
   _renderFinishButton = () => {
-    if(this.props.finishButton){
+    if (this.props.finishButton) {
       return (
         <div>
-          <button type="button" onClick={this._handleClose}>Done</button>
+          <button type='button' onClick={this._handleClose}>Done</button>
         </div>
       )
-    }else{
+    } else {
       return null
     }
   }
@@ -49,19 +45,19 @@ export default class PasswordRecovery extends Component {
         <p>{t('save_recovery_token_popup')}</p>
         <p>{t('save_recovery_token_popup_message')}</p>
         <div>
-          <input type="email" name="" onChange={this.props.handleOnChangeEmail} value={this.props.email} placeholder="Email Address"/>
+          <input type='email' name='' onChange={this.props.handleOnChangeEmail} value={this.props.email} placeholder='Email Address' />
         </div>
         <div>
-          <button type="button" onClick={() => this._handleSubmit('google')}>Send using Gmail</button>
+          <button type='button' onClick={() => this._handleSubmit('google')}>Send using Gmail</button>
         </div>
         <div>
-          <button type="button" onClick={() => this._handleSubmit('yahoo')}>Send using Yahoo</button>
+          <button type='button' onClick={() => this._handleSubmit('yahoo')}>Send using Yahoo</button>
         </div>
         <div>
-          <button type="button" onClick={() => this._handleSubmit('microsoft')}>Send using Hotmail, Outlook, Live Mail</button>
+          <button type='button' onClick={() => this._handleSubmit('microsoft')}>Send using Hotmail, Outlook, Live Mail</button>
         </div>
         <div>
-          <button type="button" onClick={() => this._handleSubmit('generic')}>Send using Email App</button>
+          <button type='button' onClick={() => this._handleSubmit('generic')}>Send using Email App</button>
         </div>
         {this._renderFinishButton()}
         <ErrorModal />

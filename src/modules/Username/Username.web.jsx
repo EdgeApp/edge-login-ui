@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-import nextButton from 'theme/nextButton.scss';
-import backButton from 'theme/backButton.scss';
-import Button from 'react-toolbox/lib/button';
-import Input from 'react-toolbox/lib/input';
+import nextButton from 'theme/nextButton.scss'
+import backButton from 'theme/backButton.scss'
+import Button from 'react-toolbox/lib/button'
+import Input from 'react-toolbox/lib/input'
 
 import { fadeWhiteOverlay } from '../Landing.action'
-import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
+import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
 
 import { checkUsername } from './Username.middleware'
 import t from 'lib/web/LocaleStrings'
 
 import { changeUsernameValue } from './Username.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
-
 
 class UsernameComponent extends Component {
 
@@ -27,7 +26,7 @@ class UsernameComponent extends Component {
       )
     }
 
-    if(this.props.username.length >= 3) {
+    if (this.props.username.length >= 3) {
       return this.props.dispatch(
         checkUsername(
           this.props.username,
@@ -36,7 +35,6 @@ class UsernameComponent extends Component {
       )
     }
   }
-
 
   _handleBack = () => {
     if (this.props.loader.loading === false) {
@@ -55,7 +53,7 @@ class UsernameComponent extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type="button">{t('string_capitalize_exit')}</Button>
+          <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type='button'>{t('string_capitalize_exit')}</Button>
           <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>{t('fragment_setup_username_label')}</div>
         </div>
         <form onSubmit={e => this._handleSubmit(e)}>

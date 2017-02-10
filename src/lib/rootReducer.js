@@ -51,7 +51,10 @@ const store = combineReducers({
     password: Login.password,
     pin: Login.pin,
     pinDummy: Login.pinDummy,
-    showCachedUsers: Login.showCachedUsers
+    showCachedUsers: Login.showCachedUsers,
+    edgeLoginResults: Login.edgeLoginResults,
+    edgeUsername: Login.edgeUsername,
+    edgeAccount: Login.edgeAccount
   }),
 
   nextButtonVisible,
@@ -59,7 +62,7 @@ const store = combineReducers({
 
   loader: combineReducers({
     loading: Loader.loading,
-    message: Loader.message,
+    message: Loader.message
     // style: Loader.style
   }),
 
@@ -85,32 +88,32 @@ const store = combineReducers({
     gainedFocus
   }),
   changePassword: combineReducers({
-    view                        : ChangePassword.view,
-    oldPassword                 : ChangePassword.oldPassword,
-    newPassword                 : ChangePassword.newPassword,
-    newPasswordRepeat           : ChangePassword.newPasswordRepeat,
-    passwordChangedNotification : ChangePassword.passwordChangedNotification
+    view: ChangePassword.view,
+    oldPassword: ChangePassword.oldPassword,
+    newPassword: ChangePassword.newPassword,
+    newPasswordRepeat: ChangePassword.newPasswordRepeat,
+    passwordChangedNotification: ChangePassword.passwordChangedNotification
   }),
   changePin: combineReducers({
-    view                   : ChangePin.view,
-    password               : ChangePin.password,
-    pin                    : ChangePin.pin,
-    pinChangedNotification : ChangePin.pinChangedNotification
+    view: ChangePin.view,
+    password: ChangePin.password,
+    pin: ChangePin.pin,
+    pinChangedNotification: ChangePin.pinChangedNotification
   }),
   passwordRecovery: combineReducers({
-    view            : PasswordRecovery.view,
-    viewToken       : PasswordRecovery.viewToken,
-    finishButton    : PasswordRecovery.finishButton,
-    questions       : PasswordRecovery.questions,
-    firstQuestion   : PasswordRecovery.firstQuestion,
-    firstAnswer     : PasswordRecovery.firstAnswer,
-    secondQuestion  : PasswordRecovery.secondQuestion,
-    secondAnswer    : PasswordRecovery.secondAnswer,
-    password        : PasswordRecovery.password,
-    token           : PasswordRecovery.token,
-    email           : PasswordRecovery.email
+    view: PasswordRecovery.view,
+    viewToken: PasswordRecovery.viewToken,
+    finishButton: PasswordRecovery.finishButton,
+    questions: PasswordRecovery.questions,
+    firstQuestion: PasswordRecovery.firstQuestion,
+    firstAnswer: PasswordRecovery.firstAnswer,
+    secondQuestion: PasswordRecovery.secondQuestion,
+    secondAnswer: PasswordRecovery.secondAnswer,
+    password: PasswordRecovery.password,
+    token: PasswordRecovery.token,
+    email: PasswordRecovery.email
   }),
-  user,
+  user
   // routes,
   // alert: alert
 })
