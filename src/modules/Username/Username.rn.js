@@ -17,10 +17,10 @@ class UsernameComponent extends Component {
   handleSubmit = () => {
     this.refs.usernameInput.blur()
     if (this.props.username.length < 3) {
-      return dispatch(openErrorModal(t('activity_signup_insufficient_username_message')))
-    }    
+      return this.props.dispatch(openErrorModal(t('activity_signup_insufficient_username_message')))
+    }
     this.props.dispatch(checkUsername(this.props.username, success => {
-      if(success) {
+      if (success) {
         Actions.pin()
       }
     }))

@@ -1,5 +1,5 @@
 import defaultLang from '../../locales/default'
-import enPH from '../../locales/en_P
+import enPH from '../../locales/en_P'
 const supportedLocales = {
   en_PH: enPH
 }

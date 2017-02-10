@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { createStore, applyMiddleware } from 'redux'
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router'
 
 import Container from './modules/Container.web'
@@ -18,22 +17,22 @@ export default class RouterComponent extends Component {
 
   render () {
     return (
-        <Router history={browserHistory}>
-          <Route path="/" component={Container}>
-            <IndexRedirect to="/login" />
-            <Route path="/login" component={Login}/>
+      <Router history={browserHistory}>
+        <Route path='/' component={Container}>
+          <IndexRedirect to='/login' />
+          <Route path='/login' component={Login} />
 
-            <Route path="/signup/username" component={Username}/>
-            <Route path="/signup/pin" component={PinNumber}/>
-            <Route path="/signup/password" component={Password}/>
-            <Route path="/signup/review" component={ReviewDetails}/>
-            <Route path="/home" component={Home}/>
+          <Route path='/signup/username' component={Username} />
+          <Route path='/signup/pin' component={PinNumber} />
+          <Route path='/signup/password' component={Password} />
+          <Route path='/signup/review' component={ReviewDetails} />
+          <Route path='/home' component={Home} />
 
-            <Route path="/changePassword" component={ChangePassword}/>
-            <Route path="/changePin" component={ChangePin}/>
-            <Route path="/passwordRecovery" component={PasswordRecovery}/>
-          </Route>
-        </Router>
+          <Route path='/changePassword' component={ChangePassword} />
+          <Route path='/changePin' component={ChangePin} />
+          <Route path='/passwordRecovery' component={PasswordRecovery} />
+        </Route>
+      </Router>
     )
   }
 }

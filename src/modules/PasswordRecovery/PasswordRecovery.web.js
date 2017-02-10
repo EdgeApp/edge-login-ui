@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
 import abcctx from '../../lib/web/abcContext'
 
@@ -12,20 +11,20 @@ import PasswordRecoveryToken from './PasswordRecoveryToken.web'
 
 class PasswordRecovery extends Component {
 
-  componentWillMount() {
+  componentWillMount () {
     this._loadQuestions()
   }
 
   _loadQuestions = () => {
     const dispatch = this.props.dispatch
     abcctx(ctx => {
-      ctx.listRecoveryQuestionChoices( ( error, results ) => {
-        if(error){
+      ctx.listRecoveryQuestionChoices((error, results) => {
+        if (error) {
           dispatch(openErrorModal(t('string_connection_error_server')))
           dispatch(action.hidePasswordRecoveryView())
         }
-        if(!error){
-          const questions = results.filter( result => result.category === 'recovery2' ).map( result => result.question )
+        if (!error) {
+          const questions = results.filter(result => result.category === 'recovery2').map(result => result.question)
           dispatch(action.setPasswordRecoveryQuestions(questions))
         }
       })
@@ -36,17 +35,17 @@ class PasswordRecovery extends Component {
     const callback = (error) => console.log(error)
     this.props.dispatch(
       checkPasswordRecovery({
-          questions     : [
-            this.props.firstQuestion,
-            this.props.secondQuestion
-          ],
-          answers       : [
-            this.props.firstAnswer,
-            this.props.secondAnswer
-          ],
-          password      : this.props.password,
-          account       : this.props.account
-        },
+        questions: [
+          this.props.firstQuestion,
+          this.props.secondQuestion
+        ],
+        answers: [
+          this.props.firstAnswer,
+          this.props.secondAnswer
+        ],
+        password: this.props.password,
+        account: this.props.account
+      },
         callback
       )
     )
@@ -87,13 +86,13 @@ class PasswordRecovery extends Component {
   }
 
   _renderQuestions = () => {
-    return this.props.questions.map( (question, index) => {
+    return this.props.questions.map((question, index) => {
       return <option key={index} value={question}>{question}</option>
     })
   }
 
   render () {
-    if(this.props.view && !this.props.viewToken){
+    if (this.props.view && !this.props.viewToken) {
       return (
         <div>
           <div>
@@ -102,32 +101,32 @@ class PasswordRecovery extends Component {
             </select>
           </div>
           <div>
-            <input type="text" name="firstAnswer" onChange={this._handleOnChangeFirstAnswer} value={this.props.firstAnswer} placeholder="First Question Answer" required/>
+            <input type='text' name='firstAnswer' onChange={this._handleOnChangeFirstAnswer} value={this.props.firstAnswer} placeholder='First Question Answer' required />
           </div>
-            <select onChange={this._handleOnChangeSecondQuestion} value={this.props.secondQuestion} required>
-              {this._renderQuestions()}
-            </select>
+          <select onChange={this._handleOnChangeSecondQuestion} value={this.props.secondQuestion} required>
+            {this._renderQuestions()}
+          </select>
           <div>
-            <input type="text" name="secondAnswer" onChange={this._handleOnChangeSecondAnswer} value={this.props.secondAnswer} placeholder="Second Question Answer" required/>
-          </div>
-          <div>
-            <input type="password" name="recoveryPassword" onChange={this._handleOnChangePassword} value={this.props.password} placeholder="Password" required/>
+            <input type='text' name='secondAnswer' onChange={this._handleOnChangeSecondAnswer} value={this.props.secondAnswer} placeholder='Second Question Answer' required />
           </div>
           <div>
-            <button type="button" onClick={this._handleSubmit}>Submit</button>
+            <input type='password' name='recoveryPassword' onChange={this._handleOnChangePassword} value={this.props.password} placeholder='Password' required />
+          </div>
+          <div>
+            <button type='button' onClick={this._handleSubmit}>Submit</button>
           </div>
         </div>
       )
     }
-    if(!this.props.view && !this.props.viewToken){
-      return(
+    if (!this.props.view && !this.props.viewToken) {
+      return (
         <div>
-          <button type="button" onClick={this._handleShowPasswordRecovery}>Show</button>
+          <button type='button' onClick={this._handleShowPasswordRecovery}>Show</button>
         </div>
       )
     }
-    if(!this.props.view && this.props.viewToken){
-      return(
+    if (!this.props.view && this.props.viewToken) {
+      return (
         <PasswordRecoveryToken
           handleOnChangeEmail={this._handleOnChangeEmail}
           email={this.props.email}
@@ -138,23 +137,22 @@ class PasswordRecovery extends Component {
         />
       )
     }
-
   }
 }
 
-export default connect( state => ({
+export default connect(state => ({
 
-    view            : state.passwordRecovery.view,
-    viewToken       : state.passwordRecovery.viewToken,
-    finishButton    : state.passwordRecovery.finishButton,
-    questions       : state.passwordRecovery.questions,
-    firstQuestion   : state.passwordRecovery.firstQuestion,
-    firstAnswer     : state.passwordRecovery.firstAnswer,
-    secondQuestion  : state.passwordRecovery.secondQuestion,
-    secondAnswer    : state.passwordRecovery.secondAnswer,
-    password        : state.passwordRecovery.password,
-    token           : state.passwordRecovery.token,
-    email           : state.passwordRecovery.email,
-    account         : state.user
+  view: state.passwordRecovery.view,
+  viewToken: state.passwordRecovery.viewToken,
+  finishButton: state.passwordRecovery.finishButton,
+  questions: state.passwordRecovery.questions,
+  firstQuestion: state.passwordRecovery.firstQuestion,
+  firstAnswer: state.passwordRecovery.firstAnswer,
+  secondQuestion: state.passwordRecovery.secondQuestion,
+  secondAnswer: state.passwordRecovery.secondAnswer,
+  password: state.passwordRecovery.password,
+  token: state.passwordRecovery.token,
+  email: state.passwordRecovery.email,
+  account: state.user
 
-}) )(PasswordRecovery)
+}))(PasswordRecovery)
