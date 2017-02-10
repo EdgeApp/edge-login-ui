@@ -23,7 +23,7 @@ class Login extends Component {
         if(success) {
           browserHistory.push('/home')
         } else {
-          is.refs.pinInput.getWrappedInstance().focus()
+          this.refs.pinInput.getWrappedInstance().focus()
         }
       })
     )
