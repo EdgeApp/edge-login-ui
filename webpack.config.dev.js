@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'app.[name].js',s',
+    filename: 'app.[name].js',
     publicPath: '/'
   },
   resolve: {
@@ -34,7 +34,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'sample-iframe.html',
       template: 'sample/sample-iframe.html'
-    })    
+    })
   ],
   module: {
     preLoaders: [
