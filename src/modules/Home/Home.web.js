@@ -2,14 +2,33 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from 'react-toolbox/lib/button'
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card'
+import { Link } from 'react-toolbox/lib/link'
 import signinButton from 'theme/signinButton.scss'
 import t from 'lib/web/LocaleStrings'
-import { Link, browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
+
+import ChangePin from '../ChangePin/ChangePin.web'
+import ChangePassword from '../ChangePassword/ChangePassword.web'
+
+import { showPinView } from '../ChangePin/ChangePin.action'
+import { showPasswordView } from '../ChangePassword/ChangePassword.action'
 
 class Home extends Component {
 
-  handleLogout = () => {
+  _handleLogout = () => {
     browserHistory.push('/')
+  }
+
+  _handleChangePin = () => {
+    this.props.dispatch(
+      showPinView()       
+    )
+  }
+
+  _handleChangePassword = () => {
+    this.props.dispatch(
+      showPasswordView()       
+    )
   }
 
   render () {
@@ -19,13 +38,14 @@ class Home extends Component {
         Manage Account
         </CardTitle>
         <CardText>
-          <p><Link to='/changePassword'>Change Password</Link></p>
-          <p><Link to='/changePin'>Change Pin</Link></p>
-          <p><Link to='/passwordRecovery'>Password Recovery</Link></p>
+          <p><Link href='#' onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</Link></p>
+          <p><Link href='#' onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</Link></p>
         </CardText>
         <CardActions>
-          <Button theme={signinButton} type='button' onClick={this.handleLogout}>{t('drawer_logout')}</Button>
+          <Button theme={signinButton} type='button' onClick={this._handleLogout}>{t('drawer_logout')}</Button>
         </CardActions>
+        <ChangePin />
+        <ChangePassword />
       </Card>
     )
   }

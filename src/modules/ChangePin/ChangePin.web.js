@@ -3,9 +3,11 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
 
-import { showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification } from './ChangePin.action'
+import { hidePinView, showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification } from './ChangePin.action'
 import { checkPin } from './ChangePin.middleware'
 import Snackbar from 'react-toolbox/lib/snackbar'
+import Dialog from 'react-toolbox/lib/dialog'
+import Input from 'react-toolbox/lib/input'
 
 class ChangePin extends Component {
 
@@ -21,19 +23,22 @@ class ChangePin extends Component {
     )
   }
 
-  _handleShowChangePin = (e) => {
-    this.props.dispatch(showPinView())
-  }
-
-  _handleOnChangePinPassword = (e) => {
-    const password = e.target.value
+  _handleOnChangePinPassword = (password) => {
     this.props.dispatch(changePinPasswordValue(password))
   }
 
-  _handleOnChangePin = (e) => {
-    const pin = e.target.value
+  _handleOnChangePin = (pin) => {
     this.props.dispatch(changePinValue(pin))
   }
+
+  _handleHideModal = () => {
+    this.props.dispatch(hidePinView())
+  }
+
+  buttons = [
+    { label: "Close", onClick: this._handleHideModal },
+    { label: "Submit", onClick: this._handleSubmit }
+  ]
 
   _renderNotification = () => {
     const { pinChangedNotification, dispatch } = this.props
@@ -50,43 +55,28 @@ class ChangePin extends Component {
 
   render () {
     const { view, pin, password } = this.props
-
-    if (view) {
-      return (
-        <div>
-          {this._renderNotification()}
-          <div>
-            <div>
-              <input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} placeholder='Current Password' />
-            </div>
-            <div>
-              <input type='number' name='changePin' onChange={this._handleOnChangePin} value={pin} placeholder='New Pin' />
-            </div>
-            <div>
-              <button type='button' onClick={this._handleSubmit}>Submit</button>
-            </div>
-          </div>
-        </div>
-      )
-    }
-
-    if (!view) {
-      return (
-        <div>
-          {this._renderNotification()}
-          <button type='button' onClick={this._handleShowChangePin}>Show</button>
-        </div>
-      )
-    }
+    return (
+      <Dialog
+        actions={this.buttons}
+        active={this.props.view}
+        onEscKeyDown={this._handleHideModal}
+        onOverlayClick={this._handleHideModal}
+        title={t('activity_signup_title_change_pin')}
+      >
+        {this._renderNotification()}
+        <Input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} label='Current Password' />
+        <Input type='number' name='changePin' onChange={this._handleOnChangePin} value={pin} label='New Pin' />
+      </Dialog>
+    )
   }
 }
 
 export default connect(state => ({
 
-  view: state.changePin.view,
-  password: state.changePin.password,
-  pin: state.changePin.pin,
-  pinChangedNotification: state.changePin.pinChangedNotification,
-  user: state.user
+  view                    : state.changePin.view,
+  password                : state.changePin.password,
+  pin                     : state.changePin.pin,
+  pinChangedNotification  : state.changePin.pinChangedNotification,
+  user                    : state.user
 
 }))(ChangePin)

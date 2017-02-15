@@ -4,9 +4,11 @@ import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
 
 import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
-import { showPasswordView, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue, hidePasswordChangedNotification } from './ChangePassword.action'
+import { hidePasswordView, showPasswordView, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue, hidePasswordChangedNotification } from './ChangePassword.action'
 import { checkPassword } from './ChangePassword.middleware'
 import Snackbar from 'react-toolbox/lib/snackbar'
+import Input from 'react-toolbox/lib/input'
+import Dialog from 'react-toolbox/lib/dialog'
 
 class ChangePassword extends Component {
 
@@ -28,21 +30,27 @@ class ChangePassword extends Component {
     this.props.dispatch(showPasswordView())
   }
 
-  _handleOnChangeOldPassword = (e) => {
-    const oldPassword = e.target.value
+  _handleOnChangeOldPassword = (oldPassword) => {
     this.props.dispatch(changeOldPasswordValue(oldPassword))
   }
 
-  _handleOnChangeNewPassword = (e) => {
-    const newPassword = e.target.value
+  _handleOnChangeNewPassword = (newPassword) => {
     this.props.dispatch(changeNewPasswordValue(newPassword))
     this.props.dispatch(validate(newPassword))
   }
 
-  _handleOnChangeNewPasswordRepeat = (e) => {
-    const newPasswordRepeat = e.target.value
+  _handleOnChangeNewPasswordRepeat = (newPasswordRepeat) => {
     this.props.dispatch(changeNewPasswordRepeatValue(newPasswordRepeat))
   }
+
+  _handleHideModal = () => {
+    this.props.dispatch(hidePasswordView())
+  }
+
+  buttons = [
+    { label: "Close", onClick: this._handleHideModal },
+    { label: "Submit", onClick: this._handleSubmit }
+  ]
 
   _renderNotification = () => {
     const { passwordChangedNotification, dispatch } = this.props
@@ -59,42 +67,26 @@ class ChangePassword extends Component {
   render () {
     const { view, oldPassword, newPassword, validation, newPasswordRepeat } = this.props
     const { upperCaseChar, lowerCaseChar, number, characterLength } = validation
-
-    if (this.props.view) {
-      return (
+    return (
+      <Dialog
+        actions={this.buttons}
+        active={this.props.view}
+        onEscKeyDown={this._handleHideModal}
+        onOverlayClick={this._handleHideModal}
+        title={t('activity_signup_password_change_title')}
+      >
+        {this._renderNotification()}
+        <Input type='password' name='oldPassword' onChange={this._handleOnChangeOldPassword} value={oldPassword} label='Old Password' />
+        <Input type='password' name='newPassword' onChange={this._handleOnChangeNewPassword} value={newPassword} label='New Password' />
+        <Input type='password' name='newPasswordRepeat' onChange={this._handleOnChangeNewPasswordRepeat} value={newPasswordRepeat} label='Confirm New Password' />
         <div>
-          {this._renderNotification()}
-          <div>
-            <div>
-              <input type='password' name='oldPassword' onChange={this._handleOnChangeOldPassword} value={oldPassword} placeholder='Old Password' />
-            </div>
-            <div>
-              <input type='password' name='newPassword' onChange={this._handleOnChangeNewPassword} value={newPassword} placeholder='New Password' />
-            </div>
-            <div>
-              <input type='password' name='newPasswordRepeat' onChange={this._handleOnChangeNewPasswordRepeat} value={newPasswordRepeat} placeholder='Confirm New Password' />
-            </div>
-            <div>
-              <button type='button' onClick={this._handleSubmit}>Submit</button>
-            </div>
-          </div>
-          <div>
-            <p>{ upperCaseChar ? '' : t('password_rule_no_uppercase') }</p>
-            <p>{ lowerCaseChar ? '' : t('password_rule_no_lowercase') }</p>
-            <p>{ number ? '' : t('password_rule_no_number') }</p>
-            <p>{ characterLength ? '' : t('password_rule_too_short') }</p>
-          </div>
+          <p>{ upperCaseChar ? '' : t('password_rule_no_uppercase') }</p>
+          <p>{ lowerCaseChar ? '' : t('password_rule_no_lowercase') }</p>
+          <p>{ number ? '' : t('password_rule_no_number') }</p>
+          <p>{ characterLength ? '' : t('password_rule_too_short') }</p>
         </div>
-      )
-    }
-    if (!view) {
-      return (
-        <div>
-          {this._renderNotification()}
-          <button type='button' onClick={this._handleShowChangePassword}>Show</button>
-        </div>
-      )
-    }
+      </Dialog>
+    )
   }
 }
 
