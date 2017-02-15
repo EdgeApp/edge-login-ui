@@ -54,7 +54,7 @@ class UsernameComponent extends Component {
       <div>
         <div style={{position: 'relative'}}>
           <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type='button'>{t('string_capitalize_exit')}</Button>
-          <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>{t('fragment_setup_username_label')}</div>
+          <div style={{textAlign: 'center', fontSize: '16px', padding: '10px'}}>{t('fragment_setup_username_label')}</div>
         </div>
         <form onSubmit={e => this._handleSubmit(e)}>
           <Card>

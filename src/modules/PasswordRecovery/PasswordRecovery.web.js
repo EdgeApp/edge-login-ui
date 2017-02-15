@@ -3,19 +3,26 @@ import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 import abcctx from '../../lib/web/abcContext'
 
+import { browserHistory } from 'react-router'
 import * as action from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { checkPasswordRecovery } from './PasswordRecovery.middleware'
+import Dropdown from 'react-toolbox/lib/dropdown'
 
 import PasswordRecoveryToken from './PasswordRecoveryToken.web'
 
+import Button from 'react-toolbox/lib/button'
+
+import Input from 'react-toolbox/lib/input'
+import signinButton from 'theme/signinButton.scss';
+import skipButton from 'theme/skipButton.scss';
+
+import { Card, CardText, CardTitle, CardActions } from 'react-toolbox/lib/card'
 class PasswordRecovery extends Component {
 
-  componentWillMount () {
-    this._loadQuestions()
-  }
 
-  _loadQuestions = () => {
+
+  loadQuestions = () => {
     const dispatch = this.props.dispatch
     abcctx(ctx => {
       ctx.listRecoveryQuestionChoices((error, results) => {
@@ -30,7 +37,9 @@ class PasswordRecovery extends Component {
       })
     })
   }
-
+  componentWillMount = () => {
+    this.loadQuestions()
+  }
   _handleSubmit = () => {
     const callback = (error) => console.log(error)
     this.props.dispatch(
@@ -51,69 +60,78 @@ class PasswordRecovery extends Component {
     )
   }
 
+  skipPasswordRecoverySetup = () => {
+    browserHistory.push('/home')
+  }
+
   _handleShowPasswordRecovery = (e) => {
     this.props.dispatch(action.showPasswordRecoveryView())
   }
 
   _handleOnChangeFirstQuestion = (e) => {
-    const firstQuestion = e.target.value
+    const firstQuestion = e
     this.props.dispatch(action.changeFirstPasswordRecoveryQuestionValue(firstQuestion))
   }
 
   _handleOnChangeFirstAnswer = (e) => {
-    const firstAnswer = e.target.value
+    const firstAnswer = e
     this.props.dispatch(action.changeFirstPasswordRecoveryAnswerValue(firstAnswer))
   }
 
   _handleOnChangeSecondQuestion = (e) => {
-    const secondQuestion = e.target.value
+    const secondQuestion = e
     this.props.dispatch(action.changeSecondPasswordRecoveryQuestionValue(secondQuestion))
   }
 
   _handleOnChangeSecondAnswer = (e) => {
-    const secondAnswer = e.target.value
+    const secondAnswer = e
     this.props.dispatch(action.changeSecondPasswordRecoveryAnswerValue(secondAnswer))
   }
 
   _handleOnChangePassword = (e) => {
-    const password = e.target.value
+    const password = e
     this.props.dispatch(action.changePasswordRecoveryPassword(password))
   }
 
   _handleOnChangeEmail = (e) => {
-    const email = e.target.value
+    const email = e
     this.props.dispatch(action.changePasswordRecoveryEmail(email))
   }
 
   _renderQuestions = () => {
     return this.props.questions.map((question, index) => {
-      return <option key={index} value={question}>{question}</option>
+      return { value: question, label: question }
     })
   }
 
   render () {
     if (this.props.view && !this.props.viewToken) {
       return (
-        <div>
-          <div>
-            <select onChange={this._handleOnChangeFirstQuestion} value={this.props.firstQuestion} required>
-              {this._renderQuestions()}
-            </select>
+        <div style={{padding: '0 0.4em'}}>
+          <h2>{t('activity_recovery_setup_title')}</h2>
+
+          <div style={{padding: '0 0.8em'}}>
+            <Dropdown
+              auto
+              onChange={this._handleOnChangeFirstQuestion}
+              value={this.props.firstQuestion}
+              source={this._renderQuestions()}
+              required/>
+            <Input type='text' name='firstAnswer' onChange={this._handleOnChangeFirstAnswer} value={this.props.firstAnswer} placeholder='First Question Answer' required />
+
+            <Dropdown
+              auto
+              source={this._renderQuestions()}
+              onChange={this._handleOnChangeSecondQuestion}
+              value={this.props.secondQuestion}
+              required/>
+            <Input type='text' name='secondAnswer' onChange={this._handleOnChangeSecondAnswer} value={this.props.secondAnswer} placeholder='Second Question Answer' required />
+
+            <Input type='password' name='recoveryPassword' onChange={this._handleOnChangePassword} value={this.props.password} placeholder='Password' required />
           </div>
-          <div>
-            <input type='text' name='firstAnswer' onChange={this._handleOnChangeFirstAnswer} value={this.props.firstAnswer} placeholder='First Question Answer' required />
-          </div>
-          <select onChange={this._handleOnChangeSecondQuestion} value={this.props.secondQuestion} required>
-            {this._renderQuestions()}
-          </select>
-          <div>
-            <input type='text' name='secondAnswer' onChange={this._handleOnChangeSecondAnswer} value={this.props.secondAnswer} placeholder='Second Question Answer' required />
-          </div>
-          <div>
-            <input type='password' name='recoveryPassword' onChange={this._handleOnChangePassword} value={this.props.password} placeholder='Password' required />
-          </div>
-          <div>
-            <button type='button' onClick={this._handleSubmit}>Submit</button>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
+            <Button type='button' theme={signinButton} raised primary style={{margin: '10px 0px 10px 0px'}} onClick={this._handleSubmit}>Submit</Button>
+            <Button theme={skipButton} raised neutral style={{margin: '10px 0px'}} onClick={this.skipPasswordRecoverySetup}>{t('activity_recovery_skip_button_text')}</Button>
           </div>
         </div>
       )

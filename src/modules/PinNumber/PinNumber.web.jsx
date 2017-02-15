@@ -46,8 +46,8 @@ class PinComponent extends Component {
   }
 
   pinStyle = () => {
-    if (this.props.pinDummy.length > 0) return {textAlign: 'center', fontSize: 110, height: '100px'}
-    return {textAlign: 'center', fontSize: 50, height: '100px'}
+    if (this.props.pinDummy.length > 0) return {textAlign: 'center', fontSize: '100px', height: '100px'}
+    return {textAlign: 'center', fontSize: '35px', height: '100px'}
   }
 
   render () {
@@ -55,7 +55,7 @@ class PinComponent extends Component {
       <div>
         <div style={{position: 'relative'}}>
           <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type='button'>{t('string_capitalize_back')}</Button>
-          <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>{t('activity_signup_pin_label')}</div>
+          <div style={{textAlign: 'center', fontSize: '16px', padding: '10px'}}>{t('activity_signup_pin_label')}</div>
         </div>
         <Card>
           <CardText>

@@ -52,15 +52,19 @@ class Password extends Component {
   }
 
   _handlePasswordNotification = () => {
-    this.refs.signupPasswordFirst.getWrappedInstance().blur()
     this.refs.signupPassword.getWrappedInstance().blur()
+    this.refs.passwordRepeat.getWrappedInstance().blur()
     this.props.dispatch(passwordNotificationShow())
   }
   checkOneNumber = () => this.props.validation.number ? selected : unselected
   checkCharacterLength = () => this.props.validation.characterLength ? selected : unselected
   checkOneUpper = () => this.props.validation.upperCaseChar ? selected : unselected
   checkOneLower = () => this.props.validation.lowerCaseChar ? selected : unselected
-
+  passwordKeyPressed = (e) => {
+    if (e.charCode == 13) {
+      this.refs.passwordRepeat.getWrappedInstance().focus()
+    }
+  }
   handleSubmitSkipPassword = () => {
     const callback = () => browserHistory.push('/signup/review')
     this.props.dispatch(
@@ -80,7 +84,7 @@ class Password extends Component {
     this.props.dispatch(changePasswordRepeatValue(passwordRepeat))
   }
   toggleRevealPassword = (e) => {
-    this.refs.signupPasswordFirst.getWrappedInstance().refs.input.type = this.props.inputState ? 'text' : 'password'
+    this.refs.signupPassword.getWrappedInstance().refs.input.type = this.props.inputState ? 'text' : 'password'
     if (this.props.inputState) {
       this.props.dispatch(hidePassword())
     } else {
@@ -94,7 +98,7 @@ class Password extends Component {
       <div>
         <div style={{position: 'relative'}}>
           <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type='button'>{t('string_capitalize_back')}</Button>
-          <div style={{textAlign: 'center', fontSize: 30, padding: 10}}>{t('activity_signup_password_label')}</div>
+          <div style={{textAlign: 'center', fontSize: '16px', padding: 10}}>{t('activity_signup_password_label')}</div>
         </div>
         <Card>
           <CardText>
@@ -109,11 +113,11 @@ class Password extends Component {
               <p>{t('fragment_setup_password_text')}</p>
             </div>
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}}>
-              <div style={{flexGrow: 1}}><Input ref='signupPasswordFirst'autoFocus type='password' name='password' onChange={this._handleOnChangePassword} value={this.props.password} placeholder='Password' /></div>
+              <div style={{flexGrow: 1}}><Input ref='signupPassword' autoFocus type='password' name='password' onKeyPress={this.passwordKeyPressed} onChange={this._handleOnChangePassword} value={this.props.password} placeholder='Password' /></div>
               <img onClick={this.toggleRevealPassword} src={require('img/icon_export_view.png')} style={{width: '30px', margin: '0px 15px'}} />
             </div>
             <form onSubmit={e => this._handleSubmit(e)}>
-              <Input type="password" ref='signupPassword' name="passwordRepeat" onChange={this._handleOnChangePasswordRepeat} value={this.props.passwordRepeat} placeholder="Re-enter Password" />
+              <Input type="password" ref='passwordRepeat' name="passwordRepeat" onChange={this._handleOnChangePasswordRepeat} value={this.props.passwordRepeat} placeholder="Re-enter Password" />
             </form>
           </CardText>
           <CardActions>

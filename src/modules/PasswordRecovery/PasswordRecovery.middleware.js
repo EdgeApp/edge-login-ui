@@ -6,21 +6,23 @@ import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 export const checkPasswordRecovery = (payload, callback) => {
   const checkAnswersLength = (answers) => answers[0].length < 4 || answers[1].length < 4
   const checkQuestions = (questions) => questions[0] === questions[1]
-  const checkPassword = (password, account) => account.checkPassword(password)
 
   return (dispatch, getState, imports) => {
     const t = imports.t
 
-    if (!checkAnswersLength(payload.answers)) {
-      return callback('Answers does not met length requirements')
+    let answers = checkAnswersLength(payload.answers)
+    let questions = checkQuestions(payload.questions)
+    if (!answers) {
+      return callback('Answer does not meet length requirements')
     }
-    if (!checkQuestions(payload.questions)) {
-      return callback('Please select a different question from the first one')
+    if (!questions) {
+      return callback('Please select 2 different questions')
     }
-    if (!checkPassword(payload.password, payload.account)) {
-      return callback('Password does not match')
-    }
-    if (checkAnswersLength && checkQuestions && checkPassword) {
+
+    payload.account.checkPassword(payload.password, (result) => {
+      if (!result) {
+        return callback('Password does not match')
+      }
       payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
         if (error) {
           return dispatch(openErrorModal(t('server_error_no_connection')))
@@ -32,7 +34,7 @@ export const checkPasswordRecovery = (payload, callback) => {
           return callback()
         }
       })
-    }
+    })
   }
 }
 

@@ -11,13 +11,13 @@ import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 
 import LoginWithPin from './LoginWithPin.web'
-import signinButton from 'theme/signinButton.scss';
-import loginUsernameInput from 'theme/loginUsernameInput.scss';
-import LoginWithAirbitz from './LoginWithAirbitz.web'
+import signinButton from 'theme/signinButton.scss'
+import loginUsernameInput from 'theme/loginUsernameInput.scss'
+import LoginEdge from './LoginEdge.web'
 
 class Login extends Component {
 
-  submit = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault()
     if (this.props.viewPassword) {
       this.refs.loginUsername.getWrappedInstance().blur()
@@ -46,13 +46,9 @@ class Login extends Component {
   }
   usernameFocused = () => {
     this.showCachedUsers()
-    this.refs.titleText.style.height = 0
-    this.refs.titleText.style.margin = 0
   }
   passwordFocused = () => {
     this.hideCachedUsers()
-    this.refs.titleText.style.height = 0
-    this.refs.titleText.style.margin = 0
   }
 
   showCachedUsers = () => {
@@ -72,6 +68,11 @@ class Login extends Component {
   }
   handleViewPress () {
     this.props.dispatch(closeUserList())
+  }
+  usernameKeyPressed = (e) => {
+    if (e.charCode == 13) {
+      this.refs.password.getWrappedInstance().focus()
+    }
   }
   render () {
     const cUsers = () => {
@@ -94,12 +95,12 @@ class Login extends Component {
     }
     return (
       <div style={style.container}>
-        <LoginWithAirbitz />
+        <LoginEdge />
         <div style={style.form}>
 
-          <div ref='titleText' style={{textAlign: 'center', fontSize: '30px', padding: '0 0.8em', overflow: 'hidden', margin: '10px'}}>{t('activity_splash_with_airbitz')}</div>
           <div ref='fieldsView' style={{
-              padding: '0 0.8em',
+              padding: '0 0.4em',
+              flex: 1,
               position: 'relative',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -117,9 +118,10 @@ class Login extends Component {
               onFocus={this.usernameFocused}
               autoCorrect={false}
               autoCapitalize={false}
+              onKeyPress={this.usernameKeyPressed}
             />
 
-            <form onSubmit={e => this.submit(e)}>
+            <form onSubmit={e => this.handleSubmit(e)}>
               <Input
                 type='password'
                 ref='password'
@@ -134,7 +136,7 @@ class Login extends Component {
             {cUsers()}
           </div>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
-            <Button theme={signinButton} style={{margin: '30px 0px 0px 0px'}} raised onClick={this.submit}>{t('fragment_landing_signin_button')}</Button>
+            <Button theme={signinButton} style={{margin: '30px 0px 0px 0px'}} raised onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
             <div ref='fieldsBelowView' style={{height: heightBelowView}} />
             <Button onClick={this.handleSignup} style={{margin: '20px 0px'}} theme={signinButton} primary raised>{t('fragment_landing_signup_button')}</Button>
           </div>
@@ -147,7 +149,14 @@ class Login extends Component {
 const style = {
 
   container: {
-    padding: '0 0.4em'
+    padding: '0 0.4em',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch'
+  },
+  form: {
+    flex: 1
   },
   whiteTransitionFade: {
     position: 'absolute',
