@@ -770,6 +770,8 @@ const strings = {
   recovery_not_setup: 'Recovery was not setup or was done on another device',
   recovery_not_setup2: 'If recovery was setup, you should have emailed yourself a recovery token with a link',
   recovery_not_setup3: 'Please find the email and click on the link from this device to initiate recovery',
+  recovery_not_setup4: 'If recovery was setup, you should have emailed yourself a recovery token with a link. To recover your account, install the Airbitz Mobile App on iOS or Android',
+  recovery_not_setup5: 'Then click one of the links in the recovery email from a device with Airbitz installed',
   recovery_token_invalid: 'Incorrect username for this recovery token. Please try a different username or use a different recovery token link.',
   logout_before_recovery: 'Please logout of current account before attempting password recovery',
   recovery_successful: 'Recovery Successful\n\nPlease change your password and PIN',

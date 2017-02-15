@@ -4,16 +4,20 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { openLogin, loginUsername, loginPassword, openUserList, closeUserList } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
+import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
+
 import t from 'lib/web/LocaleStrings'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { showWhiteOverlay } from '../Landing.action'
 import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
+import Link from 'react-toolbox/lib/link'
 
 import LoginWithPin from './LoginWithPin.web'
 import signinButton from 'theme/signinButton.scss'
 import loginUsernameInput from 'theme/loginUsernameInput.scss'
 import LoginEdge from './LoginEdge.web'
+import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
 
 class Login extends Component {
 
@@ -27,7 +31,6 @@ class Login extends Component {
       }))
     } else {
       this.props.dispatch(openLogin())
-      console.log(this.refs.fieldsView)
       // this.refs.fieldsView.transitionTo({opacity: 1, height: 90}, 200)
       // this.refs.fieldsBelowView.transitionTo({height: 0}, 200)
     }
@@ -69,6 +72,10 @@ class Login extends Component {
   handleViewPress () {
     this.props.dispatch(closeUserList())
   }
+  _handleOpenForgotPasswordModal = () => {
+    // console.log(this)
+    this.props.dispatch(openForgotPasswordModal())
+  }
   usernameKeyPressed = (e) => {
     if (e.charCode == 13) {
       this.refs.password.getWrappedInstance().focus()
@@ -96,6 +103,7 @@ class Login extends Component {
     return (
       <div style={style.container}>
         <LoginEdge />
+        <ForgotPassword />
         <div style={style.form}>
 
           <div ref='fieldsView' style={{
@@ -136,6 +144,7 @@ class Login extends Component {
             {cUsers()}
           </div>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
+            <Link href="#" onClick={this._handleOpenForgotPasswordModal} label="Forgot Password" /> 
             <Button theme={signinButton} style={{margin: '30px 0px 0px 0px'}} raised onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
             <div ref='fieldsBelowView' style={{height: heightBelowView}} />
             <Button onClick={this.handleSignup} style={{margin: '20px 0px'}} theme={signinButton} primary raised>{t('fragment_landing_signup_button')}</Button>
