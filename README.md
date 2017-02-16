@@ -11,7 +11,7 @@ Requirements:
 STEP 2 - Clone the repo
 
 ```sh
-$ git clone githttps://gitlab.com/MadeToBurst/mtb-office.git
+$ git clone https://github.com/Airbitz/airbitz-core-js-ui2
 ```
 
 STEP 3 - Go to the repo folder and install the application dependencies.
