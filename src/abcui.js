@@ -1,9 +1,9 @@
 class ABCUI {
-  constructor (options) {
-    // These arguments might be the api keys etc.
-    // console.log(options)
-    // this.bundlePath = options.bundlePath
-  }
+  // constructor (options) {
+  //   // These arguments might be the api keys etc.
+  //   // console.log(options)
+  //   // this.bundlePath = options.bundlePath
+  // }
 
   createIFrame (path) {
     const frame = document.createElement('iframe')
@@ -16,25 +16,25 @@ class ABCUI {
     return frame
   }
 
-  removeIFrame (frame) {
-    frame.parentNode.removeChild(frame)
-  }
-
-  openLoginWindow () {
-    const frame = this.createIFrame('/login')
-
-    window.exitCallback = () => {
-      this.removeIFrame(frame)
-    }
-  }
-
-  openSignUpWindow () {
-    const frame = this.createIFrame('/signup/username')
-
-    window.exitCallback = () => {
-      this.removeIFrame(frame)
-    }
-  }
+  // removeIFrame (frame) {
+  //   frame.parentNode.removeChild(frame)
+  // }
+  //
+  // openLoginWindow () {
+  //   const frame = this.createIFrame('/login')
+  //
+  //   window.exitCallback = () => {
+  //     this.removeIFrame(frame)
+  //   }
+  // }
+  //
+  // openSignUpWindow () {
+  //   const frame = this.createIFrame('/signup/username')
+  //
+  //   window.exitCallback = () => {
+  //     this.removeIFrame(frame)
+  //   }
+  // }
 
 }
 

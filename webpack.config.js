@@ -1,18 +1,21 @@
-var path = require('path')
-var webpack = require('webpack')
-const autoprefixer = require('autoprefixer')
+const path              = require('path')
+const webpack           = require('webpack')
+const autoprefixer      = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
-  entry: [
-    './src/index.web'
-  ],
+  entry: {
+    abcuiloader: './src/index.web.jsx',
+    abcui: './src/abcui.js'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'app.[name].js',
-    publicPath: '/'
+    publicPath: path.join(__dirname, 'dist'),
+    libraryTarget: "var",
+    library: "[name]"
   },
   resolve: {
     extensions: ['', '.scss', '.css', '.js', '.jsx', '.json'],
@@ -77,3 +80,41 @@ module.exports = {
     ]
   }
 }
+
+// #<{(|eslint-disable no-var |)}>#
+//
+// var fs = require('fs');
+// var path = require('path');
+// var webpack = require('webpack');
+//
+// module.exports = {
+//   entry: {
+//     abcui: './src/abcui.js'
+//   },
+//   output: {
+//     filename: 'assets/js/[name].js',
+//     // Export the library as a global var:
+//     libraryTarget: "var",
+//     // Name of the global var:
+//     library: "[name]"
+//   },
+//
+//   module: {
+//     loaders: [
+//       { test: /\.js$/,
+//         exclude: /node_modules/,
+//         loader: 'babel',
+//         query: { presets: [ 'es2015', 'react' ] }
+//       },
+//       { test: /\.jsx$/,
+//         exclude: /node_modules/,
+//         loader: 'babel',
+//         query: { presets: [ 'es2015', 'react' ] }
+//       },
+//       {
+//         test: /\.json$/,
+//         loader: 'json'
+//       }
+//     ]
+//   },
+// }
