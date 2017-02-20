@@ -11,9 +11,9 @@ module.exports = {
     abcui: './src/abcui.js'
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'assets'),
     filename: 'app.[name].js',
-    publicPath: path.join(__dirname, 'dist'),
+    publicPath: path.join(__dirname, 'assets'),
     libraryTarget: "var",
     library: "[name]"
   },
