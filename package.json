@@ -2,7 +2,7 @@
   "name": "airbitz-react",
   "version": "1.0.0",
   "description": "Foo foo testing",
-  "main": "assets/js/abcui.js",
+  "main": "dist/abcui.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server_dev.js",
