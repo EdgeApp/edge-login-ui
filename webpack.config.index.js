@@ -1,5 +1,5 @@
-const path = require('path')
-const webpack = require('webpack')
+var path = require('path')
+var webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -22,6 +22,7 @@ module.exports = {
       path.resolve('./src')
     ]
   },
+
   postcss: [autoprefixer],
   sassLoader: {
     data: '@import "theme/_config.scss";',
@@ -53,6 +54,8 @@ module.exports = {
     })
   ],
   module: {
+    preLoaders: [
+    ],
     loaders: [
       { test: /\.json$/, loader: 'json-loader' },
       {
