@@ -7,14 +7,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
-    abcuiloader: './src/index.web.jsx',
+    abcuiloader: './src/index.web.js',
     abcui: './src/abcui.js'
   },
   output: {
-    path: path.join(__dirname, 'assets'),
-    filename: 'app.[name].js',
-    publicPath: path.join(__dirname, 'assets'),
-    libraryTarget: "var",
+    filename: 'assets/js/[name].js',
+    // Export the library as a global var:
+    libraryTarget: "commonjs",
+    // Name of the global var:
     library: "[name]"
   },
   resolve: {
@@ -25,7 +25,6 @@ module.exports = {
       path.resolve('./src')
     ]
   },
-
   postcss: [autoprefixer],
   sassLoader: {
     data: '@import "theme/_config.scss";',
@@ -33,14 +32,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('bundle.css', { allChunks: true }),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */'vendor', /* filename= */'vendor.bundle.js'),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       sourceMap: true,
@@ -50,15 +42,9 @@ module.exports = {
       mangle: {
         except: ['$super', '$', 'exports', 'require', '$q', '$ocLazyLoad']
       }
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'sample-iframe.html',
-      template: 'src/sample/sample-iframe.html'
     })
   ],
   module: {
-    preLoaders: [
-    ],
     loaders: [
       { test: /\.json$/, loader: 'json-loader' },
       {
@@ -78,7 +64,8 @@ module.exports = {
       }
 
     ]
-  }
+  },
+  target: 'node'
 }
 
 // #<{(|eslint-disable no-var |)}>#
@@ -89,6 +76,7 @@ module.exports = {
 //
 // module.exports = {
 //   entry: {
+//     abcuiloader: './src/index.web.js',
 //     abcui: './src/abcui.js'
 //   },
 //   output: {
