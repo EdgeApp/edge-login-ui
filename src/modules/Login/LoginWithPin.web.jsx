@@ -85,6 +85,7 @@ class Login extends Component {
   }
 
   render () {
+    console.log(this.props)
     const cUsers = () => {
       if (this.props.showCachedUsers) {
         return (<CachedUsers blurField={this.refs.pinInput.getWrappedInstance()} />)

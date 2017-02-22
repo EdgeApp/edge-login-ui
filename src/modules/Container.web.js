@@ -7,6 +7,7 @@ import Loader from './Loader/Loader.web'
 import ErrorModal from './ErrorModal/ErrorModal.web'
 import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
+
 class Container extends Component {
 
   handleToggle = () => {
@@ -38,7 +39,6 @@ class Container extends Component {
   }
   render () {
     return (
-
       <div className='app'>
         <Dialog
           active
@@ -54,6 +54,7 @@ class Container extends Component {
     )
   }
 }
+
 
 export default connect(state => ({
 

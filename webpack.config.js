@@ -81,7 +81,7 @@ module.exports = {
   output: {
     filename: 'dist/[name].js',
     // Export the library as a global var:
-    libraryTarget: "var",
+    libraryTarget: "commonjs",
     // Name of the global var:
     library: "[name]"
   },
@@ -104,4 +104,5 @@ module.exports = {
       }
     ]
   },
+  target: 'node'
 }
