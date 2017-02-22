@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+import { withRouter } from 'react-router'
 
 import { openLogin, loginPIN, openUserList, closeUserList } from './Login.action'
 import { loginWithPin } from './Login.middleware'
@@ -21,7 +21,7 @@ class Login extends Component {
         this.props.pin
       , success => {
         if (success) {
-          browserHistory.push('/home')
+          this.props.router.push('/home')
         } else {
           this.refs.pinInput.getWrappedInstance().focus()
         }
@@ -134,6 +134,7 @@ class Login extends Component {
   }
 }
 
+Login = withRouter(Login)
 export default connect(state => ({
 
   pin: state.login.pin,
@@ -142,3 +143,4 @@ export default connect(state => ({
   showCachedUsers: state.login.showCachedUsers
 
 }))(Login)
+

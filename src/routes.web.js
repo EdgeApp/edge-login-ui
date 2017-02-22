@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Router, Route, hashHistory, IndexRedirect } from 'react-router'
+import { Router, Route, browserHistory, hashHistory, IndexRedirect } from 'react-router'
 
 import Container from './modules/Container.web'
 import Login from './modules/Login/Login.web'

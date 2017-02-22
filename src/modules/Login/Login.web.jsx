@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
-import { browserHistory } from 'react-router'
 import { openLogin, loginUsername, loginPassword, openUserList, closeUserList } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
@@ -181,6 +181,8 @@ const style = {
 
   }
 }
+
+Login = withRouter(Login)
 export default connect(state => ({
 
   username: state.login.username,
