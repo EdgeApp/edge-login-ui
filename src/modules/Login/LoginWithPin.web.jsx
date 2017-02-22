@@ -18,9 +18,12 @@ class Login extends Component {
     this.props.dispatch(
       loginWithPin(
         this.props.user,
-        this.props.pin
-      , success => {
-        if (success) {
+        this.props.pin, 
+        ( error, account ) => {
+        if (!error) {
+          if (window.parent.loginCallback) {
+            window.parent.loginCallback(null, account)
+          }
           this.props.router.push('/home')
         } else {
           this.refs.pinInput.getWrappedInstance().focus()
@@ -85,7 +88,6 @@ class Login extends Component {
   }
 
   render () {
-    console.log(this.props)
     const cUsers = () => {
       if (this.props.showCachedUsers) {
         return (<CachedUsers blurField={this.refs.pinInput.getWrappedInstance()} />)
