@@ -42,15 +42,13 @@ class Login extends Component {
       // this.refs.fieldsBelowView.transitionTo({height: 0}, 200)
     }
   }
-
   handleSignup = () => {
     this.props.dispatch(showWhiteOverlay())
-    browserHistory.push('/signup/username')
+    this.props.router.push('/signup')
   }
   changeUsername = (username) => {
     this.props.dispatch(loginUsername(username))
   }
-
   changePassword = (password) => {
     this.props.dispatch(loginPassword(password))
   }
@@ -60,15 +58,12 @@ class Login extends Component {
   passwordFocused = () => {
     this.hideCachedUsers()
   }
-
   showCachedUsers = () => {
     this.props.dispatch(openUserList())
   }
-
   hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
   }
-
   renderWhiteTransition () {
     if (this.props.whiteOverlayVisible) {
       return (<div ref='whiteOverlay' style={style.whiteTransitionFade} />)
@@ -80,7 +75,6 @@ class Login extends Component {
     this.props.dispatch(closeUserList())
   }
   _handleOpenForgotPasswordModal = () => {
-    // console.log(this)
     this.props.dispatch(openForgotPasswordModal())
   }
   usernameKeyPressed = (e) => {
@@ -88,6 +82,7 @@ class Login extends Component {
       this.refs.password.getWrappedInstance().focus()
     }
   }
+
   render () {
     const cUsers = () => {
       if (this.props.showCachedUsers) {

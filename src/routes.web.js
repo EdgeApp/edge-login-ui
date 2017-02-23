@@ -2,16 +2,10 @@ import React, { Component } from 'react'
 import { Router, Route, browserHistory, hashHistory, IndexRedirect } from 'react-router'
 
 import Container from './modules/Container.web'
+import Signup from './modules/Signup/SignupContainer.web'
 import Login from './modules/Login/Login.web'
-import Username from './modules/Username/Username.web'
-import PinNumber from './modules/PinNumber/PinNumber.web'
-import Password from './modules/Password/Password.web'
-import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 import Home from './modules/Home/Home.web'
-
-import ChangePassword from './modules/ChangePassword/ChangePassword.web'
-import ChangePin from './modules/ChangePin/ChangePin.web'
-import PasswordRecovery from './modules/PasswordRecovery/PasswordRecovery.web'
+import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 
 export default class RouterComponent extends Component {
 
@@ -21,16 +15,9 @@ export default class RouterComponent extends Component {
         <Route path='/' component={Container}>
           <IndexRedirect to='/login' />
           <Route path='/login' component={Login} />
-
-          <Route path='/signup/username' component={Username} />
-          <Route path='/signup/pin' component={PinNumber} />
-          <Route path='/signup/password' component={Password} />
-          <Route path='/signup/review' component={ReviewDetails} />
+          <Route path='/signup' component={Signup} />
+          <Route path='/review' component={ReviewDetails} />
           <Route path='/home' component={Home} />
-
-          <Route path='/changePassword' component={ChangePassword} />
-          <Route path='/changePin' component={ChangePin} />
-          <Route path='/passwordRecovery' component={PasswordRecovery} />
         </Route>
       </Router>
     )

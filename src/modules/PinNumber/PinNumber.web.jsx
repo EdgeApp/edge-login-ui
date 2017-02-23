@@ -8,6 +8,7 @@ import nextButton from 'theme/nextButton.scss'
 import backButton from 'theme/backButton.scss'
 import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
 
+import { changeSignupPage } from '../Signup/Signup.action'
 import { changePinNumberValue } from './PinNumber.action'
 import { checkPIN } from './PinNumber.middleware'
 
@@ -18,13 +19,17 @@ class PinComponent extends Component {
     this.props.dispatch(
      checkPIN(
         this.props.pin,
-        () => browserHistory.push('/signup/password')
+        () => this.props.dispatch( 
+          changeSignupPage('password') 
+        )
       )
     )
   }
 
   _handleBack = () => {
-    browserHistory.goBack()
+    this.props.dispatch( 
+      changeSignupPage('username') 
+    )
   }
 
   changePinDummy = (pinDummy) => {
@@ -32,10 +37,12 @@ class PinComponent extends Component {
       this.props.dispatch(changePinNumberValue(this.props.pinNumber.substr(0, this.props.pinDummy.length)))
     }
   }
+  
   focusPin = () => {
     this.refs.signupPinDummy.getWrappedInstance().blur()
     this.refs.signupPin.getWrappedInstance().focus()
   }
+
   _handleOnChangeText = (value, event) => {
     if (value.length > 4) {
       value = value.substr(0, 4)

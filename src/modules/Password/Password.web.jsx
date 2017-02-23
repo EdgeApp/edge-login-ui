@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+import { withRouter } from 'react-router'
+import { changeSignupPage } from '../Signup/Signup.action'
 
 import { validate } from './PasswordValidation/PasswordValidation.middleware'
 import { checkPassword, skipPassword } from './Password.middleware'
@@ -31,7 +32,7 @@ class Password extends Component {
 
   _handleSubmit = (e) => {
     e.preventDefault()
-    const callback = () => browserHistory.push('/signup/review')
+    const callback = () => this.props.router.push('/review')
     this.props.dispatch(
       checkPassword(
         this.props.password,
@@ -45,10 +46,9 @@ class Password extends Component {
   }
 
   _handleBack = () => {
-    if (this.props.loader.loading === true) {
-      return true
+    if (this.props.loader.loading === false) {
+      return this.props.dispatch(changeSignupPage('pin'))
     }
-    browserHistory.goBack()
   }
 
   _handlePasswordNotification = () => {
@@ -65,8 +65,8 @@ class Password extends Component {
       this.refs.passwordRepeat.getWrappedInstance().focus()
     }
   }
-  handleSubmitSkipPassword = () => {
-    const callback = () => browserHistory.push('/signup/review')
+  _handleSubmitSkipPassword = () => {
+    const callback = () => this.props.router.push('/signup/review')
     this.props.dispatch(
       skipPassword(
         this.props.username,
@@ -125,14 +125,15 @@ class Password extends Component {
             <Button type='button' raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </CardActions>
         </Card>
-        <SkipPassword handleSubmit={this.handleSubmitSkipPassword} />
+        <SkipPassword handleSubmit={this._handleSubmitSkipPassword} />
       </div>
 
     )
   }
 }
 
-export default connect(state => ({
+Password = withRouter(Password)
+Password = connect(state => ({
 
   inputState: state.password.inputState,
   password: state.password.password,
@@ -143,3 +144,5 @@ export default connect(state => ({
   loader: state.loader
 
 }))(Password)
+
+export default Password

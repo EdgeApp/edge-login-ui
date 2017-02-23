@@ -33,7 +33,13 @@ class Review extends Component {
       loginWithPassword(
         username,
         password,
-        () => browserHistory.push('/passwordRecovery')
+        ( error, account) => {
+          if (!error) {
+            if (window.parent.loginCallback) {
+              window.parent.loginCallback(null, account)
+            }
+          }
+        }
       )
     )
   }
