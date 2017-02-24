@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import t from '../../lib/web/LocaleStrings'
+import Button from 'react-toolbox/lib/button' 
+import Input from 'react-toolbox/lib/input'
+import signinButton from 'theme/signinButton.scss';
+
 import { passwordRecoveryDone } from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { checkEmail } from './PasswordRecovery.middleware'
@@ -31,7 +35,7 @@ export default class PasswordRecovery extends Component {
     if (this.props.finishButton) {
       return (
         <div>
-          <button type='button' onClick={this._handleClose}>Done</button>
+          <Button type='button' raised primary style={{margin: '10px 0px 10px 0px'}} onClick={this._handleClose}>Done</Button>
         </div>
       )
     } else {
@@ -45,22 +49,21 @@ export default class PasswordRecovery extends Component {
         <p>{t('save_recovery_token_popup')}</p>
         <p>{t('save_recovery_token_popup_message')}</p>
         <div>
-          <input type='email' name='' onChange={this.props.handleOnChangeEmail} value={this.props.email} placeholder='Email Address' />
+          <Input type='email' onChange={this.props.handleOnChangeEmail} value={this.props.email} placeholder='Email Address' />
         </div>
         <div>
-          <button type='button' onClick={() => this._handleSubmit('google')}>Send using Gmail</button>
+          <Button type='button' raised primary style={{margin: '10px 0px 10px 0px'}} onClick={() => this._handleSubmit('google')}>Send using Gmail</Button>
         </div>
         <div>
-          <button type='button' onClick={() => this._handleSubmit('yahoo')}>Send using Yahoo</button>
+          <Button type='button' raised primary style={{margin: '10px 0px 10px 0px'}} onClick={() => this._handleSubmit('yahoo')}>Send using Yahoo</Button>
         </div>
         <div>
-          <button type='button' onClick={() => this._handleSubmit('microsoft')}>Send using Hotmail, Outlook, Live Mail</button>
+          <Button type='button' raised primary style={{margin: '10px 0px 10px 0px'}} onClick={() => this._handleSubmit('microsoft')}>Send using Hotmail, Outlook, Live Mail</Button>
         </div>
         <div>
-          <button type='button' onClick={() => this._handleSubmit('generic')}>Send using Email App</button>
+          <Button type='button' raised primary style={{margin: '10px 0px 10px 0px'}} onClick={() => this._handleSubmit('generic')}>Send using Email App</Button>
         </div>
         {this._renderFinishButton()}
-        <ErrorModal />
       </div>
     )
   }
