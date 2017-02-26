@@ -79,7 +79,7 @@ module.exports = {
     abcui: './src/abcui.js'
   },
   output: {
-    filename: 'dist/[name].js',
+    filename: 'assets/[name].js',
     // Export the library as a global var:
     libraryTarget: "commonjs",
     // Name of the global var:

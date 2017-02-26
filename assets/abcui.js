@@ -111,7 +111,7 @@ exports["abcui"] =
 	}
 
 	InnerAbcUi.prototype.openLoginWindow = function (callback) {
-	  var frame = createIFrame(this.bundlePath + '/index.html');
+	  var frame = createIFrame(this.bundlePath + '/assets/index.html');
 	  var that = this;
 	  var abcContext = DomWindow.abcContext;
 	  DomWindow.loginCallback = function (error, account, opts) {
