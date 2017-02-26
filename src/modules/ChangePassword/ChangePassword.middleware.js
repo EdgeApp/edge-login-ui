@@ -1,20 +1,24 @@
 import { passwordChanged, hidePasswordView, showPasswordChangedNotification } from './ChangePassword.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
-// import { signupUser } from '../Signup/Signup.middleware'
+import { openLoading, closeLoading } from '../Loader/Loader.action'
 
 export const checkPassword = (oldPassword, newPassword, newPasswordRepeat, validation, account, callback) => {
   return (dispatch, getState, imports) => {
     const t = imports.t
+    dispatch(openLoading())
 
     if (!account.checkPassword(oldPassword)) {
+      dispatch(closeLoading())
       return dispatch(openErrorModal(t('server_error_bad_password')))
     }
 
     if (!validation.upperCaseChar || !validation.lowerCaseChar || !validation.number || !validation.characterLength) {
+      dispatch(closeLoading())
       return dispatch(openErrorModal(t('activity_signup_insufficient_password')))
     }
 
     if (newPassword !== newPasswordRepeat) {
+      dispatch(closeLoading())
       return dispatch(openErrorModal(t('activity_signup_passwords_dont_match')))
     }
 
@@ -26,6 +30,7 @@ export const checkPassword = (oldPassword, newPassword, newPasswordRepeat, valid
         account.checkPassword(oldPassword)
     ) {
       account.changePassword(newPassword, error => {
+        dispatch(closeLoading())
         if (error) {
           return dispatch(openErrorModal(t('server_error_no_connection')))
         }
@@ -36,6 +41,7 @@ export const checkPassword = (oldPassword, newPassword, newPasswordRepeat, valid
         }
       })
     } else {
+      dispatch(closeLoading())
       return dispatch(openErrorModal(t('activity_signup_insufficient_password')))
     }
   }

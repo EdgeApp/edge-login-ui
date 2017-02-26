@@ -15,12 +15,12 @@ export const loginWithPassword = (username, password, callback) => {
           dispatch(closeLoading())
           if (error) {
             dispatch(openErrorModal(error.message))
-            return callback()
+            return callback(error, null)
           }
           if (!error) {
             localStorage.setItem('lastUser', username)
             dispatch(userLogin(account))
-            callback(true)
+            callback(null, account)
           }
         })
       })
@@ -37,16 +37,17 @@ export const loginWithPin = (username, pin, callback) => {
     setTimeout(() => {
       abcctx(context => {
         context.loginWithPIN(username, pin, (error, account) => {
+
           dispatch(closeLoading())
           if (error) {
             dispatch(openErrorModal(error.message))
-            return callback()
+            return callback(error, null)
           }
 
           if (!error) {
             localStorage.setItem('lastUser', username)
             dispatch(userLogin(account))
-            return callback(true)
+            return callback(null, account)
           }
         })
       })

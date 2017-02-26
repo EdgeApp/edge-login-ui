@@ -8,7 +8,7 @@ app.use('/assets', express.static(path.join(__dirname, '/assets')))
 app.use('/dist', express.static(path.join(__dirname, '/dist')))
 
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'index_prod.html'))
+  res.sendFile(path.join(__dirname, 'assets/index.html'))
 })
 
 app.listen(port, '0.0.0.0', function (err) {

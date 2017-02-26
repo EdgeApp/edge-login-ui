@@ -12,7 +12,7 @@ import Input from 'react-toolbox/lib/input'
 class ChangePin extends Component {
 
   _handleSubmit = () => {
-    const callback = () => browserHistory.push('/signup/review')
+    const callback = () => null
     this.props.dispatch(
       checkPin(
         this.props.password,
@@ -64,8 +64,8 @@ class ChangePin extends Component {
         title={t('activity_signup_title_change_pin')}
       >
         {this._renderNotification()}
-        <Input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} label='Current Password' />
-        <Input type='number' name='changePin' onChange={this._handleOnChangePin} value={pin} label='New Pin' />
+        <Input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} placeholder='Current Password' />
+        <Input type='number' name='changePin' onChange={this._handleOnChangePin} value={pin} placeholder='New Pin' />
       </Dialog>
     )
   }

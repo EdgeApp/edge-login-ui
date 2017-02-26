@@ -17,8 +17,8 @@ const strings = {
   synchronizing: 'Synchronizing…',
 
   //  Generic strings
-  string_ok: 'OK',
   string_yes: 'Yes',
+  string_ok: 'Ok',
   string_bundle: 'Bundle',
   string_no: 'No',
   string_continue: 'Continue',
@@ -173,6 +173,7 @@ const strings = {
   activity_signup_failed: 'Sign Up Failed',
   activity_change_password_failed: 'Change Password Failed',
   activity_change_pin_failed: 'Change PIN Failed',
+  activity_change_pin_length: 'PIN must be exactly 4 numbers',
   fragment_signup_creating_account: 'Creating and securing account…',
   fragment_signup_creating_wallet: 'Creating and securing wallet…',
   activity_signup_title_change_password: 'Change Password',
@@ -240,6 +241,8 @@ const strings = {
   fragment_setup_writeitdown_hide: 'Hide',
 
     //  Strings for PasswordRecovery
+  activity_recovery_button_title: 'Setup/Change Password Recovery',
+  activity_recovery_title: 'Password Recovery',
   activity_recovery_setup_title: 'Password Recovery Setup',
   activity_recovery_title: 'Password Recovery',
   activity_recovery_skip_button_text: 'Skip This Step',
@@ -259,6 +262,10 @@ const strings = {
   activity_recovery_error_save_failed: 'Save recovery answers failed',
   activity_recovery_error_wrong_answers_title: 'Wrong Answers',
   activity_recovery_error_wrong_answers_message: 'The given answers were incorrect. Please try again',
+  activity_recovery_error_answer_length: 'Answer does not meet length requirements',
+  activity_recovery_error_questions_different: 'Please select 2 different questions',
+  activity_recovery_error_password: 'Password does not match',
+
   activity_recovery_warning_dirty_change_title: 'Wrong Answers',
   activity_recovery_warning_dirty_change_message: 'Warning: You are about to exit password recovery and questions &amp; answers have not yet been set. Exit anyway?',
   activity_recovery_warning_dirty_forgot_title: 'Password Recovery',
@@ -266,6 +273,11 @@ const strings = {
   fragment_recovery_mismatch_title: 'Password Mismatch',
   fragment_recovery_mismatch_message: 'Please enter your correct password.',
   fragment_recovery_answer_case_sensitive: 'Answers are case sensitive',
+  activity_recovery_account_created: 'Account Created',
+  fragment_recovery_account_created_fragment_1: 'Your {0} account has been created.',
+  fragment_recovery_account_created_fragment_2: 'Your username and password are known only to you and cannot be reset by {0}.',
+  fragment_recovery_account_created_fragment_3: 'Would you like to setup password recovery questions to reset your account in case of a forgotten password?',
+  fragment_recovery_account_setup_recovery: 'Setup Recovery',
 
     //  Strings for ForgotPassword
   activity_forgot_title: 'Forgot Password',

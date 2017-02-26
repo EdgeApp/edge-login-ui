@@ -5,32 +5,49 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  devtool: 'inline-source-map',
-  entry: {
-      bundle: 'index.web',
-      abcui: 'abcui',
-      devserver: [
-        'webpack-dev-server/client?http://localhost:8002', // WebpackDevServer host and port
-        'webpack/hot/only-dev-server' // "only" prevents reload on syntax errors
-      ]
-  },
+  devtool: 'cheap-module-source-map',
+  entry: [
+    './src/index.web'
+  ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'assets'),
     filename: 'app.[name].js',
     publicPath: '/'
   },
   resolve: {
-    extensions: ['', '.scss', '.css', '.js', '.jsx', '.json', '.png', '.jpg'],
+    extensions: ['', '.scss', '.css', '.js', '.jsx', '.json'],
     modulesDirectories: [
       'node_modules',
       path.resolve(__dirname, './node_modules'),
       path.resolve('./src')
-
     ]
   },
+
+  postcss: [autoprefixer],
+  sassLoader: {
+    data: '@import "theme/_config.scss";',
+    includePaths: [path.resolve(__dirname, './src')]
+  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('bundle.css', { allChunks: true }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */'vendor', /* filename= */'vendor.bundle.js'),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      sourceMap: true,
+      compress: {
+        drop_console: true
+      },
+      mangle: {
+        except: ['$super', '$', 'exports', 'require', '$q', '$ocLazyLoad']
+      }
+    }),
     new HtmlWebpackPlugin({
       filename: 'sample-iframe.html',
       template: 'src/sample/sample-iframe.html'
@@ -38,14 +55,13 @@ module.exports = {
   ],
   module: {
     preLoaders: [
-
     ],
     loaders: [
-            { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.json$/, loader: 'json-loader' },
       {
         test: /\.jsx?$/,
         exclude: [/native/, /\.rn\.js$/],
-        loaders: ['react-hot', 'babel'],
+        loaders: ['babel'],
         include: path.join(__dirname, 'src')
       }, {
         test: /(\.scss|\.css)$/,
@@ -53,17 +69,11 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
       },
       {
-        test: /.*\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(jpe?g|png|gif|svg)$/i,
         include: /src\/img/,
-        loaders: [
-          'file-loader'
-        ]
+        loader: 'file-loader'
       }
+
     ]
-  },
-  postcss: [autoprefixer],
-  sassLoader: {
-    data: '@import "theme/_config.scss";',
-    includePaths: [path.resolve(__dirname, './src')]
   }
 }

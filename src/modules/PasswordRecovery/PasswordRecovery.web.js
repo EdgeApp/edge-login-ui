@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 import abcctx from '../../lib/web/abcContext'
+import Dialog from 'react-toolbox/lib/dialog'
 
 import { browserHistory } from 'react-router'
 import * as action from './PasswordRecovery.action'
@@ -11,16 +12,14 @@ import Dropdown from 'react-toolbox/lib/dropdown'
 
 import PasswordRecoveryToken from './PasswordRecoveryToken.web'
 
-import Button from 'react-toolbox/lib/button'
-
+import Button from 'react-toolbox/lib/button' 
 import Input from 'react-toolbox/lib/input'
 import signinButton from 'theme/signinButton.scss';
 import skipButton from 'theme/skipButton.scss';
 
 import { Card, CardText, CardTitle, CardActions } from 'react-toolbox/lib/card'
+
 class PasswordRecovery extends Component {
-
-
 
   loadQuestions = () => {
     const dispatch = this.props.dispatch
@@ -37,9 +36,15 @@ class PasswordRecovery extends Component {
       })
     })
   }
+
   componentWillMount = () => {
     this.loadQuestions()
   }
+
+  _handleHideModal = () => {
+    this.props.dispatch(action.hidePasswordRecoveryView())
+  }
+
   _handleSubmit = () => {
     const callback = (error) => console.log(error)
     this.props.dispatch(
@@ -104,8 +109,9 @@ class PasswordRecovery extends Component {
     })
   }
 
-  render () {
-    if (this.props.view && !this.props.viewToken) {
+  _renderView = () => {
+
+    if (!this.props.viewToken) {
       return (
         <div style={{padding: '0 0.4em'}}>
           <h2>{t('activity_recovery_setup_title')}</h2>
@@ -130,20 +136,14 @@ class PasswordRecovery extends Component {
             <Input type='password' name='recoveryPassword' onChange={this._handleOnChangePassword} value={this.props.password} placeholder='Password' required />
           </div>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
-            <Button type='button' theme={signinButton} raised primary style={{margin: '10px 0px 10px 0px'}} onClick={this._handleSubmit}>Submit</Button>
-            <Button theme={skipButton} raised neutral style={{margin: '10px 0px'}} onClick={this.skipPasswordRecoverySetup}>{t('activity_recovery_skip_button_text')}</Button>
+            <Button type='button' raised style={{margin: '10px 0px 10px 0px'}} onClick={this._handleHideModal}>Close</Button>
+            <Button type='button' theme={signinButton} raised default style={{margin: '10px 0px 10px 0px'}} onClick={this._handleSubmit}>Submit</Button>
           </div>
         </div>
       )
     }
-    if (!this.props.view && !this.props.viewToken) {
-      return (
-        <div>
-          <button type='button' onClick={this._handleShowPasswordRecovery}>Show</button>
-        </div>
-      )
-    }
-    if (!this.props.view && this.props.viewToken) {
+
+    if (this.props.viewToken) {
       return (
         <PasswordRecoveryToken
           handleOnChangeEmail={this._handleOnChangeEmail}
@@ -155,22 +155,36 @@ class PasswordRecovery extends Component {
         />
       )
     }
+  
+  }
+
+  render () {
+    return (
+      <Dialog
+        actions={this.buttons}
+        active={this.props.view}
+        title={t('activity_signup_title_change_pin')}
+      >
+        { this._renderView() }
+      </Dialog>
+    )
+
   }
 }
 
 export default connect(state => ({
 
-  view: state.passwordRecovery.view,
-  viewToken: state.passwordRecovery.viewToken,
-  finishButton: state.passwordRecovery.finishButton,
-  questions: state.passwordRecovery.questions,
-  firstQuestion: state.passwordRecovery.firstQuestion,
-  firstAnswer: state.passwordRecovery.firstAnswer,
+  view          : state.passwordRecovery.view,
+  viewToken     : state.passwordRecovery.viewToken,
+  finishButton  : state.passwordRecovery.finishButton,
+  questions     : state.passwordRecovery.questions,
+  firstQuestion : state.passwordRecovery.firstQuestion,
+  firstAnswer   : state.passwordRecovery.firstAnswer,
   secondQuestion: state.passwordRecovery.secondQuestion,
-  secondAnswer: state.passwordRecovery.secondAnswer,
-  password: state.passwordRecovery.password,
-  token: state.passwordRecovery.token,
-  email: state.passwordRecovery.email,
-  account: state.user
+  secondAnswer  : state.passwordRecovery.secondAnswer,
+  password      : state.passwordRecovery.password,
+  token         : state.passwordRecovery.token,
+  email         : state.passwordRecovery.email,
+  account       : state.user
 
 }))(PasswordRecovery)

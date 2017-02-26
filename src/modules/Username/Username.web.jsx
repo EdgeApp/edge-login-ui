@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+import { withRouter } from 'react-router'
 import nextButton from 'theme/nextButton.scss'
 import backButton from 'theme/backButton.scss'
 import Button from 'react-toolbox/lib/button'
@@ -13,6 +13,7 @@ import { checkUsername } from './Username.middleware'
 import t from 'lib/web/LocaleStrings'
 
 import { changeUsernameValue } from './Username.action'
+import { changeSignupPage } from '../Signup/Signup.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
 class UsernameComponent extends Component {
@@ -30,7 +31,7 @@ class UsernameComponent extends Component {
       return this.props.dispatch(
         checkUsername(
           this.props.username,
-          () => browserHistory.push('/signup/pin')
+          () => this.props.dispatch(changeSignupPage('pin'))
         )
       )
     }
@@ -39,7 +40,7 @@ class UsernameComponent extends Component {
   _handleBack = () => {
     if (this.props.loader.loading === false) {
       this.props.dispatch(fadeWhiteOverlay())
-      browserHistory.goBack()
+      this.props.router.goBack()
     }
   }
 
@@ -62,7 +63,6 @@ class UsernameComponent extends Component {
               <Input autoFocus type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder={t('fragment_landing_username_hint')} />
               <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_username_text')}</p>
             </CardText>
-
             <CardActions>
               <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
             </CardActions>
@@ -73,9 +73,12 @@ class UsernameComponent extends Component {
   }
 }
 
-export default connect(state => ({
+UsernameComponent = withRouter(UsernameComponent)
+UsernameComponent = connect(state => ({
 
   username: state.username,
   loader: state.loader
 
 }))(UsernameComponent)
+
+export default UsernameComponent

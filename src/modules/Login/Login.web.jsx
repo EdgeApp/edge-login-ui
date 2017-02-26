@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
-import { browserHistory } from 'react-router'
 import { openLogin, loginUsername, loginPassword, openUserList, closeUserList } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
@@ -26,8 +26,15 @@ class Login extends Component {
     if (this.props.viewPassword) {
       this.refs.loginUsername.getWrappedInstance().blur()
       this.refs.password.getWrappedInstance().blur()
-      this.props.dispatch(loginWithPassword(this.props.username, this.props.password, success => {
-        if (success) browserHistory.push('/home')
+      this.props.dispatch(loginWithPassword(
+        this.props.username, 
+        this.props.password, 
+        ( error, account) => {
+        if (!error) {
+          if (window.parent.loginCallback) {
+            window.parent.loginCallback(null, account)
+          }
+        }
       }))
     } else {
       this.props.dispatch(openLogin())
@@ -35,15 +42,13 @@ class Login extends Component {
       // this.refs.fieldsBelowView.transitionTo({height: 0}, 200)
     }
   }
-
   handleSignup = () => {
     this.props.dispatch(showWhiteOverlay())
-    browserHistory.push('/signup/username')
+    this.props.router.push('/signup')
   }
   changeUsername = (username) => {
     this.props.dispatch(loginUsername(username))
   }
-
   changePassword = (password) => {
     this.props.dispatch(loginPassword(password))
   }
@@ -53,15 +58,12 @@ class Login extends Component {
   passwordFocused = () => {
     this.hideCachedUsers()
   }
-
   showCachedUsers = () => {
     this.props.dispatch(openUserList())
   }
-
   hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
   }
-
   renderWhiteTransition () {
     if (this.props.whiteOverlayVisible) {
       return (<div ref='whiteOverlay' style={style.whiteTransitionFade} />)
@@ -73,7 +75,6 @@ class Login extends Component {
     this.props.dispatch(closeUserList())
   }
   _handleOpenForgotPasswordModal = () => {
-    // console.log(this)
     this.props.dispatch(openForgotPasswordModal())
   }
   usernameKeyPressed = (e) => {
@@ -81,6 +82,7 @@ class Login extends Component {
       this.refs.password.getWrappedInstance().focus()
     }
   }
+
   render () {
     const cUsers = () => {
       if (this.props.showCachedUsers) {
@@ -144,7 +146,7 @@ class Login extends Component {
             {cUsers()}
           </div>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
-            <Link href="#" onClick={this._handleOpenForgotPasswordModal} label="Forgot Password" /> 
+            <Link onClick={this._handleOpenForgotPasswordModal} label="Forgot Password" /> 
             <Button theme={signinButton} style={{margin: '30px 0px 0px 0px'}} raised onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
             <div ref='fieldsBelowView' style={{height: heightBelowView}} />
             <Button onClick={this.handleSignup} style={{margin: '20px 0px'}} theme={signinButton} primary raised>{t('fragment_landing_signup_button')}</Button>
@@ -181,6 +183,8 @@ const style = {
 
   }
 }
+
+Login = withRouter(Login)
 export default connect(state => ({
 
   username: state.login.username,

@@ -21,6 +21,15 @@ class Loader extends Component {
     { label: 'Ok', onClick: this.handleToggle }
   ];
 
+  _renderMessage = () => {
+    if(this.props.loader.message) {
+      return <p>{this.props.loader.message}</p>
+    }else{
+      return null 
+    } 
+
+  }
+
   render () {
     if (this._checkLoading()) {
       return (
@@ -28,8 +37,8 @@ class Loader extends Component {
           action={this.actions}
           active={this._checkLoading()}
         >
-          <div style={{padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-            <p>{this.props.loader.message}</p>
+          <div style={{padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+            { this._renderMessage() }
             <ProgressBar type='circular' mode='indeterminate' multicolor />
           </div>
         </Dialog>

@@ -8,7 +8,7 @@ import ErrorModal from './ErrorModal/ErrorModal.web'
 import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
 
-class SignupContainer extends Component {
+class Container extends Component {
 
   handleToggle = () => {
     // this.refs.loginWithAirbitz.cancelRequest()
@@ -39,7 +39,6 @@ class SignupContainer extends Component {
   }
   render () {
     return (
-
       <div className='app'>
         <Dialog
           active
@@ -56,8 +55,9 @@ class SignupContainer extends Component {
   }
 }
 
+
 export default connect(state => ({
 
   loader: state.loader
 
-}))(SignupContainer)
+}))(Container)

@@ -12,28 +12,28 @@ export const checkPasswordRecovery = (payload, callback) => {
 
     let answers = checkAnswersLength(payload.answers)
     let questions = checkQuestions(payload.questions)
-    if (!answers) {
-      return callback('Answer does not meet length requirements')
-    }
-    if (!questions) {
-      return callback('Please select 2 different questions')
+
+    if (answers) {
+      return dispatch(openErrorModal(t('activity_recovery_error_answer_length')))
     }
 
-    payload.account.checkPassword(payload.password, (result) => {
-      if (!result) {
-        return callback('Password does not match')
+    if (questions) {
+      return dispatch(openErrorModal(t('activity_recovery_error_questions_different')))
+    }
+
+    if(!payload.account.checkPassword(payload.password)){
+      return dispatch(openErrorModal(t('activity_recovery_error_password')))
+    }
+
+    payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
+      if (error) {
+        callback(error)
+        return dispatch(openErrorModal(t('server_error_no_connection')))
       }
-      payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
-        if (error) {
-          return dispatch(openErrorModal(t('server_error_no_connection')))
-        }
-        if (!error) {
-          dispatch(setPasswordRecoveryToken(token))
-          dispatch(hidePasswordRecoveryView())
-          dispatch(showPasswordRecoveryTokenView())
-          return callback()
-        }
-      })
+      if (!error) {
+        dispatch(setPasswordRecoveryToken(token))
+        return dispatch(showPasswordRecoveryTokenView())
+      }
     })
   }
 }

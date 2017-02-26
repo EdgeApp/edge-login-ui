@@ -24,22 +24,23 @@ class ForgotPassword extends Component {
   }
 
   actions = [
-    { label: 'Ok', onClick: this.handleToggle }
+    { label: t('string_ok'), onClick: this._handleClose }
   ];
 
   render () {
     if (this._checkLoading()) {
       return (
-        <Dialog style={{zIndex: 2}}
-          action={this.actions}
+        <Dialog
+          actions={this.actions}
           active={this._checkLoading()}
+          onEscKeyDown={this._handleClose}
+          onOverlayClick={this._handleClose}
           title={t('activity_recovery_title')}
         >
           <div style={{padding: '10px'}}>
             <p>{t('recovery_not_setup4')}</p>
             <p><a target="_blank" href="https://airbitz.co/app">https://airbitz.co/app</a></p>
             <p>{t('recovery_not_setup5')}</p>
-            <Button raised theme={nextButton} type='button' onClick={this._handleClose}>{t('string_ok')}</Button>
           </div>
         </Dialog>
       )
