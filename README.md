@@ -1,45 +1,27 @@
-# Installation
+# Airbitz Javascript UI - Beta (Under Development)
 
-STEP 1 - You need these installed on your system.
+Supposed to be the Airbitz-core-js UI implementation. Though still entirely not usuable at the moment. Needs more fixing and debugging. You can run and test it using the airbitz-core-js-sample for compatibility.
 
-Requirements:
-
-- Node js - https://nodejs.org/en/download/ (Download here or install with your package manager).
-- NPM - Comes with node js when installed.
-- Bower - https://bower.io/#install-bower (If nodejs is installed just type "npm install -g bower")
-
-STEP 2 - Clone the repo
-
+## Clone the repos
 ```sh
-$ git clone https://github.com/Airbitz/airbitz-core-js-ui2
+git clone https://github.com/Airbitz/airbitz-core-js-sample
+git clone https://github.com/Airbitz/airbitz-core-js-ui2
 ```
 
-STEP 3 - Go to the repo folder and install the application dependencies.
-
+## Setup the airbitz-core-js-ui
 ```sh
-$ cd mtb-office
-$ npm install
+go to airbitz-core-js-ui2 directory
+run "npm install"
+run "npm link"
 ```
 
-Step 4 - Install webpack globally. Use sudo if prompt for admin.
-
+## Setup the airbitz-core-js-ui-sample
 ```sh
-$ npm install -g webpack
-(or)
-$ sudo npm install -g webpack
-```
-Step 5 -  Create a config.json using the config.example.json as the pattern
-
-Step  6 - Run the app depending on your environment.
-
- -Production
-```sh
-$ cd .. (if you are not yet at the index of the app)
-$ webpack
-$ node server.js
-```
--Development
-```sh
-$ cd .. (if you are not yet at the index of the app)
-$ npm start
+go to airbitz-core-js-sample directory
+run "npm install"
+run "npm link airbitz-core-js-ui"
+change a line in the "webpack.config.js" from "loader: 'babel'" to loader: 'babel-loader'
+change a line in the "webpack.config.js" from "loader: 'json'" to loader: 'json-loader'
+change a line in the "src/sample-app.js" from "_abcUi = abcui.makeABCUIContext({" to loader: '_abcUi = abcui.abcui.makeABCUIContext({' (This is a compile bug in the airbitz-core-js-ui that needs to be fix later)
+run "npm run build" (You should have rsync installed in your machine/terminal)
 ```
