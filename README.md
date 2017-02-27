@@ -9,21 +9,21 @@ git clone https://github.com/Airbitz/airbitz-core-js-ui2
 ```
 
 ## Setup the airbitz-core-js-ui
-go to airbitz-core-js-ui2 directory
+- go to airbitz-core-js-ui2 directory
 ```sh
 run "npm install"
 run "npm link"
 ```
 
 ## Setup the airbitz-core-js-ui-sample
-go to airbitz-core-js-sample directory
+- go to airbitz-core-js-sample directory
 ```sh
 run "npm install"
 run "npm link airbitz-core-js-ui"
 ```
-change a line in the "webpack.config.js" from "loader: 'babel'" to "loader: 'babel-loader'"
-change a line in the "webpack.config.js" from "loader: 'json'" to "loader: 'json-loader'"
-change a line in the "src/sample-app.js" from "_abcUi = abcui.makeABCUIContext({" to "_abcUi = abcui.abcui.makeABCUIContext({" (This is a compile bug in the airbitz-core-js-ui that needs to be fix later)
+- change a line in the "webpack.config.js" from "loader: 'babel'" to "loader: 'babel-loader'"
+- change a line in the "webpack.config.js" from "loader: 'json'" to "loader: 'json-loader'"
+- change a line in the "src/sample-app.js" from "_abcUi = abcui.makeABCUIContext({" to "_abcUi = abcui.abcui.makeABCUIContext({" (This is a compile bug in the airbitz-core-js-ui that needs to be fix later)
 ```sh
 run "npm run build" (You should have rsync installed in your machine/terminal)
 ```
