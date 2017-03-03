@@ -65,10 +65,6 @@ class PasswordRecovery extends Component {
     )
   }
 
-  skipPasswordRecoverySetup = () => {
-    browserHistory.push('/home')
-  }
-
   _handleShowPasswordRecovery = (e) => {
     this.props.dispatch(action.showPasswordRecoveryView())
   }
@@ -113,10 +109,10 @@ class PasswordRecovery extends Component {
 
     if (!this.props.viewToken) {
       return (
-        <div style={{padding: '0 0.4em'}}>
-          <h2>{t('activity_recovery_setup_title')}</h2>
+        <div>
+          <h3>{t('activity_recovery_setup_title')}</h3>
 
-          <div style={{padding: '0 0.8em'}}>
+          <div>
             <Dropdown
               auto
               onChange={this._handleOnChangeFirstQuestion}

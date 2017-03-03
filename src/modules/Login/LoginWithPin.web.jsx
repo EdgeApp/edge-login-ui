@@ -9,8 +9,8 @@ import { removeUserToLogin } from '../CachedUsers/CachedUsers.action'
 import t from 'lib/web/LocaleStrings'
 
 import Button from 'react-toolbox/lib/button'
-
 import Input from 'react-toolbox/lib/input'
+
 class Login extends Component {
 
   submit = () => {
@@ -18,7 +18,7 @@ class Login extends Component {
     this.props.dispatch(
       loginWithPin(
         this.props.user,
-        this.props.pin, 
+        this.props.pin,
         ( error, account ) => {
         if (!error) {
           if (window.parent.loginCallback) {
@@ -98,9 +98,7 @@ class Login extends Component {
 
     return (
       <div style={{padding: '0 0.8em', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-        <Button flat neutral style={{textTransform: 'none', margin: '10px 0px'}} onClick={this.toggleCachedUsers}>
-          { this.props.user ? this.props.user : 'No User Selected' }
-        </Button>
+        <Button flat style={{textTransform: 'none'}} onClick={this.toggleCachedUsers}>{ this.props.user ? this.props.user : 'No User Selected' }</Button>
 
         <div style={{ width: '165px', marginTop: '5px' }}>
 
@@ -127,7 +125,7 @@ class Login extends Component {
           />
         </div>
 
-        <Button flat neutral style={{margin: '10px 0px'}} onClick={this.viewPasswordInput}>
+        <Button flat onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
         {cUsers()}

@@ -1,4 +1,5 @@
 import React from 'react'
+import 'react-toolbox/lib/commons.scss'
 import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import createStore from './lib/web/configureStore'

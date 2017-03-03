@@ -27,8 +27,8 @@ class Login extends Component {
       this.refs.loginUsername.getWrappedInstance().blur()
       this.refs.password.getWrappedInstance().blur()
       this.props.dispatch(loginWithPassword(
-        this.props.username, 
-        this.props.password, 
+        this.props.username,
+        this.props.password,
         ( error, account) => {
         if (!error) {
           if (window.parent.loginCallback) {
@@ -146,8 +146,8 @@ class Login extends Component {
             {cUsers()}
           </div>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
-            <Link onClick={this._handleOpenForgotPasswordModal} label="Forgot Password" /> 
-            <Button theme={signinButton} style={{margin: '30px 0px 0px 0px'}} raised onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
+            <Link onClick={this._handleOpenForgotPasswordModal} label="Forgot Password" />
+            <Button style={{margin: '30px 0px 0px 0px'}} raised onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
             <div ref='fieldsBelowView' style={{height: heightBelowView}} />
             <Button onClick={this.handleSignup} style={{margin: '20px 0px'}} theme={signinButton} primary raised>{t('fragment_landing_signup_button')}</Button>
           </div>
