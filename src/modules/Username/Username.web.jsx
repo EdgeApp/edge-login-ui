@@ -60,7 +60,7 @@ class UsernameComponent extends Component {
         <form onSubmit={e => this._handleSubmit(e)}>
           <Card>
             <CardText>
-              <Input autoFocus type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} placeholder={t('fragment_landing_username_hint')} />
+              <Input autoFocus type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} label={t('fragment_landing_username_hint')} />
               <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_username_text')}</p>
             </CardText>
             <CardActions>

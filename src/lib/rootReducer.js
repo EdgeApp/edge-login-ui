@@ -46,7 +46,8 @@ const store = combineReducers({
 
   reviewDetails: combineReducers({
     details: ReviewDetailsStates.details,
-    view: ReviewDetailsStates.view
+    view: ReviewDetailsStates.view,
+    afterQuestionPasswordRecoveryView: ReviewDetailsStates.afterQuestionPasswordRecoveryView
   }),
 
   login: combineReducers({

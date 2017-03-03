@@ -113,11 +113,11 @@ class Password extends Component {
               <p>{t('fragment_setup_password_text')}</p>
             </div>
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}}>
-              <div style={{flexGrow: 1}}><Input ref='signupPassword' autoFocus type='password' name='password' onKeyPress={this.passwordKeyPressed} onChange={this._handleOnChangePassword} value={this.props.password} placeholder='Password' /></div>
+              <div style={{flexGrow: 1}}><Input ref='signupPassword' autoFocus type='password' name='password' onKeyPress={this.passwordKeyPressed} onChange={this._handleOnChangePassword} value={this.props.password} label='Password' /></div>
               <img onClick={this.toggleRevealPassword} src={require('img/icon_export_view.png')} style={{width: '30px', margin: '0px 15px'}} />
             </div>
             <form onSubmit={e => this._handleSubmit(e)}>
-              <Input type="password" ref='passwordRepeat' name="passwordRepeat" onChange={this._handleOnChangePasswordRepeat} value={this.props.passwordRepeat} placeholder="Re-enter Password" />
+              <Input type="password" ref='passwordRepeat' name="passwordRepeat" onChange={this._handleOnChangePasswordRepeat} value={this.props.passwordRepeat} label="Re-enter Password" />
             </form>
           </CardText>
           <CardActions>

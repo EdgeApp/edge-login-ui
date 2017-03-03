@@ -66,22 +66,26 @@ InnerAbcUi.prototype.openLoginWindow = function (callback) {
   var frame = createIFrame(this.bundlePath + '/assets/index.html')
   var that = this
   var abcContext = DomWindow.abcContext
+  var done = function () {
+    removeIFrame(frame)
+  }
+
   DomWindow.loginCallback = function (error, account, opts) {
     if (account) {
       DomWindow.abcAccount = account
-      removeIFrame(frame)
-      if (opts && opts.setupRecovery) {
-        opts.noRequirePassword = true
-        that.openSetupRecoveryWindow(account, opts, function () {})
-      } else if (!abcContext.pinExists(account.username)) {
-        that.openChangePinEdgeLoginWindow(account, opts, function () {})
-      }
-      callback(error, account)
+      // removeIFrame(frame)
+      // if (opts && opts.setupRecovery) {
+      //   opts.noRequirePassword = true
+      //   that.openSetupRecoveryWindow(account, opts, function () {})
+      // } else if (!abcContext.pinExists(account.username)) {
+      //   that.openChangePinEdgeLoginWindow(account, opts, function () {})
+      // }
+      callback(error, account, done)
     }
   }
-  DomWindow.exitCallback = function () {
-    removeIFrame(frame)
-  }
+  // DomWindow.exitCallback = function () {
+  //   removeIFrame(frame)
+  // }
 }
 
 InnerAbcUi.prototype.getABCContext = function () {
@@ -113,7 +117,7 @@ InnerAbcUi.prototype.openChangePinEdgeLoginWindow = function (account, callback)
 
 InnerAbcUi.prototype.openManageWindow = function (account, callback) {
   DomWindow.abcAccount = account
-  var frame = createIFrame(this.bundlePath + '/assets/index.html#/account/')
+  var frame = createIFrame(this.bundlePath + '/assets/index.html#/home/')
   DomWindow.exitCallback = function () {
     removeIFrame(frame)
     callback(null)

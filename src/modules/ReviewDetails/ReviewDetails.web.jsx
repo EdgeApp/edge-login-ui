@@ -3,15 +3,16 @@ import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 import { browserHistory } from 'react-router'
 
-import { showSignInDetails, hideSignInDetails } from './ReviewDetails.action'
+import { showSignInDetails, hideSignInDetails, showPasswordRecovery } from './ReviewDetails.action'
 import { loginWithPassword } from '../Login/Login.middleware'
 
-import ErrorModal from '../ErrorModal/ErrorModal.web'
-import Loader from '../Loader/Loader.web'
+import AfterSignUpQuestion from './AfterSignUpQuestion.web'
+import PasswordRecovery from '../PasswordRecovery/PasswordRecovery.web'
 
 import Button from 'react-toolbox/lib/button'
 import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
 import nextButton from 'theme/nextButton.scss'
+
 
 class Review extends Component {
 
@@ -27,21 +28,22 @@ class Review extends Component {
     }
   }
 
-  _handleFinish = () => {
-    const { username, password } = this.props.details
-    this.props.dispatch(
-      loginWithPassword(
-        username,
-        password,
-        ( error, account) => {
-          if (!error) {
-            if (window.parent.loginCallback) {
-              window.parent.loginCallback(null, account)
-            }
-          }
-        }
-      )
-    )
+  _handleAfterSignupQuestion = () => {
+    this.props.dispatch(showPasswordRecovery())
+    // const { username, password } = this.props.details
+    // this.props.dispatch(
+    //   loginWithPassword(
+    //     username,
+    //     password,
+    //     ( error, account) => {
+    //       if (!error) {
+    //         if (window.parent.loginCallback) {
+    //           window.parent.loginCallback(null, account)
+    //         }
+    //       }
+    //     }
+    //   )
+    // )
   }
 
   render () {
@@ -58,11 +60,11 @@ class Review extends Component {
               <Button type='button' raised primary onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</Button>
             </CardActions>
             <CardActions>
-              <Button type='button' raised theme={nextButton} onClick={this._handleFinish}>{t('string_finish')}</Button>
+              <Button type='button' raised theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
             </CardActions>
           </Card>
-          <ErrorModal />
-          <Loader />
+          <AfterSignUpQuestion />
+          <PasswordRecovery />
         </div>
       )
     }
@@ -79,11 +81,11 @@ class Review extends Component {
               <Button type='button' raised primary onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</Button>
             </CardActions>
             <CardActions>
-              <Button type='button' raised theme={nextButton} onClick={this._handleFinish}>{t('string_finish')}</Button>
+              <Button type='button' raised theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
             </CardActions>
           </Card>
-          <ErrorModal />
-          <Loader />
+          <AfterSignUpQuestion />
+          <PasswordRecovery />
         </div>
       )
     }
