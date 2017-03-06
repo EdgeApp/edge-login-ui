@@ -16,6 +16,8 @@ import { changeUsernameValue } from './Username.action'
 import { changeSignupPage } from '../Signup/Signup.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
+import styles from './Username.webStyle'
+
 class UsernameComponent extends Component {
 
   _handleSubmit = (e) => {
@@ -39,7 +41,6 @@ class UsernameComponent extends Component {
 
   _handleBack = () => {
     if (this.props.loader.loading === false) {
-      this.props.dispatch(fadeWhiteOverlay())
       this.props.router.goBack()
     }
   }
@@ -54,19 +55,29 @@ class UsernameComponent extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type='button'>{t('string_capitalize_exit')}</Button>
-          <div style={{textAlign: 'center', fontSize: '16px', padding: '10px'}}>{t('fragment_setup_username_label')}</div>
+          <a onClick={this._handleBack}>{t('string_capitalize_exit')}</a>
+          <div style={{textAlign: 'center'}}>
+            <h4>{t('fragment_setup_username_label')}</h4>
+          </div>
         </div>
         <form onSubmit={e => this._handleSubmit(e)}>
-          <Card>
-            <CardText>
-              <Input autoFocus type="text" name="username" onChange={this._handleOnChangeText} value={this.props.username} label={t('fragment_landing_username_hint')} />
-              <p style={{whiteSpace: 'pre-line'}}>{t('fragment_setup_username_text')}</p>
-            </CardText>
-            <CardActions>
-              <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
-            </CardActions>
-          </Card>
+          <div className={styles.section}>
+            <Input
+              autoFocus
+              type="text"
+              name="username"
+              onChange={this._handleOnChangeText}
+              value={this.props.username}
+              label={t('fragment_landing_username_hint')}
+              className={styles.inputField}
+            />
+          </div>
+          <div className={styles.section}>
+            <p className={styles.usernameText}>{t('fragment_setup_username_text')}</p>
+          </div>
+          <div className={styles.buttonSection}>
+            <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
+          </div>
         </form>
       </div>
     )

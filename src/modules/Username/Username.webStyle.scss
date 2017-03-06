@@ -1,5 +1,21 @@
 .container {
-  padding: $unit;
+  padding: 0 $unit * 5;
+}
+
+.section {
+  margin: $unit * 2.5 0;
+}
+
+.inputField {
+  width: 95%;
+}
+
+.usernameText{
+  white-space: pre-line;
+}
+
+.buttonSection {
+  @extend .section;
 
   display: flex;
   display: -webkit-flex;
@@ -12,24 +28,5 @@
 
   align-items: center;
   -webkit-align-items: center;
+
 }
-
-.username {
-  font-size:  $unit * 2.0;
-  text-transform: none;
-}
-
-.inputDiv {
-  width: 165px;
-}
-
-.inputPin {
- text-align: center;
- height: $unit * 4.5;
-}
-
-.exitPin {
-  margin: $unit * 2 0;
-}
-
-

@@ -32,12 +32,7 @@ class LoginWithPin extends Component {
         }
       })
     )
-    this.props.dispatch(loginPIN(''))
   }
-  handleViewPress = () => {
-    this.refs.pinInput.getWrappedInstance().focus()
-  }
-
   changePin = (pin) => {
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
@@ -47,23 +42,15 @@ class LoginWithPin extends Component {
       setTimeout(this.submit, 200)
     }
   }
-  changePinDummy = (pinDummy) => {
-    if (this.props.pinDummy.length < this.props.pin.length) {
-      this.props.dispatch(loginPIN(this.props.pin.substr(0, this.props.pinDummy.length)))
-    }
-  }
-
   viewPasswordInput = (pin) => {
     this.props.dispatch(closeUserList())
     this.props.dispatch(removeUserToLogin())
     this.props.dispatch(openLogin())
   }
-
   showCachedUsers = () => {
     this.props.dispatch(openUserList())
     this.refs.pinInput.getWrappedInstance().blur()
   }
-
   hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
   }
@@ -79,14 +66,12 @@ class LoginWithPin extends Component {
       this.refs.pinInput.getWrappedInstance().focus()
     }
   }
-
-  focusPin = () => {
-    this.refs.pinDummyInput.getWrappedInstance().blur()
-    this.refs.pinInput.getWrappedInstance().focus()
-  }
   pinStyle = () => {
-    if (this.props.pinDummy.length > 0) return {textAlign: 'center', fontSize: '100px', height: '100px'}
-    return {textAlign: 'center', fontSize: '35px', height: '100px'}
+    if (this.props.pin.length > 0){
+      return {textAlign: 'center', fontSize: '70px', height: '80px'}
+    }else{
+      return {textAlign: 'center', fontSize: '35px', height: '80px'}
+    }
   }
 
   render () {
@@ -103,31 +88,22 @@ class LoginWithPin extends Component {
         <Button flat className={styles.username} theme={buttonTheme} onClick={this.toggleCachedUsers}>
           { this.props.user ? this.props.user : 'No User Selected' }
         </Button>
-        <div style={{ width: '165px', marginTop: '5px' }}>
-          <Input
-            type='text'
-            placeholder={t('fragment_landing_enter_pin')}
-            style={this.pinStyle()}
-            value={this.props.pinDummy}
-            autoCorrect={false}
-            onChange={this.changePinDummy}
-            onFocus={this.focusPin}
-            ref='pinDummyInput'
-          />
+        <div className={styles.inputDiv}>
           <Input
             ref='pinInput'
             name='pinInput'
             type='password'
-            style={{height: 0, opacity: 0, zIndex: -1, marginTop: -25}}
+            placeholder={t('fragment_landing_enter_pin')}
+            style={this.pinStyle()}
             value={this.props.pin}
             onChange={this.changePin}
-            autoFocus
             autoCorrect={false}
+            autoFocus
           />
         </div>
-        <Button flat theme={buttonTheme} onClick={this.viewPasswordInput}>
+        <a className={styles.exitPin} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
-        </Button>
+        </a>
         {cUsers()}
       </div>
     )
@@ -139,7 +115,6 @@ LoginWithPin = withRouter(LoginWithPin)
 export default connect(state => ({
 
   pin: state.login.pin,
-  pinDummy: state.login.pinDummy,
   user: state.cachedUsers.selectedUserToLogin,
   showCachedUsers: state.login.showCachedUsers
 

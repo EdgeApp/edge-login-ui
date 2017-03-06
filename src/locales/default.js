@@ -150,7 +150,7 @@ const strings = {
   fragment_landing_detail_text: 'Bitcoin Wallet',
   fragment_landing_swipe_text: 'Swipe to View Business Directory',
   fragment_landing_arrow_description: 'Bouncing Arrow',
-  fragment_landing_username_hint: 'User Name',
+  fragment_landing_username_hint: 'Username',
   fragment_landing_password_hint: 'Password',
   fragment_landing_signin_button: 'Sign In',
   fragment_landing_signup_button: 'Sign Up',
@@ -165,6 +165,8 @@ const strings = {
   fragment_forgot_no_recovery_questions_text: 'This user does not have any recovery questions set!',
   fragment_landing_account_delete_title: 'Delete Account',
   fragment_landing_account_delete_message: 'Delete {0} on this device only? This will remove the 2FA and PIN access from this device. If 2FA is enabled on this account, you will be unable to access this account for 7 days from new devices',
+  fragment_landing_create_account: 'Create Account',
+  fragment_landing_create_a_new_account: 'Create a new Account',
 
     // Strings for Signup and Sign-in
   activity_signup_title: 'Sign Up',

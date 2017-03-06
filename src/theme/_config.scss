@@ -14,15 +14,12 @@ $color-primary-dark: $palette-blue-700;
 
 
 //Input
-$input-padding: 1.2 * $unit !default;
-$input-field-font-size: 1.3 * $unit !default;
-// $dialog-content-padding: 2rem 2.4rem;
+$input-padding: 1.2 * $unit;
+$input-field-font-size: 1.3 * $unit;
+
+$dialog-content-padding: 2.4 * $unit 4 * $unit;
 // $card-font-size: 1rem;
 // $button-squared-min-width: 44;
-
-//Buttons
-// $button-toggle-font-size: $unit * 0 !default;
-// $button-floating-font-size: $unit * 0 !default;
 
 p {
   line-height: $unit * 1.6;
