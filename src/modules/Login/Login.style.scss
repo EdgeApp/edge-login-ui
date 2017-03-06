@@ -1,0 +1,41 @@
+.container {
+  padding: $unit * 0.6;
+
+  display: flex;
+  display: -webkit-flex;
+
+  flex-direction: column;
+  -webkit-flex-direction: column;
+
+  justify-content: center;
+  -webkit-justify-content: center;
+
+  align-items: stretch;
+  -webkit-align-items: stretch;
+}
+
+.buttonGroup {
+  margin-top: $unit * 0.8;
+
+  display: flex;
+  display: -webkit-flex;
+
+  flex-direction: column;
+  -webkit-flex-direction: column;
+
+  alignItems: center;
+  -webkit-align-items: center;
+}
+
+.fieldsView {
+  margin: 10px 0px 25px 0px;
+  position: relative;
+}
+
+.inputFields {
+  padding: 1.1 * $unit 0;
+}
+
+.forgotPassword {
+  font-size: $unit * 1.1;
+}

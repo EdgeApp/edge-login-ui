@@ -43,13 +43,11 @@ const store = combineReducers({
       characterLength: PasswordValidation.characterLength
     })
   }),
-
   reviewDetails: combineReducers({
     details: ReviewDetailsStates.details,
     view: ReviewDetailsStates.view,
     afterQuestionPasswordRecoveryView: ReviewDetailsStates.afterQuestionPasswordRecoveryView
   }),
-
   login: combineReducers({
     viewPassword: Login.viewPassword,
     viewPIN: Login.viewPIN,
@@ -62,7 +60,6 @@ const store = combineReducers({
     edgeUsername: Login.edgeUsername,
     edgeAccount: Login.edgeAccount
   }),
-
   nextButtonVisible,
   skipButtonVisible,
 
@@ -71,7 +68,6 @@ const store = combineReducers({
     message: Loader.message
     // style: Loader.style
   }),
-
   warningModal: combineReducers({
     visible: WarningModal.visible,
     module: WarningModal.module,

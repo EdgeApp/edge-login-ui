@@ -91,7 +91,7 @@ const style = {
     position: 'absolute',
     zIndex: 2,
     overflow: 'auto',
-    maxHeight: '140px',
+    maxHeight: '120px',
     backgroundColor: '#FFF',
     left: 0,
     right: 0,

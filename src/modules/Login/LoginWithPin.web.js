@@ -8,10 +8,12 @@ import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { removeUserToLogin } from '../CachedUsers/CachedUsers.action'
 import t from 'lib/web/LocaleStrings'
 
-import Button from 'react-toolbox/lib/button'
+import { Button } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
+import buttonTheme from 'theme/neutralButtons.scss'
+import styles from './LoginWithPin.style.scss'
 
-class Login extends Component {
+class LoginWithPin extends Component {
 
   submit = () => {
     this.refs.pinInput.getWrappedInstance().blur()
@@ -88,7 +90,6 @@ class Login extends Component {
   }
 
   render () {
-    console.log(this.props)
     const cUsers = () => {
       if (this.props.showCachedUsers) {
         return (<CachedUsers blurField={this.refs.pinInput.getWrappedInstance()} />)
@@ -98,11 +99,11 @@ class Login extends Component {
     }
 
     return (
-      <div style={{padding: '0 0.8em', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-        <Button flat style={{textTransform: 'none'}} onClick={this.toggleCachedUsers}>{ this.props.user ? this.props.user : 'No User Selected' }</Button>
-
+      <div className={styles.container}>
+        <Button flat className={styles.username} theme={buttonTheme} onClick={this.toggleCachedUsers}>
+          { this.props.user ? this.props.user : 'No User Selected' }
+        </Button>
         <div style={{ width: '165px', marginTop: '5px' }}>
-
           <Input
             type='text'
             placeholder={t('fragment_landing_enter_pin')}
@@ -113,7 +114,6 @@ class Login extends Component {
             onFocus={this.focusPin}
             ref='pinDummyInput'
           />
-
           <Input
             ref='pinInput'
             name='pinInput'
@@ -125,8 +125,7 @@ class Login extends Component {
             autoCorrect={false}
           />
         </div>
-
-        <Button flat onClick={this.viewPasswordInput}>
+        <Button flat theme={buttonTheme} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
         {cUsers()}
@@ -135,7 +134,8 @@ class Login extends Component {
   }
 }
 
-Login = withRouter(Login)
+
+LoginWithPin = withRouter(LoginWithPin)
 export default connect(state => ({
 
   pin: state.login.pin,
@@ -143,5 +143,5 @@ export default connect(state => ({
   user: state.cachedUsers.selectedUserToLogin,
   showCachedUsers: state.login.showCachedUsers
 
-}))(Login)
+}))(LoginWithPin)
 

@@ -96,7 +96,7 @@ class LoginEdge extends Component {
 const style = {
 
   container: {
-    margin: '20px auto 0px auto',
+    marginBottom: '10px',
     display: 'flex',
     flex: 1,
     alignItems: 'stretch',
@@ -108,14 +108,13 @@ const style = {
     'width': '28px',
     'padding': '4px',
     'verticalAlign': 'top'
-
   },
   edgeLoginBtn: {
     margin: '0px auto'
   },
   dividerContainer: {
     textAlign: 'center',
-    margin: '20px 0 0px 0px'
+    margin: '40px 0 0px 0px'
   },
   divider: {
     fontWeight: 700,

@@ -3,16 +3,10 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { BackAndroid, View, Text, Button } from 'react-native'
 import style from '../Style'
-import { userLogin } from '../Login/Login.action'
 
 import { fadeWhiteOverlay } from '../Landing.action'
 
 class Home extends Component {
-  componentWillMount = () => {
-    if(window.parent.abcAccount){
-      this.props.dispatch(userLogin(window.parent.abcAccount)) 
-    }
-  }
   componentDidMount = () => {
     let self = this
     BackAndroid.addEventListener('hardwareBackPress', function () {
