@@ -12,6 +12,7 @@ git clone https://github.com/Airbitz/airbitz-core-js-ui2
 - go to airbitz-core-js-ui2 directory
 ```sh
 run "npm install"
+run "npm run build"
 run "npm link"
 ```
 
