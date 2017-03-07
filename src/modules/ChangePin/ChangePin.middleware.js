@@ -15,7 +15,6 @@ export const checkPin = (password, pin, account, callback) => {
 
     account.checkPassword(password).then(result => {
       if (!result) {
-        console.log(result)
         dispatch(closeLoading())
         return dispatch(openErrorModal(t('server_error_bad_password')))
       }

@@ -34,16 +34,8 @@ class SignupContainer extends Component {
       }
     })
   }
-  loadAccount = () => {
-    if(window.parent.abcAccount){
-      dispatch(
-        userLogin(window.parent.abcAccount)
-      )
-    }
-  }
   componentWillMount () {
     this.loadData()
-    this.loadAccount()
   }
   componentWillUpdate () {
     this.loadData()

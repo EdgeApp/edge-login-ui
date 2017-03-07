@@ -33,7 +33,6 @@ class Login extends Component {
           this.props.username,
           this.props.password,
           ( error, account ) => {
-          console.log(account)
           if (!error) {
             if (window.parent.loginCallback) {
               window.parent.loginCallback(null, account)

@@ -2,20 +2,19 @@
   "name": "airbitz-core-js-ui",
   "version": "1.0.0",
   "description": "Pluggable UI using airbitz-core",
-  "main": "server.js",
+  "main": "assets/abcui.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server_dev.js",
-    "standard": "standard --fix --verbose --parser babel-eslint | snazzy"
+    "standard": "standard --fix --verbose --parser babel-eslint | snazzy",
+    "build": "webpack --color --verbose --progress --config webpack.config.index.js && webpack --color --verbose --progress --config webpack.config.js && npm link"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "airbitz-core-js": "^0.1.1",
+    "airbitz-core-js": "v0.0.11",
     "async": "~2.0.1",
-    "autoprefixer": "~6.6.1",
-    "extract-text-webpack-plugin": "~1.0.1",
     "file-loader": "~0.9.0",
     "html-webpack-plugin": "~2.28.0",
     "joi-browser": "~9.0.1",
@@ -39,6 +38,7 @@
     "superagent": "~2.1.0"
   },
   "devDependencies": {
+    "autoprefixer": "~6.6.1",
     "babel": "~6.5.2",
     "babel-core": "~6.11.4",
     "babel-eslint": "~6.1.2",
@@ -47,9 +47,11 @@
     "babel-preset-react": "~6.11.1",
     "babel-preset-stage-0": "~6.5.0",
     "css-loader": "v0.23.1",
+    "encoding": "^0.1.12",
     "eslint": "~3.1.1",
     "eslint-plugin-react": "~5.2.2",
     "express": "~4.14.0",
+    "extract-text-webpack-plugin": "~1.0.1",
     "json-loader": "~0.5.4",
     "node-sass": "v3.8.0",
     "postcss-loader": "v0.10.1",

@@ -13,11 +13,20 @@ import ChangePassword from '../ChangePassword/ChangePassword.web'
 import { showPinView } from '../ChangePin/ChangePin.action'
 import { showPasswordView } from '../ChangePassword/ChangePassword.action'
 import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.action'
+import { userLogin } from '../Login/Login.action'
 
 import skipButton from 'theme/skipButton.scss'
 import styles from './Home.webStyle'
 
 class Home extends Component {
+
+  componentWillMount () {
+    if(window.parent.abcAccount){
+      this.props.dispatch(
+        userLogin(window.parent.abcAccount)
+      )
+    }
+  }
 
   _handleLogout = () => {
       if (window.parent.exitCallback) {

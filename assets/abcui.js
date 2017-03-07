@@ -114,26 +114,25 @@ exports["abcui"] =
 	  var frame = createIFrame(this.bundlePath + '/assets/index.html');
 	  var that = this;
 	  var abcContext = DomWindow.abcContext;
-	  var done = function done() {
-	    removeIFrame(frame);
-	  };
-
 	  DomWindow.loginCallback = function (error, account, opts) {
 	    if (account) {
-	      DomWindow.abcAccount = account;
-	      // removeIFrame(frame)
+
 	      // if (opts && opts.setupRecovery) {
 	      //   opts.noRequirePassword = true
 	      //   that.openSetupRecoveryWindow(account, opts, function () {})
 	      // } else if (!abcContext.pinExists(account.username)) {
 	      //   that.openChangePinEdgeLoginWindow(account, opts, function () {})
 	      // }
-	      callback(error, account, done);
+	      DomWindow.abcAccount = account;
+	      callback(error, account);
+	      setTimeout(function () {
+	        removeIFrame(frame);
+	      }, 20000);
 	    }
 	  };
-	  // DomWindow.exitCallback = function () {
-	  //   removeIFrame(frame)
-	  // }
+	  DomWindow.exitCallback = function () {
+	    removeIFrame(frame);
+	  };
 	};
 
 	InnerAbcUi.prototype.getABCContext = function () {
@@ -7218,14 +7217,13 @@ exports["abcui"] =
 
 	elliptic.version = __webpack_require__(24).version;
 	elliptic.utils = __webpack_require__(25);
-	elliptic.rand = __webpack_require__(29);
-	elliptic.hmacDRBG = __webpack_require__(30);
-	elliptic.curve = __webpack_require__(31);
-	elliptic.curves = __webpack_require__(36);
+	elliptic.rand = __webpack_require__(31);
+	elliptic.curve = __webpack_require__(32);
+	elliptic.curves = __webpack_require__(37);
 
 	// Protocols
-	elliptic.ec = __webpack_require__(38);
-	elliptic.eddsa = __webpack_require__(41);
+	elliptic.ec = __webpack_require__(39);
+	elliptic.eddsa = __webpack_require__(43);
 
 
 /***/ },
@@ -7234,7 +7232,7 @@ exports["abcui"] =
 
 	module.exports = {
 		"name": "elliptic",
-		"version": "6.3.2",
+		"version": "6.4.0",
 		"description": "EC cryptography",
 		"main": "lib/elliptic.js",
 		"files": [
@@ -7269,6 +7267,7 @@ exports["abcui"] =
 			"coveralls": "^2.11.3",
 			"grunt": "^0.4.5",
 			"grunt-browserify": "^5.0.0",
+			"grunt-cli": "^1.2.0",
 			"grunt-contrib-connect": "^1.0.0",
 			"grunt-contrib-copy": "^1.0.0",
 			"grunt-contrib-uglify": "^1.0.1",
@@ -7283,7 +7282,10 @@ exports["abcui"] =
 			"bn.js": "^4.4.0",
 			"brorand": "^1.0.1",
 			"hash.js": "^1.0.0",
-			"inherits": "^2.0.1"
+			"hmac-drbg": "^1.0.0",
+			"inherits": "^2.0.1",
+			"minimalistic-assert": "^1.0.0",
+			"minimalistic-crypto-utils": "^1.0.0"
 		}
 	};
 
@@ -7295,66 +7297,14 @@ exports["abcui"] =
 
 	var utils = exports;
 	var BN = __webpack_require__(26);
+	var minAssert = __webpack_require__(29);
+	var minUtils = __webpack_require__(30);
 
-	utils.assert = function assert(val, msg) {
-	  if (!val)
-	    throw new Error(msg || 'Assertion failed');
-	};
-
-	function toArray(msg, enc) {
-	  if (Array.isArray(msg))
-	    return msg.slice();
-	  if (!msg)
-	    return [];
-	  var res = [];
-	  if (typeof msg !== 'string') {
-	    for (var i = 0; i < msg.length; i++)
-	      res[i] = msg[i] | 0;
-	    return res;
-	  }
-	  if (!enc) {
-	    for (var i = 0; i < msg.length; i++) {
-	      var c = msg.charCodeAt(i);
-	      var hi = c >> 8;
-	      var lo = c & 0xff;
-	      if (hi)
-	        res.push(hi, lo);
-	      else
-	        res.push(lo);
-	    }
-	  } else if (enc === 'hex') {
-	    msg = msg.replace(/[^a-z0-9]+/ig, '');
-	    if (msg.length % 2 !== 0)
-	      msg = '0' + msg;
-	    for (var i = 0; i < msg.length; i += 2)
-	      res.push(parseInt(msg[i] + msg[i + 1], 16));
-	  }
-	  return res;
-	}
-	utils.toArray = toArray;
-
-	function zero2(word) {
-	  if (word.length === 1)
-	    return '0' + word;
-	  else
-	    return word;
-	}
-	utils.zero2 = zero2;
-
-	function toHex(msg) {
-	  var res = '';
-	  for (var i = 0; i < msg.length; i++)
-	    res += zero2(msg[i].toString(16));
-	  return res;
-	}
-	utils.toHex = toHex;
-
-	utils.encode = function encode(arr, enc) {
-	  if (enc === 'hex')
-	    return toHex(arr);
-	  else
-	    return arr;
-	};
+	utils.assert = minAssert;
+	utils.toArray = minUtils.toArray;
+	utils.zero2 = minUtils.zero2;
+	utils.toHex = minUtils.toHex;
+	utils.encode = minUtils.encode;
 
 	// Represent num in a w-NAF form
 	function getNAF(num, w) {
@@ -10923,6 +10873,87 @@ exports["abcui"] =
 
 /***/ },
 /* 29 */
+/***/ function(module, exports) {
+
+	module.exports = assert;
+
+	function assert(val, msg) {
+	  if (!val)
+	    throw new Error(msg || 'Assertion failed');
+	}
+
+	assert.equal = function assertEqual(l, r, msg) {
+	  if (l != r)
+	    throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
+	};
+
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var utils = exports;
+
+	function toArray(msg, enc) {
+	  if (Array.isArray(msg))
+	    return msg.slice();
+	  if (!msg)
+	    return [];
+	  var res = [];
+	  if (typeof msg !== 'string') {
+	    for (var i = 0; i < msg.length; i++)
+	      res[i] = msg[i] | 0;
+	    return res;
+	  }
+	  if (enc === 'hex') {
+	    msg = msg.replace(/[^a-z0-9]+/ig, '');
+	    if (msg.length % 2 !== 0)
+	      msg = '0' + msg;
+	    for (var i = 0; i < msg.length; i += 2)
+	      res.push(parseInt(msg[i] + msg[i + 1], 16));
+	  } else {
+	    for (var i = 0; i < msg.length; i++) {
+	      var c = msg.charCodeAt(i);
+	      var hi = c >> 8;
+	      var lo = c & 0xff;
+	      if (hi)
+	        res.push(hi, lo);
+	      else
+	        res.push(lo);
+	    }
+	  }
+	  return res;
+	}
+	utils.toArray = toArray;
+
+	function zero2(word) {
+	  if (word.length === 1)
+	    return '0' + word;
+	  else
+	    return word;
+	}
+	utils.zero2 = zero2;
+
+	function toHex(msg) {
+	  var res = '';
+	  for (var i = 0; i < msg.length; i++)
+	    res += zero2(msg[i].toString(16));
+	  return res;
+	}
+	utils.toHex = toHex;
+
+	utils.encode = function encode(arr, enc) {
+	  if (enc === 'hex')
+	    return toHex(arr);
+	  else
+	    return arr;
+	};
+
+
+/***/ },
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var r;
@@ -10985,141 +11016,21 @@ exports["abcui"] =
 
 
 /***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var hash = __webpack_require__(3);
-	var elliptic = __webpack_require__(23);
-	var utils = elliptic.utils;
-	var assert = utils.assert;
-
-	function HmacDRBG(options) {
-	  if (!(this instanceof HmacDRBG))
-	    return new HmacDRBG(options);
-	  this.hash = options.hash;
-	  this.predResist = !!options.predResist;
-
-	  this.outLen = this.hash.outSize;
-	  this.minEntropy = options.minEntropy || this.hash.hmacStrength;
-
-	  this.reseed = null;
-	  this.reseedInterval = null;
-	  this.K = null;
-	  this.V = null;
-
-	  var entropy = utils.toArray(options.entropy, options.entropyEnc);
-	  var nonce = utils.toArray(options.nonce, options.nonceEnc);
-	  var pers = utils.toArray(options.pers, options.persEnc);
-	  assert(entropy.length >= (this.minEntropy / 8),
-	         'Not enough entropy. Minimum is: ' + this.minEntropy + ' bits');
-	  this._init(entropy, nonce, pers);
-	}
-	module.exports = HmacDRBG;
-
-	HmacDRBG.prototype._init = function init(entropy, nonce, pers) {
-	  var seed = entropy.concat(nonce).concat(pers);
-
-	  this.K = new Array(this.outLen / 8);
-	  this.V = new Array(this.outLen / 8);
-	  for (var i = 0; i < this.V.length; i++) {
-	    this.K[i] = 0x00;
-	    this.V[i] = 0x01;
-	  }
-
-	  this._update(seed);
-	  this.reseed = 1;
-	  this.reseedInterval = 0x1000000000000;  // 2^48
-	};
-
-	HmacDRBG.prototype._hmac = function hmac() {
-	  return new hash.hmac(this.hash, this.K);
-	};
-
-	HmacDRBG.prototype._update = function update(seed) {
-	  var kmac = this._hmac()
-	                 .update(this.V)
-	                 .update([ 0x00 ]);
-	  if (seed)
-	    kmac = kmac.update(seed);
-	  this.K = kmac.digest();
-	  this.V = this._hmac().update(this.V).digest();
-	  if (!seed)
-	    return;
-
-	  this.K = this._hmac()
-	               .update(this.V)
-	               .update([ 0x01 ])
-	               .update(seed)
-	               .digest();
-	  this.V = this._hmac().update(this.V).digest();
-	};
-
-	HmacDRBG.prototype.reseed = function reseed(entropy, entropyEnc, add, addEnc) {
-	  // Optional entropy enc
-	  if (typeof entropyEnc !== 'string') {
-	    addEnc = add;
-	    add = entropyEnc;
-	    entropyEnc = null;
-	  }
-
-	  entropy = utils.toBuffer(entropy, entropyEnc);
-	  add = utils.toBuffer(add, addEnc);
-
-	  assert(entropy.length >= (this.minEntropy / 8),
-	         'Not enough entropy. Minimum is: ' + this.minEntropy + ' bits');
-
-	  this._update(entropy.concat(add || []));
-	  this.reseed = 1;
-	};
-
-	HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
-	  if (this.reseed > this.reseedInterval)
-	    throw new Error('Reseed is required');
-
-	  // Optional encoding
-	  if (typeof enc !== 'string') {
-	    addEnc = add;
-	    add = enc;
-	    enc = null;
-	  }
-
-	  // Optional additional data
-	  if (add) {
-	    add = utils.toArray(add, addEnc);
-	    this._update(add);
-	  }
-
-	  var temp = [];
-	  while (temp.length < len) {
-	    this.V = this._hmac().update(this.V).digest();
-	    temp = temp.concat(this.V);
-	  }
-
-	  var res = temp.slice(0, len);
-	  this._update(add);
-	  this.reseed++;
-	  return utils.encode(res, enc);
-	};
-
-
-/***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var curve = exports;
 
-	curve.base = __webpack_require__(32);
-	curve.short = __webpack_require__(33);
-	curve.mont = __webpack_require__(34);
-	curve.edwards = __webpack_require__(35);
+	curve.base = __webpack_require__(33);
+	curve.short = __webpack_require__(34);
+	curve.mont = __webpack_require__(35);
+	curve.edwards = __webpack_require__(36);
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11500,12 +11411,12 @@ exports["abcui"] =
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var curve = __webpack_require__(31);
+	var curve = __webpack_require__(32);
 	var elliptic = __webpack_require__(23);
 	var BN = __webpack_require__(26);
 	var inherits = __webpack_require__(5);
@@ -12444,12 +12355,12 @@ exports["abcui"] =
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var curve = __webpack_require__(31);
+	var curve = __webpack_require__(32);
 	var BN = __webpack_require__(26);
 	var inherits = __webpack_require__(5);
 	var Base = curve.base;
@@ -12630,12 +12541,12 @@ exports["abcui"] =
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var curve = __webpack_require__(31);
+	var curve = __webpack_require__(32);
 	var elliptic = __webpack_require__(23);
 	var BN = __webpack_require__(26);
 	var inherits = __webpack_require__(5);
@@ -13069,7 +12980,7 @@ exports["abcui"] =
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13211,7 +13122,7 @@ exports["abcui"] =
 	  prime: 'p25519',
 	  p: '7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed',
 	  a: '76d06',
-	  b: '0',
+	  b: '1',
 	  n: '1000000000000000 0000000000000000 14def9dea2f79cd6 5812631a5cf5d3ed',
 	  hash: hash.sha256,
 	  gRed: false,
@@ -13241,7 +13152,7 @@ exports["abcui"] =
 
 	var pre;
 	try {
-	  pre = __webpack_require__(37);
+	  pre = __webpack_require__(38);
 	} catch (e) {
 	  pre = undefined;
 	}
@@ -13280,7 +13191,7 @@ exports["abcui"] =
 
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -14066,18 +13977,19 @@ exports["abcui"] =
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var BN = __webpack_require__(26);
+	var HmacDRBG = __webpack_require__(40);
 	var elliptic = __webpack_require__(23);
 	var utils = elliptic.utils;
 	var assert = utils.assert;
 
-	var KeyPair = __webpack_require__(39);
-	var Signature = __webpack_require__(40);
+	var KeyPair = __webpack_require__(41);
+	var Signature = __webpack_require__(42);
 
 	function EC(options) {
 	  if (!(this instanceof EC))
@@ -14125,10 +14037,12 @@ exports["abcui"] =
 	    options = {};
 
 	  // Instantiate Hmac_DRBG
-	  var drbg = new elliptic.hmacDRBG({
+	  var drbg = new HmacDRBG({
 	    hash: this.hash,
 	    pers: options.pers,
+	    persEnc: options.persEnc || 'utf8',
 	    entropy: options.entropy || elliptic.rand(this.hash.hmacStrength),
+	    entropyEnc: options.entropy && options.entropyEnc || 'utf8',
 	    nonce: this.n.toArray()
 	  });
 
@@ -14173,12 +14087,12 @@ exports["abcui"] =
 	  var nonce = msg.toArray('be', bytes);
 
 	  // Instantiate Hmac_DRBG
-	  var drbg = new elliptic.hmacDRBG({
+	  var drbg = new HmacDRBG({
 	    hash: this.hash,
 	    entropy: bkey,
 	    nonce: nonce,
 	    pers: options.pers,
-	    persEnc: options.persEnc
+	    persEnc: options.persEnc || 'utf8'
 	  });
 
 	  // Number of bytes to generate
@@ -14309,12 +14223,134 @@ exports["abcui"] =
 
 
 /***/ },
-/* 39 */
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var hash = __webpack_require__(3);
+	var utils = __webpack_require__(30);
+	var assert = __webpack_require__(29);
+
+	function HmacDRBG(options) {
+	  if (!(this instanceof HmacDRBG))
+	    return new HmacDRBG(options);
+	  this.hash = options.hash;
+	  this.predResist = !!options.predResist;
+
+	  this.outLen = this.hash.outSize;
+	  this.minEntropy = options.minEntropy || this.hash.hmacStrength;
+
+	  this.reseed = null;
+	  this.reseedInterval = null;
+	  this.K = null;
+	  this.V = null;
+
+	  var entropy = utils.toArray(options.entropy, options.entropyEnc || 'hex');
+	  var nonce = utils.toArray(options.nonce, options.nonceEnc || 'hex');
+	  var pers = utils.toArray(options.pers, options.persEnc || 'hex');
+	  assert(entropy.length >= (this.minEntropy / 8),
+	         'Not enough entropy. Minimum is: ' + this.minEntropy + ' bits');
+	  this._init(entropy, nonce, pers);
+	}
+	module.exports = HmacDRBG;
+
+	HmacDRBG.prototype._init = function init(entropy, nonce, pers) {
+	  var seed = entropy.concat(nonce).concat(pers);
+
+	  this.K = new Array(this.outLen / 8);
+	  this.V = new Array(this.outLen / 8);
+	  for (var i = 0; i < this.V.length; i++) {
+	    this.K[i] = 0x00;
+	    this.V[i] = 0x01;
+	  }
+
+	  this._update(seed);
+	  this.reseed = 1;
+	  this.reseedInterval = 0x1000000000000;  // 2^48
+	};
+
+	HmacDRBG.prototype._hmac = function hmac() {
+	  return new hash.hmac(this.hash, this.K);
+	};
+
+	HmacDRBG.prototype._update = function update(seed) {
+	  var kmac = this._hmac()
+	                 .update(this.V)
+	                 .update([ 0x00 ]);
+	  if (seed)
+	    kmac = kmac.update(seed);
+	  this.K = kmac.digest();
+	  this.V = this._hmac().update(this.V).digest();
+	  if (!seed)
+	    return;
+
+	  this.K = this._hmac()
+	               .update(this.V)
+	               .update([ 0x01 ])
+	               .update(seed)
+	               .digest();
+	  this.V = this._hmac().update(this.V).digest();
+	};
+
+	HmacDRBG.prototype.reseed = function reseed(entropy, entropyEnc, add, addEnc) {
+	  // Optional entropy enc
+	  if (typeof entropyEnc !== 'string') {
+	    addEnc = add;
+	    add = entropyEnc;
+	    entropyEnc = null;
+	  }
+
+	  entropy = utils.toArray(entropy, entropyEnc);
+	  add = utils.toArray(add, addEnc);
+
+	  assert(entropy.length >= (this.minEntropy / 8),
+	         'Not enough entropy. Minimum is: ' + this.minEntropy + ' bits');
+
+	  this._update(entropy.concat(add || []));
+	  this.reseed = 1;
+	};
+
+	HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
+	  if (this.reseed > this.reseedInterval)
+	    throw new Error('Reseed is required');
+
+	  // Optional encoding
+	  if (typeof enc !== 'string') {
+	    addEnc = add;
+	    add = enc;
+	    enc = null;
+	  }
+
+	  // Optional additional data
+	  if (add) {
+	    add = utils.toArray(add, addEnc || 'hex');
+	    this._update(add);
+	  }
+
+	  var temp = [];
+	  while (temp.length < len) {
+	    this.V = this._hmac().update(this.V).digest();
+	    temp = temp.concat(this.V);
+	  }
+
+	  var res = temp.slice(0, len);
+	  this._update(add);
+	  this.reseed++;
+	  return utils.encode(res, enc);
+	};
+
+
+/***/ },
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var BN = __webpack_require__(26);
+	var elliptic = __webpack_require__(23);
+	var utils = elliptic.utils;
+	var assert = utils.assert;
 
 	function KeyPair(ec, options) {
 	  this.ec = ec;
@@ -14395,6 +14431,15 @@ exports["abcui"] =
 
 	KeyPair.prototype._importPublic = function _importPublic(key, enc) {
 	  if (key.x || key.y) {
+	    // Montgomery points only have an `x` coordinate.
+	    // Weierstrass/Edwards points on the other hand have both `x` and
+	    // `y` coordinates.
+	    if (this.ec.curve.type === 'mont') {
+	      assert(key.x, 'Need x coordinate');
+	    } else if (this.ec.curve.type === 'short' ||
+	               this.ec.curve.type === 'edwards') {
+	      assert(key.x && key.y, 'Need both x and y coordinate');
+	    }
 	    this.pub = this.ec.curve.point(key.x, key.y);
 	    return;
 	  }
@@ -14422,7 +14467,7 @@ exports["abcui"] =
 
 
 /***/ },
-/* 40 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14563,7 +14608,7 @@ exports["abcui"] =
 
 
 /***/ },
-/* 41 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14573,8 +14618,8 @@ exports["abcui"] =
 	var utils = elliptic.utils;
 	var assert = utils.assert;
 	var parseBytes = utils.parseBytes;
-	var KeyPair = __webpack_require__(42);
-	var Signature = __webpack_require__(43);
+	var KeyPair = __webpack_require__(44);
+	var Signature = __webpack_require__(45);
 
 	function EDDSA(curve) {
 	  assert(curve === 'ed25519', 'only tested with ed25519 so far');
@@ -14687,7 +14732,7 @@ exports["abcui"] =
 
 
 /***/ },
-/* 42 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14789,7 +14834,7 @@ exports["abcui"] =
 
 
 /***/ },
-/* 43 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
