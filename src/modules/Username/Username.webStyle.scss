@@ -2,12 +2,23 @@
   padding: 0 $unit * 5;
 }
 
+.exitButton {
+  font-size: $unit * 2.2;
+  position: absolute;
+  top: 8px;
+  left: 0;
+}
+
+.title {
+  text-align: center;
+}
+
 .section {
-  margin: $unit * 2.5 0;
+  margin: $unit * 1.8 0;
 }
 
 .inputField {
-  width: 95%;
+  width: 100%;
 }
 
 .usernameText{
