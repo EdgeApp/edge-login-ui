@@ -12,8 +12,8 @@ export const loginWithPassword = (username, password, callback) => {
     setTimeout(() => {
       abcContext(context => {
         context.loginWithPassword(username, password, null, null, (error, account) => {
-          dispatch(closeLoading())
           if (error) {
+            dispatch(closeLoading())
             dispatch(openErrorModal(error.message))
             return callback(error, null)
           }

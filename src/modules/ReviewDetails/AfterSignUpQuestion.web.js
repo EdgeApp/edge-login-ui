@@ -3,9 +3,12 @@ import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 import { browserHistory } from 'react-router'
 import Dialog from 'react-toolbox/lib/dialog'
+import { withRouter } from 'react-router'
 
 import { showPasswordRecovery, hidePasswordRecovery } from './ReviewDetails.action'
 import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.action'
+import { loginWithPassword } from '../Login/Login.middleware'
+import { openLoading, closeLoading } from '../Loader/Loader.action'
 
 import dialogOkButton from 'theme/dialogOkButton.scss'
 
@@ -23,16 +26,24 @@ class Review extends Component {
   }
 
   _handleFinish = () => {
-    if (!error) {
-      if (window.parent.loginCallback) {
-        window.parent.loginCallback(null, account)
-      }
-      if (!window.parent.loginCallback) {
-        if(window.parent.exitCallback){
-          window.parent.exitCallback(null, account)
+    const { username, password } = this.props.details
+    this.props.dispatch(
+      loginWithPassword(
+        username,
+        password,
+        ( error, account ) => {
+          if (!error) {
+            if (window.parent.loginCallback) {
+              window.parent.loginCallback(null, account)
+            }
+            if (!window.parent.loginCallback) {
+              this.props.dispatch(closeLoading())
+              this.props.router.push('/home')
+            }
+          }
         }
-      }
-    }
+      )
+    )
   }
 
   _handleOpenPasswordRecovery = () => {
@@ -65,6 +76,7 @@ class Review extends Component {
   }
 }
 
+Review = withRouter(Review)
 export default connect(state => ({
 
   details: state.reviewDetails.details,

@@ -5,6 +5,7 @@ import { withRouter } from 'react-router'
 import { openLogin, loginUsername, loginPassword, openUserList, closeUserList } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
+import { openLoading, closeLoading } from '../Loader/Loader.action'
 
 import t from 'lib/web/LocaleStrings'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
@@ -27,16 +28,23 @@ class Login extends Component {
     if (this.props.viewPassword) {
       this.refs.loginUsername.getWrappedInstance().blur()
       this.refs.password.getWrappedInstance().blur()
-      this.props.dispatch(loginWithPassword(
-        this.props.username,
-        this.props.password,
-        ( error, account) => {
-        if (!error) {
-          if (window.parent.loginCallback) {
-            window.parent.loginCallback(null, account)
+      this.props.dispatch(
+        loginWithPassword(
+          this.props.username,
+          this.props.password,
+          ( error, account ) => {
+          console.log(account)
+          if (!error) {
+            if (window.parent.loginCallback) {
+              window.parent.loginCallback(null, account)
+            }
+            if (!window.parent.loginCallback) {
+              this.props.dispatch(closeLoading())
+              this.props.router.push('/home')
+            }
           }
-        }
-      }))
+        })
+      )
     } else {
       this.props.dispatch(openLogin())
       // this.refs.fieldsView.transitionTo({opacity: 1, height: 90}, 200)

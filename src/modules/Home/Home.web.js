@@ -9,18 +9,23 @@ import { withRouter } from 'react-router'
 
 import ChangePin from '../ChangePin/ChangePin.web'
 import ChangePassword from '../ChangePassword/ChangePassword.web'
-import PasswordRecovery from '../PasswordRecovery/PasswordRecovery.web'
 
 import { showPinView } from '../ChangePin/ChangePin.action'
 import { showPasswordView } from '../ChangePassword/ChangePassword.action'
 import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.action'
 
+import skipButton from 'theme/skipButton.scss'
+import styles from './Home.webStyle'
+
 class Home extends Component {
 
   _handleLogout = () => {
-    if (window.parent.exitCallback) {
-      window.parent.exitCallback()
-    }
+      if (window.parent.exitCallback) {
+        window.parent.exitCallback(null)
+      }
+      if (!window.parent.exitCallback) {
+        this.props.router.push('/')
+      }
   }
 
   _handleChangePin = () => {
@@ -43,16 +48,17 @@ class Home extends Component {
 
   render () {
     return (
-      <div>
-        <h5>Manage Account</h5>
-        <h6>Account: { this.props.user ? this.props.user.username : '' }</h6>
-        <p><Link onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</Link></p>
-        <p><Link onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</Link></p>
-        <p><Link onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</Link></p>
-        <Button theme={signinButton} type='button' onClick={this._handleLogout}>{t('string_done')}</Button>
+      <div className={styles.container}>
+        <h4>Manage Account</h4>
+        <h5 className={styles.username}><b>{ this.props.user ? this.props.user.username : '' }</b></h5>
+        <div className={styles.sectionLinks}>
+          <p><a className={styles.links} onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</a></p>
+          <p><a className={styles.links} onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</a></p>
+          <p><a className={styles.links} onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</a></p>
+        </div>
+        <Button className={styles.section} raised theme={skipButton} type='button' onClick={this._handleLogout}>{t('string_done')}</Button>
         <ChangePin />
         <ChangePassword />
-        <PasswordRecovery />
       </div>
     )
   }

@@ -7,28 +7,33 @@ export const checkPin = (password, pin, account, callback) => {
     const t = imports.t
     dispatch(openLoading())
 
-    if (!account.checkPassword(password)) {
-      dispatch(closeLoading())
-      return dispatch(openErrorModal(t('server_error_bad_password')))
-    }
 
     if (pin.length !== 4) {
       dispatch(closeLoading())
       return dispatch(openErrorModal(t('activity_change_pin_length')))
     }
 
-    if (account.checkPassword(password)) {
-      account.changePIN(pin, error => {
+    account.checkPassword(password).then(result => {
+      if (!result) {
+        console.log(result)
         dispatch(closeLoading())
-        if (error) {
-          return dispatch(openErrorModal(t('server_error_no_connection')))
-        }
-        if (!error) {
-          dispatch(hidePinView())
-          dispatch(pinChanged())
-          return dispatch(showPinChangedNotification())
-        }
-      })
-    }
+        return dispatch(openErrorModal(t('server_error_bad_password')))
+      }
+      if (result) {
+        console.log(result)
+        account.changePIN(pin, error => {
+          dispatch(closeLoading())
+          if (error) {
+            return dispatch(openErrorModal(t('server_error_no_connection')))
+          }
+          if (!error) {
+            dispatch(hidePinView())
+            dispatch(pinChanged())
+            return dispatch(showPinChangedNotification())
+          }
+        })
+      }
+    })
+
   }
 }

@@ -77,7 +77,7 @@ InnerAbcUi.prototype.openLoginWindow = function (callback) {
       // }
       DomWindow.abcAccount = account
       callback(error, account)
-      setTimeOut(function( ){
+      setTimeout(function( ){
         removeIFrame(frame)
       }, 500)
     }

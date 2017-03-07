@@ -9,7 +9,6 @@ import { showSignInDetails, hideSignInDetails, showPasswordRecovery } from './Re
 import { loginWithPassword } from '../Login/Login.middleware'
 
 import AfterSignUpQuestion from './AfterSignUpQuestion.web'
-import PasswordRecovery from '../PasswordRecovery/PasswordRecovery.web'
 
 import nextButton from 'theme/nextButton.scss'
 import signinButton from 'theme/signinButton.scss'
@@ -87,7 +86,6 @@ class Review extends Component {
       <div>
         {renderView()}
         <AfterSignUpQuestion />
-        <PasswordRecovery />
       </div>
     )
   }

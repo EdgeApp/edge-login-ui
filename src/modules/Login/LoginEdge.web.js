@@ -33,7 +33,6 @@ class LoginEdge extends Component {
     }
   }
 
-
   handleEdgeLogin (error, account) {
     console.log(username)
     if (error) {

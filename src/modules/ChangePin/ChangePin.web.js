@@ -2,17 +2,29 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
-
-import { hidePinView, showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification } from './ChangePin.action'
-import { checkPin } from './ChangePin.middleware'
 import Snackbar from 'react-toolbox/lib/snackbar'
 import Dialog from 'react-toolbox/lib/dialog'
 import Input from 'react-toolbox/lib/input'
 
+import { hidePinView, showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification } from './ChangePin.action'
+import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { checkPin } from './ChangePin.middleware'
+
 class ChangePin extends Component {
 
   _handleSubmit = () => {
-    const callback = () => null
+    const callback = (error) => {
+      if(!error){
+        this.props.dispatch(pinChanged())
+        if (window.parent.exitCallback) {
+          window.parent.exitCallback(null)
+        }
+        if (!window.parent.exitCallback) {
+          this.props.dispatch(closeLoading())
+          this.props.dispatch(hidePinView())
+        }
+      }
+    }
     this.props.dispatch(
       checkPin(
         this.props.password,
@@ -37,7 +49,7 @@ class ChangePin extends Component {
 
   buttons = [
     { label: "Close", onClick: this._handleHideModal },
-    { label: "Submit", onClick: this._handleSubmit }
+    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true }
   ]
 
   _renderNotification = () => {
@@ -63,7 +75,6 @@ class ChangePin extends Component {
         onOverlayClick={this._handleHideModal}
         title={t('activity_signup_title_change_pin')}
       >
-        {this._renderNotification()}
         <Input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} label='Current Password' />
         <Input type='number' name='changePin' onChange={this._handleOnChangePin} value={pin} label='New Pin' />
       </Dialog>

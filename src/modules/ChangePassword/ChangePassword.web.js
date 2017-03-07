@@ -13,7 +13,18 @@ import Dialog from 'react-toolbox/lib/dialog'
 class ChangePassword extends Component {
 
   _handleSubmit = () => {
-    const callback = () => browserHistory.push('/signup/review')
+    const callback = (error) => {
+      if(!error){
+        this.props.dispatch(pinChanged())
+        if (window.parent.exitCallback) {
+          window.parent.exitCallback(null)
+        }
+        if (!window.parent.exitCallback) {
+          this.props.dispatch(closeLoading())
+          this.props.dispatch(hidePasswordView())
+        }
+      }
+    }
     this.props.dispatch(
       checkPassword(
         this.props.oldPassword,
@@ -49,7 +60,7 @@ class ChangePassword extends Component {
 
   buttons = [
     { label: "Close", onClick: this._handleHideModal },
-    { label: "Submit", onClick: this._handleSubmit }
+    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true }
   ]
 
   _renderNotification = () => {
@@ -75,7 +86,6 @@ class ChangePassword extends Component {
         onOverlayClick={this._handleHideModal}
         title={t('activity_signup_password_change_title')}
       >
-        {this._renderNotification()}
         <Input type='password' name='oldPassword' onChange={this._handleOnChangeOldPassword} value={oldPassword} label='Old Password' />
         <Input type='password' name='newPassword' onChange={this._handleOnChangeNewPassword} value={newPassword} label='New Password' />
         <Input type='password' name='newPasswordRepeat' onChange={this._handleOnChangeNewPasswordRepeat} value={newPasswordRepeat} label='Confirm New Password' />

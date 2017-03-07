@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import t from 'lib/web/LocaleStrings'
 
 import { openLogin, loginPIN, openUserList, closeUserList } from './Login.action'
 import { loginWithPin } from './Login.middleware'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { removeUserToLogin } from '../CachedUsers/CachedUsers.action'
-import t from 'lib/web/LocaleStrings'
+import { openLoading, closeLoading } from '../Loader/Loader.action'
+
 
 import { Button } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
@@ -26,7 +28,10 @@ class LoginWithPin extends Component {
           if (window.parent.loginCallback) {
             window.parent.loginCallback(null, account)
           }
-          this.props.router.push('/home')
+          if (!window.parent.loginCallback) {
+            this.props.dispatch(closeLoading())
+            this.props.router.push('/home')
+          }
         } else {
           this.refs.pinInput.getWrappedInstance().focus()
         }
