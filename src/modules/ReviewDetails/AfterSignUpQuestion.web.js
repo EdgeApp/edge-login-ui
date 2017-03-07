@@ -7,8 +7,12 @@ import Dialog from 'react-toolbox/lib/dialog'
 import { showPasswordRecovery, hidePasswordRecovery } from './ReviewDetails.action'
 import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.action'
 
+import dialogOkButton from 'theme/dialogOkButton.scss'
+
 const abcuiContext = window.parent.abcuiContext
 const vendorName = abcuiContext ?  abcuiContext.vendorName : null
+
+import nextButton from 'theme/nextButton.scss'
 
 class Review extends Component {
 
@@ -23,6 +27,11 @@ class Review extends Component {
       if (window.parent.loginCallback) {
         window.parent.loginCallback(null, account)
       }
+      if (!window.parent.loginCallback) {
+        if(window.parent.exitCallback){
+          window.parent.exitCallback(null, account)
+        }
+      }
     }
   }
 
@@ -34,7 +43,7 @@ class Review extends Component {
 
 	actions = [
 		{ label: t('password_check_check_later'),               onClick: this._handleFinish },
-		{ label: t('fragment_recovery_account_setup_recovery'), onClick: this._handleOpenPasswordRecovery }
+		{ label: t('fragment_recovery_account_setup_recovery'), onClick: this._handleOpenPasswordRecovery, raised: true, primary: true }
 	];
 
   render () {

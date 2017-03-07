@@ -37,9 +37,11 @@ class PinComponent extends Component {
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
     }
-    this.props.dispatch(
-      changePinNumberValue(pin)
-    )
+    if(/^\d+$/.test(pin) || pin.length === 0) {
+      this.props.dispatch(
+        changePinNumberValue(pin)
+      )
+    }
     if (pin.length > 3) {
       setTimeout(this._handleSubmit, 200)
     }

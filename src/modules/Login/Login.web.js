@@ -88,7 +88,6 @@ class Login extends Component {
 
   render () {
 
-    console.log(this.props.viewPIN)
     const cUsers = () => {
       if (this.props.showCachedUsers) {
         return (<CachedUsers blurField={this.refs.loginUsername.getWrappedInstance()} />)
@@ -128,7 +127,6 @@ class Login extends Component {
 
               <Input
                 ref='loginUsername'
-                className={styles.inputFields}
                 label={t('fragment_landing_username_hint')}
                 onChange={this._changeUsername}
                 value={this.props.username}
@@ -142,7 +140,6 @@ class Login extends Component {
                 <Input
                   type='password'
                   ref='password'
-                  className={styles.inputFields}
                   onFocus={this.passwordFocused}
                   label={t('fragment_landing_password_hint')}
                   onChange={this.changePassword}

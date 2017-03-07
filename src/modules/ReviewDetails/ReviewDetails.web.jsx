@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 import { browserHistory } from 'react-router'
+import Button from 'react-toolbox/lib/button'
+import FontIcon from 'react-toolbox/lib/font_icon';
 
 import { showSignInDetails, hideSignInDetails, showPasswordRecovery } from './ReviewDetails.action'
 import { loginWithPassword } from '../Login/Login.middleware'
@@ -9,9 +11,9 @@ import { loginWithPassword } from '../Login/Login.middleware'
 import AfterSignUpQuestion from './AfterSignUpQuestion.web'
 import PasswordRecovery from '../PasswordRecovery/PasswordRecovery.web'
 
-import Button from 'react-toolbox/lib/button'
-import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
 import nextButton from 'theme/nextButton.scss'
+import signinButton from 'theme/signinButton.scss'
+import styles from './ReviewDetails.webStyle'
 
 
 class Review extends Component {
@@ -47,49 +49,49 @@ class Review extends Component {
   }
 
   render () {
-    if (this.props.view) {
-      return (
-        <div>
-          <Card>
-            <CardText style={{height: '100px'}}>
-              <p>username: {this.props.details.username}</p>
-              <p>pin: {this.props.details.pin}</p>
-              <p>password: {this.props.details.password}</p>
-            </CardText>
-            <CardActions>
-              <Button type='button' raised primary onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</Button>
-            </CardActions>
-            <CardActions>
-              <Button type='button' raised theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
-            </CardActions>
-          </Card>
-          <AfterSignUpQuestion />
-          <PasswordRecovery />
-        </div>
-      )
+    const renderView = () => {
+      if (this.props.view) {
+        return(
+          <div className={styles.container}>
+            <div className={styles.section}>
+              <p className={styles.credentials}>username: <b>{this.props.details.username}</b></p>
+              <p className={styles.credentials}>pin: <b>{this.props.details.pin}</b></p>
+              <p className={styles.credentials}>password: <b>{this.props.details.password}</b></p>
+            </div>
+            <div className={styles.buttonSection}>
+              <Button className={styles.buttonBlue} type='button' raised primary onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</Button>
+              <Button className={styles.buttonGreen} type='button' raised theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
+            </div>
+          </div>
+        )
+      }
+
+      if (!this.props.view) {
+        return(
+          <div className={styles.container}>
+            <div className={styles.warningSection}>
+              <p className={styles.paragraph1}>{t('fragment_setup_writeitdown_text')}</p>
+              <br />
+              <p className={styles.paragraph2}>{t('fragment_setup_writeitdown_text_warning')}</p>
+            </div>
+            <div className={styles.buttonSection}>
+              <Button className={styles.buttonBlue} type='button' raised primary onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</Button>
+              <Button className={styles.buttonGreen} type='button' raised theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
+            </div>
+          </div>
+        )
+      }
     }
 
-    if (!this.props.view) {
-      return (
-        <div>
-          <Card>
-            <CardText style={{height: '100px'}}>
-              <h5>{t('fragment_setup_writeitdown_text')}</h5>
-              <p>{t('fragment_setup_writeitdown_text_warning')}</p>
-            </CardText>
-            <CardActions>
-              <Button type='button' raised primary onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</Button>
-            </CardActions>
-            <CardActions>
-              <Button type='button' raised theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
-            </CardActions>
-          </Card>
-          <AfterSignUpQuestion />
-          <PasswordRecovery />
-        </div>
-      )
-    }
+    return (
+      <div>
+        {renderView()}
+        <AfterSignUpQuestion />
+        <PasswordRecovery />
+      </div>
+    )
   }
+
 }
 
 export default connect(state => ({

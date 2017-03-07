@@ -25,6 +25,8 @@ import {
   changePasswordRepeatValue
 } from './Password.action'
 
+import styles from './Password.webStyle'
+
 const unselected = require('../../img/btn_unselected.png')
 const selected = require('../../img/Green-check.png')
 
@@ -44,13 +46,21 @@ class Password extends Component {
       )
     )
   }
-
+  _handleSubmitSkipPassword = () => {
+    const callback = () => this.props.router.push('/review')
+    this.props.dispatch(
+      skipPassword(
+        this.props.username,
+        this.props.pin,
+        callback
+      )
+    )
+  }
   _handleBack = () => {
     if (this.props.loader.loading === false) {
       return this.props.dispatch(changeSignupPage('pin'))
     }
   }
-
   _handlePasswordNotification = () => {
     this.refs.signupPassword.getWrappedInstance().blur()
     this.refs.passwordRepeat.getWrappedInstance().blur()
@@ -65,16 +75,6 @@ class Password extends Component {
       this.refs.passwordRepeat.getWrappedInstance().focus()
     }
   }
-  _handleSubmitSkipPassword = () => {
-    const callback = () => this.props.router.push('/signup/review')
-    this.props.dispatch(
-      skipPassword(
-        this.props.username,
-        this.props.pin,
-        callback
-      )
-    )
-  }
   _handleOnChangePassword = (password) => {
     this.props.dispatch(changePasswordValue(password))
     this.props.dispatch(validate(password))
@@ -85,6 +85,7 @@ class Password extends Component {
   }
   toggleRevealPassword = (e) => {
     this.refs.signupPassword.getWrappedInstance().refs.input.type = this.props.inputState ? 'text' : 'password'
+    this.refs.passwordRepeat.getWrappedInstance().refs.input.type = this.props.inputState ? 'text' : 'password'
     if (this.props.inputState) {
       this.props.dispatch(hidePassword())
     } else {
@@ -97,34 +98,56 @@ class Password extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <Button onClick={this._handleBack} theme={backButton} style={{position: 'absolute', left: 0, top: 0}} type='button'>{t('string_capitalize_back')}</Button>
-          <div style={{textAlign: 'center', fontSize: '16px', padding: 10}}>{t('activity_signup_password_label')}</div>
+          <a onClick={this._handleBack} className={styles.exitButton}>{t('string_capitalize_back')}</a>
+          <div className={styles.title}>
+            <h4>{t('activity_signup_password_label')}</h4>
+          </div>
         </div>
-        <Card>
-          <CardText>
-            <div style={{position: 'relative'}}>
-              <div>
-                <div style={{fontWeight: 'bold', fontSize: '16px'}}>{t('activity_signup_password_requirements')}</div>
-                <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkOneUpper()} />{ t('password_rule_no_uppercase') }</p>
-                <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkOneLower()} />{ t('password_rule_no_lowercase') }</p>
-                <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkOneNumber()} />{ t('password_rule_no_number') }</p>
-                <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkCharacterLength()} />{ t('password_rule_too_short') }</p>
-              </div>
-              <p>{t('fragment_setup_password_text')}</p>
+        <div className={styles.section}>
+          <div>
+            <h5>{t('activity_signup_password_requirements')}</h5>
+            <br />
+            <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkOneUpper()} />{ t('password_rule_no_uppercase') }</p>
+            <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkOneLower()} />{ t('password_rule_no_lowercase') }</p>
+            <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkOneNumber()} />{ t('password_rule_no_number') }</p>
+            <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkCharacterLength()} />{ t('password_rule_too_short') }</p>
+          </div>
+          <br />
+          <p>{t('fragment_setup_password_text')}</p>
+        </div>
+        <div className={styles.section}>
+          <div className={styles.inputPasswordFieldDiv}>
+            <div style={{flexGrow: 1}}>
+              <Input
+                ref='signupPassword'
+                autoFocus
+                type='password'
+                name='password'
+                onKeyPress={this.passwordKeyPressed}
+                onChange={this._handleOnChangePassword}
+                value={this.props.password}
+                label='Password'
+              />
             </div>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}}>
-              <div style={{flexGrow: 1}}><Input ref='signupPassword' autoFocus type='password' name='password' onKeyPress={this.passwordKeyPressed} onChange={this._handleOnChangePassword} value={this.props.password} label='Password' /></div>
-              <img onClick={this.toggleRevealPassword} src={require('img/icon_export_view.png')} style={{width: '30px', margin: '0px 15px'}} />
-            </div>
-            <form onSubmit={e => this._handleSubmit(e)}>
-              <Input type="password" ref='passwordRepeat' name="passwordRepeat" onChange={this._handleOnChangePasswordRepeat} value={this.props.passwordRepeat} label="Re-enter Password" />
-            </form>
-          </CardText>
-          <CardActions>
-            <Button type='button' theme={skipButton} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
-            <Button type='button' raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
-          </CardActions>
-        </Card>
+            <img onClick={this.toggleRevealPassword} src={require('img/icon_export_view.png')} className={styles.inputPasswordFieldImg} />
+          </div>
+          <form onSubmit={e => this._handleSubmit(e)}>
+            <Input
+              type="password"
+              ref='passwordRepeat'
+              name="passwordRepeat"
+              onChange={this._handleOnChangePasswordRepeat}
+              value={this.props.passwordRepeat}
+              label="Re-enter Password"
+            />
+          </form>
+        </div>
+
+        <div className={styles.section}>
+          <Button type='button' theme={skipButton} raised onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
+          <Button type='button' theme={nextButton} raised onClick={this._handleSubmit}>{t('string_next')}</Button>
+        </div>
+
         <SkipPassword handleSubmit={this._handleSubmitSkipPassword} />
       </div>
 

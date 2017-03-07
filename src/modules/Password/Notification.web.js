@@ -16,21 +16,22 @@ class NotificationModal extends Component {
     )
   }
 
+  buttons = [
+    { label: t('string_cancel'), onClick: this._handleClose },
+    { label: t('string_ok'), onClick: this.props.handleSubmit, primary: true, raised: true }
+  ]
+
   render () {
     if (this.props.visible) {
       return (
         <Dialog
-          active={this.props.visible}>
-          <Card>
-            <CardText>
-              <h5>{t('fragment_setup_password_nopassword_title')}</h5>
-              <p>{t('fragment_setup_password_nopassword_message')}</p>
-            </CardText>
-            <CardActions>
-              <Button type='button' onClick={this._handleClose}>{t('string_cancel')}</Button>
-              <Button type='button' onClick={this.props.handleSubmit}>{t('string_ok')}</Button>
-            </CardActions>
-          </Card>
+          active={this.props.visible}
+          actions={this.buttons}
+          onEscKeyDown={this._handleClose}
+          onOverlayClick={this._handleClose}
+          title={t('fragment_setup_password_nopassword_title')}
+        >
+            <p>{t('fragment_setup_password_nopassword_message')}</p>
         </Dialog>
       )
     }

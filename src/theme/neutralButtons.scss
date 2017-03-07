@@ -1,0 +1,6 @@
+.neutral:not([disabled]) {
+  &.raised {
+    background-color: #80C342;
+    color: #FFF;
+  }
+}

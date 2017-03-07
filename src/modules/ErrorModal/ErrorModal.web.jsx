@@ -8,6 +8,8 @@ import Dialog from 'react-toolbox/lib/dialog'
 
 import { closeErrorModal } from './ErrorModal.action'
 
+import styles from './ErrorModal.webStyle'
+
 class ErrorModal extends Component {
 
   _handleClose = () => {
@@ -21,22 +23,17 @@ class ErrorModal extends Component {
       return false
     }
   }
-  handleToggle = () => {
-    // this.props.dispatch(hideLoading())
-  }
-
-  actions = [
-    { label: 'Ok', onClick: this.handleToggle }
-  ];
 
   render () {
     if (this._checkLoading()) {
       return (
-        <Dialog style={{zIndex: 2}}
+        <Dialog className={styles.dialogZIndex}
           action={this.actions}
-          active={this._checkLoading()}>
-          <div style={{padding: '10px'}}>
+          active={this._checkLoading()}
+        >
+          <div className={styles.container}>
             <p>{this.props.message}</p>
+            <br />
             <Button raised theme={nextButton} type='button' onClick={this._handleClose}>{t('string_ok')}</Button>
           </div>
         </Dialog>
