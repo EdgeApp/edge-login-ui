@@ -2,12 +2,12 @@
   "name": "airbitz-core-js-ui",
   "version": "1.0.0",
   "description": "Pluggable UI using airbitz-core",
-  "main": "assets/abcui.js",
+  "main": "src/abcui.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server_dev.js",
-    "standard": "standard --fix --verbose --parser babel-eslint | snazzy",
-    "build": "webpack --color --verbose --progress --config webpack.config.index.js && webpack --color --verbose --progress --config webpack.config.js && npm link"
+    "build": "webpack --color --verbose --progress --config webpack.config.index.js && webpack --color --verbose --progress --config webpack.config.js && npm link",
+    "standard": "standard --fix --verbose --parser babel-eslint | snazzy"
   },
   "keywords": [],
   "author": "",
