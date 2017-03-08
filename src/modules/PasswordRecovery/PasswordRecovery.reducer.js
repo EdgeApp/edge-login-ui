@@ -26,6 +26,17 @@ export const viewToken = (state = false, action) => {
   }
 }
 
+export const viewFinishModal = (state = false, action) => {
+  switch (action.type) {
+    case ACTION.SHOW_PASSWORD_RECOVERY_FINISH_MODAL :
+      return true
+    case ACTION.HIDE_PASSWORD_RECOVERY_FINISH_MODAL :
+      return false
+    default:
+      return state
+  }
+}
+
 export const finishButton = (state = false, action) => {
   switch (action.type) {
     case ACTION.SHOW_PASSWORD_RECOVERY_TOKEN_BUTTON :

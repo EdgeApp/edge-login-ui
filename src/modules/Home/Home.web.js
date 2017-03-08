@@ -9,6 +9,8 @@ import { withRouter } from 'react-router'
 
 import ChangePin from '../ChangePin/ChangePin.web'
 import ChangePassword from '../ChangePassword/ChangePassword.web'
+import PasswordRecovery from '../PasswordRecovery/PasswordRecovery.web'
+import PasswordRecoverySuccess from '../PasswordRecovery/PasswordRecoverySuccess.web'
 
 import { showPinView } from '../ChangePin/ChangePin.action'
 import { showPasswordView } from '../ChangePassword/ChangePassword.action'
@@ -68,6 +70,8 @@ class Home extends Component {
         <Button className={styles.section} raised theme={skipButton} type='button' onClick={this._handleLogout}>{t('string_done')}</Button>
         <ChangePin />
         <ChangePassword />
+        <PasswordRecovery />
+        <PasswordRecoverySuccess />
       </div>
     )
   }

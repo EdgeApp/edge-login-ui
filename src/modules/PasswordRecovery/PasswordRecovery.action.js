@@ -4,6 +4,8 @@ export const SHOW_PASSWORD_RECOVERY_TOKEN_VIEW = 'SHOW_PASSWORD_RECOVERY_TOKEN_V
 export const HIDE_PASSWORD_RECOVERY_TOKEN_VIEW = 'HIDE_PASSWORD_RECOVERY_TOKEN_VIEW'
 export const SHOW_PASSWORD_RECOVERY_TOKEN_BUTTON = 'SHOW_PASSWORD_RECOVERY_TOKEN_BUTTON'
 export const HIDE_PASSWORD_RECOVERY_TOKEN_BUTTON = 'HIDE_PASSWORD_RECOVERY_TOKEN_BUTTON'
+export const SHOW_PASSWORD_RECOVERY_FINISH_MODAL = 'SHOW_PASSWORD_RECOVERY_FINISH_MODAL'
+export const HIDE_PASSWORD_RECOVERY_FINISH_MODAL = 'HIDE_PASSWORD_RECOVERY_FINISH_MODAL'
 
 export const PASSWORD_RECOVERY_QUESTIONS = 'PASSWORD_RECOVERY_QUESTIONS'
 
@@ -50,6 +52,18 @@ export function showPasswordRecoveryTokenButton () {
 export function hidePasswordRecoveryTokenButton () {
   return {
     type: HIDE_PASSWORD_RECOVERY_TOKEN_BUTTON
+  }
+}
+
+export function showPasswordRecoveryFinishModal () {
+  return {
+    type: SHOW_PASSWORD_RECOVERY_FINISH_MODAL
+  }
+}
+
+export function hidePasswordRecoveryFinishModal () {
+  return {
+    type: HIDE_PASSWORD_RECOVERY_FINISH_MODAL
   }
 }
 

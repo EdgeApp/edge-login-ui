@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import t from '../../lib/web/LocaleStrings'
-import Button from 'react-toolbox/lib/button' 
+import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import signinButton from 'theme/signinButton.scss';
 
-import { passwordRecoveryDone } from './PasswordRecovery.action'
+import { showPasswordRecoveryFinishModal, passwordRecoveryDone } from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { checkEmail } from './PasswordRecovery.middleware'
+
 import ErrorModal from '../ErrorModal/ErrorModal.web'
 
-export default class PasswordRecovery extends Component {
+export default class PasswordRecoveryToken extends Component {
 
   _handleSubmit = (address) => {
     const callback = url => {
@@ -27,7 +28,7 @@ export default class PasswordRecovery extends Component {
   }
 
   _handleClose = () => {
-    this.props.dispatch(openErrorModal(t('recovery_setup_successful')))
+    this.props.dispatch(showPasswordRecoveryFinishModal())
     this.props.dispatch(passwordRecoveryDone())
   }
 
@@ -46,7 +47,8 @@ export default class PasswordRecovery extends Component {
   render () {
     return (
       <div>
-        <p>{t('save_recovery_token_popup')}</p>
+        <h6>{t('save_recovery_token_popup')}</h6>
+        <br />
         <p>{t('save_recovery_token_popup_message')}</p>
         <div>
           <Input type='email' onChange={this.props.handleOnChangeEmail} value={this.props.email} placeholder='Email Address' />

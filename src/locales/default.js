@@ -253,7 +253,7 @@ const strings = {
   activity_recovery_prompt_title: 'Skip this step',
   activity_recovery_prompt_skip: '**WARNING** You will NEVER be able to recover your password if it is forgotten!!',
   activity_recovery_first_wallet_name: 'My Wallet',
-  activity_recovery_answer_questions_alert: 'You must answer all questions.  Make sure your answers are long enough.',
+  activity_recovery_answer_questions_alert: 'You must answer all questions. Make sure your answers are long enough.',
   activity_recovery_pick_questions_alert: 'You must choose all questions before proceeding.',
   activity_recovery_question_default: 'Question',
   item_recovery_spinner_arrow_description: 'Drop down arrow',
@@ -267,6 +267,9 @@ const strings = {
   activity_recovery_error_answer_length: 'Answer does not meet length requirements',
   activity_recovery_error_questions_different: 'Please select 2 different questions',
   activity_recovery_error_password: 'Password does not match',
+  activity_recovery_default_choice: 'Choose a question',
+  activity_recovery_first_answer: 'First Question Answer',
+  activity_recovery_second_answer: 'Second Question Answer',
 
   activity_recovery_warning_dirty_change_title: 'Wrong Answers',
   activity_recovery_warning_dirty_change_message: 'Warning: You are about to exit password recovery and questions &amp; answers have not yet been set. Exit anyway?',

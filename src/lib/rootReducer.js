@@ -105,6 +105,7 @@ const store = combineReducers({
   passwordRecovery: combineReducers({
     view: PasswordRecovery.view,
     viewToken: PasswordRecovery.viewToken,
+    viewFinishModal: PasswordRecovery.viewFinishModal,
     finishButton: PasswordRecovery.finishButton,
     questions: PasswordRecovery.questions,
     firstQuestion: PasswordRecovery.firstQuestion,

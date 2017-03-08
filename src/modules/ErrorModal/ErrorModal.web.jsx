@@ -28,7 +28,6 @@ class ErrorModal extends Component {
     if (this._checkLoading()) {
       return (
         <Dialog className={styles.dialogZIndex}
-          action={this.actions}
           active={this._checkLoading()}
         >
           <div className={styles.container}>

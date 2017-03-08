@@ -12,28 +12,25 @@ import Dropdown from 'react-toolbox/lib/dropdown'
 
 import PasswordRecoveryToken from './PasswordRecoveryToken.web'
 
-import Button from 'react-toolbox/lib/button' 
+import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import signinButton from 'theme/signinButton.scss';
 import skipButton from 'theme/skipButton.scss';
-
-import { Card, CardText, CardTitle, CardActions } from 'react-toolbox/lib/card'
 
 class PasswordRecovery extends Component {
 
   loadQuestions = () => {
     const dispatch = this.props.dispatch
     abcctx(ctx => {
-      ctx.listRecoveryQuestionChoices((error, results) => {
-        if (error) {
-          dispatch(openErrorModal(t('string_connection_error_server')))
-          dispatch(action.hidePasswordRecoveryView())
-        }
-        if (!error) {
-          const questions = results.filter(result => result.category === 'recovery2').map(result => result.question)
-          dispatch(action.setPasswordRecoveryQuestions(questions))
-        }
-      })
+		// ctx.listRecoveryQuestionChoices()
+        // if (error) {
+        //   dispatch(openErrorModal(t('string_connection_error_server')))
+        //   dispatch(action.hidePasswordRecoveryView())
+        // }
+        // if (!error) {
+        //   const questions = results.filter(result => result.category === 'recovery2').map(result => result.question)
+        //   dispatch(action.setPasswordRecoveryQuestions(questions))
+        // }
     })
   }
 
@@ -69,40 +66,36 @@ class PasswordRecovery extends Component {
     this.props.dispatch(action.showPasswordRecoveryView())
   }
 
-  _handleOnChangeFirstQuestion = (e) => {
-    const firstQuestion = e
+  _handleOnChangeFirstQuestion = (firstQuestion) => {
     this.props.dispatch(action.changeFirstPasswordRecoveryQuestionValue(firstQuestion))
   }
 
-  _handleOnChangeFirstAnswer = (e) => {
-    const firstAnswer = e
+  _handleOnChangeFirstAnswer = (firstAnswer) => {
     this.props.dispatch(action.changeFirstPasswordRecoveryAnswerValue(firstAnswer))
   }
 
-  _handleOnChangeSecondQuestion = (e) => {
-    const secondQuestion = e
+  _handleOnChangeSecondQuestion = (secondQuestion) => {
     this.props.dispatch(action.changeSecondPasswordRecoveryQuestionValue(secondQuestion))
   }
 
-  _handleOnChangeSecondAnswer = (e) => {
-    const secondAnswer = e
+  _handleOnChangeSecondAnswer = (secondAnswer) => {
     this.props.dispatch(action.changeSecondPasswordRecoveryAnswerValue(secondAnswer))
   }
 
-  _handleOnChangePassword = (e) => {
-    const password = e
+  _handleOnChangePassword = (password) => {
     this.props.dispatch(action.changePasswordRecoveryPassword(password))
   }
 
-  _handleOnChangeEmail = (e) => {
-    const email = e
+  _handleOnChangeEmail = (email) => {
     this.props.dispatch(action.changePasswordRecoveryEmail(email))
   }
 
   _renderQuestions = () => {
-    return this.props.questions.map((question, index) => {
-      return { value: question, label: question }
-    })
+    // const questions = this.props.questions.map((question, index) => {
+    //   return { value: question, label: question }
+    // })
+	// return [ ...questions , {value: 'Choose a question', label: 'Choose a question'} ]
+	return [ {value: t('activity_recovery_default_choice'), label: t('activity_recovery_default_choice')} ]
   }
 
   _renderView = () => {
@@ -110,30 +103,51 @@ class PasswordRecovery extends Component {
     if (!this.props.viewToken) {
       return (
         <div>
-          <h3>{t('activity_recovery_setup_title')}</h3>
-
           <div>
             <Dropdown
               auto
               onChange={this._handleOnChangeFirstQuestion}
               value={this.props.firstQuestion}
               source={this._renderQuestions()}
-              required/>
-            <Input type='text' name='firstAnswer' onChange={this._handleOnChangeFirstAnswer} value={this.props.firstAnswer} placeholder='First Question Answer' required />
-
+              required
+	      		  allowBlank={false}
+            />
+            <Input
+		        	type='text'
+		  		    name='firstAnswer'
+              onChange={this._handleOnChangeFirstAnswer}
+              value={this.props.firstAnswer}
+              label={t('activity_recovery_first_answer')}
+              required
+            />
             <Dropdown
               auto
               source={this._renderQuestions()}
               onChange={this._handleOnChangeSecondQuestion}
               value={this.props.secondQuestion}
-              required/>
-            <Input type='text' name='secondAnswer' onChange={this._handleOnChangeSecondAnswer} value={this.props.secondAnswer} placeholder='Second Question Answer' required />
-
-            <Input type='password' name='recoveryPassword' onChange={this._handleOnChangePassword} value={this.props.password} placeholder='Password' required />
+			        allowBlank={false}
+              required
+            />
+            <Input
+              type='text'
+              name='secondAnswer'
+              onChange={this._handleOnChangeSecondAnswer}
+              value={this.props.secondAnswer}
+              label={t('activity_recovery_second_answer')}
+              required
+            />
+            <Input
+              type='password'
+              name='recoveryPassword'
+              onChange={this._handleOnChangePassword}
+              value={this.props.password}
+              label={t('send_confirmation_enter_send_password')}
+              required
+            />
           </div>
-          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
-            <Button type='button' raised style={{margin: '10px 0px 10px 0px'}} onClick={this._handleHideModal}>Close</Button>
-            <Button type='button' theme={signinButton} raised default style={{margin: '10px 0px 10px 0px'}} onClick={this._handleSubmit}>Submit</Button>
+          <div>
+            <Button type='button' theme={skipButton} raised onClick={this._handleHideModal}>Close</Button>
+            <Button type='button' theme={signinButton} raised onClick={this._handleSubmit}>Submit</Button>
           </div>
         </div>
       )
@@ -151,7 +165,7 @@ class PasswordRecovery extends Component {
         />
       )
     }
-  
+
   }
 
   render () {
@@ -159,7 +173,7 @@ class PasswordRecovery extends Component {
       <Dialog
         actions={this.buttons}
         active={this.props.view}
-        title={t('activity_signup_title_change_pin')}
+        title={t('activity_recovery_setup_title')}
       >
         { this._renderView() }
       </Dialog>
