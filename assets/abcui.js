@@ -127,7 +127,7 @@ exports["abcui"] =
 	      callback(error, account);
 	      setTimeout(function () {
 	        removeIFrame(frame);
-	      }, 20000);
+	      }, 15000);
 	    }
 	  };
 	  DomWindow.exitCallback = function () {
