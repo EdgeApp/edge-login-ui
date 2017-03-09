@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import Input from 'react-toolbox/lib/input'
+import Link from 'react-toolbox/lib/link'
+import Button from 'react-toolbox/lib/button'
+import t from 'lib/web/LocaleStrings'
 
 import { openLogin, loginUsername, loginPassword, openUserList, closeUserList } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 
-import t from 'lib/web/LocaleStrings'
-import CachedUsers from '../CachedUsers/CachedUsers.web'
-import { showWhiteOverlay } from '../Landing.action'
-import { Button } from 'react-toolbox/lib/button'
-import Input from 'react-toolbox/lib/input'
-import Link from 'react-toolbox/lib/link'
-
 import LoginWithPin from './LoginWithPin.web'
-import signinButton from 'theme/signinButton.scss'
 import LoginEdge from './LoginEdge.web'
 import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
+import CachedUsers from '../CachedUsers/CachedUsers.web'
+import { showWhiteOverlay } from '../Landing.action'
 
+import signinButton from 'theme/signinButton.scss'
+import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './Login.style.scss'
 
 class Login extends Component {
@@ -163,7 +163,7 @@ class Login extends Component {
             <div className={styles.buttonGroup}>
               <Button raised primary theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
               <br />
-              <a onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</a>
+              <Button theme={neutral} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
               <br />
               <a onClick={this._handleOpenForgotPasswordModal} className={styles.forgotPassword}>{t('fragment_landing_forgot_password')}</a>
             </div>

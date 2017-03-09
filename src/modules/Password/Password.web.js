@@ -98,7 +98,7 @@ class Password extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <a onClick={this._handleBack} className={styles.exitButton}>{t('string_capitalize_back')}</a>
+          <Button theme={neutral} className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
           <div className={styles.title}>
             <h4>{t('activity_signup_password_label')}</h4>
           </div>

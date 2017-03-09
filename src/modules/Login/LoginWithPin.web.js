@@ -14,6 +14,7 @@ import { Button } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import buttonTheme from 'theme/neutralButtons.scss'
 import styles from './LoginWithPin.style.scss'
+import neutral from 'theme/neutralButtonWithBlueText.scss'
 
 class LoginWithPin extends Component {
 
@@ -106,9 +107,9 @@ class LoginWithPin extends Component {
             autoFocus
           />
         </div>
-        <a className={styles.exitPin} onClick={this.viewPasswordInput}>
+        <Button theme={neutral} className={styles.exitPin} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
-        </a>
+        </Button>
         {cUsers()}
       </div>
     )

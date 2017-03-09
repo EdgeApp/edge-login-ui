@@ -12,6 +12,7 @@ import { changeUsernameValue } from './Username.action'
 import { changeSignupPage } from '../Signup/Signup.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
+import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './Username.webStyle'
 
 class UsernameComponent extends Component {
@@ -51,12 +52,11 @@ class UsernameComponent extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <a className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_exit')}</a>
+          <Button theme={neutral} className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_exit')}</Button>
           <div className={styles.title}>
             <h4>{t('fragment_setup_username_label')}</h4>
           </div>
         </div>
-        <form onSubmit={e => this._handleSubmit(e)}>
           <div className={styles.section}>
             <Input
               autoFocus
@@ -74,7 +74,6 @@ class UsernameComponent extends Component {
           <div className={styles.buttonSection}>
             <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </div>
-        </form>
       </div>
     )
   }

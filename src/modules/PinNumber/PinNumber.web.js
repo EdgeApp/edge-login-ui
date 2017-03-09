@@ -59,7 +59,7 @@ class PinComponent extends Component {
     return (
       <div>
         <div style={{position: 'relative'}}>
-          <a className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</a>
+          <Button theme={neutral} className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
           <div className={styles.title}>
             <h4>{t('activity_signup_pin_label')}</h4>
           </div>
