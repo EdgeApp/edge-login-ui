@@ -6,7 +6,7 @@ import Snackbar from 'react-toolbox/lib/snackbar'
 import Dialog from 'react-toolbox/lib/dialog'
 import Input from 'react-toolbox/lib/input'
 
-import { hidePinView, showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification } from './ChangePin.action'
+import { hidePinView, showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification, showPinChangedNotification } from './ChangePin.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { checkPin } from './ChangePin.middleware'
 
@@ -15,14 +15,7 @@ class ChangePin extends Component {
   _handleSubmit = () => {
     const callback = (error) => {
       if(!error){
-        this.props.dispatch(pinChanged())
-        if (window.parent.exitCallback) {
-          window.parent.exitCallback(null)
-        }
-        if (!window.parent.exitCallback) {
-          this.props.dispatch(closeLoading())
-          this.props.dispatch(hidePinView())
-        }
+        this.props.dispatch(showPinChangedNotification())
       }
     }
     this.props.dispatch(
@@ -47,8 +40,19 @@ class ChangePin extends Component {
     this.props.dispatch(hidePinView())
   }
 
+  _handleNotificationClose = () => {
+    if (window.parent.exitCallback) {
+      window.parent.exitCallback(null)
+      this.props.dispatch(hidePinView())
+    }
+    if (!window.parent.exitCallback) {
+      this.props.dispatch(hidePinView())
+      this.props.dispatch(hidePinChangedNotification())
+    }
+  }
+
   buttons = [
-    { label: "Close", onClick: this._handleHideModal },
+    { label: "Close", onClick: this._handleHideModal, raised: true},
     { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true }
   ]
 
@@ -68,16 +72,19 @@ class ChangePin extends Component {
   render () {
     const { view, pin, password } = this.props
     return (
-      <Dialog
-        actions={this.buttons}
-        active={this.props.view}
-        onEscKeyDown={this._handleHideModal}
-        onOverlayClick={this._handleHideModal}
-        title={t('activity_signup_title_change_pin')}
-      >
-        <Input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} label='Current Password' />
-        <Input type='number' name='changePin' onChange={this._handleOnChangePin} value={pin} label='New Pin' />
-      </Dialog>
+      <div>
+        <Dialog
+          actions={this.buttons}
+          active={this.props.view}
+          onEscKeyDown={this._handleHideModal}
+          onOverlayClick={this._handleHideModal}
+          title={t('activity_signup_title_change_pin')}
+        >
+          <Input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} label='Current Password' />
+          <Input type='number' name='changePin' onChange={this._handleOnChangePin} value={pin} label='New Pin' />
+        </Dialog>
+        {this._renderNotification()}
+      </div>
     )
   }
 }

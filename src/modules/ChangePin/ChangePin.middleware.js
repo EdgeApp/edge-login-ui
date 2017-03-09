@@ -19,16 +19,14 @@ export const checkPin = (password, pin, account, callback) => {
         return dispatch(openErrorModal(t('server_error_bad_password')))
       }
       if (result) {
-        console.log(result)
         account.changePIN(pin, error => {
           dispatch(closeLoading())
           if (error) {
             return dispatch(openErrorModal(t('server_error_no_connection')))
           }
           if (!error) {
-            dispatch(hidePinView())
             dispatch(pinChanged())
-            return dispatch(showPinChangedNotification())
+            return callback(null)
           }
         })
       }

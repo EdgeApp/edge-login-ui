@@ -132,29 +132,32 @@ class Login extends Component {
             <LoginEdge />
             <div ref='fieldsView' className={styles.fieldsView}>
 
-              <Input
-                ref='loginUsername'
-                label={t('fragment_landing_username_hint')}
-                onChange={this._changeUsername}
-                value={this.props.username}
-                onFocus={this.usernameFocused}
-                autoCorrect={false}
-                autoCapitalize={false}
-                onKeyPress={this.usernameKeyPressed}
-              />
-
-              <form onSubmit={e => this.handleSubmit(e)}>
+              <div className={styles.inputGroup}>
                 <Input
-                  type='password'
-                  ref='password'
-                  onFocus={this.passwordFocused}
-                  label={t('fragment_landing_password_hint')}
-                  onChange={this.changePassword}
-                  value={this.props.password}
+                  ref='loginUsername'
+                  label={t('fragment_landing_username_hint')}
+                  onChange={this._changeUsername}
+                  value={this.props.username}
+                  onFocus={this.usernameFocused}
                   autoCorrect={false}
                   autoCapitalize={false}
+                  onKeyPress={this.usernameKeyPressed}
+                  className={styles.inputs}
                 />
-              </form>
+
+                <form className={styles.inputs} onSubmit={e => this.handleSubmit(e)}>
+                  <Input
+                    type='password'
+                    ref='password'
+                    onFocus={this.passwordFocused}
+                    label={t('fragment_landing_password_hint')}
+                    onChange={this.changePassword}
+                    value={this.props.password}
+                    autoCorrect={false}
+                    autoCapitalize={false}
+                  />
+                </form>
+              </div>
               {cUsers()}
             </div>
             <div className={styles.buttonGroup}>

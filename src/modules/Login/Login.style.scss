@@ -14,6 +14,24 @@
   -webkit-align-items: stretch;
 }
 
+.inputGroup {
+  display: flex;
+  display: -webkit-flex;
+
+  flex-direction: column;
+  -webkit-flex-direction: column;
+
+  justify-content: center;
+  -webkit-justify-content: center;
+
+  align-items: center;
+  -webkit-align-items: center;
+
+  .inputs {
+    width: 80%;
+  }
+}
+
 .buttonGroup {
   margin-top: $unit * 0.8;
 
