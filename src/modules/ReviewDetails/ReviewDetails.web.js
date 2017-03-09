@@ -6,6 +6,7 @@ import Button from 'react-toolbox/lib/button'
 import FontIcon from 'react-toolbox/lib/font_icon';
 
 import { showSignInDetails, hideSignInDetails, showPasswordRecovery } from './ReviewDetails.action'
+import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { loginWithPassword } from '../Login/Login.middleware'
 
 import AfterSignUpQuestion from './AfterSignUpQuestion.web'
@@ -32,21 +33,27 @@ class Review extends Component {
   }
 
   _handleAfterSignupQuestion = () => {
-    this.props.dispatch(showPasswordRecovery())
-    // const { username, password } = this.props.details
-    // this.props.dispatch(
-    //   loginWithPassword(
-    //     username,
-    //     password,
-    //     ( error, account) => {
-    //       if (!error) {
-    //         if (window.parent.loginCallback) {
-    //           window.parent.loginCallback(null, account)
-    //         }
-    //       }
-    //     }
-    //   )
-    // )
+
+    if(!this.props.user.username) {
+      const { username, password } = this.props.details
+      this.props.dispatch(
+        loginWithPassword(
+          username,
+          password,
+          ( error, account) => {
+            if (!error) {
+              this.props.dispatch(closeLoading())
+              return this.props.dispatch(showPasswordRecovery())
+            }
+          }
+        )
+      )
+    }
+
+    if(this.props.user.username) {
+      this.props.dispatch(showPasswordRecovery())
+    }
+
   }
 
   render () {
@@ -98,7 +105,8 @@ class Review extends Component {
 
 export default connect(state => ({
 
-  details: state.reviewDetails.details,
-  view: state.reviewDetails.view
+  details : state.reviewDetails.details,
+  user    : state.user,
+  view    : state.reviewDetails.view
 
 }))(Review)

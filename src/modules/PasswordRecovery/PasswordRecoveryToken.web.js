@@ -51,7 +51,7 @@ export default class PasswordRecoveryToken extends Component {
         <br />
         <p>{t('save_recovery_token_popup_message')}</p>
         <div>
-          <Input type='email' onChange={this.props.handleOnChangeEmail} value={this.props.email} placeholder='Email Address' />
+          <Input type='email' onChange={this.props.handleOnChangeEmail} value={this.props.email} label='Email Address' required/>
         </div>
         <div>
           <Button type='button' raised primary style={{margin: '10px 0px 10px 0px'}} onClick={() => this._handleSubmit('google')}>Send using Gmail</Button>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
 
 import Button from 'react-toolbox/lib/button'
@@ -14,18 +15,7 @@ class PasswordRecoverySuccess extends Component {
 
   _handleFinish = () => {
     if (window.parent.loginCallback) {
-      const { username, password } = this.props.details
-      this.props.dispatch(
-        loginWithPassword(
-          username,
-          password,
-          ( error, account ) => {
-            if (!error) {
-              window.parent.loginCallback(null, account)
-            }
-          }
-        )
-      )
+      window.parent.loginCallback(null, account)
     }
     if (window.parent.exitCallback) {
       window.parent.exitCallback(null)
@@ -53,6 +43,7 @@ class PasswordRecoverySuccess extends Component {
   }
 }
 
+PasswordRecoverySuccess = withRouter(PasswordRecoverySuccess)
 export default connect(state => ({
 
   visible: state.passwordRecovery.viewFinishModal,
