@@ -15,6 +15,7 @@ class ChangePin extends Component {
   _handleSubmit = () => {
     const callback = (error) => {
       if(!error){
+        this.props.dispatch(hidePinView())
         this.props.dispatch(showPinChangedNotification())
       }
     }
@@ -46,7 +47,6 @@ class ChangePin extends Component {
       this.props.dispatch(hidePinView())
     }
     if (!window.parent.exitCallback) {
-      this.props.dispatch(hidePinView())
       this.props.dispatch(hidePinChangedNotification())
     }
   }
@@ -65,8 +65,8 @@ class ChangePin extends Component {
       label={t('activity_signup_pin_change_good')}
       timeout={5000}
       type='accept'
-      onClick={() => dispatch(hidePinChangedNotification())}
-      onTimeout={() => dispatch(hidePinChangedNotification())} />
+      onClick={this._handleNotificationClose}
+      onTimeout={this._handleNotificationClose} />
   }
 
   render () {
