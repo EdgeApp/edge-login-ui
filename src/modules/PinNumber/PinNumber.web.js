@@ -12,6 +12,7 @@ import { changeSignupPage } from '../Signup/Signup.action'
 import { changePinNumberValue } from './PinNumber.action'
 import { checkPIN } from './PinNumber.middleware'
 
+import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './PinNumber.webStyle'
 
 class PinComponent extends Component {

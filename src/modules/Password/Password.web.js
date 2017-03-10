@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { changeSignupPage } from '../Signup/Signup.action'
-
-import { validate } from './PasswordValidation/PasswordValidation.middleware'
-import { checkPassword, skipPassword } from './Password.middleware'
-
-import SkipPassword from './Notification.web'
-
 import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import t from '../../lib/web/LocaleStrings'
+
+import { validate } from './PasswordValidation/PasswordValidation.middleware'
+import { checkPassword, skipPassword } from './Password.middleware'
+import { changeSignupPage } from '../Signup/Signup.action'
+
+import SkipPassword from './Notification.web'
+
 import nextButton from 'theme/nextButton.scss'
 import backButton from 'theme/backButton.scss'
 import skipButton from 'theme/skipButton.scss'
-
-import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
+import neutral from 'theme/neutralButtonWithBlueText.scss'
 
 import {
   passwordNotificationShow,

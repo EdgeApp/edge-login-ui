@@ -66,7 +66,7 @@ InnerAbcUi.prototype.openLoginWindow = function (callback) {
   var frame = createIFrame(this.bundlePath + '/assets/index.html')
   var that = this
   var abcContext = DomWindow.abcContext
-  DomWindow.loginCallback = function (error, account, opts) {
+  DomWindow.loginCallback = function (error, account) {
     if (account) {
 
       // if (opts && opts.setupRecovery) {
@@ -77,9 +77,7 @@ InnerAbcUi.prototype.openLoginWindow = function (callback) {
       // }
       DomWindow.abcAccount = account
       callback(error, account)
-      setTimeout(function( ){
-        removeIFrame(frame)
-      }, 15000)
+      removeIFrame(frame)
     }
   }
   DomWindow.exitCallback = function () {

@@ -35,11 +35,11 @@ class Login extends Component {
           ( error, account ) => {
           if (!error) {
             if (window.parent.loginCallback) {
-              window.parent.loginCallback(null, account)
+              return window.parent.loginCallback(null, account)
             }
             if (!window.parent.loginCallback) {
               this.props.dispatch(closeLoading())
-              this.props.router.push('/home')
+              return this.props.router.push('/home')
             }
           }
         })

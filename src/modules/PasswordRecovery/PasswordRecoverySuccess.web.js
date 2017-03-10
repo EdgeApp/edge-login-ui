@@ -14,14 +14,15 @@ import styles from '../ErrorModal/ErrorModal.webStyle'
 class PasswordRecoverySuccess extends Component {
 
   _handleFinish = () => {
-    if (window.parent.loginCallback) {
-      window.parent.loginCallback(null, account)
-    }
+    const account = this.props.user
     if (window.parent.exitCallback) {
-      window.parent.exitCallback(null)
+      return window.parent.exitCallback(null)
+    }
+    if (window.parent.loginCallback) {
+      return window.parent.loginCallback(null, account)
     }
     if (!window.parent.loginCallback && !window.parent.exitCallback) {
-      this.props.dispatch(hidePasswordRecoveryFinishModal())
+      return this.props.dispatch(hidePasswordRecoveryFinishModal())
     }
   }
 
@@ -47,6 +48,7 @@ PasswordRecoverySuccess = withRouter(PasswordRecoverySuccess)
 export default connect(state => ({
 
   visible: state.passwordRecovery.viewFinishModal,
+  user  :  state.user,
   details: state.reviewDetails.details
 
 }))(PasswordRecoverySuccess)
