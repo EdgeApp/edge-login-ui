@@ -116,7 +116,7 @@ class Login extends Component {
         <div className={styles.container}>
           <LoginEdge />
           <div className={styles.buttonGroup}>
-            <Button raised primary theme={signinButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_account')}</Button>
+            <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_account')}</Button>
             <div ref='fieldsBelowView' style={{height: '90px'}} />
             <a onClick={this._handleOpenLoginWithPasswordPage}>Already have an account? Log in</a>
           </div>
@@ -161,9 +161,9 @@ class Login extends Component {
               {cUsers()}
             </div>
             <div className={styles.buttonGroup}>
-              <Button raised primary theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
+              <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
               <br />
-              <Button theme={neutral} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
+              <Button theme={neutral} style={{textTransform: 'none'}} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
               <br />
               <a onClick={this._handleOpenForgotPasswordModal} className={styles.forgotPassword}>{t('fragment_landing_forgot_password')}</a>
             </div>
