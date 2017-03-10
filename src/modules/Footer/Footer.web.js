@@ -3,20 +3,19 @@ import { connect } from 'react-redux'
 import Navigation from 'react-toolbox/lib/navigation'
 import Link from 'react-toolbox/lib/link'
 import AppBar from 'react-toolbox/lib/app_bar';
-import styles from './Header.webStyle'
+import styles from './Footer.webStyle'
 
 const actions = [
 
 ]
 
-class Header extends Component {
+class Footer extends Component {
 
   render () {
     return (
-    <AppBar title="Sample App" leftIcon='menu' fixed="true" className={styles.appBar}>
+    <AppBar title="Footer" className={styles.appBar} flat="false" style={{boxShadow: "none", borderLeft: "none", borderRight: "none"}}>
         <Navigation type="horizontal" actions={actions} className={styles.navigation}>
-            <Link href="#" className={styles.headerAppName} label="App Name" />
-            <Link href="#" className={styles.headerPoweredAirBitz} label="Powered by Airbitz" />
+            <Link href="https://airbitz.co/app" className={styles.footerDownloadLink} label="Increase your account security. Download Airbitz" icon="" />
         </Navigation>
     </AppBar>
     )
@@ -25,4 +24,4 @@ class Header extends Component {
 
 export default connect(state => ({
 
-}))(Header)
+}))(Footer)

@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { changeSignupPage } from '../Signup/Signup.action'
+import Button from 'react-toolbox/lib/button'
+import Input from 'react-toolbox/lib/input'
+import FontIcon from 'react-toolbox/lib/font_icon';
+import t from '../../lib/web/LocaleStrings'
 
 import { validate } from './PasswordValidation/PasswordValidation.middleware'
 import { checkPassword, skipPassword } from './Password.middleware'
+import { changeSignupPage } from '../Signup/Signup.action'
 
 import SkipPassword from './Notification.web'
 
-import Button from 'react-toolbox/lib/button'
-import Input from 'react-toolbox/lib/input'
-import t from '../../lib/web/LocaleStrings'
 import nextButton from 'theme/nextButton.scss'
 import backButton from 'theme/backButton.scss'
 import skipButton from 'theme/skipButton.scss'
-
-import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
+import neutral    from 'theme/neutralButtonWithBlueText.scss'
 
 import {
   passwordNotificationShow,
@@ -26,9 +26,6 @@ import {
 } from './Password.action'
 
 import styles from './Password.webStyle'
-
-const unselected = require('../../img/btn_unselected.png')
-const selected = require('../../img/Green-check.png')
 
 class Password extends Component {
 
@@ -66,10 +63,7 @@ class Password extends Component {
     this.refs.passwordRepeat.getWrappedInstance().blur()
     this.props.dispatch(passwordNotificationShow())
   }
-  checkOneNumber = () => this.props.validation.number ? selected : unselected
-  checkCharacterLength = () => this.props.validation.characterLength ? selected : unselected
-  checkOneUpper = () => this.props.validation.upperCaseChar ? selected : unselected
-  checkOneLower = () => this.props.validation.lowerCaseChar ? selected : unselected
+
   passwordKeyPressed = (e) => {
     if (e.charCode == 13) {
       this.refs.passwordRepeat.getWrappedInstance().focus()
@@ -83,15 +77,15 @@ class Password extends Component {
   _handleOnChangePasswordRepeat = (passwordRepeat) => {
     this.props.dispatch(changePasswordRepeatValue(passwordRepeat))
   }
+
   toggleRevealPassword = (e) => {
-    this.refs.signupPassword.getWrappedInstance().refs.input.type = this.props.inputState ? 'text' : 'password'
-    this.refs.passwordRepeat.getWrappedInstance().refs.input.type = this.props.inputState ? 'text' : 'password'
+    // this.refs.signupPassword.getWrappedInstance().refs.input.type = this.props.inputState ? 'text' : 'password'
+    // this.refs.passwordRepeat.getWrappedInstance().refs.input.type = this.props.inputState ? 'text' : 'password'
     if (this.props.inputState) {
-      this.props.dispatch(hidePassword())
+      return this.props.dispatch(hidePassword())
     } else {
-      this.props.dispatch(showPassword())
+      return this.props.dispatch(showPassword())
     }
-    return false
   }
 
   render () {
@@ -107,10 +101,22 @@ class Password extends Component {
           <div>
             <h5>{t('activity_signup_password_requirements')}</h5>
             <br />
-            <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkOneUpper()} />{ t('password_rule_no_uppercase') }</p>
-            <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkOneLower()} />{ t('password_rule_no_lowercase') }</p>
-            <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkOneNumber()} />{ t('password_rule_no_number') }</p>
-            <p style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '14px', margin: '0px 0px'}}><img style={{width: '20px'}} src={this.checkCharacterLength()} />{ t('password_rule_too_short') }</p>
+            <p className={styles.passwordRequirement}>
+              <FontIcon value={this.props.validation.upperCaseChar ? 'done' : 'clear'} className={this.props.validation.upperCaseChar ? styles.green : styles.red}/>
+              { t('password_rule_no_uppercase') }
+            </p>
+            <p className={styles.passwordRequirement}>
+              <FontIcon value={this.props.validation.lowerCaseChar ? 'done' : 'clear'} className={this.props.validation.lowerCaseChar ? styles.green : styles.red}/>
+              { t('password_rule_no_lowercase') }
+            </p>
+            <p className={styles.passwordRequirement}>
+              <FontIcon value={this.props.validation.number ? 'done' : 'clear'} className={this.props.validation.number ? styles.green : styles.red}/>
+              { t('password_rule_no_number') }
+            </p>
+            <p className={styles.passwordRequirement}>
+              <FontIcon value={this.props.validation.characterLength ? 'done' : 'clear'} className={this.props.validation.characterLength ? styles.green : styles.red}/>
+              { t('password_rule_too_short') }
+            </p>
           </div>
           <br />
           <p>{t('fragment_setup_password_text')}</p>
@@ -121,7 +127,7 @@ class Password extends Component {
               <Input
                 ref='signupPassword'
                 autoFocus
-                type='password'
+                type={ this.props.inputState ? 'text' : 'password' }
                 name='password'
                 onKeyPress={this.passwordKeyPressed}
                 onChange={this._handleOnChangePassword}
@@ -129,11 +135,11 @@ class Password extends Component {
                 label='Password'
               />
             </div>
-            <img onClick={this.toggleRevealPassword} src={require('img/icon_export_view.png')} className={styles.inputPasswordFieldImg} />
+            <FontIcon value={this.props.inputState ? 'visibility' : 'visibility_off'} onClick={this.toggleRevealPassword} className={styles.inputPasswordFieldImg}/>
           </div>
           <form onSubmit={e => this._handleSubmit(e)}>
             <Input
-              type="password"
+              type={ this.props.inputState ? 'text' : 'password' }
               ref='passwordRepeat'
               name="passwordRepeat"
               onChange={this._handleOnChangePasswordRepeat}
@@ -143,9 +149,10 @@ class Password extends Component {
           </form>
         </div>
 
-        <div className={styles.section}>
-          <Button type='button' theme={skipButton} raised onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
+        <div className={styles.buttonSection}>
           <Button type='button' theme={nextButton} raised onClick={this._handleSubmit}>{t('string_next')}</Button>
+          <br />
+          <Button type='button' theme={neutral} className={styles.skip} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
         </div>
 
         <SkipPassword handleSubmit={this._handleSubmitSkipPassword} />

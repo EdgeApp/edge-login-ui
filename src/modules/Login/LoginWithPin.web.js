@@ -27,14 +27,14 @@ class LoginWithPin extends Component {
         ( error, account ) => {
         if (!error) {
           if (window.parent.loginCallback) {
-            window.parent.loginCallback(null, account)
+            return window.parent.loginCallback(null, account)
           }
           if (!window.parent.loginCallback) {
             this.props.dispatch(closeLoading())
-            this.props.router.push('/home')
+            return this.props.router.push('/home')
           }
         } else {
-          this.refs.pinInput.getWrappedInstance().focus()
+          return this.refs.pinInput.getWrappedInstance().focus()
         }
       })
     )
@@ -107,7 +107,7 @@ class LoginWithPin extends Component {
             autoFocus
           />
         </div>
-        <Button theme={neutral} className={styles.exitPin} onClick={this.viewPasswordInput}>
+        <Button theme={neutral} style={{textTransform: 'none'}} className={styles.exitPin} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
         {cUsers()}

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
-
 import Button from 'react-toolbox/lib/button'
-import nextButton from 'theme/nextButton.scss'
 import Dialog from 'react-toolbox/lib/dialog'
 import Link from 'react-toolbox/lib/link'
 
 import { closeForgotPasswordModal } from './ForgotPassword.action'
+
+import nextButton from 'theme/nextButton.scss'
+import styles from './ForgotPassword.webStyle'
 
 class ForgotPassword extends Component {
 
@@ -23,24 +24,25 @@ class ForgotPassword extends Component {
     }
   }
 
-  actions = [
-    { label: t('string_ok'), onClick: this._handleClose }
-  ];
-
   render () {
     if (this._checkLoading()) {
       return (
         <Dialog
-          actions={this.actions}
           active={this._checkLoading()}
           onEscKeyDown={this._handleClose}
           onOverlayClick={this._handleClose}
           title={t('activity_recovery_title')}
         >
-          <div style={{padding: '10px'}}>
+          <div>
             <p>{t('recovery_not_setup4')}</p>
+            <br />
             <p><a target="_blank" href="https://airbitz.co/app">https://airbitz.co/app</a></p>
+            <br />
             <p>{t('recovery_not_setup5')}</p>
+            <br />
+          </div>
+          <div className={styles.button}>
+            <Button type='button' theme={nextButton} raised onClick={this._handleClose}>{t('string_ok')}</Button>
           </div>
         </Dialog>
       )

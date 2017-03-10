@@ -6,7 +6,7 @@
 
 // Global CSS
 $unit: 1.4rem;
-$preferred-font: 'Lato', sans-serif;
+$preferred-font: 'Source Sans Pro', sans-serif;
 
 //Color Pallete CSS
 $color-primary: $palette-blue-500;
@@ -42,6 +42,10 @@ a:hover {
 
 .dialog {
   section.body {
-    padding: 0px;
+    padding: 65px 45px 0 45px;
   } 
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
 }

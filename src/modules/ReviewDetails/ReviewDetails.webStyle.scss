@@ -42,6 +42,8 @@
   @extend .section;
   @extend .container;
 
+  width: 100%;
+
   .button {
     margin: $unit 0;
   }

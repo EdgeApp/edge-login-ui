@@ -1,135 +1,32 @@
-.navbar {
-  position: relative;
-  min-height: 50px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-}
+.appBar{
+    height: 4.5rem;
+    padding: 0 1.7rem;
 
-.navbar>.container .navbarBrand, .navbar>.containerFluid .navbarBrand {
-    margin-left: -15px;
-}
+    .navigation {
+        width: 100%;
 
-.navbar-default .navbar-brand {
-    color: #777;
-}
+        .headerAppName {
+            float: left;
+            color: white;
+            text-decoration: none;
+            cursor: default;
+            &:hover {
+                text-decoration: none;
+            }    
+        }
 
-.navbarBrand {
-    float: left;
-    height: 50px;
-    padding: 15px 15px;
-    font-size: 18px;
-    line-height: 20px;
-}
-
-.navbarDefault {
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
-}
-@media (min-width: 768px)
-{
-    .navbar {
-        border-radius: 4px;
-    }
-}
-
-.navbarDefault {
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
-}
-
-.navbarFixedTop {
-    top: 0;
-    border-width: 0 0 1px;
-}
-@media (min-width: 768px)
-{
-    .navbarFixedBottom, .navbarFixedTop {
-        border-radius: 0;
-    }
-}
-
-.navbarFixedBottom, .navbarFixedTop {
-    position: fixed;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-}
-
-////////////////////
-
-.abNav {
-    margin-bottom: 20px;
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
-    top: 0;
-    border-width: 0 0 1px;
-    border-radius: 0;
-    position: fixed;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-    min-height: 50px;
-    border: 1px solid transparent;
-    display: block;
-}
-
-.abNavbar {
-    margin-bottom: 20px;
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
-    top: 0;
-    border-width: 0 0 1px;
-    border-radius: 0;
-    position: fixed;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-}
-
-.abContainerFluid {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.abNavbarHeader {
-    margin-right: 0;
-    margin-left: 0;
-    float: left;
-}
-
-.abNavbarBrand {
-    margin-left: -15px;
-    color: #777;
-    float: left;
-    height: 50px;
-    padding: 15px 15px;
-    font-size: 18px;
-    line-height: 20px;
-    text-decoration: none;
-    background-color: transparent; 
-}
-
-.abNavbarNav {
-    float: left;
-    margin: 0;
-    margin: 7.5px -15px;
-    padding-left: 0;
-    list-style: none;
-    box-sizing: border-box;
-
-    li {
-        float: left;
-        position: relative;
-        display: block;    
-
-        .abNavbarRight{
+        .headerPoweredAirBitz {
             float: right;
-        }    
-    }
+            color: white;
+            cursor: default;    
+
+            &:hover {
+                text-decoration: none;
+            }
+
+        }        
+    }    
 }
+
+
 

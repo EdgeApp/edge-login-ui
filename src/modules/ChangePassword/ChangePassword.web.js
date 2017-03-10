@@ -63,11 +63,11 @@ class ChangePassword extends Component {
 
   _handleNotificationClose = () => {
     if (window.parent.exitCallback) {
-      window.parent.exitCallback(null)
       this.props.dispatch(hidePasswordView())
+      return window.parent.exitCallback(null)
     }
     if (!window.parent.exitCallback) {
-      this.props.dispatch(hidePasswordChangedNotification())
+      return this.props.dispatch(hidePasswordChangedNotification())
     }
   }
 
