@@ -14,7 +14,7 @@ import SkipPassword from './Notification.web'
 import nextButton from 'theme/nextButton.scss'
 import backButton from 'theme/backButton.scss'
 import skipButton from 'theme/skipButton.scss'
-import neutral from 'theme/neutralButtonWithBlueText.scss'
+import neutral    from 'theme/neutralButtonWithBlueText.scss'
 
 import {
   passwordNotificationShow,
