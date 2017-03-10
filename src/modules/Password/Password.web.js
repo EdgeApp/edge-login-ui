@@ -142,8 +142,9 @@ class Password extends Component {
           </form>
         </div>
 
-        <div className={styles.section}>
-          <Button type='button' theme={skipButton} raised onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
+        <div className={styles.buttonSection}>
+          <Button type='button' theme={neutral} className={styles.skip} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
+          <br />
           <Button type='button' theme={nextButton} raised onClick={this._handleSubmit}>{t('string_next')}</Button>
         </div>
 
