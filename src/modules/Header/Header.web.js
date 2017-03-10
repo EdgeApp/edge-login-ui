@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import styles from './Header.webStyle'
 
 class Header extends Component {
 
   render () {
     return (
-    <nav className="navbar navbar-inverse navbar-fixed-top" >
-            <div className="container">
-                <div className="navbar-header">
-                    <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span className="sr-only">[App Name] Login</span>
-                    </button>
-                    <a className="navbar-brand" to="#">[App Name] Login</a>
-                </div>                       
-            <ul class="nav navbar-nav navbar-right">
-              <li class="active">
-                  <a href="#">Powered by AirBitz</a>
-                </li>
-            </ul>
-            </div>
+    <nav className={styles.abNav} >
+        <div className={styles.abContainerFluid}>
+            <div className={styles.abNavbarHeader}>
+                <a className={styles.abNavbarBrand} to="#">[App Name] Login</a>
+            </div>                       
+        <ul className={styles.abNavbarNav}>
+            <li className={styles.abNavbarRight}>
+                <a href="#">Powered by AirBitz</a>
+            </li>
+        </ul>
+        </div>
     </nav>
     )
   }
@@ -26,7 +24,5 @@ class Header extends Component {
 
 
 export default connect(state => ({
-
-
 
 }))(Header)
