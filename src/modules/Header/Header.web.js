@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Navigation from 'react-toolbox/lib/navigation'
+import Link from 'react-toolbox/lib/link'
+import AppBar from 'react-toolbox/lib/app_bar';
 import styles from './Header.webStyle'
+
+const actions = [
+
+]
 
 class Header extends Component {
 
   render () {
     return (
-    <nav className={styles.abNav} >
-        <div className={styles.abContainerFluid}>
-            <div className={styles.abNavbarHeader}>
-                <a className={styles.abNavbarBrand} to="#">[App Name] Login</a>
-            </div>                       
-        <ul className={styles.abNavbarNav}>
-            <li className={styles.abNavbarRight}>
-                <a href="#">Powered by AirBitz</a>
-            </li>
-        </ul>
-        </div>
-    </nav>
+    <AppBar title="Sample App" leftIcon='menu' fixed="true">
+        <Navigation type="horizontal" actions={actions} style={{width: "100%"}}>
+            <Link href="#" className="headerAppName"style={{float: "left"}} label="App Name" />
+            <Link href="#" className="headerPoweredAirBitz" style={{float: "right"}} label="Powered by AirBitz" />
+        </Navigation>
+    </AppBar>
     )
   }
 }
-
 
 export default connect(state => ({
 
