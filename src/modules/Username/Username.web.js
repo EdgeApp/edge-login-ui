@@ -58,15 +58,17 @@ class UsernameComponent extends Component {
           </div>
         </div>
           <div className={styles.section}>
-            <Input
-              autoFocus
-              type="text"
-              name="username"
-              onChange={this._handleOnChangeText}
-              value={this.props.username}
-              label={t('fragment_landing_username_hint')}
-              className={styles.inputField}
-            />
+            <form onSubmit={e => this._handleSubmit(e)}>
+              <Input
+                autoFocus
+                type="text"
+                name="username"
+                onChange={this._handleOnChangeText}
+                value={this.props.username}
+                label={t('fragment_landing_username_hint')}
+                className={styles.inputField}
+              />
+            </form>
           </div>
           <div className={styles.section}>
             <p className={styles.usernameText}>{t('fragment_setup_username_text')}</p>
