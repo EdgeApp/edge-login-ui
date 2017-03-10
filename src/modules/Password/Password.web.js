@@ -102,7 +102,7 @@ class Password extends Component {
             <h5>{t('activity_signup_password_requirements')}</h5>
             <br />
             <p className={styles.passwordRequirement}>
-              <b><FontIcon value={this.props.validation.upperCaseChar ? 'done' : 'clear'} className={this.props.validation.upperCaseChar ? styles.green : styles.red}/></b>
+              <FontIcon value={this.props.validation.upperCaseChar ? 'done' : 'clear'} className={this.props.validation.upperCaseChar ? styles.green : styles.red}/>
               { t('password_rule_no_uppercase') }
             </p>
             <p className={styles.passwordRequirement}>
