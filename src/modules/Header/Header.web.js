@@ -15,8 +15,8 @@ class Header extends Component {
     return (
     <AppBar title="Sample App" leftIcon='menu' fixed="true" className={styles.appBar}>
         <Navigation type="horizontal" actions={actions} className={styles.navigation}>
-            <Link href="#" className={styles.headerAppName} label="App Name" />
-            <Link href="#" className={styles.headerPoweredAirBitz} label="Powered by Airbitz" />
+            <Link className={styles.headerAppName} label="App Name" />
+            <Link className={styles.headerPoweredAirBitz} label="Powered by Airbitz" />
         </Navigation>
     </AppBar>
     )
