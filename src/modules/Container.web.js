@@ -7,6 +7,7 @@ import Loader from './Loader/Loader.web'
 import ErrorModal from './ErrorModal/ErrorModal.web'
 import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
+import LayoutTemplate from './LayoutTemplate/LayoutTemplate.web'
 
 class Container extends Component {
 
@@ -37,6 +38,7 @@ class Container extends Component {
   componentWillUpdate () {
     this.loadData()
   }
+
   render () {
     return (
       <div className='app'>
@@ -45,7 +47,9 @@ class Container extends Component {
           onEscKeyDown={this.handleToggle}
           onOverlayClick={this.handleToggle}
         >
-          {this.props.children}
+          <LayoutTemplate>
+            {this.props.children}
+          </LayoutTemplate>
           <Loader />
           <ErrorModal />
           <WarningModal />

@@ -39,3 +39,9 @@ a:hover {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.dialog {
+  section.body {
+    padding: 0px;
+  } 
+}
