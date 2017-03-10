@@ -48,7 +48,7 @@ class Container extends Component {
           onEscKeyDown={this.handleToggle}
           onOverlayClick={this.handleToggle}
         >
-          <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle()}/>
+          <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle}/>
           {this.props.children}
           <Loader />
           <ErrorModal />
