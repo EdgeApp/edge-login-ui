@@ -6,7 +6,7 @@
 
 // Global CSS
 $unit: 1.4rem;
-$preferred-font: 'Lato', sans-serif;
+$preferred-font: 'Source Sans Pro', sans-serif;
 
 //Color Pallete CSS
 $color-primary: $palette-blue-500;
@@ -38,4 +38,8 @@ a {
 a:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
 }
