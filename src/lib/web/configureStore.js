@@ -12,7 +12,6 @@ const logger = createLogger({ collapsed: true })
 const middleware = [thunk.withExtraArgument({ t, abcContext, logger })]
 
 export default function configureStore (initialState) {
-  console.log('inside configureStore.configureStore')
   return createStore(
     rootReducer,
     initialState,
