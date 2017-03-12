@@ -10,6 +10,7 @@ import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
 import LayoutTemplate from './LayoutTemplate/LayoutTemplate.web'
 import layoutTheme from 'theme/layoutTheme'
+import { openLogin, closeUserList } from './Login/Login.action'
 
 import styles from './Container.style.scss'
 
@@ -40,11 +41,14 @@ class Container extends Component {
       console.log('after the loop, cachedUsers is: ', cachedUsers)
       const lastUser = window.localStorage.getItem('lastUser')
       dispatch(setCachedUsers(cachedUsers))
-      if (lastUser) {
+      if (lastUser && cachedUsers.includes(lastUser)) {
         dispatch(selectUserToLogin(lastUser))
+      } else {
+        dispatch(openLogin())
       }
     })
   }
+
   componentWillMount () {
     console.log('within componentWillMount')
     this.loadData()
