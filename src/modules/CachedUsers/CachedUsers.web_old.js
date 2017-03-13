@@ -70,23 +70,16 @@ class UserList extends Component {
   hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
   }
-
   render () {
-
-    const renderValue = (item, idx) => {
-      return (
-        <li key={idx}>
-        { item }
-        </li>
-      );
-    };
-
     return (
-      <div data-react-toolbox='dropdown' className={styles.dropdown}>
-        { this.props.component }
-        <ul className={styles.values} ref='values'>
-          {_.map(this.props.users, renderValue)}
-        </ul>
+
+      <div
+        style={style.container}>
+        <div style={style.spacer} />
+        <div style={style.listContainer}>
+          { this.listUsers() }
+        </div>
+        <div style={style.spacer} />
       </div>
     )
   }

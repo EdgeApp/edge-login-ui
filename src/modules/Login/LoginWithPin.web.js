@@ -89,11 +89,17 @@ class LoginWithPin extends Component {
       }
     }
 
+    const usersDropdown = () => {
+      return (
+        <a className={styles.username} onClick={this.toggleCachedUsers}>
+          { this.props.user ? this.props.user : 'No User Selected' }
+        </a>
+      )
+    }
+
     return (
       <div className={styles.container}>
-        <Button flat className={styles.username} theme={buttonTheme} onClick={this.toggleCachedUsers}>
-          { this.props.user ? this.props.user : 'No User Selected' }
-        </Button>
+        <CachedUsers component={usersDropdown()} />
         <div className={styles.inputDiv}>
           <Input
             ref='pinInput'
@@ -110,7 +116,6 @@ class LoginWithPin extends Component {
         <Button theme={neutral} className={styles.exitPin} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
-        {cUsers()}
       </div>
     )
   }
