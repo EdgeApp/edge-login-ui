@@ -1,5 +1,6 @@
 .button {
-  width: 50%;
+  max-width: 50%;
+  min-width: 120px;     
 }
 .neutral:not([disabled]) {
   &.flat {
