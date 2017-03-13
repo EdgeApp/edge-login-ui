@@ -4,6 +4,7 @@ import _ from 'lodash'
 import Button from 'react-toolbox/lib/button'
 import t from 'lib/web/LocaleStrings'
 import styles from 'react-toolbox/lib/dropdown/theme.scss'
+import classnames from 'classnames'
 
 import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
 import { openWarningModal } from '../WarningModal/WarningModal.action'
@@ -81,8 +82,13 @@ class UserList extends Component {
       );
     };
 
+    const className = classnames(
+      styles.dropdown,
+      { [styles.active]: this.props.showCachedUsers, }
+    )
+
     return (
-      <div data-react-toolbox='dropdown' className={styles.dropdown}>
+      <div data-react-toolbox='dropdown' className={className}>
         { this.props.component }
         <ul className={styles.values} ref='values'>
           {_.map(this.props.users, renderValue)}
