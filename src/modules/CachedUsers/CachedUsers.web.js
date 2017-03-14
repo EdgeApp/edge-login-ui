@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import Button from 'react-toolbox/lib/button'
+import FontIcon from 'react-toolbox/lib/font_icon'
 import t from 'lib/web/LocaleStrings'
-import styles from 'react-toolbox/lib/dropdown/theme.scss'
+import styles from './CachedUsers.webStyle'
 import classnames from 'classnames'
 
 import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
@@ -16,12 +17,12 @@ import cachedUserButton from 'theme/cachedUserButton.scss'
 class UserList extends Component {
 
   handleLoginUserPin = (user) => {
-    this.props.blurField.focus()
+    // this.props.blurField.focus()
     this.props.dispatch(selectUserToLogin(user))
   }
 
   handleDeleteUserCache = (user) => {
-    this.props.blurField.blur()
+    // this.props.blurField.blur()
     this.props.dispatch(selectUserToDeleteFromUserCache(user))
     this.props.dispatch(
       openWarningModal(
@@ -77,14 +78,18 @@ class UserList extends Component {
     const renderValue = (item, idx) => {
       return (
         <li key={idx}>
-        { item }
+          <p className={styles.userrows}>
+            <span className={styles.useritem} onMouseDown={ e => this.handleLoginUserPin(item)}>{ item }</span>
+            <span className={styles.userdelete} onMouseDown={ e => this.handleDeleteUserCache(item) }><FontIcon value='clear' /></span>
+          </p>
         </li>
       );
     };
 
     const className = classnames(
       styles.dropdown,
-      { [styles.active]: this.props.showCachedUsers, }
+      { [styles.active]: this.props.showCachedUsers, },
+      this.props.className
     )
 
     return (

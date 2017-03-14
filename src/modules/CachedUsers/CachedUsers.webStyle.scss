@@ -1,0 +1,26 @@
+@import "~react-toolbox/lib/dropdown/theme.scss";
+
+.userrows {
+  display: flex;
+  display: -webkit-flex;
+
+  flex-direction: row;
+  -webkit-flex-direction: row;
+
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+
+  align-items: center;
+  -webkit-align-items: center;
+
+}
+
+.useritem {
+   z-index: 5;
+   -webkit-flex: 1;
+   flex: 1;
+}
+
+.userdelete {
+   z-index: 5;
+}
