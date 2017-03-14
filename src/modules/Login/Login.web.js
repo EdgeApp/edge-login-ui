@@ -65,12 +65,6 @@ class Login extends Component {
   changePassword = (password) => {
     this.props.dispatch(loginPassword(password))
   }
-  usernameFocused = () => {
-    this.showCachedUsers()
-  }
-  passwordFocused = () => {
-    this.hideCachedUsers()
-  }
   showCachedUsers = () => {
     this.props.dispatch(openUserList())
   }
@@ -103,6 +97,23 @@ class Login extends Component {
       }
     }
 
+
+    const inputDropdown = () => {
+      return (
+        <Input
+          ref='loginUsername'
+          label={t('fragment_landing_username_hint')}
+          onChange={this._changeUsername}
+          value={this.props.username}
+          onFocus={this.showCachedUsers}
+          onBlur={this.hideCachedUsers}
+          autoCorrect={false}
+          autoCapitalize={false}
+          onKeyPress={this.usernameKeyPressed}
+        />
+      )
+    }
+
     if (!this.props.viewPassword && this.props.viewPIN) {
       return (
         <div className={styles.container}>
@@ -133,23 +144,12 @@ class Login extends Component {
             <div ref='fieldsView' className={styles.fieldsView}>
 
               <div className={styles.inputGroup}>
-                <Input
-                  ref='loginUsername'
-                  label={t('fragment_landing_username_hint')}
-                  onChange={this._changeUsername}
-                  value={this.props.username}
-                  onFocus={this.usernameFocused}
-                  autoCorrect={false}
-                  autoCapitalize={false}
-                  onKeyPress={this.usernameKeyPressed}
-                  className={styles.inputs}
-                />
+                <CachedUsers component={inputDropdown()} containerClassName={styles.cachedUsers} userListClassName={styles.userListClassName} />
 
                 <form className={styles.inputs} onSubmit={e => this.handleSubmit(e)}>
                   <Input
                     type='password'
                     ref='password'
-                    onFocus={this.passwordFocused}
                     label={t('fragment_landing_password_hint')}
                     onChange={this.changePassword}
                     value={this.props.password}
@@ -158,7 +158,6 @@ class Login extends Component {
                   />
                 </form>
               </div>
-              {cUsers()}
             </div>
             <div className={styles.buttonGroup}>
               <Button raised primary theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
