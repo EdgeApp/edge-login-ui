@@ -108,7 +108,7 @@ class LoginWithPin extends Component {
             autoFocus
           />
         </div>
-        <Button theme={neutral} style={{textTransform: 'none'}} className={styles.exitPin} onClick={this.viewPasswordInput}>
+        <Button theme={neutral} style={{textTransform: 'none'}} raised className={styles.exitPin} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
         {cUsers()}

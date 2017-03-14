@@ -17,8 +17,8 @@ import { showPasswordView } from '../ChangePassword/ChangePassword.action'
 import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.action'
 import { userLogin } from '../Login/Login.action'
 
-import nextButton from 'theme/nextButton.scss'
 import styles from './Home.webStyle'
+import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
 
 class Home extends Component {
 
@@ -67,7 +67,7 @@ class Home extends Component {
           <p><a className={styles.links} onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</a></p>
           <p><a className={styles.links} onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</a></p>
         </div>
-        <Button className={styles.section} raised theme={nextButton} type='button' onClick={this._handleLogout}>{t('string_done')}</Button>
+        <Button theme={neutralButtonWithBlueTextTheme} raised type='button' onClick={this._handleLogout}>{t('string_done')}</Button>
         <ChangePin />
         <ChangePassword />
         <PasswordRecovery />

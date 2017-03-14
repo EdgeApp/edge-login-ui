@@ -9,7 +9,7 @@ import { checkPassword } from './ChangePassword.middleware'
 import Snackbar from 'react-toolbox/lib/snackbar'
 import Input from 'react-toolbox/lib/input'
 import Dialog from 'react-toolbox/lib/dialog'
-import nextButton from 'theme/nextButton.scss'
+import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
 
 class ChangePassword extends Component {
 
@@ -73,8 +73,8 @@ class ChangePassword extends Component {
   }
 
   buttons = [
-    { label: "Close", onClick: this._handleHideModal, raised: true, theme: nextButton },
-    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true }
+    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true },    
+    { label: "Close", onClick: this._handleHideModal, raised: true , theme: neutralButtonWithBlueTextTheme}
   ]
 
   _renderNotification = () => {

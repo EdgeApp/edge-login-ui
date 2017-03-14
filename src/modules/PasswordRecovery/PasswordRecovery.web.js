@@ -14,10 +14,10 @@ import PasswordRecoveryToken from './PasswordRecoveryToken.web'
 
 import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
-import signinButton from 'theme/signinButton.scss';
-import neutralButton from 'theme/neutralButtons.scss';
-import nextButton from 'theme/nextButton.scss'
+import signinButton from 'theme/signinButton.scss'
+import skipButton from 'theme/skipButton.scss'
 import styles from './PasswordRecovery.webStyle'
+import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
 
 class PasswordRecovery extends Component {
 
@@ -148,8 +148,8 @@ class PasswordRecovery extends Component {
             />
           </div>
           <div style={styles}>
-            <Button type='button' theme={nextButton} raised onClick={this._handleHideModal}>Close</Button>
-            <Button type='button' primary={true} theme={signinButton} raised onClick={this._handleSubmit}>Submit</Button>
+            <Button type='button' theme={signinButton} primary={true} raised onClick={this._handleSubmit}>Submit</Button>
+            <Button type='button' theme={neutralButtonWithBlueTextTheme}  raised onClick={this._handleHideModal}>Close</Button>            
           </div>
         </div>
       )
