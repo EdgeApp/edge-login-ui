@@ -54,12 +54,10 @@ class LoginWithPin extends Component {
     this.props.dispatch(openLogin())
   }
   showCachedUsers = () => {
-    console.log('focus')
     this.props.dispatch(openUserList())
     this.refs.pinInput.getWrappedInstance().blur()
   }
   hideCachedUsers = () => {
-    console.log('potangina')
     this.props.dispatch(closeUserList())
   }
   toggleCachedUsers = () => {
@@ -103,7 +101,7 @@ class LoginWithPin extends Component {
 
     return (
       <div className={styles.container}>
-        <CachedUsers component={usersDropdown()} className={styles.cachedUsers} />
+        <CachedUsers component={usersDropdown()} containerClassName={styles.cachedUsers} />
         <div className={styles.inputDiv}>
           <Input
             ref='pinInput'

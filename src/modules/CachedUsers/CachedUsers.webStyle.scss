@@ -1,26 +1,49 @@
 @import "~react-toolbox/lib/dropdown/theme.scss";
 
+.customValues {
+  top: 3.5rem !important;
+  max-height: 30vh !important;
+}
+
+.userList {
+  padding: 0;
+}
+
 .userrows {
   display: flex;
   display: -webkit-flex;
+}
 
-  flex-direction: row;
-  -webkit-flex-direction: row;
-
-  justify-content: flex-start;
-  -webkit-justify-content: flex-start;
+.useritem {
+  display: flex;
+  display: -webkit-flex;
 
   align-items: center;
   -webkit-align-items: center;
 
+  -webkit-flex: 1 0 auto;
+  flex: 1 0 auto;
+
+  z-index: 5;
+  padding: $unit;
 }
 
-.useritem {
-   z-index: 5;
-   -webkit-flex: 1;
-   flex: 1;
+.useritemSelected {
+  font-weight: 700;
+  color: #007AFF;
 }
 
 .userdelete {
+  display: flex;
+  display: -webkit-flex;
+
+  align-items: center;
+  -webkit-align-items: center;
+
    z-index: 5;
+   padding: $unit;
+}
+
+.userdelete:hover {
+  color: #B33A3A;
 }
