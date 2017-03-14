@@ -18,7 +18,7 @@ class Container extends Component {
     // if (this.refs.pinPasswordForm) {
     //   this.refs.pinPasswordForm.onClose()
     // }
-    console.log('closing Airbitz login')
+    console.log('toggling Airbitz login')
     if (window.parent.exitCallback) {
       window.parent.exitCallback()
     }
@@ -45,8 +45,8 @@ class Container extends Component {
       <div className='app'>
         <Dialog
           active
-          onEscKeyDown={this.handleToggle}
-          onOverlayClick={this.handleToggle}
+          onEscKeyDown={this._handleToggle}
+          onOverlayClick={this._handleToggle}
         >
           <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle}/>
           {this.props.children}
