@@ -15,7 +15,8 @@ import PasswordRecoveryToken from './PasswordRecoveryToken.web'
 import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import signinButton from 'theme/signinButton.scss';
-import skipButton from 'theme/skipButton.scss';
+import neutralButton from 'theme/neutralButtons.scss';
+import nextButton from 'theme/nextButton.scss'
 
 class PasswordRecovery extends Component {
 
@@ -146,8 +147,8 @@ class PasswordRecovery extends Component {
             />
           </div>
           <div>
-            <Button type='button' theme={skipButton} raised onClick={this._handleHideModal}>Close</Button>
-            <Button type='button' theme={signinButton} raised onClick={this._handleSubmit}>Submit</Button>
+            <Button type='button' theme={nextButton} raised onClick={this._handleHideModal}>Close</Button>
+            <Button type='button' primary="true" raised onClick={this._handleSubmit}>Submit</Button>
           </div>
         </div>
       )
