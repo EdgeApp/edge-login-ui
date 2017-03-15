@@ -16,7 +16,7 @@ export const visible = (state = false, action) => {
 export const message = (state = '', action) => {
   switch (action.type) {
     case ACTION.ERROR_MODAL_OPEN :
-      return action.error
+      return action.message
 
     case ACTION.ERROR_MODAL_CLOSE :
       return ''
