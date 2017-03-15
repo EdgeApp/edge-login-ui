@@ -1,6 +1,5 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
-
 import { userLogin, requestEdgeLogin } from './Login.action'
 
 export const loginWithPassword = (username, password, callback) => {
@@ -58,16 +57,33 @@ export const loginWithPin = (username, pin, callback) => {
   }
 }
 
-export const edgeLogin = (handleEdgeLogin, handleProcessLogin) => {
+export const edgeLogin = (callback) => {
+
+
   return (dispatch, getState, imports) => {
     const abcContext = imports.abcContext
+    const t = imports.t
+
+    const onProcess = (username) => {
+      dispatch(
+        openLoading(String.format(t('edge_logging_in'), username))
+      )
+    }
+
+    const onLogin = (error, account) => {
+      // localStorage.setItem('lastUser', account.username)
+      dispatch(userLogin(account))
+      return callback(error, account)
+    }
+
     abcContext(context => {
       context.requestEdgeLogin({
         displayName: abcContext.vendorName,
         displayImageUrl: abcContext.vendorImageUrl,
-        onLogin: handleProcessLogin,
-        onProcessLogin: handleProcessLogin
+        onLogin: onLogin,
+        onProcessLogin: onProcess
       }, (error, results) => {
+        console.log(results)
         if (error) {
           console.log(error)
         } else if (results) {
@@ -75,5 +91,6 @@ export const edgeLogin = (handleEdgeLogin, handleProcessLogin) => {
         }
       })
     })
+
   }
 }

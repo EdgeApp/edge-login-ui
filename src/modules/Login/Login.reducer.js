@@ -14,6 +14,8 @@ export const viewPassword = (state = false, action) => {
       return true
     case SELECT_USER_LOGIN :
       return false
+    case DELETE_USER_FROM_CACHE :
+      return true
     default:
       return state
   }
@@ -32,6 +34,8 @@ export const viewPIN = (state = false, action) => {
     case SELECT_USER_LOGIN :
       return true
     case REMOVE_USER_LOGIN :
+      return false
+    case DELETE_USER_FROM_CACHE :
       return false
     default:
       return state

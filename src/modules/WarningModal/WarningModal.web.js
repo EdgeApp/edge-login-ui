@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
-
 import { connect } from 'react-redux'
+import t from 'lib/web/LocaleStrings'
+import Button from 'react-toolbox/lib/button'
+import Dialog from 'react-toolbox/lib/dialog'
+
 import { closeWarningModal } from './WarningModal.action'
 import { deleteUserToCache } from '../CachedUsers/CachedUsers.middleware'
 
-import t from 'lib/web/LocaleStrings'
-
-import Button from 'react-toolbox/lib/button'
-
-import Dialog from 'react-toolbox/lib/dialog'
-import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
+import styles from './WarningModal.webStyle'
 
 class WarningModal extends Component {
 
-  handleDeleteUsersFromCache = () => {
+  _handleDeleteUsersFromCache = () => {
     this.props.dispatch(
       deleteUserToCache(
         this.props.userToDeleteFromUserCache
@@ -21,70 +19,38 @@ class WarningModal extends Component {
     )
   }
 
-  checkHandleSubmit = () => {
+  _checkHandleSubmit = () => {
     switch (this.props.module) {
       case 'deleteCachedUser' :
-        return this.handleDeleteUsersFromCache
+        return this._handleDeleteUsersFromCache()
 
       default:
         return null
     }
   }
 
-  handleClose = () => {
+  _handleHideModal = () => {
     this.props.dispatch(closeWarningModal())
   }
 
+  buttons = [
+    { label: t('string_cancel'), onClick: this._handleHideModal, className: styles.cancelButton },
+    { label: t('string_ok'), onClick: this._checkHandleSubmit, raised: true, className: styles.warningButton }
+  ]
+
   render () {
+    console.log(this.props)
     return (
       <Dialog
+        actions={this.buttons}
         active={this.props.visible}
+        onEscKeyDown={this._handleHideModal}
+        onOverlayClick={this._handleHideModal}
+        title={this.props.title}
       >
-        <Card>
-          <CardText>
-            <div style={[ style.textWarning, style.textLead ]}>{ this.props.title }</div>
-            <div style={style.textWarning}>{ this.props.message }</div>
-          </CardText>
-          <CardActions style={{ flexDirection: 'row' }}>
-            <Button onClick={this.handleClose} style={style.hideModal}>
-              {t('string_cancel')}
-            </Button>
-            <Button style={style.hideModal} onClick={this.checkHandleSubmit()} >
-              {t('string_ok')}
-            </Button>
-          </CardActions>
-        </Card>
+        <div className={styles.text}>{ this.props.message }</div>
       </Dialog>
     )
-  }
-}
-
-const style = {
-
-  modal: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '250px',
-    padding: '20px',
-    width: '300px'
-  },
-
-  textWarning: {
-    fontSize: '16px',
-    textAlign: 'center',
-    marginBottom: '10px'
-  },
-
-  textLead: {
-    fontWeight: 'bold',
-    fontSize: '18px'
-  },
-
-  hideModal: {
-    marginTop: '15px',
-    marginHorizontal: '10px',
-    fontSize: '18px',
-    textAlign: 'center'
   }
 }
 

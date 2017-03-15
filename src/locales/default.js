@@ -804,6 +804,7 @@ const strings = {
     //  SSO
   edge_login: 'Edge Login',
   edge_description: 'This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.',
+  edge_logging_in: 'Logging {0}. Please wait',
   bitid_identity: 'BitID Identity',
   provide_an_identity_token: 'Provide an Identity Token',
   invalid_edge_login_request: 'Invalid Edge Login Request',

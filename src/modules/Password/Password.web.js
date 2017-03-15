@@ -91,7 +91,8 @@ class Password extends Component {
   render () {
     return (
       <div>
-        <div style={{position: 'relative'}}>
+        <div className={styles.header}>
+          <Button theme={neutral} className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
           <div className={styles.title}>
             <h4>{t('activity_signup_password_label')}</h4>
           </div>
@@ -149,9 +150,9 @@ class Password extends Component {
         </div>
 
         <div className={styles.buttonSection}>
-          <Button theme={neutral} raised onClick={this._handleBack}>{t('string_capitalize_back')}</Button>          
-          <Button type='button' theme={nextButton} raised onClick={this._handleSubmit}>{t('string_next')}</Button>
           <Button type='button' theme={neutral} className={styles.skip} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
+          <br />
+          <Button type='button' raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
         </div>
 
         <SkipPassword handleSubmit={this._handleSubmitSkipPassword} />
