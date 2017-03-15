@@ -54,35 +54,6 @@ class WarningModal extends Component {
   }
 }
 
-const style = {
-
-  modal: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '250px',
-    padding: '20px',
-    width: '300px'
-  },
-
-  textWarning: {
-    fontSize: '16px',
-    textAlign: 'center',
-    marginBottom: '10px'
-  },
-
-  textLead: {
-    fontWeight: 'bold',
-    fontSize: '18px'
-  },
-
-  hideModal: {
-    marginTop: '15px',
-    marginHorizontal: '10px',
-    fontSize: '18px',
-    textAlign: 'center'
-  }
-}
-
 export default connect(state => ({
   visible: state.warningModal.visible,
   module: state.warningModal.module,

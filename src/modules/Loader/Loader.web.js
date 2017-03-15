@@ -23,11 +23,10 @@ class Loader extends Component {
 
   _renderMessage = () => {
     if(this.props.loader.message) {
-      return <p>{this.props.loader.message}</p>
+      return <div><p><b>{this.props.loader.message}</b></p><br /></div>
     }else{
-      return null 
-    } 
-
+      return null
+    }
   }
 
   render () {

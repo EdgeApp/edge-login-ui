@@ -17,15 +17,6 @@ class ChangePassword extends Component {
       if(!error){
         this.props.dispatch(hidePasswordView())
         this.props.dispatch(showPasswordChangedNotification())
-
-        // this.props.dispatch(pinChanged())
-        // if (window.parent.exitCallback) {
-        //   window.parent.exitCallback(null)
-        // }
-        // if (!window.parent.exitCallback) {
-        //   this.props.dispatch(closeLoading())
-        //   this.props.dispatch(hidePasswordView())
-        // }
       }
     }
     this.props.dispatch(
@@ -62,13 +53,13 @@ class ChangePassword extends Component {
   }
 
   _handleNotificationClose = () => {
-    if (window.parent.exitCallback) {
-      this.props.dispatch(hidePasswordView())
-      return window.parent.exitCallback(null)
-    }
-    if (!window.parent.exitCallback) {
+    // if (window.parent.exitCallback) {
+    //   this.props.dispatch(hidePasswordView())
+    //   return window.parent.exitCallback(null)
+    // }
+    // if (!window.parent.exitCallback) {
       return this.props.dispatch(hidePasswordChangedNotification())
-    }
+    // }
   }
 
   buttons = [

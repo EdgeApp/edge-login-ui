@@ -31,20 +31,6 @@ class LoginEdge extends Component {
     // }
   }
 
-  _handleEdgeLogin (error, account) {
-    console.log(error)
-    console.log(account)
-    if (error) {
-      console.log('Error on Edge Login')
-    } else {
-      console.log(account)
-    }
-  }
-
-  _handleProcessLogin (username) {
-    console.log(username)
-  }
-
   renderBarcode () {
     const { edgeId } = this.props
     if(edgeId) {

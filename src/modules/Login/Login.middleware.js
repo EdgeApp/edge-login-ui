@@ -59,13 +59,16 @@ export const edgeLogin = (callback) => {
 
   return (dispatch, getState, imports) => {
     const abcContext = imports.abcContext
+    const t = imports.t
 
     const onProcess = (username) => {
-      return dispatch(openLoading('We are trying to login your account. Please wait.'))
+      dispatch(
+        openLoading(String.format(t('edge_logging_in'), username))
+      )
     }
 
     const onLogin = (error, account) => {
-      localStorage.setItem('lastUser', account.username)
+      // localStorage.setItem('lastUser', account.username)
       dispatch(userLogin(account))
       return callback(error, account)
     }
@@ -77,6 +80,7 @@ export const edgeLogin = (callback) => {
         onLogin: onLogin,
         onProcessLogin: onProcess
       }, (error, results) => {
+        console.log(results)
         if (error) {
           console.log(error)
         } else if (results) {
