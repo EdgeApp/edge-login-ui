@@ -59,7 +59,7 @@ class PinComponent extends Component {
   render () {
     return (
       <div>
-        <div style={{position: 'relative'}}>
+        <div className={styles.header}>
           <Button theme={neutral} className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
           <div className={styles.title}>
             <h4>{t('activity_signup_pin_label')}</h4>
@@ -81,8 +81,8 @@ class PinComponent extends Component {
           <div className={styles.section}>
             <p className={styles.text}>{t('fragment_setup_pin_text')}</p>
           </div>
-          <div className={styles.buttonSection}>
-            <Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
+          <div className={styles.section}>
+            <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </div>
         </form>
       </div>

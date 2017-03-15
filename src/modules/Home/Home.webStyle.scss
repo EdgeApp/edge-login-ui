@@ -31,3 +31,8 @@
   font-size: $unit * 1.4;
   line-height: $unit * 2.3;
 }
+
+.button {
+  @extend .section;
+  width: 50%;
+}

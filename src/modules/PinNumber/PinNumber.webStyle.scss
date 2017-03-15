@@ -1,3 +1,5 @@
+@import "~theme/SignUpStyle";
+
 .containerBody {
   display: flex;
   display: -webkit-flex;
@@ -10,45 +12,6 @@
 
   align-items: center;
   -webkit-align-items: center;
-}
-
-.exitButton {
-  position: absolute;
-  top: -2px;
-  left: -30px;
-}
-
-.title {
-  text-align: center;
-}
-
-.section {
-  margin: $unit * 1.8 0;
-}
-
-.inputField {
-  width: 100%;
-}
-
-.text{
-  white-space: pre-line;
-}
-
-.buttonSection {
-  @extend .section;
-
-  // display: flex;
-  // display: -webkit-flex;
-  //
-  // flex-direction: column;
-  // -webkit-flex-direction: column;
-  //
-  // justify-content: center;
-  // -webkit-justify-content: center;
-  //
-  // align-items: center;
-  // -webkit-align-items: center;
-  //
 }
 
 .inputDiv {

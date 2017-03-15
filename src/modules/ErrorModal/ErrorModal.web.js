@@ -33,7 +33,7 @@ class ErrorModal extends Component {
           <div className={styles.container}>
             <p>{this.props.message}</p>
             <br />
-            <Button raised theme={nextButton} type='button' onClick={this._handleClose}>{t('string_ok')}</Button>
+            <Button raised primary className={styles.button} type='button' onClick={this._handleClose}>{t('string_ok')}</Button>
           </div>
         </Dialog>
       )

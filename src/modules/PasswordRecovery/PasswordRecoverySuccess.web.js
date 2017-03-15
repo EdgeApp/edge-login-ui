@@ -36,7 +36,7 @@ class PasswordRecoverySuccess extends Component {
           <div className={styles.container}>
             <p>{t('recovery_setup_successful')}</p>
             <br />
-            <Button raised theme={nextButton} type='button' onClick={this._handleFinish}>{t('string_ok')}</Button>
+            <Button raised primary className={styles.button} type='button' onClick={this._handleFinish}>{t('string_ok')}</Button>
           </div>
         </Dialog>
       </div>
