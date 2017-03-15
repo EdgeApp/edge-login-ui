@@ -100,6 +100,11 @@ class PasswordRecovery extends Component {
 	return [ {value: t('activity_recovery_default_choice'), label: t('activity_recovery_default_choice')} ]
   }
 
+  buttons = [
+    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true },    
+    { label: "Close", onClick: this._handleHideModal, raised: true, theme: neutralButtonWithBlueTextTheme }
+  ]  
+
   _renderView = () => {
 
     if (!this.props.viewToken) {
@@ -146,10 +151,6 @@ class PasswordRecovery extends Component {
               label={t('send_confirmation_enter_send_password')}
               required
             />
-          </div>
-          <div>
-            <Button type='button' theme={skipButton} raised onClick={this._handleHideModal}>Close</Button>
-            <Button type='submit' primary style={{width: '50%'}} raised onClick={this._handleSubmit}>Submit</Button>
           </div>
         </form>
       )
