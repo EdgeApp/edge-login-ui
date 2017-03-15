@@ -1,6 +1,5 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
-
 import { userLogin, requestEdgeLogin } from './Login.action'
 
 export const loginWithPassword = (username, password, callback) => {
@@ -55,15 +54,28 @@ export const loginWithPin = (username, pin, callback) => {
   }
 }
 
-export const edgeLogin = (handleEdgeLogin, handleProcessLogin) => {
+export const edgeLogin = (callback) => {
+
+
   return (dispatch, getState, imports) => {
     const abcContext = imports.abcContext
+
+    const onProcess = (username) => {
+      return dispatch(openLoading('We are trying to login your account. Please wait.'))
+    }
+
+    const onLogin = (error, account) => {
+      localStorage.setItem('lastUser', account.username)
+      dispatch(userLogin(account))
+      return callback(error, account)
+    }
+
     abcContext(context => {
       context.requestEdgeLogin({
         displayName: abcContext.vendorName,
         displayImageUrl: abcContext.vendorImageUrl,
-        onLogin: handleProcessLogin,
-        onProcessLogin: handleProcessLogin
+        onLogin: onLogin,
+        onProcessLogin: onProcess
       }, (error, results) => {
         if (error) {
           console.log(error)
@@ -72,5 +84,6 @@ export const edgeLogin = (handleEdgeLogin, handleProcessLogin) => {
         }
       })
     })
+
   }
 }

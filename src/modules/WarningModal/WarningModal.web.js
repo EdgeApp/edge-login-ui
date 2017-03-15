@@ -22,7 +22,7 @@ class WarningModal extends Component {
   _checkHandleSubmit = () => {
     switch (this.props.module) {
       case 'deleteCachedUser' :
-        return this._handleDeleteUsersFromCache
+        return this._handleDeleteUsersFromCache()
 
       default:
         return null
@@ -39,6 +39,7 @@ class WarningModal extends Component {
   ]
 
   render () {
+    console.log(this.props)
     return (
       <Dialog
         actions={this.buttons}
