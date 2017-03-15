@@ -13,7 +13,7 @@ class Footer extends Component {
 
   render () {
     return (
-    <AppBar title="Footer" className={styles.appBar} flat="false" style={{boxShadow: "none", borderLeft: "none", borderRight: "none"}}>
+    <AppBar title="Footer" className={styles.appBar} flat={false} style={{boxShadow: "none", borderLeft: "none", borderRight: "none"}}>
         <Navigation type="horizontal" actions={actions} className={styles.navigation}>
             <Link href="https://airbitz.co/app" className={styles.footerDownloadLink} label="Increase your account security. Download Airbitz" icon="" />
         </Navigation>

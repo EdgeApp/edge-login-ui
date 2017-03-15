@@ -13,7 +13,7 @@ class Header extends Component {
 
   render () {
     return (
-    <AppBar title="Sample App" leftIcon='menu' fixed="true" className={styles.appBar}>
+    <AppBar title="Sample App" leftIcon='menu' fixed={true} className={styles.appBar}>
         <Navigation type="horizontal" actions={actions} className={styles.navigation}>
             <Link className={styles.headerAppName} label="App Name" />
             <Link className={styles.headerPoweredAirBitz} label="Powered by Airbitz" />
