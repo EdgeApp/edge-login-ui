@@ -14,7 +14,7 @@ export const loginWithPassword = (username, password, callback) => {
         context.loginWithPassword(username, password, null, null, (error, account) => {
           if (error) {
             dispatch(closeLoading())
-            dispatch(openErrorModal(error.message))
+            dispatch(openErrorModal(error))
             return callback(error, null)
           }
           if (!error) {
@@ -40,7 +40,7 @@ export const loginWithPin = (username, pin, callback) => {
 
           dispatch(closeLoading())
           if (error) {
-            dispatch(openErrorModal(error.message))
+            dispatch(openErrorModal(error))
             return callback(error, null)
           }
 
