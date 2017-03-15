@@ -12,7 +12,7 @@
 
   align-items: center;
   -webkit-align-items: center;
-}  
+}
 
 .section {
   margin: $unit * 1.8 0;
@@ -32,3 +32,7 @@
   line-height: $unit * 2.3;
 }
 
+.button {
+  @extend .section;
+  width: 50%;
+}

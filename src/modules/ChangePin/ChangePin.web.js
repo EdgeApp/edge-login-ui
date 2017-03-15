@@ -43,13 +43,13 @@ class ChangePin extends Component {
   }
 
   _handleNotificationClose = () => {
-    if (window.parent.exitCallback) {
-      this.props.dispatch(hidePinView())
-      return window.parent.exitCallback(null)
-    }
-    if (!window.parent.exitCallback) {
+    // if (window.parent.exitCallback) {
+    //   this.props.dispatch(hidePinView())
+    //   return window.parent.exitCallback(null)
+    // }
+    // if (!window.parent.exitCallback) {
       return this.props.dispatch(hidePinChangedNotification())
-    }
+    // }
   }
 
   buttons = [

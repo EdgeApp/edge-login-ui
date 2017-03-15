@@ -9,7 +9,6 @@ import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { removeUserToLogin } from '../CachedUsers/CachedUsers.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 
-
 import { Button } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import buttonTheme from 'theme/neutralButtons.scss'
@@ -19,59 +18,54 @@ import FontIcon from 'react-toolbox/lib/font_icon'
 
 class LoginWithPin extends Component {
 
-  submit = () => {
-    this.refs.pinInput.getWrappedInstance().blur()
+  _handleSubmit = () => {
+    const callback = (error, account) => {
+      if (!error) {
+        if (window.parent.loginCallback) {
+          return window.parent.loginCallback(null, account)
+        }
+        if (!window.parent.loginCallback) {
+          this.props.dispatch(closeLoading())
+          return this.props.router.push('/home')
+        }
+      } else {
+        this._handleChangePin('')
+        return this.refs.pinInput.getWrappedInstance().focus()
+      }
+    }
     this.props.dispatch(
       loginWithPin(
         this.props.user,
         this.props.pin,
-        ( error, account ) => {
-        if (!error) {
-          if (window.parent.loginCallback) {
-            return window.parent.loginCallback(null, account)
-          }
-          if (!window.parent.loginCallback) {
-            this.props.dispatch(closeLoading())
-            return this.props.router.push('/home')
-          }
-        } else {
-          return this.refs.pinInput.getWrappedInstance().focus()
-        }
-      })
+        callback
+      )
     )
+    this.refs.pinInput.getWrappedInstance().blur()
   }
-  changePin = (pin) => {
+  _handleChangePin = (pin) => {
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
     }
-    this.props.dispatch(loginPIN(pin))
+    if(/^\d+$/.test(pin) || pin.length === 0) {
+      this.props.dispatch(
+        loginPIN(pin)
+      )
+    }
     if (pin.length > 3) {
-      setTimeout(this.submit, 200)
+      setTimeout(this._handleSubmit, 200)
     }
   }
-  viewPasswordInput = (pin) => {
-    this.props.dispatch(closeUserList())
-    this.props.dispatch(removeUserToLogin())
-    this.props.dispatch(openLogin())
-  }
-  showCachedUsers = () => {
+  _showCachedUsers = () => {
     this.props.dispatch(openUserList())
     this.refs.pinInput.getWrappedInstance().blur()
   }
-  hideCachedUsers = () => {
+  _hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
+    this.refs.pinInput.getWrappedInstance().focus()
   }
-  toggleCachedUsers = () => {
-    if (this.props.showCachedUsers) {
-      this.hideCachedUsers()
-    } else {
-      this.showCachedUsers()
-    }
-  }
-  componentDidUpdate (oldProps) {
-    if (oldProps.showCachedUsers && !this.props.showCachedUsers) {
-      this.refs.pinInput.getWrappedInstance().focus()
-    }
+  _gotoPasswordInput = (pin) => {
+    this.props.dispatch(closeUserList())
+    this.props.dispatch(openLogin())
   }
   pinStyle = () => {
     if (this.props.pin.length > 0){
@@ -90,11 +84,19 @@ class LoginWithPin extends Component {
       }
     }
 
+    const usersDropdown = () => {
+      return (
+        <div className={styles.usernameContainer}>
+          <a className={styles.username} tabIndex={1} onFocus={this._showCachedUsers} onBlur={this._hideCachedUsers}>
+            { this.props.user ? this.props.user : 'No User Selected' }
+          </a>
+        </div>
+      )
+    }
+
     return (
       <div className={styles.container}>
-        <Button flat className={styles.username} theme={buttonTheme} onClick={this.toggleCachedUsers}>
-          { this.props.user ? this.props.user : 'No User Selected' } <FontIcon className={styles.downArrow} value="play_arrow" />
-        </Button>
+        <CachedUsers component={usersDropdown()} containerClassName={styles.cachedUsers} userListClassName={styles.userListClassName}/>
         <div className={styles.inputDiv}>
           <Input
             ref='pinInput'
@@ -103,15 +105,14 @@ class LoginWithPin extends Component {
             placeholder={t('fragment_landing_enter_pin')}
             style={this.pinStyle()}
             value={this.props.pin}
-            onChange={this.changePin}
+            onChange={this._handleChangePin}
             autoCorrect={false}
             autoFocus
           />
         </div>
-        <Button theme={neutral} style={{textTransform: 'none'}} raised className={styles.exitPin} onClick={this.viewPasswordInput}>
+        <Button theme={neutral} className={styles.exitPin} onClick={this._gotoPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
-        {cUsers()}
       </div>
     )
   }

@@ -104,7 +104,7 @@ class PasswordRecovery extends Component {
 
     if (!this.props.viewToken) {
       return (
-        <div>
+        <form onSubmit={e => { e.preventDefault; this._handleSubmit(e); }}>
           <div>
             <Dropdown
               auto
@@ -147,11 +147,11 @@ class PasswordRecovery extends Component {
               required
             />
           </div>
-          <div style={styles}>
-            <Button type='button' theme={signinButton} primary={true} raised onClick={this._handleSubmit}>Submit</Button>
-            <Button type='button' theme={neutralButtonWithBlueTextTheme}  raised onClick={this._handleHideModal}>Close</Button>            
+          <div>
+            <Button type='button' theme={skipButton} raised onClick={this._handleHideModal}>Close</Button>
+            <Button type='submit' primary style={{width: '50%'}} raised onClick={this._handleSubmit}>Submit</Button>
           </div>
-        </div>
+        </form>
       )
     }
 

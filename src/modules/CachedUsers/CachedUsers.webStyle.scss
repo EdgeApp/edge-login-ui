@@ -1,0 +1,44 @@
+@import "~react-toolbox/lib/dropdown/theme.scss";
+
+.userList {
+  padding: 0;
+}
+
+.userrows {
+  display: flex;
+  display: -webkit-flex;
+}
+
+.useritem {
+  display: flex;
+  display: -webkit-flex;
+
+  align-items: center;
+  -webkit-align-items: center;
+
+  -webkit-flex: 1 0 auto;
+  flex: 1 0 auto;
+
+  z-index: 5;
+  padding: $unit;
+}
+
+.useritemSelected {
+  font-weight: 700;
+  color: #007AFF;
+}
+
+.userdelete {
+  display: flex;
+  display: -webkit-flex;
+
+  align-items: center;
+  -webkit-align-items: center;
+
+   z-index: 5;
+   padding: $unit;
+}
+
+.userdelete:hover {
+  color: #B33A3A;
+}

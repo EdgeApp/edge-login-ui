@@ -51,7 +51,8 @@ class UsernameComponent extends Component {
   render () {
     return (
       <div>
-        <div style={{position: 'relative'}}>
+        <div className={styles.header}>
+          <Button theme={neutral} className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_exit')}</Button>
           <div className={styles.title}>
             <h4>{t('fragment_setup_username_label')}</h4>
           </div>
@@ -70,10 +71,10 @@ class UsernameComponent extends Component {
             </form>
           </div>
           <div className={styles.section}>
-            <p className={styles.usernameText}>{t('fragment_setup_username_text')}</p>
+            <p className={styles.text}>{t('fragment_setup_username_text')}</p>
           </div>
           <div className={styles.buttonSection}>
-            <Button theme={neutral} raised onClick={this._handleBack}>{t('string_capitalize_back')}</Button><Button type="button" raised theme={nextButton} onClick={this._handleSubmit}>{t('string_next')}</Button>
+            <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </div>
       </div>
     )

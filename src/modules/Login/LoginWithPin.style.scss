@@ -14,9 +14,40 @@
   -webkit-align-items: center;
 }
 
+.usernameContainer {
+  text-align: center;
+}
+
 .username {
+  margin-right: 1rem;
+  position: relative;
   font-size:  $unit * 2.0;
-  text-transform: none;
+  text-decoration: none;
+}
+
+.username:hover {
+  text-decoration: none;
+}
+
+.username:after {
+  position: absolute;
+  content:"";
+  top: 1.3rem;
+  right: -2rem;
+  width:0;
+  height:0;
+  border-right:5px solid transparent;
+  border-left:5px solid transparent;
+  border-top:5px solid #007AFF;
+}
+
+.userListClassName {
+  top: 3.5rem !important;
+  max-height: 30vh !important;
+}
+
+.cachedUsers {
+  width: 40%;
 }
 
 .inputDiv {
