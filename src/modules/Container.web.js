@@ -8,6 +8,7 @@ import Loader from './Loader/Loader.web'
 import ErrorModal from './ErrorModal/ErrorModal.web'
 import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
+import LayoutTemplate from './LayoutTemplate/LayoutTemplate.web'
 
 import styles from './Container.style.scss'
 
@@ -40,6 +41,7 @@ class Container extends Component {
   componentWillUpdate () {
     this.loadData()
   }
+
   render () {
     return (
       <div className='app'>
@@ -48,8 +50,11 @@ class Container extends Component {
           onEscKeyDown={this.handleToggle}
           onOverlayClick={this.handleToggle}
         >
-          <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle}/>
-          {this.props.children}
+          <LayoutTemplate>
+            <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle}/>
+            {this.props.children}            
+          </LayoutTemplate>
+
           <Loader />
           <ErrorModal />
           <WarningModal />

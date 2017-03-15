@@ -1,0 +1,32 @@
+.appBar{
+    height: 4.5rem;
+    padding: 0 1.7rem;
+
+    .navigation {
+        width: 100%;
+
+        .headerAppName {
+            float: left;
+            color: white;
+            text-decoration: none;
+            cursor: default;
+            &:hover {
+                text-decoration: none;
+            }    
+        }
+
+        .headerPoweredAirBitz {
+            float: right;
+            color: white;
+            cursor: default;    
+
+            &:hover {
+                text-decoration: none;
+            }
+
+        }        
+    }    
+}
+
+
+
