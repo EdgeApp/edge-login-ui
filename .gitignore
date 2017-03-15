@@ -8,3 +8,4 @@ vendor
 ./config.json
 config.json
 assets
+./assets
