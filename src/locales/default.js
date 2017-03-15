@@ -127,7 +127,7 @@ const strings = {
     //  Strings for errors from server
   server_error_account_already_exists: 'This account already exists.',
   server_error_account_does_not_exists: 'We were unable to find your account. Be sure your username is correct.',
-  server_error_bad_password: 'Incorrect password.',
+  server_error_bad_password: 'Incorrect login and password.',
   server_error_wallet_exists: 'Wallet already exists.',
   server_error_invalid_wallet: 'Wallet does not exist.',
   server_error_no_connection: 'Unable to connect to server. Please try again later.',
@@ -141,6 +141,7 @@ const strings = {
   server_error_pin_expired: 'PIN has expired. Please log in.',
   server_error_invalid_pin_wait: 'Too many failed login attempts. Please try again in {0} seconds.',
   server_error_other: 'An error has occurred.',
+  server_error_bad_otp: 'This account has Two Factor Authentication enabled and cannot be logged in using a username and password. Please login by scanning the barcode with the Airbitz Wallet.',
   insufficient_amount: 'Amount too small',
   account_needs_password_title: 'WARNING: missing password',
   account_needs_password_message: 'Account [{0}] needs a password. Account is not accessible on a new device without a password.',
