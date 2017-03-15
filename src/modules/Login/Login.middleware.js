@@ -5,6 +5,7 @@ import { userLogin, requestEdgeLogin } from './Login.action'
 
 export const loginWithPassword = (username, password, callback) => {
   return (dispatch, getState, imports) => {
+    const t = imports.t
     const abcContext = imports.abcContext
     const localStorage = global ? global.localStorage : window.localStorage
 
@@ -14,7 +15,8 @@ export const loginWithPassword = (username, password, callback) => {
         context.loginWithPassword(username, password, null, null, (error, account) => {
           if (error) {
             dispatch(closeLoading())
-            dispatch(openErrorModal(error))
+            let type = error.type === "OtpError" ? "server_error_bad_otp" : "server_error_bad_password";
+            dispatch(openErrorModal(t(type)))
             return callback(error, null)
           }
           if (!error) {
@@ -30,6 +32,7 @@ export const loginWithPassword = (username, password, callback) => {
 
 export const loginWithPin = (username, pin, callback) => {
   return (dispatch, getState, imports) => {
+    const t = imports.t    
     dispatch(openLoading())
     const localStorage = global ? global.localStorage : window.localStorage
     const abcctx = imports.abcContext
@@ -40,7 +43,7 @@ export const loginWithPin = (username, pin, callback) => {
 
           dispatch(closeLoading())
           if (error) {
-            dispatch(openErrorModal(error))
+            dispatch(openErrorModal(t('server_error_bad_pin')))
             return callback(error, null)
           }
 
