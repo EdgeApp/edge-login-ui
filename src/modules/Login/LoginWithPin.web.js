@@ -15,6 +15,7 @@ import Input from 'react-toolbox/lib/input'
 import buttonTheme from 'theme/neutralButtons.scss'
 import styles from './LoginWithPin.style.scss'
 import neutral from 'theme/neutralButtonWithBlueText.scss'
+import FontIcon from 'react-toolbox/lib/font_icon'
 
 class LoginWithPin extends Component {
 
@@ -92,7 +93,7 @@ class LoginWithPin extends Component {
     return (
       <div className={styles.container}>
         <Button flat className={styles.username} theme={buttonTheme} onClick={this.toggleCachedUsers}>
-          { this.props.user ? this.props.user : 'No User Selected' }
+          { this.props.user ? this.props.user : 'No User Selected' } <FontIcon className={styles.downArrow} value="play_arrow" />
         </Button>
         <div className={styles.inputDiv}>
           <Input
@@ -107,7 +108,7 @@ class LoginWithPin extends Component {
             autoFocus
           />
         </div>
-        <Button theme={neutral} style={{textTransform: 'none'}} className={styles.exitPin} onClick={this.viewPasswordInput}>
+        <Button theme={neutral} style={{textTransform: 'none'}} raised className={styles.exitPin} onClick={this.viewPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
         {cUsers()}

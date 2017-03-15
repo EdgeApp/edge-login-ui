@@ -166,7 +166,7 @@ const strings = {
   fragment_landing_account_delete_title: 'Delete Account',
   fragment_landing_account_delete_message: 'Delete {0} on this device only? This will remove the 2FA and PIN access from this device. If 2FA is enabled on this account, you will be unable to access this account for 7 days from new devices',
   fragment_landing_create_account: 'Create Account',
-  fragment_landing_create_a_new_account: 'Create a new Account',
+  fragment_landing_create_a_new_account: 'Create a New Account',
 
     // Strings for Signup and Sign-in
   activity_signup_title: 'Sign Up',

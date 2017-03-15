@@ -1,5 +1,13 @@
 .dialogZIndex {
-  z-index: 2
+  z-index: 2;
+  width: 35vw; 
+
+  & > section {
+    padding: 1.68rem 2.8rem; 
+  }
+
+  font-size: 1.48rem;
+  line-height: 2rem;
 }
 
 .container {
@@ -16,4 +24,8 @@
   -webkit-align-items: center;
 
   padding: $unit *1;
+  
+  p {
+    text-align: center;
+  }  
 }

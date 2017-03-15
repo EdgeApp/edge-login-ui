@@ -9,6 +9,7 @@ import Input from 'react-toolbox/lib/input'
 import { hidePinView, showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification, showPinChangedNotification } from './ChangePin.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { checkPin } from './ChangePin.middleware'
+import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
 
 class ChangePin extends Component {
 
@@ -52,8 +53,8 @@ class ChangePin extends Component {
   }
 
   buttons = [
-    { label: "Close", onClick: this._handleHideModal, raised: true},
-    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true }
+    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true },    
+    { label: "Close", onClick: this._handleHideModal, raised: true, theme: neutralButtonWithBlueTextTheme }
   ]
 
   _renderNotification = () => {
