@@ -128,7 +128,7 @@ class Login extends Component {
           <LoginEdge />
           <div className={styles.buttonGroup}>
             <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_account')}</Button>
-            <div ref='fieldsBelowView' style={{height: '90px'}} />
+            <div ref='fieldsBelowView' style={{height: '45px'}} />
             <a onClick={this._handleOpenLoginWithPasswordPage}>Already have an account? Log in</a>
           </div>
           <ForgotPassword />
