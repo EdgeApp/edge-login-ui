@@ -49,6 +49,7 @@ class Container extends Component {
           active
           onEscKeyDown={this._handleToggle}
           onOverlayClick={this._handleToggle}
+          className={styles.topLevelDialog}
         >
           <LayoutTemplate>
             <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle}/>
