@@ -1,6 +1,12 @@
+$layout-breakpoint-xs:     600px !default;
+$layout-breakpoint-sm:     960px !default;
+$layout-breakpoint-md:     1280px !default;
+$layout-breakpoint-lg:     1920px !default;
+
 .appBar{
     height: 4.5rem;
-    padding: 0 1.7rem;
+    padding: 0 0.6rem;
+    font-size: 1.0rem;
 
     .navigation {
         width: 100%;
@@ -28,5 +34,25 @@
     }    
 }
 
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : $layout-breakpoint-xs) {
 
+}
 
+/* Small Devices, Tablets */
+@media only screen and (min-width : $layout-breakpoint-sm) {
+    .appBar {
+        font-size: 1.4rem;
+        padding: 0 1.0rem;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : $layout-breakpoint-md) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : $layout-breakpoint-lg) {
+
+}

@@ -1,10 +1,23 @@
-.appBar{
-    margin-top: 15px;
-    height: 4.5rem;
-    padding: 0 1.7rem;
+$break-xxs: 320px;
+$break-xs: 480px;
+$break-600: 600px;
+$break-sm: 768px;
+$break-md: 992px;
+$break-lg: 1200px;
+
+$layout-breakpoint-xs:     600px !default;
+$layout-breakpoint-sm:     960px !default;
+$layout-breakpoint-md:     1280px !default;
+$layout-breakpoint-lg:     1920px !default;
+
+.appBar {
+    height: 6rem;
+    margin-top: 10px;
+    padding: 0 0;
     border-top: 1px solid #f2f2f2;
-    background-color: inherit;
-    box-shadow: none;
+    background-color: transparent;
+    box-shadow: none !important;
+    font-size: 1.0rem;
 
     .navigation {
         width: 100%;
@@ -23,10 +36,50 @@
     }
 }
 
-.footer {
-    box-shadow: "none";
-    border-left: "none";
-    border-right: "none";
+/* Custom, iPhone Retina */ 
+
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : $layout-breakpoint-xs) {
+    .appBar {
+  
+        .navigation {
+            padding: 0 0;
+
+            .footerDownloadLink {
+                font-size: 1.2rem;
+                &:hover {
+
+                }    
+            }         
+        }
+    }
 }
 
+/* Small Devices, Tablets */
+@media only screen and (min-width : $layout-breakpoint-sm) {
+    .appBar{
 
+
+        .navigation {
+
+
+            .footerDownloadLink {
+                font-size: 1.8rem;
+                &:hover {
+
+                }    
+            }         
+        }
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : $layout-breakpoint-md) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : $layout-breakpoint-lg) {
+
+}

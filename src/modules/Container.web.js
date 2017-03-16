@@ -9,6 +9,7 @@ import ErrorModal from './ErrorModal/ErrorModal.web'
 import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
 import LayoutTemplate from './LayoutTemplate/LayoutTemplate.web'
+import layoutTheme from 'theme/layoutTheme'
 
 import styles from './Container.style.scss'
 
@@ -51,7 +52,7 @@ class Container extends Component {
           onOverlayClick={this._handleToggle}
           className={styles.topLevelDialog}
         >
-          <LayoutTemplate>
+          <LayoutTemplate theme={layoutTheme}>
             <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle}/>
             {this.props.children}            
           </LayoutTemplate>
