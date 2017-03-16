@@ -1,11 +1,11 @@
 .neutral:not([disabled]) {
-  &.raised {
-    background-color: #80C342;
-    color: #FFF;
-  }
-}
 
-.button {
-  max-width: 50%;
-  min-width: 100px;   
+  text-transform: none;
+
+  &.flat {
+    color: #007AFF;
+  }
+  &.raised {
+    color: #007AFF;
+  }
 }

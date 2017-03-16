@@ -42,7 +42,7 @@ class ForgotPassword extends Component {
             <br />
           </div>
           <div className={styles.button}>
-            <Button type='button' onClick={this._handleClose}>{t('string_ok')}</Button>
+            <Button type='button' className={styles.button} onClick={this._handleClose}>{t('string_ok')}</Button>
           </div>
         </Dialog>
       )

@@ -1,4 +1,7 @@
 .neutral:not([disabled]) {
+
+  text-transform: none;
+
   &.flat {
     color: #007AFF;
   }

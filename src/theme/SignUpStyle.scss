@@ -1,3 +1,5 @@
+@import "~theme/GlobalButton";
+
 .header {
   position: relative;
 }
@@ -7,6 +9,8 @@
 }
 
 .exitButton {
+  @extend .buttonNeutral;
+
   position: absolute;
   top: -2px;
   left: -30px;
@@ -42,9 +46,12 @@
 
   align-items: center;
   -webkit-align-items: center;
+  text-transform: none;
 
 }
 
 .buttonNext {
+  @extend .buttonPrimary;
+
   width:50%;
 }

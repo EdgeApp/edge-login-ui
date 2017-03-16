@@ -9,7 +9,9 @@ import Input from 'react-toolbox/lib/input'
 import { hidePinView, showPinView, changePinPasswordValue, changePinValue, hidePinChangedNotification, showPinChangedNotification } from './ChangePin.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { checkPin } from './ChangePin.middleware'
-import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
+
+import neutralButtons from 'theme/neutralButtons.scss'
+import primaryButtons from 'theme/primaryButtons.scss'
 
 class ChangePin extends Component {
 
@@ -43,18 +45,12 @@ class ChangePin extends Component {
   }
 
   _handleNotificationClose = () => {
-    // if (window.parent.exitCallback) {
-    //   this.props.dispatch(hidePinView())
-    //   return window.parent.exitCallback(null)
-    // }
-    // if (!window.parent.exitCallback) {
-      return this.props.dispatch(hidePinChangedNotification())
-    // }
+    return this.props.dispatch(hidePinChangedNotification())
   }
 
   buttons = [
-    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true },    
-    { label: "Close", onClick: this._handleHideModal, raised: true, theme: neutralButtonWithBlueTextTheme }
+    { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
+    { label: "Close", onClick: this._handleHideModal, theme: neutralButtons }
   ]
 
   _renderNotification = () => {

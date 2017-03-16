@@ -12,7 +12,6 @@ import { changeSignupPage } from '../Signup/Signup.action'
 import { changePinNumberValue } from './PinNumber.action'
 import { checkPIN } from './PinNumber.middleware'
 
-import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './PinNumber.webStyle'
 
 class PinComponent extends Component {
@@ -60,7 +59,7 @@ class PinComponent extends Component {
     return (
       <div>
         <div className={styles.header}>
-          <Button theme={neutral} className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
+          <Button className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
           <div className={styles.title}>
             <h4>{t('activity_signup_pin_label')}</h4>
           </div>

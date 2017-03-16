@@ -7,6 +7,9 @@ import Dialog from 'react-toolbox/lib/dialog'
 import { closeWarningModal } from './WarningModal.action'
 import { deleteUserToCache } from '../CachedUsers/CachedUsers.middleware'
 
+import neutralButtons from 'theme/neutralButtons.scss'
+import warningButtons from 'theme/warningButtons.scss'
+
 import styles from './WarningModal.webStyle'
 
 class WarningModal extends Component {
@@ -34,12 +37,11 @@ class WarningModal extends Component {
   }
 
   buttons = [
-    { label: t('string_cancel'), onClick: this._handleHideModal, className: styles.cancelButton },
-    { label: t('string_ok'), onClick: this._checkHandleSubmit, raised: true, className: styles.warningButton }
+    { label: t('string_delete'), onClick: this._checkHandleSubmit, theme: warningButtons, raised: true, className: styles.warningButton },
+    { label: t('string_cancel'), onClick: this._handleHideModal, theme: neutralButtons }
   ]
 
   render () {
-    console.log(this.props)
     return (
       <Dialog
         actions={this.buttons}

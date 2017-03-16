@@ -12,7 +12,6 @@ import { changeUsernameValue } from './Username.action'
 import { changeSignupPage } from '../Signup/Signup.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
-import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './Username.webStyle'
 
 class UsernameComponent extends Component {
@@ -52,7 +51,7 @@ class UsernameComponent extends Component {
     return (
       <div>
         <div className={styles.header}>
-          <Button theme={neutral} className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_exit')}</Button>
+          <Button className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_exit')}</Button>
           <div className={styles.title}>
             <h4>{t('fragment_setup_username_label')}</h4>
           </div>

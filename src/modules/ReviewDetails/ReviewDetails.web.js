@@ -62,13 +62,13 @@ class Review extends Component {
         return(
           <div className={styles.container}>
             <div className={styles.section}>
-              <p className={styles.credentials}>username: <b>{this.props.details.username}</b></p>
-              <p className={styles.credentials}>pin: <b>{this.props.details.pin}</b></p>
-              <p className={styles.credentials}>password: <b>{this.props.details.password}</b></p>
+              <p className={styles.credentials}>username: {this.props.details.username}</p>
+              <p className={styles.credentials}>pin: {this.props.details.pin}</p>
+              <p className={styles.credentials}>password: {this.props.details.password}</p>
             </div>
             <div className={styles.buttonSection}>
-              <Button className={styles.buttonBlue} type='button' raised primary onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</Button>
-              <Button className={styles.buttonGreen} type='button' raised theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
+              <Button className={styles.buttonShow} type='button' raised onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</Button>
+              <Button className={styles.button} type='button' raised primary theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
             </div>
           </div>
         )
@@ -83,8 +83,8 @@ class Review extends Component {
               <p className={styles.paragraph2}>{t('fragment_setup_writeitdown_text_warning')}</p>
             </div>
             <div className={styles.buttonSection}>
-              <Button className={styles.buttonBlue} type='button' raised primary onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</Button>
-              <Button className={styles.buttonGreen} type='button' raised theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
+              <Button className={styles.buttonShow} type='button' onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</Button>
+              <Button className={styles.button} type='button' raised primary theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
             </div>
           </div>
         )

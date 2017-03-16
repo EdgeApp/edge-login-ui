@@ -14,12 +14,10 @@
 
 .paragraph1 {
   font-size: $unit * 1.5;
-  font-weight: 700;
 }
 
 .paragraph2 {
   font-size: $unit * 1.5;
-  font-weight: 700;
   color: #b33a3a;
 }
 
@@ -46,15 +44,13 @@
 
   .button {
     margin: $unit 0;
+    text-transform: none;
   }
 
-  .buttonBlue {
+  .buttonShow {
     @extend .button;
-  }
-
-  .buttonGreen {
-    @extend .button;
-    background-color: #80C342;
+    border: 1px solid #007AFF;
+    color: #007AFF !important;
   }
 
 }

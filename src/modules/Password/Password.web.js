@@ -12,11 +12,6 @@ import { changeSignupPage } from '../Signup/Signup.action'
 
 import SkipPassword from './Notification.web'
 
-import nextButton from 'theme/nextButton.scss'
-import backButton from 'theme/backButton.scss'
-import skipButton from 'theme/skipButton.scss'
-import neutral    from 'theme/neutralButtonWithBlueText.scss'
-
 import {
   passwordNotificationShow,
   showPassword,
@@ -90,7 +85,7 @@ class Password extends Component {
     return (
       <div>
         <div className={styles.header}>
-          <Button theme={neutral} className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
+          <Button className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
           <div className={styles.title}>
             <h4>{t('activity_signup_password_label')}</h4>
           </div>
@@ -148,9 +143,9 @@ class Password extends Component {
         </div>
 
         <div className={styles.buttonSection}>
-          <Button type='button' raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
+          <Button type='button' raised primary className={styles.next} onClick={this._handleSubmit}>{t('string_next')}</Button>
           <br />
-          <Button type='button' theme={neutral} className={styles.skip} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
+          <Button type='button' className={styles.skip} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
         </div>
 
         <SkipPassword handleSubmit={this._handleSubmitSkipPassword} />

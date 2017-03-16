@@ -10,12 +10,11 @@ import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.a
 import { loginWithPassword } from '../Login/Login.middleware'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 
-import dialogOkButton from 'theme/dialogOkButton.scss'
-
 const abcuiContext = window.parent.abcuiContext
 const vendorName = abcuiContext ?  abcuiContext.vendorName : null
 
-import nextButton from 'theme/nextButton.scss'
+import neutralButtons from 'theme/neutralButtons.scss'
+import primaryButtons from 'theme/primaryButtons.scss'
 
 class Review extends Component {
 
@@ -53,8 +52,8 @@ class Review extends Component {
   }
 
 	actions = [
-		{ label: t('fragment_recovery_account_setup_recovery'), onClick: this._handleOpenPasswordRecovery, raised: true, primary: true },
-		{ label: t('password_check_check_later'),               onClick: this._handleFinish }
+		{ label: t('fragment_recovery_account_setup_recovery'), theme: primaryButtons, onClick: this._handleOpenPasswordRecovery, raised: true, primary: true },
+		{ label: t('password_check_check_later'), onClick: this._handleFinish, theme: neutralButtons}
 	];
 
   render () {

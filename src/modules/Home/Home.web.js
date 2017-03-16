@@ -18,7 +18,6 @@ import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.a
 import { userLogin } from '../Login/Login.action'
 
 import styles from './Home.webStyle'
-import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
 
 class Home extends Component {
 

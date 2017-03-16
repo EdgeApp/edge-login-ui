@@ -1,9 +1,11 @@
+@import "~theme/GlobalButton";
+
 .dialogZIndex {
   z-index: 2;
-  width: 35vw; 
+  width: 35vw;
 
   & > section {
-    padding: 1.68rem 2.8rem; 
+    padding: 1.68rem 2.8rem;
   }
 
   font-size: 1.48rem;
@@ -24,12 +26,13 @@
   -webkit-align-items: center;
 
   padding: $unit *1;
-  
+
   p {
     text-align: center;
-  }  
+  }
 }
 
 .button {
+  @extend .buttonPrimary;
   width: 50%;
 }

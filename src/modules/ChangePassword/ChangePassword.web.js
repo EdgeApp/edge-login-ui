@@ -9,7 +9,9 @@ import { checkPassword } from './ChangePassword.middleware'
 import Snackbar from 'react-toolbox/lib/snackbar'
 import Input from 'react-toolbox/lib/input'
 import Dialog from 'react-toolbox/lib/dialog'
-import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
+
+import neutralButtons from 'theme/neutralButtons.scss'
+import primaryButtons from 'theme/primaryButtons.scss'
 
 class ChangePassword extends Component {
 
@@ -54,18 +56,12 @@ class ChangePassword extends Component {
   }
 
   _handleNotificationClose = () => {
-    // if (window.parent.exitCallback) {
-    //   this.props.dispatch(hidePasswordView())
-    //   return window.parent.exitCallback(null)
-    // }
-    // if (!window.parent.exitCallback) {
-      return this.props.dispatch(hidePasswordChangedNotification())
-    // }
+    return this.props.dispatch(hidePasswordChangedNotification())
   }
 
   buttons = [
-    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true },    
-    { label: "Close", onClick: this._handleHideModal, raised: true , theme: neutralButtonWithBlueTextTheme}
+    { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
+    { label: "Close", onClick: this._handleHideModal, theme: neutralButtons}
   ]
 
   _renderNotification = () => {

@@ -1,3 +1,5 @@
+@import "~theme/GlobalButton";
+
 .container {
   padding: $unit;
 
@@ -34,5 +36,6 @@
 
 .button {
   @extend .section;
+  @extend .buttonPrimary;
   width: 50%;
 }

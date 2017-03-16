@@ -2,22 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 import abcctx from '../../lib/web/abcContext'
+import Input from 'react-toolbox/lib/input'
 import Dialog from 'react-toolbox/lib/dialog'
+import Dropdown from 'react-toolbox/lib/dropdown'
 
 import { browserHistory } from 'react-router'
 import * as action from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { checkPasswordRecovery } from './PasswordRecovery.middleware'
-import Dropdown from 'react-toolbox/lib/dropdown'
 
 import PasswordRecoveryToken from './PasswordRecoveryToken.web'
 
-import Button from 'react-toolbox/lib/button'
-import Input from 'react-toolbox/lib/input'
-import signinButton from 'theme/signinButton.scss'
-import skipButton from 'theme/skipButton.scss'
 import styles from './PasswordRecovery.webStyle'
-import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
+import neutralButtons from 'theme/neutralButtons.scss'
+import primaryButtons from 'theme/primaryButtons.scss'
 
 class PasswordRecovery extends Component {
 
@@ -104,8 +102,8 @@ class PasswordRecovery extends Component {
   }
 
   buttons = [
-    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true },
-    { label: "Close", onClick: this._handleHideModal, raised: true, theme: neutralButtonWithBlueTextTheme }
+    { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
+    { label: "Close", onClick: this._handleHideModal, theme: neutralButtons }
   ]
 
   _renderView = () => {

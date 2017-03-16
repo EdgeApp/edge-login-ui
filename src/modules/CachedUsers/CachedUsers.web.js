@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import Button from 'react-toolbox/lib/button'
 import FontIcon from 'react-toolbox/lib/font_icon'
 import t from 'lib/web/LocaleStrings'
 import styles from './CachedUsers.webStyle'
