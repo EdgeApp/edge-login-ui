@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"version":3,"file":"app.main.js","sources":["webpack:///app.main.js"],"mappings":"AAAA;;;;;AAgRA;;;;;AAsKA;AAi+GA;;;;;;AAu9EA;AA6tFA;;;;;;;;;;;;;;AAm1DA;AAimFA;AAsmFA;AAq/GA;AA+7HA;AAxZA;AAimFA;AAi6DA;AAw4DA;AA24FA;AAWA;AA6nDA;AA0uDA;AAm/DA;AAqzDA;AAq6JA;AAivVA;AA4lHA;AAitFA;AA4vDA;AAqzHA;AAkrHA;AAoqHA","sourceRoot":""}
-=======
-{"version":3,"file":"app.main.js","sources":["webpack:///app.main.js"],"mappings":"AAAA;;;;;AAgRA;;;;;AAuWA;AA04GA;;;;;;AA44EA;AAotFA;;;;;;;;;;;;;;AA2yDA;AA6yFA;AA04FA;AA0lGA;AA+7HA;AAxZA;AAimFA;AAi6DA;AAw4DA;AA64FA;AAQA;AA+mDA;AAovDA;AA2/DA;AAy1EA;AA6lKA;AA0pWA;AAmvFA;AAosFA;AAy1DA;AAqwHA;AAokHA;AAovHA","sourceRoot":""}
->>>>>>> ui-adjustments
+{"version":3,"file":"app.main.js","sources":["webpack:///app.main.js"],"mappings":"AAAA;;;;;AA+aA;AAs+GA;;;;;;AAw9EA;AA6tFA;;;;;;;;;;;;;;AA2xDA;AAwsFA;AA+6EA;AA8mHA;AAu5HA;AAxZA;AAimFA;AAi6DA;AAw4DA;AA04FA;AAUA;AAonDA;AA6tDA;AAq/DA;AA2qEA;AAkjKA;AAyuVA;AAyuGA;AAygFA;AAs6DA;AA+3HA;AA2lHA;AA6uHA","sourceRoot":""}
