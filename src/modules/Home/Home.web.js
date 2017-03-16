@@ -70,7 +70,7 @@ class Home extends Component {
         <Button className={styles.button} raised primary type='button' onClick={this._handleLogout}>{t('string_done')}</Button>
         <ChangePin />
         <ChangePassword />
-        <PasswordRecovery />
+        <PasswordRecovery location={this.props.location} />
         <PasswordRecoverySuccess />
       </div>
     )

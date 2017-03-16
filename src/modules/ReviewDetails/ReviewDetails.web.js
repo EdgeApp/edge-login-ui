@@ -95,7 +95,7 @@ class Review extends Component {
       <div>
         {renderView()}
         <AfterSignUpQuestion />
-        <PasswordRecovery />
+        <PasswordRecovery location={this.props.location}/>
         <PasswordRecoverySuccess />
       </div>
     )

@@ -22,7 +22,8 @@ class PasswordRecoverySuccess extends Component {
       return window.parent.loginCallback(null, account)
     }
     if (!window.parent.loginCallback && !window.parent.exitCallback) {
-      return this.props.dispatch(hidePasswordRecoveryFinishModal())
+      this.props.dispatch(hidePasswordRecoveryFinishModal())
+      return this.props.router.push('/home')
     }
   }
 

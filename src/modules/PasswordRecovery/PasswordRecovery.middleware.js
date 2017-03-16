@@ -8,15 +8,20 @@ export const checkPasswordRecovery = (payload, callback) => {
   const checkQuestionsSame    = (questions) => questions[0] === questions[1]
   const checkQuestionsDefault = (questions) => questions[0] === 'Choose a question' || questions[1] === 'Choose a question'
   const checkPassword = (callback) => {
-    payload.account.checkPassword(payload.password)
-      .then(result => {
-        if(!result) {
-          callback(true)
-        }
-        if(result) {
-          callback(null)
-        }
-      })
+    if(payload.location === '/review') {
+      return callback(false)
+    }
+    if(payload.location !== '/review') {
+      payload.account.checkPassword(payload.password)
+        .then(result => {
+          if(!result) {
+            return callback(true)
+          }
+          if(result) {
+            return callback(false)
+          }
+        })
+    }
   }
 
   return (dispatch, getState, imports) => {
@@ -26,30 +31,29 @@ export const checkPasswordRecovery = (payload, callback) => {
       return dispatch(openErrorModal(t('activity_recovery_error_answer_length')))
     }
 
-    // if (checkQuestionsDefault(payload.questions)) {
-    //   return dispatch(openErrorModal(t('activity_recovery_pick_questions_alert')))
-    // }
+    if (checkQuestionsDefault(payload.questions)) {
+      return dispatch(openErrorModal(t('activity_recovery_pick_questions_alert')))
+    }
 
-    // if (checkQuestionsSame(payload.questions)) {
-    //   return dispatch(openErrorModal(t('activity_recovery_error_questions_different')))
-    // }
+    if (checkQuestionsSame(payload.questions)) {
+      return dispatch(openErrorModal(t('activity_recovery_error_questions_different')))
+    }
 
     checkPassword((error) => {
       if(error){
         return dispatch(openErrorModal(t('activity_recovery_error_password')))
       }
       if(!error){
-        const token = 'labadadadabadab'
-        // payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
-          // if (error) {
-            // callback(error)
-            // return dispatch(openErrorModal(t('server_error_no_connection')))
-          // }
-          // if (!error) {
+        payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
+          if (error) {
+            callback(error)
+            return dispatch(openErrorModal(t('server_error_no_connection')))
+          }
+          if (!error) {
             dispatch(setPasswordRecoveryToken(token))
             return dispatch(showPasswordRecoveryTokenView())
-          // }
-        // })
+          }
+        })
       }
     })
   }

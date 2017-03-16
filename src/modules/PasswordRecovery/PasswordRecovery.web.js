@@ -24,15 +24,17 @@ class PasswordRecovery extends Component {
   loadQuestions = () => {
     const dispatch = this.props.dispatch
     abcctx(ctx => {
-		// ctx.listRecoveryQuestionChoices()
-        // if (error) {
-        //   dispatch(openErrorModal(t('string_connection_error_server')))
-        //   dispatch(action.hidePasswordRecoveryView())
-        // }
-        // if (!error) {
-        //   const questions = results.filter(result => result.category === 'recovery2').map(result => result.question)
-        //   dispatch(action.setPasswordRecoveryQuestions(questions))
-        // }
+      ctx.listRecoveryQuestionChoices((error, results) => {
+          if (error) {
+            dispatch(openErrorModal(t('string_connection_error_server')))
+            dispatch(action.hidePasswordRecoveryView())
+          }
+          if (!error) {
+            const questions = results.filter(result => result.category === 'recovery2').map(result => result.question)
+            console.log(questions)
+            dispatch(action.setPasswordRecoveryQuestions(questions))
+          }
+      })
     })
   }
 
@@ -57,7 +59,8 @@ class PasswordRecovery extends Component {
           this.props.secondAnswer
         ],
         password: this.props.password,
-        account: this.props.account
+        account: this.props.account,
+        location: this.props.location.pathname
       },
         callback
       )
@@ -93,21 +96,39 @@ class PasswordRecovery extends Component {
   }
 
   _renderQuestions = () => {
-    // const questions = this.props.questions.map((question, index) => {
-    //   return { value: question, label: question }
-    // })
-	// return [ ...questions , {value: 'Choose a question', label: 'Choose a question'} ]
-	return [ {value: t('activity_recovery_default_choice'), label: t('activity_recovery_default_choice')} ]
+    const questions = this.props.questions.map((question, index) => {
+      return { value: question, label: question }
+    })
+	return [ {value: 'Choose a question', label: 'Choose a question'}, ...questions ]
+	// return [ {value: t('activity_recovery_default_choice'), label: t('activity_recovery_default_choice')} ]
   }
 
   buttons = [
-    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true },    
+    { label: "Submit", onClick: this._handleSubmit, raised: true, primary: true },
     { label: "Close", onClick: this._handleHideModal, raised: true, theme: neutralButtonWithBlueTextTheme }
-  ]  
+  ]
 
   _renderView = () => {
 
     if (!this.props.viewToken) {
+      const renderPasswordInput = () => {
+        if(this.props.location.pathname === "/review") {
+            return null
+        }
+        if(this.props.location.pathname !== "/review") {
+          return (
+            <Input
+              type='password'
+              name='recoveryPassword'
+              onChange={this._handleOnChangePassword}
+              value={this.props.password}
+              label={t('send_confirmation_enter_send_password')}
+              required
+            />
+          )
+        }
+      }
+
       return (
         <form onSubmit={e => { e.preventDefault; this._handleSubmit(e); }}>
           <div>
@@ -143,14 +164,7 @@ class PasswordRecovery extends Component {
               label={t('activity_recovery_second_answer')}
               required
             />
-            <Input
-              type='password'
-              name='recoveryPassword'
-              onChange={this._handleOnChangePassword}
-              value={this.props.password}
-              label={t('send_confirmation_enter_send_password')}
-              required
-            />
+            {renderPasswordInput()}
           </div>
         </form>
       )
@@ -174,7 +188,7 @@ class PasswordRecovery extends Component {
   render () {
     return (
       <Dialog
-        actions={this.buttons}
+        actions={this.props.viewToken ? [] : this.buttons}
         active={this.props.view}
         title={t('activity_recovery_setup_title')}
       >
