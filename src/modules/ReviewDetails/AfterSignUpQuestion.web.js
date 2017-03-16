@@ -53,8 +53,8 @@ class Review extends Component {
   }
 
 	actions = [
-		{ label: t('password_check_check_later'),               onClick: this._handleFinish },
-		{ label: t('fragment_recovery_account_setup_recovery'), onClick: this._handleOpenPasswordRecovery, raised: true, primary: true }
+		{ label: t('fragment_recovery_account_setup_recovery'), onClick: this._handleOpenPasswordRecovery, raised: true, primary: true },
+		{ label: t('password_check_check_later'),               onClick: this._handleFinish }
 	];
 
   render () {

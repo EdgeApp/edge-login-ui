@@ -79,8 +79,6 @@ class Password extends Component {
   }
 
   toggleRevealPassword = (e) => {
-    // this.refs.signupPassword.getWrappedInstance().refs.input.type = this.props.inputState ? 'text' : 'password'
-    // this.refs.passwordRepeat.getWrappedInstance().refs.input.type = this.props.inputState ? 'text' : 'password'
     if (this.props.inputState) {
       return this.props.dispatch(hidePassword())
     } else {
@@ -150,9 +148,9 @@ class Password extends Component {
         </div>
 
         <div className={styles.buttonSection}>
-          <Button type='button' theme={neutral} className={styles.skip} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
-          <br />
           <Button type='button' raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
+          <br />
+          <Button type='button' theme={neutral} className={styles.skip} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
         </div>
 
         <SkipPassword handleSubmit={this._handleSubmitSkipPassword} />
