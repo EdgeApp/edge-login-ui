@@ -11,12 +11,12 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /airbitz-core-js\/dist/],
         loader: 'babel',
         query: { presets: [ 'es2015', 'react' ] }
       },
       { test: /\.jsx$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /airbitz-core-js\/dist/],
         loader: 'babel',
         query: { presets: [ 'es2015', 'react' ] }
       },
