@@ -145,7 +145,6 @@ class Password extends Component {
         <div className={styles.buttonSection}>
           <Button raised theme={neutralButtonWithBlueText} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>          
           <Button type='button' raised primary className={styles.next} onClick={this._handleSubmit}>{t('string_next')}</Button>
-          <Button type='button' theme={neutralButtonWithBlueText} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
         </div>
 
         <SkipPassword handleSubmit={this._handleSubmitSkipPassword} />

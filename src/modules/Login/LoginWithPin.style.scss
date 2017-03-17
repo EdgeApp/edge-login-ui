@@ -46,10 +46,6 @@
   max-height: 30vh !important;
 }
 
-.cachedUsers {
-  width: 40%;
-}
-
 .inputDiv {
   width: 165px;
 }
@@ -61,6 +57,9 @@
 
 .exitPin {
   margin: $unit * 2 0;
+  white-space: normal;
+  line-height: 2.2rem;   
+  max-width: 100%;    
 }
 
 

@@ -33,14 +33,27 @@
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : $layout-breakpoint-xs) {
+    .appBar {
+        font-size: 1.4rem;
+        padding: 0 1.0rem;
+        .navigation {
+            a {
+                font-size: 1.6rem;
+            }
+        }
 
+    }
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : $layout-breakpoint-sm) {
     .appBar {
-        font-size: 1.4rem;
-        padding: 0 1.0rem;
+        .navigation {
+            a {
+                font-size: 1.96rem;
+            }
+        }
+
     }
 }
 

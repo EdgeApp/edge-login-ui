@@ -73,8 +73,15 @@
 }
 
 button {
-  max-width: 100%;
+  max-width: 100%; 
 }
+
+.createNewButton {
+  white-space: normal;
+  line-height: 2.2rem;   
+  max-width: 100%;   
+}
+
 /* Small Devices, Tablets */
 @media only screen and (min-width : $layout-breakpoint-sm) {
   max-width: 50%;
