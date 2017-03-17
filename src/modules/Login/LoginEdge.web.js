@@ -12,6 +12,12 @@ import { openLoading, closeLoading } from '../Loader/Loader.action'
 
 class LoginEdge extends Component {
 
+  componentWillUnmount () {
+    if(this.props.edgeObject) {
+      this.props.edgeObject.cancelRequest()
+    }
+  }
+
   componentDidMount () {
     const { edgeId, dispatch } = this.props
     // if (!edgeId) {
@@ -119,5 +125,6 @@ LoginEdge = withRouter(LoginEdge)
 export default connect(state => ({
   edgeId: state.login.edgeLoginResults.id,
   edgeUsername: state.login.edgeUsername,
-  edgeAccount: state.login.edgeAccount
+  edgeAccount: state.login.edgeAccount,
+  edgeObject: state.login.edgeLoginResults
 }))(LoginEdge)

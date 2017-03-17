@@ -88,6 +88,7 @@ class Login extends Component {
   }
 
   render () {
+    console.log(this.props)
 
     const cUsers = () => {
       if (this.props.showCachedUsers) {

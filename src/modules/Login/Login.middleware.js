@@ -31,7 +31,7 @@ export const loginWithPassword = (username, password, callback) => {
 
 export const loginWithPin = (username, pin, callback) => {
   return (dispatch, getState, imports) => {
-    const t = imports.t    
+    const t = imports.t
     dispatch(openLoading())
     const localStorage = global ? global.localStorage : window.localStorage
     const abcctx = imports.abcContext
@@ -83,7 +83,6 @@ export const edgeLogin = (callback) => {
         onLogin: onLogin,
         onProcessLogin: onProcess
       }, (error, results) => {
-        console.log(results)
         if (error) {
           console.log(error)
         } else if (results) {
