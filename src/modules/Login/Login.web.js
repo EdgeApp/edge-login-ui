@@ -35,6 +35,9 @@ class Login extends Component {
           ( error, account ) => {
           if (!error) {
             if (window.parent.loginCallback) {
+              if(this.props.edgeObject) {
+                this.props.edgeObject.cancelRequest()
+              }
               return window.parent.loginCallback(null, account)
             }
             if (!window.parent.loginCallback) {
@@ -88,7 +91,6 @@ class Login extends Component {
   }
 
   render () {
-
     const cUsers = () => {
       if (this.props.showCachedUsers) {
         return (<CachedUsers blurField={this.refs.loginUsername.getWrappedInstance()} />)
@@ -182,6 +184,7 @@ export default connect(state => ({
   viewPassword: state.login.viewPassword,
   username: state.login.username,
   password: state.login.password,
-  showCachedUsers: state.login.showCachedUsers
+  showCachedUsers: state.login.showCachedUsers,
+  edgeObject: state.login.edgeLoginResults
 
 }))(Login)

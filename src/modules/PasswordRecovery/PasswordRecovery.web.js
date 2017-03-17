@@ -5,6 +5,7 @@ import abcctx from '../../lib/web/abcContext'
 import Input from 'react-toolbox/lib/input'
 import Dialog from 'react-toolbox/lib/dialog'
 import Dropdown from 'react-toolbox/lib/dropdown'
+import _ from 'lodash'
 
 import { browserHistory } from 'react-router'
 import * as action from './PasswordRecovery.action'
@@ -29,7 +30,6 @@ class PasswordRecovery extends Component {
           }
           if (!error) {
             const questions = results.filter(result => result.category === 'recovery2').map(result => result.question)
-            console.log(questions)
             dispatch(action.setPasswordRecoveryQuestions(questions))
           }
       })
@@ -93,12 +93,16 @@ class PasswordRecovery extends Component {
     this.props.dispatch(action.changePasswordRecoveryEmail(email))
   }
 
-  _renderQuestions = () => {
-    const questions = this.props.questions.map((question, index) => {
-      return { value: question, label: question }
-    })
-	return [ {value: 'Choose a question', label: 'Choose a question'}, ...questions ]
-	// return [ {value: t('activity_recovery_default_choice'), label: t('activity_recovery_default_choice')} ]
+  _renderQuestions1 = () => {
+    const filtered = _.filter(this.props.questions, question => this.props.secondQuestion !== question)
+    const questions = _.map(filtered, question => ({ value: question, label: question }))
+    return [ {value: 'Choose a question', label: 'Choose a question'}, ...questions ]
+  }
+
+  _renderQuestions2 = () => {
+    const filtered = _.filter(this.props.questions, question => this.props.firstQuestion !== question)
+    const questions = _.map(filtered, question => ({ value: question, label: question }))
+    return [ {value: 'Choose a question', label: 'Choose a question'}, ...questions ]
   }
 
   buttons = [
@@ -132,9 +136,9 @@ class PasswordRecovery extends Component {
           <div>
             <Dropdown
               auto
+              source={this._renderQuestions1()}
               onChange={this._handleOnChangeFirstQuestion}
               value={this.props.firstQuestion}
-              source={this._renderQuestions()}
               required
 	      		  allowBlank={false}
             />
@@ -148,7 +152,7 @@ class PasswordRecovery extends Component {
             />
             <Dropdown
               auto
-              source={this._renderQuestions()}
+              source={this._renderQuestions2()}
               onChange={this._handleOnChangeSecondQuestion}
               value={this.props.secondQuestion}
 			        allowBlank={false}

@@ -16,11 +16,9 @@ import styles from './Container.style.scss'
 class Container extends Component {
 
   _handleToggle = () => {
-    // this.refs.loginWithAirbitz.cancelRequest()
-    // if (this.refs.pinPasswordForm) {
-    //   this.refs.pinPasswordForm.onClose()
-    // }
-    console.log('toggling Airbitz login')
+    if(this.props.edgeObject) {
+      this.props.edgeObject.cancelRequest()
+    }
     if (window.parent.exitCallback) {
       window.parent.exitCallback()
     }
@@ -39,9 +37,6 @@ class Container extends Component {
   componentWillMount () {
     this.loadData()
   }
-  componentWillUpdate () {
-    this.loadData()
-  }
 
   render () {
     return (
@@ -54,7 +49,7 @@ class Container extends Component {
         >
           <LayoutTemplate theme={layoutTheme}>
             <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle}/>
-            {this.props.children}            
+            {this.props.children}
           </LayoutTemplate>
 
           <Loader />
@@ -69,6 +64,7 @@ class Container extends Component {
 
 export default connect(state => ({
 
-  loader: state.loader
+  loader: state.loader,
+  edgeObject: state.login.edgeLoginResults
 
 }))(Container)
