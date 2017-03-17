@@ -10,10 +10,6 @@
 
 .exitButton {
   @extend .buttonNeutral;
-
-  position: absolute;
-  top: -2px;
-  left: -30px;
 }
 
 .title {
@@ -38,8 +34,8 @@
   display: flex;
   display: -webkit-flex;
 
-  flex-direction: column;
-  -webkit-flex-direction: column;
+  flex-direction: row;
+  -webkit-flex-direction: row;
 
   justify-content: center;
   -webkit-justify-content: center;
@@ -52,6 +48,4 @@
 
 .buttonNext {
   @extend .buttonPrimary;
-
-  width:50%;
 }

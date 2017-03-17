@@ -9,6 +9,7 @@ import { closeForgotPasswordModal } from './ForgotPassword.action'
 
 import nextButton from 'theme/nextButton.scss'
 import styles from './ForgotPassword.webStyle'
+import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
 
 class ForgotPassword extends Component {
 
@@ -42,7 +43,7 @@ class ForgotPassword extends Component {
             <br />
           </div>
           <div className={styles.button}>
-            <Button type='button' className={styles.button} onClick={this._handleClose}>{t('string_ok')}</Button>
+          <Button type='button' raised primary onClick={this._handleClose}>{t('string_ok')}</Button>
           </div>
         </Dialog>
       )
