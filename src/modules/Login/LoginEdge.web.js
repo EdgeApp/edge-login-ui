@@ -94,7 +94,10 @@ const style = {
     'verticalAlign': 'top'
   },
   edgeLoginBtn: {
-    margin: '0px auto'
+    margin: '0px auto',
+    textAlign: 'center',
+    padding: '0 10px',
+    lineHeight: '2.2rem'
   },
   dividerContainer: {
     textAlign: 'center',

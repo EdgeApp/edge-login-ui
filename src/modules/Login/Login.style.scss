@@ -1,3 +1,5 @@
+@import 'theme/_config.scss';
+
 .container {
   padding: $unit * 0.6;
 
@@ -53,6 +55,8 @@
 
   alignItems: center;
   -webkit-align-items: center;
+
+  text-align: center;
 }
 
 .fieldsView {
@@ -66,4 +70,12 @@
 
 .forgotPassword {
   font-size: $unit * 1.1;
+}
+
+button {
+  max-width: 100%;
+}
+/* Small Devices, Tablets */
+@media only screen and (min-width : $layout-breakpoint-sm) {
+  max-width: 50%;
 }
