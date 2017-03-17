@@ -13,6 +13,7 @@ import { changePinNumberValue } from './PinNumber.action'
 import { checkPIN } from './PinNumber.middleware'
 
 import styles from './PinNumber.webStyle'
+import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
 
 class PinComponent extends Component {
 
@@ -59,7 +60,6 @@ class PinComponent extends Component {
     return (
       <div>
         <div className={styles.header}>
-          <Button className={styles.exitButton} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
           <div className={styles.title}>
             <h4>{t('activity_signup_pin_label')}</h4>
           </div>
@@ -81,6 +81,7 @@ class PinComponent extends Component {
             <p className={styles.text}>{t('fragment_setup_pin_text')}</p>
           </div>
           <div className={styles.section}>
+            <Button raised theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>            
             <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </div>
         </form>

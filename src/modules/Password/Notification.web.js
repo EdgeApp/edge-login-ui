@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 import { passwordNotificationHide } from './Password.action'
-
 import Dialog from 'react-toolbox/lib/dialog'
+import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
+import nextButton from 'theme/nextButton.scss'
 
 class NotificationModal extends Component {
 
@@ -14,8 +15,8 @@ class NotificationModal extends Component {
   }
 
   buttons = [
-    { label: t('string_cancel'), onClick: this._handleClose },
-    { label: t('string_ok'), onClick: this.props.handleSubmit, primary: true, raised: true }
+    { label: t('string_ok'), onClick: this.props.handleSubmit, primary: true, raised: true, theme: nextButton },
+    { label: t('string_cancel'), onClick: this._handleClose, raised: true, theme: neutralButtonWithBlueTextTheme }  
   ]
 
   render () {
