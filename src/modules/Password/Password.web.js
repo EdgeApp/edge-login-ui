@@ -11,7 +11,7 @@ import { checkPassword, skipPassword } from './Password.middleware'
 import { changeSignupPage } from '../Signup/Signup.action'
 
 import SkipPassword from './Notification.web'
-import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
+import neutralButtonWithBlueText from 'theme/neutralButtonWithBlueText.scss'
 
 import {
   passwordNotificationShow,
@@ -143,9 +143,9 @@ class Password extends Component {
         </div>
 
         <div className={styles.buttonSection}>
-          <Button type='button' raised theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>          
-          <Button type='button' raised primary onClick={this._handleSubmit}>{t('string_next')}</Button>
-          <Button type='button' theme={neutralButtonWithBlueTextTheme} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
+          <Button raised theme={neutralButtonWithBlueText} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>          
+          <Button type='button' raised primary className={styles.next} onClick={this._handleSubmit}>{t('string_next')}</Button>
+          <Button type='button' theme={neutralButtonWithBlueText} onClick={this._handlePasswordNotification}>{t('string_skip')}</Button>
         </div>
 
         <SkipPassword handleSubmit={this._handleSubmitSkipPassword} />

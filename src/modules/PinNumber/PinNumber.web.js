@@ -6,6 +6,7 @@ import Input from 'react-toolbox/lib/input'
 import t from '../../lib/web/LocaleStrings'
 import nextButton from 'theme/nextButton.scss'
 import backButton from 'theme/backButton.scss'
+import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText'
 import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
 
 import { changeSignupPage } from '../Signup/Signup.action'
@@ -13,7 +14,6 @@ import { changePinNumberValue } from './PinNumber.action'
 import { checkPIN } from './PinNumber.middleware'
 
 import styles from './PinNumber.webStyle'
-import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
 
 class PinComponent extends Component {
 
@@ -80,9 +80,9 @@ class PinComponent extends Component {
           <div className={styles.section}>
             <p className={styles.text}>{t('fragment_setup_pin_text')}</p>
           </div>
-          <div className={styles.section}>
-            <Button raised theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>            
+          <div className={styles.section}>           
             <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
+            <Button raised theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>             
           </div>
         </form>
       </div>
