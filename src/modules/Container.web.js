@@ -16,9 +16,9 @@ import styles from './Container.style.scss'
 class Container extends Component {
 
   _handleToggle = () => {
-    // if(this.props.edgeObject) {
-    //   this.props.edgeObject.cancelRequest()
-    // }
+    if(this.props.edgeObject) {
+      this.props.edgeObject.cancelRequest()
+    }
     if (window.parent.exitCallback) {
       window.parent.exitCallback()
     }
@@ -35,9 +35,6 @@ class Container extends Component {
     })
   }
   componentWillMount () {
-    this.loadData()
-  }
-  componentWillUpdate () {
     this.loadData()
   }
 
@@ -67,7 +64,7 @@ class Container extends Component {
 
 export default connect(state => ({
 
-  edgeObject: state.login.edgeLoginResults,
-  loader: state.loader
+  loader: state.loader,
+  edgeObject: state.login.edgeLoginResults
 
 }))(Container)
