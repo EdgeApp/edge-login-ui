@@ -11,8 +11,12 @@ const actions = [
 
 class Header extends Component {
   componentWillMount() {
-    var vendorName = window.parent.abcuiContext.vendorName || 'Sample App'
-    this.props.vendorName = vendorName
+    try{
+      var vendorName = window.parent.abcuiContext.vendorName || 'Sample App'
+      this.props.vendorName = vendorName
+    }catch(e) {
+      console.log('Error with finding vendorName: ', e)
+    }
   }
 
   render () {
