@@ -13,7 +13,7 @@ import Dialog from 'react-toolbox/lib/dialog'
 
 import neutralButtons from 'theme/neutralButtons.scss'
 import primaryButtons from 'theme/primaryButtons.scss'
-import styles from './ChangePassword.webStyle'
+import styles from './ChangePassword.webstyle'
 
 class ChangePassword extends Component {
 
