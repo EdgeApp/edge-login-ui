@@ -10,12 +10,16 @@ const actions = [
 ]
 
 class Header extends Component {
+  componentWillMount() {
+    var vendorName = window.parent.abcuiContext.vendorName || 'Sample App'
+    this.props.vendorName = vendorName
+  }
 
   render () {
     return (
     <AppBar title="Sample App" leftIcon='menu' fixed={true} className={styles.appBar}>
         <Navigation type="horizontal" actions={actions} className={styles.navigation}>
-            <Link className={styles.headerAppName} label="App Name" />
+            <Link className={styles.headerAppName} label={this.props.vendorName} />
             <Link className={styles.headerPoweredAirBitz} label="Powered by Airbitz" />
         </Navigation>
     </AppBar>
