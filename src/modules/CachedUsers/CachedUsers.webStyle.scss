@@ -42,3 +42,16 @@
 .userdelete:hover {
   color: #B33A3A;
 }
+
+
+@media only screen and (min-width : $layout-breakpoint-xs) {
+  .dropdown {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width : $layout-breakpoint-sm) {
+  .dropdown {
+    width: auto;
+  }
+}
