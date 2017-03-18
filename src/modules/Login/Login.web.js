@@ -166,7 +166,7 @@ class Login extends Component {
               <br />
               <Button theme={neutral} style={{textTransform: 'none'}} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
               <br />
-              <a onClick={this._handleOpenForgotPasswordModal} className={styles.forgotPassword}>{t('fragment_landing_forgot_password')}</a>
+              <Button theme={neutral} style={{textTransform: 'none'}} onClick={this._handleOpenForgotPasswordModal} className={styles.forgotPassword}>{t('fragment_landing_forgot_password')}</Button>
             </div>
           </div>
           <ForgotPassword />
