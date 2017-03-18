@@ -17,7 +17,7 @@ $layout-breakpoint-lg:     1920px !default;
     border-top: 1px solid #f2f2f2;
     background-color: transparent;
     box-shadow: none !important;
-    font-size: 1.0rem;
+    font-size: 1.4rem;
 
     .navigation {
         width: 100%;
@@ -25,24 +25,25 @@ $layout-breakpoint-lg:     1920px !default;
 
         .footerDownloadLink {
             float: none;
-            color: black;
+            color: #007AFF;
             text-decoration: none;
-            opacity: .3;
+            opacity: .7;
+            font-size: 1.4rem;
             &:hover {
                 text-decoration: none;
                 color: #444;
-            }    
-        }         
+            }
+        }
     }
 }
 
-/* Custom, iPhone Retina */ 
+/* Custom, iPhone Retina */
 
 
-/* Extra Small Devices, Phones */ 
+/* Extra Small Devices, Phones */
 @media only screen and (min-width : $layout-breakpoint-xs) {
     .appBar {
-  
+
         .navigation {
             padding: 0 0;
 
@@ -50,8 +51,8 @@ $layout-breakpoint-lg:     1920px !default;
                 font-size: 1.2rem;
                 &:hover {
 
-                }    
-            }         
+                }
+            }
         }
     }
 }
@@ -65,17 +66,31 @@ $layout-breakpoint-lg:     1920px !default;
 
 
             .footerDownloadLink {
-                font-size: 1.8rem;
+                font-size: 1.4rem;
                 &:hover {
 
-                }    
-            }         
+                }
+            }
         }
     }
 }
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : $layout-breakpoint-md) {
+  .appBar{
+
+
+    .navigation {
+
+
+      .footerDownloadLink {
+        font-size: 1.6rem;
+        &:hover {
+
+        }
+      }
+    }
+  }
 
 }
 
