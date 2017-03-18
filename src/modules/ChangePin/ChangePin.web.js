@@ -78,7 +78,7 @@ class ChangePin extends Component {
           title={t('activity_signup_title_change_pin')}
         >
           <Input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} label='Current Password' />
-          <Input type='number' name='changePin' onChange={this._handleOnChangePin} value={pin} label='New Pin' />
+          <Input type='password' name='changePin' onChange={this._handleOnChangePin} value={pin} label='New Pin' />
         </Dialog>
         {this._renderNotification()}
       </div>

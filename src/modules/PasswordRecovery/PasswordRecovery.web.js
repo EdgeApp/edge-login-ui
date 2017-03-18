@@ -133,7 +133,7 @@ class PasswordRecovery extends Component {
 
       return (
         <form onSubmit={e => { e.preventDefault; this._handleSubmit(e); }}>
-          <div>
+          <div className={styles.passwordInputs}>
             <Dropdown
               auto
               source={this._renderQuestions1()}

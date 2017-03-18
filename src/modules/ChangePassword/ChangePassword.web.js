@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
+import FontIcon from 'react-toolbox/lib/font_icon';
 import t from '../../lib/web/LocaleStrings'
 
 import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
@@ -12,6 +13,7 @@ import Dialog from 'react-toolbox/lib/dialog'
 
 import neutralButtons from 'theme/neutralButtons.scss'
 import primaryButtons from 'theme/primaryButtons.scss'
+import styles from './ChangePassword.webStyle'
 
 class ChangePassword extends Component {
 
@@ -92,10 +94,22 @@ class ChangePassword extends Component {
           <Input type='password' name='newPassword' onChange={this._handleOnChangeNewPassword} value={newPassword} label='New Password' />
           <Input type='password' name='newPasswordRepeat' onChange={this._handleOnChangeNewPasswordRepeat} value={newPasswordRepeat} label='Confirm New Password' />
           <div>
-            <p>{ upperCaseChar ? '' : t('password_rule_no_uppercase') }</p>
-            <p>{ lowerCaseChar ? '' : t('password_rule_no_lowercase') }</p>
-            <p>{ number ? '' : t('password_rule_no_number') }</p>
-            <p>{ characterLength ? '' : t('password_rule_too_short') }</p>
+            <p className={styles.passwordRequirement}>
+              <FontIcon value={upperCaseChar ? 'done' : 'clear'} className={upperCaseChar ? styles.green : styles.red}/>
+              { t('password_rule_no_uppercase') }
+            </p>
+            <p className={styles.passwordRequirement}>
+              <FontIcon value={lowerCaseChar ? 'done' : 'clear'} className={lowerCaseChar ? styles.green : styles.red}/>
+              { t('password_rule_no_lowercase') }
+            </p>
+            <p className={styles.passwordRequirement}>
+              <FontIcon value={number ? 'done' : 'clear'} className={number ? styles.green : styles.red}/>
+              { t('password_rule_no_number') }
+            </p>
+            <p className={styles.passwordRequirement}>
+              <FontIcon value={characterLength ? 'done' : 'clear'} className={characterLength ? styles.green : styles.red}/>
+              { t('password_rule_too_short') }
+            </p>
           </div>
         </Dialog>
         {this._renderNotification()}
