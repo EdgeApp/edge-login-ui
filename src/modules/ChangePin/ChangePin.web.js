@@ -37,6 +37,12 @@ class ChangePin extends Component {
   }
 
   _handleOnChangePin = (pin) => {
+    if (pin.length > 4) {
+      pin = pin.substr(0, 4)
+    }
+
+    pin = pin.replace(/\D/g,'')
+
     this.props.dispatch(changePinValue(pin))
   }
 
@@ -75,10 +81,10 @@ class ChangePin extends Component {
           active={this.props.view}
           onEscKeyDown={this._handleHideModal}
           onOverlayClick={this._handleHideModal}
-          title={t('activity_signup_title_change_pin')}
+          title={t('activity_signup_title_change_pin_4_digit')}
         >
           <Input type='password' name='changePinPassword' onChange={this._handleOnChangePinPassword} value={password} label='Current Password' />
-          <Input type='password' name='changePin' onChange={this._handleOnChangePin} value={pin} label='New Pin' />
+          <Input type='password' name='changePin' onChange={this._handleOnChangePin} value={pin} maxLength={4} label='New Pin' />
         </Dialog>
         {this._renderNotification()}
       </div>

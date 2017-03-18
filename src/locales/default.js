@@ -182,6 +182,7 @@ const strings = {
   activity_signup_title_change_password: 'Change Password',
   activity_signup_title_change_password_via_questions: 'Change Password',
   activity_signup_title_change_pin: 'Change PIN',
+  activity_signup_title_change_pin_4_digit: 'Change 4-digit PIN',  
   activity_signup_username_hint: 'User Name',
   activity_signup_password_hint: 'Choose a Password',
   activity_signup_password: 'Password',
