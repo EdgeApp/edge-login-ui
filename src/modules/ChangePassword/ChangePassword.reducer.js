@@ -11,6 +11,17 @@ export const view = (state = false, action) => {
   }
 }
 
+export const revealPassword = (state = false, action) => {
+  switch (action.type) {
+    case ACTION.PASSWORD_CHANGE_SHOW_PASSWORD :
+      return true
+    case ACTION.PASSWORD_CHANGE_HIDE_PASSWORD :
+      return false
+    default:
+      return state
+  }
+}
+
 export const oldPassword = (state = '', action) => {
   switch (action.type) {
     case ACTION.CHANGE_OLD_PASSWORD_VALUE :
