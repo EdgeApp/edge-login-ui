@@ -5,7 +5,7 @@ import FontIcon from 'react-toolbox/lib/font_icon';
 import t from '../../lib/web/LocaleStrings'
 
 import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
-import { hidePasswordView, showPasswordView, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue, hidePasswordChangedNotification, showPasswordChangedNotification } from './ChangePassword.action'
+import { hidePasswordView, showPasswordView, changePasswordHidePassword, changePasswordShowPassword, changeOldPasswordValue, changeNewPasswordValue, changeNewPasswordRepeatValue, hidePasswordChangedNotification, showPasswordChangedNotification } from './ChangePassword.action'
 import { checkPassword } from './ChangePassword.middleware'
 import Snackbar from 'react-toolbox/lib/snackbar'
 import Input from 'react-toolbox/lib/input'
@@ -61,6 +61,14 @@ class ChangePassword extends Component {
     return this.props.dispatch(hidePasswordChangedNotification())
   }
 
+  toggleRevealPassword = (e) => {
+    if (this.props.revealPassword) {
+      return this.props.dispatch(changePasswordHidePassword())
+    } else {
+      return this.props.dispatch(changePasswordShowPassword())
+    }
+  }  
+
   buttons = [
     { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
     { label: "Close", onClick: this._handleHideModal, theme: neutralButtons}
@@ -90,9 +98,12 @@ class ChangePassword extends Component {
           onOverlayClick={this._handleHideModal}
           title={t('activity_signup_password_change_title')}
         >
-          <Input type='password' name='oldPassword' onChange={this._handleOnChangeOldPassword} value={oldPassword} label='Old Password' />
-          <Input type='password' name='newPassword' onChange={this._handleOnChangeNewPassword} value={newPassword} label='New Password' />
-          <Input type='password' name='newPasswordRepeat' onChange={this._handleOnChangeNewPasswordRepeat} value={newPasswordRepeat} label='Confirm New Password' />
+          <div>
+            <Input type={ this.props.revealPassword ? 'text' : 'password' } name='oldPassword' onChange={this._handleOnChangeOldPassword} value={oldPassword} label='Old Password' />
+            <FontIcon value={this.props.revealPassword ? 'visibility' : 'visibility_off'} onClick={this.toggleRevealPassword} className={styles.inputPasswordFieldImg}/>
+          </div>
+          <Input type={ this.props.revealPassword ? 'text' : 'password' } name='newPassword' onChange={this._handleOnChangeNewPassword} value={newPassword} label='New Password' />
+          <Input type={ this.props.revealPassword ? 'text' : 'password' } name='newPasswordRepeat' onChange={this._handleOnChangeNewPasswordRepeat} value={newPasswordRepeat} label='Confirm New Password' />
           <div>
             <p className={styles.passwordRequirement}>
               <FontIcon value={upperCaseChar ? 'done' : 'clear'} className={upperCaseChar ? styles.green : styles.red}/>
@@ -121,10 +132,12 @@ class ChangePassword extends Component {
 export default connect(state => ({
 
   view: state.changePassword.view,
+  revealPassword: state.changePassword.revealPassword,
   oldPassword: state.changePassword.oldPassword,
   newPassword: state.changePassword.newPassword,
   newPasswordRepeat: state.changePassword.newPasswordRepeat,
   passwordChangedNotification: state.changePassword.passwordChangedNotification,
   validation: state.password.validation,
   user: state.user
+  
 }))(ChangePassword)

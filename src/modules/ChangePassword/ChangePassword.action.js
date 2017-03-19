@@ -9,6 +9,22 @@ export const PASSWORD_CHANGED = 'PASSWORD_CHANGED'
 export const SHOW_PASSWORD_CHANGED_NOTIFICATION = 'SHOW_PASSWORD_CHANGED_NOTIFICATION'
 export const HIDE_PASSWORD_CHANGED_NOTIFICATION = 'HIDE_PASSWORD_CHANGED_NOTIFICATION'
 
+export const PASSWORD_CHANGE_SHOW_PASSWORD = 'PASSWORD_CHANGE_SHOW_PASSWORD'
+export const PASSWORD_CHANGE_HIDE_PASSWORD = 'PASSWORD_CHANGE_HIDE_PASSWORD'
+
+export function changePasswordShowPassword () {
+  console.log('in changepassword actions, changePasswordShowPassword')
+  return {
+    type: PASSWORD_CHANGE_SHOW_PASSWORD
+  }
+}
+
+export function changePasswordHidePassword () {
+  console.log('in changepassword actions, changePasswordShowPassword')
+  return {
+    type: PASSWORD_CHANGE_HIDE_PASSWORD
+  }
+}
 export function showPasswordView () {
   return {
     type: SHOW_CHANGE_PASSWORD_VIEW

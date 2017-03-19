@@ -91,6 +91,7 @@ const store = combineReducers({
   }),
   changePassword: combineReducers({
     view: ChangePassword.view,
+    revealPassword: ChangePassword.revealPassword,
     oldPassword: ChangePassword.oldPassword,
     newPassword: ChangePassword.newPassword,
     newPasswordRepeat: ChangePassword.newPasswordRepeat,
