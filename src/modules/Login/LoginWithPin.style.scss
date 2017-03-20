@@ -12,6 +12,7 @@
 
   align-items: center;
   -webkit-align-items: center;
+  min-width: 25rem;
 }
 
 .usernameContainer {
@@ -40,7 +41,7 @@
 .username:after {
   position: absolute;
   content:"";
-  top: 1.3rem;
+  top: 1.7rem;
   right: -2rem;
   width:0;
   height:0;
@@ -77,12 +78,6 @@
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
-}
-
-.inputDiv {
-  @media only screen and (min-width : $layout-breakpoint-xs) {
-      width: 100%;
-  }  
 }
 
 @media only screen and (min-width : $layout-breakpoint-xs) {
