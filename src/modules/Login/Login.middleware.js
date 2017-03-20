@@ -66,12 +66,12 @@ export const edgeLogin = (callback) => {
     const t = imports.t
 
     const onProcess = (username) => {
+      dispatch(selectUserToLogin(username))
       return dispatch(openLoading(String.format(t('edge_logging_in'), username)))
     }
 
     const onLogin = (error, account) => {
       localStorage.setItem('lastUser', account.username)
-      dispatch(selectUserToLogin(account.username))
       dispatch(userLogin(account))
       return callback(error, account)
     }

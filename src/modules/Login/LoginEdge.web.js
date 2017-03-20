@@ -66,7 +66,7 @@ class LoginEdge extends Component {
           {!edgeUsername ? (
             <div>
               <div style={style.barCode}>
-                <a href={this.renderLoginLink()}>{this.renderBarcode()}</a>
+                <a target="_blank" href={this.renderLoginLink()}>{this.renderBarcode()}</a>
               </div>
               <div style={style.dividerContainer}>
                 <label style={style.divider}>or</label>
