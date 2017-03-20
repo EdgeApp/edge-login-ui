@@ -68,7 +68,7 @@ class Review extends Component {
             </div>
             <div className={styles.buttonSection}>
               <Button className={styles.buttonShow} type='button' raised onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</Button>
-              <Button className={styles.button} type='button' raised primary theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
+              <Button ref={(finish) => this.finishButton} className={styles.button} type='button' raised primary theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
             </div>
           </div>
         )
@@ -83,7 +83,7 @@ class Review extends Component {
               <p className={styles.paragraph2}>{t('fragment_setup_writeitdown_text_warning')}</p>
             </div>
             <div className={styles.buttonSection}>
-              <Button className={styles.buttonShow} type='button' onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</Button>
+              <Button autoFocus className={styles.buttonShow} type='button' onClick={this._handleShowDetails}>{t('fragment_setup_writeitdown_show')}</Button>
               <Button className={styles.button} type='button' raised primary theme={nextButton} onClick={this._handleAfterSignupQuestion}>{t('string_finish')}</Button>
             </div>
           </div>
