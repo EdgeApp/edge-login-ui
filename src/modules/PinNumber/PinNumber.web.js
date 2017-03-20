@@ -56,6 +56,12 @@ class PinComponent extends Component {
     }
   }
 
+  _handleKeyEnter = (e) => {
+    if(e.nativeEvent.charCode === 13) {
+      return this._handleSubmit()
+    }
+  }
+
   render () {
     return (
       <div>
@@ -64,7 +70,7 @@ class PinComponent extends Component {
             <h4>{t('activity_signup_pin_label')}</h4>
           </div>
         </div>
-        <form  className={styles.containerBody} onSubmit={e => this._handleSubmit(e)}>
+        <div className={styles.containerBody}>
           <div className={styles.inputDiv}>
             <Input
               ref='signupPin'
@@ -74,6 +80,7 @@ class PinComponent extends Component {
               placeholder={t('activity_signup_pin_hint')}
               style={this.pinStyle()}
               onChange={this._handleOnChangeText}
+              onKeyPress={this._handleKeyEnter.bind(this)}
               value={this.props.pin}
             />
           </div>
@@ -84,7 +91,7 @@ class PinComponent extends Component {
             <Button raised theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>             
             <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>            
           </div>
-        </form>
+        </div>
       </div>
     )
   }

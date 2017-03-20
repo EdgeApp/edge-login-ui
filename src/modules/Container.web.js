@@ -30,7 +30,7 @@ class Container extends Component {
       const lastUser = window.localStorage.getItem('lastUser')
       dispatch(setCachedUsers(cachedUsers))
       if (lastUser) {
-        dispatch(selectUserToLogin(lastUser))
+        return dispatch(selectUserToLogin(lastUser))
       }
     })
   }

@@ -13,7 +13,7 @@ import styles from './ErrorModal.webStyle'
 class ErrorModal extends Component {
 
   _handleClose = () => {
-    this.props.dispatch(closeErrorModal())
+    return this.props.dispatch(closeErrorModal())
   }
 
   _checkLoading = () => {
@@ -24,16 +24,26 @@ class ErrorModal extends Component {
     }
   }
 
+  _handleKeyEnter = (e) => {
+    console.log(e)
+    if(e.nativeEvent.charCode === 13) {
+      return this._handleClose()
+    }
+  }
+
   render () {
     if (this._checkLoading()) {
       return (
         <Dialog className={styles.dialogZIndex}
           active={this._checkLoading()}
+          onEscKeyDown={this._handleClose}
+          onOverlayClick={this._handleClose}
+          onKeyPress={this._handleKeyEnter.bind(this)}
         >
           <div className={styles.container}>
             <p>{this.props.message}</p>
             <br />
-            <Button raised primary className={styles.button} type='button' onClick={this._handleClose}>{t('string_ok')}</Button>
+            <Button autoFocus raised primary className={styles.button} type='button' onClick={this._handleClose}>{t('string_ok')}</Button>
           </div>
         </Dialog>
       )

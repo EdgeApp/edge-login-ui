@@ -71,7 +71,7 @@ export const edgeLogin = (callback) => {
     }
 
     const onLogin = (error, account) => {
-      // localStorage.setItem('lastUser', account.username)
+      localStorage.setItem('lastUser', account.username)
       dispatch(userLogin(account))
       return callback(error, account)
     }
