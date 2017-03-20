@@ -805,6 +805,10 @@ const strings = {
   recovery_disabled: 'Recovery Disabled',
   recovery_setup_successful: 'Password recovery setup complete. Please ensure you retain a copy of the email you sent yourself. Use the link in the email to recovery your account if your password is forgotten.',
   in: 'in',
+  password_recovery_gmamil: 'Send using Gmail',
+  password_recovery_yahoo: 'Send using Yahoo',
+  password_recovery_microsoft: 'Send using Hotmail, Outlook, Live Mail',
+  password_recovery_app: 'Send using Email App',
 
     //  SSO
   edge_login: 'Edge Login',
