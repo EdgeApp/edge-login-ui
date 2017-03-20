@@ -5,7 +5,7 @@ import Link from 'react-toolbox/lib/link'
 import AppBar from 'react-toolbox/lib/app_bar';
 import styles from './Footer.webStyle'
 import layoutTheme from 'theme/layoutTheme.scss'
-
+import t from 'lib/web/LocaleStrings'
 
 class Footer extends Component {
 
@@ -13,7 +13,7 @@ class Footer extends Component {
     return (
     <AppBar title="Footer" className={styles.appBar} flat={false} style={styles.footer}>
         <Navigation type="horizontal" className={styles.navigation}>
-            <Link href="https://airbitz.co/app" target="_blank" className={styles.footerDownloadLink} label="Increase your account security. Download Airbitz" icon="" />
+          <Link href="https://airbitz.co/app" target="_blank" className={styles.footerDownloadLink} label={t('fragment_setup_footer_1') + t('fragment_setup_footer_2_link')} icon="" />
         </Navigation>
     </AppBar>
     )

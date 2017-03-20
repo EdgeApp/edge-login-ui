@@ -70,3 +70,21 @@
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+
+.inputDiv {
+  @media only screen and (min-width : $layout-breakpoint-xs) {
+      width: 100%;
+  }  
+}
+
+@media only screen and (min-width : $layout-breakpoint-xs) {
+  .CachedUsers {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width : $layout-breakpoint-sm) {
+  .CachedUsers {
+    width: auto;
+  }
+}
