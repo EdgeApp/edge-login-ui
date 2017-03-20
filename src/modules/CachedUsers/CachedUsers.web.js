@@ -59,7 +59,7 @@ class UserList extends Component {
     return (
       <div data-react-toolbox='dropdown' className={containerClassname}>
         { this.props.component }
-        <ul className={classnames(this.props.userListClassName,styles.values)}>
+        <ul className={classnames(this.props.userListClassName,styles.values, styles.cachedDropdownList) }>
           {_.map(this.props.users, renderValue)}
         </ul>
       </div>

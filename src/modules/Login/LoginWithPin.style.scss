@@ -15,7 +15,15 @@
 }
 
 .usernameContainer {
-  text-align: center;
+  text-align:center; 
+  min-width: 20rem;
+
+  a {
+    word-wrap: break-word;
+    overflow-x: auto;
+    display: inline;      
+  }
+
 }
 
 .username {
