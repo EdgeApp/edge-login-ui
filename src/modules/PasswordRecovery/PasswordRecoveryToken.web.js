@@ -7,6 +7,7 @@ import signinButton from 'theme/signinButton.scss';
 import { showPasswordRecoveryFinishModal, passwordRecoveryDone } from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { checkEmail } from './PasswordRecovery.middleware'
+import passwordRecoveryStyles from './PasswordRecovery.webStyle.scss'
 
 import ErrorModal from '../ErrorModal/ErrorModal.web'
 
@@ -54,16 +55,16 @@ export default class PasswordRecoveryToken extends Component {
           <Input type='email' onChange={this.props.handleOnChangeEmail} value={this.props.email} label='Email Address' required/>
         </div>
         <div>
-          <Button type='button' raised primary style={{margin: '10px 0px 10px 0px'}} onClick={() => this._handleSubmit('google')}>Send using Gmail</Button>
+          <Button type='button' raised primary className={ passwordRecoveryStyles.emailButton } onClick={() => this._handleSubmit('google')}>Send using Gmail</Button>
         </div>
         <div>
-          <Button type='button' raised primary style={{margin: '10px 0px 10px 0px'}} onClick={() => this._handleSubmit('yahoo')}>Send using Yahoo</Button>
+          <Button type='button' raised primary className={ passwordRecoveryStyles.emailButton } onClick={() => this._handleSubmit('yahoo')}>Send using Yahoo</Button>
         </div>
         <div>
-          <Button type='button' raised primary style={{margin: '10px 0px 10px 0px'}} onClick={() => this._handleSubmit('microsoft')}>Send using Hotmail, Outlook, Live Mail</Button>
+          <Button type='button' raised primary className={ passwordRecoveryStyles.emailButton } onClick={() => this._handleSubmit('microsoft')}>Send using Hotmail, Outlook, Live Mail</Button>
         </div>
         <div>
-          <Button type='button' raised primary style={{margin: '10px 0px 10px 0px'}} onClick={() => this._handleSubmit('generic')}>Send using Email App</Button>
+          <Button type='button' raised primary className={ passwordRecoveryStyles.emailButton } onClick={() => this._handleSubmit('generic')}>Send using Email App</Button>
         </div>
         {this._renderFinishButton()}
       </div>
