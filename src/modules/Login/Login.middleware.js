@@ -1,6 +1,7 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { userLogin, requestEdgeLogin } from './Login.action'
+import { selectUserToLogin } from '../CachedUsers/CachedUsers.action'
 
 export const loginWithPassword = (username, password, callback) => {
   return (dispatch, getState, imports) => {
@@ -65,9 +66,8 @@ export const edgeLogin = (callback) => {
     const t = imports.t
 
     const onProcess = (username) => {
-      dispatch(
-        openLoading(String.format(t('edge_logging_in'), username))
-      )
+      dispatch(selectUserToLogin(username))
+      return dispatch(openLoading(String.format(t('edge_logging_in'), username)))
     }
 
     const onLogin = (error, account) => {

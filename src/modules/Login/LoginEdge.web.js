@@ -39,8 +39,9 @@ class LoginEdge extends Component {
 
   renderBarcode () {
     const { edgeId } = this.props
-    if(edgeId) {
-      return (<QRCode value={edgeId} style={{margin: '0px auto', width: '128px'}}/>)
+    if (edgeId) {
+      const qrCodeVal = 'airbitz-develop://edge/' + edgeId
+      return (<QRCode value={qrCodeVal} style={{margin: '0px auto', width: '128px'}}/>)
     } else {
       return null
     }
@@ -66,7 +67,7 @@ class LoginEdge extends Component {
           {!edgeUsername ? (
             <div>
               <div style={style.barCode}>
-                <a href={this.renderLoginLink()}>{this.renderBarcode()}</a>
+                <a target="_blank" href={this.renderLoginLink()}>{this.renderBarcode()}</a>
               </div>
               <div style={style.dividerContainer}>
                 <label style={style.divider}>or</label>

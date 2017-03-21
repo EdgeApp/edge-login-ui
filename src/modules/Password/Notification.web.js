@@ -16,7 +16,7 @@ class NotificationModal extends Component {
 
   buttons = [
     { label: t('string_ok'), onClick: this.props.handleSubmit, primary: true, raised: true, theme: nextButton },
-    { label: t('string_cancel'), onClick: this._handleClose, raised: true, theme: neutralButtonWithBlueTextTheme }  
+    { label: t('string_cancel'), onClick: this._handleClose, raised: true, theme: neutralButtonWithBlueTextTheme }
   ]
 
   render () {
