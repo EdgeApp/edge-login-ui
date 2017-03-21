@@ -147,7 +147,7 @@ class Password extends Component {
         </div>
 
         <div className={styles.buttonSection}>
-          <Button raised theme={neutralButtonWithBlueText} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
+          <Button theme={neutralButtonWithBlueText} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
           <Button type='button' raised primary className={styles.next} onClick={this._handleSubmit}>{t('string_next')}</Button>
         </div>
       </div>

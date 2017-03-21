@@ -76,7 +76,7 @@ class UsernameComponent extends Component {
             <p className={styles.text}>{t('fragment_setup_username_text')}</p>
           </div>
           <div className={styles.buttonSection}>
-            <Button raised theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
+            <Button theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
             <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </div>
       </div>
