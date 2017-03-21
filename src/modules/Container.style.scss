@@ -21,3 +21,15 @@
 .default {
 
 }
+
+@media only screen and (min-width : $layout-breakpoint-xs) {
+    .topLevelDialog {
+        min-width: 80vw;
+    }
+}
+
+@media only screen and (min-width : $layout-breakpoint-sm) {
+    .topLevelDialog {
+        min-width: 60vw;
+    }
+}

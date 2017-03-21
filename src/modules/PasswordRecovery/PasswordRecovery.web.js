@@ -106,8 +106,9 @@ class PasswordRecovery extends Component {
   }
 
   buttons = [
-    { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
-    { label: "Close", onClick: this._handleHideModal, theme: neutralButtons }
+    { label: "Close", onClick: this._handleHideModal, theme: neutralButtons },
+    { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true }
+
   ]
 
   _renderView = () => {
@@ -181,6 +182,7 @@ class PasswordRecovery extends Component {
           username={this.props.account.username}
           dispatch={this.props.dispatch}
           finishButton={this.props.finishButton}
+          className=""
         />
       )
     }
@@ -193,6 +195,8 @@ class PasswordRecovery extends Component {
         actions={this.props.viewToken ? [] : this.buttons}
         active={this.props.view}
         title={t('activity_recovery_setup_title')}
+        style={styles.passwordRecoveryModal}
+        className={styles.passwordRecoveryModal}
       >
         { this._renderView() }
       </Dialog>
