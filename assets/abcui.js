@@ -120,12 +120,6 @@ exports["abcui"] =
 	  };
 	  DomWindow.loginCallback = function (error, account) {
 	    if (account) {
-	      // if (opts && opts.setupRecovery) {
-	      //   opts.noRequirePassword = true
-	      //   that.openSetupRecoveryWindow(account, opts, function () {})
-	      // } else if (!abcContext.pinExists(account.username)) {
-	      //   that.openChangePinEdgeLoginWindow(account, opts, function () {})
-	      // }
 	      DomWindow.abcAccount = account;
 	      callback(error, account);
 	      done();
