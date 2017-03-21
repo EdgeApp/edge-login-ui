@@ -114,9 +114,12 @@ exports["abcui"] =
 	  var frame = createIFrame(this.bundlePath + '/assets/index.html');
 	  var that = this;
 	  var abcContext = DomWindow.abcContext;
+	  var done = function done() {
+	    DomWindow.loginCallback = null;
+	    removeIFrame(frame);
+	  };
 	  DomWindow.loginCallback = function (error, account) {
 	    if (account) {
-
 	      // if (opts && opts.setupRecovery) {
 	      //   opts.noRequirePassword = true
 	      //   that.openSetupRecoveryWindow(account, opts, function () {})
@@ -125,7 +128,7 @@ exports["abcui"] =
 	      // }
 	      DomWindow.abcAccount = account;
 	      callback(error, account);
-	      removeIFrame(frame);
+	      done();
 	    }
 	  };
 	  DomWindow.exitCallback = function () {
@@ -315,37 +318,69 @@ exports["abcui"] =
 	/***/ function(module, exports) {
 
 		module.exports = {
-			"name": "elliptic",
-			"version": "6.4.0",
-			"description": "EC cryptography",
-			"main": "lib/elliptic.js",
-			"files": [
-				"lib"
+			"_args": [
+				[
+					{
+						"raw": "elliptic@^6.3.1",
+						"scope": null,
+						"escapedName": "elliptic",
+						"name": "elliptic",
+						"rawSpec": "^6.3.1",
+						"spec": ">=6.3.1 <7.0.0",
+						"type": "range"
+					},
+					"/home/art/www/airbitz/airbitz-core-js"
+				]
 			],
-			"scripts": {
-				"jscs": "jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js",
-				"jshint": "jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js",
-				"lint": "npm run jscs && npm run jshint",
-				"unit": "istanbul test _mocha --reporter=spec test/index.js",
-				"test": "npm run lint && npm run unit",
-				"version": "grunt dist && git add dist/"
+			"_from": "elliptic@>=6.3.1 <7.0.0",
+			"_id": "elliptic@6.4.0",
+			"_inCache": true,
+			"_location": "/elliptic",
+			"_nodeVersion": "7.0.0",
+			"_npmOperationalInternal": {
+				"host": "packages-18-east.internal.npmjs.com",
+				"tmp": "tmp/elliptic-6.4.0.tgz_1487798866428_0.30510620190761983"
 			},
-			"repository": {
-				"type": "git",
-				"url": "git@github.com:indutny/elliptic"
+			"_npmUser": {
+				"name": "indutny",
+				"email": "fedor@indutny.com"
 			},
-			"keywords": [
-				"EC",
-				"Elliptic",
-				"curve",
-				"Cryptography"
+			"_npmVersion": "3.10.8",
+			"_phantomChildren": {},
+			"_requested": {
+				"raw": "elliptic@^6.3.1",
+				"scope": null,
+				"escapedName": "elliptic",
+				"name": "elliptic",
+				"rawSpec": "^6.3.1",
+				"spec": ">=6.3.1 <7.0.0",
+				"type": "range"
+			},
+			"_requiredBy": [
+				"/"
 			],
-			"author": "Fedor Indutny <fedor@indutny.com>",
-			"license": "MIT",
+			"_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
+			"_shasum": "cac9af8762c85836187003c8dfe193e5e2eae5df",
+			"_shrinkwrap": null,
+			"_spec": "elliptic@^6.3.1",
+			"_where": "/home/art/www/airbitz/airbitz-core-js",
+			"author": {
+				"name": "Fedor Indutny",
+				"email": "fedor@indutny.com"
+			},
 			"bugs": {
 				"url": "https://github.com/indutny/elliptic/issues"
 			},
-			"homepage": "https://github.com/indutny/elliptic",
+			"dependencies": {
+				"bn.js": "^4.4.0",
+				"brorand": "^1.0.1",
+				"hash.js": "^1.0.0",
+				"hmac-drbg": "^1.0.0",
+				"inherits": "^2.0.1",
+				"minimalistic-assert": "^1.0.0",
+				"minimalistic-crypto-utils": "^1.0.0"
+			},
+			"description": "EC cryptography",
 			"devDependencies": {
 				"brfs": "^1.4.3",
 				"coveralls": "^2.11.3",
@@ -362,15 +397,46 @@ exports["abcui"] =
 				"jshint": "^2.6.0",
 				"mocha": "^2.1.0"
 			},
-			"dependencies": {
-				"bn.js": "^4.4.0",
-				"brorand": "^1.0.1",
-				"hash.js": "^1.0.0",
-				"hmac-drbg": "^1.0.0",
-				"inherits": "^2.0.1",
-				"minimalistic-assert": "^1.0.0",
-				"minimalistic-crypto-utils": "^1.0.0"
-			}
+			"directories": {},
+			"dist": {
+				"shasum": "cac9af8762c85836187003c8dfe193e5e2eae5df",
+				"tarball": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz"
+			},
+			"files": [
+				"lib"
+			],
+			"gitHead": "6b0d2b76caae91471649c8e21f0b1d3ba0f96090",
+			"homepage": "https://github.com/indutny/elliptic",
+			"keywords": [
+				"EC",
+				"Elliptic",
+				"curve",
+				"Cryptography"
+			],
+			"license": "MIT",
+			"main": "lib/elliptic.js",
+			"maintainers": [
+				{
+					"name": "indutny",
+					"email": "fedor@indutny.com"
+				}
+			],
+			"name": "elliptic",
+			"optionalDependencies": {},
+			"readme": "ERROR: No README data found!",
+			"repository": {
+				"type": "git",
+				"url": "git+ssh://git@github.com/indutny/elliptic.git"
+			},
+			"scripts": {
+				"jscs": "jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js",
+				"jshint": "jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js",
+				"lint": "npm run jscs && npm run jshint",
+				"test": "npm run lint && npm run unit",
+				"unit": "istanbul test _mocha --reporter=spec test/index.js",
+				"version": "grunt dist && git add dist/"
+			},
+			"version": "6.4.0"
 		};
 
 	/***/ },
@@ -9664,7 +9730,7 @@ exports["abcui"] =
 	};
 
 	/**
-	 * Loads the loginStash matching the given query.
+	 * Loads the loginData matching the given query.
 	 * For now, the query only supports the `username` property.
 	 */
 	LoginStore.prototype.find = function find (query) {
@@ -9696,7 +9762,7 @@ exports["abcui"] =
 	};
 
 	/**
-	 * Removes any loginStash matching the given query.
+	 * Removes any loginData matching the given query.
 	 * For now, the query only supports the `username` property.
 	 */
 	LoginStore.prototype.remove = function remove (query) {
@@ -9708,12 +9774,12 @@ exports["abcui"] =
 	  this.io.localStorage.setItem('airbitz.users', JSON.stringify(users));
 	};
 
-	LoginStore.prototype.update = function update (userId, loginStash) {
+	LoginStore.prototype.update = function update (userId, loginData) {
 	  // Find the username:
 	  var username;
 	  var users = this._loadUsers();
-	  if ('username' in loginStash) {
-	    username = loginStash.username;
+	  if ('username' in loginData) {
+	    username = loginData.username;
 
 	    // Add the userId to the table, in case it's new:
 	    users[username] = base64.stringify(userId);
@@ -9729,7 +9795,7 @@ exports["abcui"] =
 
 	  // Actually save:
 	  var store = this._findUsername(username);
-	  return store.setItems(loginStash)
+	  return store.setItems(loginData)
 	};
 
 	LoginStore.prototype._findUsername = function _findUsername (username) {
@@ -9827,7 +9893,7 @@ exports["abcui"] =
 	/**
 	 * Converts a login reply from the server into the local storage format.
 	 */
-	function makeLoginStash (username, loginReply, loginKey) {
+	function makeLoginData (username, loginReply, dataKey) {
 	  // Copy common items:
 	  var out = filterObject(loginReply, [
 	    'passwordAuthBox',
@@ -9843,13 +9909,13 @@ exports["abcui"] =
 
 	  // Store the pin key unencrypted:
 	  if (loginReply.pin2KeyBox != null) {
-	    var pin2Key = decrypt(loginReply.pin2KeyBox, loginKey);
+	    var pin2Key = decrypt(loginReply.pin2KeyBox, dataKey);
 	    out.pin2Key = base58.stringify(pin2Key);
 	  }
 
 	  // Store the recovery key unencrypted:
 	  if (loginReply.recovery2KeyBox != null) {
-	    var recovery2Key = decrypt(loginReply.recovery2KeyBox, loginKey);
+	    var recovery2Key = decrypt(loginReply.recovery2KeyBox, dataKey);
 	    out.recovery2Key = base58.stringify(recovery2Key);
 	  }
 
@@ -9864,67 +9930,67 @@ exports["abcui"] =
 	 * - A list of account repos
 	 * - The legacy BitID rootKey
 	 */
-	function Login (io, userId, loginKey, loginStash) {
+	function Login (io, userId, dataKey, loginData) {
 	  if (userId.length !== 32) {
 	    throw new Error('userId must be a hash')
 	  }
 
 	  // Identity:
-	  this.username = loginStash.username;
+	  this.username = loginData.username;
 	  this.userId = userId;
-	  this.loginKey = loginKey;
+	  this.dataKey = dataKey;
 
 	  // Return access to the server:
-	  if (loginStash.passwordAuthBox == null) {
+	  if (loginData.passwordAuthBox == null) {
 	    throw new Error('Missing passwordAuthBox')
 	  }
-	  this.passwordAuth = decrypt(loginStash.passwordAuthBox, loginKey);
+	  this.passwordAuth = decrypt(loginData.passwordAuthBox, dataKey);
 
 	  // Legacy account repo:
-	  if (loginStash.syncKeyBox != null) {
-	    this.syncKey = decrypt(loginStash.syncKeyBox, loginKey);
+	  if (loginData.syncKeyBox != null) {
+	    this.syncKey = decrypt(loginData.syncKeyBox, dataKey);
 	  }
 
 	  // Legacy BitID key:
-	  if (loginStash.rootKeyBox != null) {
-	    this.rootKey = decrypt(loginStash.rootKeyBox, loginKey);
+	  if (loginData.rootKeyBox != null) {
+	    this.rootKey = decrypt(loginData.rootKeyBox, dataKey);
 	  }
 
 	  // TODO: Decrypt these:
-	  this.repos = loginStash.repos || [];
+	  this.repos = loginData.repos || [];
 
 	  // Local keys:
-	  if (loginStash.pin2Key != null) {
-	    this.pin2Key = base58.parse(loginStash.pin2Key);
+	  if (loginData.pin2Key != null) {
+	    this.pin2Key = base58.parse(loginData.pin2Key);
 	  }
-	  if (loginStash.recovery2Key != null) {
-	    this.recovery2Key = base58.parse(loginStash.recovery2Key);
+	  if (loginData.recovery2Key != null) {
+	    this.recovery2Key = base58.parse(loginData.recovery2Key);
 	  }
 	}
 
 	/**
 	 * Returns a new login object, populated with data from the server.
 	 */
-	Login.online = function (io, username, userId, loginKey, loginReply) {
-	  var loginStash = makeLoginStash(username, loginReply, loginKey);
-	  io.loginStore.update(userId, loginStash);
+	Login.online = function (io, username, userId, dataKey, loginReply) {
+	  var loginData = makeLoginData(username, loginReply, dataKey);
+	  io.loginStore.update(userId, loginData);
 
-	  return new Login(io, userId, loginKey, loginStash)
+	  return new Login(io, userId, dataKey, loginData)
 	};
 
 	/**
 	 * Returns a new login object, populated with data from the local storage.
 	 */
-	Login.offline = function (io, username, userId, loginKey) {
-	  var loginStash = io.loginStore.find({username: username});
-	  var out = new Login(io, userId, loginKey, loginStash);
+	Login.offline = function (io, username, userId, dataKey) {
+	  var loginData = io.loginStore.find({username: username});
+	  var out = new Login(io, userId, dataKey, loginData);
 
 	  // Try updating our locally-stored login data (failure is ok):
 	  io
 	    .authRequest('POST', '/v2/login', out.authJson())
 	    .then(function (loginReply) {
-	      var loginStash = makeLoginStash(username, loginReply, loginKey);
-	      return io.loginStore.update(userId, loginStash)
+	      var loginData = makeLoginData(username, loginReply, dataKey);
+	      return io.loginStore.update(userId, loginData)
 	    })
 	    .catch(function (e) { return io.log.error(e); });
 
@@ -9954,7 +10020,7 @@ exports["abcui"] =
 
 	    if (repo['type'] === type) {
 	      var keysBox = repo['keysBox'] || repo['info'];
-	      return JSON.parse(utf8.stringify(decrypt(keysBox, this$1.loginKey)))
+	      return JSON.parse(utf8.stringify(decrypt(keysBox, this$1.dataKey)))
 	    }
 	  }
 
@@ -9962,7 +10028,7 @@ exports["abcui"] =
 	  if (type === 'account:repo:co.airbitz.wallet') {
 	    return {
 	      'syncKey': base16.stringify(this.syncKey),
-	      'dataKey': base16.stringify(this.loginKey)
+	      'dataKey': base16.stringify(this.dataKey)
 	    }
 	  }
 
@@ -9991,7 +10057,7 @@ exports["abcui"] =
 	  var infoBlob = utf8.parse(JSON.stringify(info));
 	  var data = {
 	    'type': type,
-	    'info': encrypt(io, infoBlob, this.loginKey)
+	    'info': encrypt(io, infoBlob, this.dataKey)
 	  };
 
 	  var request = this.authJson();
@@ -10009,18 +10075,18 @@ exports["abcui"] =
 
 	function loginOffline (io, username, userId, password) {
 	  // Extract stuff from storage:
-	  var loginStash = io.loginStore.find({username: username});
-	  var passwordKeySnrp = loginStash.passwordKeySnrp;
-	  var passwordBox = loginStash.passwordBox;
+	  var loginData = io.loginStore.find({username: username});
+	  var passwordKeySnrp = loginData.passwordKeySnrp;
+	  var passwordBox = loginData.passwordBox;
 	  if (!passwordKeySnrp || !passwordBox) {
 	    throw new Error('Missing data for offline login')
 	  }
 
-	  // Decrypt the loginKey:
+	  // Decrypt the dataKey:
 	  var up = makeHashInput(username, password);
 	  return scrypt(up, passwordKeySnrp).then(function (passwordKey) {
-	    var loginKey = decrypt(passwordBox, passwordKey);
-	    return Login.offline(io, username, userId, loginKey)
+	    var dataKey = decrypt(passwordBox, passwordKey);
+	    return Login.offline(io, username, userId, dataKey)
 	  })
 	}
 
@@ -10041,12 +10107,12 @@ exports["abcui"] =
 	        throw new Error('Missing data for password login')
 	      }
 
-	      // Decrypt the loginKey:
+	      // Decrypt the dataKey:
 	      return scrypt(up, passwordKeySnrp).then(function (passwordKey) {
-	        var loginKey = decrypt(passwordBox, passwordKey);
+	        var dataKey = decrypt(passwordBox, passwordKey);
 
 	        // Build the login object:
-	        return Login.online(io, username, userId, loginKey, reply)
+	        return Login.online(io, username, userId, dataKey, reply)
 	      })
 	    })
 	  })
@@ -10083,23 +10149,23 @@ exports["abcui"] =
 	}
 
 	/**
-	 * Creates the data needed to attach a password to a login.
+	 * Creates the data needed to set up the password on the server.
 	 */
-	function makePasswordKit (io, login, username, password) {
+	function makeSetup (io, dataKey, username, password) {
 	  var up = makeHashInput(username, password);
 
-	  // loginKey chain:
+	  // dataKey chain:
 	  var boxPromise = makeSnrp(io).then(function (passwordKeySnrp) {
 	    return scrypt(up, passwordKeySnrp).then(function (passwordKey) {
-	      var passwordBox = encrypt(io, login.loginKey, passwordKey);
-	      return { passwordKeySnrp: passwordKeySnrp, passwordBox: passwordBox }
+	      var passwordBox = encrypt(io, dataKey, passwordKey);
+	      return {passwordKeySnrp: passwordKeySnrp, passwordBox: passwordBox}
 	    })
 	  });
 
 	  // authKey chain:
 	  var authPromise = scrypt(up, passwordAuthSnrp).then(function (passwordAuth) {
-	    var passwordAuthBox = encrypt(io, passwordAuth, login.loginKey);
-	    return { passwordAuth: passwordAuth, passwordAuthBox: passwordAuthBox }
+	    var passwordAuthBox = encrypt(io, passwordAuth, dataKey);
+	    return {passwordAuth: passwordAuth, passwordAuthBox: passwordAuthBox}
 	  });
 
 	  return Promise.all([boxPromise, authPromise]).then(function (values) {
@@ -10111,20 +10177,18 @@ exports["abcui"] =
 	    var passwordAuthBox = values_1.passwordAuthBox;
 	    return {
 	      server: {
-	        passwordAuth: base64.stringify(passwordAuth),
-	        passwordAuthSnrp: passwordAuthSnrp, // TODO: Use this on the other side
-	        passwordKeySnrp: passwordKeySnrp,
-	        passwordBox: passwordBox,
-	        passwordAuthBox: passwordAuthBox
+	        'passwordAuth': base64.stringify(passwordAuth),
+	        'passwordAuthSnrp': passwordAuthSnrp, // TODO: Not needed
+	        'passwordKeySnrp': passwordKeySnrp,
+	        'passwordBox': passwordBox,
+	        'passwordAuthBox': passwordAuthBox
 	      },
-	      stash: {
-	        passwordKeySnrp: passwordKeySnrp,
-	        passwordBox: passwordBox,
-	        passwordAuthBox: passwordAuthBox
+	      storage: {
+	        'passwordKeySnrp': passwordKeySnrp,
+	        'passwordBox': passwordBox,
+	        'passwordAuthBox': passwordAuthBox
 	      },
-	      login: {
-	        passwordAuth: passwordAuth
-	      }
+	      passwordAuth: passwordAuth
 	    }
 	  })
 	}
@@ -10133,13 +10197,13 @@ exports["abcui"] =
 	 * Sets up a password for the login.
 	 */
 	function setup (io, login, password) {
-	  return makePasswordKit(io, login, login.username, password).then(function (kit) {
+	  return makeSetup(io, login.dataKey, login.username, password).then(function (setup) {
 	    var request = login.authJson();
-	    request.data = kit.server;
+	    request['data'] = setup.server;
 	    return io.authRequest('POST', '/v2/login/password', request).then(function (reply) {
-	      io.loginStore.update(login.userId, kit.stash);
-	      login.passwordAuth = kit.login.passwordAuth;
-	      return login
+	      io.loginStore.update(login.userId, setup.storage);
+	      login.passwordAuth = setup.passwordAuth;
+	      return null
 	    })
 	  })
 	}
@@ -10156,10 +10220,8 @@ exports["abcui"] =
 	 * Returns a copy of the PIN login key if one exists on the local device.
 	 */
 	function getKey (io, username) {
-	  var loginStash = io.loginStore.find({username: username});
-	  if (loginStash.pin2Key != null) {
-	    return base58.parse(loginStash.pin2Key)
-	  }
+	  var loginData = io.loginStore.find({username: username});
+	  return loginData.pin2Key
 	}
 
 	/**
@@ -10170,6 +10232,8 @@ exports["abcui"] =
 	 * @param `Login` object promise
 	 */
 	function login$1 (io, pin2Key, username, pin) {
+	  pin2Key = base58.parse(pin2Key);
+
 	  var request = {
 	    'pin2Id': base64.stringify(pin2Id(pin2Key, username)),
 	    'pin2Auth': base64.stringify(pin2Auth(pin2Key, pin))
@@ -10182,37 +10246,36 @@ exports["abcui"] =
 	      throw new Error('Missing data for PIN v2 login')
 	    }
 
-	    // Decrypt the loginKey:
-	    var loginKey = decrypt(pin2Box, pin2Key);
+	    // Decrypt the dataKey:
+	    var dataKey = decrypt(pin2Box, pin2Key);
 
 	    // Build the login object:
 	    return io.loginStore.getUserId(username).then(function (userId) {
-	      return Login.online(io, username, userId, loginKey, reply)
+	      return Login.online(io, username, userId, dataKey, reply)
 	    })
 	  })
 	}
 
 	/**
-	 * Creates the data needed to attach a PIN to a login.
+	 * Creates the data needed to set up a PIN on the account.
 	 */
-	function makePin2Kit (io, login, username, pin) {
+	function makeSetup$1 (io, login, pin) {
 	  var pin2Key = login.pin2Key || io.random(32);
-	  var pin2Box = encrypt(io, login.loginKey, pin2Key);
-	  var pin2KeyBox = encrypt(io, pin2Key, login.loginKey);
+
+	  var pin2Box = encrypt(io, login.dataKey, pin2Key);
+	  var pin2KeyBox = encrypt(io, pin2Key, login.dataKey);
 
 	  return {
 	    server: {
-	      pin2Id: base64.stringify(pin2Id(pin2Key, username)),
-	      pin2Auth: base64.stringify(pin2Auth(pin2Key, pin)),
-	      pin2Box: pin2Box,
-	      pin2KeyBox: pin2KeyBox
+	      'pin2Id': base64.stringify(pin2Id(pin2Key, login.username)),
+	      'pin2Auth': base64.stringify(pin2Auth(pin2Key, pin)),
+	      'pin2Box': pin2Box,
+	      'pin2KeyBox': pin2KeyBox
 	    },
-	    stash: {
-	      pin2Key: base58.stringify(pin2Key)
+	    storage: {
+	      'pin2Key': base58.stringify(pin2Key)
 	    },
-	    login: {
-	      pin2Key: pin2Key
-	    }
+	    pin2Key: pin2Key
 	  }
 	}
 
@@ -10220,14 +10283,13 @@ exports["abcui"] =
 	 * Sets up PIN login v2.
 	 */
 	function setup$1 (io, login, pin) {
-	  var kit = makePin2Kit(io, login, login.username, pin);
+	  var setup = makeSetup$1(io, login, pin);
 
 	  var request = login.authJson();
-	  request.data = kit.server;
+	  request['data'] = setup.server;
 	  return io.authRequest('POST', '/v2/login/pin2', request).then(function (reply) {
-	    io.loginStore.update(login.userId, kit.stash);
-	    login.pin2Key = kit.login.pin2Key;
-	    return login
+	    io.loginStore.update(login.userId, setup.storage);
+	    return base58.stringify(setup.pin2Key)
 	  })
 	}
 
@@ -10246,10 +10308,8 @@ exports["abcui"] =
 	 * Returns a copy of the recovery key if one exists on the local device.
 	 */
 	function getKey$1 (io, username) {
-	  var loginStash = io.loginStore.find({username: username});
-	  if (loginStash.recovery2Key != null) {
-	    return base58.parse(loginStash.recovery2Key)
-	  }
+	  var loginData = io.loginStore.find({username: username});
+	  return loginData.recovery2Key
 	}
 
 	/**
@@ -10260,6 +10320,8 @@ exports["abcui"] =
 	 * @param `Login` object promise
 	 */
 	function login$2 (io, recovery2Key, username, answers) {
+	  recovery2Key = base58.parse(recovery2Key);
+
 	  var request = {
 	    'recovery2Id': base64.stringify(recovery2Id(recovery2Key, username)),
 	    'recovery2Auth': recovery2Auth(recovery2Key, answers)
@@ -10272,12 +10334,12 @@ exports["abcui"] =
 	      throw new Error('Missing data for recovery v2 login')
 	    }
 
-	    // Decrypt the loginKey:
-	    var loginKey = decrypt(recovery2Box, recovery2Key);
+	    // Decrypt the dataKey:
+	    var dataKey = decrypt(recovery2Box, recovery2Key);
 
 	    // Build the login object:
 	    return io.loginStore.getUserId(username).then(function (userId) {
-	      return Login.online(io, username, userId, loginKey, reply)
+	      return Login.online(io, username, userId, dataKey, reply)
 	    })
 	  })
 	}
@@ -10289,6 +10351,8 @@ exports["abcui"] =
 	 * @param Question array promise
 	 */
 	function questions (io, recovery2Key, username) {
+	  recovery2Key = base58.parse(recovery2Key);
+
 	  var request = {
 	    'recovery2Id': base64.stringify(recovery2Id(recovery2Key, username))
 	    // "otp": null
@@ -10307,39 +10371,34 @@ exports["abcui"] =
 	}
 
 	/**
-	 * Creates the data needed to attach recovery questions to a login.
+	 * Creates the data needed to set up recovery questions on the account.
 	 */
-	function makeRecovery2Kit (io, login, username, questions, answers) {
-	  if (!Array.isArray(questions)) {
+	function makeSetup$2 (io, login, questions, answers) {
+	  if (!(Object.prototype.toString.call(questions) === '[object Array]')) {
 	    throw new TypeError('Questions must be an array of strings')
 	  }
-	  if (!Array.isArray(answers)) {
+	  if (!(Object.prototype.toString.call(answers) === '[object Array]')) {
 	    throw new TypeError('Answers must be an array of strings')
 	  }
 
 	  var recovery2Key = login.recovery2Key || io.random(32);
-	  var question2Box = encrypt(
-	    io,
-	    utf8.parse(JSON.stringify(questions)),
-	    recovery2Key
-	  );
-	  var recovery2Box = encrypt(io, login.loginKey, recovery2Key);
-	  var recovery2KeyBox = encrypt(io, recovery2Key, login.loginKey);
+
+	  var question2Box = encrypt(io, utf8.parse(JSON.stringify(questions), 'utf8'), recovery2Key);
+	  var recovery2Box = encrypt(io, login.dataKey, recovery2Key);
+	  var recovery2KeyBox = encrypt(io, recovery2Key, login.dataKey);
 
 	  return {
 	    server: {
-	      recovery2Id: base64.stringify(recovery2Id(recovery2Key, username)),
-	      recovery2Auth: recovery2Auth(recovery2Key, answers),
-	      recovery2Box: recovery2Box,
-	      recovery2KeyBox: recovery2KeyBox,
-	      question2Box: question2Box
+	      'recovery2Id': base64.stringify(recovery2Id(recovery2Key, login.username)),
+	      'recovery2Auth': recovery2Auth(recovery2Key, answers),
+	      'recovery2Box': recovery2Box,
+	      'recovery2KeyBox': recovery2KeyBox,
+	      'question2Box': question2Box
 	    },
-	    stash: {
-	      recovery2Key: base58.stringify(recovery2Key)
+	    storage: {
+	      'recovery2Key': base58.stringify(recovery2Key)
 	    },
-	    login: {
-	      recovery2Key: recovery2Key
-	    }
+	    recovery2Key: recovery2Key
 	  }
 	}
 
@@ -10347,14 +10406,13 @@ exports["abcui"] =
 	 * Sets up recovery questions for the login.
 	 */
 	function setup$2 (io, login, questions, answers) {
-	  var kit = makeRecovery2Kit(io, login, login.username, questions, answers);
+	  var setup = makeSetup$2(io, login, questions, answers);
 
 	  var request = login.authJson();
-	  request.data = kit.server;
+	  request['data'] = setup.server;
 	  return io.authRequest('POST', '/v2/login/recovery2', request).then(function (reply) {
-	    io.loginStore.update(login.userId, kit.stash);
-	    login.recovery2Key = kit.login.recovery2Key;
-	    return login
+	    io.loginStore.update(login.userId, setup.storage);
+	    return base58.stringify(setup.recovery2Key)
 	  })
 	}
 
@@ -10760,13 +10818,11 @@ exports["abcui"] =
 
 	Account.prototype.pinSetup = nodeify(function (pin) {
 	  return setup$1(this.io, this.login, pin)
-	    .then(function (login$$1) { return base58.stringify(login$$1.pin2Key); })
 	});
 	Account.prototype.changePIN = Account.prototype.pinSetup;
 
 	Account.prototype.recovery2Set = nodeify(function (questions$$1, answers) {
 	  return setup$2(this.io, this.login, questions$$1, answers)
-	    .then(function (login$$1) { return base58.stringify(login$$1.recovery2Key); })
 	});
 
 	Account.prototype.setupRecovery2Questions = Account.prototype.recovery2Set;
@@ -10842,46 +10898,46 @@ exports["abcui"] =
 	 */
 	function create (io, username, password, opts) {
 	  // Create account repo info:
-	  var loginKey = io.random(32);
+	  var dataKey = io.random(32);
 	  var syncKey = opts.syncKey || io.random(20);
-	  var syncKeyBox = encrypt(io, syncKey, loginKey);
+	  var syncKeyBox = encrypt(io, syncKey, dataKey);
 
 	  return Promise.all([
 	    io.loginStore.getUserId(username),
-	    makePasswordKit(io, { loginKey: loginKey }, username, password)
+	    makeSetup(io, dataKey, username, password)
 	  ]).then(function (values) {
 	    var userId = values[0];
-	    var passwordKit = values[1];
+	    var passwordSetup = values[1];
 
 	    // Package:
 	    var carePackage = {
-	      'SNRP2': passwordKit.server.passwordKeySnrp
+	      'SNRP2': passwordSetup.server.passwordKeySnrp
 	    };
 	    var loginPackage = {
-	      'EMK_LP2': passwordKit.server.passwordBox,
+	      'EMK_LP2': passwordSetup.server.passwordBox,
 	      'ESyncKey': syncKeyBox,
-	      'ELP1': passwordKit.server.passwordAuthBox
+	      'ELP1': passwordSetup.server.passwordAuthBox
 	    };
 	    var request = {
 	      'l1': base64.stringify(userId),
-	      'lp1': passwordKit.server.passwordAuth,
+	      'lp1': passwordSetup.server.passwordAuth,
 	      'care_package': JSON.stringify(carePackage),
 	      'login_package': JSON.stringify(loginPackage),
 	      'repo_account_key': base16.stringify(syncKey)
 	    };
-	    var loginStash = objectAssign(
+	    var loginData = objectAssign(
 	      {
 	        username: fixUsername(username),
 	        syncKeyBox: syncKeyBox
 	      },
-	      passwordKit.stash
+	      passwordSetup.storage
 	    );
 
 	    return io.authRequest('POST', '/v1/account/create', request).then(function (reply) {
 	      // Cache everything for future logins:
-	      io.loginStore.update(userId, loginStash);
+	      io.loginStore.update(userId, loginData);
 
-	      var login$$1 = Login.offline(io, username, userId, loginKey);
+	      var login$$1 = Login.offline(io, username, userId, dataKey);
 
 	      // Now activate:
 	      var auth = login$$1.authJson();
@@ -10923,7 +10979,7 @@ exports["abcui"] =
 	    return login$$1.accountAttach(io, accountReply.type, accountReply.info).then(function () {
 	      if (typeof pin === 'string' && pin.length === 4) {
 	        if (getKey(io, username) == null) {
-	          return setup$1(io, login$$1, pin).catch(function (e) { return login$$1; })
+	          return setup$1(io, login$$1, pin).then(function () { return login$$1; }, function () { return login$$1; })
 	        }
 	      }
 	      return login$$1
@@ -11061,7 +11117,7 @@ exports["abcui"] =
 	    } catch (e) {
 	      // If the login doesn't have the correct account type, add it first:
 	      return login$$1.accountCreate(this$1.io, this$1.accountType).then(function () {
-	        return setup$1(this$1.io, login$$1, pin).then(function (login$$1) {
+	        return setup$1(this$1.io, login$$1, pin).then(function () {
 	          var account = new Account(this$1, login$$1);
 	          account.newAccount = true;
 	          return account.sync().then(function () { return account; })
@@ -11070,7 +11126,7 @@ exports["abcui"] =
 	    }
 
 	    // Otherwise, we have the correct account type, and can simply return:
-	    return setup$1(this$1.io, login$$1, pin).then(function (login$$1) {
+	    return setup$1(this$1.io, login$$1, pin).then(function () {
 	      var account = new Account(this$1, login$$1);
 	      account.newAccount = true;
 	      return account.sync().then(function () { return account; })
@@ -11114,13 +11170,12 @@ exports["abcui"] =
 	  if (recovery2Key == null) {
 	    return Promise.reject(new Error('No recovery key stored locally.'))
 	  }
-	  return Promise.resolve(base58.stringify(recovery2Key))
+	  return Promise.resolve(recovery2Key)
 	});
 
 	Context.prototype.loginWithRecovery2 = nodeify(function (recovery2Key, username, answers, otp, options) {
 	  var this$1 = this;
 
-	  recovery2Key = base58.parse(recovery2Key);
 	  return login$2(this.io, recovery2Key, username, answers).then(function (login$$1) {
 	    var account = new Account(this$1, login$$1);
 	    account.recoveryLogin = true;
@@ -11129,7 +11184,6 @@ exports["abcui"] =
 	});
 
 	Context.prototype.fetchRecovery2Questions = nodeify(function (recovery2Key, username) {
-	  recovery2Key = base58.parse(recovery2Key);
 	  return questions(this.io, recovery2Key, username)
 	});
 
