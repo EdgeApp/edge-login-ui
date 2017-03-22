@@ -82,6 +82,12 @@ button {
   max-width: 100%;   
 }
 
+.loginTimeout {
+  color: red;
+  min-height: 2rem;
+  margin-bottom: 2rem;
+}
+
 /* Small Devices, Tablets */
 @media only screen and (min-width : $layout-breakpoint-sm) {
   max-width: 50%;

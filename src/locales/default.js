@@ -139,7 +139,7 @@ const strings = {
   server_error_bad_pin: 'Invalid PIN',
   server_error_bad_pin_login: 'Invalid PIN. Please log in.',
   server_error_pin_expired: 'PIN has expired. Please log in.',
-  server_error_invalid_pin_wait: 'Too many failed login attempts. Please try again in {0} seconds.',
+  server_error_invalid_pin_wait: 'Too many failed login attempts. Please try again in %1$s seconds.',
   server_error_other: 'An error has occurred.',
   server_error_bad_otp: 'This account has Two Factor Authentication enabled and cannot be logged in using a username and password. Please login by scanning the barcode with the Airbitz Wallet.',
   insufficient_amount: 'Amount too small',

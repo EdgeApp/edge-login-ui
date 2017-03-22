@@ -5,6 +5,7 @@ import Input from 'react-toolbox/lib/input'
 import Link from 'react-toolbox/lib/link'
 import Button from 'react-toolbox/lib/button'
 import t from 'lib/web/LocaleStrings'
+import { sprintf } from 'sprintf-js'
 
 import { openLogin, loginUsername, loginPassword, openUserList, closeUserList, enableTimer, disableTimer, refreshTimer } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
@@ -52,10 +53,8 @@ class Login extends Component {
               return this.props.router.push('/home')
             }
           } else {
-            let currentWaitSpan = 15
-            let rightNow = Date.now()
-            let reEnableLoginTime = rightNow + currentWaitSpan * 1000
-            console.log('about to enable timer, rightNow->reEnableLoginTime = ', rightNow , reEnableLoginTime)
+            let currentWaitSpan = 15 //dummy data
+            let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
             this.enableTimer(reEnableLoginTime)
           }
         })
@@ -197,8 +196,8 @@ class Login extends Component {
               </div>
             </div>
             <div className={styles.buttonGroup}>
-              {this.props.loginWait ? this.props.loginWait : 'none'}
-              <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
+              <span className={styles.loginTimeout}>{this.props.loginWait ? sprintf(t('server_error_invalid_pin_wait'),  this.props.loginWait) : ''}</span>
+              <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit} disabled={this.props.loginWait > 0}>{t('fragment_landing_signin_button')}</Button>
               <br />
               <Button theme={neutral} className={styles.createNewButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
               <br />
