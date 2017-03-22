@@ -27,6 +27,7 @@ class Container extends Component {
     const dispatch = this.props.dispatch
     abcctx(ctx => {
       const cachedUsers = ctx.listUsernames()
+      console.log('cachedUsers is: ', cachedUsers)
       const lastUser = window.localStorage.getItem('lastUser')
       dispatch(setCachedUsers(cachedUsers))
       if (lastUser) {

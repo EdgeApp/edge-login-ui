@@ -11,6 +11,29 @@ export const USER_LOGIN = 'USER_LOGIN'
 export const REQUEST_EDGE_LOGIN = 'REQUEST_EDGE_LOGIN'
 export const SET_EDGE_USERNAME = 'SET_EDGE_USERNAME'
 export const SET_EDGE_ACCOUNT = 'SET_EDGE_ACCOUNT'
+export const ENABLE_LOGIN_WAIT_DURATION = 'ENABLE_LOGIN_WAIT_DURATION'
+export const DISABLE_LOGIN_WAIT_DURATION = 'DISABLE_LOGIN_WAIT_DURATION'
+export const REFRESH_LOGIN_WAIT_DURATION = 'REFRESH_LOGIN_WAIT_DURATION'
+
+export function enableTimer (durationLeft) {
+  return {
+    type: ENABLE_LOGIN_WAIT_DURATION,
+    durationLeft
+  }
+}
+
+export function disableTimer() {
+  return {
+    type: DISABLE_LOGIN_WAIT_DURATION  
+  }
+}
+
+export function refreshTimer(durationLeft) {
+  return {
+    type: REFRESH_LOGIN_WAIT_DURATION,
+    durationLeft
+  }
+}
 
 export function openLogin () {
   return {

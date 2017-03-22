@@ -6,7 +6,7 @@ import Link from 'react-toolbox/lib/link'
 import Button from 'react-toolbox/lib/button'
 import t from 'lib/web/LocaleStrings'
 
-import { openLogin, loginUsername, loginPassword, openUserList, closeUserList } from './Login.action'
+import { openLogin, loginUsername, loginPassword, openUserList, closeUserList, enableTimer, disableTimer, refreshTimer } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
@@ -22,6 +22,13 @@ import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './Login.style.scss'
 
 class Login extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentCountdown: false
+    };
+  } 
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -44,6 +51,12 @@ class Login extends Component {
               this.props.dispatch(closeLoading())
               return this.props.router.push('/home')
             }
+          } else {
+            let currentWaitSpan = 15
+            let rightNow = Date.now()
+            let reEnableLoginTime = rightNow + currentWaitSpan * 1000
+            console.log('about to enable timer, rightNow->reEnableLoginTime = ', rightNow , reEnableLoginTime)
+            this.enableTimer(reEnableLoginTime)
           }
         })
       )
@@ -53,6 +66,28 @@ class Login extends Component {
       // this.refs.fieldsBelowView.transitionTo({height: 0}, 200)
     }
   }
+
+  enableTimer = (target) => {
+    this.state.currentCountdown = Math.floor((target - Date.now()) / 1000)
+    this.props.dispatch(enableTimer(this.state.currentCountdown))
+    this.scheduleTick(target)   
+  }
+
+  scheduleTick(targetTime) {
+    var difference = Math.floor( ( targetTime - Date.now() ) / 1000 ) 
+    if(difference > 0) {
+      this.props.dispatch(refreshTimer(difference))
+      this.state.scheduleTickTimeout = setTimeout(() => this.scheduleTick(targetTime), 1000)
+    } else {
+      clearTimeout(this.state.scheduleTickTimeout)
+      this.props.dispatch(disableTimer())
+    }
+  }
+
+  refreshTimer = () => {
+
+  }
+
   _handleGoToSignupPage = () => {
     this.props.router.push('/signup')
   }
@@ -162,6 +197,7 @@ class Login extends Component {
               </div>
             </div>
             <div className={styles.buttonGroup}>
+              {this.props.loginWait ? this.props.loginWait : 'none'}
               <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
               <br />
               <Button theme={neutral} className={styles.createNewButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
@@ -185,6 +221,8 @@ export default connect(state => ({
   username: state.login.username,
   password: state.login.password,
   showCachedUsers: state.login.showCachedUsers,
-  edgeObject: state.login.edgeLoginResults
+  edgeObject: state.login.edgeLoginResults,
+  loginWait: state.login.loginWait,
+  currentCountdown: false
 
 }))(Login)

@@ -154,3 +154,17 @@ export const edgeAccount = (state = '', action) => {
       return state
   }
 }
+
+export const loginWait = (state = false, action) => {
+  console.log('within Login.reducer.js')
+  switch (action.type) {
+    case ACTION.ENABLE_LOGIN_WAIT_DURATION:
+      return action.durationLeft
+    case ACTION.REFRESH_LOGIN_WAIT_DURATION:
+      return action.durationLeft
+    case ACTION.DISABLE_LOGIN_WAIT_DURATION:
+      return false
+    default:
+      return state
+  }
+}
