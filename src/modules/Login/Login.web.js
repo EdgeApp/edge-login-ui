@@ -53,9 +53,11 @@ class Login extends Component {
               return this.props.router.push('/home')
             }
           } else {
-            let currentWaitSpan = 15 //dummy data
-            let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-            this.enableTimer(reEnableLoginTime)
+            if(e.type === 'PasswordError' && e.wait){
+              let currentWaitSpan = e.wait
+              let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
+              this.enableTimer(reEnableLoginTime)
+            }
           }
         })
       )

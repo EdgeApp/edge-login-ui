@@ -1,6 +1,6 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
-import { userLogin, requestEdgeLogin, enableTime, disableTimer } from './Login.action'
+import { userLogin, requestEdgeLogin, enableTimeout, disableTimeout, refreshTimeout } from './Login.action'
 import { selectUserToLogin } from '../CachedUsers/CachedUsers.action'
 
 export const loginWithPassword = (username, password, callback) => {
@@ -44,6 +44,9 @@ export const loginWithPin = (username, pin, callback) => {
           dispatch(closeLoading())
           if (error) {
             dispatch(openErrorModal(t('server_error_bad_pin')))
+            let currentWaitSpan = 10
+            let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
+            enableTimer(reEnableLoginTime)           
             return callback(error, null)
           }
 
@@ -58,8 +61,34 @@ export const loginWithPin = (username, pin, callback) => {
   }
 }
 
-export const edgeLogin = (callback) => {
 
+const enableTimer = (target) => {
+  console.log('in enableTimer, target time is: ', target)
+  return (dispatch, getState, imports) => {  
+    console.log('within enableTimer return')
+    var currentCountdown = Math.floor((target - Date.now()) / 1000)
+    dispatch(enableTimeout(currentCountdown))
+    scheduleTick(target)  
+  } 
+}
+
+const scheduleTick = (targetTime) => {
+  console.log('inside scheduleTick')
+  return (dispatch, getState, imports) => {  
+    console.log('within scheduleTick return')
+    var difference = Math.floor( ( targetTime - Date.now() ) / 1000 ) 
+    if(difference > 0) {
+      dispatch(refreshTimeout(difference))
+      var scheduleTickTimeout = setTimeout(() => this.scheduleTick(targetTime), 1000)
+    } else {
+      clearTimeout(scheduleTickTimeout)
+      dispatch(disableTimeout())
+    }
+  }
+}
+
+
+export const edgeLogin = (callback) => {
 
   return (dispatch, getState, imports) => {
     const abcContext = imports.abcContext

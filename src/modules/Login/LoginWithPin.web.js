@@ -30,10 +30,7 @@ class LoginWithPin extends Component {
           return this.props.router.push('/home')
         }
       } else {
-        this._handleChangePin('')
-        let currentWaitSpan = 15 //dummy data
-        let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-        this.enableTimer(reEnableLoginTime)            
+        this._handleChangePin('')   
         return this.refs.pinInput.getWrappedInstance().focus()    
       }
     }
@@ -45,23 +42,6 @@ class LoginWithPin extends Component {
       )
     )
     this.refs.pinInput.getWrappedInstance().blur()
-  }
-
-  enableTimer = (target) => {
-    var currentCountdown = Math.floor((target - Date.now()) / 1000)
-    this.props.dispatch(enableTimer(currentCountdown))
-    this.scheduleTick(target)   
-  }
-
-  scheduleTick(targetTime) {
-    var difference = Math.floor( ( targetTime - Date.now() ) / 1000 ) 
-    if(difference > 0) {
-      this.props.dispatch(refreshTimer(difference))
-      var scheduleTickTimeout = setTimeout(() => this.scheduleTick(targetTime), 1000)
-    } else {
-      clearTimeout(scheduleTickTimeout)
-      this.props.dispatch(disableTimer())
-    }
   }
 
   _handleChangePin = (pin) => {
