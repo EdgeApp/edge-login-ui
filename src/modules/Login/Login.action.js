@@ -16,7 +16,6 @@ export const DISABLE_LOGIN_WAIT_DURATION = 'DISABLE_LOGIN_WAIT_DURATION'
 export const REFRESH_LOGIN_WAIT_DURATION = 'REFRESH_LOGIN_WAIT_DURATION'
 
 export function enableTimeout (durationLeft) {
-  console.log('inside action.enableTimeout')
   return {
     type: ENABLE_LOGIN_WAIT_DURATION,
     durationLeft
@@ -24,14 +23,12 @@ export function enableTimeout (durationLeft) {
 }
 
 export function disableTimeout() {
-  console.log('inside action.disableTimeout')
   return {
     type: DISABLE_LOGIN_WAIT_DURATION  
   }
 }
 
 export function refreshTimeout(durationLeft) {
-  console.log('inside refreshTimeout')
   return {
     type: REFRESH_LOGIN_WAIT_DURATION,
     durationLeft

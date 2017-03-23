@@ -47,7 +47,7 @@ export const loginWithPin = (username, pin, callback) => {
             dispatch(openErrorModal(t('server_error_bad_pin')))
             let currentWaitSpan = 10
             let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-            enableTimer(reEnableLoginTime, dispatch)           
+            enableTimer(reEnableLoginTime, dispatch)       
             return callback(error, null)
           }
 
@@ -64,17 +64,13 @@ export const loginWithPin = (username, pin, callback) => {
 
 
 export const enableTimer = (target, dispatch) => {
-  console.log('in enableTimer, target time is: ', target)
   var currentCountdown = Math.floor((target - Date.now()) / 1000)
   scheduleTick(target, dispatch)    
-  console.log('within enableTimer return') 
   dispatch(enableTimeout(currentCountdown))    
 }
 
 export const scheduleTick = (targetTime, dispatch) => {
   var difference = Math.floor( ( targetTime - Date.now() ) / 1000 )   
-  console.log('inside scheduleTick')  
-  console.log('within scheduleTick return')
   if(difference > 0) {
     var scheduleTickTimeout = setTimeout(() => scheduleTick(targetTime, dispatch), 1000)      
     dispatch(refreshTimeout(difference))
