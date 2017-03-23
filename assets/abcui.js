@@ -189,45 +189,64 @@ exports["abcui"] =
 	var aesjs = _interopDefault(__webpack_require__(11));
 	var HmacDRBG = _interopDefault(__webpack_require__(12));
 	var scryptJs = _interopDefault(__webpack_require__(22));
-	var url = _interopDefault(__webpack_require__(25));
-	var crypto = _interopDefault(__webpack_require__(32));
-	var fetch = _interopDefault(__webpack_require__(33));
-	var nodeLocalstorage = __webpack_require__(34);
+	var crypto = _interopDefault(__webpack_require__(25));
+	var fetch = _interopDefault(__webpack_require__(26));
+	var nodeLocalstorage = __webpack_require__(27);
 
 	var base58Codec = baseX('123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz');
 
+	function assertString (text) {
+	  if (typeof text !== 'string') {
+	    throw new Error('Input is not a string')
+	  }
+	}
+
+	function assertData (data) {
+	  if (typeof data === 'string' || data.length == null) {
+	    throw new Error('Input is not data')
+	  }
+	}
+
 	var base16 = {
 	  parse: function parse (text) {
+	    assertString(text);
 	    return new buffer.Buffer(text, 'hex')
 	  },
 	  stringify: function stringify (data) {
+	    assertData(data);
 	    return new buffer.Buffer(data).toString('hex')
 	  }
 	};
 
 	var base58 = {
 	  parse: function parse$1 (text) {
+	    assertString(text);
 	    return new buffer.Buffer(base58Codec.decode(text))
 	  },
 	  stringify: function stringify$1 (data) {
+	    assertData(data);
 	    return base58Codec.encode(data)
 	  }
 	};
 
 	var base64 = {
 	  parse: function parse$2 (text) {
+	    assertString(text);
 	    return new buffer.Buffer(text, 'base64')
 	  },
 	  stringify: function stringify$2 (data) {
+	    assertData(data);
 	    return new buffer.Buffer(data).toString('base64')
 	  }
 	};
 
 	var utf8 = {
 	  parse: function parse$3 (text) {
+	    assertString(text);
 	    return new buffer.Buffer(text, 'utf8')
 	  },
 	  stringify: function stringify$3 (data) {
+	    assertData(data);
 	    return new buffer.Buffer(data).toString('utf8')
 	  }
 	};
@@ -9413,12 +9432,150 @@ exports["abcui"] =
 	  return hmac.update(data).digest()
 	}
 
+	function sha256 (data) {
+	  return hashjs.sha256().update(data).digest()
+	}
+
+	/*
+	 * These are errors the core knows about.
+	 *
+	 * The GUI should handle these errors in an "intelligent" way, such as by
+	 * displaying a localized error message or asking the user for more info.
+	 * All these errors have a `type` field, which the GUI can use to select
+	 * the appropriate response.
+	 *
+	 * Other errors are possible, of course, since the Javascript language
+	 * itself can generate exceptions. Those errors won't have a `type` field,
+	 * and the GUI should just show them with a stack trace & generic message,
+	 * since the program has basically crashed at that point.
+	 */
+
+	/**
+	 * Creates an error constructor with the given type and default message.
+	 */
+	function defineError (type, defaultMessage) {
+	  var f = function ConstructError (message) {
+	    var e = new Error(message || defaultMessage);
+	    e.type = type;
+	    return e
+	  };
+	  f.type = type;
+	  return f
+	}
+
+	/**
+	 * Could not reach the server at all.
+	 */
+	var NetworkError =
+	  defineError('NetworkError', 'Cannot reach the network');
+
+	/**
+	 * The endpoint on the server is obsolete, and the app needs to be upgraded.
+	 */
+	var ObsoleteApiError =
+	  defineError('ObsoleteApiError', 'The application is too old. Please upgrade.');
+
+	/**
+	 * Cannot find a login with that id.
+	 *
+	 * Reasons could include:
+	 * - Password login: wrong username
+	 * - PIN login: wrong PIN key
+	 * - Recovery login: wrong username, or wrong recovery key
+	 */
+	var UsernameError =
+	  defineError('UsernameError', 'Invaid username');
+
+	/**
+	 * The provided authentication is incorrect.
+	 *
+	 * Reasons could include:
+	 * - Password login: wrong password
+	 * - PIN login: wrong PIN
+	 * - Recovery login: wrong answers
+	 *
+	 * The error object may include a `wait` member,
+	 * which is the number of seconds the user must wait before trying again.
+	 */
+	function PasswordError (resultsJson, message) {
+	  if ( resultsJson === void 0 ) resultsJson = {};
+
+	  var e = new Error(message || 'Invalid password');
+	  e.type = PasswordError.name;
+	  e.wait = resultsJson['wait_seconds'];
+	  return e
+	}
+	PasswordError.type = PasswordError.name;
+
+	/**
+	 * The OTP token was missing / incorrect.
+	 *
+	 * The error object should include a `resetToken` member,
+	 * which can be used to reset OTP protection on the account.
+	 *
+	 * The error object may include a `resetDate` member,
+	 * which indicates that an OTP reset is already pending,
+	 * and when it will complete.
+	 */
+	function OtpError (resultsJson, message) {
+	  if ( resultsJson === void 0 ) resultsJson = {};
+
+	  var e = new Error(message || 'Invalid OTP token');
+	  e.type = OtpError.name;
+	  e.resetToken = resultsJson['otp_reset_auth'];
+	  if (resultsJson.otp_timeout_date != null) {
+	    e.resetDate = new Date(resultsJson.otp_timeout_date);
+	  }
+	  return e
+	}
+	OtpError.type = OtpError.name;
+
+	/**
+	 * Prepares an async API endpoint for consumption by the outside world.
+	 */
+	function asyncApi (f) {
+	  return nodeify(logify(rejectify(f)))
+	}
+
+	/**
+	 * Prepares a sync API endploint for consumption by the outside world.
+	 */
+	function syncApi (f) {
+	  return function syncApi () {
+	    var rest = [], len = arguments.length;
+	    while ( len-- ) rest[ len ] = arguments[ len ];
+
+	    try {
+	      return f.apply(this, rest)
+	    } catch (e) {
+	      this.io.log.error(e);
+	      throw e
+	    }
+	  }
+	}
+
+	/**
+	 * If the function rejects with an error, note it in the logs.
+	 */
+	function logify (f) {
+	  return function logify () {
+	    var this$1 = this;
+	    var rest = [], len = arguments.length;
+	    while ( len-- ) rest[ len ] = arguments[ len ];
+
+	    return f.apply(this, rest).catch(function (e) {
+	      this$1.io.log.error(e);
+	      throw e
+	    })
+	  }
+	}
+
 	/**
 	 * Converts a promise-returning function into a Node-style function,
 	 * but only an extra callback argument is actually passed in.
 	 */
 	function nodeify (f) {
-	  return function () {
+	  return function nodeify () {
 	    var rest = [], len = arguments.length;
 	    while ( len-- ) rest[ len ] = arguments[ len ];
 
@@ -9438,7 +9595,7 @@ exports["abcui"] =
 	 * If the function f throws an error, return that as a rejected promise.
 	 */
 	function rejectify (f) {
-	  return function () {
+	  return function rejectify () {
 	    var rest = [], len = arguments.length;
 	    while ( len-- ) rest[ len ] = arguments[ len ];
 
@@ -9456,7 +9613,7 @@ exports["abcui"] =
 	 */
 	function serialize (f) {
 	  var nextTask = Promise.resolve();
-	  return function () {
+	  return function serialize () {
 	    var this$1 = this;
 	    var rest = [], len = arguments.length;
 	    while ( len-- ) rest[ len ] = arguments[ len ];
@@ -9575,6 +9732,373 @@ exports["abcui"] =
 	}
 
 	/**
+	 * Returns x, unless that would be undefined or null.
+	 * This is called the "Elvis operator" in many languages.
+	 */
+	function elvis (x, fallback) {
+	  return x != null ? x : fallback
+	}
+
+	/**
+	 * Copies the selected properties into a new object, if they exist.
+	 */
+	function filterObject (source, keys) {
+	  var out = {};
+	  keys.forEach(function (key) {
+	    if (key in source) {
+	      out[key] = source[key];
+	    }
+	  });
+	  return out
+	}
+
+	/**
+	 * Ponyfill for `Object.assign`.
+	 */
+	function objectAssign (target) {
+	  var args = [], len = arguments.length - 1;
+	  while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+
+	  args.forEach(function (arg) {
+	    var from = Object(arg);
+	    Object.keys(from).forEach(function (key) {
+	      target[key] = from[key];
+	    });
+	  });
+	  return target
+	}
+
+	/**
+	 * Functions for working with login data in its on-disk format.
+	 */
+
+	/**
+	 * Returns the login that satisifies the given predicated,
+	 * or undefined if nothing matches.
+	 */
+	function searchTree (node, predicate) {
+	  return predicate(node)
+	    ? node
+	    : elvis(node.children, [])
+	        .map(function (child) { return searchTree(child, predicate); })
+	        .find(function (child) { return child != null; })
+	}
+
+	/**
+	 * Replaces a node within a tree.
+	 * The `clone` callback is called for each unmodified node.
+	 * The `predicate` callback is used to find the target node.
+	 * The `update` callback is called on the target.
+	 */
+	function updateTree (node, clone, predicate, update) {
+	  return predicate(node)
+	    ? update(node)
+	    : clone(
+	        node,
+	        elvis(node.children, []).map(function (child) { return updateTree(child, clone, predicate, update); })
+	      )
+	}
+
+	function applyLoginReplyInner (loginStash, loginKey, loginReply) {
+	  // Copy common items:
+	  var out = filterObject(loginReply, [
+	    'appId',
+	    'loginId',
+	    'loginAuthBox',
+	    'userId',
+	    'parentBox',
+	    'passwordAuthBox',
+	    'passwordBox',
+	    'passwordKeySnrp',
+	    'mnemonicBox',
+	    'rootKeyBox',
+	    'mnemonicBox',
+	    'syncKeyBox'
+	  ]);
+
+	  out.username = loginStash.username;
+	  out.userId = loginStash.userId;
+
+	  // Store the pin key unencrypted:
+	  if (loginReply.pin2KeyBox != null) {
+	    var pin2Key = decrypt(loginReply.pin2KeyBox, loginKey);
+	    out.pin2Key = base64.stringify(pin2Key);
+	  }
+
+	  // Store the recovery key unencrypted:
+	  if (loginReply.recovery2KeyBox != null) {
+	    var recovery2Key = decrypt(loginReply.recovery2KeyBox, loginKey);
+	    out.recovery2Key = base64.stringify(recovery2Key);
+	  }
+
+	  // Keys (we could be more picky about this):
+	  out.keyBoxes = elvis(loginReply.keyBoxes, []);
+
+	  // Recurse into children:
+	  var stashChildren = elvis(loginStash.children, []);
+	  var replyChildren = elvis(loginReply.children, []);
+	  if (stashChildren.length > replyChildren.length) {
+	    throw new Error('The server has lost children!')
+	  }
+	  out.children = replyChildren.map(function (child, index) {
+	    var childStash = stashChildren[index] != null ? stashChildren[index] : {};
+	    var childKey = decrypt(child.parentBox, loginKey);
+	    return applyLoginReplyInner(childStash, childKey, child)
+	  });
+
+	  return out
+	}
+
+	/**
+	 * Updates the given loginStash object with fields from the auth server.
+	 * TODO: We don't trust the auth server 100%, so be picky about what we copy.
+	 */
+	function applyLoginReply (loginStash, loginKey, loginReply) {
+	  return updateTree(
+	    loginStash,
+	    function (stash, newChildren) {
+	      stash.children = newChildren;
+	      return stash
+	    },
+	    function (stash) { return stash.appId === loginReply.appId; },
+	    function (stash) { return applyLoginReplyInner(stash, loginKey, loginReply); }
+	  )
+	}
+
+	function makeLoginInner (loginStash, loginKey) {
+	  var login = {};
+
+	  if (loginStash.username != null) {
+	    login.username = loginStash.username;
+	  }
+
+	  // Identity:
+	  if (loginStash.appId == null) {
+	    throw new Error('No appId provided')
+	  }
+	  if (loginStash.loginAuthBox != null) {
+	    login.loginAuth = decrypt(loginStash.loginAuthBox, loginKey);
+	  }
+	  if (loginStash.loginId == null) {
+	    throw new Error('No loginId provided')
+	  }
+	  login.appId = loginStash.appId;
+	  login.loginId = base64.parse(loginStash.loginId);
+	  login.loginKey = loginKey;
+
+	  // Password:
+	  if (loginStash.userId != null) {
+	    login.userId = base64.parse(loginStash.userId);
+	  } else if (loginStash.passwordAuthBox != null) {
+	    login.userId = login.loginId;
+	  }
+	  if (loginStash.passwordAuthBox != null) {
+	    login.passwordAuth = decrypt(loginStash.passwordAuthBox, loginKey);
+	  }
+
+	  // PIN v2:
+	  if (loginStash.pin2Key != null) {
+	    login.pin2Key = base64.parse(loginStash.pin2Key);
+	  }
+
+	  // Recovery v2:
+	  if (loginStash.recovery2Key != null) {
+	    login.recovery2Key = base64.parse(loginStash.recovery2Key);
+	  }
+
+	  var legacyKeys = [];
+
+	  // BitID wallet:
+	  if (loginStash.menemonicBox != null && loginStash.rootKeyBox != null) {
+	    var mnemonic = utf8.stringify(decrypt(loginStash.menemonicBox, loginKey));
+	    var rootKey = decrypt(loginStash.rootKeyBox, loginKey);
+	    var keysJson = {
+	      mnemonic: mnemonic,
+	      rootKey: base64.stringify(rootKey)
+	    };
+	    legacyKeys.push(makeKeyInfo(keysJson, 'wallet:bitid', rootKey));
+	  }
+
+	  // Account settings:
+	  if (loginStash.syncKeyBox != null) {
+	    var syncKey = decrypt(loginStash.syncKeyBox, loginKey);
+	    var type = makeAccountType(login.appId);
+	    var keysJson$1 = {
+	      syncKey: base64.stringify(syncKey),
+	      dataKey: base64.stringify(loginKey)
+	    };
+	    legacyKeys.push(makeKeyInfo(keysJson$1, type, loginKey));
+	  }
+
+	  // Keys:
+	  var keyInfos = elvis(loginStash.keyBoxes, []).map(function (box) { return JSON.parse(utf8.stringify(decrypt(box, loginKey))); });
+
+	  login.keyInfos = mergeKeyInfos(legacyKeys.concat( keyInfos));
+
+	  // Recurse into children:
+	  login.children = elvis(loginStash.children, []).map(function (child) {
+	    var childKey = decrypt(child.parentBox, loginKey);
+	    return makeLoginInner(child, childKey)
+	  });
+
+	  // Integrity check:
+	  if (login.loginAuth == null && login.passwordAuth == null) {
+	    throw new Error('No server authentication methods on login')
+	  }
+
+	  return login
+	}
+
+	/**
+	 * Converts a loginStash into an in-memory login object.
+	 */
+	function makeLogin (loginStash, loginKey, appId) {
+	  if ( appId === void 0 ) appId = '';
+
+	  return updateTree(
+	    loginStash,
+	    function (stash, newChildren) {
+	      var login = filterObject(stash, ['username', 'appId', 'loginId']);
+	      login.keyInfos = [];
+	      login.children = newChildren;
+	      return login
+	    },
+	    function (stash) { return stash.appId === appId; },
+	    function (stash) { return makeLoginInner(stash, loginKey); }
+	  )
+	}
+	/**
+	 * Sets up a login v2 server authorization JSON.
+	 */
+	function makeAuthJson (login) {
+	  if (login.loginAuth != null) {
+	    return {
+	      loginId: base64.stringify(login.loginId),
+	      loginAuth: base64.stringify(login.loginAuth)
+	    }
+	  }
+	  if (login.passwordAuth != null) {
+	    return {
+	      userId: base64.stringify(login.userId),
+	      passwordAuth: base64.stringify(login.passwordAuth)
+	    }
+	  }
+	  throw new Error('No server authentication methods available')
+	}
+
+	/**
+	 * Assembles the key metadata structure that is encrypted within a keyBox.
+	 * @param idKey Used to derive the wallet id. It's usually `dataKey`.
+	 */
+	function makeKeyInfo (keys, type, idKey) {
+	  return {
+	    id: base64.stringify(hmacSha256(idKey, utf8.parse(type))),
+	    type: type,
+	    keys: keys
+	  }
+	}
+
+	/**
+	 * Assembles all the resources needed to attach new keys to the account.
+	 */
+	function makeKeysKit (io, login, keyInfos, newSyncKeys) {
+	  if ( newSyncKeys === void 0 ) newSyncKeys = [];
+
+	  var keyBoxes = keyInfos.map(function (info) { return encrypt(io, utf8.parse(JSON.stringify(info)), login.loginKey); });
+
+	  return {
+	    server: {
+	      keyBoxes: keyBoxes,
+	      newSyncKeys: newSyncKeys.map(function (syncKey) { return base16.stringify(syncKey); })
+	    },
+	    stash: { keyBoxes: keyBoxes },
+	    login: { keyInfos: keyInfos }
+	  }
+	}
+
+	/**
+	 * Flattens an array of key structures, removing duplicates.
+	 */
+	function mergeKeyInfos (keyInfos) {
+	  var ids = []; // All ID's, in order of appearance
+	  var keys = {}; // All keys, indexed by id
+	  var types = {}; // Key types, indexed by id
+
+	  keyInfos.forEach(function (info) {
+	    var id = info.id;
+	    if (id == null || base64.parse(id).length !== 32) {
+	      throw new Error(("Key integrity violation: invalid id " + id))
+	    }
+
+	    if (keys[id] == null) {
+	      // The id is new, so just insert the keys:
+	      ids.push(id);
+	      keys[id] = objectAssign({}, info.keys);
+	      types[id] = info.type;
+	    } else {
+	      // An object with this ID already exists, so update it:
+	      if (types[id] !== info.type) {
+	        throw new Error(
+	          ("Key integrity violation for " + id + ": type " + (info.type) + " does not match " + (types[id]))
+	        )
+	      }
+	      info.keys.forEach(function (key) {
+	        if (keys[id][key] && keys[id][key] !== info.keys[key]) {
+	          throw new Error(
+	            ("Key integrity violation for " + id + ": " + key + " keys do not match")
+	          )
+	        }
+	        keys[id][key] = info.keys[key];
+	      });
+	    }
+	  });
+
+	  return ids.map(function (id) {
+	    return {
+	      id: id,
+	      keys: keys[id],
+	      type: types[id]
+	    }
+	  })
+	}
+
+	/**
+	 * Attaches keys to the login object,
+	 * optionally creating any repos needed.
+	 */
+	function attachKeys (io, rootLogin, login, keyInfos, syncKeys) {
+	  if ( syncKeys === void 0 ) syncKeys = [];
+
+	  var kit = makeKeysKit(io, login, keyInfos, syncKeys);
+
+	  var request = makeAuthJson(login);
+	  request.data = kit.server;
+	  return io.authRequest('POST', '/v2/login/keys', request).then(function (reply) {
+	    login.keyInfos = mergeKeyInfos(login.keyInfos.concat( kit.login.keyInfos));
+	    return io.loginStore.update(rootLogin, login, function (stash) {
+	      stash.keyBoxes = elvis(stash.keyBoxes, []).concat( kit.stash.keyBoxes);
+	      return stash
+	    })
+	  })
+	}
+
+	/**
+	 * Passes the selected loginStash to the `update` callback,
+	 * allowing it to make changes. Returns the new stash tree.
+	 */
+	function updateLoginStash (loginStash, predicate, update) {
+	  return updateTree(
+	    loginStash,
+	    function (stash, newChildren) {
+	      stash.children = newChildren;
+	      return stash
+	    },
+	    predicate,
+	    update
+	  )
+	}
+
+	/**
 	 * Wraps `LocalStorage` with a namespace and other extra goodies.
 	 */
 	function ScopedStorage (localStorage, prefix) {
@@ -9647,103 +10171,91 @@ exports["abcui"] =
 	 * TODO: Make all methods async!
 	 */
 	var LoginStore = function LoginStore (io) {
-	  this.io = io;
-	};
-
-	/**
-	 * Finds the userId for a particular username.
-	 * TODO: Memoize this method.
-	 */
-	LoginStore.prototype.getUserId = function getUserId (username) {
-	  var fixedName = fixUsername(username);
-	  var users = this._loadUsers(this.io);
-	  if (users[fixedName]) {
-	    return Promise.resolve(base64.parse(users[fixedName]))
-	  }
-	  return scrypt(fixedName, userIdSnrp)
-	};
-
-	/**
-	 * Loads the loginStash matching the given query.
-	 * For now, the query only supports the `username` property.
-	 */
-	LoginStore.prototype.find = function find (query) {
-	  var fixedName = fixUsername(query.username);
-	  var store = this._findUsername(fixedName);
-
-	  return {
-	    username: fixedName,
-
-	    passwordAuthBox: store.getJson('passwordAuthBox'),
-	    passwordBox: store.getJson('passwordBox'),
-	    passwordKeySnrp: store.getJson('passwordKeySnrp'),
-
-	    pin2Key: store.getItem('pin2Key'),
-	    recovery2Key: store.getItem('recovery2Key'),
-
-	    rootKeyBox: store.getJson('rootKeyBox'),
-	    syncKeyBox: store.getJson('syncKeyBox'),
-	    repos: store.getJson('repos') || []
-	  }
+	  this.storage = new ScopedStorage(io.localStorage, 'airbitz.login');
 	};
 
 	/**
 	 * Lists the usernames that have data in the store.
 	 */
 	LoginStore.prototype.listUsernames = function listUsernames () {
-	  var users = this._loadUsers();
-	  return Object.keys(users)
+	    var this$1 = this;
+
+	  return this.storage.keys().map(function (filename) {
+	    return this$1.storage.getJson(filename).username
+	  })
 	};
 
 	/**
-	 * Removes any loginStash matching the given query.
-	 * For now, the query only supports the `username` property.
+	 * Finds the loginStash for the given username.
 	 */
-	LoginStore.prototype.remove = function remove (query) {
-	  var fixedName = fixUsername(query.username);
-	  this._findUsername(fixedName).removeAll();
-
-	  var users = this._loadUsers();
-	  delete users[fixedName];
-	  this.io.localStorage.setItem('airbitz.users', JSON.stringify(users));
+	LoginStore.prototype.load = function load (username) {
+	  return Promise.resolve(this.loadSync(username))
 	};
 
-	LoginStore.prototype.update = function update (userId, loginStash) {
-	  // Find the username:
-	  var username;
-	  var users = this._loadUsers();
-	  if ('username' in loginStash) {
-	    username = loginStash.username;
+	/**
+	 * Same thing as `load`, but doesn't block on the `userId`.
+	 */
+	LoginStore.prototype.loadSync = function loadSync (username) {
+	  var filename = this._findFilename(username);
+	  return filename != null
+	    ? this.storage.getJson(filename)
+	    : { username: fixUsername(username), appId: '' }
+	};
 
-	    // Add the userId to the table, in case it's new:
-	    users[username] = base64.stringify(userId);
-	    this.io.localStorage.setItem('airbitz.users', JSON.stringify(users));
-	  } else {
-	    username = Object.keys(users).find(function (username) {
-	      return users[username] === base64.stringify(userId)
-	    });
-	    if (!username) {
-	      throw new Error('Cannot find userId')
+	/**
+	 * Removes any loginStash that may be stored for the given username.
+	 */
+	LoginStore.prototype.remove = function remove (username) {
+	  var filename = this._findFilename(username);
+	  if (filename != null) {
+	    this.storage.removeItem(filename);
+	  }
+	};
+
+	/**
+	 * Saves a loginStash.
+	 */
+	LoginStore.prototype.save = function save (loginStash) {
+	  var loginId = base64.parse(loginStash.loginId);
+	  if (loginStash.appId == null) {
+	    throw new Error('Cannot save a login without an appId.')
+	  }
+	  if (loginId.length !== 32) {
+	    throw new Error('Invalid loginId')
+	  }
+	  var filename = base58.stringify(loginId);
+	  this.storage.setJson(filename, loginStash);
+	};
+
+	/**
+	 * Updates the selected login stash.
+	 * The `username` gives the root of the search,
+	 * and the `targetLoginId` gives the node to update.
+	 * The `update` callback is called on the selected node,
+	 * and can make any modifications it likes.
+	 */
+	LoginStore.prototype.update = function update (rootLogin, targetLogin, update) {
+	    var this$1 = this;
+
+	  return this.load(rootLogin.username).then(function (loginStash) {
+	    if (loginStash.loginId == null) {
+	      throw new Error(("Could not load stash for \"" + (rootLogin.username) + "\""))
 	    }
-	  }
-
-	  // Actually save:
-	  var store = this._findUsername(username);
-	  return store.setItems(loginStash)
+	    var target = base64.stringify(targetLogin.loginId);
+	    return this$1.save(
+	      updateLoginStash(loginStash, function (stash) { return stash.loginId === target; }, update)
+	    )
+	  })
 	};
 
-	LoginStore.prototype._findUsername = function _findUsername (username) {
-	  var path = 'airbitz.user.' + fixUsername(username);
-	  return new ScopedStorage(this.io.localStorage, path)
-	};
+	LoginStore.prototype._findFilename = function _findFilename (username) {
+	    var this$1 = this;
 
-	LoginStore.prototype._loadUsers = function _loadUsers () {
-	  try {
-	    var users = JSON.parse(this.io.localStorage.getItem('airbitz.users'));
-	    return users || {}
-	  } catch (e) {
-	    return {}
-	  }
+	  var fixedName = fixUsername(username);
+	  return this.storage.keys().find(function (filename) {
+	    var loginStash = this$1.storage.getJson(filename);
+	    return loginStash && loginStash.username === fixedName
+	  })
 	};
 
 	/**
@@ -9766,287 +10278,62 @@ exports["abcui"] =
 	  return out
 	}
 
+	// Hashed username cache:
+	var userIdCache = {};
+
 	/**
-	 * Copies the selected properties into a new object, if they exist.
+	 * Hashes a username into a userId.
 	 */
-	function filterObject (source, keys) {
-	  var out = {};
-	  keys.forEach(function (key) {
-	    if (key in source) {
-	      out[key] = source[key];
-	    }
-	  });
-	  return out
+	function hashUsername (username) {
+	  var fixedName = fixUsername(username);
+	  if (userIdCache[fixedName] == null) {
+	    userIdCache[fixedName] = scrypt(fixedName, userIdSnrp);
+	  }
+	  return userIdCache[fixedName]
 	}
-
-	/**
-	 * Ponyfill for `Object.assign`.
-	 */
-	function objectAssign (target) {
-	  var args = [], len = arguments.length - 1;
-	  while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
-
-	  args.forEach(function (arg) {
-	    var from = Object(arg);
-	    Object.keys(from).forEach(function (key) {
-	      target[key] = from[key];
-	    });
-	  });
-	  return target
-	}
-
-	/**
-	 * Creates a blank repo on the sync server.
-	 */
-	function repoCreate (io, login, keysJson) {
-	  keysJson.dataKey = keysJson.dataKey || base16.stringify(io.random(32));
-	  keysJson.syncKey = keysJson.syncKey || base16.stringify(io.random(20));
-
-	  var request = {
-	    'l1': base64.stringify(login.userId),
-	    'lp1': base64.stringify(login.passwordAuth),
-	    'repo_wallet_key': keysJson.syncKey
-	  };
-	  return io.authRequest('POST', '/v1/wallet/create', request).then(function (reply) { return keysJson; })
-	}
-
-	/**
-	 * Marks a repo as being used.
-	 * This should be called after the repo is securely attached
-	 * to the login or account.
-	 */
-	function repoActivate (io, login, keysJson) {
-	  var request = {
-	    'l1': base64.stringify(login.userId),
-	    'lp1': base64.stringify(login.passwordAuth),
-	    'repo_wallet_key': keysJson.syncKey
-	  };
-	  return io.authRequest('POST', '/v1/wallet/activate', request).then(function (reply) { return null; })
-	}
-
-	/**
-	 * Converts a login reply from the server into the local storage format.
-	 */
-	function makeLoginStash (username, loginReply, loginKey) {
-	  // Copy common items:
-	  var out = filterObject(loginReply, [
-	    'passwordAuthBox',
-	    'passwordBox',
-	    'passwordKeySnrp',
-	    'rootKeyBox',
-	    'syncKeyBox',
-	    'repos'
-	  ]);
-
-	  // Store the normalized username:
-	  out.username = fixUsername(username);
-
-	  // Store the pin key unencrypted:
-	  if (loginReply.pin2KeyBox != null) {
-	    var pin2Key = decrypt(loginReply.pin2KeyBox, loginKey);
-	    out.pin2Key = base58.stringify(pin2Key);
-	  }
-
-	  // Store the recovery key unencrypted:
-	  if (loginReply.recovery2KeyBox != null) {
-	    var recovery2Key = decrypt(loginReply.recovery2KeyBox, loginKey);
-	    out.recovery2Key = base58.stringify(recovery2Key);
-	  }
-
-	  return out
-	}
-
-	/**
-	 * Access to the logged-in user data.
-	 *
-	 * This type has following powers:
-	 * - Access to the auth server
-	 * - A list of account repos
-	 * - The legacy BitID rootKey
-	 */
-	function Login (io, userId, loginKey, loginStash) {
-	  if (userId.length !== 32) {
-	    throw new Error('userId must be a hash')
-	  }
-
-	  // Identity:
-	  this.username = loginStash.username;
-	  this.userId = userId;
-	  this.loginKey = loginKey;
-
-	  // Return access to the server:
-	  if (loginStash.passwordAuthBox == null) {
-	    throw new Error('Missing passwordAuthBox')
-	  }
-	  this.passwordAuth = decrypt(loginStash.passwordAuthBox, loginKey);
-
-	  // Legacy account repo:
-	  if (loginStash.syncKeyBox != null) {
-	    this.syncKey = decrypt(loginStash.syncKeyBox, loginKey);
-	  }
-
-	  // Legacy BitID key:
-	  if (loginStash.rootKeyBox != null) {
-	    this.rootKey = decrypt(loginStash.rootKeyBox, loginKey);
-	  }
-
-	  // TODO: Decrypt these:
-	  this.repos = loginStash.repos || [];
-
-	  // Local keys:
-	  if (loginStash.pin2Key != null) {
-	    this.pin2Key = base58.parse(loginStash.pin2Key);
-	  }
-	  if (loginStash.recovery2Key != null) {
-	    this.recovery2Key = base58.parse(loginStash.recovery2Key);
-	  }
-	}
-
-	/**
-	 * Returns a new login object, populated with data from the server.
-	 */
-	Login.online = function (io, username, userId, loginKey, loginReply) {
-	  var loginStash = makeLoginStash(username, loginReply, loginKey);
-	  io.loginStore.update(userId, loginStash);
-
-	  return new Login(io, userId, loginKey, loginStash)
-	};
-
-	/**
-	 * Returns a new login object, populated with data from the local storage.
-	 */
-	Login.offline = function (io, username, userId, loginKey) {
-	  var loginStash = io.loginStore.find({username: username});
-	  var out = new Login(io, userId, loginKey, loginStash);
-
-	  // Try updating our locally-stored login data (failure is ok):
-	  io
-	    .authRequest('POST', '/v2/login', out.authJson())
-	    .then(function (loginReply) {
-	      var loginStash = makeLoginStash(username, loginReply, loginKey);
-	      return io.loginStore.update(userId, loginStash)
-	    })
-	    .catch(function (e) { return io.log.error(e); });
-
-	  return out
-	};
-
-	/**
-	 * Sets up a login v2 server authorization JSON.
-	 */
-	Login.prototype.authJson = function () {
-	  return {
-	    'userId': base64.stringify(this.userId),
-	    'passwordAuth': base64.stringify(this.passwordAuth)
-	  }
-	};
-
-	/**
-	 * Searches for the given account type in the provided login object.
-	 * Returns the repo keys in the JSON bundle format.
-	 */
-	Login.prototype.accountFind = function (type) {
-	  var this$1 = this;
-
-	  // Search the repos array:
-	  for (var i = 0, list = this.repos; i < list.length; i += 1) {
-	    var repo = list[i];
-
-	    if (repo['type'] === type) {
-	      var keysBox = repo['keysBox'] || repo['info'];
-	      return JSON.parse(utf8.stringify(decrypt(keysBox, this$1.loginKey)))
-	    }
-	  }
-
-	  // Handle the legacy Airbitz repo:
-	  if (type === 'account:repo:co.airbitz.wallet') {
-	    return {
-	      'syncKey': base16.stringify(this.syncKey),
-	      'dataKey': base16.stringify(this.loginKey)
-	    }
-	  }
-
-	  throw new Error(("Cannot find a \"" + type + "\" repo"))
-	};
-
-	/**
-	 * Creates and attaches new account repo.
-	 */
-	Login.prototype.accountCreate = function (io, type) {
-	  var this$1 = this;
-
-	  return repoCreate(io, this, {}).then(function (keysJson) {
-	    return this$1.accountAttach(io, type, keysJson).then(function () {
-	      return repoActivate(io, this$1, keysJson)
-	    })
-	  })
-	};
-
-	/**
-	 * Attaches an account repo to the login.
-	 */
-	Login.prototype.accountAttach = function (io, type, info) {
-	  var this$1 = this;
-
-	  var infoBlob = utf8.parse(JSON.stringify(info));
-	  var data = {
-	    'type': type,
-	    'info': encrypt(io, infoBlob, this.loginKey)
-	  };
-
-	  var request = this.authJson();
-	  request['data'] = data;
-	  return io.authRequest('POST', '/v2/login/repos', request).then(function (reply) {
-	    this$1.repos.push(data);
-	    io.loginStore.update(this$1.userId, {repos: this$1.repos});
-	    return null
-	  })
-	};
 
 	function makeHashInput (username, password) {
 	  return fixUsername(username) + password
 	}
 
-	function loginOffline (io, username, userId, password) {
-	  // Extract stuff from storage:
-	  var loginStash = io.loginStore.find({username: username});
-	  var passwordKeySnrp = loginStash.passwordKeySnrp;
-	  var passwordBox = loginStash.passwordBox;
-	  if (!passwordKeySnrp || !passwordBox) {
-	    throw new Error('Missing data for offline login')
+	/**
+	 * Extracts the loginKey from the loginStash.
+	 */
+	function extractLoginKey (loginStash, username, password) {
+	  if (loginStash.passwordBox == null || loginStash.passwordKeySnrp == null) {
+	    throw new Error('Missing data for offline password login')
 	  }
-
-	  // Decrypt the loginKey:
 	  var up = makeHashInput(username, password);
-	  return scrypt(up, passwordKeySnrp).then(function (passwordKey) {
-	    var loginKey = decrypt(passwordBox, passwordKey);
-	    return Login.offline(io, username, userId, loginKey)
+	  return scrypt(up, loginStash.passwordKeySnrp).then(function (passwordKey) {
+	    return decrypt(loginStash.passwordBox, passwordKey)
 	  })
 	}
 
-	function loginOnline (io, username, userId, password) {
+	/**
+	 * Fetches the loginKey from the server.
+	 */
+	function fetchLoginKey (io, username, password) {
 	  var up = makeHashInput(username, password);
-	  return scrypt(up, passwordAuthSnrp).then(function (passwordAuth) {
-	    // Encode the username:
+	  var userId = hashUsername(username);
+	  var passwordAuth = scrypt(up, passwordAuthSnrp);
+
+	  return Promise.all([userId, passwordAuth]).then(function (values) {
+	    var userId = values[0];
+	    var passwordAuth = values[1];
 	    var request = {
-	      'userId': base64.stringify(userId),
-	      'passwordAuth': base64.stringify(passwordAuth)
+	      userId: base64.stringify(userId),
+	      passwordAuth: base64.stringify(passwordAuth)
 	      // "otp": null
 	    };
 	    return io.authRequest('POST', '/v2/login', request).then(function (reply) {
-	      // Password login:
-	      var passwordKeySnrp = reply['passwordKeySnrp'];
-	      var passwordBox = reply['passwordBox'];
-	      if (!passwordKeySnrp || !passwordBox) {
-	        throw new Error('Missing data for password login')
+	      if (reply.passwordBox == null || reply.passwordKeySnrp == null) {
+	        throw new Error('Missing data for online password login')
 	      }
-
-	      // Decrypt the loginKey:
-	      return scrypt(up, passwordKeySnrp).then(function (passwordKey) {
-	        var loginKey = decrypt(passwordBox, passwordKey);
-
-	        // Build the login object:
-	        return Login.online(io, username, userId, loginKey, reply)
+	      return scrypt(up, reply.passwordKeySnrp).then(function (passwordKey) {
+	        return {
+	          loginKey: decrypt(reply.passwordBox, passwordKey),
+	          loginReply: reply
+	        }
 	      })
 	    })
 	  })
@@ -10056,13 +10343,35 @@ exports["abcui"] =
 	 * Logs a user in using a password.
 	 * @param username string
 	 * @param password string
-	 * @return `Login` object promise
+	 * @return A `Promise` for the new root login.
 	 */
 	function login (io, username, password) {
-	  return io.loginStore.getUserId(username).then(function (userId) {
-	    // Race the two login methods, and let the fastest one win:
-	    return rejectify(loginOffline)(io, username, userId, password).catch(function (e) { return rejectify(loginOnline)(io, username, userId, password); }
-	    )
+	  return io.loginStore.load(username).then(function (loginStash) {
+	    return rejectify(extractLoginKey)(loginStash, username, password)
+	      .then(function (loginKey) {
+	        var login = makeLogin(loginStash, loginKey);
+
+	        // Since we logged in offline, update the stash in the background:
+	        io
+	          .authRequest('POST', '/v2/login', makeAuthJson(login))
+	          .then(function (loginReply) {
+	            loginStash = applyLoginReply(loginStash, loginKey, loginReply);
+	            return io.loginStore.save(loginStash)
+	          })
+	          .catch(function (e) { return io.log.warn(e); });
+
+	        return login
+	      })
+	      .catch(function (e) {
+	        // If that failed, try an online login:
+	        return fetchLoginKey(io, username, password).then(function (values) {
+	          var loginKey = values.loginKey;
+	          var loginReply = values.loginReply;
+	          loginStash = applyLoginReply(loginStash, loginKey, loginReply);
+	          io.loginStore.save(loginStash);
+	          return makeLogin(loginStash, loginKey)
+	        })
+	      })
 	  })
 	}
 
@@ -10071,7 +10380,8 @@ exports["abcui"] =
 	 */
 	function check (io, login, password) {
 	  // Derive passwordAuth:
-	  return scrypt(login.username + password, passwordAuthSnrp).then(function (passwordAuth) {
+	  var up = makeHashInput(login.username, password);
+	  return scrypt(up, passwordAuthSnrp).then(function (passwordAuth) {
 	    // Compare what we derived with what we have:
 	    for (var i = 0; i < passwordAuth.length; ++i) {
 	      if (passwordAuth[i] !== login.passwordAuth[i]) {
@@ -10132,14 +10442,15 @@ exports["abcui"] =
 	/**
 	 * Sets up a password for the login.
 	 */
-	function setup (io, login, password) {
-	  return makePasswordKit(io, login, login.username, password).then(function (kit) {
-	    var request = login.authJson();
+	function setup (io, rootLogin, login, password) {
+	  return makePasswordKit(io, login, rootLogin.username, password).then(function (kit) {
+	    var request = makeAuthJson(login);
 	    request.data = kit.server;
 	    return io.authRequest('POST', '/v2/login/password', request).then(function (reply) {
-	      io.loginStore.update(login.userId, kit.stash);
 	      login.passwordAuth = kit.login.passwordAuth;
-	      return login
+	      return io.loginStore
+	        .update(rootLogin, login, function (stash) { return objectAssign(stash, kit.stash); })
+	        .then(function () { return login; })
 	    })
 	  })
 	}
@@ -10153,41 +10464,52 @@ exports["abcui"] =
 	}
 
 	/**
+	 * Fetches and decrypts the loginKey from the server.
+	 * @return Promise<{loginKey, loginReply}>
+	 */
+	function fetchLoginKey$1 (io, pin2Key, username, pin) {
+	  var request = {
+	    pin2Id: base64.stringify(pin2Id(pin2Key, username)),
+	    pin2Auth: base64.stringify(pin2Auth(pin2Key, pin))
+	    // "otp": null
+	  };
+	  return io.authRequest('POST', '/v2/login', request).then(function (reply) {
+	    if (reply.pin2Box == null) {
+	      throw new Error('Missing data for PIN v2 login')
+	    }
+	    return {
+	      loginKey: decrypt(reply.pin2Box, pin2Key),
+	      loginReply: reply
+	    }
+	  })
+	}
+
+	/**
 	 * Returns a copy of the PIN login key if one exists on the local device.
 	 */
-	function getKey (io, username) {
-	  var loginStash = io.loginStore.find({username: username});
-	  if (loginStash.pin2Key != null) {
-	    return base58.parse(loginStash.pin2Key)
+	function getKey (loginStash, appId) {
+	  var stash = searchTree(loginStash, function (stash) { return stash.appId === appId; });
+	  if (stash != null && stash.pin2Key != null) {
+	    return base64.parse(stash.pin2Key)
 	  }
 	}
 
 	/**
 	 * Logs a user in using their PIN.
-	 * @param username string
-	 * @param pin2Key the recovery key, as a base58 string.
-	 * @param pin the PIN, as a string.
-	 * @param `Login` object promise
+	 * @return A `Promise` for the new root login.
 	 */
-	function login$1 (io, pin2Key, username, pin) {
-	  var request = {
-	    'pin2Id': base64.stringify(pin2Id(pin2Key, username)),
-	    'pin2Auth': base64.stringify(pin2Auth(pin2Key, pin))
-	    // "otp": null
-	  };
-	  return io.authRequest('POST', '/v2/login', request).then(function (reply) {
-	    // PIN login:
-	    var pin2Box = reply['pin2Box'];
-	    if (!pin2Box) {
-	      throw new Error('Missing data for PIN v2 login')
+	function login$1 (io, appId, username, pin) {
+	  return io.loginStore.load(username).then(function (loginStash) {
+	    var pin2Key = getKey(loginStash, appId);
+	    if (pin2Key == null) {
+	      throw new Error('No PIN set locally for this account')
 	    }
-
-	    // Decrypt the loginKey:
-	    var loginKey = decrypt(pin2Box, pin2Key);
-
-	    // Build the login object:
-	    return io.loginStore.getUserId(username).then(function (userId) {
-	      return Login.online(io, username, userId, loginKey, reply)
+	    return fetchLoginKey$1(io, pin2Key, username, pin).then(function (values) {
+	      var loginKey = values.loginKey;
+	      var loginReply = values.loginReply;
+	      loginStash = applyLoginReply(loginStash, loginKey, loginReply);
+	      io.loginStore.save(loginStash);
+	      return makeLogin(loginStash, loginKey, appId)
 	    })
 	  })
 	}
@@ -10208,9 +10530,10 @@ exports["abcui"] =
 	      pin2KeyBox: pin2KeyBox
 	    },
 	    stash: {
-	      pin2Key: base58.stringify(pin2Key)
+	      pin2Key: base64.stringify(pin2Key)
 	    },
 	    login: {
+	      pin: pin,
 	      pin2Key: pin2Key
 	    }
 	  }
@@ -10219,15 +10542,150 @@ exports["abcui"] =
 	/**
 	 * Sets up PIN login v2.
 	 */
-	function setup$1 (io, login, pin) {
-	  var kit = makePin2Kit(io, login, login.username, pin);
+	function setup$1 (io, rootLogin, login, pin) {
+	  var kit = makePin2Kit(io, login, rootLogin.username, pin);
 
-	  var request = login.authJson();
+	  var request = makeAuthJson(login);
 	  request.data = kit.server;
 	  return io.authRequest('POST', '/v2/login/pin2', request).then(function (reply) {
-	    io.loginStore.update(login.userId, kit.stash);
 	    login.pin2Key = kit.login.pin2Key;
-	    return login
+	    return io.loginStore
+	      .update(rootLogin, login, function (stash) { return objectAssign(stash, kit.stash); })
+	      .then(function () { return login; })
+	  })
+	}
+
+	/**
+	 * Determines whether or not a username is available.
+	 */
+	function usernameAvailable (io, username) {
+	  return hashUsername(username).then(function (userId) {
+	    var request = {
+	      userId: base64.stringify(userId)
+	    };
+	    return io
+	      .authRequest('POST', '/v2/login', request)
+	      .then(function (reply) { return false; }) // It's not available if we can hit it!
+	      .catch(function (e) {
+	        if (e.type !== UsernameError.type) {
+	          throw e
+	        }
+	        return true
+	      })
+	  })
+	}
+
+	/**
+	 * Assembles all the data needed to create a new login.
+	 */
+	function makeNewKit (io, parentLogin, appId, username, opts) {
+	  // Figure out login identity:
+	  var loginId = parentLogin != null ? io.random(32) : hashUsername(username);
+	  var loginKey = io.random(32);
+	  var loginAuth = io.random(32);
+	  var loginAuthBox = encrypt(io, loginAuth, loginKey);
+
+	  // Set up login methods:
+	  var parentBox = parentLogin != null
+	    ? encrypt(io, loginKey, parentLogin.loginKey)
+	    : void 0;
+	  var passwordKit = opts.password != null
+	    ? makePasswordKit(io, { loginKey: loginKey }, username, opts.password)
+	    : {};
+	  var pin2Kit = opts.pin != null
+	    ? makePin2Kit(io, { loginKey: loginKey }, username, opts.pin)
+	    : {};
+	  var keysKit = opts.keyInfos != null
+	    ? makeKeysKit(io, { loginKey: loginKey }, opts.keyInfos, opts.newSyncKeys)
+	    : {};
+
+	  // Bundle everything:
+	  return Promise.all([loginId, passwordKit]).then(function (values) {
+	    var loginId = values[0];
+	    var passwordKit = values[1];
+	    return {
+	      server: objectAssign(
+	        {
+	          appId: appId,
+	          loginId: base64.stringify(loginId),
+	          loginAuth: base64.stringify(loginAuth),
+	          loginAuthBox: loginAuthBox,
+	          parentBox: parentBox
+	        },
+	        passwordKit.server,
+	        pin2Kit.server,
+	        keysKit.server
+	      ),
+	      stash: objectAssign(
+	        {
+	          appId: appId,
+	          loginId: base64.stringify(loginId),
+	          loginAuthBox: loginAuthBox,
+	          parentBox: parentBox
+	        },
+	        passwordKit.stash,
+	        pin2Kit.stash,
+	        keysKit.stash
+	      ),
+	      login: objectAssign(
+	        {
+	          loginKey: loginKey,
+	          appId: appId,
+	          loginId: loginId,
+	          loginAuth: loginAuth,
+	          keyInfos: [],
+	          children: []
+	        },
+	        passwordKit.login,
+	        pin2Kit.login,
+	        keysKit.login
+	      )
+	    }
+	  })
+	}
+
+	/**
+	 * Creates a new login on the auth server.
+	 */
+	function createLogin (io, username, opts) {
+	  var fixedName = fixUsername(username);
+
+	  return makeNewKit(io, null, '', fixedName, opts).then(function (kit) {
+	    var request = {};
+	    request.data = kit.server;
+	    return io.authRequest('POST', '/v2/login/create', request).then(function (reply) {
+	      kit.login.username = fixedName;
+	      kit.stash.username = fixedName;
+	      kit.login.userId = kit.login.loginId;
+	      io.loginStore.save(kit.stash);
+
+	      return kit.login
+	    })
+	  })
+	}
+
+	/**
+	 * Creates a new child login on the auth server.
+	 */
+	function createChildLogin (io, rootLogin, parentLogin, appId, opts) {
+	  return makeNewKit(
+	    io,
+	    parentLogin,
+	    appId,
+	    rootLogin.username,
+	    opts
+	  ).then(function (kit) {
+	    var request = makeAuthJson(parentLogin);
+	    request.data = kit.server;
+	    return io.authRequest('POST', '/v2/login/create', request).then(function (reply) {
+	      parentLogin.children.push(kit.login);
+	      return io.loginStore
+	        .update(rootLogin, parentLogin, function (stash) {
+	          stash.children = elvis(stash.children, []).concat( [kit.stash]);
+	          return stash
+	        })
+	        .then(function () { return kit.login; })
+	    })
 	  })
 	}
 
@@ -10243,41 +10701,47 @@ exports["abcui"] =
 	}
 
 	/**
+	 * Fetches and decrypts the loginKey from the server.
+	 * @return Promise<{loginKey, loginReply}>
+	 */
+	function fetchLoginKey$2 (io, recovery2Key, username, answers) {
+	  var request = {
+	    recovery2Id: base64.stringify(recovery2Id(recovery2Key, username)),
+	    recovery2Auth: recovery2Auth(recovery2Key, answers)
+	    // "otp": null
+	  };
+	  return io.authRequest('POST', '/v2/login', request).then(function (reply) {
+	    if (reply.recovery2Box == null) {
+	      throw new Error('Missing data for recovery v2 login')
+	    }
+	    return {
+	      loginKey: decrypt(reply.recovery2Box, recovery2Key),
+	      loginReply: reply
+	    }
+	  })
+	}
+
+	/**
 	 * Returns a copy of the recovery key if one exists on the local device.
 	 */
-	function getKey$1 (io, username) {
-	  var loginStash = io.loginStore.find({username: username});
+	function getKey$1 (loginStash) {
 	  if (loginStash.recovery2Key != null) {
-	    return base58.parse(loginStash.recovery2Key)
+	    return base64.parse(loginStash.recovery2Key)
 	  }
 	}
 
 	/**
 	 * Logs a user in using recovery answers.
-	 * @param username string
-	 * @param recovery2Key an ArrayBuffer recovery key
-	 * @param array of answer strings
-	 * @param `Login` object promise
+	 * @return A `Promise` for the new root login.
 	 */
 	function login$2 (io, recovery2Key, username, answers) {
-	  var request = {
-	    'recovery2Id': base64.stringify(recovery2Id(recovery2Key, username)),
-	    'recovery2Auth': recovery2Auth(recovery2Key, answers)
-	    // "otp": null
-	  };
-	  return io.authRequest('POST', '/v2/login', request).then(function (reply) {
-	    // Recovery login:
-	    var recovery2Box = reply['recovery2Box'];
-	    if (recovery2Box == null) {
-	      throw new Error('Missing data for recovery v2 login')
-	    }
-
-	    // Decrypt the loginKey:
-	    var loginKey = decrypt(recovery2Box, recovery2Key);
-
-	    // Build the login object:
-	    return io.loginStore.getUserId(username).then(function (userId) {
-	      return Login.online(io, username, userId, loginKey, reply)
+	  return io.loginStore.load(username).then(function (loginStash) {
+	    return fetchLoginKey$2(io, recovery2Key, username, answers).then(function (values) {
+	      var loginKey = values.loginKey;
+	      var loginReply = values.loginReply;
+	      loginStash = applyLoginReply(loginStash, loginKey, loginReply);
+	      io.loginStore.save(loginStash);
+	      return makeLogin(loginStash, loginKey)
 	    })
 	  })
 	}
@@ -10335,7 +10799,7 @@ exports["abcui"] =
 	      question2Box: question2Box
 	    },
 	    stash: {
-	      recovery2Key: base58.stringify(recovery2Key)
+	      recovery2Key: base64.stringify(recovery2Key)
 	    },
 	    login: {
 	      recovery2Key: recovery2Key
@@ -10346,15 +10810,16 @@ exports["abcui"] =
 	/**
 	 * Sets up recovery questions for the login.
 	 */
-	function setup$2 (io, login, questions, answers) {
-	  var kit = makeRecovery2Kit(io, login, login.username, questions, answers);
+	function setup$2 (io, rootLogin, login, questions, answers) {
+	  var kit = makeRecovery2Kit(io, login, rootLogin.username, questions, answers);
 
-	  var request = login.authJson();
+	  var request = makeAuthJson(login);
 	  request.data = kit.server;
 	  return io.authRequest('POST', '/v2/login/recovery2', request).then(function (reply) {
-	    io.loginStore.update(login.userId, kit.stash);
 	    login.recovery2Key = kit.login.recovery2Key;
-	    return login
+	    return io.loginStore
+	      .update(rootLogin, login, function (stash) { return objectAssign(stash, kit.stash); })
+	      .then(function () { return login; })
 	  })
 	}
 
@@ -10705,77 +11170,169 @@ exports["abcui"] =
 	 * This will typically include `dataKey`, `syncKey`,
 	 * and some type of crytpocurrency key.
 	 */
-	WalletList.prototype.addWallet = function (type, keysJson) {
-	  var walletJson = {
-	    'type': type,
-	    'keys': keysJson,
-	    'Archived': false,
-	    'SortIndex': 0
-	  };
+	WalletList.prototype.addWallet = function (io, login, type, keysJson) {
+	  var this$1 = this;
 
-	  var dataKey = base16.parse(keysJson['dataKey']);
-	  var filename = this.repo.secureFilename(dataKey);
-	  this.repo.setJson(this.folder + '/' + filename, walletJson);
+	  keysJson.dataKey = keysJson.dataKey || base16.stringify(io.random(32));
+	  keysJson.syncKey = keysJson.syncKey || base16.stringify(io.random(20));
+	  var dataKey = base16.parse(keysJson.dataKey);
+	  var syncKey = base16.parse(keysJson.syncKey);
 
-	  var id = walletId(walletJson);
-	  this.wallets[id] = walletJson;
-	  return id
+	  // We are just using this to create the repo, not to attach:
+	  return attachKeys(io, login, login, [], [syncKey]).then(function () {
+	    var walletJson = {
+	      type: type,
+	      keys: keysJson,
+	      Archived: false,
+	      SortIndex: 0
+	    };
+
+	    var filename = this$1.repo.secureFilename(dataKey);
+	    this$1.repo.setJson(this$1.folder + '/' + filename, walletJson);
+
+	    var id = walletId(walletJson);
+	    this$1.wallets[id] = walletJson;
+	    return id
+	  })
 	};
+
+	function findAccount (login$$1, type) {
+	  return login$$1.keyInfos.find(function (info) { return info.type === type; })
+	}
+
+	function makeAccountType (appId) {
+	  return appId === ''
+	    ? 'account-repo:co.airbitz.wallet'
+	    : ("account-repo:" + appId)
+	}
+
+	function ensureAppIdExists (io, rootLogin, appId) {
+	  var login$$1 = searchTree(rootLogin, function (login$$1) { return login$$1.appId === appId; });
+	  if (!login$$1) {
+	    var accountType = makeAccountType(appId);
+	    var dataKey = io.random(32);
+	    var syncKey = io.random(20);
+	    var keyJson = {
+	      dataKey: base64.stringify(dataKey),
+	      syncKey: base64.stringify(syncKey)
+	    };
+	    var opts = {
+	      pin: rootLogin.pin,
+	      keyInfos: [makeKeyInfo(keyJson, accountType, dataKey)],
+	      newSyncKeys: [syncKey]
+	    };
+	    return createChildLogin(io, rootLogin, rootLogin, appId, opts).then(function (login$$1) {
+	      return { rootLogin: rootLogin, login: login$$1 }
+	    })
+	  }
+
+	  return Promise.resolve({ rootLogin: rootLogin, login: login$$1 })
+	}
+
+	function ensureAccountRepoExists (io, rootLogin, login$$1) {
+	  var accountType = makeAccountType(login$$1.appId);
+	  if (findAccount(login$$1, accountType) == null) {
+	    var dataKey = io.random(32);
+	    var syncKey = io.random(20);
+	    var keyJson = {
+	      dataKey: base64.stringify(dataKey),
+	      syncKey: base64.stringify(syncKey)
+	    };
+	    var keyInfo = makeKeyInfo(keyJson, accountType, dataKey);
+
+	    return attachKeys(io, rootLogin, login$$1, [keyInfo], [syncKey])
+	  }
+
+	  return Promise.resolve()
+	}
+
+	function makeAccount (ctx, rootLogin, loginType) {
+	  var io = ctx.io;
+	  var appId = ctx.appId;
+
+	  return ensureAppIdExists(io, rootLogin, appId).then(function (value) {
+	    var rootLogin = value.rootLogin;
+	    var login$$1 = value.login;
+	    return ensureAccountRepoExists(io, rootLogin, login$$1).then(function () {
+	      var account = new Account(ctx, rootLogin, login$$1);
+	      account[loginType] = true;
+	      return account.sync().then(function (dirty) { return account; })
+	    })
+	  })
+	}
 
 	/**
 	 * This is a thin shim object,
 	 * which wraps the core implementation in a more OOP-style API.
 	 */
-	function Account (ctx, login$$1) {
+	function Account (ctx, rootLogin, login$$1) {
 	  this.io = ctx.io;
+
+	  // Login:
+	  this.username = rootLogin.username;
+	  this.rootLogin = rootLogin;
 	  this.login = login$$1;
-	  this.keys = login$$1.accountFind(ctx.accountType);
+
+	  // Repo:
+	  this.type = makeAccountType(ctx.appId);
+	  var keyInfo = findAccount(this.login, this.type);
+	  if (keyInfo == null) {
+	    throw new Error(("Cannot find a \"" + (this.type) + "\" repo"))
+	  }
+	  this.keys = keyInfo.keys;
 	  this.repoInfo = this.keys; // Deprecated name
+
+	  // Flags:
 	  this.loggedIn = true;
-	  this.edgeLogin = false;
+	  this.edgeLogin = this.rootLogin.loginKey == null;
 	  this.pinLogin = false;
 	  this.passwordLogin = false;
 	  this.newAccount = false;
 	  this.recoveryLogin = false;
-	  this.username = login$$1.username;
 
-	  this.repo = new Repo(this.io, base16.parse(this.keys.dataKey), base16.parse(this.keys.syncKey));
+	  this.repo = new Repo(this.io, base64.parse(this.keys.dataKey), base64.parse(this.keys.syncKey));
 	  this.walletList = new WalletList(this.repo);
 	}
 
-	Account.prototype.logout = function () {
+	Account.prototype.logout = syncApi(function () {
 	  this.login = null;
 	  this.loggedIn = false;
-	};
+	});
 
-	Account.prototype.passwordOk = nodeify(function (password) {
-	  return check(this.io, this.login, password)
+	Account.prototype.passwordOk = asyncApi(function (password) {
+	  return check(this.io, this.rootLogin, password)
 	});
 	Account.prototype.checkPassword = Account.prototype.passwordOk;
 
-	Account.prototype.passwordSetup = nodeify(function (password) {
-	  return setup(this.io, this.login, password)
+	Account.prototype.passwordSetup = asyncApi(function (password) {
+	  if (this.rootLogin.loginKey == null) {
+	    return Promise.reject(new Error('Edge logged-in account'))
+	  }
+	  return setup(this.io, this.rootLogin, this.rootLogin, password)
 	});
 	Account.prototype.changePassword = Account.prototype.passwordSetup;
 
-	Account.prototype.pinSetup = nodeify(function (pin) {
-	  return setup$1(this.io, this.login, pin)
+	Account.prototype.pinSetup = asyncApi(function (pin) {
+	  return setup$1(this.io, this.rootLogin, this.login, pin)
 	    .then(function (login$$1) { return base58.stringify(login$$1.pin2Key); })
 	});
 	Account.prototype.changePIN = Account.prototype.pinSetup;
 
-	Account.prototype.recovery2Set = nodeify(function (questions$$1, answers) {
-	  return setup$2(this.io, this.login, questions$$1, answers)
+	Account.prototype.recovery2Set = asyncApi(function (questions$$1, answers) {
+	  if (this.rootLogin.loginKey == null) {
+	    return Promise.reject(new Error('Edge logged-in account'))
+	  }
+	  return setup$2(this.io, this.rootLogin, this.rootLogin, questions$$1, answers)
 	    .then(function (login$$1) { return base58.stringify(login$$1.recovery2Key); })
 	});
 
 	Account.prototype.setupRecovery2Questions = Account.prototype.recovery2Set;
 
-	Account.prototype.isLoggedIn = function () {
+	Account.prototype.isLoggedIn = syncApi(function () {
 	  return this.loggedIn
-	};
+	});
 
-	Account.prototype.sync = nodeify(function () {
+	Account.prototype.sync = asyncApi(function () {
 	  var this$1 = this;
 
 	  return this.repo.sync().then(function (changed) {
@@ -10786,27 +11343,24 @@ exports["abcui"] =
 	  })
 	});
 
-	Account.prototype.listWalletIds = function () {
-	  return this.walletList.listIds()
-	};
+	Account.prototype.listWalletIds = syncApi(function () {
+	  return this.login.keyInfos.map(function (info) { return info.id; })
+	});
 
-	Account.prototype.getWallet = function (id) {
-	  return new Wallet(this.walletList.getType(id), this.walletList.getKeys(id))
-	};
+	Account.prototype.getWallet = syncApi(function (id) {
+	  var info = this.login.keyInfos.find(function (info) { return info.id === id; });
+	  return info != null ? new Wallet(info.type, info.keys) : null
+	});
 
 	/**
 	 * Gets the first wallet in an account (the first by sort order).
 	 * If type is a string, finds the first wallet with the same type.
 	 * Might return null if there are no wallets.
 	 */
-	Account.prototype.getFirstWallet = function (type) {
-	  var this$1 = this;
-
-	  var id = this.walletList.listIds().find(
-	    function (id) { return type == null || this$1.walletList.getType(id) === type; }
-	  );
-	  return id ? this.getWallet(id) : null
-	};
+	Account.prototype.getFirstWallet = syncApi(function (type) {
+	  var info = this.login.keyInfos.find(function (info) { return info.type === type; });
+	  return info != null ? new Wallet(info.type, info.keys) : null
+	});
 
 	/**
 	 * Creates a new wallet repo, and attaches it to the account.
@@ -10814,215 +11368,200 @@ exports["abcui"] =
 	 * that should be stored along with the wallet. For example,
 	 * Airbitz Bitcoin wallets would place their `bitcoinKey` here.
 	 */
-	Account.prototype.createWallet = nodeify(function (type, keysJson) {
-	  var this$1 = this;
+	Account.prototype.createWallet = asyncApi(function (type, keysJson) {
+	  keysJson.dataKey = keysJson.dataKey || base64.stringify(this.io.random(32));
+	  keysJson.syncKey = keysJson.syncKey || base64.stringify(this.io.random(20));
+	  var dataKey = base64.parse(keysJson.dataKey);
+	  var syncKey = base64.parse(keysJson.syncKey);
 
-	  return repoCreate(this.io, this.login, keysJson).then(function (keysJson) {
-	    var id = this$1.walletList.addWallet(type, keysJson);
-	    return this$1.sync().then(function (dirty) {
-	      return repoActivate(this$1.io, this$1.login, keysJson).then(function () { return id; })
-	    })
+	  var info = makeKeyInfo(keysJson, type, dataKey);
+
+	  // We are just using this to create the repo, not to attach:
+	  return attachKeys(this.io, this.rootLogin, this.login, [info], [syncKey]).then(function () {
+	    return info.id
 	  })
 	});
 
+	var EC = elliptic.ec;
+	var secp256k1 = new EC('secp256k1');
+
 	/**
-	 * Determines whether or not a username is available.
+	 * Derives a shared secret from the given secret key and public key.
 	 */
-	function usernameAvailable (io, username) {
-	  return io.loginStore.getUserId(username).then(function (userId) {
-	    var request = {
-	      'l1': base64.stringify(userId)
-	    };
-	    return io.authRequest('POST', '/v1/account/available', request)
-	  })
+	function deriveSharedKey (keypair, pubkey) {
+	  var secretX = keypair
+	    .derive(secp256k1.keyFromPublic(pubkey).getPublic())
+	    .toArray('be');
+
+	  // From NIST.SP.800-56Ar2 section 5.8.1:
+	  return hmacSha256([0, 0, 0, 1 ].concat( secretX), utf8.parse('dataKey'))
 	}
 
 	/**
-	 * Creates a new login on the auth server.
+	 * Decrypts a lobby reply using the request's secret key.
 	 */
-	function create (io, username, password, opts) {
-	  // Create account repo info:
-	  var loginKey = io.random(32);
-	  var syncKey = opts.syncKey || io.random(20);
-	  var syncKeyBox = encrypt(io, syncKey, loginKey);
+	function decryptLobbyReply (keypair, lobbyReply) {
+	  var pubkey = base64.parse(lobbyReply.publicKey);
+	  var sharedKey = deriveSharedKey(keypair, pubkey);
+	  return JSON.parse(utf8.stringify(decrypt(lobbyReply.box, sharedKey)))
+	}
 
-	  return Promise.all([
-	    io.loginStore.getUserId(username),
-	    makePasswordKit(io, { loginKey: loginKey }, username, password)
-	  ]).then(function (values) {
-	    var userId = values[0];
-	    var passwordKit = values[1];
+	/**
+	 * Encrypts a lobby reply JSON replyData, and returns a reply
+	 * suitable for sending to the server.
+	 */
 
-	    // Package:
-	    var carePackage = {
-	      'SNRP2': passwordKit.server.passwordKeySnrp
-	    };
-	    var loginPackage = {
-	      'EMK_LP2': passwordKit.server.passwordBox,
-	      'ESyncKey': syncKeyBox,
-	      'ELP1': passwordKit.server.passwordAuthBox
-	    };
-	    var request = {
-	      'l1': base64.stringify(userId),
-	      'lp1': passwordKit.server.passwordAuth,
-	      'care_package': JSON.stringify(carePackage),
-	      'login_package': JSON.stringify(loginPackage),
-	      'repo_account_key': base16.stringify(syncKey)
-	    };
-	    var loginStash = objectAssign(
-	      {
-	        username: fixUsername(username),
-	        syncKeyBox: syncKeyBox
-	      },
-	      passwordKit.stash
-	    );
 
-	    return io.authRequest('POST', '/v1/account/create', request).then(function (reply) {
-	      // Cache everything for future logins:
-	      io.loginStore.update(userId, loginStash);
+	function scheduleLobbyPoll (watcher) {
+	  if (!watcher.done) {
+	    watcher.timeout = setTimeout(function () { return pollLobby(watcher); }, watcher.period);
+	  }
+	}
 
-	      var login$$1 = Login.offline(io, username, userId, loginKey);
+	function pollLobby (watcher) {
+	  var io = watcher.io;
+	  var lobbyId = watcher.lobbyId;
+	  var keypair = watcher.keypair;
+	  var onReply = watcher.onReply;
+	  var onError = watcher.onError;
 
-	      // Now activate:
-	      var auth = login$$1.authJson();
-	      var request = {
-	        l1: auth.userId,
-	        lp1: auth.passwordAuth
-	      };
-	      return io.authRequest('POST', '/v1/account/activate', request).then(function (reply) { return login$$1; })
+	  return io
+	    .authRequest('GET', '/v2/lobby/' + lobbyId, '')
+	    .then(function (reply) {
+	      while (watcher.replyCount < reply.replies.length) {
+	        var lobbyReply = reply.replies[watcher.replyCount];
+	        if (onReply) {
+	          onReply(decryptLobbyReply(keypair, lobbyReply));
+	        }
+	        ++watcher.replyCount;
+	      }
+	      return watcher
 	    })
-	  })
+	    .then(scheduleLobbyPoll)
+	    .catch(function (e) {
+	      if (onError) { onError(e); }
+	      return watcher
+	    })
 	}
 
-	var EllipticCurve = elliptic.ec;
-	var secp256k1 = new EllipticCurve('secp256k1');
+	/**
+	 * Approximates the proposed ES `Observable` interface,
+	 * allowing clients to subscribe to lobby reply messages.
+	 */
+	var ObservableLobby = function ObservableLobby (io, lobbyId, keypair) {
+	  this.io = io;
+	  this.lobbyId = lobbyId;
+	  this.keypair = keypair;
+	};
 
-	function ABCEdgeLoginRequest (id) {
-	  this.id = id;
-	  this.done_ = false;
-	}
+	ObservableLobby.prototype.subscribe = function subscribe (onReply, onError, period) {
+	    var this$1 = this;
+	    if ( period === void 0 ) period = 1000;
 
-	ABCEdgeLoginRequest.prototype.cancelRequest = function () {
-	  this.done_ = true;
+	  this.onReply = onReply;
+	  this.onError = onError;
+	  this.period = period;
+	  this.replyCount = 0;
+	  this.done = false;
+	  pollLobby(this);
+
+	  var subscription = {
+	    unsubscribe: function () {
+	      this$1.done = true;
+	      if (this$1.timeout != null) {
+	        clearTimeout(this$1.timeout);
+	      }
+	    }
+	  };
+	  return subscription
 	};
 
 	/**
-	 * Creates a new login object, and attaches the account repo info to it.
+	 * Creates a new lobby on the auth server holding the given request.
+	 * @return A lobby watcher object that will check for incoming replies.
 	 */
-	function createLogin (io, accountReply) {
-	  var username = accountReply.username + '-' + base58.stringify(io.random(4));
-	  var password = base58.stringify(io.random(24));
-	  var pin = accountReply.pinString;
-
-	  var opts = {};
-	  if (accountReply.type === 'account:repo:co.airbitz.wallet') {
-	    opts.syncKey = base16.parse(accountReply.info['syncKey']);
+	function makeLobby (io, lobbyRequest) {
+	  var keypair = secp256k1.genKeyPair({ entropy: io.random(32) });
+	  var pubkey = keypair.getPublic().encodeCompressed();
+	  if (lobbyRequest.timeout == null) {
+	    lobbyRequest.timeout = 600;
 	  }
+	  lobbyRequest.publicKey = base64.stringify(pubkey);
 
-	  return create(io, username, password, opts).then(function (login$$1) {
-	    return login$$1.accountAttach(io, accountReply.type, accountReply.info).then(function () {
-	      if (typeof pin === 'string' && pin.length === 4) {
-	        if (getKey(io, username) == null) {
-	          return setup$1(io, login$$1, pin).catch(function (e) { return login$$1; })
-	        }
-	      }
-	      return login$$1
-	    })
+	  var lobbyId = base58.stringify(sha256(sha256(pubkey)).slice(0, 10));
+
+	  var request = {
+	    data: lobbyRequest
+	  };
+	  return io.authRequest('PUT', '/v2/lobby/' + lobbyId, request).then(function (reply) {
+	    return new ObservableLobby(io, lobbyId, keypair)
 	  })
 	}
 
 	/**
-	 * Opens a lobby object to determine if it contains a resolved account request.
-	 * Returns the account info if so, or null otherwise.
+	 * Fetches a lobby request from the auth server.
+	 * @return A promise of the lobby request JSON.
 	 */
-	function decodeAccountReply (keys, lobby) {
-	  var accountRequest = lobby['accountRequest'];
-	  var replyBox = accountRequest['replyBox'];
-	  var replyKey = accountRequest['replyKey'];
 
-	  // If the reply is missing, just return false:
-	  if (replyBox == null || replyKey == null) {
-	    return null
-	  }
-
-	  var replyPubkey = secp256k1.keyFromPublic(replyKey, 'hex').getPublic();
-	  var secret = keys.derive(replyPubkey).toArray('be');
-	  var dataKey = hmacSha256('dataKey', new Uint8Array(secret));
-	  var reply = JSON.parse(utf8.stringify(decrypt(replyBox, dataKey)));
-
-	  var returnObj = {
-	    type: accountRequest['type'],
-	    info: reply['keys'] || reply['info'],
-	    username: reply['username']
-	  };
-	  if (typeof reply.pinString === 'string') {
-	    returnObj.pinString = reply['pinString'];
-	  }
-
-	  return returnObj
-	}
 
 	/**
-	 * Polls the lobby every second or so,
-	 * looking for a reply to our account request.
+	 * Encrypts and sends a reply to a lobby request.
 	 */
-	function pollServer (io, edgeLogin, keys, onLogin, onProcessLogin) {
-	  // Don't do anything if the user has cancelled this request:
-	  if (edgeLogin.done_) {
-	    return
+
+	/**
+	 * The public API for edge login requests.
+	 */
+	var ABCEdgeLoginRequest = function ABCEdgeLoginRequest (lobbyId, subscription) {
+	  this.id = lobbyId;
+	  this.cancelRequest = function () { return subscription.unsubscribe(); };
+	};
+
+	/**
+	 * Turns a reply into a logged-in account.
+	 */
+	function onReply (io, subscription, reply, appId, opts) {
+	  subscription.unsubscribe();
+	  if (opts.onProcessLogin != null) {
+	    opts.onProcessLogin(reply.loginStash.username);
 	  }
 
-	  setTimeout(function () {
-	    io.authRequest('GET', '/v2/lobby/' + edgeLogin.id, '').then(function (reply) {
-	      var accountReply = decodeAccountReply(keys, reply);
-	      if (accountReply == null) {
-	        return pollServer(io, edgeLogin, keys, onLogin, onProcessLogin)
-	      }
-	      if (onProcessLogin != null) {
-	        onProcessLogin(accountReply.username);
-	      }
-	      return createLogin(io, accountReply).then(
-	        function (login$$1) { return onLogin(null, login$$1); }, function (e) { return onLogin(e); }
-	      )
-	    }).catch(function (e) {
-	      return onLogin(e)
-	    });
-	  }, 1000);
+	  // Find the appropriate child:
+	  if (!searchTree(reply.loginStash, function (stash) { return stash.appId === appId; })) {
+	    throw new Error(("Cannot find requested appId: \"" + appId + "\""))
+	  }
+	  io.loginStore.save(reply.loginStash);
+
+	  // This is almost guaranteed to blow up spectacularly:
+	  var login = makeLogin(reply.loginStash, base64.parse(reply.loginKey), appId);
+	  if (opts.onLogin != null) {
+	    opts.onLogin(null, login);
+	  }
+	}
+
+	function onError (lobby, e, opts) {
+	  if (opts.onLogin != null) {
+	    opts.onLogin(e);
+	  }
 	}
 
 	/**
 	 * Creates a new account request lobby on the server.
 	 */
-	function create$1 (io, opts) {
-	  var keys = secp256k1.genKeyPair({entropy: io.random(32)});
-
-	  var data = {
-	    'accountRequest': {
-	      'displayName': opts['displayName'] || '',
-	      'requestKey': keys.getPublic().encodeCompressed('hex'),
-	      'type': opts.type
-	    }
-	  };
-
-	  if (typeof opts.displayImageUrl === 'string') {
-	    data.accountRequest.displayImageUrl = opts.displayImageUrl;
-	  } else {
-	    data.accountRequest.displayImageUrl = '';
-	  }
-
+	function requestEdgeLogin (io, appId, opts) {
 	  var request = {
-	    'expires': 300,
-	    'data': data
+	    loginRequest: {
+	      appId: appId,
+	      displayImageUrl: opts.displayImageUrl,
+	      displayName: opts.displayName
+	    }
 	  };
 
-	  return io.authRequest('POST', '/v2/lobby', request).then(function (reply) {
-	    var edgeLogin = new ABCEdgeLoginRequest(reply.id);
-	    var onProcessLogin = null;
-	    if (opts.onProcessLogin != null) {
-	      onProcessLogin = opts.onProcessLogin;
-	    }
-	    pollServer(io, edgeLogin, keys, opts.onLogin, onProcessLogin);
-	    return edgeLogin
+	  return makeLobby(io, request).then(function (lobby) {
+	    var subscription = lobby.subscribe(
+	      function (reply) { return onReply(io, subscription, reply, appId, opts); },
+	      function (e) { return onError(lobby, e, opts); }
+	    );
+	    return new ABCEdgeLoginRequest(lobby.lobbyId, subscription)
 	  })
 	}
 
@@ -11031,109 +11570,91 @@ exports["abcui"] =
 	 */
 	function Context (io, opts) {
 	  this.io = io;
-	  this.accountType = opts.accountType || 'account:repo:co.airbitz.wallet';
+	  this.appId = opts.appId != null
+	    ? opts.appId
+	    : opts.accountType != null
+	      ? opts.accountType.replace(/^account.repo:/, '')
+	      : '';
 	}
 
-	Context.prototype.usernameList = function () {
+	Context.prototype.usernameList = syncApi(function () {
 	  return this.io.loginStore.listUsernames()
-	};
+	});
 	Context.prototype.listUsernames = Context.prototype.usernameList;
 
-	Context.prototype.fixUsername = fixUsername;
+	Context.prototype.fixUsername = syncApi(fixUsername);
 
-	Context.prototype.removeUsername = function (username) {
-	  this.io.loginStore.remove({username: username});
-	};
+	Context.prototype.removeUsername = syncApi(function (username) {
+	  this.io.loginStore.remove(username);
+	});
 
-	Context.prototype.usernameAvailable = nodeify(function (username) {
-	  return usernameAvailable(this.io, username)
+	Context.prototype.usernameAvailable = asyncApi(function (username) {
+	  // TODO: We should change the API to expect a bool, rather than throwing:
+	  return usernameAvailable(this.io, username).then(function (bool) {
+	    if (!bool) {
+	      throw new UsernameError()
+	    }
+	    return bool
+	  })
 	});
 
 	/**
 	 * Creates a login, then creates and attaches an account to it.
 	 */
-	Context.prototype.createAccount = nodeify(function (username, password, pin) {
+	Context.prototype.createAccount = asyncApi(function (username, password, pin) {
 	  var this$1 = this;
 
-	  return create(this.io, username, password, {}).then(function (login$$1) {
-	    try {
-	      login$$1.accountFind(this$1.accountType);
-	    } catch (e) {
-	      // If the login doesn't have the correct account type, add it first:
-	      return login$$1.accountCreate(this$1.io, this$1.accountType).then(function () {
-	        return setup$1(this$1.io, login$$1, pin).then(function (login$$1) {
-	          var account = new Account(this$1, login$$1);
-	          account.newAccount = true;
-	          return account.sync().then(function () { return account; })
-	        })
-	      })
-	    }
-
-	    // Otherwise, we have the correct account type, and can simply return:
-	    return setup$1(this$1.io, login$$1, pin).then(function (login$$1) {
-	      var account = new Account(this$1, login$$1);
-	      account.newAccount = true;
-	      return account.sync().then(function () { return account; })
-	    })
+	  return createLogin(this.io, username, { password: password, pin: pin }).then(function (login$$1) {
+	    return makeAccount(this$1, login$$1, 'newAccount')
 	  })
 	});
 
-	Context.prototype.loginWithPassword = nodeify(function (username, password, otp, opts) {
+	Context.prototype.loginWithPassword = asyncApi(function (username, password, otp, opts) {
 	  var this$1 = this;
 
 	  return login(this.io, username, password).then(function (login$$1) {
-	    var account = new Account(this$1, login$$1);
-	    account.passwordLogin = true;
-	    return account.sync().then(function () { return account; })
+	    return makeAccount(this$1, login$$1, 'passwordLogin')
 	  })
 	});
 
-	Context.prototype.pinExists = function (username) {
-	  return getKey(this.io, username) != null
-	};
-	Context.prototype.pinLoginEnabled = function (username) {
-	  return getKey(this.io, username) != null
-	};
+	Context.prototype.pinExists = syncApi(function (username) {
+	  var loginStash = this.io.loginStore.loadSync(username);
+	  return getKey(loginStash, this.appId) != null
+	});
+	Context.prototype.pinLoginEnabled = Context.prototype.pinExists;
 
-	Context.prototype.loginWithPIN = nodeify(function (username, pin) {
+	Context.prototype.loginWithPIN = asyncApi(function (username, pin) {
 	  var this$1 = this;
 
-	  var pin2Key = getKey(this.io, username);
-	  if (pin2Key == null) {
-	    throw new Error('No PIN set locally for this account')
-	  }
-	  return login$1(this.io, pin2Key, username, pin).then(function (login$$1) {
-	    var account = new Account(this$1, login$$1);
-	    account.pinLogin = true;
-	    return account.sync().then(function () { return account; })
+	  return login$1(this.io, this.appId, username, pin).then(function (login$$1) {
+	    return makeAccount(this$1, login$$1, 'pinLogin')
 	  })
 	});
 
-	Context.prototype.getRecovery2Key = nodeify(function (username) {
-	  var recovery2Key = getKey$1(this.io, username);
+	Context.prototype.getRecovery2Key = asyncApi(function (username) {
+	  var loginStash = this.io.loginStore.loadSync(username);
+	  var recovery2Key = getKey$1(loginStash);
 	  if (recovery2Key == null) {
 	    return Promise.reject(new Error('No recovery key stored locally.'))
 	  }
 	  return Promise.resolve(base58.stringify(recovery2Key))
 	});
 
-	Context.prototype.loginWithRecovery2 = nodeify(function (recovery2Key, username, answers, otp, options) {
+	Context.prototype.loginWithRecovery2 = asyncApi(function (recovery2Key, username, answers, otp, options) {
 	  var this$1 = this;
 
 	  recovery2Key = base58.parse(recovery2Key);
 	  return login$2(this.io, recovery2Key, username, answers).then(function (login$$1) {
-	    var account = new Account(this$1, login$$1);
-	    account.recoveryLogin = true;
-	    return account.sync().then(function () { return account; })
+	    return makeAccount(this$1, login$$1, 'recoveryLogin')
 	  })
 	});
 
-	Context.prototype.fetchRecovery2Questions = nodeify(function (recovery2Key, username) {
+	Context.prototype.fetchRecovery2Questions = asyncApi(function (recovery2Key, username) {
 	  recovery2Key = base58.parse(recovery2Key);
 	  return questions(this.io, recovery2Key, username)
 	});
 
-	Context.prototype.checkPasswordRules = function (password) {
+	Context.prototype.checkPasswordRules = syncApi(function (password) {
 	  var tooShort = password.length < 10;
 	  var noNumber = password.match(/\d/) == null;
 	  var noUpperCase = password.match(/[A-Z]/) == null;
@@ -11147,119 +11668,25 @@ exports["abcui"] =
 	    'noLowerCase': noLowerCase,
 	    'passed': extraLong || !(tooShort || noNumber || noUpperCase || noLowerCase)
 	  }
-	};
+	});
 
-	Context.prototype.requestEdgeLogin = nodeify(function (opts) {
+	Context.prototype.requestEdgeLogin = asyncApi(function (opts) {
 	  var this$1 = this;
 
 	  var onLogin = opts.onLogin;
 	  opts.onLogin = function (err, login$$1) {
 	    if (err) { return onLogin(err) }
-	    var account = new Account(this$1, login$$1);
-	    account.edgeLogin = true;
-	    account.sync().then(function (dirty) { return onLogin(null, account); }, function (err) { return onLogin(err); });
+	    makeAccount(this$1, login$$1, 'edgeLogin').then(
+	      function (account) { return onLogin(null, account); },
+	      function (err) { return onLogin(err); }
+	    );
 	  };
-	  opts.type = opts.type || this.accountType;
-	  return create$1(this.io, opts)
+	  return requestEdgeLogin(this.io, this.appId, opts)
 	});
 
-	Context.prototype.listRecoveryQuestionChoices = nodeify(function () {
+	Context.prototype.listRecoveryQuestionChoices = asyncApi(function () {
 	  return listRecoveryQuestionChoices(this.io)
 	});
-
-	/*
-	 * These are errors the core knows about.
-	 *
-	 * The GUI should handle these errors in an "intelligent" way, such as by
-	 * displaying a localized error message or asking the user for more info.
-	 * All these errors have a `type` field, which the GUI can use to select
-	 * the appropriate response.
-	 *
-	 * Other errors are possible, of course, since the Javascript language
-	 * itself can generate exceptions. Those errors won't have a `type` field,
-	 * and the GUI should just show them with a stack trace & generic message,
-	 * since the program has basically crashed at that point.
-	 */
-
-	/**
-	 * Creates an error constructor with the given type and default message.
-	 */
-	function defineError (type, defaultMessage) {
-	  var f = function ConstructError (message) {
-	    var e = new Error(message || defaultMessage);
-	    e.type = type;
-	    return e
-	  };
-	  f.type = type;
-	  return f
-	}
-
-	/**
-	 * Could not reach the server at all.
-	 */
-	var NetworkError =
-	  defineError('NetworkError', 'Cannot reach the network');
-
-	/**
-	 * The endpoint on the server is obsolete, and the app needs to be upgraded.
-	 */
-	var ObsoleteApiError =
-	  defineError('ObsoleteApiError', 'The application is too old. Please upgrade.');
-
-	/**
-	 * Cannot find a login with that id.
-	 *
-	 * Reasons could include:
-	 * - Password login: wrong username
-	 * - PIN login: wrong PIN key
-	 * - Recovery login: wrong username, or wrong recovery key
-	 */
-	var UsernameError =
-	  defineError('UsernameError', 'Invaid username');
-
-	/**
-	 * The provided authentication is incorrect.
-	 *
-	 * Reasons could include:
-	 * - Password login: wrong password
-	 * - PIN login: wrong PIN
-	 * - Recovery login: wrong answers
-	 *
-	 * The error object may include a `wait` member,
-	 * which is the number of seconds the user must wait before trying again.
-	 */
-	function PasswordError (resultsJson, message) {
-	  if ( resultsJson === void 0 ) resultsJson = {};
-
-	  var e = new Error(message || 'Invalid password');
-	  e.type = PasswordError.name;
-	  e.wait = resultsJson['wait_seconds'];
-	  return e
-	}
-	PasswordError.type = PasswordError.name;
-
-	/**
-	 * The OTP token was missing / incorrect.
-	 *
-	 * The error object should include a `resetToken` member,
-	 * which can be used to reset OTP protection on the account.
-	 *
-	 * The error object may include a `resetDate` member,
-	 * which indicates that an OTP reset is already pending,
-	 * and when it will complete.
-	 */
-	function OtpError (resultsJson, message) {
-	  if ( resultsJson === void 0 ) resultsJson = {};
-
-	  var e = new Error(message || 'Invalid OTP token');
-	  e.type = OtpError.name;
-	  e.resetToken = resultsJson['otp_reset_auth'];
-	  if (resultsJson.otp_timeout_date != null) {
-	    e.resetDate = new Date(resultsJson.otp_timeout_date);
-	  }
-	  return e
-	}
-	OtpError.type = OtpError.name;
 
 	/**
 	 * Waits for the first successful promise.
@@ -11283,8 +11710,7 @@ exports["abcui"] =
 	  ])
 	}
 
-	var serverRoot = 'https://auth.airbitz.co/api';
-	// const serverRoot = 'https://test-auth.airbitz.co/api'
+	var serverRoot = 'https://test-auth.airbitz.co/api';
 
 	function parseReply (json) {
 	  switch (json['status_code']) {
@@ -11443,9 +11869,11 @@ exports["abcui"] =
 	 * Finds all matching handlers in the routing table.
 	 */
 	function findRoute (method, path) {
-	  return routes.filter(function (route) {
-	    return route.method === method && route.path.test(path)
-	  }).map(function (route) { return route.handler; })
+	  return routes
+	    .filter(function (route) {
+	      return route.method === method && route.path.test(path)
+	    })
+	    .map(function (route) { return route.handler; })
 	}
 
 	var errorCodes = {
@@ -11485,10 +11913,10 @@ exports["abcui"] =
 
 	function makeResponse (results) {
 	  var reply = {
-	    'status_code': 0
+	    status_code: 0
 	  };
 	  if (results != null) {
-	    reply['results'] = results;
+	    reply.results = results;
 	  }
 	  return new FakeResponse(JSON.stringify(reply))
 	}
@@ -11501,7 +11929,7 @@ exports["abcui"] =
 	    status_code: code,
 	    message: message || 'Server error'
 	  };
-	  return new FakeResponse(JSON.stringify(body), {status: status})
+	  return new FakeResponse(JSON.stringify(body), { status: status })
 	}
 
 	// Authentication middleware: ----------------------------------------------
@@ -11512,49 +11940,69 @@ exports["abcui"] =
 	function authHandler1 (req) {
 	  // Password login:
 	  if (req.body.l1 != null && req.body.lp1 != null) {
-	    if (req.body.l1 !== this.db.userId) {
+	    var login = this.findLoginId(req.body.l1);
+	    if (login == null) {
 	      return makeErrorResponse(errorCodes.noAccount)
 	    }
-	    if (req.body.lp1 !== this.db.passwordAuth) {
+	    if (req.body.lp1 !== login.passwordAuth) {
 	      return makeErrorResponse(errorCodes.invalidPassword)
 	    }
-	    return null
+	    req.login = login;
+	    return
 	  }
-	  return makeErrorResponse(errorCodes.error)
+	  return makeErrorResponse(errorCodes.error, 'Missing credentials')
 	}
 
 	/**
 	 * Verifies that the request contains valid v2 authenticaion.
 	 */
 	function authHandler (req) {
-	  // Password login:
-	  if (req.body.userId != null && req.body.passwordAuth != null) {
-	    if (req.body.userId !== this.db.userId) {
+	  // Token login:
+	  if (req.body.loginId != null && req.body.loginAuth != null) {
+	    var login = this.findLoginId(req.body.loginId);
+	    if (login == null) {
 	      return makeErrorResponse(errorCodes.noAccount)
 	    }
-	    if (req.body.passwordAuth !== this.db.passwordAuth) {
+	    if (req.body.loginAuth !== login.loginAuth) {
 	      return makeErrorResponse(errorCodes.invalidPassword)
 	    }
-	    return null
+	    req.login = login;
+	    return
+	  }
+
+	  // Password login:
+	  if (req.body.userId != null && req.body.passwordAuth != null) {
+	    var login$1 = this.findLoginId(req.body.userId);
+	    if (login$1 == null) {
+	      return makeErrorResponse(errorCodes.noAccount)
+	    }
+	    if (req.body.passwordAuth !== login$1.passwordAuth) {
+	      return makeErrorResponse(errorCodes.invalidPassword)
+	    }
+	    req.login = login$1;
+	    return
 	  }
 
 	  // PIN2 login:
 	  if (req.body.pin2Id != null && req.body.pin2Auth != null) {
-	    if (req.body.pin2Id !== this.db.pin2Id) {
+	    var login$2 = this.findPin2Id(req.body.pin2Id);
+	    if (login$2 == null) {
 	      return makeErrorResponse(errorCodes.noAccount)
 	    }
-	    if (req.body.pin2Auth !== this.db.pin2Auth) {
+	    if (req.body.pin2Auth !== login$2.pin2Auth) {
 	      return makeErrorResponse(errorCodes.invalidPassword)
 	    }
-	    return null
+	    req.login = login$2;
+	    return
 	  }
 
 	  // Recovery2 login:
 	  if (req.body.recovery2Id != null && req.body.recovery2Auth != null) {
-	    if (req.body.recovery2Id !== this.db.recovery2Id) {
+	    var login$3 = this.findRecovery2Id(req.body.recovery2Id);
+	    if (login$3 == null) {
 	      return makeErrorResponse(errorCodes.noAccount)
 	    }
-	    var serverAuth = this.db.recovery2Auth;
+	    var serverAuth = login$3.recovery2Auth;
 	    var clientAuth = req.body.recovery2Auth;
 	    if (clientAuth.length !== serverAuth.length) {
 	      return makeErrorResponse(errorCodes.invalidAnswers)
@@ -11564,31 +12012,37 @@ exports["abcui"] =
 	        return makeErrorResponse(errorCodes.invalidAnswers)
 	      }
 	    }
-	    return null
+	    req.login = login$3;
+	    return
 	  }
-	  return makeErrorResponse(errorCodes.error)
+	  return makeErrorResponse(errorCodes.error, 'Missing credentials')
 	}
 
 	// Account lifetime v1: ----------------------------------------------------
 
 	addRoute('POST', '/api/v1/account/available', function (req) {
-	  if (req.body.l1 != null && req.body.l1 === this.db.userId) {
+	  if (this.findLoginId(req.body.l1)) {
 	    return makeErrorResponse(errorCodes.accountExists)
 	  }
 	  return makeResponse()
 	});
 
 	addRoute('POST', '/api/v1/account/create', function (req) {
-	  this.db.userId = req.body['l1'];
-	  this.db.passwordAuth = req.body['lp1'];
+	  if (this.findLoginId(req.body.l1)) {
+	    return makeErrorResponse(errorCodes.accountExists)
+	  }
 
 	  var carePackage = JSON.parse(req.body['care_package']);
-	  this.db.passwordKeySnrp = carePackage['SNRP2'];
-
 	  var loginPackage = JSON.parse(req.body['login_package']);
-	  this.db.passwordAuthBox = loginPackage['ELP1'];
-	  this.db.passwordBox = loginPackage['EMK_LP2'];
-	  this.db.syncKeyBox = loginPackage['ESyncKey'];
+	  this.db.logins.push({
+	    appId: '',
+	    loginId: req.body['l1'],
+	    passwordAuth: req.body['lp1'],
+	    passwordKeySnrp: carePackage['SNRP2'],
+	    passwordAuthBox: loginPackage['ELP1'],
+	    passwordBox: loginPackage['EMK_LP2'],
+	    syncKeyBox: loginPackage['ESyncKey']
+	  });
 	  this.repos[req.body['repo_account_key']] = {};
 
 	  return makeResponse()
@@ -11601,44 +12055,55 @@ exports["abcui"] =
 	// Login v1: ---------------------------------------------------------------
 
 	addRoute('POST', '/api/v1/account/carepackage/get', function (req) {
-	  if (req.body.l1 == null || req.body.l1 !== this.db.userId) {
+	  var login = this.findLoginId(req.body.l1);
+	  if (login == null) {
 	    return makeErrorResponse(errorCodes.noAccount)
 	  }
 
 	  return makeResponse({
-	    'care_package': JSON.stringify({
-	      'SNRP2': this.db.passwordKeySnrp
+	    care_package: JSON.stringify({
+	      SNRP2: login.passwordKeySnrp
 	    })
 	  })
 	});
 
-	addRoute('POST', '/api/v1/account/loginpackage/get', authHandler1, function (req) {
-	  var results = {
-	    'login_package': JSON.stringify({
-	      'ELP1': this.db.passwordAuthBox,
-	      'EMK_LP2': this.db.passwordBox,
-	      'ESyncKey': this.db.syncKeyBox
-	    })
-	  };
-	  if (this.db.rootKeyBox != null) {
-	    results['rootKeyBox'] = this.db.rootKeyBox;
+	addRoute(
+	  'POST',
+	  '/api/v1/account/loginpackage/get',
+	  authHandler1,
+	  function (req) {
+	    var results = {
+	      login_package: JSON.stringify({
+	        ELP1: req.login.passwordAuthBox,
+	        EMK_LP2: req.login.passwordBox,
+	        ESyncKey: req.login.syncKeyBox
+	      })
+	    };
+	    if (req.login.rootKeyBox != null) {
+	      results.rootKeyBox = req.login.rootKeyBox;
+	    }
+	    return makeResponse(results)
 	  }
-	  return makeResponse(results)
-	});
+	);
 
 	// PIN login v1: -----------------------------------------------------------
 
-	addRoute('POST', '/api/v1/account/pinpackage/update', authHandler1, function (req) {
-	  this.db.pinKeyBox = JSON.parse(req.body['pin_package']);
-	  return makeResponse()
-	});
+	addRoute(
+	  'POST',
+	  '/api/v1/account/pinpackage/update',
+	  authHandler1,
+	  function (req) {
+	    this.db.pinKeyBox = JSON.parse(req.body['pin_package']);
+	    return makeResponse()
+	  }
+	);
 
 	addRoute('POST', '/api/v1/account/pinpackage/get', function (req) {
 	  if (this.db.pinKeyBox == null) {
 	    return makeErrorResponse(errorCodes.noAccount)
 	  }
 	  return makeResponse({
-	    'pin_package': JSON.stringify(this.db.pinKeyBox)
+	    pin_package: JSON.stringify(this.db.pinKeyBox)
 	  })
 	});
 
@@ -11655,35 +12120,40 @@ exports["abcui"] =
 
 	// login v2: ---------------------------------------------------------------
 
-	addRoute('POST', '/api/v2/login', function (req) {
-	  if (req.body.recovery2Id != null && req.body.recovery2Auth == null) {
-	    if (req.body.recovery2Id !== this.db.recovery2Id) {
-	      return makeErrorResponse(errorCodes.noAccount)
+	addRoute(
+	  'POST',
+	  '/api/v2/login',
+	  function (req) {
+	    if (req.body.userId != null && req.body.passwordAuth == null) {
+	      var login = this.findLoginId(req.body.userId);
+	      if (login == null) {
+	        return makeErrorResponse(errorCodes.noAccount)
+	      }
+	      return makeResponse({
+	        passwordAuthSnrp: login.passwordAuthSnrp
+	      })
 	    }
-	    return makeResponse({
-	      'question2Box': this.db.question2Box
-	    })
+	    if (req.body.recovery2Id != null && req.body.recovery2Auth == null) {
+	      var login$1 = this.findRecovery2Id(req.body.recovery2Id);
+	      if (login$1 == null) {
+	        return makeErrorResponse(errorCodes.noAccount)
+	      }
+	      return makeResponse({
+	        question2Box: login$1.question2Box
+	      })
+	    }
+	    return null
+	  },
+	  authHandler,
+	  function (req) {
+	    return makeResponse(this.makeReply(req.login))
 	  }
-	  return null
-	}, authHandler, function (req) {
-	  return makeResponse(filterObject(this.db, [
-	    'passwordAuthBox',
-	    'passwordBox',
-	    'passwordKeySnrp',
-	    'pin2Box',
-	    'pin2KeyBox',
-	    'recovery2Box',
-	    'recovery2KeyBox',
-	    'rootKeyBox',
-	    'syncKeyBox',
-	    'repos'
-	  ]))
-	});
+	);
 
 	addRoute('POST', '/api/v2/login/create', function (req) {
 	  var this$1 = this;
 
-	  var data = req.body['data'];
+	  var data = req.body.data;
 
 	  // Set up repos:
 	  if (data.newSyncKeys != null) {
@@ -11693,10 +12163,15 @@ exports["abcui"] =
 	  }
 
 	  // Set up login object:
-	  objectAssign(this.db, filterObject(data, [
-	    'userId',
+	  var row = filterObject(data, [
+	    'appId',
+	    'loginId',
+	    'loginAuth',
+	    'loginAuthBox',
+	    'parentBox',
 	    'passwordAuth',
 	    'passwordAuthBox',
+	    'passwordAuthSnrp',
 	    'passwordBox',
 	    'passwordKeySnrp',
 	    'pin2Auth',
@@ -11708,91 +12183,125 @@ exports["abcui"] =
 	    'recovery2Box',
 	    'recovery2Id',
 	    'recovery2KeyBox',
-	    'rootKeyBox',
-	    'syncKeyBox',
+	    'mnemonicBox', // Used for testing, not part of the real server!
+	    'rootKeyBox', // Same
+	    'syncKeyBox', // Same
 	    'repos'
-	  ]));
+	  ]);
+	  if (!authHandler.call(this, req)) {
+	    row.parent = req.login.loginId;
+	  }
+	  this.db.logins.push(row);
+
+	  return makeResponse()
+	});
+
+	addRoute('POST', '/api/v2/login/keys', authHandler, function (req) {
+	  var this$1 = this;
+
+	  var data = req.body['data'];
+	  if (data.keyBoxes == null) {
+	    return makeErrorResponse(errorCodes.error)
+	  }
+
+	  // Set up repos:
+	  if (data.newSyncKeys != null) {
+	    data.newSyncKeys.forEach(function (syncKey) {
+	      this$1.repos[syncKey] = {};
+	    });
+	  }
+
+	  req.login.keyBoxes = elvis(req.login.keyBoxes, []).concat( data.keyBoxes);
 
 	  return makeResponse()
 	});
 
 	addRoute('POST', '/api/v2/login/password', authHandler, function (req) {
-	  var data = req.body['data'];
-	  if (data.passwordAuth == null || data.passwordKeySnrp == null ||
-	      data.passwordBox == null || data.passwordAuthBox == null) {
+	  var data = req.body.data;
+	  if (
+	    data.passwordAuth == null ||
+	    data.passwordAuthBox == null ||
+	    data.passwordAuthSnrp == null ||
+	    data.passwordBox == null ||
+	    data.passwordKeySnrp == null
+	  ) {
 	    return makeErrorResponse(errorCodes.error)
 	  }
 
-	  this.db.passwordAuth = data['passwordAuth'];
-	  this.db.passwordKeySnrp = data['passwordKeySnrp'];
-	  this.db.passwordBox = data['passwordBox'];
-	  this.db.passwordAuthBox = data['passwordAuthBox'];
+	  req.login.passwordAuth = data.passwordAuth;
+	  req.login.passwordAuthBox = data.passwordAuthBox;
+	  req.login.passwordAuthSnrp = data.passwordAuthSnrp;
+	  req.login.passwordBox = data.passwordBox;
+	  req.login.passwordKeySnrp = data.passwordKeySnrp;
 
 	  return makeResponse()
 	});
 
 	addRoute('POST', '/api/v2/login/pin2', authHandler, function (req) {
-	  var data = req.body['data'];
-	  if (data.pin2Id == null || data.pin2Auth == null ||
-	      data.pin2Box == null || data.pin2KeyBox == null) {
+	  var data = req.body.data;
+	  if (
+	    data.pin2Auth == null ||
+	    data.pin2Box == null ||
+	    data.pin2Id == null ||
+	    data.pin2KeyBox == null
+	  ) {
 	    return makeErrorResponse(errorCodes.error)
 	  }
 
-	  this.db.pin2Id = data['pin2Id'];
-	  this.db.pin2Auth = data['pin2Auth'];
-	  this.db.pin2Box = data['pin2Box'];
-	  this.db.pin2KeyBox = data['pin2KeyBox'];
+	  req.login.pin2Auth = data.pin2Auth;
+	  req.login.pin2Box = data.pin2Box;
+	  req.login.pin2Id = data.pin2Id;
+	  req.login.pin2KeyBox = data.pin2KeyBox;
 
 	  return makeResponse()
 	});
 
 	addRoute('POST', '/api/v2/login/recovery2', authHandler, function (req) {
-	  var data = req.body['data'];
-	  if (data.recovery2Id == null || data.recovery2Auth == null ||
-	      data.question2Box == null || data.recovery2Box == null ||
-	      data.recovery2KeyBox == null) {
+	  var data = req.body.data;
+	  if (
+	    data.question2Box == null ||
+	    data.recovery2Auth == null ||
+	    data.recovery2Box == null ||
+	    data.recovery2Id == null ||
+	    data.recovery2KeyBox == null
+	  ) {
 	    return makeErrorResponse(errorCodes.error)
 	  }
 
-	  this.db.recovery2Id = data['recovery2Id'];
-	  this.db.recovery2Auth = data['recovery2Auth'];
-	  this.db.question2Box = data['question2Box'];
-	  this.db.recovery2Box = data['recovery2Box'];
-	  this.db.recovery2KeyBox = data['recovery2KeyBox'];
-
-	  return makeResponse()
-	});
-
-	addRoute('POST', '/api/v2/login/repos', authHandler, function (req) {
-	  var data = req.body['data'];
-	  if (data.type == null || data.info == null) {
-	    return makeErrorResponse(errorCodes.error)
-	  }
-
-	  if (this.db.repos != null) {
-	    this.db.repos.push(data);
-	  } else {
-	    this.db.repos = [data];
-	  }
+	  req.login.question2Box = data.question2Box;
+	  req.login.recovery2Auth = data.recovery2Auth;
+	  req.login.recovery2Box = data.recovery2Box;
+	  req.login.recovery2Id = data.recovery2Id;
+	  req.login.recovery2KeyBox = data.recovery2KeyBox;
 
 	  return makeResponse()
 	});
 
 	// lobby: ------------------------------------------------------------------
 
-	addRoute('POST', '/api/v2/lobby', function (req) {
-	  this.db.lobby = req.body['data'];
-	  return makeResponse({
-	    'id': 'IMEDGELOGIN'
-	  })
+	addRoute('PUT', '/api/v2/lobby/.*', function (req) {
+	  var pubkey = req.path.split('/')[4];
+	  this.db.lobbies[pubkey] = { request: req.body['data'], replies: [] };
+	  return makeResponse()
 	});
 
-	addRoute('GET', '/api/v2/lobby/IMEDGELOGIN', function (req) {
-	  return makeResponse(this.db.lobby)
+	addRoute('POST', '/api/v2/lobby/.*', function (req) {
+	  var pubkey = req.path.split('/')[4];
+	  this.db.lobbies[pubkey].replies.push(req.body['data']);
+	  return makeResponse()
 	});
 
-	addRoute('PUT', '/api/v2/lobby/IMEDGELOGIN', function (req) {
-	  this.db.lobby = req.body['data'];
+	addRoute('GET', '/api/v2/lobby/.*', function (req) {
+	  var pubkey = req.path.split('/')[4];
+	  if (this.db.lobbies[pubkey] == null) {
+	    return new FakeResponse(("Cannot find lobby \"" + pubkey + "\""), { status: 404 })
+	  }
+	  return makeResponse(this.db.lobbies[pubkey])
+	});
+
+	addRoute('DELETE', '/api/v2/lobby/.*', function (req) {
+	  var pubkey = req.path.split('/')[4];
+	  delete this.db.lobbies[pubkey];
 	  return makeResponse()
 	});
 
@@ -11805,22 +12314,24 @@ exports["abcui"] =
 
 	  var repo = this.repos[syncKey];
 	  if (repo == null) {
-	    return new FakeResponse('Cannot find repo ' + syncKey, {status: 404})
+	    return new FakeResponse('Cannot find repo ' + syncKey, { status: 404 })
 	  }
 
 	  switch (req.method) {
 	    case 'POST':
-	      var changes = req.body['changes'];
+	      var changes = req.body.changes;
 	      Object.keys(changes).forEach(function (change) {
 	        repo[change] = changes[change];
 	      });
-	      return new FakeResponse(JSON.stringify({
-	        'changes': changes,
-	        'hash': '1111111111111111111111111111111111111111'
-	      }))
+	      return new FakeResponse(
+	        JSON.stringify({
+	          changes: changes,
+	          hash: '1111111111111111111111111111111111111111'
+	        })
+	      )
 
 	    case 'GET':
-	      return new FakeResponse(JSON.stringify({'changes': repo}))
+	      return new FakeResponse(JSON.stringify({ changes: repo }))
 	  }
 	}
 
@@ -11833,7 +12344,7 @@ exports["abcui"] =
 	var FakeServer = function FakeServer () {
 	  var this$1 = this;
 
-	  this.db = {};
+	  this.db = { lobbies: {}, logins: [] };
 	  this.repos = {};
 	  this.fetch = function (uri, opts) {
 	    if ( opts === void 0 ) opts = {};
@@ -11846,13 +12357,54 @@ exports["abcui"] =
 	  };
 	};
 
+	FakeServer.prototype.findLoginId = function findLoginId (loginId) {
+	  if (loginId == null) { return }
+	  return this.db.logins.find(function (login) { return login.loginId === loginId; })
+	};
+
+	FakeServer.prototype.findPin2Id = function findPin2Id (pin2Id) {
+	  return this.db.logins.find(function (login) { return login.pin2Id === pin2Id; })
+	};
+
+	FakeServer.prototype.findRecovery2Id = function findRecovery2Id (recovery2Id) {
+	  return this.db.logins.find(function (login) { return login.recovery2Id === recovery2Id; })
+	};
+
+	FakeServer.prototype.makeReply = function makeReply (login) {
+	    var this$1 = this;
+
+	  var reply = filterObject(login, [
+	    'appId',
+	    'loginId',
+	    'loginAuthBox',
+	    'parentBox',
+	    'passwordAuthBox',
+	    'passwordAuthSnrp',
+	    'passwordBox',
+	    'passwordKeySnrp',
+	    'pin2Box',
+	    'pin2KeyBox',
+	    'question2Box',
+	    'recovery2Box',
+	    'recovery2KeyBox',
+	    'mnemonicBox',
+	    'rootKeyBox',
+	    'syncKeyBox',
+	    'keyBoxes'
+	  ]);
+	  reply.children = this.db.logins
+	    .filter(function (child) { return child.parent === login.loginId; })
+	    .map(function (child) { return this$1.makeReply(child); });
+	  return reply
+	};
+
 	FakeServer.prototype.request = function request (uri, opts) {
 	    var this$1 = this;
 
 	  var req = {
 	    method: opts.method || 'GET',
 	    body: opts.body ? JSON.parse(opts.body) : null,
-	    path: url.parse(uri).pathname
+	    path: uri.replace(new RegExp('https?://[^/]*'), '')
 	  };
 
 	  var handlers = findRoute(req.method, req.path);
@@ -11864,7 +12416,11 @@ exports["abcui"] =
 	      return out
 	    }
 	  }
-	  return makeErrorResponse(errorCodes.error, ("Unknown API endpoint " + (req.path)), 404)
+	  return makeErrorResponse(
+	    errorCodes.error,
+	    ("Unknown API endpoint " + (req.path)),
+	    404
+	  )
 	};
 
 	/**
@@ -19182,1495 +19738,18 @@ exports["abcui"] =
 
 /***/ },
 /* 25 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	'use strict';
-
-	var punycode = __webpack_require__(26);
-	var util = __webpack_require__(28);
-
-	exports.parse = urlParse;
-	exports.resolve = urlResolve;
-	exports.resolveObject = urlResolveObject;
-	exports.format = urlFormat;
-
-	exports.Url = Url;
-
-	function Url() {
-	  this.protocol = null;
-	  this.slashes = null;
-	  this.auth = null;
-	  this.host = null;
-	  this.port = null;
-	  this.hostname = null;
-	  this.hash = null;
-	  this.search = null;
-	  this.query = null;
-	  this.pathname = null;
-	  this.path = null;
-	  this.href = null;
-	}
-
-	// Reference: RFC 3986, RFC 1808, RFC 2396
-
-	// define these here so at least they only have to be
-	// compiled once on the first module load.
-	var protocolPattern = /^([a-z0-9.+-]+:)/i,
-	    portPattern = /:[0-9]*$/,
-
-	    // Special case for a simple path URL
-	    simplePathPattern = /^(\/\/?(?!\/)[^\?\s]*)(\?[^\s]*)?$/,
-
-	    // RFC 2396: characters reserved for delimiting URLs.
-	    // We actually just auto-escape these.
-	    delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
-
-	    // RFC 2396: characters not allowed for various reasons.
-	    unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims),
-
-	    // Allowed by RFCs, but cause of XSS attacks.  Always escape these.
-	    autoEscape = ['\''].concat(unwise),
-	    // Characters that are never ever allowed in a hostname.
-	    // Note that any invalid chars are also handled, but these
-	    // are the ones that are *expected* to be seen, so we fast-path
-	    // them.
-	    nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
-	    hostEndingChars = ['/', '?', '#'],
-	    hostnameMaxLen = 255,
-	    hostnamePartPattern = /^[+a-z0-9A-Z_-]{0,63}$/,
-	    hostnamePartStart = /^([+a-z0-9A-Z_-]{0,63})(.*)$/,
-	    // protocols that can allow "unsafe" and "unwise" chars.
-	    unsafeProtocol = {
-	      'javascript': true,
-	      'javascript:': true
-	    },
-	    // protocols that never have a hostname.
-	    hostlessProtocol = {
-	      'javascript': true,
-	      'javascript:': true
-	    },
-	    // protocols that always contain a // bit.
-	    slashedProtocol = {
-	      'http': true,
-	      'https': true,
-	      'ftp': true,
-	      'gopher': true,
-	      'file': true,
-	      'http:': true,
-	      'https:': true,
-	      'ftp:': true,
-	      'gopher:': true,
-	      'file:': true
-	    },
-	    querystring = __webpack_require__(29);
-
-	function urlParse(url, parseQueryString, slashesDenoteHost) {
-	  if (url && util.isObject(url) && url instanceof Url) return url;
-
-	  var u = new Url;
-	  u.parse(url, parseQueryString, slashesDenoteHost);
-	  return u;
-	}
-
-	Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
-	  if (!util.isString(url)) {
-	    throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
-	  }
-
-	  // Copy chrome, IE, opera backslash-handling behavior.
-	  // Back slashes before the query string get converted to forward slashes
-	  // See: https://code.google.com/p/chromium/issues/detail?id=25916
-	  var queryIndex = url.indexOf('?'),
-	      splitter =
-	          (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
-	      uSplit = url.split(splitter),
-	      slashRegex = /\\/g;
-	  uSplit[0] = uSplit[0].replace(slashRegex, '/');
-	  url = uSplit.join(splitter);
-
-	  var rest = url;
-
-	  // trim before proceeding.
-	  // This is to support parse stuff like "  http://foo.com  \n"
-	  rest = rest.trim();
-
-	  if (!slashesDenoteHost && url.split('#').length === 1) {
-	    // Try fast path regexp
-	    var simplePath = simplePathPattern.exec(rest);
-	    if (simplePath) {
-	      this.path = rest;
-	      this.href = rest;
-	      this.pathname = simplePath[1];
-	      if (simplePath[2]) {
-	        this.search = simplePath[2];
-	        if (parseQueryString) {
-	          this.query = querystring.parse(this.search.substr(1));
-	        } else {
-	          this.query = this.search.substr(1);
-	        }
-	      } else if (parseQueryString) {
-	        this.search = '';
-	        this.query = {};
-	      }
-	      return this;
-	    }
-	  }
-
-	  var proto = protocolPattern.exec(rest);
-	  if (proto) {
-	    proto = proto[0];
-	    var lowerProto = proto.toLowerCase();
-	    this.protocol = lowerProto;
-	    rest = rest.substr(proto.length);
-	  }
-
-	  // figure out if it's got a host
-	  // user@server is *always* interpreted as a hostname, and url
-	  // resolution will treat //foo/bar as host=foo,path=bar because that's
-	  // how the browser resolves relative URLs.
-	  if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
-	    var slashes = rest.substr(0, 2) === '//';
-	    if (slashes && !(proto && hostlessProtocol[proto])) {
-	      rest = rest.substr(2);
-	      this.slashes = true;
-	    }
-	  }
-
-	  if (!hostlessProtocol[proto] &&
-	      (slashes || (proto && !slashedProtocol[proto]))) {
-
-	    // there's a hostname.
-	    // the first instance of /, ?, ;, or # ends the host.
-	    //
-	    // If there is an @ in the hostname, then non-host chars *are* allowed
-	    // to the left of the last @ sign, unless some host-ending character
-	    // comes *before* the @-sign.
-	    // URLs are obnoxious.
-	    //
-	    // ex:
-	    // http://a@b@c/ => user:a@b host:c
-	    // http://a@b?@c => user:a host:c path:/?@c
-
-	    // v0.12 TODO(isaacs): This is not quite how Chrome does things.
-	    // Review our test case against browsers more comprehensively.
-
-	    // find the first instance of any hostEndingChars
-	    var hostEnd = -1;
-	    for (var i = 0; i < hostEndingChars.length; i++) {
-	      var hec = rest.indexOf(hostEndingChars[i]);
-	      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
-	        hostEnd = hec;
-	    }
-
-	    // at this point, either we have an explicit point where the
-	    // auth portion cannot go past, or the last @ char is the decider.
-	    var auth, atSign;
-	    if (hostEnd === -1) {
-	      // atSign can be anywhere.
-	      atSign = rest.lastIndexOf('@');
-	    } else {
-	      // atSign must be in auth portion.
-	      // http://a@b/c@d => host:b auth:a path:/c@d
-	      atSign = rest.lastIndexOf('@', hostEnd);
-	    }
-
-	    // Now we have a portion which is definitely the auth.
-	    // Pull that off.
-	    if (atSign !== -1) {
-	      auth = rest.slice(0, atSign);
-	      rest = rest.slice(atSign + 1);
-	      this.auth = decodeURIComponent(auth);
-	    }
-
-	    // the host is the remaining to the left of the first non-host char
-	    hostEnd = -1;
-	    for (var i = 0; i < nonHostChars.length; i++) {
-	      var hec = rest.indexOf(nonHostChars[i]);
-	      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
-	        hostEnd = hec;
-	    }
-	    // if we still have not hit it, then the entire thing is a host.
-	    if (hostEnd === -1)
-	      hostEnd = rest.length;
-
-	    this.host = rest.slice(0, hostEnd);
-	    rest = rest.slice(hostEnd);
-
-	    // pull out port.
-	    this.parseHost();
-
-	    // we've indicated that there is a hostname,
-	    // so even if it's empty, it has to be present.
-	    this.hostname = this.hostname || '';
-
-	    // if hostname begins with [ and ends with ]
-	    // assume that it's an IPv6 address.
-	    var ipv6Hostname = this.hostname[0] === '[' &&
-	        this.hostname[this.hostname.length - 1] === ']';
-
-	    // validate a little.
-	    if (!ipv6Hostname) {
-	      var hostparts = this.hostname.split(/\./);
-	      for (var i = 0, l = hostparts.length; i < l; i++) {
-	        var part = hostparts[i];
-	        if (!part) continue;
-	        if (!part.match(hostnamePartPattern)) {
-	          var newpart = '';
-	          for (var j = 0, k = part.length; j < k; j++) {
-	            if (part.charCodeAt(j) > 127) {
-	              // we replace non-ASCII char with a temporary placeholder
-	              // we need this to make sure size of hostname is not
-	              // broken by replacing non-ASCII by nothing
-	              newpart += 'x';
-	            } else {
-	              newpart += part[j];
-	            }
-	          }
-	          // we test again with ASCII char only
-	          if (!newpart.match(hostnamePartPattern)) {
-	            var validParts = hostparts.slice(0, i);
-	            var notHost = hostparts.slice(i + 1);
-	            var bit = part.match(hostnamePartStart);
-	            if (bit) {
-	              validParts.push(bit[1]);
-	              notHost.unshift(bit[2]);
-	            }
-	            if (notHost.length) {
-	              rest = '/' + notHost.join('.') + rest;
-	            }
-	            this.hostname = validParts.join('.');
-	            break;
-	          }
-	        }
-	      }
-	    }
-
-	    if (this.hostname.length > hostnameMaxLen) {
-	      this.hostname = '';
-	    } else {
-	      // hostnames are always lower case.
-	      this.hostname = this.hostname.toLowerCase();
-	    }
-
-	    if (!ipv6Hostname) {
-	      // IDNA Support: Returns a punycoded representation of "domain".
-	      // It only converts parts of the domain name that
-	      // have non-ASCII characters, i.e. it doesn't matter if
-	      // you call it with a domain that already is ASCII-only.
-	      this.hostname = punycode.toASCII(this.hostname);
-	    }
-
-	    var p = this.port ? ':' + this.port : '';
-	    var h = this.hostname || '';
-	    this.host = h + p;
-	    this.href += this.host;
-
-	    // strip [ and ] from the hostname
-	    // the host field still retains them, though
-	    if (ipv6Hostname) {
-	      this.hostname = this.hostname.substr(1, this.hostname.length - 2);
-	      if (rest[0] !== '/') {
-	        rest = '/' + rest;
-	      }
-	    }
-	  }
-
-	  // now rest is set to the post-host stuff.
-	  // chop off any delim chars.
-	  if (!unsafeProtocol[lowerProto]) {
-
-	    // First, make 100% sure that any "autoEscape" chars get
-	    // escaped, even if encodeURIComponent doesn't think they
-	    // need to be.
-	    for (var i = 0, l = autoEscape.length; i < l; i++) {
-	      var ae = autoEscape[i];
-	      if (rest.indexOf(ae) === -1)
-	        continue;
-	      var esc = encodeURIComponent(ae);
-	      if (esc === ae) {
-	        esc = escape(ae);
-	      }
-	      rest = rest.split(ae).join(esc);
-	    }
-	  }
-
-
-	  // chop off from the tail first.
-	  var hash = rest.indexOf('#');
-	  if (hash !== -1) {
-	    // got a fragment string.
-	    this.hash = rest.substr(hash);
-	    rest = rest.slice(0, hash);
-	  }
-	  var qm = rest.indexOf('?');
-	  if (qm !== -1) {
-	    this.search = rest.substr(qm);
-	    this.query = rest.substr(qm + 1);
-	    if (parseQueryString) {
-	      this.query = querystring.parse(this.query);
-	    }
-	    rest = rest.slice(0, qm);
-	  } else if (parseQueryString) {
-	    // no query string, but parseQueryString still requested
-	    this.search = '';
-	    this.query = {};
-	  }
-	  if (rest) this.pathname = rest;
-	  if (slashedProtocol[lowerProto] &&
-	      this.hostname && !this.pathname) {
-	    this.pathname = '/';
-	  }
-
-	  //to support http.request
-	  if (this.pathname || this.search) {
-	    var p = this.pathname || '';
-	    var s = this.search || '';
-	    this.path = p + s;
-	  }
-
-	  // finally, reconstruct the href based on what has been validated.
-	  this.href = this.format();
-	  return this;
-	};
-
-	// format a parsed object into a url string
-	function urlFormat(obj) {
-	  // ensure it's an object, and not a string url.
-	  // If it's an obj, this is a no-op.
-	  // this way, you can call url_format() on strings
-	  // to clean up potentially wonky urls.
-	  if (util.isString(obj)) obj = urlParse(obj);
-	  if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
-	  return obj.format();
-	}
-
-	Url.prototype.format = function() {
-	  var auth = this.auth || '';
-	  if (auth) {
-	    auth = encodeURIComponent(auth);
-	    auth = auth.replace(/%3A/i, ':');
-	    auth += '@';
-	  }
-
-	  var protocol = this.protocol || '',
-	      pathname = this.pathname || '',
-	      hash = this.hash || '',
-	      host = false,
-	      query = '';
-
-	  if (this.host) {
-	    host = auth + this.host;
-	  } else if (this.hostname) {
-	    host = auth + (this.hostname.indexOf(':') === -1 ?
-	        this.hostname :
-	        '[' + this.hostname + ']');
-	    if (this.port) {
-	      host += ':' + this.port;
-	    }
-	  }
-
-	  if (this.query &&
-	      util.isObject(this.query) &&
-	      Object.keys(this.query).length) {
-	    query = querystring.stringify(this.query);
-	  }
-
-	  var search = this.search || (query && ('?' + query)) || '';
-
-	  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
-
-	  // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
-	  // unless they had them to begin with.
-	  if (this.slashes ||
-	      (!protocol || slashedProtocol[protocol]) && host !== false) {
-	    host = '//' + (host || '');
-	    if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
-	  } else if (!host) {
-	    host = '';
-	  }
-
-	  if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
-	  if (search && search.charAt(0) !== '?') search = '?' + search;
-
-	  pathname = pathname.replace(/[?#]/g, function(match) {
-	    return encodeURIComponent(match);
-	  });
-	  search = search.replace('#', '%23');
-
-	  return protocol + host + pathname + search + hash;
-	};
-
-	function urlResolve(source, relative) {
-	  return urlParse(source, false, true).resolve(relative);
-	}
-
-	Url.prototype.resolve = function(relative) {
-	  return this.resolveObject(urlParse(relative, false, true)).format();
-	};
-
-	function urlResolveObject(source, relative) {
-	  if (!source) return relative;
-	  return urlParse(source, false, true).resolveObject(relative);
-	}
-
-	Url.prototype.resolveObject = function(relative) {
-	  if (util.isString(relative)) {
-	    var rel = new Url();
-	    rel.parse(relative, false, true);
-	    relative = rel;
-	  }
-
-	  var result = new Url();
-	  var tkeys = Object.keys(this);
-	  for (var tk = 0; tk < tkeys.length; tk++) {
-	    var tkey = tkeys[tk];
-	    result[tkey] = this[tkey];
-	  }
-
-	  // hash is always overridden, no matter what.
-	  // even href="" will remove it.
-	  result.hash = relative.hash;
-
-	  // if the relative url is empty, then there's nothing left to do here.
-	  if (relative.href === '') {
-	    result.href = result.format();
-	    return result;
-	  }
-
-	  // hrefs like //foo/bar always cut to the protocol.
-	  if (relative.slashes && !relative.protocol) {
-	    // take everything except the protocol from relative
-	    var rkeys = Object.keys(relative);
-	    for (var rk = 0; rk < rkeys.length; rk++) {
-	      var rkey = rkeys[rk];
-	      if (rkey !== 'protocol')
-	        result[rkey] = relative[rkey];
-	    }
-
-	    //urlParse appends trailing / to urls like http://www.example.com
-	    if (slashedProtocol[result.protocol] &&
-	        result.hostname && !result.pathname) {
-	      result.path = result.pathname = '/';
-	    }
-
-	    result.href = result.format();
-	    return result;
-	  }
-
-	  if (relative.protocol && relative.protocol !== result.protocol) {
-	    // if it's a known url protocol, then changing
-	    // the protocol does weird things
-	    // first, if it's not file:, then we MUST have a host,
-	    // and if there was a path
-	    // to begin with, then we MUST have a path.
-	    // if it is file:, then the host is dropped,
-	    // because that's known to be hostless.
-	    // anything else is assumed to be absolute.
-	    if (!slashedProtocol[relative.protocol]) {
-	      var keys = Object.keys(relative);
-	      for (var v = 0; v < keys.length; v++) {
-	        var k = keys[v];
-	        result[k] = relative[k];
-	      }
-	      result.href = result.format();
-	      return result;
-	    }
-
-	    result.protocol = relative.protocol;
-	    if (!relative.host && !hostlessProtocol[relative.protocol]) {
-	      var relPath = (relative.pathname || '').split('/');
-	      while (relPath.length && !(relative.host = relPath.shift()));
-	      if (!relative.host) relative.host = '';
-	      if (!relative.hostname) relative.hostname = '';
-	      if (relPath[0] !== '') relPath.unshift('');
-	      if (relPath.length < 2) relPath.unshift('');
-	      result.pathname = relPath.join('/');
-	    } else {
-	      result.pathname = relative.pathname;
-	    }
-	    result.search = relative.search;
-	    result.query = relative.query;
-	    result.host = relative.host || '';
-	    result.auth = relative.auth;
-	    result.hostname = relative.hostname || relative.host;
-	    result.port = relative.port;
-	    // to support http.request
-	    if (result.pathname || result.search) {
-	      var p = result.pathname || '';
-	      var s = result.search || '';
-	      result.path = p + s;
-	    }
-	    result.slashes = result.slashes || relative.slashes;
-	    result.href = result.format();
-	    return result;
-	  }
-
-	  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '/'),
-	      isRelAbs = (
-	          relative.host ||
-	          relative.pathname && relative.pathname.charAt(0) === '/'
-	      ),
-	      mustEndAbs = (isRelAbs || isSourceAbs ||
-	                    (result.host && relative.pathname)),
-	      removeAllDots = mustEndAbs,
-	      srcPath = result.pathname && result.pathname.split('/') || [],
-	      relPath = relative.pathname && relative.pathname.split('/') || [],
-	      psychotic = result.protocol && !slashedProtocol[result.protocol];
-
-	  // if the url is a non-slashed url, then relative
-	  // links like ../.. should be able
-	  // to crawl up to the hostname, as well.  This is strange.
-	  // result.protocol has already been set by now.
-	  // Later on, put the first path part into the host field.
-	  if (psychotic) {
-	    result.hostname = '';
-	    result.port = null;
-	    if (result.host) {
-	      if (srcPath[0] === '') srcPath[0] = result.host;
-	      else srcPath.unshift(result.host);
-	    }
-	    result.host = '';
-	    if (relative.protocol) {
-	      relative.hostname = null;
-	      relative.port = null;
-	      if (relative.host) {
-	        if (relPath[0] === '') relPath[0] = relative.host;
-	        else relPath.unshift(relative.host);
-	      }
-	      relative.host = null;
-	    }
-	    mustEndAbs = mustEndAbs && (relPath[0] === '' || srcPath[0] === '');
-	  }
-
-	  if (isRelAbs) {
-	    // it's absolute.
-	    result.host = (relative.host || relative.host === '') ?
-	                  relative.host : result.host;
-	    result.hostname = (relative.hostname || relative.hostname === '') ?
-	                      relative.hostname : result.hostname;
-	    result.search = relative.search;
-	    result.query = relative.query;
-	    srcPath = relPath;
-	    // fall through to the dot-handling below.
-	  } else if (relPath.length) {
-	    // it's relative
-	    // throw away the existing file, and take the new path instead.
-	    if (!srcPath) srcPath = [];
-	    srcPath.pop();
-	    srcPath = srcPath.concat(relPath);
-	    result.search = relative.search;
-	    result.query = relative.query;
-	  } else if (!util.isNullOrUndefined(relative.search)) {
-	    // just pull out the search.
-	    // like href='?foo'.
-	    // Put this after the other two cases because it simplifies the booleans
-	    if (psychotic) {
-	      result.hostname = result.host = srcPath.shift();
-	      //occationaly the auth can get stuck only in host
-	      //this especially happens in cases like
-	      //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-	      var authInHost = result.host && result.host.indexOf('@') > 0 ?
-	                       result.host.split('@') : false;
-	      if (authInHost) {
-	        result.auth = authInHost.shift();
-	        result.host = result.hostname = authInHost.shift();
-	      }
-	    }
-	    result.search = relative.search;
-	    result.query = relative.query;
-	    //to support http.request
-	    if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
-	      result.path = (result.pathname ? result.pathname : '') +
-	                    (result.search ? result.search : '');
-	    }
-	    result.href = result.format();
-	    return result;
-	  }
-
-	  if (!srcPath.length) {
-	    // no path at all.  easy.
-	    // we've already handled the other stuff above.
-	    result.pathname = null;
-	    //to support http.request
-	    if (result.search) {
-	      result.path = '/' + result.search;
-	    } else {
-	      result.path = null;
-	    }
-	    result.href = result.format();
-	    return result;
-	  }
-
-	  // if a url ENDs in . or .., then it must get a trailing slash.
-	  // however, if it ends in anything else non-slashy,
-	  // then it must NOT get a trailing slash.
-	  var last = srcPath.slice(-1)[0];
-	  var hasTrailingSlash = (
-	      (result.host || relative.host || srcPath.length > 1) &&
-	      (last === '.' || last === '..') || last === '');
-
-	  // strip single dots, resolve double dots to parent dir
-	  // if the path tries to go above the root, `up` ends up > 0
-	  var up = 0;
-	  for (var i = srcPath.length; i >= 0; i--) {
-	    last = srcPath[i];
-	    if (last === '.') {
-	      srcPath.splice(i, 1);
-	    } else if (last === '..') {
-	      srcPath.splice(i, 1);
-	      up++;
-	    } else if (up) {
-	      srcPath.splice(i, 1);
-	      up--;
-	    }
-	  }
-
-	  // if the path is allowed to go above the root, restore leading ..s
-	  if (!mustEndAbs && !removeAllDots) {
-	    for (; up--; up) {
-	      srcPath.unshift('..');
-	    }
-	  }
-
-	  if (mustEndAbs && srcPath[0] !== '' &&
-	      (!srcPath[0] || srcPath[0].charAt(0) !== '/')) {
-	    srcPath.unshift('');
-	  }
-
-	  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
-	    srcPath.push('');
-	  }
-
-	  var isAbsolute = srcPath[0] === '' ||
-	      (srcPath[0] && srcPath[0].charAt(0) === '/');
-
-	  // put the host back
-	  if (psychotic) {
-	    result.hostname = result.host = isAbsolute ? '' :
-	                                    srcPath.length ? srcPath.shift() : '';
-	    //occationaly the auth can get stuck only in host
-	    //this especially happens in cases like
-	    //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-	    var authInHost = result.host && result.host.indexOf('@') > 0 ?
-	                     result.host.split('@') : false;
-	    if (authInHost) {
-	      result.auth = authInHost.shift();
-	      result.host = result.hostname = authInHost.shift();
-	    }
-	  }
-
-	  mustEndAbs = mustEndAbs || (result.host && srcPath.length);
-
-	  if (mustEndAbs && !isAbsolute) {
-	    srcPath.unshift('');
-	  }
-
-	  if (!srcPath.length) {
-	    result.pathname = null;
-	    result.path = null;
-	  } else {
-	    result.pathname = srcPath.join('/');
-	  }
-
-	  //to support request.http
-	  if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
-	    result.path = (result.pathname ? result.pathname : '') +
-	                  (result.search ? result.search : '');
-	  }
-	  result.auth = relative.auth || result.auth;
-	  result.slashes = result.slashes || relative.slashes;
-	  result.href = result.format();
-	  return result;
-	};
-
-	Url.prototype.parseHost = function() {
-	  var host = this.host;
-	  var port = portPattern.exec(host);
-	  if (port) {
-	    port = port[0];
-	    if (port !== ':') {
-	      this.port = port.substr(1);
-	    }
-	    host = host.substr(0, host.length - port.length);
-	  }
-	  if (host) this.hostname = host;
-	};
-
+	/* (ignored) */
 
 /***/ },
 /* 26 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
-	;(function(root) {
-
-		/** Detect free variables */
-		var freeExports = typeof exports == 'object' && exports &&
-			!exports.nodeType && exports;
-		var freeModule = typeof module == 'object' && module &&
-			!module.nodeType && module;
-		var freeGlobal = typeof global == 'object' && global;
-		if (
-			freeGlobal.global === freeGlobal ||
-			freeGlobal.window === freeGlobal ||
-			freeGlobal.self === freeGlobal
-		) {
-			root = freeGlobal;
-		}
-
-		/**
-		 * The `punycode` object.
-		 * @name punycode
-		 * @type Object
-		 */
-		var punycode,
-
-		/** Highest positive signed 32-bit float value */
-		maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
-
-		/** Bootstring parameters */
-		base = 36,
-		tMin = 1,
-		tMax = 26,
-		skew = 38,
-		damp = 700,
-		initialBias = 72,
-		initialN = 128, // 0x80
-		delimiter = '-', // '\x2D'
-
-		/** Regular expressions */
-		regexPunycode = /^xn--/,
-		regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
-		regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
-
-		/** Error messages */
-		errors = {
-			'overflow': 'Overflow: input needs wider integers to process',
-			'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
-			'invalid-input': 'Invalid input'
-		},
-
-		/** Convenience shortcuts */
-		baseMinusTMin = base - tMin,
-		floor = Math.floor,
-		stringFromCharCode = String.fromCharCode,
-
-		/** Temporary variable */
-		key;
-
-		/*--------------------------------------------------------------------------*/
-
-		/**
-		 * A generic error utility function.
-		 * @private
-		 * @param {String} type The error type.
-		 * @returns {Error} Throws a `RangeError` with the applicable error message.
-		 */
-		function error(type) {
-			throw RangeError(errors[type]);
-		}
-
-		/**
-		 * A generic `Array#map` utility function.
-		 * @private
-		 * @param {Array} array The array to iterate over.
-		 * @param {Function} callback The function that gets called for every array
-		 * item.
-		 * @returns {Array} A new array of values returned by the callback function.
-		 */
-		function map(array, fn) {
-			var length = array.length;
-			var result = [];
-			while (length--) {
-				result[length] = fn(array[length]);
-			}
-			return result;
-		}
-
-		/**
-		 * A simple `Array#map`-like wrapper to work with domain name strings or email
-		 * addresses.
-		 * @private
-		 * @param {String} domain The domain name or email address.
-		 * @param {Function} callback The function that gets called for every
-		 * character.
-		 * @returns {Array} A new string of characters returned by the callback
-		 * function.
-		 */
-		function mapDomain(string, fn) {
-			var parts = string.split('@');
-			var result = '';
-			if (parts.length > 1) {
-				// In email addresses, only the domain name should be punycoded. Leave
-				// the local part (i.e. everything up to `@`) intact.
-				result = parts[0] + '@';
-				string = parts[1];
-			}
-			// Avoid `split(regex)` for IE8 compatibility. See #17.
-			string = string.replace(regexSeparators, '\x2E');
-			var labels = string.split('.');
-			var encoded = map(labels, fn).join('.');
-			return result + encoded;
-		}
-
-		/**
-		 * Creates an array containing the numeric code points of each Unicode
-		 * character in the string. While JavaScript uses UCS-2 internally,
-		 * this function will convert a pair of surrogate halves (each of which
-		 * UCS-2 exposes as separate characters) into a single code point,
-		 * matching UTF-16.
-		 * @see `punycode.ucs2.encode`
-		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
-		 * @memberOf punycode.ucs2
-		 * @name decode
-		 * @param {String} string The Unicode input string (UCS-2).
-		 * @returns {Array} The new array of code points.
-		 */
-		function ucs2decode(string) {
-			var output = [],
-			    counter = 0,
-			    length = string.length,
-			    value,
-			    extra;
-			while (counter < length) {
-				value = string.charCodeAt(counter++);
-				if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
-					// high surrogate, and there is a next character
-					extra = string.charCodeAt(counter++);
-					if ((extra & 0xFC00) == 0xDC00) { // low surrogate
-						output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
-					} else {
-						// unmatched surrogate; only append this code unit, in case the next
-						// code unit is the high surrogate of a surrogate pair
-						output.push(value);
-						counter--;
-					}
-				} else {
-					output.push(value);
-				}
-			}
-			return output;
-		}
-
-		/**
-		 * Creates a string based on an array of numeric code points.
-		 * @see `punycode.ucs2.decode`
-		 * @memberOf punycode.ucs2
-		 * @name encode
-		 * @param {Array} codePoints The array of numeric code points.
-		 * @returns {String} The new Unicode string (UCS-2).
-		 */
-		function ucs2encode(array) {
-			return map(array, function(value) {
-				var output = '';
-				if (value > 0xFFFF) {
-					value -= 0x10000;
-					output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
-					value = 0xDC00 | value & 0x3FF;
-				}
-				output += stringFromCharCode(value);
-				return output;
-			}).join('');
-		}
-
-		/**
-		 * Converts a basic code point into a digit/integer.
-		 * @see `digitToBasic()`
-		 * @private
-		 * @param {Number} codePoint The basic numeric code point value.
-		 * @returns {Number} The numeric value of a basic code point (for use in
-		 * representing integers) in the range `0` to `base - 1`, or `base` if
-		 * the code point does not represent a value.
-		 */
-		function basicToDigit(codePoint) {
-			if (codePoint - 48 < 10) {
-				return codePoint - 22;
-			}
-			if (codePoint - 65 < 26) {
-				return codePoint - 65;
-			}
-			if (codePoint - 97 < 26) {
-				return codePoint - 97;
-			}
-			return base;
-		}
-
-		/**
-		 * Converts a digit/integer into a basic code point.
-		 * @see `basicToDigit()`
-		 * @private
-		 * @param {Number} digit The numeric value of a basic code point.
-		 * @returns {Number} The basic code point whose value (when used for
-		 * representing integers) is `digit`, which needs to be in the range
-		 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
-		 * used; else, the lowercase form is used. The behavior is undefined
-		 * if `flag` is non-zero and `digit` has no uppercase form.
-		 */
-		function digitToBasic(digit, flag) {
-			//  0..25 map to ASCII a..z or A..Z
-			// 26..35 map to ASCII 0..9
-			return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
-		}
-
-		/**
-		 * Bias adaptation function as per section 3.4 of RFC 3492.
-		 * http://tools.ietf.org/html/rfc3492#section-3.4
-		 * @private
-		 */
-		function adapt(delta, numPoints, firstTime) {
-			var k = 0;
-			delta = firstTime ? floor(delta / damp) : delta >> 1;
-			delta += floor(delta / numPoints);
-			for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
-				delta = floor(delta / baseMinusTMin);
-			}
-			return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
-		}
-
-		/**
-		 * Converts a Punycode string of ASCII-only symbols to a string of Unicode
-		 * symbols.
-		 * @memberOf punycode
-		 * @param {String} input The Punycode string of ASCII-only symbols.
-		 * @returns {String} The resulting string of Unicode symbols.
-		 */
-		function decode(input) {
-			// Don't use UCS-2
-			var output = [],
-			    inputLength = input.length,
-			    out,
-			    i = 0,
-			    n = initialN,
-			    bias = initialBias,
-			    basic,
-			    j,
-			    index,
-			    oldi,
-			    w,
-			    k,
-			    digit,
-			    t,
-			    /** Cached calculation results */
-			    baseMinusT;
-
-			// Handle the basic code points: let `basic` be the number of input code
-			// points before the last delimiter, or `0` if there is none, then copy
-			// the first basic code points to the output.
-
-			basic = input.lastIndexOf(delimiter);
-			if (basic < 0) {
-				basic = 0;
-			}
-
-			for (j = 0; j < basic; ++j) {
-				// if it's not a basic code point
-				if (input.charCodeAt(j) >= 0x80) {
-					error('not-basic');
-				}
-				output.push(input.charCodeAt(j));
-			}
-
-			// Main decoding loop: start just after the last delimiter if any basic code
-			// points were copied; start at the beginning otherwise.
-
-			for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
-
-				// `index` is the index of the next character to be consumed.
-				// Decode a generalized variable-length integer into `delta`,
-				// which gets added to `i`. The overflow checking is easier
-				// if we increase `i` as we go, then subtract off its starting
-				// value at the end to obtain `delta`.
-				for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
-
-					if (index >= inputLength) {
-						error('invalid-input');
-					}
-
-					digit = basicToDigit(input.charCodeAt(index++));
-
-					if (digit >= base || digit > floor((maxInt - i) / w)) {
-						error('overflow');
-					}
-
-					i += digit * w;
-					t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
-
-					if (digit < t) {
-						break;
-					}
-
-					baseMinusT = base - t;
-					if (w > floor(maxInt / baseMinusT)) {
-						error('overflow');
-					}
-
-					w *= baseMinusT;
-
-				}
-
-				out = output.length + 1;
-				bias = adapt(i - oldi, out, oldi == 0);
-
-				// `i` was supposed to wrap around from `out` to `0`,
-				// incrementing `n` each time, so we'll fix that now:
-				if (floor(i / out) > maxInt - n) {
-					error('overflow');
-				}
-
-				n += floor(i / out);
-				i %= out;
-
-				// Insert `n` at position `i` of the output
-				output.splice(i++, 0, n);
-
-			}
-
-			return ucs2encode(output);
-		}
-
-		/**
-		 * Converts a string of Unicode symbols (e.g. a domain name label) to a
-		 * Punycode string of ASCII-only symbols.
-		 * @memberOf punycode
-		 * @param {String} input The string of Unicode symbols.
-		 * @returns {String} The resulting Punycode string of ASCII-only symbols.
-		 */
-		function encode(input) {
-			var n,
-			    delta,
-			    handledCPCount,
-			    basicLength,
-			    bias,
-			    j,
-			    m,
-			    q,
-			    k,
-			    t,
-			    currentValue,
-			    output = [],
-			    /** `inputLength` will hold the number of code points in `input`. */
-			    inputLength,
-			    /** Cached calculation results */
-			    handledCPCountPlusOne,
-			    baseMinusT,
-			    qMinusT;
-
-			// Convert the input in UCS-2 to Unicode
-			input = ucs2decode(input);
-
-			// Cache the length
-			inputLength = input.length;
-
-			// Initialize the state
-			n = initialN;
-			delta = 0;
-			bias = initialBias;
-
-			// Handle the basic code points
-			for (j = 0; j < inputLength; ++j) {
-				currentValue = input[j];
-				if (currentValue < 0x80) {
-					output.push(stringFromCharCode(currentValue));
-				}
-			}
-
-			handledCPCount = basicLength = output.length;
-
-			// `handledCPCount` is the number of code points that have been handled;
-			// `basicLength` is the number of basic code points.
-
-			// Finish the basic string - if it is not empty - with a delimiter
-			if (basicLength) {
-				output.push(delimiter);
-			}
-
-			// Main encoding loop:
-			while (handledCPCount < inputLength) {
-
-				// All non-basic code points < n have been handled already. Find the next
-				// larger one:
-				for (m = maxInt, j = 0; j < inputLength; ++j) {
-					currentValue = input[j];
-					if (currentValue >= n && currentValue < m) {
-						m = currentValue;
-					}
-				}
-
-				// Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
-				// but guard against overflow
-				handledCPCountPlusOne = handledCPCount + 1;
-				if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
-					error('overflow');
-				}
-
-				delta += (m - n) * handledCPCountPlusOne;
-				n = m;
-
-				for (j = 0; j < inputLength; ++j) {
-					currentValue = input[j];
-
-					if (currentValue < n && ++delta > maxInt) {
-						error('overflow');
-					}
-
-					if (currentValue == n) {
-						// Represent delta as a generalized variable-length integer
-						for (q = delta, k = base; /* no condition */; k += base) {
-							t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
-							if (q < t) {
-								break;
-							}
-							qMinusT = q - t;
-							baseMinusT = base - t;
-							output.push(
-								stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0))
-							);
-							q = floor(qMinusT / baseMinusT);
-						}
-
-						output.push(stringFromCharCode(digitToBasic(q, 0)));
-						bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
-						delta = 0;
-						++handledCPCount;
-					}
-				}
-
-				++delta;
-				++n;
-
-			}
-			return output.join('');
-		}
-
-		/**
-		 * Converts a Punycode string representing a domain name or an email address
-		 * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
-		 * it doesn't matter if you call it on a string that has already been
-		 * converted to Unicode.
-		 * @memberOf punycode
-		 * @param {String} input The Punycoded domain name or email address to
-		 * convert to Unicode.
-		 * @returns {String} The Unicode representation of the given Punycode
-		 * string.
-		 */
-		function toUnicode(input) {
-			return mapDomain(input, function(string) {
-				return regexPunycode.test(string)
-					? decode(string.slice(4).toLowerCase())
-					: string;
-			});
-		}
-
-		/**
-		 * Converts a Unicode string representing a domain name or an email address to
-		 * Punycode. Only the non-ASCII parts of the domain name will be converted,
-		 * i.e. it doesn't matter if you call it with a domain that's already in
-		 * ASCII.
-		 * @memberOf punycode
-		 * @param {String} input The domain name or email address to convert, as a
-		 * Unicode string.
-		 * @returns {String} The Punycode representation of the given domain name or
-		 * email address.
-		 */
-		function toASCII(input) {
-			return mapDomain(input, function(string) {
-				return regexNonASCII.test(string)
-					? 'xn--' + encode(string)
-					: string;
-			});
-		}
-
-		/*--------------------------------------------------------------------------*/
-
-		/** Define the public API */
-		punycode = {
-			/**
-			 * A string representing the current Punycode.js version number.
-			 * @memberOf punycode
-			 * @type String
-			 */
-			'version': '1.3.2',
-			/**
-			 * An object of methods to convert from JavaScript's internal character
-			 * representation (UCS-2) to Unicode code points, and back.
-			 * @see <https://mathiasbynens.be/notes/javascript-encoding>
-			 * @memberOf punycode
-			 * @type Object
-			 */
-			'ucs2': {
-				'decode': ucs2decode,
-				'encode': ucs2encode
-			},
-			'decode': decode,
-			'encode': encode,
-			'toASCII': toASCII,
-			'toUnicode': toUnicode
-		};
-
-		/** Expose `punycode` */
-		// Some AMD build optimizers, like r.js, check for specific condition patterns
-		// like the following:
-		if (
-			true
-		) {
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
-				return punycode;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else if (freeExports && freeModule) {
-			if (module.exports == freeExports) { // in Node.js or RingoJS v0.8.0+
-				freeModule.exports = punycode;
-			} else { // in Narwhal or RingoJS v0.7.0-
-				for (key in punycode) {
-					punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
-				}
-			}
-		} else { // in Rhino or a web browser
-			root.punycode = punycode;
-		}
-
-	}(this));
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27)(module), (function() { return this; }())))
+	/* (ignored) */
 
 /***/ },
 /* 27 */
-/***/ function(module, exports) {
-
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
-
-/***/ },
-/* 28 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	module.exports = {
-	  isString: function(arg) {
-	    return typeof(arg) === 'string';
-	  },
-	  isObject: function(arg) {
-	    return typeof(arg) === 'object' && arg !== null;
-	  },
-	  isNull: function(arg) {
-	    return arg === null;
-	  },
-	  isNullOrUndefined: function(arg) {
-	    return arg == null;
-	  }
-	};
-
-
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	exports.decode = exports.parse = __webpack_require__(30);
-	exports.encode = exports.stringify = __webpack_require__(31);
-
-
-/***/ },
-/* 30 */
-/***/ function(module, exports) {
-
-	// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	'use strict';
-
-	// If obj.hasOwnProperty has been overridden, then calling
-	// obj.hasOwnProperty(prop) will break.
-	// See: https://github.com/joyent/node/issues/1707
-	function hasOwnProperty(obj, prop) {
-	  return Object.prototype.hasOwnProperty.call(obj, prop);
-	}
-
-	module.exports = function(qs, sep, eq, options) {
-	  sep = sep || '&';
-	  eq = eq || '=';
-	  var obj = {};
-
-	  if (typeof qs !== 'string' || qs.length === 0) {
-	    return obj;
-	  }
-
-	  var regexp = /\+/g;
-	  qs = qs.split(sep);
-
-	  var maxKeys = 1000;
-	  if (options && typeof options.maxKeys === 'number') {
-	    maxKeys = options.maxKeys;
-	  }
-
-	  var len = qs.length;
-	  // maxKeys <= 0 means that we should not limit keys count
-	  if (maxKeys > 0 && len > maxKeys) {
-	    len = maxKeys;
-	  }
-
-	  for (var i = 0; i < len; ++i) {
-	    var x = qs[i].replace(regexp, '%20'),
-	        idx = x.indexOf(eq),
-	        kstr, vstr, k, v;
-
-	    if (idx >= 0) {
-	      kstr = x.substr(0, idx);
-	      vstr = x.substr(idx + 1);
-	    } else {
-	      kstr = x;
-	      vstr = '';
-	    }
-
-	    k = decodeURIComponent(kstr);
-	    v = decodeURIComponent(vstr);
-
-	    if (!hasOwnProperty(obj, k)) {
-	      obj[k] = v;
-	    } else if (Array.isArray(obj[k])) {
-	      obj[k].push(v);
-	    } else {
-	      obj[k] = [obj[k], v];
-	    }
-	  }
-
-	  return obj;
-	};
-
-
-/***/ },
-/* 31 */
-/***/ function(module, exports) {
-
-	// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	'use strict';
-
-	var stringifyPrimitive = function(v) {
-	  switch (typeof v) {
-	    case 'string':
-	      return v;
-
-	    case 'boolean':
-	      return v ? 'true' : 'false';
-
-	    case 'number':
-	      return isFinite(v) ? v : '';
-
-	    default:
-	      return '';
-	  }
-	};
-
-	module.exports = function(obj, sep, eq, name) {
-	  sep = sep || '&';
-	  eq = eq || '=';
-	  if (obj === null) {
-	    obj = undefined;
-	  }
-
-	  if (typeof obj === 'object') {
-	    return Object.keys(obj).map(function(k) {
-	      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
-	      if (Array.isArray(obj[k])) {
-	        return obj[k].map(function(v) {
-	          return ks + encodeURIComponent(stringifyPrimitive(v));
-	        }).join(sep);
-	      } else {
-	        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
-	      }
-	    }).join(sep);
-
-	  }
-
-	  if (!name) return '';
-	  return encodeURIComponent(stringifyPrimitive(name)) + eq +
-	         encodeURIComponent(stringifyPrimitive(obj));
-	};
-
-
-/***/ },
-/* 32 */
-/***/ function(module, exports) {
-
-	/* (ignored) */
-
-/***/ },
-/* 33 */
-/***/ function(module, exports) {
-
-	/* (ignored) */
-
-/***/ },
-/* 34 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
