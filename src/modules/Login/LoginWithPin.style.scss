@@ -13,6 +13,10 @@
   align-items: center;
   -webkit-align-items: center;
   min-width: 25rem;
+
+  button {
+    margin-top: 0;
+  }
 }
 
 .usernameContainer {
@@ -71,7 +75,6 @@
   max-width: 100%;    
 }
 
-
 .downArrow{
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
@@ -90,4 +93,10 @@
   .CachedUsers {
     width: auto;
   }
+}
+
+.loginTimeout {
+  color: red;
+  min-height: 2rem;
+  margin-bottom: 2rem;
 }
