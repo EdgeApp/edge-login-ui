@@ -2,6 +2,7 @@ import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { userLogin, requestEdgeLogin, enableTimeout, disableTimeout, refreshTimeout } from './Login.action'
 import { selectUserToLogin } from '../CachedUsers/CachedUsers.action'
+import store from '../../lib/web/configureStore'
 
 export const loginWithPassword = (username, password, callback) => {
   return (dispatch, getState, imports) => {
@@ -46,7 +47,7 @@ export const loginWithPin = (username, pin, callback) => {
             dispatch(openErrorModal(t('server_error_bad_pin')))
             let currentWaitSpan = 10
             let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-            enableTimer(reEnableLoginTime)           
+            enableTimer(reEnableLoginTime, dispatch)           
             return callback(error, null)
           }
 
@@ -62,28 +63,24 @@ export const loginWithPin = (username, pin, callback) => {
 }
 
 
-export const enableTimer = (target) => {
+export const enableTimer = (target, dispatch) => {
   console.log('in enableTimer, target time is: ', target)
   var currentCountdown = Math.floor((target - Date.now()) / 1000)
-  scheduleTick(target)   
-  return (dispatch, getState, imports) => {  
-    console.log('within enableTimer return') 
-    dispatch(enableTimeout(currentCountdown))    
-  } 
+  scheduleTick(target, dispatch)    
+  console.log('within enableTimer return') 
+  dispatch(enableTimeout(currentCountdown))    
 }
 
-export const scheduleTick = (targetTime) => {
-  console.log('inside scheduleTick')
+export const scheduleTick = (targetTime, dispatch) => {
   var difference = Math.floor( ( targetTime - Date.now() ) / 1000 )   
-  return (dispatch, getState, imports) => {  
-    console.log('within scheduleTick return')
-    if(difference > 0) {
-      var scheduleTickTimeout = setTimeout(() => scheduleTick(targetTime), 1000)      
-      dispatch(refreshTimeout(difference))
-    } else {
-      clearTimeout(scheduleTickTimeout)
-      dispatch(disableTimeout())
-    }
+  console.log('inside scheduleTick')  
+  console.log('within scheduleTick return')
+  if(difference > 0) {
+    var scheduleTickTimeout = setTimeout(() => scheduleTick(targetTime, dispatch), 1000)      
+    dispatch(refreshTimeout(difference))
+  } else {
+    clearTimeout(scheduleTickTimeout)
+    dispatch(disableTimeout())
   }
 }
 
