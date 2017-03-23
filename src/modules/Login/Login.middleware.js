@@ -62,24 +62,24 @@ export const loginWithPin = (username, pin, callback) => {
 }
 
 
-const enableTimer = (target) => {
+export const enableTimer = (target) => {
   console.log('in enableTimer, target time is: ', target)
+  var currentCountdown = Math.floor((target - Date.now()) / 1000)
+  scheduleTick(target)   
   return (dispatch, getState, imports) => {  
-    console.log('within enableTimer return')
-    var currentCountdown = Math.floor((target - Date.now()) / 1000)
-    dispatch(enableTimeout(currentCountdown))
-    scheduleTick(target)  
+    console.log('within enableTimer return') 
+    dispatch(enableTimeout(currentCountdown))    
   } 
 }
 
-const scheduleTick = (targetTime) => {
+export const scheduleTick = (targetTime) => {
   console.log('inside scheduleTick')
+  var difference = Math.floor( ( targetTime - Date.now() ) / 1000 )   
   return (dispatch, getState, imports) => {  
     console.log('within scheduleTick return')
-    var difference = Math.floor( ( targetTime - Date.now() ) / 1000 ) 
     if(difference > 0) {
+      var scheduleTickTimeout = setTimeout(() => scheduleTick(targetTime), 1000)      
       dispatch(refreshTimeout(difference))
-      var scheduleTickTimeout = setTimeout(() => this.scheduleTick(targetTime), 1000)
     } else {
       clearTimeout(scheduleTickTimeout)
       dispatch(disableTimeout())
