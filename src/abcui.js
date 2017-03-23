@@ -55,11 +55,8 @@ function InnerAbcUi (args) {
     'bundlePath': this.bundlePath
   }
 
-  if (typeof args.vendorImageUrl === 'string') {
-    DomWindow.abcuiContext.vendorImageUrl = args.vendorImageUrl
-  } else {
-    DomWindow.abcuiContext.vendorImageUrl = ''
-  }
+  this.abcContext.displayName = args.vendorName
+  this.abcContext.displayImageUrl = args.vendorImageUrl
 }
 
 InnerAbcUi.prototype.openLoginWindow = function (callback) {

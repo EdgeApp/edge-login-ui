@@ -10,6 +10,7 @@ import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
 import LayoutTemplate from './LayoutTemplate/LayoutTemplate.web'
 import layoutTheme from 'theme/layoutTheme'
+import { openLogin, closeUserList } from './Login/Login.action'
 
 import styles from './Container.style.scss'
 
@@ -24,22 +25,31 @@ class Container extends Component {
     }
   }
   loadData () {
+     
     const dispatch = this.props.dispatch
     abcctx(ctx => {
       const cachedUsers = ctx.listUsernames()
-      console.log('cachedUsers is: ', cachedUsers)
+      for (var index in cachedUsers) {
+        let enabled = ctx.pinLoginEnabled(cachedUsers[index])
+        if(enabled === false) {
+          cachedUsers.splice(index, 1)
+        }
+      }
       const lastUser = window.localStorage.getItem('lastUser')
       dispatch(setCachedUsers(cachedUsers))
-      if (lastUser) {
-        return dispatch(selectUserToLogin(lastUser))
+      if (lastUser && cachedUsers.includes(lastUser)) {
+        dispatch(selectUserToLogin(lastUser))
+      } else {
+        dispatch(openLogin())
       }
     })
   }
+
   componentWillMount () {
     this.loadData()
-  }
+  } 
 
-  render () {
+  render () {   
     return (
       <div className='app'>
         <Dialog

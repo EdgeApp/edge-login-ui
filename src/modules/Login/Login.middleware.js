@@ -100,8 +100,8 @@ export const edgeLogin = (callback) => {
 
     abcContext(context => {
       context.requestEdgeLogin({
-        displayName: abcContext.vendorName,
-        displayImageUrl: abcContext.vendorImageUrl,
+        displayName: context.displayName,
+        displayImageUrl: context.displayImageUrl,
         onLogin: onLogin,
         onProcessLogin: onProcess
       }, (error, results) => {
