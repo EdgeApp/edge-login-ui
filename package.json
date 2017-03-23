@@ -66,10 +66,5 @@
     "webpack": "~1.13.1",
     "webpack-dev-middleware": "~1.6.1",
     "webpack-dev-server": "~1.14.1"
-  },
-  "standard": {
-    "ignore": [
-      "src/lib/native/abc.webpack.js"
-    ]
   }
 }
