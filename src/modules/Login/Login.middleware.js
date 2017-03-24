@@ -1,6 +1,6 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
-import { userLogin, requestEdgeLogin, enableTimeout, disableTimeout, refreshTimeout } from './Login.action'
+import { userLogin, requestEdgeLogin, enablePinTimeout, disablePinTimeout, refreshPinTimeout, enablePasswordTimeout, disablePasswordTimeout, refreshPasswordTimeout } from './Login.action'
 import { selectUserToLogin } from '../CachedUsers/CachedUsers.action'
 import store from '../../lib/web/configureStore'
 
@@ -18,6 +18,13 @@ export const loginWithPassword = (username, password, callback) => {
             dispatch(closeLoading())
             let type = (error.type === "OtpError") ? "server_error_bad_otp" : "server_error_bad_password";
             dispatch(openErrorModal(t(type)))
+
+            if(error.wait > 0) {
+              let currentWaitSpan = error.wait
+              let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
+              enableTimer(reEnableLoginTime, "password", dispatch)       
+            }
+
             return callback(error, null)
           }
           if (!error) {
@@ -45,9 +52,11 @@ export const loginWithPin = (username, pin, callback) => {
           dispatch(closeLoading())
           if (error) {
             dispatch(openErrorModal(t('server_error_bad_pin')))
-            let currentWaitSpan = 10
-            let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-            enableTimer(reEnableLoginTime, dispatch)       
+            if(error.wait > 0) {
+              let currentWaitSpan = error.wait
+              let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
+              enableTimer(reEnableLoginTime, "pin", dispatch)       
+            }
             return callback(error, null)
           }
 
@@ -63,20 +72,32 @@ export const loginWithPin = (username, pin, callback) => {
 }
 
 
-export const enableTimer = (target, dispatch) => {
+export const enableTimer = (target, source, dispatch) => {
   var currentCountdown = Math.floor((target - Date.now()) / 1000)
-  scheduleTick(target, dispatch)    
-  dispatch(enableTimeout(currentCountdown))    
+  scheduleTick(target, source, dispatch)    
+  if(source == "pin"){
+    dispatch(enablePinTimeout(currentCountdown))    
+  } else if(source == "password") {
+    dispatch(enablePasswordTimeout(currentCountdown))    
+  }
 }
 
-export const scheduleTick = (targetTime, dispatch) => {
-  var difference = Math.floor( ( targetTime - Date.now() ) / 1000 )   
+export const scheduleTick = (targetTime, source, disp) => {
+  var difference = Math.floor( ( targetTime - Date.now() ) / 1000 )  
   if(difference > 0) {
-    var scheduleTickTimeout = setTimeout(() => scheduleTick(targetTime, dispatch), 1000)      
-    dispatch(refreshTimeout(difference))
+    var scheduleTickTimeout = setTimeout(() => scheduleTick(targetTime, source, disp), 1000)   
+    if(source == "pin" ){   
+      disp(refreshPinTimeout(difference))
+    } else if (source == "password") {
+      disp(refreshPasswordTimeout(difference))
+    }
   } else {
-    clearTimeout(scheduleTickTimeout)
-    dispatch(disableTimeout())
+    clearTimeout(scheduleTickTimeout, source)
+    if(source == "pin") {
+      disp(disablePinTimeout())
+    } else if(source == "password") {
+      disp(disablePasswordTimeout())
+    }
   }
 }
 

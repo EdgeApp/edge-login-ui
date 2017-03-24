@@ -110,10 +110,10 @@ class LoginWithPin extends Component {
             onChange={this._handleChangePin}
             autoCorrect={false}
             autoFocus
-            disabled={this.props.loginWait > 0}            
+            disabled={this.props.loginPinWait > 0}            
           />
         </div>
-        <span className={styles.loginTimeout}>{this.props.loginWait ? sprintf(t('server_error_invalid_pin_wait'),  this.props.loginWait) : ''}</span>        
+        <span className={styles.loginTimeout}>{this.props.loginPinWait ? sprintf(t('server_error_invalid_pin_wait'),  this.props.loginPinWait) : ''}</span>        
         <Button theme={neutral} className={styles.exitPin} onClick={this._gotoPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
@@ -129,8 +129,8 @@ export default connect(state => ({
   pin: state.login.pin,
   user: state.cachedUsers.selectedUserToLogin,
   showCachedUsers: state.login.showCachedUsers,
-  loginWait: state.login.loginWait,
-  currentCountdown: false  
+  loginPinWait: state.login.loginPinWait,
+  currentPasswordCountdown: false  
 
 }))(LoginWithPin)
 

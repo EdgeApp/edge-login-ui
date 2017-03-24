@@ -155,13 +155,26 @@ export const edgeAccount = (state = '', action) => {
   }
 }
 
-export const loginWait = (state = false, action) => {
+export const loginPinWait = (state = false, action) => {
   switch (action.type) {
-    case ACTION.ENABLE_LOGIN_WAIT_DURATION:
+    case ACTION.ENABLE_PIN_WAIT_DURATION:
       return action.durationLeft
-    case ACTION.REFRESH_LOGIN_WAIT_DURATION:
+    case ACTION.REFRESH_PIN_WAIT_DURATION:
       return action.durationLeft
-    case ACTION.DISABLE_LOGIN_WAIT_DURATION:
+    case ACTION.DISABLE_PIN_WAIT_DURATION:
+      return false
+    default:
+      return state
+  }
+}
+
+export const loginPasswordWait = (state = false, action) => {
+  switch (action.type) {
+    case ACTION.ENABLE_PASSWORD_WAIT_DURATION:
+      return action.durationLeft
+    case ACTION.REFRESH_PASSWORD_WAIT_DURATION:
+      return action.durationLeft
+    case ACTION.DISABLE_PASSWORD_WAIT_DURATION:
       return false
     default:
       return state

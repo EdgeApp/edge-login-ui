@@ -27,7 +27,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentCountdown: false
+      currentPasswordCountdown: false
     };
   } 
 
@@ -52,12 +52,6 @@ class Login extends Component {
               this.props.dispatch(closeLoading())
               return this.props.router.push('/home')
             }
-          } else {
-            if(e.type === 'PasswordError' && e.wait){
-              let currentWaitSpan = e.wait
-              let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-              this.enableTimer(reEnableLoginTime)
-            }
           }
         })
       )
@@ -66,27 +60,6 @@ class Login extends Component {
       // this.refs.fieldsView.transitionTo({opacity: 1, height: 90}, 200)
       // this.refs.fieldsBelowView.transitionTo({height: 0}, 200)
     }
-  }
-
-  enableTimer = (target) => {
-    this.state.currentCountdown = Math.floor((target - Date.now()) / 1000)
-    this.props.dispatch(enableTimer(this.state.currentCountdown))
-    this.scheduleTick(target)   
-  }
-
-  scheduleTick(targetTime) {
-    var difference = Math.floor( ( targetTime - Date.now() ) / 1000 ) 
-    if(difference > 0) {
-      this.props.dispatch(refreshTimer(difference))
-      this.state.scheduleTickTimeout = setTimeout(() => this.scheduleTick(targetTime), 1000)
-    } else {
-      clearTimeout(this.state.scheduleTickTimeout)
-      this.props.dispatch(disableTimer())
-    }
-  }
-
-  refreshTimer = () => {
-
   }
 
   _handleGoToSignupPage = () => {
@@ -198,8 +171,8 @@ class Login extends Component {
               </div>
             </div>
             <div className={styles.buttonGroup}>
-              <span className={styles.loginTimeout}>{this.props.loginWait ? sprintf(t('server_error_invalid_pin_wait'),  this.props.loginWait) : ''}</span>
-              <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit} disabled={this.props.loginWait > 0}>{t('fragment_landing_signin_button')}</Button>
+              <span className={styles.loginTimeout}>{this.props.loginPasswordWait ? sprintf(t('server_error_invalid_pin_wait'),  this.props.loginPasswordWait) : ''}</span>
+              <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit} disabled={this.props.loginPasswordWait > 0}>{t('fragment_landing_signin_button')}</Button>
               <br />
               <Button theme={neutral} className={styles.createNewButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
               <br />
@@ -223,7 +196,7 @@ export default connect(state => ({
   password: state.login.password,
   showCachedUsers: state.login.showCachedUsers,
   edgeObject: state.login.edgeLoginResults,
-  loginWait: state.login.loginWait,
-  currentCountdown: false
+  loginPasswordWait: state.login.loginPasswordWait,
+  currentPinCountdown: false
 
 }))(Login)

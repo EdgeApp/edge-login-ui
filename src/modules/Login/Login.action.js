@@ -11,26 +11,49 @@ export const USER_LOGIN = 'USER_LOGIN'
 export const REQUEST_EDGE_LOGIN = 'REQUEST_EDGE_LOGIN'
 export const SET_EDGE_USERNAME = 'SET_EDGE_USERNAME'
 export const SET_EDGE_ACCOUNT = 'SET_EDGE_ACCOUNT'
-export const ENABLE_LOGIN_WAIT_DURATION = 'ENABLE_LOGIN_WAIT_DURATION'
-export const DISABLE_LOGIN_WAIT_DURATION = 'DISABLE_LOGIN_WAIT_DURATION'
-export const REFRESH_LOGIN_WAIT_DURATION = 'REFRESH_LOGIN_WAIT_DURATION'
+export const ENABLE_PIN_WAIT_DURATION = 'ENABLE_PIN_WAIT_DURATION'
+export const DISABLE_PIN_WAIT_DURATION = 'DISABLE_PIN_WAIT_DURATION'
+export const REFRESH_PIN_WAIT_DURATION = 'REFRESH_PIN_WAIT_DURATION'
+export const ENABLE_PASSWORD_WAIT_DURATION = 'ENABLE_PASSWORD_WAIT_DURATION'
+export const DISABLE_PASSWORD_WAIT_DURATION = 'DISABLE_PASSWORD_WAIT_DURATION'
+export const REFRESH_PASSWORD_WAIT_DURATION = 'REFRESH_PASSWORD_WAIT_DURATION'
 
-export function enableTimeout (durationLeft) {
+export function enablePinTimeout (durationLeft) {
   return {
-    type: ENABLE_LOGIN_WAIT_DURATION,
+    type: ENABLE_PIN_WAIT_DURATION,
     durationLeft
   }
 }
 
-export function disableTimeout() {
+export function disablePinTimeout() {
   return {
-    type: DISABLE_LOGIN_WAIT_DURATION  
+    type: DISABLE_PIN_WAIT_DURATION  
   }
 }
 
-export function refreshTimeout(durationLeft) {
+export function refreshPinTimeout(durationLeft) {
   return {
-    type: REFRESH_LOGIN_WAIT_DURATION,
+    type: REFRESH_PIN_WAIT_DURATION,
+    durationLeft
+  }
+}
+
+export function enablePasswordTimeout (durationLeft) {
+  return {
+    type: ENABLE_PASSWORD_WAIT_DURATION,
+    durationLeft
+  }
+}
+
+export function disablePasswordTimeout() {
+  return {
+    type: DISABLE_PASSWORD_WAIT_DURATION  
+  }
+}
+
+export function refreshPasswordTimeout(durationLeft) {
+  return {
+    type: REFRESH_PASSWORD_WAIT_DURATION,
     durationLeft
   }
 }
