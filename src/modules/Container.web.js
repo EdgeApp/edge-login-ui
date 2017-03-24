@@ -28,20 +28,23 @@ class Container extends Component {
      
     const dispatch = this.props.dispatch
     abcctx(ctx => {
-      const cachedUsers = ctx.listUsernames()
-      for (var index in cachedUsers) {
-        let enabled = ctx.pinLoginEnabled(cachedUsers[index])
+      const listedUsers = ctx.listUsernames()
+      var cachedUsers = listedUsers.slice(0)
+      for (var index in listedUsers) {
+        let enabled = ctx.pinLoginEnabled(listedUsers[index])
         if(enabled === false) {
           cachedUsers.splice(index, 1)
         }
       }
       const lastUser = window.localStorage.getItem('lastUser')
-      dispatch(setCachedUsers(cachedUsers))
-      if (lastUser && cachedUsers.includes(lastUser)) {
-        dispatch(selectUserToLogin(lastUser))
-      } else {
-        dispatch(openLogin())
-      }
+      dispatch(setCachedUsers(cachedUsers)) 
+      if(listedUsers.length >= 1) {
+        if(cachedUsers.includes(lastUser)) {
+          dispatch(selectUserToLogin(lastUser)) 
+        } else {
+          dispatch(openLogin()) 
+        }
+      } 
     })
   }
 
