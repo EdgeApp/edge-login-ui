@@ -1,8 +1,5 @@
 # Airbitz Javascript UI
 
-
-# Airbitz Javascript UI
-
 This repo implements a UI layer on top of [airbitz-core-js](https://github.com/Airbitz/airbitz-core-js) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
 
 ## Build from source repo (not needed if using NPM)
