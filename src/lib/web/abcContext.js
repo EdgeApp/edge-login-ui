@@ -1,4 +1,5 @@
 const abc = require('airbitz-core-js')
+import 'whatwg-fetch'
 
 const context = {
   apiKey        : '3ad0717b3eb31f745aba7bd9d51e7fd1b2926431',
