@@ -1,6 +1,6 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
-import { userLogin, requestEdgeLogin, enablePinTimeout, disablePinTimeout, refreshPinTimeout, enablePasswordTimeout, disablePasswordTimeout, refreshPasswordTimeout } from './Login.action'
+import { userLogin, requestEdgeLogin, enablePinTimeout, disablePinTimeout, refreshPinTimeout, enablePasswordTimeout, disablePasswordTimeout, refreshPasswordTimeout, showLoginNotification, hideLoginNotification } from './Login.action'
 import { selectUserToLogin } from '../CachedUsers/CachedUsers.action'
 import store from '../../lib/web/configureStore'
 
@@ -24,7 +24,7 @@ export const loginWithPassword = (username, password, callback) => {
               let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
               enableTimer(reEnableLoginTime, "password", dispatch)       
             }
-
+            dispatch(showLoginNotification())
             return callback(error, null)
           }
           if (!error) {

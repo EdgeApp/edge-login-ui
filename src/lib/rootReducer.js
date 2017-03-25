@@ -60,7 +60,8 @@ const store = combineReducers({
     edgeUsername: Login.edgeUsername,
     edgeAccount: Login.edgeAccount,
     loginPinWait: Login.loginPinWait,
-    loginPasswordWait: Login.loginPasswordWait
+    loginPasswordWait: Login.loginPasswordWait,
+    loginNotification: Login.loginNotification
 
   }),
   nextButtonVisible,

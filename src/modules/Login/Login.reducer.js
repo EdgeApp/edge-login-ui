@@ -180,3 +180,14 @@ export const loginPasswordWait = (state = false, action) => {
       return state
   }
 }
+
+export const loginNotification = (state = false, action) => {
+  switch (action.type) {
+    case ACTION.SHOW_LOGIN_NOTIFICATION:
+      return true
+    case ACTION.HIDE_LOGIN_NOTIFICATION:
+      return false
+    default:
+      return state
+  }
+}

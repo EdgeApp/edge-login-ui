@@ -17,6 +17,8 @@ export const REFRESH_PIN_WAIT_DURATION = 'REFRESH_PIN_WAIT_DURATION'
 export const ENABLE_PASSWORD_WAIT_DURATION = 'ENABLE_PASSWORD_WAIT_DURATION'
 export const DISABLE_PASSWORD_WAIT_DURATION = 'DISABLE_PASSWORD_WAIT_DURATION'
 export const REFRESH_PASSWORD_WAIT_DURATION = 'REFRESH_PASSWORD_WAIT_DURATION'
+export const SHOW_LOGIN_NOTIFICATION = 'SHOW_LOGIN_NOTIFICATION'
+export const HIDE_LOGIN_NOTIFICATION = 'HIDE_LOGIN_NOTIFICATION'
 
 export function enablePinTimeout (durationLeft) {
   return {
@@ -140,5 +142,18 @@ export function setEdgeAccount (account) {
   return {
     type: SET_EDGE_ACCOUNT,
     account
+  }
+}
+
+export function showLoginNotification () {
+  console.log('within Login.action.js->showLoginNotification')
+  return {
+    type: SHOW_LOGIN_NOTIFICATION
+  }
+}
+
+export function hideLoginNotification () {
+  return {
+    type: HIDE_LOGIN_NOTIFICATION
   }
 }
