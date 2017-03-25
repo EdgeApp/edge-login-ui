@@ -597,6 +597,7 @@ const strings = {
   error_invalid_credentials: 'Invalid User Name or Password',
   error_invalid_wallet_name_title: 'Invalid Wallet Name',
   error_invalid_wallet_name_description: 'You must provide a wallet name',
+  error_filler: 'This is just sample error.',
 
     //  OS Notifications
   alert_notification_message: 'Touch to read critical messages',
