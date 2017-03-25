@@ -37,7 +37,8 @@
     "redux-thunk": "~2.1.0",
     "socket.io-client": "~1.7.2",
     "sprintf-js": "^1.0.3",
-    "superagent": "~2.1.0"
+    "superagent": "~2.1.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "autoprefixer": "~6.6.1",

@@ -1,4 +1,5 @@
 var abc = require('airbitz-core-js')
+import 'whatwg-fetch'
 
 var DomWindow
 var DomDocument
