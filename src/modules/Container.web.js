@@ -55,12 +55,13 @@ class Container extends Component {
     return this.props.dispatch(hideContainerNotification())
   }
 
-  _renderNotification = (errorString) => {
+  _renderNotification = (string, notificationType = null) => {
     const { containerNotification, dispatch } = this.props
     return <Snackbar
       action='Dismiss'
       active={containerNotification}
-      label={t(errorString)}
+      label={string}
+      className={styles[notificationType]}
       timeout={5000}
       type='accept'
       onClick={this._handleNotificationClose}
@@ -89,7 +90,7 @@ class Container extends Component {
           <ErrorModal />
           <WarningModal />
         </Dialog>
-        {this._renderNotification('error_filler')}
+        {this._renderNotification(this.props.containerNotificationValues.text, this.props.containerNotificationValues.notificationType)}
       </div>
     )
   }
@@ -100,6 +101,7 @@ export default connect(state => ({
 
   loader: state.loader,
   edgeObject: state.login.edgeLoginResults,
-  containerNotification: state.container.containerNotification
+  containerNotification: state.container.containerNotification,
+  containerNotificationValues: state.container.containerNotificationValues
 
 }))(Container)

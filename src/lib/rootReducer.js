@@ -32,7 +32,8 @@ const store = combineReducers({
   pin,
   pinDummy,
   container: combineReducers({
-    containerNotification: Container.containerNotification
+    containerNotification: Container.containerNotification,
+    containerNotificationValues: Container.containerNotificationValues
   }), 
   password: combineReducers({
     inputState: PasswordStates.inputState,

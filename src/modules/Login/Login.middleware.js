@@ -25,7 +25,6 @@ export const loginWithPassword = (username, password, callback) => {
               let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
               enableTimer(reEnableLoginTime, "password", dispatch)       
             }
-            dispatch(showContainerNotification('hello'))
             return callback(error, null)
           }
           if (!error) {
@@ -128,7 +127,7 @@ export const edgeLogin = (callback) => {
         onProcessLogin: onProcess
       }, (error, results) => {
         if (error) {
-          console.log(error)
+          dispatch(showContainerNotification(t('error_edge_login'), 'error'))
         } else if (results) {
           dispatch(requestEdgeLogin(results))
         }

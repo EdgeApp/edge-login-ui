@@ -826,6 +826,7 @@ const strings = {
   login_button_text: 'LOGIN',
   back_button_text: 'Back',
   verify_domain_and_approve: 'Please verify the domain above and tap LOGIN to authenticate with this site',
+  error_edge_login: 'There has been an error logging in. Please try again later.',
   would_like_to: 'This site would like to:',
   request_payment_address: 'Request a Payment Address',
   identity_token_created_and_saved: 'Identity token from [{0}] created and saved',

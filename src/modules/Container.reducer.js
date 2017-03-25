@@ -11,3 +11,15 @@ export const containerNotification = (state = false, action) => {
       return state
   }
 }
+
+export const containerNotificationValues = (state = false, action) => {
+  console.log('inside Container.reducer.js->containerNotificationValues')
+  switch (action.type) {
+    case ACTION.SHOW_CONTAINER_NOTIFICATION:
+      return {text: action.text, notificationType: action.notificationType}
+    case ACTION.HIDE_CONTAINER_NOTIFICATION:
+      return false
+    default:
+      return state
+  }
+}
