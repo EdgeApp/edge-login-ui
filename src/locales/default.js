@@ -813,6 +813,7 @@ const strings = {
 
     //  SSO
   edge_login: 'Edge Login',
+  edge_login_manage: "Login to the Airbitz Wallet to change your password/PIN or setup password recovery",
   edge_description: 'This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.',
   edge_logging_in: 'Signing in user "{0}"',
   bitid_identity: 'BitID Identity',
