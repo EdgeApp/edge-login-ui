@@ -1,7 +1,6 @@
 import * as ACTION from './Container.action'
 
 export const containerNotification = (state = false, action) => {
-  console.log('inside Container.reducer.js->containerNotification')
   switch (action.type) {
     case ACTION.SHOW_CONTAINER_NOTIFICATION:
       return true
@@ -13,7 +12,6 @@ export const containerNotification = (state = false, action) => {
 }
 
 export const containerNotificationValues = (state = false, action) => {
-  console.log('inside Container.reducer.js->containerNotificationValues')
   switch (action.type) {
     case ACTION.SHOW_CONTAINER_NOTIFICATION:
       return {text: action.text, notificationType: action.notificationType}
