@@ -5,6 +5,7 @@ export const USER_TO_DELETE_FROM_CACHE = 'USER_TO_DELETE_FROM_CACHE'
 export const DELETE_USER_FROM_CACHE = 'DELETE_USER_FROM_CACHE'
 export const OPEN_REMOVE_USER_WARNING = 'OPEN_REMOVE_USER_WARNING'
 export const CLOSE_REMOVE_USER_WARNING = 'CLOSE_REMOVE_USER_WARNING'
+export const SET_CACHED_USERS_WITH_PIN = 'SET_CACHED_USERS_WITH_PIN'
 
 export function setCachedUsers (data) {
   return {
@@ -49,5 +50,12 @@ export function openRemoveUserFromCacheWarning () {
 export function closeRemoveUserFromCacheWarning () {
   return {
     type: CLOSE_REMOVE_USER_WARNING
+  }
+}
+
+export function setCachedUsersWithPin (data) {
+  return {
+    type: SET_CACHED_USERS_WITH_PIN,
+    data
   }
 }

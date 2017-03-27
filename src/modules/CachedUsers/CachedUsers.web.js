@@ -50,6 +50,8 @@ class UserList extends Component {
       );
     };
 
+    var userList = (this.props.area === 'pinLogin') ? this.props.cachedUsersWithPinEnabled : this.props.users
+
     const containerClassname = classnames(
       { [styles.active]: this.props.showCachedUsers, },
       styles.dropdown,
@@ -60,7 +62,7 @@ class UserList extends Component {
       <div data-react-toolbox='dropdown' className={containerClassname}>
         { this.props.component }
         <ul className={classnames(this.props.userListClassName,styles.values)}>
-          {_.map(this.props.users, renderValue)}
+          {_.map(userList, renderValue)}
         </ul>
       </div>
     )
@@ -71,6 +73,7 @@ export default connect(state => ({
 
   users: state.cachedUsers.users,
   selectedUserToLogin: state.cachedUsers.selectedUserToLogin,
+  cachedUsersWithPinEnabled: state.cachedUsers.usersWithPinEnabled,
   showCachedUsers: state.login.showCachedUsers
 
 }))(UserList)

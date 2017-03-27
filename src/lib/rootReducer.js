@@ -81,7 +81,8 @@ const store = combineReducers({
   cachedUsers: combineReducers({
     users: CachedUsers.users,
     selectedUserToLogin: CachedUsers.selectedUserToLogin,
-    userToDeleteFromUserCache: CachedUsers.userToDeleteFromUserCache
+    userToDeleteFromUserCache: CachedUsers.userToDeleteFromUserCache,
+    usersWithPinEnabled: CachedUsers.usersWithPinEnabled
   }),
   landing: combineReducers({
     disclaimerAccepted,
