@@ -23,9 +23,6 @@ class Home extends Component {
 
   componentWillMount () {
     if(window.parent.abcAccount){
-      console.log('window.parent.abcAccount is: ', window.parent.abcAccount)
-      this.props.edgeLogin = window.parent.abcAccount.edgeLogin
-      console.log('edgeLogin is: ', this.props.edgeLogin)
       this.props.dispatch(
         userLogin(window.parent.abcAccount)
       )
@@ -64,7 +61,7 @@ class Home extends Component {
       <div className={styles.container}>
         <h4>Manage Account</h4>
         <h5 className={styles.username}><b>{ this.props.user ? this.props.user.username : '' }</b></h5>
-        {this.props.edgeLogin ?(
+        {this.props.user.edgeLogin ? (
             <div className={styles.edgeLoginManage}>
               <p>{t('edge_login_manage')}</p>
             </div>
