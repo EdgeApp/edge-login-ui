@@ -11,7 +11,7 @@ export function showContainerNotification (text, notificationType) {
 }
 
 export function hideContainerNotification () {
-    console.log('within Container.action.js->hideLoginNotification')
+  console.log('within Container.action.js->hideLoginNotification')
   return {
     type: HIDE_CONTAINER_NOTIFICATION
   }

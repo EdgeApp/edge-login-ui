@@ -31,4 +31,3 @@ export const gainedFocus = (state = false, action) => {
       return state
   }
 }
-

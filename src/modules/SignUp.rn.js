@@ -9,7 +9,7 @@ import { fadeWhiteOverlay } from './Landing.action'
 
 class SignUpContainer extends Component {
   componentDidMount = () => {
-    let self = this
+    const self = this
     BackAndroid.addEventListener('hardwareBackPress', function () {
       if (this.props.loader.loading === true) {
         return true

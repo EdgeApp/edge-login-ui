@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Dialog } from 'react-toolbox/lib/dialog'
-import FontIcon from 'react-toolbox/lib/font_icon';
-import { selectUserToLogin, setCachedUsers, selectUserToDeleteFromUserCache, deleteUserFromUserCache, setCachedUsersWithPin } from './CachedUsers/CachedUsers.action'
+import FontIcon from 'react-toolbox/lib/font_icon'
+import { selectUserToLogin, setCachedUsers, setCachedUsersWithPin } from './CachedUsers/CachedUsers.action'
 
 import Loader from './Loader/Loader.web'
 import ErrorModal from './ErrorModal/ErrorModal.web'
@@ -10,17 +10,15 @@ import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
 import LayoutTemplate from './LayoutTemplate/LayoutTemplate.web'
 import layoutTheme from 'theme/layoutTheme'
-import { openLogin, closeUserList } from './Login/Login.action'
-import { showContainerNotification, hideContainerNotification } from './Container.action'
+import { openLogin } from './Login/Login.action'
+import { hideContainerNotification } from './Container.action'
 import Snackbar from 'react-toolbox/lib/snackbar'
-import t from 'lib/web/LocaleStrings'
 
 import styles from './Container.style.scss'
 
 class Container extends Component {
-
   _handleToggle = () => {
-    if(this.props.edgeObject) {
+    if (this.props.edgeObject) {
       this.props.edgeObject.cancelRequest()
     }
     if (window.parent.exitCallback) {
@@ -28,14 +26,13 @@ class Container extends Component {
     }
   }
   loadData () {
-     
     const dispatch = this.props.dispatch
     abcctx(ctx => {
       const cachedUsers = ctx.listUsernames()
-      var cachedUsersWithPin = cachedUsers.slice(0)
-      for (var index in cachedUsers) {
-        let enabled = ctx.pinLoginEnabled(cachedUsers[index])
-        if(enabled === false) {
+      const cachedUsersWithPin = cachedUsers.slice(0)
+      for (const index in cachedUsers) {
+        const enabled = ctx.pinLoginEnabled(cachedUsers[index])
+        if (enabled === false) {
           cachedUsersWithPin.splice(index, 1)
         }
       }
@@ -55,7 +52,7 @@ class Container extends Component {
   }
 
   _renderNotification = (string, notificationType = null) => {
-    const { containerNotification, dispatch } = this.props
+    const { containerNotification } = this.props
     return <Snackbar
       action='Dismiss'
       active={containerNotification}
@@ -69,9 +66,9 @@ class Container extends Component {
 
   componentWillMount () {
     this.loadData()
-  } 
+  }
 
-  render () {   
+  render () {
     return (
       <div className='app'>
         <Dialog
@@ -94,7 +91,6 @@ class Container extends Component {
     )
   }
 }
-
 
 export default connect(state => ({
 

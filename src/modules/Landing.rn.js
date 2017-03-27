@@ -33,16 +33,15 @@ global.randomBytes = require('react-native-randombytes').randomBytes
 // console.log('SYNC RANDOM BYTES', rand, rand.toString('hex'))
 
 class HomeComponent extends TemplateView {
-
   componentDidUpdate (prevProps) {
-    let self = this
+    const self = this
     if (this.props.gainedFocus && this.props.whiteOverlayVisible) {
       this.refs.whiteOverlay.fadeOut(200).then(endState => {
-        self.props.dispatch(removeWhiteOverlay())
+        return self.props.dispatch(removeWhiteOverlay())
       })
     } else if (this.props.lostFocus) {
       this.refs.whiteOverlay.fadeIn(200).then(endState => {
-        self.props.dispatch(showWhiteOverlayComplete())
+        return self.props.dispatch(showWhiteOverlayComplete())
       }).catch(e => {
         console.error(e)
       })
@@ -106,7 +105,6 @@ class HomeComponent extends TemplateView {
       </Image>
     )
   }
-
 }
 
 export default connect(state => ({

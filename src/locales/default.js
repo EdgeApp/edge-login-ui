@@ -182,7 +182,7 @@ const strings = {
   activity_signup_title_change_password: 'Change Password',
   activity_signup_title_change_password_via_questions: 'Change Password',
   activity_signup_title_change_pin: 'Change PIN',
-  activity_signup_title_change_pin_4_digit: 'Change 4-digit PIN',  
+  activity_signup_title_change_pin_4_digit: 'Change 4-digit PIN',
   activity_signup_username_hint: 'User Name',
   activity_signup_password_hint: 'Choose a Password',
   activity_signup_password: 'Password',
@@ -252,7 +252,6 @@ const strings = {
   activity_recovery_button_title: 'Setup/Change Password Recovery',
   activity_recovery_title: 'Password Recovery',
   activity_recovery_setup_title: 'Password Recovery Setup',
-  activity_recovery_title: 'Password Recovery',
   activity_recovery_skip_button_text: 'Skip This Step',
   activity_recovery_complete_button: 'Complete Sign Up',
   activity_recovery_complete_button_change_questions: 'Done',
@@ -813,7 +812,7 @@ const strings = {
 
     //  SSO
   edge_login: 'Edge Login',
-  edge_login_manage: "Login to the Airbitz Wallet to change your password/PIN or setup password recovery",
+  edge_login_manage: 'Login to the Airbitz Wallet to change your password/PIN or setup password recovery',
   edge_description: 'This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.',
   edge_logging_in: 'Signing in user "{0}"',
   bitid_identity: 'BitID Identity',

@@ -24,4 +24,3 @@ export function showWhiteOverlayComplete () {
     type: SHOW_WHITE_OVERLAY_COMPLETE
   }
 }
-

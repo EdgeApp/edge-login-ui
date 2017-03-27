@@ -22,7 +22,6 @@ import { signupPage } from '../modules/Signup/Signup.reducer'
 import { user } from '../modules/User/User.reducer'
 import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 
-
 // import routes from './routesReducer'
 // import { alert } from '../modules/Alert/Alert.reducer'
 
@@ -34,7 +33,7 @@ const store = combineReducers({
   container: combineReducers({
     containerNotification: Container.containerNotification,
     containerNotificationValues: Container.containerNotificationValues
-  }), 
+  }),
   password: combineReducers({
     inputState: PasswordStates.inputState,
     password: PasswordStates.password,
