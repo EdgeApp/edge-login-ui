@@ -17,6 +17,8 @@ export const revealPassword = (state = false, action) => {
       return true
     case ACTION.PASSWORD_CHANGE_HIDE_PASSWORD :
       return false
+    case ACTION.PASSWORD_CHANGED :
+      return false
     default:
       return state
   }

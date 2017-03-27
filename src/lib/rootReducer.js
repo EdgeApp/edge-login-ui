@@ -17,6 +17,7 @@ import * as ChangePassword from '../modules/ChangePassword/ChangePassword.reduce
 import * as ChangePin from '../modules/ChangePin/ChangePin.reducer'
 import * as PasswordRecovery from '../modules/PasswordRecovery/PasswordRecovery.reducer'
 import * as ForgotPassword from '../modules/ForgotPassword/ForgotPassword.reducer'
+import * as Container from '../modules/Container.reducer'
 import { signupPage } from '../modules/Signup/Signup.reducer'
 import { user } from '../modules/User/User.reducer'
 import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
@@ -30,6 +31,10 @@ const store = combineReducers({
   username,
   pin,
   pinDummy,
+  container: combineReducers({
+    containerNotification: Container.containerNotification,
+    containerNotificationValues: Container.containerNotificationValues
+  }), 
   password: combineReducers({
     inputState: PasswordStates.inputState,
     password: PasswordStates.password,
@@ -58,7 +63,11 @@ const store = combineReducers({
     showCachedUsers: Login.showCachedUsers,
     edgeLoginResults: Login.edgeLoginResults,
     edgeUsername: Login.edgeUsername,
-    edgeAccount: Login.edgeAccount
+    edgeAccount: Login.edgeAccount,
+    loginPinWait: Login.loginPinWait,
+    loginPasswordWait: Login.loginPasswordWait,
+    loginNotification: Login.loginNotification
+
   }),
   nextButtonVisible,
   skipButtonVisible,

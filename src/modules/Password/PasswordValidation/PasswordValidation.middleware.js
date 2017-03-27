@@ -1,39 +1,43 @@
 import * as action from './PasswordValidation.action'
 
 export const validate = (password) => {
-  return dispatch => {
-    let valid = true
-    if (password.match(/[A-Z]/)) {
-      dispatch(action.upperCaseCharPass())
-    } else {
-      dispatch(action.upperCaseCharFail())
-      valid = false
-    }
+  return (dispatch, getState, imports) => {
+    const abcContext = imports.abcContext
 
-    if (password.match(/[a-z]/)) {
-      dispatch(action.lowerCaseCharPass())
-    } else {
-      dispatch(action.lowerCaseCharFail())
-      valid = false
-    }
+    abcContext(context => {
+      const check = context.checkPasswordRules(password)
 
-    if (password.match(/\d/)) {
-      dispatch(action.numberPass())
-    } else {
-      dispatch(action.numberFail())
-      valid = false
-    }
+      if(!check.noLowerCase) {
+        dispatch(action.lowerCaseCharPass())
+      }else{
+        dispatch(action.lowerCaseCharFail())
+      }
 
-    if (password.length >= 10) {
-      dispatch(action.characterLengthPass())
-    } else {
-      dispatch(action.characterLengthFail())
-      valid = false
-    }
-    if (valid) {
-      dispatch(action.validatePassword())
-    } else {
-      dispatch(action.invalidatePassword())
-    }
+      if(!check.noNumber) {
+        dispatch(action.numberPass())
+      }else{
+        dispatch(action.numberFail())
+      }
+
+      if(!check.noUpperCase) {
+        dispatch(action.upperCaseCharPass())
+      }else{
+        dispatch(action.upperCaseCharFail())
+      }
+
+      if(!check.tooShort) {
+        dispatch(action.characterLengthPass())
+      }else{
+        dispatch(action.characterLengthFail())
+      }
+
+      if (check.passed) {
+        dispatch(action.validatePassword())
+      } else {
+        dispatch(action.invalidatePassword())
+      }
+
+    })
+
   }
 }

@@ -1,4 +1,5 @@
 var abc = require('airbitz-core-js')
+import 'whatwg-fetch'
 
 var DomWindow
 var DomDocument
@@ -55,29 +56,23 @@ function InnerAbcUi (args) {
     'bundlePath': this.bundlePath
   }
 
-  if (typeof args.vendorImageUrl === 'string') {
-    DomWindow.abcuiContext.vendorImageUrl = args.vendorImageUrl
-  } else {
-    DomWindow.abcuiContext.vendorImageUrl = ''
-  }
+  this.abcContext.displayName = args.vendorName
+  this.abcContext.displayImageUrl = args.vendorImageUrl
 }
 
 InnerAbcUi.prototype.openLoginWindow = function (callback) {
   var frame = createIFrame(this.bundlePath + '/assets/index.html')
   var that = this
   var abcContext = DomWindow.abcContext
+  var done = () => {
+     DomWindow.loginCallback = null
+    removeIFrame(frame)
+  }
   DomWindow.loginCallback = function (error, account) {
     if (account) {
-
-      // if (opts && opts.setupRecovery) {
-      //   opts.noRequirePassword = true
-      //   that.openSetupRecoveryWindow(account, opts, function () {})
-      // } else if (!abcContext.pinExists(account.username)) {
-      //   that.openChangePinEdgeLoginWindow(account, opts, function () {})
-      // }
       DomWindow.abcAccount = account
       callback(error, account)
-      removeIFrame(frame)
+      done()
     }
   }
   DomWindow.exitCallback = function () {

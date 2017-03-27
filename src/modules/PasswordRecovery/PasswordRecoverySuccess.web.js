@@ -15,11 +15,11 @@ class PasswordRecoverySuccess extends Component {
 
   _handleFinish = () => {
     const account = this.props.user
-    if (window.parent.exitCallback) {
-      return window.parent.exitCallback(null)
-    }
     if (window.parent.loginCallback) {
       return window.parent.loginCallback(null, account)
+    }
+    if (window.parent.exitCallback) {
+      return window.parent.exitCallback(null)
     }
     if (!window.parent.loginCallback && !window.parent.exitCallback) {
       this.props.dispatch(hidePasswordRecoveryFinishModal())

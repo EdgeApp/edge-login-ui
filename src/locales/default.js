@@ -139,7 +139,7 @@ const strings = {
   server_error_bad_pin: 'Invalid PIN',
   server_error_bad_pin_login: 'Invalid PIN. Please log in.',
   server_error_pin_expired: 'PIN has expired. Please log in.',
-  server_error_invalid_pin_wait: 'Too many failed login attempts. Please try again in {0} seconds.',
+  server_error_invalid_pin_wait: 'Too many failed login attempts. Please try again in %1$s seconds.',
   server_error_other: 'An error has occurred.',
   server_error_bad_otp: 'This account has Two Factor Authentication enabled and cannot be logged in using a username and password. Please login by scanning the barcode with the Airbitz Wallet.',
   insufficient_amount: 'Amount too small',
@@ -243,6 +243,10 @@ const strings = {
   fragment_setup_writeitdown_pin_title: 'PIN',
   fragment_setup_writeitdown_show: 'Show',
   fragment_setup_writeitdown_hide: 'Hide',
+  fragment_setup_footer_1: 'Increase your account security. ',
+  fragment_setup_footer_2_link: 'Download Airbitz & Enable 2FA',
+  fragment_setup_header_right: 'Powered by Airbitz',
+  fragment_setup_header_left: 'Login to %1$s',
 
     //  Strings for PasswordRecovery
   activity_recovery_button_title: 'Setup/Change Password Recovery',
@@ -593,6 +597,7 @@ const strings = {
   error_invalid_credentials: 'Invalid User Name or Password',
   error_invalid_wallet_name_title: 'Invalid Wallet Name',
   error_invalid_wallet_name_description: 'You must provide a wallet name',
+  error_filler: 'This is just sample error.',
 
     //  OS Notifications
   alert_notification_message: 'Touch to read critical messages',
@@ -801,9 +806,14 @@ const strings = {
   recovery_disabled: 'Recovery Disabled',
   recovery_setup_successful: 'Password recovery setup complete. Please ensure you retain a copy of the email you sent yourself. Use the link in the email to recovery your account if your password is forgotten.',
   in: 'in',
+  password_recovery_gmamil: 'Send using Gmail',
+  password_recovery_yahoo: 'Send using Yahoo',
+  password_recovery_microsoft: 'Send using Hotmail, Outlook, Live Mail',
+  password_recovery_app: 'Send using Email App',
 
     //  SSO
   edge_login: 'Edge Login',
+  edge_login_manage: "Login to the Airbitz Wallet to change your password/PIN or setup password recovery",
   edge_description: 'This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.',
   edge_logging_in: 'Signing in user "{0}"',
   bitid_identity: 'BitID Identity',
@@ -817,6 +827,7 @@ const strings = {
   login_button_text: 'LOGIN',
   back_button_text: 'Back',
   verify_domain_and_approve: 'Please verify the domain above and tap LOGIN to authenticate with this site',
+  error_edge_login: 'There has been an error logging in. Please try again later.',
   would_like_to: 'This site would like to:',
   request_payment_address: 'Request a Payment Address',
   identity_token_created_and_saved: 'Identity token from [{0}] created and saved',

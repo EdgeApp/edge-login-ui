@@ -25,8 +25,7 @@ import styles from './Password.webStyle'
 
 class Password extends Component {
 
-  _handleSubmit = (e) => {
-    e.preventDefault()
+  _handleSubmit = () => {
     const callback = () => this.props.router.push('/review')
     this.props.dispatch(
       checkPassword(
@@ -82,6 +81,12 @@ class Password extends Component {
     }
   }
 
+  _handleKeyEnter = (e) => {
+    if(e.nativeEvent.charCode === 13) {
+      return this._handleSubmit()
+    }
+  }
+
   render () {
     return (
       <div>
@@ -130,24 +135,21 @@ class Password extends Component {
             </div>
             <FontIcon value={this.props.inputState ? 'visibility' : 'visibility_off'} onClick={this.toggleRevealPassword} className={styles.inputPasswordFieldImg}/>
           </div>
-          <form onSubmit={e => this._handleSubmit(e)}>
-            <Input
-              type={ this.props.inputState ? 'text' : 'password' }
-              ref='passwordRepeat'
-              name="passwordRepeat"
-              onChange={this._handleOnChangePasswordRepeat}
-              value={this.props.passwordRepeat}
-              label="Re-enter Password"
-            />
-          </form>
+          <Input
+            type={ this.props.inputState ? 'text' : 'password' }
+            ref='passwordRepeat'
+            name="passwordRepeat"
+            onChange={this._handleOnChangePasswordRepeat}
+            value={this.props.passwordRepeat}
+            onKeyPress={this._handleKeyEnter.bind(this)}
+            label="Re-enter Password"
+          />
         </div>
 
         <div className={styles.buttonSection}>
-          <Button raised theme={neutralButtonWithBlueText} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>          
+          <Button theme={neutralButtonWithBlueText} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
           <Button type='button' raised primary className={styles.next} onClick={this._handleSubmit}>{t('string_next')}</Button>
         </div>
-
-        <SkipPassword handleSubmit={this._handleSubmitSkipPassword} />
       </div>
 
     )

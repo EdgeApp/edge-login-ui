@@ -36,7 +36,9 @@
     "redux-logger": "~2.7.4",
     "redux-thunk": "~2.1.0",
     "socket.io-client": "~1.7.2",
-    "superagent": "~2.1.0"
+    "sprintf-js": "^1.0.3",
+    "superagent": "~2.1.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "autoprefixer": "~6.6.1",
@@ -65,10 +67,5 @@
     "webpack": "~1.13.1",
     "webpack-dev-middleware": "~1.6.1",
     "webpack-dev-server": "~1.14.1"
-  },
-  "standard": {
-    "ignore": [
-      "src/lib/native/abc.webpack.js"
-    ]
   }
 }

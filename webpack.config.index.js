@@ -41,7 +41,9 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       sourceMap: true,
-
+      compress: {
+        drop_console: true
+      },
       mangle: {
         except: ['$super', '$', 'exports', 'require', '$q', '$ocLazyLoad']
       }

@@ -67,7 +67,7 @@ class ChangePassword extends Component {
     } else {
       return this.props.dispatch(changePasswordShowPassword())
     }
-  }  
+  }
 
   buttons = [
     { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
@@ -139,5 +139,5 @@ export default connect(state => ({
   passwordChangedNotification: state.changePassword.passwordChangedNotification,
   validation: state.password.validation,
   user: state.user
-  
+
 }))(ChangePassword)

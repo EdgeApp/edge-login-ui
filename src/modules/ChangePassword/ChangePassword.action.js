@@ -13,14 +13,12 @@ export const PASSWORD_CHANGE_SHOW_PASSWORD = 'PASSWORD_CHANGE_SHOW_PASSWORD'
 export const PASSWORD_CHANGE_HIDE_PASSWORD = 'PASSWORD_CHANGE_HIDE_PASSWORD'
 
 export function changePasswordShowPassword () {
-  console.log('in changepassword actions, changePasswordShowPassword')
   return {
     type: PASSWORD_CHANGE_SHOW_PASSWORD
   }
 }
 
 export function changePasswordHidePassword () {
-  console.log('in changepassword actions, changePasswordShowPassword')
   return {
     type: PASSWORD_CHANGE_HIDE_PASSWORD
   }

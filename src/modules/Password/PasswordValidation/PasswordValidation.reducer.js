@@ -45,7 +45,7 @@ export const lowerCaseChar = (state = false, action) => {
     case ACTION.LOWER_CASE_PASS :
       return true
 
-    case ACTION.UPPER_CASE_FAIL :
+    case ACTION.LOWER_CASE_FAIL :
       return false
 
     case PASSWORD_CHANGED :

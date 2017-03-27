@@ -4,6 +4,24 @@
   padding: 0;
 }
 
+.cachedDropdownList {
+
+  max-width: inherit;
+
+  span {
+    &.useritem {
+      word-wrap: break-word;
+      overflow-x: auto;
+      display: inline;
+      width: calc(70% - 52px);
+    }
+
+    &.material-icons {
+      float: right;
+    }
+  }
+}
+
 .userrows {
   display: flex;
   display: -webkit-flex;
@@ -21,6 +39,7 @@
 
   z-index: 5;
   padding: $unit;
+
 }
 
 .useritemSelected {
@@ -37,6 +56,7 @@
 
    z-index: 5;
    padding: $unit;
+   float: right;
 }
 
 .userdelete:hover {

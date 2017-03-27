@@ -1,4 +1,3 @@
-// import {abc} from 'abc.webpack'
 var abc = require('airbitz-core-js')
 
 import LocalStorage from './LocalStorage'

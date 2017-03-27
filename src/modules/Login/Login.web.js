@@ -5,8 +5,9 @@ import Input from 'react-toolbox/lib/input'
 import Link from 'react-toolbox/lib/link'
 import Button from 'react-toolbox/lib/button'
 import t from 'lib/web/LocaleStrings'
+import { sprintf } from 'sprintf-js'
 
-import { openLogin, loginUsername, loginPassword, openUserList, closeUserList } from './Login.action'
+import { openLogin, loginUsername, loginPassword, openUserList, closeUserList, enableTimer, disableTimer, refreshTimer, hideLoginNotification } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
@@ -15,6 +16,7 @@ import LoginWithPin from './LoginWithPin.web'
 import LoginEdge from './LoginEdge.web'
 import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
+import Snackbar from 'react-toolbox/lib/snackbar'
 import { showWhiteOverlay } from '../Landing.action'
 
 import signinButton from 'theme/signinButton.scss'
@@ -22,6 +24,13 @@ import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './Login.style.scss'
 
 class Login extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPasswordCountdown: false
+    };
+  } 
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -44,6 +53,8 @@ class Login extends Component {
               this.props.dispatch(closeLoading())
               return this.props.router.push('/home')
             }
+          } else {
+            //this.props._renderNotification('There has been an error logging in.')
           }
         })
       )
@@ -53,6 +64,7 @@ class Login extends Component {
       // this.refs.fieldsBelowView.transitionTo({height: 0}, 200)
     }
   }
+
   _handleGoToSignupPage = () => {
     this.props.router.push('/signup')
   }
@@ -90,6 +102,22 @@ class Login extends Component {
     }
   }
 
+  _handleNotificationClose = () => {
+    return this.props.dispatch(hideLoginNotification())
+  }
+
+  _renderNotification = (errorString) => {
+    const { loginNotification, dispatch } = this.props
+    return <Snackbar
+      action='Dismiss'
+      active={loginNotification}
+      label={t(errorString)}
+      timeout={5000}
+      type='accept'
+      onClick={this._handleNotificationClose}
+      onTimeout={this._handleNotificationClose} />
+  }
+
   render () {
     const cUsers = () => {
       if (this.props.showCachedUsers) {
@@ -120,6 +148,7 @@ class Login extends Component {
       return (
         <div className={styles.container}>
           <LoginWithPin />
+          {this._renderNotification()}
         </div>
       )
     }
@@ -129,11 +158,12 @@ class Login extends Component {
         <div className={styles.container}>
           <LoginEdge />
           <div className={styles.buttonGroup}>
-            <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_account')}</Button>
+            <Button raised primary style={{textTransform: 'none', marginLeft: '0px'}} theme={signinButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_account')}</Button>
             <div ref='fieldsBelowView' style={{height: '45px'}} />
             <a onClick={this._handleOpenLoginWithPasswordPage}>Already have an account?<br />Log in</a>
           </div>
           <ForgotPassword />
+          {this._renderNotification()}
         </div>
       )
     }
@@ -162,14 +192,16 @@ class Login extends Component {
               </div>
             </div>
             <div className={styles.buttonGroup}>
-              <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit}>{t('fragment_landing_signin_button')}</Button>
+              <span className={styles.loginTimeout}>{this.props.loginPasswordWait ? sprintf(t('server_error_invalid_pin_wait'),  this.props.loginPasswordWait) : ''}</span>
+              <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit} disabled={this.props.loginPasswordWait > 0}>{t('fragment_landing_signin_button')}</Button>
               <br />
               <Button theme={neutral} className={styles.createNewButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
               <br />
-              <a onClick={this._handleOpenForgotPasswordModal} className={styles.forgotPassword}>{t('fragment_landing_forgot_password')}</a>
+              <Button theme={neutral} style={{textTransform: 'none'}} onClick={this._handleOpenForgotPasswordModal} className={styles.forgotPassword}>{t('fragment_landing_forgot_password')}</Button>
             </div>
           </div>
           <ForgotPassword />
+          {this._renderNotification()}
         </div>
       )
     }
@@ -184,7 +216,10 @@ export default connect(state => ({
   viewPassword: state.login.viewPassword,
   username: state.login.username,
   password: state.login.password,
+  loginNotification: state.login.loginNotification,
   showCachedUsers: state.login.showCachedUsers,
-  edgeObject: state.login.edgeLoginResults
+  edgeObject: state.login.edgeLoginResults,
+  loginPasswordWait: state.login.loginPasswordWait,
+  currentPinCountdown: false
 
 }))(Login)

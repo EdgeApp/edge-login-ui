@@ -11,6 +11,9 @@ import abcctx from 'lib/web/abcContext'
 import LayoutTemplate from './LayoutTemplate/LayoutTemplate.web'
 import layoutTheme from 'theme/layoutTheme'
 import { openLogin, closeUserList } from './Login/Login.action'
+import { showContainerNotification, hideContainerNotification } from './Container.action'
+import Snackbar from 'react-toolbox/lib/snackbar'
+import t from 'lib/web/LocaleStrings'
 
 import styles from './Container.style.scss'
 
@@ -47,6 +50,23 @@ class Container extends Component {
     })
   }
 
+  _handleNotificationClose = () => {
+    return this.props.dispatch(hideContainerNotification())
+  }
+
+  _renderNotification = (string, notificationType = null) => {
+    const { containerNotification, dispatch } = this.props
+    return <Snackbar
+      action='Dismiss'
+      active={containerNotification}
+      label={string}
+      className={styles[notificationType]}
+      timeout={5000}
+      type='accept'
+      onClick={this._handleNotificationClose}
+      onTimeout={this._handleNotificationClose} />
+  }
+
   componentWillMount () {
     this.loadData()
   } 
@@ -69,6 +89,7 @@ class Container extends Component {
           <ErrorModal />
           <WarningModal />
         </Dialog>
+        {this._renderNotification(this.props.containerNotificationValues.text, this.props.containerNotificationValues.notificationType)}
       </div>
     )
   }
@@ -78,6 +99,8 @@ class Container extends Component {
 export default connect(state => ({
 
   loader: state.loader,
-  edgeObject: state.login.edgeLoginResults
+  edgeObject: state.login.edgeLoginResults,
+  containerNotification: state.container.containerNotification,
+  containerNotificationValues: state.container.containerNotificationValues
 
 }))(Container)

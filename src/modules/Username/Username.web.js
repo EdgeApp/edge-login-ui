@@ -17,9 +17,7 @@ import styles from './Username.webStyle'
 
 class UsernameComponent extends Component {
 
-  _handleSubmit = (e) => {
-    e.preventDefault()
-
+  _handleSubmit = () => {
     if (this.props.username.length < 3) {
       return this.props.dispatch(
         openErrorModal(t('activity_signup_insufficient_username_message'))
@@ -42,38 +40,43 @@ class UsernameComponent extends Component {
     }
   }
 
-  _handleOnChangeText = (username) => {
+  _handleOnChangeText = (username, event, foo) => {
     this.props.dispatch(
       changeUsernameValue(username)
     )
   }
 
+  _handleKeyEnter = (e) => {
+    if(e.nativeEvent.charCode === 13) {
+      return this._handleSubmit()
+    }
+  }
+
   render () {
     return (
-      <div>
+      <div onKeyPress={this._handleKeyEnter.bind(this)}>
         <div className={styles.header}>
           <div className={styles.title}>
             <h4>{t('fragment_setup_username_label')}</h4>
           </div>
         </div>
           <div className={styles.section}>
-            <form onSubmit={e => this._handleSubmit(e)}>
-              <Input
-                autoFocus
-                type="text"
-                name="username"
-                onChange={this._handleOnChangeText}
-                value={this.props.username}
-                label={t('fragment_landing_username_hint')}
-                className={styles.inputField}
-              />
-            </form>
+          <Input
+            autoFocus
+            type="text"
+            name="username"
+            onChange={this._handleOnChangeText}
+            onKeyPress={this._handleKeyEnter.bind(this)}
+            value={this.props.username}
+            label={t('fragment_landing_username_hint')}
+            className={styles.inputField}
+          />
           </div>
           <div className={styles.section}>
             <p className={styles.text}>{t('fragment_setup_username_text')}</p>
           </div>
           <div className={styles.buttonSection}>
-            <Button raised theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>               
+            <Button theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
             <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </div>
       </div>

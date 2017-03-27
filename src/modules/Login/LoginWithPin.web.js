@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import t from 'lib/web/LocaleStrings'
+import { sprintf } from 'sprintf-js'
 
-import { openLogin, loginPIN, openUserList, closeUserList } from './Login.action'
+import { openLogin, loginPIN, openUserList, closeUserList, enableTimer, disableTimer, refreshTimer } from './Login.action'
 import { loginWithPin } from './Login.middleware'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
 import { removeUserToLogin } from '../CachedUsers/CachedUsers.action'
@@ -29,8 +30,8 @@ class LoginWithPin extends Component {
           return this.props.router.push('/home')
         }
       } else {
-        this._handleChangePin('')
-        return this.refs.pinInput.getWrappedInstance().focus()
+        this._handleChangePin('')   
+        return this.refs.pinInput.getWrappedInstance().focus()    
       }
     }
     this.props.dispatch(
@@ -42,6 +43,7 @@ class LoginWithPin extends Component {
     )
     this.refs.pinInput.getWrappedInstance().blur()
   }
+
   _handleChangePin = (pin) => {
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
@@ -108,8 +110,10 @@ class LoginWithPin extends Component {
             onChange={this._handleChangePin}
             autoCorrect={false}
             autoFocus
+            disabled={this.props.loginPinWait > 0}            
           />
         </div>
+        <span className={styles.loginTimeout}>{this.props.loginPinWait ? sprintf(t('server_error_invalid_pin_wait'),  this.props.loginPinWait) : ''}</span>        
         <Button theme={neutral} className={styles.exitPin} onClick={this._gotoPasswordInput}>
           { t('fragment_landing_switch_user') }
         </Button>
@@ -124,7 +128,9 @@ export default connect(state => ({
 
   pin: state.login.pin,
   user: state.cachedUsers.selectedUserToLogin,
-  showCachedUsers: state.login.showCachedUsers
+  showCachedUsers: state.login.showCachedUsers,
+  loginPinWait: state.login.loginPinWait,
+  currentPasswordCountdown: false  
 
 }))(LoginWithPin)
 
