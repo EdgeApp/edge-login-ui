@@ -11,7 +11,6 @@ import { InputGroup, Input } from 'native-base'
 import t from '../../lib/LocaleStrings'
 import style from '../Style'
 class Login extends Component {
-
   submit = () => {
     this.refs.pinInput.blur()
     this.props.dispatch(

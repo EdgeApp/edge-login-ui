@@ -96,4 +96,3 @@ export const characterLength = (state = false, action) => {
       return state
   }
 }
-

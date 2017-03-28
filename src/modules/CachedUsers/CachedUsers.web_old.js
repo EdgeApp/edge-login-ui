@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import Button from 'react-toolbox/lib/button'
 import t from 'lib/web/LocaleStrings'
-import styles from 'react-toolbox/lib/dropdown/theme.scss'
 
 import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
 import { openWarningModal } from '../WarningModal/WarningModal.action'
@@ -13,7 +12,6 @@ import cachedUserXButton from 'theme/cachedUserXButton.scss'
 import cachedUserButton from 'theme/cachedUserButton.scss'
 
 class UserList extends Component {
-
   handleLoginUserPin = (user) => {
     this.props.blurField.focus()
     this.props.dispatch(selectUserToLogin(user))
@@ -34,7 +32,7 @@ class UserList extends Component {
   listUsers = () => {
     const checkIfLastElementStyle = index => {
       const lastIndex = this.props.users.length - 1
-      let styleArr = _.clone(style.row)
+      const styleArr = _.clone(style.row)
       if (index === 0) {
         _.extend(styleArr, style.border)
         _.extend(styleArr, style.topRadius)

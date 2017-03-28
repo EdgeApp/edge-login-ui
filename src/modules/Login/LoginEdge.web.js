@@ -1,27 +1,24 @@
 import React, { Component } from 'react'
-const QRCode = require('qrcode.react');
+const QRCode = require('qrcode.react')
 import { withRouter } from 'react-router'
-import { Button, IconButton } from 'react-toolbox/lib/button'
 
 import { connect } from 'react-redux'
 import t from 'lib/web/LocaleStrings'
-import logo from '../../img/logo_icon.png'
 
 import { edgeLogin } from './Login.middleware'
-import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { closeLoading } from '../Loader/Loader.action'
 
 class LoginEdge extends Component {
-
   componentWillUnmount () {
-    if(this.props.edgeObject) {
+    if (this.props.edgeObject) {
       this.props.edgeObject.cancelRequest()
     }
   }
 
   componentDidMount () {
-    const { edgeId, dispatch } = this.props
+    const { dispatch } = this.props
     // if (!edgeId) {
-      dispatch(
+    dispatch(
         edgeLogin((error, account) => {
           if (!error) {
             if (window.parent.loginCallback) {
@@ -41,7 +38,7 @@ class LoginEdge extends Component {
     const { edgeId } = this.props
     if (edgeId) {
       const qrCodeVal = 'airbitz-develop://edge/' + edgeId
-      return (<QRCode value={qrCodeVal} style={{margin: '0px auto', width: '128px'}}/>)
+      return (<QRCode value={qrCodeVal} style={{margin: '0px auto', width: '128px'}} />)
     } else {
       return null
     }
@@ -67,17 +64,17 @@ class LoginEdge extends Component {
           {!edgeUsername ? (
             <div>
               <div style={style.barCode}>
-                <a target="_blank" href={this.renderLoginLink()}>{this.renderBarcode()}</a>
+                <a target='_blank' href={this.renderLoginLink()}>{this.renderBarcode()}</a>
               </div>
               <div style={style.dividerContainer}>
                 <label style={style.divider}>or</label>
               </div>
             </div>
             ) : (
-            <div>
-              <b>{edgeUsername}</b><br />
-              {t('approving_login_text')}<br />
-            </div>)}
+              <div>
+                <b>{edgeUsername}</b><br />
+                {t('approving_login_text')}<br />
+              </div>)}
         </div>
       </div>
     )
@@ -93,7 +90,7 @@ const style = {
     alignItems: 'stretch',
     flexWrap: 'wrap',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   logoIcon: {
     'width': '28px',
@@ -122,10 +119,12 @@ const style = {
   }
 }
 
-LoginEdge = withRouter(LoginEdge)
-export default connect(state => ({
+const LoginEdgeWithRouter = withRouter(LoginEdge)
+const LoginEdgeWithRedux = connect(state => ({
   edgeId: state.login.edgeLoginResults.id,
   edgeUsername: state.login.edgeUsername,
   edgeAccount: state.login.edgeAccount,
   edgeObject: state.login.edgeLoginResults
-}))(LoginEdge)
+}))(LoginEdgeWithRouter)
+
+export default LoginEdgeWithRedux

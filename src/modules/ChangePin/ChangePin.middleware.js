@@ -1,4 +1,4 @@
-import { pinChanged, hidePinView, showPinChangedNotification } from './ChangePin.action'
+import { pinChanged } from './ChangePin.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 
@@ -7,30 +7,25 @@ export const checkPin = (password, pin, account, callback) => {
     const t = imports.t
     dispatch(openLoading())
 
-
     if (pin.length !== 4) {
       dispatch(closeLoading())
       return dispatch(openErrorModal(t('activity_change_pin_length')))
     }
 
-    account.checkPassword(password).then(result => {
-      if (!result) {
+    account.checkPassword(password).then(passwordIsGood => {
+      if (!passwordIsGood) {
         dispatch(closeLoading())
         return dispatch(openErrorModal(t('server_error_bad_password')))
       }
-      if (result) {
-        account.changePIN(pin, error => {
-          dispatch(closeLoading())
-          if (error) {
-            return dispatch(openErrorModal(t('server_error_no_connection')))
-          }
-          if (!error) {
-            dispatch(pinChanged())
-            return callback(null)
-          }
-        })
-      }
-    })
 
+      return account.changePIN(pin, error => {
+        dispatch(closeLoading())
+        if (error != null) {
+          return dispatch(openErrorModal(t('server_error_no_connection')))
+        }
+        dispatch(pinChanged())
+        return callback(null)
+      })
+    })
   }
 }

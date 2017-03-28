@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import t from 'lib/web/LocaleStrings'
-import Button from 'react-toolbox/lib/button'
 import Dialog from 'react-toolbox/lib/dialog'
 
 import { closeWarningModal } from './WarningModal.action'
@@ -13,7 +12,6 @@ import warningButtons from 'theme/warningButtons.scss'
 import styles from './WarningModal.webStyle'
 
 class WarningModal extends Component {
-
   _handleDeleteUsersFromCache = () => {
     this.props.dispatch(
       deleteUserToCache(

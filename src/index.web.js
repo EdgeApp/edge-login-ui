@@ -22,4 +22,3 @@ render((
     <Router />
   </Provider>
 ), rootElement)
-

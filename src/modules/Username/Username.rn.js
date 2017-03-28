@@ -13,7 +13,6 @@ import NextButton from '../NextButton/NextButton.ui'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
 class UsernameComponent extends Component {
-
   handleSubmit = () => {
     this.refs.usernameInput.blur()
     if (this.props.username.length < 3) {

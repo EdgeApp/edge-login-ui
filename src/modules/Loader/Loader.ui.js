@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import style from '../Style'
 
 class Loader extends Component {
-
   checkLoading = () => {
     if (this.props.loader.loading === true && this.props.errorModal.visible === false && this.props.loader.style === 'grey') {
       return true

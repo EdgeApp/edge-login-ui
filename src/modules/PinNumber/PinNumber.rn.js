@@ -12,7 +12,6 @@ import t from '../../lib/LocaleStrings'
 import NextButton from '../NextButton/NextButton.ui'
 
 class PinComponent extends Component {
-
   handleSubmit = () => {
     this.refs.signupPin.blur()
     this.props.dispatch(

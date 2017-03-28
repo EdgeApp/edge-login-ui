@@ -6,7 +6,6 @@ import appTheme from '../../../Themes/appTheme'
 import t from '../../lib/LocaleStrings'
 
 class SkipButton extends Component {
-
   render () {
     if (this.props.scene === 'password') {
       return (
@@ -22,7 +21,6 @@ class SkipButton extends Component {
       return null
     }
   }
-
 }
 
 const styles = StyleSheet.create({

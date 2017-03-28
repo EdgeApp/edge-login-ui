@@ -1,23 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
-import { browserHistory } from 'react-router'
 import Dialog from 'react-toolbox/lib/dialog'
 import { withRouter } from 'react-router'
 
-import { showPasswordRecovery, hidePasswordRecovery } from './ReviewDetails.action'
+import { hidePasswordRecovery } from './ReviewDetails.action'
 import { showPasswordRecoveryView } from '../PasswordRecovery/PasswordRecovery.action'
 import { loginWithPassword } from '../Login/Login.middleware'
-import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { closeLoading } from '../Loader/Loader.action'
 
 const abcuiContext = window.parent.abcuiContext
-const vendorName = abcuiContext ?  abcuiContext.vendorName : null
+const vendorName = abcuiContext ? abcuiContext.vendorName : null
 
 import neutralButtons from 'theme/neutralButtons.scss'
 import primaryButtons from 'theme/primaryButtons.scss'
 
 class Review extends Component {
-
   _handleHideModal = () => {
     this.props.dispatch(
       hidePasswordRecovery()
@@ -30,7 +28,7 @@ class Review extends Component {
       loginWithPassword(
         username,
         password,
-        ( error, account ) => {
+        (error, account) => {
           if (!error) {
             if (window.parent.loginCallback) {
               window.parent.loginCallback(null, account)
@@ -51,13 +49,13 @@ class Review extends Component {
     )
   }
 
-	actions = [
-		{ label: t('fragment_recovery_account_setup_recovery'), theme: primaryButtons, onClick: this._handleOpenPasswordRecovery, raised: true, primary: true },
-		{ label: t('password_check_check_later'), onClick: this._handleFinish, theme: neutralButtons}
-	];
+  actions = [
+    { label: t('fragment_recovery_account_setup_recovery'), theme: primaryButtons, onClick: this._handleOpenPasswordRecovery, raised: true, primary: true },
+    { label: t('password_check_check_later'), onClick: this._handleFinish, theme: neutralButtons }
+  ]
 
   render () {
-      return (
+    return (
         <Dialog
           actions={this.actions}
           active={this.props.view}
@@ -71,14 +69,16 @@ class Review extends Component {
           <br />
           <p>{ t('fragment_recovery_account_created_fragment_3') }</p>
         </Dialog>
-      )
+    )
   }
 }
 
-Review = withRouter(Review)
-export default connect(state => ({
+const ReviewWithRouter = withRouter(Review)
+const ReviewWithRedux = connect(state => ({
 
   details: state.reviewDetails.details,
   view: state.reviewDetails.afterQuestionPasswordRecoveryView
 
-}))(Review)
+}))(ReviewWithRouter)
+
+export default ReviewWithRedux

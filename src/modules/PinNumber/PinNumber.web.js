@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
 import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import t from '../../lib/web/LocaleStrings'
-import nextButton from 'theme/nextButton.scss'
-import backButton from 'theme/backButton.scss'
 import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText'
-import { Card, CardText, CardActions } from 'react-toolbox/lib/card'
 
 import { changeSignupPage } from '../Signup/Signup.action'
 import { changePinNumberValue } from './PinNumber.action'
@@ -16,7 +12,6 @@ import { checkPIN } from './PinNumber.middleware'
 import styles from './PinNumber.webStyle'
 
 class PinComponent extends Component {
-
   _handleSubmit = (e) => {
     this.props.dispatch(
      checkPIN(
@@ -38,7 +33,7 @@ class PinComponent extends Component {
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
     }
-    if(/^\d+$/.test(pin) || pin.length === 0) {
+    if (/^\d+$/.test(pin) || pin.length === 0) {
       this.props.dispatch(
         changePinNumberValue(pin)
       )
@@ -51,13 +46,13 @@ class PinComponent extends Component {
   pinStyle = () => {
     if (this.props.pin.length > 0) {
       return {textAlign: 'center', fontSize: '70px', height: '80px'}
-    }else{
+    } else {
       return {textAlign: 'center', fontSize: '35px', height: '80px'}
     }
   }
 
   _handleKeyEnter = (e) => {
-    if(e.nativeEvent.charCode === 13) {
+    if (e.nativeEvent.charCode === 13) {
       return this._handleSubmit()
     }
   }
@@ -87,9 +82,9 @@ class PinComponent extends Component {
           <div className={styles.section}>
             <p className={styles.text}>{t('fragment_setup_pin_text')}</p>
           </div>
-          <div className={styles.buttonSection}>           
-            <Button theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>             
-            <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>            
+          <div className={styles.buttonSection}>
+            <Button theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
+            <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </div>
         </div>
       </div>

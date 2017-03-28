@@ -4,7 +4,7 @@
   "description": "Pluggable UI using airbitz-core",
   "main": "src/abcui.js",
   "scripts": {
-    "lint": "eslint src/**/*.js src/**/*.jsx",
+    "lint": "eslint 'src/**/*.js' 'src/**/*.jsx'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server_dev.js",
     "build": "webpack --color --verbose --progress --config webpack.config.index.js && webpack --color --verbose --progress --config webpack.config.js && npm link",

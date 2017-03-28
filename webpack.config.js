@@ -4,8 +4,8 @@ module.exports = {
   },
   output: {
     filename: 'assets/[name].js',
-    libraryTarget: "commonjs",
-    library: "[name]"
+    libraryTarget: 'commonjs',
+    library: '[name]'
   },
 
   module: {

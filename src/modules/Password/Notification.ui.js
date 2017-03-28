@@ -7,7 +7,6 @@ import { passwordNotificationHide } from './Password.action'
 
 import appTheme from '../../../Themes/appTheme'
 class ErrorModal extends Component {
-
   handleClose = () => {
     this.props.dispatch(passwordNotificationHide())
   }

@@ -8,7 +8,6 @@ import { readContactPermissions } from './Notifications.middleware'
 import t from '../../lib/LocaleStrings'
 
 export default class Contact extends Component {
-
   handleSubmit = () => {
     this.props.dispatch(
       readContactPermissions()

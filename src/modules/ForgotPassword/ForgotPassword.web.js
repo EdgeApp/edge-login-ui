@@ -3,16 +3,10 @@ import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 import Button from 'react-toolbox/lib/button'
 import Dialog from 'react-toolbox/lib/dialog'
-import Link from 'react-toolbox/lib/link'
-
 import { closeForgotPasswordModal } from './ForgotPassword.action'
-
-import nextButton from 'theme/nextButton.scss'
 import styles from './ForgotPassword.webStyle'
-import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss'
 
 class ForgotPassword extends Component {
-
   _handleClose = () => {
     this.props.dispatch(closeForgotPasswordModal())
   }

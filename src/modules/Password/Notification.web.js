@@ -7,7 +7,6 @@ import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss
 import nextButton from 'theme/nextButton.scss'
 
 class NotificationModal extends Component {
-
   _handleClose = () => {
     this.props.dispatch(
       passwordNotificationHide()

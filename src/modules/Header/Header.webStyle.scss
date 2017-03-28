@@ -15,23 +15,23 @@
             cursor: default;
             &:hover {
                 text-decoration: none;
-            }    
+            }
         }
 
         .headerPoweredAirBitz {
             float: right;
             color: white;
-            cursor: default;    
+            cursor: default;
 
             &:hover {
                 text-decoration: none;
             }
 
-        }        
-    }    
+        }
+    }
 }
 
-/* Extra Small Devices, Phones */ 
+/* Extra Small Devices, Phones */
 @media only screen and (min-width : $layout-breakpoint-xs) {
     .appBar {
         font-size: 1.4rem;

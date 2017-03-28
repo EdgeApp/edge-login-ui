@@ -1,4 +1,4 @@
-var abc = require('airbitz-core-js')
+const abc = require('airbitz-core-js')
 
 import LocalStorage from './LocalStorage'
 

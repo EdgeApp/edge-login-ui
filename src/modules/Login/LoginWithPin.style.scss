@@ -20,13 +20,13 @@
 }
 
 .usernameContainer {
-  text-align:center; 
+  text-align:center;
   min-width: 20rem;
 
   a {
     word-wrap: break-word;
     overflow-x: auto;
-    display: inline;      
+    display: inline;
   }
 
 }
@@ -71,8 +71,8 @@
 .exitPin {
   margin: $unit * 2 0;
   white-space: normal;
-  line-height: 2.2rem;   
-  max-width: 100%;    
+  line-height: 2.2rem;
+  max-width: 100%;
 }
 
 .downArrow{

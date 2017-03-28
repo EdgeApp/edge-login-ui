@@ -7,31 +7,29 @@ import Dialog from 'react-toolbox/lib/dialog'
 import Dropdown from 'react-toolbox/lib/dropdown'
 import _ from 'lodash'
 
-import { browserHistory } from 'react-router'
 import * as action from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { checkPasswordRecovery } from './PasswordRecovery.middleware'
 
 import PasswordRecoveryToken from './PasswordRecoveryToken.web'
 
-import styles from './PasswordRecovery.webStyle'
+import styles from './PasswordRecovery.webStyle.scss'
 import neutralButtons from 'theme/neutralButtons.scss'
 import primaryButtons from 'theme/primaryButtons.scss'
 
 class PasswordRecovery extends Component {
-
   loadQuestions = () => {
     const dispatch = this.props.dispatch
     abcctx(ctx => {
       ctx.listRecoveryQuestionChoices((error, results) => {
-          if (error) {
-            dispatch(openErrorModal(t('string_connection_error_server')))
-            dispatch(action.hidePasswordRecoveryView())
-          }
-          if (!error) {
-            const questions = results.filter(result => result.category === 'recovery2').map(result => result.question)
-            dispatch(action.setPasswordRecoveryQuestions(questions))
-          }
+        if (error) {
+          dispatch(openErrorModal(t('string_connection_error_server')))
+          dispatch(action.hidePasswordRecoveryView())
+        }
+        if (!error) {
+          const questions = results.filter(result => result.category === 'recovery2').map(result => result.question)
+          dispatch(action.setPasswordRecoveryQuestions(questions))
+        }
       })
     })
   }
@@ -106,19 +104,17 @@ class PasswordRecovery extends Component {
   }
 
   buttons = [
-    { label: "Close", onClick: this._handleHideModal, theme: neutralButtons },
-    { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true }
-
+    { label: 'Close', onClick: this._handleHideModal, theme: neutralButtons },
+    { label: 'Submit', onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true }
   ]
 
   _renderView = () => {
-
     if (!this.props.viewToken) {
       const renderPasswordInput = () => {
-        if(this.props.location.pathname === "/review") {
-            return null
+        if (this.props.location.pathname === '/review') {
+          return null
         }
-        if(this.props.location.pathname !== "/review") {
+        if (this.props.location.pathname !== '/review') {
           return (
             <Input
               type='password'
@@ -133,19 +129,19 @@ class PasswordRecovery extends Component {
       }
 
       return (
-        <form onSubmit={e => { e.preventDefault; this._handleSubmit(e); }}>
+        <form onSubmit={e => { e.preventDefault(); this._handleSubmit(e) }}>
           <div className={styles.passwordInputs}>
             <Dropdown
-              auto
+              autoz
               source={this._renderQuestions1()}
               onChange={this._handleOnChangeFirstQuestion}
               value={this.props.firstQuestion}
               required
-	      		  allowBlank={false}
+        allowBlank={false}
             />
             <Input
-		        	type='text'
-		  		    name='firstAnswer'
+              type='text'
+              name='firstAnswer'
               onChange={this._handleOnChangeFirstAnswer}
               value={this.props.firstAnswer}
               label={t('activity_recovery_first_answer')}
@@ -156,7 +152,7 @@ class PasswordRecovery extends Component {
               source={this._renderQuestions2()}
               onChange={this._handleOnChangeSecondQuestion}
               value={this.props.secondQuestion}
-			        allowBlank={false}
+              allowBlank={false}
               required
             />
             <Input
@@ -185,7 +181,6 @@ class PasswordRecovery extends Component {
         />
       )
     }
-
   }
 
   render () {
@@ -200,23 +195,22 @@ class PasswordRecovery extends Component {
         { this._renderView() }
       </Dialog>
     )
-
   }
 }
 
 export default connect(state => ({
 
-  view          : state.passwordRecovery.view,
-  viewToken     : state.passwordRecovery.viewToken,
-  finishButton  : state.passwordRecovery.finishButton,
-  questions     : state.passwordRecovery.questions,
-  firstQuestion : state.passwordRecovery.firstQuestion,
-  firstAnswer   : state.passwordRecovery.firstAnswer,
+  view: state.passwordRecovery.view,
+  viewToken: state.passwordRecovery.viewToken,
+  finishButton: state.passwordRecovery.finishButton,
+  questions: state.passwordRecovery.questions,
+  firstQuestion: state.passwordRecovery.firstQuestion,
+  firstAnswer: state.passwordRecovery.firstAnswer,
   secondQuestion: state.passwordRecovery.secondQuestion,
-  secondAnswer  : state.passwordRecovery.secondAnswer,
-  password      : state.passwordRecovery.password,
-  token         : state.passwordRecovery.token,
-  email         : state.passwordRecovery.email,
-  account       : state.user
+  secondAnswer: state.passwordRecovery.secondAnswer,
+  password: state.passwordRecovery.password,
+  token: state.passwordRecovery.token,
+  email: state.passwordRecovery.email,
+  account: state.user
 
 }))(PasswordRecovery)

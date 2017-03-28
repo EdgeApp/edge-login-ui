@@ -46,7 +46,6 @@ class Disclaimer extends Component {
       </View>
     )
   }
-
 }
 
 const style = StyleSheet.create({

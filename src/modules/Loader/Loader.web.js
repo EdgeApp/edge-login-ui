@@ -4,7 +4,6 @@ import Dialog from 'react-toolbox/lib/dialog'
 import ProgressBar from 'react-toolbox/lib/progress_bar'
 
 class Loader extends Component {
-
   _checkLoading = () => {
     if (this.props.loader.loading === true && this.props.errorModal.visible === false) {
       return true
@@ -22,9 +21,9 @@ class Loader extends Component {
   ];
 
   _renderMessage = () => {
-    if(this.props.loader.message) {
+    if (this.props.loader.message) {
       return <div><p><b>{this.props.loader.message}</b></p><br /></div>
-    }else{
+    } else {
       return null
     }
   }

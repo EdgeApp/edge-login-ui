@@ -27,13 +27,13 @@ export function enablePinTimeout (durationLeft) {
   }
 }
 
-export function disablePinTimeout() {
+export function disablePinTimeout () {
   return {
-    type: DISABLE_PIN_WAIT_DURATION  
+    type: DISABLE_PIN_WAIT_DURATION
   }
 }
 
-export function refreshPinTimeout(durationLeft) {
+export function refreshPinTimeout (durationLeft) {
   return {
     type: REFRESH_PIN_WAIT_DURATION,
     durationLeft
@@ -47,13 +47,13 @@ export function enablePasswordTimeout (durationLeft) {
   }
 }
 
-export function disablePasswordTimeout() {
+export function disablePasswordTimeout () {
   return {
-    type: DISABLE_PASSWORD_WAIT_DURATION  
+    type: DISABLE_PASSWORD_WAIT_DURATION
   }
 }
 
-export function refreshPasswordTimeout(durationLeft) {
+export function refreshPasswordTimeout (durationLeft) {
   return {
     type: REFRESH_PASSWORD_WAIT_DURATION,
     durationLeft

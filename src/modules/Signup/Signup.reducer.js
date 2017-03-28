@@ -8,4 +8,3 @@ export const signupPage = (state = 'username', action) => {
       return state
   }
 }
-

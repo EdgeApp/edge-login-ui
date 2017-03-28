@@ -13,7 +13,6 @@ import style from './ReviewDetails.style'
 import NextButton from '../NextButton/NextButton.ui'
 
 class Review extends Component {
-
   handleHideDetails = () => {
     if (this.props.review) {
       this.props.dispatch(hideSignInDetails())

@@ -8,13 +8,8 @@ import classnames from 'classnames'
 
 import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
 import { openWarningModal } from '../WarningModal/WarningModal.action'
-import { openUserList, closeUserList } from '../Login/Login.action'
-
-import cachedUserXButton from 'theme/cachedUserXButton.scss'
-import cachedUserButton from 'theme/cachedUserButton.scss'
 
 class UserList extends Component {
-
   _handleLoginUserPin = (user) => {
     // this.props.blurField.focus()
     this.props.dispatch(selectUserToLogin(user))
@@ -33,7 +28,6 @@ class UserList extends Component {
   }
 
   render () {
-
     const renderValue = (item, idx) => {
       const userItemclassName = classnames(
         styles.useritem,
@@ -47,13 +41,13 @@ class UserList extends Component {
             <span className={styles.userdelete} onMouseDown={ e => this._handleDeleteUserCache(item) }><FontIcon value='clear' /></span>
           </div>
         </li>
-      );
-    };
+      )
+    }
 
-    var userList = (this.props.area === 'pinLogin') ? this.props.cachedUsersWithPinEnabled : this.props.users
+    const userList = (this.props.area === 'pinLogin') ? this.props.cachedUsersWithPinEnabled : this.props.users
 
     const containerClassname = classnames(
-      { [styles.active]: this.props.showCachedUsers, },
+      { [styles.active]: this.props.showCachedUsers },
       styles.dropdown,
       this.props.containerClassName
     )
@@ -61,7 +55,7 @@ class UserList extends Component {
     return (
       <div data-react-toolbox='dropdown' className={containerClassname}>
         { this.props.component }
-        <ul className={classnames(this.props.userListClassName,styles.values)}>
+        <ul className={classnames(this.props.userListClassName, styles.values)}>
           {_.map(userList, renderValue)}
         </ul>
       </div>

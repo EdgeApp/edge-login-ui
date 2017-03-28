@@ -9,7 +9,6 @@ import appTheme from '../../../Themes/appTheme'
 import t from '../../lib/LocaleStrings'
 
 class WarningModal extends Component {
-
   handleDeleteUsersFromCache = () => {
     this.props.dispatch(
       deleteUserToCache(

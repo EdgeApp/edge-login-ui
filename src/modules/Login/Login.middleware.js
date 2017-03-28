@@ -1,9 +1,8 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
-import { userLogin, requestEdgeLogin, enablePinTimeout, disablePinTimeout, refreshPinTimeout, enablePasswordTimeout, disablePasswordTimeout, refreshPasswordTimeout, showLoginNotification, hideLoginNotification } from './Login.action'
-import { showContainerNotification, hideContainerNotification } from '../Container.action.js'
+import { userLogin, requestEdgeLogin, enablePinTimeout, disablePinTimeout, refreshPinTimeout, enablePasswordTimeout, disablePasswordTimeout, refreshPasswordTimeout } from './Login.action'
+import { showContainerNotification } from '../Container.action.js'
 import { selectUserToLogin } from '../CachedUsers/CachedUsers.action'
-import store from '../../lib/web/configureStore'
 
 export const loginWithPassword = (username, password, callback) => {
   return (dispatch, getState, imports) => {
@@ -17,13 +16,13 @@ export const loginWithPassword = (username, password, callback) => {
         context.loginWithPassword(username, password, null, null, (error, account) => {
           if (error) {
             dispatch(closeLoading())
-            let type = (error.type === "OtpError") ? "server_error_bad_otp" : "server_error_bad_password";
+            const type = (error.type === 'OtpError') ? 'server_error_bad_otp' : 'server_error_bad_password'
             dispatch(openErrorModal(t(type)))
 
-            if(error.wait > 0) {
-              let currentWaitSpan = error.wait
-              let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-              enableTimer(reEnableLoginTime, "password", dispatch)       
+            if (error.wait > 0) {
+              const currentWaitSpan = error.wait
+              const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
+              enableTimer(reEnableLoginTime, 'password', dispatch)
             }
             return callback(error, null)
           }
@@ -48,14 +47,13 @@ export const loginWithPin = (username, pin, callback) => {
     setTimeout(() => {
       abcctx(context => {
         context.loginWithPIN(username, pin, (error, account) => {
-
           dispatch(closeLoading())
           if (error) {
             dispatch(openErrorModal(t('server_error_bad_pin')))
-            if(error.wait > 0) {
-              let currentWaitSpan = error.wait
-              let reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-              enableTimer(reEnableLoginTime, "pin", dispatch)       
+            if (error.wait > 0) {
+              const currentWaitSpan = error.wait
+              const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
+              enableTimer(reEnableLoginTime, 'pin', dispatch)
             }
             return callback(error, null)
           }
@@ -71,39 +69,37 @@ export const loginWithPin = (username, pin, callback) => {
   }
 }
 
-
 export const enableTimer = (target, source, dispatch) => {
-  var currentCountdown = Math.floor((target - Date.now()) / 1000)
-  scheduleTick(target, source, dispatch)    
-  if(source == "pin"){
-    dispatch(enablePinTimeout(currentCountdown))    
-  } else if(source == "password") {
-    dispatch(enablePasswordTimeout(currentCountdown))    
+  const currentCountdown = Math.floor((target - Date.now()) / 1000)
+  scheduleTick(target, source, dispatch)
+  if (source === 'pin') {
+    dispatch(enablePinTimeout(currentCountdown))
+  } else if (source === 'password') {
+    dispatch(enablePasswordTimeout(currentCountdown))
   }
 }
 
 export const scheduleTick = (targetTime, source, disp) => {
-  var difference = Math.floor( ( targetTime - Date.now() ) / 1000 )  
-  if(difference > 0) {
-    var scheduleTickTimeout = setTimeout(() => scheduleTick(targetTime, source, disp), 1000)   
-    if(source == "pin" ){   
+  const difference = Math.floor((targetTime - Date.now()) / 1000)
+  if (difference > 0) {
+    if (source === 'pin') {
       disp(refreshPinTimeout(difference))
-    } else if (source == "password") {
+    } else if (source === 'password') {
       disp(refreshPasswordTimeout(difference))
     }
   } else {
+    const scheduleTickTimeout = setTimeout(() => scheduleTick(targetTime, source, disp), 1000)
+
     clearTimeout(scheduleTickTimeout, source)
-    if(source == "pin") {
+    if (source === 'pin') {
       disp(disablePinTimeout())
-    } else if(source == "password") {
+    } else if (source === 'password') {
       disp(disablePasswordTimeout())
     }
   }
 }
 
-
 export const edgeLogin = (callback) => {
-
   return (dispatch, getState, imports) => {
     const abcContext = imports.abcContext
     const t = imports.t
@@ -133,6 +129,5 @@ export const edgeLogin = (callback) => {
         }
       })
     })
-
   }
 }
