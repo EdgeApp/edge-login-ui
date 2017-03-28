@@ -52,8 +52,8 @@ class ChangePin extends Component {
   }
 
   buttons = [
-    { label: 'Submit', onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
-    { label: 'Close', onClick: this._handleHideModal, theme: neutralButtons }
+    { label: 'Submit', onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true, style: {float: 'right'} },
+    { label: 'Close', onClick: this._handleHideModal, theme: neutralButtons, style: {float: 'right'} }
   ]
 
   _renderNotification = () => {
