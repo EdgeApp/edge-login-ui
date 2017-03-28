@@ -9,7 +9,6 @@ import NextButton from '../NextButton/NextButton.ui'
 import t from '../../lib/LocaleStrings'
 
 export default class Camera extends Component {
-
   handleSubmit = () => {
     this.props.dispatch(
       cameraPermissions()

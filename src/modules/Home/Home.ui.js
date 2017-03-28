@@ -8,7 +8,7 @@ import { fadeWhiteOverlay } from '../Landing.action'
 
 class Home extends Component {
   componentDidMount = () => {
-    let self = this
+    const self = this
     BackAndroid.addEventListener('hardwareBackPress', function () {
       return self.handleBack()
     })
@@ -17,7 +17,7 @@ class Home extends Component {
     if (this.props.loader.loading === true) {
       return true
     }
-    let self = this
+    const self = this
     self.props.dispatch(fadeWhiteOverlay())
     Actions.landing()
     return true
@@ -33,7 +33,6 @@ class Home extends Component {
       </View>
     )
   }
-
 }
 
 export default connect(state => ({

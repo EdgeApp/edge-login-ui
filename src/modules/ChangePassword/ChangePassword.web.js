@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
-import FontIcon from 'react-toolbox/lib/font_icon';
+import FontIcon from 'react-toolbox/lib/font_icon'
 import t from '../../lib/web/LocaleStrings'
 
 import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
@@ -16,10 +15,9 @@ import primaryButtons from 'theme/primaryButtons.scss'
 import styles from './ChangePassword.webstyle'
 
 class ChangePassword extends Component {
-
   _handleSubmit = () => {
     const callback = (error) => {
-      if(!error){
+      if (!error) {
         this.props.dispatch(hidePasswordView())
         this.props.dispatch(showPasswordChangedNotification())
       }
@@ -70,12 +68,12 @@ class ChangePassword extends Component {
   }
 
   buttons = [
-    { label: "Submit", onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
-    { label: "Close", onClick: this._handleHideModal, theme: neutralButtons}
+    { label: 'Submit', onClick: this._handleSubmit, theme: primaryButtons, raised: true, primary: true },
+    { label: 'Close', onClick: this._handleHideModal, theme: neutralButtons }
   ]
 
   _renderNotification = () => {
-    const { passwordChangedNotification, dispatch } = this.props
+    const { passwordChangedNotification } = this.props
     return <Snackbar
       action='Dismiss'
       active={passwordChangedNotification}
@@ -93,7 +91,7 @@ class ChangePassword extends Component {
       <div>
         <Dialog
           actions={this.buttons}
-          active={this.props.view}
+          active={view}
           onEscKeyDown={this._handleHideModal}
           onOverlayClick={this._handleHideModal}
           title={t('activity_signup_password_change_title')}

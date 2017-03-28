@@ -2,17 +2,12 @@ import React, { Component } from 'react'
 import t from '../../lib/web/LocaleStrings'
 import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
-import signinButton from 'theme/signinButton.scss';
 
 import { showPasswordRecoveryFinishModal, passwordRecoveryDone } from './PasswordRecovery.action'
-import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { checkEmail } from './PasswordRecovery.middleware'
 import passwordRecoveryStyles from './PasswordRecovery.webStyle.scss'
 
-import ErrorModal from '../ErrorModal/ErrorModal.web'
-
 export default class PasswordRecoveryToken extends Component {
-
   _handleSubmit = (address) => {
     const callback = url => {
       window.open(url, '_blank')

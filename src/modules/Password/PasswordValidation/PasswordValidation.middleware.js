@@ -7,27 +7,27 @@ export const validate = (password) => {
     abcContext(context => {
       const check = context.checkPasswordRules(password)
 
-      if(!check.noLowerCase) {
+      if (!check.noLowerCase) {
         dispatch(action.lowerCaseCharPass())
-      }else{
+      } else {
         dispatch(action.lowerCaseCharFail())
       }
 
-      if(!check.noNumber) {
+      if (!check.noNumber) {
         dispatch(action.numberPass())
-      }else{
+      } else {
         dispatch(action.numberFail())
       }
 
-      if(!check.noUpperCase) {
+      if (!check.noUpperCase) {
         dispatch(action.upperCaseCharPass())
-      }else{
+      } else {
         dispatch(action.upperCaseCharFail())
       }
 
-      if(!check.tooShort) {
+      if (!check.tooShort) {
         dispatch(action.characterLengthPass())
-      }else{
+      } else {
         dispatch(action.characterLengthFail())
       }
 
@@ -36,8 +36,6 @@ export const validate = (password) => {
       } else {
         dispatch(action.invalidatePassword())
       }
-
     })
-
   }
 }

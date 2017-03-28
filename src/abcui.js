@@ -1,8 +1,8 @@
-var abc = require('airbitz-core-js')
+const abc = require('airbitz-core-js')
 import 'whatwg-fetch'
 
-var DomWindow
-var DomDocument
+let DomWindow
+let DomDocument
 if (typeof (window) === 'undefined') {
   DomWindow = {}
 } else {
@@ -21,8 +21,8 @@ if (typeof (document) === 'undefined') {
   DomDocument = document
 }
 function createIFrame (path) {
-  var frame = DomDocument.createElement('iframe')
-  var body = DomDocument.getElementsByTagName('BODY')[0]
+  const frame = DomDocument.createElement('iframe')
+  const body = DomDocument.getElementsByTagName('BODY')[0]
   body.appendChild(frame, body)
   frame.setAttribute('src', path)
   frame.setAttribute('frameborder', '0')
@@ -40,7 +40,7 @@ function makeABCUIContext (args) {
 }
 
 function InnerAbcUi (args) {
-  var apiKey = args.apiKey
+  const apiKey = args.apiKey
   if (!apiKey) {
     throw Error('Missing api key')
   }
@@ -61,11 +61,9 @@ function InnerAbcUi (args) {
 }
 
 InnerAbcUi.prototype.openLoginWindow = function (callback) {
-  var frame = createIFrame(this.bundlePath + '/assets/index.html')
-  var that = this
-  var abcContext = DomWindow.abcContext
-  var done = () => {
-     DomWindow.loginCallback = null
+  const frame = createIFrame(this.bundlePath + '/assets/index.html')
+  const done = () => {
+    DomWindow.loginCallback = null
     removeIFrame(frame)
   }
   DomWindow.loginCallback = function (error, account) {
@@ -89,7 +87,7 @@ InnerAbcUi.prototype.openRecoveryWindow = function (callback) {
 }
 
 InnerAbcUi.prototype.openSetupRecoveryWindow = function (account, opts, callback) {
-  var frame
+  let frame
   if (opts && opts.noRequirePassword) {
     frame = createIFrame(this.bundlePath + '/assets/index.html#/account/setuprecovery-nopassword')
   } else {
@@ -101,7 +99,7 @@ InnerAbcUi.prototype.openSetupRecoveryWindow = function (account, opts, callback
 }
 
 InnerAbcUi.prototype.openChangePinEdgeLoginWindow = function (account, callback) {
-  var frame = createIFrame(this.bundlePath + '/assets/index.html#/account/changepin-edge-login')
+  const frame = createIFrame(this.bundlePath + '/assets/index.html#/account/changepin-edge-login')
   DomWindow.exitCallback = function () {
     removeIFrame(frame)
   }
@@ -109,13 +107,13 @@ InnerAbcUi.prototype.openChangePinEdgeLoginWindow = function (account, callback)
 
 InnerAbcUi.prototype.openManageWindow = function (account, callback) {
   DomWindow.abcAccount = account
-  var frame = createIFrame(this.bundlePath + '/assets/index.html#/home/')
+  const frame = createIFrame(this.bundlePath + '/assets/index.html#/home/')
   DomWindow.exitCallback = function () {
     removeIFrame(frame)
     callback(null)
   }
 }
 
-var abcui = {}
+const abcui = {}
 abcui.makeABCUIContext = makeABCUIContext
 module.exports = abcui

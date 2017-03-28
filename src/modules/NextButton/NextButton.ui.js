@@ -5,7 +5,6 @@ import t from '../../lib/LocaleStrings'
 
 import appTheme from '../../../Themes/appTheme'
 class NextButton extends Component {
-
   checkScene = () => {
     switch (this.props.scene) {
       case 'review':
@@ -42,7 +41,6 @@ class NextButton extends Component {
       )
     }
   }
-
 }
 
 const styles = StyleSheet.create({

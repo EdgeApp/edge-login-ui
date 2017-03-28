@@ -7,23 +7,20 @@ import Password from '../Password/Password.web'
 import ReviewDetails from '../ReviewDetails/ReviewDetails.web'
 
 class Container extends Component {
-
   render () {
-
-    switch(this.props.page) {
+    switch (this.props.page) {
       case 'username':
-          return <Username />
+        return <Username />
       case 'pin' :
-          return <PinNumber />
+        return <PinNumber />
       case 'password' :
-          return <Password />
+        return <Password />
       case 'review' :
-          return <ReviewDetails />
+        return <ReviewDetails />
       default:
-          return <Username />
+        return <Username />
     }
   }
-
 }
 
 export default connect(state => ({

@@ -7,7 +7,6 @@ import Loader from '../Loader/Loader.ui'
 import ErrorModal from '../ErrorModal/ErrorModal.ui'
 
 class TemplateView extends Component {
-
   componentWillMount () {
     if (!Device.isTablet) {
       Orientation.lockToPortrait()

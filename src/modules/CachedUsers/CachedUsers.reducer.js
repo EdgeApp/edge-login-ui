@@ -36,11 +36,10 @@ export const userToDeleteFromUserCache = (state = '', action) => {
   }
 }
 
-
 export const usersWithPinEnabled = (state = '', action) => {
-  switch(action.type) {
+  switch (action.type) {
     case ACTION.SET_CACHED_USERS_WITH_PIN:
       return action.data
     default: return state
-  }  
+  }
 }

@@ -1,25 +1,20 @@
 import { validateEmail, obfuscateUsername } from '../../lib/helper'
 
-import { hidePasswordRecoveryView, setPasswordRecoveryToken, showPasswordRecoveryTokenView, showPasswordRecoveryTokenButton } from './PasswordRecovery.action'
+import { setPasswordRecoveryToken, showPasswordRecoveryTokenView, showPasswordRecoveryTokenButton } from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
 export const checkPasswordRecovery = (payload, callback) => {
-  const checkAnswersLength    = (answers) => answers[0].length < 4 || answers[1].length < 4
-  const checkQuestionsSame    = (questions) => questions[0] === questions[1]
+  const checkAnswersLength = (answers) => answers[0].length < 4 || answers[1].length < 4
+  const checkQuestionsSame = (questions) => questions[0] === questions[1]
   const checkQuestionsDefault = (questions) => questions[0] === 'Choose a question' || questions[1] === 'Choose a question'
   const checkPassword = (callback) => {
-    if(payload.location === '/review') {
+    if (payload.location === '/review') {
       return callback(false)
     }
-    if(payload.location !== '/review') {
+    if (payload.location !== '/review') {
       payload.account.checkPassword(payload.password)
         .then(result => {
-          if(!result) {
-            return callback(true)
-          }
-          if(result) {
-            return callback(false)
-          }
+          return callback(!result)
         })
     }
   }
@@ -40,10 +35,10 @@ export const checkPasswordRecovery = (payload, callback) => {
     }
 
     checkPassword((error) => {
-      if(error){
+      if (error) {
         return dispatch(openErrorModal(t('activity_recovery_error_password')))
       }
-      if(!error){
+      if (!error) {
         payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
           if (error) {
             callback(error)

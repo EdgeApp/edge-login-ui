@@ -4,15 +4,13 @@ import { withRouter } from 'react-router'
 import t from '../../lib/web/LocaleStrings'
 
 import Button from 'react-toolbox/lib/button'
-import nextButton from 'theme/nextButton.scss'
 import Dialog from 'react-toolbox/lib/dialog'
 
-import { showPasswordRecoveryFinishModal, hidePasswordRecoveryFinishModal  } from './PasswordRecovery.action'
+import { hidePasswordRecoveryFinishModal } from './PasswordRecovery.action'
 
 import styles from '../ErrorModal/ErrorModal.webStyle'
 
 class PasswordRecoverySuccess extends Component {
-
   _handleFinish = () => {
     const account = this.props.user
     if (window.parent.loginCallback) {
@@ -45,11 +43,13 @@ class PasswordRecoverySuccess extends Component {
   }
 }
 
-PasswordRecoverySuccess = withRouter(PasswordRecoverySuccess)
-export default connect(state => ({
+const PasswordRecoverySuccessWithRouter = withRouter(PasswordRecoverySuccess)
+const PasswordRecoveryWithRedux = connect(state => ({
 
   visible: state.passwordRecovery.viewFinishModal,
-  user  :  state.user,
+  user: state.user,
   details: state.reviewDetails.details
 
-}))(PasswordRecoverySuccess)
+}))(PasswordRecoverySuccessWithRouter)
+
+export default PasswordRecoveryWithRedux

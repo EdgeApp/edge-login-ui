@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import nextButton from 'theme/nextButton.scss'
-import backButton from 'theme/backButton.scss'
 import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import t from 'lib/web/LocaleStrings'
@@ -16,7 +14,6 @@ import neutralButtonWithBlueTextTheme from 'theme/neutralButtonWithBlueText.scss
 import styles from './Username.webStyle'
 
 class UsernameComponent extends Component {
-
   _handleSubmit = () => {
     if (this.props.username.length < 3) {
       return this.props.dispatch(
@@ -47,7 +44,7 @@ class UsernameComponent extends Component {
   }
 
   _handleKeyEnter = (e) => {
-    if(e.nativeEvent.charCode === 13) {
+    if (e.nativeEvent.charCode === 13) {
       return this._handleSubmit()
     }
   }
@@ -84,12 +81,12 @@ class UsernameComponent extends Component {
   }
 }
 
-UsernameComponent = withRouter(UsernameComponent)
-UsernameComponent = connect(state => ({
+const UsernameComponentWithRouter = withRouter(UsernameComponent)
+const UsernameComponentWithRedux = connect(state => ({
 
   username: state.username,
   loader: state.loader
 
-}))(UsernameComponent)
+}))(UsernameComponentWithRouter)
 
-export default UsernameComponent
+export default UsernameComponentWithRedux

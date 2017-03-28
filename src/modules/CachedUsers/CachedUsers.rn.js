@@ -11,7 +11,6 @@ import appTheme from '../../../Themes/appTheme'
 import t from '../../lib/LocaleStrings'
 
 class UserList extends Component {
-
   handleLoginUserPin = (user) => {
     this.props.blurField.focus()
     this.props.dispatch(selectUserToLogin(user))
@@ -32,7 +31,7 @@ class UserList extends Component {
   listUsers = () => {
     const checkIfLastElementStyle = index => {
       const lastIndex = this.props.users.length - 1
-      let styleArr = [style.row]
+      const styleArr = [style.row]
       if (index === 0) {
         styleArr.push(style.topRadius)
       }

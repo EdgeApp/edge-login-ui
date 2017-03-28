@@ -1,4 +1,4 @@
-var RNFS = require('react-native-fs')
+const RNFS = require('react-native-fs')
 
 const readJSONDb = (pathToDb, callback) => {
   RNFS.readFile(RNFS.DocumentDirectoryPath + pathToDb).then(function (text) {
@@ -29,9 +29,9 @@ const defineLocalVariable = (ctx, name, value) => {
 }
 
 const init = (ctx, data) => {
-  var def = defineLocalVariable.bind(null, ctx)
-  var list = data.map(copy)
-  var map = new Map()
+  const def = defineLocalVariable.bind(null, ctx)
+  const list = data.map(copy)
+  const map = new Map()
   list.forEach(record => map.set(record.key, record))
 
   def('map', map)
@@ -40,20 +40,20 @@ const init = (ctx, data) => {
 
 const writeToDisk = ctx => {
   RNFS.writeFile(RNFS.DocumentDirectoryPath + ctx.pathToDb, JSON.stringify(ctx.list), 'utf8').then((success) => {
-
+    return success // Todo: Added return success to make linter pass
   }).catch(err => {
     throw err
   })
 }
 
 /**
- * Generaly object of storage.
+ * Generally object of storage.
  * @constructor
  * @param {string} absolutePathToDbFile - Absolute path to db.
  * @param {Array} data - List of key value pairs.
  */
 function LocalStorage (absolutePathToDbFile, callback) {
-  var self = this
+  const self = this
   readJSONDb(absolutePathToDbFile, function (data) {
     init(self, data)
 
@@ -88,9 +88,9 @@ LocalStorage.prototype.setItem = function (key, value) {
       ' setItem should take two arguments')
   }
 
-  var map = this.map
-  var list = this.list
-  var field
+  const map = this.map
+  const list = this.list
+  let field
   value = value.toString()
 
   if (map.has(key)) {
@@ -106,7 +106,7 @@ LocalStorage.prototype.setItem = function (key, value) {
 }
 
 LocalStorage.prototype.getItem = function (key) {
-  var map = this.map
+  const map = this.map
   try {
     if (map.has(key)) {
       // console.log(key, map.get(key).value)
@@ -119,15 +119,15 @@ LocalStorage.prototype.getItem = function (key) {
 }
 
 LocalStorage.prototype.removeItem = function (key) {
-  var map = this.map
-  var list = this.list
+  const map = this.map
+  const list = this.list
 
   if (map.has(key)) {
-    var field
+    let field
 
     map.delete(key)
 
-    for (var i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
       field = list[i]
 
       if (field.key === key) {

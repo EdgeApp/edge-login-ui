@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 
 import Button from 'react-toolbox/lib/button'
-import nextButton from 'theme/nextButton.scss'
 import Dialog from 'react-toolbox/lib/dialog'
 
 import { closeErrorModal } from './ErrorModal.action'
@@ -11,7 +10,6 @@ import { closeErrorModal } from './ErrorModal.action'
 import styles from './ErrorModal.webStyle'
 
 class ErrorModal extends Component {
-
   _handleClose = () => {
     return this.props.dispatch(closeErrorModal())
   }
@@ -26,7 +24,7 @@ class ErrorModal extends Component {
 
   _handleKeyEnter = (e) => {
     console.log(e)
-    if(e.nativeEvent.charCode === 13) {
+    if (e.nativeEvent.charCode === 13) {
       return this._handleClose()
     }
   }

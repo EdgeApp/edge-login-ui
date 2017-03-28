@@ -3,14 +3,13 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Button from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
-import FontIcon from 'react-toolbox/lib/font_icon';
+import FontIcon from 'react-toolbox/lib/font_icon'
 import t from '../../lib/web/LocaleStrings'
 
 import { validate } from './PasswordValidation/PasswordValidation.middleware'
 import { checkPassword, skipPassword } from './Password.middleware'
 import { changeSignupPage } from '../Signup/Signup.action'
 
-import SkipPassword from './Notification.web'
 import neutralButtonWithBlueText from 'theme/neutralButtonWithBlueText.scss'
 
 import {
@@ -24,7 +23,6 @@ import {
 import styles from './Password.webStyle'
 
 class Password extends Component {
-
   _handleSubmit = () => {
     const callback = () => this.props.router.push('/review')
     this.props.dispatch(
@@ -60,7 +58,7 @@ class Password extends Component {
   }
 
   passwordKeyPressed = (e) => {
-    if (e.charCode == 13) {
+    if (e.charCode === 13) {
       this.refs.passwordRepeat.getWrappedInstance().focus()
     }
   }
@@ -82,7 +80,7 @@ class Password extends Component {
   }
 
   _handleKeyEnter = (e) => {
-    if(e.nativeEvent.charCode === 13) {
+    if (e.nativeEvent.charCode === 13) {
       return this._handleSubmit()
     }
   }
@@ -156,8 +154,8 @@ class Password extends Component {
   }
 }
 
-Password = withRouter(Password)
-Password = connect(state => ({
+const PasswordWithRouter = withRouter(Password)
+const PasswordWithRedux = connect(state => ({
 
   inputState: state.password.inputState,
   password: state.password.password,
@@ -167,6 +165,6 @@ Password = connect(state => ({
   pin: state.pin,
   loader: state.loader
 
-}))(Password)
+}))(PasswordWithRouter)
 
-export default Password
+export default PasswordWithRedux

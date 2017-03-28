@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from 'react-toolbox/lib/button'
-import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card'
-import { Link } from 'react-toolbox/lib/link'
-import signinButton from 'theme/signinButton.scss'
 import t from 'lib/web/LocaleStrings'
 import { withRouter } from 'react-router'
 
@@ -20,9 +17,8 @@ import { userLogin } from '../Login/Login.action'
 import styles from './Home.webStyle'
 
 class Home extends Component {
-
   componentWillMount () {
-    if(window.parent.abcAccount){
+    if (window.parent.abcAccount) {
       this.props.dispatch(
         userLogin(window.parent.abcAccount)
       )
@@ -30,12 +26,12 @@ class Home extends Component {
   }
 
   _handleLogout = () => {
-      if (window.parent.exitCallback) {
-        window.parent.exitCallback(null)
-      }
-      if (!window.parent.exitCallback) {
-        this.props.router.push('/')
-      }
+    if (window.parent.exitCallback) {
+      window.parent.exitCallback(null)
+    }
+    if (!window.parent.exitCallback) {
+      this.props.router.push('/')
+    }
   }
 
   _handleChangePin = () => {
@@ -70,7 +66,7 @@ class Home extends Component {
               <p><a className={styles.links} onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</a></p>
               <p><a className={styles.links} onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</a></p>
               <p><a className={styles.links} onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</a></p>
-            </div>            
+            </div>
           )
         }
 
@@ -82,11 +78,12 @@ class Home extends Component {
       </div>
     )
   }
-
 }
 
-Home = withRouter(Home)
-export default connect(state => ({
+const HomeWithRouter = withRouter(Home)
+const HomeWithRedux = connect(state => ({
   user: state.user,
   loader: state.loader
-}))(Home)
+}))(HomeWithRouter)
+
+export default HomeWithRedux

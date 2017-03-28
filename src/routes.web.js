@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Router, Route, browserHistory, hashHistory, IndexRedirect } from 'react-router'
+import { Router, Route, hashHistory, IndexRedirect } from 'react-router'
 
 import Container from './modules/Container.web'
 import Signup from './modules/Signup/SignupContainer.web'
@@ -8,7 +8,6 @@ import Home from './modules/Home/Home.web'
 import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 
 export default class RouterComponent extends Component {
-
   render () {
     return (
       <Router history={hashHistory}>

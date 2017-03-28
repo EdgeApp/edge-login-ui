@@ -13,7 +13,6 @@ import style from '../Style'
 import { showWhiteOverlay } from '../Landing.action'
 
 class Login extends Component {
-
   submit = () => {
     if (this.props.viewPassword) {
       this.refs.loginUsername.blur()

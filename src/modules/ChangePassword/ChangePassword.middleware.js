@@ -21,30 +21,26 @@ export const checkPassword = (oldPassword, newPassword, newPasswordRepeat, valid
       }
 
       if (check.passed && newPassword === newPasswordRepeat) {
-        account.checkPassword(oldPassword).then(result => {
-          if(!result){
+        account.checkPassword(oldPassword).then(passwordIsGood => {
+          if (!passwordIsGood) {
             dispatch(closeLoading())
             return dispatch(openErrorModal(t('server_error_bad_password')))
           }
-          if(result){
-            account.changePassword(newPassword, error => {
-              dispatch(closeLoading())
-              if (error) {
-                return dispatch(openErrorModal(t('server_error_no_connection')))
-              }
-              if (!error) {
-                dispatch(passwordChanged())
-                dispatch(hidePasswordView())
-                return dispatch(showPasswordChangedNotification())
-              }
-            })
-          }
+          return account.changePassword(newPassword, error => {
+            dispatch(closeLoading())
+            if (error) {
+              return dispatch(openErrorModal(t('server_error_no_connection')))
+            }
+
+            dispatch(passwordChanged())
+            dispatch(hidePasswordView())
+            return dispatch(showPasswordChangedNotification())
+          })
         })
       } else {
         dispatch(closeLoading())
         return dispatch(openErrorModal(t('activity_signup_insufficient_password')))
       }
     })
-
   }
 }

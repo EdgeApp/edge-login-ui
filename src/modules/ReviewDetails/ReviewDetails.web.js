@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
-import { browserHistory } from 'react-router'
 import Button from 'react-toolbox/lib/button'
-import FontIcon from 'react-toolbox/lib/font_icon';
 
 import { showSignInDetails, hideSignInDetails, showPasswordRecovery } from './ReviewDetails.action'
-import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { closeLoading } from '../Loader/Loader.action'
 import { loginWithPassword } from '../Login/Login.middleware'
 
 import AfterSignUpQuestion from './AfterSignUpQuestion.web'
@@ -14,12 +12,9 @@ import PasswordRecovery from '../PasswordRecovery/PasswordRecovery.web'
 import PasswordRecoverySuccess from '../PasswordRecovery/PasswordRecoverySuccess.web'
 
 import nextButton from 'theme/nextButton.scss'
-import signinButton from 'theme/signinButton.scss'
 import styles from './ReviewDetails.webStyle'
 
-
 class Review extends Component {
-
   _handleHideDetails = () => {
     if (this.props.view) {
       this.props.dispatch(hideSignInDetails())
@@ -33,14 +28,13 @@ class Review extends Component {
   }
 
   _handleAfterSignupQuestion = () => {
-
-    if(!this.props.user.username) {
+    if (!this.props.user.username) {
       const { username, password } = this.props.details
       this.props.dispatch(
         loginWithPassword(
           username,
           password,
-          ( error, account) => {
+          (error, account) => {
             if (!error) {
               this.props.dispatch(closeLoading())
               return this.props.dispatch(showPasswordRecovery())
@@ -50,16 +44,15 @@ class Review extends Component {
       )
     }
 
-    if(this.props.user.username) {
+    if (this.props.user.username) {
       this.props.dispatch(showPasswordRecovery())
     }
-
   }
 
   render () {
     const renderView = () => {
       if (this.props.view) {
-        return(
+        return (
           <div className={styles.container}>
             <div className={styles.section}>
               <p className={styles.credentials}>username: {this.props.details.username}</p>
@@ -75,7 +68,7 @@ class Review extends Component {
       }
 
       if (!this.props.view) {
-        return(
+        return (
           <div className={styles.container}>
             <div className={styles.warningSection}>
               <p className={styles.paragraph1}>{t('fragment_setup_writeitdown_text')}</p>
@@ -100,13 +93,12 @@ class Review extends Component {
       </div>
     )
   }
-
 }
 
 export default connect(state => ({
 
-  details : state.reviewDetails.details,
-  user    : state.user,
-  view    : state.reviewDetails.view
+  details: state.reviewDetails.details,
+  user: state.user,
+  view: state.reviewDetails.view
 
 }))(Review)

@@ -22,7 +22,6 @@ export const checkPassword = (password, passwordRepeat, validation, username, pi
         return dispatch(openErrorModal(t('activity_signup_insufficient_password')))
       }
     })
-
   }
 }
 

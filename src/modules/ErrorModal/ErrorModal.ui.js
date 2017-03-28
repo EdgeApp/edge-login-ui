@@ -8,7 +8,6 @@ import style from './ErrorModal.style'
 import t from '../../lib/LocaleStrings'
 
 class ErrorModal extends Component {
-
   handleClose = () => {
     this.props.dispatch(closeErrorModal())
   }

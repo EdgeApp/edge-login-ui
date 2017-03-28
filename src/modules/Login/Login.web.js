@@ -2,35 +2,32 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Input from 'react-toolbox/lib/input'
-import Link from 'react-toolbox/lib/link'
 import Button from 'react-toolbox/lib/button'
 import t from 'lib/web/LocaleStrings'
 import { sprintf } from 'sprintf-js'
 
-import { openLogin, loginUsername, loginPassword, openUserList, closeUserList, enableTimer, disableTimer, refreshTimer, hideLoginNotification } from './Login.action'
+import { openLogin, loginUsername, loginPassword, openUserList, closeUserList, hideLoginNotification } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
-import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { closeLoading } from '../Loader/Loader.action'
 
 import LoginWithPin from './LoginWithPin.web'
 import LoginEdge from './LoginEdge.web'
 import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
 import CachedUsers from '../CachedUsers/CachedUsers.web'
 import Snackbar from 'react-toolbox/lib/snackbar'
-import { showWhiteOverlay } from '../Landing.action'
 
 import signinButton from 'theme/signinButton.scss'
 import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './Login.style.scss'
 
 class Login extends Component {
-
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       currentPasswordCountdown: false
-    };
-  } 
+    }
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -41,22 +38,22 @@ class Login extends Component {
         loginWithPassword(
           this.props.username,
           this.props.password,
-          ( error, account ) => {
-          if (!error) {
-            if (window.parent.loginCallback) {
-              if(this.props.edgeObject) {
-                this.props.edgeObject.cancelRequest()
+          (error, account) => {
+            if (!error) {
+              if (window.parent.loginCallback) {
+                if (this.props.edgeObject) {
+                  this.props.edgeObject.cancelRequest()
+                }
+                return window.parent.loginCallback(null, account)
               }
-              return window.parent.loginCallback(null, account)
+              if (!window.parent.loginCallback) {
+                this.props.dispatch(closeLoading())
+                return this.props.router.push('/home')
+              }
+            } else {
+            // this.props._renderNotification('There has been an error logging in.')
             }
-            if (!window.parent.loginCallback) {
-              this.props.dispatch(closeLoading())
-              return this.props.router.push('/home')
-            }
-          } else {
-            //this.props._renderNotification('There has been an error logging in.')
-          }
-        })
+          })
       )
     } else {
       this.props.dispatch(openLogin())
@@ -97,7 +94,7 @@ class Login extends Component {
     this.props.dispatch(closeUserList())
   }
   usernameKeyPressed = (e) => {
-    if (e.charCode == 13) {
+    if (e.charCode === 13) {
       this.refs.password.getWrappedInstance().focus()
     }
   }
@@ -107,7 +104,7 @@ class Login extends Component {
   }
 
   _renderNotification = (errorString) => {
-    const { loginNotification, dispatch } = this.props
+    const { loginNotification } = this.props
     return <Snackbar
       action='Dismiss'
       active={loginNotification}
@@ -119,15 +116,6 @@ class Login extends Component {
   }
 
   render () {
-    const cUsers = () => {
-      if (this.props.showCachedUsers) {
-        return (<CachedUsers blurField={this.refs.loginUsername.getWrappedInstance()} />)
-      } else {
-        return null
-      }
-    }
-
-
     const inputDropdown = () => {
       return (
         <Input
@@ -153,7 +141,7 @@ class Login extends Component {
       )
     }
 
-    if(!this.props.viewPassword && !this.props.viewPIN){
+    if (!this.props.viewPassword && !this.props.viewPIN) {
       return (
         <div className={styles.container}>
           <LoginEdge />
@@ -168,7 +156,7 @@ class Login extends Component {
       )
     }
 
-    if(this.props.viewPassword && !this.props.viewPIN){
+    if (this.props.viewPassword && !this.props.viewPIN) {
       return (
         <div className={styles.container}>
           <div>
@@ -192,7 +180,7 @@ class Login extends Component {
               </div>
             </div>
             <div className={styles.buttonGroup}>
-              <span className={styles.loginTimeout}>{this.props.loginPasswordWait ? sprintf(t('server_error_invalid_pin_wait'),  this.props.loginPasswordWait) : ''}</span>
+              <span className={styles.loginTimeout}>{this.props.loginPasswordWait ? sprintf(t('server_error_invalid_pin_wait'), this.props.loginPasswordWait) : ''}</span>
               <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit} disabled={this.props.loginPasswordWait > 0}>{t('fragment_landing_signin_button')}</Button>
               <br />
               <Button theme={neutral} className={styles.createNewButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
@@ -205,12 +193,11 @@ class Login extends Component {
         </div>
       )
     }
-
   }
 }
 
-Login = withRouter(Login)
-export default connect(state => ({
+const LoginWithRouter = withRouter(Login)
+const LoginWithRedux = connect(state => ({
 
   viewPIN: state.login.viewPIN,
   viewPassword: state.login.viewPassword,
@@ -222,4 +209,6 @@ export default connect(state => ({
   loginPasswordWait: state.login.loginPasswordWait,
   currentPinCountdown: false
 
-}))(Login)
+}))(LoginWithRouter)
+
+export default LoginWithRedux

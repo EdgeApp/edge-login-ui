@@ -44,7 +44,6 @@ export const viewPIN = (state = false, action) => {
 
 export const username = (state = '', action) => {
   switch (action.type) {
-
     case ACTION.LOG_IN_USERNAME :
       return action.data
 
@@ -61,7 +60,6 @@ export const username = (state = '', action) => {
 
 export const password = (state = '', action) => {
   switch (action.type) {
-
     case ACTION.LOG_IN_PASSWORD :
       return action.data
 
@@ -78,7 +76,6 @@ export const password = (state = '', action) => {
 
 export const showCachedUsers = (state = false, action) => {
   switch (action.type) {
-
     case ACTION.OPEN_USER_LIST :
       return true
 
@@ -101,7 +98,6 @@ export const showCachedUsers = (state = false, action) => {
 
 export const pin = (state = '', action) => {
   switch (action.type) {
-
     case ACTION.LOG_IN_PIN :
       return action.data
 
@@ -115,9 +111,9 @@ export const pin = (state = '', action) => {
 export const pinDummy = (state = '', action) => {
   switch (action.type) {
     case ACTION.LOG_IN_PIN:
-      let len = action.data.length
+      const len = action.data.length
       let retval = ''
-      for (var i = 0; i < len; i++) {
+      for (let i = 0; i < len; i++) {
         retval += '·'
       }
       return retval
