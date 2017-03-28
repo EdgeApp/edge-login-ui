@@ -1,4 +1,5 @@
 import { validateEmail, obfuscateUsername } from '../../lib/helper'
+import t from '../../lib/web/LocaleStrings'
 
 import { setPasswordRecoveryToken, showPasswordRecoveryTokenView, showPasswordRecoveryTokenButton } from './PasswordRecovery.action'
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
@@ -68,7 +69,7 @@ export const checkEmail = (address, email, token, accountUsername, callback) => 
       )
     }
     if (!validateEmail(email)) {
-      return dispatch(openErrorModal('Wrong Email Address'))
+      return dispatch(openErrorModal(t('password_recovery_invalid_email')))
     }
   }
 }

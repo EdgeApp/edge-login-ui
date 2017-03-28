@@ -810,6 +810,7 @@ const strings = {
   password_recovery_yahoo: 'Send Using Yahoo',
   password_recovery_microsoft: 'Send Using Hotmail and Live Mail',
   password_recovery_app: 'Send Using Email App',
+  password_recovery_invalid_email: 'Please enter a valid email address.',
 
     //  SSO
   edge_login: 'Edge Login',
