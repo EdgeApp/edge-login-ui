@@ -56,7 +56,10 @@ module.exports = {
         include: /src\/img/,
         loaders: [
           'file-loader'
-        ]
+        ],
+        options: {
+          name: '/assets/[name].[hash].[ext]'
+        }        
       }
     ]
   },
