@@ -67,7 +67,7 @@ class LoginEdge extends Component {
                 <a target='_blank' href={this.renderLoginLink()}>{this.renderBarcode()}</a>
               </div>
               <div style={style.dividerContainer}>
-                <label style={style.divider}>or</label>
+                <label style={style.divider}>{t('string_or')}</label>
               </div>
             </div>
             ) : (

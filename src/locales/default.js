@@ -21,6 +21,7 @@ const strings = {
   string_ok: 'Ok',
   string_bundle: 'Bundle',
   string_no: 'No',
+  string_or: 'or',
   string_continue: 'Continue',
   string_change: 'Change',
   string_cancel: 'Cancel',

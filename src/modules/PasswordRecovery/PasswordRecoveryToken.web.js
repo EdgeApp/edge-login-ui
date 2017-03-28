@@ -32,7 +32,7 @@ export default class PasswordRecoveryToken extends Component {
     if (this.props.finishButton) {
       return (
         <div>
-          <Button type='button' raised primary className={ passwordRecoveryStyles.emailButton } style={{textAlign: 'center', marginTop: '30px'}} onClick={this._handleClose}>Done</Button>
+          <Button type='button' raised primary className={ passwordRecoveryStyles.emailButton } style={{textAlign: 'center', marginTop: '30px'}} onClick={this._handleClose}>{t('string_done')}</Button>
         </div>
       )
     } else {
