@@ -182,7 +182,6 @@ class PasswordRecovery extends Component {
           username={this.props.account.username}
           dispatch={this.props.dispatch}
           finishButton={this.props.finishButton}
-          className=""
         />
       )
     }
