@@ -5,14 +5,19 @@ import FontIcon from 'react-toolbox/lib/font_icon'
 import t from 'lib/web/LocaleStrings'
 import styles from './CachedUsers.webStyle'
 import classnames from 'classnames'
+import {loginUsername} from '../Login/Login.action'
 
 import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
 import { openWarningModal } from '../WarningModal/WarningModal.action'
 
 class UserList extends Component {
-  _handleLoginUserPin = (user) => {
+  _handleLoginUser = (user) => {
     // this.props.blurField.focus()
-    this.props.dispatch(selectUserToLogin(user))
+    if(this.props.area === 'pinLogin') {
+      this.props.dispatch(selectUserToLogin(user))
+    }else {
+      this.props.dispatch(loginUsername(user))
+    }
   }
 
   _handleDeleteUserCache = (user) => {
@@ -37,7 +42,7 @@ class UserList extends Component {
       return (
         <li key={idx} className={styles.userList}>
           <div className={styles.userrows}>
-            <span className={userItemclassName} onMouseDown={ e => this._handleLoginUserPin(item)}>{ item }</span>
+            <span className={userItemclassName} onMouseDown={ e => this._handleLoginUser(item)}>{ item }</span>
             <span className={styles.userdelete} onMouseDown={ e => this._handleDeleteUserCache(item) }><FontIcon value='clear' /></span>
           </div>
         </li>
