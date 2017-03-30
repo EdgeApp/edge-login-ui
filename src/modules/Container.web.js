@@ -39,10 +39,12 @@ class Container extends Component {
       const lastUser = window.localStorage.getItem('lastUser')
       dispatch(setCachedUsersWithPin(cachedUsersWithPin))
       dispatch(setCachedUsers(cachedUsers))
-      if (lastUser && cachedUsersWithPin.includes(lastUser)) {
-        dispatch(selectUserToLogin(lastUser))
-      } else {
-        dispatch(openLogin())
+      if (cachedUsers.length >= 1) {
+        if (lastUser && cachedUsersWithPin.includes(lastUser)) {
+          dispatch(selectUserToLogin(lastUser))
+        } else {
+          dispatch(openLogin())
+        }
       }
     })
   }
