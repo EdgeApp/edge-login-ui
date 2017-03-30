@@ -13,10 +13,14 @@ import { openWarningModal } from '../WarningModal/WarningModal.action'
 class UserList extends Component {
   _handleLoginUser = (user) => {
     // this.props.blurField.focus()
-    if(this.props.area === 'pinLogin') {
+    if (this.props.area === 'pinLogin') {
       this.props.dispatch(selectUserToLogin(user))
-    }else {
-      this.props.dispatch(loginUsername(user))
+    } else {
+      if (this.props.cachedUsersWithPinEnabled.includes(user)) {
+        this.props.dispatch(selectUserToLogin(user))
+      } else {
+        this.props.dispatch(loginUsername(user))
+      }
     }
   }
 
