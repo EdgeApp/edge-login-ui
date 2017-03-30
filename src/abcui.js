@@ -40,24 +40,35 @@ function makeABCUIContext (args) {
 }
 
 function InnerAbcUi (args) {
-  const apiKey = args.apiKey
-  if (!apiKey) {
+  if (args.apiKey == null) {
     throw Error('Missing api key')
   }
-  DomWindow.abcContext = this.abcContext =
-    abc.makeContext({'apiKey': args.apiKey, 'accountType': args.accountType})
+
+  // Figure out which server to use:
+  const airbitzAuthServer = DomWindow.localStorage != null
+    ? DomWindow.localStorage.getItem('airbitzAuthServer')
+    : null
+
+  // Make the core context:
+  this.abcContext = abc.makeContext({
+    apiKey: args.apiKey,
+    accountType: args.accountType,
+    authServer: airbitzAuthServer
+  })
+  this.abcContext.displayName = args.vendorName
+  this.abcContext.displayImageUrl = args.vendorImageUrl
+  DomWindow.abcContext = this.abcContext
+
+  // Set up the UI context:
   if (args['bundlePath']) {
     this.bundlePath = args.bundlePath
   } else {
     this.bundlePath = '/abcui'
   }
   DomWindow.abcuiContext = {
-    'vendorName': args.vendorName,
-    'bundlePath': this.bundlePath
+    vendorName: args.vendorName,
+    bundlePath: this.bundlePath
   }
-
-  this.abcContext.displayName = args.vendorName
-  this.abcContext.displayImageUrl = args.vendorImageUrl
 }
 
 InnerAbcUi.prototype.openLoginWindow = function (callback) {

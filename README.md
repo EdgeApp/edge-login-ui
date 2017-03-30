@@ -4,7 +4,7 @@ This repo implements a UI layer on top of [airbitz-core-js](https://github.com/A
 
 ## Build from source repo (not needed if using NPM)
 
-`npm install` to fetch the dependencies.  
+`npm install` to fetch the dependencies.
 `npm run build` to create the web bundle.
 
 ## Or just use the NPM package from your own repo
@@ -32,7 +32,7 @@ or just include this repo somewhere in your server's path.
 Include the `abcui.js` file in your code
 
     <script src="/path-to-abcui/assets/js/abcui.js"></script>
-    
+
 Or using webpack:
 
     var abcui = require('airbitz-core-js-ui')
@@ -60,16 +60,16 @@ Create an overlay popup where a user can register a new account or login to a pr
 Launch an account management window for changing password, PIN, and recovery questions
 
     _abcUi.openManageWindow(_account, function(error) {
-    
+
     });
 
 ![Manage UI](https://airbitz.co/go/wp-content/uploads/2016/08/Screen-Shot-2016-08-26-at-12.50.26-PM.png)
 
 Get or create a wallet inside of the account
-    
+
     _abcUi.openLoginWindow(function(error, account) {
       _account = account;
-      
+
       // Get the first wallet in the account that matches our required wallet type
       const abcWallet = account.getFirstWallet('wallet:repo:ethereum');
       if (abcWallet == null) {
@@ -79,7 +79,7 @@ Get or create a wallet inside of the account
         }
         account.createWallet("wallet:repo:ethereum", keys, function (err, id) {
           if (err) {
-            // Yikes. This shouldn't fail except for network or disk errors  
+            // Yikes. This shouldn't fail except for network or disk errors
           } else {
             _wallet = account.getWallet(id)
             _key = _wallet.keys.ethereumKey
@@ -103,6 +103,14 @@ Logoff a user
 ## Sample website repo
 
 See a sample implementation at [airbitz-core-js-sample](https://github.com/Airbitz/airbitz-core-js-sample)
+
+## Test server
+
+Besides the production authentication servers, Airbitz also maintains a test authentication server with a completely separate account namespace. If you would like to use this server for testing, rather than the production server, please run the following code:
+
+    localStorage.setItem('airbitzAuthServer', 'https://test-auth.airbitz.co/api')
+
+Please note that we occassionally wipe out the test server, so please don't store any vauable assets on there.
 
 # Detailed Docs
 
