@@ -50,8 +50,8 @@ class Review extends Component {
   }
 
   actions = [
-    { label: t('fragment_recovery_account_setup_recovery'), theme: primaryButtons, onClick: this._handleOpenPasswordRecovery, raised: true, primary: true },
-    { label: t('password_check_check_later'), onClick: this._handleFinish, theme: neutralButtons }
+    { label: t('password_check_check_later'), onClick: this._handleFinish, theme: neutralButtons },
+    { label: t('fragment_recovery_account_setup_recovery'), theme: primaryButtons, onClick: this._handleOpenPasswordRecovery, raised: true, primary: true }
   ]
 
   render () {
