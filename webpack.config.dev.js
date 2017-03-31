@@ -25,7 +25,6 @@ module.exports = {
       'node_modules',
       path.resolve(__dirname, './node_modules'),
       path.resolve('./src')
-
     ]
   },
   plugins: [
@@ -59,7 +58,7 @@ module.exports = {
         ],
         options: {
           name: '/assets/[name].[hash].[ext]'
-        }        
+        }
       }
     ]
   },

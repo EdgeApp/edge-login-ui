@@ -35,7 +35,7 @@ function removeIFrame (frame) {
   frame.parentNode.removeChild(frame)
 }
 
-function makeABCUIContext (args) {
+export function makeABCUIContext (args) {
   return new InnerAbcUi(args)
 }
 
@@ -128,7 +128,3 @@ InnerAbcUi.prototype.openManageWindow = function (account, callback) {
     callback(null)
   }
 }
-
-const abcui = {}
-abcui.makeABCUIContext = makeABCUIContext
-module.exports = abcui
