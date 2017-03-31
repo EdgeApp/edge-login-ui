@@ -13,6 +13,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "files": [
+    "assets/**",
+    "src/abcui.js"
+  ],
   "dependencies": {
     "airbitz-core-js": "^0.2.1",
     "async": "~2.0.1",
