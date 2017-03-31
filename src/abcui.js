@@ -45,9 +45,13 @@ function InnerAbcUi (args) {
   }
 
   // Figure out which server to use:
-  const airbitzAuthServer = DomWindow.localStorage != null
-    ? DomWindow.localStorage.getItem('airbitzAuthServer')
-    : null
+  let airbitzAuthServer
+  if (DomWindow.localStorage != null) {
+    const value = DomWindow.localStorage.getItem('airbitzAuthServer')
+    if (value != null) {
+      airbitzAuthServer = value
+    }
+  }
 
   // Make the core context:
   this.abcContext = abc.makeContext({
