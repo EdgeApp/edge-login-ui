@@ -42,7 +42,7 @@ Now start diving in and make some calls
 Initialize the library
 
     _abcUi = abcui.makeABCUIContext({'apiKey': 'api-key-here',
-                                     'accountType': 'account:repo:com.mydomain.myapp',
+                                     'appId': 'com.mydomain.myapp',
                                      'bundlePath': '/path-to-abcui/',
                                      'vendorName': 'My Awesome Project',
                                      'vendorImageUrl': 'https://mydomain.com/mylogo.png'});

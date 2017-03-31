@@ -40,25 +40,34 @@ export function makeABCUIContext (args) {
 }
 
 function InnerAbcUi (args) {
+  const opts = {}
+
+  // API key:
   if (args.apiKey == null) {
     throw Error('Missing api key')
   }
+  opts.apiKey = args.apiKey
+
+  // appId:
+  if (args.appId != null) {
+    opts.appId = args.appId
+  } else if (args.accountType != null) {
+    opts.accountType = args.accountType
+    console.warn('Please provide Airbitz with an `appId`. The `accountType` is deprecated.')
+  } else {
+    throw Error('Missing appId')
+  }
 
   // Figure out which server to use:
-  let airbitzAuthServer
   if (DomWindow.localStorage != null) {
     const value = DomWindow.localStorage.getItem('airbitzAuthServer')
     if (value != null) {
-      airbitzAuthServer = value
+      opts.authServer = value
     }
   }
 
   // Make the core context:
-  this.abcContext = abc.makeContext({
-    apiKey: args.apiKey,
-    accountType: args.accountType,
-    authServer: airbitzAuthServer
-  })
+  this.abcContext = abc.makeContext(opts)
   this.abcContext.displayName = args.vendorName
   this.abcContext.displayImageUrl = args.vendorImageUrl
   DomWindow.abcContext = this.abcContext
