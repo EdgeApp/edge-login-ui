@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "airbitz-core-js": "^0.1.1",
+    "airbitz-core-js": "^0.2.1",
     "async": "~2.0.1",
     "classnames": "^2.2.5",
     "file-loader": "~0.9.0",
