@@ -1,6 +1,6 @@
 {
   "name": "airbitz-core-js-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Pluggable UI using airbitz-core",
   "main": "src/abcui.js",
   "scripts": {
