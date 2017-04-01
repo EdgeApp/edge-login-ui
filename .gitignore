@@ -5,6 +5,7 @@
 /assets/bundle.css.map
 /assets/vendor.bundle.js
 /assets/vendor.bundle.js.map
+/lib
 
 ./config.json
 .DS_Store

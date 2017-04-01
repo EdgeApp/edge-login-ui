@@ -2,12 +2,13 @@
   "name": "airbitz-core-js-ui",
   "version": "0.1.2",
   "description": "Pluggable UI using airbitz-core",
-  "main": "src/abcui.js",
+  "main": "lib/abcui.cjs.js",
+  "module": "lib/abcui.es6.js",
   "scripts": {
     "lint": "eslint 'src/**/*.js' 'src/**/*.jsx'",
     "test": "jest",
     "start": "node server_dev.js",
-    "build": "webpack --color --verbose --progress --config webpack.config.index.js && webpack --color --verbose --progress --config webpack.config.js && npm link",
+    "build": "rollup -c && webpack --color --verbose --progress --config webpack.config.index.js && npm link",
     "standard": "standard --fix --verbose --parser babel-eslint | snazzy"
   },
   "keywords": [],
@@ -15,7 +16,7 @@
   "license": "ISC",
   "files": [
     "assets/**",
-    "src/abcui.js"
+    "lib/**"
   ],
   "dependencies": {
     "airbitz-core-js": "^0.2.1",
@@ -74,6 +75,8 @@
     "react-test-renderer": "^15.4.2",
     "redux-devtools-extension": "^2.10.2",
     "redux-mock-store": "^1.2.2",
+    "rollup": "^0.41.6",
+    "rollup-plugin-buble": "^0.15.0",
     "sass-lint": "~1.10.2",
     "sass-loader": "v4.0.0",
     "standard": "~8.6.0",
