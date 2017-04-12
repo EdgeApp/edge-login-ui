@@ -1,4 +1,4 @@
-const abc = require('airbitz-core-js')
+import { makeBrowserContext } from 'airbitz-core-js'
 import 'whatwg-fetch'
 
 let DomWindow
@@ -35,26 +35,39 @@ function removeIFrame (frame) {
   frame.parentNode.removeChild(frame)
 }
 
-function makeABCUIContext (args) {
+export function makeABCUIContext (args) {
   return new InnerAbcUi(args)
 }
 
 function InnerAbcUi (args) {
+  const opts = {}
+
+  // API key:
   if (args.apiKey == null) {
     throw Error('Missing api key')
   }
+  opts.apiKey = args.apiKey
+
+  // appId:
+  if (args.appId != null) {
+    opts.appId = args.appId
+  } else if (args.accountType != null) {
+    opts.accountType = args.accountType
+    console.warn('Please provide Airbitz with an `appId`. The `accountType` is deprecated.')
+  } else {
+    throw Error('Missing appId')
+  }
 
   // Figure out which server to use:
-  const airbitzAuthServer = DomWindow.localStorage != null
-    ? DomWindow.localStorage.getItem('airbitzAuthServer')
-    : null
+  if (DomWindow.localStorage != null) {
+    const value = DomWindow.localStorage.getItem('airbitzAuthServer')
+    if (value != null) {
+      opts.authServer = value
+    }
+  }
 
   // Make the core context:
-  this.abcContext = abc.makeContext({
-    apiKey: args.apiKey,
-    accountType: args.accountType,
-    authServer: airbitzAuthServer
-  })
+  this.abcContext = makeBrowserContext(opts)
   this.abcContext.displayName = args.vendorName
   this.abcContext.displayImageUrl = args.vendorImageUrl
   DomWindow.abcContext = this.abcContext
@@ -124,7 +137,3 @@ InnerAbcUi.prototype.openManageWindow = function (account, callback) {
     callback(null)
   }
 }
-
-const abcui = {}
-abcui.makeABCUIContext = makeABCUIContext
-module.exports = abcui

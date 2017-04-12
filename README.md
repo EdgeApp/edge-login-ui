@@ -27,13 +27,7 @@ Install from npm
 
     npm install airbitz-core-js-ui --save
 
-or just include this repo somewhere in your server's path.
-
-Include the `abcui.js` file in your code
-
-    <script src="/path-to-abcui/assets/js/abcui.js"></script>
-
-Or using webpack:
+Include the `abcui.js` file in your code (using Webpack or any other bundler of your choice):
 
     var abcui = require('airbitz-core-js-ui')
 
@@ -42,12 +36,12 @@ Now start diving in and make some calls
 Initialize the library
 
     _abcUi = abcui.makeABCUIContext({'apiKey': 'api-key-here',
-                                     'accountType': 'account:repo:com.mydomain.myapp',
+                                     'appId': 'com.mydomain.myapp',
                                      'bundlePath': '/path-to-abcui/',
                                      'vendorName': 'My Awesome Project',
                                      'vendorImageUrl': 'https://mydomain.com/mylogo.png'});
 
-where `/path-to-abcui/` leads to the root directory of this repo when accessed via HTTP.
+where `/path-to-abcui/` leads to the root directory of this repo when accessed via HTTP (only the `assets` directory needs to be present, though).
 
 Create an overlay popup where a user can register a new account or login to a previously created account via password or PIN.
 
