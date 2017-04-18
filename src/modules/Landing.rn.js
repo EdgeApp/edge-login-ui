@@ -55,15 +55,17 @@ class HomeComponent extends TemplateView {
     super.componentWillMount()
     const dispatch = this.props.dispatch
     abcctx(ctx => {
-      const cachedUsers = ctx.listUsernames()
-      const lastUser = global.localStorage.getItem('lastUser')
+      return ctx.listUsernames().then(cachedUsers => {
+        const lastUser = global.localStorage.getItem('lastUser')
 
-      dispatch(setCachedUsers(cachedUsers))
-      if (lastUser) {
-        dispatch(selectUserToLogin(lastUser))
-      }
-      const disclaimerAccepted = global.localStorage.getItem('disclaimerAccepted')
-      if (!disclaimerAccepted) dispatch(showDisclaimer())
+        dispatch(setCachedUsers(cachedUsers))
+        if (lastUser) {
+          dispatch(selectUserToLogin(lastUser))
+        }
+        const disclaimerAccepted = global.localStorage.getItem('disclaimerAccepted')
+        if (!disclaimerAccepted) dispatch(showDisclaimer())
+        return null
+      })
     })
   }
 

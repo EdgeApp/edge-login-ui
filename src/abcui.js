@@ -1,4 +1,4 @@
-import { makeBrowserContext } from 'airbitz-core-js'
+import { makeContext } from 'airbitz-core-js'
 import 'whatwg-fetch'
 
 let DomWindow
@@ -67,7 +67,7 @@ function InnerAbcUi (args) {
   }
 
   // Make the core context:
-  this.abcContext = makeBrowserContext(opts)
+  this.abcContext = makeContext(opts)
   this.abcContext.displayName = args.vendorName
   this.abcContext.displayImageUrl = args.vendorImageUrl
   DomWindow.abcContext = this.abcContext

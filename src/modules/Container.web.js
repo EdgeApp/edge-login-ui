@@ -16,6 +16,13 @@ import Snackbar from 'react-toolbox/lib/snackbar'
 
 import styles from './Container.style.scss'
 
+function findUsernamesWithPin (ctx, usernames) {
+  const promises = usernames.map(username => ctx.pinLoginEnabled(username))
+
+  return Promise.all(promises).then(bools =>
+    usernames.filter((username, i) => bools[i]))
+}
+
 class Container extends Component {
   _handleToggle = () => {
     if (this.props.edgeObject) {
@@ -25,27 +32,25 @@ class Container extends Component {
       window.parent.exitCallback()
     }
   }
+
   loadData () {
     const dispatch = this.props.dispatch
     abcctx(ctx => {
-      const cachedUsers = ctx.listUsernames()
-      const cachedUsersWithPin = cachedUsers.slice(0)
-      for (const index in cachedUsers) {
-        const enabled = ctx.pinLoginEnabled(cachedUsers[index])
-        if (enabled === false) {
-          cachedUsersWithPin.splice(index, 1)
-        }
-      }
-      const lastUser = window.localStorage.getItem('lastUser')
-      dispatch(setCachedUsersWithPin(cachedUsersWithPin))
-      dispatch(setCachedUsers(cachedUsers))
-      if (cachedUsers.length >= 1) {
-        if (lastUser && cachedUsersWithPin.includes(lastUser)) {
-          dispatch(selectUserToLogin(lastUser))
-        } else {
-          dispatch(openLogin())
-        }
-      }
+      return ctx.listUsernames().then(cachedUsers => {
+        return findUsernamesWithPin(ctx, cachedUsers).then(cachedUsersWithPin => {
+          const lastUser = window.localStorage.getItem('lastUser')
+          dispatch(setCachedUsersWithPin(cachedUsersWithPin))
+          dispatch(setCachedUsers(cachedUsers))
+          if (cachedUsers.length >= 1) {
+            if (lastUser && cachedUsersWithPin.includes(lastUser)) {
+              dispatch(selectUserToLogin(lastUser))
+            } else {
+              dispatch(openLogin())
+            }
+          }
+          return null
+        })
+      })
     })
   }
 

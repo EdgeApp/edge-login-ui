@@ -19,7 +19,7 @@
     "lib/**"
   ],
   "dependencies": {
-    "airbitz-core-js": "^0.2.1",
+    "airbitz-core-js": "^0.3.0",
     "async": "~2.0.1",
     "classnames": "^2.2.5",
     "file-loader": "~0.9.0",
