@@ -12,11 +12,11 @@
   "main": "lib/abcui.cjs.js",
   "module": "lib/abcui.es6.js",
   "scripts": {
-    "build": "rollup -c && webpack --color --verbose --progress --config webpack.config.index.js && npm link",
+    "build": "rollup -c && webpack --color --verbose --progress --config webpack.config.index.js",
+    "fix": "eslint --fix 'src/**/*.js' 'src/**/*.jsx'",
     "lint": "eslint 'src/**/*.js' 'src/**/*.jsx'",
-    "standard": "standard --fix --verbose --parser babel-eslint | snazzy",
-    "start": "node server_dev.js",
-    "test": "jest"
+    "prepare": "npm run build",
+    "start": "node server_dev.js"
   },
   "dependencies": {
     "airbitz-core-js": "^0.3.3",
