@@ -1,0 +1,25 @@
+.container {
+
+    display: flex;
+    display: -webkit-flex;
+
+    flex-direction: column;
+    -webkit-flex-direction: column;
+
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    align-items: stretch;
+    -webkit-align-items: stretch;
+
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+
+    .main {
+      height: 458px;
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+    }
+}

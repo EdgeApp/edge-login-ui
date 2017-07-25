@@ -9,11 +9,16 @@ import t from 'lib/web/LocaleStrings'
 class Footer extends Component {
   render () {
     return (
-      <AppBar title='Footer' className={styles.appBar} flat={false} style={styles.footer}>
-        <Navigation type='horizontal' className={styles.navigation}>
-          <Link href='https://airbitz.co/app' target='_blank' className={styles.footerDownloadLink} label={t('fragment_setup_footer_1') + t('fragment_setup_footer_2_link')} icon='' />
-        </Navigation>
-      </AppBar>
+      <div className={styles.container}>
+        {/* {t('fragment_setup_footer_1') + t('fragment_setup_footer_2_link')} */}
+        <div className={styles.left}>
+        </div>
+        <div className={styles.spacer}>
+        </div>
+        <p className={styles.right}>
+          Powered by <span style={{ fontWeight: 'bold' }}>Airbitz</span>
+        </p>
+      </div>
     )
   }
 }

@@ -6,8 +6,13 @@
   font-weight: 700;
 }
 
+.topLevelDialog {
+    width :870px;
+    height :586px;
+}
+
 .topLevelDialog section {
-    padding: 65px 45px 0 45px;
+    padding: 0;
 }
 
 .error {
@@ -16,10 +21,6 @@
 
 .warning {
   color: orange;
-}
-
-.default {
-
 }
 
 @media only screen and (min-width : $layout-breakpoint-xs) {
