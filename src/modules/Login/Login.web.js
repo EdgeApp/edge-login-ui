@@ -115,84 +115,98 @@ class Login extends Component {
       onTimeout={this._handleNotificationClose} />
   }
 
+  // render () {
+  //   const inputDropdown = () => {
+  //     return (
+  //       <Input
+  //         ref='loginUsername'
+  //         label={t('fragment_landing_username_hint')}
+  //         onChange={this._changeUsername}
+  //         value={this.props.username}
+  //         onFocus={this.showCachedUsers}
+  //         onBlur={this.hideCachedUsers}
+  //         autoCorrect={false}
+  //         autoCapitalize={false}
+  //         onKeyPress={this.usernameKeyPressed}
+  //       />
+  //     )
+  //   }
+  //
+  //   if (!this.props.viewPassword && this.props.viewPIN) {
+  //     return (
+  //       <div className={styles.container}>
+  //         <LoginWithPin />
+  //         {this._renderNotification()}
+  //       </div>
+  //     )
+  //   }
+  //
+  //   if (!this.props.viewPassword && !this.props.viewPIN) {
+  //     return (
+  //       <div className={styles.container}>
+  //         <LoginEdge />
+  //         <div className={styles.buttonGroup}>
+  //           <Button raised primary style={{textTransform: 'none', marginLeft: '0px'}} theme={signinButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_account')}</Button>
+  //           <div ref='fieldsBelowView' style={{height: '45px'}} />
+  //           <a onClick={this._handleOpenLoginWithPasswordPage}>Already have an account?<br />Log in</a>
+  //         </div>
+  //         <ForgotPassword />
+  //         {this._renderNotification()}
+  //       </div>
+  //     )
+  //   }
+  //
+  //   if (this.props.viewPassword && !this.props.viewPIN) {
+  //     return (
+  //       <div className={styles.container}>
+  //         <div>
+  //           <LoginEdge />
+  //           <div ref='fieldsView' className={styles.fieldsView}>
+  //
+  //             <div className={styles.inputGroup}>
+  //               <CachedUsers component={inputDropdown()} area="passwordLogin" containerClassName={styles.cachedUsers} userListClassName={styles.userListClassName} />
+  //
+  //               <form className={styles.inputs} onSubmit={e => this.handleSubmit(e)}>
+  //                 <Input
+  //                   type='password'
+  //                   ref='password'
+  //                   label={t('fragment_landing_password_hint')}
+  //                   onChange={this.changePassword}
+  //                   value={this.props.password}
+  //                   autoCorrect={false}
+  //                   autoCapitalize={false}
+  //                 />
+  //               </form>
+  //             </div>
+  //           </div>
+  //           <div className={styles.buttonGroup}>
+  //             <span className={styles.loginTimeout}>{this.props.loginPasswordWait ? sprintf(t('server_error_invalid_pin_wait'), this.props.loginPasswordWait) : ''}</span>
+  //             <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit} disabled={this.props.loginPasswordWait > 0}>{t('fragment_landing_signin_button')}</Button>
+  //             <br />
+  //             <Button theme={neutral} className={styles.createNewButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
+  //             <br />
+  //             <Button theme={neutral} style={{textTransform: 'none'}} onClick={this._handleOpenForgotPasswordModal} className={styles.forgotPassword}>{t('fragment_landing_forgot_password')}</Button>
+  //           </div>
+  //         </div>
+  //         <ForgotPassword />
+  //         {this._renderNotification()}
+  //       </div>
+  //     )
+  //   }
+  // }
+
   render () {
-    const inputDropdown = () => {
-      return (
-        <Input
-          ref='loginUsername'
-          label={t('fragment_landing_username_hint')}
-          onChange={this._changeUsername}
-          value={this.props.username}
-          onFocus={this.showCachedUsers}
-          onBlur={this.hideCachedUsers}
-          autoCorrect={false}
-          autoCapitalize={false}
-          onKeyPress={this.usernameKeyPressed}
-        />
-      )
-    }
 
-    if (!this.props.viewPassword && this.props.viewPIN) {
-      return (
-        <div className={styles.container}>
-          <LoginWithPin />
-          {this._renderNotification()}
-        </div>
-      )
-    }
-
-    if (!this.props.viewPassword && !this.props.viewPIN) {
-      return (
-        <div className={styles.container}>
+    return (
+      <div className={styles.container}>
+        <div style={{ flex: 1 }}>
           <LoginEdge />
-          <div className={styles.buttonGroup}>
-            <Button raised primary style={{textTransform: 'none', marginLeft: '0px'}} theme={signinButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_account')}</Button>
-            <div ref='fieldsBelowView' style={{height: '45px'}} />
-            <a onClick={this._handleOpenLoginWithPasswordPage}>Already have an account?<br />Log in</a>
-          </div>
-          <ForgotPassword />
-          {this._renderNotification()}
         </div>
-      )
-    }
-
-    if (this.props.viewPassword && !this.props.viewPIN) {
-      return (
-        <div className={styles.container}>
-          <div>
-            <LoginEdge />
-            <div ref='fieldsView' className={styles.fieldsView}>
-
-              <div className={styles.inputGroup}>
-                <CachedUsers component={inputDropdown()} area="passwordLogin" containerClassName={styles.cachedUsers} userListClassName={styles.userListClassName} />
-
-                <form className={styles.inputs} onSubmit={e => this.handleSubmit(e)}>
-                  <Input
-                    type='password'
-                    ref='password'
-                    label={t('fragment_landing_password_hint')}
-                    onChange={this.changePassword}
-                    value={this.props.password}
-                    autoCorrect={false}
-                    autoCapitalize={false}
-                  />
-                </form>
-              </div>
-            </div>
-            <div className={styles.buttonGroup}>
-              <span className={styles.loginTimeout}>{this.props.loginPasswordWait ? sprintf(t('server_error_invalid_pin_wait'), this.props.loginPasswordWait) : ''}</span>
-              <Button raised primary style={{textTransform: 'none'}} theme={signinButton} onClick={this.handleSubmit} disabled={this.props.loginPasswordWait > 0}>{t('fragment_landing_signin_button')}</Button>
-              <br />
-              <Button theme={neutral} className={styles.createNewButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_a_new_account')}</Button>
-              <br />
-              <Button theme={neutral} style={{textTransform: 'none'}} onClick={this._handleOpenForgotPasswordModal} className={styles.forgotPassword}>{t('fragment_landing_forgot_password')}</Button>
-            </div>
-          </div>
-          <ForgotPassword />
-          {this._renderNotification()}
+        <div style={{ flex: 1 }}>
         </div>
-      )
-    }
+      </div>
+    )
+
   }
 }
 

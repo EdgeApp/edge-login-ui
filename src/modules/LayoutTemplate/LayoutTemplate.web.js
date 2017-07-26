@@ -11,7 +11,7 @@ class LayoutTemplate extends Component {
         <div className={styles.main}>
           {this.props.children}
         </div>
-        <Footer className='dialogFooter' />
+        <Footer />
       </div>
     )
   }

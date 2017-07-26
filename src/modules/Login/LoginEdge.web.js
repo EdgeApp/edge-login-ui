@@ -38,7 +38,7 @@ class LoginEdge extends Component {
     const { edgeId } = this.props
     if (edgeId) {
       const qrCodeVal = 'airbitz://edge/' + edgeId
-      return (<QRCode value={qrCodeVal} style={{margin: '0px auto', width: '128px'}} />)
+      return <QRCode value={qrCodeVal} size={205} />
     } else {
       return null
     }
@@ -56,27 +56,20 @@ class LoginEdge extends Component {
     const { edgeUsername } = this.props
 
     return (
-      <div>
-        <div style={style.container}>
-          <div style={style.edgeLoginBtn}>
-            {this.props.register ? t('string_scan_barcode_to_register') : t('string_scan_barcode_to_signin')}
-          </div>
-          {!edgeUsername ? (
-            <div>
-              <div style={style.barCode}>
-                <a target='_blank' href={this.renderLoginLink()}>{this.renderBarcode()}</a>
-              </div>
-              <div style={style.dividerContainer}>
-                <label style={style.divider}>{t('string_or')}</label>
-              </div>
-            </div>
-            ) : (
-              <div>
-                <b>{edgeUsername}</b><br />
-                {t('approving_login_text')}<br />
-              </div>)}
+      <div style={style.container}>
+        <div style={style.topText}>
+          {this.props.register ? t('string_scan_barcode_to_register') : t('string_scan_barcode_to_signin')}
         </div>
-      </div>
+        {!edgeUsername ? (
+          <div>
+            <a target='_blank' href={this.renderLoginLink()}>{this.renderBarcode()}</a>
+          </div>
+        ) : (
+          <div>
+            <b>{edgeUsername}</b><br />
+            {t('approving_login_text')}<br />
+          </div>)}
+        </div>
     )
   }
 }
@@ -84,14 +77,22 @@ class LoginEdge extends Component {
 const style = {
 
   container: {
-    marginBottom: '10px',
     display: 'flex',
-    flex: 1,
-    alignItems: 'stretch',
     flexWrap: 'wrap',
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
+
+  topText: {
+    width: '217px',
+    color: '#909091',
+    fontSize: '19px',
+    lineHeight: '24px',
+    textAlign: 'center',
+    marginBottom: '45px'
+  },
+
   logoIcon: {
     'width': '28px',
     'padding': '4px',
@@ -112,10 +113,7 @@ const style = {
     textTransform: 'uppercase'
   },
   barCode: {
-    paddingTop: '20px',
-    margin: '0px auto',
-    height: '128px',
-    textAlign: 'center'
+    height: '275px'
   }
 }
 
