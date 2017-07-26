@@ -16,11 +16,12 @@ import LoginEdge from './LoginEdge.web'
 // import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
 // import CachedUsers from '../CachedUsers/CachedUsers.web'
 import Snackbar from 'react-toolbox/lib/snackbar'
+import NewAccount from './Components/NewAccount.web.js'
 
 // import signinButton from 'theme/signinButton.scss'
 // import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './Login.style.scss'
-import buttons from '../../theme/buttons.scss'
+// import buttons from '../../theme/buttons.scss'
 
 class Login extends Component {
   constructor (props) {
@@ -199,11 +200,8 @@ class Login extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <div style={{ flex: 1 }}>
-          <LoginEdge />
-        </div>
-        <div style={{ flex: 1 }}>
-        </div>
+        <LoginEdge />
+        <NewAccount />
       </div>
     )
   }

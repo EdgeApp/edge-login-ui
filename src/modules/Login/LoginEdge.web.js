@@ -78,9 +78,10 @@ const style = {
 
   container: {
     display: 'flex',
+    flex: 1,
     flexWrap: 'wrap',
     flexDirection: 'column',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center'
   },
 
@@ -90,7 +91,7 @@ const style = {
     fontSize: '19px',
     lineHeight: '24px',
     textAlign: 'center',
-    marginBottom: '45px'
+    marginBottom: '35px'
   },
 
   logoIcon: {

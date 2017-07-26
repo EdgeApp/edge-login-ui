@@ -44,9 +44,11 @@
 
 .link {
   color: #4977BB;
+  font-size: 16px;
 }
 
 .link:hover {
+  color: rgba(73,119,187,0.6);
   text-decoration: none;
 }
 
