@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import Input from 'react-toolbox/lib/input'
-import Button from 'react-toolbox/lib/button'
+// import Input from 'react-toolbox/lib/input'
+// import Button from 'react-toolbox/lib/button'
 import t from 'lib/web/LocaleStrings'
-import { sprintf } from 'sprintf-js'
+// import { sprintf } from 'sprintf-js'
 
 import { openLogin, loginUsername, loginPassword, openUserList, closeUserList, hideLoginNotification } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
 import { closeLoading } from '../Loader/Loader.action'
 
-import LoginWithPin from './LoginWithPin.web'
+// import LoginWithPin from './LoginWithPin.web'
 import LoginEdge from './LoginEdge.web'
-import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
-import CachedUsers from '../CachedUsers/CachedUsers.web'
+// import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
+// import CachedUsers from '../CachedUsers/CachedUsers.web'
 import Snackbar from 'react-toolbox/lib/snackbar'
 
-import signinButton from 'theme/signinButton.scss'
-import neutral from 'theme/neutralButtonWithBlueText.scss'
+// import signinButton from 'theme/signinButton.scss'
+// import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './Login.style.scss'
 
 class Login extends Component {
@@ -196,7 +196,6 @@ class Login extends Component {
   // }
 
   render () {
-
     return (
       <div className={styles.container}>
         <div style={{ flex: 1 }}>
@@ -206,13 +205,11 @@ class Login extends Component {
         </div>
       </div>
     )
-
   }
 }
 
 const LoginWithRouter = withRouter(Login)
 const LoginWithRedux = connect(state => ({
-
   viewPIN: state.login.viewPIN,
   viewPassword: state.login.viewPassword,
   username: state.login.username,

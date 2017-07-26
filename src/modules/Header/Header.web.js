@@ -5,7 +5,6 @@ import { sprintf } from 'sprintf-js'
 import t from 'lib/web/LocaleStrings'
 
 class Header extends Component {
-
   componentWillMount () {
     try {
       const vendorName = window.parent.abcuiContext.vendorName || 'Sample App'
