@@ -20,6 +20,7 @@ import Snackbar from 'react-toolbox/lib/snackbar'
 // import signinButton from 'theme/signinButton.scss'
 // import neutral from 'theme/neutralButtonWithBlueText.scss'
 import styles from './Login.style.scss'
+import buttons from '../../theme/buttons.scss'
 
 class Login extends Component {
   constructor (props) {
@@ -210,6 +211,7 @@ class Login extends Component {
 
 const LoginWithRouter = withRouter(Login)
 const LoginWithRedux = connect(state => ({
+
   viewPIN: state.login.viewPIN,
   viewPassword: state.login.viewPassword,
   username: state.login.username,
