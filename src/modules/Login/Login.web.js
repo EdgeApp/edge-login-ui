@@ -16,8 +16,9 @@ import LoginEdge from './LoginEdge.web'
 // import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
 // import CachedUsers from '../CachedUsers/CachedUsers.web'
 import Snackbar from 'react-toolbox/lib/snackbar'
-// import NewAccountSection from './Components/NewAccount.web.js'
+import NewAccountSection from './Components/NewAccount.web.js'
 import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
+import LoginWithPinSection from './Components/LoginWithPin.web.js'
 
 // import signinButton from 'theme/signinButton.scss'
 // import neutral from 'theme/neutralButtonWithBlueText.scss'
@@ -201,12 +202,16 @@ class Login extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <LoginEdge />
-        {/* <NewAccount */}
-        {/*   signup={this._handleGoToSignupPage} */}
-        {/*   login={this._handleOpenLoginWithPasswordPage} */}
-        {/* /> */}
-        <LoginWithPasswordSection />
+        <LoginWithPinSection />
+        {/* <LoginEdge /> */}
+        {/* { */}
+        {/*   this.props.viewPassword ? */}
+        {/*     <LoginWithPasswordSection /> : */}
+        {/*     <NewAccountSection */}
+        {/*       signup={this._handleGoToSignupPage} */}
+        {/*       login={this._handleOpenLoginWithPasswordPage} */}
+        {/*     /> */}
+        {/* } */}
       </div>
     )
   }
