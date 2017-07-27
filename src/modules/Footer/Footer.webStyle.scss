@@ -10,14 +10,76 @@ $layout-breakpoint-sm:     960px !default;
 $layout-breakpoint-md:     1280px !default;
 $layout-breakpoint-lg:     1920px !default;
 
-.appBar {
-    height: 6rem;
-    margin-top: 10px;
-    padding: 0 0;
-    border-top: 1px solid #f2f2f2;
-    background-color: transparent;
-    box-shadow: none !important;
-    font-size: 1.4rem;
+.container {
+
+	  height: 100px;
+
+    display: flex;
+    display: -webkit-flex;
+
+    flex-direction: column;
+    -webkit-flex-direction: column;
+
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    align-items: stretch;
+    -webkit-align-items: stretch;
+
+    .top {
+      height: 58px;
+
+      display: flex;
+      display: -webkit-flex;
+
+      align-items: center;
+      -webkit-align-items: center;
+
+      justify-content: center;
+      -webkit-justify-content: center;
+
+	    color: #4977BB;
+      font-size: 16px;
+      line-height: 16px;
+      text-align: center;
+    }
+
+    .bottom {
+
+      height: 42px;
+
+      background: linear-gradient(90deg, rgba(59,122,218,0.98) 0%, #2B5698 100%);
+
+      display: flex;
+      display: -webkit-flex;
+
+      flex-direction: row;
+      -webkit-flex-direction: row;
+
+      justify-content: center;
+      -webkit-justify-content: center;
+
+      align-items: center;
+      -webkit-align-items: center;
+
+      .left {
+
+      }
+
+      .spacer {
+        flex: 1;
+
+      }
+
+      .right {
+        margin: 0px 20px;
+        color: #FFFFFF;
+        font-size: 14px;
+        text-align: center;
+      }
+
+    }
+
 
     .navigation {
         width: 100%;

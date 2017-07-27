@@ -1,0 +1,104 @@
+@import "~theme/buttons";
+@import "~theme/input";
+
+.container {
+  flex: 1;
+
+  display: flex;
+  display: -webkit-flex;
+
+  flex-direction: column;
+  -webkit-flex-direction: column;
+
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+
+  align-items: center;
+  -webkit-align-items: center;
+
+
+  .background {
+    background: linear-gradient(90deg, rgba(59,122,218,0.98) 0%, #2B5698 100%);
+    height: 198px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    width: 100%;
+  }
+
+  .main {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+
+    flex: 1;
+
+    display: flex;
+    display: -webkit-flex;
+
+    flex-direction: column;
+    -webkit-flex-direction: column;
+
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+
+    align-items: center;
+    -webkit-align-items: center;
+
+    .header {
+      margin-top: 25px;
+      color: #FFFFFF;
+      font-size: 32px;
+      text-align: center;
+    }
+
+    .box {
+
+      display: flex;
+      display: -webkit-flex;
+
+      flex-direction: column;
+      -webkit-flex-direction: column;
+
+      justify-content: center;
+      -webkit-justify-content: center;
+
+      align-items: center;
+      -webkit-align-items: center;
+
+      height: 237px;
+      width: 380px;
+      border-radius: 3px;
+      background-color: #FFFFFF;
+      box-shadow: 0 0 4px 0 rgba(0,0,0,0.5);
+      margin: 30px 0px;
+
+      .userList {
+        @extend .form-group;
+        width: 300px;
+      }
+
+      .password {
+        @extend .form-group;
+        width: 120px;
+
+        .passwordLabel {
+          @extend .control-label;
+          text-align: center;
+        }
+      }
+    }
+
+    .exitLink {
+      @extend .link;
+      font-size: 18px;
+    }
+
+  }
+
+
+}
+
+.button {
+  @extend .primary;
+  width: 210px;
+}

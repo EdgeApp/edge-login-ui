@@ -1,19 +1,18 @@
 @import 'theme/_config.scss';
 
 .container {
-  padding: $unit * 0.6;
 
   display: flex;
   display: -webkit-flex;
 
-  flex-direction: column;
-  -webkit-flex-direction: column;
+  flex-direction: row;
+  -webkit-flex-direction: row;
 
   justify-content: center;
   -webkit-justify-content: center;
 
-  align-items: stretch;
-  -webkit-align-items: stretch;
+  flex: 1;
+
 }
 
 .inputGroup {
