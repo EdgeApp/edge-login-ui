@@ -52,12 +52,40 @@
     }
 
     .box {
+
+      display: flex;
+      display: -webkit-flex;
+
+      flex-direction: column;
+      -webkit-flex-direction: column;
+
+      justify-content: center;
+      -webkit-justify-content: center;
+
+      align-items: center;
+      -webkit-align-items: center;
+
       height: 237px;
       width: 380px;
       border-radius: 3px;
       background-color: #FFFFFF;
       box-shadow: 0 0 4px 0 rgba(0,0,0,0.5);
       margin: 30px 0px;
+
+      .userList {
+        @extend .form-group;
+        width: 300px;
+      }
+
+      .password {
+        @extend .form-group;
+        width: 120px;
+
+        .passwordLabel {
+          @extend .control-label;
+          text-align: center;
+        }
+      }
     }
 
     .exitLink {
