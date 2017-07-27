@@ -12,12 +12,12 @@ import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action
 import { closeLoading } from '../Loader/Loader.action'
 
 // import LoginWithPin from './LoginWithPin.web'
-import LoginEdge from './LoginEdge.web'
+// import LoginEdge from './LoginEdge.web'
 // import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
 // import CachedUsers from '../CachedUsers/CachedUsers.web'
 import Snackbar from 'react-toolbox/lib/snackbar'
-import NewAccountSection from './Components/NewAccount.web.js'
-import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
+// import NewAccountSection from './Components/NewAccount.web.js'
+// import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
 import LoginWithPinSection from './Components/LoginWithPin.web.js'
 
 // import signinButton from 'theme/signinButton.scss'
