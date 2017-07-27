@@ -26,7 +26,7 @@ class LoginWithPin extends Component {
               <i className={styles.bar}></i>
             </div>
           </div>
-          <p className={styles.exitLink}>Exit PIN Login</p>
+          <p className={styles.exitLink} onClick={this.props.openViewPassword}>Exit PIN Login</p>
         </div>
       </div>
     )

@@ -28,7 +28,7 @@ class NewAccount extends Component {
 
         <div style={{ height: '25px' }}/>
 
-        <button className={styles.primary}>Sign In</button>
+        <button className={styles.primary} onClick={this.props.openViewPin}>Sign In</button>
 
         <div style={{ height: '30px' }}/>
 

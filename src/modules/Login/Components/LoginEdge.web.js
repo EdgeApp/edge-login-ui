@@ -5,8 +5,8 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import t from 'lib/web/LocaleStrings'
 
-import { edgeLogin } from './Login.middleware'
-import { closeLoading } from '../Loader/Loader.action'
+import { edgeLogin } from '../Login.middleware'
+import { closeLoading } from '../../Loader/Loader.action'
 
 class LoginEdge extends Component {
   componentWillUnmount () {
@@ -82,7 +82,8 @@ const style = {
     flexWrap: 'wrap',
     flexDirection: 'column',
     // justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: '40px'
   },
 
   topText: {

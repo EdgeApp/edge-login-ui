@@ -6,18 +6,18 @@ import { withRouter } from 'react-router'
 import t from 'lib/web/LocaleStrings'
 // import { sprintf } from 'sprintf-js'
 
-import { openLogin, loginUsername, loginPassword, openUserList, closeUserList, hideLoginNotification } from './Login.action'
+import { openLogin, openLoginUsingPin, closeLoginUsingPin, closeLogin, loginUsername, loginPassword, openUserList, closeUserList, hideLoginNotification } from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
 import { closeLoading } from '../Loader/Loader.action'
 
 // import LoginWithPin from './LoginWithPin.web'
-// import LoginEdge from './LoginEdge.web'
 // import ForgotPassword from '../ForgotPassword/ForgotPassword.web'
 // import CachedUsers from '../CachedUsers/CachedUsers.web'
 import Snackbar from 'react-toolbox/lib/snackbar'
-// import NewAccountSection from './Components/NewAccount.web.js'
-// import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
+import LoginEdge from './Components/LoginEdge.web'
+import NewAccountSection from './Components/NewAccount.web.js'
+import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
 import LoginWithPinSection from './Components/LoginWithPin.web.js'
 
 // import signinButton from 'theme/signinButton.scss'
@@ -87,6 +87,14 @@ class Login extends Component {
   hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
   }
+  openViewPin = () => {
+    this.props.dispatch(openLoginUsingPin())
+    this.props.dispatch(closeLogin())
+  }
+  openViewPassword = () => {
+    this.props.dispatch(closeLoginUsingPin())
+    this.props.dispatch(openLogin())
+  }
   // renderWhiteTransition () {
   //   if (this.props.whiteOverlayVisible) {
   //     return (<div ref='whiteOverlay' style={style.whiteTransitionFade} />)
@@ -117,6 +125,11 @@ class Login extends Component {
       type='accept'
       onClick={this._handleNotificationClose}
       onTimeout={this._handleNotificationClose} />
+  }
+
+  _gotoPasswordInput = (pin) => {
+    this.props.dispatch(closeUserList())
+    this.props.dispatch(openLogin())
   }
 
   // render () {
@@ -200,20 +213,31 @@ class Login extends Component {
   // }
 
   render () {
-    return (
-      <div className={styles.container}>
-        <LoginWithPinSection />
-        {/* <LoginEdge /> */}
-        {/* { */}
-        {/*   this.props.viewPassword ? */}
-        {/*     <LoginWithPasswordSection /> : */}
-        {/*     <NewAccountSection */}
-        {/*       signup={this._handleGoToSignupPage} */}
-        {/*       login={this._handleOpenLoginWithPasswordPage} */}
-        {/*     /> */}
-        {/* } */}
-      </div>
-    )
+
+    if(this.props.viewPIN) {
+      return (
+        <div className={styles.container}>
+          <LoginWithPinSection openViewPassword={this.openViewPassword}/>
+        </div>
+      )
+    }
+
+    if(!this.props.viewPIN) {
+      return (
+        <div className={styles.container}>
+          <LoginEdge />
+          {
+            this.props.viewPassword ?
+            <LoginWithPasswordSection openViewPin={this.openViewPin}/> :
+              <NewAccountSection
+                signup={this._handleGoToSignupPage}
+                login={this._handleOpenLoginWithPasswordPage}
+            />
+          }
+        </div>
+      )
+    }
+
   }
 }
 
