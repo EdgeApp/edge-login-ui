@@ -213,31 +213,21 @@ class Login extends Component {
   // }
 
   render () {
-
-    if(this.props.viewPIN) {
+    if (this.props.viewPIN) {
       return (
         <div className={styles.container}>
           <LoginWithPinSection openViewPassword={this.openViewPassword}/>
         </div>
       )
     }
-
-    if(!this.props.viewPIN) {
+    if (!this.props.viewPIN) {
       return (
         <div className={styles.container}>
           <LoginEdge />
-          {
-            this.props.viewPassword ?
-            <LoginWithPasswordSection openViewPin={this.openViewPin}/> :
-              <NewAccountSection
-                signup={this._handleGoToSignupPage}
-                login={this._handleOpenLoginWithPasswordPage}
-            />
-          }
+          { this.props.viewPassword ? <LoginWithPasswordSection openViewPin={this.openViewPin}/> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
         </div>
       )
     }
-
   }
 }
 
