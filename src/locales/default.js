@@ -16,6 +16,9 @@ const strings = {
   loading: 'Loading…',
   synchronizing: 'Synchronizing…',
 
+  // Login
+  login_text: 'Log in with your username and password',
+
   //  Generic strings
   string_yes: 'Yes',
   string_ok: 'Ok',

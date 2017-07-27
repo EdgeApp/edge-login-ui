@@ -9,7 +9,7 @@ class NewAccount extends Component {
       <div className={styles.container}>
         <button className={styles.button}>Create Account</button>
         <br />
-        <p>Already have an account? <a href="#" className={buttons.link}>Login</a></p>
+        <p>Already have an account? <span className={buttons.link}>Login</span></p>
       </div>
     )
   }
