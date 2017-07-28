@@ -13,7 +13,7 @@ class NewAccount extends Component {
   };
 
   handleToggle = () => {
-    this.setState({active: !this.state.active});
+    this.setState({active: !this.state.active})
   }
 
   render () {
