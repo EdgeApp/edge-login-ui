@@ -19,6 +19,7 @@ import LoginEdge from './Components/LoginEdge.web'
 import NewAccountSection from './Components/NewAccount.web.js'
 import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
 import LoginWithPinSection from './Components/LoginWithPin.web.js'
+import Divider from './Components/Divider.web.js'
 
 // import signinButton from 'theme/signinButton.scss'
 // import neutral from 'theme/neutralButtonWithBlueText.scss'
@@ -224,6 +225,7 @@ class Login extends Component {
       return (
         <div className={styles.container}>
           <LoginEdge />
+          <Divider />
           { this.props.viewPassword ? <LoginWithPasswordSection openViewPin={this.openViewPin}/> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
         </div>
       )
