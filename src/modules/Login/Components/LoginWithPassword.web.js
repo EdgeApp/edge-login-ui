@@ -4,7 +4,18 @@ import styles from './LoginWithPassword.webStyle.scss'
 import t from 'lib/web/LocaleStrings'
 // import buttons from '../../../theme/buttons.scss'
 
+import PasswordRecovery from '../../Modals/PasswordRecovery/PasswordRecovery.web.js'
+
 class NewAccount extends Component {
+
+  state = {
+    active: false
+  };
+
+  handleToggle = () => {
+    this.setState({active: !this.state.active});
+  }
+
   render () {
     return (
       <div className={styles.container}>
@@ -24,7 +35,7 @@ class NewAccount extends Component {
           </div>
         </div>
 
-        <p className={styles.link}>Forgot Password</p>
+        <p className={styles.link} onClick={this.handleToggle}>Forgot Password</p>
 
         <div style={{ height: '25px' }}/>
 
@@ -33,6 +44,8 @@ class NewAccount extends Component {
         <div style={{ height: '30px' }}/>
 
         <p>Already have an account? <span className={styles.link}>Create Account</span></p>
+
+        <PasswordRecovery active={this.state.active} close={this.handleToggle}/>
       </div>
     )
   }
