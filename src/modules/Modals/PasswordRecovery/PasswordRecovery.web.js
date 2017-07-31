@@ -10,8 +10,9 @@ class PasswordRecovery extends Component {
       <Modal
         active={this.props.active}
         close={this.props.close}
+        icon='../../../../assets/modals/recovery-W.png'
       >
-        <h1>test</h1>
+        <p>test</p>
       </Modal>
     )
   }

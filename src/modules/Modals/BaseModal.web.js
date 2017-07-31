@@ -13,8 +13,12 @@ class BaseModal extends Component {
         onEscKeyDown={this.props.close}
         onOverlayClick={this.props.close}
       >
-        <div></div>
-        {this.props.children}
+        <div className={styles.circle}>
+          <img src={this.props.icon}/>
+        </div>
+        <div className={styles.main}>
+          {this.props.children}
+        </div>
       </Dialog>
     )
   }
