@@ -53,7 +53,7 @@ class Login extends Component {
               }
               if (!window.parent.loginCallback) {
                 this.props.dispatch(closeLoading())
-                return this.props.router.push('/home')
+                return this.props.router.push('/account')
               }
             } else {
             // this.props._renderNotification('There has been an error logging in.')

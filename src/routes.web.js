@@ -5,6 +5,7 @@ import Container from './modules/Container.web'
 import Signup from './modules/Signup/SignupContainer.web'
 import Login from './modules/Login/Login.web'
 import Home from './modules/Home/Home.web'
+import AccountManagement from './modules/AccountManagement/AccountManagement.web.js'
 import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 
 export default class RouterComponent extends Component {
@@ -17,6 +18,8 @@ export default class RouterComponent extends Component {
           <Route path='/signup' component={Signup} />
           <Route path='/review' component={ReviewDetails} />
           <Route path='/home' component={Home} />
+          <Route path='/home' component={Home} />
+          <Route path='/account' component={AccountManagement} />
         </Route>
       </Router>
     )

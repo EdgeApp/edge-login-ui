@@ -18,7 +18,6 @@ import styles from './Container.style.scss'
 
 function findUsernamesWithPin (ctx, usernames) {
   const promises = usernames.map(username => ctx.pinLoginEnabled(username))
-
   return Promise.all(promises).then(bools =>
     usernames.filter((username, i) => bools[i]))
 }
@@ -82,13 +81,12 @@ class Container extends Component {
           active
           onEscKeyDown={this._handleToggle}
           onOverlayClick={this._handleToggle}
-          className={styles.topLevelDialog}
+          className={this.props.location.pathname === '/account' ? styles.dialogAccount : styles.dialogLogin}
         >
           <LayoutTemplate theme={layoutTheme}>
             <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle}/>
             {this.props.children}
           </LayoutTemplate>
-
           <Loader />
           <ErrorModal />
           <WarningModal />
