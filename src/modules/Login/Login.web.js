@@ -34,11 +34,11 @@ class Login extends Component {
     }
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
+  handleSubmit = (username, password) => {
+    // console.log(username + ' - ' + password)
     if (this.props.viewPassword) {
-      this.refs.loginUsername.getWrappedInstance().blur()
-      this.refs.password.getWrappedInstance().blur()
+      // this.refs.loginUsername.getWrappedInstance().blur()
+      // this.refs.password.getWrappedInstance().blur()
       this.props.dispatch(
         loginWithPassword(
           this.props.username,
@@ -96,13 +96,6 @@ class Login extends Component {
     this.props.dispatch(closeLoginUsingPin())
     this.props.dispatch(openLogin())
   }
-  // renderWhiteTransition () {
-  //   if (this.props.whiteOverlayVisible) {
-  //     return (<div ref='whiteOverlay' style={style.whiteTransitionFade} />)
-  //   } else {
-  //     return null
-  //   }
-  // }
   handleViewPress () {
     this.props.dispatch(closeUserList())
   }
@@ -226,7 +219,7 @@ class Login extends Component {
         <div className={styles.container}>
           <LoginEdge />
           <Divider />
-          { this.props.viewPassword ? <LoginWithPasswordSection openViewPin={this.openViewPin}/> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
+          { this.props.viewPassword ? <LoginWithPasswordSection openViewPin={this.openViewPin} login={this.handleSubmit} /> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
         </div>
       )
     }

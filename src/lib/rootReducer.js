@@ -6,7 +6,7 @@ import * as PasswordStates from '../modules/Password/Password.reducer'
 import * as PasswordValidation from '../modules/Password/PasswordValidation/PasswordValidation.reducer'
 import { nextButtonVisible } from '../modules/NextButton/NextButton.reducer'
 import { skipButtonVisible } from '../modules/SkipButton/SkipButton.reducer'
-import { disclaimerAccepted } from '../modules/Disclaimer/Disclaimer.reducer'
+// import { disclaimerAccepted } from '../modules/Disclaimer/Disclaimer.reducer'
 import * as ReviewDetailsStates from '../modules/ReviewDetails/ReviewDetails.reducer'
 import * as Loader from '../modules/Loader/Loader.reducer'
 import * as WarningModal from '../modules/WarningModal/WarningModal.reducer'
@@ -20,7 +20,7 @@ import * as ForgotPassword from '../modules/ForgotPassword/ForgotPassword.reduce
 import * as Container from '../modules/Container.reducer'
 import { signupPage } from '../modules/Signup/Signup.reducer'
 import { user } from '../modules/User/User.reducer'
-import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
+// import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 
 // import routes from './routesReducer'
 // import { alert } from '../modules/Alert/Alert.reducer'
@@ -92,12 +92,11 @@ const store = combineReducers({
     userToDeleteFromUserCache: CachedUsers.userToDeleteFromUserCache,
     usersWithPinEnabled: CachedUsers.usersWithPinEnabled
   }),
-  landing: combineReducers({
-    disclaimerAccepted,
-    whiteOverlayVisible,
-    lostFocus,
-    gainedFocus
-  }),
+  // landing: combineReducers({
+  //   disclaimerAccepted,
+  //   whiteOverlayVisible,
+  //   gainedFocus
+  // }),
   changePassword: combineReducers({
     view: ChangePassword.view,
     revealPassword: ChangePassword.revealPassword,
