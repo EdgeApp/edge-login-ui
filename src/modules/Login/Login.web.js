@@ -19,6 +19,7 @@ import LoginEdge from './Components/LoginEdge.web'
 import NewAccountSection from './Components/NewAccount.web.js'
 import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
 import LoginWithPinSection from './Components/LoginWithPin.web.js'
+import Divider from './Components/Divider.web.js'
 
 // import signinButton from 'theme/signinButton.scss'
 // import neutral from 'theme/neutralButtonWithBlueText.scss'
@@ -33,11 +34,11 @@ class Login extends Component {
     }
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
+  handleSubmit = (username, password) => {
+    // console.log(username + ' - ' + password)
     if (this.props.viewPassword) {
-      this.refs.loginUsername.getWrappedInstance().blur()
-      this.refs.password.getWrappedInstance().blur()
+      // this.refs.loginUsername.getWrappedInstance().blur()
+      // this.refs.password.getWrappedInstance().blur()
       this.props.dispatch(
         loginWithPassword(
           this.props.username,
@@ -52,7 +53,7 @@ class Login extends Component {
               }
               if (!window.parent.loginCallback) {
                 this.props.dispatch(closeLoading())
-                return this.props.router.push('/home')
+                return this.props.router.push('/account')
               }
             } else {
             // this.props._renderNotification('There has been an error logging in.')
@@ -95,13 +96,6 @@ class Login extends Component {
     this.props.dispatch(closeLoginUsingPin())
     this.props.dispatch(openLogin())
   }
-  // renderWhiteTransition () {
-  //   if (this.props.whiteOverlayVisible) {
-  //     return (<div ref='whiteOverlay' style={style.whiteTransitionFade} />)
-  //   } else {
-  //     return null
-  //   }
-  // }
   handleViewPress () {
     this.props.dispatch(closeUserList())
   }
@@ -224,7 +218,8 @@ class Login extends Component {
       return (
         <div className={styles.container}>
           <LoginEdge />
-          { this.props.viewPassword ? <LoginWithPasswordSection openViewPin={this.openViewPin}/> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
+          <Divider />
+          { this.props.viewPassword ? <LoginWithPasswordSection openViewPin={this.openViewPin} login={this.handleSubmit} /> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
         </div>
       )
     }

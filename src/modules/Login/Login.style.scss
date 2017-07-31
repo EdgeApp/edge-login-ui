@@ -13,6 +13,8 @@
 
   flex: 1;
 
+  height: 400px;
+
 }
 
 .inputGroup {
@@ -91,3 +93,4 @@ button {
 @media only screen and (min-width : $layout-breakpoint-sm) {
   max-width: 50%;
 }
+
