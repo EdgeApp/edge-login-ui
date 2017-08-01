@@ -66,9 +66,15 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'src'),
-        use: production
-          ? ['babel-loader']
-          : ['react-hot-loader', 'babel-loader']
+        use: [
+          ...(production ? [] : ['react-hot-loader']),
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015', 'stage-2', 'react']
+            }
+          }
+        ]
       },
       {
         test: /\.(css|scss)$/,
