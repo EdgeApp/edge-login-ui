@@ -29,6 +29,7 @@
   "dependencies": {
     "airbitz-core-js": "^0.3.3",
     "async": "~2.0.1",
+    "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",
     "file-loader": "~0.9.0",
     "joi-browser": "~9.0.1",
@@ -62,7 +63,6 @@
     "babel-loader": "^7.1.1",
     "babel-preset-es2015": "~6.9.0",
     "babel-preset-react": "~6.11.1",
-    "babel-preset-stage-0": "~6.5.0",
     "css-loader": "^0.28.4",
     "encoding": "^0.1.12",
     "enzyme": "^2.8.0",
