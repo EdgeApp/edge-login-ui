@@ -14,7 +14,9 @@
   "author": "Airbitz, Inc.",
   "files": [
     "assets/**",
-    "lib/**"
+    "lib/**",
+    "src/common/**",
+    "src/native/**"
   ],
   "main": "lib/abcui.cjs.js",
   "module": "lib/abcui.es6.js",
@@ -87,6 +89,10 @@
     "webpack": "^3.4.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.6.1"
+  },
+  "react-native": {
+    "lib/abcui.es6.js": "src/native/index.js",
+    "lib/abcui.cjs.js": "src/native/index.js"
   },
   "jest": {
     "moduleNameMapper": {
