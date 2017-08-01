@@ -1,10 +1,17 @@
 {
   "name": "airbitz-core-js-ui",
   "version": "0.1.4",
-  "description": "Pluggable UI using airbitz-core",
-  "keywords": [],
+  "description": "Airbitz login UI components, as a library",
+  "keywords": [
+    "Airbitz",
+    "bitcoin",
+    "blockchain",
+    "ethereum",
+    "key management",
+    "security"
+  ],
   "license": "SEE LICENSE IN LICENSE",
-  "author": "",
+  "author": "Airbitz, Inc.",
   "files": [
     "assets/**",
     "lib/**"
