@@ -15,6 +15,7 @@
     "build": "rollup -c && webpack --color --verbose --progress --config webpack.config.index.js",
     "fix": "eslint --fix 'src/**/*.js' 'src/**/*.jsx'",
     "lint": "eslint 'src/**/*.js' 'src/**/*.jsx'",
+    "precommit": "npm run lint",
     "prepare": "npm run build",
     "start": "node server_dev.js"
   },
@@ -66,7 +67,7 @@
     "eslint-plugin-standard": "^2.1.1",
     "express": "~4.14.0",
     "extract-text-webpack-plugin": "~1.0.1",
-    "git-pre-hooks": "^1.2.0",
+    "husky": "^0.14.3",
     "json-loader": "~0.5.4",
     "node-sass": "v3.8.0",
     "postcss-loader": "v0.10.1",
@@ -84,9 +85,6 @@
     "webpack": "~1.13.1",
     "webpack-dev-middleware": "~1.6.1",
     "webpack-dev-server": "~1.14.1"
-  },
-  "git-pre-hooks": {
-    "pre-commit": "npm run lint"
   },
   "jest": {
     "moduleNameMapper": {
