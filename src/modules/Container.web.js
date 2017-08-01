@@ -85,7 +85,7 @@ class Container extends Component {
           className={styles.topLevelDialog}
         >
           <LayoutTemplate theme={layoutTheme}>
-            <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle}/>
+            <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
             {this.props.children}
           </LayoutTemplate>
 

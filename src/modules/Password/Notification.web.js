@@ -28,7 +28,7 @@ class NotificationModal extends Component {
           onOverlayClick={this._handleClose}
           title={t('fragment_setup_password_nopassword_title')}
         >
-            <p>{t('fragment_setup_password_nopassword_message')}</p>
+          <p>{t('fragment_setup_password_nopassword_message')}</p>
         </Dialog>
       )
     }

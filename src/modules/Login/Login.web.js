@@ -164,7 +164,7 @@ class Login extends Component {
             <div ref='fieldsView' className={styles.fieldsView}>
 
               <div className={styles.inputGroup}>
-                <CachedUsers component={inputDropdown()} area="passwordLogin" containerClassName={styles.cachedUsers} userListClassName={styles.userListClassName} />
+                <CachedUsers component={inputDropdown()} area='passwordLogin' containerClassName={styles.cachedUsers} userListClassName={styles.userListClassName} />
 
                 <form className={styles.inputs} onSubmit={e => this.handleSubmit(e)}>
                   <Input

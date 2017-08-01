@@ -98,19 +98,19 @@ class Password extends Component {
             <h5>{t('activity_signup_password_requirements')}</h5>
             <br />
             <p className={styles.passwordRequirement}>
-              <FontIcon value={this.props.validation.upperCaseChar ? 'done' : 'clear'} className={this.props.validation.upperCaseChar ? styles.green : styles.red}/>
+              <FontIcon value={this.props.validation.upperCaseChar ? 'done' : 'clear'} className={this.props.validation.upperCaseChar ? styles.green : styles.red} />
               { t('password_rule_no_uppercase') }
             </p>
             <p className={styles.passwordRequirement}>
-              <FontIcon value={this.props.validation.lowerCaseChar ? 'done' : 'clear'} className={this.props.validation.lowerCaseChar ? styles.green : styles.red}/>
+              <FontIcon value={this.props.validation.lowerCaseChar ? 'done' : 'clear'} className={this.props.validation.lowerCaseChar ? styles.green : styles.red} />
               { t('password_rule_no_lowercase') }
             </p>
             <p className={styles.passwordRequirement}>
-              <FontIcon value={this.props.validation.number ? 'done' : 'clear'} className={this.props.validation.number ? styles.green : styles.red}/>
+              <FontIcon value={this.props.validation.number ? 'done' : 'clear'} className={this.props.validation.number ? styles.green : styles.red} />
               { t('password_rule_no_number') }
             </p>
             <p className={styles.passwordRequirement}>
-              <FontIcon value={this.props.validation.characterLength ? 'done' : 'clear'} className={this.props.validation.characterLength ? styles.green : styles.red}/>
+              <FontIcon value={this.props.validation.characterLength ? 'done' : 'clear'} className={this.props.validation.characterLength ? styles.green : styles.red} />
               { t('password_rule_too_short') }
             </p>
           </div>
@@ -123,7 +123,7 @@ class Password extends Component {
               <Input
                 ref='signupPassword'
                 autoFocus
-                type={ this.props.inputState ? 'text' : 'password' }
+                type={this.props.inputState ? 'text' : 'password'}
                 name='password'
                 onKeyPress={this.passwordKeyPressed}
                 onChange={this._handleOnChangePassword}
@@ -131,16 +131,16 @@ class Password extends Component {
                 label='Password'
               />
             </div>
-            <FontIcon value={this.props.inputState ? 'visibility' : 'visibility_off'} onClick={this.toggleRevealPassword} className={styles.inputPasswordFieldImg}/>
+            <FontIcon value={this.props.inputState ? 'visibility' : 'visibility_off'} onClick={this.toggleRevealPassword} className={styles.inputPasswordFieldImg} />
           </div>
           <Input
-            type={ this.props.inputState ? 'text' : 'password' }
+            type={this.props.inputState ? 'text' : 'password'}
             ref='passwordRepeat'
-            name="passwordRepeat"
+            name='passwordRepeat'
             onChange={this._handleOnChangePasswordRepeat}
             value={this.props.passwordRepeat}
             onKeyPress={this._handleKeyEnter.bind(this)}
-            label="Re-enter Password"
+            label='Re-enter Password'
           />
         </div>
 
