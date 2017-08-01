@@ -7,6 +7,11 @@ import { showPasswordRecoveryFinishModal, passwordRecoveryDone } from './Passwor
 import { checkEmail } from './PasswordRecovery.middleware'
 import passwordRecoveryStyles from './PasswordRecovery.webStyle.scss'
 
+import emailIcon from '../../img/email-icon-black.svg'
+import gmailIcon from '../../img/gmail-white.svg'
+import microsoftIcon from '../../img/microsoft-white.svg'
+import yahooIcon from '../../img/yahoo-white.svg'
+
 export default class PasswordRecoveryToken extends Component {
   _handleSubmit = (address) => {
     const callback = url => {
@@ -52,22 +57,22 @@ export default class PasswordRecoveryToken extends Component {
         <div className={passwordRecoveryStyles.recoveryButtons}>
           <div>
             <Button type='button' raised primary className={ passwordRecoveryStyles.emailButton } style={{backgroundColor: '#dd4b39'}} onClick={() => this._handleSubmit('google')}>
-              <img src="gmail-white.svg" /> {t('password_recovery_gmail')}
+              <img src={gmailIcon} /> {t('password_recovery_gmail')}
             </Button>
           </div>
           <div>
             <Button type='button' raised primary className={ passwordRecoveryStyles.emailButton } style={{backgroundColor: '#720e9e'}} onClick={() => this._handleSubmit('yahoo')}>
-              <img src="yahoo-white.svg" /> {t('password_recovery_yahoo')}
+              <img src={yahooIcon} /> {t('password_recovery_yahoo')}
             </Button>
           </div>
           <div>
             <Button type='button' raised primary className={ passwordRecoveryStyles.emailButton } style={{backgroundColor: '#2672ec'}} onClick={() => this._handleSubmit('microsoft')}>
-              <img src="microsoft-white.svg" /> {t('password_recovery_microsoft')}
+              <img src={microsoftIcon} /> {t('password_recovery_microsoft')}
             </Button>
           </div>
           <div>
             <Button type='button' raised primary className={ passwordRecoveryStyles.emailButton } style={{backgroundColor: '#bcddff', color: 'black'}} onClick={() => this._handleSubmit('generic')}>
-              <img src="email-icon-black.svg" /> {t('password_recovery_app')}
+              <img src={emailIcon} /> {t('password_recovery_app')}
             </Button>
           </div>
         {this._renderFinishButton()}

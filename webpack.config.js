@@ -40,7 +40,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'assets'),
     filename: 'app.[name].js',
-    publicPath: '/'
+    publicPath: './'
   },
 
   resolve: {
@@ -56,8 +56,8 @@ module.exports = {
     new ExtractTextPlugin('bundle.css', { allChunks: true }),
     ...productionPlugins,
     new HtmlWebpackPlugin({
-      filename: 'sample-iframe.html',
-      template: 'src/sample/sample-iframe.html'
+      filename: 'index.html',
+      template: 'src/index.html'
     })
   ],
 
@@ -106,7 +106,7 @@ module.exports = {
         include: path.join(__dirname, 'src'),
         loader: 'file-loader',
         options: {
-          name: '/assets/[name].[hash].[ext]'
+          name: '[name].[ext]'
         }
       }
     ]
