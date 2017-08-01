@@ -2,7 +2,7 @@ import babel from 'rollup-plugin-babel'
 import packageJson from './package.json'
 
 export default {
-  entry: 'src/abcui.js',
+  entry: 'src/web/index.js',
   external: Object.keys(packageJson.dependencies),
   plugins: [
     babel({

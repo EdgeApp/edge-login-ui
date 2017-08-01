@@ -35,7 +35,7 @@ module.exports = {
     port: 8002
   },
 
-  entry: './src/index.web.js',
+  entry: './src/web/iframe.js',
 
   output: {
     path: path.join(__dirname, 'assets'),
@@ -48,7 +48,7 @@ module.exports = {
     modules: [
       'node_modules',
       path.resolve(__dirname, './node_modules'),
-      path.resolve('./src')
+      path.resolve('./src/web')
     ]
   },
 
@@ -57,7 +57,7 @@ module.exports = {
     ...productionPlugins,
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/index.html'
+      template: 'src/web/iframe.html'
     })
   ],
 
@@ -101,7 +101,7 @@ module.exports = {
               loader: 'sass-loader',
               options: {
                 data: '@import "theme/_config.scss";',
-                includePaths: [path.resolve(__dirname, './src')]
+                includePaths: [path.resolve(__dirname, './src/web')]
               }
             }
           ]

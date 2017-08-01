@@ -3,7 +3,7 @@ import 'react-toolbox/lib/commons.scss'
 import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import createStore from './lib/web/configureStore'
-import Router from './routes.web'
+import Router from './routes.js'
 
 const store = createStore()
 const rootElement = document.getElementById('app')
