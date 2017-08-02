@@ -4,6 +4,11 @@ import React, { Component } from 'react'
 import styles from './AccountManagement.webStyle.scss'
 // import t from 'lib/web/LocaleStrings'
 
+import ChangePin from '../ChangePin/ChangePin.web'
+import ChangePassword from '../ChangePassword/ChangePassword.web'
+import PasswordRecovery from '../PasswordRecovery/PasswordRecovery.web'
+import PasswordRecoverySuccess from '../PasswordRecovery/PasswordRecoverySuccess.web'
+
 class AccountManager extends Component {
   render () {
     return (
@@ -23,6 +28,10 @@ class AccountManager extends Component {
             <p className={styles.label}>Setup / Change<br />Password Recovery</p>
           </div>
         </div>
+        <ChangePin />
+        <ChangePassword />
+        <PasswordRecovery location={this.props.location} />
+        <PasswordRecoverySuccess />
       </div>
     )
   }

@@ -55,6 +55,7 @@
       width: 160px;
       border: 1px solid #D8D6D6;
       border-radius: 3px;
+      cursor: pointer;
 
       .label {
         color: #4977BB;
@@ -62,5 +63,11 @@
         text-align: center;
       }
     }
+
+    .square:active {
+      border: 1px solid #4977BB;
+      background-color: rgba(73,119,187,0.1);
+    }
+
   }
 }
