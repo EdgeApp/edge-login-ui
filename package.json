@@ -27,7 +27,7 @@
     "start": "webpack-dev-server --open"
   },
   "dependencies": {
-    "airbitz-core-js": "^0.3.3",
+    "airbitz-core-js": "^0.3.4",
     "async": "~2.0.1",
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",

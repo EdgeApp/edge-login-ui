@@ -55,9 +55,9 @@ after@0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
 
-airbitz-core-js@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/airbitz-core-js/-/airbitz-core-js-0.3.3.tgz#54717dd6a7f8524562771bc8f35c51ff43a13059"
+airbitz-core-js@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/airbitz-core-js/-/airbitz-core-js-0.3.4.tgz#24c0387457aced32903a590639928a3103aaf012"
   dependencies:
     aes-js "^3.1.0"
     base-x "^1.0.4"
