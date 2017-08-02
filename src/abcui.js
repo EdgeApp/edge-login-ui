@@ -83,19 +83,22 @@ class UIContext {
     DomWindow.abcContext = this.abcContext
 
     // Set up the UI context:
-    if (args['bundlePath']) {
-      this.bundlePath = args.bundlePath
+    if (args.assetPath != null) {
+      this.assetsPath = args.assetsPath
+    } else if (args.bundlePath != null) {
+      this.assetsPath = args.bundlePath + '/assets'
     } else {
-      this.bundlePath = '/abcui'
+      this.assetsPath = './assets'
     }
+
     DomWindow.abcuiContext = {
       vendorName: args.vendorName,
-      bundlePath: this.bundlePath
+      assetsPath: this.assetsPath
     }
   }
 
   openLoginWindow (callback) {
-    const frame = createIFrame(this.bundlePath + '/assets/index.html')
+    const frame = createIFrame(this.assetsPath + '/index.html')
     const done = () => {
       DomWindow.loginCallback = null
       removeIFrame(frame)
@@ -117,18 +120,18 @@ class UIContext {
   }
 
   openRecoveryWindow (callback) {
-    createIFrame(this.bundlePath + '/assets/index.html#/recovery')
+    createIFrame(this.assetsPath + '/index.html#/recovery')
   }
 
   openSetupRecoveryWindow (account, opts, callback) {
     let frame
     if (opts && opts.noRequirePassword) {
       frame = createIFrame(
-        this.bundlePath + '/assets/index.html#/account/setuprecovery-nopassword'
+        this.assetsPath + '/index.html#/account/setuprecovery-nopassword'
       )
     } else {
       frame = createIFrame(
-        this.bundlePath + '/assets/index.html#/account/setuprecovery'
+        this.assetsPath + '/index.html#/account/setuprecovery'
       )
     }
     DomWindow.exitCallback = function () {
@@ -138,7 +141,7 @@ class UIContext {
 
   openChangePinEdgeLoginWindow (account, callback) {
     const frame = createIFrame(
-      this.bundlePath + '/assets/index.html#/account/changepin-edge-login'
+      this.assetsPath + '/index.html#/account/changepin-edge-login'
     )
     DomWindow.exitCallback = function () {
       removeIFrame(frame)
@@ -147,7 +150,7 @@ class UIContext {
 
   openManageWindow (account, callback) {
     DomWindow.abcAccount = account
-    const frame = createIFrame(this.bundlePath + '/assets/index.html#/home/')
+    const frame = createIFrame(this.assetsPath + '/index.html#/home/')
     DomWindow.exitCallback = function () {
       removeIFrame(frame)
       callback(null)
