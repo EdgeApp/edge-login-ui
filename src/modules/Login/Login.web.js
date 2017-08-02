@@ -219,7 +219,7 @@ class Login extends Component {
         <div className={styles.container}>
           <LoginEdge />
           <Divider />
-          { this.props.viewPassword ? <LoginWithPasswordSection openViewPin={this.openViewPin} login={this.handleSubmit} /> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
+          { this.props.viewPassword ? <LoginWithPasswordSection openViewPin={this.openViewPin} login={this.handleSubmit} signup={this._handleGoToSignupPage}/> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
         </div>
       )
     }

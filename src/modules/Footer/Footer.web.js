@@ -8,7 +8,7 @@ class Footer extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.top}>
-          {t('fragment_setup_footer_1') + t('fragment_setup_footer_2_link')}
+          <a href="https://airbitz.co/app" target="_blank" className={styles.text}>{t('fragment_setup_footer_1') + t('fragment_setup_footer_2_link')}</a>
         </div>
         <div className={styles.bottom}>
           <div className={styles.left}>
@@ -16,7 +16,7 @@ class Footer extends Component {
           <div className={styles.spacer}>
           </div>
           <p className={styles.right}>
-            Powered by <span style={{ fontWeight: 'bold' }}>Airbitz</span>
+            Powered by <a href="https://airbitz.co/app" target="_blank" className={styles.airbitzLink}>Airbitz</a>
           </p>
         </div>
       </div>

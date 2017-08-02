@@ -39,7 +39,7 @@ class NewAccount extends Component {
         <div style={{ height: '25px' }}/>
         <button className={styles.primary} onClick={ e => this.props.login(username, password)}>Sign In</button>
         <div style={{ height: '30px' }}/>
-        <p>Already have an account? <span className={styles.link}>Create Account</span></p>
+        <p>Already have an account? <span className={styles.link} onClick={this.props.signup}>Create Account</span></p>
         <PasswordRecovery active={this.state.active} close={this.handleToggle}/>
       </div>
     )
