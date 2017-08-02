@@ -8,15 +8,9 @@ import t from 'lib/web/LocaleStrings'
 import { loginUsername, loginPassword } from '../Login.action.js'
 import PasswordRecovery from '../../Modals/PasswordRecovery/PasswordRecovery.web.js'
 
+import { openPasswordRecoveryModal } from '../../Modals/PasswordRecovery/PasswordRecovery.action.js'
+
 class NewAccount extends Component {
-
-  state = {
-    active: false
-  };
-
-  handleToggle = () => {
-    this.setState({active: !this.state.active})
-  }
 
   render () {
     const {dispatch, username, password} = this.props
@@ -35,12 +29,12 @@ class NewAccount extends Component {
             <i className={styles.bar}></i>
           </div>
         </div>
-        <p className={styles.link} onClick={this.handleToggle}>Forgot Password</p>
+        <p className={styles.link} onClick={ e => dispatch(openPasswordRecoveryModal()) }>Forgot Password</p>
         <div style={{ height: '25px' }}/>
         <button className={styles.primary} onClick={ e => this.props.login(username, password)}>Sign In</button>
         <div style={{ height: '30px' }}/>
-        <p>Already have an account? <span className={styles.link}>Create Account</span></p>
-        <PasswordRecovery active={this.state.active} close={this.handleToggle}/>
+        <p>Already have an account? <span className={styles.link} onClick={this.props.signup}>Create Account</span></p>
+        <PasswordRecovery/>
       </div>
     )
   }

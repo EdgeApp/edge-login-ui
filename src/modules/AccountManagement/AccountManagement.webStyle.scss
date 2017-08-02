@@ -1,15 +1,13 @@
-@import 'theme/_config.scss';
-
 .container {
 
   display: flex;
   display: -webkit-flex;
 
-  flex-direction: row;
-  -webkit-flex-direction: row;
+  flex-direction: column;
+  -webkit-flex-direction: column;
 
-  justify-content: center;
-  -webkit-justify-content: center;
+  justify-content: flex-start;
+  -webkit-justify-content:  flex-start;
 
   flex: 1;
 
@@ -24,4 +22,50 @@
     margin-bottom: 30px;
   }
 
+  .main {
+    display: flex;
+    display: -webkit-flex;
+
+    flex-direction: row;
+    -webkit-flex-direction: row;
+
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    align-items: center;
+    -webkit-align-items: center;
+
+    .square {
+      display: flex;
+      display: -webkit-flex;
+
+      flex-direction: column;
+      -webkit-flex-direction: column;
+
+      justify-content: center;
+      -webkit-justify-content: center;
+
+      align-items: center;
+      -webkit-align-items: center;
+
+      margin: 0px 15px;
+      height: 160px;
+      width: 160px;
+      border: 1px solid #D8D6D6;
+      border-radius: 3px;
+      cursor: pointer;
+
+      .label {
+        color: #4977BB;
+        font-size: 16px;
+        text-align: center;
+      }
+    }
+
+    .square:active {
+      border: 1px solid #4977BB;
+      background-color: rgba(73,119,187,0.1);
+    }
+
+  }
 }

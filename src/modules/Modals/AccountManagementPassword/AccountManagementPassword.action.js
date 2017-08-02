@@ -1,0 +1,14 @@
+export const OPEN_ACCOUNT_MANAGEMENT_PASSWORD_MODAL = 'OPEN_ACCOUNT_MANAGEMENT_PASSWORD_MODAL'
+export const CLOSE_ACCOUNT_MANAGEMENT_PASSWORD_MODAL = 'CLOSE_ACCOUNT_MANAGEMENT_PASSWORD_MODAL'
+
+export function openAccountManagementModal () {
+  return {
+    type: OPEN_ACCOUNT_MANAGEMENT_PASSWORD_MODAL
+  }
+}
+
+export function closeAccountManagementModal () {
+  return {
+    type: CLOSE_ACCOUNT_MANAGEMENT_PASSWORD_MODAL
+  }
+}

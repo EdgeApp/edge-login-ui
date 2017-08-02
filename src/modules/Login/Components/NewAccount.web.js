@@ -7,7 +7,7 @@ class NewAccount extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <button className={styles.button}>Create Account</button>
+        <button className={styles.button} onClick={this.props.signup}>Create Account</button>
         <br />
         <p>Already have an account? <span className={buttons.link} onClick={this.props.login}>Login</span></p>
       </div>
