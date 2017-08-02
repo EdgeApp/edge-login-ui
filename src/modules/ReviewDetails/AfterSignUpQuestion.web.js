@@ -56,19 +56,19 @@ class Review extends Component {
 
   render () {
     return (
-        <Dialog
-          actions={this.actions}
-          active={this.props.view}
-          onEscKeyDown={this._handleHideModal}
-          onOverlayClick={this._handleHideModal}
-          title={t('activity_recovery_account_created')}
+      <Dialog
+        actions={this.actions}
+        active={this.props.view}
+        onEscKeyDown={this._handleHideModal}
+        onOverlayClick={this._handleHideModal}
+        title={t('activity_recovery_account_created')}
         >
-          <p>{ String.format(t('fragment_recovery_account_created_fragment_1'), vendorName || 'Airbitz') }</p>
-          <br />
-          <p>{ String.format(t('fragment_recovery_account_created_fragment_2'), vendorName || 'Airbitz') }</p>
-          <br />
-          <p>{ t('fragment_recovery_account_created_fragment_3') }</p>
-        </Dialog>
+        <p>{ String.format(t('fragment_recovery_account_created_fragment_1'), vendorName || 'Airbitz') }</p>
+        <br />
+        <p>{ String.format(t('fragment_recovery_account_created_fragment_2'), vendorName || 'Airbitz') }</p>
+        <br />
+        <p>{ t('fragment_recovery_account_created_fragment_3') }</p>
+      </Dialog>
     )
   }
 }

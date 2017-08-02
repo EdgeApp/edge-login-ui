@@ -57,25 +57,25 @@ class UsernameComponent extends Component {
             <h4>{t('fragment_setup_username_label')}</h4>
           </div>
         </div>
-          <div className={styles.section}>
+        <div className={styles.section}>
           <Input
             autoFocus
-            type="text"
-            name="username"
+            type='text'
+            name='username'
             onChange={this._handleOnChangeText}
             onKeyPress={this._handleKeyEnter.bind(this)}
             value={this.props.username}
             label={t('fragment_landing_username_hint')}
             className={styles.inputField}
           />
-          </div>
-          <div className={styles.section}>
-            <p className={styles.text}>{t('fragment_setup_username_text')}</p>
-          </div>
-          <div className={styles.buttonSection}>
-            <Button theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
-            <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
-          </div>
+        </div>
+        <div className={styles.section}>
+          <p className={styles.text}>{t('fragment_setup_username_text')}</p>
+        </div>
+        <div className={styles.buttonSection}>
+          <Button theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
+          <Button type='button' raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
+        </div>
       </div>
     )
   }

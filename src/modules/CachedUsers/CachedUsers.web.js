@@ -46,8 +46,8 @@ class UserList extends Component {
       return (
         <li key={idx} className={styles.userList}>
           <div className={styles.userrows}>
-            <span className={userItemclassName} onMouseDown={ e => this._handleLoginUser(item)}>{ item }</span>
-            <span className={styles.userdelete} onMouseDown={ e => this._handleDeleteUserCache(item) }><FontIcon value='clear' /></span>
+            <span className={userItemclassName} onMouseDown={e => this._handleLoginUser(item)}>{ item }</span>
+            <span className={styles.userdelete} onMouseDown={e => this._handleDeleteUserCache(item)}><FontIcon value='clear' /></span>
           </div>
         </li>
       )

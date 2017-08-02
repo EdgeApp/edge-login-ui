@@ -5,7 +5,7 @@ class Divider extends Component {
   render () {
     return (
       <div className={styles.divider}>
-        <div className={styles.line}></div>
+        <div className={styles.line} />
         <div className={styles.circle}>
           <p className={styles.or}>or</p>
         </div>

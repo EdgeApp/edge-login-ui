@@ -1,18 +1,9 @@
-/assets/abcui.js
-/assets/app.main.js
-/assets/app.main.js.map
-/assets/bundle.css
-/assets/bundle.css.map
-/assets/vendor.bundle.js
-/assets/vendor.bundle.js.map
+/assets
 /lib
 
-./config.json
 .DS_Store
 .idea
-bower_components
 config.json
 node_modules
 npm-debug.log
-vendor
 yarn-error.log

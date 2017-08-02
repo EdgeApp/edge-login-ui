@@ -69,7 +69,7 @@ class LoginEdge extends Component {
             <b>{edgeUsername}</b><br />
             {t('approving_login_text')}<br />
           </div>)}
-        </div>
+      </div>
     )
   }
 }

@@ -137,7 +137,7 @@ class PasswordRecovery extends Component {
               onChange={this._handleOnChangeFirstQuestion}
               value={this.props.firstQuestion}
               required
-        allowBlank={false}
+              allowBlank={false}
             />
             <Input
               type='text'

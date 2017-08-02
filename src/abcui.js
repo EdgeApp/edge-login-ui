@@ -3,18 +3,22 @@ import 'whatwg-fetch'
 
 let DomWindow
 let DomDocument
-if (typeof (window) === 'undefined') {
+if (typeof window === 'undefined') {
   DomWindow = {}
 } else {
   DomWindow = window
 }
-if (typeof (document) === 'undefined') {
+if (typeof document === 'undefined') {
   DomDocument = {
     createElement: function () {
-      console.log('createElement: Error browser routine used in non-browser environment')
+      console.log(
+        'createElement: Error browser routine used in non-browser environment'
+      )
     },
     getElementsByTagName: function () {
-      console.log('getElementsByTagName: Error browser routine used in non-browser environment')
+      console.log(
+        'getElementsByTagName: Error browser routine used in non-browser environment'
+      )
     }
   }
 } else {
@@ -27,7 +31,10 @@ function createIFrame (path) {
   frame.setAttribute('src', path)
   frame.setAttribute('frameborder', '0')
   frame.setAttribute('allowtransparency', 'true')
-  frame.setAttribute('style', 'border: 0px none transparent; overflow: hidden; visibility: visible; margin: 0px; padding: 0px; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 9999; display: block; background: transparent;')
+  frame.setAttribute(
+    'style',
+    'border: 0px none transparent; overflow: hidden; visibility: visible; margin: 0px; padding: 0px; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 9999; display: block; background: transparent;'
+  )
   return frame
 }
 
@@ -36,104 +43,117 @@ function removeIFrame (frame) {
 }
 
 export function makeABCUIContext (args) {
-  return new InnerAbcUi(args)
+  return new UIContext(args)
 }
 
-function InnerAbcUi (args) {
-  const opts = {}
+class UIContext {
+  constructor (args) {
+    const opts = {}
 
-  // API key:
-  if (args.apiKey == null) {
-    throw Error('Missing api key')
-  }
-  opts.apiKey = args.apiKey
+    // API key:
+    if (args.apiKey == null) {
+      throw new Error('Missing api key')
+    }
+    opts.apiKey = args.apiKey
 
-  // appId:
-  if (args.appId != null) {
-    opts.appId = args.appId
-  } else if (args.accountType != null) {
-    opts.accountType = args.accountType
-    console.warn('Please provide Airbitz with an `appId`. The `accountType` is deprecated.')
-  } else {
-    throw Error('Missing appId')
-  }
+    // appId:
+    if (args.appId != null) {
+      opts.appId = args.appId
+    } else if (args.accountType != null) {
+      opts.accountType = args.accountType
+      console.warn(
+        'Please provide Airbitz with an `appId`. The `accountType` is deprecated.'
+      )
+    } else {
+      throw new Error('Missing appId')
+    }
 
-  // Figure out which server to use:
-  if (DomWindow.localStorage != null) {
-    const value = DomWindow.localStorage.getItem('airbitzAuthServer')
-    if (value != null) {
-      opts.authServer = value
+    // Figure out which server to use:
+    if (DomWindow.localStorage != null) {
+      const value = DomWindow.localStorage.getItem('airbitzAuthServer')
+      if (value != null) {
+        opts.authServer = value
+      }
+    }
+
+    // Make the core context:
+    this.abcContext = makeContext(opts)
+    this.abcContext.displayName = args.vendorName
+    this.abcContext.displayImageUrl = args.vendorImageUrl
+    DomWindow.abcContext = this.abcContext
+
+    // Set up the UI context:
+    if (args.assetPath != null) {
+      this.assetsPath = args.assetsPath
+    } else if (args.bundlePath != null) {
+      this.assetsPath = args.bundlePath + '/assets'
+    } else {
+      this.assetsPath = './assets'
+    }
+
+    DomWindow.abcuiContext = {
+      vendorName: args.vendorName,
+      assetsPath: this.assetsPath
     }
   }
 
-  // Make the core context:
-  this.abcContext = makeContext(opts)
-  this.abcContext.displayName = args.vendorName
-  this.abcContext.displayImageUrl = args.vendorImageUrl
-  DomWindow.abcContext = this.abcContext
-
-  // Set up the UI context:
-  if (args['bundlePath']) {
-    this.bundlePath = args.bundlePath
-  } else {
-    this.bundlePath = '/abcui'
-  }
-  DomWindow.abcuiContext = {
-    vendorName: args.vendorName,
-    bundlePath: this.bundlePath
-  }
-}
-
-InnerAbcUi.prototype.openLoginWindow = function (callback) {
-  const frame = createIFrame(this.bundlePath + '/assets/index.html')
-  const done = () => {
-    DomWindow.loginCallback = null
-    removeIFrame(frame)
-  }
-  DomWindow.loginCallback = function (error, account) {
-    if (account) {
-      DomWindow.abcAccount = account
-      callback(error, account)
-      done()
+  openLoginWindow (callback) {
+    const frame = createIFrame(this.assetsPath + '/index.html')
+    const done = () => {
+      DomWindow.loginCallback = null
+      removeIFrame(frame)
+    }
+    DomWindow.loginCallback = function (error, account) {
+      if (account) {
+        DomWindow.abcAccount = account
+        callback(error, account)
+        done()
+      }
+    }
+    DomWindow.exitCallback = function () {
+      removeIFrame(frame)
     }
   }
-  DomWindow.exitCallback = function () {
-    removeIFrame(frame)
+
+  getABCContext () {
+    return this.abcContext
   }
-}
 
-InnerAbcUi.prototype.getABCContext = function () {
-  return this.abcContext
-}
-
-InnerAbcUi.prototype.openRecoveryWindow = function (callback) {
-  createIFrame(this.bundlePath + '/assets/index.html#/recovery')
-}
-
-InnerAbcUi.prototype.openSetupRecoveryWindow = function (account, opts, callback) {
-  let frame
-  if (opts && opts.noRequirePassword) {
-    frame = createIFrame(this.bundlePath + '/assets/index.html#/account/setuprecovery-nopassword')
-  } else {
-    frame = createIFrame(this.bundlePath + '/assets/index.html#/account/setuprecovery')
+  openRecoveryWindow (callback) {
+    createIFrame(this.assetsPath + '/index.html#/recovery')
   }
-  DomWindow.exitCallback = function () {
-    removeIFrame(frame)
-  }
-}
 
-InnerAbcUi.prototype.openChangePinEdgeLoginWindow = function (account, callback) {
-  const frame = createIFrame(this.bundlePath + '/assets/index.html#/account/changepin-edge-login')
-  DomWindow.exitCallback = function () {
-    removeIFrame(frame)
+  openSetupRecoveryWindow (account, opts, callback) {
+    let frame
+    if (opts && opts.noRequirePassword) {
+      frame = createIFrame(
+        this.assetsPath + '/index.html#/account/setuprecovery-nopassword'
+      )
+    } else {
+      frame = createIFrame(
+        this.assetsPath + '/index.html#/account/setuprecovery'
+      )
+    }
+    DomWindow.exitCallback = function () {
+      removeIFrame(frame)
+    }
   }
-}
 
-InnerAbcUi.prototype.openManageWindow = function (account, callback) {
-  DomWindow.abcAccount = account
-  const frame = createIFrame(this.bundlePath + '/assets/index.html#/home/')
-  DomWindow.exitCallback = function () {
-    removeIFrame(frame)
-    callback(null)
+  openChangePinEdgeLoginWindow (account, callback) {
+    const frame = createIFrame(
+      this.assetsPath + '/index.html#/account/changepin-edge-login'
+    )
+    DomWindow.exitCallback = function () {
+      removeIFrame(frame)
+    }
+  }
+
+  openManageWindow (account, callback) {
+    DomWindow.abcAccount = account
+    const frame = createIFrame(this.assetsPath + '/index.html#/home/')
+    DomWindow.exitCallback = function () {
+      removeIFrame(frame)
+      callback(null)
+    }
   }
 }
