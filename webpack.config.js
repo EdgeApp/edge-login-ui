@@ -31,7 +31,8 @@ const productionPlugins = production
 module.exports = {
   devtool: production ? 'cheap-module-source-map' : 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'assets'),
+    contentBase: false,
+    publicPath: '/',
     port: 8002
   },
 
