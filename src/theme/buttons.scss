@@ -10,6 +10,7 @@
   text-align: center;
 
   cursor: pointer;
+  margin: 0px 5px;
 }
 
 .primary:hover {
@@ -32,6 +33,7 @@
   text-align: center;
 
   cursor: pointer;
+  margin: 0px 5px;
 }
 
 .secondary:hover {
@@ -56,4 +58,18 @@
 .link:active {
   text-decoration: none;
   color: #2A5799;;
+}
+
+.rowButtons {
+  display: flex;
+  display: -webkit-flex;
+
+  flex-direction: row;
+  -webkit-flex-direction: row;
+
+  justify-content: center;
+  -webkit-justify-content: center;
+
+  align-items: center;
+  -webkit-align-items: center;
 }

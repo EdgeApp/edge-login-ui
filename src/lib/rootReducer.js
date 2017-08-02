@@ -20,6 +20,8 @@ import * as ForgotPassword from '../modules/ForgotPassword/ForgotPassword.reduce
 import * as Container from '../modules/Container.reducer'
 import { signupPage } from '../modules/Signup/Signup.reducer'
 import { user } from '../modules/User/User.reducer'
+import { passwordRecovery } from '../modules/Modals/PasswordRecovery/PasswordRecovery.reducer.js'
+import { accountManagementPassword } from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
 // import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 
 // import routes from './routesReducer'
@@ -124,6 +126,10 @@ const store = combineReducers({
     password: PasswordRecovery.password,
     token: PasswordRecovery.token,
     email: PasswordRecovery.email
+  }),
+  modal: combineReducers({
+    passwordRecovery,
+    accountManagementPassword
   }),
   forgotPasswordModal: ForgotPassword.visible,
   user

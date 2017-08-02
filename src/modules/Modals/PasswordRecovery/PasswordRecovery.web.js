@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 import Modal from '../BaseModal.web.js'
 import styles from './PasswordRecovery.webStyle.scss'
 
+import { closePasswordRecoveryModal } from './PasswordRecovery.action.js'
+
 class PasswordRecovery extends Component {
   render () {
     return (
       <Modal
-        active={this.props.active}
-        close={this.props.close}
+        active={this.props.view}
+        close={ e => this.props.dispatch(closePasswordRecoveryModal()) }
         icon='../../../../assets/modals/recovery-W.png'
       >
         <p className={styles.header}>Password Recovery</p>
@@ -21,10 +23,12 @@ class PasswordRecovery extends Component {
         <p className={styles.text}>
          Then click one of the links in the recovery email from a device with Airbitz installed.
         </p>
-        <button className={styles.close} onClick={this.props.close}>Ok</button>
+        <button className={styles.close} onClick={ e => this.props.dispatch(closePasswordRecoveryModal()) }>Ok</button>
       </Modal>
     )
   }
 }
 
-export default connect()(PasswordRecovery)
+export default connect(state => ({
+  view: state.modal.passwordRecovery
+}))(PasswordRecovery)
