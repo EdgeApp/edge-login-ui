@@ -14,7 +14,7 @@ class BaseModal extends Component {
         onOverlayClick={this.props.close}
       >
         <div className={styles.circle}>
-          <img src={this.props.icon}/>
+          <img src={this.props.icon} />
         </div>
         <div className={styles.main}>
           {this.props.children}

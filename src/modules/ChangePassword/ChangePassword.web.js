@@ -97,26 +97,26 @@ class ChangePassword extends Component {
           title={t('activity_signup_password_change_title')}
         >
           <div>
-            <Input type={ this.props.revealPassword ? 'text' : 'password' } name='oldPassword' onChange={this._handleOnChangeOldPassword} value={oldPassword} label='Old Password' />
-            <FontIcon value={this.props.revealPassword ? 'visibility' : 'visibility_off'} onClick={this.toggleRevealPassword} className={styles.inputPasswordFieldImg}/>
+            <Input type={this.props.revealPassword ? 'text' : 'password'} name='oldPassword' onChange={this._handleOnChangeOldPassword} value={oldPassword} label='Old Password' />
+            <FontIcon value={this.props.revealPassword ? 'visibility' : 'visibility_off'} onClick={this.toggleRevealPassword} className={styles.inputPasswordFieldImg} />
           </div>
-          <Input type={ this.props.revealPassword ? 'text' : 'password' } name='newPassword' onChange={this._handleOnChangeNewPassword} value={newPassword} label='New Password' />
-          <Input type={ this.props.revealPassword ? 'text' : 'password' } name='newPasswordRepeat' onChange={this._handleOnChangeNewPasswordRepeat} value={newPasswordRepeat} label='Confirm New Password' />
+          <Input type={this.props.revealPassword ? 'text' : 'password'} name='newPassword' onChange={this._handleOnChangeNewPassword} value={newPassword} label='New Password' />
+          <Input type={this.props.revealPassword ? 'text' : 'password'} name='newPasswordRepeat' onChange={this._handleOnChangeNewPasswordRepeat} value={newPasswordRepeat} label='Confirm New Password' />
           <div>
             <p className={styles.passwordRequirement}>
-              <FontIcon value={upperCaseChar ? 'done' : 'clear'} className={upperCaseChar ? styles.green : styles.red}/>
+              <FontIcon value={upperCaseChar ? 'done' : 'clear'} className={upperCaseChar ? styles.green : styles.red} />
               { t('password_rule_no_uppercase') }
             </p>
             <p className={styles.passwordRequirement}>
-              <FontIcon value={lowerCaseChar ? 'done' : 'clear'} className={lowerCaseChar ? styles.green : styles.red}/>
+              <FontIcon value={lowerCaseChar ? 'done' : 'clear'} className={lowerCaseChar ? styles.green : styles.red} />
               { t('password_rule_no_lowercase') }
             </p>
             <p className={styles.passwordRequirement}>
-              <FontIcon value={number ? 'done' : 'clear'} className={number ? styles.green : styles.red}/>
+              <FontIcon value={number ? 'done' : 'clear'} className={number ? styles.green : styles.red} />
               { t('password_rule_no_number') }
             </p>
             <p className={styles.passwordRequirement}>
-              <FontIcon value={characterLength ? 'done' : 'clear'} className={characterLength ? styles.green : styles.red}/>
+              <FontIcon value={characterLength ? 'done' : 'clear'} className={characterLength ? styles.green : styles.red} />
               { t('password_rule_too_short') }
             </p>
           </div>

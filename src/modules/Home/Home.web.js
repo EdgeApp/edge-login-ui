@@ -58,14 +58,14 @@ class Home extends Component {
         <h4>Manage Account</h4>
         <h5 className={styles.username}><b>{ this.props.user ? this.props.user.username : '' }</b></h5>
         {this.props.user.edgeLogin ? (
-            <div className={styles.edgeLoginManage}>
-              <p>{t('edge_login_manage')}</p>
-            </div>
+          <div className={styles.edgeLoginManage}>
+            <p>{t('edge_login_manage')}</p>
+          </div>
           ) : (
             <div className={styles.sectionLinks}>
-              <p><a className={styles.links} onClick={ this._handleChangePin }>{t('activity_signup_title_change_pin')}</a></p>
-              <p><a className={styles.links} onClick={ this._handleChangePassword }>{t('activity_signup_password_change_title')}</a></p>
-              <p><a className={styles.links} onClick={ this._handlePasswordRecovery }>{t('activity_recovery_button_title')}</a></p>
+              <p><a className={styles.links} onClick={this._handleChangePin}>{t('activity_signup_title_change_pin')}</a></p>
+              <p><a className={styles.links} onClick={this._handleChangePassword}>{t('activity_signup_password_change_title')}</a></p>
+              <p><a className={styles.links} onClick={this._handlePasswordRecovery}>{t('activity_recovery_button_title')}</a></p>
             </div>
           )
         }

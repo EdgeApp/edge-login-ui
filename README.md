@@ -37,11 +37,11 @@ Initialize the library
 
     _abcUi = abcui.makeABCUIContext({'apiKey': 'api-key-here',
                                      'appId': 'com.mydomain.myapp',
-                                     'bundlePath': '/path-to-abcui/',
+                                     'assetsPath': '/path-to-assets/',
                                      'vendorName': 'My Awesome Project',
                                      'vendorImageUrl': 'https://mydomain.com/mylogo.png'});
 
-where `/path-to-abcui/` leads to the root directory of this repo when accessed via HTTP (only the `assets` directory needs to be present, though).
+where `/path-to-assets/` tells the UI where to find the contents of the `assets` directory of this node module via HTTP. When updating this node module, you must keep the `assets` directory up-to-date on your server. We suggest automating this using NPM scripts or any other tool or your choice.
 
 Create an overlay popup where a user can register a new account or login to a previously created account via password or PIN.
 

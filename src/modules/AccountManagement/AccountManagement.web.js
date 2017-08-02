@@ -12,6 +12,10 @@ import EnterPassword from '../Modals/AccountManagementPassword/AccountManagement
 
 import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
 
+import pinIcon from '../../img/account-settings/PIN-W.png'
+import passwordIcon from '../../img/account-settings/password-W.png'
+import recoveryIcon from '../../img/account-settings/recovery-W.png'
+
 class AccountManager extends Component {
   render () {
     return (
@@ -19,15 +23,15 @@ class AccountManager extends Component {
         <p className={styles.header}>Account name: AirbitzAugur</p>
         <div className={styles.main}>
           <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
-            <img src="../../../assets/account-settings/PIN-W.png" />
+            <img src={pinIcon} />
             <p className={styles.label}>Change Pin</p>
           </div>
           <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
-            <img src="../../../assets/account-settings/password-W.png" />
+            <img src={passwordIcon} />
             <p className={styles.label}>Change Password</p>
           </div>
           <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
-            <img src="../../../assets/account-settings/recovery-W.png" />
+            <img src={recoveryIcon} />
             <p className={styles.label}>Setup / Change<br />Password Recovery</p>
           </div>
           <EnterPassword />

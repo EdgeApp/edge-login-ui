@@ -11,7 +11,6 @@ import PasswordRecovery from '../../Modals/PasswordRecovery/PasswordRecovery.web
 import { openPasswordRecoveryModal } from '../../Modals/PasswordRecovery/PasswordRecovery.action.js'
 
 class NewAccount extends Component {
-
   render () {
     const {dispatch, username, password} = this.props
     return (
@@ -19,22 +18,22 @@ class NewAccount extends Component {
         <p className={styles.header}>{t('login_text')}</p>
         <div style={{ marginTop: '10px', width: '300px' }}>
           <div className={styles['form-group']}>
-            <input type="text" value={username} onChange={ e => dispatch(loginUsername(e.target.value)) } required="required"/>
-            <label className={styles['control-label']} htmlFor="input">Username</label>
-            <i className={styles.bar}></i>
+            <input type='text' value={username} onChange={e => dispatch(loginUsername(e.target.value))} required='required' />
+            <label className={styles['control-label']} htmlFor='input'>Username</label>
+            <i className={styles.bar} />
           </div>
           <div className={styles['form-group']}>
-            <input type="password" value={password} onChange={ e => dispatch(loginPassword(e.target.value)) } required="required"/>
-            <label className={styles['control-label']} htmlFor="input">Password</label>
-            <i className={styles.bar}></i>
+            <input type='password' value={password} onChange={e => dispatch(loginPassword(e.target.value))} required='required' />
+            <label className={styles['control-label']} htmlFor='input'>Password</label>
+            <i className={styles.bar} />
           </div>
         </div>
-        <p className={styles.link} onClick={ e => dispatch(openPasswordRecoveryModal()) }>Forgot Password</p>
-        <div style={{ height: '25px' }}/>
-        <button className={styles.primary} onClick={ e => this.props.login(username, password)}>Sign In</button>
-        <div style={{ height: '30px' }}/>
+        <p className={styles.link} onClick={e => dispatch(openPasswordRecoveryModal())}>Forgot Password</p>
+        <div style={{ height: '25px' }} />
+        <button className={styles.primary} onClick={e => this.props.login(username, password)}>Sign In</button>
+        <div style={{ height: '30px' }} />
         <p>Already have an account? <span className={styles.link} onClick={this.props.signup}>Create Account</span></p>
-        <PasswordRecovery/>
+        <PasswordRecovery />
       </div>
     )
   }

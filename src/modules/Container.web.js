@@ -84,7 +84,7 @@ class Container extends Component {
           className={this.props.location.pathname === '/account' ? styles.dialogAccount : styles.dialogLogin}
         >
           <LayoutTemplate theme={layoutTheme}>
-            <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle}/>
+            <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
             {this.props.children}
           </LayoutTemplate>
           <Loader />

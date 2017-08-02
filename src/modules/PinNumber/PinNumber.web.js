@@ -69,8 +69,8 @@ class PinComponent extends Component {
           <div className={styles.inputDiv}>
             <Input
               ref='signupPin'
-              type="password"
-              name="pin"
+              type='password'
+              name='pin'
               autoFocus
               placeholder={t('activity_signup_pin_hint')}
               style={this.pinStyle()}
@@ -84,7 +84,7 @@ class PinComponent extends Component {
           </div>
           <div className={styles.buttonSection}>
             <Button theme={neutralButtonWithBlueTextTheme} onClick={this._handleBack}>{t('string_capitalize_back')}</Button>
-            <Button type="button" raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
+            <Button type='button' raised primary className={styles.buttonNext} onClick={this._handleSubmit}>{t('string_next')}</Button>
           </div>
         </div>
       </div>

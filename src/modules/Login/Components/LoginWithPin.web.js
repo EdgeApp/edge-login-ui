@@ -6,7 +6,7 @@ class LoginWithPin extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <div className={styles.background}></div>
+        <div className={styles.background} />
         <div className={styles.main}>
           <p className={styles.header}>Login with your PIN</p>
           <div className={styles.box}>
@@ -17,13 +17,13 @@ class LoginWithPin extends Component {
                 <option>GokuVegetaKririnYamcha</option>
                 <option>BayangMagiliwPerlasNgSilanganan</option>
               </select>
-              <label className={styles['control-label']} htmlFor="select">Username</label>
-              <i className={styles.bar}></i>
+              <label className={styles['control-label']} htmlFor='select'>Username</label>
+              <i className={styles.bar} />
             </div>
             <div className={styles.password}>
-              <input type="password" style={{ textAlign: 'center' }}required="required"/>
-              <label className={styles.passwordLabel} htmlFor="input">Enter PIN</label>
-              <i className={styles.bar}></i>
+              <input type='password' style={{ textAlign: 'center' }}required='required' />
+              <label className={styles.passwordLabel} htmlFor='input'>Enter PIN</label>
+              <i className={styles.bar} />
             </div>
           </div>
           <p className={styles.exitLink} onClick={this.props.openViewPassword}>Exit PIN Login</p>

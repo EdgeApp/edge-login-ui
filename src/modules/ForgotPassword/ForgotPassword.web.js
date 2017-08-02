@@ -31,13 +31,13 @@ class ForgotPassword extends Component {
           <div>
             <p>{t('recovery_not_setup4')}</p>
             <br />
-            <p><a target="_blank" href="https://airbitz.co/app">https://airbitz.co/app</a></p>
+            <p><a target='_blank' href='https://airbitz.co/app'>https://airbitz.co/app</a></p>
             <br />
             <p>{t('recovery_not_setup5')}</p>
             <br />
           </div>
           <div className={styles.button}>
-          <Button type='button' raised primary onClick={this._handleClose}>{t('string_ok')}</Button>
+            <Button type='button' raised primary onClick={this._handleClose}>{t('string_ok')}</Button>
           </div>
         </Dialog>
       )
