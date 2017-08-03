@@ -29,10 +29,12 @@ class AccountManager extends Component {
               <p className={styles.label}>Change Pin</p>
             </div>
           </Link>
-          <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
-            <img src={passwordIcon} />
-            <p className={styles.label}>Change Password</p>
-          </div>
+          <Link to='/changepassword'>
+            <div className={styles.square}>
+              <img src={passwordIcon} />
+              <p className={styles.label}>Change Password</p>
+            </div>
+          </Link>
           <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
             <img src={recoveryIcon} />
             <p className={styles.label}>Setup / Change<br />Password Recovery</p>
