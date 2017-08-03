@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 import styles from './AccountManagement.webStyle.scss'
 // import t from 'lib/web/LocaleStrings'
@@ -22,10 +23,12 @@ class AccountManager extends Component {
       <div className={styles.container}>
         <p className={styles.header}>Account name: AirbitzAugur</p>
         <div className={styles.main}>
-          <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
-            <img src={pinIcon} />
-            <p className={styles.label}>Change Pin</p>
-          </div>
+          <Link to='/changepin'>
+            <div className={styles.square}>
+              <img src={pinIcon} />
+              <p className={styles.label}>Change Pin</p>
+            </div>
+          </Link>
           <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
             <img src={passwordIcon} />
             <p className={styles.label}>Change Password</p>

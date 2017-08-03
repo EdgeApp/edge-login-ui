@@ -74,6 +74,17 @@ class Container extends Component {
     this.loadData()
   }
 
+  selectDialogHeight = (pathname) => {
+    switch (pathname) {
+      case '/account':
+        return styles.dialogAccount
+      case '/changepin':
+        return styles.dialogAccount
+      default:
+        return styles.dialogLogin
+    }
+  }
+
   render () {
     return (
       <div className='app'>
@@ -81,7 +92,7 @@ class Container extends Component {
           active
           onEscKeyDown={this._handleToggle}
           onOverlayClick={this._handleToggle}
-          className={this.props.location.pathname === '/account' ? styles.dialogAccount : styles.dialogLogin}
+          className={this.selectDialogHeight(this.props.location.pathname)}
         >
           <LayoutTemplate theme={layoutTheme}>
             <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />

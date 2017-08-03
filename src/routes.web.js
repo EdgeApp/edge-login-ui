@@ -7,6 +7,7 @@ import Login from './modules/Login/Login.web'
 import Home from './modules/Home/Home.web'
 import AccountManagement from './modules/AccountManagement/AccountManagement.web.js'
 import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
+import ChangePin from './modules/ChangePin/ChangePin.web.new.js'
 
 export default class RouterComponent extends Component {
   render () {
@@ -20,6 +21,7 @@ export default class RouterComponent extends Component {
           <Route path='/home' component={Home} />
           <Route path='/home' component={Home} />
           <Route path='/account' component={AccountManagement} />
+          <Route path='/changepin' component={ChangePin} />
         </Route>
       </Router>
     )
