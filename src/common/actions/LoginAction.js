@@ -13,20 +13,35 @@ export function previousUsersReturned (data) {
     data
   }
 }
+
+async function getDiskStuff (context) {
+  const userList = await context.listUsernames().then(usernames =>
+    Promise.all(
+      usernames.map(username => {
+        return context
+          .pinLoginEnabled(username)
+          .then(pinEnabled => ({ username, pinEnabled }))
+      })
+    )
+  )
+
+  const lastUser = await context.io.folder
+    .file('lastuser.json')
+    .getText() // setText for later.
+    .then(text => JSON.parse(text))
+    .then(json => json.username)
+    .catch(e => null)
+
+  return { lastUser, userList }
+}
+
 export function getPreviousUsers (context) {
   return (dispatch, getState, imports) => {
     let context = imports.context
-    // dispatch(openLoading()) Legacy dealt with state for showing a spinner
-    // the timeout is a hack until we put in interaction manager.
-    context
-      .listUsernames()
-      .then(response => {
-        dispatch(previousUsersReturned(response))
-      })
-      .catch(e => {
-        console.log('Getting Previous  ')
-        console.log(e)
-      })
+
+    getDiskStuff(context).then(bob => {
+      dispatch(previousUsersReturned(bob))
+    })
   }
 }
 
