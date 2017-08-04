@@ -4,7 +4,7 @@ import reducers from '../common/reducers'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import LoginAppConnector from './connectors/LogInAppConnector'
-// import LogInAppComponent from './components/LogInAppComponent'
+import * as Styles from './styles/'
 
 export class LoginScreen extends Component {
   componentWillMount () {
@@ -20,8 +20,6 @@ export class LoginScreen extends Component {
     )
   }
   componentWillReceiveProps (props) {
-    console.log('WE GOT THE PROPS UPDATE ')
-    console.log(props)
   }
 
   render () {
@@ -30,6 +28,7 @@ export class LoginScreen extends Component {
         <LoginAppConnector
           context={this.props.context}
           onLogin={this.props.onLogin}
+          styles={Styles}
         />
       </Provider>
     )

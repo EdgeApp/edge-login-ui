@@ -6,7 +6,8 @@ export const mapStateToProps = (state, ownProps) => {
   return {
     context: ownProps.context,
     onLogin: ownProps.onLogin,
-    previousUsers: state.previousUsers
+    previousUsers: state.previousUsers,
+    workflow: state.workflow
   }
 }
 
