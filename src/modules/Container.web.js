@@ -81,7 +81,7 @@ class Container extends Component {
       case '/changepin':
         return styles.dialogAccount
       case '/changepassword':
-        return styles.dialogAccount
+        return styles.dialogChangePassword
       default:
         return styles.dialogLogin
     }
