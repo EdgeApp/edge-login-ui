@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { Link } from 'react-router'
+import { Link } from 'react-router'
 import Input from 'react-toolbox/lib/input'
 import Dropdown from 'react-toolbox/lib/dropdown'
 import _ from 'lodash'
@@ -97,7 +97,7 @@ class PasswordRecovery extends Component {
               value={this.props.firstQuestion}
               required
               allowBlank={false}
-              className={styles.form}
+              className={styles.formDropdown}
             />
             <Input
               type='text'
@@ -105,16 +105,17 @@ class PasswordRecovery extends Component {
               onChange={this._handleOnChangeFirstAnswer}
               value={this.props.firstAnswer}
               label={t('activity_recovery_first_answer')}
-              className={styles.form}
+              className={styles.formInput}
               required
             />
+            <p className={styles.note}>Answers are case sensitive</p>
             <Dropdown
               auto
               source={this._renderQuestions2()}
               onChange={this._handleOnChangeSecondQuestion}
               value={this.props.secondQuestion}
               allowBlank={false}
-              className={styles.form}
+              className={styles.formDropdown}
               required
             />
             <Input
@@ -123,11 +124,18 @@ class PasswordRecovery extends Component {
               onChange={this._handleOnChangeSecondAnswer}
               value={this.props.secondAnswer}
               label={t('activity_recovery_second_answer')}
-              className={styles.form}
+              className={styles.formInput}
               required
             />
+            <p className={styles.note}>Answers are case sensitive</p>
           </div>
         </form>
+        <div className={styles.rowButtonsCustom}>
+          <Link to='/account'>
+            <button className={styles.secondary}>Close</button>
+          </Link>
+          <button className={styles.primary}>Submit</button>
+        </div>
       </div>
     )
   }
