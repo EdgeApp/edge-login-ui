@@ -1,4 +1,5 @@
 import * as Constants from '../constants'
+import * as WorkflowActions from './WorkflowActions'
 
 export function loginPIN (data) {
   return {
@@ -62,5 +63,31 @@ export function userLogin (data) {
           console.log(e)
         })
     }, 300)
+  }
+}
+
+export function validateUsername (data) {
+  return (dispatch, getState, imports) => {
+    console.log('We are validating.. so lets do some shit. ')
+    dispatch(WorkflowActions.nextScreen())
+  }
+}
+export function validatePassword (data) {
+  return (dispatch, getState, imports) => {
+    console.log('submit pin. ')
+    dispatch(WorkflowActions.nextScreen())
+  }
+}
+export function createUser (data) {
+  return (dispatch, getState, imports) => {
+    console.log('Create User ')
+    dispatch(WorkflowActions.nextScreen())
+  }
+}
+
+export function skipPassword (data) {
+  return (dispatch, getState, imports) => {
+    console.log('Skip Password. ')
+    dispatch(WorkflowActions.nextScreen())
   }
 }

@@ -3,7 +3,7 @@ import LandingScreenComponent from '../../components/screens/LandingScreenCompon
 import * as actions from '../../../common/actions'
 export const mapStateToProps = (state, ownProps) => {
   return {
-
+    styles: ownProps.styles
   }
 }
 

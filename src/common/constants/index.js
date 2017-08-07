@@ -1,3 +1,4 @@
+export const WORKFLOW_FIRST_LOAD = 'firstLoadWF'
 export const WORKFLOW_INIT = 'initalizeWF'
 export const WORKFLOW_CREATE = 'createWF'
 export const WORKFLOW_PASSWORD = 'passwordWF'

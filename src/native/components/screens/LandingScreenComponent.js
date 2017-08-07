@@ -7,13 +7,20 @@ export default class LandingScreenComponent extends Component {
   render () {
     return (
       <View>
-        <Button onPress={this.onButtonPress.bind(this)}>
-        Create an Account
-      </Button>
+        <Button onPress={this.onStartCreate.bind(this)}>
+          Create an Account
+        </Button>
+        <Button onPress={this.onStartLogin.bind(this)}>
+          Go to log in screen
+        </Button>
       </View>
     )
   }
-  onButtonPress () {
+  onStartCreate () {
     this.props.startFlow(Constants.WORKFLOW_CREATE)
+  }
+
+  onStartLogin () {
+    this.props.startFlow(Constants.WORKFLOW_PASSWORD)
   }
 }

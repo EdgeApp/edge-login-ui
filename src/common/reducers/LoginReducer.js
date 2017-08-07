@@ -1,6 +1,12 @@
 import * as Constants from '../../common/constants'
 
-export default function (state = [], action) {
+const initialState = {
+  username: null,
+  password: null,
+  pin: null,
+  errorMessage: null
+}
+export default function (state = initialState, action) {
   switch (action.type) {
     case Constants.LOGIN_USERNAME_PASSWORD:
       console.log('HEY NOW YOUR AN ALL STAR ')
@@ -8,10 +14,6 @@ export default function (state = [], action) {
       console.log(action)
       return state
 
-    case Constants.GET_PREVIOUS_USERS:
-      console.log('FUCK YEAH ')
-      console.log(action.context)
-      return state
     default:
       return state
   }
