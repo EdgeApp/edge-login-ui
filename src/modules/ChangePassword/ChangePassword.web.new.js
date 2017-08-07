@@ -6,6 +6,9 @@ import styles from './ChangePassword.webstyle.scss'
 import Input from 'react-toolbox/lib/input'
 import FontIcon from 'react-toolbox/lib/font_icon'
 
+import eyeShow from '../../img/create-account/show-password.png'
+// import eyeHide from '../../img/create-account/hide-password.png'
+
 class ChangePin extends Component {
   render () {
     return (
@@ -21,7 +24,10 @@ class ChangePin extends Component {
             <p className={styles.crack}>Time to crack: 0 seconds</p>
           </div>
           <div className={styles.formContainer}>
-            <Input type='password' label='Password' name='password' className={styles.form} />
+            <div className={styles.formWithIcon}>
+              <Input type='password' label='Password' name='password' className={styles.form} />
+              <img src={eyeShow} className={styles.icon} />
+            </div>
             <Input type='password' label='Re-enter Password' name='password_confirmation' className={styles.form} />
           </div>
         </div>
