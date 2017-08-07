@@ -9,6 +9,7 @@ import AccountManagement from './modules/AccountManagement/AccountManagement.web
 import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 import ChangePin from './modules/ChangePin/ChangePin.web.new.js'
 import ChangePassword from './modules/ChangePassword/ChangePassword.web.new.js'
+import PasswordRecovery from './modules/PasswordRecovery/PasswordRecovery.web.new.js'
 
 export default class RouterComponent extends Component {
   render () {
@@ -24,6 +25,7 @@ export default class RouterComponent extends Component {
           <Route path='/account' component={AccountManagement} />
           <Route path='/changepin' component={ChangePin} />
           <Route path='/changepassword' component={ChangePassword} />
+          <Route path='/passwordrecovery' component={PasswordRecovery} />
         </Route>
       </Router>
     )

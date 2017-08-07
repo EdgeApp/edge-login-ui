@@ -11,7 +11,7 @@ import styles from './AccountManagement.webStyle.scss'
 // import PasswordRecoverySuccess from '../PasswordRecovery/PasswordRecoverySuccess.web'
 import EnterPassword from '../Modals/AccountManagementPassword/AccountManagementPassword.web.js'
 
-import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
+// import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
 
 import pinIcon from '../../img/account-settings/PIN-W.png'
 import passwordIcon from '../../img/account-settings/password-W.png'
@@ -35,10 +35,12 @@ class AccountManager extends Component {
               <p className={styles.label}>Change Password</p>
             </div>
           </Link>
-          <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
-            <img src={recoveryIcon} />
-            <p className={styles.label}>Setup / Change<br />Password Recovery</p>
-          </div>
+          <Link to='/passwordrecovery'>
+            <div className={styles.square}>
+              <img src={recoveryIcon} />
+              <p className={styles.label}>Setup / Change<br />Password Recovery</p>
+            </div>
+          </Link>
           <EnterPassword />
         </div>
       </div>
