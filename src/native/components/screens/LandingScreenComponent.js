@@ -18,8 +18,9 @@ export default class LandingScreenComponent extends Component {
     )
   }
   renderOverImage () {
+    const {LandingPageScreenStyle} = this.props.styles
     return (
-      <View>
+      <View style={LandingPageScreenStyle.featureBox} >
         <Button onPress={this.onStartCreate.bind(this)}>
           Create an Account
         </Button>

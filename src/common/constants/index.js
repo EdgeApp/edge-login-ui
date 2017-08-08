@@ -14,3 +14,4 @@ export const WORKFLOW_NEXT = 'workflowNext'
 export const LOG_IN_PIN = 'LOG_IN_PIN'
 export const LOGIN_USERNAME_PASSWORD = 'USERNAME_PASSWORD'
 export const SET_PREVIOUS_USERS = 'SET_PREVIOUS_USERS'
+

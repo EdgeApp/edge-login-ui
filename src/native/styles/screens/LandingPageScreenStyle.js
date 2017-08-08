@@ -1,4 +1,5 @@
 import * as Styles from '../'
+import * as Colors from '../../../common/constants/Colors'
 
 const LandingPageScreenStyle = {
   container: Styles.ScreenStyle,
@@ -6,8 +7,16 @@ const LandingPageScreenStyle = {
   featureBox: {
     position: 'relative',
     width: '80%',
-    height: '80%',
-    backgroundColor: '#FFFFFF'
+    height: '60%',
+    backgroundColor: Colors.OVERLAY_BOX,
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  featureBoxIconHeader: {
+
+  },
+  featureBoxBody: {
+
   }
 }
 
