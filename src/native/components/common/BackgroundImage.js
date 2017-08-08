@@ -4,7 +4,7 @@ import { Image } from 'react-native'
 const BackgroundImage = ({ style, src, children }) => {
   return (
     <Image
-      source={require('../../assets/login_bg.png')}
+      source={src}
       style={style}
     >
       {children}
