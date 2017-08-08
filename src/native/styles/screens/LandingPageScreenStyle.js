@@ -3,11 +3,12 @@ import * as Colors from '../../../common/constants/Colors'
 
 const LandingPageScreenStyle = {
   container: Styles.ScreenStyle,
-  backgroundImage: {...Styles.BackgroundScreenImageStyle, justifyContent: 'space-around', alignItems: 'center'},
+  backgroundImage: {...Styles.BackgroundScreenImageStyle, alignItems: 'center'},
   featureBox: {
     position: 'relative',
-    width: '80%',
-    height: '60%',
+    top: 71,
+    width: 260,
+    height: 306,
     backgroundColor: Colors.OVERLAY_BOX,
     justifyContent: 'space-around',
     alignItems: 'center'
@@ -17,6 +18,18 @@ const LandingPageScreenStyle = {
   },
   featureBoxBody: {
 
+  },
+  createButton: {
+    upStyle: Styles.PrimaryButtonUpStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextStyle,
+    downStyle: Styles.PrimaryButtonDownStyle
+  },
+  loginButton: {
+    upStyle: Styles.PrimaryButtonUpStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextStyle,
+    downStyle: Styles.PrimaryButtonDownStyle
   }
 }
 

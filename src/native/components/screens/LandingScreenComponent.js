@@ -11,22 +11,35 @@ export default class LandingScreenComponent extends Component {
     console.log(Assets.LOGIN_BACKGROUND)
     return (
       <View style={LandingPageScreenStyle.container}>
-        <BackgroundImage src={Assets.LOGIN_BACKGROUND} style={LandingPageScreenStyle.backgroundImage} >
+        <BackgroundImage
+          src={Assets.LOGIN_BACKGROUND}
+          style={LandingPageScreenStyle.backgroundImage}
+        >
           {this.renderOverImage()}
         </BackgroundImage>
       </View>
     )
   }
   renderOverImage () {
-    const {LandingPageScreenStyle} = this.props.styles
+    const { LandingPageScreenStyle } = this.props.styles
     return (
-      <View style={LandingPageScreenStyle.featureBox} >
-        <Button onPress={this.onStartCreate.bind(this)}>
-          Create an Account
-        </Button>
-        <Button onPress={this.onStartLogin.bind(this)}>
-          Go to log in screen
-        </Button>
+      <View style={LandingPageScreenStyle.featureBox}>
+        <Button
+          onPress={this.onStartCreate.bind(this)}
+          label={'Create an Account'}
+          downStyle={LandingPageScreenStyle.createButton.downStyle}
+          downTextStyle={LandingPageScreenStyle.createButton.downTextStyle}
+          upStyle={LandingPageScreenStyle.createButton.upStyle}
+          upTextStyle={LandingPageScreenStyle.createButton.upTextStyle}
+        />
+        <Button
+          onPress={this.onStartLogin.bind(this)}
+          label={'GO TO LOGIN SCREEN '}
+          downStyle={LandingPageScreenStyle.loginButton.downStyle}
+          downTextStyle={LandingPageScreenStyle.loginButton.downTextStyle}
+          upStyle={LandingPageScreenStyle.loginButton.upStyle}
+          upTextStyle={LandingPageScreenStyle.loginButton.upTextStyle}
+        />
       </View>
     )
   }
