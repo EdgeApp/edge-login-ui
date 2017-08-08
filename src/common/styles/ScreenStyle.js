@@ -7,7 +7,9 @@ const ScreenStyle = {
 
 const BackgroundScreenImageStyle = {
   flex: 1,
-  resizeMode: 'cover'
+  width: null,
+  height: null,
+  resizeMode: 'stretch'
 }
 
 export {BackgroundScreenImageStyle}

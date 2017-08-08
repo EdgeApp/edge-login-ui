@@ -1,8 +1,8 @@
 import * as Styles from '../'
 
 const LandingPageScreenStyle = {
-  container: {...Styles.ScreenStyle, backgroundColor: '#FF0000', justifyContent: 'space-around', alignItems: 'center'},
-  backgroundImage: Styles.BackgroundScreenImageStyle,
+  container: Styles.ScreenStyle,
+  backgroundImage: {...Styles.BackgroundScreenImageStyle, justifyContent: 'space-around', alignItems: 'center'},
   featureBox: {
     position: 'relative',
     width: '80%',
