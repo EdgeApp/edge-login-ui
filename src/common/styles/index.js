@@ -1,2 +1,2 @@
 export * from './ScreenStyle'
-export * from './CenteredSpinnerStyle'
+export * from './common/CenteredSpinnerStyle'

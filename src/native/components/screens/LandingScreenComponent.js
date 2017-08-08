@@ -5,8 +5,10 @@ import * as Constants from '../../../common/constants'
 
 export default class LandingScreenComponent extends Component {
   render () {
+    console.log(this.props.styles)
+    const {LandingPageScreenStyle} = this.props.styles
     return (
-      <View>
+      <View style={LandingPageScreenStyle.container}>
         <Button onPress={this.onStartCreate.bind(this)}>
           Create an Account
         </Button>

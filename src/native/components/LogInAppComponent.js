@@ -15,14 +15,18 @@ import NewAccountPinScreenConnector
   from '../connectors/screens/newAccount/SetAccountPinScreenConnector.js'
 import NewAccountWalletCreationScreenConnector
   from '../connectors/screens/newAccount/NewAccountWalletCreationScreenConnector'
+import LoginUsernamePasswordScreenConnector
+  from '../connectors/screens/LogInUsernamePasswordScreenConnector.js'
 
 export default class LoginAppComponent extends Component {
   componentWillMount () {
     this.props.getPreviousUsers()
   }
   render () {
+    const {ScreenStyle} = this.props.styles
     return (
-      <View>
+      <View
+        style={ScreenStyle}>
         {this.renderContent()}
       </View>
     )
@@ -79,17 +83,15 @@ export default class LoginAppComponent extends Component {
         return <NewAccountPinScreenConnector styles={this.props.styles} />
       case 4:
         console.log('We are blowing up here. ')
-        return <NewAccountWalletCreationScreenConnector styles={this.props.styles} />
+        return (
+          <NewAccountWalletCreationScreenConnector styles={this.props.styles} />
+        )
       default:
         return <NewAccountWelcomeScreenConnector styles={this.props.styles} />
     }
   }
   getPasswordScreen (arg) {
-    return (
-      <Text>
-        Holding Text Password Screen
-      </Text>
-    )
+    return <LoginUsernamePasswordScreenConnector styles={this.props.styles} />
   }
 
   getPinScreen (arg) {
