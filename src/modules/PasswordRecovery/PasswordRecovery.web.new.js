@@ -87,49 +87,51 @@ class PasswordRecovery extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <p className={styles.header}>Password Recovery Setup</p>
-        <form onSubmit={e => { e.preventDefault(); this._handleSubmit(e) }}>
-          <div className={styles.passwordInputs}>
-            <Dropdown
-              auto
-              source={this._renderQuestions1()}
-              onChange={this._handleOnChangeFirstQuestion}
-              value={this.props.firstQuestion}
-              required
-              allowBlank={false}
-              className={styles.formDropdown}
-            />
-            <Input
-              type='text'
-              name='firstAnswer'
-              onChange={this._handleOnChangeFirstAnswer}
-              value={this.props.firstAnswer}
-              label={t('activity_recovery_first_answer')}
-              className={styles.formInput}
-              required
-            />
-            <p className={styles.note}>Answers are case sensitive</p>
-            <Dropdown
-              auto
-              source={this._renderQuestions2()}
-              onChange={this._handleOnChangeSecondQuestion}
-              value={this.props.secondQuestion}
-              allowBlank={false}
-              className={styles.formDropdown}
-              required
-            />
-            <Input
-              type='text'
-              name='secondAnswer'
-              onChange={this._handleOnChangeSecondAnswer}
-              value={this.props.secondAnswer}
-              label={t('activity_recovery_second_answer')}
-              className={styles.formInput}
-              required
-            />
-            <p className={styles.note}>Answers are case sensitive</p>
-          </div>
-        </form>
+        <div style={{ overFlow: 'auto' }}>
+          <p className={styles.header}>Password Recovery Setup</p>
+          <form onSubmit={e => { e.preventDefault(); this._handleSubmit(e) }}>
+            <div className={styles.passwordInputs}>
+              <Dropdown
+                auto
+                source={this._renderQuestions1()}
+                onChange={this._handleOnChangeFirstQuestion}
+                value={this.props.firstQuestion}
+                required
+                allowBlank={false}
+                className={styles.formDropdown}
+              />
+              <Input
+                type='text'
+                name='firstAnswer'
+                onChange={this._handleOnChangeFirstAnswer}
+                value={this.props.firstAnswer}
+                label={t('activity_recovery_first_answer')}
+                className={styles.formInput}
+                required
+              />
+              <p className={styles.note}>Answers are case sensitive</p>
+              <Dropdown
+                auto
+                source={this._renderQuestions2()}
+                onChange={this._handleOnChangeSecondQuestion}
+                value={this.props.secondQuestion}
+                allowBlank={false}
+                className={styles.formDropdown}
+                required
+              />
+              <Input
+                type='text'
+                name='secondAnswer'
+                onChange={this._handleOnChangeSecondAnswer}
+                value={this.props.secondAnswer}
+                label={t('activity_recovery_second_answer')}
+                className={styles.formInput}
+                required
+              />
+              <p className={styles.note}>Answers are case sensitive</p>
+            </div>
+          </form>
+        </div>
         <div className={styles.rowButtonsCustom}>
           <Link to='/account'>
             <button className={styles.secondary}>Close</button>

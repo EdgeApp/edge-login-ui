@@ -21,7 +21,6 @@ export default class RouterComponent extends Component {
           <Route path='/signup' component={Signup} />
           <Route path='/review' component={ReviewDetails} />
           <Route path='/home' component={Home} />
-          <Route path='/home' component={Home} />
           <Route path='/account' component={AccountManagement} />
           <Route path='/changepin' component={ChangePin} />
           <Route path='/changepassword' component={ChangePassword} />

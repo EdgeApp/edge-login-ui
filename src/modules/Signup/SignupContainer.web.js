@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Username from '../Username/Username.web'
+import Username from '../Username/Username.web.new.js'
 import PinNumber from '../PinNumber/PinNumber.web'
 import Password from '../Password/Password.web'
 import ReviewDetails from '../ReviewDetails/ReviewDetails.web'
