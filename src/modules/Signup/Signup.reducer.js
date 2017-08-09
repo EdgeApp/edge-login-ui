@@ -1,6 +1,6 @@
 import * as ACTION from './Signup.action'
 
-export const signupPage = (state = 'username', action) => {
+export const signupPage = (state = 'pin', action) => {
   switch (action.type) {
     case ACTION.CHANGE_SIGNUP_PAGE :
       return action.data

@@ -74,9 +74,19 @@ class Container extends Component {
   }
 
   selectDialogHeight = (pathname) => {
+    const checkSignupPage = () => {
+      switch (this.props.signupPage) {
+        case 'pin':
+          return styles.dialogPin
+        default:
+          return styles.dialogSignUp
+      }
+    }
     switch (pathname) {
       case '/account':
         return styles.dialogAccount
+      case '/signup':
+        return checkSignupPage()
       case '/changepin':
         return styles.dialogAccount
       case '/changepassword':
@@ -113,7 +123,7 @@ class Container extends Component {
 export default connect(state => ({
 
   loader: state.loader,
-  signupPage: state.signUpPage,
+  signupPage: state.signupPage,
   edgeObject: state.login.edgeLoginResults,
   containerNotification: state.container.containerNotification,
   containerNotificationValues: state.container.containerNotificationValues

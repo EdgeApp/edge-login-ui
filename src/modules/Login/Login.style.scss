@@ -1,6 +1,7 @@
 @import 'theme/_config.scss';
 
 .container {
+  flex: 1;
 
   display: flex;
   display: -webkit-flex;
@@ -11,10 +12,7 @@
   justify-content: center;
   -webkit-justify-content: center;
 
-  flex: 1;
-
   height: 422px;
-
 }
 
 .inputGroup {

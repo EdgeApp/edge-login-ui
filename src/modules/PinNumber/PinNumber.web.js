@@ -77,6 +77,7 @@ class PinComponent extends Component {
               onChange={this._handleOnChangeText}
               onKeyPress={this._handleKeyEnter.bind(this)}
               value={this.props.pin}
+              className={styles.password}
             />
           </div>
           <div className={styles.section}>
