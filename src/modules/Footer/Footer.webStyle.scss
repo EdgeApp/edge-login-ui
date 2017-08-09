@@ -1,21 +1,9 @@
 @import 'theme/_config.scss';
 @import 'theme/buttons';
 
-$break-xxs: 320px;
-$break-xs: 480px;
-$break-600: 600px;
-$break-sm: 768px;
-$break-md: 992px;
-$break-lg: 1200px;
-
-$layout-breakpoint-xs:     600px !default;
-$layout-breakpoint-sm:     960px !default;
-$layout-breakpoint-md:     1280px !default;
-$layout-breakpoint-lg:     1920px !default;
-
 .container {
 
-	  height: 100px;
+	  height: 42px;
 
     display: flex;
     display: -webkit-flex;
@@ -29,30 +17,9 @@ $layout-breakpoint-lg:     1920px !default;
     align-items: stretch;
     -webkit-align-items: stretch;
 
-    .top {
-      height: 58px;
+    .main {
 
-      display: flex;
-      display: -webkit-flex;
-
-      align-items: center;
-      -webkit-align-items: center;
-
-      justify-content: center;
-      -webkit-justify-content: center;
-
-      .text {
-        @extend .link;
-        color: #4977BB;
-        font-size: 16px;
-        line-height: 16px;
-        text-align: center;
-      }
-    }
-
-    .bottom {
-
-      height: 42px;
+      flex: 1;
 
       background: linear-gradient(90deg, rgba(59,122,218,0.98) 0%, #2B5698 100%);
 
@@ -69,15 +36,39 @@ $layout-breakpoint-lg:     1920px !default;
       -webkit-align-items: center;
 
       .left {
+        width: 125px;
         margin: 0px 20px;
       }
 
-      .spacer {
+      .mid {
         flex: 1;
+
+        flex-direction: column;
+        -webkit-flex-direction: column;
+
+        justify-content: center;
+        -webkit-justify-content: center;
+
+        align-items: center;
+        -webkit-align-items: center;
+
+        .text {
+          text-align: center;
+        }
+
+        .text > a,
+        .text > a:hover,
+        .text > a:active {
+          @extend .link;
+          color: #FFFFFF;
+          font-size: 16px;
+          line-height: 16px;
+        }
 
       }
 
       .right {
+        width: 125px;
         margin: 0px 20px;
         color: #FFFFFF;
         font-size: 14px;
@@ -102,84 +93,4 @@ $layout-breakpoint-lg:     1920px !default;
       }
 
     }
-
-
-    .navigation {
-        width: 100%;
-        text-align: center;
-
-        .footerDownloadLink {
-            float: none;
-            color: #007AFF;
-            text-decoration: none;
-            opacity: .7;
-            font-size: 1.4rem;
-            &:hover {
-                text-decoration: none;
-                color: #444;
-            }
-        }
-    }
-}
-
-/* Custom, iPhone Retina */
-
-
-/* Extra Small Devices, Phones */
-@media only screen and (min-width : $layout-breakpoint-xs) {
-    .appBar {
-
-        .navigation {
-            padding: 0 0;
-
-            .footerDownloadLink {
-                font-size: 1.2rem;
-                &:hover {
-
-                }
-            }
-        }
-    }
-}
-
-/* Small Devices, Tablets */
-@media only screen and (min-width : $layout-breakpoint-sm) {
-    .appBar{
-
-
-        .navigation {
-
-
-            .footerDownloadLink {
-                font-size: 1.4rem;
-                &:hover {
-
-                }
-            }
-        }
-    }
-}
-
-/* Medium Devices, Desktops */
-@media only screen and (min-width : $layout-breakpoint-md) {
-  .appBar{
-
-
-    .navigation {
-
-
-      .footerDownloadLink {
-        font-size: 1.6rem;
-        &:hover {
-
-        }
-      }
-    }
-  }
-
-}
-
-/* Large Devices, Wide Screens */
-@media only screen and (min-width : $layout-breakpoint-lg) {
-
 }

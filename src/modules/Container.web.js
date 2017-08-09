@@ -113,6 +113,7 @@ class Container extends Component {
 export default connect(state => ({
 
   loader: state.loader,
+  signupPage: state.signUpPage,
   edgeObject: state.login.edgeLoginResults,
   containerNotification: state.container.containerNotification,
   containerNotificationValues: state.container.containerNotificationValues
