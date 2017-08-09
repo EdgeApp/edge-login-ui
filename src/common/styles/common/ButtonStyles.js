@@ -28,8 +28,42 @@ const TertiaryButtonUpStyle = {
 
 }
 
-const TertiarButtonDownStyle = {
+const TertiaryButtonTextUpStyle = {
 
+}
+
+const TertiaryButtonDownStyle = {
+
+}
+
+const TertiaryButtonTextDownStyle = {
+
+}
+
+const TextOnlyButtonUpStyle = {
+  backgroundColor: Colors.TRANSPARENT,
+  width: 220,
+  height: 50,
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderRadius: 3
+}
+
+const TextOnlyButtonTextUpStyle = {
+  color: Colors.SECONDARY
+}
+
+const TextOnlyButtonDownStyle = {
+  backgroundColor: Colors.TRANSPARENT,
+  width: 220,
+  height: 50,
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderRadius: 3
+}
+
+const TextOnlyButtonTextDownStyle = {
+  color: Colors.PRIMARY
 }
 
 export {PrimaryButtonUpStyle}
@@ -38,4 +72,11 @@ export {PrimaryButtonDownStyle}
 export {SecondaryButtonUpStyle}
 export {SecondaryButtonDownStyle}
 export {TertiaryButtonUpStyle}
-export {TertiarButtonDownStyle}
+export {TertiaryButtonTextUpStyle}
+export {TertiaryButtonDownStyle}
+export {TertiaryButtonTextDownStyle}
+export {TextOnlyButtonUpStyle}
+export {TextOnlyButtonTextUpStyle}
+export {TextOnlyButtonDownStyle}
+export {TextOnlyButtonTextDownStyle}
+

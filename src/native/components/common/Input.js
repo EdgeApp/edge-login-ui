@@ -1,50 +1,59 @@
-import React from 'react'
-import { TextInput, View, Text } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { TextInput, View } from 'react-native'
 
-const Input = ({
-  label,
-  value,
-  onChangeText,
-  placeholder,
-  secureTextEntry
-}) => {
-  const { inputStyle, labelStyle, containerStyle } = styles
+class Input extends Component {
+  componentWillMount () {
+    this.setState({
+      inputText: ''
+    })
+  }
 
-  return (
-    <View style={containerStyle}>
-      <Text style={labelStyle}>{label}</Text>
-      <TextInput
-        secureTextEntry={secureTextEntry}
-        placeholder={placeholder}
-        autoCorrect={false}
-        style={inputStyle}
-        value={value}
-        onChangeText={onChangeText}
-      />
-    </View>
-  )
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.value !== this.state.inputText) {
+      this.setState({
+        inputText: nextProps.value
+      })
+    }
+  }
+
+  render () {
+    const InputStyles = this.props.style
+    return (
+      <View style={InputStyles.container}>
+        <TextInput
+          secureTextEntry={this.props.secureTextEntry}
+          placeholder={this.props.placeholder}
+          autoCorrect={this.props.autoCorrect}
+          autoCapitalize={this.props.autoCapitalize}
+          value={this.state.inputText}
+          styles={InputStyles.inputStyles}
+          onChangeText={this.onChange.bind(this)}
+        />
+      </View>
+    )
+  }
+  onChange (text) {
+    this.setState({
+      inputText: text
+    })
+    this.props.onChangeText(text)
+  }
 }
 
-const styles = {
-  inputStyle: {
-    color: '#000',
-    paddingRight: 5,
-    paddingLeft: 5,
-    fontSize: 18,
-    lineHeight: 23,
-    flex: 2
-  },
-  labelStyle: {
-    fontSize: 18,
-    paddingLeft: 20,
-    flex: 1
-  },
-  containerStyle: {
-    height: 40,
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center'
-  }
+Input.propTypes = {
+  onChangeText: PropTypes.func.isRequired,
+  style: PropTypes.object.isRequired,
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  autoCorrect: PropTypes.bool,
+  autoCapitalize: PropTypes.string,
+  secureTextEntry: PropTypes.bool,
+  isError: PropTypes.bool
+}
+
+Input.defaultProps = {
+  autoCapitalize: 'none',
+  autoCorrect: false
 }
 
 export { Input }

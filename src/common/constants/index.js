@@ -15,3 +15,5 @@ export const LOG_IN_PIN = 'LOG_IN_PIN'
 export const LOGIN_USERNAME_PASSWORD = 'USERNAME_PASSWORD'
 export const SET_PREVIOUS_USERS = 'SET_PREVIOUS_USERS'
 
+export const AUTH_UPDATE_USERNAME = 'authUpdateUsername'
+

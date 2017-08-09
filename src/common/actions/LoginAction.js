@@ -7,6 +7,12 @@ export function loginPIN (data) {
     data
   }
 }
+export function updateUsername (data) {
+  return {
+    type: Constants.AUTH_UPDATE_USERNAME,
+    data
+  }
+}
 
 export function previousUsersReturned (data) {
   return {
@@ -28,7 +34,7 @@ async function getDiskStuff (context) {
 
   const lastUser = await context.io.folder
     .file('lastuser.json')
-    .getText() // setText for later.
+    .getText() // setText for later. username
     .then(text => JSON.parse(text))
     .then(json => json.username)
     .catch(e => null)
@@ -55,7 +61,11 @@ export function userLogin (data) {
     setTimeout(() => {
       context
         .loginWithPassword(data.username, data.password, null, null)
-        .then(response => {
+        .then(async response => {
+          await context.io.folder
+            .file('lastuser.json')
+            .setText(JSON.stringify({username: data.username}))
+            .catch(e => null)
           callback(null, response)
         })
         .catch(e => {
@@ -68,8 +78,8 @@ export function userLogin (data) {
 
 export function validateUsername (data) {
   return (dispatch, getState, imports) => {
-    console.log('We are validating.. so lets do some shit. ')
-    dispatch(WorkflowActions.nextScreen())
+    console.log('We are validating..USERNAME so lets do some shit. ' + data)
+    dispatch(updateUsername(data))
   }
 }
 export function validatePassword (data) {

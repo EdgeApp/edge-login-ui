@@ -42,7 +42,7 @@ class Button extends Component {
     )
   }
   onPress () {
-    // this.props.onPress()
+    this.props.onPress()
     if (this.props.doesThink) {
       this.setState({
         isThinking: true
