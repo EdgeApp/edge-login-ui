@@ -70,9 +70,9 @@ export function userLogin (data) {
         .then(async response => {
           await context.io.folder
             .file('lastuser.json')
-            .setText(JSON.stringify({username: data.username}))
+            .setText(JSON.stringify({ username: data.username }))
             .catch(e => null)
-          console.log("WE GOT THIS")
+          console.log('WE GOT THIS')
           dispatch(logSuccess())
           callback(null, response)
         })

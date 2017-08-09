@@ -100,10 +100,10 @@ export default class LandingScreenComponent extends Component {
     this.setState({
       loggingIn: true
     })
-    /* this.props.userLogin({
+    this.props.userLogin({
       username: this.state.username,
       password: this.state.password
-    }) */
+    })
   }
   onCreateAccount () {
     // this.props.userLogin({ username: 'Bob20', password: 'Bob20' })
