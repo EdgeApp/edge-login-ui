@@ -1,6 +1,12 @@
 import * as Constants from '../constants'
 import * as WorkflowActions from './WorkflowActions'
 
+export function logSuccess () {
+  return {
+    type: Constants.LOGIN_USERNAME_PASSWORD
+  }
+}
+
 export function loginPIN (data) {
   return {
     type: Constants.LOG_IN_PIN,
@@ -66,6 +72,8 @@ export function userLogin (data) {
             .file('lastuser.json')
             .setText(JSON.stringify({username: data.username}))
             .catch(e => null)
+          console.log("WE GOT THIS")
+          dispatch(logSuccess())
           callback(null, response)
         })
         .catch(e => {
