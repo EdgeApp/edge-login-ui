@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import t from '../../lib/web/LocaleStrings'
 
 import { changeSignupPage } from '../Signup/Signup.action'
-import { changePinNumberValue } from './PinNumber.action'
+import { changePinNumberValue, error, clearError } from './PinNumber.action'
 import { checkPIN } from './PinNumber.middleware'
 
 import styles from './PinNumber.webStyle.scss'
@@ -12,17 +12,18 @@ import Input from 'react-toolbox/lib/input'
 class Pin extends Component {
   _handleSubmit = (e) => {
     this.props.dispatch(
-     checkPIN(
+      checkPIN(
         this.props.pin,
-        () => this.props.dispatch(
-          changeSignupPage('password')
-        )
+        (errorMessage) => {
+          if (errorMessage) {
+            return this.props.dispatch(error(errorMessage))
+          }
+          if (!errorMessage) {
+            this.props.dispatch(clearError())
+            return this.props.dispatch(changeSignupPage('password'))
+          }
+        }
       )
-    )
-  }
-  _handleBack = () => {
-    this.props.dispatch(
-      changeSignupPage('username')
     )
   }
   _handleOnChangeText = (pin) => {
@@ -64,12 +65,13 @@ class Pin extends Component {
             onChange={this._handleOnChangeText}
             onKeyPress={this._handleKeyEnter.bind(this)}
             value={this.props.pin}
-            error='foo'
+            error={this.props.error}
+            className={styles.input}
           />
         </div>
         <p className={styles.bullet}>Your PIN is a 4 digit code used to do quick re-logins into your account</p>
         <div className={styles.rowButtons}>
-          <button className={styles.secondary} onClick={this._handleBack}>Back</button>
+          <button className={styles.secondary} onClick={e => this.props.dispatch(changeSignupPage('username'))}>Back</button>
           <button className={styles.primary}>Submit</button>
         </div>
       </div>
@@ -78,5 +80,6 @@ class Pin extends Component {
 }
 
 export default connect(state => ({
-  pin: state.pin
+  pin: state.pin.pin,
+  error: state.pin.error
 }))(Pin)

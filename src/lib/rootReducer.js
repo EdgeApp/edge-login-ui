@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import { username, error } from '../modules/Username/Username.reducer'
-import { pin, pinDummy } from '../modules/PinNumber/PinNumber.reducer'
+import * as Username from '../modules/Username/Username.reducer'
+import * as PinNumber from '../modules/PinNumber/PinNumber.reducer'
 import * as PasswordStates from '../modules/Password/Password.reducer'
 import * as PasswordValidation from '../modules/Password/PasswordValidation/PasswordValidation.reducer'
 import { nextButtonVisible } from '../modules/NextButton/NextButton.reducer'
@@ -30,11 +30,13 @@ import { accountManagementPassword } from '../modules/Modals/AccountManagementPa
 const store = combineReducers({
   signupPage,
   username: combineReducers({
-    username,
-    error
+    username: Username.username,
+    error: Username.error
   }),
-  pin,
-  pinDummy,
+  pin: combineReducers({
+    pin: PinNumber.pin,
+    error: PinNumber.error
+  }),
   container: combineReducers({
     containerNotification: Container.containerNotification,
     containerNotificationValues: Container.containerNotificationValues

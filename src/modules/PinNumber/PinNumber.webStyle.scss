@@ -23,8 +23,13 @@
     margin-top: 40px;
   }
 
-  .password{
+  .password {
     width: 200px;
+    .input > span[class*="error"] {
+      display: block;
+      text-align: center;
+      margin: 0px auto;
+    }
   }
 
   .bullet {
