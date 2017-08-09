@@ -1,30 +1,89 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import t from 'lib/web/LocaleStrings'
 
-import styles from './Username.webStyle.scss'
 import Input from 'react-toolbox/lib/input'
+import styles from './Username.webStyle.scss'
 
-class ChangePin extends Component {
+import { checkUsername } from './Username.middleware'
+import { changeUsernameValue } from './Username.action'
+import { changeSignupPage } from '../Signup/Signup.action'
+import { openErrorModal } from '../ErrorModal/ErrorModal.action'
+
+class Username extends Component {
+  _handleSubmit = () => {
+    if (this.props.username.length < 3) {
+      return this.props.dispatch(
+        openErrorModal(t('activity_signup_insufficient_username_message'))
+      )
+    }
+    if (this.props.username.length >= 3) {
+      return this.props.dispatch(
+        checkUsername(
+          this.props.username,
+          () => this.props.dispatch(changeSignupPage('pin'))
+        )
+      )
+    }
+  }
+  _handleOnChangeText = (username, event, foo) => {
+    this.props.dispatch(
+      changeUsernameValue(username)
+    )
+  }
+  _handleKeyEnter = (e) => {
+    if (e.nativeEvent.charCode === 13) {
+      return this._handleSubmit()
+    }
+  }
+  _renderButtonRows = () => {
+    if (!this.props.loader.loading) {
+      return (
+        <div className={styles.rowButtons}>
+          <Link to='/login'>
+            <button className={styles.secondary}>Back</button>
+          </Link>
+          <button className={styles.primary} onClick={this._handleSubmit}>Next</button>
+        </div>
+      )
+    }
+    if (this.props.loader.loading) {
+      return (
+        <div className={styles.rowButtons}>
+          <button className={styles.secondaryLoad}>Back</button>
+          <button className={styles.primaryLoad}><div className={styles.loader} /></button>
+        </div>
+      )
+    }
+  }
   render () {
+    console.log(this.props.loader)
     return (
       <div className={styles.container}>
         <p className={styles.header}>Choose a Username</p>
-        <Input label='Username' className={styles.input} />
+        <Input
+          autoFocus
+          type='text'
+          name='username'
+          onChange={this._handleOnChangeText}
+          onKeyPress={this._handleKeyEnter.bind(this)}
+          value={this.props.username}
+          label={t('fragment_landing_username_hint')}
+          className={styles.input}
+        />
         <div className={styles.bullets}>
           <p className={styles.bullet}><span className={styles.bulletIcon}>•</span> This is not your email or real name.</p>
           <p className={styles.bullet}><span className={styles.bulletIcon}>•</span> This is the username to login into your account on this and other devices.</p>
           <p className={styles.bullet}><span className={styles.bulletIcon}>•</span> Your username and password are known only to you and never stored unencrypted.</p>
         </div>
-        <div className={styles.rowButtons}>
-          <Link to='/login'>
-            <button className={styles.secondary}>Back</button>
-          </Link>
-          <button className={styles.primary}>Next</button>
-        </div>
+        {this._renderButtonRows()}
       </div>
     )
   }
 }
 
-export default connect()(ChangePin)
+export default connect(state => ({
+  username: state.username,
+  loader: state.loader
+}))(Username)

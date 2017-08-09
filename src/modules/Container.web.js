@@ -4,7 +4,6 @@ import { Dialog } from 'react-toolbox/lib/dialog'
 import FontIcon from 'react-toolbox/lib/font_icon'
 import { selectUserToLogin, setCachedUsers, setCachedUsersWithPin } from './CachedUsers/CachedUsers.action'
 
-import Loader from './Loader/Loader.web'
 import ErrorModal from './ErrorModal/ErrorModal.web'
 import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
@@ -102,7 +101,6 @@ class Container extends Component {
             <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
             {this.props.children}
           </LayoutTemplate>
-          <Loader />
           <ErrorModal />
           <WarningModal />
         </Dialog>
