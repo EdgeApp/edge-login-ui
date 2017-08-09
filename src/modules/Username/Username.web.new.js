@@ -7,22 +7,29 @@ import Input from 'react-toolbox/lib/input'
 import styles from './Username.webStyle.scss'
 
 import { checkUsername } from './Username.middleware'
-import { changeUsernameValue } from './Username.action'
+import { changeUsernameValue, error, clearError } from './Username.action'
 import { changeSignupPage } from '../Signup/Signup.action'
-import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 
 class Username extends Component {
   _handleSubmit = () => {
     if (this.props.username.length < 3) {
       return this.props.dispatch(
-        openErrorModal(t('activity_signup_insufficient_username_message'))
+        error('Username must be at least 3 characters.')
       )
     }
     if (this.props.username.length >= 3) {
       return this.props.dispatch(
         checkUsername(
           this.props.username,
-          () => this.props.dispatch(changeSignupPage('pin'))
+          (errorMessage) => {
+            if (errorMessage) {
+              return this.props.dispatch(error(errorMessage))
+            }
+            if (!errorMessage) {
+              this.props.dispatch(clearError())
+              return this.props.dispatch(changeSignupPage('pin'))
+            }
+          }
         )
       )
     }
@@ -58,7 +65,6 @@ class Username extends Component {
     }
   }
   render () {
-    console.log(this.props.loader)
     return (
       <div className={styles.container}>
         <p className={styles.header}>Choose a Username</p>
@@ -71,6 +77,7 @@ class Username extends Component {
           value={this.props.username}
           label={t('fragment_landing_username_hint')}
           className={styles.input}
+          error={this.props.error}
         />
         <div className={styles.bullets}>
           <p className={styles.bullet}><span className={styles.bulletIcon}>•</span> This is not your email or real name.</p>
@@ -84,6 +91,7 @@ class Username extends Component {
 }
 
 export default connect(state => ({
-  username: state.username,
+  username: state.username.username,
+  error: state.username.error,
   loader: state.loader
 }))(Username)

@@ -11,3 +11,14 @@ export const username = (state = '', action) => {
       return state
   }
 }
+
+export const error = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.ERROR_USERNAME_VALUE :
+      return action.data
+    case ACTION.CLEAR_ERROR_USERNAME_VALUE :
+      return ''
+    default:
+      return state
+  }
+}
