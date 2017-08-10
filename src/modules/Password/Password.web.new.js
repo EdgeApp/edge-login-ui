@@ -145,7 +145,7 @@ class Password extends Component {
                 value={password}
                 className={styles.form}
                 error={error.password}
-                ref={(input) => { this.password = input }}
+                ref={input => { this.password = input }}
               />
               <img src={inputState ? eyeHide : eyeShow} className={styles.icon} onClick={this.toggleRevealPassword} />
             </div>
@@ -158,7 +158,7 @@ class Password extends Component {
               value={passwordRepeat}
               className={styles.form}
               error={error.passwordRepeat}
-              ref={(input) => { this.passwordRepeat = input }}
+              ref={input => { this.passwordRepeat = input }}
             />
           </div>
         </div>
