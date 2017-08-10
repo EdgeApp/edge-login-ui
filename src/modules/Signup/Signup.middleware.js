@@ -21,7 +21,7 @@ export const signupUser = (username, password, pin, callback) => {
               pin: pin
             })
           )
-          callback()
+          return callback(null)
         }
       })
     })

@@ -6,18 +6,47 @@
   font-weight: 700;
 }
 
+.baseWidth {
+  width :870px;
+}
+
 .dialogLogin {
-    width :870px;
-    height :586px;
+  @extend .baseWidth;
+  height : 550px;
+}
+
+.dialogPin {
+  @extend .baseWidth;
+  height : 472px;
+}
+
+.dialogPassword {
+  @extend .baseWidth;
+  height : 565px;
+}
+
+.dialogSignUp {
+  @extend .baseWidth;
+  height : 550px;
 }
 
 .dialogAccount {
-    width :870px;
-    height :466px;
+  @extend .baseWidth;
+  height : 466px;
+}
+
+.dialogChangePassword {
+  @extend .baseWidth;
+  height : 579px;
+}
+
+.dialogPasswordRecovery {
+  @extend .baseWidth;
+  height : 677px;
 }
 
 .topLevelDialog section {
-    padding: 0;
+  padding: 0;
 }
 
 .error {

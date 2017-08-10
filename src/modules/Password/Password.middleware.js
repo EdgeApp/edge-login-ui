@@ -1,5 +1,4 @@
 import { passwordNotificationHide, changePasswordValue } from './Password.action'
-import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { signupUser } from '../Signup/Signup.middleware'
 
 export const checkPassword = (password, passwordRepeat, validation, username, pinNumber, callback) => {
@@ -9,17 +8,26 @@ export const checkPassword = (password, passwordRepeat, validation, username, pi
     imports.abcContext(context => {
       const check = context.checkPasswordRules(password)
       if (!check.passed) {
-        return dispatch(openErrorModal(t('activity_signup_insufficient_password')))
+        return callback({
+          type: 'password',
+          message: t('activity_signup_insufficient_password')
+        })
       }
       if (password !== passwordRepeat) {
-        return dispatch(openErrorModal(t('activity_signup_passwords_dont_match')))
+        return callback({
+          type: 'passwordRepeat',
+          message: 'Password does not match'
+        })
       }
       if (check.passed && password === passwordRepeat) {
         return dispatch(
           signupUser(username, password, pinNumber, callback)
         )
       } else {
-        return dispatch(openErrorModal(t('activity_signup_insufficient_password')))
+        return callback({
+          type: 'password',
+          message: t('activity_signup_insufficient_password')
+        })
       }
     })
   }

@@ -1,5 +1,45 @@
 @import "~theme/SignUpStyle";
 @import "~theme/GlobalButton";
+@import "~theme/buttons";
+@import "~theme/input";
+
+.container {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: flex-start;
+  -webkit-justify-content:  flex-start;
+  align-items: center;
+  -webkit-align-items: center;
+  height: 344px;
+
+  .header {
+    color: #909091;
+    font-size: 32px;
+    line-height: 36px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .password {
+    width: 200px;
+    .input > span[class*="error"] {
+      display: block;
+      text-align: center;
+      margin: 0px auto;
+    }
+  }
+
+  .bullet {
+    color: #909091;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+}
 
 .containerBody {
   display: flex;
@@ -13,8 +53,4 @@
 
   align-items: center;
   -webkit-align-items: center;
-}
-
-.inputDiv {
-  width: 200px;
 }

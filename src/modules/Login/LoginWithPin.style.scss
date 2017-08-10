@@ -83,18 +83,18 @@
     transform: rotate(90deg);
 }
 
-@media only screen and (min-width : $layout-breakpoint-xs) {
-  .CachedUsers {
-    width: 100%;
-  }
-}
-
-@media only screen and (min-width : $layout-breakpoint-sm) {
-  .CachedUsers {
-    width: auto;
-  }
-}
-
+// @media only screen and (min-width : $layout-breakpoint-xs) {
+//   .CachedUsers {
+//     width: 100%;
+//   }
+// }
+//
+// @media only screen and (min-width : $layout-breakpoint-sm) {
+//   .CachedUsers {
+//     width: auto;
+//   }
+// }
+//
 .loginTimeout {
   color: red;
   min-height: 2rem;

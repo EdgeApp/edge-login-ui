@@ -121,10 +121,9 @@ class Password extends Component {
           <div className={styles.inputPasswordFieldDiv}>
             <div style={{flexGrow: 1}}>
               <Input
-                ref='signupPassword'
                 autoFocus
-                type={this.props.inputState ? 'text' : 'password'}
                 name='password'
+                type={this.props.inputState ? 'text' : 'password'}
                 onKeyPress={this.passwordKeyPressed}
                 onChange={this._handleOnChangePassword}
                 value={this.props.password}

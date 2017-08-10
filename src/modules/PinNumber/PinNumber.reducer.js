@@ -12,16 +12,11 @@ export const pin = (state = '', action) => {
   }
 }
 
-export const pinDummy = (state = '', action) => {
+export const error = (state = '', action) => {
   switch (action.type) {
-    case ACTION.CHANGE_PIN_NUMBER_VALUE:
-      const len = action.data.length
-      let retval = ''
-      for (let i = 0; i < len; i++) {
-        retval += '·'
-      }
-      return retval
-    case GET_DETAILS :
+    case ACTION.ERROR_PIN_NUMBER_VALUE :
+      return action.data
+    case ACTION.CLEAR_ERROR_PIN_NUMBER_VALUE :
       return ''
     default:
       return state

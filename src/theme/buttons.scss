@@ -21,6 +21,19 @@
   background-color: #2A5799;
 }
 
+.primaryLoad {
+	height: 50px;
+  width: 200px;
+  border-radius: 3px;
+  border-style: none;
+  background-color: #2A5799;
+  color: #FFFFFF;
+  font-size: 18px;
+  line-height: 17px;
+  text-align: center;
+  margin: 0px 5px;
+}
+
 .secondary {
 	height: 50px;
   width: 200px;
@@ -42,6 +55,19 @@
 
 .secondary:active {
   background-color: #58595C;
+}
+
+.secondaryLoad {
+	height: 50px;
+  width: 200px;
+  border-radius: 3px;
+  border-style: none;
+  background-color: rgba(144,144,145,0.6);
+  color: #FFFFFF;
+  font-size: 18px;
+  line-height: 17px;
+  text-align: center;
+  margin: 0px 5px;
 }
 
 .link {

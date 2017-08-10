@@ -48,3 +48,25 @@ export const notification = (state = false, action) => {
       return state
   }
 }
+
+export const errorPassword = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.ERROR_PASSWORD_VALUE :
+      return action.data
+    case ACTION.CLEAR_PASSWORD_VALUE :
+      return ''
+    default:
+      return state
+  }
+}
+
+export const errorPasswordRepeat = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.ERROR_PASSWORD_REPEAT_VALUE :
+      return action.data
+    case ACTION.CLEAR_PASSWORD_VALUE :
+      return ''
+    default:
+      return state
+  }
+}

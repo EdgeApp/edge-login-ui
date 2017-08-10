@@ -1,6 +1,5 @@
-@import "~theme/SignUpStyle";
 @import "~theme/buttons";
-@import "~theme/loader";
+@import "~theme/input";
 
 .container {
 
@@ -18,7 +17,7 @@
 
   flex: 1;
 
-  height: 422px;
+  height: 280px;
 
   .header {
     color: #909091;
@@ -27,28 +26,6 @@
     text-align: center;
     margin-top: 40px;
     margin-bottom: 30px;
-  }
-
-  .input {
-    width: 300px;
-  }
-
-  .bullets {
-    width: 595px;
-    margin-bottom: 40px;
-
-    .bullet {
-      text-align: left;
-      color: #909091;
-      font-size: 16px;
-      margin: 10px 0px;
-
-      .bulletIcon {
-        font-size: 22px;
-        color: #4977BB;
-        margin: 0px 10px;
-      }
-    }
   }
 
 }

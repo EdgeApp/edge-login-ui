@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 import styles from './AccountManagement.webStyle.scss'
 // import t from 'lib/web/LocaleStrings'
@@ -10,7 +11,7 @@ import styles from './AccountManagement.webStyle.scss'
 // import PasswordRecoverySuccess from '../PasswordRecovery/PasswordRecoverySuccess.web'
 import EnterPassword from '../Modals/AccountManagementPassword/AccountManagementPassword.web.js'
 
-import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
+// import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
 
 import pinIcon from '../../img/account-settings/PIN-W.png'
 import passwordIcon from '../../img/account-settings/password-W.png'
@@ -22,18 +23,24 @@ class AccountManager extends Component {
       <div className={styles.container}>
         <p className={styles.header}>Account name: AirbitzAugur</p>
         <div className={styles.main}>
-          <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
-            <img src={pinIcon} />
-            <p className={styles.label}>Change Pin</p>
-          </div>
-          <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
-            <img src={passwordIcon} />
-            <p className={styles.label}>Change Password</p>
-          </div>
-          <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal())}>
-            <img src={recoveryIcon} />
-            <p className={styles.label}>Setup / Change<br />Password Recovery</p>
-          </div>
+          <Link to='/changepin'>
+            <div className={styles.square}>
+              <img src={pinIcon} />
+              <p className={styles.label}>Change Pin</p>
+            </div>
+          </Link>
+          <Link to='/changepassword'>
+            <div className={styles.square}>
+              <img src={passwordIcon} />
+              <p className={styles.label}>Change Password</p>
+            </div>
+          </Link>
+          <Link to='/passwordrecovery'>
+            <div className={styles.square}>
+              <img src={recoveryIcon} />
+              <p className={styles.label}>Setup / Change<br />Password Recovery</p>
+            </div>
+          </Link>
           <EnterPassword />
         </div>
       </div>

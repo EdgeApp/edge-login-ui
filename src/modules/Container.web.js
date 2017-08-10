@@ -4,7 +4,6 @@ import { Dialog } from 'react-toolbox/lib/dialog'
 import FontIcon from 'react-toolbox/lib/font_icon'
 import { selectUserToLogin, setCachedUsers, setCachedUsersWithPin } from './CachedUsers/CachedUsers.action'
 
-import Loader from './Loader/Loader.web'
 import ErrorModal from './ErrorModal/ErrorModal.web'
 import WarningModal from './WarningModal/WarningModal.web'
 import abcctx from 'lib/web/abcContext'
@@ -74,6 +73,33 @@ class Container extends Component {
     this.loadData()
   }
 
+  selectDialogHeight = (pathname) => {
+    const checkSignupPage = () => {
+      switch (this.props.signupPage) {
+        case 'pin':
+          return styles.dialogPin
+        case 'password':
+          return styles.dialogPassword
+        default:
+          return styles.dialogSignUp
+      }
+    }
+    switch (pathname) {
+      case '/account':
+        return styles.dialogAccount
+      case '/signup':
+        return checkSignupPage()
+      case '/changepin':
+        return styles.dialogAccount
+      case '/changepassword':
+        return styles.dialogChangePassword
+      case '/passwordrecovery':
+        return styles.dialogPasswordRecovery
+      default:
+        return styles.dialogLogin
+    }
+  }
+
   render () {
     return (
       <div className='app'>
@@ -81,13 +107,12 @@ class Container extends Component {
           active
           onEscKeyDown={this._handleToggle}
           onOverlayClick={this._handleToggle}
-          className={this.props.location.pathname === '/account' ? styles.dialogAccount : styles.dialogLogin}
+          className={this.selectDialogHeight(this.props.location.pathname)}
         >
           <LayoutTemplate theme={layoutTheme}>
             <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
             {this.props.children}
           </LayoutTemplate>
-          <Loader />
           <ErrorModal />
           <WarningModal />
         </Dialog>
@@ -100,6 +125,7 @@ class Container extends Component {
 export default connect(state => ({
 
   loader: state.loader,
+  signupPage: state.signupPage,
   edgeObject: state.login.edgeLoginResults,
   containerNotification: state.container.containerNotification,
   containerNotificationValues: state.container.containerNotificationValues
