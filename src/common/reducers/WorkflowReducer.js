@@ -3,8 +3,8 @@ import * as Constants from '../../common/constants'
 const initialState = {
   currentSceneIndex: 0,
   currentKey: 'firstLoadWF',
-  firstLoadWF: [],
-  initalizeWF: [],
+  firstLoadWF: 1,
+  initalizeWF: 1,
   createWF: 5,
   passwordWF: [],
   pinWF: [],

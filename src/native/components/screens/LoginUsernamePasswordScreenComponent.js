@@ -52,7 +52,7 @@ export default class LandingScreenComponent extends Component {
             secureTextEntry
           />
           <Button
-            onPress={this.onStartCreate.bind(this)}
+            onPress={this.onForgotPassword.bind(this)}
             label={'Forgot Password'}
             downStyle={LoginPasswordScreenStyle.forgotButton.downStyle}
             downTextStyle={LoginPasswordScreenStyle.forgotButton.downTextStyle}
@@ -93,8 +93,8 @@ export default class LandingScreenComponent extends Component {
       password: data
     })
   }
-  onStartCreate () {
-    // this.props.userLogin({ username: 'Bob20', password: 'Bob20' })
+  onForgotPassword () {
+    this.props.onForgotPassword()
   }
   onStartLogin () {
     this.setState({
@@ -106,6 +106,6 @@ export default class LandingScreenComponent extends Component {
     })
   }
   onCreateAccount () {
-    // this.props.userLogin({ username: 'Bob20', password: 'Bob20' })
+    this.props.gotoCreatePage()
   }
 }

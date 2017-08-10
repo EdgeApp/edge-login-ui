@@ -27,6 +27,13 @@ export function previousUsersReturned (data) {
   }
 }
 
+export function testAction () {
+  console.log('this is a todo stubb.. dont use ')
+  return {
+    type: 'DO NOTHING '
+  }
+}
+
 async function getDiskStuff (context) {
   const userList = await context.listUsernames().then(usernames =>
     Promise.all(

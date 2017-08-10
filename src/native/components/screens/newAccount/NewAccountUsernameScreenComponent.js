@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { Button } from '../../common'
 // import * as Constants from '../../../common/constants'
 
 export default class LandingScreenComponent extends Component {
   render () {
+    const { NewAccountUsernameScreenStyle } = this.props.styles
     return (
-      <View>
-        <Text>
-          Holding Text New Account Username Screen
-        </Text>
-        <Button onPress={this.onNextPress.bind(this)}>Get started </Button>
+      <View style={NewAccountUsernameScreenStyle.screen}>
+        <View style={NewAccountUsernameScreenStyle.header} />
+        <View style={NewAccountUsernameScreenStyle.pageContainer}>
+          <Button
+            onPress={this.onNextPress.bind(this)}
+            downStyle={NewAccountUsernameScreenStyle.nextButton.downStyle}
+            downTextStyle={
+              NewAccountUsernameScreenStyle.nextButton.downTextStyle
+            }
+            upStyle={NewAccountUsernameScreenStyle.nextButton.upStyle}
+            upTextStyle={NewAccountUsernameScreenStyle.nextButton.upTextStyle}
+            label={'NEXT'}
+          />
+        </View>
       </View>
     )
   }

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/newAccount/NewAccountWelcomeScreenComponent'
 import * as actions from '../../../../common/actions/'
+import * as Constants from '../../../../common/constants'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
@@ -11,7 +12,8 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    nextScreen: () => dispatch(actions.nextScreen())
+    nextScreen: () => dispatch(actions.nextScreen()),
+    exitScreen: () => dispatch(actions.startWorkflow(Constants.WORKFLOW_INIT))
   }
 }
 

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import LinkedComponent from '../../components/screens/LoginUsernamePasswordScreenComponent'
-import * as loginAction from '../../../common/actions'
+import * as action from '../../../common/actions'
+import * as Constants from '../../../common/constants'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
@@ -13,7 +14,9 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    userLogin: (data) => dispatch(loginAction.userLogin(data))
+    userLogin: (data) => dispatch(action.userLogin(data)),
+    gotoCreatePage: () => dispatch(action.startWorkflow(Constants.WORKFLOW_CREATE)),
+    onForgotPassword: () => dispatch(action.testAction())
   }
 }
 

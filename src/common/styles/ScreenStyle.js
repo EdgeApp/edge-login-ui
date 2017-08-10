@@ -5,6 +5,12 @@ const ScreenStyle = {
   backgroundColor: '#CCCCCC'
 }
 
+const ScreenRow = {
+  position: 'relative',
+  width: '100%',
+  flex: 1
+}
+
 const BackgroundScreenImageStyle = {
   flex: 1,
   width: null,
@@ -12,5 +18,21 @@ const BackgroundScreenImageStyle = {
   resizeMode: 'stretch'
 }
 
+const HeaderContainerStyle = {
+  position: 'relative',
+  flex: 1,
+  width: '100%'
+}
+
+const PageContainerWithHeaderStyle = {
+  position: 'relative',
+  flex: 6,
+  width: '100%'
+
+}
+
+export {HeaderContainerStyle}
+export {PageContainerWithHeaderStyle}
 export {BackgroundScreenImageStyle}
 export {ScreenStyle}
+export {ScreenRow}
