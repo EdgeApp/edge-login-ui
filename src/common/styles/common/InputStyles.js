@@ -1,7 +1,6 @@
 const InputStyles = {
   container: {
     position: 'relative',
-    flex: 1,
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     backgroundColor: '#cccccc',
@@ -9,7 +8,6 @@ const InputStyles = {
   },
   inputStyle: {
     position: 'relative',
-    flex: 1,
     color: '#FFFFFF',
     paddingRight: 5,
     paddingLeft: 5,

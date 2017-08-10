@@ -5,13 +5,15 @@ import * as loginAction from '../../../../common/actions'
 export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
-    workflow: state.workflow
+    workflow: state.workflow,
+    username: state.login.username,
+    usernameErrorMessage: state.login.usernameErrorMessage
   }
 }
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    validateUsername: (data) => dispatch(loginAction.validateUsername(data))
+    checkUsernameForAvailabilty: (data) => dispatch(loginAction.checkUsernameForAvailabilty(data))
   }
 }
 

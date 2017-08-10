@@ -116,11 +116,40 @@ export function userLogin (data) {
     }, 300)
   }
 }
-
+// validateUsername check
 export function validateUsername (data) {
   return (dispatch, getState, imports) => {
     console.log('We are validating..USERNAME so lets do some shit. ' + data)
-    dispatch(updateUsername(data))
+    const obj = {
+      username: data,
+      error: null
+    }
+    dispatch(updateUsername(obj))
+  }
+}
+
+export function checkUsernameForAvailabilty (data) {
+  return (dispatch, getState, imports) => {
+    let context = imports.context
+    // dispatch(openLoading()) Legacy dealt with state for showing a spinner
+    // the timeout is a hack until we put in interaction manager.
+    setTimeout(() => {
+      context
+        .usernameAvailable(data)
+        .then(async response => {
+          console.log('WE GOT A USERNAME ')
+          const obj = {
+            username: data,
+            error: null
+          }
+          dispatch(updateUsername(obj))
+          dispatch(WorkflowActions.nextScreen())
+        })
+        .catch(e => {
+          console.log('Big ficking error ')
+          console.log(e)
+        })
+    }, 300)
   }
 }
 export function validatePassword (data) {

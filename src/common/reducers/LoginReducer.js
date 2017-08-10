@@ -14,15 +14,16 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case Constants.LOGIN_USERNAME_PASSWORD:
-      console.log('HEY NOW YOUR AN ALL STAR ')
-      console.log(action.data)
-      console.log(action)
-      return {...state, loginSuccess: true}
+      return { ...state, loginSuccess: true }
     case Constants.AUTH_UPDATE_USERNAME:
-      return {...state, username: action.data}
+      console.log('IN REDUCER ')
+      console.log(action.data)
+      return {
+        ...state,
+        username: action.data.username,
+        usernameErrorMessage: action.data.error
+      }
     default:
-      console.log('returning default state ')
-      console.log(state)
       return state
   }
 }

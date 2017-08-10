@@ -10,6 +10,10 @@ const NewAccountUsernameScreenStyle = {
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
     downStyle: Styles.PrimaryButtonDownStyle
+  },
+  inputBox: {
+    container: Styles.InputStyles.container,
+    inputStyle: {...Styles.InputStyles.inputStyle, width: '100%'}
   }
 }
 
