@@ -46,6 +46,10 @@ const store = combineReducers({
     password: PasswordStates.password,
     passwordRepeat: PasswordStates.passwordRepeat,
     notification: PasswordStates.notification,
+    error: combineReducers({
+      password: PasswordStates.errorPassword,
+      passwordRepeat: PasswordStates.errorPasswordRepeat
+    }),
     validation: combineReducers({
       passwordValid: PasswordValidation.passwordValid,
       upperCaseChar: PasswordValidation.upperCaseChar,

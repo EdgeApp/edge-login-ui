@@ -10,15 +10,15 @@ class Container extends Component {
   render () {
     switch (this.props.page) {
       case 'username':
-        return <Username />
+        return <Username {...this.props} />
       case 'pin' :
-        return <PinNumber />
+        return <PinNumber {...this.props} />
       case 'password' :
-        return <Password />
+        return <Password {...this.props} />
       case 'review' :
-        return <ReviewDetails />
+        return <ReviewDetails {...this.props} />
       default:
-        return <Username />
+        return <Username {...this.props} />
     }
   }
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 
 import FontIcon from 'react-toolbox/lib/font_icon'
 import Input from 'react-toolbox/lib/input'
@@ -14,7 +13,10 @@ import {
   showPassword,
   hidePassword,
   changePasswordValue,
-  changePasswordRepeatValue
+  changePasswordRepeatValue,
+  errorPasswordValue,
+  errorPasswordRepeatValue,
+  clearPasswordError
 } from './Password.action'
 
 import eyeShow from '../../img/create-account/show-password.png'
@@ -22,7 +24,22 @@ import eyeHide from '../../img/create-account/hide-password.png'
 
 class Password extends Component {
   _handleSubmit = () => {
-    const callback = () => this.props.router.push('/review')
+    const callback = (error) => {
+      if (error) {
+        if (error.type === 'password') {
+          this.props.dispatch(clearPasswordError())
+          return this.props.dispatch(errorPasswordValue(error.message))
+        }
+        if (error.type === 'passwordRepeat') {
+          this.props.dispatch(clearPasswordError())
+          return this.props.dispatch(errorPasswordRepeatValue(error.message))
+        }
+      }
+      if (!error) {
+        this.props.dispatch(clearPasswordError())
+        return this.props.history.push('/review')
+      }
+    }
     this.props.dispatch(
       checkPassword(
         this.props.password,
@@ -44,17 +61,12 @@ class Password extends Component {
       )
     )
   }
-  _handleBack = () => {
-    if (this.props.loader.loading === false) {
-      return this.props.dispatch(changeSignupPage('pin'))
-    }
-  }
   _handlePasswordNotification = () => {
     this.props.dispatch(passwordNotificationShow())
   }
   passwordKeyPressed = (e) => {
     if (e.charCode === 13) {
-      this.refs.passwordRepeat.getWrappedInstance().focus()
+      this.passwordRepeat.getWrappedInstance().focus()
     }
   }
   _handleOnChangePassword = (password) => {
@@ -76,8 +88,26 @@ class Password extends Component {
       return this._handleSubmit()
     }
   }
+  _renderButtonRows = () => {
+    if (!this.props.loader.loading) {
+      return (
+        <div className={styles.rowButtons}>
+          <button className={styles.secondary} onClick={e => this.props.dispatch(changeSignupPage('pin'))}>Back</button>
+          <button className={styles.primary} onClick={this._handleSubmit}>Next</button>
+        </div>
+      )
+    }
+    if (this.props.loader.loading) {
+      return (
+        <div className={styles.rowButtons}>
+          <button className={styles.secondaryLoad}>Back</button>
+          <button className={styles.primaryLoad}><div className={styles.loader} /></button>
+        </div>
+      )
+    }
+  }
   render () {
-    const { inputState, validation, password, passwordRepeat } = this.props
+    const { inputState, validation, password, passwordRepeat, error } = this.props
     return (
       <div className={styles.container}>
         <p className={styles.header}>Change your password</p>
@@ -114,6 +144,8 @@ class Password extends Component {
                 onChange={this._handleOnChangePassword}
                 value={password}
                 className={styles.form}
+                error={error.password}
+                ref={(input) => { this.password = input }}
               />
               <img src={inputState ? eyeHide : eyeShow} className={styles.icon} onClick={this.toggleRevealPassword} />
             </div>
@@ -125,15 +157,12 @@ class Password extends Component {
               onChange={this._handleOnChangePasswordRepeat}
               value={passwordRepeat}
               className={styles.form}
+              error={error.passwordRepeat}
+              ref={(input) => { this.passwordRepeat = input }}
             />
           </div>
         </div>
-        <div className={styles.rowButtons}>
-          <Link to='/account'>
-            <button className={styles.secondary}>Back</button>
-          </Link>
-          <button className={styles.primary}>Submit</button>
-        </div>
+        {this._renderButtonRows()}
       </div>
     )
   }
@@ -144,7 +173,8 @@ export default connect(state => ({
   password: state.password.password,
   passwordRepeat: state.password.passwordRepeat,
   validation: state.password.validation,
-  username: state.username,
-  pin: state.pin,
-  loader: state.loader
+  username: state.username.username,
+  pin: state.pin.password,
+  loader: state.loader,
+  error: state.password.error
 }))(Password)
