@@ -58,6 +58,32 @@ export function getPreviousUsers (context) {
   }
 }
 
+export function userLoginWithPin (data) {
+  return (dispatch, getState, imports) => {
+    let context = imports.context
+    let callback = imports.callback
+    // dispatch(openLoading()) Legacy dealt with state for showing a spinner
+    // the timeout is a hack until we put in interaction manager.
+    setTimeout(() => {
+      context
+        .loginWithPIN(data.username, data.pin, null, null)
+        .then(async response => {
+          await context.io.folder
+            .file('lastuser.json')
+            .setText(JSON.stringify({ username: data.username }))
+            .catch(e => null)
+          console.log('WE GOT THIS LOGIN WITH PIN')
+          dispatch(logSuccess())
+          callback(null, response)
+        })
+        .catch(e => {
+          console.log('Big ficking error PIN ')
+          console.log(e)
+        })
+    }, 300)
+  }
+}
+
 export function userLogin (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context

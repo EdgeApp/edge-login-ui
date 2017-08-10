@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import * as Constants from '../../common/constants'
 import LoadingScreenConnector
   from '../connectors/screens/LoadingScreenConnector'
@@ -12,11 +12,13 @@ import NewAccountUsernameScreenConnector
 import NewAccountPasswordScreenConnector
   from '../connectors/screens/newAccount/NewAccountPasswordScreenConnector'
 import NewAccountPinScreenConnector
-  from '../connectors/screens/newAccount/SetAccountPinScreenConnector.js'
+  from '../connectors/screens/newAccount/SetAccountPinScreenConnector'
 import NewAccountWalletCreationScreenConnector
   from '../connectors/screens/newAccount/NewAccountWalletCreationScreenConnector'
 import LoginUsernamePasswordScreenConnector
-  from '../connectors/screens/LogInUsernamePasswordScreenConnector.js'
+  from '../connectors/screens/LogInUsernamePasswordScreenConnector'
+import PinLoginScreenConnector
+  from '../connectors/screens/PinLoginScreenConnector'
 
 export default class LoginAppComponent extends Component {
   componentWillMount () {
@@ -95,10 +97,6 @@ export default class LoginAppComponent extends Component {
   }
 
   getPinScreen (arg) {
-    return (
-      <Text>
-        Holding Text Pin Log In screen
-      </Text>
-    )
+    return <PinLoginScreenConnector styles={this.props.styles} />
   }
 }
