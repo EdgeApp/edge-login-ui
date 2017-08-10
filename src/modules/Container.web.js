@@ -78,6 +78,8 @@ class Container extends Component {
       switch (this.props.signupPage) {
         case 'pin':
           return styles.dialogPin
+        case 'password':
+          return styles.dialogPassword
         default:
           return styles.dialogSignUp
       }

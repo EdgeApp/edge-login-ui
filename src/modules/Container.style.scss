@@ -20,6 +20,11 @@
   height : 472px;
 }
 
+.dialogPassword {
+  @extend .baseWidth;
+  height : 565px;
+}
+
 .dialogSignUp {
   @extend .baseWidth;
   height : 550px;

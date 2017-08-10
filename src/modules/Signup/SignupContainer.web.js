@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Username from '../Username/Username.web.new.js'
 import PinNumber from '../PinNumber/PinNumber.web.new.js'
-import Password from '../Password/Password.web'
+import Password from '../Password/Password.web.new.js'
 import ReviewDetails from '../ReviewDetails/ReviewDetails.web'
 
 class Container extends Component {
