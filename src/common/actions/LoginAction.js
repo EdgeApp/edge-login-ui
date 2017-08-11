@@ -19,6 +19,18 @@ export function updateUsername (data) {
     data
   }
 }
+export function updatePassword (data) {
+  return {
+    type: Constants.AUTH_UPDATE_PASSWORD,
+    data
+  }
+}
+export function updateConfirmPassword (data) {
+  return {
+    type: Constants.AUTH_UPDATE_CONFIRM_PASSWORD,
+    data
+  }
+}
 
 export function previousUsersReturned (data) {
   return {
@@ -79,7 +91,6 @@ export function userLoginWithPin (data) {
             .file('lastuser.json')
             .setText(JSON.stringify({ username: data.username }))
             .catch(e => null)
-          console.log('WE GOT THIS LOGIN WITH PIN')
           dispatch(logSuccess())
           callback(null, response)
         })
@@ -120,6 +131,7 @@ export function userLogin (data) {
 export function validateUsername (data) {
   return (dispatch, getState, imports) => {
     console.log('We are validating..USERNAME so lets do some shit. ' + data)
+    // TODO evaluate client side evaluations.
     const obj = {
       username: data,
       error: null
@@ -154,10 +166,21 @@ export function checkUsernameForAvailabilty (data) {
 }
 export function validatePassword (data) {
   return (dispatch, getState, imports) => {
-    console.log('submit pin. ')
-    dispatch(WorkflowActions.nextScreen())
+    console.log('Validating the password')
+    let context = imports.context
+    // dispatch(openLoading()) Legacy dealt with state for showing a spinner
+    // the timeout is a hack until we put in interaction manager.
+    const passwordEval = context.checkPasswordRules(data)
+    console.log('passwordEval')
+    console.log(passwordEval)
+    var obj = {
+      password: data,
+      passwordStatus: passwordEval
+    }
+    dispatch(updatePassword(obj))
   }
 }
+
 export function createUser (data) {
   return (dispatch, getState, imports) => {
     console.log('Create User ')

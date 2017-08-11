@@ -7,6 +7,13 @@ class Button extends Component {
       pressed: false
     }
   }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.isThinking !== this.state.isThinking) {
+      this.setState({
+        isThinking: nextProps.isThinking
+      })
+    }
+  }
   render () {
     return (
       <TouchableHighlight
@@ -15,7 +22,7 @@ class Button extends Component {
           this.state.pressed ? this.props.downStyle : {}
         ]}
         onPress={this.onPress.bind(this)}
-        disabled={this.state.isThinking}
+        disabled={this.props.isThinking}
         onHideUnderlay={() => {
           this.setState({ pressed: false })
         }}
@@ -28,7 +35,7 @@ class Button extends Component {
     )
   }
   renderInside () {
-    if (!this.state.isThinking) {
+    if (!this.props.isThinking) {
       return (
         <Text style={this.props.upTextStyle}>
           {this.props.label}

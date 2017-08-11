@@ -16,4 +16,6 @@ export const LOGIN_USERNAME_PASSWORD = 'USERNAME_PASSWORD'
 export const SET_PREVIOUS_USERS = 'SET_PREVIOUS_USERS'
 
 export const AUTH_UPDATE_USERNAME = 'authUpdateUsername'
+export const AUTH_UPDATE_PASSWORD = 'authUpdatePassword'
+export const AUTH_UPDATE_CONFIRM_PASSWORD = 'authUpdatePasswordConfirm'
 

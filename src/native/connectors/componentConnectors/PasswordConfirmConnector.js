@@ -5,15 +5,15 @@ import * as loginAction from '../../../common/actions'
 export const mapStateToProps = (state, ownProps) => {
   return {
     style: ownProps.style,
-    value: state.login.password,
-    status: state.login.passwordStatus,
+    value: state.login.confirmPassword,
+    error: state.login.confirmPasswordErrorMessage,
     secureTextEntry: true
   }
 }
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onChangeText: (data) => dispatch(loginAction.validatePassword(data))
+    onChangeText: (data) => dispatch(loginAction.updateConfirmPassword(data))
   }
 }
 

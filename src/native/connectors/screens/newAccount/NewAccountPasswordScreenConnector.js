@@ -1,19 +1,21 @@
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/newAccount/NewAccountPasswordScreenComponent'
-import * as loginAction from '../../../../common/actions'
+import * as actions from '../../../../common/actions'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
-    auth: state.login,
+    password: state.login.password,
+    passwordStatus: state.login.passwordStatus,
+    confirmPassword: state.login.confirmPassword,
+    confirmPasswordErrorMessage: state.login.confirmPasswordErrorMessage,
     workflow: state.workflow
   }
 }
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    validatePassword: (data) => dispatch(loginAction.validatePassword(data)),
-    skipPassword: (data) => dispatch(loginAction.skipPassword(data))
+    nextScreen: () => dispatch(actions.nextScreen())
   }
 }
 
