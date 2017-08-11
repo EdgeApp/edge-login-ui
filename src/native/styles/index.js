@@ -5,4 +5,5 @@ export * from './screens/PinLoginScreenStyle'
 export * from './screens/NewAccountWelcomeScreenStyle'
 export * from './screens/NewAccountUsernameScreenStyle'
 export * from './screens/NewAccountPasswordScreenStyle'
+export * from './screens/SetAccountPinScreenStyle'
 

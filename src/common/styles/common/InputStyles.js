@@ -1,18 +1,18 @@
+import * as Colors from '../../../common/constants/Colors'
+
 const InputStyles = {
   container: {
     position: 'relative',
-    borderBottomColor: 'black',
+    borderBottomColor: Colors.PRIMARY,
     borderBottomWidth: 1,
-    backgroundColor: '#cccccc',
     width: '100%'
   },
   inputStyle: {
     position: 'relative',
-    color: '#FFFFFF',
-    paddingRight: 5,
-    paddingLeft: 5,
-    fontSize: 18,
-    lineHeight: 23
+    color: '#FFFFFF'
+    // fontSize: 24,
+    // lineHeight: 40,
+   // margin: 20
   }
 }
 

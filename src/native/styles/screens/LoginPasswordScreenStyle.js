@@ -3,32 +3,46 @@ import * as Colors from '../../../common/constants/Colors'
 
 const LoginPasswordScreenStyle = {
   container: Styles.ScreenStyle,
-  backgroundImage: {...Styles.BackgroundScreenImageStyle, alignItems: 'center'},
+  backgroundImage: {
+    ...Styles.BackgroundScreenImageStyle,
+    alignItems: 'center'
+  },
   featureBox: {
     position: 'relative',
     top: 55,
     width: 260,
     height: 376,
-    backgroundColor: Colors.OVERLAY_BOX,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    padding: '10%'
+    backgroundColor: Colors.OVERLAY_BOX
   },
   featureBoxIconHeader: {
-    flex: 1,
-    width: '100%',
-    position: 'relative',
-    backgroundColor: Colors.ACCENT_GREEN
-  },
-  featureBoxBody: {
     flex: 3,
     width: '100%',
+    position: 'relative',
     justifyContent: 'space-around',
     alignItems: 'center'
   },
-  inputBoxes: {
+  logo: Styles.LogoImageStyles,
+  featureBoxBody: {
+    flex: 7,
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingLeft: '10%',
+    paddingRight: '10%',
+    paddingTop: '10%'
+  },
+  inputsBox: {
+    flex: 1,
+    width: '100%'
+  },
+  buttonsBox: {
+    flex: 3,
+    width: '100%',
+    justifyContent: 'space-around'
+  },
+  input: {
     container: Styles.InputStyles.container,
-    inputStyle: {...Styles.InputStyles.inputStyle, width: '100%'}
+    inputStyle: { ...Styles.InputStyles.inputStyle, width: '100%' }
   },
   forgotButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
@@ -37,7 +51,7 @@ const LoginPasswordScreenStyle = {
     downStyle: Styles.TextOnlyButtonDownStyle
   },
   loginButton: {
-    upStyle: {...Styles.PrimaryButtonUpStyle, width: '100%'},
+    upStyle: { ...Styles.PrimaryButtonUpStyle, width: '100%' },
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
     downStyle: Styles.PrimaryButtonDownStyle
@@ -50,4 +64,4 @@ const LoginPasswordScreenStyle = {
   }
 }
 
-export {LoginPasswordScreenStyle}
+export { LoginPasswordScreenStyle }

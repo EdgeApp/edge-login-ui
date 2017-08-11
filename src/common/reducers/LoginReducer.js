@@ -4,14 +4,16 @@ const initialState = {
   username: null,
   password: null,
   confirmPassword: null,
-  pin: null,
-  usernameErrorMessage: null,
+  pin: '1111',
+  loginSuccess: false,
+  creationSuccess: false,
   passwordStatus: null,
+  pinError: null,
+  usernameErrorMessage: null,
   confirmPasswordErrorMessage: null,
   createErrorMessage: null,
   loginPasswordErrorMessage: null,
-  loginPinErrorMessage: null,
-  loginSuccess: false
+  loginPinErrorMessage: null
 }
 export default function (state = initialState, action) {
   let em = null

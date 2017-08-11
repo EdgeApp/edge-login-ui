@@ -29,7 +29,7 @@
     "start": "webpack-dev-server --open"
   },
   "dependencies": {
-    "airbitz-core-js": "^0.3.4",
+    "airbitz-core-js": "git+ssh://git@github.com/Airbitz/airbitz-core-js.git",
     "async": "~2.0.1",
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",

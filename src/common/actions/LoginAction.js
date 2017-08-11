@@ -183,8 +183,26 @@ export function validatePassword (data) {
 
 export function createUser (data) {
   return (dispatch, getState, imports) => {
-    console.log('Create User ')
+    let context = imports.context
     dispatch(WorkflowActions.nextScreen())
+    setTimeout(() => {
+      context
+        .createAccount(data.username, data.password, data.pin, null, null)
+        .then(async response => {
+          console.log('REGISTRATION SUCCESS ')
+          console.log(response)
+          /* const obj = {
+            username: data,
+            error: null
+          } */
+          // dispatch(updateUsername(obj))
+          dispatch(WorkflowActions.nextScreen())
+        })
+        .catch(e => {
+          console.log('Big ficking error ')
+          console.log(e)
+        })
+    }, 300)
   }
 }
 
