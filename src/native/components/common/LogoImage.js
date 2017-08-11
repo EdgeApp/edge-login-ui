@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Image } from 'react-native'
+import { Image } from 'react-native'
 import * as Assets from '../../assets/'
 
 export default class LogoImageHeader extends Component {
