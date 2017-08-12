@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { Button } from '../../common'
-import { PasswordHelper } from '../../../../common/dataHelpers/'
+// import { PasswordHelper } from '../../../../common/dataHelpers/'
 import PasswordConnector
   from '../../../connectors/componentConnectors/PasswordConnector.js'
 import PasswordConfirmConnector
@@ -50,30 +50,15 @@ export default class LandingScreenComponent extends Component {
       })
       return
     }
-    if (this.props.confirmPasswordErrorMessage) {
-      console.log('Confirm Error message ')
+    if (this.props.createPasswordErrorMessage) {
+      console.log('Error ' + this.props.createPasswordErrorMessage)
       this.setState({
         isProcessing: false
       })
       return
     }
-    /* if (!this.props.password && !this.props.confirmPassword) {
-      console.log('Confirm Error message ')
-      this.setState({
-        isProcessing: false
-      })
-      return
-    } */
-    const data = new PasswordHelper(this.props.passwordStatus)
-    if (data.passed) {
-      console.log('GOOD TO GO ON PASSWORD ')
-      this.props.nextScreen()
-      return
-    }
-    console.log('HMMM.... Problem z ')
-    this.setState({
-      isProcessing: false
-    })
+    console.log(this.props.createPasswordErrorMessage)
+    this.props.nextScreen()
   }
 }
 

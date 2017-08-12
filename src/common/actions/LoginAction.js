@@ -1,5 +1,6 @@
 import * as Constants from '../constants'
 import * as WorkflowActions from './WorkflowActions'
+import { isASCII } from '../util'
 
 export function createAccountSuccess (data) {
   return {
@@ -136,11 +137,14 @@ export function userLogin (data) {
 // validateUsername check
 export function validateUsername (data) {
   return (dispatch, getState, imports) => {
-    console.log('We are validating..USERNAME so lets do some shit. ' + data)
     // TODO evaluate client side evaluations.
+    let error = data.length > 3
+      ? null
+      : 'Username must be longer than 3 characters ' // TODO: Localize string
+    error = isASCII(data) ? null : 'Username must only be ascii characthers ' // TODO: localize
     const obj = {
       username: data,
-      error: null
+      error: error
     }
     dispatch(updateUsername(obj))
   }
@@ -155,31 +159,77 @@ export function checkUsernameForAvailabilty (data) {
       context
         .usernameAvailable(data)
         .then(async response => {
+          if (response) {
+            const obj = {
+              username: data,
+              error: null
+            }
+            dispatch(updateUsername(obj))
+            dispatch(WorkflowActions.nextScreen())
+            return
+          }
           const obj = {
             username: data,
-            error: null
+            error: 'THE USERNAME ALREADY EXOSTS ' // TODO - localize string.
           }
           dispatch(updateUsername(obj))
-          dispatch(WorkflowActions.nextScreen())
         })
         .catch(e => {
           console.log('Big ficking error ')
+          console.log(e.message)
           console.log(e)
         })
     }, 300)
   }
 }
-export function validatePassword (data) {
+export function validateConfirmPassword (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context
+    let error = null
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     const passwordEval = context.checkPasswordRules(data)
+    if (!passwordEval.passed) {
+      error = 'YOU HAVE NOT MET MINIMUM PASSWORD REQUIREMENTS' // TODO localize.
+    }
     var obj = {
       password: data,
-      passwordStatus: passwordEval
+      passwordStatus: passwordEval,
+      error: error
+    }
+    dispatch(updateConfirmPassword(obj))
+  }
+}
+export function validatePassword (data) {
+  return (dispatch, getState, imports) => {
+    let context = imports.context
+    let error = null
+    // dispatch(openLoading()) Legacy dealt with state for showing a spinner
+    // the timeout is a hack until we put in interaction manager.
+    const passwordEval = context.checkPasswordRules(data)
+    if (!passwordEval.passed) {
+      error = 'YOU HAVE NOT MET MINIMUM PASSWORD REQUIREMENTS' // TODO localize.
+    }
+    var obj = {
+      password: data,
+      passwordStatus: passwordEval,
+      error: error
     }
     dispatch(updatePassword(obj))
+  }
+}
+export function pin (data) {
+  return (dispatch, getState, imports) => {
+    let error = null
+    if (data.length !== 4) {
+      error = 'PIN MUST BE 4 Digits' // TODO localize
+    }
+    var obj = {
+      password: data,
+      error: error
+    }
+    console.log(obj)
+    // dispatch(updatePin(obj))
   }
 }
 export function createUser (data) {

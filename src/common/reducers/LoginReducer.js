@@ -8,9 +8,10 @@ const initialState = {
   loginSuccess: false,
   creationSuccess: false,
   passwordStatus: null,
+  createPasswordErrorMessage: null,
+  confirmPasswordErrorMessage: null,
   pinError: null,
   usernameErrorMessage: null,
-  confirmPasswordErrorMessage: null,
   createErrorMessage: null,
   loginPasswordErrorMessage: null,
   loginPinErrorMessage: null,
@@ -30,22 +31,31 @@ export default function (state = initialState, action) {
         usernameErrorMessage: action.data.error
       }
     case Constants.AUTH_UPDATE_PASSWORD:
+      console.log('UPDATE PASSWORD ')
       if (state.confirmPassword !== action.data.password) {
         em = 'ERROR MESSAGE'
       }
+      if (action.data.error) {
+        em = action.data.error
+      }
+      console.log('EM ' + em)
       return {
         ...state,
         password: action.data.password,
         passwordStatus: action.data.passwordStatus,
-        confirmPasswordErrorMessage: em
+        createPasswordErrorMessage: em
       }
     case Constants.AUTH_UPDATE_CONFIRM_PASSWORD:
-      if (state.password !== action.data) {
+      if (state.password !== action.data.password) {
         em = 'ERROR MESSAGE'
+      }
+      if (action.data.error) {
+        em = action.data.error
       }
       return {
         ...state,
-        confirmPassword: action.data,
+        confirmPassword: action.data.password,
+        createPasswordErrorMessage: em,
         confirmPasswordErrorMessage: em
       }
 

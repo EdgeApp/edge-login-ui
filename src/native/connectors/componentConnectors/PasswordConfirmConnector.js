@@ -13,7 +13,7 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onChangeText: (data) => dispatch(loginAction.updateConfirmPassword(data))
+    onChangeText: (data) => dispatch(loginAction.validateConfirmPassword(data))
   }
 }
 
