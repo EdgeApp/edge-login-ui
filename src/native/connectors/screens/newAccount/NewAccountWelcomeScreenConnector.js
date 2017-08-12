@@ -13,6 +13,7 @@ export const mapStateToProps = (state, ownProps) => {
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     nextScreen: () => dispatch(actions.nextScreen()),
+    createUser: (data) => dispatch(actions.createUser(data)),
     exitScreen: () => dispatch(actions.startWorkflow(Constants.WORKFLOW_INIT))
   }
 }

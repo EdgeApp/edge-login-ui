@@ -5,6 +5,7 @@ import { Spinner } from '../../common'
 
 export default class CreatingAccountWaitScreenComponent extends Component {
   componentWillReceiveProps (nextProps) {
+    console.log(nextProps)
     if (nextProps.createSuccess) {
       this.props.nextScreen()
     }

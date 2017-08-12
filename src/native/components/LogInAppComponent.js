@@ -55,7 +55,6 @@ export default class LoginAppComponent extends Component {
           return this.getPinScreen()
         }
         // we have previous users, but no pin enabled previous user.
-        console.log('Password Screen ')
         return this.getPasswordScreen()
 
       case Constants.WORKFLOW_INIT:
@@ -71,7 +70,6 @@ export default class LoginAppComponent extends Component {
     this.props.userLogin({ username: 'bob20', password: 'bob20' })
   }
   getLoadingScreen () {
-    console.log('getLoading Styles Screen ')
     return <LoadingScreenConnector styles={this.props.styles} />
   }
   getLandingScreen () {

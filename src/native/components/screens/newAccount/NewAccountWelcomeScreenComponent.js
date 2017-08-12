@@ -41,7 +41,12 @@ export default class LandingScreenComponent extends Component {
     )
   }
   onNextPress () {
-    this.props.nextScreen()
+    // this.props.nextScreen()
+    this.props.createUser({
+      username: 'bob20',
+      password: '!@#123QWERTYqwerty',
+      pin: '1111'
+    })
   }
   onExitPress () {
     this.props.exitScreen()

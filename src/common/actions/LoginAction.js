@@ -8,6 +8,12 @@ export function createAccountSuccess (data) {
     data
   }
 }
+export function createAccountFail (data) {
+  return {
+    type: Constants.CREATE_ACCOUNT_FAIL,
+    data
+  }
+}
 export function logSuccess () {
   return {
     type: Constants.LOGIN_USERNAME_PASSWORD
@@ -240,11 +246,13 @@ export function createUser (data) {
       context
         .createAccount(data.username, data.password, data.pin, null, null)
         .then(async response => {
+          console.log('response create user ')
           dispatch(createAccountSuccess(response))
         })
         .catch(e => {
           console.log('Big ficking error createUser')
           console.log(e)
+          dispatch(createAccountFail(e.message))
         })
     }, 300)
   }
