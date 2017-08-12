@@ -1,5 +1,5 @@
 import * as Colors from '../../constants/Colors'
-import { hs, vs } from '../../util'
+import { hs, vs, fontSize } from '../../util'
 const PrimaryButtonUpStyle = {
   backgroundColor: Colors.BUTTON_PRIMARY_UP,
   width: hs(220),
@@ -9,7 +9,8 @@ const PrimaryButtonUpStyle = {
   borderRadius: hs(3)
 }
 const PrimaryButtonUpTextStyle = {
-  color: Colors.WHITE
+  color: Colors.WHITE,
+  fontSize: fontSize(17)
 }
 
 const PrimaryButtonDownStyle = {

@@ -1,5 +1,5 @@
 import * as Colors from '../../../common/constants/Colors'
-import { hs, vs } from '../../util'
+import { hs, vs, fontSize } from '../../util'
 const FormFieldStyle = {
   container: {
     position: 'relative',
@@ -22,14 +22,14 @@ const FormFieldStyle = {
   },
   labelText: {
     color: Colors.PRIMARY,
-    fontSize: 12
+    fontSize: fontSize(17)
   },
   errorText: {
     color: Colors.ACCENT_RED,
-    fontSize: 12
+    fontSize: fontSize(17)
   },
   inputStyle: {
-    fontSize: 17,
+    fontSize: fontSize(17),
     height: '100%',
     width: '100%',
     color: Colors.GRAY_1
