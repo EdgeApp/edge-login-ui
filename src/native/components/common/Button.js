@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { Text, TouchableHighlight } from 'react-native'
+import { Text, TouchableHighlight, View } from 'react-native'
+import { Spinner } from './Spinner'
 class Button extends Component {
   componentWillMount () {
     this.state = {
@@ -42,11 +43,7 @@ class Button extends Component {
         </Text>
       )
     }
-    return (
-      <Text style={this.props.upTextStyle}>
-        THINKING
-      </Text>
-    )
+    return <View><Spinner /></View>
   }
   onPress () {
     this.props.onPress()
