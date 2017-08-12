@@ -17,19 +17,16 @@ class Input extends Component {
   }
 
   render () {
-    const InputStyles = this.props.style
     return (
-      <View style={InputStyles.container}>
-        <TextInput
-          secureTextEntry={this.props.secureTextEntry}
-          placeholder={this.props.placeholder}
-          autoCorrect={this.props.autoCorrect}
-          autoCapitalize={this.props.autoCapitalize}
-          value={this.state.inputText}
-          styles={InputStyles.inputStyles}
-          onChangeText={this.onChange.bind(this)}
-        />
-      </View>
+      <TextInput
+        secureTextEntry={this.props.secureTextEntry}
+        placeholder={this.props.placeholder}
+        autoCorrect={this.props.autoCorrect}
+        autoCapitalize={this.props.autoCapitalize}
+        value={this.state.inputText}
+        style={this.props.style}
+        onChangeText={this.onChange.bind(this)}
+      />
     )
   }
   onChange (text) {

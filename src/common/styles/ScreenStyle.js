@@ -28,7 +28,6 @@ const PageContainerWithHeaderStyle = {
   position: 'relative',
   flex: 6,
   width: '100%'
-
 }
 
 export {HeaderContainerStyle}

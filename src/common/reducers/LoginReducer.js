@@ -27,6 +27,8 @@ export default function (state = initialState, action) {
     case Constants.LOGIN_USERNAME_PASSWORD:
       return { ...state, loginSuccess: true }
     case Constants.AUTH_UPDATE_USERNAME:
+      console.log('Userna,e update')
+      console.log(action.data)
       return {
         ...state,
         username: action.data.username,

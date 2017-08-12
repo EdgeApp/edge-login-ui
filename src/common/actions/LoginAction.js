@@ -147,7 +147,7 @@ export function validateUsername (data) {
     let error = data.length > 3
       ? null
       : 'Username must be longer than 3 characters ' // TODO: Localize string
-    error = isASCII(data) ? null : 'Username must only be ascii characthers ' // TODO: localize
+    error = isASCII(data) ? error : 'Username must only be ascii characthers ' // TODO: localize
     const obj = {
       username: data,
       error: error

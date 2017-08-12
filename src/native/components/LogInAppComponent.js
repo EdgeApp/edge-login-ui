@@ -29,10 +29,9 @@ export default class LoginAppComponent extends Component {
     this.props.getPreviousUsers()
   }
   render () {
-    const {ScreenStyle} = this.props.styles
+    const { ScreenStyle } = this.props.styles
     return (
-      <View
-        style={ScreenStyle}>
+      <View style={ScreenStyle}>
         {this.renderContent()}
       </View>
     )
@@ -78,7 +77,7 @@ export default class LoginAppComponent extends Component {
   getCreateScreen (arg) {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <NewAccountWelcomeScreenConnector styles={this.props.styles} />
+        return <NewAccountWelcomeScreenConnector styles={this.props.styles} /> // NewAccountWelcomeScreenConnector
       case 1:
         return <NewAccountUsernameScreenConnector styles={this.props.styles} />
       case 2:

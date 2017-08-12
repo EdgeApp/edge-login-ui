@@ -17,6 +17,7 @@ export default class LandingScreenComponent extends Component {
       <View style={NewAccountUsernameScreenStyle.screen}>
         <View style={NewAccountUsernameScreenStyle.header} />
         <View style={NewAccountUsernameScreenStyle.pageContainer}>
+          <View style={NewAccountUsernameScreenStyle.instructions} />
           <UsernameConnector style={NewAccountUsernameScreenStyle.inputBox} />
           <Button
             onPress={this.onNextPress.bind(this)}

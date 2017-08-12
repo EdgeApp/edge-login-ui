@@ -1,12 +1,12 @@
 import * as Colors from '../../constants/Colors'
-
+import { hs, vs } from '../../util'
 const PrimaryButtonUpStyle = {
   backgroundColor: Colors.BUTTON_PRIMARY_UP,
-  width: 220,
-  height: 50,
+  width: hs(220),
+  height: vs(50),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: 3
+  borderRadius: hs(3)
 }
 const PrimaryButtonUpTextStyle = {
   color: Colors.WHITE
