@@ -46,7 +46,7 @@ export const loginWithPin = (username, pin, callback) => {
 
     setTimeout(() => {
       abcctx(context => {
-        context.loginWithPIN(username, pin, (error, account) => {
+        context.loginWithPIN(username, pin, null, (error, account) => {
           dispatch(closeLoading())
           if (error) {
             dispatch(openErrorModal(t('server_error_bad_pin')))
