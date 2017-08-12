@@ -30,6 +30,9 @@ export default class LandingScreenComponent extends Component {
     )
   }
   onNextPress () {
+    this.setState({
+      isProcessing: true
+    })
     // validation.
     // is there no error message ,
     if (this.props.pin.length !== 4) {

@@ -46,4 +46,5 @@ export default class LandingScreenComponent extends Component {
   onExitPress () {
     this.props.exitScreen()
   }
+
 }

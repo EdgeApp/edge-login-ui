@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { Button } from '../../common'
 // import * as Constants from '../../../common/constants'
 
-export default class NewAccountReviewScreenComponent extends Component {
+export default class TermsAndConditionsScreenComponent extends Component {
   render () {
     const { NewAccountReviewScreenStyle } = this.props.styles
     return (
@@ -22,7 +22,7 @@ export default class NewAccountReviewScreenComponent extends Component {
             }
             upStyle={NewAccountReviewScreenStyle.nextButton.upStyle}
             upTextStyle={NewAccountReviewScreenStyle.nextButton.upTextStyle}
-            label={'REVIEW'}
+            label={'DONE'}
           />
         </View>
 
@@ -30,6 +30,6 @@ export default class NewAccountReviewScreenComponent extends Component {
     )
   }
   onNextPress () {
-    this.props.nextScreen()
+    this.props.agreeToCondition(this.props.accountObject)
   }
 }

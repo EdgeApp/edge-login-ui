@@ -1,20 +1,18 @@
 import { connect } from 'react-redux'
-import LinkedComponent from '../../../components/screens/newAccount/NewAccountReviewScreenComponent'
+import LinkedComponent from '../../../components/screens/newAccount/TermsAndConditionsScreenComponent'
 import * as actions from '../../../../common/actions/'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
     workflow: state.workflow,
-    username: state.login.username,
-    password: state.login.password,
-    pin: state.login.pin
+    accountObject: state.login.accountObject
   }
 }
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    nextScreen: () => dispatch(actions.nextScreen())
+    agreeToCondition: (data) => dispatch(actions.agreeToConditions(data))
   }
 }
 

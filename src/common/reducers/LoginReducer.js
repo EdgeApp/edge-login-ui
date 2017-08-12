@@ -13,11 +13,14 @@ const initialState = {
   confirmPasswordErrorMessage: null,
   createErrorMessage: null,
   loginPasswordErrorMessage: null,
-  loginPinErrorMessage: null
+  loginPinErrorMessage: null,
+  accountObject: null
 }
 export default function (state = initialState, action) {
   let em = null
   switch (action.type) {
+    case Constants.CREATE_ACCOUNT_SUCCESS:
+      return { ...state, accountObject: action.data, creationSuccess: true }
     case Constants.LOGIN_USERNAME_PASSWORD:
       return { ...state, loginSuccess: true }
     case Constants.AUTH_UPDATE_USERNAME:
@@ -27,7 +30,6 @@ export default function (state = initialState, action) {
         usernameErrorMessage: action.data.error
       }
     case Constants.AUTH_UPDATE_PASSWORD:
-      console.log('IPDATE PASSWORD YO>')
       if (state.confirmPassword !== action.data.password) {
         em = 'ERROR MESSAGE'
       }

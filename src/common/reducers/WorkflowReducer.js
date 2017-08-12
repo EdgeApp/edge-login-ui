@@ -5,7 +5,7 @@ const initialState = {
   currentKey: 'firstLoadWF',
   firstLoadWF: 1,
   initalizeWF: 1,
-  createWF: 5,
+  createWF: 8,
   passwordWF: [],
   pinWF: [],
   recoveryWF: [],

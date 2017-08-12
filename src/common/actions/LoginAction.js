@@ -1,6 +1,12 @@
 import * as Constants from '../constants'
 import * as WorkflowActions from './WorkflowActions'
 
+export function createAccountSuccess (data) {
+  return {
+    type: Constants.CREATE_ACCOUNT_SUCCESS,
+    data
+  }
+}
 export function logSuccess () {
   return {
     type: Constants.LOGIN_USERNAME_PASSWORD
@@ -149,7 +155,6 @@ export function checkUsernameForAvailabilty (data) {
       context
         .usernameAvailable(data)
         .then(async response => {
-          console.log('WE GOT A USERNAME ')
           const obj = {
             username: data,
             error: null
@@ -166,13 +171,10 @@ export function checkUsernameForAvailabilty (data) {
 }
 export function validatePassword (data) {
   return (dispatch, getState, imports) => {
-    console.log('Validating the password')
     let context = imports.context
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     const passwordEval = context.checkPasswordRules(data)
-    console.log('passwordEval')
-    console.log(passwordEval)
     var obj = {
       password: data,
       passwordStatus: passwordEval
@@ -180,7 +182,6 @@ export function validatePassword (data) {
     dispatch(updatePassword(obj))
   }
 }
-
 export function createUser (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context
@@ -189,26 +190,28 @@ export function createUser (data) {
       context
         .createAccount(data.username, data.password, data.pin, null, null)
         .then(async response => {
-          console.log('REGISTRATION SUCCESS ')
-          console.log(response)
-          /* const obj = {
-            username: data,
-            error: null
-          } */
-          // dispatch(updateUsername(obj))
-          dispatch(WorkflowActions.nextScreen())
+          dispatch(createAccountSuccess(response))
         })
         .catch(e => {
-          console.log('Big ficking error ')
+          console.log('Big ficking error createUser')
           console.log(e)
         })
     }, 300)
   }
 }
 
+export function agreeToConditions (account) {
+  return (dispatch, getState, imports) => {
+    console.log('Skip Password. ')
+    // dispatch(WorkflowActions.nextScreen())
+  }
+}
+
 export function skipPassword (data) {
   return (dispatch, getState, imports) => {
     console.log('Skip Password. ')
-    dispatch(WorkflowActions.nextScreen())
+    let callback = imports.callback
+    callback(data)
+    // dispatch(WorkflowActions.nextScreen())
   }
 }

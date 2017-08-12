@@ -13,8 +13,12 @@ import NewAccountPasswordScreenConnector
   from '../connectors/screens/newAccount/NewAccountPasswordScreenConnector'
 import NewAccountPinScreenConnector
   from '../connectors/screens/newAccount/SetAccountPinScreenConnector'
-import NewAccountWalletCreationScreenConnector
-  from '../connectors/screens/newAccount/NewAccountWalletCreationScreenConnector'
+import CreatingAccountWaitScreenConnector
+  from '../connectors/screens/newAccount/CreatingAccountWaitScreenConnector'
+import NewAccountReviewScreenConnector
+  from '../connectors/screens/newAccount/NewAccountReviewScreenConnector'
+import TermsAndConditionsScreenConnector
+  from '../connectors/screens/newAccount/TermsAndConditionsScreenConnector'
 import LoginUsernamePasswordScreenConnector
   from '../connectors/screens/LogInUsernamePasswordScreenConnector'
 import PinLoginScreenConnector
@@ -84,10 +88,13 @@ export default class LoginAppComponent extends Component {
       case 3:
         return <NewAccountPinScreenConnector styles={this.props.styles} />
       case 4:
-        console.log('We are blowing up here. ')
-        return (
-          <NewAccountWalletCreationScreenConnector styles={this.props.styles} />
-        )
+        return <CreatingAccountWaitScreenConnector styles={this.props.styles} />
+      case 5:
+        return <NewAccountReviewScreenConnector styles={this.props.styles} />
+      case 6:
+        return <NewAccountReviewScreenConnector styles={this.props.styles} />
+      case 7:
+        return <TermsAndConditionsScreenConnector styles={this.props.styles} />
       default:
         return <NewAccountWelcomeScreenConnector styles={this.props.styles} />
     }

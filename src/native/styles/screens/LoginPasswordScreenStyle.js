@@ -1,17 +1,19 @@
 import * as Styles from '../'
 import * as Colors from '../../../common/constants/Colors'
-
+import { hs, vs } from '../../../common/util/PixelUtil'
 const LoginPasswordScreenStyle = {
   container: Styles.ScreenStyle,
   backgroundImage: {
     ...Styles.BackgroundScreenImageStyle,
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '100%',
+    height: '100%'
   },
   featureBox: {
     position: 'relative',
-    top: 55,
-    width: 260,
-    height: 376,
+    top: vs(55),
+    width: hs(260),
+    height: vs(376),
     backgroundColor: Colors.OVERLAY_BOX
   },
   featureBoxIconHeader: {

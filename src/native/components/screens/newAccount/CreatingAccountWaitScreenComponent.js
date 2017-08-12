@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
-import { Text } from 'react-native'
-// import { Button } from '../common'
+import { View } from 'react-native'
+import { Spinner } from '../../common'
 // import * as Constants from '../../../../common/constants'
 
 export default class CreatingAccountWaitScreenComponent extends Component {
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.createSuccess) {
+      this.props.nextScreen()
+    }
+  }
+
   render () {
+    const { CreatingAccountWaitScreenStyle } = this.props.styles
     return (
-      <Text>
-        Holding Text
-      </Text>
+      <View style={CreatingAccountWaitScreenStyle.container}>
+        <Spinner style={CreatingAccountWaitScreenStyle.spinner} />
+      </View>
     )
   }
 }
