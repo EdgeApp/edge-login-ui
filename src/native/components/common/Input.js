@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { TextInput, View } from 'react-native'
+import { TextInput } from 'react-native'
 
 class Input extends Component {
   componentWillMount () {
