@@ -1,16 +1,26 @@
 import * as Colors from '../../../common/constants/Colors'
 import { hs, vs, fontSize } from '../../util'
+import { BasicCheckBoxWithLabel } from './CheckboxStyles'
 const FormFieldStyle = {
   container: {
     position: 'relative',
     width: hs(200),
     height: vs(60)
   },
+  helperCheckbox: BasicCheckBoxWithLabel,
   labelContainer: {
     flex: 1
   },
   errorContainer: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  errorContainerLeft: {
     flex: 1
+  },
+  errorContainerRight: {
+    flex: 1,
+    backgroundColor: Colors.WHITE
   },
   imputContainer: {
     position: 'relative',

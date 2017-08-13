@@ -2,10 +2,18 @@ import React, { Component, PropTypes } from 'react'
 import * as Colors from '../../../common/constants/Colors'
 import { View, Text } from 'react-native'
 import { Input } from './Input'
+import { Checkbox } from './Checkbox'
 
 class FormField extends Component {
+  componentWillMount () {
+    const secure = this.props.secureTextEntry
+      ? this.props.secureTextEntry
+      : false
+    this.setState({
+      secure: secure
+    })
+  }
   componentWillReceiveProps (nextProps) {
-    console.log('GOt new props')
     console.log(nextProps)
   }
   render () {
@@ -35,13 +43,32 @@ class FormField extends Component {
             onChangeText={this.props.onChangeText}
             value={this.props.value}
             autoCapitalize={'none'}
+            secureTextEntry={this.state.secure}
           />
         </View>
         <View style={Style.errorContainer}>
-          <Text style={Style.errorText}>{this.renderError()}</Text>
+          <View style={Style.errorContainerLeft}>
+            <Text style={Style.errorText}>{this.renderError()}</Text>
+          </View>
+          <View style={Style.errorContainerRight}>
+            {this.renderHelperBox(Style)}
+          </View>
         </View>
       </View>
     )
+  }
+  renderHelperBox (Style) {
+    if (this.props.showSecureCheckbox) {
+      console.log('HEY WE ARE RENDERING IT ')
+      return (
+        <Checkbox
+          style={Style.helperCheckbox}
+          onChange={this.setSecurity.bind(this)}
+          label={this.props.showSecureCheckboxLabel}
+        />
+      )
+    }
+    return null
   }
   renderLabel () {
     return this.props.label
@@ -51,6 +78,11 @@ class FormField extends Component {
       return this.props.error
     }
     return null
+  }
+  setSecurity (arg) {
+    this.setState({
+      secure: arg
+    })
   }
 }
 
@@ -63,6 +95,7 @@ FormField.propTypes = {
   autoCorrect: PropTypes.bool,
   autoCapitalize: PropTypes.string,
   secureTextEntry: PropTypes.bool,
+  showSecureCheckbox: PropTypes.bool,
   error: PropTypes.string
 }
 

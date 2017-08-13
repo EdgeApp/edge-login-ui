@@ -8,7 +8,10 @@ export const mapStateToProps = (state, ownProps) => {
     value: state.login.confirmPassword,
     error: state.login.confirmPasswordErrorMessage,
     secureTextEntry: true,
-    label: 'Confirm Password' // TODO localize
+    showSecureCheckbox: true,
+    showSecureCheckboxLabel: 'Show Password',
+    label: 'Confirm Password'
+     // TODO localize
   }
 }
 
