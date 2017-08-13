@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import {Input} from '../../components/common/'
+import {FormField} from '../../components/common/'
 import * as loginAction from '../../../common/actions'
 
 export const mapStateToProps = (state, ownProps) => {
@@ -7,7 +7,8 @@ export const mapStateToProps = (state, ownProps) => {
     style: ownProps.style,
     value: state.login.confirmPassword,
     error: state.login.confirmPasswordErrorMessage,
-    secureTextEntry: true
+    secureTextEntry: true,
+    label: 'Confirm Password' // TODO localize
   }
 }
 
@@ -17,4 +18,4 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Input)
+export default connect(mapStateToProps, mapDispatchToProps)(FormField)

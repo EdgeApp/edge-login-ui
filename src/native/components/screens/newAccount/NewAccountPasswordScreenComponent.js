@@ -6,6 +6,7 @@ import PasswordConnector
   from '../../../connectors/componentConnectors/PasswordConnector.js'
 import PasswordConfirmConnector
   from '../../../connectors/componentConnectors/PasswordConfirmConnector'
+import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
     this.setState({
@@ -13,23 +14,24 @@ export default class LandingScreenComponent extends Component {
     })
   }
   render () {
-    const { NewAccountUsernameScreenStyle } = this.props.styles
+    const { NewAccountPasswordScreenStyle } = this.props.styles
     return (
-      <View style={NewAccountUsernameScreenStyle.screen}>
-        <View style={NewAccountUsernameScreenStyle.header} />
-        <View style={NewAccountUsernameScreenStyle.pageContainer}>
-          <PasswordConnector style={NewAccountUsernameScreenStyle.inputBox} />
+      <View style={NewAccountPasswordScreenStyle.screen}>
+        <View style={NewAccountPasswordScreenStyle.header} />
+        <View style={NewAccountPasswordScreenStyle.pageContainer}>
+          <PasswordStatusConnector style={NewAccountPasswordScreenStyle.status} />
+          <PasswordConnector style={NewAccountPasswordScreenStyle.inputBox} />
           <PasswordConfirmConnector
-            style={NewAccountUsernameScreenStyle.inputBox}
+            style={NewAccountPasswordScreenStyle.inputBox}
           />
           <Button
             onPress={this.onNextPress.bind(this)}
-            downStyle={NewAccountUsernameScreenStyle.nextButton.downStyle}
+            downStyle={NewAccountPasswordScreenStyle.nextButton.downStyle}
             downTextStyle={
-              NewAccountUsernameScreenStyle.nextButton.downTextStyle
+              NewAccountPasswordScreenStyle.nextButton.downTextStyle
             }
-            upStyle={NewAccountUsernameScreenStyle.nextButton.upStyle}
-            upTextStyle={NewAccountUsernameScreenStyle.nextButton.upTextStyle}
+            upStyle={NewAccountPasswordScreenStyle.nextButton.upStyle}
+            upTextStyle={NewAccountPasswordScreenStyle.nextButton.upTextStyle}
             label={'NEXT'}
             isThinking={this.state.isProcessing}
             doesThink

@@ -27,6 +27,8 @@ class FormField extends Component {
             Style.imputContainer,
             this.props.error ? { borderBottomColor: Colors.ACCENT_RED } : {}
           ]}
+          numberOfLines={1}
+          ellipsizeMode={'tail'}
         >
           <Input
             style={Style.inputStyle}

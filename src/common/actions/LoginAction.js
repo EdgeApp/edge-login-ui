@@ -196,7 +196,7 @@ export function validateConfirmPassword (data) {
     // the timeout is a hack until we put in interaction manager.
     const passwordEval = context.checkPasswordRules(data)
     if (!passwordEval.passed) {
-      error = 'YOU HAVE NOT MET MINIMUM PASSWORD REQUIREMENTS' // TODO localize.
+      error = 'Insufficient Password' // TODO localize.
     }
     var obj = {
       password: data,
@@ -214,7 +214,7 @@ export function validatePassword (data) {
     // the timeout is a hack until we put in interaction manager.
     const passwordEval = context.checkPasswordRules(data)
     if (!passwordEval.passed) {
-      error = 'YOU HAVE NOT MET MINIMUM PASSWORD REQUIREMENTS' // TODO localize.
+      error = 'Insufficient Password' // TODO localize.
     }
     var obj = {
       password: data,

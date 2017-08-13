@@ -26,7 +26,7 @@ const FormFieldStyle = {
   },
   errorText: {
     color: Colors.ACCENT_RED,
-    fontSize: fontSize(17)
+    fontSize: fontSize(12)
   },
   inputStyle: {
     fontSize: fontSize(17),
