@@ -12,9 +12,6 @@ export default class LandingScreenComponent extends Component {
     })
   }
   componentDidUpdate (prevProps, prevState) {
-    console.log('PREVIOUS PROPS')
-    console.log(prevProps)
-    console.log(this.props)
     if (this.props !== prevProps) {
       this.setState({
         isProcessing: false

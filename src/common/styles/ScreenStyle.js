@@ -1,3 +1,4 @@
+// import {vs} from '../../common/util'
 const ScreenStyle = {
   flex: 1,
   width: '100%',
@@ -20,13 +21,13 @@ const BackgroundScreenImageStyle = {
 
 const HeaderContainerStyle = {
   position: 'relative',
-  flex: 1,
+  height: 65,
   width: '100%'
 }
 
 const PageContainerWithHeaderStyle = {
   position: 'relative',
-  flex: 6,
+  flex: 1,
   width: '100%'
 }
 

@@ -43,11 +43,11 @@ const TertiaryButtonTextDownStyle = {
 
 const TextOnlyButtonUpStyle = {
   backgroundColor: Colors.TRANSPARENT,
-  width: 220,
-  height: 50,
+  width: hs(220),
+  height: vs(50),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: 3
+  borderRadius: hs(3)
 }
 
 const TextOnlyButtonTextUpStyle = {
@@ -56,11 +56,11 @@ const TextOnlyButtonTextUpStyle = {
 
 const TextOnlyButtonDownStyle = {
   backgroundColor: Colors.TRANSPARENT,
-  width: 220,
-  height: 50,
+  width: hs(220),
+  height: vs(50),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: 3
+  borderRadius: hs(3)
 }
 
 const TextOnlyButtonTextDownStyle = {
