@@ -3,6 +3,9 @@ import { View } from 'react-native'
 import { Button } from '../../common'
 import UsernameConnector
   from '../../../connectors/componentConnectors/UsernameConnector'
+import HeaderConnector
+  from '../../../connectors/componentConnectors/HeaderConnector'
+
 // import * as Constants from '../../../common/constants'
 
 export default class LandingScreenComponent extends Component {
@@ -23,7 +26,7 @@ export default class LandingScreenComponent extends Component {
     const { NewAccountUsernameScreenStyle } = this.props.styles
     return (
       <View style={NewAccountUsernameScreenStyle.screen}>
-        <View style={NewAccountUsernameScreenStyle.header} />
+        <HeaderConnector style={NewAccountUsernameScreenStyle.header} />
         <View style={NewAccountUsernameScreenStyle.pageContainer}>
           <View style={NewAccountUsernameScreenStyle.instructions} />
           <UsernameConnector style={NewAccountUsernameScreenStyle.inputBox} />

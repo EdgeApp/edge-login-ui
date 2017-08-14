@@ -1,35 +1,65 @@
-// Import libraries for making a component
-import React from 'react'
+import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { Button } from '../common'
 
 // Make a component
-const Header = props => {
-  const { textStyle, viewStyle } = styles
-
-  return (
-    <View style={viewStyle}>
-      <Text style={textStyle}>{props.headerText}</Text>
-    </View>
-  )
-}
-
-const styles = {
-  viewStyle: {
-    backgroundColor: '#F8F8F8',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 60,
-    paddingTop: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    elevation: 2,
-    position: 'relative'
-  },
-  textStyle: {
-    fontSize: 20
+class Header extends Component {
+  render () {
+    const Style = this.props.style
+    console.log(Style)
+    return (
+      <View style={Style.container}>
+        <View style={Style.left}>
+          {this.renderBack(Style)}
+        </View>
+        <View style={Style.center}>
+          {this.renderText(Style)}
+        </View>
+        <View style={Style.right}>
+          {this.renderSkip(Style)}
+        </View>
+      </View>
+    )
+  }
+  renderBack (style) {
+    if (!this.props.showBackButton) {
+      return
+    }
+    return (
+      <Button
+        onPress={this.onBack.bind(this)}
+        downStyle={style.textButton.downStyle}
+        downTextStyle={style.textButton.downTextStyle}
+        upStyle={style.textButton.upStyle}
+        upTextStyle={style.textButton.upTextStyle}
+        label={'BACK'}
+      />
+    )
+  }
+  renderText (style) {
+    return <Text style={style.textStyle}>{this.props.title}</Text>
+  }
+  renderSkip (style) {
+    if (!this.props.showSkipButton) {
+      return
+    }
+    return (
+      <Button
+        onPress={this.onSkip.bind(this)}
+        downStyle={style.textButton.downStyle}
+        downTextStyle={style.textButton.downTextStyle}
+        upStyle={style.textButton.upStyle}
+        upTextStyle={style.textButton.upTextStyle}
+        label={'SKIP'}
+      />
+    )
+  }
+  onSkip () {
+    this.props.skipScreen()
+  }
+  onBack () {
+    this.props.goBack()
   }
 }
 
-// Make the component available to other parts of the app
 export { Header }

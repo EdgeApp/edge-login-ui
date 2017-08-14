@@ -3,10 +3,17 @@ import { Text, TouchableOpacity, View } from 'react-native'
 
 class Checkbox extends Component {
   componentWillMount () {
-    const onOff = this.props.defaultVaue ? this.props.defaultVaue : false
+    const onOff = this.props.value ? this.props.value : false
     this.setState({
       onOff: onOff
     })
+  }
+  componentWillReceiveProps (nextProps) {
+    if (this.props.disabled) {
+      this.setState({
+        onOff: nextProps.defaultValue
+      })
+    }
   }
   render () {
     const style = this.props.style
@@ -14,7 +21,7 @@ class Checkbox extends Component {
       <TouchableOpacity
         onPress={this.onPress.bind(this)}
         disabled={this.props.disabled}
-        style={style.container}
+        style={[style.container, this.state.onOff && style.containerSelected]}
       >
         <View style={style.boxContainer} />
         <View style={style.labelContainer}>
@@ -24,6 +31,7 @@ class Checkbox extends Component {
     )
   }
   onPress () {
+    console.log('FUCK PRESSED ')
     let onOff = this.state.onOff
     let newOnOff = false
     if (!onOff) {
@@ -39,7 +47,7 @@ class Checkbox extends Component {
 Checkbox.propTypes = {
   style: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
-  defaultValue: PropTypes.bool,
+  value: PropTypes.bool,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   isSelected: PropTypes.bool

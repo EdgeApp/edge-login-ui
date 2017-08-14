@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text } from 'react-native'
+import { Checkbox } from '../common/Checkbox'
 
 export default class PaswordStatusComponent extends Component {
+  componentWillMount () {}
   render () {
     const style = this.props.style
     return (
@@ -11,13 +13,36 @@ export default class PaswordStatusComponent extends Component {
     )
   }
   renderStatusList () {
-    return <View />
+    const style = this.props.style
+    console.log('HERE IS THE LIST ')
+    console.log(this.props.status.list)
+    return this.props.status.list.map(Item => (
+      <View style={style.checkboxContainer} key={Item.title}>
+        <Checkbox
+          style={style.checkboxes}
+          label={Item.title}
+          defaultValue={Item.value}
+          disabled
+        />
+      </View>
+    ))
   }
   renderInterior () {
-    if (this.props.status) {
-      return this.renderStatusList()
-    }
     const style = this.props.style
+    if (this.props.status) {
+      return (
+        <View
+          style={{
+            flex: 1,
+            height: 100,
+            width: '100%',
+            backgroundColor: '#FFCC00'
+          }}
+        >
+          {this.renderStatusList()}
+        </View>
+      )
+    }
     return (
       <View>
         <Text style={style.instructions}>

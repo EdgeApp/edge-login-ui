@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { Button } from '../../common'
-// import { PasswordHelper } from '../../../../common/dataHelpers/'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import PasswordConnector
   from '../../../connectors/componentConnectors/PasswordConnector.js'
 import PasswordConfirmConnector
@@ -17,7 +17,7 @@ export default class LandingScreenComponent extends Component {
     const { NewAccountPasswordScreenStyle } = this.props.styles
     return (
       <View style={NewAccountPasswordScreenStyle.screen}>
-        <View style={NewAccountPasswordScreenStyle.header} />
+        <HeaderConnector style={NewAccountPasswordScreenStyle.header} />
         <View style={NewAccountPasswordScreenStyle.pageContainer}>
           <PasswordStatusConnector style={NewAccountPasswordScreenStyle.status} />
           <PasswordConnector style={NewAccountPasswordScreenStyle.inputBox} />

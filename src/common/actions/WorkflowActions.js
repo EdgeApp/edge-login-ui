@@ -14,6 +14,7 @@ export function nextScreen () {
 }
 
 export function skipStep () {
+  console.log('SKIP ')
   return {
     type: Constants.WORKFLOW_SKIP
   }
@@ -21,7 +22,6 @@ export function skipStep () {
 
 export function goBack () {
   return {
-    type: Constants.LOG_IN_PIN
+    type: Constants.WORKFLOW_BACK
   }
 }
-

@@ -10,36 +10,26 @@ const PrimaryButtonUpStyle = {
 }
 const PrimaryButtonUpTextStyle = {
   color: Colors.WHITE,
-  fontSize: fontSize(17)
+  fontSize: fontSize(17),
+  width: '100%',
+  textAlign: 'center'
 }
 
 const PrimaryButtonDownStyle = {
   backgroundColor: Colors.BUTTON_PRIMARY_DOWN
 }
 
-const SecondaryButtonUpStyle = {
+const SecondaryButtonUpStyle = {}
 
-}
+const SecondaryButtonDownStyle = {}
 
-const SecondaryButtonDownStyle = {
+const TertiaryButtonUpStyle = {}
 
-}
+const TertiaryButtonTextUpStyle = {}
 
-const TertiaryButtonUpStyle = {
+const TertiaryButtonDownStyle = {}
 
-}
-
-const TertiaryButtonTextUpStyle = {
-
-}
-
-const TertiaryButtonDownStyle = {
-
-}
-
-const TertiaryButtonTextDownStyle = {
-
-}
+const TertiaryButtonTextDownStyle = {}
 
 const TextOnlyButtonUpStyle = {
   backgroundColor: Colors.TRANSPARENT,
@@ -51,7 +41,10 @@ const TextOnlyButtonUpStyle = {
 }
 
 const TextOnlyButtonTextUpStyle = {
-  color: Colors.SECONDARY
+  color: Colors.SECONDARY,
+  fontSize: fontSize(17),
+  width: '100%',
+  textAlign: 'center'
 }
 
 const TextOnlyButtonDownStyle = {
@@ -64,20 +57,22 @@ const TextOnlyButtonDownStyle = {
 }
 
 const TextOnlyButtonTextDownStyle = {
-  color: Colors.PRIMARY
+  color: Colors.PRIMARY,
+  fontSize: fontSize(17),
+  width: '100%',
+  textAlign: 'center'
 }
 
-export {PrimaryButtonUpStyle}
-export {PrimaryButtonUpTextStyle}
-export {PrimaryButtonDownStyle}
-export {SecondaryButtonUpStyle}
-export {SecondaryButtonDownStyle}
-export {TertiaryButtonUpStyle}
-export {TertiaryButtonTextUpStyle}
-export {TertiaryButtonDownStyle}
-export {TertiaryButtonTextDownStyle}
-export {TextOnlyButtonUpStyle}
-export {TextOnlyButtonTextUpStyle}
-export {TextOnlyButtonDownStyle}
-export {TextOnlyButtonTextDownStyle}
-
+export { PrimaryButtonUpStyle }
+export { PrimaryButtonUpTextStyle }
+export { PrimaryButtonDownStyle }
+export { SecondaryButtonUpStyle }
+export { SecondaryButtonDownStyle }
+export { TertiaryButtonUpStyle }
+export { TertiaryButtonTextUpStyle }
+export { TertiaryButtonDownStyle }
+export { TertiaryButtonTextDownStyle }
+export { TextOnlyButtonUpStyle }
+export { TextOnlyButtonTextUpStyle }
+export { TextOnlyButtonDownStyle }
+export { TextOnlyButtonTextDownStyle }
