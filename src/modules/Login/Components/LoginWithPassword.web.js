@@ -47,17 +47,18 @@ class NewAccount extends Component {
             onChange={value => dispatch(loginPassword(value))}
             value={password}
             ref={input => { this.password = input }}
+            className={styles.form}
           />
         </div>
         <p className={styles.link} onClick={e => dispatch(openPasswordRecoveryModal())}>Forgot Password</p>
-        <div style={{ height: '25px' }} />
+        <div style={{ height: '15px' }} />
         <button
           className={this.props.loader.loading ? styles.primaryLoad : styles.primary}
           onClick={e => this.props.login(username, password)}
         >
           { this.props.loader.loading ? <div className={styles.loader} /> : 'Sign In' }
         </button>
-        <div style={{ height: '30px' }} />
+        <div style={{ height: '15px' }} />
         <p>Already have an account? <span className={styles.link} onClick={this.props.signup}>Create Account</span></p>
         <PasswordRecovery />
       </div>

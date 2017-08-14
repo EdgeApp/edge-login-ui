@@ -3,9 +3,11 @@ import { connect } from 'react-redux'
 // import { Link } from 'react-router'
 // import t from 'lib/web/LocaleStrings'
 
+import AccountCreated from '../Modals/AccountCreated/AccountCreated.web.js'
 import styles from './ReviewDetails.webStyle.scss'
 
 import { showSignInDetails, hideSignInDetails } from './ReviewDetails.action'
+import { openAccountCreatedModal } from '../Modals/AccountCreated/AccountCreated.action.js'
 
 class Review extends Component {
   _toggleInfo = () => {
@@ -42,7 +44,8 @@ class Review extends Component {
         <div className={styles.infoBox} onClick={this._toggleInfo}>
           { this._renderInfo() }
         </div>
-        <button className={styles.primary}>Finish</button>
+        <button className={styles.primary} onClick={e => this.props.dispatch(openAccountCreatedModal())}>Finish</button>
+        <AccountCreated />
       </div>
     )
   }

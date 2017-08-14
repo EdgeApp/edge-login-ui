@@ -22,6 +22,7 @@ import { signupPage } from '../modules/Signup/Signup.reducer'
 import { user } from '../modules/User/User.reducer'
 import { passwordRecovery } from '../modules/Modals/PasswordRecovery/PasswordRecovery.reducer.js'
 import { accountManagementPassword } from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
+import { accountCreated } from '../modules/Modals/AccountCreated/AccountCreated.reducer.js'
 // import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 
 // import routes from './routesReducer'
@@ -138,7 +139,8 @@ const store = combineReducers({
   }),
   modal: combineReducers({
     passwordRecovery,
-    accountManagementPassword
+    accountManagementPassword,
+    accountCreated
   }),
   forgotPasswordModal: ForgotPassword.visible,
   user
