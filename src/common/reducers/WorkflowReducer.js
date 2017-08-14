@@ -26,7 +26,7 @@ const initialState = {
       { back: true, skip: true, title: 'Set a password', subTitle: 'step 2/3' },
       {
         back: true,
-        skip: false,
+        skip: true,
         title: 'Set a 4-digit PIN ',
         subTitle: 'step 3/3'
       },
@@ -73,8 +73,6 @@ export default function (state = initialState, action) {
     case Constants.WORKFLOW_START:
       return { ...state, currentKey: action.data, currentSceneIndex: 0 }
     case Constants.WORKFLOW_BACK:
-      console.log('GO BACK REDUCER ')
-      console.log(state.currentSceneIndex)
       nextIndex = state.currentSceneIndex - 1
       if (nextIndex === -1) {
         nextIndex = 0
@@ -87,7 +85,8 @@ export default function (state = initialState, action) {
         nextIndex = state.currentSceneIndex
       }
       return { ...state, currentSceneIndex: nextIndex }
-
+    case Constants.WORKFLOW_SKIP:
+      return { ...state, showModal: true, modalView: action.data }
     default:
       return state
   }

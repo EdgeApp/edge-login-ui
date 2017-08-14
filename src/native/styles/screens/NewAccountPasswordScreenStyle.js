@@ -14,7 +14,8 @@ const NewAccountPasswordScreenStyle = {
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
     downStyle: Styles.PrimaryButtonDownStyle
   },
-  inputBox: { ...Styles.FormFieldStyle }
+  inputBox: { ...Styles.FormFieldStyle },
+  modal: Styles.ModalStyles
 }
 
 export { NewAccountPasswordScreenStyle }

@@ -13,10 +13,11 @@ export function nextScreen () {
   }
 }
 
-export function skipStep () {
+export function skipStep (data) {
   console.log('SKIP ')
   return {
-    type: Constants.WORKFLOW_SKIP
+    type: Constants.WORKFLOW_SKIP,
+    data
   }
 }
 

@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
-import { Button } from '../../common'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import { Button, Modal } from '../../common'
+import HeaderConnector
+  from '../../../connectors/componentConnectors/HeaderConnector'
 import PasswordConnector
   from '../../../connectors/componentConnectors/PasswordConnector.js'
 import PasswordConfirmConnector
   from '../../../connectors/componentConnectors/PasswordConfirmConnector'
-import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
+import PasswordStatusConnector
+  from '../../../connectors/abSpecific/PasswordStatusConnector'
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
     this.setState({
@@ -19,7 +21,9 @@ export default class LandingScreenComponent extends Component {
       <View style={NewAccountPasswordScreenStyle.screen}>
         <HeaderConnector style={NewAccountPasswordScreenStyle.header} />
         <View style={NewAccountPasswordScreenStyle.pageContainer}>
-          <PasswordStatusConnector style={NewAccountPasswordScreenStyle.status} />
+          <PasswordStatusConnector
+            style={NewAccountPasswordScreenStyle.status}
+          />
           <PasswordConnector style={NewAccountPasswordScreenStyle.inputBox} />
           <PasswordConfirmConnector
             style={NewAccountPasswordScreenStyle.inputBox}
@@ -37,8 +41,15 @@ export default class LandingScreenComponent extends Component {
             doesThink
           />
         </View>
+        {this.renderModal(NewAccountPasswordScreenStyle)}
       </View>
     )
+  }
+  renderModal (style) {
+    if (this.props.workflow.showModal) {
+      return <Modal style={style.modal.container} />
+    }
+    return null
   }
   onNextPress () {
     this.setState({

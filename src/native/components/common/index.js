@@ -7,4 +7,5 @@ export * from './Spinner'
 export * from './OverlayBox'
 export * from './BackgroundImage'
 export * from './FormField'
+export * from './Modal'
 
