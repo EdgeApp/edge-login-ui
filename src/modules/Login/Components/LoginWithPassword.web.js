@@ -48,6 +48,7 @@ class NewAccount extends Component {
             value={password}
             ref={input => { this.password = input }}
             className={styles.form}
+            error={this.props.error}
           />
         </div>
         <p className={styles.link} onClick={e => dispatch(openPasswordRecoveryModal())}>Forgot Password</p>
@@ -69,5 +70,6 @@ class NewAccount extends Component {
 export default connect(state => ({
   username: state.login.username,
   password: state.login.password,
-  loader: state.loader
+  loader: state.loader,
+  error: state.login.error
 }))(NewAccount)

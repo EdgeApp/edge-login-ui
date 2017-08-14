@@ -187,3 +187,14 @@ export const loginNotification = (state = false, action) => {
       return state
   }
 }
+
+export const error = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.SHOW_ERROR_LOGIN_MESSAGE:
+      return action.data
+    case ACTION.CLEAR_ERROR_LOGIN_MESSAGE:
+      return ''
+    default:
+      return state
+  }
+}

@@ -6,7 +6,19 @@ import { withRouter } from 'react-router'
 import t from 'lib/web/LocaleStrings'
 // import { sprintf } from 'sprintf-js'
 
-import { openLogin, openLoginUsingPin, closeLoginUsingPin, closeLogin, loginUsername, loginPassword, openUserList, closeUserList, hideLoginNotification } from './Login.action'
+import {
+  openLogin,
+  openLoginUsingPin,
+  closeLoginUsingPin,
+  closeLogin,
+  loginUsername,
+  loginPassword,
+  openUserList,
+  closeUserList,
+  hideLoginNotification,
+  showErrorLoginMessage,
+  clearErrorLoginMessage
+} from './Login.action'
 import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
 import { closeLoading } from '../Loader/Loader.action'
@@ -35,7 +47,23 @@ class Login extends Component {
   }
 
   handleSubmit = (username, password) => {
-    // console.log(username + ' - ' + password)
+    const callback = (error, account) => {
+      if (!error) {
+        this.props.dispatch(clearErrorLoginMessage(error))
+        if (window.parent.loginCallback) {
+          if (this.props.edgeObject) {
+            this.props.edgeObject.cancelRequest()
+          }
+          return window.parent.loginCallback(null, account)
+        }
+        if (!window.parent.loginCallback) {
+          this.props.dispatch(closeLoading())
+          return this.props.router.push('/account')
+        }
+      } else {
+        return this.props.dispatch(showErrorLoginMessage(error))
+      }
+    }
     if (this.props.viewPassword) {
       // this.refs.loginUsername.getWrappedInstance().blur()
       // this.refs.password.getWrappedInstance().blur()
@@ -43,22 +71,8 @@ class Login extends Component {
         loginWithPassword(
           this.props.username,
           this.props.password,
-          (error, account) => {
-            if (!error) {
-              if (window.parent.loginCallback) {
-                if (this.props.edgeObject) {
-                  this.props.edgeObject.cancelRequest()
-                }
-                return window.parent.loginCallback(null, account)
-              }
-              if (!window.parent.loginCallback) {
-                this.props.dispatch(closeLoading())
-                return this.props.router.push('/account')
-              }
-            } else {
-            // this.props._renderNotification('There has been an error logging in.')
-            }
-          })
+          callback
+        )
       )
     } else {
       this.props.dispatch(openLogin())
@@ -219,7 +233,7 @@ class Login extends Component {
         <div className={styles.container}>
           <LoginEdge />
           <Divider />
-          { this.props.viewPassword ? <LoginWithPasswordSection openViewPin={this.openViewPin} login={this.handleSubmit} signup={this._handleGoToSignupPage} /> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
+          { this.props.viewPassword ? <LoginWithPasswordSection login={this.handleSubmit} signup={this._handleGoToSignupPage} /> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
         </div>
       )
     }
@@ -228,7 +242,6 @@ class Login extends Component {
 
 const LoginWithRouter = withRouter(Login)
 const LoginWithRedux = connect(state => ({
-
   viewPIN: state.login.viewPIN,
   viewPassword: state.login.viewPassword,
   username: state.login.username,
@@ -238,7 +251,6 @@ const LoginWithRedux = connect(state => ({
   edgeObject: state.login.edgeLoginResults,
   loginPasswordWait: state.login.loginPasswordWait,
   currentPinCountdown: false
-
 }))(LoginWithRouter)
 
 export default LoginWithRedux

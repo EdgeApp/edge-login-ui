@@ -1,4 +1,4 @@
-import { openErrorModal } from '../ErrorModal/ErrorModal.action'
+// import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { userLogin, requestEdgeLogin, enablePinTimeout, disablePinTimeout, refreshPinTimeout, enablePasswordTimeout, disablePasswordTimeout, refreshPasswordTimeout } from './Login.action'
 import { showContainerNotification } from '../Container.action.js'
@@ -17,14 +17,14 @@ export const loginWithPassword = (username, password, callback) => {
           if (error) {
             dispatch(closeLoading())
             const type = (error.type === 'OtpError') ? 'server_error_bad_otp' : 'server_error_bad_password'
-            dispatch(openErrorModal(t(type)))
+            // dispatch(openErrorModal(t(type)))
 
             if (error.wait > 0) {
               const currentWaitSpan = error.wait
               const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
               enableTimer(reEnableLoginTime, 'password', dispatch)
             }
-            return callback(error, null)
+            return callback(t(type), null)
           }
           if (!error) {
             localStorage.setItem('lastUser', username)
@@ -49,13 +49,13 @@ export const loginWithPin = (username, pin, callback) => {
         context.loginWithPIN(username, pin, (error, account) => {
           dispatch(closeLoading())
           if (error) {
-            dispatch(openErrorModal(t('server_error_bad_pin')))
+            // dispatch(openErrorModal(t('server_error_bad_pin')))
             if (error.wait > 0) {
               const currentWaitSpan = error.wait
               const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
               enableTimer(reEnableLoginTime, 'pin', dispatch)
             }
-            return callback(error, null)
+            return callback(t('server_error_bad_pin'), null)
           }
 
           if (!error) {
