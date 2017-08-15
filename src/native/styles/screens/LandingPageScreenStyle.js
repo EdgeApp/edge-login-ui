@@ -18,7 +18,7 @@ const LandingPageScreenStyle = {
   featureBoxContent: {
     // height: vs(186), 306- 125 - remaining space.
     width: '100%',
-    height: vs(186),
+    height: vs(306),
     alignItems: 'center',
     justifyContent: 'flex-end'
   },
@@ -40,8 +40,8 @@ const LandingPageScreenStyle = {
   loginButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: Styles.TextOnlyButtonTextUpStyle,
-    downTextStyle: Styles.TextOnlyButtonDownStyle,
-    downStyle: Styles.TextOnlyButtonTextDownStyle
+    downTextStyle: Styles.TextOnlyButtonTextDownStyle,
+    downStyle: Styles.TextOnlyButtonDownStyle
   }
 }
 
