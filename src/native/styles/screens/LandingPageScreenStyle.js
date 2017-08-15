@@ -18,7 +18,7 @@ const LandingPageScreenStyle = {
   featureBoxContent: {
     // height: vs(186), 306- 125 - remaining space.
     width: '100%',
-    height: vs(306),
+    height: vs(186),
     alignItems: 'center',
     justifyContent: 'flex-end'
   },

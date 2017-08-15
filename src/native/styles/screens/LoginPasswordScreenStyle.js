@@ -19,11 +19,10 @@ const LoginPasswordScreenStyle = {
   },
   logoHeader: Styles.LogoHeaderStyle,
   featureBoxBody: {
-    height: vs(275),
+    height: vs(250),
     width: '100%',
     justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: Colors.ACCENT_GREEN
+    alignItems: 'center'
   },
   inputsBox: {
     flex: 1,
