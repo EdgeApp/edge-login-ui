@@ -5,8 +5,6 @@ import * as Assets from '../../assets/'
 export default class LogoImageHeader extends Component {
   render () {
     let src = Assets.LOGO_BIG
-    console.log('IMAGE PROPS')
-    console.log(this.props.style)
     if (this.props.small) {
       src = Assets.LOGO_SMALL
     }

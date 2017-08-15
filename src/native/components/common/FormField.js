@@ -13,9 +13,7 @@ class FormField extends Component {
       secure: secure
     })
   }
-  componentWillReceiveProps (nextProps) {
-    console.log(nextProps)
-  }
+
   render () {
     const Style = this.props.style
     return (
@@ -46,20 +44,31 @@ class FormField extends Component {
             secureTextEntry={this.state.secure}
           />
         </View>
+        {this.renderErrorContainer(Style)}
+      </View>
+    )
+  }
+  renderErrorContainer (Style) {
+    if (!this.props.showSecureCheckbox) {
+      return (
         <View style={Style.errorContainer}>
-          <View style={Style.errorContainerLeft}>
-            <Text style={Style.errorText}>{this.renderError()}</Text>
-          </View>
-          <View style={Style.errorContainerRight}>
-            {this.renderHelperBox(Style)}
-          </View>
+          <Text style={Style.errorText}>{this.renderError()}</Text>
+        </View>
+      )
+    }
+    return (
+      <View style={Style.errorContainer}>
+        <View style={Style.errorContainerLeft}>
+          <Text style={Style.errorText}>{this.renderError()}</Text>
+        </View>
+        <View style={Style.errorContainerRight}>
+          {this.renderHelperBox(Style)}
         </View>
       </View>
     )
   }
   renderHelperBox (Style) {
     if (this.props.showSecureCheckbox) {
-      console.log('HEY WE ARE RENDERING IT ')
       return (
         <Checkbox
           style={Style.helperCheckbox}

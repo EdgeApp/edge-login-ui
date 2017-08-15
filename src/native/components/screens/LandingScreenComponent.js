@@ -7,9 +7,7 @@ import LogoImage from '../common/LogoImage'
 
 export default class LandingScreenComponent extends Component {
   render () {
-    console.log(this.props.styles)
     const { LandingPageScreenStyle } = this.props.styles
-    console.log(Assets.LOGIN_BACKGROUND)
     return (
       <View style={LandingPageScreenStyle.container}>
         <BackgroundImage

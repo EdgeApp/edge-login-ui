@@ -14,8 +14,6 @@ export default class PaswordStatusComponent extends Component {
   }
   renderStatusList () {
     const style = this.props.style
-    console.log('HERE IS THE LIST ')
-    console.log(this.props.status.list)
     return this.props.status.list.map(Item => (
       <View style={style.checkboxContainer} key={Item.title}>
         <Checkbox

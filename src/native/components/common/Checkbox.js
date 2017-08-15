@@ -31,7 +31,6 @@ class Checkbox extends Component {
     )
   }
   onPress () {
-    console.log('FUCK PRESSED ')
     let onOff = this.state.onOff
     let newOnOff = false
     if (!onOff) {

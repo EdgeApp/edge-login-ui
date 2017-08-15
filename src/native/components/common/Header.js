@@ -6,7 +6,6 @@ import { Button } from '../common'
 class Header extends Component {
   render () {
     const Style = this.props.style
-    console.log(Style)
     return (
       <View style={Style.container}>
         <View style={Style.left}>

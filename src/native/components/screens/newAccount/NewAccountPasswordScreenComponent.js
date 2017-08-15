@@ -56,7 +56,6 @@ export default class LandingScreenComponent extends Component {
       isProcessing: true
     })
     if (!this.props.passwordStatus) {
-      console.log('No Password Status Skip ')
       // TODO Skip component
       this.setState({
         isProcessing: false

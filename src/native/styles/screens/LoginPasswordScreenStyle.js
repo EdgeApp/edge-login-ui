@@ -42,10 +42,7 @@ const LoginPasswordScreenStyle = {
     width: '100%',
     justifyContent: 'space-around'
   },
-  input: {
-    container: Styles.InputStyles.container,
-    inputStyle: { ...Styles.InputStyles.inputStyle, width: '100%' }
-  },
+  input: Styles.FormFieldStyle,
   forgotButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: Styles.TextOnlyButtonTextUpStyle,

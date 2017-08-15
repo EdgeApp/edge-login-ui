@@ -19,6 +19,12 @@ export function logSuccess () {
     type: Constants.LOGIN_USERNAME_PASSWORD
   }
 }
+export function logFail (data) {
+  return {
+    type: Constants.LOGIN_USERNAME_PASSWORD_FAIL,
+    data
+  }
+}
 
 export function loginPIN (data) {
   return {
@@ -108,8 +114,7 @@ export function userLoginWithPin (data) {
           callback(null, response)
         })
         .catch(e => {
-          console.log('Big ficking error PIN ')
-          console.log(e)
+          dispatch(logFail(e.message))
         })
     }, 300)
   }
@@ -129,13 +134,11 @@ export function userLogin (data) {
             .file('lastuser.json')
             .setText(JSON.stringify({ username: data.username }))
             .catch(e => null)
-          console.log('WE GOT THIS')
           dispatch(logSuccess())
           callback(null, response)
         })
         .catch(e => {
-          console.log('Big ficking error ')
-          console.log(e)
+          dispatch(logFail(e.message))
         })
     }, 300)
   }

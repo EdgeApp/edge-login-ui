@@ -8,7 +8,8 @@ export const mapStateToProps = (state, ownProps) => {
     styles: ownProps.styles,
     auth: state.login,
     loginSuccess: state.login.loginSuccess,
-    workflow: state.workflow
+    workflow: state.workflow,
+    error: state.login.loginPasswordErrorMessage
   }
 }
 

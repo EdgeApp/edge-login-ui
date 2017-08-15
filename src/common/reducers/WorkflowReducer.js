@@ -77,7 +77,6 @@ export default function (state = initialState, action) {
       if (nextIndex === -1) {
         nextIndex = 0
       }
-      console.log(nextIndex)
       return { ...state, currentSceneIndex: nextIndex }
     case Constants.WORKFLOW_NEXT:
       nextIndex = state.currentSceneIndex + 1
