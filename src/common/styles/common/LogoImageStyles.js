@@ -1,15 +1,12 @@
 const LogoImageStyles = {
   container: {
     position: 'relative',
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
-    width: '100%',
-    backgroundColor: '#FFcc00'
+    width: '100%'
   },
   image: {
-    position: 'relative',
-    marginTop: 15
+    position: 'relative'
     // width: null,
     // height: null
     // resizeMode: 'stretch'

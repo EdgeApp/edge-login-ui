@@ -1,34 +1,39 @@
 import * as Styles from '../'
 import * as Colors from '../../../common/constants/Colors'
+import { hs, vs } from '../../../common/util'
 
 const PinLoginScreenStyle = {
   container: Styles.ScreenStyle,
-  backgroundImage: {...Styles.BackgroundScreenImageStyle, alignItems: 'center'},
+  backgroundImage: {
+    ...Styles.BackgroundScreenImageStyle,
+    alignItems: 'center'
+  },
   featureBox: {
     position: 'relative',
-    top: 55,
-    width: 260,
-    height: 376,
+    top: vs(55),
+    width: hs(260),
+    height: vs(376),
     backgroundColor: Colors.OVERLAY_BOX,
     justifyContent: 'space-around',
-    alignItems: 'center',
-    padding: '10%'
+    alignItems: 'center'
   },
   featureBoxIconHeader: {
-    flex: 1,
+    flex: 3,
     width: '100%',
     position: 'relative',
-    backgroundColor: Colors.ACCENT_GREEN
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
   featureBoxBody: {
-    flex: 3,
+    flex: 4,
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center'
   },
+  logo: Styles.LogoImageStyles,
   inputBoxes: {
     container: Styles.InputStyles.container,
-    inputStyle: {...Styles.InputStyles.inputStyle, width: '100%'}
+    inputStyle: { ...Styles.InputStyles.inputStyle, width: '100%' }
   },
   forgotButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
@@ -37,7 +42,7 @@ const PinLoginScreenStyle = {
     downStyle: Styles.TextOnlyButtonDownStyle
   },
   loginButton: {
-    upStyle: {...Styles.PrimaryButtonUpStyle, width: '100%'},
+    upStyle: Styles.PrimaryButtonUpStyle,
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
     downStyle: Styles.PrimaryButtonDownStyle
@@ -50,4 +55,4 @@ const PinLoginScreenStyle = {
   }
 }
 
-export {PinLoginScreenStyle}
+export { PinLoginScreenStyle }

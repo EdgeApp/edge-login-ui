@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { BackgroundImage, Button } from '../../components/common'
+import {LogoImageHeader} from '../../components/abSpecific'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 
@@ -37,9 +38,10 @@ export default class PinLogInScreenComponent extends Component {
     }
     return (
       <View style={PinLoginScreenStyle.featureBox}>
-        <View style={PinLoginScreenStyle.featureBoxIconHeader} />
+        <View style={PinLoginScreenStyle.featureBoxIconHeader}>
+          <LogoImageHeader style={PinLoginScreenStyle.logo} />
+        </View>
         <View style={PinLoginScreenStyle.featureBoxBody}>
-
           <Button
             onPress={this.props.gotoLoginPage}
             label={'EXIT PIN'}

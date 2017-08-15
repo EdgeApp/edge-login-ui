@@ -54,3 +54,4 @@ PaswordStatusComponent.propTypes = {
   style: PropTypes.object.isRequired,
   status: PropTypes.object
 }
+

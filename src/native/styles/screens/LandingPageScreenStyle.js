@@ -1,34 +1,36 @@
 import * as Styles from '../'
 import * as Colors from '../../../common/constants/Colors'
-import {hs, vs} from '../../../common/util'
+import { hs, vs } from '../../../common/util'
 const LandingPageScreenStyle = {
   container: Styles.ScreenStyle,
-  backgroundImage: {...Styles.BackgroundScreenImageStyle, alignItems: 'center'},
+  backgroundImage: {
+    ...Styles.BackgroundScreenImageStyle,
+    alignItems: 'center'
+  },
   featureBox: {
     position: 'relative',
     top: vs(71),
     width: hs(260),
     height: vs(306),
-    backgroundColor: Colors.OVERLAY_BOX,
-    justifyContent: 'space-around',
-    alignItems: 'center'
+    backgroundColor: Colors.OVERLAY_BOX
   },
-  featureBoxIconHeader: {
-    // height: vs(120),
-    flex: 1
+  logoHeader: Styles.LogoHeaderStyle,
+  featureBoxContent: {
+    // height: vs(186), 306- 125 - remaining space.
+    width: '100%',
+    height: vs(186),
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   },
   featureBoxDescription: {
-    // height: vs(186),
-    flex: 2,
+    // height: vs(186), 306- 125 - remaining space.
     width: '100%',
     justifyContent: 'flex-end'
   },
   featureBoxButtons: {
     // height: vs(186),
-    flex: 1,
     justifyContent: 'flex-end'
   },
-  logo: Styles.LogoImageStyles,
   createButton: {
     upStyle: Styles.PrimaryButtonUpStyle,
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
@@ -41,7 +43,6 @@ const LandingPageScreenStyle = {
     downTextStyle: Styles.TextOnlyButtonDownStyle,
     downStyle: Styles.TextOnlyButtonTextDownStyle
   }
-
 }
 
-export {LandingPageScreenStyle}
+export { LandingPageScreenStyle }

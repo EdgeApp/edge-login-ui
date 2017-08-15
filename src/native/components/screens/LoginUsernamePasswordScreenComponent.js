@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { BackgroundImage, Button, FormField } from '../../components/common'
-import LogoImage from '../common/LogoImage'
+import {LogoImageHeader} from '../abSpecific'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 
@@ -38,9 +38,7 @@ export default class LandingScreenComponent extends Component {
     }
     return (
       <View style={LoginPasswordScreenStyle.featureBox}>
-        <View style={LoginPasswordScreenStyle.featureBoxIconHeader}>
-          <LogoImage style={LoginPasswordScreenStyle.logo} />
-        </View>
+        <LogoImageHeader style={LoginPasswordScreenStyle.logoHeader} />
         <View style={LoginPasswordScreenStyle.featureBoxBody}>
           <FormField
             style={LoginPasswordScreenStyle.input}

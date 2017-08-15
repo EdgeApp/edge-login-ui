@@ -1,4 +1,5 @@
 export * from '../../common/styles'
+export * from './components/LogoHeaderStyle'
 export * from './screens/LoginPasswordScreenStyle'
 export * from './screens/LandingPageScreenStyle'
 export * from './screens/PinLoginScreenStyle'

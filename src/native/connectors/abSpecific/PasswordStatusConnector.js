@@ -9,6 +9,4 @@ export const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, null)(
-  PasswordStatusComponent
-)
+export default connect(mapStateToProps, null)(PasswordStatusComponent)
