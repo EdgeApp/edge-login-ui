@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { BackgroundImage, Button, FormField } from '../../components/common'
-import {LogoImageHeader} from '../abSpecific'
+import { LogoImageHeader } from '../abSpecific'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 
@@ -12,6 +12,13 @@ export default class LandingScreenComponent extends Component {
       password: '',
       loggingIn: false
     })
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.error && this.state.loggingIn) {
+      this.setState({
+        loggingIn: false
+      })
+    }
   }
   render () {
     const { LoginPasswordScreenStyle } = this.props.styles
@@ -79,7 +86,7 @@ export default class LandingScreenComponent extends Component {
           downTextStyle={style.loginButton.downTextStyle}
           upStyle={style.loginButton.upStyle}
           upTextStyle={style.loginButton.upTextStyle}
-          isThinking={this.state.logginIn}
+          isThinking={this.state.loggingIn}
           doesThink
         />
         <Button

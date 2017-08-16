@@ -25,7 +25,7 @@ export default function (state = initialState, action) {
     case Constants.CREATE_ACCOUNT_FAIL:
       return { ...state, createErrorMessage: action.data }
     case Constants.LOGIN_USERNAME_PASSWORD:
-      return { ...state, loginSuccess: true }
+      return { ...state, loginSuccess: true, loginPasswordErrorMessage: null }
     case Constants.LOGIN_USERNAME_PASSWORD_FAIL:
       console.log('WE HAVE PASSWORD ERROR ')
       return { ...state, loginPasswordErrorMessage: action.data }
