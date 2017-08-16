@@ -23,19 +23,19 @@ class AccountManager extends Component {
       <div className={styles.container}>
         <p className={styles.header}>Account name: AirbitzAugur</p>
         <div className={styles.main}>
-          <Link to='/changepin'>
+          <Link to='/changepin' className={styles.linking}>
             <div className={styles.square}>
               <img src={pinIcon} />
               <p className={styles.label}>Change Pin</p>
             </div>
           </Link>
-          <Link to='/changepassword'>
+          <Link to='/changepassword' className={styles.linking}>
             <div className={styles.square}>
               <img src={passwordIcon} />
               <p className={styles.label}>Change Password</p>
             </div>
           </Link>
-          <Link to='/passwordrecovery'>
+          <Link to='/passwordrecovery' className={styles.linking}>
             <div className={styles.square}>
               <img src={recoveryIcon} />
               <p className={styles.label}>Setup / Change<br />Password Recovery</p>

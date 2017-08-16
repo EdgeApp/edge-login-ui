@@ -7,7 +7,7 @@ class LayoutTemplate extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <Header />
+        <Header location={this.props.location} />
         <div className={styles.main}>
           {this.props.children}
         </div>

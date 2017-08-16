@@ -13,12 +13,19 @@ class Header extends Component {
       console.log('Error with finding vendorName: ', e)
     }
   }
-
+  _renderheader = (pathname) => {
+    switch (pathname) {
+      case '/changepin':
+        return 'Change your 4-digit PIN'
+      default:
+        return sprintf(t('fragment_setup_header_left'), this.props.vendorName)
+    }
+  }
   render () {
     return (
       <div className={styles.container}>
         <p className={styles.text}>
-          {sprintf(t('fragment_setup_header_left'), this.props.vendorName)}
+          {this._renderheader(this.props.location.pathname)}
         </p>
       </div>
     )

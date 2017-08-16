@@ -1,5 +1,6 @@
 @import "~theme/buttons";
 @import "~theme/input";
+@import "~theme/loader";
 
 .container {
 
@@ -17,15 +18,39 @@
 
   flex: 1;
 
-  height: 280px;
+  height: 276px;
 
-  .header {
-    color: #909091;
-    font-size: 32px;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 30px;
+  .input {
+    width: 200px;
+    margin: 50px 0px 30px 0px;
+    span[class*="error"] {
+      display: block;
+      text-align: center;
+      margin: 0px auto;
+    }
+    input {
+      height: 40px;
+      font-size: 32px;
+      text-align: center;
+      color: #D8D6D6;
+      padding-bottom: 30px;
+    }
+  }
+
+  .inputed {
+    width: 200px;
+    margin: 50px 0px 30px 0px;
+    span[class*="error"] {
+      display: block;
+      text-align: center;
+      margin: 0px auto;
+    }
+    input {
+      height: 40px;
+      font-size: 50px;
+      text-align: center;
+      padding-bottom: 30px;
+    }
   }
 
 }

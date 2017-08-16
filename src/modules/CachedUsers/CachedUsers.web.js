@@ -37,6 +37,7 @@ class UserList extends Component {
   }
 
   render () {
+    console.log(this.props.cachedUsersWithPinEnabled)
     const renderValue = (item, idx) => {
       const userItemclassName = classnames(
         styles.useritem,
@@ -73,10 +74,8 @@ class UserList extends Component {
 }
 
 export default connect(state => ({
-
   users: state.cachedUsers.users,
   selectedUserToLogin: state.cachedUsers.selectedUserToLogin,
   cachedUsersWithPinEnabled: state.cachedUsers.usersWithPinEnabled,
   showCachedUsers: state.login.showCachedUsers
-
 }))(UserList)
