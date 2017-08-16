@@ -11,22 +11,11 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case Constants.SET_PREVIOUS_USERS:
-      const data = action.data
-      if (data.lastUser) {
-        data.userList.forEach(function (element) {
-          if (element.username === data.lastUser) {
-            data.lastUser = {
-              username: data.lastUser,
-              pinEnabled: element.pinEnabled
-            }
-          }
-        }, this)
+      if (action.data.lastUser) {
+        return { ...state, username: action.data.lastUser.username }
       }
-      if (data.lastUser) {
-        return { ...state, username: data.lastUser.username }
-      }
-      if (data.userList.length > 0) {
-        const topUser = data.userList[0]
+      if (action.data.usersWithPinList.length > 0) {
+        const topUser = action.data.usersWithPinList[0]
         return { ...state, username: topUser.username }
       }
       return state

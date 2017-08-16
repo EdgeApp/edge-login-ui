@@ -1,5 +1,5 @@
 import * as Constants from '../constants'
-import {dispatchActionWithData} from './'
+import { dispatchActionWithData } from './'
 
 async function getDiskStuff (context) {
   const userList = await context.listUsernames().then(usernames =>
@@ -25,8 +25,22 @@ async function getDiskStuff (context) {
 export function getPreviousUsers (context) {
   return (dispatch, getState, imports) => {
     let context = imports.context
-    getDiskStuff(context).then(bob => {
-      dispatch(dispatchActionWithData(Constants.SET_PREVIOUS_USERS, bob))
+    getDiskStuff(context).then(data => {
+      if (data.lastUser) {
+        data.usersWithPinList = []
+        data.userList.forEach(function (element) {
+          if (element.username === data.lastUser) {
+            data.lastUser = {
+              username: data.lastUser,
+              pinEnabled: element.pinEnabled
+            }
+          }
+          if (element.pinEnabled) {
+            data.usersWithPinList.push(element)
+          }
+        }, this)
+      }
+      dispatch(dispatchActionWithData(Constants.SET_PREVIOUS_USERS, data))
     })
   }
 }
