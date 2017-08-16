@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { BackgroundImage, Button, DropInput } from '../../components/common'
+import { BackgroundImage, Button } from '../../components/common'
 import { LogoImageHeader } from '../../components/abSpecific'
-import FourDigitInputConnector from '../../connectors/abSpecific/FourDigitInputConnector'
+import FourDigitInputConnector
+  from '../../connectors/abSpecific/FourDigitInputConnector'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 
@@ -11,7 +12,8 @@ export default class PinLogInScreenComponent extends Component {
     this.setState({
       username: '',
       pin: '',
-      loggingIn: false
+      loggingIn: false,
+      focusOn: 'pin'
     })
   }
   render () {
@@ -41,43 +43,45 @@ export default class PinLogInScreenComponent extends Component {
       <View style={PinLoginScreenStyle.featureBox}>
         <LogoImageHeader style={PinLoginScreenStyle.logoHeader} />
         <View style={PinLoginScreenStyle.featureBoxBody}>
-          <DropInput style={PinLoginScreenStyle.dropInput} />
-          <FourDigitInputConnector style={PinLoginScreenStyle.fourPin} />
-          <Button
-            onPress={this.props.gotoLoginPage}
-            label={'EXIT PIN'}
-            downStyle={PinLoginScreenStyle.forgotButton.downStyle}
-            downTextStyle={PinLoginScreenStyle.forgotButton.downTextStyle}
-            upStyle={PinLoginScreenStyle.forgotButton.upStyle}
-            upTextStyle={PinLoginScreenStyle.forgotButton.upTextStyle}
-          />
+          {this.renderBottomHalf(PinLoginScreenStyle)}
         </View>
 
       </View>
     )
   }
 
-  updateUsername (data) {
-    this.setState({
-      username: data
-    })
+  renderBottomHalf (style) {
+    if (this.state.focusOn === 'pin') {
+      return (
+        <View style={style.innerView}>
+          <Button
+            onPress={this.showDrop.bind(this)}
+            label={this.props.username}
+            downStyle={style.forgotButton.downStyle}
+            downTextStyle={style.forgotButton.downTextStyle}
+            upStyle={style.forgotButton.upStyle}
+            upTextStyle={style.forgotButton.upTextStyle}
+          />
+          <FourDigitInputConnector style={style.fourPin} />
+          <Button
+            onPress={this.props.gotoLoginPage}
+            label={'EXIT PIN'}
+            downStyle={style.forgotButton.downStyle}
+            downTextStyle={style.forgotButton.downTextStyle}
+            upStyle={style.forgotButton.upStyle}
+            upTextStyle={style.forgotButton.upTextStyle}
+          />
+        </View>
+      )
+    }
+    return <View style={style.innerView} />
   }
-  updatePassword (data) {
+  showDrop () {
+    /* if (this.props.previousUsers.userList.length < 2) {
+      return
+    } */
     this.setState({
-      password: data
+      focusOn: 'List'
     })
-  }
-
-  onStartLogin () {
-    this.setState({
-      loggingIn: true
-    })
-    this.props.userLogin({
-      username: 'edgy26', // this.state.username,
-      pin: '1111' // this.state.pin
-    })
-  }
-  onCreateAccount () {
-    // this.props.userLogin({ username: 'Bob20', password: 'Bob20' })
   }
 }

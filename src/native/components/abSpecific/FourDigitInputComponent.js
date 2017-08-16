@@ -11,19 +11,21 @@ class FourDigitInputComponent extends Component {
   render () {
     const Style = this.props.style
     return (
-      <TouchableWithoutFeedback style={Style.container} onPress={this.refocus.bind(this)}>
-        <View style={Style.interactiveContainer}>
-          {this.renderDotContainer(Style)}
-          <Input
-            style={Style.input}
-            onChangeText={this.updatePin.bind(this)}
-            maxLength={4}
-            value={this.props.pin}
-            autoFocus={this.state.autoFocus}
-          />
-        </View>
-        <View style={Style.errorContainer}>
-          <Text style={Style.errorText}>{this.props.error}</Text>
+      <TouchableWithoutFeedback onPress={this.refocus.bind(this)}>
+        <View style={Style.container}>
+          <View style={Style.interactiveContainer}>
+            {this.renderDotContainer(Style)}
+            <Input
+              style={Style.input}
+              onChangeText={this.updatePin.bind(this)}
+              maxLength={4}
+              value={this.props.pin}
+              autoFocus={this.state.autoFocus}
+            />
+          </View>
+          <View style={Style.errorContainer}>
+            <Text style={Style.errorText}>{this.props.error}</Text>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     )

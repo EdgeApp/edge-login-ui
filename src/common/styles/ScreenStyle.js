@@ -26,6 +26,13 @@ const PageContainerWithHeaderStyle = {
   width: '100%'
 }
 
+const InnerView = {
+  position: 'relative',
+  height: '100%',
+  width: '100%'
+}
+
+export { InnerView }
 export { PageContainerWithHeaderStyle }
 export { BackgroundScreenImageStyle }
 export { ScreenStyle }

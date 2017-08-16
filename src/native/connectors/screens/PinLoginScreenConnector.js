@@ -6,8 +6,7 @@ import * as Constants from '../../../common/constants'
 export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
-    auth: state.login,
-    loginSuccess: state.login.loginSuccess,
+    username: state.login.username,
     previousUsers: state.previousUsers,
     workflow: state.workflow
   }

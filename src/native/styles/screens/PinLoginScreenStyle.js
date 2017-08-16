@@ -8,6 +8,11 @@ const PinLoginScreenStyle = {
     ...Styles.BackgroundScreenImageStyle,
     alignItems: 'center'
   },
+  innerView: {
+    ...Styles.InnerView,
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
   featureBox: {
     position: 'relative',
     top: vs(55),
@@ -19,9 +24,7 @@ const PinLoginScreenStyle = {
   },
   featureBoxBody: {
     height: vs(250),
-    width: '100%',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
+    width: '100%'
   },
   logoHeader: Styles.LogoHeaderStyle,
   dropInput: {
