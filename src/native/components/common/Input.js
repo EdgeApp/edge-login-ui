@@ -4,8 +4,14 @@ import { TextInput } from 'react-native'
 class Input extends Component {
   componentWillMount () {
     this.setState({
-      inputText: ''
+      inputText: '',
+      autoFocus: this.props.autoFocus
     })
+  }
+  componentDidMount () {
+    if (this.props.autoFocus) {
+      // set the focus to the thing
+    }
   }
 
   componentWillReceiveProps (nextProps) {
@@ -26,6 +32,7 @@ class Input extends Component {
         value={this.state.inputText}
         style={this.props.style}
         onChangeText={this.onChange.bind(this)}
+        autoFocus={this.state.autoFocus}
       />
     )
   }
@@ -50,7 +57,8 @@ Input.propTypes = {
 
 Input.defaultProps = {
   autoCapitalize: 'none',
-  autoCorrect: false
+  autoCorrect: false,
+  autoFocus: false
 }
 
 export { Input }

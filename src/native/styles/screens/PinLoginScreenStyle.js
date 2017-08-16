@@ -35,13 +35,49 @@ const PinLoginScreenStyle = {
   fourPin: {
     container: {
       width: 200,
-      height: 30,
-      backgroundColor: Colors.ACCENT_ORANGE
+      height: 60
+    },
+    interactiveContainer: {
+      flex: 1,
+      width: '100%'
+    },
+    errorContainer: {
+      flex: 1,
+      width: '100%'
+    },
+    dotContainer: {
+      height: '100%',
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    },
+    errorText: {
+      width: '100%',
+      textAlign: 'center',
+      color: Colors.ACCENT_RED
     },
     input: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
       width: '100%',
       height: '100%',
-      opacity: 0.1
+      opacity: 0.8
+    },
+    circle: {
+      borderWidth: 2,
+      borderColor: Colors.PRIMARY,
+      borderRadius: 15,
+      height: 30,
+      width: 30
+    },
+    circleSected: {
+      backgroundColor: Colors.PRIMARY,
+      borderWidth: 2,
+      borderColor: Colors.PRIMARY,
+      borderRadius: 15,
+      height: 30,
+      width: 30
     }
   },
   inputBoxes: {

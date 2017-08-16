@@ -1,19 +1,49 @@
 import React, { Component, PropTypes } from 'react'
-import { View, TextInput } from 'react-native'
+import { View, Text, TouchableWithoutFeedback } from 'react-native'
+import { Spinner, Input } from '../common'
 
 class FourDigitInputComponent extends Component {
+  componentWillMount () {
+    this.setState({
+      autoFocus: true
+    })
+  }
   render () {
     const Style = this.props.style
-    console.log('KKKKKKKKKKKKKKK')
-    console.log(this.props.username)
     return (
-      <View style={Style.container}>
-        <TextInput
-          style={Style.input}
-          onChangeText={this.updatePin.bind(this)}
-          maxLength={4}
-          keyboardType={'numeric'}
-        />
+      <TouchableWithoutFeedback style={Style.container} onPress={this.refocus.bind(this)}>
+        <View style={Style.interactiveContainer}>
+          {this.renderDotContainer(Style)}
+          <Input
+            style={Style.input}
+            onChangeText={this.updatePin.bind(this)}
+            maxLength={4}
+            value={this.props.pin}
+            autoFocus={this.state.autoFocus}
+          />
+        </View>
+        <View style={Style.errorContainer}>
+          <Text style={Style.errorText}>{this.props.error}</Text>
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  }
+  refocus () {
+    this.setState({
+      autoFocus: true
+    })
+  }
+  renderDotContainer (style) {
+    const pinLength = this.props.pin ? this.props.pin.length : 0
+    if (pinLength === 4) {
+      return <Spinner />
+    }
+    return (
+      <View style={style.dotContainer}>
+        <View style={[style.circle, pinLength > 0 && style.circleSected]} />
+        <View style={[style.circle, pinLength > 1 && style.circleSected]} />
+        <View style={[style.circle, pinLength > 2 && style.circleSected]} />
+        <View style={[style.circle, pinLength > 3 && style.circleSected]} />
       </View>
     )
   }

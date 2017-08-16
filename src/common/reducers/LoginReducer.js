@@ -30,6 +30,8 @@ export default function (state = initialState, action) {
         return { ...state, username: topUser.username }
       }
       return state
+    case Constants.AUTH_UPDATE_PIN:
+      return { ...state, pin: action.data }
     case Constants.LOGIN_SUCCEESS:
       return { ...state, loginSuccess: true, loginPasswordErrorMessage: null }
     case Constants.LOGIN_USERNAME_PASSWORD_FAIL:
