@@ -1,5 +1,5 @@
 import * as Constants from '../constants'
-import {dispatchAction, dispatchActionWithData} from './'
+import { dispatchAction, dispatchActionWithData } from './'
 
 /* export function loginPIN (data) {
   return {
@@ -22,8 +22,10 @@ export function userLoginWithPin (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context
     let callback = imports.callback
-    dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PIN, data))
-    if (data.length === 4) {
+    dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PIN, data.pin))
+    if (data.pin.length === 4) {
+      console.log('USER LOGIN WITH PIN ')
+      console.log(data)
       setTimeout(() => {
         context
           .loginWithPIN(data.username, data.pin, null, null)
@@ -32,10 +34,12 @@ export function userLoginWithPin (data) {
               .file('lastuser.json')
               .setText(JSON.stringify({ username: data.username }))
               .catch(e => null)
-            dispatch(dispatchAction(Constants.LOGIN_USERNAME_PASSWORD))
+            dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
             callback(null, response)
           })
           .catch(e => {
+            console.log('LOG IN WITH PIN ERROR ')
+            console.log(e.message)
             dispatch(
               dispatchActionWithData(
                 Constants.LOGIN_USERNAME_PASSWORD_FAIL,
@@ -64,7 +68,7 @@ export function userLogin (data) {
             .file('lastuser.json')
             .setText(JSON.stringify({ username: data.username }))
             .catch(e => null)
-          dispatch(dispatchAction(Constants.LOGIN_USERNAME_PASSWORD))
+          dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
           callback(null, response)
         })
         .catch(e => {
@@ -94,4 +98,3 @@ export function pin (data) {
     // dispatch(updatePin(obj))
   }
 }
-

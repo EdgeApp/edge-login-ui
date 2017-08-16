@@ -12,7 +12,7 @@ export const mapStateToProps = (state, ownProps) => {
 }
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onChangeText: (data) => dispatch(actions.testAction(data))
+    onChangeText: (data) => dispatch(actions.userLoginWithPin(data))
   }
 }
 

@@ -5,9 +5,8 @@ const initialState = {
   password: null,
   pin: null,
   loginSuccess: false,
-  pinError: null,
-  usernameErrorMessage: null,
-  passwordErrorMessage: null
+  errorMessage: null,
+  pinError: null
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -24,17 +23,17 @@ export default function (state = initialState, action) {
         }, this)
       }
       if (data.lastUser) {
-        return { ...state, username: data.lastUser }
+        return { ...state, username: data.lastUser.username }
       }
       if (data.userList.length > 0) {
         const topUser = data.userList[0]
         return { ...state, username: topUser.username }
       }
       return state
-    case Constants.LOGIN_USERNAME_PASSWORD:
+    case Constants.LOGIN_SUCCEESS:
       return { ...state, loginSuccess: true, loginPasswordErrorMessage: null }
     case Constants.LOGIN_USERNAME_PASSWORD_FAIL:
-      return { ...state, loginPasswordErrorMessage: action.data }
+      return { ...state, errorMessage: action.data }
 
     default:
       return state
