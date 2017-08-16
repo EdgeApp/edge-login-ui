@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { BackgroundImage, Button } from '../../components/common'
-import {LogoImageHeader} from '../../components/abSpecific'
+import { BackgroundImage, Button, DropInput } from '../../components/common'
+import { LogoImageHeader } from '../../components/abSpecific'
+import FourDigitInputConnector from '../../connectors/abSpecific/FourDigitInputConnector'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 
@@ -14,7 +15,7 @@ export default class PinLogInScreenComponent extends Component {
     })
   }
   render () {
-    const {PinLoginScreenStyle} = this.props.styles
+    const { PinLoginScreenStyle } = this.props.styles
     return (
       <View style={PinLoginScreenStyle.container}>
         <BackgroundImage
@@ -28,7 +29,7 @@ export default class PinLogInScreenComponent extends Component {
   }
 
   renderOverImage () {
-    const {PinLoginScreenStyle} = this.props.styles
+    const { PinLoginScreenStyle } = this.props.styles
     if (this.props.loginSuccess) {
       return (
         <View style={PinLoginScreenStyle.featureBox}>
@@ -38,10 +39,10 @@ export default class PinLogInScreenComponent extends Component {
     }
     return (
       <View style={PinLoginScreenStyle.featureBox}>
-        <View style={PinLoginScreenStyle.featureBoxIconHeader}>
-          <LogoImageHeader style={PinLoginScreenStyle.logo} />
-        </View>
+        <LogoImageHeader style={PinLoginScreenStyle.logoHeader} />
         <View style={PinLoginScreenStyle.featureBoxBody}>
+          <DropInput style={PinLoginScreenStyle.dropInput} />
+          <FourDigitInputConnector style={PinLoginScreenStyle.fourPin} />
           <Button
             onPress={this.props.gotoLoginPage}
             label={'EXIT PIN'}
@@ -49,16 +50,6 @@ export default class PinLogInScreenComponent extends Component {
             downTextStyle={PinLoginScreenStyle.forgotButton.downTextStyle}
             upStyle={PinLoginScreenStyle.forgotButton.upStyle}
             upTextStyle={PinLoginScreenStyle.forgotButton.upTextStyle}
-          />
-          <Button
-            onPress={this.onStartLogin.bind(this)}
-            label={'Login'}
-            downStyle={PinLoginScreenStyle.loginButton.downStyle}
-            downTextStyle={PinLoginScreenStyle.loginButton.downTextStyle}
-            upStyle={PinLoginScreenStyle.loginButton.upStyle}
-            upTextStyle={PinLoginScreenStyle.loginButton.upTextStyle}
-            isThinking={this.state.logginIn}
-            doesThink
           />
         </View>
 
@@ -83,7 +74,7 @@ export default class PinLogInScreenComponent extends Component {
     })
     this.props.userLogin({
       username: 'edgy26', // this.state.username,
-      pin: '1111'// this.state.pin
+      pin: '1111' // this.state.pin
     })
   }
   onCreateAccount () {

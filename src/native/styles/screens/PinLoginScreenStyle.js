@@ -17,20 +17,33 @@ const PinLoginScreenStyle = {
     justifyContent: 'space-around',
     alignItems: 'center'
   },
-  featureBoxIconHeader: {
-    flex: 3,
-    width: '100%',
-    position: 'relative',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
   featureBoxBody: {
-    flex: 4,
+    height: vs(250),
     width: '100%',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     alignItems: 'center'
   },
-  logo: Styles.LogoImageStyles,
+  logoHeader: Styles.LogoHeaderStyle,
+  dropInput: {
+    container: {
+      width: 200,
+      height: 30,
+      backgroundColor: Colors.ACCENT_GREEN,
+      marginBottom: 20
+    }
+  },
+  fourPin: {
+    container: {
+      width: 200,
+      height: 30,
+      backgroundColor: Colors.ACCENT_ORANGE
+    },
+    input: {
+      width: '100%',
+      height: '100%',
+      opacity: 0.1
+    }
+  },
   inputBoxes: {
     container: Styles.InputStyles.container,
     inputStyle: { ...Styles.InputStyles.inputStyle, width: '100%' }
