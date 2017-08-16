@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { View, TextInput } from 'react-native'
 
-class FourDigitInput extends Component {
+class FourDigitInputComponent extends Component {
   render () {
     const Style = this.props.style
+    console.log('KKKKKKKKKKKKKKK')
+    console.log(this.props.username)
     return (
       <View style={Style.container}>
         <TextInput
@@ -16,13 +18,11 @@ class FourDigitInput extends Component {
     )
   }
   updatePin (arg) {
-    console.log('Update Pin')
-    console.log(arg)
-    this.props.onChangeText({ name: 'FUN THING' })
+    this.props.onChangeText({ username: this.props.username, pin: arg })
   }
 }
-FourDigitInput.propTypes = {
+FourDigitInputComponent.propTypes = {
   style: PropTypes.object.isRequired
 }
 
-export { FourDigitInput }
+export { FourDigitInputComponent }

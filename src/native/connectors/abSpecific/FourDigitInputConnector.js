@@ -1,12 +1,11 @@
 import { connect } from 'react-redux'
-import {FourDigitInput} from '../../components/abSpecific/'
+import {FourDigitInputComponent} from '../../components/abSpecific/'
 import * as actions from '../../../common/actions'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
     style: ownProps.style,
-    status: state.passwordStatus,
-    pin: state.login.loginPin,
+    pin: state.login.pin,
     username: state.login.username
 
   }
@@ -17,4 +16,4 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FourDigitInput)
+export default connect(mapStateToProps, mapDispatchToProps)(FourDigitInputComponent)
