@@ -2,19 +2,74 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import CachedUsers from '../../CachedUsers/CachedUsers.web.js'
-import { openUserList, closeUserList } from '../Login.action'
+import dropdown from '../../../img/dropdown.png'
+
+import { openLogin, loginPIN, openUserList, closeUserList } from '../Login.action'
+import { loginWithPin } from '../Login.middleware'
+import { closeLoading } from '../../Loader/Loader.action'
 
 import styles from './LoginWithPin.webStyle.scss'
 import Input from 'react-toolbox/lib/input'
 
 class LoginWithPin extends Component {
+  _handleSubmit = () => {
+    const callback = (error, account) => {
+      if (!error) {
+        if (window.parent.loginCallback) {
+          return window.parent.loginCallback(null, account)
+        }
+        if (!window.parent.loginCallback) {
+          this.props.dispatch(closeLoading())
+          return this.props.router.push('/account')
+        }
+      }
+    }
+    this.props.dispatch(
+      loginWithPin(
+        this.props.user,
+        this.props.pin,
+        callback
+      )
+    )
+    // this.pin.getWrappedInstance().blur()
+  }
+  _handleChangePin = (pin) => {
+    if (pin.length > 4) {
+      pin = pin.substr(0, 4)
+    }
+    if (/^\d+$/.test(pin) || pin.length === 0 && pin.length > 4) {
+      this.props.dispatch(
+        loginPIN(pin)
+      )
+    }
+    if (pin.length === 4) {
+      setTimeout(this._handleSubmit, 200)
+    }
+  }
+  _gotoPasswordInput = (pin) => {
+    this.props.dispatch(closeUserList())
+    this.props.dispatch(openLogin())
+  }
   _showCachedUsers = () => {
     this.props.dispatch(openUserList())
+    this.pin.getWrappedInstance().blur()
   }
   _hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
+    this.pin.getWrappedInstance().focus()
   }
   render () {
+    const usersDropdown = () => {
+      return (
+        <div className={styles.usernameContainer}>
+          <p className={styles.label}>Username</p>
+          <div className={styles.inputRow} tabIndex={1} onFocus={this._showCachedUsers} onBlur={this._hideCachedUsers}>
+            <p className={styles.username}>{ this.props.user ? this.props.user : 'No User Selected' }</p>
+            <img src={dropdown} className={styles.caret} />
+          </div>
+        </div>
+      )
+    }
     return (
       <div className={styles.container}>
         <div className={styles.background} />
@@ -22,21 +77,24 @@ class LoginWithPin extends Component {
           <p className={styles.header}>Login with your PIN</p>
           <div className={styles.box}>
             <CachedUsers
-              component={
-                <Input
-                  onFocus={this._showCachedUsers}
-                  onBlur={this._hideCachedUsers}
-                  className={styles.userList}
-                />
-              }
+              component={usersDropdown()}
               area='pinLogin'
               containerClassName={styles.cachedUsers}
               userListClassName={styles.userListClassName}
             />
-            <div className={styles.password}>
-              <input type='password' style={{ textAlign: 'center' }}required='required' />
-              <label className={styles.passwordLabel} htmlFor='input'>Enter PIN</label>
-              <i className={styles.bar} />
+            <div className={styles.pinForm}>
+              <p className={styles.pinLabel}>Enter PIN</p>
+              <div className={styles.pinInput}>
+                <p className={styles.placeholder}>&#8226;&#8226;&#8226;&#8226;</p>
+                <Input
+                  type='password'
+                  name='password'
+                  ref={input => { this.pin = input }}
+                  className={styles.input}
+                  onChange={this._handleChangePin}
+                  value={this.props.pin}
+                />
+              </div>
             </div>
           </div>
           <p className={styles.exitLink} onClick={this.props.openViewPassword}>Exit PIN Login</p>
@@ -46,4 +104,10 @@ class LoginWithPin extends Component {
   }
 }
 
-export default connect()(LoginWithPin)
+export default connect(state => ({
+  pin: state.login.pin,
+  user: state.cachedUsers.selectedUserToLogin,
+  showCachedUsers: state.login.showCachedUsers,
+  loginPinWait: state.login.loginPinWait,
+  currentPasswordCountdown: false
+}))(LoginWithPin)

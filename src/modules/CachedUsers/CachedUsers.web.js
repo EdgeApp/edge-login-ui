@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import FontIcon from 'react-toolbox/lib/font_icon'
 import t from 'lib/web/LocaleStrings'
-import styles from './CachedUsers.webStyle'
 import classnames from 'classnames'
 import {loginUsername} from '../Login/Login.action'
 
 import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
 import { openWarningModal } from '../WarningModal/WarningModal.action'
+import styles from './CachedUsers.webStyle'
 
 class UserList extends Component {
   _handleLoginUser = (user) => {
@@ -37,7 +37,6 @@ class UserList extends Component {
   }
 
   render () {
-    console.log(this.props.cachedUsersWithPinEnabled)
     const renderValue = (item, idx) => {
       const userItemclassName = classnames(
         styles.useritem,
