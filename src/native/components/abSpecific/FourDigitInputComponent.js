@@ -50,9 +50,6 @@ class FourDigitInputComponent extends Component {
     )
   }
   updatePin (arg) {
-    if (arg.length === 4) {
-      // trap here to not continue until we get an update.
-    }
     this.props.onChangeText({ username: this.props.username, pin: arg })
   }
 }

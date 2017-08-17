@@ -5,8 +5,7 @@ const initialState = {
   password: null,
   pin: null,
   loginSuccess: false,
-  errorMessage: null,
-  pinError: null
+  errorMessage: null
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -26,7 +25,7 @@ export default function (state = initialState, action) {
     case Constants.LOGIN_SUCCEESS:
       return { ...state, loginSuccess: true, loginPasswordErrorMessage: null }
     case Constants.LOGIN_USERNAME_PASSWORD_FAIL:
-      return { ...state, errorMessage: action.data }
+      return { ...state, errorMessage: action.data, pin: '' }
 
     default:
       return state

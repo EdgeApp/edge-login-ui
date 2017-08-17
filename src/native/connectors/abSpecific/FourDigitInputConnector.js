@@ -7,7 +7,7 @@ export const mapStateToProps = (state, ownProps) => {
     style: ownProps.style,
     pin: state.login.pin,
     username: state.login.username,
-    error: state.login.error
+    error: state.login.errorMessage
 
   }
 }

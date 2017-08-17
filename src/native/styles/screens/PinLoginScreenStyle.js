@@ -74,7 +74,8 @@ const PinLoginScreenStyle = {
     errorText: {
       width: '100%',
       textAlign: 'center',
-      color: Colors.ACCENT_RED
+      color: Colors.ACCENT_RED,
+      padding: 20
     },
     input: {
       position: 'absolute',
