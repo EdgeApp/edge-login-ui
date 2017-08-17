@@ -10,7 +10,7 @@ import { dispatchAction, dispatchActionWithData } from './'
 
 export function testAction (data) {
   return (dispatch, getState, imports) => {
-    dispatch(dispatchActionWithData(data))
+    dispatch(dispatchActionWithData('JUST A TEST DO NOTHING', data))
   }
 }
 

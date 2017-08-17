@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { BackgroundImage, Button } from '../../components/common'
+import { BackgroundImage, Button, ScrollingList } from '../../components/common'
 import { LogoImageHeader } from '../../components/abSpecific'
 import FourDigitInputConnector
   from '../../connectors/abSpecific/FourDigitInputConnector'
 // import * as Constants from '../../../common/constants'
+import { UserListItem } from '../abSpecific'
 import * as Assets from '../../assets/'
 
 export default class PinLogInScreenComponent extends Component {
@@ -45,7 +46,6 @@ export default class PinLogInScreenComponent extends Component {
         <View style={PinLoginScreenStyle.featureBoxBody}>
           {this.renderBottomHalf(PinLoginScreenStyle)}
         </View>
-
       </View>
     )
   }
@@ -74,12 +74,38 @@ export default class PinLogInScreenComponent extends Component {
         </View>
       )
     }
-    return <View style={style.innerView} />
+    return (
+      <View style={style.innerView}>
+        <ScrollingList
+          style={style.listView}
+          getListItemsFunction={this.renderItems.bind(this)}
+          dataList={this.props.usersWithPin}
+        />
+      </View>
+    )
+  }
+  renderItems (item) {
+    const { PinLoginScreenStyle } = this.props.styles
+    return (
+      <UserListItem
+        key={'key ' + item}
+        data={item}
+        style={PinLoginScreenStyle.listItem}
+        onClick={this.selectUser.bind(this)}
+      />
+    )
+  }
+  selectUser (arg) {
+    this.props.changeUser(arg)
+    this.setState({
+      focusOn: 'pin'
+    })
   }
   showDrop () {
-    /* if (this.props.previousUsers.userList.length < 2) {
+    console.log(this.props.usersWithPin)
+    if (this.props.usersWithPin.length < 2) {
       return
-    } */
+    }
     this.setState({
       focusOn: 'List'
     })

@@ -36,10 +36,12 @@ export function getPreviousUsers (context) {
             }
           }
           if (element.pinEnabled) {
-            data.usersWithPinList.push(element)
+            data.usersWithPinList.push(element.username)
           }
         }, this)
       }
+      console.log('show me the data ')
+      console.log(data)
       dispatch(dispatchActionWithData(Constants.SET_PREVIOUS_USERS, data))
     })
   }

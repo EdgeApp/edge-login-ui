@@ -27,6 +27,23 @@ const PinLoginScreenStyle = {
     width: '100%'
   },
   logoHeader: Styles.LogoHeaderStyle,
+  listView: {
+    height: vs(250),
+    width: hs(160)
+  },
+  listItem: {
+    container: {
+      height: vs(40),
+      width: '100%',
+      backgroundColor: Colors.WHITE,
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    text: {
+      paddingLeft: 20,
+      color: Colors.PRIMARY
+    }
+  },
   dropInput: {
     container: {
       width: 200,

@@ -18,7 +18,7 @@ export function checkUsernameForAvailabilty (data) {
               error: null
             }
             dispatch(
-              dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, obj)
+              dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
             )
             dispatch(WorkflowActions.nextScreen())
             return
@@ -27,7 +27,7 @@ export function checkUsernameForAvailabilty (data) {
             username: data,
             error: 'THE USERNAME ALREADY EXOSTS ' // TODO - localize string.
           }
-          dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, obj))
+          dispatch(dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj))
         })
         .catch(e => {
           console.log('Big ficking error ')
@@ -49,7 +49,7 @@ export function validateUsername (data) {
       username: data,
       error: error
     }
-    dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, obj))
+    dispatch(dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj))
   }
 }
 export function validateConfirmPassword (data) {

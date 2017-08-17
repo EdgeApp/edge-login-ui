@@ -7,15 +7,20 @@ export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
     username: state.login.username,
-    previousUsers: state.previousUsers,
+    usersWithPin: state.previousUsers.usersWithPinList,
     workflow: state.workflow
   }
 }
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    userLogin: (data) => dispatch(actions.userLoginWithPin(data)),
-    gotoLoginPage: () => dispatch(actions.startWorkflow(Constants.WORKFLOW_PASSWORD))
+    changeUser: (data) =>
+      dispatch(
+        actions.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data)
+      ),
+    userLogin: data => dispatch(actions.userLoginWithPin(data)),
+    gotoLoginPage: () =>
+      dispatch(actions.startWorkflow(Constants.WORKFLOW_PASSWORD))
   }
 }
 

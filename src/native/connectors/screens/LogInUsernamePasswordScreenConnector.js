@@ -9,7 +9,7 @@ export const mapStateToProps = (state, ownProps) => {
     auth: state.login,
     loginSuccess: state.login.loginSuccess,
     workflow: state.workflow,
-    error: state.login.loginPasswordErrorMessage
+    error: state.login.errorMessage
   }
 }
 
