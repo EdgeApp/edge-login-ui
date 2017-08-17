@@ -26,7 +26,7 @@ const initialState = {
       { back: true, skip: true, title: 'Set a password', subTitle: 'step 2/3' },
       {
         back: true,
-        skip: true,
+        skip: false,
         title: 'Set a 4-digit PIN ',
         subTitle: 'step 3/3'
       },

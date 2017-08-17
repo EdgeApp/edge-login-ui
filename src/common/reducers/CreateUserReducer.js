@@ -4,7 +4,7 @@ const initialState = {
   username: null,
   password: null,
   confirmPassword: null,
-  pin: null,
+  pin: '1111',
   loginPin: null,
   loginSuccess: false,
   creationSuccess: false,

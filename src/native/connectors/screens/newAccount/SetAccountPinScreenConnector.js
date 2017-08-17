@@ -5,10 +5,10 @@ import * as loginAction from '../../../../common/actions'
 export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
-    username: state.login.username,
-    password: state.login.password,
-    pin: state.login.pin,
-    pinError: state.login.pinError,
+    username: state.create.username,
+    password: state.create.password,
+    pin: state.create.pin,
+    pinError: state.create.pinError,
     workflow: state.workflow
   }
 }

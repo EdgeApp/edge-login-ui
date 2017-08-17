@@ -5,8 +5,8 @@ import * as loginAction from '../../../common/actions'
 export const mapStateToProps = (state, ownProps) => {
   return {
     style: ownProps.style,
-    value: state.login.password,
-    error: state.login.createPasswordErrorMessage,
+    value: state.create.password,
+    error: state.create.createPasswordErrorMessage,
     secureTextEntry: true,
     showSecureCheckbox: true,
     showSecureCheckboxLabel: 'Show Password',

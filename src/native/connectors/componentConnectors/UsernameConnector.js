@@ -5,8 +5,8 @@ import * as loginAction from '../../../common/actions'
 export const mapStateToProps = (state, ownProps) => {
   return {
     style: ownProps.style,
-    value: state.login.username,
-    error: state.login.usernameErrorMessage,
+    value: state.create.username,
+    error: state.create.usernameErrorMessage,
     label: 'Username'
   }
 }

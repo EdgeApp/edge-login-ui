@@ -6,8 +6,8 @@ export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
     workflow: state.workflow,
-    username: state.login.username,
-    usernameErrorMessage: state.login.usernameErrorMessage
+    username: state.create.username,
+    usernameErrorMessage: state.create.usernameErrorMessage
   }
 }
 

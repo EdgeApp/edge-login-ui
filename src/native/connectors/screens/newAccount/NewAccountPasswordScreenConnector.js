@@ -5,10 +5,10 @@ import * as actions from '../../../../common/actions'
 export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
-    password: state.login.password,
-    passwordStatus: state.login.passwordStatus,
-    confirmPassword: state.login.confirmPassword,
-    createPasswordErrorMessage: state.login.createPasswordErrorMessage,
+    password: state.create.password,
+    passwordStatus: state.create.passwordStatus,
+    confirmPassword: state.create.confirmPassword,
+    createPasswordErrorMessage: state.create.createPasswordErrorMessage,
     workflow: state.workflow
   }
 }

@@ -1,17 +1,20 @@
 import * as Constants from '../constants'
 import * as WorkflowActions from './WorkflowActions'
 import { isASCII } from '../util'
-import {dispatchActionWithData} from './'
+import { dispatchAction, dispatchActionWithData } from './'
 
 export function checkUsernameForAvailabilty (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
+    console.log('usernmae availblecheck')
     setTimeout(() => {
       context
         .usernameAvailable(data)
         .then(async response => {
+          console.log('usernmae availblecheck response')
+          console.log(response)
           if (response) {
             const obj = {
               username: data,
@@ -20,14 +23,16 @@ export function checkUsernameForAvailabilty (data) {
             dispatch(
               dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
             )
-            dispatch(WorkflowActions.nextScreen())
+            dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
             return
           }
           const obj = {
             username: data,
             error: 'THE USERNAME ALREADY EXOSTS ' // TODO - localize string.
           }
-          dispatch(dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj))
+          dispatch(
+            dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
+          )
         })
         .catch(e => {
           console.log('Big ficking error ')
@@ -100,12 +105,17 @@ export function createUser (data) {
         .createAccount(data.username, data.password, data.pin, null, null)
         .then(async response => {
           console.log('response create user ')
-          dispatch(dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, response))
+          dispatch(
+            dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, response)
+          )
+          dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
         })
         .catch(e => {
           console.log('Big ficking error createUser')
           console.log(e)
-          dispatch(dispatchActionWithData(Constants.CREATE_ACCOUNT_FAIL, e.message))
+          dispatch(
+            dispatchActionWithData(Constants.CREATE_ACCOUNT_FAIL, e.message)
+          )
         })
     }, 300)
   }
