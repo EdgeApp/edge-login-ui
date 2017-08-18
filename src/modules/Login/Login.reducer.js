@@ -198,3 +198,14 @@ export const error = (state = '', action) => {
       return state
   }
 }
+
+export const errorPin = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.SHOW_ERROR_LOGIN_PIN_MESSAGE:
+      return action.data
+    case ACTION.CLEAR_ERROR_LOGIN_PIN_MESSAGE:
+      return ''
+    default:
+      return state
+  }
+}

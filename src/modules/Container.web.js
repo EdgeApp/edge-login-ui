@@ -77,7 +77,7 @@ class Container extends Component {
     const checkSignupPage = () => {
       switch (this.props.signupPage) {
         case 'pin':
-          return styles.dialogPin
+          return styles.dialogSignUpPin
         case 'password':
           return styles.dialogPassword
         case 'review':

@@ -9,8 +9,8 @@ import {
   loginPIN,
   openUserList,
   closeUserList,
-  showErrorLoginMessage,
-  clearErrorLoginMessage
+  showErrorLoginPinMessage,
+  clearErrorLoginPinMessage
 } from '../Login.action'
 import { loginWithPin } from '../Login.middleware'
 import { closeLoading } from '../../Loader/Loader.action'
@@ -21,7 +21,7 @@ import Input from 'react-toolbox/lib/input'
 class LoginWithPin extends Component {
   _handleSubmit = () => {
     const callback = (error, account) => {
-      this.props.dispatch(clearErrorLoginMessage(error))
+      this.props.dispatch(clearErrorLoginPinMessage(error))
       if (!error) {
         this.props.dispatch(loginPIN(''))
         if (window.parent.loginCallback) {
@@ -33,7 +33,7 @@ class LoginWithPin extends Component {
         }
       }
       if (error) {
-        return this.props.dispatch(showErrorLoginMessage(error))
+        return this.props.dispatch(showErrorLoginPinMessage(error))
       }
     }
     this.props.dispatch(
@@ -132,7 +132,7 @@ export default connect(state => ({
   user: state.cachedUsers.selectedUserToLogin,
   showCachedUsers: state.login.showCachedUsers,
   loginPinWait: state.login.loginPinWait,
-  error: state.login.error,
+  error: state.login.errorPin,
   loader: state.loader,
   currentPasswordCountdown: false
 }))(LoginWithPin)

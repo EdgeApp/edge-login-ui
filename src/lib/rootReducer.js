@@ -78,7 +78,8 @@ const store = combineReducers({
     loginPinWait: Login.loginPinWait,
     loginPasswordWait: Login.loginPasswordWait,
     loginNotification: Login.loginNotification,
-    error: Login.error
+    error: Login.error,
+    errorPin: Login.errorPin
   }),
   nextButtonVisible,
   skipButtonVisible,

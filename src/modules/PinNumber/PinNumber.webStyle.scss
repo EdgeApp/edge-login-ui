@@ -24,11 +24,20 @@
   }
 
   .password {
-    width: 200px;
-    .input > span[class*="error"] {
-      display: block;
-      text-align: center;
-      margin: 0px auto;
+    width: 150px;
+    .input {
+      input {
+        text-align: center;
+        font-size: 80px;
+        height: 50px;
+        color: #909091;
+        // letter-spacing: 4px;
+      }
+      span[class*="error"] {
+        display: block;
+        text-align: center;
+        margin: 0px auto;
+      }
     }
   }
 

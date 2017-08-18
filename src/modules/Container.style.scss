@@ -30,6 +30,11 @@
   height : 550px;
 }
 
+.dialogSignUpPin {
+  @extend .baseWidth;
+  height: 472px;
+}
+
 .dialogAccount {
   @extend .baseWidth;
   height : 431px;
