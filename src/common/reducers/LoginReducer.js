@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
       if (action.data.lastUser) {
         return { ...state, username: action.data.lastUser.username }
       }
-      if (action.data.usersWithPinList.length > 0) {
+      if (typeof action.data.usersWithPinList !== 'undefined' && action.data.usersWithPinList.length > 0) {
         const topUser = action.data.usersWithPinList[0]
         return { ...state, username: topUser.username }
       }
