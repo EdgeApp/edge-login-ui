@@ -4,7 +4,14 @@ import { connect } from 'react-redux'
 import CachedUsers from '../../CachedUsers/CachedUsers.web.js'
 import dropdown from '../../../img/dropdown.png'
 
-import { openLogin, loginPIN, openUserList, closeUserList } from '../Login.action'
+import {
+  openLogin,
+  loginPIN,
+  openUserList,
+  closeUserList,
+  showErrorLoginMessage,
+  clearErrorLoginMessage
+} from '../Login.action'
 import { loginWithPin } from '../Login.middleware'
 import { closeLoading } from '../../Loader/Loader.action'
 
@@ -14,7 +21,9 @@ import Input from 'react-toolbox/lib/input'
 class LoginWithPin extends Component {
   _handleSubmit = () => {
     const callback = (error, account) => {
+      this.props.dispatch(clearErrorLoginMessage(error))
       if (!error) {
+        this.props.dispatch(loginPIN(''))
         if (window.parent.loginCallback) {
           return window.parent.loginCallback(null, account)
         }
@@ -22,6 +31,9 @@ class LoginWithPin extends Component {
           this.props.dispatch(closeLoading())
           return this.props.router.push('/account')
         }
+      }
+      if (error) {
+        return this.props.dispatch(showErrorLoginMessage(error))
       }
     }
     this.props.dispatch(
@@ -37,7 +49,7 @@ class LoginWithPin extends Component {
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
     }
-    if (/^\d+$/.test(pin) || pin.length === 0 && pin.length > 4) {
+    if (/^\d+$/.test(pin) || pin.length === 0) {
       this.props.dispatch(
         loginPIN(pin)
       )
@@ -57,6 +69,27 @@ class LoginWithPin extends Component {
   _hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
     this.pin.getWrappedInstance().focus()
+  }
+  _renderLoader = () => {
+    if (this.props.loader.loading) {
+      return <div className={styles.loading} />
+    }
+    if (!this.props.loader.loading) {
+      return (
+        <div className={styles.pinInput}>
+          <p className={styles.placeholder}>&#8226;&#8226;&#8226;&#8226;</p>
+          <Input
+            type='password'
+            name='password'
+            ref={input => { this.pin = input }}
+            className={styles.input}
+            onChange={this._handleChangePin}
+            value={this.props.pin}
+            error={this.props.error}
+          />
+        </div>
+      )
+    }
   }
   render () {
     const usersDropdown = () => {
@@ -84,17 +117,7 @@ class LoginWithPin extends Component {
             />
             <div className={styles.pinForm}>
               <p className={styles.pinLabel}>Enter PIN</p>
-              <div className={styles.pinInput}>
-                <p className={styles.placeholder}>&#8226;&#8226;&#8226;&#8226;</p>
-                <Input
-                  type='password'
-                  name='password'
-                  ref={input => { this.pin = input }}
-                  className={styles.input}
-                  onChange={this._handleChangePin}
-                  value={this.props.pin}
-                />
-              </div>
+              {this._renderLoader()}
             </div>
           </div>
           <p className={styles.exitLink} onClick={this.props.openViewPassword}>Exit PIN Login</p>
@@ -109,5 +132,7 @@ export default connect(state => ({
   user: state.cachedUsers.selectedUserToLogin,
   showCachedUsers: state.login.showCachedUsers,
   loginPinWait: state.login.loginPinWait,
+  error: state.login.error,
+  loader: state.loader,
   currentPasswordCountdown: false
 }))(LoginWithPin)
