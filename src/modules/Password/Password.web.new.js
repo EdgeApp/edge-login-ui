@@ -37,7 +37,7 @@ class Password extends Component {
       }
       if (!error) {
         this.props.dispatch(clearPasswordError())
-        return this.props.history.push('/review')
+        return this.props.dispatch(changeSignupPage('review'))
       }
     }
     this.props.dispatch(
@@ -52,7 +52,7 @@ class Password extends Component {
     )
   }
   _handleSubmitSkipPassword = () => {
-    const callback = () => this.props.router.push('/review')
+    const callback = () => this.props.dispatch(changeSignupPage('review'))
     this.props.dispatch(
       skipPassword(
         this.props.username,
@@ -174,7 +174,7 @@ export default connect(state => ({
   passwordRepeat: state.password.passwordRepeat,
   validation: state.password.validation,
   username: state.username.username,
-  pin: state.pin.password,
+  pin: state.pin.pin,
   loader: state.loader,
   error: state.password.error
 }))(Password)

@@ -77,8 +77,10 @@ class Container extends Component {
     const checkSignupPage = () => {
       switch (this.props.signupPage) {
         case 'pin':
-          return styles.dialogPin
+          return styles.dialogSignUpPin
         case 'password':
+          return styles.dialogPassword
+        case 'review':
           return styles.dialogPassword
         default:
           return styles.dialogSignUp
@@ -90,7 +92,7 @@ class Container extends Component {
       case '/signup':
         return checkSignupPage()
       case '/changepin':
-        return styles.dialogAccount
+        return styles.dialogPin
       case '/changepassword':
         return styles.dialogChangePassword
       case '/passwordrecovery':
@@ -109,7 +111,7 @@ class Container extends Component {
           onOverlayClick={this._handleToggle}
           className={this.selectDialogHeight(this.props.location.pathname)}
         >
-          <LayoutTemplate theme={layoutTheme}>
+          <LayoutTemplate theme={layoutTheme} location={this.props.location}>
             <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
             {this.props.children}
           </LayoutTemplate>

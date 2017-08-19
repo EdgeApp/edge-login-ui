@@ -19,6 +19,10 @@ export const DISABLE_PASSWORD_WAIT_DURATION = 'DISABLE_PASSWORD_WAIT_DURATION'
 export const REFRESH_PASSWORD_WAIT_DURATION = 'REFRESH_PASSWORD_WAIT_DURATION'
 export const SHOW_LOGIN_NOTIFICATION = 'SHOW_LOGIN_NOTIFICATION'
 export const HIDE_LOGIN_NOTIFICATION = 'HIDE_LOGIN_NOTIFICATION'
+export const SHOW_ERROR_LOGIN_MESSAGE = 'SHOW_ERROR_LOGIN_MESSAGE'
+export const CLEAR_ERROR_LOGIN_MESSAGE = 'CLEAR_ERROR_LOGIN_MESSAGE'
+export const SHOW_ERROR_LOGIN_PIN_MESSAGE = 'SHOW_ERROR_LOGIN_PIN_MESSAGE'
+export const CLEAR_ERROR_LOGIN_PIN_MESSAGE = 'CLEAR_ERROR_LOGIN_PIN_MESSAGE'
 
 export function enablePinTimeout (durationLeft) {
   return {
@@ -146,7 +150,6 @@ export function setEdgeAccount (account) {
 }
 
 export function showLoginNotification () {
-  console.log('within Login.action.js->showLoginNotification')
   return {
     type: SHOW_LOGIN_NOTIFICATION
   }
@@ -155,5 +158,31 @@ export function showLoginNotification () {
 export function hideLoginNotification () {
   return {
     type: HIDE_LOGIN_NOTIFICATION
+  }
+}
+
+export function showErrorLoginMessage (data) {
+  return {
+    type: SHOW_ERROR_LOGIN_MESSAGE,
+    data
+  }
+}
+
+export function clearErrorLoginMessage () {
+  return {
+    type: CLEAR_ERROR_LOGIN_MESSAGE
+  }
+}
+
+export function showErrorLoginPinMessage (data) {
+  return {
+    type: SHOW_ERROR_LOGIN_PIN_MESSAGE,
+    data
+  }
+}
+
+export function clearErrorLoginPinMessage () {
+  return {
+    type: CLEAR_ERROR_LOGIN_PIN_MESSAGE
   }
 }

@@ -45,3 +45,14 @@ export const pinChangedNotification = (state = false, action) => {
       return state
   }
 }
+
+export const error = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.SHOW_PIN_CHANGE_ERROR:
+      return action.data
+    case ACTION.CLEAR_PIN_CHANGE_ERROR:
+      return ''
+    default:
+      return state
+  }
+}

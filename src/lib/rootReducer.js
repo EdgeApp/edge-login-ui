@@ -22,6 +22,7 @@ import { signupPage } from '../modules/Signup/Signup.reducer'
 import { user } from '../modules/User/User.reducer'
 import { passwordRecovery } from '../modules/Modals/PasswordRecovery/PasswordRecovery.reducer.js'
 import { accountManagementPassword } from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
+import { accountCreated } from '../modules/Modals/AccountCreated/AccountCreated.reducer.js'
 // import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 
 // import routes from './routesReducer'
@@ -76,8 +77,9 @@ const store = combineReducers({
     edgeAccount: Login.edgeAccount,
     loginPinWait: Login.loginPinWait,
     loginPasswordWait: Login.loginPasswordWait,
-    loginNotification: Login.loginNotification
-
+    loginNotification: Login.loginNotification,
+    error: Login.error,
+    errorPin: Login.errorPin
   }),
   nextButtonVisible,
   skipButtonVisible,
@@ -120,7 +122,8 @@ const store = combineReducers({
     view: ChangePin.view,
     password: ChangePin.password,
     pin: ChangePin.pin,
-    pinChangedNotification: ChangePin.pinChangedNotification
+    pinChangedNotification: ChangePin.pinChangedNotification,
+    error: ChangePin.error
   }),
   passwordRecovery: combineReducers({
     view: PasswordRecovery.view,
@@ -138,7 +141,8 @@ const store = combineReducers({
   }),
   modal: combineReducers({
     passwordRecovery,
-    accountManagementPassword
+    accountManagementPassword,
+    accountCreated
   }),
   forgotPasswordModal: ForgotPassword.visible,
   user

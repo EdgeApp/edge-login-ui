@@ -17,7 +17,7 @@
 
 .dialogPin {
   @extend .baseWidth;
-  height : 472px;
+  height : 402px;
 }
 
 .dialogPassword {
@@ -30,9 +30,14 @@
   height : 550px;
 }
 
+.dialogSignUpPin {
+  @extend .baseWidth;
+  height: 472px;
+}
+
 .dialogAccount {
   @extend .baseWidth;
-  height : 466px;
+  height : 431px;
 }
 
 .dialogChangePassword {
