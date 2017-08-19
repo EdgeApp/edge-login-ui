@@ -34,6 +34,14 @@ class Review extends Component {
       )
     }
   }
+  _cancel = () => {
+    if (window.parent.loginCallback) {
+      return window.parent.loginCallback(null, this.props.user)
+    }
+    if (!window.parent.loginCallback) {
+      return this.props.history.push('/account')
+    }
+  }
   render () {
     return (
       <div className={styles.container}>
@@ -45,7 +53,7 @@ class Review extends Component {
           { this._renderInfo() }
         </div>
         <button className={styles.primary} onClick={e => this.props.dispatch(openAccountCreatedModal())}>Finish</button>
-        <AccountCreated />
+        <AccountCreated cancel={this._cancel} submit={e => this.props.history.push('/passwordrecovery')} />
       </div>
     )
   }

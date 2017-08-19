@@ -22,8 +22,8 @@ class AccountManagementPassword extends Component {
           <p className={styles.p2}>Your username and password are known only to you and cannot be reset by Augur.</p>
           <p className={styles.p3}>Would you like to set up password recovery questions to reset your account in case of a forgotten password?</p>
           <div className={styles.rowButtons}>
-            <button className={styles.secondary} onClick={e => this.props.dispatch(closeAccountCreatedModal())}>I'll do it later</button>
-            <button className={styles.primary} onClick={e => this.props.dispatch(closeAccountCreatedModal())}>Setup Recovery</button>
+            <button className={styles.secondary} onClick={this.props.cancel}>I'll do it later</button>
+            <button className={styles.primary} onClick={this.props.submit}>Setup Recovery</button>
           </div>
         </div>
       </Modal>

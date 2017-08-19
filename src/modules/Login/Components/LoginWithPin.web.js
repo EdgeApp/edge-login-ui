@@ -20,10 +20,11 @@ import Input from 'react-toolbox/lib/input'
 
 class LoginWithPin extends Component {
   _handleSubmit = () => {
+    console.log(this.props.pin)
     const callback = (error, account) => {
+      this.props.dispatch(loginPIN(''))
       this.props.dispatch(clearErrorLoginPinMessage(error))
       if (!error) {
-        this.props.dispatch(loginPIN(''))
         if (window.parent.loginCallback) {
           return window.parent.loginCallback(null, account)
         }
