@@ -13,7 +13,6 @@ class ChangePin extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <p className={styles.header}>Change your password</p>
         <div className={styles.main}>
           <div className={styles.tooltip}>
             <p className={styles.textHeader}>Password Requirements:</p>

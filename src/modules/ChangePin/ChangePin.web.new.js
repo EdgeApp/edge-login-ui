@@ -16,7 +16,7 @@ class ChangePin extends Component {
       }
       if (!error) {
         this.props.dispatch(clearPinChangeError())
-        return this.props.router.push('/account')
+        return this.props.history.push('/account')
         // return this.props.dispatch(showPinChangedNotification())
       }
     }
