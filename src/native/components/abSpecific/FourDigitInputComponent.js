@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, TouchableWithoutFeedback } from 'react-native'
-import { Spinner, Input } from '../common'
+import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native'
+import { Spinner } from '../common'
 
 class FourDigitInputComponent extends Component {
   componentWillMount () {
@@ -15,10 +15,11 @@ class FourDigitInputComponent extends Component {
         <View style={Style.container}>
           <View style={Style.interactiveContainer}>
             {this.renderDotContainer(Style)}
-            <Input
+            <TextInput
               style={Style.input}
               onChangeText={this.updatePin.bind(this)}
               maxLength={4}
+              keyboardType='numeric'
               value={this.props.pin}
               autoFocus={this.state.autoFocus}
             />
