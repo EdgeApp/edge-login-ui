@@ -1,18 +1,23 @@
-import * as Colors from '../../constants/Colors'
-// import { hs, vs, fontSize } from '../../util'
-
 const BasicCheckBoxWithLabel = {
   container: {
     position: 'relative',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row'
   },
   containerSelected: {
     position: 'relative',
     width: '100%',
     height: '100%',
-    backgroundColor: Colors.ACCENT_GREEN
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
+  checkbox: {
+    padding: 5
   }
+
   /* backgroundColor: Colors.BUTTON_PRIMARY_UP,
   width: hs(220),
   height: vs(50),

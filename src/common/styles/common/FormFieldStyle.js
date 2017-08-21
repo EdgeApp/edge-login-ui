@@ -19,8 +19,7 @@ const FormFieldStyle = {
     flex: 1
   },
   errorContainerRight: {
-    flex: 1,
-    backgroundColor: Colors.WHITE
+    flex: 1
   },
   imputContainer: {
     position: 'relative',

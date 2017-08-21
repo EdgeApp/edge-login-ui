@@ -3,6 +3,7 @@ import * as Colors from '../../../common/constants/Colors'
 import { View, Text } from 'react-native'
 import { Input } from './Input'
 import { Checkbox } from './Checkbox'
+import { STANDARD_CHECKED, STANDARD_UNCHECKED } from '../../../native/assets'
 
 class FormField extends Component {
   componentWillMount () {
@@ -74,6 +75,8 @@ class FormField extends Component {
           style={Style.helperCheckbox}
           onChange={this.setSecurity.bind(this)}
           label={this.props.showSecureCheckboxLabel}
+          checkedImage={STANDARD_CHECKED}
+          uncheckedImage={STANDARD_UNCHECKED}
         />
       )
     }

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, View, Image, TouchableWithoutFeedback } from 'react-native'
 
 class Checkbox extends Component {
   componentWillMount () {
@@ -15,19 +15,36 @@ class Checkbox extends Component {
       })
     }
   }
+  renderImage (style) {
+    if (this.state.onOff) {
+      return (
+        <View style={style.checkbox}>
+          <Image source={this.props.checkedImage} />
+        </View>
+      )
+    }
+    return (
+      <View style={style.checkbox}>
+        <Image source={this.props.uncheckedImage} />
+      </View>
+    )
+  }
   render () {
     const style = this.props.style
     return (
-      <TouchableOpacity
+      <TouchableWithoutFeedback
         onPress={this.onPress.bind(this)}
         disabled={this.props.disabled}
-        style={[style.container, this.state.onOff && style.containerSelected]}
       >
-        <View style={style.boxContainer} />
-        <View style={style.labelContainer}>
-          <Text>{this.props.label} </Text>
+        <View
+          style={[style.container, this.state.onOff && style.containerSelected]}
+        >
+          {this.renderImage(style)}
+          <View style={style.labelContainer}>
+            <Text>{this.props.label} </Text>
+          </View>
         </View>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     )
   }
   onPress () {
@@ -46,6 +63,8 @@ class Checkbox extends Component {
 Checkbox.propTypes = {
   style: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
+  checkedImage: PropTypes.number.isRequired,
+  uncheckedImage: PropTypes.number.isRequired,
   value: PropTypes.bool,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
