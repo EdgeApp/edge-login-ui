@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Provider } from 'react-redux'
 import reducers from '../common/reducers'
 import { createStore, applyMiddleware } from 'redux'
@@ -33,4 +33,11 @@ export class LoginScreen extends Component {
       </Provider>
     )
   }
+}
+
+LoginScreen.propTypes = {
+  context: PropTypes.object.isRequired,
+  onLogin: PropTypes.func.isRequired,
+  locale: PropTypes.string,
+  language: PropTypes.string
 }
