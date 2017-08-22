@@ -1,22 +1,28 @@
-import * as Colors from '../../constants/Colors'
 import { vs, fontSize } from '../../util'
-
 import { BasicCheckBoxWithLabel } from '../'
+import * as Colors from '../../constants/Colors'
+
 const PasswordStatusStyle = {
   container: {
-    backgroundColor: Colors.WHITE,
-    height: vs(100),
-    width: '100%'
+    height: vs(129),
+    width: '100%',
+    backgroundColor: Colors.GRAY_4
   },
   instructions: {
     fontSize: fontSize(17),
     textAlign: 'center'
   },
   checkboxContainer: {
-    width: '100%',
-    height: 20
+    width: '80%',
+    height: 20,
+    backgroundColor: '#ffffff',
+    top: 20
   },
-  checkboxes: BasicCheckBoxWithLabel
+  checkboxes: BasicCheckBoxWithLabel,
+  text: {
+    textAlign: 'center',
+    width: '100%'
+  }
 }
 
 export { PasswordStatusStyle }

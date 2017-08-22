@@ -29,6 +29,7 @@ const LandingPageScreenStyle = {
   },
   featureBoxButtons: {
     // height: vs(186),
+    alignItems: 'center',
     justifyContent: 'flex-end'
   },
   createButton: {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { Button } from '../../common'
+import { LogoImageHeader } from '../../abSpecific'
 // import * as Constants from '../../../common/constants'
 
 export default class LandingScreenComponent extends Component {
@@ -20,10 +21,20 @@ export default class LandingScreenComponent extends Component {
             label={'Exit'}
           />
         </View>
-        <View style={NewAccountWelcomeScreenStyle.row2} />
-        <View style={NewAccountWelcomeScreenStyle.row3} />
+        <View style={NewAccountWelcomeScreenStyle.row2}>
+          <LogoImageHeader style={NewAccountWelcomeScreenStyle.logoHeader} />
+        </View>
+        <View style={NewAccountWelcomeScreenStyle.row3}>
+          <Text style={NewAccountWelcomeScreenStyle.instructionsText}>
+            Let’s get started by creating your account login. You’ll choose a username and password, which we’ll use to encrypt your account. Not even Edge has access to your information, so you have full and complete control over your digital assets.
+          </Text>
+        </View>
         <View style={NewAccountWelcomeScreenStyle.row4} />
-        <View style={NewAccountWelcomeScreenStyle.row5} />
+        <View style={NewAccountWelcomeScreenStyle.row5}>
+          <Text style={NewAccountWelcomeScreenStyle.callToAction}>
+            Let’s get started with choosing a username
+          </Text>
+        </View>
         <View style={NewAccountWelcomeScreenStyle.row6}>
           <Button
             onPress={this.onNextPress.bind(this)}
@@ -46,5 +57,4 @@ export default class LandingScreenComponent extends Component {
   onExitPress () {
     this.props.exitScreen()
   }
-
 }

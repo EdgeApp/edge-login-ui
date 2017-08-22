@@ -6,6 +6,8 @@ import thunk from 'redux-thunk'
 import LoginAppConnector from './connectors/LogInAppConnector'
 import * as Styles from './styles/'
 
+console.ignoredYellowBox = ['Warning: View.propTypes']
+
 export class LoginScreen extends Component {
   componentWillMount () {
     this.store = createStore(
@@ -39,5 +41,6 @@ LoginScreen.propTypes = {
   context: PropTypes.object.isRequired,
   onLogin: PropTypes.func.isRequired,
   locale: PropTypes.string,
-  language: PropTypes.string
+  language: PropTypes.string,
+  username: PropTypes.string
 }

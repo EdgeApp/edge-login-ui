@@ -1,4 +1,5 @@
 import * as Styles from '../'
+// import * as Colors from '../../../common/constants/Colors'
 
 const NewAccountPasswordScreenStyle = {
   screen: { ...Styles.ScreenStyle },
@@ -14,7 +15,10 @@ const NewAccountPasswordScreenStyle = {
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
     downStyle: Styles.PrimaryButtonDownStyle
   },
-  inputBox: { ...Styles.FormFieldStyle },
+  inputBox: {
+    ...Styles.FormFieldStyle
+  },
+  inputShim: {...Styles.Shim, height: 10},
   modal: Styles.ModalStyles
 }
 

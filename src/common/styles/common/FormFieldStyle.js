@@ -1,41 +1,44 @@
 import * as Colors from '../../../common/constants/Colors'
 import { hs, vs, fontSize } from '../../util'
-import { BasicCheckBoxWithLabel } from './CheckboxStyles'
+import { BasicCheckBoxWithLabelAlignRight } from './CheckboxStyles'
 const FormFieldStyle = {
   container: {
     position: 'relative',
-    width: hs(200),
+    width: hs(220),
     height: vs(60)
   },
-  helperCheckbox: BasicCheckBoxWithLabel,
+  helperCheckbox: BasicCheckBoxWithLabelAlignRight,
   labelContainer: {
-    flex: 1
+    flex: 2,
+    justifyContent: 'flex-end'
   },
   errorContainer: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'row'
   },
   errorContainerLeft: {
-    flex: 1
+    flex: 5,
+    alignItems: 'flex-start',
+    justifyContent: 'space-around'
   },
   errorContainerRight: {
-    flex: 1
+    flex: 4
   },
   imputContainer: {
     position: 'relative',
     borderBottomColor: Colors.PRIMARY,
     borderBottomWidth: 1,
-    flex: 2,
+    flex: 3,
     width: '100%',
     alignItems: 'center'
   },
   labelText: {
     color: Colors.PRIMARY,
-    fontSize: fontSize(17)
+    fontSize: fontSize(11)
   },
   errorText: {
     color: Colors.ACCENT_RED,
-    fontSize: fontSize(12)
+    fontSize: fontSize(11)
   },
   inputStyle: {
     fontSize: fontSize(17),

@@ -1,3 +1,5 @@
+import { fontSize } from '../../../common/util'
+import * as Colors from '../../constants/Colors'
 const BasicCheckBoxWithLabel = {
   container: {
     position: 'relative',
@@ -7,23 +9,32 @@ const BasicCheckBoxWithLabel = {
     justifyContent: 'flex-start',
     flexDirection: 'row'
   },
-  containerSelected: {
+  text: {
+    fontSize: fontSize(11),
+    color: Colors.GRAY_2
+  },
+  checkbox: {
+    padding: 2
+  }
+}
+
+const BasicCheckBoxWithLabelAlignRight = {
+  container: {
     position: 'relative',
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-end',
+    flexDirection: 'row'
+  },
+  text: {
+    fontSize: fontSize(11),
+    color: Colors.GRAY_2
   },
   checkbox: {
-    padding: 5
+    padding: 2
   }
-
-  /* backgroundColor: Colors.BUTTON_PRIMARY_UP,
-  width: hs(220),
-  height: vs(50),
-  alignItems: 'center',
-  justifyContent: 'space-around',
-  borderRadius: hs(3) */
 }
 
 export { BasicCheckBoxWithLabel }
+export { BasicCheckBoxWithLabelAlignRight }

@@ -25,9 +25,11 @@ export default class LandingScreenComponent extends Component {
             style={NewAccountPasswordScreenStyle.status}
           />
           <PasswordConnector style={NewAccountPasswordScreenStyle.inputBox} />
+          <View style={NewAccountPasswordScreenStyle.inputShim} />
           <PasswordConfirmConnector
             style={NewAccountPasswordScreenStyle.inputBox}
           />
+          <View style={NewAccountPasswordScreenStyle.inputShim} />
           <Button
             onPress={this.onNextPress.bind(this)}
             downStyle={NewAccountPasswordScreenStyle.nextButton.downStyle}

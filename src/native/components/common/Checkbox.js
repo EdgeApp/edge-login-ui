@@ -36,12 +36,10 @@ class Checkbox extends Component {
         onPress={this.onPress.bind(this)}
         disabled={this.props.disabled}
       >
-        <View
-          style={[style.container, this.state.onOff && style.containerSelected]}
-        >
+        <View style={style.container}>
           {this.renderImage(style)}
           <View style={style.labelContainer}>
-            <Text>{this.props.label} </Text>
+            <Text style={style.text}>{this.props.label} </Text>
           </View>
         </View>
       </TouchableWithoutFeedback>
