@@ -12,28 +12,43 @@ const HeaderContainerStyle = {
   },
   left: {
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: 'space-around'
   },
   center: {
     flex: 3,
     justifyContent: 'flex-end',
-    paddingBottom: 15
+    paddingBottom: 10
   },
   right: {
     flex: 1,
-    justifyContent: 'flex-end' // ,
+    justifyContent: 'space-around' // ,
     // alignItems: 'center'
   },
   textStyle: {
-    fontSize: fontSize(20),
+    fontSize: fontSize(18),
     width: '100%',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: Colors.WHITE
   },
   textButton: {
     upStyle: { ...Styles.TextOnlyButtonUpStyle, width: '100%' },
-    upTextStyle: { ...Styles.TextOnlyButtonTextUpStyle, width: '100%', color: Colors.WHITE },
-    downTextStyle: { ...Styles.TextOnlyButtonTextDownStyle, width: '100%', color: Colors.SECONDARY },
-    downStyle: { ...Styles.TextOnlyButtonDownStyle, width: '100%', height: vs(50) }
+    upTextStyle: {
+      ...Styles.TextOnlyButtonTextUpStyle,
+      width: '100%',
+      color: Colors.WHITE,
+      fontSize: fontSize(12)
+    },
+    downTextStyle: {
+      ...Styles.TextOnlyButtonTextDownStyle,
+      width: '100%',
+      color: Colors.SECONDARY,
+      fontSize: fontSize(12)
+    },
+    downStyle: {
+      ...Styles.TextOnlyButtonDownStyle,
+      width: '100%',
+      height: vs(50)
+    }
   }
 }
 
