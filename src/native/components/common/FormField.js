@@ -11,12 +11,23 @@ class FormField extends Component {
       ? this.props.secureTextEntry
       : false
     this.setState({
-      secure: secure
+      secure: secure,
+      autoFocus: this.props.autoFocus
     })
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.autoFocus && !this.props.autoFocus) {
+      this.setState({
+        autoFocus: true
+      })
+    }
   }
 
   render () {
     const Style = this.props.style
+    if (this.props.label === 'Confirm Password') {
+      console.log('WE ARE THE CONFIRM _Autofocuse__ ' + this.state.autoFocus)
+    }
     return (
       <View style={Style.container}>
         <View style={Style.labelContainer}>
@@ -46,7 +57,8 @@ class FormField extends Component {
             onFinish={this.props.onFinish}
             returnKeyType={this.props.returnKeyType}
             onSubmitEditing={this.onSubmitEdit.bind(this)}
-            autoFocus={this.props.autoFocus}
+            autoFocus={this.state.autoFocus}
+            label={this.props.label}
           />
         </View>
         {this.renderErrorContainer(Style)}

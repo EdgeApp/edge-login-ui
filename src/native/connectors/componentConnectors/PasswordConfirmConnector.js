@@ -10,7 +10,9 @@ export const mapStateToProps = (state, ownProps) => {
     secureTextEntry: true,
     showSecureCheckbox: true,
     showSecureCheckboxLabel: 'Show Password',
-    label: 'Confirm Password'
+    label: 'Confirm Password',
+    returnKeyType: 'go',
+    autoFocus: ownProps.autoFocus
      // TODO localize
   }
 }

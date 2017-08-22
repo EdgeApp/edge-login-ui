@@ -17,14 +17,23 @@ class Input extends Component {
   componentWillReceiveProps (nextProps) {
     if (nextProps.value !== this.state.inputText) {
       this.setState({
-        inputText: nextProps.value
+        inputText: nextProps.value,
+        autoFocus: nextProps.autoFocus
       })
+    }
+    if (nextProps.autoFocus && !this.props.autoFocus) {
+      console.log('SENDING THE FOCUS WTF> ')
+      console.log('SENDING THE FOCUS WTF> ')
+      console.log('SENDING THE FOCUS WTF> ')
+      console.log('SENDING THE FOCUS WTF> ')
+      this.textInput.focus()
     }
   }
 
   render () {
     return (
       <TextInput
+        ref={this.addRef.bind(this)}
         secureTextEntry={this.props.secureTextEntry}
         placeholder={this.props.placeholder}
         autoCorrect={this.props.autoCorrect}
@@ -38,6 +47,12 @@ class Input extends Component {
       />
     )
   }
+  addRef (arg) {
+    if (arg) {
+      this.textInput = arg
+    }
+  }
+
   onSubmitEdit (event) {
     if (this.props.onFinish) {
       this.props.onFinish()

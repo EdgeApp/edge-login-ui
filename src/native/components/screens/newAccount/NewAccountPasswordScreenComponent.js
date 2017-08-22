@@ -12,7 +12,9 @@ import PasswordStatusConnector
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
     this.setState({
-      isProcessing: false
+      isProcessing: false,
+      focusFirst: true,
+      focusSecond: false
     })
   }
   render () {
@@ -24,10 +26,16 @@ export default class LandingScreenComponent extends Component {
           <PasswordStatusConnector
             style={NewAccountPasswordScreenStyle.status}
           />
-          <PasswordConnector style={NewAccountPasswordScreenStyle.inputBox} />
+          <PasswordConnector
+            style={NewAccountPasswordScreenStyle.inputBox}
+            autoFocus={this.state.focusFirst}
+            onFinish={this.onSetNextFocus.bind(this)}
+          />
           <View style={NewAccountPasswordScreenStyle.inputShim} />
           <PasswordConfirmConnector
             style={NewAccountPasswordScreenStyle.inputBox}
+            autoFocus={this.state.focusSecond}
+            onFinish={this.onNextPress.bind(this)}
           />
           <View style={NewAccountPasswordScreenStyle.inputShim} />
           <Button
@@ -52,6 +60,12 @@ export default class LandingScreenComponent extends Component {
       return <Modal style={style.modal.container} />
     }
     return null
+  }
+  onSetNextFocus () {
+    this.setState({
+      focusFirst: false,
+      focusSecond: true
+    })
   }
   onNextPress () {
     this.setState({
