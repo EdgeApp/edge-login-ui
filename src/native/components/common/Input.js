@@ -33,8 +33,15 @@ class Input extends Component {
         style={this.props.style}
         onChangeText={this.onChange.bind(this)}
         autoFocus={this.state.autoFocus}
+        returnKeyType={this.props.returnKeyType}
+        onSubmitEditing={this.onSubmitEdit.bind(this)}
       />
     )
+  }
+  onSubmitEdit (event) {
+    if (this.props.onFinish) {
+      this.props.onFinish()
+    }
   }
   onChange (text) {
     this.setState({
@@ -52,13 +59,16 @@ Input.propTypes = {
   autoCorrect: PropTypes.bool,
   autoCapitalize: PropTypes.string,
   secureTextEntry: PropTypes.bool,
-  isError: PropTypes.bool
+  isError: PropTypes.bool,
+  onFinish: PropTypes.func,
+  returnKeyType: PropTypes.string
 }
 
 Input.defaultProps = {
   autoCapitalize: 'none',
   autoCorrect: false,
-  autoFocus: false
+  autoFocus: false,
+  returnKeyType: 'default'
 }
 
 export { Input }

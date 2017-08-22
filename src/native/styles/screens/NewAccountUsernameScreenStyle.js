@@ -1,9 +1,12 @@
 import * as Styles from '../'
-import { vs } from '../../../common/util'
+import { vs, fontSize } from '../../../common/util'
 const NewAccountUsernameScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   header: Styles.HeaderContainerStyle,
-  pageContainer: {...Styles.PageContainerWithHeaderStyle, alignItems: 'center'},
+  pageContainer: {
+    ...Styles.PageContainerWithHeaderStyle,
+    alignItems: 'center'
+  },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpStyle,
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
@@ -11,9 +14,15 @@ const NewAccountUsernameScreenStyle = {
     downStyle: Styles.PrimaryButtonDownStyle
   },
   instructions: {
-    height: vs(40)
+    height: vs(100),
+    width: '80%'
   },
-  inputBox: {...Styles.FormFieldStyle}
+  instructionsText: {
+    fontSize: fontSize(12),
+    textAlign: 'center',
+    paddingTop: vs(20)
+  },
+  inputBox: { ...Styles.FormFieldStyle }
 }
 
 export { NewAccountUsernameScreenStyle }

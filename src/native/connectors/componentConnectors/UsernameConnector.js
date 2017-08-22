@@ -7,7 +7,10 @@ export const mapStateToProps = (state, ownProps) => {
     style: ownProps.style,
     value: state.create.username,
     error: state.create.usernameErrorMessage,
-    label: 'Username'
+    label: 'Username',
+    returnKeyType: 'go',
+    autoFocus: true, // ownProps.autoFocus,
+    onFinish: ownProps.onFinish
   }
 }
 export const mapDispatchToProps = (dispatch, ownProps) => {

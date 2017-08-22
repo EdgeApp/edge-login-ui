@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { Button } from '../../common'
 import UsernameConnector
   from '../../../connectors/componentConnectors/UsernameConnector'
@@ -28,8 +28,15 @@ export default class LandingScreenComponent extends Component {
       <View style={NewAccountUsernameScreenStyle.screen}>
         <HeaderConnector style={NewAccountUsernameScreenStyle.header} />
         <View style={NewAccountUsernameScreenStyle.pageContainer}>
-          <View style={NewAccountUsernameScreenStyle.instructions} />
-          <UsernameConnector style={NewAccountUsernameScreenStyle.inputBox} />
+          <View style={NewAccountUsernameScreenStyle.instructions}>
+            <Text style={NewAccountUsernameScreenStyle.instructionsText}>
+              Username will be required to sign in to your Edge account on this and other devices. Need a copy about not using name + email
+            </Text>
+          </View>
+          <UsernameConnector
+            style={NewAccountUsernameScreenStyle.inputBox}
+            onFinish={this.onNextPress.bind(this)}
+          />
           <Button
             onPress={this.onNextPress.bind(this)}
             downStyle={NewAccountUsernameScreenStyle.nextButton.downStyle}
@@ -47,6 +54,7 @@ export default class LandingScreenComponent extends Component {
     )
   }
   onNextPress () {
+    console.log('Here is the stuff ')
     this.setState({
       isProcessing: true
     })

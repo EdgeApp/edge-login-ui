@@ -43,6 +43,10 @@ class FormField extends Component {
             value={this.props.value}
             autoCapitalize={'none'}
             secureTextEntry={this.state.secure}
+            onFinish={this.props.onFinish}
+            returnKeyType={this.props.returnKeyType}
+            onSubmitEditing={this.onSubmitEdit.bind(this)}
+            autoFocus={this.props.autoFocus}
           />
         </View>
         {this.renderErrorContainer(Style)}
@@ -96,6 +100,11 @@ class FormField extends Component {
       secure: arg
     })
   }
+  onSubmitEdit (event) {
+    if (this.props.onFinish) {
+      this.props.onFinish()
+    }
+  }
 }
 
 FormField.propTypes = {
@@ -105,10 +114,20 @@ FormField.propTypes = {
   value: PropTypes.string,
   placeholder: PropTypes.string,
   autoCorrect: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   autoCapitalize: PropTypes.string,
   secureTextEntry: PropTypes.bool,
   showSecureCheckbox: PropTypes.bool,
-  error: PropTypes.string
+  error: PropTypes.string,
+  onFinish: PropTypes.func,
+  returnKeyType: PropTypes.string
+}
+
+FormField.defaultProps = {
+  autoCapitalize: 'none',
+  autoCorrect: false,
+  autoFocus: false,
+  returnKeyType: 'go'
 }
 
 export { FormField }

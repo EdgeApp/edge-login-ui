@@ -4,7 +4,7 @@ import { BasicCheckBoxWithLabelAlignRight } from './CheckboxStyles'
 const FormFieldStyle = {
   container: {
     position: 'relative',
-    width: hs(220),
+    width: hs(230),
     height: vs(60)
   },
   helperCheckbox: BasicCheckBoxWithLabelAlignRight,
@@ -38,7 +38,7 @@ const FormFieldStyle = {
   },
   errorText: {
     color: Colors.ACCENT_RED,
-    fontSize: fontSize(11)
+    fontSize: fontSize(10)
   },
   inputStyle: {
     fontSize: fontSize(17),
