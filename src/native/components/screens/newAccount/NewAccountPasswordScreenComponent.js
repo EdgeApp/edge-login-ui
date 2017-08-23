@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { View, KeyboardAvoidingView } from 'react-native'
 import { Button, Modal } from '../../common'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnector'
@@ -9,7 +9,7 @@ import PasswordConfirmConnector
   from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordStatusConnector
   from '../../../connectors/abSpecific/PasswordStatusConnector'
-export default class LandingScreenComponent extends Component {
+export default class NewAccountPasswordScreenComponent extends Component {
   componentWillMount () {
     this.setState({
       isProcessing: false,
@@ -22,36 +22,57 @@ export default class LandingScreenComponent extends Component {
     return (
       <View style={NewAccountPasswordScreenStyle.screen}>
         <HeaderConnector style={NewAccountPasswordScreenStyle.header} />
-        <View style={NewAccountPasswordScreenStyle.pageContainer}>
-          <PasswordStatusConnector
-            style={NewAccountPasswordScreenStyle.status}
-          />
-          <PasswordConnector
-            style={NewAccountPasswordScreenStyle.inputBox}
-            autoFocus={this.state.focusFirst}
-            onFinish={this.onSetNextFocus.bind(this)}
-          />
-          <View style={NewAccountPasswordScreenStyle.inputShim} />
-          <PasswordConfirmConnector
-            style={NewAccountPasswordScreenStyle.inputBox}
-            autoFocus={this.state.focusSecond}
-            onFinish={this.onNextPress.bind(this)}
-          />
-          <View style={NewAccountPasswordScreenStyle.inputShim} />
-          <Button
-            onPress={this.onNextPress.bind(this)}
-            downStyle={NewAccountPasswordScreenStyle.nextButton.downStyle}
-            downTextStyle={
-              NewAccountPasswordScreenStyle.nextButton.downTextStyle
-            }
-            upStyle={NewAccountPasswordScreenStyle.nextButton.upStyle}
-            upTextStyle={NewAccountPasswordScreenStyle.nextButton.upTextStyle}
-            label={'NEXT'}
-            isThinking={this.state.isProcessing}
-            doesThink
-          />
-        </View>
+        {this.renderMain(NewAccountPasswordScreenStyle)}
         {this.renderModal(NewAccountPasswordScreenStyle)}
+      </View>
+    )
+  }
+  renderMain (styles) {
+    console.log('THIS IS THE STATE ' + this.state.focusSecond)
+    if (this.state.focusSecond) {
+      return (
+        <KeyboardAvoidingView
+          style={styles.pageContainer}
+          contentContainerStyle={styles.pageContainer}
+          behavior={'position'}
+          keyboardVerticalOffset={-150}
+        >
+          {this.renderInterior(styles)}
+        </KeyboardAvoidingView>
+      )
+    }
+    return (
+      <View style={styles.pageContainer}>
+        {this.renderInterior(styles)}
+      </View>
+    )
+  }
+  renderInterior (styles) {
+    return (
+      <View style={styles.innerView}>
+        <PasswordStatusConnector style={styles.status} />
+        <PasswordConnector
+          style={styles.inputBox}
+          autoFocus={this.state.focusFirst}
+          onFinish={this.onSetNextFocus.bind(this)}
+        />
+        <View style={styles.inputShim} />
+        <PasswordConfirmConnector
+          style={styles.inputBox}
+          autoFocus={this.state.focusSecond}
+          onFinish={this.onNextPress.bind(this)}
+        />
+        <View style={styles.inputShim} />
+        <Button
+          onPress={this.onNextPress.bind(this)}
+          downStyle={styles.nextButton.downStyle}
+          downTextStyle={styles.nextButton.downTextStyle}
+          upStyle={styles.nextButton.upStyle}
+          upTextStyle={styles.nextButton.upTextStyle}
+          label={'NEXT'}
+          isThinking={this.state.isProcessing}
+          doesThink
+        />
       </View>
     )
   }
@@ -62,6 +83,7 @@ export default class LandingScreenComponent extends Component {
     return null
   }
   onSetNextFocus () {
+    console.log('CHANGING THE FOCUS')
     this.setState({
       focusFirst: false,
       focusSecond: true
@@ -90,7 +112,7 @@ export default class LandingScreenComponent extends Component {
   }
 }
 
-LandingScreenComponent.propTypes = {
+NewAccountPasswordScreenComponent.propTypes = {
   styles: PropTypes.object.isRequired,
   confirmPasswordErrorMessage: PropTypes.string,
   passwordStatus: PropTypes.object,

@@ -6,11 +6,14 @@ const PasswordStatusStyle = {
   container: {
     height: vs(129),
     width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     backgroundColor: Colors.GRAY_4
   },
   instructions: {
-    fontSize: fontSize(17),
-    textAlign: 'center'
+    fontSize: fontSize(14),
+    textAlign: 'center',
+    width: '80%'
   },
   checkboxContainer: {
     width: '80%',

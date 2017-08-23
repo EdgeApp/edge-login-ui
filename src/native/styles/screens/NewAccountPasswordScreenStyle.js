@@ -8,6 +8,7 @@ const NewAccountPasswordScreenStyle = {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'
   },
+  innerView: {...Styles.InnerView, alignItems: 'center'},
   status: Styles.PasswordStatusStyle,
   nextButton: {
     upStyle: Styles.PrimaryButtonUpStyle,
