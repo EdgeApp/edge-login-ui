@@ -4,14 +4,14 @@ const initialState = {
   username: null,
   password: null,
   confirmPassword: null,
-  pin: '1111',
+  pin: '',
   loginPin: null,
   loginSuccess: false,
   creationSuccess: false,
   passwordStatus: null,
   createPasswordErrorMessage: null,
   confirmPasswordErrorMessage: null,
-  pinError: null,
+  pinErrorMessage: null,
   usernameErrorMessage: null,
   createErrorMessage: null,
   loginPasswordErrorMessage: null,
@@ -31,6 +31,13 @@ export default function (state = initialState, action) {
         username: action.data.username,
         usernameErrorMessage: action.data.error
       }
+    case Constants.CREATE_UPDATE_PIN:
+      return {
+        ...state,
+        pin: action.data.pin,
+        pinErrorMessage: action.data.error
+      }
+
     case Constants.AUTH_UPDATE_PASSWORD:
       console.log('UPDATE PASSWORD ')
       if (state.confirmPassword !== action.data.password) {

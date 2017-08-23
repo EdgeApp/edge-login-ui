@@ -5,16 +5,14 @@ import * as actions from '../../../common/actions'
 export const mapStateToProps = (state, ownProps) => {
   return {
     style: ownProps.style,
-    pin: state.login.pin,
-    username: state.login.username,
-    error: state.login.errorMessage,
-    autoLogIn: true
+    pin: state.create.pin,
+    error: state.create.pinErrorMessage
 
   }
 }
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onChangeText: (data) => dispatch(actions.userLoginWithPin(data))
+    onChangeText: (data) => dispatch(actions.validatePin(data))
   }
 }
 

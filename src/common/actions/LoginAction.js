@@ -84,17 +84,3 @@ export function userLogin (data) {
 }
 // validateUsername check
 
-export function pin (data) {
-  return (dispatch, getState, imports) => {
-    let error = null
-    if (data.length !== 4) {
-      error = 'PIN MUST BE 4 Digits' // TODO localize
-    }
-    var obj = {
-      password: data,
-      error: error
-    }
-    console.log(obj)
-    // dispatch(updatePin(obj))
-  }
-}

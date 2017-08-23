@@ -13,6 +13,7 @@ export const WORKFLOW_NEXT = 'workflowNext'
 
 // create actions
 export const CREATE_UPDATE_USERNAME = 'createUpdateUsername'
+export const CREATE_UPDATE_PIN = 'createUpdatePin'
 export const LOG_IN_PIN = 'LOG_IN_PIN'
 export const LOGIN_SUCCEESS = 'USERNAME_PASSWORD'
 export const LOGIN_USERNAME_PASSWORD_FAIL = 'USERNAME_PASSWORD_FAIL'

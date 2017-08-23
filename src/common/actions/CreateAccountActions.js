@@ -3,6 +3,24 @@ import * as WorkflowActions from './WorkflowActions'
 import { isASCII } from '../util'
 import { dispatchAction, dispatchActionWithData } from './'
 
+export function validatePin (data) {
+  const pin = data.pin
+  return (dispatch, getState, imports) => {
+    let error = null
+    if (pin.length !== 4) {
+      error = 'PIN MUST BE 4 Digits' // TODO localize
+    }
+    if (pin.length > 4) {
+      return
+    }
+    var obj = {
+      pin: pin,
+      error: error
+    }
+    dispatch(dispatchActionWithData(Constants.CREATE_UPDATE_PIN, obj))
+    // dispatch(updatePin(obj))
+  }
+}
 export function checkUsernameForAvailabilty (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context

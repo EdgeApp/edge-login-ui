@@ -38,7 +38,7 @@ class FourDigitInputComponent extends Component {
   }
   renderDotContainer (style) {
     const pinLength = this.props.pin ? this.props.pin.length : 0
-    if (pinLength === 4) {
+    if (pinLength === 4 && this.props.autoLogIn) {
       return <Spinner />
     }
     return (
@@ -55,7 +55,8 @@ class FourDigitInputComponent extends Component {
   }
 }
 FourDigitInputComponent.propTypes = {
-  style: PropTypes.object.isRequired
+  style: PropTypes.object.isRequired,
+  autoLogIn: PropTypes.bool
 }
 
 export { FourDigitInputComponent }
