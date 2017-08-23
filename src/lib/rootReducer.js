@@ -116,7 +116,9 @@ const store = combineReducers({
     oldPassword: ChangePassword.oldPassword,
     newPassword: ChangePassword.newPassword,
     newPasswordRepeat: ChangePassword.newPasswordRepeat,
-    passwordChangedNotification: ChangePassword.passwordChangedNotification
+    passwordChangedNotification: ChangePassword.passwordChangedNotification,
+    errorPassword: ChangePassword.errorPassword,
+    errorPasswordRepeat: ChangePassword.errorPasswordRepeat
   }),
   changePin: combineReducers({
     view: ChangePin.view,

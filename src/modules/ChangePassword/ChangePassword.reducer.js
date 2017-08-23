@@ -69,3 +69,29 @@ export const passwordChangedNotification = (state = false, action) => {
       return state
   }
 }
+
+export const errorPassword = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.ERROR_CHANGE_PASSWORD:
+      return action.data
+    case ACTION.CLEAR_CHANGE_PASSWORD:
+      return ''
+    case ACTION.PASSWORD_CHANGED :
+      return ''
+    default:
+      return state
+  }
+}
+
+export const errorPasswordRepeat = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.ERROR_CHANGE_PASSWORD_REPEAT:
+      return action.data
+    case ACTION.CLEAR_CHANGE_PASSWORD:
+      return ''
+    case ACTION.PASSWORD_CHANGED :
+      return ''
+    default:
+      return state
+  }
+}

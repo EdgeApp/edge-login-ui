@@ -7,23 +7,49 @@ import Input from 'react-toolbox/lib/input'
 import FontIcon from 'react-toolbox/lib/font_icon'
 
 import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
-// import { checkPassword } from './ChangePassword.middleware'
+import { checkPassword } from './ChangePassword.middleware'
 import {
   changePasswordHidePassword,
   changePasswordShowPassword,
   changeNewPasswordValue,
-  changeNewPasswordRepeatValue
+  changeNewPasswordRepeatValue,
+  errorChangePassword,
+  errorChangePasswordRepeat,
+  passwordChanged
 } from './ChangePassword.action'
 
 import eyeShow from '../../img/create-account/show-password.png'
 import eyeHide from '../../img/create-account/hide-password.png'
 
-class ChangePin extends Component {
+class ChangePassword extends Component {
+  _handleSubmit = () => {
+    const callback = (error) => {
+      if (error) {
+        if (error.type === 'password') {
+          return this.props.dispatch(errorChangePassword(error.message))
+        }
+        if (error.type === 'passwordRepeat') {
+          return this.props.dispatch(errorChangePasswordRepeat(error.message))
+        }
+      }
+      if (!error) {
+        this.props.dispatch(passwordChanged())
+        return this.props.history.push('/account')
+      }
+    }
+    this.props.dispatch(
+      checkPassword(
+        this.props.newPassword,
+        this.props.newPasswordRepeat,
+        this.props.user,
+        callback
+      )
+    )
+  }
   _handleOnChangeNewPassword = (newPassword) => {
     this.props.dispatch(changeNewPasswordValue(newPassword))
     this.props.dispatch(validate(newPassword))
   }
-
   _handleOnChangeNewPasswordRepeat = (newPasswordRepeat) => {
     this.props.dispatch(changeNewPasswordRepeatValue(newPasswordRepeat))
   }
@@ -34,8 +60,40 @@ class ChangePin extends Component {
       return this.props.dispatch(changePasswordShowPassword())
     }
   }
+  _passwordKeyPress = (e) => {
+    if (e.charCode === 13) {
+      return this.passwordRepeat.getWrappedInstance().focus()
+    }
+  }
+  _passwordRepeatKeyPress = (e) => {
+    if (e.charCode === 13) {
+      if (!this.props.loader.loading) {
+        return this._handleSubmit()
+      }
+    }
+  }
+  _renderButtonRows = () => {
+    if (!this.props.loader.loading) {
+      return (
+        <div className={styles.rowButtons}>
+          <Link to='/account'>
+            <button className={styles.secondary}>Back</button>
+          </Link>
+          <button className={styles.primary} onClick={this._handleSubmit}>Next</button>
+        </div>
+      )
+    }
+    if (this.props.loader.loading) {
+      return (
+        <div className={styles.rowButtons}>
+          <button className={styles.secondaryLoad}>Back</button>
+          <button className={styles.primaryLoad}><div className={styles.loader} /></button>
+        </div>
+      )
+    }
+  }
   render () {
-    const { revealPassword, validation, newPassword, newPasswordRepeat } = this.props
+    const { revealPassword, validation, newPassword, newPasswordRepeat, errorPassword, errorPasswordRepeat } = this.props
     return (
       <div className={styles.container}>
         <div className={styles.main}>
@@ -62,11 +120,15 @@ class ChangePin extends Component {
           <div className={styles.formContainer}>
             <div className={styles.formWithIcon}>
               <Input
+                autoFocus
                 type={this.props.revealPassword ? 'text' : 'password'}
                 onChange={this._handleOnChangeNewPassword}
-                value={newPassword}
                 label='Password'
+                value={newPassword}
                 className={styles.form}
+                error={errorPassword}
+                onKeyPress={this._passwordKeyPress}
+                ref={input => { this.password = input }}
               />
               <img src={revealPassword ? eyeHide : eyeShow} className={styles.icon} onClick={this.toggleRevealPassword} />
             </div>
@@ -74,29 +136,27 @@ class ChangePin extends Component {
               type={this.props.revealPassword ? 'text' : 'password'}
               onChange={this._handleOnChangeNewPasswordRepeat}
               label='Re-enter Password'
-              className={styles.form}
               value={newPasswordRepeat}
+              className={styles.form}
+              error={errorPasswordRepeat}
+              onKeyPress={this._passwordRepeatKeyPress}
+              ref={input => { this.passwordRepeat = input }}
             />
           </div>
         </div>
-        <div className={styles.rowButtons}>
-          <Link to='/account'>
-            <button className={styles.secondary}>Back</button>
-          </Link>
-          <button className={styles.primary}>Submit</button>
-        </div>
+        {this._renderButtonRows()}
       </div>
     )
   }
 }
 
 export default connect(state => ({
-  view: state.changePassword.view,
   revealPassword: state.changePassword.revealPassword,
-  oldPassword: state.changePassword.oldPassword,
   newPassword: state.changePassword.newPassword,
   newPasswordRepeat: state.changePassword.newPasswordRepeat,
-  passwordChangedNotification: state.changePassword.passwordChangedNotification,
+  errorPassword: state.changePassword.errorPassword,
+  errorPasswordRepeat: state.changePassword.errorPasswordRepeat,
+  loader: state.loader,
   validation: state.password.validation,
   user: state.user
-}))(ChangePin)
+}))(ChangePassword)
