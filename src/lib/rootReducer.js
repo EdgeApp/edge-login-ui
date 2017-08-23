@@ -139,7 +139,8 @@ const store = combineReducers({
     secondAnswer: PasswordRecovery.secondAnswer,
     password: PasswordRecovery.password,
     token: PasswordRecovery.token,
-    email: PasswordRecovery.email
+    email: PasswordRecovery.email,
+    error: PasswordRecovery.error
   }),
   modal: combineReducers({
     passwordRecovery,

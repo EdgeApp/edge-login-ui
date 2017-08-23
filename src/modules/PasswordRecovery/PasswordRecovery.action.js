@@ -17,6 +17,9 @@ export const CHANGE_PASSWORD_RECOVERY_PASSWORD = 'CHANGE_PASSWORD_RECOVERY_PASSW
 export const PASSWORD_RECOVERY_TOKEN = 'PASSWORD_RECOVERY_TOKEN'
 export const CHANGE_PASSWORD_RECOVERY_EMAIL = 'CHANGE_PASSWORD_RECOVERY_EMAIL'
 
+export const ERROR_PASSWORD_RECOVERY = 'ERROR_PASSWORD_RECOVERY'
+export const CLEAR_PASSWORD_RECOVERY = 'CLEAR_PASSWORD_RECOVERY'
+
 export const PASSWORD_RECOVERY_DONE = 'PASSWORD_RECOVERY_DONE'
 
 export function showPasswordRecoveryView () {
@@ -126,5 +129,18 @@ export function setPasswordRecoveryToken (data) {
 export function passwordRecoveryDone () {
   return {
     type: PASSWORD_RECOVERY_DONE
+  }
+}
+
+export function errorPasswordRecovery (data) {
+  return {
+    type: ERROR_PASSWORD_RECOVERY,
+    data
+  }
+}
+
+export function clearPasswordRecovery () {
+  return {
+    type: CLEAR_PASSWORD_RECOVERY
   }
 }

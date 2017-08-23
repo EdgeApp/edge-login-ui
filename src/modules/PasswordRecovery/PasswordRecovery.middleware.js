@@ -8,48 +8,27 @@ export const checkPasswordRecovery = (payload, callback) => {
   const checkAnswersLength = (answers) => answers[0].length < 4 || answers[1].length < 4
   const checkQuestionsSame = (questions) => questions[0] === questions[1]
   const checkQuestionsDefault = (questions) => questions[0] === 'Choose a question' || questions[1] === 'Choose a question'
-  const checkPassword = (callback) => {
-    if (payload.location === '/review') {
-      return callback(false)
-    }
-    if (payload.location !== '/review') {
-      payload.account.checkPassword(payload.password)
-        .then(result => {
-          return callback(!result)
-        })
-    }
-  }
 
   return (dispatch, getState, imports) => {
     const t = imports.t
-
     if (checkAnswersLength(payload.answers)) {
-      return dispatch(openErrorModal(t('activity_recovery_error_answer_length')))
+      return callback(t('activity_recovery_error_answer_length'))
     }
-
     if (checkQuestionsDefault(payload.questions)) {
-      return dispatch(openErrorModal(t('activity_recovery_pick_questions_alert')))
+      return callback(t('activity_recovery_pick_questions_alert'))
     }
-
     if (checkQuestionsSame(payload.questions)) {
-      return dispatch(openErrorModal(t('activity_recovery_error_questions_different')))
+      return callback(t('activity_recovery_error_questions_different'))
     }
 
-    checkPassword((error) => {
+    payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
       if (error) {
-        return dispatch(openErrorModal(t('activity_recovery_error_password')))
+        callback(error)
+        return dispatch(openErrorModal(t('server_error_no_connection')))
       }
       if (!error) {
-        payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
-          if (error) {
-            callback(error)
-            return dispatch(openErrorModal(t('server_error_no_connection')))
-          }
-          if (!error) {
-            dispatch(setPasswordRecoveryToken(token))
-            return dispatch(showPasswordRecoveryTokenView())
-          }
-        })
+        dispatch(setPasswordRecoveryToken(token))
+        return dispatch(showPasswordRecoveryTokenView())
       }
     })
   }
