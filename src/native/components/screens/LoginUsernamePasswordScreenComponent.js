@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, KeyboardAvoidingView } from 'react-native'
 import { BackgroundImage, Button, FormField } from '../../components/common'
 import { LogoImageHeader } from '../abSpecific'
 // import * as Constants from '../../../common/constants'
@@ -10,7 +10,9 @@ export default class LandingScreenComponent extends Component {
     this.setState({
       username: '',
       password: '',
-      loggingIn: false
+      loggingIn: false,
+      focusFirst: true,
+      focusSecond: false
     })
   }
   componentWillReceiveProps (nextProps) {
@@ -19,6 +21,12 @@ export default class LandingScreenComponent extends Component {
         loggingIn: false
       })
     }
+  }
+  onSetNextFocus () {
+    this.setState({
+      focusFirst: false,
+      focusSecond: true
+    })
   }
   render () {
     const { LoginPasswordScreenStyle } = this.props.styles
@@ -46,24 +54,53 @@ export default class LandingScreenComponent extends Component {
     return (
       <View style={LoginPasswordScreenStyle.featureBox}>
         <LogoImageHeader style={LoginPasswordScreenStyle.logoHeader} />
-        <View style={LoginPasswordScreenStyle.featureBoxBody}>
-          <FormField
-            style={LoginPasswordScreenStyle.input}
-            onChangeText={this.updateUsername.bind(this)}
-            value={this.state.username}
-            label={'Username'}
-          />
-          <FormField
-            style={LoginPasswordScreenStyle.input}
-            onChangeText={this.updatePassword.bind(this)}
-            value={this.state.password}
-            label={'Password'}
-            error={this.props.error}
-            secureTextEntry
-          />
-          {this.renderButtons(LoginPasswordScreenStyle)}
-        </View>
-
+        {this.renderMain(LoginPasswordScreenStyle)}
+      </View>
+    )
+  }
+  renderMain (styles) {
+    if (this.state.focusSecond) {
+      return (
+        <KeyboardAvoidingView
+          style={styles.featureBoxBody}
+          contentContainerStyle={styles.featureBoxBody}
+          behavior={'position'}
+          keyboardVerticalOffset={-80}
+        >
+          {this.renderInterior(styles)}
+        </KeyboardAvoidingView>
+      )
+    }
+    return (
+      <View style={styles.featureBoxBody}>
+        {this.renderInterior(styles)}
+      </View>
+    )
+  }
+  renderInterior (styles) {
+    return (
+      <View style={styles.innerView}>
+        <FormField
+          style={styles.input}
+          onChangeText={this.updateUsername.bind(this)}
+          value={this.state.username}
+          label={'Username'}
+          returnKeyType={'next'}
+          autoFocus={this.state.focusFirst}
+          onFinish={this.onSetNextFocus.bind(this)}
+        />
+        <FormField
+          style={styles.input}
+          onChangeText={this.updatePassword.bind(this)}
+          value={this.state.password}
+          label={'Password'}
+          error={this.props.error}
+          secureTextEntry
+          returnKeyType={'go'}
+          autoFocus={this.state.focusSecond}
+          onFinish={this.onStartLogin.bind(this)}
+        />
+        {this.renderButtons(styles)}
       </View>
     )
   }

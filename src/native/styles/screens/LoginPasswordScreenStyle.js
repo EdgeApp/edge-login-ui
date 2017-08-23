@@ -17,6 +17,11 @@ const LoginPasswordScreenStyle = {
     height: vs(376),
     backgroundColor: Colors.OVERLAY_BOX
   },
+  innerView: {
+    ...Styles.InnerView,
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
   logoHeader: Styles.LogoHeaderStyle,
   featureBoxBody: {
     height: vs(250),
