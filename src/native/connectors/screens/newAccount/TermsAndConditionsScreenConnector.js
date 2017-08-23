@@ -6,7 +6,8 @@ export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
     workflow: state.workflow,
-    accountObject: state.login.accountObject
+    accountObject: state.login.accountObject,
+    terms: state.terms
   }
 }
 

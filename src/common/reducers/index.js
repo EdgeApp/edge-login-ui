@@ -4,11 +4,13 @@ import CreateUserReducer from './CreateUserReducer'
 import PreviousUsersReducer from './PreviousUsersReducer'
 import WorkflowReducer from './WorkflowReducer'
 import PasswordStatusReducer from './PasswordStatusReducer'
+import TermsAndConditinsReducer from './TermsAndConditinsReducer'
 
 export default combineReducers({
   login: LoginReducer,
   create: CreateUserReducer,
   previousUsers: PreviousUsersReducer,
   workflow: WorkflowReducer,
-  passwordStatus: PasswordStatusReducer
+  passwordStatus: PasswordStatusReducer,
+  terms: TermsAndConditinsReducer
 })

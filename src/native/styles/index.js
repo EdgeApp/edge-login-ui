@@ -10,4 +10,5 @@ export * from './screens/NewAccountPasswordScreenStyle'
 export * from './screens/SetAccountPinScreenStyle'
 export * from './screens/CreatingAccountWaitScreenStyle'
 export * from './screens/NewAccountReviewScreenStyle'
+export * from './screens/TermsAndConditionsScreenStyle'
 

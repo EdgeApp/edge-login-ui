@@ -1,31 +1,37 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, ScrollView, Text } from 'react-native'
 import { Button } from '../../common'
+import HeaderConnector
+  from '../../../connectors/componentConnectors/HeaderConnector'
 // import * as Constants from '../../../common/constants'
 
 export default class TermsAndConditionsScreenComponent extends Component {
+  renderItems () {
+    console.log()
+  }
   render () {
-    const { NewAccountReviewScreenStyle } = this.props.styles
+    const { TermsAndConditionsScreenStyle } = this.props.styles
     return (
-      <View style={NewAccountReviewScreenStyle.screen}>
-        <View style={NewAccountReviewScreenStyle.row1} />
-        <View style={NewAccountReviewScreenStyle.row2} />
-        <View style={NewAccountReviewScreenStyle.row3} />
-        <View style={NewAccountReviewScreenStyle.row4} />
-        <View style={NewAccountReviewScreenStyle.row5} />
-        <View style={NewAccountReviewScreenStyle.row6}>
+      <View style={TermsAndConditionsScreenStyle.screen}>
+        <HeaderConnector style={TermsAndConditionsScreenStyle.header} />
+        <ScrollView
+          contentContainerStyle={TermsAndConditionsScreenStyle.pageContainer}
+        >
+          <View style={TermsAndConditionsScreenStyle.instructions}>
+            <Text>Msd</Text>
+          </View>
+          {this.renderItems()}
           <Button
             onPress={this.onNextPress.bind(this)}
-            downStyle={NewAccountReviewScreenStyle.nextButton.downStyle}
+            downStyle={TermsAndConditionsScreenStyle.nextButton.downStyle}
             downTextStyle={
-              NewAccountReviewScreenStyle.nextButton.downTextStyle
+              TermsAndConditionsScreenStyle.nextButton.downTextStyle
             }
-            upStyle={NewAccountReviewScreenStyle.nextButton.upStyle}
-            upTextStyle={NewAccountReviewScreenStyle.nextButton.upTextStyle}
+            upStyle={TermsAndConditionsScreenStyle.nextButton.upStyle}
+            upTextStyle={TermsAndConditionsScreenStyle.nextButton.upTextStyle}
             label={'DONE'}
           />
-        </View>
-
+        </ScrollView>
       </View>
     )
   }
