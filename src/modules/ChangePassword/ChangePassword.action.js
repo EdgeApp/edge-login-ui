@@ -12,6 +12,10 @@ export const HIDE_PASSWORD_CHANGED_NOTIFICATION = 'HIDE_PASSWORD_CHANGED_NOTIFIC
 export const PASSWORD_CHANGE_SHOW_PASSWORD = 'PASSWORD_CHANGE_SHOW_PASSWORD'
 export const PASSWORD_CHANGE_HIDE_PASSWORD = 'PASSWORD_CHANGE_HIDE_PASSWORD'
 
+export const ERROR_CHANGE_PASSWORD = 'ERROR_CHANGE_PASSWORD'
+export const ERROR_CHANGE_PASSWORD_REPEAT = 'ERROR_CHANGE_PASSWORD_REPEAT'
+export const CLEAR_CHANGE_PASSWORD = 'CLEAR_CHANGE_PASSWORD'
+
 export function changePasswordShowPassword () {
   return {
     type: PASSWORD_CHANGE_SHOW_PASSWORD
@@ -71,5 +75,25 @@ export function showPasswordChangedNotification () {
 export function hidePasswordChangedNotification () {
   return {
     type: HIDE_PASSWORD_CHANGED_NOTIFICATION
+  }
+}
+
+export function errorChangePassword (data) {
+  return {
+    type: ERROR_CHANGE_PASSWORD,
+    data
+  }
+}
+
+export function errorChangePasswordRepeat (data) {
+  return {
+    type: ERROR_CHANGE_PASSWORD_REPEAT,
+    data
+  }
+}
+
+export function clearChangePassword () {
+  return {
+    type: CLEAR_CHANGE_PASSWORD
   }
 }

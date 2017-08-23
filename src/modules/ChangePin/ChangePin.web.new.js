@@ -16,8 +16,7 @@ class ChangePin extends Component {
       }
       if (!error) {
         this.props.dispatch(clearPinChangeError())
-        return this.props.router.push('/account')
-        // return this.props.dispatch(showPinChangedNotification())
+        return this.props.history.push('/account')
       }
     }
     this.props.dispatch(
@@ -60,6 +59,13 @@ class ChangePin extends Component {
           <button className={styles.primaryLoad}><div className={styles.loader} /></button>
         </div>
       )
+    }
+  }
+  _pinStyle = () => {
+    if (this.props.pin.length > 0) {
+      return {textAlign: 'center', fontSize: '70px', height: '80px'}
+    } else {
+      return {textAlign: 'center', fontSize: '35px', height: '80px'}
     }
   }
   render () {

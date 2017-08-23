@@ -135,3 +135,14 @@ export const email = (state = '', action) => {
       return state
   }
 }
+
+export const error = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.ERROR_PASSWORD_RECOVERY :
+      return action.data
+    case ACTION.CLEAR_PASSWORD_RECOVERY :
+      return ''
+    default:
+      return state
+  }
+}

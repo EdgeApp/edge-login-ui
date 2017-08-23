@@ -21,7 +21,7 @@ import * as Container from '../modules/Container.reducer'
 import { signupPage } from '../modules/Signup/Signup.reducer'
 import { user } from '../modules/User/User.reducer'
 import { passwordRecovery } from '../modules/Modals/PasswordRecovery/PasswordRecovery.reducer.js'
-import { accountManagementPassword } from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
+import * as AccountManagementPassword from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
 import { accountCreated } from '../modules/Modals/AccountCreated/AccountCreated.reducer.js'
 // import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 
@@ -116,7 +116,9 @@ const store = combineReducers({
     oldPassword: ChangePassword.oldPassword,
     newPassword: ChangePassword.newPassword,
     newPasswordRepeat: ChangePassword.newPasswordRepeat,
-    passwordChangedNotification: ChangePassword.passwordChangedNotification
+    passwordChangedNotification: ChangePassword.passwordChangedNotification,
+    errorPassword: ChangePassword.errorPassword,
+    errorPasswordRepeat: ChangePassword.errorPasswordRepeat
   }),
   changePin: combineReducers({
     view: ChangePin.view,
@@ -137,11 +139,17 @@ const store = combineReducers({
     secondAnswer: PasswordRecovery.secondAnswer,
     password: PasswordRecovery.password,
     token: PasswordRecovery.token,
-    email: PasswordRecovery.email
+    email: PasswordRecovery.email,
+    error: PasswordRecovery.error
   }),
   modal: combineReducers({
     passwordRecovery,
-    accountManagementPassword,
+    accountManagementPassword: combineReducers({
+      password: AccountManagementPassword.password,
+      view: AccountManagementPassword.view,
+      route: AccountManagementPassword.route,
+      error: AccountManagementPassword.error
+    }),
     accountCreated
   }),
   forgotPasswordModal: ForgotPassword.visible,

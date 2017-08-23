@@ -17,6 +17,10 @@ class Header extends Component {
     switch (pathname) {
       case '/changepin':
         return 'Change your 4-digit PIN'
+      case '/changepassword':
+        return 'Change your password'
+      case '/passwordrecovery':
+        return 'Password Recovery Setup'
       default:
         return sprintf(t('fragment_setup_header_left'), this.props.vendorName)
     }

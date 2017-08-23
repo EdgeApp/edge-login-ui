@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 
 import styles from './AccountManagement.webStyle.scss'
 // import t from 'lib/web/LocaleStrings'
 
-// import ChangePin from '../ChangePin/ChangePin.web'
-// import ChangePassword from '../ChangePassword/ChangePassword.web'
-// import PasswordRecovery from '../PasswordRecovery/PasswordRecovery.web'
-// import PasswordRecoverySuccess from '../PasswordRecovery/PasswordRecoverySuccess.web'
 import EnterPassword from '../Modals/AccountManagementPassword/AccountManagementPassword.web.js'
 
-// import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
+import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
 
 import pinIcon from '../../img/account-settings/PIN-W.png'
 import passwordIcon from '../../img/account-settings/password-W.png'
@@ -23,26 +18,20 @@ class AccountManager extends Component {
       <div className={styles.container}>
         <p className={styles.header}>Account name: AirbitzAugur</p>
         <div className={styles.main}>
-          <Link to='/changepin' className={styles.linking}>
-            <div className={styles.square}>
-              <img src={pinIcon} />
-              <p className={styles.label}>Change Pin</p>
-            </div>
-          </Link>
-          <Link to='/changepassword' className={styles.linking}>
-            <div className={styles.square}>
-              <img src={passwordIcon} />
-              <p className={styles.label}>Change Password</p>
-            </div>
-          </Link>
-          <Link to='/passwordrecovery' className={styles.linking}>
-            <div className={styles.square}>
-              <img src={recoveryIcon} />
-              <p className={styles.label}>Setup / Change<br />Password Recovery</p>
-            </div>
-          </Link>
-          <EnterPassword />
+          <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal('/changepin'))}>
+            <img src={pinIcon} />
+            <p className={styles.label}>Change Pin</p>
+          </div>
+          <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal('/changepassword'))}>
+            <img src={passwordIcon} />
+            <p className={styles.label}>Change Password</p>
+          </div>
+          <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal('/passwordrecovery'))}>
+            <img src={recoveryIcon} />
+            <p className={styles.label}>Setup / Change<br />Password Recovery</p>
+          </div>
         </div>
+        <EnterPassword history={this.props.history} />
       </div>
     )
   }
