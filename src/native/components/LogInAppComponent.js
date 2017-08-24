@@ -77,7 +77,7 @@ export default class LoginAppComponent extends Component {
   getCreateScreen (arg) {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <NewAccountReviewScreenConnector styles={this.props.styles} /> // NewAccountWelcomeScreenConnector
+        return <NewAccountWelcomeScreenConnector styles={this.props.styles} /> // NewAccountWelcomeScreenConnector
       case 1:
         return <NewAccountUsernameScreenConnector styles={this.props.styles} />
       case 2:
