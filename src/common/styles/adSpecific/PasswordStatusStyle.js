@@ -15,11 +15,23 @@ const PasswordStatusStyle = {
     textAlign: 'center',
     width: '80%'
   },
+  boxes: {
+    width: '100%',
+    flex: 5,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    top: 10
+
+  },
   checkboxContainer: {
     width: '80%',
-    height: 20,
-    backgroundColor: '#ffffff',
-    top: 20
+    height: vs(20)
+  },
+  textContianer: {
+    width: '100%',
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'space-around'
   },
   checkboxes: BasicCheckBoxWithLabel,
   text: {

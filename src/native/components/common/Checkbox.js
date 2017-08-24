@@ -11,7 +11,7 @@ class Checkbox extends Component {
   componentWillReceiveProps (nextProps) {
     if (this.props.disabled) {
       this.setState({
-        onOff: nextProps.defaultValue
+        onOff: nextProps.value
       })
     }
   }

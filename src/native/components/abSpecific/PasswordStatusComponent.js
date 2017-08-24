@@ -11,14 +11,13 @@ export default class PaswordStatusComponent extends Component {
   render () {
     return this.renderInterior()
   }
-  renderStatusList () {
-    const style = this.props.style
+  renderStatusList (style) {
     return this.props.status.list.map(Item => (
       <View style={style.checkboxContainer} key={Item.title}>
         <Checkbox
           style={style.checkboxes}
           label={Item.title}
-          defaultValue={Item.value}
+          value={Item.value}
           checkedImage={PASSWORD_REQ_CHECKED}
           uncheckedImage={PASSWORD_REQ_UNCHECKED}
           disabled
@@ -27,14 +26,14 @@ export default class PaswordStatusComponent extends Component {
     ))
   }
   renderInterior () {
-    console.log('HERE IS THE THING ')
-    console.log(this.props.status)
     const style = this.props.style
     if (this.props.status) {
       return (
         <View style={style.container}>
-          {this.renderStatusList()}
-          <View>
+          <View style={style.boxes}>
+            {this.renderStatusList(style)}
+          </View>
+          <View style={style.textContianer}>
             <Text style={style.text}>{this.props.status.secondsToCrack} </Text>
           </View>
         </View>
@@ -43,7 +42,7 @@ export default class PaswordStatusComponent extends Component {
     return (
       <View style={style.container}>
         <Text style={style.instructions}>
-        The password is used to login and change sensitive settings
+          The password is used to login and change sensitive settings
         </Text>
       </View>
     )
