@@ -1,37 +1,84 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text } from 'react-native'
-import { Button } from '../../common'
+import { View, Text } from 'react-native'
+import { Button, Checkbox } from '../../common'
+// import {  } from '../../common/Checkbox'
+import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnector'
 // import * as Constants from '../../../common/constants'
 
 export default class TermsAndConditionsScreenComponent extends Component {
-  renderItems () {
-    console.log()
+  componentWillMount () {
+    this.setState({
+      totalChecks: 0
+    })
+  }
+  renderItems (style) {
+    return this.props.terms.items.map(Item => (
+      <View style={style.checkboxContainer} key={Item.title}>
+        <Checkbox
+          style={style.checkboxes}
+          label={Item.title}
+          onChange={this.changeStatus.bind(this)}
+          defaultValue={false}
+          checkedImage={REVIEW_CHECKED}
+          uncheckedImage={REVIEW_UNCHECKED}
+          key={Item.title}
+        />
+      </View>
+    ))
+  }
+  renderInstructions (style) {
+    if (this.state.totalChecks < 3) {
+      return (
+        <View style={style.instructionsContainer}>
+          <Text style={style.instructionsText}>Last step! Let’s finish with a quick review</Text>
+        </View>
+      )
+    }
+    return null
+  }
+  renderButton (style) {
+    if (this.state.totalChecks === 3) {
+      return (
+        <View style={style.buttonContainer}>
+          <Text style={style.agreeText}>I have read, understood, and agree to the Terms of Use</Text>
+          <Button
+            onPress={this.onNextPress.bind(this)}
+            downStyle={style.nextButton.downStyle}
+            downTextStyle={style.nextButton.downTextStyle}
+            upStyle={style.nextButton.upStyle}
+            upTextStyle={style.nextButton.upTextStyle}
+            label={'Confirm & finish'}
+          />
+        </View>
+      )
+    }
+    return null
+  }
+  changeStatus (event) {
+    if (!event) {
+      this.setState({
+        totalChecks: this.state.totalChecks + 1
+      })
+    } else {
+      this.setState({
+        totalChecks: this.state.totalChecks - 1
+      })
+    }
   }
   render () {
     const { TermsAndConditionsScreenStyle } = this.props.styles
     return (
       <View style={TermsAndConditionsScreenStyle.screen}>
         <HeaderConnector style={TermsAndConditionsScreenStyle.header} />
-        <ScrollView
-          contentContainerStyle={TermsAndConditionsScreenStyle.pageContainer}
-        >
-          <View style={TermsAndConditionsScreenStyle.instructions}>
-            <Text>Msd</Text>
+        <View style={TermsAndConditionsScreenStyle.pageContainer}>
+          {this.renderInstructions(TermsAndConditionsScreenStyle)}
+          <View style={TermsAndConditionsScreenStyle.midSection}>
+            {this.renderItems(TermsAndConditionsScreenStyle)}
           </View>
-          {this.renderItems()}
-          <Button
-            onPress={this.onNextPress.bind(this)}
-            downStyle={TermsAndConditionsScreenStyle.nextButton.downStyle}
-            downTextStyle={
-              TermsAndConditionsScreenStyle.nextButton.downTextStyle
-            }
-            upStyle={TermsAndConditionsScreenStyle.nextButton.upStyle}
-            upTextStyle={TermsAndConditionsScreenStyle.nextButton.upTextStyle}
-            label={'DONE'}
-          />
-        </ScrollView>
+          {this.renderButton(TermsAndConditionsScreenStyle)}
+        </View>
       </View>
     )
   }
