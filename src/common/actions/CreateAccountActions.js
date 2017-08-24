@@ -141,6 +141,8 @@ export function createUser (data) {
 export function agreeToConditions (account) {
   return (dispatch, getState, imports) => {
     console.log('Skip Password. ')
+    let callback = imports.callback
+    callback(account)
     // dispatch(WorkflowActions.nextScreen())
   }
 }
@@ -148,8 +150,8 @@ export function agreeToConditions (account) {
 export function skipPassword (data) {
   return (dispatch, getState, imports) => {
     console.log('Skip Password. ')
-    let callback = imports.callback
-    callback(data)
+    // let callback = imports.callback
+    // callback(data)
     // dispatch(WorkflowActions.nextScreen())
   }
 }
