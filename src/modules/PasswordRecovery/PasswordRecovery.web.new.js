@@ -15,9 +15,18 @@ import styles from './PasswordRecovery.webStyle.scss'
 class PasswordRecovery extends Component {
   _handleSubmit = () => {
     const callback = (error) => {
-      console.log(error)
+      this.props.dispatch(action.clearPasswordRecovery())
       if (error) {
-        return this.props.dispatch(action.errorPasswordRecovery(error))
+        switch (error.type) {
+          case 'firstQuestion' :
+            return this.props.dispatch(action.errorFirstQuestion(error.message))
+          case 'secondQuestion' :
+            return this.props.dispatch(action.errorSecondQuestion(error.message))
+          case 'firstAnswer' :
+            return this.props.dispatch(action.errorFirstAnswer(error.message))
+          case 'secondAnswer' :
+            return this.props.dispatch(action.errorSecondAnswer(error.message))
+        }
       }
     }
     this.props.dispatch(
@@ -43,8 +52,8 @@ class PasswordRecovery extends Component {
     abcctx(ctx => {
       ctx.listRecoveryQuestionChoices((error, results) => {
         if (error) {
-          // dispatch(openErrorModal(t('string_connection_error_server')))
-          dispatch(action.hidePasswordRecoveryView())
+          this.props.dispatch(action.errorFirstQuestion(t('string_connection_error_server')))
+          return this.props.dispatch(action.errorSecondQuestion(t('string_connection_error_server')))
         }
         if (!error) {
           const questions = results.filter(result => result.category === 'recovery2').map(result => result.question)
@@ -69,7 +78,6 @@ class PasswordRecovery extends Component {
     this.props.dispatch(action.changeSecondPasswordRecoveryAnswerValue(secondAnswer))
   }
   _renderQuestions1 = () => {
-    console.log(this.props.questions)
     const filtered = _.filter(this.props.questions, question => this.props.secondQuestion !== question)
     const questions = _.map(filtered, question => ({ value: question, label: question }))
     return [ {value: 'Choose a question', label: 'Choose a question'}, ...questions ]
@@ -110,6 +118,7 @@ class PasswordRecovery extends Component {
               value={this.props.firstQuestion}
               allowBlank={false}
               className={styles.formDropdown}
+              error={this.props.error.firstQuestion}
               required
             />
             <Input
@@ -119,15 +128,17 @@ class PasswordRecovery extends Component {
               value={this.props.firstAnswer}
               label={t('activity_recovery_first_answer')}
               className={styles.formInput}
+              error={this.props.error.firstAnswer}
               required
             />
-            <p className={styles.note}>Answers are case sensitive</p>
+            <p className={styles.note}>{this.props.error.firstAnswer ? '' : 'Answers are case sensitive' }</p>
             <Dropdown
               source={this._renderQuestions2()}
               onChange={this._handleOnChangeSecondQuestion}
               value={this.props.secondQuestion}
               allowBlank={false}
               className={styles.formDropdown}
+              error={this.props.error.secondQuestion}
               required
             />
             <Input
@@ -137,10 +148,10 @@ class PasswordRecovery extends Component {
               value={this.props.secondAnswer}
               label={t('activity_recovery_second_answer')}
               className={styles.formInput}
-              error={this.props.error}
+              error={this.props.error.secondAnswer}
               required
             />
-            <p className={styles.note}>Answers are case sensitive</p>
+            <p className={styles.note}>{this.props.error.secondAnswer ? '' : 'Answers are case sensitive'}</p>
           </div>
         </form>
         {this._renderButtonRows()}
@@ -161,7 +172,12 @@ export default connect(state => ({
   password: state.passwordRecovery.password,
   token: state.passwordRecovery.token,
   email: state.passwordRecovery.email,
-  error: state.passwordRecovery.error,
+  error: {
+    firstQuestion: state.passwordRecovery.error.firstQuestion,
+    secondQuestion: state.passwordRecovery.error.secondQuestion,
+    firstAnswer: state.passwordRecovery.error.firstAnswer,
+    secondAnswer: state.passwordRecovery.error.secondAnswer
+  },
   loader: state.loader,
   account: state.user
 }))(PasswordRecovery)

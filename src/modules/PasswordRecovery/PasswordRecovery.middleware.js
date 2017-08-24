@@ -1,36 +1,53 @@
 import { validateEmail, obfuscateUsername } from '../../lib/helper'
-import t from '../../lib/web/LocaleStrings'
-
-import { setPasswordRecoveryToken, showPasswordRecoveryTokenView, showPasswordRecoveryTokenButton } from './PasswordRecovery.action'
-import { openErrorModal } from '../ErrorModal/ErrorModal.action'
+import { setPasswordRecoveryToken, showPasswordRecoveryTokenButton } from './PasswordRecovery.action'
+import { openLoading, closeLoading } from '../Loader/Loader.action'
 
 export const checkPasswordRecovery = (payload, callback) => {
-  const checkAnswersLength = (answers) => answers[0].length < 4 || answers[1].length < 4
-  const checkQuestionsSame = (questions) => questions[0] === questions[1]
-  const checkQuestionsDefault = (questions) => questions[0] === 'Choose a question' || questions[1] === 'Choose a question'
-
   return (dispatch, getState, imports) => {
     const t = imports.t
-    if (checkAnswersLength(payload.answers)) {
-      return callback(t('activity_recovery_error_answer_length'))
+    dispatch(openLoading())
+    if (payload.questions[0] === 'Choose a question') {
+      dispatch(closeLoading())
+      return callback({
+        type: 'firstQuestion',
+        message: t('activity_recovery_pick_questions_alert')
+      })
     }
-    if (checkQuestionsDefault(payload.questions)) {
-      return callback(t('activity_recovery_pick_questions_alert'))
+    if (payload.answers[0].length < 4) {
+      dispatch(closeLoading())
+      return callback({
+        type: 'firstAnswer',
+        message: t('activity_recovery_error_answer_length')
+      })
     }
-    if (checkQuestionsSame(payload.questions)) {
-      return callback(t('activity_recovery_error_questions_different'))
+    if (payload.questions[1] === 'Choose a question') {
+      dispatch(closeLoading())
+      return callback({
+        type: 'secondQuestion',
+        message: t('activity_recovery_pick_questions_alert')
+      })
     }
-
-    payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
-      if (error) {
-        callback(error)
-        return dispatch(openErrorModal(t('server_error_no_connection')))
-      }
-      if (!error) {
-        dispatch(setPasswordRecoveryToken(token))
-        return dispatch(showPasswordRecoveryTokenView())
-      }
-    })
+    if (payload.answers[1].length < 4) {
+      dispatch(closeLoading())
+      return callback({
+        type: 'secondAnswer',
+        message: t('activity_recovery_error_answer_length')
+      })
+    }
+    if (!payload.answers[0].length < 4 && !payload.answers[1].length < 4 && !payload.questions[0] === 'Choose a question' && !payload.questions[1] === 'Choose a question') {
+      payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
+        dispatch(closeLoading())
+        if (error) {
+          callback(error)
+          return callback(t('server_error_no_connection'))
+        }
+        if (!error) {
+          dispatch(setPasswordRecoveryToken(token))
+          return callback(null)
+          // return dispatch(showPasswordRecoveryTokenView())
+        }
+      })
+    }
   }
 }
 
@@ -48,7 +65,7 @@ export const checkEmail = (address, email, token, accountUsername, callback) => 
       )
     }
     if (!validateEmail(email)) {
-      return dispatch(openErrorModal(t('password_recovery_invalid_email')))
+      // return dispatch(openErrorModal(t('password_recovery_invalid_email')))
     }
   }
 }

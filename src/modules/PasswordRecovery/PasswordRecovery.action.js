@@ -17,7 +17,10 @@ export const CHANGE_PASSWORD_RECOVERY_PASSWORD = 'CHANGE_PASSWORD_RECOVERY_PASSW
 export const PASSWORD_RECOVERY_TOKEN = 'PASSWORD_RECOVERY_TOKEN'
 export const CHANGE_PASSWORD_RECOVERY_EMAIL = 'CHANGE_PASSWORD_RECOVERY_EMAIL'
 
-export const ERROR_PASSWORD_RECOVERY = 'ERROR_PASSWORD_RECOVERY'
+export const ERROR_FIRST_QUESTION_PASSWORD_RECOVERY = 'ERROR_FIRST_QUESTION_PASSWORD_RECOVERY'
+export const ERROR_SECOND_QUESTION_PASSWORD_RECOVERY = 'ERROR_SECOND_QUESTION_PASSWORD_RECOVERY'
+export const ERROR_FIRST_ANSWER_PASSWORD_RECOVERY = 'ERROR_FIRST_ANSWER_PASSWORD_RECOVERY'
+export const ERROR_SECOND_ANSWER_PASSWORD_RECOVERY = 'ERROR_SECOND_ANSWER_PASSWORD_RECOVERY'
 export const CLEAR_PASSWORD_RECOVERY = 'CLEAR_PASSWORD_RECOVERY'
 
 export const PASSWORD_RECOVERY_DONE = 'PASSWORD_RECOVERY_DONE'
@@ -132,9 +135,30 @@ export function passwordRecoveryDone () {
   }
 }
 
-export function errorPasswordRecovery (data) {
+export function errorFirstQuestion (data) {
   return {
-    type: ERROR_PASSWORD_RECOVERY,
+    type: ERROR_FIRST_QUESTION_PASSWORD_RECOVERY,
+    data
+  }
+}
+
+export function errorSecondQuestion (data) {
+  return {
+    type: ERROR_SECOND_QUESTION_PASSWORD_RECOVERY,
+    data
+  }
+}
+
+export function errorFirstAnswer (data) {
+  return {
+    type: ERROR_FIRST_ANSWER_PASSWORD_RECOVERY,
+    data
+  }
+}
+
+export function errorSecondAnswer (data) {
+  return {
+    type: ERROR_SECOND_ANSWER_PASSWORD_RECOVERY,
     data
   }
 }

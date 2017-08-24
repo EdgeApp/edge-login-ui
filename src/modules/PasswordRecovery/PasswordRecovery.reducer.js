@@ -136,9 +136,42 @@ export const email = (state = '', action) => {
   }
 }
 
-export const error = (state = '', action) => {
+export const errorFirstQuestion = (state = '', action) => {
   switch (action.type) {
-    case ACTION.ERROR_PASSWORD_RECOVERY :
+    case ACTION.ERROR_FIRST_QUESTION_PASSWORD_RECOVERY :
+      return action.data
+    case ACTION.CLEAR_PASSWORD_RECOVERY :
+      return ''
+    default:
+      return state
+  }
+}
+
+export const errorSecondQuestion = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.ERROR_SECOND_QUESTION_PASSWORD_RECOVERY :
+      return action.data
+    case ACTION.CLEAR_PASSWORD_RECOVERY :
+      return ''
+    default:
+      return state
+  }
+}
+
+export const errorFirstAnswer = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.ERROR_FIRST_ANSWER_PASSWORD_RECOVERY :
+      return action.data
+    case ACTION.CLEAR_PASSWORD_RECOVERY :
+      return ''
+    default:
+      return state
+  }
+}
+
+export const errorSecondAnswer = (state = '', action) => {
+  switch (action.type) {
+    case ACTION.ERROR_SECOND_ANSWER_PASSWORD_RECOVERY :
       return action.data
     case ACTION.CLEAR_PASSWORD_RECOVERY :
       return ''
