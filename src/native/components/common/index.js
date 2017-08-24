@@ -11,4 +11,5 @@ export * from './Modal'
 export * from './DropInput'
 export * from './ScrollingList'
 export * from './Checkbox'
+export * from './WarningBox'
 

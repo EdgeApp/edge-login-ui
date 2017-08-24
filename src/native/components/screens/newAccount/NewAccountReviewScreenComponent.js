@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Button } from '../../common'
+import { View, Text } from 'react-native'
+import { Button, WarningBox } from '../../common'
+import AccountInfoContainer
+  from '../../../connectors/abSpecific/AccountInfoConnector'
+import HeaderConnector
+  from '../../../connectors/componentConnectors/HeaderConnector'
 // import * as Constants from '../../../common/constants'
 
 export default class NewAccountReviewScreenComponent extends Component {
@@ -8,24 +12,37 @@ export default class NewAccountReviewScreenComponent extends Component {
     const { NewAccountReviewScreenStyle } = this.props.styles
     return (
       <View style={NewAccountReviewScreenStyle.screen}>
-        <View style={NewAccountReviewScreenStyle.row1} />
-        <View style={NewAccountReviewScreenStyle.row2} />
-        <View style={NewAccountReviewScreenStyle.row3} />
-        <View style={NewAccountReviewScreenStyle.row4} />
-        <View style={NewAccountReviewScreenStyle.row5} />
-        <View style={NewAccountReviewScreenStyle.row6}>
+        <HeaderConnector style={NewAccountReviewScreenStyle.header} />
+        <View style={NewAccountReviewScreenStyle.pageContainer}>
+          <View style={NewAccountReviewScreenStyle.instructionsContainer}>
+            <Text style={NewAccountReviewScreenStyle.instructionsText}>
+              Last step! Let’s finish with a quick review
+            </Text>
+          </View>
+          <View style={NewAccountReviewScreenStyle.warningBoxContainer}>
+            <WarningBox
+              style={NewAccountReviewScreenStyle.warningBox}
+              message={
+                'If you lose your account information, you’ll lose access to your funds permanently. Write down and store it securely.'
+              } // TODO localize
+            />
+          </View>
+          <View style={NewAccountReviewScreenStyle.shim} />
+          <View style={NewAccountReviewScreenStyle.detailsContainer}>
+            <AccountInfoContainer
+              style={NewAccountReviewScreenStyle.accountDetailsBox}
+            />
+          </View>
+          <View style={NewAccountReviewScreenStyle.shim} />
           <Button
             onPress={this.onNextPress.bind(this)}
             downStyle={NewAccountReviewScreenStyle.nextButton.downStyle}
-            downTextStyle={
-              NewAccountReviewScreenStyle.nextButton.downTextStyle
-            }
+            downTextStyle={NewAccountReviewScreenStyle.nextButton.downTextStyle}
             upStyle={NewAccountReviewScreenStyle.nextButton.upStyle}
             upTextStyle={NewAccountReviewScreenStyle.nextButton.upTextStyle}
             label={'REVIEW'}
           />
         </View>
-
       </View>
     )
   }
