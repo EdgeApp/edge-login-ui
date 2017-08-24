@@ -25,13 +25,15 @@ async function getDiskStuff (context) {
 export function getPreviousUsers (context) {
   return (dispatch, getState, imports) => {
     let context = imports.context
+    let username = imports.username
     getDiskStuff(context).then(data => {
+      let focusUser = username || data.lastUser
       if (data.lastUser) {
         data.usersWithPinList = []
         data.userList.forEach(function (element) {
-          if (element.username === data.lastUser) {
+          if (element.username === focusUser) {
             data.lastUser = {
-              username: data.lastUser,
+              username: focusUser,
               pinEnabled: element.pinEnabled
             }
           }
@@ -40,8 +42,6 @@ export function getPreviousUsers (context) {
           }
         }, this)
       }
-      console.log('show me the data ')
-      console.log(data)
       dispatch(dispatchActionWithData(Constants.SET_PREVIOUS_USERS, data))
     })
   }
