@@ -9,6 +9,7 @@ import PasswordConfirmConnector
   from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordStatusConnector
   from '../../../connectors/abSpecific/PasswordStatusConnector'
+import SkipModalConnector from '../../../connectors/abSpecific/SkipModalConnector'
 export default class NewAccountPasswordScreenComponent extends Component {
   componentWillMount () {
     this.setState({
@@ -78,7 +79,11 @@ export default class NewAccountPasswordScreenComponent extends Component {
   }
   renderModal (style) {
     if (this.props.workflow.showModal) {
-      return <CustomModal style={style.modal.modal} />
+      return (
+        <CustomModal style={style.modal}>
+          <SkipModalConnector style={style.modal.skip} />
+        </CustomModal>
+      )
     }
     return null
   }

@@ -19,9 +19,24 @@ const PrimaryButtonDownStyle = {
   backgroundColor: Colors.BUTTON_PRIMARY_DOWN
 }
 
-const SecondaryButtonUpStyle = {}
+const SecondaryButtonUpStyle = {
+  backgroundColor: Colors.BUTTON_SECONDARY_UP,
+  width: hs(220),
+  height: vs(50),
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderRadius: hs(3)
+}
 
-const SecondaryButtonDownStyle = {}
+const SecondaryButtonDownStyle = {
+  backgroundColor: Colors.BUTTON_SECONDARY_DOWN
+}
+const SecondaryButtonUpTextStyle = {
+  color: Colors.WHITE,
+  fontSize: fontSize(17),
+  width: '100%',
+  textAlign: 'center'
+}
 
 const TertiaryButtonUpStyle = {}
 
@@ -59,6 +74,7 @@ export { PrimaryButtonUpStyle }
 export { PrimaryButtonUpTextStyle }
 export { PrimaryButtonDownStyle }
 export { SecondaryButtonUpStyle }
+export { SecondaryButtonUpTextStyle }
 export { SecondaryButtonDownStyle }
 export { TertiaryButtonUpStyle }
 export { TertiaryButtonTextUpStyle }

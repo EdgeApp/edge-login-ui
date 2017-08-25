@@ -83,9 +83,11 @@ export default function (state = initialState, action) {
       if (nextIndex === state[state.currentKey.scenes]) {
         nextIndex = state.currentSceneIndex
       }
-      return { ...state, currentSceneIndex: nextIndex }
+      return { ...state, currentSceneIndex: nextIndex, showModal: false }
     case Constants.WORKFLOW_SKIP:
       return { ...state, showModal: true, modalView: action.data }
+    case Constants.WORKFLOW_CANCEL_SKIP:
+      return { ...state, showModal: false, modalView: null }
     default:
       return state
   }

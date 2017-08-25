@@ -46,7 +46,6 @@ export default function (state = initialState, action) {
       if (action.data.error) {
         em = action.data.error
       }
-      console.log('EM ' + em)
       return {
         ...state,
         password: action.data.password,

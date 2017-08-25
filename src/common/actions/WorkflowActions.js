@@ -14,10 +14,15 @@ export function nextScreen () {
 }
 
 export function skipStep (data) {
-  console.log('SKIP ')
   return {
     type: Constants.WORKFLOW_SKIP,
     data
+  }
+}
+
+export function cancelSkipStep () {
+  return {
+    type: Constants.WORKFLOW_CANCEL_SKIP
   }
 }
 

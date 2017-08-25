@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Modal } from 'react-native'
 
 class CustomModal extends Component {
   render () {
+    const Style = this.props.style
     return (
-      <View style={this.props.style}>
-        <View>{this.props.children}</View>
-      </View>
+      <Modal style={Style.modal} animationType={'slide'} transparent visible>
+        <View style={Style.container}>
+          {this.props.children}
+        </View>
+      </Modal>
     )
   }
 }

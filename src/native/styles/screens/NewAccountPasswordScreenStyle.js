@@ -20,7 +20,7 @@ const NewAccountPasswordScreenStyle = {
     ...Styles.FormFieldStyle
   },
   inputShim: {...Styles.Shim, height: 10},
-  modal: Styles.ModalStyles
+  modal: Styles.SkipModalStyle
 }
 
 export { NewAccountPasswordScreenStyle }
