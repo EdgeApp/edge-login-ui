@@ -50,6 +50,11 @@
   height : 594px;
 }
 
+.dialogPasswordRecoveryToken {
+  @extend .baseWidth;
+  height : 528px;
+}
+
 .topLevelDialog section {
   padding: 0;
 }

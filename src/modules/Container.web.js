@@ -97,6 +97,8 @@ class Container extends Component {
         return styles.dialogChangePassword
       case '/passwordrecovery':
         return styles.dialogPasswordRecovery
+      case '/passwordrecoverytoken':
+        return styles.dialogPasswordRecoveryToken
       default:
         return styles.dialogLogin
     }
