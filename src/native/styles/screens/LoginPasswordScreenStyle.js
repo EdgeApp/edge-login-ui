@@ -15,6 +15,12 @@ const LoginPasswordScreenStyle = {
     top: vs(55),
     width: hs(260),
     height: vs(376),
+    backgroundColor: Colors.TRANSPARENT
+  },
+  keyboardAvoidContainer: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
     backgroundColor: Colors.OVERLAY_BOX
   },
   innerView: {

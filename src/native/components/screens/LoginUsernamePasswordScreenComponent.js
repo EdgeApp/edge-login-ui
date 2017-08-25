@@ -54,46 +54,47 @@ export default class LandingScreenComponent extends Component {
       )
     }
     return (
-      <View style={LoginPasswordScreenStyle.featureBox}>
-        <LogoImageHeader style={LoginPasswordScreenStyle.logoHeader} />
-        <KeyboardAvoidingView
-          style={LoginPasswordScreenStyle.featureBoxBody}
-          contentContainerStyle={LoginPasswordScreenStyle.featureBoxBody}
-          behavior={'position'}
-          keyboardVerticalOffset={this.state.offset}
-        >
-          {this.renderInterior(LoginPasswordScreenStyle)}
-        </KeyboardAvoidingView>
-      </View>
+      <KeyboardAvoidingView
+        style={LoginPasswordScreenStyle.featureBox}
+        contentContainerStyle={LoginPasswordScreenStyle.keyboardAvoidContainer}
+        behavior={'position'}
+        keyboardVerticalOffset={this.state.offset}
+      >
+        {this.renderInterior(LoginPasswordScreenStyle)}
+      </KeyboardAvoidingView>
     )
   }
   renderInterior (styles) {
     return (
       <View style={styles.innerView}>
-        <FormField
-          style={styles.input}
-          onChangeText={this.updateUsername.bind(this)}
-          value={this.state.username}
-          label={'Username'}
-          returnKeyType={'next'}
-          autoFocus={this.state.focusFirst}
-          forceFocus={this.state.focusFirst}
-          onFocus={this.onfocusOne.bind(this)}
-          onFinish={this.onSetNextFocus.bind(this)}
-        />
-        <FormField
-          style={styles.input}
-          onChangeText={this.updatePassword.bind(this)}
-          value={this.state.password}
-          label={'Password'}
-          error={this.props.error}
-          secureTextEntry
-          returnKeyType={'go'}
-          forceFocus={this.state.focusSecond}
-          onFocus={this.onfocusTwo.bind(this)}
-          onFinish={this.onStartLogin.bind(this)}
-        />
-        {this.renderButtons(styles)}
+        <LogoImageHeader style={styles.logoHeader} />
+        <View style={styles.featureBoxBody}>
+
+          <FormField
+            style={styles.input}
+            onChangeText={this.updateUsername.bind(this)}
+            value={this.state.username}
+            label={'Username'}
+            returnKeyType={'next'}
+            autoFocus={this.state.focusFirst}
+            forceFocus={this.state.focusFirst}
+            onFocus={this.onfocusOne.bind(this)}
+            onFinish={this.onSetNextFocus.bind(this)}
+          />
+          <FormField
+            style={styles.input}
+            onChangeText={this.updatePassword.bind(this)}
+            value={this.state.password}
+            label={'Password'}
+            error={this.props.error}
+            secureTextEntry
+            returnKeyType={'go'}
+            forceFocus={this.state.focusSecond}
+            onFocus={this.onfocusTwo.bind(this)}
+            onFinish={this.onStartLogin.bind(this)}
+          />
+          {this.renderButtons(styles)}
+        </View>
       </View>
     )
   }
