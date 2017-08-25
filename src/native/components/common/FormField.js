@@ -15,14 +15,6 @@ class FormField extends Component {
       autoFocus: this.props.autoFocus
     })
   }
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.autoFocus && !this.props.autoFocus) {
-      this.setState({
-        autoFocus: true
-      })
-    }
-  }
-
   render () {
     const Style = this.props.style
     if (this.props.label === 'Confirm Password') {
@@ -58,6 +50,8 @@ class FormField extends Component {
             returnKeyType={this.props.returnKeyType}
             onSubmitEditing={this.onSubmitEdit.bind(this)}
             autoFocus={this.state.autoFocus}
+            forceFocus={this.props.forceFocus}
+            onFocus={this.props.onFocus}
             label={this.props.label}
           />
         </View>
@@ -127,11 +121,13 @@ FormField.propTypes = {
   placeholder: PropTypes.string,
   autoCorrect: PropTypes.bool,
   autoFocus: PropTypes.bool,
+  forceFocus: PropTypes.bool,
   autoCapitalize: PropTypes.string,
   secureTextEntry: PropTypes.bool,
   showSecureCheckbox: PropTypes.bool,
   error: PropTypes.string,
   onFinish: PropTypes.func,
+  onFocus: PropTypes.func,
   returnKeyType: PropTypes.string
 }
 
@@ -139,7 +135,9 @@ FormField.defaultProps = {
   autoCapitalize: 'none',
   autoCorrect: false,
   autoFocus: false,
-  returnKeyType: 'go'
+  forceFocus: false,
+  returnKeyType: 'go',
+  onFocus: null
 }
 
 export { FormField }

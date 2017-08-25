@@ -1,6 +1,6 @@
 import * as Styles from '../'
 import * as Colors from '../../../common/constants/Colors'
-import { hs, vs } from '../../../common/util'
+import { hs, vs, fontSize } from '../../../common/util'
 const LandingPageScreenStyle = {
   container: Styles.ScreenStyle,
   backgroundImage: {
@@ -40,8 +40,8 @@ const LandingPageScreenStyle = {
   },
   loginButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: Styles.TextOnlyButtonTextUpStyle,
-    downTextStyle: Styles.TextOnlyButtonTextDownStyle,
+    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, fontSize: fontSize(14)},
+    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, fontSize: fontSize(14)},
     downStyle: Styles.TextOnlyButtonDownStyle
   }
 }

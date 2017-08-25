@@ -22,10 +22,9 @@ class Input extends Component {
       })
     }
     if (nextProps.autoFocus && !this.props.autoFocus) {
-      console.log('SENDING THE FOCUS WTF> ')
-      console.log('SENDING THE FOCUS WTF> ')
-      console.log('SENDING THE FOCUS WTF> ')
-      console.log('SENDING THE FOCUS WTF> ')
+      this.textInput.focus()
+    }
+    if (nextProps.forceFocus) {
       this.textInput.focus()
     }
   }
@@ -44,6 +43,8 @@ class Input extends Component {
         autoFocus={this.state.autoFocus}
         returnKeyType={this.props.returnKeyType}
         onSubmitEditing={this.onSubmitEdit.bind(this)}
+        onFocus={this.onFocus.bind(this)}
+        onBlur={this.onBlur.bind(this)}
       />
     )
   }
@@ -64,6 +65,16 @@ class Input extends Component {
     })
     this.props.onChangeText(text)
   }
+  onFocus () {
+    if (this.props.onFocus) {
+      this.props.onFocus()
+    }
+  }
+  onBlur () {
+    if (this.props.onBlur) {
+      this.props.onBlur()
+    }
+  }
 }
 
 Input.propTypes = {
@@ -76,6 +87,8 @@ Input.propTypes = {
   secureTextEntry: PropTypes.bool,
   isError: PropTypes.bool,
   onFinish: PropTypes.func,
+  onFocus: PropTypes.func,
+  forceFocus: PropTypes.bool,
   returnKeyType: PropTypes.string
 }
 
@@ -83,6 +96,7 @@ Input.defaultProps = {
   autoCapitalize: 'none',
   autoCorrect: false,
   autoFocus: false,
+  forceFocus: false,
   returnKeyType: 'default'
 }
 
