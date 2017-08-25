@@ -11,9 +11,12 @@ const ModalStyles = {
     backgroundColor: Colors.BLACK,
     opacity: 0.5
   },
-  box: {
-
-  }
+  modal: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 20
+  },
+  box: {}
 }
 
 export { ModalStyles }

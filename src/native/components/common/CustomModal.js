@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-class Modal extends Component {
+class CustomModal extends Component {
   render () {
     return (
       <View style={this.props.style}>
@@ -11,4 +11,4 @@ class Modal extends Component {
   }
 }
 
-export { Modal }
+export { CustomModal }

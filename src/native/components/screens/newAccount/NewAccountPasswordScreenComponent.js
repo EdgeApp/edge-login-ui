@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
-import { Button, Modal } from '../../common'
+import { Button, CustomModal } from '../../common'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnector'
 import PasswordConnector
@@ -78,7 +78,7 @@ export default class NewAccountPasswordScreenComponent extends Component {
   }
   renderModal (style) {
     if (this.props.workflow.showModal) {
-      return <Modal style={style.modal.container} />
+      return <CustomModal style={style.modal.modal} />
     }
     return null
   }
