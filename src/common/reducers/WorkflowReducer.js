@@ -16,7 +16,7 @@ const initialState = {
   createWF: {
     scenes: 6,
     details: [
-      { back: false, skip: false, title: '', subTitle: '' },
+      { back: true, skip: true, title: 'Choose a username', subTitle: 'step 2/3' },
       {
         back: true,
         skip: false,

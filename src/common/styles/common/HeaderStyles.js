@@ -17,18 +17,24 @@ const HeaderContainerStyle = {
   center: {
     flex: 3,
     justifyContent: 'flex-end',
-    paddingBottom: 10
+    paddingBottom: 5
   },
   right: {
     flex: 1,
     justifyContent: 'space-around' // ,
     // alignItems: 'center'
   },
-  textStyle: {
-    fontSize: fontSize(18),
+  headlineText: {
+    fontSize: fontSize(17),
     width: '100%',
     textAlign: 'center',
     color: Colors.WHITE
+  },
+  subHeadText: {
+    fontSize: fontSize(11),
+    width: '100%',
+    textAlign: 'center',
+    color: Colors.ACCENT_ORANGE
   },
   textButton: {
     upStyle: { ...Styles.TextOnlyButtonUpStyle, width: '100%' },

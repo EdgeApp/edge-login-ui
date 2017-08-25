@@ -11,9 +11,7 @@ class Header extends Component {
         <View style={Style.left}>
           {this.renderBack(Style)}
         </View>
-        <View style={Style.center}>
-          {this.renderText(Style)}
-        </View>
+        {this.renderText(Style)}
         <View style={Style.right}>
           {this.renderSkip(Style)}
         </View>
@@ -36,7 +34,12 @@ class Header extends Component {
     )
   }
   renderText (style) {
-    return <Text style={style.textStyle}>{this.props.title}</Text>
+    return (
+      <View style={style.center}>
+        <Text style={style.subHeadText}>{this.props.subTitle}</Text>
+        <Text style={style.headlineText}>{this.props.title}</Text>
+      </View>
+    )
   }
   renderSkip (style) {
     if (!this.props.showSkipButton) {

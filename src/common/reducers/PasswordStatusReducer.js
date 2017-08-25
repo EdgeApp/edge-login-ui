@@ -5,11 +5,6 @@ export default function (state = null, action) {
     case Constants.AUTH_UPDATE_PASSWORD:
       // action.data.passwordStatus
       const status = action.data.passwordStatus
-      console.log('PASWORD CHECK- WE NEED THIS ')
-      console.log('PASWORD CHECK- WE NEED THIS ')
-      console.log('PASWORD CHECK- WE NEED THIS ')
-      console.log('PASWORD CHECK- WE NEED THIS ')
-      console.log(status)
       var array = [
         { title: 'at least 12 characters', value: !status.tooShort },
         {
