@@ -2,6 +2,7 @@ import { validateEmail, obfuscateUsername } from '../../lib/helper'
 
 export const checkEmail = (address, email, token, accountUsername, callback) => {
   return (dispatch, getState, imports) => {
+    const t = imports.t
     if (!validateEmail(email)) {
       return callback(t('password_recovery_invalid_email'), null)
     }

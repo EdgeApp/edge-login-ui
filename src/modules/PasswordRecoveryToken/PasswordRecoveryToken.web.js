@@ -5,7 +5,6 @@ import Input from 'react-toolbox/lib/input'
 import styles from './PasswordRecoveryToken.webStyle.scss'
 import { checkEmail } from './PasswordRecoveryToken.middleware.js'
 import {
-  setPasswordRecoveryToken,
   changePasswordRecoveryEmail,
   errorPasswordRecoveryEmail,
   finishPasswordRecoveryToken
@@ -42,7 +41,7 @@ class PasswordRecoveryToken extends Component {
             type='text'
             name='firstAnswer'
             label='Email Address'
-            onChange={ value => this.props.dispatch(changePasswordRecoveryEmail(value)) }
+            onChange={value => this.props.dispatch(changePasswordRecoveryEmail(value))}
             className={styles.input}
             error={this.props.error}
             required
@@ -80,6 +79,6 @@ class PasswordRecoveryToken extends Component {
 export default connect(state => ({
   account: state.user,
   token: state.passwordRecoveryToken.token,
-  email: state.passwordRecoveryToken.email
+  email: state.passwordRecoveryToken.email,
   error: state.passwordRecoveryToken.error
 }))(PasswordRecoveryToken)

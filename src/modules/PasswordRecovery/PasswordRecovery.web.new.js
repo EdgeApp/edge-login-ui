@@ -15,7 +15,7 @@ import styles from './PasswordRecovery.webStyle.scss'
 
 class PasswordRecovery extends Component {
   _handleSubmit = () => {
-    const callback = (error) => {
+    const callback = (error, token) => {
       this.props.dispatch(action.clearPasswordRecovery())
       if (error) {
         switch (error.type) {
@@ -29,8 +29,9 @@ class PasswordRecovery extends Component {
             return this.props.dispatch(action.errorSecondAnswer(error.message))
         }
       }
-      if (!error) {
-
+      if (!error && token) {
+        this.props.dispatch(setPasswordRecoveryToken(token))
+        return this.props.dispatch(action.finishPasswordRecovery())
       }
     }
     this.props.dispatch(
