@@ -1,9 +1,37 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Input from 'react-toolbox/lib/input'
 
 import styles from './PasswordRecoveryToken.webStyle.scss'
+import { checkEmail } from './PasswordRecoveryToken.middleware.js'
+import {
+  setPasswordRecoveryToken,
+  changePasswordRecoveryEmail,
+  errorPasswordRecoveryEmail,
+  finishPasswordRecoveryToken
+} from './PasswordRecoveryToken.action.js'
 
-export default class PasswordRecoveryToken extends Component {
+class PasswordRecoveryToken extends Component {
+  _handleSubmit = (address) => {
+    const callback = (error, url) => {
+      if (error) {
+        return this.props.dispatch(errorPasswordRecoveryEmail(error))
+      }
+      if (!error && url) {
+        window.open(url, '_blank')
+        return this.props.dispatch(finishPasswordRecoveryToken())
+      }
+    }
+    this.props.dispatch(
+      checkEmail(
+        address,
+        this.props.email,
+        this.props.token,
+        this.props.account.username,
+        callback
+      )
+    )
+  }
   render () {
     return (
       <div className={styles.container}>
@@ -14,29 +42,31 @@ export default class PasswordRecoveryToken extends Component {
             type='text'
             name='firstAnswer'
             label='Email Address'
+            onChange={ value => this.props.dispatch(changePasswordRecoveryEmail(value)) }
             className={styles.input}
+            error={this.props.error}
             required
           />
         </div>
         <div className={styles.linkRows}>
-          <button className={styles.gmail}>
+          <button className={styles.gmail} onClick={() => this._handleSubmit('google')}>
             <span className={styles.logo} />
             <span className={styles.title}>Send with Gmail</span>
             <span className={styles.logo} />
           </button>
-          <button className={styles.hotmail}>
+          <button className={styles.hotmail} onClick={() => this._handleSubmit('microsoft')}>
             <span className={styles.logo} />
             <span className={styles.title}>Send with Hotmail or Live Mail</span>
             <span className={styles.logo} />
           </button>
         </div>
         <div className={styles.linkRows}>
-          <button className={styles.yahoo}>
+          <button className={styles.yahoo} onClick={() => this._handleSubmit('yahoo')}>
             <span className={styles.logo} />
             <span className={styles.title}>Send with Yahoo</span>
             <span className={styles.logo} />
           </button>
-          <button className={styles.default}>
+          <button className={styles.default} onClick={() => this._handleSubmit('generic')}>
             <span className={styles.logo} />
             <span className={styles.title}>Send with Email App</span>
             <span className={styles.logo} />
@@ -46,3 +76,10 @@ export default class PasswordRecoveryToken extends Component {
     )
   }
 }
+
+export default connect(state => ({
+  account: state.user,
+  token: state.passwordRecoveryToken.token,
+  email: state.passwordRecoveryToken.email
+  error: state.passwordRecoveryToken.error
+}))(PasswordRecoveryToken)

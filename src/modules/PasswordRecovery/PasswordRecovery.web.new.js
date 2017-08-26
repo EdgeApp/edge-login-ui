@@ -7,8 +7,9 @@ import _ from 'lodash'
 import abcctx from '../../lib/web/abcContext'
 import t from '../../lib/web/LocaleStrings'
 
-import * as action from './PasswordRecovery.action'
-import { checkPasswordRecovery } from './PasswordRecovery.middleware'
+import * as action from './PasswordRecovery.action.js'
+import { setPasswordRecoveryToken } from '../PasswordRecoveryToken/PasswordRecoveryToken.action.js'
+import { checkPasswordRecovery } from './PasswordRecovery.middleware.js'
 
 import styles from './PasswordRecovery.webStyle.scss'
 
@@ -27,6 +28,9 @@ class PasswordRecovery extends Component {
           case 'secondAnswer' :
             return this.props.dispatch(action.errorSecondAnswer(error.message))
         }
+      }
+      if (!error) {
+
       }
     }
     this.props.dispatch(

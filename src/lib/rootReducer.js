@@ -16,6 +16,7 @@ import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
 import * as ChangePassword from '../modules/ChangePassword/ChangePassword.reducer'
 import * as ChangePin from '../modules/ChangePin/ChangePin.reducer'
 import * as PasswordRecovery from '../modules/PasswordRecovery/PasswordRecovery.reducer'
+import passwordRecoveryToken from '../modules/PasswordRecoveryToken/PasswordRecoveryToken.reducer.js'
 import * as ForgotPassword from '../modules/ForgotPassword/ForgotPassword.reducer'
 import * as Container from '../modules/Container.reducer'
 import { signupPage } from '../modules/Signup/Signup.reducer'
@@ -147,6 +148,7 @@ const store = combineReducers({
       secondAnswer: PasswordRecovery.errorSecondAnswer
     })
   }),
+  passwordRecoveryToken,
   modal: combineReducers({
     passwordRecovery,
     accountManagementPassword: combineReducers({

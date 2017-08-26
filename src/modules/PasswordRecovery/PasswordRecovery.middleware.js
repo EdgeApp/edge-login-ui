@@ -44,7 +44,6 @@ export const checkPasswordRecovery = (payload, callback) => {
         if (!error) {
           dispatch(setPasswordRecoveryToken(token))
           return callback(null)
-          // return dispatch(showPasswordRecoveryTokenView())
         }
       })
     }
