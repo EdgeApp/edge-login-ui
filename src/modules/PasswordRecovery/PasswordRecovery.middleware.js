@@ -32,7 +32,7 @@ export const checkPasswordRecovery = (payload, callback) => {
         message: t('activity_recovery_error_answer_length')
       }, null)
     }
-    if (!payload.answers[0].length < 4 && !payload.answers[1].length < 4 && !payload.questions[0] === 'Choose a question' && !payload.questions[1] === 'Choose a question') {
+    if (payload.answers[0].length > 3 && payload.answers[1].length > 3 && !payload.questions[0] !== 'Choose a question' && !payload.questions[1] !== 'Choose a question') {
       payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
         dispatch(closeLoading())
         if (error) {

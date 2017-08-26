@@ -42,6 +42,7 @@ class PasswordRecoveryToken extends Component {
             name='firstAnswer'
             label='Email Address'
             onChange={value => this.props.dispatch(changePasswordRecoveryEmail(value))}
+            value={this.props.email}
             className={styles.input}
             error={this.props.error}
             required

@@ -31,7 +31,8 @@ class PasswordRecovery extends Component {
       }
       if (!error && token) {
         this.props.dispatch(setPasswordRecoveryToken(token))
-        return this.props.dispatch(action.finishPasswordRecovery())
+        this.props.dispatch(action.finishPasswordRecovery())
+        return this.props.history.push('/passwordrecoverytoken')
       }
     }
     this.props.dispatch(
@@ -113,6 +114,7 @@ class PasswordRecovery extends Component {
     }
   }
   render () {
+    console.log(this.props)
     return (
       <div className={styles.container}>
         <form onSubmit={e => { e.preventDefault(); this._handleSubmit(e) }}>
