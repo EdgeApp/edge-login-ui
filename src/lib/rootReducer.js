@@ -24,6 +24,7 @@ import { user } from '../modules/User/User.reducer'
 import { passwordRecovery } from '../modules/Modals/PasswordRecovery/PasswordRecovery.reducer.js'
 import * as AccountManagementPassword from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
 import { accountCreated } from '../modules/Modals/AccountCreated/AccountCreated.reducer.js'
+import { passwordRecoverySuccess } from '../modules/Modals/PasswordRecoverySucess/PasswordRecoverySuccess.reducer.js'
 // import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 
 // import routes from './routesReducer'
@@ -157,6 +158,7 @@ const store = combineReducers({
       route: AccountManagementPassword.route,
       error: AccountManagementPassword.error
     }),
+    passwordRecoverySuccess,
     accountCreated
   }),
   forgotPasswordModal: ForgotPassword.visible,

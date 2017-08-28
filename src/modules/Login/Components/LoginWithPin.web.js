@@ -80,6 +80,7 @@ class LoginWithPin extends Component {
         <div className={styles.pinInput}>
           <p className={styles.placeholder}>&#8226;&#8226;&#8226;&#8226;</p>
           <Input
+            autoFocus
             type='password'
             name='password'
             ref={input => { this.pin = input }}

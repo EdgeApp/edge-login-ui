@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Input from 'react-toolbox/lib/input'
+import PasswordRecoveryTokenSuccess from '../Modals/PasswordRecoverySucess/PasswordRecoverySuccess.web.js'
 
 import styles from './PasswordRecoveryToken.webStyle.scss'
 import { checkEmail } from './PasswordRecoveryToken.middleware.js'
@@ -9,6 +10,7 @@ import {
   errorPasswordRecoveryEmail,
   finishPasswordRecoveryToken
 } from './PasswordRecoveryToken.action.js'
+import { openPasswordRecoverySuccessModal, closePasswordRecoverySuccessModal } from '../Modals/PasswordRecoverySucess/PasswordRecoverySuccess.action.js'
 
 class PasswordRecoveryToken extends Component {
   _handleSubmit = (address) => {
@@ -18,7 +20,8 @@ class PasswordRecoveryToken extends Component {
       }
       if (!error && url) {
         window.open(url, '_blank')
-        return this.props.dispatch(finishPasswordRecoveryToken())
+        return this.props.dispatch(openPasswordRecoverySuccessModal())
+        // return this.props.dispatch(finishPasswordRecoveryToken())
       }
     }
     this.props.dispatch(
@@ -30,6 +33,11 @@ class PasswordRecoveryToken extends Component {
         callback
       )
     )
+  }
+  _handleFinish = () => {
+    this.props.dispatch(finishPasswordRecoveryToken())
+    this.props.dispatch(closePasswordRecoverySuccessModal())
+    return this.props.history.push('/account')
   }
   render () {
     return (
@@ -72,6 +80,7 @@ class PasswordRecoveryToken extends Component {
             <span className={styles.logo} />
           </button>
         </div>
+        <PasswordRecoveryTokenSuccess finish={this._handleFinish} />
       </div>
     )
   }
