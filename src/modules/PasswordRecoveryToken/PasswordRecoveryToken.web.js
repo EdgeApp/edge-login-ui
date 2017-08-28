@@ -12,6 +12,11 @@ import {
 } from './PasswordRecoveryToken.action.js'
 import { openPasswordRecoverySuccessModal, closePasswordRecoverySuccessModal } from '../Modals/PasswordRecoverySucess/PasswordRecoverySuccess.action.js'
 
+import yahoo from '../../img/password-recovery/yahoo.png'
+import gmail from '../../img/password-recovery/gmail.png'
+import windows from '../../img/password-recovery/windows.png'
+import mail from '../../img/password-recovery/mail.png'
+
 class PasswordRecoveryToken extends Component {
   _handleSubmit = (address) => {
     const callback = (error, url) => {
@@ -58,24 +63,24 @@ class PasswordRecoveryToken extends Component {
         </div>
         <div className={styles.linkRows}>
           <button className={styles.gmail} onClick={() => this._handleSubmit('google')}>
-            <span className={styles.logo} />
+            <span className={styles.logo} ><img src={gmail} /></span>
             <span className={styles.title}>Send with Gmail</span>
             <span className={styles.logo} />
           </button>
           <button className={styles.hotmail} onClick={() => this._handleSubmit('microsoft')}>
-            <span className={styles.logo} />
-            <span className={styles.title}>Send with Hotmail or Live Mail</span>
-            <span className={styles.logo} />
+            <span className={styles.logoHotmail} ><img src={windows} /></span>
+            <span className={styles.titleHotmail}>Send with Hotmail or Live Mail</span>
+            <span className={styles.spacerHotmail} />
           </button>
         </div>
         <div className={styles.linkRows}>
           <button className={styles.yahoo} onClick={() => this._handleSubmit('yahoo')}>
-            <span className={styles.logo} />
+            <span className={styles.logo} ><img src={yahoo} /></span>
             <span className={styles.title}>Send with Yahoo</span>
             <span className={styles.logo} />
           </button>
           <button className={styles.default} onClick={() => this._handleSubmit('generic')}>
-            <span className={styles.logo} />
+            <span className={styles.logo} ><img src={mail} /></span>
             <span className={styles.title}>Send with Email App</span>
             <span className={styles.logo} />
           </button>

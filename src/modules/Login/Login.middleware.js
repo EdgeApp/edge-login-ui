@@ -29,6 +29,7 @@ export const loginWithPassword = (username, password, callback) => {
           if (!error) {
             localStorage.setItem('lastUser', username)
             dispatch(userLogin(account))
+            dispatch(closeLoading())
             callback(null, account)
           }
         })

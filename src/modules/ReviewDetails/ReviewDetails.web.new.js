@@ -7,9 +7,19 @@ import AccountCreated from '../Modals/AccountCreated/AccountCreated.web.js'
 import styles from './ReviewDetails.webStyle.scss'
 
 import { showSignInDetails, hideSignInDetails } from './ReviewDetails.action'
-import { openAccountCreatedModal } from '../Modals/AccountCreated/AccountCreated.action.js'
+import { openAccountCreatedModal, closeAccountCreatedModal } from '../Modals/AccountCreated/AccountCreated.action.js'
+import { loginWithPassword } from '../Login/Login.middleware'
 
 class Review extends Component {
+  _handleLogin = callback => {
+    this.props.dispatch(
+      loginWithPassword(
+        this.props.details.username,
+        this.props.details.password,
+        callback
+      )
+    )
+  }
   _toggleInfo = () => {
     if (!this.props.view) {
       return this.props.dispatch(showSignInDetails())
@@ -34,13 +44,25 @@ class Review extends Component {
       )
     }
   }
+
   _cancel = () => {
-    if (window.parent.loginCallback) {
-      return window.parent.loginCallback(null, this.props.user)
-    }
-    if (!window.parent.loginCallback) {
-      return this.props.history.push('/account')
-    }
+    this._handleLogin((error, account) => {
+      if(!error) {
+        if (window.parent.loginCallback) {
+          return window.parent.loginCallback(null, account)
+        }
+        if (!window.parent.loginCallback) {
+          return this.props.history.push('/account')
+        }
+      }
+    })
+  }
+  _submit = () => {
+    this._handleLogin((error, account) => {
+      if(!error) {
+        return this.props.history.push('/passwordrecovery')
+      }
+    })
   }
   render () {
     return (
@@ -53,7 +75,7 @@ class Review extends Component {
           { this._renderInfo() }
         </div>
         <button className={styles.primary} onClick={e => this.props.dispatch(openAccountCreatedModal())}>Finish</button>
-        <AccountCreated cancel={this._cancel} submit={e => this.props.history.push('/passwordrecovery')} />
+        <AccountCreated cancel={this._cancel} submit={this._submit} />
       </div>
     )
   }
@@ -61,7 +83,6 @@ class Review extends Component {
 
 export default connect(state => ({
   details: state.reviewDetails.details,
-  user: state.user,
   view: state.reviewDetails.view
 }))(Review)
 
