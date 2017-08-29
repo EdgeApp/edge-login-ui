@@ -18,13 +18,14 @@ import {
   errorPasswordRepeatValue,
   clearPasswordError
 } from './Password.action'
+import { getDetails } from '../ReviewDetails/ReviewDetails.action'
 
 import eyeShow from '../../img/create-account/show-password.png'
 import eyeHide from '../../img/create-account/hide-password.png'
 
 class Password extends Component {
   _handleSubmit = () => {
-    const callback = (error) => {
+    const callback = (error, account) => {
       if (error) {
         if (error.type === 'password') {
           this.props.dispatch(clearPasswordError())
@@ -37,6 +38,13 @@ class Password extends Component {
       }
       if (!error) {
         this.props.dispatch(clearPasswordError())
+        this.props.dispatch(
+          getDetails({
+            username: this.props.username,
+            password: this.props.password,
+            pin: this.props.pin
+          })
+        )
         return this.props.dispatch(changeSignupPage('review'))
       }
     }

@@ -16,6 +16,7 @@ import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
 import * as ChangePassword from '../modules/ChangePassword/ChangePassword.reducer'
 import * as ChangePin from '../modules/ChangePin/ChangePin.reducer'
 import * as PasswordRecovery from '../modules/PasswordRecovery/PasswordRecovery.reducer'
+import passwordRecoveryToken from '../modules/PasswordRecoveryToken/PasswordRecoveryToken.reducer.js'
 import * as ForgotPassword from '../modules/ForgotPassword/ForgotPassword.reducer'
 import * as Container from '../modules/Container.reducer'
 import { signupPage } from '../modules/Signup/Signup.reducer'
@@ -23,6 +24,7 @@ import { user } from '../modules/User/User.reducer'
 import { passwordRecovery } from '../modules/Modals/PasswordRecovery/PasswordRecovery.reducer.js'
 import * as AccountManagementPassword from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
 import { accountCreated } from '../modules/Modals/AccountCreated/AccountCreated.reducer.js'
+import { passwordRecoverySuccess } from '../modules/Modals/PasswordRecoverySucess/PasswordRecoverySuccess.reducer.js'
 // import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 
 // import routes from './routesReducer'
@@ -140,8 +142,14 @@ const store = combineReducers({
     password: PasswordRecovery.password,
     token: PasswordRecovery.token,
     email: PasswordRecovery.email,
-    error: PasswordRecovery.error
+    error: combineReducers({
+      firstQuestion: PasswordRecovery.errorFirstQuestion,
+      secondQuestion: PasswordRecovery.errorSecondQuestion,
+      firstAnswer: PasswordRecovery.errorFirstAnswer,
+      secondAnswer: PasswordRecovery.errorSecondAnswer
+    })
   }),
+  passwordRecoveryToken,
   modal: combineReducers({
     passwordRecovery,
     accountManagementPassword: combineReducers({
@@ -150,6 +158,7 @@ const store = combineReducers({
       route: AccountManagementPassword.route,
       error: AccountManagementPassword.error
     }),
+    passwordRecoverySuccess,
     accountCreated
   }),
   forgotPasswordModal: ForgotPassword.visible,

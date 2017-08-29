@@ -8,8 +8,18 @@ import styles from './ReviewDetails.webStyle.scss'
 
 import { showSignInDetails, hideSignInDetails } from './ReviewDetails.action'
 import { openAccountCreatedModal } from '../Modals/AccountCreated/AccountCreated.action.js'
+import { loginWithPassword } from '../Login/Login.middleware'
 
 class Review extends Component {
+  _handleLogin = callback => {
+    this.props.dispatch(
+      loginWithPassword(
+        this.props.details.username,
+        this.props.details.password,
+        callback
+      )
+    )
+  }
   _toggleInfo = () => {
     if (!this.props.view) {
       return this.props.dispatch(showSignInDetails())
@@ -34,9 +44,10 @@ class Review extends Component {
       )
     }
   }
+
   _cancel = () => {
     if (window.parent.loginCallback) {
-      return window.parent.loginCallback(null, this.props.user)
+      return window.parent.loginCallback(null, this.props.account)
     }
     if (!window.parent.loginCallback) {
       return this.props.history.push('/account')
@@ -61,7 +72,7 @@ class Review extends Component {
 
 export default connect(state => ({
   details: state.reviewDetails.details,
-  user: state.user,
+  account: state.user,
   view: state.reviewDetails.view
 }))(Review)
 

@@ -24,7 +24,9 @@ import styles from './Password.webStyle'
 
 class Password extends Component {
   _handleSubmit = () => {
-    const callback = () => this.props.router.push('/review')
+    const callback = () => {
+      return this.props.router.push('/review')
+    }
     this.props.dispatch(
       checkPassword(
         this.props.password,

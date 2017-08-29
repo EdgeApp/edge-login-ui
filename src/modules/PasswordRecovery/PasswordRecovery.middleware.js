@@ -1,98 +1,47 @@
-import { validateEmail, obfuscateUsername } from '../../lib/helper'
-import t from '../../lib/web/LocaleStrings'
-
-import { setPasswordRecoveryToken, showPasswordRecoveryTokenView, showPasswordRecoveryTokenButton } from './PasswordRecovery.action'
-import { openErrorModal } from '../ErrorModal/ErrorModal.action'
+import { openLoading, closeLoading } from '../Loader/Loader.action'
 
 export const checkPasswordRecovery = (payload, callback) => {
-  const checkAnswersLength = (answers) => answers[0].length < 4 || answers[1].length < 4
-  const checkQuestionsSame = (questions) => questions[0] === questions[1]
-  const checkQuestionsDefault = (questions) => questions[0] === 'Choose a question' || questions[1] === 'Choose a question'
-
   return (dispatch, getState, imports) => {
     const t = imports.t
-    if (checkAnswersLength(payload.answers)) {
-      return callback(t('activity_recovery_error_answer_length'))
+    dispatch(openLoading())
+    if (payload.questions[0] === 'Choose a question') {
+      dispatch(closeLoading())
+      return callback({
+        type: 'firstQuestion',
+        message: t('activity_recovery_pick_questions_alert')
+      }, null)
     }
-    if (checkQuestionsDefault(payload.questions)) {
-      return callback(t('activity_recovery_pick_questions_alert'))
+    if (payload.answers[0].length < 4) {
+      dispatch(closeLoading())
+      return callback({
+        type: 'firstAnswer',
+        message: t('activity_recovery_error_answer_length')
+      }, null)
     }
-    if (checkQuestionsSame(payload.questions)) {
-      return callback(t('activity_recovery_error_questions_different'))
+    if (payload.questions[1] === 'Choose a question') {
+      dispatch(closeLoading())
+      return callback({
+        type: 'secondQuestion',
+        message: t('activity_recovery_pick_questions_alert')
+      }, null)
     }
-
-    payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
-      if (error) {
-        callback(error)
-        return dispatch(openErrorModal(t('server_error_no_connection')))
-      }
-      if (!error) {
-        dispatch(setPasswordRecoveryToken(token))
-        return dispatch(showPasswordRecoveryTokenView())
-      }
-    })
-  }
-}
-
-export const checkEmail = (address, email, token, accountUsername, callback) => {
-  return (dispatch, getState, imports) => {
-    if (validateEmail(email)) {
-      return dispatch(
-        processEmail(
-          address,
-          email,
-          token,
-          accountUsername,
-          callback
-        )
-      )
+    if (payload.answers[1].length < 4) {
+      dispatch(closeLoading())
+      return callback({
+        type: 'secondAnswer',
+        message: t('activity_recovery_error_answer_length')
+      }, null)
     }
-    if (!validateEmail(email)) {
-      return dispatch(openErrorModal(t('password_recovery_invalid_email')))
+    if (payload.answers[0].length > 3 && payload.answers[1].length > 3 && !payload.questions[0] !== 'Choose a question' && !payload.questions[1] !== 'Choose a question') {
+      payload.account.setupRecovery2Questions(payload.questions, payload.answers, (error, token) => {
+        dispatch(closeLoading())
+        if (error) {
+          return callback(t('server_error_no_connection'), null)
+        }
+        if (!error) {
+          return callback(null, token)
+        }
+      })
     }
-  }
-}
-
-const processEmail = (address, email, token, accountUsername, callback) => {
-  return (dispatch, getState, imports) => {
-    const username = obfuscateUsername(accountUsername)
-    const mobileLink = 'iOS\n' + 'airbitz' + '://recovery?token=' + token +
-        '\n\nAndroid\nhttps://recovery.airbitz.co/recovery?token=' + token
-    const to = email
-    let subject = 'Airbitz ' + 'Recovery Token' // this should have a vendors name. Hardcoded Airbitz
-    let body = 'To recover your account, install the ' + 'Airbitz' +
-        ' Mobile App on iOS or Android from https://airbitz.co/app\n\nPlease click one of the links below from a device with ' +
-        'Airbitz' + ' installed to initiate account recovery for username [' + username + '] ' +
-        '\n\n' + mobileLink
-    subject = encodeURI(subject)
-    body = encodeURI(body)
-    body = body.replace('index.html#', 'index.html%23')
-
-    switch (address) {
-      case 'google': {
-        const url = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + to + '&su=' + subject + '&body=' + body
-        callback(url)
-        break
-      }
-      case 'yahoo': {
-        const url = 'http://compose.mail.yahoo.com/?to=' + to + '&subj=' + subject + '&body=' + body
-        callback(url)
-        break
-      }
-      case 'microsoft': {
-        const url = 'https://mail.live.com/default.aspx?rru=compose&to=' + to + '&subject=' + subject + '&body=' + body
-        callback(url)
-        break
-      }
-      case 'generic': {
-        const url = 'mailto:' + to + '?subject=' + subject + '&body=' + body
-        callback(url)
-        break
-      }
-      default:
-        return null
-    }
-
-    return dispatch(showPasswordRecoveryTokenButton())
   }
 }

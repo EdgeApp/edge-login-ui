@@ -16,7 +16,7 @@ class AccountManager extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <p className={styles.header}>Account name: AirbitzAugur</p>
+        <p className={styles.header}>Account name: { this.props.account.username }</p>
         <div className={styles.main}>
           <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal('/changepin'))}>
             <img src={pinIcon} />
@@ -37,4 +37,4 @@ class AccountManager extends Component {
   }
 }
 
-export default connect()(AccountManager)
+export default connect(state => ({ account: state.user }))(AccountManager)
