@@ -26,35 +26,3 @@ export const signupUser = (username, password, pin, callback) => {
     })
   }
 }
-
-// const checkPermissions = () => {
-//   return dispatch => {
-//     checkCameraPermission((errorCamera, camera) => {
-//       if (errorCamera) {
-//         console.log(errorCamera)
-//       }
-//       if (!errorCamera) {
-//         console.log('camera permissions', camera)
-//
-//         checkReadContactPermission((errorContact, contact) => {
-//           if (errorContact) {
-//             console.log(errorContact)
-//           }
-//           if (!errorContact) {
-//             console.log('contact permissions', contact)
-//           }
-//           dispatch(closeLoading())
-//           if (!camera) {
-//             Actions.cameraNotification()
-//           }
-//           if (camera && !contact) {
-//             Actions.contactNotification()
-//           }
-//           if (camera && contact) {
-//             Actions.review()
-//           }
-//         })
-//       }
-//     })
-//   }
-// }
