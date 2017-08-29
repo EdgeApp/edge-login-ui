@@ -33,7 +33,8 @@ const LoginPasswordScreenStyle = {
     height: vs(250),
     width: '100%',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'column-reverse'
   },
   inputsBox: {
     flex: 1,

@@ -4,6 +4,7 @@ import { BackgroundImage, Button, FormField } from '../../components/common'
 import { LogoImageHeader } from '../abSpecific'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
+import * as Offsets from '../../constants'
 
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
@@ -17,7 +18,7 @@ export default class LandingScreenComponent extends Component {
       loggingIn: false,
       focusFirst: true,
       focusSecond: false,
-      offset: -110
+      offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN
     })
   }
   componentWillUnmount () {
@@ -69,18 +70,7 @@ export default class LandingScreenComponent extends Component {
       <View style={styles.innerView}>
         <LogoImageHeader style={styles.logoHeader} />
         <View style={styles.featureBoxBody}>
-
-          <FormField
-            style={styles.input}
-            onChangeText={this.updateUsername.bind(this)}
-            value={this.state.username}
-            label={'Username'}
-            returnKeyType={'next'}
-            autoFocus={this.state.focusFirst}
-            forceFocus={this.state.focusFirst}
-            onFocus={this.onfocusOne.bind(this)}
-            onFinish={this.onSetNextFocus.bind(this)}
-          />
+          {this.renderButtons(styles)}
           <FormField
             style={styles.input}
             onChangeText={this.updatePassword.bind(this)}
@@ -93,7 +83,18 @@ export default class LandingScreenComponent extends Component {
             onFocus={this.onfocusTwo.bind(this)}
             onFinish={this.onStartLogin.bind(this)}
           />
-          {this.renderButtons(styles)}
+          <FormField
+            style={styles.input}
+            onChangeText={this.updateUsername.bind(this)}
+            value={this.state.username}
+            label={'Username'}
+            returnKeyType={'next'}
+            autoFocus={this.state.focusFirst}
+            forceFocus={this.state.focusFirst}
+            onFocus={this.onfocusOne.bind(this)}
+            onFinish={this.onSetNextFocus.bind(this)}
+          />
+
         </View>
       </View>
     )
@@ -135,30 +136,30 @@ export default class LandingScreenComponent extends Component {
     this.setState({
       focusFirst: true,
       focusSecond: false,
-      offset: -110
+      offset: this.props.hasUsers
+        ? Offsets.USERNAME_OFFSET_LOGIN_SCREEN
+        : Offsets.LOGIN_SCREEN_NO_OFFSET
     })
   }
   onfocusTwo () {
     this.setState({
       focusFirst: false,
       focusSecond: true,
-      offset: -80
+      offset: Offsets.PASSWORD_OFFSET_LOGIN_SCREEN
     })
   }
   noFocus () {
-    console.log('WE BLURRED KEYBOARD ')
     this.setState({
       focusFirst: false,
       focusSecond: false,
-      offset: 0
+      offset: Offsets.LOGIN_SCREEN_NO_OFFSET
     })
   }
   onSetNextFocus () {
-    console.log('WE GOT THE SECOND CALL ' + this.state.offset)
     this.setState({
       focusFirst: false,
       focusSecond: true,
-      offset: -80
+      offset: Offsets.PASSWORD_OFFSET_LOGIN_SCREEN
     })
   }
   updateUsername (data) {
