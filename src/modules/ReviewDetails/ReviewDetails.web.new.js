@@ -7,7 +7,7 @@ import AccountCreated from '../Modals/AccountCreated/AccountCreated.web.js'
 import styles from './ReviewDetails.webStyle.scss'
 
 import { showSignInDetails, hideSignInDetails } from './ReviewDetails.action'
-import { openAccountCreatedModal, closeAccountCreatedModal } from '../Modals/AccountCreated/AccountCreated.action.js'
+import { openAccountCreatedModal } from '../Modals/AccountCreated/AccountCreated.action.js'
 import { loginWithPassword } from '../Login/Login.middleware'
 
 class Review extends Component {
@@ -47,7 +47,7 @@ class Review extends Component {
 
   _cancel = () => {
     this._handleLogin((error, account) => {
-      if(!error) {
+      if (!error) {
         if (window.parent.loginCallback) {
           return window.parent.loginCallback(null, account)
         }
@@ -59,7 +59,7 @@ class Review extends Component {
   }
   _submit = () => {
     this._handleLogin((error, account) => {
-      if(!error) {
+      if (!error) {
         return this.props.history.push('/passwordrecovery')
       }
     })

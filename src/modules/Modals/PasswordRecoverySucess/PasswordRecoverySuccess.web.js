@@ -20,10 +20,12 @@ class PasswordRecovery extends Component {
         <p className={styles.text}>
           Please ensure you retain a copy of the email you sent to yourself. Use the link in the email to recover yoru account if your password is forgotten.
         </p>
-        <div className={styles.rowButtons}>
-          <button className={styles.secondary} onClick={e => this.props.dispatch(closePasswordRecoverySuccessModal())}>Email More</button>
-          <button className={styles.primary} onClick={this.props.finish}>Finish</button>
-        </div>
+        <button className={styles.primary} onClick={this.props.finish}>Done</button>
+        <p className={styles.cancel}>
+          Didn’t get an email or need to send it again?
+          <br />
+          <span className={styles.link} onClick={e => this.props.dispatch(closePasswordRecoverySuccessModal())}>Go back to the previous screen</span>
+        </p>
       </Modal>
     )
   }
