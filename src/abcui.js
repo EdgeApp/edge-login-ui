@@ -46,8 +46,6 @@ export function makeABCUIContext (args) {
   return new UIContext(args)
 }
 
-export { makeContext }
-
 class UIContext {
   constructor (args) {
     const opts = {}
