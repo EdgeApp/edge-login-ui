@@ -1,6 +1,6 @@
 import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
-import { getDetails } from '../ReviewDetails/ReviewDetails.action'
+import { loginWithPassword } from '../Login/Login.middleware.js'
 
 export const signupUser = (username, password, pin, callback) => {
   return (dispatch, getState, imports) => {
@@ -14,14 +14,13 @@ export const signupUser = (username, password, pin, callback) => {
           return dispatch(openErrorModal(t('activity_signup_failed') + ': ' + err.message))
         }
         if (!err) {
-          dispatch(
-            getDetails({
-              username: username,
-              password: password,
-              pin: pin
-            })
+          return dispatch(
+            loginWithPassword(
+              username,
+              password,
+              callback
+            )
           )
-          return callback(null)
         }
       })
     })

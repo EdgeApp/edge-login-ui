@@ -46,23 +46,12 @@ class Review extends Component {
   }
 
   _cancel = () => {
-    this._handleLogin((error, account) => {
-      if (!error) {
-        if (window.parent.loginCallback) {
-          return window.parent.loginCallback(null, account)
-        }
-        if (!window.parent.loginCallback) {
-          return this.props.history.push('/account')
-        }
-      }
-    })
-  }
-  _submit = () => {
-    this._handleLogin((error, account) => {
-      if (!error) {
-        return this.props.history.push('/passwordrecovery')
-      }
-    })
+    if (window.parent.loginCallback) {
+      return window.parent.loginCallback(null, this.props.account)
+    }
+    if (!window.parent.loginCallback) {
+      return this.props.history.push('/account')
+    }
   }
   render () {
     return (
@@ -75,7 +64,7 @@ class Review extends Component {
           { this._renderInfo() }
         </div>
         <button className={styles.primary} onClick={e => this.props.dispatch(openAccountCreatedModal())}>Finish</button>
-        <AccountCreated cancel={this._cancel} submit={this._submit} />
+        <AccountCreated cancel={this._cancel} submit={e => this.props.history.push('/passwordrecovery')} />
       </div>
     )
   }
@@ -83,6 +72,7 @@ class Review extends Component {
 
 export default connect(state => ({
   details: state.reviewDetails.details,
+  account: state.user,
   view: state.reviewDetails.view
 }))(Review)
 
