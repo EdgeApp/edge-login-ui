@@ -14,6 +14,7 @@ export const mapStateToProps = (state, ownProps) => {
     auth: state.login,
     loginSuccess: state.login.loginSuccess,
     workflow: state.workflow,
+    username: state.login.username,
     error: state.login.errorMessage,
     previousUsers: state.previousUsers.userList,
     usernameList: state.previousUsers.usernameOnlyList,
@@ -27,7 +28,9 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
     userLogin: data => dispatch(action.userLogin(data)),
     gotoCreatePage: () =>
       dispatch(action.startWorkflow(Constants.WORKFLOW_CREATE)),
-    onForgotPassword: () => dispatch(action.testAction())
+    onForgotPassword: () => dispatch(action.testAction()),
+    clearLogin: () => dispatch(action.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, '')),
+    updateUsername: (data) => dispatch(action.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data))
   }
 }
 

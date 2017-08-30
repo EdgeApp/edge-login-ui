@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, KeyboardAvoidingView, Keyboard } from 'react-native'
-import {
-  BackgroundImage,
-  Button,
-  FormField,
-  FormFieldWithDropComponent
-} from '../../components/common'
+import { BackgroundImage, Button, FormField } from '../../components/common'
+import UsernameDropConnector
+  from '../../connectors/componentConnectors/UsernameDropConnector'
 import { LogoImageHeader, UserListItem } from '../abSpecific'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
@@ -13,6 +10,7 @@ import * as Offsets from '../../constants'
 
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
+    this.props.clearLogin()
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       this.noFocus.bind(this)
@@ -108,12 +106,9 @@ export default class LandingScreenComponent extends Component {
       )
     }
     return (
-      <FormFieldWithDropComponent
+      <UsernameDropConnector
         style={styles.inputWithDrop}
         onChangeText={this.updateUsername.bind(this)}
-        value={this.state.username}
-        label={'Username'}
-        returnKeyType={'next'}
         autoFocus={this.state.focusFirst}
         forceFocus={this.state.focusFirst}
         onFocus={this.onfocusOne.bind(this)}
@@ -123,22 +118,16 @@ export default class LandingScreenComponent extends Component {
       />
     )
   }
-  renderItems (item) {
-    const { PinLoginScreenStyle } = this.props.styles
-    return (
+  renderItems (style, dataList) {
+    return dataList.map(Item => (
       <UserListItem
-        key={'key ' + item}
-        data={item}
-        style={PinLoginScreenStyle.listItem}
+        key={'key ' + Item}
+        data={Item}
+        style={style}
         onClick={this.selectUser.bind(this)}
       />
-    )
+    ))
   }
-  selectUser (user) {
-    console.log('select user ')
-    console.log(user)
-  }
-
   renderButtons (style) {
     return (
       <View style={style.buttonsBox}>
@@ -172,6 +161,7 @@ export default class LandingScreenComponent extends Component {
     )
   }
   onfocusOne () {
+    console.log('THIS IS ON FOCUS ONE WHATCHAY NOW ')
     this.setState({
       focusFirst: true,
       focusSecond: false,
@@ -201,10 +191,12 @@ export default class LandingScreenComponent extends Component {
       offset: Offsets.PASSWORD_OFFSET_LOGIN_SCREEN
     })
   }
+  selectUser (user) {
+    this.onSetNextFocus()
+    this.updateUsername(user)
+  }
   updateUsername (data) {
-    this.setState({
-      username: data
-    })
+    this.props.updateUsername(data)
   }
   updatePassword (data) {
     this.setState({
@@ -219,7 +211,7 @@ export default class LandingScreenComponent extends Component {
       loggingIn: true
     })
     this.props.userLogin({
-      username: this.state.username,
+      username: this.props.username,
       password: this.state.password
     })
   }

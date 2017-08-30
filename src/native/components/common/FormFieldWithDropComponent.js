@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 // import * as Colors from '../../../common/constants/Colors'
-import { View, Text, Keyboard } from 'react-native'
+import { View, Text } from 'react-native'
 import { Input } from './'
-import { UserListItem } from '../abSpecific'
 class FormFieldWithDropComponent extends Component {
   componentWillMount () {
+    console.log('WILL MOUNT ' + this.props.forceFocus)
     const secure = this.props.secureTextEntry
       ? this.props.secureTextEntry
       : false
@@ -15,6 +15,7 @@ class FormFieldWithDropComponent extends Component {
     })
   }
   componentWillReceiveProps (nextProps) {
+    console.log('Recieve Props ' + nextProps.forceFocus)
     this.setState({
       isFocused: nextProps.forceFocus
     })
@@ -56,34 +57,16 @@ class FormFieldWithDropComponent extends Component {
       </View>
     )
   }
-  dropMe () {
-    console.log('HERE WE GO ')
-    Keyboard.dismiss()
-  }
   renderDropList (style) {
+    console.log('ARE WE FOCUSED ' + this.state.isFocused)
     if (this.state.isFocused) {
       return (
         <View style={style.searchContainer}>
-          {this.renderUserList(style)}
+          {this.props.getListItemsFunction(style.listItem, this.props.dataList)}
         </View>
       )
     }
     return null
-  }
-  renderUserList (style) {
-    return this.props.dataList.map(Item => (
-      <UserListItem
-        key={'key ' + Item}
-        data={Item}
-        style={style.listItem}
-        onClick={this.selectUser.bind(this)}
-      />
-    ))
-  }
-
-  selectUser (arg) {
-    console.log('HERE WE ARE USER ')
-    console.log(arg)
   }
 
   renderLabel () {
