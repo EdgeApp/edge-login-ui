@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, KeyboardAvoidingView, Keyboard } from 'react-native'
-import { BackgroundImage, Button, FormField } from '../../components/common'
-import { LogoImageHeader } from '../abSpecific'
+import {
+  BackgroundImage,
+  Button,
+  FormField,
+  FormFieldWithDropComponent
+} from '../../components/common'
+import { LogoImageHeader, UserListItem } from '../abSpecific'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 import * as Offsets from '../../constants'
@@ -39,9 +44,9 @@ export default class LandingScreenComponent extends Component {
         <BackgroundImage
           src={Assets.LOGIN_BACKGROUND}
           style={LoginPasswordScreenStyle.backgroundImage}
-        >
-          {this.renderOverImage()}
-        </BackgroundImage>
+          enableTouch={false}
+          content={this.renderOverImage()}
+        />
       </View>
     )
   }
@@ -83,21 +88,57 @@ export default class LandingScreenComponent extends Component {
             onFocus={this.onfocusTwo.bind(this)}
             onFinish={this.onStartLogin.bind(this)}
           />
-          <FormField
-            style={styles.input}
-            onChangeText={this.updateUsername.bind(this)}
-            value={this.state.username}
-            label={'Username'}
-            returnKeyType={'next'}
-            autoFocus={this.state.focusFirst}
-            forceFocus={this.state.focusFirst}
-            onFocus={this.onfocusOne.bind(this)}
-            onFinish={this.onSetNextFocus.bind(this)}
-          />
-
+          {this.renderUsername(styles)}
         </View>
       </View>
     )
+  }
+  renderUsername (styles) {
+    if (this.props.previousUsers.length < 1) {
+      return (
+        <FormField
+          style={styles.inputWithDrop}
+          onChangeText={this.updateUsername.bind(this)}
+          value={this.state.username}
+          label={'Username'}
+          returnKeyType={'next'}
+          autoFocus={this.state.focusFirst}
+          forceFocus={this.state.focusFirst}
+          onFocus={this.onfocusOne.bind(this)}
+          onFinish={this.onSetNextFocus.bind(this)}
+        />
+      )
+    }
+    return (
+      <FormFieldWithDropComponent
+        style={styles.inputWithDrop}
+        onChangeText={this.updateUsername.bind(this)}
+        value={this.state.username}
+        label={'Username'}
+        returnKeyType={'next'}
+        autoFocus={this.state.focusFirst}
+        forceFocus={this.state.focusFirst}
+        onFocus={this.onfocusOne.bind(this)}
+        onFinish={this.onSetNextFocus.bind(this)}
+        getListItemsFunction={this.renderItems.bind(this)}
+        dataList={this.props.usernameList}
+      />
+    )
+  }
+  renderItems (item) {
+    const { PinLoginScreenStyle } = this.props.styles
+    return (
+      <UserListItem
+        key={'key ' + item}
+        data={item}
+        style={PinLoginScreenStyle.listItem}
+        onClick={this.selectUser.bind(this)}
+      />
+    )
+  }
+  selectUser (user) {
+    console.log('select user ')
+    console.log(user)
   }
 
   renderButtons (style) {
@@ -149,11 +190,11 @@ export default class LandingScreenComponent extends Component {
     })
   }
   noFocus () {
-    this.setState({
+    /* this.setState({
       focusFirst: false,
       focusSecond: false,
       offset: Offsets.LOGIN_SCREEN_NO_OFFSET
-    })
+    }) */
   }
   onSetNextFocus () {
     this.setState({

@@ -16,6 +16,8 @@ export const mapStateToProps = (state, ownProps) => {
     workflow: state.workflow,
     error: state.login.errorMessage,
     previousUsers: state.previousUsers.userList,
+    usernameList: state.previousUsers.usernameOnlyList,
+    filteredUsernameList: state.previousUsers.filteredUsernameList,
     hasUsers: pv
   }
 }

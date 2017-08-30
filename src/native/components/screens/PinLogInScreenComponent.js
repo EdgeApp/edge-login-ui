@@ -24,9 +24,8 @@ export default class PinLogInScreenComponent extends Component {
         <BackgroundImage
           src={Assets.LOGIN_BACKGROUND}
           style={PinLoginScreenStyle.backgroundImage}
-        >
-          {this.renderOverImage()}
-        </BackgroundImage>
+          content={this.renderOverImage()}
+        />
       </View>
     )
   }

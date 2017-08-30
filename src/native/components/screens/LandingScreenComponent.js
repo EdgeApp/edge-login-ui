@@ -13,9 +13,8 @@ export default class LandingScreenComponent extends Component {
         <BackgroundImage
           src={Assets.LOGIN_BACKGROUND}
           style={LandingPageScreenStyle.backgroundImage}
-        >
-          {this.renderOverImage()}
-        </BackgroundImage>
+          content={this.renderOverImage()}
+        />
       </View>
     )
   }

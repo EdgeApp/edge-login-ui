@@ -30,6 +30,8 @@ export function getPreviousUsers (context) {
       let focusUser = username || data.lastUser
       if (data.lastUser) {
         data.usersWithPinList = []
+        data.usernameOnlyList = []
+        data.filteredUsernameList = []
         data.userList.forEach(function (element) {
           if (element.username === focusUser) {
             data.lastUser = {
@@ -40,6 +42,8 @@ export function getPreviousUsers (context) {
           if (element.pinEnabled) {
             data.usersWithPinList.push(element.username)
           }
+          data.usernameOnlyList.push(element.username)
+          data.filteredUsernameList.push(element.username)
         }, this)
       }
       dispatch(dispatchActionWithData(Constants.SET_PREVIOUS_USERS, data))
