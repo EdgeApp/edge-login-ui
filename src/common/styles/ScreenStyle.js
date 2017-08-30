@@ -21,8 +21,7 @@ const Shim = {
 const BackgroundScreenImageStyle = {
   flex: 1,
   width: null,
-  height: null,
-  resizeMode: 'stretch'
+  height: null
 }
 
 const PageContainerWithHeaderStyle = {
