@@ -125,8 +125,12 @@ export default class LandingScreenComponent extends Component {
         data={Item}
         style={style}
         onClick={this.selectUser.bind(this)}
+        onDelete={this.onDelete.bind(this)}
       />
     ))
+  }
+  onDelete (user) {
+    console.log('DELETE THIS USER ' + user)
   }
   renderButtons (style) {
     return (
@@ -161,7 +165,6 @@ export default class LandingScreenComponent extends Component {
     )
   }
   onfocusOne () {
-    console.log('THIS IS ON FOCUS ONE WHATCHAY NOW ')
     this.setState({
       focusFirst: true,
       focusSecond: false,
@@ -178,11 +181,11 @@ export default class LandingScreenComponent extends Component {
     })
   }
   noFocus () {
-    /* this.setState({
+    this.setState({
       focusFirst: false,
       focusSecond: false,
       offset: Offsets.LOGIN_SCREEN_NO_OFFSET
-    }) */
+    })
   }
   onSetNextFocus () {
     this.setState({

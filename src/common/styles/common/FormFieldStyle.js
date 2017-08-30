@@ -1,6 +1,7 @@
 import * as Colors from '../../../common/constants/Colors'
 import { hs, vs, fontSize } from '../../util'
 import { BasicCheckBoxWithLabelAlignRight } from './CheckboxStyles'
+import * as Styles from '../'
 
 const FormFieldStyle = {
   container: {
@@ -88,7 +89,14 @@ const FormFieldWithDropStyle = {
       },
       text: {
         paddingLeft: 20,
-        color: Colors.PRIMARY
+        color: Colors.PRIMARY,
+        width: '90%'
+      },
+      deleteButton: {
+        upStyle: Styles.TextOnlyButtonUpStyle,
+        upTextStyle: Styles.TextOnlyButtonTextUpStyle,
+        downTextStyle: Styles.TextOnlyButtonTextDownStyle,
+        downStyle: Styles.TextOnlyButtonDownStyle
       }
     },
     inputStyle: {
