@@ -130,7 +130,8 @@ export default class LandingScreenComponent extends Component {
     ))
   }
   onDelete (user) {
-    console.log('DELETE THIS USER ' + user)
+    // console.log('DELETE THIS USER ' + user)
+    this.props.deleteUserFromDevice(user)
   }
   renderButtons (style) {
     return (
