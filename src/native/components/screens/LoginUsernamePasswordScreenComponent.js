@@ -38,13 +38,11 @@ export default class LandingScreenComponent extends Component {
   }
   render () {
     const { LoginPasswordScreenStyle } = this.props.styles
-    console.log('RENDER')
     return (
       <View style={LoginPasswordScreenStyle.container}>
         <BackgroundImage
           src={Assets.LOGIN_BACKGROUND}
           style={LoginPasswordScreenStyle.backgroundImage}
-          enableTouch={false}
           content={this.renderOverImage()}
         />
       </View>

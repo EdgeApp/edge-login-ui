@@ -1,6 +1,7 @@
 import * as Colors from '../../../common/constants/Colors'
 import { hs, vs, fontSize } from '../../util'
 import { BasicCheckBoxWithLabelAlignRight } from './CheckboxStyles'
+
 const FormFieldStyle = {
   container: {
     position: 'relative',
@@ -66,7 +67,8 @@ const FormFieldWithDropStyle = {
       borderBottomWidth: 1,
       flex: 1,
       width: '100%',
-      alignItems: 'center'
+      alignItems: 'center',
+      flexDirection: 'row'
     },
     searchContainer: {
       flex: 3,
@@ -76,17 +78,24 @@ const FormFieldWithDropStyle = {
       color: Colors.PRIMARY,
       fontSize: fontSize(11)
     },
+    listItem: {
+      container: {
+        height: vs(40),
+        width: '100%',
+        backgroundColor: Colors.WHITE,
+        flexDirection: 'row',
+        alignItems: 'center'
+      },
+      text: {
+        paddingLeft: 20,
+        color: Colors.PRIMARY
+      }
+    },
     inputStyle: {
       fontSize: fontSize(17),
       height: '100%',
       width: '100%',
       color: Colors.GRAY_1
-    },
-    listView: {
-      position: 'relative',
-      height: '100%',
-      width: '100%',
-      backgroundColor: Colors.ACCENT_ORANGE
     }
   },
   container: {

@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 // import * as Colors from '../../../common/constants/Colors'
-import { View, Text } from 'react-native'
-import { Input, ScrollingList } from './'
+import { View, Text, Keyboard } from 'react-native'
+import { Input } from './'
+import { UserListItem } from '../abSpecific'
 class FormFieldWithDropComponent extends Component {
   componentWillMount () {
     const secure = this.props.secureTextEntry
@@ -55,21 +56,34 @@ class FormFieldWithDropComponent extends Component {
       </View>
     )
   }
+  dropMe () {
+    console.log('HERE WE GO ')
+    Keyboard.dismiss()
+  }
   renderDropList (style) {
     if (this.state.isFocused) {
-      console.log('STYLE WRF T ')
-      console.log(style.listView)
       return (
         <View style={style.searchContainer}>
-          <ScrollingList
-            style={style.listView}
-            getListItemsFunction={this.props.getListItemsFunction}
-            dataList={this.props.dataList}
-          />
+          {this.renderUserList(style)}
         </View>
       )
     }
     return null
+  }
+  renderUserList (style) {
+    return this.props.dataList.map(Item => (
+      <UserListItem
+        key={'key ' + Item}
+        data={Item}
+        style={style.listItem}
+        onClick={this.selectUser.bind(this)}
+      />
+    ))
+  }
+
+  selectUser (arg) {
+    console.log('HERE WE ARE USER ')
+    console.log(arg)
   }
 
   renderLabel () {
