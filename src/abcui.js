@@ -97,17 +97,17 @@ class UIContext {
     }
   }
 
+  getABCContext () {
+    return this.abcContext
+  }
+
   openLoginWindow (callback) {
     const frame = createIFrame(this.assetsPath + '/index.html')
-    const done = () => {
-      DomWindow.loginCallback = null
-      removeIFrame(frame)
-    }
     DomWindow.loginCallback = function (error, account) {
       if (account) {
         DomWindow.abcAccount = account
         callback(error, account)
-        done()
+        removeIFrame(frame)
       }
     }
     DomWindow.exitCallback = function () {
@@ -115,42 +115,9 @@ class UIContext {
     }
   }
 
-  getABCContext () {
-    return this.abcContext
-  }
-
-  openRecoveryWindow (callback) {
-    createIFrame(this.assetsPath + '/index.html#/recovery')
-  }
-
-  openSetupRecoveryWindow (account, opts, callback) {
-    let frame
-    if (opts && opts.noRequirePassword) {
-      frame = createIFrame(
-        this.assetsPath + '/index.html#/account/setuprecovery-nopassword'
-      )
-    } else {
-      frame = createIFrame(
-        this.assetsPath + '/index.html#/account/setuprecovery'
-      )
-    }
-    DomWindow.exitCallback = function () {
-      removeIFrame(frame)
-    }
-  }
-
-  openChangePinEdgeLoginWindow (account, callback) {
-    const frame = createIFrame(
-      this.assetsPath + '/index.html#/account/changepin-edge-login'
-    )
-    DomWindow.exitCallback = function () {
-      removeIFrame(frame)
-    }
-  }
-
   openManageWindow (account, callback) {
     DomWindow.abcAccount = account
-    const frame = createIFrame(this.assetsPath + '/index.html#/home/')
+    const frame = createIFrame(this.assetsPath + '/index.html#/account/')
     DomWindow.exitCallback = function () {
       removeIFrame(frame)
       callback(null)
