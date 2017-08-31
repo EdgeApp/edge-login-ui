@@ -4,6 +4,9 @@ const translations = {
   },
   login: {
     en_us: 'Login'
+  },
+  create_account: {
+    en_us: 'Create an account'
   }
 }
 

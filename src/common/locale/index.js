@@ -9,8 +9,12 @@ function setLocal (arg, arg2) {
   // region = arg
 }
 
-function localize (arg) {
-  return translations[arg][language]
+function localize (arg, array = null) {
+  let string = translations[arg][language]
+  if (array.length > 0) {
+    // this is where we sfprint the string swaps with a try catch
+  }
+  return string
 }
 
 export { localize, KEYS, setLocal }
