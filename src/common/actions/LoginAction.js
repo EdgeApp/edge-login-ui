@@ -47,6 +47,10 @@ export function userLoginWithPin (data) {
                 e.message
               )
             )
+            callback(e.message, null)
+          })
+          .then((response) => {
+            callback(null, response)
           })
       }, 300)
     }
@@ -80,6 +84,10 @@ export function userLogin (data) {
               e.message
             )
           )
+          callback(e.message, null)
+        })
+        .then((response) => {
+          callback(null, response)
         })
     }, 300)
   }
