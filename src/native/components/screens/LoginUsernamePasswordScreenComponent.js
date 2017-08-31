@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import { View, Text, KeyboardAvoidingView, Keyboard } from 'react-native'
-import { BackgroundImage, Button, FormField } from '../../components/common'
+import {
+  BackgroundImage,
+  Button,
+  FormField,
+  CustomModal
+} from '../../components/common'
 import UsernameDropConnector
   from '../../connectors/componentConnectors/UsernameDropConnector'
 import { LogoImageHeader, UserListItem } from '../abSpecific'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 import * as Offsets from '../../constants'
+import DeleteUserConnector
+  from '../../../native/connectors/abSpecific/DeleteUserConnector'
 
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
@@ -63,6 +70,7 @@ export default class LandingScreenComponent extends Component {
         keyboardVerticalOffset={this.state.offset}
       >
         {this.renderInterior(LoginPasswordScreenStyle)}
+        {this.renderModal(LoginPasswordScreenStyle)}
       </KeyboardAvoidingView>
     )
   }
@@ -131,7 +139,11 @@ export default class LandingScreenComponent extends Component {
   }
   onDelete (user) {
     // console.log('DELETE THIS USER ' + user)
-    this.props.deleteUserFromDevice(user)
+    // this.props.deleteUserFromDevice(user)
+    this.setState({
+      username: user
+    })
+    this.props.launchDeleteModal()
   }
   renderButtons (style) {
     return (
@@ -165,6 +177,20 @@ export default class LandingScreenComponent extends Component {
       </View>
     )
   }
+  renderModal (style) {
+    if (this.props.showModal) {
+      return (
+        <CustomModal style={style.modal}>
+          <DeleteUserConnector
+            style={style.modal.skip}
+            username={this.state.username}
+          />
+        </CustomModal>
+      )
+    }
+    return null
+  }
+
   onfocusOne () {
     this.setState({
       focusFirst: true,

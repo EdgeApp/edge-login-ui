@@ -70,6 +70,8 @@ const initialState = {
 export default function (state = initialState, action) {
   let nextIndex
   switch (action.type) {
+    case Constants.SET_PREVIOUS_USERS:
+      return { ...state, showModal: false, modalView: null }
     case Constants.WORKFLOW_START:
       return { ...state, currentKey: action.data, currentSceneIndex: 0 }
     case Constants.WORKFLOW_BACK:
@@ -84,9 +86,11 @@ export default function (state = initialState, action) {
         nextIndex = state.currentSceneIndex
       }
       return { ...state, currentSceneIndex: nextIndex, showModal: false }
+    case Constants.WORKFLOW_LAUNCH_MODAL:
+      return { ...state, showModal: true }
     case Constants.WORKFLOW_SKIP:
       return { ...state, showModal: true, modalView: action.data }
-    case Constants.WORKFLOW_CANCEL_SKIP:
+    case Constants.WORKFLOW_CANCEL_MODAL:
       return { ...state, showModal: false, modalView: null }
     default:
       return state

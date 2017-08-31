@@ -21,6 +21,7 @@ export default function (state = null, action) {
 
       // get the character at
       return { ...state, filteredUsernameList: tempArray }
+
     case Constants.SET_PREVIOUS_USERS:
       return action.data
 

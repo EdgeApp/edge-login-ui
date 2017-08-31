@@ -8,7 +8,8 @@ export const WORKFLOW_FINGERPRINT = 'fingerprintWF'
 
 export const WORKFLOW_START = 'workflowStart'
 export const WORKFLOW_SKIP = 'workflowSkip'
-export const WORKFLOW_CANCEL_SKIP = 'workflowCancelSkip'
+export const WORKFLOW_LAUNCH_MODAL = 'workflowLaunchModal'
+export const WORKFLOW_CANCEL_MODAL = 'workflowCancelSkip'
 export const WORKFLOW_BACK = 'workflowBack'
 export const WORKFLOW_NEXT = 'workflowNext'
 

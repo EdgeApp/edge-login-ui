@@ -15,7 +15,6 @@ class FormFieldWithDropComponent extends Component {
     })
   }
   componentWillReceiveProps (nextProps) {
-    console.log('Recieve Props ' + nextProps.forceFocus)
     this.setState({
       isFocused: nextProps.forceFocus
     })
@@ -58,7 +57,6 @@ class FormFieldWithDropComponent extends Component {
     )
   }
   renderDropList (style) {
-    console.log('ARE WE FOCUSED ' + this.state.isFocused)
     if (this.state.isFocused) {
       return (
         <View style={style.searchContainer}>

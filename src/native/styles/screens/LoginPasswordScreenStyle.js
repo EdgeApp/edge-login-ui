@@ -65,7 +65,8 @@ const LoginPasswordScreenStyle = {
     upTextStyle: Styles.TextOnlyButtonTextUpStyle,
     downTextStyle: Styles.TextOnlyButtonTextDownStyle,
     downStyle: Styles.TextOnlyButtonDownStyle
-  }
+  },
+  modal: Styles.SkipModalStyle
 }
 
 export { LoginPasswordScreenStyle }

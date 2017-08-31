@@ -19,7 +19,8 @@ export const mapStateToProps = (state, ownProps) => {
     previousUsers: state.previousUsers.userList,
     usernameList: state.previousUsers.usernameOnlyList,
     filteredUsernameList: state.previousUsers.filteredUsernameList,
-    hasUsers: pv
+    hasUsers: pv,
+    showModal: state.workflow.showModal
   }
 }
 
@@ -29,9 +30,17 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
     gotoCreatePage: () =>
       dispatch(action.startWorkflow(Constants.WORKFLOW_CREATE)),
     onForgotPassword: () => dispatch(action.testAction()),
-    clearLogin: () => dispatch(action.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, '')),
-    updateUsername: (data) => dispatch(action.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data)),
-    deleteUserFromDevice: (data) => dispatch(action.deleteUserFromDevice(data))
+    clearLogin: () =>
+      dispatch(
+        action.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, '')
+      ),
+    updateUsername: data =>
+      dispatch(
+        action.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data)
+      ),
+    deleteUserFromDevice: data => dispatch(action.deleteUserFromDevice(data)),
+    launchDeleteModal: () =>
+      dispatch(action.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL))
   }
 }
 

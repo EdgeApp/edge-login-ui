@@ -22,7 +22,7 @@ export function skipStep (data) {
 
 export function cancelSkipStep () {
   return {
-    type: Constants.WORKFLOW_CANCEL_SKIP
+    type: Constants.WORKFLOW_CANCEL_MODAL
   }
 }
 
