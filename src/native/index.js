@@ -5,9 +5,11 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import LoginAppConnector from './connectors/LogInAppConnector'
 import * as Styles from './styles/'
+import {setLocal} from '../common/locale'
 
 export class LoginScreen extends Component {
   componentWillMount () {
+    setLocal(this.props.locale, this.props.language)
     this.store = createStore(
       reducers,
       {},
@@ -50,7 +52,7 @@ LoginScreen.propTypes = {
 
 LoginScreen.defaultProps = {
   locale: 'US',
-  language: 'us-en',
+  language: 'en_us',
   username: null,
   accountOptions: null
 }

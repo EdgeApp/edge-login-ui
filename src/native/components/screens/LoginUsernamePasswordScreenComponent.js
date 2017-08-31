@@ -14,6 +14,7 @@ import * as Assets from '../../assets/'
 import * as Offsets from '../../constants'
 import DeleteUserConnector
   from '../../../native/connectors/abSpecific/DeleteUserConnector'
+import {localize, KEYS} from '../../../common/locale'
 
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
@@ -158,7 +159,7 @@ export default class LandingScreenComponent extends Component {
         />
         <Button
           onPress={this.onStartLogin.bind(this)}
-          label={'Login'}
+          label={localize(KEYS.BUTTONS.LOGIN)}
           downStyle={style.loginButton.downStyle}
           downTextStyle={style.loginButton.downTextStyle}
           upStyle={style.loginButton.upStyle}
