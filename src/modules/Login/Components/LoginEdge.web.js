@@ -16,9 +16,8 @@ class LoginEdge extends Component {
   }
 
   componentDidMount () {
-    const { dispatch } = this.props
-    // if (!edgeId) {
-    dispatch(
+    // console.log('mounted')
+    this.props.dispatch(
         edgeLogin((error, account) => {
           if (!error) {
             if (window.parent.loginCallback) {
@@ -26,12 +25,11 @@ class LoginEdge extends Component {
             }
             if (!window.parent.loginCallback) {
               this.props.dispatch(closeLoading())
-              return this.props.router.push('/home')
+              return this.props.router.push('/account')
             }
           }
         })
       )
-    // }
   }
 
   renderBarcode () {
