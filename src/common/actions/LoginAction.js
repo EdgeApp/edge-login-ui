@@ -22,13 +22,14 @@ export function userLoginWithPin (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context
     let callback = imports.callback
+    let accountOptions = imports.accountOptions
     dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PIN, data.pin))
     if (data.pin.length === 4) {
       console.log('USER LOGIN WITH PIN ')
       console.log(data)
       setTimeout(() => {
         context
-          .loginWithPIN(data.username, data.pin, null, null)
+          .loginWithPIN(data.username, data.pin, accountOptions)
           .then(async response => {
             await context.io.folder
               .file('lastuser.json')
@@ -58,11 +59,12 @@ export function userLogin (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context
     let callback = imports.callback
+    let accountOptions = imports.accountOptions
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     setTimeout(() => {
       context
-        .loginWithPassword(data.username, data.password, null, null)
+        .loginWithPassword(data.username, data.password, accountOptions)
         .then(async response => {
           await context.io.folder
             .file('lastuser.json')

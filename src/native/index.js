@@ -15,6 +15,7 @@ export class LoginScreen extends Component {
         thunk.withExtraArgument({
           context: this.props.context,
           callback: this.props.onLogin,
+          accountOptions: this.props.accountOptions,
           username: this.props.username,
           locale: this.props.local,
           language: this.props.language
@@ -43,11 +44,13 @@ LoginScreen.propTypes = {
   onLogin: PropTypes.func.isRequired,
   locale: PropTypes.string,
   language: PropTypes.string,
-  username: PropTypes.string
+  username: PropTypes.string,
+  accountOptions: PropTypes.object
 }
 
 LoginScreen.defaultProps = {
   locale: 'US',
   language: 'us-en',
-  username: null
+  username: null,
+  accountOptions: null
 }
