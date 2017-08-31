@@ -65,13 +65,13 @@ Get or create a wallet inside of the account
       _account = account;
 
       // Get the first wallet in the account that matches our required wallet type
-      const abcWallet = account.getFirstWallet('wallet:repo:ethereum');
+      const abcWallet = account.getFirstWallet('wallet:ethereum');
       if (abcWallet == null) {
         // Create an ethereum wallet if one doesn't exist:
         const keys = {
           ethereumKey: new Buffer(secureRandom(32)).toString('hex')
         }
-        account.createWallet("wallet:repo:ethereum", keys, function (err, id) {
+        account.createWallet("wallet:ethereum", keys, function (err, id) {
           if (err) {
             // Yikes. This shouldn't fail except for network or disk errors
           } else {
@@ -97,14 +97,6 @@ Logoff a user
 ## Sample website repo
 
 See a sample implementation at [airbitz-core-js-sample](https://github.com/Airbitz/airbitz-core-js-sample)
-
-## Test server
-
-Besides the production authentication servers, Airbitz also maintains a test authentication server with a completely separate account namespace. If you would like to use this server for testing, rather than the production server, please run the following code:
-
-    localStorage.setItem('airbitzAuthServer', 'https://test-auth.airbitz.co/api')
-
-Please note that we occassionally wipe out the test server, so please don't store any vauable assets on there.
 
 # Detailed Docs
 
