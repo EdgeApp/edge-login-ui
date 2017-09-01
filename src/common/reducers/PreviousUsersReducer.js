@@ -12,10 +12,12 @@ export default function (state = null, action) {
       const num = username.length - 1
       const char = username.charAt(num)
       var tempArray = []
-      for (let i = 0; i < state.filteredUsernameList.length; i++) {
-        const item = state.filteredUsernameList[i]
-        if (item.charAt(num) === char.toLowerCase()) {
-          tempArray.push(item)
+      if (state.filteredUsernameList) {
+        for (let i = 0; i < state.filteredUsernameList.length; i++) {
+          const item = state.filteredUsernameList[i]
+          if (item.charAt(num) === char.toLowerCase()) {
+            tempArray.push(item)
+          }
         }
       }
 
