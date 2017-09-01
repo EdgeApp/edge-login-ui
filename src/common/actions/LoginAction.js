@@ -36,7 +36,6 @@ export function userLoginWithPin (data) {
               .setText(JSON.stringify({ username: data.username }))
               .catch(e => null)
             dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
-            callback(null, response)
           })
           .catch(e => {
             console.log('LOG IN WITH PIN ERROR ')
@@ -75,7 +74,6 @@ export function userLogin (data) {
             .setText(JSON.stringify({ username: data.username }))
             .catch(e => null)
           dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
-          callback(null, response)
         })
         .catch(e => {
           dispatch(
