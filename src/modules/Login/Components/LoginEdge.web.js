@@ -16,12 +16,12 @@ class LoginEdge extends Component {
   }
 
   componentDidMount () {
-    // console.log('mounted')
     this.props.dispatch(
         edgeLogin((error, account) => {
+          const abcuiCallback = window.parent.abcui
           if (!error) {
-            if (window.parent.loginCallback) {
-              return window.parent.loginCallback(null, account)
+            if (abcuiCallback.loginCallback) {
+              return abcuiCallback.loginCallback(null, account)
             }
             if (!window.parent.loginCallback) {
               this.props.dispatch(closeLoading())
