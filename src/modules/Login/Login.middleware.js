@@ -47,6 +47,7 @@ export const loginWithPin = (username, pin, callback) => {
 
     setTimeout(() => {
       abcctx(context => {
+        console.log(context)
         context.loginWithPIN(username, pin, (error, account) => {
           dispatch(closeLoading())
           if (error) {

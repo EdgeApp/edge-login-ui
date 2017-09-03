@@ -51,7 +51,7 @@ const UIContext = (args) => {
 
   const getApiServer = () => {
     if (DomWindow.localStorage) {
-      return DomWindow.localStorage.getItem('airbitzAuthServer') || null
+      return DomWindow.localStorage.getItem('airbitzAuthServer') || undefined
     }
   }
 

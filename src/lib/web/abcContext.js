@@ -9,7 +9,7 @@ const context = {
   vendorImageUrl: 'https://airbitz.co/go/wp-content/uploads/2016/10/GenericEdgeLoginIcon.png'
 }
 
-const abcctx = function (callback) {
+const abcctx = callback => {
   if (window.parent.abcContext) {
     return callback(window.parent.abcContext)
   }
