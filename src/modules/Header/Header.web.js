@@ -5,7 +5,7 @@ import { sprintf } from 'sprintf-js'
 import t from 'lib/web/LocaleStrings'
 
 class Header extends Component {
-  _renderheader = (pathname) => {
+  _renderHeaderText = (pathname) => {
     const name = window.parent.abcui.vendorName || window.abcui.vendorName
     switch (pathname) {
       case '/changepin':
@@ -21,8 +21,9 @@ class Header extends Component {
   render () {
     return (
       <div className={styles.container}>
+        <p><img src={window.parent.abcui.vendorImageUrl || window.abcui.vendorImageUrl} className={styles.icon} /></p>
         <p className={styles.text}>
-          {this._renderheader(this.props.location.pathname)}
+          {this._renderHeaderText(this.props.location.pathname)}
         </p>
       </div>
     )
