@@ -44,13 +44,13 @@ class Review extends Component {
       )
     }
   }
-
   _cancel = () => {
-    if (window.parent.loginCallback) {
-      return window.parent.loginCallback(null, this.props.account)
-    }
-    if (!window.parent.loginCallback) {
+    const abcuiCallback = window.parent.abcui
+    if (!abcuiCallback.loginCallback) {
       return this.props.history.push('/account')
+    }
+    if (abcuiCallback.loginCallback) {
+      return abcuiCallback.loginCallback(null, this.props.account)
     }
   }
   render () {

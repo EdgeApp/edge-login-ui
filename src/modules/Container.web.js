@@ -23,11 +23,12 @@ function findUsernamesWithPin (ctx, usernames) {
 
 class Container extends Component {
   _handleToggle = () => {
+    const abcuiCallback = window.parent.abcui
     if (this.props.edgeObject) {
-      this.props.edgeObject.cancelRequest()
+      return this.props.edgeObject.cancelRequest()
     }
-    if (window.parent.exitCallback) {
-      window.parent.exitCallback()
+    if (abcuiCallback.exitCallback) {
+      return abcuiCallback.exitCallback()
     }
   }
 
