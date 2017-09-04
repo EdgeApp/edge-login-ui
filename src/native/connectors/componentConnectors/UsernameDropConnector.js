@@ -3,6 +3,7 @@ import { FormFieldWithDropComponent } from '../../components/common/'
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
 export const mapStateToProps = (state, ownProps) => {
+  const dataList = state.previousUsers.filteredUsernameList ? state.previousUsers.filteredUsernameList : []
   return {
     style: ownProps.style,
     value: state.login.username,
@@ -12,7 +13,7 @@ export const mapStateToProps = (state, ownProps) => {
     forceFocus: ownProps.forceFocus,
     onFocus: ownProps.onFocus,
     onFinish: ownProps.onFinish,
-    dataList: state.previousUsers.filteredUsernameList,
+    dataList: dataList,
     getListItemsFunction: ownProps.getListItemsFunction
   }
 }

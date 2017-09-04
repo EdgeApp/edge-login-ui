@@ -104,7 +104,7 @@ export default class LandingScreenComponent extends Component {
         <FormField
           style={styles.inputWithDrop}
           onChangeText={this.updateUsername.bind(this)}
-          value={this.state.username}
+          value={this.props.username}
           label={'Username'}
           returnKeyType={'next'}
           autoFocus={this.state.focusFirst}
