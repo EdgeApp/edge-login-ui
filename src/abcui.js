@@ -1,15 +1,8 @@
 import { makeContext } from 'airbitz-core-js'
 import 'whatwg-fetch'
 
-let DomWindow
-let DomDocument
-if (typeof window === 'undefined') {
-  DomWindow = {}
-} else {
-  DomWindow = window
-}
-if (typeof document === 'undefined') {
-  DomDocument = {
+const setDocument = () => {
+  return {
     createElement: function () {
       console.log(
         'createElement: Error browser routine used in non-browser environment'
@@ -21,12 +14,12 @@ if (typeof document === 'undefined') {
       )
     }
   }
-} else {
-  DomDocument = document
 }
-function createIFrame (path) {
-  const frame = DomDocument.createElement('iframe')
-  const body = DomDocument.getElementsByTagName('BODY')[0]
+const DomWindow = typeof window === undefined ? {} : window
+const DomDocument = typeof document === undefined ? setDocument() : document
+const createIFrame = function (path) {
+  let frame = DomDocument.createElement('iframe')
+  let body = DomDocument.getElementsByTagName('BODY')[0]
   body.appendChild(frame, body)
   frame.setAttribute('src', path)
   frame.setAttribute('frameborder', '0')
@@ -38,89 +31,113 @@ function createIFrame (path) {
   return frame
 }
 
-function removeIFrame (frame) {
+const removeIFrame = function (frame) {
   frame.parentNode.removeChild(frame)
 }
 
-export function makeABCUIContext (args) {
-  return new UIContext(args)
-}
+const UIContext = (args) => {
+  // Checking errors
+  if (!args.apiKey) {
+    throw new Error('Missing api key')
+  }
+  if (!args.appId && !args.accountType) {
+    throw new Error('Missing appId')
+  }
+  if (args.accountType) {
+    console.warn(
+      'Please provide Airbitz with an `appId`. The `accountType` is deprecated.'
+    )
+  }
 
-class UIContext {
-  constructor (args) {
-    const opts = {}
-
-    // API key:
-    if (args.apiKey == null) {
-      throw new Error('Missing api key')
+  const getApiServer = () => {
+    if (DomWindow.localStorage) {
+      return DomWindow.localStorage.getItem('airbitzAuthServer') || undefined
     }
-    opts.apiKey = args.apiKey
+  }
 
-    // appId:
-    if (args.appId != null) {
-      opts.appId = args.appId
-    } else if (args.accountType != null) {
-      opts.accountType = args.accountType
-      console.warn(
-        'Please provide Airbitz with an `appId`. The `accountType` is deprecated.'
-      )
-    } else {
-      throw new Error('Missing appId')
+  const getAssetPath = (args) => {
+    if (args.assetPath) {
+      return args.assetsPath
     }
-
-    // Figure out which server to use:
-    if (DomWindow.localStorage != null) {
-      const value = DomWindow.localStorage.getItem('airbitzAuthServer')
-      if (value != null) {
-        opts.authServer = value
-      }
+    if (args.bundlePath) {
+      return args.bundlePath + '/assets'
     }
-
-    // Make the core context:
-    this.abcContext = makeContext(opts)
-    this.abcContext.displayName = args.vendorName
-    this.abcContext.displayImageUrl = args.vendorImageUrl
-    DomWindow.abcContext = this.abcContext
-
-    // Set up the UI context:
-    if (args.assetPath != null) {
-      this.assetsPath = args.assetsPath
-    } else if (args.bundlePath != null) {
-      this.assetsPath = args.bundlePath + '/assets'
-    } else {
-      this.assetsPath = './assets'
+    if (!args.assetPath && !args.bundlePath) {
+      return './assets'
     }
+  }
 
-    DomWindow.abcuiContext = {
+  if (args.apiKey && args.appId) {
+    const airbitzCoreJs = makeContext({
+      apiKey: args.apiKey,
+      appId: args.appId,
+      accountType: args.accountType,
+      authServer: getApiServer()
+    })
+
+    DomWindow.abcui = {
+      assetPath: getAssetPath(args),
+      abcuiContext: airbitzCoreJs,
       vendorName: args.vendorName,
-      assetsPath: this.assetsPath
+      vendorImageUrl: args.vendorImageUrl
     }
-  }
 
-  getABCContext () {
-    return this.abcContext
-  }
+    const getABCContext = () => {
+      return airbitzCoreJs
+    }
 
-  openLoginWindow (callback) {
-    const frame = createIFrame(this.assetsPath + '/index.html')
-    DomWindow.loginCallback = function (error, account) {
-      if (account) {
-        DomWindow.abcAccount = account
-        callback(error, account)
-        removeIFrame(frame)
+    const openLoginWindow = (callback) => {
+      const frame = createIFrame(getAssetPath(args) + '/index.html')
+      const removeCallbacks = () => {
+        DomWindow.abcui.loginCallback = null
+        DomWindow.abcui.loginWithoutClosingCallback = null
+        return null
+      }
+      DomWindow.abcui.loginCallback = (error, account) => {
+        if (!account) {
+          throw new Error('Account not provided')
+        }
+        if (account) {
+          DomWindow.abcui.abcAccount = account
+          callback(error, account)
+          removeCallbacks()
+          return removeIFrame(frame)
+        }
+      }
+      DomWindow.abcui.loginWithoutClosingCallback = (error, account) => {
+        if (!account) {
+          throw new Error('Account not provided')
+        }
+        if (account) {
+          DomWindow.abcAccount = account
+          callback(error, account)
+          return removeCallbacks()
+        }
+      }
+      DomWindow.abcui.exitCallback = () => {
+        return removeIFrame(frame)
       }
     }
-    DomWindow.exitCallback = function () {
-      removeIFrame(frame)
-    }
-  }
 
-  openManageWindow (account, callback) {
-    DomWindow.abcAccount = account
-    const frame = createIFrame(this.assetsPath + '/index.html#/account/')
-    DomWindow.exitCallback = function () {
-      removeIFrame(frame)
-      callback(null)
+    const openManageWindow = (account, callback) => {
+      const frame = createIFrame(getAssetPath(args) + '/index.html#/account')
+      DomWindow.abcui.abcAccount = account
+      DomWindow.abcui.exitCallback = () => {
+        removeIFrame(frame)
+        callback(null)
+      }
+    }
+
+    return {
+      getABCContext,
+      openLoginWindow,
+      openManageWindow
     }
   }
 }
+
+const makeABCUIContext = (args) => {
+  return UIContext(args)
+}
+
+export { makeABCUIContext }

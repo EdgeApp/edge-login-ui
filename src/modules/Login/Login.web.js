@@ -33,18 +33,20 @@ class Login extends Component {
   _handleSubmit = (username, password) => {
     const callback = (error, account) => {
       if (!error) {
+        const abcuiCallback = window.parent.abcui
         this.props.dispatch(clearErrorLoginMessage(error))
-        if (window.parent.loginCallback) {
+        if (abcuiCallback.loginCallback) {
           if (this.props.edgeObject) {
             this.props.edgeObject.cancelRequest()
           }
-          return window.parent.loginCallback(null, account)
+          return abcuiCallback.loginCallback(null, account)
         }
-        if (!window.parent.loginCallback) {
+        if (!abcuiCallback.loginCallback) {
           this.props.dispatch(closeLoading())
           return this.props.router.push('/account')
         }
-      } else {
+      }
+      if (error) {
         return this.props.dispatch(showErrorLoginMessage(error))
       }
     }

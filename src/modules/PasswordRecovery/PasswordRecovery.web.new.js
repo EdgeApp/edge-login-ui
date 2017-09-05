@@ -114,7 +114,6 @@ class PasswordRecovery extends Component {
     }
   }
   render () {
-    console.log(this.props)
     return (
       <div className={styles.container}>
         <form onSubmit={e => { e.preventDefault(); this._handleSubmit(e) }}>

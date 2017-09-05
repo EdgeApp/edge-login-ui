@@ -2,17 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import FontIcon from 'react-toolbox/lib/font_icon'
-import t from 'lib/web/LocaleStrings'
+// import t from 'lib/web/LocaleStrings'
 import classnames from 'classnames'
 import {loginUsername} from '../Login/Login.action'
 
 import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
-import { openWarningModal } from '../WarningModal/WarningModal.action'
+import { deleteUserToCache } from './CachedUsers.middleware.js'
+import AccountCacheDelete from '../Modals/AccountCacheDelete/AccountCacheDelete.web.js'
+// import { openWarningModal } from '../WarningModal/WarningModal.action'
+import { openAccountCacheDeleteModal, closeAccountCacheDeleteModal } from '../Modals/AccountCacheDelete/AccountCacheDelete.action.js'
+
 import styles from './CachedUsers.webStyle'
 
 class UserList extends Component {
   _handleLoginUser = (user) => {
-    // this.props.blurField.focus()
     if (this.props.area === 'pinLogin') {
       this.props.dispatch(selectUserToLogin(user))
     } else {
@@ -23,19 +26,14 @@ class UserList extends Component {
       }
     }
   }
-
-  _handleDeleteUserCache = (user) => {
-    // this.props.blurField.blur()
+  _handleOpenDeleteUserCacheModal = (user) => {
     this.props.dispatch(selectUserToDeleteFromUserCache(user))
-    this.props.dispatch(
-      openWarningModal(
-        'deleteCachedUser',
-        t('fragment_landing_account_delete_title'),
-        String.format(t('fragment_landing_account_delete_message'), user)
-      )
-    )
+    return this.props.dispatch(openAccountCacheDeleteModal())
   }
-
+  _handleDeleteUserFromCache = (user) => {
+    this.props.dispatch(deleteUserToCache())
+    return this.props.dispatch(closeAccountCacheDeleteModal())
+  }
   render () {
     const renderValue = (item, idx) => {
       const userItemclassName = classnames(
@@ -47,7 +45,7 @@ class UserList extends Component {
         <li key={idx} className={styles.userList}>
           <div className={styles.userrows}>
             <span className={userItemclassName} onMouseDown={e => this._handleLoginUser(item)}>{ item }</span>
-            <span className={styles.userdelete} onMouseDown={e => this._handleDeleteUserCache(item)}><FontIcon value='clear' /></span>
+            <span className={styles.userdelete} onMouseDown={e => this._handleOpenDeleteUserCacheModal(item)}><FontIcon value='clear' /></span>
           </div>
         </li>
       )
@@ -67,6 +65,7 @@ class UserList extends Component {
         <ul className={classnames(this.props.userListClassName, styles.values)}>
           {_.map(userList, renderValue)}
         </ul>
+        <AccountCacheDelete delete={this._handleDeleteUserFromCache} />
       </div>
     )
   }
@@ -76,5 +75,6 @@ export default connect(state => ({
   users: state.cachedUsers.users,
   selectedUserToLogin: state.cachedUsers.selectedUserToLogin,
   cachedUsersWithPinEnabled: state.cachedUsers.usersWithPinEnabled,
-  showCachedUsers: state.login.showCachedUsers
+  showCachedUsers: state.login.showCachedUsers,
+  userToDeleteFromUserCache: state.cachedUsers.userToDeleteFromUserCache
 }))(UserList)
