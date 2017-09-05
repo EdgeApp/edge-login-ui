@@ -98,6 +98,15 @@ const UIContext = (args) => {
           return removeIFrame(frame)
         }
       }
+      DomWindow.abcui.loginWithoutClosingCallback = (error, account) => {
+        if (!account) {
+          throw new Error('Account not provided')
+        }
+        if (account) {
+          DomWindow.abcAccount = account
+          return callback(error, account)
+        }
+      }
       DomWindow.abcui.exitCallback = () => {
         return removeIFrame(frame)
       }

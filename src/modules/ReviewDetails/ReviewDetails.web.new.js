@@ -53,6 +53,16 @@ class Review extends Component {
       return abcuiCallback.loginCallback(null, this.props.account)
     }
   }
+  _submit = () => {
+    const abcuiCallback = window.parent.abcui
+    if (!abcuiCallback.loginWithoutClosingCallback) {
+      return this.props.history.push('/passwordrecovery')
+    }
+    if (abcuiCallback.loginWithoutClosingCallback) {
+      abcuiCallback.loginWithoutClosingCallback(null, this.props.account)
+      return this.props.history.push('/passwordrecovery')
+    }
+  }
   render () {
     return (
       <div className={styles.container}>
@@ -64,7 +74,7 @@ class Review extends Component {
           { this._renderInfo() }
         </div>
         <button className={styles.primary} onClick={e => this.props.dispatch(openAccountCreatedModal())}>Finish</button>
-        <AccountCreated cancel={this._cancel} submit={e => this.props.history.push('/passwordrecovery')} />
+        <AccountCreated cancel={this._cancel} submit={this._submit} />
       </div>
     )
   }
