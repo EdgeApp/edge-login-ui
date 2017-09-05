@@ -10,12 +10,8 @@ const context = {
 }
 
 const abcctx = callback => {
-  if (window.parent.abcContext) {
-    return callback(window.parent.abcContext)
-  }
-  if (!window.parent.abcContext) {
-    return callback(abc.makeABCUIContext(context).getABCContext())
-  }
+  const abcuiContext = window.parent.abcui.abcuiContext
+  return callback(abcuiContext || abc.makeABCUIContext(context).getABCContext())
 }
 
 export default abcctx
