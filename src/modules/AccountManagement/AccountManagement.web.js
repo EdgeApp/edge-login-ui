@@ -7,12 +7,21 @@ import styles from './AccountManagement.webStyle.scss'
 import EnterPassword from '../Modals/AccountManagementPassword/AccountManagementPassword.web.js'
 
 import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
+import { userLogin } from '../Login/Login.action'
 
 import pinIcon from '../../img/account-settings/PIN-W.png'
 import passwordIcon from '../../img/account-settings/password-W.png'
 import recoveryIcon from '../../img/account-settings/recovery-W.png'
 
 class AccountManager extends Component {
+  componentWillMount () {
+    const abcuiCallback = window.parent.abcui
+    if (abcuiCallback.abcAccount) {
+      this.props.dispatch(
+        userLogin(window.parent.abcui.abcAccount)
+      )
+    }
+  }
   render () {
     return (
       <div className={styles.container}>

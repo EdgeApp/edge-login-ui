@@ -88,13 +88,19 @@ const UIContext = (args) => {
 
     const openLoginWindow = (callback) => {
       const frame = createIFrame(getAssetPath(args) + '/index.html')
+      const removeCallbacks = () => {
+        DomWindow.abcui.loginCallback = null
+        DomWindow.abcui.loginWithoutClosingCallback = null
+        return null
+      }
       DomWindow.abcui.loginCallback = (error, account) => {
         if (!account) {
           throw new Error('Account not provided')
         }
         if (account) {
-          DomWindow.abcAccount = account
+          DomWindow.abcui.abcAccount = account
           callback(error, account)
+          removeCallbacks()
           return removeIFrame(frame)
         }
       }
@@ -104,7 +110,8 @@ const UIContext = (args) => {
         }
         if (account) {
           DomWindow.abcAccount = account
-          return callback(error, account)
+          callback(error, account)
+          return removeCallbacks()
         }
       }
       DomWindow.abcui.exitCallback = () => {
@@ -113,8 +120,8 @@ const UIContext = (args) => {
     }
 
     const openManageWindow = (account, callback) => {
-      const frame = createIFrame(getAssetPath(args) + '/index.html#/account/')
-      DomWindow.abcAccount = account
+      const frame = createIFrame(getAssetPath(args) + '/index.html#/account')
+      DomWindow.abcui.abcAccount = account
       DomWindow.abcui.exitCallback = () => {
         removeIFrame(frame)
         callback(null)
