@@ -59,7 +59,8 @@ const store = combineReducers({
       upperCaseChar: PasswordValidation.upperCaseChar,
       lowerCaseChar: PasswordValidation.lowerCaseChar,
       number: PasswordValidation.number,
-      characterLength: PasswordValidation.characterLength
+      characterLength: PasswordValidation.characterLength,
+      timeToCrackPassword: PasswordValidation.timeToCrackPassword
     })
   }),
   reviewDetails: combineReducers({

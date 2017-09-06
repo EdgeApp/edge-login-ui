@@ -10,7 +10,7 @@ const context = {
 }
 
 const abcctx = callback => {
-  const abcuiContext = window.parent.abcui.abcuiContext
+  const abcuiContext = window.parent.abcui ? window.parent.abcui.abcuiContext : null
   return callback(abcuiContext || abc.makeABCUIContext(context).getABCContext())
 }
 

@@ -8,7 +8,7 @@ export const signupUser = (username, password, pin, callback) => {
     const abcContext = imports.abcContext
     dispatch(openLoading(t('fragment_signup_creating_account')))
     abcContext(ctx => {
-      ctx.createAccount(username, password, pin, (err, result) => {
+      ctx.createAccount(username, password, pin, undefined, (err, result) => {
         dispatch(closeLoading())
         if (err) {
           return dispatch(openErrorModal(t('activity_signup_failed') + ': ' + err.message))
