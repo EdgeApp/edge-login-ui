@@ -13,7 +13,7 @@ export const loginWithPassword = (username, password, callback) => {
     dispatch(openLoading())
     setTimeout(() => {
       abcContext(context => {
-        context.loginWithPassword(username, password, null, null, (error, account) => {
+        context.loginWithPassword(username, password, null, (error, account) => {
           if (error) {
             dispatch(closeLoading())
             const type = (error.type === 'OtpError') ? 'server_error_bad_otp' : 'server_error_bad_password'
@@ -47,7 +47,7 @@ export const loginWithPin = (username, pin, callback) => {
 
     setTimeout(() => {
       abcctx(context => {
-        context.loginWithPIN(username, pin, (error, account) => {
+        context.loginWithPIN(username, pin, undefined, (error, account) => {
           dispatch(closeLoading())
           if (error) {
             // dispatch(openErrorModal(t('server_error_bad_pin')))
