@@ -6,6 +6,7 @@ export const validate = (password) => {
 
     abcContext(context => {
       const check = context.checkPasswordRules(password)
+      dispatch(action.changeTimeToCrackPassword(check.secondsToCrack))
 
       if (!check.noLowerCase) {
         dispatch(action.lowerCaseCharPass())

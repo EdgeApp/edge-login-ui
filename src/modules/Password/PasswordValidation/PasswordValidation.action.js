@@ -8,6 +8,7 @@ export const CHARACTER_LENGTH_PASS = 'CHARACTER_LENGTH_PASS'
 export const CHARACTER_LENGTH_FAIL = 'CHARACTER_LENGTH_FAIL'
 export const VALIDATE_PASSWORD = 'VALIDATE_PASSWORD'
 export const INVALIDATE_PASSWORD = 'INVALIDATE_PASSWORD'
+export const TIME_TO_CRACK_PASSWORD = 'TIME_TO_CRACK_PASSWORD'
 
 export function validatePassword () {
   return {
@@ -64,5 +65,12 @@ export function characterLengthPass () {
 export function characterLengthFail () {
   return {
     type: CHARACTER_LENGTH_FAIL
+  }
+}
+
+export function changeTimeToCrackPassword (data) {
+  return {
+    type: TIME_TO_CRACK_PASSWORD,
+    data
   }
 }

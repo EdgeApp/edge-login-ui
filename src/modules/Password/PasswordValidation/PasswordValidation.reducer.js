@@ -96,3 +96,19 @@ export const characterLength = (state = false, action) => {
       return state
   }
 }
+
+export const timeToCrackPassword = (state = 0, action) => {
+  switch (action.type) {
+    case ACTION.TIME_TO_CRACK_PASSWORD :
+      return action.data
+
+    case PASSWORD_CHANGED :
+      return false
+
+    case GET_DETAILS :
+      return false
+
+    default:
+      return state
+  }
+}

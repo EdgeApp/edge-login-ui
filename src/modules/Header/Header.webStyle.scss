@@ -9,8 +9,8 @@
     display: flex;
     display: -webkit-flex;
 
-    flex-direction: row;
-    -webkit-flex-direction: row;
+    flex-direction: column;
+    -webkit-flex-direction: column;
 
     justify-content: center;
     -webkit-justify-content: center;
@@ -27,40 +27,9 @@
       text-transform: uppercase;
       line-height: 16px;
     }
-}
 
-/* Extra Small Devices, Phones */
-@media only screen and (min-width : $layout-breakpoint-xs) {
-    .appBar {
-        font-size: 1.4rem;
-        padding: 0 1.0rem;
-        .navigation {
-            a {
-                font-size: 1.6rem;
-            }
-        }
-
+    .icon {
+      max-width: 35px;
+      max-height: 35px;
     }
-}
-
-/* Small Devices, Tablets */
-@media only screen and (min-width : $layout-breakpoint-sm) {
-    .appBar {
-        .navigation {
-            a {
-                font-size: 1.96rem;
-            }
-        }
-
-    }
-}
-
-/* Medium Devices, Desktops */
-@media only screen and (min-width : $layout-breakpoint-md) {
-
-}
-
-/* Large Devices, Wide Screens */
-@media only screen and (min-width : $layout-breakpoint-lg) {
-
 }

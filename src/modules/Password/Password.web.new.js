@@ -19,6 +19,7 @@ import {
   clearPasswordError
 } from './Password.action'
 import { getDetails } from '../ReviewDetails/ReviewDetails.action'
+import { calculateTime } from '../../lib/helper'
 
 import eyeShow from '../../img/create-account/show-password.png'
 import eyeHide from '../../img/create-account/hide-password.png'
@@ -139,7 +140,7 @@ class Password extends Component {
               {validation.characterLength ? <FontIcon value='done' className={styles.check} /> : <span className={styles.bullet}>•</span>}
               Must have at least 10 characters
             </p>
-            <p className={styles.crack}>Time to crack: 0 seconds</p>
+            <p className={styles.crack}>Time to crack: {calculateTime(validation.timeToCrackPassword)}</p>
           </div>
           <div className={styles.formContainer}>
             <div className={styles.formWithIcon}>
