@@ -64,11 +64,9 @@ class LoginWithPin extends Component {
   }
   _showCachedUsers = () => {
     this.props.dispatch(openUserList())
-    this.pin.getWrappedInstance().blur()
   }
   _hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
-    this.pin.getWrappedInstance().focus()
   }
   _renderLoader = () => {
     if (this.props.loader.loading) {

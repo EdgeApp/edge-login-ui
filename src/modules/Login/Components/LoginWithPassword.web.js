@@ -5,12 +5,13 @@ import t from 'lib/web/LocaleStrings'
 import styles from './LoginWithPassword.webStyle.scss'
 import Input from 'react-toolbox/lib/input'
 
-import { loginUsername, loginPassword } from '../Login.action.js'
+import { loginUsername, loginPassword, openUserList, closeUserList } from '../Login.action.js'
 import PasswordRecovery from '../../Modals/PasswordRecovery/PasswordRecovery.web.js'
+import CachedUsers from '../../CachedUsers/CachedUsers.web.js'
 
 import { openPasswordRecoveryModal } from '../../Modals/PasswordRecovery/PasswordRecovery.action.js'
 
-class NewAccount extends Component {
+class LoginWithPassword extends Component {
   _usernameKeyPress = (e) => {
     if (e.charCode === 13) {
       return this.password.getWrappedInstance().focus()
@@ -23,21 +24,42 @@ class NewAccount extends Component {
       }
     }
   }
+  _showCachedUsers = () => {
+    console.log('fofof')
+    this.props.dispatch(openUserList())
+    this.pin.getWrappedInstance().blur()
+  }
+  _hideCachedUsers = () => {
+    this.props.dispatch(closeUserList())
+    this.pin.getWrappedInstance().focus()
+  }
   render () {
     const {dispatch, username, password} = this.props
+    const usersDropdown = () => {
+      return (
+        <Input
+          autoFocus
+          type='text'
+          label='Username'
+          name='username'
+          onKeyPress={this._usernameKeyPress}
+          onChange={value => dispatch(loginUsername(value))}
+          value={username}
+          ref={input => { this.username = input }}
+          onFocus={this._showCachedUsers}
+          onBlur={this._hideCachedUsers}
+        />
+      )
+    }
     return (
       <div className={styles.container}>
         <p className={styles.header}>{t('login_text')}</p>
         <div className={styles.forms}>
-          <Input
-            autoFocus
-            type='text'
-            label='Username'
-            name='username'
-            onKeyPress={this._usernameKeyPress}
-            onChange={value => dispatch(loginUsername(value))}
-            value={username}
-            ref={input => { this.username = input }}
+          <CachedUsers
+            component={usersDropdown()}
+            area='passwordLogin'
+            containerClassName={styles.cachedUsers}
+            userListClassName={styles.userListClassName}
           />
           <Input
             type='password'
@@ -72,4 +94,4 @@ export default connect(state => ({
   password: state.login.password,
   loader: state.loader,
   error: state.login.error
-}))(NewAccount)
+}))(LoginWithPassword)
