@@ -24,10 +24,11 @@
     "lint": "standard --parser babel-eslint",
     "precommit": "npm run lint",
     "prepare": "npm run build",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+    "updot": "updot"
   },
   "dependencies": {
-    "airbitz-core-js": "^0.3.6",
+    "airbitz-core-js": "git+ssh://git@github.com:Airbitz/airbitz-core-js.git#develop",
     "async": "~2.0.1",
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",
@@ -84,9 +85,10 @@
     "sass-loader": "^6.0.6",
     "standard": "~8.6.0",
     "style-loader": "^0.18.2",
+    "updot": "^1.1.4",
     "webpack": "^3.4.1",
     "webpack-dev-middleware": "^1.12.0",
-    "webpack-dev-server": "^2.6.1"
+    "webpack-dev-server": "^2.7.1"
   },
   "jest": {
     "moduleNameMapper": {
