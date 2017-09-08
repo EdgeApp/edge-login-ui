@@ -25,7 +25,6 @@ class LoginWithPassword extends Component {
     }
   }
   _showCachedUsers = () => {
-    console.log('fofof')
     this.props.dispatch(openUserList())
     this.pin.getWrappedInstance().blur()
   }
@@ -38,7 +37,6 @@ class LoginWithPassword extends Component {
     const usersDropdown = () => {
       return (
         <Input
-          autoFocus
           type='text'
           label='Username'
           name='username'

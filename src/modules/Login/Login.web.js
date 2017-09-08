@@ -123,19 +123,28 @@ class Login extends Component {
   }
 
   render () {
-    if (!this.props.viewPassword) {
-      return (
-        <div className={styles.container}>
-          <LoginWithPinSection openViewPassword={this.openViewPassword} router={this.props.router} />
-        </div>
-      )
-    }
-    if (this.props.viewPassword) {
+    if (!this.props.viewPassword && !this.props.viewPIN) {
       return (
         <div className={styles.container}>
           <LoginEdge />
           <Divider />
-          { this.props.viewPassword ? <LoginWithPasswordSection login={this._handleSubmit} signup={this._handleGoToSignupPage} /> : <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} /> }
+          <NewAccountSection signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} />
+        </div>
+      )
+    }
+    if (!this.props.viewPIN && this.props.viewPassword) {
+      return (
+        <div className={styles.container}>
+          <LoginEdge />
+          <Divider />
+          <LoginWithPasswordSection login={this._handleSubmit} signup={this._handleGoToSignupPage} />
+        </div>
+      )
+    }
+    if (this.props.viewPIN && !this.props.viewPassword) {
+      return (
+        <div className={styles.container}>
+          <LoginWithPinSection openViewPassword={this.openViewPassword} router={this.props.router} />
         </div>
       )
     }
