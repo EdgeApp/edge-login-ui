@@ -25,7 +25,7 @@ class AccountManager extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <p className={styles.header}>Account name: { this.props.account.username }</p>
+        <p className={styles.header}><span className={styles.heavy}>Account name:</span> { this.props.account.username }</p>
         <div className={styles.main}>
           <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal('/changepin'))}>
             <img src={pinIcon} />

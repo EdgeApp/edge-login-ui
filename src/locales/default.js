@@ -131,7 +131,7 @@ const strings = {
     //  Strings for errors from server
   server_error_account_already_exists: 'This account already exists.',
   server_error_account_does_not_exists: 'We were unable to find your account. Be sure your username is correct.',
-  server_error_bad_password: 'Incorrect login and password.',
+  server_error_bad_password: 'Incorrect login or password',
   server_error_wallet_exists: 'Wallet already exists.',
   server_error_invalid_wallet: 'Wallet does not exist.',
   server_error_no_connection: 'Unable to connect to server. Please try again later.',
@@ -813,7 +813,7 @@ const strings = {
   password_recovery_yahoo: 'Send Using Yahoo',
   password_recovery_microsoft: 'Send Using Hotmail and Live Mail',
   password_recovery_app: 'Send Using Email App',
-  password_recovery_invalid_email: 'Please enter a valid email address.',
+  password_recovery_invalid_email: 'Please enter a valid email address',
 
     //  SSO
   edge_login: 'Edge Login',

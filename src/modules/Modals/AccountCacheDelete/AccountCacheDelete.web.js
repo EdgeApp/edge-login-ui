@@ -18,7 +18,7 @@ class AccountCacheDelete extends Component {
       >
         <p className={styles.header}>Delete Account</p>
         <p className={styles.text}>
-          Delete reinaaugurtest on this device only? This will remove the 2FA and PIN access from this device.
+          Delete {this.props.name} on this device only? This will remove the 2FA and PIN access from this device.
           If 2FA is enabled on this account, you will be unable to access this account for 7 days from new devices.
         </p>
         <div className={styles.rowButtons}>
@@ -31,5 +31,6 @@ class AccountCacheDelete extends Component {
 }
 
 export default connect(state => ({
-  view: state.modal.accountCacheDelete
+  view: state.modal.accountCacheDelete,
+  name: state.cachedUsers.userToDeleteFromUserCache
 }))(AccountCacheDelete)

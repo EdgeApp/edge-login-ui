@@ -14,7 +14,7 @@ class Username extends Component {
   _handleSubmit = () => {
     if (this.props.username.length < 3) {
       return this.props.dispatch(
-        error('Username must be at least 3 characters.')
+        error('Username must be at least 3 characters')
       )
     }
     if (this.props.username.length >= 3) {

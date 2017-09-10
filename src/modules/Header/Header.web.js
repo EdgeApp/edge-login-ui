@@ -8,6 +8,8 @@ class Header extends Component {
   _renderHeaderText = (pathname) => {
     const name = window.parent.abcui.vendorName || window.abcui.vendorName
     switch (pathname) {
+      case '/account':
+        return 'Manage your ' + name + ' account'
       case '/changepin':
         return 'Change your 4-digit PIN'
       case '/changepassword':

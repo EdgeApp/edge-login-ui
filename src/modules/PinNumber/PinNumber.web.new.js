@@ -72,7 +72,7 @@ class Pin extends Component {
         <p className={styles.bullet}>Your PIN is a 4 digit code used to do quick re-logins into your account</p>
         <div className={styles.rowButtons}>
           <button className={styles.secondary} onClick={e => this.props.dispatch(changeSignupPage('username'))}>Back</button>
-          <button className={styles.primary} onClick={this._handleSubmit}>Submit</button>
+          <button className={styles.primary} onClick={this._handleSubmit}>Next</button>
         </div>
       </div>
     )

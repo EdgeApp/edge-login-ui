@@ -31,7 +31,7 @@ class UserList extends Component {
     return this.props.dispatch(openAccountCacheDeleteModal())
   }
   _handleDeleteUserFromCache = (user) => {
-    this.props.dispatch(deleteUserToCache())
+    this.props.dispatch(deleteUserToCache(this.props.userToDeleteFromUserCache))
     return this.props.dispatch(closeAccountCacheDeleteModal())
   }
   render () {

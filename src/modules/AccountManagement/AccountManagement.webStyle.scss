@@ -16,10 +16,13 @@
   .header {
     color: #909091;
     font-size: 32px;
-    font-weight: 600;
     text-align: center;
     margin-top: 40px;
     margin-bottom: 30px;
+
+    .heavy {
+      font-weight: 600;
+    }
   }
 
   .main {

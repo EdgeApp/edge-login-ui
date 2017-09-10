@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 
 import { connect } from 'react-redux'
 import t from 'lib/web/LocaleStrings'
+import styles from './LoginEdge.webStyle.scss'
 
 import { edgeLogin } from '../Login.middleware'
 import { closeLoading } from '../../Loader/Loader.action'
@@ -56,7 +57,7 @@ class LoginEdge extends Component {
     return (
       <div style={style.container}>
         <div style={style.topText}>
-          {this.props.register ? t('string_scan_barcode_to_register') : t('string_scan_barcode_to_signin')}
+          <p className={styles.header}>{this.props.register ? t('string_scan_barcode_to_register') : t('string_scan_barcode_to_signin')}</p>
         </div>
         {!edgeUsername ? (
           <div>
