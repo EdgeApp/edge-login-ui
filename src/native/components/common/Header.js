@@ -22,6 +22,10 @@ class Header extends Component {
     if (!this.props.showBackButton) {
       return
     }
+    let label = 'BACK'
+    if (this.props.useCancel) {
+      label = 'CANCEL' // TODO localize
+    }
     return (
       <Button
         onPress={this.onBack.bind(this)}
@@ -29,7 +33,7 @@ class Header extends Component {
         downTextStyle={style.textButton.downTextStyle}
         upStyle={style.textButton.upStyle}
         upTextStyle={style.textButton.upTextStyle}
-        label={'BACK'}
+        label={label}
       />
     )
   }

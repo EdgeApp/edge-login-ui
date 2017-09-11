@@ -238,6 +238,8 @@ export default class LandingScreenComponent extends Component {
     this.props.onForgotPassword()
   }
   onStartLogin () {
+    this.noFocus()
+    Keyboard.dismiss()
     this.setState({
       loggingIn: true
     })

@@ -3,6 +3,7 @@ export * from './CreateAccountActions'
 export * from './PreviousUsersActions'
 export * from './WorkflowActions'
 export * from './UserActions'
+export * from './ChangePasswordPinActions'
 
 export function dispatchAction (type) {
   return {

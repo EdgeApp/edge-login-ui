@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button } from '../../common'
 import HeaderConnector
-  from '../../../connectors/componentConnectors/HeaderConnector'
+  from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import CreateFourDigitPinConnector
   from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
 // import * as Constants from '../../../common/constants'
 
-export default class SetAccountPinScreenComponent extends Component {
+export default class ChangeAccountPinScreenComponent extends Component {
   componentWillMount () {
     this.setState({
       username: '',
@@ -39,7 +39,7 @@ export default class SetAccountPinScreenComponent extends Component {
               downTextStyle={SetAccountPinScreenStyle.nextButton.downTextStyle}
               upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
               upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
-              label={'NEXT'}
+              label={'DONE'}
               isThinking={this.state.isProcessing}
               doesThink
             />
@@ -53,17 +53,12 @@ export default class SetAccountPinScreenComponent extends Component {
     this.setState({
       isProcessing: true
     })
-    console.log(this.props)
     // validation.
     // is there no error message ,
     if (this.props.pin.length !== 4) {
       console.log('PIN ERROR')
       return
     }
-    this.props.createUser({
-      username: this.props.username,
-      password: this.props.password,
-      pin: this.props.pin
-    })
+    this.props.changePin(this.props.pin)
   }
 }

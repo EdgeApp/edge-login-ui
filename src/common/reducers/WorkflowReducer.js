@@ -7,11 +7,11 @@ const initialState = {
   modalView: null,
   firstLoadWF: {
     scenes: 1,
-    details: [{ back: false, skip: false, title: 'title', subTitle: '' }]
+    details: [{ back: false, skip: false, title: 'firstLoad', subTitle: '' }]
   },
   initalizeWF: {
     scenes: 1,
-    details: [{ back: false, skip: false, title: 'title', subTitle: '' }]
+    details: [{ back: false, skip: false, title: 'initialize', subTitle: '' }]
   },
   createWF: {
     scenes: 6,
@@ -52,15 +52,15 @@ const initialState = {
   },
   passwordWF: {
     scenes: 1,
-    details: [{ back: false, skip: false, title: 'title', subTitle: '' }]
+    details: [{ back: true, skip: false, title: 'Change Password', subTitle: '' }]
   },
   pinWF: {
     scenes: 1,
-    details: [{ back: false, skip: false, title: 'title', subTitle: '' }]
+    details: [{ back: true, skip: false, title: 'Change Pin', subTitle: '' }]
   },
   recoveryWF: {
     scenes: 1,
-    details: [{ back: false, skip: false, title: 'title', subTitle: '' }]
+    details: [{ back: true, skip: false, title: 'Recovery', subTitle: '' }]
   },
   fingerprintWF: {
     scenes: 1,

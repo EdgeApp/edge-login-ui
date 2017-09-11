@@ -140,9 +140,17 @@ export function createUser (data) {
 }
 export function agreeToConditions (account) {
   return (dispatch, getState, imports) => {
-    console.log('Skip Password. ')
+    let context = imports.context
     let callback = imports.callback
-    callback(account)
+    // write to disklet
+    async response => {
+      await context.io.folder
+        .file('acceptTermsAndConditions.json')
+        .setText(JSON.stringify({ accepted: true }))
+        .catch(e => null)
+      return response
+    }
+    callback(null, account)
     // dispatch(WorkflowActions.nextScreen())
   }
 }

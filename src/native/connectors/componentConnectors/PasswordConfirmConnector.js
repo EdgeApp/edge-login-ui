@@ -3,6 +3,7 @@ import {FormField} from '../../components/common/'
 import * as loginAction from '../../../common/actions'
 
 export const mapStateToProps = (state, ownProps) => {
+  let label = ownProps.label ? ownProps.label : 'Confirm Password'
   return {
     style: ownProps.style,
     value: state.create.confirmPassword,
@@ -10,7 +11,7 @@ export const mapStateToProps = (state, ownProps) => {
     secureTextEntry: true,
     showSecureCheckbox: true,
     showSecureCheckboxLabel: 'Show Password',
-    label: 'Confirm Password',
+    label: label,
     returnKeyType: 'go',
     autoFocus: ownProps.autoFocus
      // TODO localize

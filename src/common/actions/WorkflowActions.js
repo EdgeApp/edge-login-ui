@@ -31,3 +31,9 @@ export function goBack () {
     type: Constants.WORKFLOW_BACK
   }
 }
+export function cancel () {
+  return (dispatch, getState, imports) => {
+    let onCancel = imports.onCancel
+    onCancel()
+  }
+}
