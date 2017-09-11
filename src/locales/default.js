@@ -131,7 +131,7 @@ const strings = {
     //  Strings for errors from server
   server_error_account_already_exists: 'This account already exists.',
   server_error_account_does_not_exists: 'We were unable to find your account. Be sure your username is correct.',
-  server_error_bad_password: 'Incorrect login or password',
+  server_error_bad_password: 'Incorrect username or password',
   server_error_wallet_exists: 'Wallet already exists.',
   server_error_invalid_wallet: 'Wallet does not exist.',
   server_error_no_connection: 'Unable to connect to server. Please try again later.',
