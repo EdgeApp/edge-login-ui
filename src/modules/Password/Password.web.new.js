@@ -19,7 +19,7 @@ import {
   clearPasswordError
 } from './Password.action'
 import { getDetails } from '../ReviewDetails/ReviewDetails.action'
-import { calculateTime } from '../../lib/helper'
+// import { calculateTime } from '../../lib/helper'
 
 import eyeShow from '../../img/create-account/show-password.png'
 import eyeHide from '../../img/create-account/hide-password.png'
@@ -119,7 +119,7 @@ class Password extends Component {
     const { inputState, validation, password, passwordRepeat, error } = this.props
     return (
       <div className={styles.container}>
-        <p className={styles.header}>Change your password</p>
+        <p className={styles.header}>Create a password</p>
         <p className={styles.hint}>The password is used to authenticate your account and to change sensitive settings.</p>
         <div className={styles.main}>
           <div className={styles.tooltip}>
@@ -140,7 +140,7 @@ class Password extends Component {
               {validation.characterLength ? <FontIcon value='done' className={styles.check} /> : <span className={styles.bullet}>•</span>}
               Must have at least 10 characters
             </p>
-            <p className={styles.crack}>Time to crack: {calculateTime(validation.timeToCrackPassword)}</p>
+            {/* <p className={styles.crack}>Time to crack: {calculateTime(validation.timeToCrackPassword)}</p> */}
           </div>
           <div className={styles.formContainer}>
             <div className={styles.formWithIcon}>

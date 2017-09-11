@@ -80,7 +80,7 @@ class LoginWithPassword extends Component {
           { this.props.loader.loading ? <div className={styles.loader} /> : 'Sign In' }
         </button>
         <div style={{ height: '15px' }} />
-        <p>Already have an account? <span className={styles.link} onClick={this.props.signup}>Create Account</span></p>
+        <p>Don't have an account? <span className={styles.link} onClick={this.props.signup}>Create Account</span></p>
         <PasswordRecovery />
       </div>
     )

@@ -17,7 +17,7 @@ import {
   errorChangePasswordRepeat,
   passwordChanged
 } from './ChangePassword.action'
-import { calculateTime } from '../../lib/helper'
+// import { calculateTime } from '../../lib/helper'
 
 import eyeShow from '../../img/create-account/show-password.png'
 import eyeHide from '../../img/create-account/hide-password.png'
@@ -116,7 +116,7 @@ class ChangePassword extends Component {
               {validation.characterLength ? <FontIcon value='done' className={styles.check} /> : <span className={styles.bullet}>•</span>}
               Must have at least 10 characters
             </p>
-            <p className={styles.crack}>Time to crack: {calculateTime(validation.timeToCrackPassword)}</p>
+            {/* <p className={styles.crack}>Time to crack: {calculateTime(validation.timeToCrackPassword)}</p> */}
           </div>
           <div className={styles.formContainer}>
             <div className={styles.formWithIcon}>
