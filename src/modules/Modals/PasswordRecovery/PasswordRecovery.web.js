@@ -6,7 +6,7 @@ import styles from './PasswordRecovery.webStyle.scss'
 
 import { closePasswordRecoveryModal } from './PasswordRecovery.action.js'
 
-import recoveryIcon from '../../../img/account-settings/recovery-W.png'
+import recoveryIcon from '../../../img/modals/recovery-modal-W.png'
 
 class PasswordRecovery extends Component {
   render () {
