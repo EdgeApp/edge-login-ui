@@ -63,7 +63,7 @@ export default class PinLogInScreenComponent extends Component {
           />
           <FourDigitInputConnector style={style.fourPin} />
           <Button
-            onPress={this.props.gotoLoginPage}
+            onPress={this.exitPin.bind(this)}
             label={'EXIT PIN'}
             downStyle={style.forgotButton.downStyle}
             downTextStyle={style.forgotButton.downTextStyle}
@@ -83,6 +83,10 @@ export default class PinLogInScreenComponent extends Component {
       </View>
     )
   }
+  exitPin () {
+    this.props.gotoLoginPage()
+  }
+
   renderItems (item) {
     const { PinLoginScreenStyle } = this.props.styles
     return (
