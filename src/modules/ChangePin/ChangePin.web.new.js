@@ -37,9 +37,6 @@ class ChangePin extends Component {
         changePinValue(pin)
       )
     }
-    if (pin.length > 3) {
-      setTimeout(this._handleSubmit, 200)
-    }
   }
   _renderButtonRows = () => {
     if (!this.props.loader.loading) {

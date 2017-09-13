@@ -35,9 +35,6 @@ class Pin extends Component {
         changePinNumberValue(pin)
       )
     }
-    if (pin.length > 3) {
-      setTimeout(this._handleSubmit, 200)
-    }
   }
   pinStyle = () => {
     if (this.props.pin.length > 0) {
@@ -52,6 +49,7 @@ class Pin extends Component {
     }
   }
   render () {
+    console.log(this.props.pin)
     return (
       <div className={styles.container}>
         <p className={styles.header}>Choose a 4 Digit PIN</p>
