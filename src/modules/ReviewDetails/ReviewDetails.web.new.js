@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { Link } from 'react-router'
+import FontIcon from 'react-toolbox/lib/font_icon'
 // import t from 'lib/web/LocaleStrings'
 
 import AccountCreated from '../Modals/AccountCreated/AccountCreated.web.js'
@@ -35,6 +35,7 @@ class Review extends Component {
           <span className={styles.bold}>Username:</span> {this.props.details.username} <br />
           <span className={styles.bold}>Password:</span> {this.props.details.password} <br />
           <span className={styles.bold}>PIN:</span> {this.props.details.pin}
+          <FontIcon className={styles.close} value='clear' />
         </p>
       )
     }

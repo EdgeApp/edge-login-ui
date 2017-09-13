@@ -6,28 +6,28 @@ export const checkPasswordRecovery = (payload, callback) => {
     dispatch(openLoading())
     if (payload.questions[0] === 'Choose a question') {
       dispatch(closeLoading())
-      return callback({
+      callback({
         type: 'firstQuestion',
         message: t('activity_recovery_pick_questions_alert')
       }, null)
     }
     if (payload.answers[0].length < 4) {
       dispatch(closeLoading())
-      return callback({
+      callback({
         type: 'firstAnswer',
         message: t('activity_recovery_error_answer_length')
       }, null)
     }
     if (payload.questions[1] === 'Choose a question') {
       dispatch(closeLoading())
-      return callback({
+      callback({
         type: 'secondQuestion',
         message: t('activity_recovery_pick_questions_alert')
       }, null)
     }
     if (payload.answers[1].length < 4) {
       dispatch(closeLoading())
-      return callback({
+      callback({
         type: 'secondAnswer',
         message: t('activity_recovery_error_answer_length')
       }, null)
