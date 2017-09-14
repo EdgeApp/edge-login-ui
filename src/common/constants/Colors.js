@@ -26,3 +26,4 @@ export const MODAL_DROP = '#FFFFFF'
 export const OVERLAY_BOX = 'rgba(255,255,255,.6)'
 export const MODAL_BOX = 'rgba(0,0,0,.6)'
 export const TRANSPARENT = 'rgba(255,255,255,0)'
+export const GRADIENT = ['#3B7ADA', '#2B5698']

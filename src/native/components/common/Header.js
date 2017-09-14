@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { Button } from '../common'
+import * as Colors from '../../../common/constants/Colors'
+import LinearGradient from 'react-native-linear-gradient'
 
 // Make a component
 class Header extends Component {
   render () {
     const Style = this.props.style
     return (
-      <View style={Style.container}>
+      <LinearGradient
+        style={Style.container}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={Colors.GRADIENT}
+      >
         <View style={Style.left}>
           {this.renderBack(Style)}
         </View>
@@ -15,7 +22,7 @@ class Header extends Component {
         <View style={Style.right}>
           {this.renderSkip(Style)}
         </View>
-      </View>
+      </LinearGradient>
     )
   }
   renderBack (style) {
