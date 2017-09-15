@@ -7,7 +7,7 @@ const HeaderContainerStyle = {
     position: 'relative',
     height: vs(65),
     width: '100%',
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: Colors.TRANSPARENT,
     flexDirection: 'row'
   },
   left: {
