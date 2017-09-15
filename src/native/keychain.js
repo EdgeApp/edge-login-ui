@@ -38,14 +38,19 @@ export async function disableTouchId (abcAccount) {
   }
 }
 
-export async function loginWithTouchId (abcContext, username, opts) {
+export async function loginWithTouchId (abcContext, username, promptString, fallbackString, opts) {
   const supported = await supportsTouchId()
 
   if (supported) {
     const loginKeyKey = createKeyWithUsername(username, LOGINKEY_KEY)
     const loginKey = await AbcCoreJsUi.getKeychainString(loginKeyKey)
     if (loginKey && loginKey.length > 10) {
-      return abcContext.loginWithKey(username, loginKey, opts)
+      const success = await AbcCoreJsUi.authenticateTouchID(promptString, fallbackString)
+      if (success) {
+        return abcContext.loginWithKey(username, loginKey, opts)
+      } else {
+        return null
+      }
     } else {
       // No login. Just return null as AbcAccount object
       return null

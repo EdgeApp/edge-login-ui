@@ -73,6 +73,5 @@ RCT_REMAP_METHOD(authenticateTouchID, authenticateTouchID:(NSString *) promptStr
                                 NSNumber *num = [NSNumber numberWithInteger:(NSInteger)didAuthenticate];
                                 resolve(num);
                             }];
-    resolve(nil);
 }
 @end

@@ -1,5 +1,6 @@
 import * as Constants from '../constants'
 import { dispatchAction, dispatchActionWithData } from './'
+import { enableTouchId } from '../../native/keychain.js'
 
 /* export function loginPIN (data) {
   return {
@@ -31,6 +32,7 @@ export function userLoginWithPin (data) {
         context
           .loginWithPIN(data.username, data.pin, accountOptions)
           .then(async response => {
+            enableTouchId(response)
             await context.io.folder
               .file('lastuser.json')
               .setText(JSON.stringify({ username: data.username }))
