@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
 import {setLocal} from '../../../common/locale'
+import { loginWithTouchId, enableTouchId } from '../../keychain.js'
 
 class LoginScreen extends Component {
   componentWillMount () {
@@ -28,7 +29,16 @@ class LoginScreen extends Component {
   componentWillReceiveProps (props) {
   }
 
+  preOnLogin (error, abcAccount) {
+    enableTouchId(abcAccount)
+    this.props.onLogin(error, abcAccount)
+  }
+
   render () {
+    loginWithTouchId(this.props.context, 'edgy8', null).then((error, result) => {
+      console.log(error)
+      console.log(result)
+    })
     return (
       <Provider store={this.store}>
         <LoginAppConnector
