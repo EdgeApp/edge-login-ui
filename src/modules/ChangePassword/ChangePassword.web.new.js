@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import styles from './ChangePassword.webstyle.scss'
 import Input from 'react-toolbox/lib/input'
 import FontIcon from 'react-toolbox/lib/font_icon'
+import Success from '../Modals/Success/Success.web.js'
 
 import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
 import { checkPassword } from './ChangePassword.middleware'
@@ -17,6 +18,7 @@ import {
   errorChangePasswordRepeat,
   passwordChanged
 } from './ChangePassword.action'
+import { openSuccessModal, closeSuccessModal } from '../Modals/Success/Success.action.js'
 // import { calculateTime } from '../../lib/helper'
 
 import eyeShow from '../../img/create-account/show-password.png'
@@ -35,7 +37,7 @@ class ChangePassword extends Component {
       }
       if (!error) {
         this.props.dispatch(passwordChanged())
-        return this.props.history.push('/account')
+        this.props.dispatch(openSuccessModal())
       }
     }
     this.props.dispatch(
@@ -46,6 +48,10 @@ class ChangePassword extends Component {
         callback
       )
     )
+  }
+  _handleSuccess = () => {
+    this.props.dispatch(closeSuccessModal())
+    return this.props.history.push('/account')
   }
   _handleOnChangeNewPassword = (newPassword) => {
     this.props.dispatch(changeNewPasswordValue(newPassword))
@@ -146,6 +152,7 @@ class ChangePassword extends Component {
           </div>
         </div>
         {this._renderButtonRows()}
+        <Success header='Password successfully changed' close={this._handleSuccess} />
       </div>
     )
   }

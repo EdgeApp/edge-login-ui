@@ -11,6 +11,7 @@ import { closeLoading } from '../../Loader/Loader.action'
 
 class LoginEdge extends Component {
   componentWillUnmount () {
+    console.log(this.props.edgeObject)
     if (this.props.edgeObject) {
       this.props.edgeObject.cancelRequest()
     }

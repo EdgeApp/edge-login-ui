@@ -31,12 +31,16 @@ class Review extends Component {
   _renderInfo = () => {
     if (this.props.view) {
       return (
-        <p className={styles.shown}>
-          <span className={styles.bold}>Username:</span> {this.props.details.username} <br />
-          <span className={styles.bold}>Password:</span> {this.props.details.password} <br />
-          <span className={styles.bold}>PIN:</span> {this.props.details.pin}
+        <div className={styles.divShown}>
           <FontIcon className={styles.close} value='clear' />
-        </p>
+          <div>
+            <p className={styles.shown}>
+              <span className={styles.bold}>Username:</span> jdskajdslajdlska{this.props.details.username} <br />
+              <span className={styles.bold}>Password:</span> {this.props.details.password} <br />
+              <span className={styles.bold}>PIN:</span> {this.props.details.pin}
+            </p>
+          </div>
+        </div>
       )
     }
     if (!this.props.view) {

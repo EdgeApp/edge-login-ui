@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import Input from 'react-toolbox/lib/input'
+
+import Success from '../Modals/Success/Success.web.js'
 
 import { changePinValue, showPinChangeError, clearPinChangeError } from './ChangePin.action'
 import { checkPin } from './ChangePin.middleware'
+import { openSuccessModal, closeSuccessModal } from '../Modals/Success/Success.action.js'
 
 import styles from './ChangePin.webStyle.scss'
-import Input from 'react-toolbox/lib/input'
 
 class ChangePin extends Component {
   _handleSubmit = () => {
@@ -16,7 +19,7 @@ class ChangePin extends Component {
       }
       if (!error) {
         this.props.dispatch(clearPinChangeError())
-        return this.props.history.push('/account')
+        this.props.dispatch(openSuccessModal())
       }
     }
     this.props.dispatch(
@@ -27,6 +30,10 @@ class ChangePin extends Component {
         callback
       )
     )
+  }
+  _handleSuccess = () => {
+    this.props.dispatch(closeSuccessModal())
+    return this.props.history.push('/account')
   }
   _handleOnChangePin = (pin) => {
     if (pin.length > 4) {
@@ -69,6 +76,7 @@ class ChangePin extends Component {
     return (
       <div className={styles.container}>
         <Input
+          autoFocus
           onKeyPress={e => e.nativeEvent.charCode === 13 ? this._handleSubmit() : null}
           onChange={this._handleOnChangePin}
           value={this.props.pin}
@@ -79,6 +87,7 @@ class ChangePin extends Component {
           error={this.props.error}
         />
         {this._renderButtonRows()}
+        <Success header='PIN successfully changed' close={this._handleSuccess} />
       </div>
     )
   }

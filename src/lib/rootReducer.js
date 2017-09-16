@@ -26,6 +26,7 @@ import * as AccountManagementPassword from '../modules/Modals/AccountManagementP
 import { accountCreated } from '../modules/Modals/AccountCreated/AccountCreated.reducer.js'
 import { passwordRecoverySuccess } from '../modules/Modals/PasswordRecoverySucess/PasswordRecoverySuccess.reducer.js'
 import { accountCacheDelete } from '../modules/Modals/AccountCacheDelete/AccountCacheDelete.reducer.js'
+import { success } from '../modules/Modals/Success/Success.reducer.js'
 // import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 
 // import routes from './routesReducer'
@@ -162,7 +163,8 @@ const store = combineReducers({
     }),
     passwordRecoverySuccess,
     accountCreated,
-    accountCacheDelete
+    accountCacheDelete,
+    success
   }),
   forgotPasswordModal: ForgotPassword.visible,
   user

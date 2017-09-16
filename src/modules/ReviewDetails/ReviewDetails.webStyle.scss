@@ -76,21 +76,22 @@
       text-align: center;
     }
 
-    .shown {
-      color: #58595C;
-      font-size: 16px;
-      text-align: center;
-      line-height: 24px;
+    .divShown {
       position: relative;
-      .bold {
-        font-weight: 700;
-      }
       .close {
         position: absolute;
         top: -14px;
-        right: -96px;
+        right: -54px;
         color: #4977BB;
         font-size: 17px;
+      }
+      .shown {
+        color: #58595C;
+        font-size: 16px;
+        text-align: center;
+        .bold {
+          font-weight: 700;
+        }
       }
     }
   }
