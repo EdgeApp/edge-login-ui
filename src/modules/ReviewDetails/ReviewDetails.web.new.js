@@ -31,16 +31,11 @@ class Review extends Component {
   _renderInfo = () => {
     if (this.props.view) {
       return (
-        <div className={styles.divShown}>
-          <FontIcon className={styles.close} value='clear' />
-          <div>
-            <p className={styles.shown}>
-              <span className={styles.bold}>Username:</span> jdskajdslajdlska{this.props.details.username} <br />
-              <span className={styles.bold}>Password:</span> {this.props.details.password} <br />
-              <span className={styles.bold}>PIN:</span> {this.props.details.pin}
-            </p>
-          </div>
-        </div>
+        <p className={styles.shown}>
+          <span className={styles.bold}>Username:</span> {this.props.details.username} <br />
+          <span className={styles.bold}>Password:</span> {this.props.details.password} <br />
+          <span className={styles.bold}>PIN:</span> {this.props.details.pin}
+        </p>
       )
     }
     if (!this.props.view) {
@@ -76,7 +71,10 @@ class Review extends Component {
         <p className={styles.p2}>You WILL lose access to funds if your password is lost.</p>
         <p className={styles.caution}>Write down and store securely!</p>
         <div className={styles.infoBox} onClick={this._toggleInfo}>
-          { this._renderInfo() }
+          { this.props.view ? <FontIcon className={styles.close} value='clear' /> : null }
+          <div className={styles.infoText}>
+            { this._renderInfo() }
+          </div>
         </div>
         <button className={styles.primary} onClick={e => this.props.dispatch(openAccountCreatedModal())}>Finish</button>
         <AccountCreated cancel={this._cancel} submit={this._submit} />
