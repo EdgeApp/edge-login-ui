@@ -15,7 +15,7 @@ class PasswordRecoveryScreen extends Component {
       {},
       applyMiddleware(
         thunk.withExtraArgument({
-          accountObject: this.props.accountObject,
+          accountObject: this.props.account,
           context: this.props.context,
           onComplete: this.props.onComplete,
           onCancel: this.props.onComplete,
@@ -31,7 +31,7 @@ class PasswordRecoveryScreen extends Component {
     return (
       <Provider store={this.store}>
         <ChangePinConnector
-          accountObject={this.props.accountObject}
+          accountObject={this.props.account}
           styles={Styles}
         />
       </Provider>
@@ -40,7 +40,7 @@ class PasswordRecoveryScreen extends Component {
 }
 
 PasswordRecoveryScreen.propTypes = {
-  accountObject: PropTypes.object.isRequired,
+  account: PropTypes.object.isRequired,
   context: PropTypes.object.isRequired,
   onComplete: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

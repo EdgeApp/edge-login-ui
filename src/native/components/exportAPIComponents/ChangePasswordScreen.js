@@ -16,7 +16,7 @@ class ChangePasswordScreen extends Component {
       {},
       applyMiddleware(
         thunk.withExtraArgument({
-          accountObject: this.props.accountObject,
+          accountObject: this.props.account,
           context: this.props.context,
           onComplete: this.props.onComplete,
           onCancel: this.props.onComplete,
@@ -38,7 +38,7 @@ class ChangePasswordScreen extends Component {
 }
 
 ChangePasswordScreen.propTypes = {
-  accountObject: PropTypes.object.isRequired,
+  account: PropTypes.object.isRequired,
   context: PropTypes.object.isRequired,
   onComplete: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

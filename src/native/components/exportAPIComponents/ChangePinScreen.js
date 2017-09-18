@@ -15,7 +15,7 @@ class ChangePinScreen extends Component {
       {},
       applyMiddleware(
         thunk.withExtraArgument({
-          accountObject: this.props.accountObject,
+          accountObject: this.props.account,
           context: this.props.context,
           onComplete: this.props.onComplete,
           onCancel: this.props.onComplete,
@@ -31,7 +31,7 @@ class ChangePinScreen extends Component {
     return (
       <Provider store={this.store}>
         <ChangePinConnector
-          accountObject={this.props.accountObject}
+          accountObject={this.props.account}
           styles={Styles}
         />
       </Provider>
@@ -40,7 +40,7 @@ class ChangePinScreen extends Component {
 }
 
 ChangePinScreen.propTypes = {
-  accountObject: PropTypes.object.isRequired,
+  account: PropTypes.object.isRequired,
   context: PropTypes.object.isRequired,
   onComplete: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
@@ -50,7 +50,7 @@ ChangePinScreen.propTypes = {
 ChangePinScreen.defaultProps = {
   locale: 'US',
   language: 'en_us',
-  accountObject: null
+  account: null
 }
 
 export { ChangePinScreen }
