@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './Header.webStyle.scss'
+import styles from './Header.mobileStyle.scss'
 import { sprintf } from 'sprintf-js'
 import t from 'lib/web/LocaleStrings'
 
