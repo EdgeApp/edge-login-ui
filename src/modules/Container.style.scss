@@ -10,6 +10,10 @@
   width :870px;
 }
 
+.mobileWidth {
+  width :320px;
+}
+
 .dialogLogin {
   @extend .baseWidth;
   height : 550px;
@@ -53,6 +57,10 @@
 .dialogPasswordRecoveryToken {
   @extend .baseWidth;
   height : 528px;
+}
+
+.dialogMobile {
+
 }
 
 .topLevelDialog section {

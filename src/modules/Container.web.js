@@ -112,7 +112,7 @@ class Container extends Component {
           active
           onEscKeyDown={this._handleToggle}
           onOverlayClick={this._handleToggle}
-          className={this.selectDialogHeight(this.props.location.pathname)}
+          className={styles.mobileWidth}
         >
           <LayoutTemplate theme={layoutTheme} location={this.props.location}>
             <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
