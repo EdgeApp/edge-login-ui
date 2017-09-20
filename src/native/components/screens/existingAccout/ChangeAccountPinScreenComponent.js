@@ -16,11 +16,17 @@ export default class ChangeAccountPinScreenComponent extends Component {
       focusOn: 'pin'
     })
   }
+  renderHeader (style) {
+    if (this.props.showHeader) {
+      return <HeaderConnector style={style.header} />
+    }
+    return null
+  }
   render () {
     const { SetAccountPinScreenStyle } = this.props.styles
     return (
       <View style={SetAccountPinScreenStyle.screen}>
-        <HeaderConnector style={SetAccountPinScreenStyle.header} />
+        {this.renderHeader(SetAccountPinScreenStyle)}
         <View style={SetAccountPinScreenStyle.pageContainer}>
           <View style={SetAccountPinScreenStyle.row1}>
             <Text style={SetAccountPinScreenStyle.instructions}>

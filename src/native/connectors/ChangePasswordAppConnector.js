@@ -6,7 +6,8 @@ import * as Constants from '../../common/constants'
 export const mapStateToProps = (state, ownProps) => {
   return {
     accountObject: ownProps.accountObject,
-    workflow: state.workflow
+    workflow: state.workflow,
+    showHeader: ownProps.showHeader
   }
 }
 

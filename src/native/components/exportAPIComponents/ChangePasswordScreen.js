@@ -31,7 +31,10 @@ class ChangePasswordScreen extends Component {
   render () {
     return (
       <Provider store={this.store}>
-        <ChangePasswordAppConnector styles={Styles} />
+        <ChangePasswordAppConnector
+          styles={Styles}
+          showHeader={this.props.showHeader}
+        />
       </Provider>
     )
   }
@@ -42,13 +45,15 @@ ChangePasswordScreen.propTypes = {
   context: PropTypes.object.isRequired,
   onComplete: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  showHeader: PropTypes.bool,
   locale: PropTypes.string,
   language: PropTypes.string
 }
 ChangePasswordScreen.defaultProps = {
   locale: 'US',
   language: 'en_us',
-  accountObject: null
+  accountObject: null,
+  showHeader: true
 }
 
 export { ChangePasswordScreen }

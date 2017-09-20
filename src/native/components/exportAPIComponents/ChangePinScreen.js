@@ -33,6 +33,7 @@ class ChangePinScreen extends Component {
         <ChangePinConnector
           accountObject={this.props.account}
           styles={Styles}
+          showHeader={this.props.showHeader}
         />
       </Provider>
     )
@@ -44,6 +45,7 @@ ChangePinScreen.propTypes = {
   context: PropTypes.object.isRequired,
   onComplete: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  showHeader: PropTypes.bool,
   locale: PropTypes.string,
   language: PropTypes.string
 }
