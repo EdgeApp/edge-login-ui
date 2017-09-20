@@ -9,7 +9,7 @@ class LayoutTemplate extends Component {
       <div className={styles.container}>
         <Header location={this.props.location} />
         <div className={styles.main}>
-          {/* {this.props.children} */}
+          {this.props.children}
         </div>
         <Footer />
       </div>
