@@ -21,6 +21,8 @@ class FormFieldWithDropComponent extends Component {
   }
 
   render () {
+    console.log('FOR DROPO COMPONENT ')
+    console.log(this.props.username)
     let Style = this.props.style
     if (this.state.isFocused) {
       Style = this.props.style.selected

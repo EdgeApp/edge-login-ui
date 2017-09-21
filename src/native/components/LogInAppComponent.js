@@ -60,6 +60,8 @@ export default class LoginAppComponent extends Component {
         return this.getLandingScreen()
       case Constants.WORKFLOW_PASSWORD:
         return this.getPasswordScreen()
+      case Constants.WORKFLOW_PIN:
+        return this.getPinScreen()
       case Constants.WORKFLOW_CREATE:
         return this.getCreateScreen()
     }
