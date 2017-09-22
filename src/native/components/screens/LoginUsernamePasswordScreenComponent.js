@@ -14,11 +14,10 @@ import * as Assets from '../../assets/'
 import * as Offsets from '../../constants'
 import DeleteUserConnector
   from '../../../native/connectors/abSpecific/DeleteUserConnector'
-import {localize, KEYS} from '../../../common/locale'
+import { localize, KEYS } from '../../../common/locale'
 
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
-    this.props.clearLogin()
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       this.noFocus.bind(this)
@@ -223,8 +222,22 @@ export default class LandingScreenComponent extends Component {
     })
   }
   selectUser (user) {
-    this.onSetNextFocus()
     this.updateUsername(user)
+    if (this.checkPinEnabled(user)) {
+      this.props.gotoPinLoginPage()
+      return
+    }
+    this.onSetNextFocus()
+  }
+
+  checkPinEnabled (user) {
+    for (let i = 0; i < this.props.previousUsers.length; i++) {
+      let obj = this.props.previousUsers[i]
+      if (user === obj.username && obj.pinEnabled) {
+        return true
+      }
+    }
+    return false
   }
   updateUsername (data) {
     this.props.updateUsername(data)

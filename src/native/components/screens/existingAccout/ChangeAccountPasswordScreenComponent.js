@@ -17,11 +17,17 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
       focusSecond: false
     })
   }
+  renderHeader (style) {
+    if (this.props.showHeader) {
+      return <HeaderConnector style={style.header} />
+    }
+    return null
+  }
   render () {
     const { NewAccountPasswordScreenStyle } = this.props.styles
     return (
       <View style={NewAccountPasswordScreenStyle.screen}>
-        <HeaderConnector style={NewAccountPasswordScreenStyle.header} />
+        {this.renderHeader(NewAccountPasswordScreenStyle)}
         {this.renderMain(NewAccountPasswordScreenStyle)}
         {this.renderModal(NewAccountPasswordScreenStyle)}
       </View>

@@ -7,7 +7,8 @@ export const mapStateToProps = (state, ownProps) => {
     styles: ownProps.styles,
     pin: state.create.pin,
     pinError: state.create.pinError,
-    workflow: state.workflow
+    workflow: state.workflow,
+    showHeader: ownProps.showHeader
   }
 }
 

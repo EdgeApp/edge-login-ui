@@ -11,7 +11,6 @@ import * as Assets from '../../assets/'
 export default class PinLogInScreenComponent extends Component {
   componentWillMount () {
     this.setState({
-      username: '',
       pin: '',
       loggingIn: false,
       focusOn: 'pin'

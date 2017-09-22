@@ -13,12 +13,17 @@ export default function (state = initialState, action) {
       if (action.data.lastUser) {
         return { ...state, username: action.data.lastUser.username }
       }
-      if (typeof action.data.usersWithPinList !== 'undefined' && action.data.usersWithPinList.length > 0) {
+      if (
+        typeof action.data.usersWithPinList !== 'undefined' &&
+        action.data.usersWithPinList.length > 0
+      ) {
         const topUser = action.data.usersWithPinList[0]
         return { ...state, username: topUser.username }
       }
       return state
     case Constants.AUTH_UPDATE_USERNAME:
+      console.log('updainguser name ')
+      console.log(action.data)
       return { ...state, username: action.data }
     case Constants.AUTH_UPDATE_PIN:
       return { ...state, pin: action.data }

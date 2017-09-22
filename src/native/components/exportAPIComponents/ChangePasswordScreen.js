@@ -16,7 +16,7 @@ class ChangePasswordScreen extends Component {
       {},
       applyMiddleware(
         thunk.withExtraArgument({
-          accountObject: this.props.accountObject,
+          accountObject: this.props.account,
           context: this.props.context,
           onComplete: this.props.onComplete,
           onCancel: this.props.onComplete,
@@ -31,24 +31,29 @@ class ChangePasswordScreen extends Component {
   render () {
     return (
       <Provider store={this.store}>
-        <ChangePasswordAppConnector styles={Styles} />
+        <ChangePasswordAppConnector
+          styles={Styles}
+          showHeader={this.props.showHeader}
+        />
       </Provider>
     )
   }
 }
 
 ChangePasswordScreen.propTypes = {
-  accountObject: PropTypes.object.isRequired,
+  account: PropTypes.object.isRequired,
   context: PropTypes.object.isRequired,
   onComplete: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  showHeader: PropTypes.bool,
   locale: PropTypes.string,
   language: PropTypes.string
 }
 ChangePasswordScreen.defaultProps = {
   locale: 'US',
   language: 'en_us',
-  accountObject: null
+  accountObject: null,
+  showHeader: true
 }
 
 export { ChangePasswordScreen }
