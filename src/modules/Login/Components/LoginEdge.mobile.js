@@ -8,13 +8,14 @@ import styles from './LoginEdge.mobileStyle.scss'
 import { edgeLogin } from '../Login.middleware'
 import { closeLoading } from '../../Loader/Loader.action'
 
+import { showQRCode, hideQRCode } from './LoginEdge.mobileState.js'
+
 class LoginEdge extends Component {
   componentWillUnmount () {
     if (this.props.edgeObject) {
       this.props.edgeObject.cancelRequest()
     }
   }
-
   componentDidMount () {
     this.props.dispatch(
         edgeLogin((error, account) => {
@@ -31,8 +32,15 @@ class LoginEdge extends Component {
         })
       )
   }
-
-  renderBarcode () {
+  _toggleQRCode = () => {
+    if (!this.props.view) {
+      this.props.dispatch(showQRCode())
+    }
+    if (this.props.view) {
+      this.props.dispatch(hideQRCode())
+    }
+  }
+  renderBarcode = () => {
     const { edgeId } = this.props
     if (edgeId) {
       const qrCodeVal = 'airbitz://edge/' + edgeId
@@ -41,13 +49,27 @@ class LoginEdge extends Component {
       return null
     }
   }
-  renderLoginLink () {
+  renderLoginLink = () => {
     const { edgeId } = this.props
     if (edgeId) {
       return `https://airbitz.co/elf/?address=${edgeId}`
     }
   }
-
+  _renderQRCode = () => {
+    if (!this.props.view) {
+      return null
+    }
+    if (this.props.view) {
+      return (
+        <div className={styles.qrCode}>
+          <a target='_blank' href={this.renderLoginLink()}>
+            {this.renderBarcode()}
+          </a>
+          <p className={styles.text}>Scan using Airbitz wallet to login</p>
+        </div>
+      )
+    }
+  }
   render () {
     return (
       <div className={styles.container}>
@@ -69,14 +91,9 @@ class LoginEdge extends Component {
             Airbitz mobile wallet
           </p>
         </div>
-        <div className={styles.qrCode}>
-          <a target='_blank' href={this.renderLoginLink()}>
-            {this.renderBarcode()}
-          </a>
-          <p className={styles.text}>Scan using Airbitz wallet to login</p>
-        </div>
-        <p className={styles.QRTextToggle}>
-          Hide QR code
+        {this._renderQRCode()}
+        <p className={styles.QRTextToggle} onClick={this._toggleQRCode}>
+          {this.props.view ? 'Hide QR code' : 'Show QR code'}
         </p>
         <div className={styles.divider} />
         <div className={styles.signUp}>
@@ -95,27 +112,6 @@ class LoginEdge extends Component {
       </div>
     )
   }
-
-  // render () {
-  //   const { edgeUsername } = this.props
-  //
-  //   return (
-  //     <div style={style.container}>
-  //       <div style={style.topText}>
-  //         <p className={styles.header}>{this.props.register ? t('string_scan_barcode_to_register') : t('string_scan_barcode_to_signin')}</p>
-  //       </div>
-  //       {!edgeUsername ? (
-  //         <div>
-  //           <a target='_blank' href={this.renderLoginLink()}>{this.renderBarcode()}</a>
-  //         </div>
-  //       ) : (
-  //         <div>
-  //           <b>{edgeUsername}</b><br />
-  //           {t('approving_login_text')}<br />
-  //         </div>)}
-  //     </div>
-  //   )
-  // }
 }
 
 const LoginEdgeWithRouter = withRouter(LoginEdge)
@@ -123,7 +119,8 @@ const LoginEdgeWithRedux = connect(state => ({
   edgeId: state.login.edgeLoginResults.id,
   edgeUsername: state.login.edgeUsername,
   edgeAccount: state.login.edgeAccount,
-  edgeObject: state.login.edgeLoginResults
+  edgeObject: state.login.edgeLoginResults,
+  view: state.login.mobileShowQRCode
 }))(LoginEdgeWithRouter)
 
 export default LoginEdgeWithRedux

@@ -110,8 +110,8 @@
       color: #909091;
       font-size: 18px;
       text-align: center;
-      margin-top: 15px;
-      margin-bottom: 10px;
+      margin-top: 20px;
+      margin-bottom: 5px;
     }
   }
   .QRTextToggle {
@@ -122,7 +122,6 @@
     margin-bottom: 10px;
     cursor: pointer;
   }
-
   .divider {
     @extend .max-width;
     height: 1px;
