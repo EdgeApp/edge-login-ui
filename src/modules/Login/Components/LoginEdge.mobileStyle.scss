@@ -1,11 +1,9 @@
-@import 'theme/_config.scss';
 @import "~theme/buttons";
 
 .max-width {
   width: 100%;
   margin: 0 auto;
 }
-
 .container {
   display: flex;
   display: -webkit-flex;
@@ -98,8 +96,25 @@
       text-align: center;
     }
   }
-
-  .showQRText {
+  .qrCode {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    margin-top: 15px;
+    .text {
+      color: #909091;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+  }
+  .QRTextToggle {
     color: #4977BB;
     font-size: 16px;
     text-align: center;
@@ -140,22 +155,3 @@
     margin-bottom: 10px;
   }
 }
-
-.inputGroup {
-  display: flex;
-  display: -webkit-flex;
-
-  flex-direction: column;
-  -webkit-flex-direction: column;
-
-  justify-content: center;
-  -webkit-justify-content: center;
-
-  align-items: center;
-  -webkit-align-items: center;
-
-  .inputs {
-    width: 80%;
-  }
-}
-

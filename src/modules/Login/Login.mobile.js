@@ -21,13 +21,13 @@ import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action
 import { closeLoading } from '../Loader/Loader.action'
 
 import Snackbar from 'react-toolbox/lib/snackbar'
-// import LoginEdge from './Components/LoginEdge.web'
+import LoginEdge from './Components/LoginEdge.mobile.js'
 // import NewAccountSection from './Components/NewAccount.web.js'
 // import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
 // import LoginWithPinSection from './Components/LoginWithPin.web.js'
 // import Divider from './Components/Divider.web.js'
 
-import styles from './Login.mobileStyle.scss'
+// import styles from './Login.mobileStyle.scss'
 
 class Login extends Component {
   _handleSubmit = (username, password) => {
@@ -122,46 +122,54 @@ class Login extends Component {
     this.props.dispatch(openLogin())
   }
 
+  // render () {
+  //   return (
+  //     <div className={styles.container}>
+  //       <div className={styles.navigation}>
+  //         <div className={styles.navBoxActive}>
+  //           <p className={styles.text}>
+  //             Edge Login
+  //           </p>
+  //         </div>
+  //         <div className={styles.navBox}>
+  //           <p className={styles.text}>
+  //             Username Login
+  //           </p>
+  //         </div>
+  //       </div>
+  //       <div className={styles.rectangle}>
+  //         <p className={styles.text}>
+  //           Tap to login with the <br />
+  //           Airbitz mobile wallet
+  //         </p>
+  //       </div>
+  //       <p className={styles.showQRText}>
+  //         Show QR code
+  //       </p>
+  //       <div className={styles.divider} />
+  //       <div className={styles.signUp}>
+  //         <p className={styles.question}>
+  //           Don’t have an account?
+  //         </p>
+  //         <p className={styles.create}>
+  //           Create account
+  //         </p>
+  //       </div>
+  //       <div className={styles.divider} />
+  //       <p className={styles.appText}>
+  //         Increase your Account Security. <br />
+  //         Download Airbitz & enable 2FA
+  //       </p>
+  //     </div>
+  //   )
+  // }
+
   render () {
     return (
-      <div className={styles.container}>
-        <div className={styles.navigation}>
-          <div className={styles.edge}>
-            <p className={styles.text}>
-              Edge Login
-            </p>
-          </div>
-          <div className={styles.username}>
-            <p className={styles.text}>
-              Username Login
-            </p>
-          </div>
-        </div>
-        <div className={styles.rectangle}>
-          <p className={styles.text}>
-            Tap to login with the Airbitz mobile wallet
-          </p>
-        </div>
-        <p className={styles.showQRText}>
-          Show QR code
-        </p>
-        <div className={styles.divider} />
-        <div className={styles.signUp}>
-          <p className={styles.question}>
-            Don’t have an account?
-          </p>
-          <p className={styles.create}>
-            Create account
-          </p>
-        </div>
-        <div className={styles.divider} />
-        <p className={styles.appText}>
-          Increase your Account Security. <br />
-          Download Airbitz & enable 2FA
-        </p>
-      </div>
+      <LoginEdge />
     )
   }
+
 }
 
 const LoginWithRouter = withRouter(Login)
