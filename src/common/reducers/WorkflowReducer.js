@@ -14,7 +14,7 @@ const initialState = {
     details: [{ back: false, skip: false, title: 'initialize', subTitle: '' }]
   },
   createWF: {
-    scenes: 6,
+    scenes: 7,
     details: [
       { back: false, skip: false, title: '', subTitle: '' },
       {
@@ -34,7 +34,7 @@ const initialState = {
         back: false,
         skip: false,
         title: 'Creating your account',
-        subTitle: 'sd'
+        subTitle: ''
       },
       {
         back: true,

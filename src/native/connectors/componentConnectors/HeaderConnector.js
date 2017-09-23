@@ -3,12 +3,6 @@ import { Header } from '../../components/common/'
 import * as actions from '../../../common/actions'
 
 export const mapStateToProps = (state, ownProps) => {
-  console.log('START LOGGING ')
-  console.log('START LOGGING ')
-  console.log('START LOGGING ')
-  console.log('START LOGGING ')
-  console.log('START LOGGING ')
-  console.log('START LOGGING ')
   const workflow = state.workflow
   const currentWorkflow = workflow[state.workflow.currentKey]
   const currentScene = currentWorkflow.details[state.workflow.currentSceneIndex]
