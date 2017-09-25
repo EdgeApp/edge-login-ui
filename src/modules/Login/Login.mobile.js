@@ -22,6 +22,7 @@ import { closeLoading } from '../Loader/Loader.action'
 
 import Snackbar from 'react-toolbox/lib/snackbar'
 import LoginEdge from './Components/LoginEdge.mobile.js'
+import LoginWithPassword from './Components/LoginWithPassword.mobile.js'
 // import NewAccountSection from './Components/NewAccount.web.js'
 // import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
 // import LoginWithPinSection from './Components/LoginWithPin.web.js'
@@ -165,9 +166,13 @@ class Login extends Component {
   // }
 
   render () {
-    return (
-      <LoginEdge />
-    )
+    console.log(this.props.mobileLoginView)
+    if (this.props.mobileLoginView) {
+      return <LoginEdge history={this.props.history} />
+    }
+    if (!this.props.mobileLoginView) {
+      return <LoginWithPassword history={this.props.history} />
+    }
   }
 
 }
@@ -182,6 +187,7 @@ const LoginWithRedux = connect(state => ({
   showCachedUsers: state.login.showCachedUsers,
   edgeObject: state.login.edgeLoginResults,
   loginPasswordWait: state.login.loginPasswordWait,
+  mobileLoginView: state.login.mobileLoginView,
   currentPinCountdown: false
 }))(LoginWithRouter)
 

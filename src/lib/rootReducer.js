@@ -86,6 +86,7 @@ const store = combineReducers({
     loginNotification: Login.loginNotification,
     error: Login.error,
     errorPin: Login.errorPin,
+    mobileLoginView: Login.mobileLoginView,
     mobileShowQRCode
   }),
   nextButtonVisible,
