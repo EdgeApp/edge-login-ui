@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import styles from './LoginEdge.mobileStyle.scss'
 import QRCode from './QRCode.js'
-
-import { showMobileLoginWithPasswordView } from '../Login.action'
+import Divider from './Divider.mobile.js'
 import { showQRCode, hideQRCode } from './LoginEdge.mobileState.js'
 
-class LoginEdgeMobile extends Component {
+import styles from './NewAccount.mobileStyle.scss'
+
+class NewAccountMobile extends Component {
   _toggleQRCode = () => {
     if (!this.props.view) {
       this.props.dispatch(showQRCode())
@@ -32,18 +32,6 @@ class LoginEdgeMobile extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <div className={styles.navigation}>
-          <div className={styles.navBoxActive}>
-            <p className={styles.text}>
-              Edge Login
-            </p>
-          </div>
-          <div className={styles.navBox} onClick={e => this.props.dispatch(showMobileLoginWithPasswordView())}>
-            <p className={styles.text}>
-              Username Login
-            </p>
-          </div>
-        </div>
         <div className={styles.rectangle}>
           <p className={styles.text}>
             Tap to login with the <br />
@@ -54,16 +42,11 @@ class LoginEdgeMobile extends Component {
         <p className={styles.QRTextToggle} onClick={this._toggleQRCode}>
           {this.props.view ? 'Hide QR code' : 'Show QR code'}
         </p>
-        <div className={styles.divider} />
-        <div className={styles.signUp}>
-          <p className={styles.question}>
-            Don’t have an account?
-          </p>
-          <p className={styles.create}>
-            Create account
-          </p>
-        </div>
-        <div className={styles.dividerBottom} />
+        <Divider />
+        <button className={styles.createButton}>Create Account</button>
+        <p className={styles.alreadyAccount}>
+          Already have an account? <span className={styles.link}>Log in</span>
+        </p>
       </div>
     )
   }
@@ -75,4 +58,4 @@ export default connect(state => ({
   edgeAccount: state.login.edgeAccount,
   edgeObject: state.login.edgeLoginResults,
   view: state.login.mobileShowQRCode
-}))(LoginEdgeMobile)
+}))(NewAccountMobile)

@@ -1,0 +1,77 @@
+@import "~theme/buttons";
+@import "~theme/mobile";
+
+.container {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  align-items: center;
+  -webkit-align-items: center;
+
+  // height: 640px;
+  // height: 411px;
+  padding: 20px;
+
+  .rectangle {
+    @extend .max-width;
+	  height: 100px;
+    border: 1px solid #4977BB;
+    border-radius: 3px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+
+    .text {
+      color: #4977BB;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+  .qrCode {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    margin-top: 15px;
+    .text {
+      color: #909091;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 5px;
+    }
+  }
+  .QRTextToggle {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #4977BB;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .createButton {
+    @extend .margins;
+    @extend .primaryMobile;
+  }
+  .alreadyAccount {
+    @extend .margins;
+    color: #909091;
+    font-size: 16px;
+    text-align: center;
+  }
+}

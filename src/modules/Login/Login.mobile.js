@@ -23,7 +23,7 @@ import { closeLoading } from '../Loader/Loader.action'
 import Snackbar from 'react-toolbox/lib/snackbar'
 import LoginEdge from './Components/LoginEdge.mobile.js'
 import LoginWithPassword from './Components/LoginWithPassword.mobile.js'
-// import NewAccountSection from './Components/NewAccount.web.js'
+import NewAccountSection from './Components/NewAccount.mobile.js'
 // import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
 // import LoginWithPinSection from './Components/LoginWithPin.web.js'
 // import Divider from './Components/Divider.web.js'
@@ -122,56 +122,17 @@ class Login extends Component {
     this.props.dispatch(closeUserList())
     this.props.dispatch(openLogin())
   }
-
-  // render () {
-  //   return (
-  //     <div className={styles.container}>
-  //       <div className={styles.navigation}>
-  //         <div className={styles.navBoxActive}>
-  //           <p className={styles.text}>
-  //             Edge Login
-  //           </p>
-  //         </div>
-  //         <div className={styles.navBox}>
-  //           <p className={styles.text}>
-  //             Username Login
-  //           </p>
-  //         </div>
-  //       </div>
-  //       <div className={styles.rectangle}>
-  //         <p className={styles.text}>
-  //           Tap to login with the <br />
-  //           Airbitz mobile wallet
-  //         </p>
-  //       </div>
-  //       <p className={styles.showQRText}>
-  //         Show QR code
-  //       </p>
-  //       <div className={styles.divider} />
-  //       <div className={styles.signUp}>
-  //         <p className={styles.question}>
-  //           Don’t have an account?
-  //         </p>
-  //         <p className={styles.create}>
-  //           Create account
-  //         </p>
-  //       </div>
-  //       <div className={styles.divider} />
-  //       <p className={styles.appText}>
-  //         Increase your Account Security. <br />
-  //         Download Airbitz & enable 2FA
-  //       </p>
-  //     </div>
-  //   )
-  // }
-
   render () {
-    console.log(this.props.mobileLoginView)
-    if (this.props.mobileLoginView) {
-      return <LoginEdge history={this.props.history} />
+    if (!this.props.viewPassword && !this.props.viewPIN) {
+      return <NewAccountSection />
     }
-    if (!this.props.mobileLoginView) {
-      return <LoginWithPassword history={this.props.history} />
+    if (!this.props.viewPIN && this.props.viewPassword) {
+      if (this.props.mobileLoginView) {
+        return <LoginEdge history={this.props.history} />
+      }
+      if (!this.props.mobileLoginView) {
+        return <LoginWithPassword history={this.props.history} />
+      }
     }
   }
 
