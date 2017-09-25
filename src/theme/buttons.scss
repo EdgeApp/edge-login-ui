@@ -13,11 +13,18 @@
   margin: 0px 5px;
 }
 
-.primary:hover {
+.primaryMobile {
+  @extend .primary;
+  width: 100%;
+}
+
+.primary:hover,
+.primaryMobile:hover {
   background-color: rgba(73,119,187,0.6);
 }
 
-.primary:active {
+.primary:active,
+.primaryMobile:active {
   background-color: #2A5799;
 }
 
@@ -32,6 +39,11 @@
   line-height: 17px;
   text-align: center;
   margin: 0px 5px;
+}
+
+.primaryLoadMobile {
+  @extend .primaryLoad;
+  width: 100%;
 }
 
 .secondary {
@@ -49,11 +61,18 @@
   margin: 0px 5px;
 }
 
-.secondary:hover {
+.secondaryMobile {
+  @extend .secondary;
+  width: 100%;
+}
+
+.secondary:hover,
+.secondaryMobile:hover {
   background-color: rgba(144,144,145,0.6);
 }
 
-.secondary:active {
+.secondary:active,
+.secondaryMobile:active {
   background-color: #58595C;
 }
 
@@ -68,6 +87,11 @@
   line-height: 17px;
   text-align: center;
   margin: 0px 5px;
+}
+
+.secondaryLoadMobile {
+  @extend .secondaryLoad;
+  width: 100%;
 }
 
 .link {
@@ -92,6 +116,20 @@
 
   flex-direction: row;
   -webkit-flex-direction: row;
+
+  justify-content: center;
+  -webkit-justify-content: center;
+
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.rowButtonsMobile {
+  display: flex;
+  display: -webkit-flex;
+
+  flex-direction: column;
+  -webkit-flex-direction: column;
 
   justify-content: center;
   -webkit-justify-content: center;

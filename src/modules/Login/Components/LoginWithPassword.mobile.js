@@ -2,18 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import styles from './LoginWithPassword.mobileStyle.scss'
-// import Input from 'react-toolbox/lib/input'
+import Input from 'react-toolbox/lib/input'
 
 import {
-  // loginUsername,
-  // loginPassword,
+  loginUsername,
+  loginPassword,
   openUserList,
   closeUserList,
   showMobileLoginEdgeView
 } from '../Login.action.js'
 // import PasswordRecovery from '../../Modals/PasswordRecovery/PasswordRecovery.web.js'
-// import CachedUsers from '../../CachedUsers/CachedUsers.web.js'
-
+import CachedUsers from '../../CachedUsers/CachedUsers.web.js'
 // import { openPasswordRecoveryModal } from '../../Modals/PasswordRecovery/PasswordRecovery.action.js'
 
 class LoginWithPasswordMobile extends Component {
@@ -38,6 +37,22 @@ class LoginWithPasswordMobile extends Component {
     this.pin.getWrappedInstance().focus()
   }
   render () {
+    const {dispatch, username, password} = this.props
+    const usersDropdown = () => {
+      return (
+        <Input
+          type='text'
+          label='Username'
+          name='username'
+          onKeyPress={this._usernameKeyPress}
+          onChange={value => dispatch(loginUsername(value))}
+          value={username}
+          ref={input => { this.username = input }}
+          onFocus={this._showCachedUsers}
+          onBlur={this._hideCachedUsers}
+        />
+      )
+    }
     return (
       <div className={styles.container}>
         <div className={styles.navigation}>
@@ -52,6 +67,38 @@ class LoginWithPasswordMobile extends Component {
             </p>
           </div>
         </div>
+        <p className={styles.header}>Log in with your username and <br />password</p>
+        <div className={styles.forms}>
+          <CachedUsers
+            component={usersDropdown()}
+            area='passwordLogin'
+            containerClassName={styles.cachedUsers}
+            userListClassName={styles.userListClassName}
+          />
+          <Input
+            type='password'
+            label='Password'
+            name='password'
+            onKeyPress={this._passwordKeyPress}
+            onChange={value => dispatch(loginPassword(value))}
+            value={password}
+            ref={input => { this.password = input }}
+            className={styles.form}
+            error={this.props.error}
+          />
+        </div>
+
+        <p className={styles.forgotPassword}>Forgot Password</p>
+        <button className={styles.signUpButton}>Sign In</button>
+        <div className={styles.signUp}>
+          <p className={styles.question}>
+            Don’t have an account?
+          </p>
+          <p className={styles.create}>
+            Create account
+          </p>
+        </div>
+        <div className={styles.dividerBottom} />
       </div>
     )
   }

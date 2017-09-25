@@ -1,9 +1,6 @@
 @import "~theme/buttons";
+@import "~theme/mobile";
 
-.max-width {
-  width: 100%;
-  margin: 0 auto;
-}
 .container {
   display: flex;
   display: -webkit-flex;
@@ -115,24 +112,15 @@
     }
   }
   .QRTextToggle {
+    margin-top: 10px;
+    margin-bottom: 10px;
     color: #4977BB;
     font-size: 16px;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
     cursor: pointer;
   }
-  .divider {
-    @extend .max-width;
-    height: 1px;
-    border-top: 1px solid #D8D6D6;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
   .signUp {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  @extend .margins;
     .question {
       color: #909091;
       font-size: 16px;

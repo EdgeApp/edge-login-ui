@@ -50,7 +50,7 @@ class LoginEdgeMobile extends Component {
             Create account
           </p>
         </div>
-        <div className={styles.divider} />
+        <div className={styles.dividerBottom} />
       </div>
     )
   }
