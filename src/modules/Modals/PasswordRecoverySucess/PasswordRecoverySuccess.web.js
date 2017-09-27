@@ -18,7 +18,7 @@ class PasswordRecovery extends Component {
       >
         <p className={styles.header}>Password Recovery Setup complete!</p>
         <p className={styles.text}>
-          Please ensure you retain a copy of the email you sent to yourself. Use the link in the email to recover yoru account if your password is forgotten.
+          Please ensure you retain a copy of the email you sent to yourself. Use the link in the email to recover your account if your password is forgotten.
         </p>
         <button className={styles.primary} onClick={this.props.finish}>Done</button>
         <p className={styles.cancel}>
