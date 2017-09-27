@@ -23,10 +23,8 @@ import { closeLoading } from '../Loader/Loader.action'
 import Snackbar from 'react-toolbox/lib/snackbar'
 import LoginEdge from './Components/LoginEdge.mobile.js'
 import LoginWithPassword from './Components/LoginWithPassword.mobile.js'
-import NewAccountSection from './Components/NewAccount.mobile.js'
-// import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
-// import LoginWithPinSection from './Components/LoginWithPin.web.js'
-// import Divider from './Components/Divider.web.js'
+import NewAccount from './Components/NewAccount.mobile.js'
+import LoginWithPin from './Components/LoginWithPin.mobile.js'
 
 // import styles from './Login.mobileStyle.scss'
 
@@ -124,7 +122,7 @@ class Login extends Component {
   }
   render () {
     if (!this.props.viewPassword && !this.props.viewPIN) {
-      return <NewAccountSection />
+      return <NewAccount />
     }
     if (!this.props.viewPIN && this.props.viewPassword) {
       if (this.props.mobileLoginView) {
@@ -133,6 +131,9 @@ class Login extends Component {
       if (!this.props.mobileLoginView) {
         return <LoginWithPassword history={this.props.history} />
       }
+    }
+    if (this.props.viewPIN && !this.props.viewPassword) {
+      return <LoginWithPin />
     }
   }
 
