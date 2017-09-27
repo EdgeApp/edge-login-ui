@@ -20,7 +20,6 @@ export default class LandingScreenComponent extends Component {
   }
   renderOverImage () {
     const { LandingPageScreenStyle } = this.props.styles
-    console.log(LandingPageScreenStyle)
     return (
       <View style={LandingPageScreenStyle.featureBox}>
         <LogoImageHeader style={LandingPageScreenStyle.logoHeader} />

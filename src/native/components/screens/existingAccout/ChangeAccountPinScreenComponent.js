@@ -62,7 +62,6 @@ export default class ChangeAccountPinScreenComponent extends Component {
     // validation.
     // is there no error message ,
     if (this.props.pin.length !== 4) {
-      console.log('PIN ERROR')
       return
     }
     this.props.changePin(this.props.pin)
