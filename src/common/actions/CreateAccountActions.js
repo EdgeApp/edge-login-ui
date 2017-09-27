@@ -147,7 +147,10 @@ export function agreeToConditions (account) {
       await context.io.folder
         .file('acceptTermsAndConditions.json')
         .setText(JSON.stringify({ accepted: true }))
-        .catch(e => null)
+        .catch(e => {
+          console.log('error')
+          console.log(e)
+        })
       return response
     }
     callback(null, account)

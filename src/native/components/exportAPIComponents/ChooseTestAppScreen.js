@@ -12,7 +12,6 @@ class ChooseTestAppScreen extends Component {
     this.props.onChangePin()
   }
   onRecoverPress () {
-    console.log('do thing')
   }
   render () {
     // const { ScreenStyle } = this.props.styles

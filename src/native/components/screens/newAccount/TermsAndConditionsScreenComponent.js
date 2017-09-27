@@ -83,6 +83,7 @@ export default class TermsAndConditionsScreenComponent extends Component {
     )
   }
   onNextPress () {
+    console.log(this.props.accountObject)
     this.props.agreeToCondition(this.props.accountObject)
   }
 }

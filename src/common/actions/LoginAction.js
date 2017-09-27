@@ -26,8 +26,6 @@ export function userLoginWithPin (data) {
     let accountOptions = imports.accountOptions
     dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PIN, data.pin))
     if (data.pin.length === 4) {
-      console.log('USER LOGIN WITH PIN ')
-      console.log(data)
       setTimeout(() => {
         context
           .loginWithPIN(data.username, data.pin, accountOptions)

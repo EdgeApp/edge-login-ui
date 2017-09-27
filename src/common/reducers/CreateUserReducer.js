@@ -39,7 +39,6 @@ export default function (state = initialState, action) {
       }
 
     case Constants.AUTH_UPDATE_PASSWORD:
-      console.log('UPDATE PASSWORD ')
       if (state.confirmPassword !== action.data.password) {
         em = 'ERROR MESSAGE'
       }

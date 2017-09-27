@@ -22,8 +22,6 @@ export default function (state = initialState, action) {
       }
       return state
     case Constants.AUTH_UPDATE_USERNAME:
-      console.log('updainguser name ')
-      console.log(action.data)
       return { ...state, username: action.data }
     case Constants.AUTH_UPDATE_PIN:
       return { ...state, pin: action.data }

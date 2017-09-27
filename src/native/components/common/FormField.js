@@ -17,9 +17,6 @@ class FormField extends Component {
   }
   render () {
     const Style = this.props.style
-    if (this.props.label === 'Confirm Password') {
-      console.log('WE ARE THE CONFIRM _Autofocuse__ ' + this.state.autoFocus)
-    }
     return (
       <View style={Style.container}>
         <View style={Style.labelContainer}>
