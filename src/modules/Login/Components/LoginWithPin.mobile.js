@@ -111,8 +111,8 @@ class LoginWithPin extends Component {
             <CachedUsers
               component={usersDropdown()}
               area='pinLogin'
-              containerClassName={styles.cachedUsers}
-              userListClassName={styles.userListClassName}
+              containerClassName={styles.containerClassName}
+              userListClassName={styles.userList}
             />
             <div className={styles.pinForm}>
               <p className={styles.pinLabel}>Enter PIN</p>

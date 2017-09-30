@@ -4,18 +4,15 @@
 
 .container {
   flex: 1;
-
   display: flex;
   display: -webkit-flex;
-
   flex-direction: column;
   -webkit-flex-direction: column;
-
   justify-content: flex-start;
   -webkit-justify-content: flex-start;
-
   align-items: center;
   -webkit-align-items: center;
+  height: 325px;
 
   .background {
     background: linear-gradient(90deg, rgba(59,122,218,0.98) 0%, #2B5698 100%);
@@ -27,9 +24,8 @@
   .main {
     position: absolute;
     width: 100%;
-    height: 330px;
-    background: transparent;
-    padding: 20px;
+    height: 330px; background: transparent;
+    padding: 20px 20px 0px 20px;
 
     flex: 1;
     display: flex;
@@ -45,7 +41,6 @@
       color: #FFFFFF;
       font-size: 24px;
       text-align: center;
-      margin-top: 15px;
       margin-bottom: 10px;
     }
 
@@ -56,7 +51,7 @@
       border-radius: 3px;
       background-color: #FFFFFF;
       box-shadow: 0 0 4px 0 rgba(0,0,0,0.5);
-      padding-top: 10px;
+      padding: 10px 20px 0px 20px;
 
       display: flex;
       display: -webkit-flex;
@@ -67,14 +62,7 @@
       align-items: center;
       -webkit-align-items: center;
 
-      .cachedUserList {
-        overflow-y: auto;
-        max-height: 142px;
-      }
-
       .usernameContainer {
-        width: 100%;
-        margin: 0px 20px;
         border-bottom: 1px solid #979797;
 
         .label {
@@ -92,11 +80,13 @@
           cursor: pointer;
 
           .username {
-            width: 279px;
+            width: 100%;
             color: #58595C;
             font-size: 18px;
             line-height: 24px;
             margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
             text-overflow: ellipsis;
           }
 
@@ -110,8 +100,11 @@
 
       }
 
-      .userList {
-        width: 300px;
+      .containerClassName {
+        width: 100%;
+      }
+
+      .userListClassName {
       }
 
       .pinForm {
@@ -189,7 +182,8 @@
 
     .exitLink {
       @extend .link;
-      font-size: 18px;
+      font-size: 16px;
+      margin-top: 10px;
     }
 
   }
