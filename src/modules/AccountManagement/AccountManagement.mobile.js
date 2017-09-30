@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import styles from './AccountManagement.webStyle.scss'
+import styles from './AccountManagement.mobileStyle.scss'
 // import t from 'lib/web/LocaleStrings'
 
 import EnterPassword from '../Modals/AccountManagementPassword/AccountManagementPassword.web.js'
@@ -9,9 +9,9 @@ import EnterPassword from '../Modals/AccountManagementPassword/AccountManagement
 // import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
 import { userLogin } from '../Login/Login.action'
 
-// import pinIcon from '../../img/account-settings/PIN-W.png'
-// import passwordIcon from '../../img/account-settings/password-W.png'
-// import recoveryIcon from '../../img/account-settings/recovery-W.png'
+import pinIcon from '../../img/account-settings/PIN-MW.png'
+import passwordIcon from '../../img/account-settings/password-MW.png'
+import recoveryIcon from '../../img/account-settings/recovery-MW.png'
 
 class AccountManager extends Component {
   componentWillMount () {
@@ -26,10 +26,23 @@ class AccountManager extends Component {
     return (
       <div className={styles.container}>
         <p className={styles.header}>
-          <span className={styles.heavy}>Account name:</span>
-          <br />
+          Account name:
+        </p>
+        <p className={styles.accountName}>
           { this.props.account.username }
         </p>
+        <div className={styles.square}>
+          <img src={pinIcon} />
+          <p className={styles.label}>Change Pin</p>
+        </div>
+        <div className={styles.square}>
+          <img src={passwordIcon} />
+          <p className={styles.label}>Change Password</p>
+        </div>
+        <div className={styles.square}>
+          <img src={recoveryIcon} />
+          <p className={styles.label}>Setup/Change Password Recovery</p>
+        </div>
         <EnterPassword history={this.props.history} />
       </div>
     )

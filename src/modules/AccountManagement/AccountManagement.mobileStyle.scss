@@ -6,67 +6,58 @@
   -webkit-flex-direction: column;
   justify-content: flex-start;
   -webkit-justify-content:  flex-start;
-  padding: 20px 20px 0px 20px;
+  padding: 20px 20px 30px 20px;
 
   .header {
     color: #909091;
     font-size: 24px;
     text-align: center;
     margin-top: 10px;
-    margin-bottom: 10px;
-    .heavy {
-      font-weight: 600;
-    }
+    margin-bottom: 5px;
+    font-weight: 600;
   }
 
-  .main {
+  .accountName {
+    color: #909091;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 30px;
+  }
+
+  .square {
     display: flex;
     display: -webkit-flex;
-
-    flex-direction: row;
-    -webkit-flex-direction: row;
-
+    flex-direction: column;
+    -webkit-flex-direction: column;
     justify-content: center;
     -webkit-justify-content: center;
-
     align-items: center;
     -webkit-align-items: center;
 
-    .square {
-      display: flex;
-      display: -webkit-flex;
+    height: 66px;
+    width: 100%;
+    border: 1px solid #D8D6D6;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
 
-      flex-direction: column;
-      -webkit-flex-direction: column;
-
-      justify-content: center;
-      -webkit-justify-content: center;
-
-      align-items: center;
-      -webkit-align-items: center;
-
-      margin: 0px 15px;
-      height: 160px;
-      width: 160px;
-      border: 1px solid #D8D6D6;
-      border-radius: 3px;
-      cursor: pointer;
-
-      a:hover {
-          text-decoration: none !important;
-      }
-
-      .label {
-        color: #4977BB;
-        font-size: 16px;
-        text-align: center;
-      }
+    a:hover {
+      text-decoration: none !important;
     }
 
-    .square:active {
-      border: 1px solid #4977BB;
-      background-color: rgba(73,119,187,0.1);
+    .label {
+      margin-top: 3px;
+      color: #4977BB;
+      font-size: 16px;
+      text-align: center;
     }
-
   }
+
+  .square:active {
+    border: 1px solid #4977BB;
+    background-color: rgba(73,119,187,0.1);
+  }
+
 }

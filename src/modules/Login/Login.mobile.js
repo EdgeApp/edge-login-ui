@@ -128,7 +128,7 @@ class Login extends Component {
       }
     }
     if (this.props.viewPIN && !this.props.viewPassword) {
-      return <LoginWithPin />
+      return <LoginWithPin history={this.props.history} />
     }
   }
 

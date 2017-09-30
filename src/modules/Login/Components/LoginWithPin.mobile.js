@@ -22,6 +22,7 @@ import Input from 'react-toolbox/lib/input'
 class LoginWithPin extends Component {
   _handleSubmit = () => {
     const callback = (error, account) => {
+      console.log(account)
       this.props.dispatch(loginPIN(''))
       this.props.dispatch(clearErrorLoginPinMessage(error))
       if (!error) {
@@ -30,7 +31,7 @@ class LoginWithPin extends Component {
         }
         if (!window.parent.abcui.loginCallback) {
           this.props.dispatch(closeLoading())
-          return this.props.router.push('/account')
+          return this.props.history.push('/account')
         }
       }
       if (error) {
