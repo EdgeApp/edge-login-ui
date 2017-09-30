@@ -6,6 +6,7 @@ import dropdown from '../../../img/dropdown.png'
 
 import {
   openLogin,
+  closeLoginUsingPin,
   loginPIN,
   openUserList,
   closeUserList,
@@ -68,6 +69,10 @@ class LoginWithPin extends Component {
   _hideCachedUsers = () => {
     this.props.dispatch(closeUserList())
   }
+  _openViewPassword = () => {
+    this.props.dispatch(closeLoginUsingPin())
+    this.props.dispatch(openLogin())
+  }
   _renderLoader = () => {
     if (this.props.loader.loading) {
       return <div className={styles.loading} />
@@ -119,7 +124,7 @@ class LoginWithPin extends Component {
               {this._renderLoader()}
             </div>
           </div>
-          <p className={styles.exitLink} onClick={this.props.openViewPassword}>Exit PIN Login</p>
+          <p className={styles.exitLink} onClick={this._openViewPassword}>Exit PIN Login</p>
         </div>
       </div>
     )

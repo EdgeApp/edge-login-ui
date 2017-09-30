@@ -6,7 +6,6 @@ import t from 'lib/web/LocaleStrings'
 import {
   openLogin,
   openLoginUsingPin,
-  closeLoginUsingPin,
   closeLogin,
   loginUsername,
   loginPassword,
@@ -86,10 +85,6 @@ class Login extends Component {
   openViewPin = () => {
     this.props.dispatch(openLoginUsingPin())
     this.props.dispatch(closeLogin())
-  }
-  openViewPassword = () => {
-    this.props.dispatch(closeLoginUsingPin())
-    this.props.dispatch(openLogin())
   }
   handleViewPress () {
     this.props.dispatch(closeUserList())
