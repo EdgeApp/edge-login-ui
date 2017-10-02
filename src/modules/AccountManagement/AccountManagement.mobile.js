@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import styles from './AccountManagement.mobileStyle.scss'
 // import t from 'lib/web/LocaleStrings'
 
-import EnterPassword from '../Modals/AccountManagementPassword/AccountManagementPassword.web.js'
+import EnterPassword from '../Modals/AccountManagementPassword/AccountManagementPassword.mobile.js'
 
-// import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
+import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
 import { userLogin } from '../Login/Login.action'
 
 import pinIcon from '../../img/account-settings/PIN-MW.png'
@@ -31,15 +31,15 @@ class AccountManager extends Component {
         <p className={styles.accountName}>
           { this.props.account.username }
         </p>
-        <div className={styles.square}>
+        <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal('/changepin'))} >
           <img src={pinIcon} />
           <p className={styles.label}>Change Pin</p>
         </div>
-        <div className={styles.square}>
+        <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal('/changepassword'))}>
           <img src={passwordIcon} />
           <p className={styles.label}>Change Password</p>
         </div>
-        <div className={styles.square}>
+        <div className={styles.square} onClick={e => this.props.dispatch(openAccountManagementModal('/passwordrecovery'))}>
           <img src={recoveryIcon} />
           <p className={styles.label}>Setup/Change Password Recovery</p>
         </div>

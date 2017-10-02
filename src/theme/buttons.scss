@@ -6,7 +6,6 @@
   background-color: #4977BB;
   color: #FFFFFF;
   font-size: 18px;
-  line-height: 17px;
   text-align: center;
 
   cursor: pointer;
@@ -15,6 +14,8 @@
 
 .primaryMobile {
   @extend .primary;
+  font-size: 16px;
+  margin: 0px;
   width: 100%;
 }
 
@@ -43,6 +44,8 @@
 
 .primaryLoadMobile {
   @extend .primaryLoad;
+  font-size: 16px;
+  margin: 0px;
   width: 100%;
 }
 
@@ -63,6 +66,8 @@
 
 .secondaryMobile {
   @extend .secondary;
+  font-size: 16px;
+  margin: 0px 5px 0px 0px;
   width: 100%;
 }
 
@@ -91,6 +96,8 @@
 
 .secondaryLoadMobile {
   @extend .secondaryLoad;
+  font-size: 16px;
+  margin: 0px 5px 0px 0px;
   width: 100%;
 }
 
@@ -113,27 +120,21 @@
 .rowButtons {
   display: flex;
   display: -webkit-flex;
-
   flex-direction: row;
   -webkit-flex-direction: row;
-
   justify-content: center;
   -webkit-justify-content: center;
-
   align-items: center;
   -webkit-align-items: center;
 }
 
-.rowButtonsMobile {
+.rowButtonsHorizontal {
   display: flex;
   display: -webkit-flex;
-
   flex-direction: column;
   -webkit-flex-direction: column;
-
   justify-content: center;
   -webkit-justify-content: center;
-
   align-items: center;
   -webkit-align-items: center;
 }
