@@ -47,7 +47,7 @@ class AccountManagementPassword extends Component {
   _renderButtonRows = () => {
     if (!this.props.loader.loading) {
       return (
-        <div className={styles.customRow}>
+        <div className={styles.rowButtonsMobile}>
           <button className={styles.secondaryMobile} onClick={this._handleClose}>Cancel</button>
           <button className={styles.primaryMobile} onClick={this._handleSubmit}>Done</button>
         </div>
@@ -55,7 +55,7 @@ class AccountManagementPassword extends Component {
     }
     if (this.props.loader.loading) {
       return (
-        <div className={styles.customRow}>
+        <div className={styles.rowButtonsMobile}>
           <button className={styles.secondaryLoadMobile}>Back</button>
           <button className={styles.primaryLoadMobile}><div className={styles.loader} /></button>
         </div>
