@@ -124,7 +124,7 @@ class Login extends Component {
         return <LoginEdge history={this.props.history} />
       }
       if (!this.props.mobileLoginView) {
-        return <LoginWithPassword history={this.props.history} />
+        return <LoginWithPassword history={this.props.history} login={this._handleSubmit} signup={this._handleGoToSignupPage} />
       }
     }
     if (this.props.viewPIN && !this.props.viewPassword) {

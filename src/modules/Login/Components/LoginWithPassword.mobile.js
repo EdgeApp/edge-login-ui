@@ -89,7 +89,13 @@ class LoginWithPasswordMobile extends Component {
         </div>
 
         <p className={styles.forgotPassword}>Forgot Password</p>
-        <button className={styles.signUpButton}>Sign In</button>
+        <button
+          className={this.props.loader.loading ? styles.primaryLoadMobile : styles.primaryMobile}
+          onClick={e => this.props.login(username, password)}
+        >
+          { this.props.loader.loading ? <div className={styles.loader} /> : 'Sign In' }
+        </button>
+        {/* <button className={styles.signUpButton}>Sign In</button> */}
         <div className={styles.signUp}>
           <p className={styles.question}>
             Don’t have an account?

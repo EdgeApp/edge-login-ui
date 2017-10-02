@@ -7,7 +7,7 @@ import Login from './modules/Login/Login.mobile.js'
 import AccountManagement from './modules/AccountManagement/AccountManagement.mobile.js'
 import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 import ChangePin from './modules/ChangePin/ChangePin.mobile.js'
-import ChangePassword from './modules/ChangePassword/ChangePassword.web.new.js'
+import ChangePassword from './modules/ChangePassword/ChangePassword.mobile.js'
 import PasswordRecovery from './modules/PasswordRecovery/PasswordRecovery.web.new.js'
 import PasswordRecoveryToken from './modules/PasswordRecoveryToken/PasswordRecoveryToken.web.js'
 
