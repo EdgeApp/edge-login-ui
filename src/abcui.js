@@ -83,7 +83,7 @@ class UIContext {
     DomWindow.abcContext = this.abcContext
 
     // Set up the UI context:
-    if (args.assetPath != null) {
+    if (args.assetsPath != null) {
       this.assetsPath = args.assetsPath
     } else if (args.bundlePath != null) {
       this.assetsPath = args.bundlePath + '/assets'
