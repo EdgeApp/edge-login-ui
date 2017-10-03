@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Input from 'react-toolbox/lib/input'
-import PasswordRecoveryTokenSuccess from '../Modals/PasswordRecoverySucess/PasswordRecoverySuccess.web.js'
+import PasswordRecoveryTokenSuccess from '../Modals/PasswordRecoverySucess/PasswordRecoverySuccess.mobile.js'
 
 import styles from './PasswordRecoveryToken.mobileStyle.scss'
 import { checkEmail } from './PasswordRecoveryToken.middleware.js'
