@@ -9,7 +9,7 @@ import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 import ChangePin from './modules/ChangePin/ChangePin.mobile.js'
 import ChangePassword from './modules/ChangePassword/ChangePassword.mobile.js'
 import PasswordRecovery from './modules/PasswordRecovery/PasswordRecovery.mobile.js'
-import PasswordRecoveryToken from './modules/PasswordRecoveryToken/PasswordRecoveryToken.web.js'
+import PasswordRecoveryToken from './modules/PasswordRecoveryToken/PasswordRecoveryToken.mobile.js'
 
 export default class RouterComponent extends Component {
   render () {
