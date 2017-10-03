@@ -8,7 +8,7 @@ import AccountManagement from './modules/AccountManagement/AccountManagement.mob
 import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 import ChangePin from './modules/ChangePin/ChangePin.mobile.js'
 import ChangePassword from './modules/ChangePassword/ChangePassword.mobile.js'
-import PasswordRecovery from './modules/PasswordRecovery/PasswordRecovery.web.new.js'
+import PasswordRecovery from './modules/PasswordRecovery/PasswordRecovery.mobile.js'
 import PasswordRecoveryToken from './modules/PasswordRecoveryToken/PasswordRecoveryToken.web.js'
 
 export default class RouterComponent extends Component {
