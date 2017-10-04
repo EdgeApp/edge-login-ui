@@ -8,7 +8,7 @@ import {loginUsername} from '../Login/Login.action'
 
 import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
 import { deleteUserToCache } from './CachedUsers.middleware.js'
-import AccountCacheDelete from '../Modals/AccountCacheDelete/AccountCacheDelete.web.js'
+import AccountCacheDelete from '../Modals/AccountCacheDelete/AccountCacheDelete.mobile.js'
 // import { openWarningModal } from '../WarningModal/WarningModal.action'
 import { openAccountCacheDeleteModal, closeAccountCacheDeleteModal } from '../Modals/AccountCacheDelete/AccountCacheDelete.action.js'
 
