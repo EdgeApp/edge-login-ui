@@ -19,7 +19,7 @@
   "main": "lib/abcui.cjs.js",
   "module": "lib/abcui.es6.js",
   "scripts": {
-    "build": "rimraf assets lib && rollup -c && webpack -p --color --progress",
+    "build": "rimraf assets lib && rollup -c && ./node_modules/.bin/webpack --config webpack.config.js -p --color --progress",
     "fix": "standard --parser babel-eslint --fix",
     "lint": "standard --parser babel-eslint",
     "precommit": "npm run lint",
