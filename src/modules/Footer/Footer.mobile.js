@@ -8,8 +8,10 @@ export default class Footer extends Component {
       <div className={styles.container}>
         <div className={styles.text1Container}>
           <p className={styles.text1}>
-            Increase your Account Security. <br />
-            Download Airbitz & enable 2FA
+            <a href='https://airbitz.co/app' target='_blank'>
+              Increase your Account Security. <br />
+              Download Airbitz & enable 2FA
+            </a>
           </p>
         </div>
         <div className={styles.text2Container}>

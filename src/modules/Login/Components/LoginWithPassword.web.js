@@ -6,10 +6,10 @@ import styles from './LoginWithPassword.webStyle.scss'
 import Input from 'react-toolbox/lib/input'
 
 import { loginUsername, loginPassword, openUserList, closeUserList } from '../Login.action.js'
-import PasswordRecovery from '../../Modals/PasswordRecovery/PasswordRecovery.web.js'
+import ForgotPassword from '../../Modals/ForgotPassword/ForgotPassword.web.js'
 import CachedUsers from '../../CachedUsers/CachedUsers.web.js'
 
-import { openPasswordRecoveryModal } from '../../Modals/PasswordRecovery/PasswordRecovery.action.js'
+import { openForgotPasswordModal } from '../../Modals/ForgotPassword/ForgotPassword.action.js'
 
 class LoginWithPassword extends Component {
   _usernameKeyPress = (e) => {
@@ -71,17 +71,14 @@ class LoginWithPassword extends Component {
             error={this.props.error}
           />
         </div>
-        <p className={styles.link} onClick={e => dispatch(openPasswordRecoveryModal())}>Forgot Password</p>
+        <p className={styles.link} onClick={e => dispatch(openForgotPasswordModal())}>Forgot Password</p>
         <div style={{ height: '15px' }} />
-        <button
-          className={this.props.loader.loading ? styles.primaryLoad : styles.primary}
-          onClick={e => this.props.login(username, password)}
-        >
+        <button className={this.props.loader.loading ? styles.primaryLoad : styles.primary} onClick={e => this.props.login(username, password)}>
           { this.props.loader.loading ? <div className={styles.loader} /> : 'Sign In' }
         </button>
         <div style={{ height: '15px' }} />
         <p>Don't have an account? <span className={styles.link} onClick={this.props.signup}>Create Account</span></p>
-        <PasswordRecovery />
+        <ForgotPassword />
       </div>
     )
   }

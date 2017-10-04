@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-import styles from './LoginWithPassword.mobileStyle.scss'
 import Input from 'react-toolbox/lib/input'
 
 import {
@@ -11,9 +9,12 @@ import {
   closeUserList,
   showMobileLoginEdgeView
 } from '../Login.action.js'
-// import PasswordRecovery from '../../Modals/PasswordRecovery/PasswordRecovery.web.js'
+
+import ForgotPassword from '../../Modals/ForgotPassword/ForgotPassword.mobile.js'
 import CachedUsers from '../../CachedUsers/CachedUsers.web.js'
-// import { openPasswordRecoveryModal } from '../../Modals/PasswordRecovery/PasswordRecovery.action.js'
+import { openForgotPasswordModal } from '../../Modals/ForgotPassword/ForgotPassword.action.js'
+
+import styles from './LoginWithPassword.mobileStyle.scss'
 
 class LoginWithPasswordMobile extends Component {
   _usernameKeyPress = (e) => {
@@ -88,14 +89,13 @@ class LoginWithPasswordMobile extends Component {
           />
         </div>
 
-        <p className={styles.forgotPassword}>Forgot Password</p>
+        <p className={styles.forgotPassword} onClick={e => this.props.dispatch(openForgotPasswordModal())}>Forgot Password</p>
         <button
           className={this.props.loader.loading ? styles.primaryLoadMobile : styles.primaryMobile}
           onClick={e => this.props.login(username, password)}
         >
           { this.props.loader.loading ? <div className={styles.loader} /> : 'Sign In' }
         </button>
-        {/* <button className={styles.signUpButton}>Sign In</button> */}
         <div className={styles.signUp}>
           <p className={styles.question}>
             Don’t have an account?
@@ -105,6 +105,7 @@ class LoginWithPasswordMobile extends Component {
           </p>
         </div>
         <div className={styles.dividerBottom} />
+        <ForgotPassword />
       </div>
     )
   }

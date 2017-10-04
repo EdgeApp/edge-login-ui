@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import CachedUsers from '../../CachedUsers/CachedUsers.web.js'
-import dropdown from '../../../img/dropdown.png'
 
 import {
   openLogin,
@@ -16,6 +15,7 @@ import {
 import { loginWithPin } from '../Login.middleware'
 import { closeLoading } from '../../Loader/Loader.action'
 
+import dropdown from '../../../img/dropdown.png'
 import styles from './LoginWithPin.mobileStyle.scss'
 import Input from 'react-toolbox/lib/input'
 

@@ -22,14 +22,14 @@ import * as ForgotPassword from '../modules/ForgotPassword/ForgotPassword.reduce
 import * as Container from '../modules/Container.reducer'
 import { signupPage } from '../modules/Signup/Signup.reducer'
 import { user } from '../modules/User/User.reducer'
-import { passwordRecovery } from '../modules/Modals/PasswordRecovery/PasswordRecovery.reducer.js'
 import * as AccountManagementPassword from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
+import { forgotPassword } from '../modules/Modals/ForgotPassword/ForgotPassword.reducer.js'
 import { accountCreated } from '../modules/Modals/AccountCreated/AccountCreated.reducer.js'
 import { passwordRecoverySuccess } from '../modules/Modals/PasswordRecoverySucess/PasswordRecoverySuccess.reducer.js'
 import { accountCacheDelete } from '../modules/Modals/AccountCacheDelete/AccountCacheDelete.reducer.js'
 import { success } from '../modules/Modals/Success/Success.reducer.js'
-// import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 
+// import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
 // import routes from './routesReducer'
 // import { alert } from '../modules/Alert/Alert.reducer'
 
@@ -157,7 +157,7 @@ const store = combineReducers({
   }),
   passwordRecoveryToken,
   modal: combineReducers({
-    passwordRecovery,
+    forgotPassword,
     accountManagementPassword: combineReducers({
       password: AccountManagementPassword.password,
       view: AccountManagementPassword.view,

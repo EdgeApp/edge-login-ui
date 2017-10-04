@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import t from 'lib/web/LocaleStrings'
 
 import {
   openLogin,
@@ -20,7 +19,6 @@ import { loginWithPassword } from './Login.middleware'
 import { openForgotPasswordModal } from '../ForgotPassword/ForgotPassword.action'
 import { closeLoading } from '../Loader/Loader.action'
 
-import Snackbar from 'react-toolbox/lib/snackbar'
 import LoginEdge from './Components/LoginEdge.web'
 import NewAccountSection from './Components/NewAccount.web.js'
 import LoginWithPasswordSection from './Components/LoginWithPassword.web.js'
@@ -103,18 +101,6 @@ class Login extends Component {
 
   _handleNotificationClose = () => {
     return this.props.dispatch(hideLoginNotification())
-  }
-
-  _renderNotification = (errorString) => {
-    const { loginNotification } = this.props
-    return <Snackbar
-      action='Dismiss'
-      active={loginNotification}
-      label={t(errorString)}
-      timeout={5000}
-      type='accept'
-      onClick={this._handleNotificationClose}
-      onTimeout={this._handleNotificationClose} />
   }
 
   _gotoPasswordInput = (pin) => {

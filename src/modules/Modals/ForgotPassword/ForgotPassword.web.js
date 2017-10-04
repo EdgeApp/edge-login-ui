@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Modal from '../BaseModal.web.js'
-import styles from './PasswordRecovery.webStyle.scss'
+import styles from './ForgotPassword.webStyle.scss'
 
-import { closePasswordRecoveryModal } from './PasswordRecovery.action.js'
+import { closePasswordRecoveryModal } from './ForgotPassword.action.js'
 
 import recoveryIcon from '../../../img/modals/recovery-modal-W.png'
 

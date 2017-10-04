@@ -45,7 +45,7 @@ class NewAccountMobile extends Component {
         <Divider />
         <button className={styles.createButton}>Create Account</button>
         <p className={styles.alreadyAccount}>
-          Already have an account? <span className={styles.link}>Log in</span>
+          Already have an account? <span className={styles.link} onClick={this.props.login}>Log in</span>
         </p>
       </div>
     )
