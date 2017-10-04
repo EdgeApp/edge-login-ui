@@ -9,7 +9,19 @@ function createKeyWithUsername (username, key) {
   return username + '___' + key
 }
 
+export async function isTouchEnabled (abcAccount) {
+  console.log('Touch Enabled Check ')
+  // const supported = await supportsTouchId()
+  // console.log(supported)
+  console.log(' Dont throw error , what do we got. ')
+  return false
+}
+
 export async function supportsTouchId () {
+  if (!AbcCoreJsUi) {
+    console.warn('AbcCoreJsUi  is unavailable')
+    return false
+  }
   const out = await AbcCoreJsUi.supportsTouchId()
   return out
 }
@@ -38,14 +50,23 @@ export async function disableTouchId (abcAccount) {
   }
 }
 
-export async function loginWithTouchId (abcContext, username, promptString, fallbackString, opts) {
+export async function loginWithTouchId (
+  abcContext,
+  username,
+  promptString,
+  fallbackString,
+  opts
+) {
   const supported = await supportsTouchId()
 
   if (supported) {
     const loginKeyKey = createKeyWithUsername(username, LOGINKEY_KEY)
     const loginKey = await AbcCoreJsUi.getKeychainString(loginKeyKey)
     if (loginKey && loginKey.length > 10) {
-      const success = await AbcCoreJsUi.authenticateTouchID(promptString, fallbackString)
+      const success = await AbcCoreJsUi.authenticateTouchID(
+        promptString,
+        fallbackString
+      )
       if (success) {
         return abcContext.loginWithKey(username, loginKey, opts)
       } else {
@@ -59,4 +80,3 @@ export async function loginWithTouchId (abcContext, username, promptString, fall
     throw new Error('TouchIdNotSupportedError')
   }
 }
-
