@@ -98,7 +98,7 @@ class Login extends Component {
   }
   render () {
     if (!this.props.viewPassword && !this.props.viewPIN) {
-      return <NewAccount signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} />
+      return <NewAccount history={this.props.history} signup={this._handleGoToSignupPage} login={this._handleOpenLoginWithPasswordPage} />
     }
     if (!this.props.viewPIN && this.props.viewPassword) {
       if (this.props.mobileLoginView) {

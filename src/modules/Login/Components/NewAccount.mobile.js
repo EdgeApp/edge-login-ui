@@ -43,7 +43,7 @@ class NewAccountMobile extends Component {
           {this.props.view ? 'Hide QR code' : 'Show QR code'}
         </p>
         <Divider />
-        <button className={styles.createButton}>Create Account</button>
+        <button className={styles.createButton} onClick={e => this.props.history.push('/signup')}>Create Account</button>
         <p className={styles.alreadyAccount}>
           Already have an account? <span className={styles.link} onClick={this.props.login}>Log in</span>
         </p>

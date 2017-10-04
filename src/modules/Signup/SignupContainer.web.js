@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Username from '../Username/Username.web.new.js'
-import PinNumber from '../PinNumber/PinNumber.web.new.js'
+import Username from '../Username/Username.mobile.js'
+import PinNumber from '../PinNumber/PinNumber.mobile.js'
 import Password from '../Password/Password.web.new.js'
 import ReviewDetails from '../ReviewDetails/ReviewDetails.web.new.js'
 

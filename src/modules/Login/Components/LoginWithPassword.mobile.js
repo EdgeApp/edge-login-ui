@@ -100,7 +100,7 @@ class LoginWithPasswordMobile extends Component {
           <p className={styles.question}>
             Don’t have an account?
           </p>
-          <p className={styles.create}>
+          <p className={styles.create} onClick={e => this.props.history.push('/signup')}>
             Create account
           </p>
         </div>
