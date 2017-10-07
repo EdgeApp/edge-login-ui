@@ -57,9 +57,9 @@ class Pin extends Component {
           className={this.props.pin.length > 0 ? styles.inputed : styles.input}
         />
         <p className={styles.text}>Your PIN is a 4 digit code used to do quick re-logins into your account</p>
-        <div className={styles.rowButtonsMobile}>
-          <button className={styles.secondaryMobile} onClick={e => this.props.dispatch(changeSignupPage('username'))}>Back</button>
+        <div className={styles.rowButtonsHorizontalMobile}>
           <button className={styles.primaryMobile} onClick={this._handleSubmit}>Next</button>
+          <button className={styles.secondaryMobile} onClick={e => this.props.dispatch(changeSignupPage('username'))}>Back</button>
         </div>
       </div>
     )

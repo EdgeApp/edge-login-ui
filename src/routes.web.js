@@ -5,7 +5,6 @@ import Container from './modules/Container.web'
 import Signup from './modules/Signup/SignupContainer.web'
 import Login from './modules/Login/Login.mobile.js'
 import AccountManagement from './modules/AccountManagement/AccountManagement.mobile.js'
-import ReviewDetails from './modules/ReviewDetails/ReviewDetails.web'
 import ChangePin from './modules/ChangePin/ChangePin.mobile.js'
 import ChangePassword from './modules/ChangePassword/ChangePassword.mobile.js'
 import PasswordRecovery from './modules/PasswordRecovery/PasswordRecovery.mobile.js'
@@ -19,7 +18,6 @@ export default class RouterComponent extends Component {
           <IndexRedirect to='/login' />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/review' component={ReviewDetails} />
           <Route path='/account' component={AccountManagement} />
           <Route path='/changepin' component={ChangePin} />
           <Route path='/changepassword' component={ChangePassword} />

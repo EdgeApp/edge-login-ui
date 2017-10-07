@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 
 import Username from '../Username/Username.mobile.js'
 import PinNumber from '../PinNumber/PinNumber.mobile.js'
-import Password from '../Password/Password.web.new.js'
-import ReviewDetails from '../ReviewDetails/ReviewDetails.web.new.js'
+import Password from '../Password/Password.mobile.js'
+import ReviewDetails from '../ReviewDetails/ReviewDetails.mobile.js'
 
 class Container extends Component {
   render () {

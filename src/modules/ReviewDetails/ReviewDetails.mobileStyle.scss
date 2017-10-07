@@ -3,34 +3,31 @@
 @import "~theme/loader";
 
 .container {
-
   display: flex;
   display: -webkit-flex;
-
   flex-direction: column;
   -webkit-flex-direction: column;
-
   justify-content: flex-start;
   -webkit-justify-content:  flex-start;
-
   align-items: center;
   -webkit-align-items: center;
-
-  flex: 1;
-  height: 437px;
+  padding: 20px;
 
   .header{
     color: #909091;
-    font-size: 32px;
+    font-size: 24px;
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
   }
 
   .p1{
     color: #909091;
     font-size: 16px;
     text-align: center;
+    margin-top: 10px;
     margin-bottom: 10px;
   }
 
@@ -38,35 +35,33 @@
     color: #909091;
     font-size: 16px;
     font-weight: 600;
-    line-height: 20px;
+    text-align: center;
+    margin-top: 10px;
     margin-bottom: 10px;
   }
 
   .caution {
     color: #F03A47;
     font-size: 16px;
-    line-height: 20px;
     text-align: center;
-  }
-
-  .input {
-    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .infoBox {
-    height: 112px;
-    width: 280px;
-    border: 1px solid #D8D6D6;
-    border-radius: 3px;
-    background-color: #FFFFFF;
-    margin: 30px 0px;
-    cursor: pointer;
     position: relative;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
     -webkit-flex-direction: column;
-
+    height: 112px;
+    width: 280px;
+    border: 1px solid #D8D6D6;
+    border-radius: 3px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 30px;
     .close {
       position: absolute;
       top: 5px;
@@ -99,7 +94,5 @@
         }
       }
     }
-
-
   }
 }

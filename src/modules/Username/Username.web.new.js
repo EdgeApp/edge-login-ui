@@ -34,7 +34,7 @@ class Username extends Component {
       )
     }
   }
-  _handleOnChangeText = (username, event, foo) => {
+  _handleOnChangeText = (username) => {
     this.props.dispatch(
       changeUsernameValue(username)
     )
