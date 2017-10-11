@@ -1,5 +1,4 @@
 import { openLoading, closeLoading } from '../Loader/Loader.action'
-import showCoreError from '../../services/errorHandler.js'
 
 export const checkUsername = (username, callback) => {
   return (dispatch, getState, imports) => {
@@ -15,9 +14,6 @@ export const checkUsername = (username, callback) => {
         if (available) {
           return callback(null)
         }
-      }).catch(e => {
-        dispatch(closeLoading())
-        return showCoreError(e, dispatch)
       })
     })
   }

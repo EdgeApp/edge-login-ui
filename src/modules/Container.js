@@ -1,21 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import MediaQuery from 'react-responsive'
 import { Dialog } from 'react-toolbox/lib/dialog'
 import FontIcon from 'react-toolbox/lib/font_icon'
+import abcctx from 'lib/web/abcContext'
+
+import { openLogin } from './Login/Login.action'
 import { selectUserToLogin, setCachedUsers, setCachedUsersWithPin } from './CachedUsers/CachedUsers.action'
 
-import ErrorModal from './ErrorModal/ErrorModal.web'
-import WarningModal from './WarningModal/WarningModal.web'
-import abcctx from 'lib/web/abcContext'
 import LayoutTemplate from './LayoutTemplate/LayoutTemplate.web'
 import layoutTheme from 'theme/layoutTheme'
-import { openLogin } from './Login/Login.action'
-import { hideContainerNotification } from './Container.action'
-import Snackbar from 'react-toolbox/lib/snackbar'
+import styles from './Container.scss'
 
-import styles from './Container.style.scss'
-
-function findUsernamesWithPin (ctx, usernames) {
+const findUsernamesWithPin = (ctx, usernames) => {
   const promises = usernames.map(username => ctx.pinLoginEnabled(username))
   return Promise.all(promises).then(bools =>
     usernames.filter((username, i) => bools[i]))
@@ -31,7 +28,6 @@ class Container extends Component {
       return abcuiCallback.exitCallback()
     }
   }
-
   loadData () {
     const dispatch = this.props.dispatch
     abcctx(ctx => {
@@ -52,28 +48,9 @@ class Container extends Component {
       })
     })
   }
-
-  _handleNotificationClose = () => {
-    return this.props.dispatch(hideContainerNotification())
-  }
-
-  _renderNotification = (string, notificationType = null) => {
-    const { containerNotification } = this.props
-    return <Snackbar
-      action='Dismiss'
-      active={containerNotification}
-      label={string}
-      className={styles[notificationType]}
-      timeout={5000}
-      type='accept'
-      onClick={this._handleNotificationClose}
-      onTimeout={this._handleNotificationClose} />
-  }
-
   componentWillMount () {
     this.loadData()
   }
-
   selectDialogHeight = (pathname) => {
     const checkSignupPage = () => {
       switch (this.props.signupPage) {
@@ -104,35 +81,42 @@ class Container extends Component {
         return styles.dialogLogin
     }
   }
-
   render () {
     return (
       <div className='app'>
-        <Dialog
-          active
-          onEscKeyDown={this._handleToggle}
-          onOverlayClick={this._handleToggle}
-          className={styles.mobileWidth}
-        >
-          <LayoutTemplate theme={layoutTheme} location={this.props.location}>
-            <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
-            {this.props.children}
-          </LayoutTemplate>
-          <ErrorModal />
-          <WarningModal />
-        </Dialog>
-        {this._renderNotification(this.props.containerNotificationValues.text, this.props.containerNotificationValues.notificationType)}
+        <MediaQuery minWidth={720}>
+          <Dialog
+            active
+            onEscKeyDown={this._handleToggle}
+            onOverlayClick={this._handleToggle}
+            className={this.selectDialogHeight()}
+          >
+            <LayoutTemplate theme={layoutTheme} location={this.props.location}>
+              <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
+              {this.props.children}
+            </LayoutTemplate>
+          </Dialog>
+        </MediaQuery>
+        <MediaQuery maxWidth={719}>
+          <Dialog
+            active
+            onEscKeyDown={this._handleToggle}
+            onOverlayClick={this._handleToggle}
+            className={styles.mobileWidth}
+          >
+            <LayoutTemplate theme={layoutTheme} location={this.props.location}>
+              <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
+              {this.props.children}
+            </LayoutTemplate>
+          </Dialog>
+        </MediaQuery>
       </div>
     )
   }
 }
 
 export default connect(state => ({
-
   loader: state.loader,
   signupPage: state.signupPage,
-  edgeObject: state.login.edgeLoginResults,
-  containerNotification: state.container.containerNotification,
-  containerNotificationValues: state.container.containerNotificationValues
-
+  edgeObject: state.login.edgeLoginResults
 }))(Container)

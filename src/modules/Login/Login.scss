@@ -1,4 +1,15 @@
-.container {
+.webContainer {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  justify-content: center;
+  -webkit-justify-content: center;
+  height: 422px;
+}
+
+.mobileContainer {
   display: flex;
   display: -webkit-flex;
   flex-direction: column;

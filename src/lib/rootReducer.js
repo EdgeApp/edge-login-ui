@@ -19,7 +19,6 @@ import * as ChangePin from '../modules/ChangePin/ChangePin.reducer'
 import * as PasswordRecovery from '../modules/PasswordRecovery/PasswordRecovery.reducer'
 import passwordRecoveryToken from '../modules/PasswordRecoveryToken/PasswordRecoveryToken.reducer.js'
 import * as ForgotPassword from '../modules/ForgotPassword/ForgotPassword.reducer'
-import * as Container from '../modules/Container.reducer'
 import { signupPage } from '../modules/Signup/Signup.reducer'
 import { user } from '../modules/User/User.reducer'
 import * as AccountManagementPassword from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
@@ -42,10 +41,6 @@ const store = combineReducers({
   pin: combineReducers({
     pin: PinNumber.pin,
     error: PinNumber.error
-  }),
-  container: combineReducers({
-    containerNotification: Container.containerNotification,
-    containerNotificationValues: Container.containerNotificationValues
   }),
   password: combineReducers({
     inputState: PasswordStates.inputState,
@@ -91,7 +86,6 @@ const store = combineReducers({
   }),
   nextButtonVisible,
   skipButtonVisible,
-
   loader: combineReducers({
     loading: Loader.loading,
     message: Loader.message

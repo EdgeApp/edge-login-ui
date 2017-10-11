@@ -1,92 +1,68 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import t from 'lib/web/LocaleStrings'
-
-import styles from './LoginWithPassword.webStyle.scss'
 import Input from 'react-toolbox/lib/input'
-
-import { loginUsername, loginPassword, openUserList, closeUserList } from '../Login.action.js'
-import ForgotPassword from '../../Modals/ForgotPassword/ForgotPassword.web.js'
 import CachedUsers from '../../CachedUsers/CachedUsers.web.js'
+import styles from './LoginWithPassword.webStyle.scss'
 
-import { openForgotPasswordModal } from '../../Modals/ForgotPassword/ForgotPassword.action.js'
-
-class LoginWithPassword extends Component {
-  _usernameKeyPress = (e) => {
-    if (e.charCode === 13) {
-      return this.password.getWrappedInstance().focus()
-    }
-  }
-  _passwordKeyPress = (e) => {
-    if (e.charCode === 13) {
-      if (!this.props.loader.loading) {
-        return this.props.login(this.props.username, this.props.password)
-      }
-    }
-  }
-  _showCachedUsers = () => {
-    this.props.dispatch(openUserList())
-    this.pin.getWrappedInstance().blur()
-  }
-  _hideCachedUsers = () => {
-    this.props.dispatch(closeUserList())
-    this.pin.getWrappedInstance().focus()
-  }
-  render () {
-    const {dispatch, username, password} = this.props
-    const usersDropdown = () => {
-      return (
-        <Input
-          type='text'
-          label='Username'
-          name='username'
-          onKeyPress={this._usernameKeyPress}
-          onChange={value => dispatch(loginUsername(value))}
-          value={username}
-          ref={input => { this.username = input }}
-          onFocus={this._showCachedUsers}
-          onBlur={this._hideCachedUsers}
-        />
-      )
-    }
-    return (
-      <div className={styles.container}>
-        <p className={styles.header}>{t('login_text')}</p>
-        <div className={styles.forms}>
-          <CachedUsers
-            component={usersDropdown()}
-            area='passwordLogin'
-            containerClassName={styles.cachedUsers}
-            userListClassName={styles.userListClassName}
-          />
+export default ({
+  submit,
+  goToSignupPage,
+  hideCachedUsers,
+  showCachedUsers,
+  passwordKeyPress,
+  usernameKeyPress,
+  changeUsernameValue,
+  changePasswordValue,
+  refUsername,
+  refPassword,
+  username,
+  password,
+  loader,
+  error
+}) => (
+  <div className={styles.container}>
+    <p className={styles.header}>{t('login_text')}</p>
+    <div className={styles.forms}>
+      <CachedUsers
+        component={
           <Input
-            type='password'
-            label='Password'
-            name='password'
-            onKeyPress={this._passwordKeyPress}
-            onChange={value => dispatch(loginPassword(value))}
-            value={password}
-            ref={input => { this.password = input }}
-            className={styles.form}
-            error={this.props.error}
+            type='text'
+            label='Username'
+            name='username'
+            onKeyPress={usernameKeyPress}
+            onChange={changeUsernameValue}
+            value={username}
+            ref={refUsername}
+            onFocus={showCachedUsers}
+            onBlur={hideCachedUsers}
           />
-        </div>
-        <p className={styles.link} onClick={e => dispatch(openForgotPasswordModal())}>Forgot Password</p>
-        <div style={{ height: '15px' }} />
-        <button className={this.props.loader.loading ? styles.primaryLoad : styles.primary} onClick={e => this.props.login(username, password)}>
-          { this.props.loader.loading ? <div className={styles.loader} /> : 'Sign In' }
-        </button>
-        <div style={{ height: '15px' }} />
-        <p>Don't have an account? <span className={styles.link} onClick={this.props.signup}>Create Account</span></p>
-        <ForgotPassword />
-      </div>
-    )
-  }
-}
-
-export default connect(state => ({
-  username: state.login.username,
-  password: state.login.password,
-  loader: state.loader,
-  error: state.login.error
-}))(LoginWithPassword)
+        }
+        area='passwordLogin'
+        containerClassName={styles.cachedUsers}
+        userListClassName={styles.userListClassName}
+      />
+      <Input
+        type='password'
+        label='Password'
+        name='password'
+        onKeyPress={passwordKeyPress}
+        onChange={changePasswordValue}
+        value={password}
+        ref={refPassword}
+        className={styles.form}
+        error={error}
+      />
+    </div>
+    <p className={styles.forgotPasswordLink} onClick={e => console.log('foo')}>
+      Forgot Password
+    </p>
+    <button className={loader ? styles.primaryLoad : styles.primary} onClick={submit}>
+      { loader ? <div className={styles.loader} /> : 'Sign In' }
+    </button>
+    <p className={styles.createAccountText}>Don't have an account?
+      <span className={styles.link} onClick={goToSignupPage}>
+        Create Account
+      </span>
+    </p>
+  </div>
+)

@@ -1,7 +1,6 @@
 // import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { userLogin, requestEdgeLogin, enablePinTimeout, disablePinTimeout, refreshPinTimeout, enablePasswordTimeout, disablePasswordTimeout, refreshPasswordTimeout } from './Login.action'
-import { showContainerNotification } from '../Container.action.js'
 import { selectUserToLogin } from '../CachedUsers/CachedUsers.action'
 
 export const loginWithPassword = (username, password, callback) => {
@@ -124,7 +123,7 @@ export const edgeLogin = (callback) => {
         onProcessLogin: onProcess
       }, (error, results) => {
         if (error) {
-          dispatch(showContainerNotification(t('error_edge_login'), 'error'))
+          // dispatch(showContainerNotification(t('error_edge_login'), 'error'))
         } else if (results) {
           dispatch(requestEdgeLogin(results))
         }

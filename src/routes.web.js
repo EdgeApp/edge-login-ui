@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Router, Route, hashHistory, IndexRedirect } from 'react-router'
 
-import Container from './modules/Container.web'
+import Container from './modules/Container.js'
 import Signup from './modules/Signup/SignupContainer.web'
-import Login from './modules/Login/Login.mobile.js'
+import Login from './modules/Login/Login.js'
 import AccountManagement from './modules/AccountManagement/AccountManagement.mobile.js'
 import ChangePin from './modules/ChangePin/ChangePin.mobile.js'
 import ChangePassword from './modules/ChangePassword/ChangePassword.mobile.js'
