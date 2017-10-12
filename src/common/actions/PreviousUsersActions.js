@@ -17,7 +17,7 @@ async function getDiskStuff (context) {
     .getText() // setText for later. username
     .then(text => JSON.parse(text))
     .then(json => json.username)
-    .catch(e => null)
+    .catch(e => userList[0])
 
   return { lastUser, userList }
 }
