@@ -1,9 +1,9 @@
 import React from 'react'
-import LoginEdge from './Components/LoginEdge.web'
-import NewAccountSection from './Components/NewAccount.web.js'
-import LoginWithPasswordSection from './Components/LoginWithPassword.js'
-import LoginWithPinSection from './Components/LoginWithPin.web.js'
-import Divider from './Components/Divider.web.js'
+import LoginEdge from './LoginEdge/LoginEdge.web'
+import NewAccountSection from './NewAccount/NewAccount.web.js'
+import LoginWithPasswordSection from './LoginWithPassword/LoginWithPassword.js'
+import LoginWithPinSection from './LoginWithPin/LoginWithPin.web.js'
+import Divider from './Divider/Divider.web.js'
 
 import styles from './Login.scss'
 

@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import FontIcon from 'react-toolbox/lib/font_icon'
-// import t from 'lib/web/LocaleStrings'
 import classnames from 'classnames'
-import {loginUsername} from '../Login/Login.action'
+import FontIcon from 'react-toolbox/lib/font_icon'
 
+import {loginUsername} from '../Login/Login.action'
 import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
 import { deleteUserToCache } from './CachedUsers.middleware.js'
-import AccountCacheDelete from '../Modals/AccountCacheDelete/AccountCacheDelete.mobile.js'
-// import { openWarningModal } from '../WarningModal/WarningModal.action'
 import { openAccountCacheDeleteModal, closeAccountCacheDeleteModal } from '../Modals/AccountCacheDelete/AccountCacheDelete.action.js'
 
-import styles from './CachedUsers.webStyle'
+import AccountCacheDelete from '../Modals/AccountCacheDelete/AccountCacheDelete.js'
+
+import styles from './CachedUsers.js'
 
 class UserList extends Component {
   _handleLoginUser = (user) => {

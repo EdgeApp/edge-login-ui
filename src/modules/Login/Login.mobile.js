@@ -1,8 +1,8 @@
 import React from 'react'
-import LoginEdge from './Components/LoginEdge.mobile.js'
-import LoginWithPassword from './Components/LoginWithPassword.js'
-import NewAccount from './Components/NewAccount.mobile.js'
-import LoginWithPin from './Components/LoginWithPin.mobile.js'
+import LoginEdge from './LoginEdge/LoginEdge.mobile.js'
+import LoginWithPassword from './LoginWithPassword/LoginWithPassword.js'
+import NewAccount from './NewAccount/NewAccount.mobile.js'
+import LoginWithPin from './LoginWithPin/LoginWithPin.mobile.js'
 
 export default ({
   password,

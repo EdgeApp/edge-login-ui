@@ -1,59 +1,31 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import Input from 'react-toolbox/lib/input'
-
-import {
-  changeAccountManagementPasswordModalPassword,
-  closeAccountManagementModal,
-  errorAccountManagementModal,
-  clearAccountManagementModal
-} from './AccountManagementPassword.action.js'
-import { checkPassword } from './AccountManagementPassword.middleware.js'
-
-import Modal from '../BaseModal.mobile.js'
+import Modal from '../BaseModal.js'
 import styles from './AccountManagementPassword.mobileStyle.scss'
 import passwordIcon from '../../../img/account-settings/password-MW.png'
 
-class AccountManagementPassword extends Component {
-  _handleClose = () => {
-    this.props.dispatch(clearAccountManagementModal())
-    this.props.dispatch(changeAccountManagementPasswordModalPassword(''))
-    return this.props.dispatch(closeAccountManagementModal())
-  }
-  _handleSubmit = () => {
-    const callback = (error) => {
-      if (error) {
-        this.props.dispatch(clearAccountManagementModal())
-        return this.props.dispatch(errorAccountManagementModal(error))
-      }
-      if (!error) {
-        this.props.history.push(this.props.route)
-        return this._handleClose()
-      }
-    }
-    this.props.dispatch(
-      checkPassword(
-        this.props.password,
-        this.props.user,
-        callback
-      )
-    )
-  }
-  _passwordKeyPressed = (e) => {
-    if (e.charCode === 13) {
-      return this._handleSubmit()
-    }
-  }
-  _renderButtonRows = () => {
-    if (!this.props.loader.loading) {
+export default ({
+  close,
+  submit,
+  passwordKeyPressed,
+  changePasswordValue,
+  view,
+  password,
+  route,
+  error,
+  user,
+  loader
+}) => {
+  const renderButtonRows = () => {
+    if (!loader) {
       return (
         <div className={styles.rowButtonsMobile}>
-          <button className={styles.secondaryMobile} onClick={this._handleClose}>Cancel</button>
-          <button className={styles.primaryMobile} onClick={this._handleSubmit}>Done</button>
+          <button className={styles.secondaryMobile} onClick={close}>Cancel</button>
+          <button className={styles.primaryMobile} onClick={submit}>Done</button>
         </div>
       )
     }
-    if (this.props.loader.loading) {
+    if (loader) {
       return (
         <div className={styles.rowButtonsMobile}>
           <button className={styles.secondaryLoadMobile}>Back</button>
@@ -62,35 +34,24 @@ class AccountManagementPassword extends Component {
       )
     }
   }
-  render () {
-    return (
-      <Modal
-        active={this.props.view}
-        close={this._handleClose}
-        icon={passwordIcon}
-      >
-        <p className={styles.header}>Enter your password to make changes to your account settings</p>
-        <Input
-          autoFocus
-          type='password'
-          onKeyPress={this._passwordKeyPressed}
-          onChange={value => this.props.dispatch(changeAccountManagementPasswordModalPassword(value))}
-          value={this.props.password}
-          label='Your Current Password'
-          className={styles.password}
-          error={this.props.error}
-        />
-        {this._renderButtonRows()}
-      </Modal>
-    )
-  }
+  return (
+    <Modal
+      active={view}
+      close={close}
+      icon={passwordIcon}
+    >
+      <p className={styles.header}>Enter your password to make changes to your account settings</p>
+      <Input
+        autoFocus
+        type='password'
+        onKeyPress={passwordKeyPressed}
+        onChange={changePasswordValue}
+        value={password}
+        label='Your Current Password'
+        className={styles.password}
+        error={error}
+      />
+      {renderButtonRows()}
+    </Modal>
+  )
 }
-
-export default connect(state => ({
-  view: state.modal.accountManagementPassword.view,
-  password: state.modal.accountManagementPassword.password,
-  route: state.modal.accountManagementPassword.route,
-  error: state.modal.accountManagementPassword.error,
-  loader: state.loader,
-  user: state.user
-}))(AccountManagementPassword)
