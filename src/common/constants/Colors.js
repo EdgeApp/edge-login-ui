@@ -1,5 +1,5 @@
-export const GR_DARK = '#2B5698'
-export const GR_LIGHT = '#3B7ADA'
+export const GR_DARK = '#0D2145'
+export const GR_LIGHT = '#0E4B75'
 export const PRIMARY = '#0D2145'
 export const SECONDARY = '#0E4B75'
 export const ACCENT_GREEN = '#0073D9'
@@ -28,4 +28,4 @@ export const MODAL_DROP = '#FFFFFF'
 export const OVERLAY_BOX = 'rgba(255,255,255,.6)'
 export const MODAL_BOX = 'rgba(0,0,0,.6)'
 export const TRANSPARENT = 'transparent'
-export const GRADIENT = ['#3B7ADA', '#2B5698']
+export const GRADIENT = ['#0E4B75', '#0D2145']
