@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Input from 'react-toolbox/lib/input'
 
-import Success from '../Modals/Success/Success.mobile.js'
+import Success from '../Modals/Success/Success.js'
 
 import { changePinValue, showPinChangeError, clearPinChangeError } from './ChangePin.action'
 import { checkPin } from './ChangePin.middleware'

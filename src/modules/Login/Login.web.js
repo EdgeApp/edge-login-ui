@@ -3,7 +3,7 @@ import LoginEdge from './LoginEdge/LoginEdge.web'
 import NewAccountSection from './NewAccount/NewAccount.web.js'
 import LoginWithPasswordSection from './LoginWithPassword/LoginWithPassword.js'
 import LoginWithPinSection from './LoginWithPin/LoginWithPin.web.js'
-import Divider from './Divider/Divider.web.js'
+import Divider from './Divider/Divider.js'
 
 import styles from './Login.scss'
 

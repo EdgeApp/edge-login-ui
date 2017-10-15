@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 import Modal from '../BaseModal.js'
 import desktopStyles from './Success.webStyle.scss'
-import MobileStyles from './Success.mobileStyles'
+import MobileStyles from './Success.mobileStyle.scss'
 import desktopIcon from '../../../img/modals/success-W.png'
 import mobileIcon from '../../../img/modals/success-MW.png'
 

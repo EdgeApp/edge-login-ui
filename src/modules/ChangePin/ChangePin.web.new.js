@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Input from 'react-toolbox/lib/input'
 
-import Success from '../Modals/Success/Success.web.js'
+import Success from '../Modals/Success/Success.js'
 
 import { changePinValue, showPinChangeError, clearPinChangeError } from './ChangePin.action'
 import { checkPin } from './ChangePin.middleware'

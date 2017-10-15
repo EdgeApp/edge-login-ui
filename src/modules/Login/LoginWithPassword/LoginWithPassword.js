@@ -6,6 +6,7 @@ import { loginUsername, loginPassword, openUserList, closeUserList, showMobileLo
 import { loginWithPassword } from '../Login.middleware'
 import { closeLoading } from '../../Loader/Loader.action'
 
+import ForgotPassword from '../../Modals/ForgotPassword/ForgotPassword.js'
 import Desktop from './LoginWithPassword.web.js'
 import Mobile from './LoginWithPassword.mobile.js'
 
@@ -109,6 +110,7 @@ class LoginWithPassword extends Component {
             error={this.props.error}
           />
         </MediaQuery>
+        <ForgotPassword />
       </section>
     )
   }

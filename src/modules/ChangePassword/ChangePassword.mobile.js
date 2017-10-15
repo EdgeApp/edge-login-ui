@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Input from 'react-toolbox/lib/input'
 import FontIcon from 'react-toolbox/lib/font_icon'
 
-import Success from '../Modals/Success/Success.mobile.js'
+import Success from '../Modals/Success/Success.js'
 
 import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
 import { checkPassword } from './ChangePassword.middleware'

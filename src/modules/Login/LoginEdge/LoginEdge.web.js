@@ -1,130 +1,27 @@
-import React, { Component } from 'react'
-const QRCode = require('qrcode.react')
-import { withRouter } from 'react-router'
-
-import { connect } from 'react-redux'
+import React from 'react'
 import t from 'lib/web/LocaleStrings'
 import styles from './LoginEdge.webStyle.scss'
+import QRCode from './QRCode.js'
 
-import { edgeLogin } from '../Login.middleware'
-import { closeLoading } from '../../Loader/Loader.action'
-
-class LoginEdge extends Component {
-  componentWillUnmount () {
-    console.log(this.props.edgeObject)
-    if (this.props.edgeObject) {
-      this.props.edgeObject.cancelRequest()
-    }
-  }
-
-  componentDidMount () {
-    this.props.dispatch(
-        edgeLogin((error, account) => {
-          const abcuiCallback = window.parent.abcui
-          if (!error) {
-            if (abcuiCallback.loginCallback) {
-              return abcuiCallback.loginCallback(null, account)
-            }
-            if (!window.parent.loginCallback) {
-              this.props.dispatch(closeLoading())
-              return this.props.router.push('/account')
-            }
-          }
-        })
-      )
-  }
-
-  renderBarcode () {
-    const { edgeId } = this.props
-    if (edgeId) {
-      const qrCodeVal = 'airbitz://edge/' + edgeId
-      return <QRCode value={qrCodeVal} size={205} />
-    } else {
-      return null
-    }
-  }
-
-  renderLoginLink () {
-    const { edgeId } = this.props
-
-    if (edgeId) {
-      return `https://airbitz.co/elf/?address=${edgeId}`
-    }
-  }
-
-  render () {
-    const { edgeUsername } = this.props
-
-    return (
-      <div style={style.container}>
-        <div style={style.topText}>
-          <p className={styles.header}>{this.props.register ? t('string_scan_barcode_to_register') : t('string_scan_barcode_to_signin')}</p>
-        </div>
-        {!edgeUsername ? (
-          <div>
-            <a target='_blank' href={this.renderLoginLink()}>{this.renderBarcode()}</a>
-          </div>
-        ) : (
-          <div>
-            <b>{edgeUsername}</b><br />
-            {t('approving_login_text')}<br />
-          </div>)}
-      </div>
-    )
-  }
+export default ({
+  view,
+  edgeId,
+  edgeUsername,
+  edgeAccount,
+  edgeObject,
+  toggleQRCode,
+  goToSignupPage
+}) => {
+  return (
+    <div style={styles.container}>
+      <p className={styles.header}>{t('string_scan_barcode_to_signin')}</p>
+      <QRCode
+        dispatch={this.props.dispatch}
+        edgeId={this.props.edgeId}
+        edgeUsername={this.props.edgeUsername}
+        edgeAccount={this.props.edgeAccount}
+        edgeObject={this.props.edgeObject}
+      />
+    </div>
+  )
 }
-
-const style = {
-
-  container: {
-    display: 'flex',
-    flex: 1,
-    flexWrap: 'wrap',
-    flexDirection: 'column',
-    // justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '40px'
-  },
-
-  topText: {
-    width: '217px',
-    color: '#909091',
-    fontSize: '19px',
-    lineHeight: '24px',
-    textAlign: 'center',
-    marginBottom: '35px'
-  },
-
-  logoIcon: {
-    'width': '28px',
-    'padding': '4px',
-    'verticalAlign': 'top'
-  },
-  edgeLoginBtn: {
-    margin: '0px auto',
-    textAlign: 'center',
-    padding: '0 10px',
-    lineHeight: '2.2rem'
-  },
-  dividerContainer: {
-    textAlign: 'center',
-    margin: '40px 0 0px 0px'
-  },
-  divider: {
-    fontWeight: 700,
-    textTransform: 'uppercase'
-  },
-  barCode: {
-    height: '275px'
-  }
-}
-
-const LoginEdgeWithRouter = withRouter(LoginEdge)
-const LoginEdgeWithRedux = connect(state => ({
-  edgeId: state.login.edgeLoginResults.id,
-  edgeUsername: state.login.edgeUsername,
-  edgeAccount: state.login.edgeAccount,
-  edgeObject: state.login.edgeLoginResults
-}))(LoginEdgeWithRouter)
-
-export default LoginEdgeWithRedux
