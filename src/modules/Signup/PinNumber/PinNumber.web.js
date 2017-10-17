@@ -1,6 +1,6 @@
 import React from 'react'
 import Input from 'react-toolbox/lib/input'
-import t from '../../lib/web/LocaleStrings'
+import t from '../../../lib/web/LocaleStrings'
 import styles from './PinNumber.webStyle.scss'
 
 export default ({

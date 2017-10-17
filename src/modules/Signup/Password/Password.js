@@ -15,8 +15,8 @@ import {
 } from './Password.action'
 import { getDetails } from '../ReviewDetails/ReviewDetails.action'
 
-import Desktop from './PinNumber.web.js'
-import Mobile from './PinNumber.mobile.js'
+import Desktop from './Password.web.js'
+import Mobile from './Password.mobile.js'
 
 class Password extends Component {
   handleSubmit = () => {
@@ -82,46 +82,48 @@ class Password extends Component {
     return this.props.dispatch(changeSignupPage('pin'))
   }
   render () {
-    <section>
-      <MediaQuery minWidth={720}>
-        <Desktop
-          inputState={this.props.inputState}
-          password={this.props.password}
-          passwordRepeat={this.props.passwordRepeat}
-          validation={this.props.validation}
-          error={this.props.error}
-          loader={this.props.loader.loading}
-          handleSubmit={this.handleSubmit}
-          refPassword={input => { this.password = input }}
-          refPasswordRepeat={input => { this.passwordRepeat = input }}
-          passwordKeyPressed={this.passwordKeyPressed}
-          passwordRepeatKeyPressed={this.passwordRepeatKeyPressed}
-          handleOnChangePassword={this.handleOnChangePassword}
-          handleOnChangePasswordRepeat={this.handleOnChangePasswordRepeat}
-          toggleRevealPassword={this.toggleRevealPassword}
-          gotoPin={this.gotoPin}
-        />
-      </MediaQuery>
-      <MediaQuery maxWidth={719}>
-        <Mobile
-          inputState={this.props.inputState}
-          password={this.props.password}
-          passwordRepeat={this.props.passwordRepeat}
-          validation={this.props.validation}
-          error={this.props.error}
-          loader={this.props.loader.loading}
-          handleSubmit={this.handleSubmit}
-          refPassword={input => { this.password = input }}
-          refPasswordRepeat={input => { this.passwordRepeat = input }}
-          passwordKeyPressed={this.passwordKeyPressed}
-          passwordRepeatKeyPressed={this.passwordRepeatKeyPressed}
-          handleOnChangePassword={this.handleOnChangePassword}
-          handleOnChangePasswordRepeat={this.handleOnChangePasswordRepeat}
-          toggleRevealPassword={this.toggleRevealPassword}
-          gotoPin={this.gotoPin}
-        />
-      </MediaQuery>
-    </section>
+    return (
+      <section>
+        <MediaQuery minWidth={720}>
+          <Desktop
+            inputState={this.props.inputState}
+            password={this.props.password}
+            passwordRepeat={this.props.passwordRepeat}
+            validation={this.props.validation}
+            error={this.props.error}
+            loader={this.props.loader.loading}
+            handleSubmit={this.handleSubmit}
+            refPassword={input => { this.password = input }}
+            refPasswordRepeat={input => { this.passwordRepeat = input }}
+            passwordKeyPressed={this.passwordKeyPressed}
+            passwordRepeatKeyPressed={this.passwordRepeatKeyPressed}
+            handleOnChangePassword={this.handleOnChangePassword}
+            handleOnChangePasswordRepeat={this.handleOnChangePasswordRepeat}
+            toggleRevealPassword={this.toggleRevealPassword}
+            gotoPin={this.gotoPin}
+          />
+        </MediaQuery>
+        <MediaQuery maxWidth={719}>
+          <Mobile
+            inputState={this.props.inputState}
+            password={this.props.password}
+            passwordRepeat={this.props.passwordRepeat}
+            validation={this.props.validation}
+            error={this.props.error}
+            loader={this.props.loader.loading}
+            handleSubmit={this.handleSubmit}
+            refPassword={input => { this.password = input }}
+            refPasswordRepeat={input => { this.passwordRepeat = input }}
+            passwordKeyPressed={this.passwordKeyPressed}
+            passwordRepeatKeyPressed={this.passwordRepeatKeyPressed}
+            handleOnChangePassword={this.handleOnChangePassword}
+            handleOnChangePasswordRepeat={this.handleOnChangePasswordRepeat}
+            toggleRevealPassword={this.toggleRevealPassword}
+            gotoPin={this.gotoPin}
+          />
+        </MediaQuery>
+      </section>
+    )
   }
 }
 

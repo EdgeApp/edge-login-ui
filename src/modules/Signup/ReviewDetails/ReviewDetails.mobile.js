@@ -30,10 +30,10 @@ export default ({
     <div className={styles.container}>
       <p className={styles.header}>Write down your account info</p>
       <p className={styles.p1}>Your username and password are known only to you and cannot be recovered if forgotten.</p>
-      <p clasrenderInfosName={styles.p2}>You WILL lose access to funds if your password is lost.</p>
+      <p className={styles.p2}>You WILL lose access to funds if your password is lost.</p>
       <p className={styles.caution}>Write down and store securely!</p>
       <div className={styles.infoBox} onClick={toggleInfo}>
-        { this.props.view ? <FontIcon className={styles.close} value='clear' /> : null }
+        { view ? <FontIcon className={styles.close} value='clear' /> : null }
         <div className={styles.infoText}>
           { renderInfo() }
         </div>

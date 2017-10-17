@@ -1,7 +1,7 @@
 import React from 'react'
 import FontIcon from 'react-toolbox/lib/font_icon'
 import Input from 'react-toolbox/lib/input'
-import styles from './Password.webStyle.scss'
+import styles from './Password.mobileStyle.scss'
 
 import eyeShow from '../../../img/create-account/show-password.png'
 import eyeHide from '../../../img/create-account/hide-password.png'

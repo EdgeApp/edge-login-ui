@@ -89,7 +89,7 @@ class Container extends Component {
             active
             onEscKeyDown={this._handleToggle}
             onOverlayClick={this._handleToggle}
-            className={this.selectDialogHeight()}
+            className={this.selectDialogHeight(this.props.location.pathname)}
           >
             <Layout
               theme={layoutTheme}

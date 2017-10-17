@@ -5,7 +5,7 @@ import MediaQuery from 'react-responsive'
 import { showSignInDetails, hideSignInDetails } from './ReviewDetails.action'
 import { openAccountCreatedModal } from '../../Modals/AccountCreated/AccountCreated.action.js'
 
-import AccountCreated from '../../Modals/AccountCreated/AccountCreated.web.js'
+import AccountCreated from '../../Modals/AccountCreated/AccountCreated.js'
 import Desktop from './ReviewDetails.web.js'
 import Mobile from './ReviewDetails.mobile.js'
 
@@ -59,7 +59,7 @@ class Review extends Component {
             handleOpenAccountCreatedModal={this.handleOpenAccountCreatedModal}
           />
         </MediaQuery>
-        <AccountCreated cancel={this._cancel} submit={this._submit} />
+        <AccountCreated cancel={this.cancel} submit={this.submit} />
       </section>
     )
   }

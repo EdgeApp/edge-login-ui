@@ -2,20 +2,15 @@
 @import "~theme/loader";
 
 .container {
-
+  flex: 1;
   display: flex;
   display: -webkit-flex;
-
   flex-direction: column;
   -webkit-flex-direction: column;
-
   justify-content: flex-start;
   -webkit-justify-content:  flex-start;
-
   align-items: center;
   -webkit-align-items: center;
-
-  flex: 1;
   height: 437px;
 
   .header{
