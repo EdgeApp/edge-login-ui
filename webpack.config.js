@@ -36,7 +36,7 @@ module.exports = {
     port: 8002
   },
 
-  entry: './src/index.web.js',
+  entry: './src/index.js',
 
   output: {
     path: path.join(__dirname, 'assets'),

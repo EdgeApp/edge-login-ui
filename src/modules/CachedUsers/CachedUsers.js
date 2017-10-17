@@ -11,7 +11,7 @@ import { openAccountCacheDeleteModal, closeAccountCacheDeleteModal } from '../Mo
 
 import AccountCacheDelete from '../Modals/AccountCacheDelete/AccountCacheDelete.js'
 
-import styles from './CachedUsers.js'
+import styles from './CachedUsers.scss'
 
 class UserList extends Component {
   _handleLoginUser = (user) => {

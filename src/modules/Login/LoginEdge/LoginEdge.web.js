@@ -5,23 +5,24 @@ import QRCode from './QRCode.js'
 
 export default ({
   view,
+  dispatch,
   edgeId,
   edgeUsername,
   edgeAccount,
   edgeObject,
   toggleQRCode,
   goToSignupPage
-}) => {
-  return (
-    <div style={styles.container}>
-      <p className={styles.header}>{t('string_scan_barcode_to_signin')}</p>
+}) => (
+  <div className={styles.container}>
+    <p className={styles.header}>{t('string_scan_barcode_to_signin')}</p>
+    <div className={styles.QRcodeContainer}>
       <QRCode
-        dispatch={this.props.dispatch}
-        edgeId={this.props.edgeId}
-        edgeUsername={this.props.edgeUsername}
-        edgeAccount={this.props.edgeAccount}
-        edgeObject={this.props.edgeObject}
+        dispatch={dispatch}
+        edgeId={edgeId}
+        edgeUsername={edgeUsername}
+        edgeAccount={edgeAccount}
+        edgeObject={edgeObject}
       />
     </div>
-  )
-}
+  </div>
+)

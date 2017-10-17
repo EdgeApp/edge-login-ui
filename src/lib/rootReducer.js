@@ -1,26 +1,26 @@
 import { combineReducers } from 'redux'
 
-import * as Username from '../modules/Username/Username.reducer'
-import * as PinNumber from '../modules/PinNumber/PinNumber.reducer'
-import * as PasswordStates from '../modules/Password/Password.reducer'
-import * as PasswordValidation from '../modules/Password/PasswordValidation/PasswordValidation.reducer'
-import { nextButtonVisible } from '../modules/NextButton/NextButton.reducer'
-import { skipButtonVisible } from '../modules/SkipButton/SkipButton.reducer'
-// import { disclaimerAccepted } from '../modules/Disclaimer/Disclaimer.reducer'
-import * as ReviewDetailsStates from '../modules/ReviewDetails/ReviewDetails.reducer'
-import * as Loader from '../modules/Loader/Loader.reducer'
-import * as WarningModal from '../modules/WarningModal/WarningModal.reducer'
-import * as ErrorModal from '../modules/ErrorModal/ErrorModal.reducer'
+// Signup
+import { signupPage } from '../modules/Signup/Signup.reducer'
+import * as Username from '../modules/Signup/Username/Username.reducer'
+import * as PinNumber from '../modules/Signup/PinNumber/PinNumber.reducer'
+import * as PasswordStates from '../modules/Signup/Password/Password.reducer'
+import * as PasswordValidation from '../modules/Signup/Password/PasswordValidation/PasswordValidation.reducer'
+import * as ReviewDetailsStates from '../modules/Signup/ReviewDetails/ReviewDetails.reducer'
+
+// Login
 import * as Login from '../modules/Login/Login.reducer'
 import { mobileShowQRCode } from '../modules/Login/LoginEdge/LoginEdge.mobileState.js'
 import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
+import { user } from '../modules/User/User.reducer'
+
+// Account Management
 import * as ChangePassword from '../modules/ChangePassword/ChangePassword.reducer'
 import * as ChangePin from '../modules/ChangePin/ChangePin.reducer'
 import * as PasswordRecovery from '../modules/PasswordRecovery/PasswordRecovery.reducer'
 import passwordRecoveryToken from '../modules/PasswordRecoveryToken/PasswordRecoveryToken.reducer.js'
-import * as ForgotPassword from '../modules/ForgotPassword/ForgotPassword.reducer'
-import { signupPage } from '../modules/Signup/Signup.reducer'
-import { user } from '../modules/User/User.reducer'
+
+// Modals
 import * as AccountManagementPassword from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
 import { forgotPassword } from '../modules/Modals/ForgotPassword/ForgotPassword.reducer.js'
 import { accountCreated } from '../modules/Modals/AccountCreated/AccountCreated.reducer.js'
@@ -28,9 +28,9 @@ import { passwordRecoverySuccess } from '../modules/Modals/PasswordRecoverySuces
 import { accountCacheDelete } from '../modules/Modals/AccountCacheDelete/AccountCacheDelete.reducer.js'
 import { success } from '../modules/Modals/Success/Success.reducer.js'
 
-// import { whiteOverlayVisible, lostFocus, gainedFocus } from '../modules/Landing.reducer'
-// import routes from './routesReducer'
-// import { alert } from '../modules/Alert/Alert.reducer'
+import * as Loader from '../modules/Loader/Loader.reducer'
+import * as WarningModal from '../modules/WarningModal/WarningModal.reducer'
+import * as ErrorModal from '../modules/ErrorModal/ErrorModal.reducer'
 
 const store = combineReducers({
   signupPage,
@@ -62,8 +62,7 @@ const store = combineReducers({
   }),
   reviewDetails: combineReducers({
     details: ReviewDetailsStates.details,
-    view: ReviewDetailsStates.view,
-    afterQuestionPasswordRecoveryView: ReviewDetailsStates.afterQuestionPasswordRecoveryView
+    view: ReviewDetailsStates.view
   }),
   login: combineReducers({
     viewPassword: Login.viewPassword,
@@ -84,8 +83,6 @@ const store = combineReducers({
     mobileLoginView: Login.mobileLoginView,
     mobileShowQRCode
   }),
-  nextButtonVisible,
-  skipButtonVisible,
   loader: combineReducers({
     loading: Loader.loading,
     message: Loader.message
@@ -107,11 +104,6 @@ const store = combineReducers({
     userToDeleteFromUserCache: CachedUsers.userToDeleteFromUserCache,
     usersWithPinEnabled: CachedUsers.usersWithPinEnabled
   }),
-  // landing: combineReducers({
-  //   disclaimerAccepted,
-  //   whiteOverlayVisible,
-  //   gainedFocus
-  // }),
   changePassword: combineReducers({
     view: ChangePassword.view,
     revealPassword: ChangePassword.revealPassword,
@@ -163,10 +155,8 @@ const store = combineReducers({
     accountCacheDelete,
     success
   }),
-  forgotPasswordModal: ForgotPassword.visible,
   user
   // routes,
-  // alert: alert
 })
 
 export default store

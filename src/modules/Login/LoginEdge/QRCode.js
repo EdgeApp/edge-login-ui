@@ -6,7 +6,7 @@ import { closeLoading } from '../../Loader/Loader.action'
 export default class QRCodeEdge extends Component {
   componentWillUnmount () {
     if (this.props.edgeObject) {
-      this.props.edgeObject.cancelRequest()
+      return this.props.edgeObject.cancelRequest()
     }
   }
   componentDidMount () {

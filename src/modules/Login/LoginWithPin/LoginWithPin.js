@@ -17,6 +17,11 @@ import Desktop from './LoginWithPin.web.js'
 import Mobile from './LoginWithPin.mobile.js'
 
 class LoginWithPin extends Component {
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.edgeObject) {
+      return nextProps.edgeObject.cancelRequest()
+    }
+  }
   handleSubmit = () => {
     const callback = (error, account) => {
       this.props.dispatch(loginPIN(''))
@@ -102,6 +107,7 @@ class LoginWithPin extends Component {
 export default connect(state => ({
   pin: state.login.pin,
   user: state.cachedUsers.selectedUserToLogin,
+  edgeObject: state.login.edgeLoginResults,
   error: state.login.errorPin,
   loader: state.loader
 }))(LoginWithPin)

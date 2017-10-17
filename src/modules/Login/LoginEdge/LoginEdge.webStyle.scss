@@ -1,6 +1,7 @@
 @import "~theme/buttons";
 
 .container {
+  flex:1;
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
@@ -9,11 +10,24 @@
   -webkit-justify-content: flex-start;
   align-items: center;
   -webkit-align-items: center;
-  margin-top: 40px
+  margin-top: 45px
 }
 
 .header {
   color: #909091;
   font-size: 20px;
   text-align: center;
+}
+
+.QRcodeContainer {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  margin-top: 45px
 }

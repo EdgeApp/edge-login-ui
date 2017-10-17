@@ -5,7 +5,7 @@ import FontIcon from 'react-toolbox/lib/font_icon'
 
 import Success from '../Modals/Success/Success.js'
 
-import { validate } from '../Password/PasswordValidation/PasswordValidation.middleware'
+import { validate } from '../Signup/Password/PasswordValidation/PasswordValidation.middleware'
 import { checkPassword } from './ChangePassword.middleware'
 import {
   changePasswordHidePassword,

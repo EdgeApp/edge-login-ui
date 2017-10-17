@@ -5,6 +5,7 @@ import styles from './NewAccount.mobileStyle.scss'
 
 export default ({
   view,
+  dispatch,
   edgeId,
   edgeUsername,
   edgeAccount,
@@ -18,6 +19,7 @@ export default ({
       return (
         <div className={styles.qrCode}>
           <QRCode
+            dispatch={dispatch}
             edgeId={edgeId}
             edgeUsername={edgeUsername}
             edgeAccount={edgeAccount}

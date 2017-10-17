@@ -8,7 +8,7 @@ import abcctx from 'lib/web/abcContext'
 import { openLogin } from './Login/Login.action'
 import { selectUserToLogin, setCachedUsers, setCachedUsersWithPin } from './CachedUsers/CachedUsers.action'
 
-import LayoutTemplate from './LayoutTemplate/LayoutTemplate.web'
+import Layout from './Layout/Layout.js'
 import layoutTheme from 'theme/layoutTheme'
 import styles from './Container.scss'
 
@@ -38,9 +38,9 @@ class Container extends Component {
           dispatch(setCachedUsers(cachedUsers))
           if (cachedUsers.length >= 1) {
             if (lastUser && cachedUsersWithPin.includes(lastUser)) {
-              dispatch(selectUserToLogin(lastUser))
+              return dispatch(selectUserToLogin(lastUser))
             } else {
-              dispatch(openLogin())
+              return dispatch(openLogin())
             }
           }
           return null
@@ -91,10 +91,17 @@ class Container extends Component {
             onOverlayClick={this._handleToggle}
             className={this.selectDialogHeight()}
           >
-            <LayoutTemplate theme={layoutTheme} location={this.props.location}>
-              <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
+            <Layout
+              theme={layoutTheme}
+              location={this.props.location}
+            >
+              <FontIcon
+                value='clear'
+                className={styles.exitTooltip}
+                onClick={this._handleToggle}
+              />
               {this.props.children}
-            </LayoutTemplate>
+            </Layout>
           </Dialog>
         </MediaQuery>
         <MediaQuery maxWidth={719}>
@@ -104,10 +111,17 @@ class Container extends Component {
             onOverlayClick={this._handleToggle}
             className={styles.mobileWidth}
           >
-            <LayoutTemplate theme={layoutTheme} location={this.props.location}>
-              <FontIcon value='clear' className={styles.exitTooltip} onClick={this._handleToggle} />
+            <Layout
+              theme={layoutTheme}
+              location={this.props.location}
+            >
+              <FontIcon
+                value='clear'
+                className={styles.exitTooltip}
+                onClick={this._handleToggle}
+              />
               {this.props.children}
-            </LayoutTemplate>
+            </Layout>
           </Dialog>
         </MediaQuery>
       </div>

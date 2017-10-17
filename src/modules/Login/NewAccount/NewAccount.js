@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import MediaQuery from 'react-responsive'
 import { connect } from 'react-redux'
 import { openLogin } from '../Login.action'
-import { showQRCode, hideQRCode } from './LoginEdge.mobileState.js'
+import { showQRCode, hideQRCode } from '../LoginEdge/LoginEdge.mobileState.js'
 
 import Desktop from './NewAccount.web.js'
 import Mobile from './NewAccount.mobile.js'
@@ -34,10 +34,11 @@ class NewAccount extends Component {
         <MediaQuery maxWidth={719}>
           <Mobile
             view={this.props.view}
+            dispatch={this.props.dispatch}
             edgeId={this.props.edgeId}
             edgeUsername={this.props.edgeUsername}
             edgeAccount={this.props.edgeAccount}
-            edgeObject={this.porps.edgeObject}
+            edgeObject={this.props.edgeObject}
             goToSignupPage={this.goToSignupPage}
             handleOpenLoginWithPasswordPage={this.handleOpenLoginWithPasswordPage}
             toggleQRCode={this.toggleQRCode}

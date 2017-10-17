@@ -31,6 +31,7 @@ class LoginEdge extends Component {
         <MediaQuery minWidth={720}>
           <Desktop
             view={this.props.view}
+            dispatch={this.props.dispatch}
             edgeId={this.props.edgeId}
             edgeUsername={this.props.edgeUsername}
             edgeAccount={this.props.edgeAccount}
@@ -42,6 +43,7 @@ class LoginEdge extends Component {
         <MediaQuery maxWidth={719}>
           <Mobile
             view={this.props.view}
+            dispatch={this.props.dispatch}
             edgeId={this.props.edgeId}
             edgeUsername={this.props.edgeUsername}
             edgeAccount={this.props.edgeAccount}

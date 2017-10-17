@@ -4,6 +4,7 @@ import QRCode from './QRCode.js'
 
 export default ({
   view,
+  dispatch,
   edgeId,
   edgeUsername,
   edgeAccount,
@@ -17,11 +18,11 @@ export default ({
       return (
         <div className={styles.qrCode}>
           <QRCode
-            dispatch={this.props.dispatch}
-            edgeId={this.props.edgeId}
-            edgeUsername={this.props.edgeUsername}
-            edgeAccount={this.props.edgeAccount}
-            edgeObject={this.props.edgeObject}
+            dispatch={dispatch}
+            edgeId={edgeId}
+            edgeUsername={edgeUsername}
+            edgeAccount={edgeAccount}
+            edgeObject={edgeObject}
           />
           <p className={styles.text}>Scan using Airbitz wallet to login</p>
         </div>
