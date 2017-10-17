@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Input from 'react-toolbox/lib/input'
-import Dropdown from 'react-toolbox/lib/dropdown'
+import MediaQuery from 'react-responsive'
 import _ from 'lodash'
-import abcctx from '../../lib/web/abcContext'
-import t from '../../lib/web/LocaleStrings'
+import abcctx from '../../../lib/web/abcContext'
+import t from '../../../lib/web/LocaleStrings'
 
 import * as action from './PasswordRecovery.action.js'
 import { setPasswordRecoveryToken } from '../PasswordRecoveryToken/PasswordRecoveryToken.action.js'
 import { checkPasswordRecovery } from './PasswordRecovery.middleware.js'
 
-import styles from './PasswordRecovery.mobileStyle.scss'
+import Desktop from './PasswordRecovery.web.js'
+import Mobile from './PasswordRecovery.mobile.js'
 
 class PasswordRecovery extends Component {
-  _handleSubmit = () => {
+  handleSubmit = () => {
     const callback = (error, token) => {
       if (error) {
         switch (error.type) {
@@ -34,7 +34,7 @@ class PasswordRecovery extends Component {
       }
     }
     this.props.dispatch(action.clearPasswordRecovery())
-    this.props.dispatch(
+    return this.props.dispatch(
       checkPasswordRecovery({
         questions: [
           this.props.firstQuestion,
@@ -44,9 +44,7 @@ class PasswordRecovery extends Component {
           this.props.firstAnswer,
           this.props.secondAnswer
         ],
-        password: this.props.password,
-        account: this.props.account,
-        location: this.props.location.pathname
+        account: this.props.account
       },
         callback
       )
@@ -70,109 +68,81 @@ class PasswordRecovery extends Component {
   componentWillMount = () => {
     this.loadQuestions()
   }
-  _handleOnChangeFirstQuestion = (firstQuestion) => {
+  handleOnChangeFirstQuestion = (firstQuestion) => {
     this.props.dispatch(action.changeFirstPasswordRecoveryQuestionValue(firstQuestion))
   }
-  _handleOnChangeFirstAnswer = (firstAnswer) => {
+  handleOnChangeFirstAnswer = (firstAnswer) => {
     this.props.dispatch(action.changeFirstPasswordRecoveryAnswerValue(firstAnswer))
   }
-  _handleOnChangeSecondQuestion = (secondQuestion) => {
+  handleOnChangeSecondQuestion = (secondQuestion) => {
     this.props.dispatch(action.changeSecondPasswordRecoveryQuestionValue(secondQuestion))
   }
-  _handleOnChangeSecondAnswer = (secondAnswer) => {
+  handleOnChangeSecondAnswer = (secondAnswer) => {
     this.props.dispatch(action.changeSecondPasswordRecoveryAnswerValue(secondAnswer))
   }
-  _renderQuestions1 = () => {
+  renderQuestions1 = () => {
     const filtered = _.filter(this.props.questions, question => this.props.secondQuestion !== question)
     const questions = _.map(filtered, question => ({ value: question, label: question }))
     return [ {value: 'Choose a question', label: 'Choose a question'}, ...questions ]
   }
-  _renderQuestions2 = () => {
+  renderQuestions2 = () => {
     const filtered = _.filter(this.props.questions, question => this.props.firstQuestion !== question)
     const questions = _.map(filtered, question => ({ value: question, label: question }))
     return [ {value: 'Choose a question', label: 'Choose a question'}, ...questions ]
   }
-  _renderButtonRows = () => {
-    if (!this.props.loader.loading) {
-      return (
-        <div className={styles.rowButtonsHorizontalMobile}>
-          <button className={styles.primaryMobile} onClick={this._handleSubmit}>Submit</button>
-          <button className={styles.secondaryMobile} onClick={e => this.props.history.push('/account')}>Back</button>
-        </div>
-      )
-    }
-    if (this.props.loader.loading) {
-      return (
-        <div className={styles.rowButtonsHorizontalMobile}>
-          <button className={styles.primaryLoadMobile}><div className={styles.loader} /></button>
-          <button className={styles.secondaryLoadMobile}>Back</button>
-        </div>
-      )
-    }
+  gotoAccount = () => {
+    return this.props.history.push('/account')
   }
   render () {
     return (
-      <div className={styles.container}>
-        <form onSubmit={e => { e.preventDefault(); this._handleSubmit(e) }} className={styles.forms}>
-          <Dropdown
-            source={this._renderQuestions1()}
-            onChange={this._handleOnChangeFirstQuestion}
-            value={this.props.firstQuestion}
-            allowBlank={false}
-            className={styles.formDropdown}
-            error={this.props.error.firstQuestion}
-            required
+      <section>
+        <MediaQuery minWidth={720}>
+          <Desktop
+            firstQuestion={this.props.firstQuestion}
+            firstAnswer={this.props.firstAnswer}
+            secondQuestion={this.props.secondQuestion}
+            secondAnswer={this.props.secondAnswer}
+            error={this.props.error}
+            loader={this.props.loader.loading}
+            renderQuestions1={this.renderQuestions1}
+            renderQuestions2={this.renderQuestions2}
+            handleOnChangeFirstQuestion={this.handleOnChangeFirstQuestion}
+            handleOnChangeFirstAnswer={this.handleOnChangeFirstAnswer}
+            handleOnChangeSecondQuestion={this.handleOnChangeSecondQuestion}
+            handleOnChangeSecondAnswer={this.handleOnChangeSecondAnswer}
+            handleSubmit={this.handleSubmit}
+            gotoAccount={this.gotoAccount}
           />
-          <Input
-            type='text'
-            name='firstAnswer'
-            onChange={this._handleOnChangeFirstAnswer}
-            value={this.props.firstAnswer}
-            label={t('activity_recovery_first_answer')}
-            className={styles.formInput}
-            error={this.props.error.firstAnswer}
-            required
+        </MediaQuery>
+        <MediaQuery maxWidth={719}>
+          <Mobile
+            firstQuestion={this.props.firstQuestion}
+            firstAnswer={this.props.firstAnswer}
+            secondQuestion={this.props.secondQuestion}
+            secondAnswer={this.props.secondAnswer}
+            error={this.props.error}
+            loader={this.props.loader.loading}
+            renderQuestions1={this.renderQuestions1}
+            renderQuestions2={this.renderQuestions2}
+            handleOnChangeFirstQuestion={this.handleOnChangeFirstQuestion}
+            handleOnChangeFirstAnswer={this.handleOnChangeFirstAnswer}
+            handleOnChangeSecondQuestion={this.handleOnChangeSecondQuestion}
+            handleOnChangeSecondAnswer={this.handleOnChangeSecondAnswer}
+            handleSubmit={this.handleSubmit}
+            gotoAccount={this.gotoAccount}
           />
-          <p className={styles.note}>{this.props.error.firstAnswer ? '' : 'Answers are case sensitive' }</p>
-          <Dropdown
-            source={this._renderQuestions2()}
-            onChange={this._handleOnChangeSecondQuestion}
-            value={this.props.secondQuestion}
-            allowBlank={false}
-            className={styles.formDropdown}
-            error={this.props.error.secondQuestion}
-            required
-          />
-          <Input
-            type='text'
-            name='secondAnswer'
-            onChange={this._handleOnChangeSecondAnswer}
-            value={this.props.secondAnswer}
-            label={t('activity_recovery_second_answer')}
-            className={styles.formInput}
-            error={this.props.error.secondAnswer}
-            required
-          />
-          <p className={styles.note}>{this.props.error.secondAnswer ? '' : 'Answers are case sensitive'}</p>
-        </form>
-        {this._renderButtonRows()}
-      </div>
+        </MediaQuery>
+      </section>
     )
   }
 }
 
 export default connect(state => ({
-  view: state.passwordRecovery.view,
-  viewToken: state.passwordRecovery.viewToken,
-  finishButton: state.passwordRecovery.finishButton,
   questions: state.passwordRecovery.questions,
   firstQuestion: state.passwordRecovery.firstQuestion,
   firstAnswer: state.passwordRecovery.firstAnswer,
   secondQuestion: state.passwordRecovery.secondQuestion,
   secondAnswer: state.passwordRecovery.secondAnswer,
-  password: state.passwordRecovery.password,
-  token: state.passwordRecovery.token,
-  email: state.passwordRecovery.email,
   error: {
     firstQuestion: state.passwordRecovery.error.firstQuestion,
     secondQuestion: state.passwordRecovery.error.secondQuestion,
