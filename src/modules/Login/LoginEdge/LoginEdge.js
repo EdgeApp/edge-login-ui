@@ -6,6 +6,7 @@ import { showQRCode, hideQRCode } from './LoginEdge.mobileState.js'
 
 import Desktop from './LoginEdge.web.js'
 import Mobile from './LoginEdge.mobile.js'
+// import webStyle from './LoginEdge.webStyle.scss'
 
 class LoginEdge extends Component {
   toggleQRCode = () => {

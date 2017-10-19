@@ -31,7 +31,7 @@
   display: flex;
   display: -webkit-flex;
   box-sizing: border-box;
-  border-bottom: 1px solid #D8D6D6;
+  border-bottom: 1px solid $color-grey-03;
 }
 
 .useritem {
@@ -45,12 +45,12 @@
   z-index: 5;
   padding: $unit;
 
-	color: #909091;
+	color: $color-grey-02;
   font-size: 16px;
 }
 
 .useritemSelected {
-  color: #007AFF;
+  color: $color-accent-blue;
 }
 
 .userdelete {
@@ -66,5 +66,5 @@
 }
 
 .userdelete:hover {
-  color: #B33A3A;
+  color: $color-accent-red;
 }

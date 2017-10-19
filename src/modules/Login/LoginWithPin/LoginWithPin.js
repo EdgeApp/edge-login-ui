@@ -72,7 +72,7 @@ class LoginWithPin extends Component {
   }
   render () {
     return (
-      <section>
+      <section style={{ width: '100%' }}>
         <MediaQuery minWidth={720}>
           <Desktop
             pin={this.props.pin}

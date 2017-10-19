@@ -9,6 +9,7 @@ import { closeLoading } from '../../Loader/Loader.action'
 import ForgotPassword from '../../Modals/ForgotPassword/ForgotPassword.js'
 import Desktop from './LoginWithPassword.web.js'
 import Mobile from './LoginWithPassword.mobile.js'
+// import webStyle from './LoginWithPassword.webStyle.scss'
 
 class LoginWithPassword extends Component {
   handleSubmit = () => {

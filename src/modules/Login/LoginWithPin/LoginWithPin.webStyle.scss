@@ -4,72 +4,61 @@
 
 .container {
   flex: 1;
-
   display: flex;
   display: -webkit-flex;
-
   flex-direction: column;
   -webkit-flex-direction: column;
-
   justify-content: flex-start;
   -webkit-justify-content: flex-start;
-
   align-items: center;
   -webkit-align-items: center;
+  width: 100%;
 
   .background {
-    background: linear-gradient(90deg, rgba(59,122,218,0.98) 0%, #2B5698 100%);
+    background: $color-gradient;
     height: 198px;
     border-top: 1px solid rgba(255,255,255,0.2);
     width: 100%;
   }
 
   .main {
-    flex: 1;
-
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     background: transparent;
 
+    flex: 1;
     display: flex;
     display: -webkit-flex;
-
     flex-direction: column;
     -webkit-flex-direction: column;
-
     justify-content: flex-start;
     -webkit-justify-content: flex-start;
-
     align-items: center;
     -webkit-align-items: center;
 
     .header {
       margin-top: 25px;
-      color: #FFFFFF;
+      color: $color-white;
       font-size: 32px;
       text-align: center;
     }
 
     .box {
-
       display: flex;
       display: -webkit-flex;
-
       flex-direction: column;
       -webkit-flex-direction: column;
-
       justify-content: center;
       -webkit-justify-content: center;
-
       align-items: center;
       -webkit-align-items: center;
 
       height: 237px;
       width: 380px;
       border-radius: 3px;
-      background-color: #FFFFFF;
-      box-shadow: 0 0 4px 0 rgba(0,0,0,0.5);
+      background-color: $color-white;
+      box-shadow: 0 0 4px 0 rgba(37,41,44,0.5);
       margin: 30px 0px;
       padding-top: 10px;
 
@@ -80,10 +69,10 @@
 
       .usernameContainer {
         width: 300px;
-        border-bottom: 1px solid #979797;
+        border-bottom: 1px solid $color-grey-02;
 
         .label {
-          color: #909091;
+          color: $color-grey-02;
           font-size: 14px;
           line-height: 16px;
           margin-bottom: 5px;
@@ -98,7 +87,7 @@
 
           .username {
             width: 279px;
-            color: #58595C;
+            color: $color-grey-01;
             font-size: 18px;
             line-height: 24px;
             margin-bottom: 6px;
@@ -111,17 +100,13 @@
             margin-left: 10px;
           }
         }
-
       }
-
       .userList {
         width: 300px;
       }
-
       .password {
         @extend .form-group;
         width: 120px;
-
         .passwordLabel {
           @extend .control-label;
           text-align: center;
@@ -144,14 +129,14 @@
           @extend .loader;
           width: 32px;
           height: 32px;
-          border-top: 4px solid #4977BB;
-          border-right: 4px solid #4977BB;
-          border-bottom: 4px solid #4977BB;
-          border-left: 4px solid rgba(73, 119, 187, 0.4);
+          border-top: 4px solid $color-secondary-navy;
+          border-right: 4px solid $color-secondary-navy;
+          border-bottom: 4px solid $color-secondary-navy;
+          border-left: 4px solid rgba(14,75,117,0.4);
         }
 
         .pinLabel {
-          color: #909091;
+          color: $color-grey-02;
           font-size: 18px;
           text-align: center;
         }
@@ -181,7 +166,7 @@
             padding-top: 8px;
 
             input {
-              color: #909091;
+              color: $color-grey-02;
               font-size: 69px;
               letter-spacing: 2px;
               padding-left: 14px;
@@ -194,18 +179,13 @@
               margin: 0px auto;
               line-height: 22px;
             }
-
           }
         }
-
       }
     }
-
     .exitLink {
       @extend .link;
       font-size: 18px;
     }
-
   }
-
 }
