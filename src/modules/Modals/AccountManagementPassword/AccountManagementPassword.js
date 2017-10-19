@@ -26,7 +26,7 @@ class AccountManagementPassword extends Component {
       }
       if (!error) {
         this.props.history.push(this.props.route)
-        return this._handleClose()
+        return this.handleClose()
       }
     }
     return this.props.dispatch(
@@ -52,7 +52,7 @@ class AccountManagementPassword extends Component {
           <Desktop
             close={this.handleClose}
             submit={this.handleSubmit}
-            passwordKeyPressed={this.passwordKeyPress}
+            passwordKeyPressed={this.passwordKeyPressed}
             changePasswordValue={this.changePasswordValue}
             view={this.props.view}
             password={this.props.password}
@@ -66,7 +66,7 @@ class AccountManagementPassword extends Component {
           <Mobile
             close={this.handleClose}
             submit={this.handleSubmit}
-            passwordKeyPressed={this.passwordKeyPress}
+            passwordKeyPressed={this.passwordKeyPressed}
             changePasswordValue={this.changePasswordValue}
             view={this.props.view}
             password={this.props.password}

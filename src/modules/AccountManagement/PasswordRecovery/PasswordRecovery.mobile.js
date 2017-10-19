@@ -43,7 +43,7 @@ export default ({
       <form className={styles.forms}>
         <Dropdown
           source={renderQuestions1()}
-          onChange={this.handleOnChangeFirstQuestion}
+          onChange={handleOnChangeFirstQuestion}
           value={firstQuestion}
           allowBlank={false}
           className={styles.formDropdown}

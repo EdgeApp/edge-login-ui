@@ -15,10 +15,10 @@ import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
 import { user } from '../modules/User/User.reducer'
 
 // Account Management
-import * as ChangePassword from '../modules/ChangePassword/ChangePassword.reducer'
-import * as ChangePin from '../modules/ChangePin/ChangePin.reducer'
-import * as PasswordRecovery from '../modules/PasswordRecovery/PasswordRecovery.reducer'
-import passwordRecoveryToken from '../modules/PasswordRecoveryToken/PasswordRecoveryToken.reducer.js'
+import * as ChangePassword from '../modules/AccountManagement/ChangePassword/ChangePassword.reducer'
+import * as ChangePin from '../modules/AccountManagement/ChangePin/ChangePin.reducer'
+import * as PasswordRecovery from '../modules/AccountManagement/PasswordRecovery/PasswordRecovery.reducer'
+import passwordRecoveryToken from '../modules/AccountManagement/PasswordRecoveryToken/PasswordRecoveryToken.reducer.js'
 
 // Modals
 import * as AccountManagementPassword from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'

@@ -9,6 +9,7 @@ import {
   changeNewPasswordRepeatValue,
   errorChangePassword,
   errorChangePasswordRepeat,
+  clearChangePassword,
   passwordChanged
 } from './ChangePassword.action'
 import { openSuccessModal, closeSuccessModal } from '../../Modals/Success/Success.action.js'
@@ -22,6 +23,7 @@ import Mobile from './ChangePassword.mobile.js'
 class ChangePassword extends Component {
   handleSubmit = () => {
     const callback = (error) => {
+      this.props.dispatch(clearChangePassword())
       if (error) {
         if (error.type === 'password') {
           return this.props.dispatch(errorChangePassword(error.message))
@@ -82,12 +84,12 @@ class ChangePassword extends Component {
       <section>
         <MediaQuery minWidth={720}>
           <Desktop
-            revealPassword={this.props.pin}
+            revealPassword={this.props.revealPassword}
             newPassword={this.props.newPassword}
             newPasswordRepeat={this.props.newPasswordRepeat}
             errorPassword={this.props.errorPassword}
             errorPasswordRepeat={this.props.errorPasswordRepeat}
-            loader={this.props.loader}
+            loader={this.props.loader.loading}
             validation={this.props.validation}
             handleSubmit={this.handleSubmit}
             passwordKeyPress={this.passwordKeyPress}
@@ -102,12 +104,12 @@ class ChangePassword extends Component {
         </MediaQuery>
         <MediaQuery maxWidth={719}>
           <Mobile
-            revealPassword={this.props.pin}
+            revealPassword={this.props.revealPassword}
             newPassword={this.props.newPassword}
             newPasswordRepeat={this.props.newPasswordRepeat}
             errorPassword={this.props.errorPassword}
             errorPasswordRepeat={this.props.errorPasswordRepeat}
-            loader={this.props.loader}
+            loader={this.props.loader.loading}
             validation={this.props.validation}
             handleSubmit={this.handleSubmit}
             passwordKeyPress={this.passwordKeyPress}

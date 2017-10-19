@@ -1,10 +1,10 @@
 import React from 'react'
 import Input from 'react-toolbox/lib/input'
 import styles from './PasswordRecoveryToken.mobileStyle.scss'
-import yahoo from '../../img/password-recovery/yahoo.png'
-import gmail from '../../img/password-recovery/gmail.png'
-import windows from '../../img/password-recovery/windows.png'
-import mail from '../../img/password-recovery/mail.png'
+import yahoo from '../../../img/password-recovery/yahoo.png'
+import gmail from '../../../img/password-recovery/gmail.png'
+import windows from '../../../img/password-recovery/windows.png'
+import mail from '../../../img/password-recovery/mail.png'
 
 export default ({
   email,

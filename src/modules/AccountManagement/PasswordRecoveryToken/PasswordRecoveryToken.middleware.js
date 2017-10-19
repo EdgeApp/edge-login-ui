@@ -1,4 +1,4 @@
-import { validateEmail, obfuscateUsername } from '../../lib/helper'
+import { validateEmail, obfuscateUsername } from '../../../lib/helper'
 
 export const checkEmail = (address, email, token, accountUsername, callback) => {
   return (dispatch, getState, imports) => {

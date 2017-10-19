@@ -1,4 +1,4 @@
-import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { openLoading, closeLoading } from '../../Loader/Loader.action'
 
 export const checkPasswordRecovery = (payload, callback) => {
   return (dispatch, getState, imports) => {

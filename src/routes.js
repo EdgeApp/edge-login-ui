@@ -5,10 +5,10 @@ import Container from './modules/Container.js'
 import Signup from './modules/Signup/Signup.js'
 import Login from './modules/Login/Login.js'
 import AccountManagement from './modules/AccountManagement/AccountManagement.js'
-import ChangePin from './modules/ChangePin/ChangePin.js'
-import ChangePassword from './modules/ChangePassword/ChangePassword.js'
-import PasswordRecovery from './modules/PasswordRecovery/PasswordRecovery.js'
-import PasswordRecoveryToken from './modules/PasswordRecoveryToken/PasswordRecoveryToken.js'
+import ChangePin from './modules/AccountManagement/ChangePin/ChangePin.js'
+import ChangePassword from './modules/AccountManagement/ChangePassword/ChangePassword.js'
+import PasswordRecovery from './modules/AccountManagement/PasswordRecovery/PasswordRecovery.js'
+import PasswordRecoveryToken from './modules/AccountManagement/PasswordRecoveryToken/PasswordRecoveryToken.js'
 
 export default class RouterComponent extends Component {
   render () {

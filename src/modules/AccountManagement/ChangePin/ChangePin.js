@@ -86,5 +86,6 @@ class ChangePin extends Component {
 export default connect(state => ({
   pin: state.changePin.pin,
   loader: state.loader,
-  error: state.changePin.error
+  error: state.changePin.error,
+  user: state.user
 }))(ChangePin)

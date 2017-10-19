@@ -1,4 +1,4 @@
-import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { openLoading, closeLoading } from '../../Loader/Loader.action'
 
 export const checkPassword = (newPassword, newPasswordRepeat, account, callback) => {
   return (dispatch, getState, imports) => {

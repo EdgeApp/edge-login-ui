@@ -1,5 +1,5 @@
 import * as ACTION from './PasswordValidation.action'
-import { PASSWORD_CHANGED } from '../../../ChangePassword/ChangePassword.action'
+import { PASSWORD_CHANGED } from '../../../AccountManagement/ChangePassword/ChangePassword.action'
 import { GET_DETAILS } from '../../ReviewDetails/ReviewDetails.action'
 
 export const upperCaseChar = (state = false, action) => {
