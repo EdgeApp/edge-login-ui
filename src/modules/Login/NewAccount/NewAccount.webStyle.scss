@@ -5,7 +5,6 @@
   display: flex;
   display: -webkit-flex;
 }
-
 .container {
   flex: 1;
   display: flex;
@@ -16,9 +15,7 @@
   -webkit-justify-content: center;
   align-items: center;
   -webkit-align-items: center;
-
 }
-
 .button {
   @extend .primary;
   width: 210px;

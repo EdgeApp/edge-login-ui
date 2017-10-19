@@ -28,7 +28,7 @@
     -webkit-align-items: stretch;
 
     height: 37px;
-    border: 1px solid #4977BB;
+    border: 1px solid $color-secondary-navy;
     border-radius: 3px;
     margin-bottom: 15px;
 
@@ -42,10 +42,10 @@
       -webkit-justify-content: center;
       align-items: center;
       -webkit-align-items: center;
-      background-color: #4977BB;
+      background-color: $color-secondary-navy;
       cursor: pointer;
       .text {
-        color: #FFFFFF;
+        color: $color-white;
         font-size: 14px;
         text-align: center;
       }
@@ -63,7 +63,7 @@
       -webkit-align-items: center;
       cursor: pointer;
       .text {
-        color: #4977BB;
+        color: $color-secondary-navy;
         font-size: 14px;
         text-align: center;
       }
@@ -74,7 +74,7 @@
   .rectangle {
     @extend .max-width;
 	  height: 100px;
-    border: 1px solid #4977BB;
+    border: 1px solid $color-secondary-navy;
     border-radius: 3px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -89,7 +89,7 @@
     -webkit-align-items: center;
 
     .text {
-      color: #4977BB;
+      color: $color-secondary-navy;
       font-size: 16px;
       text-align: center;
     }
@@ -105,7 +105,7 @@
     -webkit-align-items: center;
     margin-top: 15px;
     .text {
-      color: #909091;
+      color: $color-grey-02;
       font-size: 18px;
       text-align: center;
       margin-top: 20px;
@@ -115,7 +115,7 @@
   .QRTextToggle {
     margin-top: 10px;
     margin-bottom: 10px;
-    color: #4977BB;
+    color: $color-secondary-navy;
     font-size: 16px;
     text-align: center;
     cursor: pointer;
@@ -123,12 +123,12 @@
   .signUp {
   @extend .margins;
     .question {
-      color: #909091;
+      color: $color-grey-02;
       font-size: 16px;
       text-align: center;
     }
     .create {
-      color: #4977BB;
+      color: $color-secondary-navy;
       font-size: 16px;
       text-align: center;
       cursor: pointer;
