@@ -1,0 +1,49 @@
+@import "~theme/buttons";
+@import "~theme/input";
+
+.container {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: flex-start;
+  -webkit-justify-content:  flex-start;
+  align-items: center;
+  -webkit-align-items: center;
+  height: 344px;
+
+  .header {
+    color: $color-grey-02;
+    font-size: 32px;
+    line-height: 36px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .password {
+    width: 150px;
+    .input {
+      input {
+        text-align: center;
+        font-size: 80px;
+        height: 50px;
+        color: $color-grey-02;
+        // letter-spacing: 4px;
+      }
+      span[class*="error"] {
+        display: block;
+        text-align: center;
+        margin: 0px auto;
+      }
+    }
+  }
+
+  .bullet {
+    color: $color-grey-02;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+}

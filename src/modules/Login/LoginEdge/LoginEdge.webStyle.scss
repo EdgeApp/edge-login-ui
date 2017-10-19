@@ -1,0 +1,28 @@
+@import "~theme/buttons";
+
+.rootContainer {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+}
+
+.container {
+  flex:1;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.header {
+  color: $color-grey-02;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 45px;
+  margin-bottom: 30px;
+  height: 48px;
+}

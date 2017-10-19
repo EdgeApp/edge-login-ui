@@ -23,6 +23,8 @@ export const SHOW_ERROR_LOGIN_MESSAGE = 'SHOW_ERROR_LOGIN_MESSAGE'
 export const CLEAR_ERROR_LOGIN_MESSAGE = 'CLEAR_ERROR_LOGIN_MESSAGE'
 export const SHOW_ERROR_LOGIN_PIN_MESSAGE = 'SHOW_ERROR_LOGIN_PIN_MESSAGE'
 export const CLEAR_ERROR_LOGIN_PIN_MESSAGE = 'CLEAR_ERROR_LOGIN_PIN_MESSAGE'
+export const MOBILE_LOGIN_WITH_PASSWORD_VIEW = 'MOBILE_LOGIN_WITH_PASSWORD_VIEW'
+export const MOBILE_LOGIN_EDGE_VIEW = 'MOBILE_LOGIN_EDGE_VIEW'
 
 export function enablePinTimeout (durationLeft) {
   return {
@@ -184,5 +186,17 @@ export function showErrorLoginPinMessage (data) {
 export function clearErrorLoginPinMessage () {
   return {
     type: CLEAR_ERROR_LOGIN_PIN_MESSAGE
+  }
+}
+
+export function showMobileLoginWithPasswordView () {
+  return {
+    type: MOBILE_LOGIN_WITH_PASSWORD_VIEW
+  }
+}
+
+export function showMobileLoginEdgeView () {
+  return {
+    type: MOBILE_LOGIN_EDGE_VIEW
   }
 }

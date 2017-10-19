@@ -1,0 +1,47 @@
+@import "~theme/buttons";
+@import "~theme/loader";
+
+.container {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: flex-start;
+  -webkit-justify-content:  flex-start;
+  align-items: center;
+  -webkit-align-items: center;
+
+  height: 422px;
+
+  .header {
+    color: $color-grey-02;
+    font-size: 32px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+
+  .input {
+    width: 300px;
+  }
+
+  .bullets {
+    width: 595px;
+    margin-bottom: 40px;
+
+    .bullet {
+      text-align: left;
+      color: $color-grey-02;
+      font-size: 16px;
+      margin: 10px 0px;
+
+      .bulletIcon {
+        font-size: 22px;
+        color: $color-secondary-navy;
+        margin: 0px 10px;
+      }
+    }
+  }
+
+}

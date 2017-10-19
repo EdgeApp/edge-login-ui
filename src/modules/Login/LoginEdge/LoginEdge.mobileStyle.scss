@@ -1,0 +1,137 @@
+@import "~theme/buttons";
+@import "~theme/mobile";
+
+.container {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  align-items: center;
+  -webkit-align-items: center;
+
+  // height: 640px;
+  // height: 411px;
+  padding: 20px;
+
+  .navigation {
+    @extend .max-width;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    justify-content: stretch;
+    -webkit-justify-content: stretch;
+    align-items: stretch;
+    -webkit-align-items: stretch;
+
+    height: 37px;
+    border: 1px solid $color-secondary-navy;
+    border-radius: 3px;
+    margin-bottom: 15px;
+
+    .navBoxActive {
+      flex: 1;
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      justify-content: center;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
+      background-color: $color-secondary-navy;
+      cursor: pointer;
+      .text {
+        color: $color-white;
+        font-size: 14px;
+        text-align: center;
+      }
+    }
+
+    .navBox {
+      flex: 1;
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      justify-content: center;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
+      cursor: pointer;
+      .text {
+        color: $color-secondary-navy;
+        font-size: 14px;
+        text-align: center;
+      }
+    }
+
+  }
+
+  .rectangle {
+    @extend .max-width;
+	  height: 100px;
+    border: 1px solid $color-secondary-navy;
+    border-radius: 3px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+
+    .text {
+      color: $color-secondary-navy;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+  .qrCode {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    margin-top: 15px;
+    .text {
+      color: $color-grey-02;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 5px;
+    }
+  }
+  .QRTextToggle {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: $color-secondary-navy;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .signUp {
+  @extend .margins;
+    .question {
+      color: $color-grey-02;
+      font-size: 16px;
+      text-align: center;
+    }
+    .create {
+      color: $color-secondary-navy;
+      font-size: 16px;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+}

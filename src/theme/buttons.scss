@@ -3,22 +3,30 @@
   width: 200px;
   border-radius: 3px;
   border-style: none;
-  background-color: #4977BB;
-  color: #FFFFFF;
+  background-color: $color-secondary-navy;
+  color: $color-white;
   font-size: 18px;
-  line-height: 17px;
   text-align: center;
 
   cursor: pointer;
   margin: 0px 5px;
 }
 
-.primary:hover {
-  background-color: rgba(73,119,187,0.6);
+.primaryMobile {
+  @extend .primary;
+  font-size: 16px;
+  margin: 0px;
+  width: 100%;
 }
 
-.primary:active {
-  background-color: #2A5799;
+.primary:hover,
+.primaryMobile:hover {
+  background-color: $color-secondary-navy-dilluted;
+}
+
+.primary:active,
+.primaryMobile:active {
+  background-color: $color-primary-navy;
 }
 
 .primaryLoad {
@@ -26,12 +34,19 @@
   width: 200px;
   border-radius: 3px;
   border-style: none;
-  background-color: #2A5799;
-  color: #FFFFFF;
+  background-color: $color-primary-navy;
+  color: $color-white;
   font-size: 18px;
   line-height: 17px;
   text-align: center;
   margin: 0px 5px;
+}
+
+.primaryLoadMobile {
+  @extend .primaryLoad;
+  font-size: 16px;
+  margin: 0px;
+  width: 100%;
 }
 
 .secondary {
@@ -39,8 +54,8 @@
   width: 200px;
   border-radius: 3px;
   border-style: none;
-  background-color: #909091;
-  color: #FFFFFF;
+  background-color: $color-grey-02;
+  color: $color-white;
   font-size: 18px;
   line-height: 17px;
   text-align: center;
@@ -49,12 +64,21 @@
   margin: 0px 5px;
 }
 
-.secondary:hover {
-  background-color: rgba(144,144,145,0.6);
+.secondaryMobile {
+  @extend .secondary;
+  font-size: 16px;
+  margin: 0px;
+  width: 100%;
 }
 
-.secondary:active {
-  background-color: #58595C;
+.secondary:hover,
+.secondaryMobile:hover {
+  background-color: $color-grey-02-dilluted;
+}
+
+.secondary:active,
+.secondaryMobile:active {
+  background-color: $color-grey-01;
 }
 
 .secondaryLoad {
@@ -62,22 +86,28 @@
   width: 200px;
   border-radius: 3px;
   border-style: none;
-  background-color: rgba(144,144,145,0.6);
-  color: #FFFFFF;
+  background-color: $color-grey-02-dilluted;
+  color: $color-white;
   font-size: 18px;
   line-height: 17px;
   text-align: center;
   margin: 0px 5px;
 }
 
+.secondaryLoadMobile {
+  @extend .secondaryLoad;
+  font-size: 16px;
+  width: 100%;
+}
+
 .link {
   cursor: pointer;
-  color: #4977BB;
+  color: $color-secondary-navy;
   font-size: 16px;
 }
 
 .link:hover {
-  color: rgba(73,119,187,0.6);
+  color: $color-secondary-navy-dilluted;
   text-decoration: none;
 }
 
@@ -89,13 +119,58 @@
 .rowButtons {
   display: flex;
   display: -webkit-flex;
-
   flex-direction: row;
   -webkit-flex-direction: row;
-
   justify-content: center;
   -webkit-justify-content: center;
-
   align-items: center;
   -webkit-align-items: center;
+}
+
+.rowButtonsHorizontal {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.rowButtonsMobile {
+  width: 100%;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+
+  .secondaryMobile,
+  .secondaryLoadMobile {
+      margin-right:5px;
+  }
+}
+
+.rowButtonsHorizontalMobile {
+  width: 100%;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+
+  .primaryMobile,
+  .primaryLoadMobile,
+  .secondaryMobile,
+  .secondaryLoadMobile {
+      margin:5px 0px;
+  }
+
 }

@@ -1,20 +1,16 @@
 .container {
-
+  flex: 1;
   display: flex;
   display: -webkit-flex;
-
   flex-direction: column;
   -webkit-flex-direction: column;
-
   justify-content: flex-start;
   -webkit-justify-content:  flex-start;
-
-  flex: 1;
 
   height: 303px;
 
   .header {
-    color: #909091;
+    color: $color-grey-02;
     font-size: 32px;
     text-align: center;
     margin-top: 40px;
@@ -28,26 +24,20 @@
   .main {
     display: flex;
     display: -webkit-flex;
-
     flex-direction: row;
     -webkit-flex-direction: row;
-
     justify-content: center;
     -webkit-justify-content: center;
-
     align-items: center;
     -webkit-align-items: center;
 
     .square {
       display: flex;
       display: -webkit-flex;
-
       flex-direction: column;
       -webkit-flex-direction: column;
-
       justify-content: center;
       -webkit-justify-content: center;
-
       align-items: center;
       -webkit-align-items: center;
 
@@ -63,7 +53,7 @@
       }
 
       .label {
-        color: #4977BB;
+        color: $color-secondary-navy;
         font-size: 16px;
         text-align: center;
       }
@@ -71,8 +61,7 @@
 
     .square:active {
       border: 1px solid #4977BB;
-      background-color: rgba(73,119,187,0.1);
+      background-color: rgba(14,75,117,0.1);
     }
-
   }
 }

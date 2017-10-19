@@ -209,3 +209,14 @@ export const errorPin = (state = '', action) => {
       return state
   }
 }
+
+export const mobileLoginView = (state = false, action) => {
+  switch (action.type) {
+    case ACTION.MOBILE_LOGIN_WITH_PASSWORD_VIEW:
+      return false
+    case ACTION.MOBILE_LOGIN_EDGE_VIEW:
+      return true
+    default:
+      return state
+  }
+}

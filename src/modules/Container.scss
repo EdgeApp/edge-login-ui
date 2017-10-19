@@ -1,0 +1,65 @@
+.baseWidth {
+  width :870px;
+}
+
+.mobileWidth {
+  width :720px;
+}
+
+.dialogLogin {
+  @extend .baseWidth;
+  height : 550px;
+}
+
+.dialogPin {
+  @extend .baseWidth;
+  height : 402px;
+}
+
+.dialogPassword {
+  @extend .baseWidth;
+  height : 565px;
+}
+
+.dialogSignUp {
+  @extend .baseWidth;
+  height : 550px;
+}
+
+.dialogSignUpPin {
+  @extend .baseWidth;
+  height: 472px;
+}
+
+.dialogAccount {
+  @extend .baseWidth;
+  height : 431px;
+}
+
+.dialogChangePassword {
+  @extend .baseWidth;
+  height : 480px;
+}
+
+.dialogPasswordRecovery {
+  @extend .baseWidth;
+  height : 594px;
+}
+
+.dialogPasswordRecoveryToken {
+  @extend .baseWidth;
+  height : 528px;
+}
+
+.topLevelDialog section {
+  padding: 0;
+}
+
+.exitTooltip {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
