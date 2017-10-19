@@ -5,11 +5,12 @@ import MediaQuery from 'react-responsive'
 import { loginUsername, loginPassword, openUserList, closeUserList, showMobileLoginEdgeView, showErrorLoginMessage, clearErrorLoginMessage } from '../Login.action'
 import { loginWithPassword } from '../Login.middleware'
 import { closeLoading } from '../../Loader/Loader.action'
+import { openForgotPasswordModal } from '../../Modals/ForgotPassword/ForgotPassword.action.js'
 
 import ForgotPassword from '../../Modals/ForgotPassword/ForgotPassword.js'
 import Desktop from './LoginWithPassword.web.js'
 import Mobile from './LoginWithPassword.mobile.js'
-// import webStyle from './LoginWithPassword.webStyle.scss'
+import webStyle from './LoginWithPassword.webStyle.scss'
 
 class LoginWithPassword extends Component {
   handleSubmit = () => {
@@ -52,7 +53,7 @@ class LoginWithPassword extends Component {
   passwordKeyPress = (e) => {
     if (e.charCode === 13) {
       if (!this.props.loader.loading) {
-        return this._handleSubmit()
+        return this.handleSubmit()
       }
     }
   }
@@ -71,9 +72,12 @@ class LoginWithPassword extends Component {
   changePasswordValue = (value) => {
     return this.props.dispatch(loginPassword(value))
   }
+  toggleForgotPassword = () => {
+    return this.props.dispatch(openForgotPasswordModal())
+  }
   render () {
     return (
-      <section>
+      <section className={webStyle.rootContainer}>
         <MediaQuery minWidth={720}>
           <Desktop
             submit={this.handleSubmit}
@@ -84,6 +88,7 @@ class LoginWithPassword extends Component {
             usernameKeyPress={this.usernameKeyPress}
             changeUsernameValue={this.changeUsernameValue}
             changePasswordValue={this.changePasswordValue}
+            toggleForgotPassword={this.toggleForgotPassword}
             refUsername={input => { this.username = input }}
             refPassword={input => { this.password = input }}
             username={this.props.username}
@@ -102,6 +107,7 @@ class LoginWithPassword extends Component {
             usernameKeyPress={this.usernameKeyPress}
             changeUsernameValue={this.changeUsernameValue}
             changePasswordValue={this.changePasswordValue}
+            toggleForgotPassword={this.toggleForgotPassword}
             toggleMobileLoginView={this.toggleMobileLoginView}
             refUsername={input => { this.username = input }}
             refPassword={input => { this.password = input }}

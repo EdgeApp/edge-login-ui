@@ -6,7 +6,7 @@ import { showQRCode, hideQRCode } from '../LoginEdge/LoginEdge.mobileState.js'
 
 import Desktop from './NewAccount.web.js'
 import Mobile from './NewAccount.mobile.js'
-// import webStyle from './NewAccount.webStyle.scss'
+import webStyle from './NewAccount.webStyle.scss'
 
 class NewAccount extends Component {
   goToSignupPage = () => {
@@ -25,7 +25,7 @@ class NewAccount extends Component {
   }
   render () {
     return (
-      <section>
+      <section className={webStyle.rootContainer}>
         <MediaQuery minWidth={720}>
           <Desktop
             goToSignupPage={this.goToSignupPage}

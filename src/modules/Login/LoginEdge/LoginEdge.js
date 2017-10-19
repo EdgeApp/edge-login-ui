@@ -6,7 +6,7 @@ import { showQRCode, hideQRCode } from './LoginEdge.mobileState.js'
 
 import Desktop from './LoginEdge.web.js'
 import Mobile from './LoginEdge.mobile.js'
-// import webStyle from './LoginEdge.webStyle.scss'
+import webStyle from './LoginEdge.webStyle.scss'
 
 class LoginEdge extends Component {
   toggleQRCode = () => {
@@ -28,7 +28,7 @@ class LoginEdge extends Component {
   }
   render () {
     return (
-      <section>
+      <section className={webStyle.rootContainer}>
         <MediaQuery minWidth={720}>
           <Desktop
             view={this.props.view}

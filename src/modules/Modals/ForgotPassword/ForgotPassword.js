@@ -31,5 +31,5 @@ class ForgotPassword extends Component {
 }
 
 export default connect(state => ({
-  view: state.modal.passwordRecovery
+  view: state.modal.forgotPassword
 }))(ForgotPassword)

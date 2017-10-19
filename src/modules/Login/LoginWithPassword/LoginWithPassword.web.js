@@ -13,6 +13,7 @@ export default ({
   usernameKeyPress,
   changeUsernameValue,
   changePasswordValue,
+  toggleForgotPassword,
   refUsername,
   refPassword,
   username,
@@ -35,6 +36,7 @@ export default ({
             ref={refUsername}
             onFocus={showCachedUsers}
             onBlur={hideCachedUsers}
+            className={styles.usernameForm}
           />
         }
         area='passwordLogin'
@@ -49,20 +51,18 @@ export default ({
         onChange={changePasswordValue}
         value={password}
         ref={refPassword}
-        className={styles.form}
         error={error}
+        className={styles.forms}
       />
     </div>
-    <p className={styles.forgotPasswordLink} onClick={e => console.log('foo')}>
+    <p className={styles.forgotPasswordLink} onClick={toggleForgotPassword}>
       Forgot Password
     </p>
     <button className={loader ? styles.primaryLoad : styles.primary} onClick={submit}>
       { loader ? <div className={styles.loader} /> : 'Sign In' }
     </button>
     <p className={styles.createAccountText}>Don't have an account?
-      <span className={styles.link} onClick={goToSignupPage}>
-        Create Account
-      </span>
+      <span className={styles.link} onClick={goToSignupPage}> Create Account</span>
     </p>
   </div>
 )

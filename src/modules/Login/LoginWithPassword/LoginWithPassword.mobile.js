@@ -12,6 +12,7 @@ export default ({
   usernameKeyPress,
   changeUsernameValue,
   changePasswordValue,
+  toggleForgotPassword,
   toggleMobileLoginView,
   refUsername,
   refPassword,
@@ -65,7 +66,7 @@ export default ({
         error={error}
       />
     </div>
-    <p className={styles.forgotPassword}>Forgot Password</p>
+    <p className={styles.forgotPassword} onClick={toggleForgotPassword}>Forgot Password</p>
     <button
       className={loader ? styles.primaryLoadMobile : styles.primaryMobile}
       onClick={submit}
