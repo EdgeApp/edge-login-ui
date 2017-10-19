@@ -1,26 +1,22 @@
 @import 'theme/_config.scss';
 
 .container{
-    height: 86px;
-    padding: 0 0.6rem;
-    font-size: 1.0rem;
-    background: linear-gradient(90deg, rgba(59,122,218,0.98) 0%, #2B5698 100%);
-
     display: flex;
     display: -webkit-flex;
-
     flex-direction: column;
     -webkit-flex-direction: column;
-
     justify-content: center;
     -webkit-justify-content: center;
-
     align-items: center;
     -webkit-align-items: center;
 
+    height: 86px;
+    padding: 0 0.6rem;
+    font-size: 1.0rem;
+    background: $color-gradient;
     .text {
       opacity: 0.6;
-      color: #FFFFFF;
+      color: $color-white;
       font-size: 20px;
       font-weight: bold;
       text-align: center;

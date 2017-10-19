@@ -1,7 +1,7 @@
 .container {
   width: 500px;
   border-radius: 3px;
-  background-color: #FFFFFF;
+  background-color: $color-white;
   box-shadow: 0 0 4px 0 rgba(0,0,0,0.5);
 
   section {
@@ -22,11 +22,11 @@
     position: absolute;
     width: 92px;
     height: 92px;
-    border-color: rgba(59,122,218,0.98);
+    border-color: $color-secondary-navy;
     border-width: 5px;
     border-style: solid;
     border-radius: 46px;
-    background-color: #FFFFFF;
+    background-color: $color-white;
     top: -46px;
     z-index: 5;
 

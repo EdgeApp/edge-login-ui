@@ -1,4 +1,3 @@
-@import 'theme/_config.scss';
 @import 'theme/buttons';
 
 .container {
@@ -36,16 +35,16 @@
     -webkit-justify-content: center;
     align-items: center;
     -webkit-align-items: center;
-    background: linear-gradient(90deg, rgba(59,122,218,0.98) 0%, #2B5698 100%);
+    background: $color-gradient;
     height: 42px;
   }
   .text2 {
     text-align: center;
     font-size: 14px;
-    color: #FFFFFF;
+    color: $color-white;
     .link {
       @extend .link;
-      color: #FFFFFF;
+      color: $color-white;
       font-size: 14px;
       font-weight: bold;
       text-decoration: none;

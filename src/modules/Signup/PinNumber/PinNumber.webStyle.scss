@@ -14,7 +14,7 @@
   height: 344px;
 
   .header {
-    color: #909091;
+    color: $color-grey-02;
     font-size: 32px;
     line-height: 36px;
     text-align: center;
@@ -28,7 +28,7 @@
         text-align: center;
         font-size: 80px;
         height: 50px;
-        color: #909091;
+        color: $color-grey-02;
         // letter-spacing: 4px;
       }
       span[class*="error"] {
@@ -40,24 +40,10 @@
   }
 
   .bullet {
-    color: #909091;
+    color: $color-grey-02;
     font-size: 16px;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 30px;
   }
-}
-
-.containerBody {
-  display: flex;
-  display: -webkit-flex;
-
-  flex-direction: column;
-  -webkit-flex-direction: column;
-
-  justify-content: center;
-  -webkit-justify-content: center;
-
-  align-items: center;
-  -webkit-align-items: center;
 }

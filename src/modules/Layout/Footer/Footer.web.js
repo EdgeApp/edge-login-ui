@@ -15,7 +15,7 @@ export default () => (
         </p>
       </div>
       <p className={styles.right}>
-        Powered by <a href='https://airbitz.co/app' target='_blank' className={styles.airbitzLink}>Airbitz</a>
+        Powered by <a href='https://airbitz.co/app' target='_blank' className={styles.airbitzLink}>Edge</a>
       </p>
     </div>
   </div>

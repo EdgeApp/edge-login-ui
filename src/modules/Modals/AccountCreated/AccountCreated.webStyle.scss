@@ -2,27 +2,22 @@
 @import "~theme/input";
 
 .container {
-
+  flex: 1;
   display: flex;
   display: -webkit-flex;
-
   flex-direction: column;
   -webkit-flex-direction: column;
-
   justify-content: center;
   -webkit-justify-content:  center;
-
   align-items: center;
   -webkit-align-items: center;
-
-  flex: 1;
 
   margin-left: 40px;
   margin-right: 40px;
 
   .header {
     width: 169px;
-    color: #2A5799;
+    color: $color-primary-navy;
     font-size: 24px;
     text-align: center;
     margin-bottom: 20px;
@@ -30,7 +25,7 @@
 
   .p1 {
     width: 420px;
-    color: #58595C;
+    color: $color-grey-01;
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 20px;
@@ -39,7 +34,7 @@
 
   .p2 {
     width: 420px;
-    color: #58595C;
+    color: $color-grey-01;
     font-size: 18px;
     font-weight: bold;
     line-height: 24px;
@@ -49,7 +44,7 @@
 
   .p3 {
     width: 420px;
-    color: #58595C;
+    color: $color-grey-01;
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 20px;
@@ -58,7 +53,7 @@
 
   .text {
     margin: 10px 40px;
-    color: #58595C;
+    color: $color-grey-01;
     font-size: 18px;
     text-align: center;
   }
@@ -75,7 +70,6 @@
 
   .password {
     @extend .form-group;
-
     width: 350px;
     margin-top: 40px;
     margin-bottom: 30px;

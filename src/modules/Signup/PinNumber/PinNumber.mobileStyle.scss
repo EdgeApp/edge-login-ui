@@ -13,7 +13,7 @@
   padding: 20px;
 
   .header {
-    color: #909091;
+    color: $color-grey-02;
     font-size: 24px;
     text-align: center;
     margin-top: 10px;
@@ -32,7 +32,7 @@
       height: 40px;
       font-size: 24px;
       text-align: center;
-      color: #D8D6D6;
+      color: $color-grey-03;
       padding-bottom: 25px;
     }
   }
@@ -48,13 +48,13 @@
       height: 40px;
       text-align: center;
       font-size: 55px;
-      color: #909091;
+      color: $color-grey-02;
       padding-bottom: 25px;
     }
   }
 
   .text {
-    color: #909091;
+    color: $color-grey-02;
     font-size: 16px;
     text-align: center;
     margin-top: 10px;

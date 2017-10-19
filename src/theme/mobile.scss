@@ -12,7 +12,7 @@
   @extend .max-width;
   @extend .margins;
   height: 1px;
-  border-top: 1px solid #D8D6D6;
+  border-top: 1px solid $color-grey-03;
 }
 
 .dividerBottom {

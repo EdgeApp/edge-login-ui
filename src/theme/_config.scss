@@ -5,46 +5,56 @@
 // @import "~react-toolbox/lib/commons";
 // @import "~react-toolbox/lib/button/theme";
 
-// Global CSS
+//Color Pallete
+$color-gradient: linear-gradient(270deg, #0E4B75 0%, #0D2145 100%);
+$color-primary-navy: #0D2145; //#2A5799
+$color-secondary-navy: #0E4B75; //#4977BB
+$color-accent-blue: #0073D9; //#7FC343
+$color-accent-orange: #F1AA19; //#F7A623
+$color-accent-red: #E85466; //#F03A47
+$color-grey-01: #4A5157; //#58595C
+$color-grey-02: #87939E; //#909091
+$color-grey-03: #D9E3ED; //#D8D6D6
+$color-grey-04: #F4F5F6; //#F7F7F7
+$color-black: #25292C; //#000000
+$color-white: #FFFFFF; //#FFFFFF
+$color-mint: #66EDA8;
+
+$color-secondary-navy-dilluted: rgba(14,75,117,0.6);
+$color-grey-02-dilluted: rgba(135,147,158,0.6);
+
+// Global
 $unit: 1.4rem;
 $preferred-font: 'Source Sans Pro', sans-serif;
-
-//Color Pallete CSS
-$color-primary: #4977BB;
-$color-primary-dark: #4977BB;
+$color-text: $color-grey-01;
+$color-text-secondary: $color-grey-02;
 
 //Input
 $input-padding: 1.4 * $unit;
 $input-field-font-size: 1.2 * $unit;
 $input-label-font-size: $unit;
 $input-underline-height: $unit;
+$input-text-highlight-color: $color-secondary-navy;
+$input-text-error-color: $color-accent-red;
+$input-text-label-color: $color-grey-02;
+$input-text-bottom-border-color: $color-grey-02 !default;
 
+//Dialog
 $dialog-content-padding: 0;
-// $card-font-size: 1rem;
-// $button-squared-min-width: 44;
 
+//CSS Global
 p {
-  // font-size: $unit * 1.2;
   font-size: 16px;
-  line-height: $unit * 1.6;
-}
-
-.button {
-  // font-size: $unit * 1.8;
+	line-height: 24px;
+  color: $color-grey-01;
 }
 
 a {
-  font-size: $unit * 1.4;
+  font-size: 16px;
   color: #007AFF;
 }
 
-a:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: $preferred-font;
+  color: $color-grey-01;
 }
-
-

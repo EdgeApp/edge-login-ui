@@ -3,21 +3,15 @@
 @import "~theme/loader";
 
 .container {
-
+  flex: 1;
   display: flex;
   display: -webkit-flex;
-
   flex-direction: column;
   -webkit-flex-direction: column;
-
   justify-content: flex-start;
   -webkit-justify-content:  flex-start;
-
   align-items: center;
   -webkit-align-items: center;
-
-  flex: 1;
-
   height: 276px;
 
   .input {
@@ -32,7 +26,7 @@
       height: 40px;
       font-size: 32px;
       text-align: center;
-      color: #D8D6D6;
+      color: $color-grey-03;
       padding-bottom: 35px;
     }
   }
@@ -49,7 +43,7 @@
       height: 40px;
       text-align: center;
       font-size: 70px;
-      color: #909091;
+      color: $color-grey-02;
       padding-bottom: 35px;
     }
   }

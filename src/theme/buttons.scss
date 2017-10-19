@@ -3,8 +3,8 @@
   width: 200px;
   border-radius: 3px;
   border-style: none;
-  background-color: #4977BB;
-  color: #FFFFFF;
+  background-color: $color-secondary-navy;
+  color: $color-white;
   font-size: 18px;
   text-align: center;
 
@@ -21,12 +21,12 @@
 
 .primary:hover,
 .primaryMobile:hover {
-  background-color: rgba(73,119,187,0.6);
+  background-color: $color-secondary-navy-dilluted;
 }
 
 .primary:active,
 .primaryMobile:active {
-  background-color: #2A5799;
+  background-color: $color-primary-navy;
 }
 
 .primaryLoad {
@@ -34,8 +34,8 @@
   width: 200px;
   border-radius: 3px;
   border-style: none;
-  background-color: #2A5799;
-  color: #FFFFFF;
+  background-color: $color-primary-navy;
+  color: $color-white;
   font-size: 18px;
   line-height: 17px;
   text-align: center;
@@ -54,8 +54,8 @@
   width: 200px;
   border-radius: 3px;
   border-style: none;
-  background-color: #909091;
-  color: #FFFFFF;
+  background-color: $color-grey-02;
+  color: $color-white;
   font-size: 18px;
   line-height: 17px;
   text-align: center;
@@ -73,12 +73,12 @@
 
 .secondary:hover,
 .secondaryMobile:hover {
-  background-color: rgba(144,144,145,0.6);
+  background-color: $color-grey-02-dilluted;
 }
 
 .secondary:active,
 .secondaryMobile:active {
-  background-color: #58595C;
+  background-color: $color-grey-01;
 }
 
 .secondaryLoad {
@@ -86,8 +86,8 @@
   width: 200px;
   border-radius: 3px;
   border-style: none;
-  background-color: rgba(144,144,145,0.6);
-  color: #FFFFFF;
+  background-color: $color-grey-02-dilluted;
+  color: $color-white;
   font-size: 18px;
   line-height: 17px;
   text-align: center;
@@ -102,12 +102,12 @@
 
 .link {
   cursor: pointer;
-  color: #4977BB;
+  color: $color-secondary-navy;
   font-size: 16px;
 }
 
 .link:hover {
-  color: rgba(73,119,187,0.6);
+  color: $color-secondary-navy-dilluted;
   text-decoration: none;
 }
 
