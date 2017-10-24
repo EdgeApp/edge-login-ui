@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { BackgroundImage, Button, ScrollingList } from '../../components/common'
-import { LogoImageHeader, UserListItem } from '../../components/components/abSpecific'
+import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
 import FourDigitInputConnector
   from '../../connectors/abSpecific/FourDigitInputConnector'
 // import * as Constants from '../../../common/constants'
