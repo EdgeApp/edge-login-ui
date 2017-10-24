@@ -1,5 +1,5 @@
 
-package co.airbitz.core-js-ui;
+package co.airbitz.AbcCoreJsUi;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,7 +16,6 @@ public class AbcCoreJsUiPackage implements ReactPackage {
       return Arrays.<NativeModule>asList(new AbcCoreJsUiModule(reactContext));
     }
 
-    @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
       return Collections.emptyList();
     }

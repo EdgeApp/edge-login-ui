@@ -1,5 +1,5 @@
 
-package co.airbitz.core-js-ui;
+package co.airbitz.AbcCoreJsUi;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
