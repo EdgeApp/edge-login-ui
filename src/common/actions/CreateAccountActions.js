@@ -46,7 +46,7 @@ export function checkUsernameForAvailabilty (data) {
           }
           const obj = {
             username: data,
-            error: 'THE USERNAME ALREADY EXOSTS ' // TODO - localize string.
+            error: 'THE USERNAME ALREADY EXiSTS ' // TODO - localize string.
           }
           dispatch(
             dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
