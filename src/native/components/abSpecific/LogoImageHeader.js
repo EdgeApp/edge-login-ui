@@ -1,6 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Image, View } from 'react-native'
 import * as Assets from '../../assets/'
+
+/* type Props = {
+  small: boolean,
+  style: any
+} */
 
 class LogoImageHeader extends Component {
   render () {
@@ -14,11 +19,6 @@ class LogoImageHeader extends Component {
       </View>
     )
   }
-}
-
-LogoImageHeader.propTypes = {
-  small: PropTypes.bool,
-  style: PropTypes.object.isRequired
 }
 
 export { LogoImageHeader }

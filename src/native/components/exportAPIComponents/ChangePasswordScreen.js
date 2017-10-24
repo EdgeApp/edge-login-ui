@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import reducers from '../../../common/reducers'
 import { createStore, applyMiddleware } from 'redux'
@@ -8,7 +8,24 @@ import ChangePasswordAppConnector
 import * as Styles from '../../styles'
 import { setLocal } from '../../../common/locale'
 
+/* type Props = {
+  account: any,
+  context: any,
+  showHeader: boolean,
+  locale: string,
+  language: string,
+  onComplete(): void,
+  onCancel(): void,
+} */
+
 class ChangePasswordScreen extends Component {
+  static defaultProps = {
+    locale: 'US',
+    language: 'en_us',
+    accountObject: null,
+    showHeader: true
+  }
+
   componentWillMount () {
     setLocal(this.props.locale, this.props.language)
     this.store = createStore(
@@ -38,22 +55,6 @@ class ChangePasswordScreen extends Component {
       </Provider>
     )
   }
-}
-
-ChangePasswordScreen.propTypes = {
-  account: PropTypes.object.isRequired,
-  context: PropTypes.object.isRequired,
-  onComplete: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  showHeader: PropTypes.bool,
-  locale: PropTypes.string,
-  language: PropTypes.string
-}
-ChangePasswordScreen.defaultProps = {
-  locale: 'US',
-  language: 'en_us',
-  accountObject: null,
-  showHeader: true
 }
 
 export { ChangePasswordScreen }

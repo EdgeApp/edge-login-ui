@@ -1,7 +1,30 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { TextInput } from 'react-native'
 
+/* type Props = {
+  style: any,
+  value: string,
+  placeholder: string,
+  autoCorrect: boolean,
+  autoCapitalize: string,
+  secureTextEntry: boolean,
+  isError: boolean,
+  forceFocus: boolean,
+  returnKeyType: string,
+  onFinish(): void,
+  onFocus(): void,
+  onChangeText(): void
+} */
+
 class Input extends Component {
+  static defaultProps = {
+    autoCapitalize: 'none',
+    autoCorrect: false,
+    autoFocus: false,
+    forceFocus: false,
+    returnKeyType: 'default'
+  }
+
   componentWillMount () {
     this.setState({
       inputText: '',
@@ -75,29 +98,6 @@ class Input extends Component {
       this.props.onBlur()
     }
   }
-}
-
-Input.propTypes = {
-  onChangeText: PropTypes.func.isRequired,
-  style: PropTypes.object.isRequired,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  autoCorrect: PropTypes.bool,
-  autoCapitalize: PropTypes.string,
-  secureTextEntry: PropTypes.bool,
-  isError: PropTypes.bool,
-  onFinish: PropTypes.func,
-  onFocus: PropTypes.func,
-  forceFocus: PropTypes.bool,
-  returnKeyType: PropTypes.string
-}
-
-Input.defaultProps = {
-  autoCapitalize: 'none',
-  autoCorrect: false,
-  autoFocus: false,
-  forceFocus: false,
-  returnKeyType: 'default'
 }
 
 export { Input }

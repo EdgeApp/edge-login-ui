@@ -1,7 +1,14 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import { Button } from '../common'
 import { LOGO_DOT } from '../../../native/assets/'
+
+/* type Props = {
+  style: any,
+  cancelFunc(): void,
+  skipFunc(): void
+} */
+
 class SkipModalComponent extends Component {
   render () {
     const Style = this.props.style
@@ -51,9 +58,5 @@ class SkipModalComponent extends Component {
     this.props.skipFunc()
   }
 }
-SkipModalComponent.propTypes = {
-  style: PropTypes.object.isRequired,
-  cancelFunc: PropTypes.func.isRequired,
-  skipFunc: PropTypes.func.isRequired
-}
+
 export { SkipModalComponent }

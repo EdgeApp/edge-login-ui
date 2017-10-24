@@ -1,7 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Button } from '../common/Button'
 import * as Styles from '../../styles'
+
+/* type Props = {
+  onChangePassword(): void,
+  onChangePin(): void,
+  onRecoverPassword(): void
+} */
 
 class ChooseTestAppScreen extends Component {
   componentWillReceiveProps (props) {}
@@ -11,8 +17,7 @@ class ChooseTestAppScreen extends Component {
   onPinPress () {
     this.props.onChangePin()
   }
-  onRecoverPress () {
-  }
+  onRecoverPress () {}
   render () {
     // const { ScreenStyle } = this.props.styles
     return (
@@ -50,12 +55,6 @@ class ChooseTestAppScreen extends Component {
       </View>
     )
   }
-}
-
-ChooseTestAppScreen.propTypes = {
-  onChangePassword: PropTypes.func,
-  onChangePin: PropTypes.func,
-  onRecoverPassword: PropTypes.func
 }
 
 export { ChooseTestAppScreen }

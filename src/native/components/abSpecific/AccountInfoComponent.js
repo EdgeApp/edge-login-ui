@@ -1,6 +1,14 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Text, TouchableWithoutFeedback } from 'react-native'
 import * as Colors from '../../../common/constants/Colors'
+
+/* type Props = {
+  username?: string,
+  password?: string,
+  pin: string.isRequired,
+  passwordMessage?: string
+} */
+
 class AccountInfoComponent extends Component {
   componentWillMount () {
     this.setState({
@@ -85,13 +93,6 @@ class AccountInfoComponent extends Component {
       </View>
     )
   }
-}
-
-AccountInfoComponent.propTypes = {
-  username: PropTypes.string,
-  password: PropTypes.string,
-  pin: PropTypes.string.isRequired,
-  passwordMessage: PropTypes.string
 }
 
 export { AccountInfoComponent }

@@ -1,8 +1,37 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 // import * as Colors from '../../../common/constants/Colors'
 import { View, Text } from 'react-native'
 import { Input } from './'
+
+/* type Props = {
+  dataList: Array,
+  style: any,
+  label: string,
+  value: string,
+  placeholder: string,
+  autoCorrect: boolean,
+  autoFocus: boolean,
+  forceFocus: boolean,
+  autoCapitalize: string,
+  secureTextEntry: boolean,
+  showSecureCheckbox: boolean,
+  returnKeyType: string,
+  error: string,
+  onFinish(): void,
+  onFocus(): void,
+  onChangeText(): void,
+  getListItemsFunction(): void,
+} */
 class FormFieldWithDropComponent extends Component {
+  static defaultProps = {
+    autoCapitalize: 'none',
+    autoCorrect: false,
+    autoFocus: false,
+    forceFocus: false,
+    returnKeyType: 'go',
+    onFocus: null
+  }
+
   componentWillMount () {
     const secure = this.props.secureTextEntry
       ? this.props.secureTextEntry
@@ -75,35 +104,6 @@ class FormFieldWithDropComponent extends Component {
       this.props.onFinish()
     }
   }
-}
-
-FormFieldWithDropComponent.propTypes = {
-  onChangeText: PropTypes.func.isRequired,
-  style: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  autoCorrect: PropTypes.bool,
-  autoFocus: PropTypes.bool,
-  forceFocus: PropTypes.bool,
-  autoCapitalize: PropTypes.string,
-  secureTextEntry: PropTypes.bool,
-  showSecureCheckbox: PropTypes.bool,
-  error: PropTypes.string,
-  onFinish: PropTypes.func,
-  onFocus: PropTypes.func,
-  returnKeyType: PropTypes.string,
-  getListItemsFunction: PropTypes.func,
-  dataList: PropTypes.array
-}
-
-FormFieldWithDropComponent.defaultProps = {
-  autoCapitalize: 'none',
-  autoCorrect: false,
-  autoFocus: false,
-  forceFocus: false,
-  returnKeyType: 'go',
-  onFocus: null
 }
 
 export { FormFieldWithDropComponent }

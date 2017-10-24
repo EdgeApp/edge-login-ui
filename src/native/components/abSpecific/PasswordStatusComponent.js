@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Checkbox } from '../common/Checkbox'
 import {
@@ -6,6 +6,11 @@ import {
   PASSWORD_REQ_UNCHECKED
 } from '../../../native/assets'
 
+/* type Props = {
+  style: any,
+  status: any
+}
+ */
 export default class PaswordStatusComponent extends Component {
   componentWillMount () {}
   render () {
@@ -48,7 +53,4 @@ export default class PaswordStatusComponent extends Component {
     )
   }
 }
-PaswordStatusComponent.propTypes = {
-  style: PropTypes.object.isRequired,
-  status: PropTypes.object
-}
+

@@ -34,7 +34,7 @@ export async function enableTouchId (abcAccount) {
     await AbcCoreJsUi.setKeychainString(abcAccount.loginKey, loginKeyKey)
     return true
   } else {
-    //throw new Error('TouchIdNotSupportedError')
+    // throw new Error('TouchIdNotSupportedError')
   }
 }
 

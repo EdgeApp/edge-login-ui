@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
 import { Button, CustomModal } from '../../common'
 import HeaderConnector
@@ -9,6 +9,15 @@ import PasswordConfirmConnector
   from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import ChangePasswordModalConnector
   from '../../../connectors/abSpecific/ChangePasswordModalConnector'
+
+/* type Props = {
+  styles: any,
+  confirmPasswordErrorMessage: string,
+  passwordStatus: any,
+  password: string,
+  confirmPassword: string
+} */
+
 export default class ChangeAccountPasswordScreenComponent extends Component {
   componentWillMount () {
     this.setState({
@@ -121,12 +130,4 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
     console.log(this.props.createPasswordErrorMessage)
     this.props.nextScreen() */
   }
-}
-
-ChangeAccountPasswordScreenComponent.propTypes = {
-  styles: PropTypes.object.isRequired,
-  confirmPasswordErrorMessage: PropTypes.string,
-  passwordStatus: PropTypes.object,
-  password: PropTypes.string,
-  confirmPassword: PropTypes.string
 }

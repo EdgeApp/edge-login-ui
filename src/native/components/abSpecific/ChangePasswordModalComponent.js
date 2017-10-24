@@ -1,7 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import { Button } from '../common'
 import { LOGO_DOT } from '../../../native/assets/'
+
+/* type Props = {
+  style: any,
+  cancelFunc(): void
+} */
+
 class ChangePasswordModalComponent extends Component {
   render () {
     const Style = this.props.style
@@ -40,8 +46,5 @@ class ChangePasswordModalComponent extends Component {
     this.props.cancelFunc()
   }
 }
-ChangePasswordModalComponent.propTypes = {
-  style: PropTypes.object.isRequired,
-  cancelFunc: PropTypes.func.isRequired
-}
+
 export { ChangePasswordModalComponent }

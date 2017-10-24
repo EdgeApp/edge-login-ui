@@ -1,13 +1,29 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import reducers from '../../../common/reducers'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
-import {setLocal} from '../../../common/locale'
+import { setLocal } from '../../../common/locale'
+
+/* type Props = {
+  context: any,
+  locale: string,
+  language: string,
+  username: string,
+  accountOptions: any,
+  onLogin(): void,
+} */
 
 class LoginScreen extends Component {
+  static defaultProps = {
+    locale: 'US',
+    language: 'en_us',
+    username: null,
+    accountOptions: null
+  }
+
   componentWillMount () {
     setLocal(this.props.locale, this.props.language)
     this.store = createStore(
@@ -25,8 +41,7 @@ class LoginScreen extends Component {
       )
     )
   }
-  componentWillReceiveProps (props) {
-  }
+  componentWillReceiveProps (props) {}
 
   render () {
     return (
@@ -41,20 +56,4 @@ class LoginScreen extends Component {
   }
 }
 
-LoginScreen.propTypes = {
-  context: PropTypes.object.isRequired,
-  onLogin: PropTypes.func.isRequired,
-  locale: PropTypes.string,
-  language: PropTypes.string,
-  username: PropTypes.string,
-  accountOptions: PropTypes.object
-}
-
-LoginScreen.defaultProps = {
-  locale: 'US',
-  language: 'en_us',
-  username: null,
-  accountOptions: null
-}
-
-export {LoginScreen}
+export { LoginScreen }

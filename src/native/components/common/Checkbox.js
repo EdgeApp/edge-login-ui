@@ -1,6 +1,17 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Text, View, Image, TouchableWithoutFeedback } from 'react-native'
 
+/* type Props = {
+  style: any,
+  label: string,
+  checkedImage: number,
+  uncheckedImage: number,
+  value: boolean,
+  disabled: boolean,
+  isSelected: boolean,
+  onChange(): void,
+}
+ */
 class Checkbox extends Component {
   componentWillMount () {
     const onOff = this.props.value ? this.props.value : false
@@ -56,17 +67,6 @@ class Checkbox extends Component {
     })
     this.props.onChange(this.state.onOff)
   }
-}
-
-Checkbox.propTypes = {
-  style: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
-  checkedImage: PropTypes.number.isRequired,
-  uncheckedImage: PropTypes.number.isRequired,
-  value: PropTypes.bool,
-  onChange: PropTypes.func,
-  disabled: PropTypes.bool,
-  isSelected: PropTypes.bool
 }
 
 export { Checkbox }

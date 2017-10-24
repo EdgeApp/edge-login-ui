@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import reducers from '../../../common/reducers'
 import { createStore, applyMiddleware } from 'redux'
@@ -7,7 +7,23 @@ import ChangePinConnector from '../../connectors/ChangePinConnector'
 import * as Styles from '../../styles'
 import { setLocal } from '../../../common/locale'
 
+/* type Props = {
+  account: object,
+  context: object,
+  showHeader: boolean,
+  locale: string,
+  language: string,
+  onComplete(): void,
+  onCancel():void
+}
+ */
+
 class ChangePinScreen extends Component {
+  static defaultProps = {
+    locale: 'US',
+    language: 'en_us',
+    account: null
+  }
   componentWillMount () {
     setLocal(this.props.locale, this.props.language)
     this.store = createStore(
@@ -38,21 +54,6 @@ class ChangePinScreen extends Component {
       </Provider>
     )
   }
-}
-
-ChangePinScreen.propTypes = {
-  account: PropTypes.object.isRequired,
-  context: PropTypes.object.isRequired,
-  onComplete: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  showHeader: PropTypes.bool,
-  locale: PropTypes.string,
-  language: PropTypes.string
-}
-ChangePinScreen.defaultProps = {
-  locale: 'US',
-  language: 'en_us',
-  account: null
 }
 
 export { ChangePinScreen }

@@ -1,6 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import { Button } from '../common'
+
+/* type Props= {
+  data: any,
+  style: any,
+  onClick():void,
+  onDelete():void
+} */
 
 class UserListItem extends Component {
   render () {
@@ -39,13 +46,6 @@ class UserListItem extends Component {
   onPress () {
     this.props.onClick(this.props.data)
   }
-}
-
-UserListItem.propTypes = {
-  data: PropTypes.string,
-  style: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onDelete: PropTypes.func
 }
 
 export { UserListItem }

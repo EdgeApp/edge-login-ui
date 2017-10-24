@@ -1,6 +1,18 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Text, TouchableHighlight, View } from 'react-native'
 import { Spinner } from './Spinner'
+
+/* type Props = {
+  label: string,
+  downStyle: object,
+  upStyle: any,
+  downTextStyle: any,
+  upTextStyle: any,
+  isThinking: boolean,
+  doesThink: boolean,
+  onPress(): void // if doesThink is used, then isThinking is also required
+} */
+
 class Button extends Component {
   componentWillMount () {
     this.state = {
@@ -53,17 +65,6 @@ class Button extends Component {
       })
     }
   }
-}
-
-Button.propTypes = {
-  onPress: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
-  downStyle: PropTypes.object.isRequired,
-  upStyle: PropTypes.object.isRequired,
-  downTextStyle: PropTypes.object.isRequired,
-  upTextStyle: PropTypes.object.isRequired,
-  isThinking: PropTypes.bool,
-  doesThink: PropTypes.bool // if doesThink is used, then isThinking is also required
 }
 
 export { Button }

@@ -1,6 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native'
 import { Spinner } from '../common'
+
+/* type Props = {
+  style: any,
+  autoLogIn: boolean
+} */
 
 class FourDigitInputComponent extends Component {
   componentWillMount () {
@@ -53,10 +58,6 @@ class FourDigitInputComponent extends Component {
   updatePin (arg) {
     this.props.onChangeText({ username: this.props.username, pin: arg })
   }
-}
-FourDigitInputComponent.propTypes = {
-  style: PropTypes.object.isRequired,
-  autoLogIn: PropTypes.bool
 }
 
 export { FourDigitInputComponent }

@@ -1,7 +1,15 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import { Button } from '../common'
 import { LOGO_DOT } from '../../../native/assets/'
+
+/*
+type Props = {
+  style: any,
+  cancelFunc(): void,
+  deleteFunc(): void
+}
+*/
 class DeleteUserModal extends Component {
   componentWillMount () {
     this.setState({
@@ -65,9 +73,5 @@ class DeleteUserModal extends Component {
     this.props.deleteFunc(this.props.username)
   }
 }
-DeleteUserModal.propTypes = {
-  style: PropTypes.object.isRequired,
-  cancelFunc: PropTypes.func.isRequired,
-  deleteFunc: PropTypes.func.isRequired
-}
+
 export { DeleteUserModal }
