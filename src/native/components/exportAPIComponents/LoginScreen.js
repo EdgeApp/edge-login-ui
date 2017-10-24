@@ -30,9 +30,9 @@ class LoginScreen extends Component {
   }
 
   render () {
-    loginWithTouchId(this.props.context, 'edgy8', 'Touch me', 'Fallback string', null).then(result => {
+    loginWithTouchId(this.props.context, 'edgy17', 'Touch me', 'Fallback string', null).then(result => {
       console.log(result)
-      this.props.onLogin(result)
+      this.props.onLogin(null, result)
     }).catch(e => {
       console.log(e)
     })
