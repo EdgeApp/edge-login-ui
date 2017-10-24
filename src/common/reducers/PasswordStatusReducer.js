@@ -6,7 +6,7 @@ export default function (state = null, action) {
       // action.data.passwordStatus
       const status = action.data.passwordStatus
       var array = [
-        { title: 'at least 12 characters', value: !status.tooShort },
+        { title: 'at least 10 characters', value: !status.tooShort },
         {
           title: 'at least 1 lower case charachter',
           value: !status.noLowerCase
