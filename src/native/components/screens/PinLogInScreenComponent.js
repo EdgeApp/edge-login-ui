@@ -16,6 +16,16 @@ export default class PinLogInScreenComponent extends Component {
       focusOn: 'pin'
     })
   }
+  componentDidMount () {
+    if (this.props.username) {
+      this.props.launchUserLoginWithTouchId({username: this.props.username})
+    }
+  }
+  componentWillReceiveProps (nextProps) {
+    if (this.props.username !== nextProps.username) {
+      this.props.launchUserLoginWithTouchId({username: nextProps.username})
+    }
+  }
   render () {
     const { PinLoginScreenStyle } = this.props.styles
     return (

@@ -34,7 +34,17 @@ export default class LandingScreenComponent extends Component {
   componentWillUnmount () {
     this.keyboardDidHideListener.remove()
   }
+  componentDidMount () {
+    if (this.props.previousUsers.lastUser) {
+      this.props.launchUserLoginWithTouchId({username: this.props.previousUsers.lastUser.username})
+    }
+  }
   componentWillReceiveProps (nextProps) {
+    if (this.props.previousUsers.lastUser && nextProps.previousUsers.lastUser) {
+      if (this.props.previousUsers.lastUser.username !== nextProps.previousUsers.lastUser.username) {
+        this.props.launchUserLoginWithTouchId({username: this.props.previousUsers.lastUser.username})
+      }
+    }
     if (nextProps.error && this.state.loggingIn) {
       this.setState({
         loggingIn: false
