@@ -16,7 +16,9 @@
     "assets/**",
     "lib/**",
     "src/common/**",
-    "src/native/**"
+    "src/native/**",
+    "ios/**",
+    "android/**"
   ],
   "main": "lib/abcui.cjs.js",
   "module": "lib/abcui.es6.js",

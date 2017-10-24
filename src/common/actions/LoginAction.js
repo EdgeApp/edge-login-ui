@@ -1,5 +1,6 @@
 import * as Constants from '../constants'
 import { dispatchAction, dispatchActionWithData } from './'
+import { enableTouchId, loginWithTouchId } from '../../native/keychain.js'
 
 /* export function loginPIN (data) {
   return {
@@ -18,6 +19,33 @@ export function testAction (data) {
  * Make it Thunky
  */
 
+export function userLoginWithTouchId (data) {
+  return (dispatch, getState, imports) => {
+    let context = imports.context
+    let callback = imports.callback
+    let accountOptions = imports.accountOptions
+
+    loginWithTouchId(
+      context,
+      data.username,
+      'Touch to login user: `' + data.username + '`',
+      null,
+      accountOptions
+    ).then(async response => {
+      if (response) {
+        context.io.folder
+        .file('lastuser.json')
+        .setText(JSON.stringify({ username: data.username }))
+        .catch(e => null)
+        dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
+        callback(null, response)
+      }
+    }).catch(e => {
+      console.log(e)
+    })
+  }
+}
+
 export function userLoginWithPin (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context
@@ -29,6 +57,7 @@ export function userLoginWithPin (data) {
         context
           .loginWithPIN(data.username, data.pin, accountOptions)
           .then(async response => {
+            enableTouchId(response)
             await context.io.folder
               .file('lastuser.json')
               .setText(JSON.stringify({ username: data.username }))
