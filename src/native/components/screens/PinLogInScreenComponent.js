@@ -104,7 +104,6 @@ export default class PinLogInScreenComponent extends Component {
     })
   }
   showDrop () {
-    console.log(this.props.usersWithPin)
     if (this.props.usersWithPin.length < 2) {
       return
     }

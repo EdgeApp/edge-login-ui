@@ -54,7 +54,6 @@ export default class LandingScreenComponent extends Component {
     )
   }
   onNextPress () {
-    console.log('Here is the stuff ')
     this.setState({
       isProcessing: true
     })

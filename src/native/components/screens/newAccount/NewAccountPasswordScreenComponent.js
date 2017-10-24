@@ -29,7 +29,6 @@ export default class NewAccountPasswordScreenComponent extends Component {
     )
   }
   renderMain (styles) {
-    console.log('THIS IS THE STATE ' + this.state.focusSecond)
     if (this.state.focusSecond) {
       return (
         <KeyboardAvoidingView
@@ -88,7 +87,6 @@ export default class NewAccountPasswordScreenComponent extends Component {
     return null
   }
   onSetNextFocus () {
-    console.log('CHANGING THE FOCUS')
     this.setState({
       focusFirst: false,
       focusSecond: true
@@ -106,13 +104,11 @@ export default class NewAccountPasswordScreenComponent extends Component {
       return
     }
     if (this.props.createPasswordErrorMessage) {
-      console.log('Error ' + this.props.createPasswordErrorMessage)
       this.setState({
         isProcessing: false
       })
       return
     }
-    console.log(this.props.createPasswordErrorMessage)
     this.props.nextScreen()
   }
 }
