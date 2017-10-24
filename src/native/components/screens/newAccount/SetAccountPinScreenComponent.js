@@ -53,11 +53,9 @@ export default class SetAccountPinScreenComponent extends Component {
     this.setState({
       isProcessing: true
     })
-    console.log(this.props)
     // validation.
     // is there no error message ,
     if (this.props.pin.length !== 4) {
-      console.log('PIN ERROR')
       return
     }
     this.props.createUser({

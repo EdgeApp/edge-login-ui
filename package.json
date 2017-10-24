@@ -39,6 +39,7 @@
     "joi-browser": "~9.0.1",
     "jsbarcode": "~3.5.8",
     "lodash": "~4.17.4",
+    "material-ui": "^0.19.4",
     "moment": "~2.14.1",
     "normalize.css": "v4.2.0",
     "qrcode.react": "~0.6.1",
