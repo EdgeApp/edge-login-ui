@@ -34,7 +34,7 @@ export async function enableTouchId (abcAccount) {
     await AbcCoreJsUi.setKeychainString(abcAccount.loginKey, loginKeyKey)
     return true
   } else {
-    throw new Error('TouchIdNotSupportedError')
+    //throw new Error('TouchIdNotSupportedError')
   }
 }
 
@@ -46,7 +46,7 @@ export async function disableTouchId (abcAccount) {
     await AbcCoreJsUi.clearKeychain(loginKeyKey)
     return true
   } else {
-    throw new Error('TouchIdNotSupportedError')
+    // throw new Error('TouchIdNotSupportedError')
   }
 }
 
@@ -83,6 +83,6 @@ export async function loginWithTouchId (
     }
   } else {
     console.log('TouchIdNotSupportedError')
-    throw new Error('TouchIdNotSupportedError')
+    // throw new Error('TouchIdNotSupportedError')
   }
 }
