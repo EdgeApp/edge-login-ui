@@ -46,7 +46,7 @@ export function checkUsernameForAvailabilty (data) {
           }
           const obj = {
             username: data,
-            error: 'THE USERNAME ALREADY EXOSTS ' // TODO - localize string.
+            error: 'THE USERNAME ALREADY EXISTS ' // TODO - localize string.
           }
           dispatch(
             dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
@@ -117,10 +117,11 @@ export function validatePassword (data) {
 export function createUser (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context
+    let accountOptions = imports.accountOptions
     dispatch(WorkflowActions.nextScreen())
     setTimeout(() => {
       context
-        .createAccount(data.username, data.password, data.pin, null, null)
+        .createAccount(data.username, data.password, data.pin, accountOptions)
         .then(async response => {
           console.log('response create user ')
           dispatch(

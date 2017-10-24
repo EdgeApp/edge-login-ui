@@ -6,7 +6,7 @@ export default function (state = null, action) {
       // action.data.passwordStatus
       const status = action.data.passwordStatus
       var array = [
-        { title: 'at least 12 characters', value: !status.tooShort },
+        { title: 'at least 10 characters', value: !status.tooShort },
         {
           title: 'at least 1 lower case charachter',
           value: !status.noLowerCase
@@ -18,8 +18,8 @@ export default function (state = null, action) {
         { title: 'at least one number', value: !status.noNumber }
       ]
       let msg = 'Seconds to Crack is not in the develop branch '
-      if (action.data.secondsToCrack) {
-        msg = action.data.secondsToCrack
+      if (status.secondsToCrack) {
+        msg = status.secondsToCrack
       }
       return {
         passed: status.passed,
