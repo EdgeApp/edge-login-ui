@@ -31,7 +31,7 @@ export default class CreatingAccountWaitScreenComponent extends Component {
             <Text style={CreatingAccountWaitScreenStyle.bodyText}>and secure your account</Text>
           </View>
           <View style={CreatingAccountWaitScreenStyle.encriptingContainer}>
-            <Text style={CreatingAccountWaitScreenStyle.bodyText}>Encrypting password...</Text>
+            <Text style={CreatingAccountWaitScreenStyle.bodyText}>Encrypting wallet...</Text>
           </View>
         </View>
       </View>
