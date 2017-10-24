@@ -63,20 +63,26 @@ export async function loginWithTouchId (
     const loginKeyKey = createKeyWithUsername(username, LOGINKEY_KEY)
     const loginKey = await AbcCoreJsUi.getKeychainString(loginKeyKey)
     if (loginKey && loginKey.length > 10) {
+      console.log('loginKey valid. Launching TouchID modal...')
       const success = await AbcCoreJsUi.authenticateTouchID(
         promptString,
         fallbackString
       )
       if (success) {
-        return abcContext.loginWithKey(username, loginKey, opts)
+        console.log('TouchID authenticated. Calling loginWithKey')
+        const abcAccount = abcContext.loginWithKey(username, loginKey, opts)
+        console.log('abcAccount logged in: ' + username)
+        return abcAccount
       } else {
+        console.log('Failed to authenticate TouchID')
         return null
       }
     } else {
-      // No login. Just return null as AbcAccount object
+      console.log('No valid loginKey for TouchID')
       return null
     }
   } else {
+    console.log('TouchIdNotSupportedError')
     throw new Error('TouchIdNotSupportedError')
   }
 }
