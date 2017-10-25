@@ -26,7 +26,8 @@ const SetAccountPinScreenStyle = {
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
     downStyle: Styles.PrimaryButtonDownStyle
-  }
+  },
+  modal: Styles.SkipModalStyle
 }
 
 export { SetAccountPinScreenStyle }

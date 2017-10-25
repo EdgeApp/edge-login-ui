@@ -23,7 +23,8 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
     this.setState({
       isProcessing: false,
       focusFirst: true,
-      focusSecond: false
+      focusSecond: false,
+      showModal: false
     })
   }
   componentWillReceiveProps (nextProps) {

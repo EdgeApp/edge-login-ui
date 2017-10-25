@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { Button } from '../../common'
+import { Button, CustomModal } from '../../common'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import CreateFourDigitPinConnector
   from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
+import ChangePasswordModalConnector
+  from '../../../connectors/abSpecific/ChangePasswordModalConnector'
 // import * as Constants from '../../../common/constants'
 
 export default class ChangeAccountPinScreenComponent extends Component {
@@ -13,12 +15,36 @@ export default class ChangeAccountPinScreenComponent extends Component {
       username: '',
       pin: '',
       isProcessing: false,
-      focusOn: 'pin'
+      focusOn: 'pin',
+      showModal: false
+    })
+  }
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      showModal: nextProps.workflow.showModal
     })
   }
   renderHeader (style) {
     if (this.props.showHeader) {
       return <HeaderConnector style={style.header} />
+    }
+    return null
+  }
+  onCloseModal () {
+    this.setState({
+      showModal: false
+    })
+  }
+  renderModal (style) {
+    if (this.state.showModal) {
+      return (
+        <CustomModal style={style.modal}>
+          <ChangePasswordModalConnector
+            style={style.modal.skip}
+            onClick={this.onCloseModal.bind(this)}
+          />
+        </CustomModal>
+      )
     }
     return null
   }
@@ -52,6 +78,7 @@ export default class ChangeAccountPinScreenComponent extends Component {
           </View>
 
         </View>
+        {this.renderModal(SetAccountPinScreenStyle)}
       </View>
     )
   }
