@@ -17,10 +17,8 @@ export default function (state = null, action) {
         },
         { title: 'at least one number', value: !status.noNumber }
       ]
-      let msg = 'Seconds to Crack is not in the develop branch '
-      if (status.secondsToCrack) {
-        msg = status.secondsToCrack
-      }
+      const msg = status.secondsToCrack
+
       return {
         passed: status.passed,
         secondsToCrack: msg,
