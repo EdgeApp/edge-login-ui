@@ -8,14 +8,14 @@ export default function (state = null, action) {
       var array = [
         { title: 'at least 10 characters', value: !status.tooShort },
         {
-          title: 'at least 1 lower case charachter',
+          title: 'at least 1 lowercase letter',
           value: !status.noLowerCase
         },
         {
-          title: 'at least 1 upper case character',
+          title: 'at least 1 uppercase letter',
           value: !status.noUpperCase
         },
-        { title: 'at least one number', value: !status.noNumber }
+        { title: 'at least 1 number', value: !status.noNumber }
       ]
       const msg = status.secondsToCrack
 
