@@ -38,9 +38,6 @@ export default class PaswordStatusComponent extends Component {
           <View style={style.boxes}>
             {this.renderStatusList(style)}
           </View>
-          <View style={style.textContianer}>
-            <Text style={style.text}>{this.props.secondsToCrack} </Text>
-          </View>
         </View>
       )
     }
