@@ -34,6 +34,11 @@ export default class LandingScreenComponent extends Component {
   componentWillUnmount () {
     this.keyboardDidHideListener.remove()
   }
+  componentDidMount () {
+    if (this.props.previousUsers.lastUser) {
+      this.props.launchUserLoginWithTouchId({username: this.props.previousUsers.lastUser.username})
+    }
+  }
   componentWillReceiveProps (nextProps) {
     if (nextProps.error && this.state.loggingIn) {
       this.setState({
@@ -227,6 +232,7 @@ export default class LandingScreenComponent extends Component {
       this.props.gotoPinLoginPage()
       return
     }
+    this.props.launchUserLoginWithTouchId({username: user})
     this.onSetNextFocus()
   }
 

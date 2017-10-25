@@ -13,7 +13,6 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    launchUserLoginWithTouchId: (data) => dispatch(loginAction.userLoginWithTouchId(data)),
     userLogin: (data) => dispatch(loginAction.userLogin(data)),
     getPreviousUsers: () => dispatch(loginAction.getPreviousUsers())
   }

@@ -26,6 +26,7 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    launchUserLoginWithTouchId: (data) => dispatch(action.userLoginWithTouchId(data)),
     userLogin: data => dispatch(action.userLogin(data)),
     gotoCreatePage: () =>
       dispatch(action.startWorkflow(Constants.WORKFLOW_CREATE)),

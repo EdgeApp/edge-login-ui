@@ -40,9 +40,6 @@ export default class LoginAppComponent extends Component {
     if (!this.props.previousUsers) {
       return this.getLoadingScreen()
     }
-    if (this.props.previousUsers.lastUser) {
-      this.props.launchUserLoginWithTouchId({username: this.props.previousUsers.lastUser.username})
-    }
     switch (this.props.workflow.currentKey) {
       case Constants.WORKFLOW_FIRST_LOAD:
         if (this.props.previousUsers.userList.length === 0) {
