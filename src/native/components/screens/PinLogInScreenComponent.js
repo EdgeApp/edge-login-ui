@@ -15,6 +15,11 @@ export default class PinLogInScreenComponent extends Component {
       focusOn: 'pin'
     })
   }
+  componentDidMount () {
+    if (this.props.username) {
+      this.props.launchUserLoginWithTouchId({username: this.props.username})
+    }
+  }
   render () {
     const { PinLoginScreenStyle } = this.props.styles
     return (
@@ -97,6 +102,7 @@ export default class PinLogInScreenComponent extends Component {
     )
   }
   selectUser (arg) {
+    this.props.launchUserLoginWithTouchId({username: arg})
     this.props.changeUser(arg)
     this.setState({
       focusOn: 'pin'

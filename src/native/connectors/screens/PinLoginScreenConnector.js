@@ -8,6 +8,7 @@ export const mapStateToProps = (state, ownProps) => {
     styles: ownProps.styles,
     username: state.login.username,
     loginSuccess: state.login.loginSuccess,
+    previousUsers: state.previousUsers.userList,
     usersWithPin: state.previousUsers.usersWithPinList,
     workflow: state.workflow
   }
@@ -20,6 +21,7 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
         actions.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data)
       ),
     userLogin: data => dispatch(actions.userLoginWithPin(data)),
+    launchUserLoginWithTouchId: (data) => dispatch(actions.userLoginWithTouchId(data)),
     gotoLoginPage: () =>
       dispatch(actions.startWorkflow(Constants.WORKFLOW_PASSWORD))
   }
