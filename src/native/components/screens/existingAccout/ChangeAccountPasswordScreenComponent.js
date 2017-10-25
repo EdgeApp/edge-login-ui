@@ -26,6 +26,11 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
       focusSecond: false
     })
   }
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      showModal: nextProps.workflow.showModal
+    })
+  }
   renderHeader (style) {
     if (this.props.showHeader) {
       return <HeaderConnector style={style.header} />
@@ -41,6 +46,11 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
         {this.renderModal(NewAccountPasswordScreenStyle)}
       </View>
     )
+  }
+  onCloseModal () {
+    this.setState({
+      showModal: false
+    })
   }
   renderMain (styles) {
     if (this.state.focusSecond) {
@@ -92,10 +102,13 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
     )
   }
   renderModal (style) {
-    if (this.props.workflow.showModal) {
+    if (this.state.showModal) {
       return (
         <CustomModal style={style.modal}>
-          <ChangePasswordModalConnector style={style.modal.skip} />
+          <ChangePasswordModalConnector
+            style={style.modal.skip}
+            onClick={this.onCloseModal.bind(this)}
+          />
         </CustomModal>
       )
     }

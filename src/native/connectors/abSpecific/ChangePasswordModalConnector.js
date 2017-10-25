@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import {ChangePasswordModalComponent}
-  from '../../components/abSpecific/ChangePasswordModalComponent'
+import {
+  ChangePasswordModalComponent
+} from '../../components/abSpecific/ChangePasswordModalComponent'
 import * as actions from '../../../common/actions'
 
 export const mapStateToProps = (state, ownProps) => {
@@ -10,8 +11,13 @@ export const mapStateToProps = (state, ownProps) => {
 }
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    cancelFunc: () => dispatch(actions.cancel())
+    cancelFunc: () => {
+      dispatch(actions.cancelSkipStep())
+      dispatch(actions.cancel())
+    }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChangePasswordModalComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ChangePasswordModalComponent
+)

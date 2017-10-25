@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/existingAccout/ChangeAccountPasswordScreenComponent'
 import * as actions from '../../../../common/actions'
 import * as Constants from '../../../../common/constants'
+
 export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
