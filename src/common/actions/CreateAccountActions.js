@@ -64,10 +64,10 @@ export function checkUsernameForAvailabilty (data) {
 export function validateUsername (data) {
   return (dispatch, getState, imports) => {
     // TODO evaluate client side evaluations.
-    let error = data.length > 3
+    let error = data.length > 2
       ? null
-      : 'Username must be longer than 3 characters ' // TODO: Localize string
-    error = isASCII(data) ? error : 'Username must only be ascii characthers ' // TODO: localize
+      : 'Username must be at least 3 characters ' // TODO: Localize string
+    error = isASCII(data) ? error : 'Username must only be ascii characters ' // TODO: localize
     const obj = {
       username: data,
       error: error
