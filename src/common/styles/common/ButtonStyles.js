@@ -1,70 +1,84 @@
-import * as Colors from '../../constants/Colors'
-import { hs, vs, fontSize } from '../../util'
+import * as Constants from '../../constants/'
+import { hs, fontSize } from '../../util'
 const PrimaryButtonUpStyle = {
-  backgroundColor: Colors.BUTTON_PRIMARY_UP,
-  width: hs(220),
-  height: vs(50),
+  backgroundColor: Constants.BUTTON_PRIMARY_UP,
+  width: Constants.BUTTON_WIDTH_1,
+  height: Constants.BUTTON_HEIGHT,
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: hs(3)
+  borderRadius: Constants.BUTTON_BORDER_RADIUS
 }
 const PrimaryButtonUpTextStyle = {
-  color: Colors.WHITE,
-  fontSize: fontSize(17),
+  color: Constants.WHITE,
+  fontSize: Constants.BUTTON_TEXT_SIZE,
   width: '100%',
   textAlign: 'center'
 }
 
 const PrimaryButtonDownStyle = {
-  backgroundColor: Colors.BUTTON_PRIMARY_DOWN
+  backgroundColor: Constants.BUTTON_PRIMARY_DOWN
 }
 
 const SecondaryButtonUpStyle = {
-  backgroundColor: Colors.BUTTON_SECONDARY_UP,
-  width: hs(220),
-  height: vs(50),
+  backgroundColor: Constants.BUTTON_SECONDARY_UP,
+  width: Constants.BUTTON_WIDTH_1,
+  height: Constants.BUTTON_HEIGHT,
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: hs(3)
+  borderRadius: Constants.BUTTON_BORDER_RADIUS
 }
 
 const SecondaryButtonDownStyle = {
-  backgroundColor: Colors.BUTTON_SECONDARY_DOWN
+  backgroundColor: Constants.BUTTON_SECONDARY_DOWN
 }
 const SecondaryButtonUpTextStyle = {
-  color: Colors.WHITE,
-  fontSize: fontSize(17),
+  color: Constants.WHITE,
+  fontSize: Constants.BUTTON_TEXT_SIZE,
   width: '100%',
   textAlign: 'center'
 }
 
-const TertiaryButtonUpStyle = {}
+const TertiaryButtonUpStyle = {
+  backgroundColor: Constants.TRANSPARENT,
+  width: Constants.BUTTON_WIDTH_1,
+  height: Constants.BUTTON_HEIGHT,
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderRadius: hs(3),
+  borderColor: Constants.ACCENT_MINT,
+  borderWidth: Constants.BUTTON_BORDER_STROKE
+}
 
-const TertiaryButtonTextUpStyle = {}
+const TertiaryButtonTextUpStyle = {
+  color: Constants.ACCENT_MINT,
+  fontSize: Constants.BUTTON_TEXT_SIZE,
+  width: '100%',
+  textAlign: 'center'
+}
 
 const TertiaryButtonDownStyle = {}
 
 const TertiaryButtonTextDownStyle = {}
 
 const TextOnlyButtonUpStyle = {
-  backgroundColor: Colors.TRANSPARENT,
+  backgroundColor: Constants.TRANSPARENT,
   padding: 10
 }
 
 const TextOnlyButtonTextUpStyle = {
-  color: Colors.SECONDARY,
+  color: Constants.SECONDARY,
   fontSize: fontSize(17),
   width: '100%',
   textAlign: 'center'
 }
 
 const TextOnlyButtonDownStyle = {
-  backgroundColor: Colors.TRANSPARENT,
+  backgroundColor: Constants.TRANSPARENT,
   padding: 10
 }
 
 const TextOnlyButtonTextDownStyle = {
-  color: Colors.PRIMARY,
+  color: Constants.PRIMARY,
   fontSize: fontSize(17),
   width: '100%',
   textAlign: 'center'

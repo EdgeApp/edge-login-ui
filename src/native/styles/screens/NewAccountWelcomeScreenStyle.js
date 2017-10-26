@@ -1,5 +1,5 @@
 import * as Styles from '../'
-// import * as Colors from '../../../common/constants/Colors'
+// import * as Constants from '../../../common/constants/'
 import { fontSize } from '../../../common/util'
 const NewAccountWelcomeScreenStyle = {
   screen: { ...Styles.ScreenStyle },

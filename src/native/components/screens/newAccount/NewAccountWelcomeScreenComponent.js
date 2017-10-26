@@ -11,7 +11,7 @@ export default class LandingScreenComponent extends Component {
       <View style={NewAccountWelcomeScreenStyle.screen}>
         <View style={NewAccountWelcomeScreenStyle.row1}>
           <Button
-            onPress={this.onExitPress.bind(this)}
+            onPress={this.props.exitScreen}
             downStyle={NewAccountWelcomeScreenStyle.exitButton.downStyle}
             downTextStyle={
               NewAccountWelcomeScreenStyle.exitButton.downTextStyle
@@ -37,7 +37,7 @@ export default class LandingScreenComponent extends Component {
         </View>
         <View style={NewAccountWelcomeScreenStyle.row6}>
           <Button
-            onPress={this.onNextPress.bind(this)}
+            onPress={this.props.nextScreen}
             downStyle={NewAccountWelcomeScreenStyle.nextButton.downStyle}
             downTextStyle={
               NewAccountWelcomeScreenStyle.nextButton.downTextStyle
@@ -51,10 +51,10 @@ export default class LandingScreenComponent extends Component {
       </View>
     )
   }
-  onNextPress () {
+  /* onNextPress () {
     this.props.nextScreen()
-  }
-  onExitPress () {
+  }* /
+  /* onExitPress = () =>  {
     this.props.exitScreen()
-  }
+  } */
 }

@@ -1,8 +1,13 @@
+export * from './Colors'
+export * from './Fonts'
+export * from './Theme'
+
 export const WORKFLOW_FIRST_LOAD = 'firstLoadWF'
 export const WORKFLOW_INIT = 'initalizeWF'
 export const WORKFLOW_CREATE = 'createWF'
 export const WORKFLOW_PASSWORD = 'passwordWF'
 export const WORKFLOW_PIN = 'pinWF'
+
 export const WORKFLOW_RECOVERY = 'recoveryWF'
 export const WORKFLOW_FINGERPRINT = 'fingerprintWF'
 
