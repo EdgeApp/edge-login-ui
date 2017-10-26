@@ -15,6 +15,7 @@ import * as Offsets from '../../constants'
 import DeleteUserConnector
   from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import { localize, KEYS } from '../../../common/locale'
+// import PasswordConnector from '../../connectors/componentConnectors/PasswordConnector'
 
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
@@ -86,7 +87,7 @@ export default class LandingScreenComponent extends Component {
         <View style={styles.featureBoxBody}>
           {this.renderButtons(styles)}
           <FormField
-            style={styles.input}
+            style={styles.input2}
             onChangeText={this.updatePassword.bind(this)}
             value={this.state.password}
             label={'Password'}
@@ -97,6 +98,12 @@ export default class LandingScreenComponent extends Component {
             onFocus={this.onfocusTwo.bind(this)}
             onFinish={this.onStartLogin.bind(this)}
           />
+          {/* <PasswordConnector
+            onChangeText={this.updatePassword.bind(this)}
+            value={this.state.password}
+            label={'Password'}
+            style={styles.input2}
+          /> */}
           {this.renderUsername(styles)}
         </View>
       </View>
@@ -151,6 +158,7 @@ export default class LandingScreenComponent extends Component {
     this.props.launchDeleteModal()
   }
   renderButtons (style) {
+    console.log(style)
     return (
       <View style={style.buttonsBox}>
         <Button

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as Colors from '../../../common/constants/Colors'
 import { View, Text } from 'react-native'
-import { Input } from './Input'
+import { Input } from '../materialWrappers/Input'
 import { Checkbox } from './Checkbox'
 import { STANDARD_CHECKED, STANDARD_UNCHECKED } from '../../../native/assets'
 
@@ -25,14 +25,14 @@ import { STANDARD_CHECKED, STANDARD_UNCHECKED } from '../../../native/assets'
 } */
 
 class FormField extends Component {
-  static defaultProps = {
+  /* static defaultProps = {
     autoCapitalize: 'none',
     autoCorrect: false,
     autoFocus: false,
     forceFocus: false,
     returnKeyType: 'go',
     onFocus: null
-  }
+  } */
   componentWillMount () {
     const secure = this.props.secureTextEntry
       ? this.props.secureTextEntry

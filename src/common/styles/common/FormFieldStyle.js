@@ -1,4 +1,4 @@
-import * as Colors from '../../../common/constants/Colors'
+import * as Constants from '../../../common/constants/'
 import { hs, vs, fontSize } from '../../util'
 import { BasicCheckBoxWithLabelAlignRight } from './CheckboxStyles'
 import * as Styles from '../'
@@ -28,25 +28,25 @@ const FormFieldStyle = {
   },
   imputContainer: {
     position: 'relative',
-    borderBottomColor: Colors.PRIMARY,
+    borderBottomColor: Constants.PRIMARY,
     borderBottomWidth: 1,
     flex: 3,
     width: '100%',
     alignItems: 'center'
   },
   labelText: {
-    color: Colors.PRIMARY,
+    color: Constants.PRIMARY,
     fontSize: fontSize(11)
   },
   errorText: {
-    color: Colors.ACCENT_RED,
+    color: Constants.ACCENT_RED,
     fontSize: fontSize(10)
   },
   inputStyle: {
     fontSize: fontSize(17),
     height: '100%',
     width: '100%',
-    color: Colors.GRAY_1
+    color: Constants.GRAY_1
   }
 }
 
@@ -64,7 +64,7 @@ const FormFieldWithDropStyle = {
     },
     imputContainer: {
       position: 'relative',
-      borderBottomColor: Colors.PRIMARY,
+      borderBottomColor: Constants.PRIMARY,
       borderBottomWidth: 1,
       flex: 1,
       width: '100%',
@@ -76,20 +76,20 @@ const FormFieldWithDropStyle = {
       width: '100%'
     },
     labelText: {
-      color: Colors.PRIMARY,
+      color: Constants.PRIMARY,
       fontSize: fontSize(11)
     },
     listItem: {
       container: {
         height: vs(40),
         width: '100%',
-        backgroundColor: Colors.WHITE,
+        backgroundColor: Constants.WHITE,
         flexDirection: 'row',
         alignItems: 'center'
       },
       text: {
         paddingLeft: 20,
-        color: Colors.PRIMARY,
+        color: Constants.PRIMARY,
         width: '90%'
       },
       deleteButton: {
@@ -103,7 +103,7 @@ const FormFieldWithDropStyle = {
       fontSize: fontSize(17),
       height: '100%',
       width: '100%',
-      color: Colors.GRAY_1
+      color: Constants.GRAY_1
     }
   },
   container: {
@@ -131,27 +131,46 @@ const FormFieldWithDropStyle = {
   },
   imputContainer: {
     position: 'relative',
-    borderBottomColor: Colors.PRIMARY,
+    borderBottomColor: Constants.PRIMARY,
     borderBottomWidth: 1,
     flex: 3,
     width: '100%',
     alignItems: 'center'
   },
   labelText: {
-    color: Colors.PRIMARY,
+    color: Constants.PRIMARY,
     fontSize: fontSize(11)
   },
   errorText: {
-    color: Colors.ACCENT_RED,
+    color: Constants.ACCENT_RED,
     fontSize: fontSize(10)
   },
   inputStyle: {
     fontSize: fontSize(17),
     height: '100%',
     width: '100%',
-    color: Colors.GRAY_1
+    color: Constants.GRAY_1
   }
 }
 
+const MaterialInput = {
+  container: {
+    position: 'relative',
+    width: Constants.LOGIN_LABEL_WIDTH,
+    height: Constants.LOGIN_LABEL_HEIGHT
+  },
+  baseColor: Constants.WHITE,
+  tintColor: Constants.ACCENT_MINT,
+  errorColor: Constants.ACCENT_RED,
+  textColor: Constants.WHITE,
+  affixTextStyle: {
+    color: Constants.WHITE
+  },
+  titleTextStyle: {
+    color: Constants.WHITE
+  }
+}
+
+export {MaterialInput}
 export { FormFieldStyle }
 export { FormFieldWithDropStyle }

@@ -51,7 +51,7 @@ const TertiaryButtonUpStyle = {
 
 const TertiaryButtonTextUpStyle = {
   color: Constants.ACCENT_MINT,
-  fontSize: Constants.BUTTON_TEXT_SIZE,
+  fontSize: 22,
   width: '100%',
   textAlign: 'center'
 }
@@ -69,7 +69,7 @@ const TertiaryButtonDownStyle = {
 
 const TertiaryButtonTextDownStyle = {
   color: Constants.PRIMARY,
-  fontSize: Constants.BUTTON_TEXT_SIZE,
+  fontSize: 18,
   width: '100%',
   textAlign: 'center'
 }

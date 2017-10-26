@@ -1,5 +1,5 @@
 import * as Styles from '../'
-import * as Colors from '../../../common/constants/Colors'
+import * as Constants from '../../../common/constants/'
 import { hs, vs } from '../../../common/util/PixelUtil'
 
 const LoginPasswordScreenStyle = {
@@ -15,13 +15,12 @@ const LoginPasswordScreenStyle = {
     top: vs(55),
     width: hs(260),
     height: vs(376),
-    backgroundColor: Colors.TRANSPARENT
+    backgroundColor: Constants.TRANSPARENT
   },
   keyboardAvoidContainer: {
     position: 'relative',
     width: '100%',
-    height: '100%',
-    backgroundColor: Colors.OVERLAY_BOX
+    height: '100%'
   },
   innerView: {
     ...Styles.InnerView,
@@ -47,23 +46,24 @@ const LoginPasswordScreenStyle = {
     alignItems: 'center'
   },
   input: Styles.FormFieldStyle,
+  input2: Styles.MaterialInput,
   inputWithDrop: Styles.FormFieldWithDropStyle,
   forgotButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: Styles.TextOnlyButtonTextUpStyle,
-    downTextStyle: Styles.TextOnlyButtonTextDownStyle,
+    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, fontSize: 14, color: Constants.WHITE},
+    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, fontSize: 14, color: Constants.WHITE},
     downStyle: Styles.TextOnlyButtonDownStyle
   },
   loginButton: {
-    upStyle: Styles.PrimaryButtonUpStyle,
-    upTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: Styles.PrimaryButtonDownStyle
+    upStyle: Styles.TertiaryButtonUpStyle,
+    upTextStyle: Styles.TertiaryButtonTextUpStyle,
+    downTextStyle: Styles.TertiaryButtonTextDownStyle,
+    downStyle: Styles.TertiaryButtonDownStyle
   },
   signupButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: Styles.TextOnlyButtonTextUpStyle,
-    downTextStyle: Styles.TextOnlyButtonTextDownStyle,
+    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, fontSize: 14, color: Constants.WHITE},
+    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, fontSize: 14, color: Constants.WHITE},
     downStyle: Styles.TextOnlyButtonDownStyle
   },
   modal: Styles.SkipModalStyle
