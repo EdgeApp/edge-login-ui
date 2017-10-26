@@ -56,9 +56,23 @@ const TertiaryButtonTextUpStyle = {
   textAlign: 'center'
 }
 
-const TertiaryButtonDownStyle = {}
+const TertiaryButtonDownStyle = {
+  backgroundColor: Constants.ACCENT_MINT,
+  width: Constants.BUTTON_WIDTH_1,
+  height: Constants.BUTTON_HEIGHT,
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderRadius: hs(3),
+  borderColor: Constants.ACCENT_MINT,
+  borderWidth: Constants.BUTTON_BORDER_STROKE
+}
 
-const TertiaryButtonTextDownStyle = {}
+const TertiaryButtonTextDownStyle = {
+  color: Constants.PRIMARY,
+  fontSize: Constants.BUTTON_TEXT_SIZE,
+  width: '100%',
+  textAlign: 'center'
+}
 
 const TextOnlyButtonUpStyle = {
   backgroundColor: Constants.TRANSPARENT,

@@ -47,7 +47,7 @@ const LandingScreenStyle = {
   createButton: {
     upStyle: Styles.TertiaryButtonUpStyle,
     upTextStyle: Styles.TertiaryButtonTextUpStyle,
-    downTextStyle: Styles.TertiaryButtonTextUpStyle,
+    downTextStyle: Styles.TertiaryButtonTextDownStyle,
     downStyle: Styles.TertiaryButtonDownStyle
   },
   loginButton: {
