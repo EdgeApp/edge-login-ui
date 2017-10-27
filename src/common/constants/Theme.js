@@ -1,5 +1,5 @@
 // import { hs, vs, fontSize } from '../../util'
-export const HEADER_HEIGHT = 56
+export const HEADER_HEIGHT = 66
 
 export const BUTTON_HEIGHT = 44
 export const BUTTON_WIDTH_1 = 220

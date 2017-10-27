@@ -29,7 +29,7 @@ const NewAccountWelcomeScreenStyle = {
   },
   callToAction: {
     fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
-    // fontFamily: Constants.FONT_BLACK,
+    fontFamily: Constants.FONT_BLACK,
     color: Constants.GRAY_2,
     textAlign: 'center'
   },

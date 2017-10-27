@@ -12,7 +12,7 @@ const HeaderContainerStyle = {
   },
   left: {
     flex: 1,
-    justifyContent: 'space-around'
+    justifyContent: 'flex-end'
   },
   center: {
     flex: 3,
@@ -21,7 +21,7 @@ const HeaderContainerStyle = {
   },
   right: {
     flex: 1,
-    justifyContent: 'space-around' // ,
+    justifyContent: 'flex-end' // ,
     // alignItems: 'center'
   },
   headlineText: {
