@@ -2,6 +2,7 @@ export * from './Colors'
 export * from './Fonts'
 export * from './Theme'
 export * from './ErrorConstants'
+export * from './IconConstants'
 
 /* export const LEFT_TO_RIGHT = 'leftToRight'
 export const RIGHT_TO_LEFT = 'rightToLeft'

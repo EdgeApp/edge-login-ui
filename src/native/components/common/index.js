@@ -13,4 +13,7 @@ export * from './DropInput'
 export * from './ScrollingList'
 export * from './Checkbox'
 export * from './WarningBox'
+export * from './IconButton'
+export * from './Icon'
+export * from './Gradient'
 
