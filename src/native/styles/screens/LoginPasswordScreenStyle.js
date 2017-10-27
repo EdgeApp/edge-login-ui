@@ -1,6 +1,6 @@
 import * as Styles from '../'
 import * as Constants from '../../../common/constants/'
-import { hs, vs } from '../../../common/util/PixelUtil'
+import { vs } from '../../../common/util/PixelUtil'
 
 const LoginPasswordScreenStyle = {
   container: Styles.ScreenStyle,
@@ -18,14 +18,9 @@ const LoginPasswordScreenStyle = {
   featureBox: {
     position: 'relative',
     top: vs(55),
-    width: hs(260),
-    height: vs(376),
-    backgroundColor: Constants.TRANSPARENT
-  },
-  keyboardAvoidContainer: {
-    position: 'relative',
     width: '100%',
-    height: '100%'
+    height: vs(376),
+    alignItems: 'center'
   },
   innerView: {
     ...Styles.InnerView,
@@ -33,24 +28,13 @@ const LoginPasswordScreenStyle = {
     justifyContent: 'space-around'
   },
   logoHeader: Styles.LogoHeaderStyle,
-  featureBoxBody: {
-    height: vs(250),
-    width: '100%',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'column-reverse'
-  },
-  inputsBox: {
-    flex: 1,
-    width: '100%'
-  },
+  shimTiny: {...Styles.Shim, height: 10},
+  shimSmall: {...Styles.Shim, height: 25},
+  shim: Styles.Shim,
   buttonsBox: {
-    flex: 3,
     width: '100%',
-    justifyContent: 'space-around',
     alignItems: 'center'
   },
-  input: Styles.FormFieldStyle,
   input2: Styles.MaterialInput,
   inputWithDrop: Styles.FormFieldWithDropStyle,
   forgotButton: {

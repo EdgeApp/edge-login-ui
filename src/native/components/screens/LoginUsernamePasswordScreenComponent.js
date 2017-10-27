@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, Keyboard } from 'react-native'
+import { View, Keyboard } from 'react-native'
 import {
   BackgroundImage,
   Button,
   FormField,
   CustomModal
 } from '../../components/common'
-import UsernameDropConnector
-  from '../../connectors/componentConnectors/UsernameDropConnector'
+/* import UsernameDropConnector
+  from '../../connectors/componentConnectors/UsernameDropConnector' */
 import { LogoImageHeader, UserListItem } from '../abSpecific'
 import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
@@ -40,7 +40,9 @@ export default class LandingScreenComponent extends Component {
   }
   componentDidMount () {
     if (this.props.previousUsers.lastUser) {
-      this.props.launchUserLoginWithTouchId({username: this.props.previousUsers.lastUser.username})
+      this.props.launchUserLoginWithTouchId({
+        username: this.props.previousUsers.lastUser.username
+      })
     }
   }
   componentWillReceiveProps (nextProps) {
@@ -69,45 +71,34 @@ export default class LandingScreenComponent extends Component {
   renderOverImage () {
     const { LoginPasswordScreenStyle } = this.props.styles
     if (this.props.loginSuccess) {
-      return (
+      /* return (
         <View style={LoginPasswordScreenStyle.featureBox}>
           <Text>LOGIN SUCCESS</Text>
         </View>
-      )
+      ) */
+      return null
     }
     return (
-      <View style={LoginPasswordScreenStyle.featureBox} >
-        {this.renderInterior(LoginPasswordScreenStyle)}
+      <View style={LoginPasswordScreenStyle.featureBox}>
+        <LogoImageHeader style={LoginPasswordScreenStyle.logoHeader} />
+        <View style={LoginPasswordScreenStyle.shimSmall} />
+        {this.renderUsername(LoginPasswordScreenStyle)}
+        <View style={LoginPasswordScreenStyle.shimSmall} />
+        <FormField
+          style={LoginPasswordScreenStyle.input2}
+          onChangeText={this.updatePassword.bind(this)}
+          value={this.state.password}
+          label={'Password'}
+          error={this.props.error}
+          secureTextEntry
+          returnKeyType={'go'}
+          forceFocus={this.state.focusSecond}
+          onFocus={this.onfocusTwo.bind(this)}
+          onFinish={this.onStartLogin.bind(this)}
+        />
+        <View style={LoginPasswordScreenStyle.shim} />
+        {this.renderButtons(LoginPasswordScreenStyle)}
         {this.renderModal(LoginPasswordScreenStyle)}
-      </View>
-    )
-  }
-  renderInterior (styles) {
-    return (
-      <View style={styles.innerView}>
-        <LogoImageHeader style={styles.logoHeader} />
-        <View style={styles.featureBoxBody}>
-          {this.renderButtons(styles)}
-          <FormField
-            style={styles.input2}
-            onChangeText={this.updatePassword.bind(this)}
-            value={this.state.password}
-            label={'Password'}
-            error={this.props.error}
-            secureTextEntry
-            returnKeyType={'go'}
-            forceFocus={this.state.focusSecond}
-            onFocus={this.onfocusTwo.bind(this)}
-            onFinish={this.onStartLogin.bind(this)}
-          />
-          {/* <PasswordConnector
-            onChangeText={this.updatePassword.bind(this)}
-            value={this.state.password}
-            label={'Password'}
-            style={styles.input2}
-          /> */}
-          {this.renderUsername(styles)}
-        </View>
       </View>
     )
   }
@@ -115,7 +106,7 @@ export default class LandingScreenComponent extends Component {
     if (this.props.previousUsers.length < 1) {
       return (
         <FormField
-          style={styles.inputWithDrop}
+          style={styles.input2}
           onChangeText={this.updateUsername.bind(this)}
           value={this.props.username}
           label={'Username'}
@@ -128,6 +119,19 @@ export default class LandingScreenComponent extends Component {
       )
     }
     return (
+      <FormField
+        style={styles.input2}
+        onChangeText={this.updateUsername.bind(this)}
+        value={this.props.username}
+        label={'Username'}
+        returnKeyType={'next'}
+        autoFocus={this.state.focusFirst}
+        forceFocus={this.state.focusFirst}
+        onFocus={this.onfocusOne.bind(this)}
+        onFinish={this.onSetNextFocus.bind(this)}
+      />
+    )
+    /* return (
       <UsernameDropConnector
         style={styles.inputWithDrop}
         onChangeText={this.updateUsername.bind(this)}
@@ -138,7 +142,7 @@ export default class LandingScreenComponent extends Component {
         getListItemsFunction={this.renderItems.bind(this)}
         dataList={this.props.usernameList}
       />
-    )
+    ) */
   }
   renderItems (style, dataList) {
     return dataList.map(Item => (
@@ -163,6 +167,7 @@ export default class LandingScreenComponent extends Component {
     console.log(style)
     return (
       <View style={style.buttonsBox}>
+        <View style={style.shimTiny} />
         <Button
           onPress={this.onForgotPassword.bind(this)}
           label={'Forgot Password'}
@@ -171,6 +176,7 @@ export default class LandingScreenComponent extends Component {
           upStyle={style.forgotButton.upStyle}
           upTextStyle={style.forgotButton.upTextStyle}
         />
+        <View style={style.shimTiny} />
         <Button
           onPress={this.onStartLogin.bind(this)}
           label={localize(KEYS.BUTTONS.LOGIN)}
@@ -181,6 +187,7 @@ export default class LandingScreenComponent extends Component {
           isThinking={this.state.loggingIn}
           doesThink
         />
+        <View style={style.shimTiny} />
         <Button
           onPress={this.onCreateAccount.bind(this)}
           label={'Create an account'}
@@ -242,7 +249,7 @@ export default class LandingScreenComponent extends Component {
       this.props.gotoPinLoginPage()
       return
     }
-    this.props.launchUserLoginWithTouchId({username: user})
+    this.props.launchUserLoginWithTouchId({ username: user })
     this.onSetNextFocus()
   }
 
