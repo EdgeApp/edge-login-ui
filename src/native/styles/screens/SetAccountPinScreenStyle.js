@@ -21,7 +21,7 @@ const SetAccountPinScreenStyle = {
     color: Constants.GRAY_2,
     textAlign: 'center'
   },
-  fourPin: Styles.FourDotInputStyle,
+  fourPin: Styles.FourDotInputDarkStyle,
   nextButton: {
     upStyle: Styles.PrimaryButtonUpStyle,
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
