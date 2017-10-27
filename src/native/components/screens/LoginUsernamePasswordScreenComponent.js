@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, KeyboardAvoidingView, Keyboard } from 'react-native'
+import { View, Text, Keyboard } from 'react-native'
 import {
   BackgroundImage,
   Button,
@@ -9,13 +9,16 @@ import {
 import UsernameDropConnector
   from '../../connectors/componentConnectors/UsernameDropConnector'
 import { LogoImageHeader, UserListItem } from '../abSpecific'
-// import * as Constants from '../../../common/constants'
+import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 import * as Offsets from '../../constants'
 import DeleteUserConnector
   from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import { localize, KEYS } from '../../../common/locale'
 // import PasswordConnector from '../../connectors/componentConnectors/PasswordConnector'
+import {
+  KeyboardAwareScrollView
+} from 'react-native-keyboard-aware-scroll-view'
 
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
@@ -50,13 +53,17 @@ export default class LandingScreenComponent extends Component {
   render () {
     const { LoginPasswordScreenStyle } = this.props.styles
     return (
-      <View style={LoginPasswordScreenStyle.container}>
+      <KeyboardAwareScrollView
+        style={LoginPasswordScreenStyle.container}
+        keyboardShouldPersistTaps={Constants.ALWAYS}
+        contentContainerStyle={LoginPasswordScreenStyle.mainScrollView}
+      >
         <BackgroundImage
           src={Assets.LOGIN_BACKGROUND}
           style={LoginPasswordScreenStyle.backgroundImage}
           content={this.renderOverImage()}
         />
-      </View>
+      </KeyboardAwareScrollView>
     )
   }
   renderOverImage () {
@@ -69,15 +76,10 @@ export default class LandingScreenComponent extends Component {
       )
     }
     return (
-      <KeyboardAvoidingView
-        style={LoginPasswordScreenStyle.featureBox}
-        contentContainerStyle={LoginPasswordScreenStyle.keyboardAvoidContainer}
-        behavior={'position'}
-        keyboardVerticalOffset={this.state.offset}
-      >
+      <View style={LoginPasswordScreenStyle.featureBox} >
         {this.renderInterior(LoginPasswordScreenStyle)}
         {this.renderModal(LoginPasswordScreenStyle)}
-      </KeyboardAvoidingView>
+      </View>
     )
   }
   renderInterior (styles) {

@@ -4,6 +4,11 @@ import { hs, vs } from '../../../common/util/PixelUtil'
 
 const LoginPasswordScreenStyle = {
   container: Styles.ScreenStyle,
+  mainScrollView: {
+    position: 'relative',
+    width: '100%',
+    height: '100%'
+  },
   backgroundImage: {
     ...Styles.BackgroundScreenImageStyle,
     alignItems: 'center',
