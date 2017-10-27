@@ -8,6 +8,17 @@ import LinearGradient from 'react-native-linear-gradient'
 class Header extends Component {
   render () {
     const Style = this.props.style
+    /* return (
+      <View style={{...Style.container, backgroundColor: '#FFcc00'}}>
+        <View style={Style.left}>
+          {this.renderBack(Style)}
+        </View>
+        {this.renderText(Style)}
+        <View style={Style.right}>
+          {this.renderSkip(Style)}
+        </View>
+      </View>
+    ) */
     return (
       <LinearGradient
         style={Style.container}

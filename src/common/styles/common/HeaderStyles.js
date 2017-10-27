@@ -1,13 +1,13 @@
-import * as Colors from '../../constants/Colors'
+import * as Constants from '../../constants/'
 import { vs, fontSize } from '../../util'
 import * as Styles from '../'
 
 const HeaderContainerStyle = {
   container: {
     position: 'relative',
-    height: vs(65),
+    height: Constants.HEADER_HEIGHT,
     width: '100%',
-    backgroundColor: Colors.TRANSPARENT,
+    backgroundColor: Constants.TRANSPARENT,
     flexDirection: 'row'
   },
   left: {
@@ -28,26 +28,26 @@ const HeaderContainerStyle = {
     fontSize: fontSize(17),
     width: '100%',
     textAlign: 'center',
-    color: Colors.WHITE
+    color: Constants.WHITE
   },
   subHeadText: {
     fontSize: fontSize(11),
     width: '100%',
     textAlign: 'center',
-    color: Colors.ACCENT_ORANGE
+    color: Constants.ACCENT_ORANGE
   },
   textButton: {
     upStyle: { ...Styles.TextOnlyButtonUpStyle, width: '100%' },
     upTextStyle: {
       ...Styles.TextOnlyButtonTextUpStyle,
       width: '100%',
-      color: Colors.WHITE,
+      color: Constants.WHITE,
       fontSize: fontSize(12)
     },
     downTextStyle: {
       ...Styles.TextOnlyButtonTextDownStyle,
       width: '100%',
-      color: Colors.SECONDARY,
+      color: Constants.SECONDARY,
       fontSize: fontSize(12)
     },
     downStyle: {

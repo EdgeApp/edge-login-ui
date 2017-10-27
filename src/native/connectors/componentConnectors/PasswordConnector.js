@@ -14,7 +14,8 @@ export const mapStateToProps = (state, ownProps) => {
     showSecureCheckboxLabel: 'Show Password',
     label: label, // TODO localize
     returnKeyType: 'go',
-    autoFocus: ownProps.autoFocus
+    autoFocus: ownProps.autoFocus,
+    onFinish: ownProps.onFinish
   }
 }
 

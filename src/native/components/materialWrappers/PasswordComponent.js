@@ -29,6 +29,7 @@ class PasswordComponent extends Component {
         titleTextStyle={titleTextStyle}
         secureTextEntry={this.props.secureTextEntry}
         returnKeyType={this.props.returnKeyType}
+        onSubmitEditing={this.props.onFinish}
       />
     )
   }

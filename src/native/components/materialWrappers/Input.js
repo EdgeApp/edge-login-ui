@@ -10,16 +10,33 @@ class Input extends Component {
     returnKeyType: 'go',
     onFocus: null
   } */
+  componentWillMount () {
+    this.setState({
+      inputText: '',
+      autoFocus: this.props.autoFocus
+    })
+  }
   componentDidMount () {
     if (this.props.autoFocus) {
       this.textInput.focus()
     }
   }
-  addRef (arg) {
-    if (arg) {
-      this.textInput = arg
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.value !== this.state.inputText) {
+      this.setState({
+        inputText: nextProps.value,
+        autoFocus: nextProps.autoFocus
+      })
+    }
+    if (nextProps.autoFocus && !this.props.autoFocus) {
+      this.textInput.focus()
+    }
+    if (nextProps.forceFocus) {
+      this.textInput.focus()
     }
   }
+
   render () {
     const value = this.props.value ? this.props.value : ''
     const error = this.props.error ? this.props.error : ''
@@ -30,7 +47,6 @@ class Input extends Component {
       textColor,
       errorColor,
       titleTextStyle,
-      onChangeText,
       secureTextEntry,
       returnKeyType
     } = this.props
@@ -39,7 +55,7 @@ class Input extends Component {
         ref={this.addRef.bind(this)}
         label={this.props.label}
         value={value}
-        onChangeText={onChangeText}
+        onChangeText={this.onChange.bind(this)}
         error={error}
         containerStyle={containerStyle}
         baseColor={baseColor}
@@ -49,9 +65,24 @@ class Input extends Component {
         titleTextStyle={titleTextStyle}
         secureTextEntry={secureTextEntry}
         returnKeyType={returnKeyType}
+        onSubmitEditing={this.onSubmitEdit.bind(this)}
       />
     )
   }
+
+  addRef (arg) {
+    if (arg) {
+      this.textInput = arg
+    }
+  }
+
+  onChange (text) {
+    this.setState({
+      inputText: text
+    })
+    this.props.onChangeText(text)
+  }
+
   onSubmitEdit (event) {
     if (this.props.onFinish) {
       this.props.onFinish()
