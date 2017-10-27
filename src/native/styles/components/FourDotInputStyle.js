@@ -24,6 +24,7 @@ const FourDotInputStyle = {
     width: '100%',
     textAlign: 'center',
     color: Colors.ACCENT_RED,
+    backgroundColor: Colors.TRANSPARENT,
     padding: 20
   },
   input: {
@@ -36,15 +37,15 @@ const FourDotInputStyle = {
   },
   circle: {
     borderWidth: 2,
-    borderColor: Colors.PRIMARY,
+    borderColor: Colors.WHITE,
     borderRadius: 15,
     height: 30,
     width: 30
   },
   circleSected: {
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: Colors.ACCENT_MINT,
     borderWidth: 2,
-    borderColor: Colors.PRIMARY,
+    borderColor: Colors.WHITE,
     borderRadius: 15,
     height: 30,
     width: 30

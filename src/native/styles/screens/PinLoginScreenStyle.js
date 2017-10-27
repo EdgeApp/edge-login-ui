@@ -1,5 +1,5 @@
 import * as Styles from '../'
-import * as Colors from '../../../common/constants/Colors'
+import * as Constants from '../../../common/constants/'
 import { hs, vs } from '../../../common/util'
 
 const PinLoginScreenStyle = {
@@ -15,18 +15,17 @@ const PinLoginScreenStyle = {
   },
   featureBox: {
     position: 'relative',
-    top: vs(55),
-    width: hs(260),
+    top: 40,
+    width: '100%',
     height: vs(376),
-    backgroundColor: Colors.OVERLAY_BOX,
-    justifyContent: 'space-around',
     alignItems: 'center'
   },
   featureBoxBody: {
     height: vs(250),
     width: '100%'
   },
-  logoHeader: Styles.LogoHeaderStyle,
+  logoHeader: Styles.LogoHeaderStyleShort,
+
   listView: {
     height: vs(250),
     width: hs(160)
@@ -35,44 +34,30 @@ const PinLoginScreenStyle = {
     container: {
       height: vs(40),
       width: '100%',
-      backgroundColor: Colors.WHITE,
+      backgroundColor: Constants.PRIMARY,
       flexDirection: 'row',
       alignItems: 'center'
     },
     text: {
       paddingLeft: 20,
-      color: Colors.PRIMARY
+      color: Constants.ACCENT_RED,
+      backgroundColor: Constants.TRANSPARENT
     }
   },
   dropInput: {
     container: {
       width: 200,
       height: 30,
-      backgroundColor: Colors.ACCENT_GREEN,
+      // backgroundColor: Constants.WHITE,
       marginBottom: 20
     }
   },
   fourPin: Styles.FourDotInputStyle,
-  inputBoxes: {
-    container: Styles.InputStyles.container,
-    inputStyle: { ...Styles.InputStyles.inputStyle, width: '100%' }
-  },
+
   forgotButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: Styles.TextOnlyButtonTextUpStyle,
-    downTextStyle: Styles.TextOnlyButtonTextDownStyle,
-    downStyle: Styles.TextOnlyButtonDownStyle
-  },
-  loginButton: {
-    upStyle: Styles.PrimaryButtonUpStyle,
-    upTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: Styles.PrimaryButtonDownStyle
-  },
-  signupButton: {
-    upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: Styles.TextOnlyButtonTextUpStyle,
-    downTextStyle: Styles.TextOnlyButtonTextDownStyle,
+    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, color: Constants.WHITE},
+    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, color: Constants.WHITE},
     downStyle: Styles.TextOnlyButtonDownStyle
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { BackgroundImage, Button, ScrollingList } from '../../components/common'
 import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
 import FourDigitInputConnector
@@ -36,11 +36,12 @@ export default class PinLogInScreenComponent extends Component {
   renderOverImage () {
     const { PinLoginScreenStyle } = this.props.styles
     if (this.props.loginSuccess) {
-      return (
+      /* return (
         <View style={PinLoginScreenStyle.featureBox}>
           <Text>LOGIN SUCCESS</Text>
         </View>
-      )
+      ) */
+      return null
     }
     return (
       <View style={PinLoginScreenStyle.featureBox}>
