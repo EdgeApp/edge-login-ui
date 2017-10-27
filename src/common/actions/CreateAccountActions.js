@@ -8,7 +8,7 @@ export function validatePin (data) {
   return (dispatch, getState, imports) => {
     let error = null
     if (pin.length !== 4) {
-      error = 'PIN MUST BE 4 Digits' // TODO localize
+      error = Constants.FOUR_DIGIT_PIN_ERROR
     }
     if (pin.length > 4) {
       return
@@ -26,13 +26,10 @@ export function checkUsernameForAvailabilty (data) {
     let context = imports.context
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
-    console.log('usernmae availblecheck')
     setTimeout(() => {
       context
         .usernameAvailable(data)
         .then(async response => {
-          console.log('usernmae availblecheck response')
-          console.log(response)
           if (response) {
             const obj = {
               username: data,
@@ -46,16 +43,14 @@ export function checkUsernameForAvailabilty (data) {
           }
           const obj = {
             username: data,
-            error: 'THE USERNAME ALREADY EXISTS ' // TODO - localize string.
+            error: Constants.USERNAME_EXISTS_ERROR
           }
           dispatch(
             dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
           )
         })
         .catch(e => {
-          console.log('Big ficking error ')
           console.log(e.message)
-          console.log(e)
         })
     }, 300)
   }
@@ -121,14 +116,12 @@ export function createUser (data) {
       context
         .createAccount(data.username, data.password, data.pin, accountOptions)
         .then(async response => {
-          console.log('response create user ')
           dispatch(
             dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, response)
           )
           dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
         })
         .catch(e => {
-          console.log('Big ficking error createUser')
           console.log(e)
           dispatch(
             dispatchActionWithData(Constants.CREATE_ACCOUNT_FAIL, e.message)

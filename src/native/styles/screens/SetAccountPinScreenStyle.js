@@ -1,10 +1,9 @@
 import * as Styles from '../'
-import * as Colors from '../../../common/constants/Colors'
-import { fontSize } from '../../../common/util'
+import * as Constants from '../../../common/constants/'
 
 const SetAccountPinScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: { ...Styles.HeaderContainerStyle, backgroundColor: Colors.PRIMARY },
+  header: { ...Styles.HeaderContainerStyle, backgroundColor: Constants.PRIMARY },
   pageContainer: Styles.PageContainerWithHeaderStyle,
   row1: {
     ...Styles.ScreenRow,
@@ -17,7 +16,9 @@ const SetAccountPinScreenStyle = {
   instructions: {
     position: 'relative',
     width: '80%',
-    fontSize: fontSize(14),
+    fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+    fontFamily: Constants.FONT_REGUALR,
+    color: Constants.GRAY_2,
     textAlign: 'center'
   },
   fourPin: Styles.FourDotInputStyle,
