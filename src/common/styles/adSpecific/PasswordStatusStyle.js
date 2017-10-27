@@ -16,27 +16,37 @@ const PasswordStatusStyle = {
     width: '80%'
   },
   boxes: {
-    width: '100%',
     flex: 5,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    top: 10
+    flexDirection: 'column',
+    top: 5
 
   },
   checkboxContainer: {
-    width: '80%',
-    height: vs(20)
+    height: vs(20),
+    marginTop: 4
   },
-  textContianer: {
+  textContainer: {
+    position: 'relative',
     width: '100%',
+    flexDirection: 'column',
+    marginTop: 5,
     flex: 2,
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'flex-end'
+  },
+  shim: {
+    height: 5,
+    width: 30
   },
   checkboxes: BasicCheckBoxWithLabel,
   text: {
     textAlign: 'center',
-    width: '100%'
+    width: '80%',
+    marginLeft: '10%',
+    marginRight: '10%',
+    marginBottom: 6,
+    fontSize: 11
+
   }
 }
 

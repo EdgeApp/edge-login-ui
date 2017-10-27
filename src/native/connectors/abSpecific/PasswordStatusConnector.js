@@ -9,7 +9,10 @@ export const mapStateToProps = (state, ownProps) => {
   if (state.passwordStatus) {
     secondsToCrack = moment
       .duration(state.passwordStatus.secondsToCrack, 'seconds')
-      .format('Y [yrs], M [months], D [days], H[hr]:mm[min]:ss[seconds] ')
+      .format('Y [yrs], M [months], D [days], H[hr]:mm[min]:ss [seconds] ')
+    const array = secondsToCrack.split('days')
+
+    secondsToCrack = array.length > 1 ? array[0] + 'days, \n' + array[1] : array[0]
     secondsToCrack = secondsToCrack + ' to crack'
   }
   return {
