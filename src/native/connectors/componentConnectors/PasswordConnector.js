@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import {PasswordComponent} from '../../components/materialWrappers/indexMaterial'
+import {FormField} from '../../components/common'
 import * as loginAction from '../../../common/actions'
 
 export const mapStateToProps = (state, ownProps) => {
@@ -13,9 +13,11 @@ export const mapStateToProps = (state, ownProps) => {
     showSecureCheckbox: true,
     showSecureCheckboxLabel: 'Show Password',
     label: label, // TODO localize
-    returnKeyType: 'go',
+    returnKeyType: 'next',
     autoFocus: ownProps.autoFocus,
-    onFinish: ownProps.onFinish
+    onFinish: ownProps.onFinish,
+    onBlur: ownProps.onBlur,
+    onFocus: ownProps.onFocus
   }
 }
 
@@ -25,4 +27,4 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(FormField)

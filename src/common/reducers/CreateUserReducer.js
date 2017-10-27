@@ -19,7 +19,6 @@ const initialState = {
   accountObject: null
 }
 export default function (state = initialState, action) {
-  let em = null
   switch (action.type) {
     case Constants.CREATE_ACCOUNT_SUCCESS:
       return { ...state, accountObject: action.data, creationSuccess: true }
@@ -39,32 +38,19 @@ export default function (state = initialState, action) {
       }
 
     case Constants.AUTH_UPDATE_PASSWORD:
-      if (state.confirmPassword !== action.data.password) {
-        em = 'ERROR MESSAGE'
-      }
-      if (action.data.error) {
-        em = action.data.error
-      }
       return {
         ...state,
         password: action.data.password,
         passwordStatus: action.data.passwordStatus,
-        createPasswordErrorMessage: em
+        createPasswordErrorMessage: action.data.error
       }
     case Constants.AUTH_UPDATE_PIN:
       return { ...state, loginPin: action.data }
     case Constants.AUTH_UPDATE_CONFIRM_PASSWORD:
-      if (state.password !== action.data.password) {
-        em = 'ERROR MESSAGE'
-      }
-      if (action.data.error) {
-        em = action.data.error
-      }
       return {
         ...state,
         confirmPassword: action.data.password,
-        createPasswordErrorMessage: em,
-        confirmPasswordErrorMessage: em
+        confirmPasswordErrorMessage: action.data.error
       }
 
     default:

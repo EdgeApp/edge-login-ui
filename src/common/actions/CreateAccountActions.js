@@ -66,8 +66,8 @@ export function validateUsername (data) {
     // TODO evaluate client side evaluations.
     let error = data.length > 3
       ? null
-      : 'Username must be longer than 3 characters ' // TODO: Localize string
-    error = isASCII(data) ? error : 'Username must only be ascii characthers ' // TODO: localize
+      : Constants.USERNAME_3_CHARACTERS_ERROR // TODO: Localize string
+    error = isASCII(data) ? error : Constants.USERNAME_ASCII_ERROR // TODO: localize
     const obj = {
       username: data,
       error: error
@@ -77,18 +77,16 @@ export function validateUsername (data) {
 }
 export function validateConfirmPassword (data) {
   return (dispatch, getState, imports) => {
-    let context = imports.context
-    let error = null
+    const state = getState()
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
-    const passwordEval = context.checkPasswordRules(data)
-    if (!passwordEval.passed) {
-      error = 'Insufficient Password' // TODO localize.
+    let error = null
+    if (data !== state.create.password) {
+      error = Constants.CONFIRM_PASSWORD_ERROR
     }
     var obj = {
       password: data,
-      passwordStatus: passwordEval,
-      error: error
+      error
     }
     dispatch(
       dispatchActionWithData(Constants.AUTH_UPDATE_CONFIRM_PASSWORD, obj)
@@ -103,7 +101,7 @@ export function validatePassword (data) {
     // the timeout is a hack until we put in interaction manager.
     const passwordEval = context.checkPasswordRules(data)
     if (!passwordEval.passed) {
-      error = 'Insufficient Password' // TODO localize.
+      error = Constants.PASSWORD_ERROR // TODO localize.
     }
     var obj = {
       password: data,
