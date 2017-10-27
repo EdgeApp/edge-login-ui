@@ -30,7 +30,7 @@ export default class LandingScreenComponent extends Component {
         <View style={NewAccountUsernameScreenStyle.pageContainer}>
           <View style={NewAccountUsernameScreenStyle.instructions}>
             <Text style={NewAccountUsernameScreenStyle.instructionsText}>
-              Username will be required to sign in to your Edge account on this and other devices. Need a copy about not using name + email
+              Your username will be required to sign in to your Edge account on this and other devices.
             </Text>
           </View>
           <UsernameConnector

@@ -59,7 +59,7 @@ export function checkUsernameForAvailabilty (data) {
 export function validateUsername (data) {
   return (dispatch, getState, imports) => {
     // TODO evaluate client side evaluations.
-    let error = data.length > 3
+    let error = data.length > 2
       ? null
       : Constants.USERNAME_3_CHARACTERS_ERROR // TODO: Localize string
     error = isASCII(data) ? error : Constants.USERNAME_ASCII_ERROR // TODO: localize
