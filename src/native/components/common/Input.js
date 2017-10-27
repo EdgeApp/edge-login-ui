@@ -17,13 +17,13 @@ import { TextInput } from 'react-native'
 } */
 
 class Input extends Component {
-  static defaultProps = {
+  /* static defaultProps = {
     autoCapitalize: 'none',
     autoCorrect: false,
     autoFocus: false,
     forceFocus: false,
     returnKeyType: 'default'
-  }
+  } */
 
   componentWillMount () {
     this.setState({
@@ -34,6 +34,8 @@ class Input extends Component {
   componentDidMount () {
     if (this.props.autoFocus) {
       // set the focus to the thing
+      console.log('SHOUDL AUTOFOCUS ')
+      this.textInput.focus()
     }
   }
 

@@ -1,6 +1,6 @@
 import * as Styles from '../'
-// import * as Constants from '../../../common/constants/'
-import { fontSize } from '../../../common/util'
+import * as Constants from '../../../common/constants/'
+
 const NewAccountWelcomeScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   row1: {
@@ -21,13 +21,16 @@ const NewAccountWelcomeScreenStyle = {
   },
   logoHeader: Styles.LogoHeaderStyle,
   instructionsText: {
-    fontSize: fontSize(14),
+    fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+    color: Constants.GRAY_2,
     textAlign: 'center',
     paddingLeft: 20,
     paddingRight: 20
   },
   callToAction: {
-    fontSize: fontSize(12),
+    fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+    // fontFamily: Constants.FONT_BLACK,
+    color: Constants.GRAY_2,
     textAlign: 'center'
   },
   nextButton: {

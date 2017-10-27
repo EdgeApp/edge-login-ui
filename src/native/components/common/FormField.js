@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import * as Colors from '../../../common/constants/Colors'
-import { View, Text } from 'react-native'
-import { Input } from '../materialWrappers/Input'
-import { Checkbox } from './Checkbox'
+// import * as Constants from '../../../common/constants'
+import { Input } from '../materialWrappers/indexMaterial'
+/* import { Checkbox } from './Checkbox'
 import { STANDARD_CHECKED, STANDARD_UNCHECKED } from '../../../native/assets'
-
+ */
 /* type Props = {
 
   style: object.isRequired,
@@ -43,66 +42,38 @@ class FormField extends Component {
     })
   }
   render () {
-    const Style = this.props.style
+    const {
+      container,
+      baseColor,
+      tintColor,
+      textColor,
+      errorColor,
+      titleTextStyle
+
+    } = this.props.style
+    console.log('stop')
     return (
-      <View style={Style.container}>
-        <View style={Style.labelContainer}>
-          <Text
-            style={[
-              Style.labelText,
-              this.props.error ? Style.errorText : Style.labelText
-            ]}
-          >
-            {this.renderLabel()}
-          </Text>
-        </View>
-        <View
-          style={[
-            Style.imputContainer,
-            this.props.error ? { borderBottomColor: Colors.ACCENT_RED } : {}
-          ]}
-          numberOfLines={1}
-          ellipsizeMode={'tail'}
-        >
-          <Input
-            style={Style.inputStyle}
-            onChangeText={this.props.onChangeText}
-            value={this.props.value}
-            autoCapitalize={'none'}
-            secureTextEntry={this.state.secure}
-            onFinish={this.props.onFinish}
-            returnKeyType={this.props.returnKeyType}
-            onSubmitEditing={this.onSubmitEdit.bind(this)}
-            autoFocus={this.state.autoFocus}
-            forceFocus={this.props.forceFocus}
-            onFocus={this.props.onFocus}
-            label={this.props.label}
-          />
-        </View>
-        {this.renderErrorContainer(Style)}
-      </View>
+      <Input
+        label={this.props.label}
+        value={this.props.value}
+        onChangeText={this.props.onChangeText}
+        error={this.props.error}
+        containerStyle={container}
+        secureTextEntry={this.state.secure}
+        returnKeyType={this.props.returnKeyType}
+        baseColor={baseColor}
+        tintColor={tintColor}
+        textColor={textColor}
+        errorColor={errorColor}
+        titleTextStyle={titleTextStyle}
+        autoFocus={this.state.autoFocus}
+        forceFocus={this.props.forceFocus}
+        onFocus={this.props.onFocus}
+        autoCapitalize={'none'}
+        />
     )
   }
-  renderErrorContainer (Style) {
-    if (!this.props.showSecureCheckbox) {
-      return (
-        <View style={Style.errorContainer}>
-          <Text style={Style.errorText}>{this.renderError()}</Text>
-        </View>
-      )
-    }
-    return (
-      <View style={Style.errorContainer}>
-        <View style={Style.errorContainerLeft}>
-          <Text style={Style.errorText}>{this.renderError()}</Text>
-        </View>
-        <View style={Style.errorContainerRight}>
-          {this.renderHelperBox(Style)}
-        </View>
-      </View>
-    )
-  }
-  renderHelperBox (Style) {
+  /* renderHelperBox (Style) {
     if (this.props.showSecureCheckbox) {
       return (
         <Checkbox
@@ -124,8 +95,8 @@ class FormField extends Component {
       return this.props.error
     }
     return null
-  }
-  setSecurity (arg) {
+  } */
+  /* setSecurity (arg) {
     this.setState({
       secure: arg
     })
@@ -134,7 +105,7 @@ class FormField extends Component {
     if (this.props.onFinish) {
       this.props.onFinish()
     }
-  }
+  } */
 }
 
 export { FormField }

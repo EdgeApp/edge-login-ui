@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button } from '../../common'
-import { LogoImageHeader } from '../../abSpecific'
+import { ImageHeaderComponent } from '../../abSpecific'
+import * as Assets from '../../../assets'
 // import * as Constants from '../../../common/constants'
 
 export default class LandingScreenComponent extends Component {
@@ -22,7 +23,7 @@ export default class LandingScreenComponent extends Component {
           />
         </View>
         <View style={NewAccountWelcomeScreenStyle.row2}>
-          <LogoImageHeader style={NewAccountWelcomeScreenStyle.logoHeader} />
+          <ImageHeaderComponent style={NewAccountWelcomeScreenStyle.logoHeader} src={Assets.WELCOME} />
         </View>
         <View style={NewAccountWelcomeScreenStyle.row3}>
           <Text style={NewAccountWelcomeScreenStyle.instructionsText}>

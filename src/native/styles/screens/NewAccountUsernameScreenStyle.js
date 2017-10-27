@@ -1,5 +1,5 @@
 import * as Styles from '../'
-import { vs, fontSize } from '../../../common/util'
+import * as Constants from '../../../common/constants'
 const NewAccountUsernameScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   header: Styles.HeaderContainerStyle,
@@ -14,15 +14,20 @@ const NewAccountUsernameScreenStyle = {
     downStyle: Styles.PrimaryButtonDownStyle
   },
   instructions: {
-    height: vs(100),
-    width: '80%'
+    height: Constants.USERNAME_INSTRUCTIONS_HEIGHT,
+    width: '90%'
+  },
+  shim: {
+    height: 30
   },
   instructionsText: {
-    fontSize: fontSize(12),
+    fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+    color: Constants.GRAY_1,
     textAlign: 'center',
-    paddingTop: vs(20)
+    paddingTop: 20,
+    paddingBottom: 20
   },
-  inputBox: { ...Styles.FormFieldStyle }
+  inputBox: Styles.MaterialInputOnWhite
 }
 
 export { NewAccountUsernameScreenStyle }

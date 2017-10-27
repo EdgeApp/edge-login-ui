@@ -37,6 +37,7 @@ export default class LandingScreenComponent extends Component {
             style={NewAccountUsernameScreenStyle.inputBox}
             onFinish={this.onNextPress.bind(this)}
           />
+          <View style={NewAccountUsernameScreenStyle.shim} />
           <Button
             onPress={this.onNextPress.bind(this)}
             downStyle={NewAccountUsernameScreenStyle.nextButton.downStyle}

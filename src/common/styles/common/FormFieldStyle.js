@@ -170,7 +170,24 @@ const MaterialInput = {
     color: Constants.WHITE
   }
 }
-
-export {MaterialInput}
+const MaterialInputOnWhite = {
+  container: {
+    position: 'relative',
+    width: Constants.LOGIN_LABEL_WIDTH,
+    height: Constants.LOGIN_LABEL_HEIGHT
+  },
+  baseColor: Constants.PRIMARY,
+  tintColor: Constants.SECONDARY,
+  errorColor: Constants.ACCENT_RED,
+  textColor: Constants.BLACK,
+  affixTextStyle: {
+    color: Constants.ACCENT_RED
+  },
+  titleTextStyle: {
+    color: Constants.PRIMARY
+  }
+}
+export { MaterialInputOnWhite }
+export { MaterialInput }
 export { FormFieldStyle }
 export { FormFieldWithDropStyle }
