@@ -2,6 +2,13 @@ export * from './Colors'
 export * from './Fonts'
 export * from './Theme'
 
+/* export const LEFT_TO_RIGHT = 'leftToRight'
+export const RIGHT_TO_LEFT = 'rightToLeft'
+export const NONE ='none'
+export const FROM ='from'
+export const TO ='to' */
+export const ALWAYS = 'always'
+
 export const WORKFLOW_FIRST_LOAD = 'firstLoadWF'
 export const WORKFLOW_INIT = 'initalizeWF'
 export const WORKFLOW_CREATE = 'createWF'
@@ -37,4 +44,3 @@ export const AUTH_UPDATE_CONFIRM_PASSWORD = 'authUpdatePasswordConfirm'
 export const AUTH_UPDATE_PIN = 'authUpdatePin'
 
 export const DELETE_USER_FROM_DEVICE = 'deleteUserFromDevice'
-

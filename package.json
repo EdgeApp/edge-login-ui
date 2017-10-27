@@ -47,6 +47,7 @@
     "react-addons-update": "v15.3.0",
     "react-css-themr": "v1.7.1",
     "react-dom": "^15.4.2",
+    "react-native-keyboard-aware-scroll-view": "^0.4.1",
     "react-native-linear-gradient": "^2.3.0",
     "react-native-material-textfield": "^0.10.0",
     "react-redux": "~4.4.5",

@@ -11,7 +11,10 @@ import PasswordStatusConnector
   from '../../../connectors/abSpecific/PasswordStatusConnector'
 import SkipModalConnector
   from '../../../connectors/abSpecific/SkipModalConnector'
-
+import * as Constants from '../../../../common/constants'
+import {
+  KeyboardAwareScrollView
+} from 'react-native-keyboard-aware-scroll-view'
 /* type Props = {
   styles: any,
   confirmPasswordErrorMessage: string,
@@ -31,11 +34,15 @@ export default class NewAccountPasswordScreenComponent extends Component {
   render () {
     const { NewAccountPasswordScreenStyle } = this.props.styles
     return (
-      <View style={NewAccountPasswordScreenStyle.screen}>
+      <KeyboardAwareScrollView
+        style={NewAccountPasswordScreenStyle.screen}
+        keyboardShouldPersistTaps={Constants.ALWAYS}
+        contentContainerStyle={NewAccountPasswordScreenStyle.mainScrollView}
+      >
         <HeaderConnector style={NewAccountPasswordScreenStyle.header} />
         {this.renderMain(NewAccountPasswordScreenStyle)}
         {this.renderModal(NewAccountPasswordScreenStyle)}
-      </View>
+      </KeyboardAwareScrollView>
     )
   }
   renderMain (styles) {
