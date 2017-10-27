@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import {FormField} from '../../components/common'
-import * as loginAction from '../../../common/actions'
+import * as actions from '../../../common/actions'
 
 export const mapStateToProps = (state, ownProps) => {
   const label = ownProps.label ? ownProps.label : 'Password'
@@ -24,7 +24,7 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onChangeText: (data) => dispatch(loginAction.validatePassword(data))
+    onChangeText: (data) => dispatch(actions.validatePassword(data))
   }
 }
 

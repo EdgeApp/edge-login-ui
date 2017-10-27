@@ -36,7 +36,6 @@ export default function (state = initialState, action) {
         pin: action.data.pin,
         pinErrorMessage: action.data.error
       }
-
     case Constants.AUTH_UPDATE_PASSWORD:
       return {
         ...state,

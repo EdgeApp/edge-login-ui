@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import {PasswordComponent} from '../../components/materialWrappers/indexMaterial'
-import * as loginAction from '../../../common/actions'
+import {FormField} from '../../components/common'
+import * as actions from '../../../common/actions'
 
 export const mapStateToProps = (state, ownProps) => {
   const label = ownProps.label ? ownProps.label : 'Confirm Password'
@@ -23,8 +23,8 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onChangeText: (data) => dispatch(loginAction.validateConfirmPassword(PasswordComponent))
+    onChangeText: (data) => dispatch(actions.validateConfirmPassword(data))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(FormField)
