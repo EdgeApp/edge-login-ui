@@ -65,8 +65,8 @@ class Input extends Component {
         titleTextStyle={titleTextStyle}
         secureTextEntry={secureTextEntry}
         returnKeyType={returnKeyType}
-        onBlur={this.props.onBlur}
-        onFocus={this.props.Focus}
+        onBlur={this.onBlur.bind(this)}
+        onFocus={this.onFocus.bind(this)}
         onSubmitEditing={this.onSubmitEdit.bind(this)}
       />
     )
