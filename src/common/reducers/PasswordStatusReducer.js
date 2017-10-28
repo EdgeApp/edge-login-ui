@@ -17,11 +17,10 @@ export default function (state = null, action) {
         },
         { title: 'Must have at least 1 number', value: !status.noNumber }
       ]
-      const msg = status.secondsToCrack
 
       return {
         passed: status.passed,
-        secondsToCrack: msg,
+        secondsToCrack: action.data.passwordCheckString,
         list: array
       }
 
