@@ -3,10 +3,10 @@ import LinearGradient from 'react-native-linear-gradient'
 export default class Gradient extends Component {
 
   render () {
-    const {
+    /* const {
       lightColor,
       rightColor
-    } = this.props
+    } = this.props */
     const UPPER_LEFT = { x: 0, y: 0 }
     const UPPER_RIGHT = { x: 1, y: 0 }
     return (
@@ -14,7 +14,7 @@ export default class Gradient extends Component {
         style={this.props.style}
         start={UPPER_LEFT}
         end={UPPER_RIGHT}
-        colors={[lightColor, rightColor]}
+        colors={['#FFcc00', '#FF0000']}
       >
         {this.props.children}
       </LinearGradient>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
-import { Button, CustomModal } from '../../common'
+import { Button } from '../../common'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnector'
 import PasswordConnector
@@ -40,8 +40,9 @@ export default class NewAccountPasswordScreenComponent extends Component {
         contentContainerStyle={NewAccountPasswordScreenStyle.mainScrollView}
       >
         <HeaderConnector style={NewAccountPasswordScreenStyle.header} />
-        {this.renderMain(NewAccountPasswordScreenStyle)}
         {this.renderModal(NewAccountPasswordScreenStyle)}
+        {this.renderMain(NewAccountPasswordScreenStyle)}
+
       </KeyboardAwareScrollView>
     )
   }
@@ -95,11 +96,7 @@ export default class NewAccountPasswordScreenComponent extends Component {
   }
   renderModal (style) {
     if (this.props.workflow.showModal) {
-      return (
-        <CustomModal style={style.modal}>
-          <SkipModalConnector style={style.modal.skip} />
-        </CustomModal>
-      )
+      return <SkipModalConnector />
     }
     return null
   }

@@ -1,6 +1,7 @@
 import * as Constants from '../../constants/'
 import { hs, fontSize } from '../../util'
 const PrimaryButtonUpStyle = {
+  position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_UP,
   width: Constants.BUTTON_WIDTH_1,
   height: Constants.BUTTON_HEIGHT,
@@ -9,6 +10,14 @@ const PrimaryButtonUpStyle = {
   borderRadius: Constants.BUTTON_BORDER_RADIUS
 }
 const PrimaryButtonUpTextStyle = {
+  position: 'relative',
+  color: Constants.WHITE,
+  fontSize: Constants.BUTTON_TEXT_SIZE,
+  width: '100%',
+  textAlign: 'center'
+}
+const PrimaryButtonDownTextStyle = {
+  position: 'relative',
   color: Constants.WHITE,
   fontSize: Constants.BUTTON_TEXT_SIZE,
   width: '100%',
@@ -16,10 +25,17 @@ const PrimaryButtonUpTextStyle = {
 }
 
 const PrimaryButtonDownStyle = {
-  backgroundColor: Constants.BUTTON_PRIMARY_DOWN
+  position: 'relative',
+  backgroundColor: Constants.BUTTON_PRIMARY_DOWN,
+  width: Constants.BUTTON_WIDTH_1,
+  height: Constants.BUTTON_HEIGHT,
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderRadius: Constants.BUTTON_BORDER_RADIUS
 }
 
 const SecondaryButtonUpStyle = {
+  position: 'relative',
   backgroundColor: Constants.BUTTON_SECONDARY_UP,
   width: Constants.BUTTON_WIDTH_1,
   height: Constants.BUTTON_HEIGHT,
@@ -29,9 +45,23 @@ const SecondaryButtonUpStyle = {
 }
 
 const SecondaryButtonDownStyle = {
-  backgroundColor: Constants.BUTTON_SECONDARY_DOWN
+  position: 'relative',
+  backgroundColor: Constants.BUTTON_SECONDARY_DOWN,
+  width: Constants.BUTTON_WIDTH_1,
+  height: Constants.BUTTON_HEIGHT,
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderRadius: Constants.BUTTON_BORDER_RADIUS
 }
 const SecondaryButtonUpTextStyle = {
+  position: 'relative',
+  color: Constants.WHITE,
+  fontSize: Constants.BUTTON_TEXT_SIZE,
+  width: '100%',
+  textAlign: 'center'
+}
+const SecondaryButtonDownTextStyle = {
+  position: 'relative',
   color: Constants.WHITE,
   fontSize: Constants.BUTTON_TEXT_SIZE,
   width: '100%',
@@ -98,12 +128,32 @@ const TextOnlyButtonTextDownStyle = {
   textAlign: 'center'
 }
 
+const IconButtonStyle = {
+  container: {
+    width: 40,
+    height: 40,
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  icon: {
+    color: Constants.WHITE
+  },
+  iconPressed: {
+    color: Constants.GRAY_2
+  },
+  iconSize: 36,
+  underlayColor: Constants.TRANSPARENT
+}
+
+export { IconButtonStyle }
 export { PrimaryButtonUpStyle }
 export { PrimaryButtonUpTextStyle }
+export { PrimaryButtonDownTextStyle }
 export { PrimaryButtonDownStyle }
 export { SecondaryButtonUpStyle }
 export { SecondaryButtonUpTextStyle }
 export { SecondaryButtonDownStyle }
+export { SecondaryButtonDownTextStyle }
 export { TertiaryButtonUpStyle }
 export { TertiaryButtonTextUpStyle }
 export { TertiaryButtonDownStyle }

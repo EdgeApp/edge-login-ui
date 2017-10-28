@@ -4,10 +4,10 @@ import FAIcon from 'react-native-vector-icons/FontAwesome'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
-import * as Constants from '../../../../constants/indexConstants'
+import * as Constants from '../../../common/constants'
 
 /* type Props= {
-  style: any,
+  style: any, {color min}
   name: string,
   size: number,
   type: string
@@ -26,6 +26,7 @@ const Icon = ({ style, name, size, type }) => {
     case Constants.SIMPLE_ICONS:
       return <SimpleIcon style={style} name={name} size={size} />
   }
+  console.warn('No icon: Probably forgot the type ' + type + 'or ' + name + 'doesnt exist')
   return null
 }
 

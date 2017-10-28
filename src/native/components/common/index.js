@@ -16,4 +16,5 @@ export * from './WarningBox'
 export * from './IconButton'
 export * from './Icon'
 export * from './Gradient'
+export * from './Modal'
 
