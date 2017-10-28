@@ -51,7 +51,6 @@ class FormField extends Component {
       titleTextStyle
 
     } = this.props.style
-    console.log('stop')
     return (
       <Input
         label={this.props.label}

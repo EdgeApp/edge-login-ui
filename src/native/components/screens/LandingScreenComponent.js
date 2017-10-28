@@ -25,7 +25,7 @@ export default class LandingScreenComponent extends Component {
         <LogoImageHeader style={LandingScreenStyle.logoHeader} />
         <View style={LandingScreenStyle.featureBoxContent}>
           <View style={LandingScreenStyle.featureBoxDescription}>
-            <Text style={LandingScreenStyle.tagText}>{'The secure and say to use wallet for your blockchain assets and tokens'}</Text>
+            <Text style={LandingScreenStyle.tagText}>{'The secure and easy to use wallet for your blockchain assets and tokens'}</Text>
           </View>
 
         </View>

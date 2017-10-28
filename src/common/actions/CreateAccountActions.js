@@ -2,6 +2,8 @@ import * as Constants from '../constants'
 import * as WorkflowActions from './WorkflowActions'
 import { isASCII } from '../util'
 import { dispatchAction, dispatchActionWithData } from './'
+import passwordCheck from 'zxcvbn'
+import { sprintf } from 'sprintf-js'
 
 export function validatePin (data) {
   const pin = data.pin
@@ -59,7 +61,7 @@ export function checkUsernameForAvailabilty (data) {
 export function validateUsername (data) {
   return (dispatch, getState, imports) => {
     // TODO evaluate client side evaluations.
-    let error = data.length > 3
+    let error = data.length > 2
       ? null
       : Constants.USERNAME_3_CHARACTERS_ERROR // TODO: Localize string
     error = isASCII(data) ? error : Constants.USERNAME_ASCII_ERROR // TODO: localize
@@ -95,12 +97,29 @@ export function validatePassword (data) {
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     const passwordEval = context.checkPasswordRules(data)
+    const passwordCheckResult = passwordCheck(data)
+    let passwordCheckString: string
+
+    if (
+      passwordCheckResult &&
+      passwordCheckResult.crack_times_display &&
+      passwordCheckResult.crack_times_display.online_no_throttling_10_per_second) {
+      passwordCheckString = passwordCheckResult.crack_times_display.online_no_throttling_10_per_second
+    }
+
+    passwordCheckString = sprintf(Constants.IT_WOULD_TAKE_XX_TO_CRACK, passwordCheckString)
+    if (passwordCheckResult.score < 3) {
+      passwordCheckString += Constants.RECOMMEND_CHOOSING_A_STRONGER
+    }
+
     if (!passwordEval.passed) {
       error = Constants.PASSWORD_ERROR // TODO localize.
     }
-    var obj = {
+
+    const obj = {
       password: data,
       passwordStatus: passwordEval,
+      passwordCheckString,
       error: error
     }
     dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PASSWORD, obj))
