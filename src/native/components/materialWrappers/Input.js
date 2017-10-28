@@ -64,6 +64,7 @@ class Input extends Component {
         errorColor={errorColor}
         titleTextStyle={titleTextStyle}
         secureTextEntry={secureTextEntry}
+        autoCapitalize={this.props.autoCapitalize}
         returnKeyType={returnKeyType}
         onBlur={this.onBlur.bind(this)}
         onFocus={this.onFocus.bind(this)}
