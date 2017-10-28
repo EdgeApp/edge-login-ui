@@ -4,3 +4,5 @@ export const USERNAME_3_CHARACTERS_ERROR = 'Username must have at least 3 charac
 export const USERNAME_ASCII_ERROR = 'Username must only be ascii characters '
 export const USERNAME_EXISTS_ERROR = 'Username already exists'
 export const FOUR_DIGIT_PIN_ERROR = 'PIN must be four digits'
+export const IT_WOULD_TAKE_XX_TO_CRACK = 'It would take %s to crack your password'
+export const RECOMMEND_CHOOSING_A_STRONGER = '\nWe recommend choosing a stronger password'

@@ -60,7 +60,8 @@
     "socket.io-client": "~1.7.2",
     "sprintf-js": "^1.0.3",
     "superagent": "~2.1.0",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
