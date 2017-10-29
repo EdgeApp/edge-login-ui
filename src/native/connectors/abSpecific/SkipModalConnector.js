@@ -7,8 +7,8 @@ export const mapStateToProps = (state, ownProps) => {
   return {
     headerText: 'Are you sure you want to skip?',
     middleText: 'Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled.',
-    icon: Constants.CLOSE_ICON,
-    iconType: Constants.MATERIAL_ICONS,
+    icon: Constants.EXCLAMATION,
+    iconType: Constants.SIMPLE_ICONS,
     actionLabel: 'SKIP',
     cancelLabel: 'Cancel'
   }
