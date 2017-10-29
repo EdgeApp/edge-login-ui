@@ -162,7 +162,8 @@ const TextAndIconButtonStyle = {
   },
   textContainer: {
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-around'
   },
   iconContainer: {
     height: '100%',

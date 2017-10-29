@@ -62,7 +62,7 @@ class MyModal extends Component {
     </View> */
     return <View style={styles.modalHeaderIconWrapBottom}>
       <View style={styles.modalHeaderIconWrapTop}>
-        <Icon style={styles.iconStyle} icon={icon} size={styles.iconSize} type={iconType} />
+        <Icon style={styles.iconStyle} name={icon} size={styles.iconSize} type={iconType} />
       </View>
     </View>
   }

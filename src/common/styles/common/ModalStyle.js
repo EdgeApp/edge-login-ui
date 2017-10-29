@@ -62,7 +62,9 @@ const ModalStyle = {
     zIndex: 100,
     elevation: 100,
     height: 48,
-    width: 48
+    width: 48,
+    alignItems: 'center',
+    justifyContent: 'space-around'
   },
   closeIconButton: {
     ...Styles.IconButtonStyle,

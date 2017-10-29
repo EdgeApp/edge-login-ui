@@ -64,11 +64,14 @@ const NewAccountReviewScreenStyle = {
       zIndex: 100,
       elevation: 100,
       height: 28,
-      width: 28
+      width: 28,
+      alignItems: 'center',
+      justifyContent: 'space-around'
     },
     iconSize: 24,
     iconStyle: {
-      color: Constants.ACCENT_RED
+      color: Constants.ACCENT_RED,
+      backgroundColor: Constants.TRANSPARENT
     }
   },
   detailsContainer: {

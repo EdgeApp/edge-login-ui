@@ -66,9 +66,10 @@ class AccountInfoComponent extends Component {
   }
   renderTop (style) {
     const msg = this.state.collapsed ? 'Show account information' : 'Hide account information'
+    const icon = this.state.collapsed ? Constants.KEYBOARD_ARROW_DOWN : Constants.KEYBOARD_ARROW_UP
     return <View style={style.top}>
       <TextAndIconButton style={style.textIconButton}
-        icon={Constants.CLOSE_ICON}
+        icon={icon}
         iconType={Constants.MATERIAL_ICONS}
         onPress={this.onPress.bind(this)}
         title={msg} />
