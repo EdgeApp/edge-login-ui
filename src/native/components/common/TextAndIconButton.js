@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { View, Text, TouchableHighlight } from 'react-native'
-// import FAIcon from 'react-native-vector-icons/MaterialIcons'
+import FAIcon from 'react-native-vector-icons/MaterialIcons'
 
 /* type Props = {
   icon: string,
@@ -36,16 +36,16 @@ class TextAndIconButton extends Component /* <Props, State> */ {
   // TODO: allen- test with icon on main app. - not working on sample.
   renderIcon (iconStyle, iconPressedStyle, iconSize) {
     try {
-      return <Text style={[iconStyle, this.state.pressed && iconPressedStyle]}>
+      /* return <Text style={[iconStyle, this.state.pressed && iconPressedStyle]}>
         {this.props.icon}
-      </Text>
-      /* return (
+      </Text> */
+      return (
         <FAIcon
           style={[iconStyle, this.state.pressed && iconPressedStyle]}
           name={this.props.icon}
           size={iconSize}
         />
-      ) */
+      )
     } catch (e) {
       console.log('Error')
     }
