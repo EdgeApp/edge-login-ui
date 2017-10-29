@@ -1,5 +1,5 @@
 import * as Styles from '../'
-// import * as Colors from '../../../common/constants/Colors'
+import * as Constants from '../../../common/constants/'
 import {
   MultiLineTextCheckBox
 } from '../../../common/styles/common/CheckboxStyles'
@@ -20,22 +20,23 @@ const TermsAndConditionsScreenStyle = {
     fontSize: fontSize(14),
     textAlign: 'center'
   },
+  instructionsSubShim: {
+    height: 20
+  },
   agreeText: {
     fontSize: fontSize(11),
-    textAlign: 'center',
-    paddingBottom: 20
+    textAlign: 'center'
   },
   midSection: {
     height: vs(250)
   },
   buttonContainer: {
     height: vs(100),
-    alignItems: 'center',
-    justifyContent: 'space-around'
+    alignItems: 'center'
   },
   checkboxContainer: {
     width: '80%',
-    flex: 1
+    marginBottom: 20
   },
   checkboxes: MultiLineTextCheckBox,
   nextButton: {
@@ -43,6 +44,14 @@ const TermsAndConditionsScreenStyle = {
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
     downStyle: Styles.PrimaryButtonDownStyle
+  },
+  termsButton: {
+    upStyle: Styles.TextOnlyButtonUpStyle,
+    upTextStyle: { ...Styles.TextOnlyButtonTextUpStyle,
+      fontSize: Constants.DEFAULT_FONT_TEXT_SIZE },
+    downTextStyle: {...Styles.TextOnlyButtonDownStyle,
+      fontSize: Constants.DEFAULT_FONT_TEXT_SIZE },
+    downStyle: Styles.TextOnlyButtonTextDownStyle
   },
   inputBox: {
     ...Styles.FormFieldStyle

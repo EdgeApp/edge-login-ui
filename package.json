@@ -51,6 +51,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.4.1",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-material-textfield": "git+ssh://git@github.com:ahujsak/react-native-material-textfield.git#addOnFinish",
+    "react-native-modal": "^4.1.0",
     "react-native-vector-icons": "^4.4.2",
     "react-redux": "~4.4.5",
     "react-router": "~2.6.0",

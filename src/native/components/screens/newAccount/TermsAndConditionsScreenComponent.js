@@ -36,13 +36,20 @@ export default class TermsAndConditionsScreenComponent extends Component {
         </View>
       )
     }
-    return null
+    return <View style={style.instructionsSubShim} />
   }
   renderButton (style) {
     if (this.state.totalChecks === 3) {
       return (
         <View style={style.buttonContainer}>
-          <Text style={style.agreeText}>I have read, understood, and agree to the Terms of Use</Text>
+          <Text style={style.agreeText}>I have read, understood, and agree to the</Text>
+          <Button
+            onPress={this.onNextPress.bind(this)}
+            downStyle={style.termsButton.downStyle}
+            downTextStyle={style.termsButton.downTextStyle}
+            upStyle={style.termsButton.upStyle}
+            upTextStyle={style.termsButton.upTextStyle}
+            label={'Terms of Use'} />
           <Button
             onPress={this.onNextPress.bind(this)}
             downStyle={style.nextButton.downStyle}
