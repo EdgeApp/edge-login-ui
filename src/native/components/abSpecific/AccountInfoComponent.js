@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableWithoutFeedback } from 'react-native'
-import * as Colors from '../../../common/constants/Colors'
+import { View, Text } from 'react-native'
+import {TextAndIconButton} from '../common'
+import * as Constants from '../../../common/constants/'
 
 /* type Props = {
   username?: string,
@@ -8,7 +9,9 @@ import * as Colors from '../../../common/constants/Colors'
   pin: string.isRequired,
   passwordMessage?: string
 } */
-
+/* <TouchableWithoutFeedback onPress={this.onPress.bind(this)}>
+{this.renderTop(Style)}
+</TouchableWithoutFeedback> */
 class AccountInfoComponent extends Component {
   componentWillMount () {
     this.setState({
@@ -62,11 +65,14 @@ class AccountInfoComponent extends Component {
     return <View style={style.bottom} />
   }
   renderTop (style) {
-    let msg = 'Hide account information'
-    if (this.state.collapsed) {
-      msg = 'Show account information'
-    }
-    return <View style={style.top}><Text>{msg}</Text></View>
+    const msg = this.state.collapsed ? 'Show account information' : 'Hide account information'
+    return <View style={style.top}>
+      <TextAndIconButton style={style.textIconButton}
+        icon={Constants.CLOSE_ICON}
+        iconType={Constants.MATERIAL_ICONS}
+        onPress={this.onPress.bind(this)}
+        title={msg} />
+    </View>
   }
   onPress () {
     this.setState({
@@ -82,13 +88,11 @@ class AccountInfoComponent extends Component {
           !this.state.collapsed && {
             ...Style.container,
             borderWidth: 1,
-            borderColor: Colors.GRAY_3
+            borderColor: Constants.GRAY_3
           }
         ]}
       >
-        <TouchableWithoutFeedback onPress={this.onPress.bind(this)}>
-          {this.renderTop(Style)}
-        </TouchableWithoutFeedback>
+        {this.renderTop(Style)}
         {this.renderBottom(Style)}
       </View>
     )

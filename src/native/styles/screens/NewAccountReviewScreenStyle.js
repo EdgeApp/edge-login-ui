@@ -1,6 +1,6 @@
 import * as Styles from '../'
 import { vs, fontSize } from '../../../common/util'
-import * as Colors from '../../../common/constants/Colors'
+import * as Constants from '../../../common/constants/'
 
 const NewAccountReviewScreenStyle = {
   screen: { ...Styles.ScreenStyle },
@@ -28,14 +28,15 @@ const NewAccountReviewScreenStyle = {
   warningBox: {
     container: {
       flex: 1,
-      width: '80%'
+      width: '80%',
+      flexDirection: 'column-reverse'
     },
     top: {
       flex: 1
     },
     bottom: {
       flex: 9,
-      borderColor: Colors.ACCENT_RED,
+      borderColor: Constants.ACCENT_RED,
       borderWidth: 1,
       padding: 5,
       alignItems: 'center',
@@ -44,6 +45,30 @@ const NewAccountReviewScreenStyle = {
     text: {
       fontSize: fontSize(10),
       textAlign: 'center'
+    },
+    iconWrapBottom: {
+      position: 'relative',
+      left: '42%',
+      top: -8,
+      borderRadius: 27,
+      backgroundColor: Constants.ACCENT_RED,
+      height: 30,
+      width: 30
+    },
+    iconWrapTop: {
+      position: 'relative',
+      top: 1,
+      left: 1,
+      borderRadius: 27,
+      backgroundColor: Constants.WHITE,
+      zIndex: 100,
+      elevation: 100,
+      height: 28,
+      width: 28
+    },
+    iconSize: 24,
+    iconStyle: {
+      color: Constants.ACCENT_RED
     }
   },
   detailsContainer: {
@@ -55,11 +80,24 @@ const NewAccountReviewScreenStyle = {
       flex: 1,
       width: '100%'
     },
+    textIconButton: {...Styles.TextAndIconButtonStyle,
+      text: {...Styles.TextAndIconButtonStyle.text,
+        fontSize: Constants.DEFAULT_FONT_TEXT_SIZE + 2,
+        color: Constants.BLACK
+      },
+      textPressed: {...Styles.TextAndIconButtonStyle.text,
+        fontSize: Constants.DEFAULT_FONT_TEXT_SIZE + 2,
+        color: Constants.GRAY_2
+      },
+      icon: {...Styles.TextAndIconButtonStyle.icon,
+        color: Constants.BLACK
+      }
+    },
     top: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'space-around',
-      backgroundColor: Colors.GRAY_3
+      backgroundColor: Constants.GRAY_3
     },
     bottom: {
       flex: 6,
@@ -76,11 +114,11 @@ const NewAccountReviewScreenStyle = {
     },
     accountText: {
       fontSize: fontSize(12),
-      color: Colors.PRIMARY
+      color: Constants.PRIMARY
     },
     bottomWarningText: {
       fontSize: fontSize(10),
-      color: Colors.ACCENT_RED
+      color: Constants.ACCENT_RED
     }
   },
   nextButton: {
