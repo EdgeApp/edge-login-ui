@@ -156,15 +156,14 @@ export default class LandingScreenComponent extends Component {
     ))
   }
   onDelete (user) {
-    // console.log('DELETE THIS USER ' + user)
-    // this.props.deleteUserFromDevice(user)
+    //
+    // this.props.deleteUserFromDevice(user) TODO
     this.setState({
       username: user
     })
     this.props.launchDeleteModal()
   }
   renderButtons (style) {
-    console.log(style)
     return (
       <View style={style.buttonsBox}>
         <View style={style.shimTiny} />
