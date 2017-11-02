@@ -30,35 +30,37 @@ const ModalStyle = {
     left: screenDimensions.width / 8,
     width: screenDimensions.width * 3 / 4,
     borderRadius: 3,
+    borderWidth: 2,
+    borderColor: Constants.GRAY_2,
     alignItems: 'stretch',
     position: 'absolute',
     // height: (screenDimensions.height) / 3,
     backgroundColor: Constants.WHITE,
     padding: 15,
-    paddingTop: 25,
+    paddingTop: 5,
     flexDirection: 'column',
     justifyContent: 'flex-start'
   },
   exitRow: {
     alignItems: 'flex-end',
-    position: 'relative',
-    zIndex: 200
+    position: 'relative'
   },
   modalHeaderIconWrapBottom: {
     position: 'absolute',
     left: screenDimensions.width / 2 - 27,
     top: screenDimensions.height / 8 - 28,
     borderRadius: 27,
-    backgroundColor: Constants.WHITE,
+    backgroundColor: Constants.PRIMARY,
     height: 54,
-    width: 54
+    width: 54,
+    zIndex: 50
   },
   modalHeaderIconWrapTop: {
     position: 'relative',
     top: 3,
     left: 3,
     borderRadius: 27,
-    // backgroundColor: Constants.WHITE,
+    backgroundColor: Constants.WHITE,
     zIndex: 100,
     elevation: 100,
     height: 48,
@@ -72,13 +74,10 @@ const ModalStyle = {
     icon: { ...Styles.IconButtonStyle.icon, color: Constants.GRAY_2 },
     iconPressed: { ...Styles.IconButtonStyle.icon, color: Constants.GRAY_1 }
   },
-  iconSize: 36,
+  iconSize: 30,
   iconStyle: {
-    position: 'relative',
     color: Constants.PRIMARY,
-    backgroundColor: Constants.TRANSPARENT,
-    width: 48,
-    height: 48
+    backgroundColor: Constants.TRANSPARENT
   },
   modalBody: {
     position: 'relative',
@@ -113,7 +112,7 @@ const ModalStyle = {
   },
   buttonsWrap: {
     position: 'relative',
-    marginTop: 4,
+    marginTop: 20,
     flex: 1,
     height: Constants.BUTTON_HEIGHT,
     width: '100%',

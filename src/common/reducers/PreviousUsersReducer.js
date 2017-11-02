@@ -11,7 +11,7 @@ export default function (state = null, action) {
       const username = action.data
       const num = username.length - 1
       const char = username.charAt(num)
-      var tempArray = []
+      const tempArray = []
       if (state.filteredUsernameList) {
         for (let i = 0; i < state.filteredUsernameList.length; i++) {
           const item = state.filteredUsernameList[i]

@@ -169,11 +169,3 @@ export function agreeToConditions (account) {
   }
 }
 
-export function skipPassword (data) {
-  return (dispatch, getState, imports) => {
-    console.log('Skip Password. ')
-    // let callback = imports.callback
-    // callback(data)
-    // dispatch(WorkflowActions.nextScreen())
-  }
-}

@@ -6,7 +6,6 @@ class PasswordComponent extends Component {
     secureTextEntry: false
   } */
   render () {
-    console.log('test')
     const {
       container,
       baseColor,
