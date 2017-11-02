@@ -1,53 +1,55 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { Button, CustomModal } from '../../common'
+import { Button } from '../../common'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import CreateFourDigitPinConnector
   from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
-import ChangePasswordModalConnector
-  from '../../../connectors/abSpecific/ChangePasswordModalConnector'
+import ChangePinModalConnector
+  from '../../../connectors/abSpecific/ChangePinModalConnector'
 // import * as Constants from '../../../common/constants'
 
 export default class ChangeAccountPinScreenComponent extends Component {
+  constructor (props) {
+    super(props)
+    this.renderHeader = (style) => {
+      if (this.props.showHeader) {
+        return <HeaderConnector style={style.header} />
+      }
+      return null
+    }
+
+    this.renderModal = (style) => {
+      if (this.props.showModal) {
+        return (
+          <ChangePinModalConnector
+            style={style.modal.skip}
+          />
+        )
+      }
+      return null
+    }
+    this.onNextPress = () => {
+      this.setState({
+        isProcessing: true
+      })
+      // validation.
+      // is there no error message ,
+      if (this.props.pin.length !== 4) {
+        return
+      }
+      this.props.changePin(this.props.pin)
+    }
+  }
   componentWillMount () {
     this.setState({
       username: '',
       pin: '',
       isProcessing: false,
-      focusOn: 'pin',
-      showModal: false
+      focusOn: 'pin'
     })
   }
-  componentWillReceiveProps (nextProps) {
-    this.setState({
-      showModal: nextProps.workflow.showModal
-    })
-  }
-  renderHeader (style) {
-    if (this.props.showHeader) {
-      return <HeaderConnector style={style.header} />
-    }
-    return null
-  }
-  onCloseModal () {
-    this.setState({
-      showModal: false
-    })
-  }
-  renderModal (style) {
-    if (this.state.showModal) {
-      return (
-        <CustomModal style={style.modal}>
-          <ChangePasswordModalConnector
-            style={style.modal.skip}
-            onClick={this.onCloseModal.bind(this)}
-          />
-        </CustomModal>
-      )
-    }
-    return null
-  }
+
   render () {
     const { SetAccountPinScreenStyle } = this.props.styles
     return (
@@ -66,7 +68,7 @@ export default class ChangeAccountPinScreenComponent extends Component {
           </View>
           <View style={SetAccountPinScreenStyle.row3}>
             <Button
-              onPress={this.onNextPress.bind(this)}
+              onPress={this.onNextPress}
               downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
               downTextStyle={SetAccountPinScreenStyle.nextButton.downTextStyle}
               upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
@@ -81,16 +83,5 @@ export default class ChangeAccountPinScreenComponent extends Component {
         {this.renderModal(SetAccountPinScreenStyle)}
       </View>
     )
-  }
-  onNextPress () {
-    this.setState({
-      isProcessing: true
-    })
-    // validation.
-    // is there no error message ,
-    if (this.props.pin.length !== 4) {
-      return
-    }
-    this.props.changePin(this.props.pin)
   }
 }

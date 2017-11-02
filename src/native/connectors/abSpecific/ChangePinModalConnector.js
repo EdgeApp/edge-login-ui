@@ -5,9 +5,9 @@ import * as actions from '../../../common/actions/index'
 export const mapStateToProps = (state, ownProps) => {
   return {
     style: ownProps.style,
-    headerText: 'Password Changed',
-    headerSubtext: 'Password Successfully Changed',
-    middleText: 'DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!',
+    headerText: 'PIN Changed',
+    headerSubtext: 'Pin Successfully Changed',
+    middleText: '',
     icon: Constants.EXCLAMATION,
     iconType: Constants.SIMPLE_ICONS,
     actionLabel: 'OK',
