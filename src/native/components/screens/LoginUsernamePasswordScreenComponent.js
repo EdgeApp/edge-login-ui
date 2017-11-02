@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { View, Keyboard } from 'react-native'
+import { View, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import {
   BackgroundImage,
   Button,
-  FormField,
-  CustomModal
+  FormField
 } from '../../components/common'
 /* import UsernameDropConnector
   from '../../connectors/componentConnectors/UsernameDropConnector' */
@@ -79,27 +78,32 @@ export default class LandingScreenComponent extends Component {
       return null
     }
     return (
-      <View style={LoginPasswordScreenStyle.featureBox}>
-        <LogoImageHeader style={LoginPasswordScreenStyle.logoHeader} />
-        <View style={LoginPasswordScreenStyle.shimSmall} />
-        {this.renderUsername(LoginPasswordScreenStyle)}
-        <View style={LoginPasswordScreenStyle.shimSmall} />
-        <FormField
-          style={LoginPasswordScreenStyle.input2}
-          onChangeText={this.updatePassword.bind(this)}
-          value={this.state.password}
-          label={'Password'}
-          error={this.props.error}
-          secureTextEntry
-          returnKeyType={'go'}
-          forceFocus={this.state.focusSecond}
-          onFocus={this.onfocusTwo.bind(this)}
-          onFinish={this.onStartLogin.bind(this)}
-        />
-        <View style={LoginPasswordScreenStyle.shim} />
-        {this.renderButtons(LoginPasswordScreenStyle)}
-        {this.renderModal(LoginPasswordScreenStyle)}
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View
+          style={LoginPasswordScreenStyle.featureBox}
+          onPress={Keyboard.dismiss}
+        >
+          <LogoImageHeader style={LoginPasswordScreenStyle.logoHeader} />
+          <View style={LoginPasswordScreenStyle.shimSmall} />
+          {this.renderUsername(LoginPasswordScreenStyle)}
+          <View style={LoginPasswordScreenStyle.shimSmall} />
+          <FormField
+            style={LoginPasswordScreenStyle.input2}
+            onChangeText={this.updatePassword.bind(this)}
+            value={this.state.password}
+            label={'Password'}
+            error={this.props.error}
+            secureTextEntry
+            returnKeyType={'go'}
+            forceFocus={this.state.focusSecond}
+            onFocus={this.onfocusTwo.bind(this)}
+            onFinish={this.onStartLogin.bind(this)}
+          />
+          <View style={LoginPasswordScreenStyle.shim} />
+          {this.renderButtons(LoginPasswordScreenStyle)}
+          {this.renderModal(LoginPasswordScreenStyle)}
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
   renderUsername (styles) {
@@ -201,12 +205,10 @@ export default class LandingScreenComponent extends Component {
   renderModal (style) {
     if (this.props.showModal) {
       return (
-        <CustomModal style={style.modal}>
-          <DeleteUserConnector
-            style={style.modal.skip}
-            username={this.state.username}
-          />
-        </CustomModal>
+        <DeleteUserConnector
+          style={style.modal.skip}
+          username={this.state.username}
+        />
       )
     }
     return null
