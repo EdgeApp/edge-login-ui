@@ -5,7 +5,7 @@ import { ImageHeaderComponent } from '../../abSpecific'
 import * as Assets from '../../../assets'
 // import * as Constants from '../../../common/constants'
 
-export default class LandingScreenComponent extends Component {
+export default class NewAccountWelcomeScreenComponent extends Component {
   render () {
     const { NewAccountWelcomeScreenStyle } = this.props.styles
     return (

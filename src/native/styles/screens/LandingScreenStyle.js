@@ -7,6 +7,12 @@ const LandingScreenStyle = {
     ...Styles.BackgroundScreenImageStyle,
     alignItems: 'center'
   },
+  inner: {
+    position: 'relative',
+    flex: 1,
+    width: '100%',
+    height: '100%'
+  },
   featureBox: {
     position: 'relative',
     top: vs(71),

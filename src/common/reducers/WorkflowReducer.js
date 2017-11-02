@@ -5,6 +5,7 @@ const initialState = {
   currentKey: 'firstLoadWF',
   showModal: false,
   modalView: null,
+  betaModal: true,
   firstLoadWF: {
     scenes: 1,
     details: [{ back: false, skip: false, title: 'firstLoad', subTitle: '' }]
@@ -92,6 +93,8 @@ export default function (state = initialState, action) {
       return { ...state, showModal: true, modalView: action.data }
     case Constants.WORKFLOW_CANCEL_MODAL:
       return { ...state, showModal: false, modalView: null }
+    case Constants.WORKFLOW_CANCEL_BETA_MODAL:
+      return {...state, betaModal: false}
     default:
       return state
   }

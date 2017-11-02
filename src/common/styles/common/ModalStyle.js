@@ -20,11 +20,6 @@ const ModalStyle = {
     alignItems: 'center',
     backgroundColor: Constants.MODAL_BOX
   },
-  /* margins: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 20
-  }, */
   modalBox: {
     top: screenDimensions.height / 8,
     left: screenDimensions.width / 8,
@@ -43,7 +38,8 @@ const ModalStyle = {
   },
   exitRow: {
     alignItems: 'flex-end',
-    position: 'relative'
+    position: 'relative',
+    minHeight: 20
   },
   modalHeaderIconWrapBottom: {
     position: 'absolute',
