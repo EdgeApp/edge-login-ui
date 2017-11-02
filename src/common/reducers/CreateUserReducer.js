@@ -16,7 +16,8 @@ const initialState = {
   createErrorMessage: null,
   loginPasswordErrorMessage: null,
   loginPinErrorMessage: null,
-  accountObject: null
+  accountObject: null,
+  showModal: false
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -45,6 +46,10 @@ export default function (state = initialState, action) {
       }
     case Constants.AUTH_UPDATE_PIN:
       return { ...state, loginPin: action.data }
+    case Constants.LAUNCH_NOTIFICATION_MODAL:
+      return { ...state, showModal: true }
+    case Constants.CLOSE_NOTIFICATION_MODAL:
+      return { ...state, showModal: false }
     case Constants.AUTH_UPDATE_CONFIRM_PASSWORD:
       return {
         ...state,

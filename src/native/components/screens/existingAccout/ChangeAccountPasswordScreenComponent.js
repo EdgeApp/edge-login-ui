@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
-import { Button, CustomModal } from '../../common'
+import { Button } from '../../common'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
 import PasswordConnector
@@ -19,25 +19,97 @@ import ChangePasswordModalConnector
 } */
 
 export default class ChangeAccountPasswordScreenComponent extends Component {
+  constructor (props) {
+    super(props)
+    this.onSetNextFocus = () => {
+      this.setState({
+        focusFirst: false,
+        focusSecond: true
+      })
+    }
+
+    this.onNextPress = () => {
+      this.setState({
+        isProcessing: true
+      })
+      this.props.changePassword(this.props.password)
+    }
+    this.renderHeader = (style) => {
+      if (this.props.showHeader) {
+        return <HeaderConnector style={style.header} />
+      }
+      return null
+    }
+    this.renderInterior = (styles) => {
+      return (
+        <View style={styles.innerView}>
+          <PasswordConnector
+            style={styles.inputBox}
+            autoFocus={this.state.focusFirst}
+            label={'New Password'}
+            onFinish={this.onSetNextFocus}
+          />
+          <View style={styles.inputShim} />
+          <PasswordConfirmConnector
+            style={styles.inputBox}
+            label={'Re-enter New Password'}
+            autoFocus={this.state.focusSecond}
+            onFinish={this.onNextPress}
+          />
+          <View style={styles.inputShim} />
+          <Button
+            onPress={this.onNextPress}
+            downStyle={styles.nextButton.downStyle}
+            downTextStyle={styles.nextButton.downTextStyle}
+            upStyle={styles.nextButton.upStyle}
+            upTextStyle={styles.nextButton.upTextStyle}
+            label={'DONE'}
+            isThinking={this.state.isProcessing}
+            doesThink
+          />
+        </View>
+      )
+    }
+
+    this.renderMain = (styles) => {
+      if (this.state.focusSecond) {
+        return (
+          <KeyboardAvoidingView
+            style={styles.pageContainer}
+            contentContainerStyle={styles.pageContainer}
+            behavior={'position'}
+            keyboardVerticalOffset={-150}
+          >
+            {this.renderInterior(styles)}
+          </KeyboardAvoidingView>
+        )
+      }
+      return (
+        <View style={styles.pageContainer}>
+          {this.renderInterior(styles)}
+        </View>
+      )
+    }
+
+    this.renderModal = (style) => {
+      if (this.props.showModal) {
+        return (
+          <ChangePasswordModalConnector
+            style={style.modal.skip}
+          />
+        )
+      }
+      return null
+    }
+  }
   componentWillMount () {
     this.setState({
       isProcessing: false,
       focusFirst: true,
-      focusSecond: false,
-      showModal: false
+      focusSecond: false
     })
   }
-  componentWillReceiveProps (nextProps) {
-    this.setState({
-      showModal: nextProps.workflow.showModal
-    })
-  }
-  renderHeader (style) {
-    if (this.props.showHeader) {
-      return <HeaderConnector style={style.header} />
-    }
-    return null
-  }
+
   render () {
     const { NewAccountPasswordScreenStyle } = this.props.styles
     return (
@@ -47,101 +119,5 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
         {this.renderModal(NewAccountPasswordScreenStyle)}
       </View>
     )
-  }
-  onCloseModal () {
-    this.setState({
-      showModal: false
-    })
-  }
-  renderMain (styles) {
-    if (this.state.focusSecond) {
-      return (
-        <KeyboardAvoidingView
-          style={styles.pageContainer}
-          contentContainerStyle={styles.pageContainer}
-          behavior={'position'}
-          keyboardVerticalOffset={-150}
-        >
-          {this.renderInterior(styles)}
-        </KeyboardAvoidingView>
-      )
-    }
-    return (
-      <View style={styles.pageContainer}>
-        {this.renderInterior(styles)}
-      </View>
-    )
-  }
-  renderInterior (styles) {
-    return (
-      <View style={styles.innerView}>
-        <PasswordConnector
-          style={styles.inputBox}
-          autoFocus={this.state.focusFirst}
-          label={'New Password'}
-          onFinish={this.onSetNextFocus.bind(this)}
-        />
-        <View style={styles.inputShim} />
-        <PasswordConfirmConnector
-          style={styles.inputBox}
-          label={'Re-enter New Password'}
-          autoFocus={this.state.focusSecond}
-          onFinish={this.onNextPress.bind(this)}
-        />
-        <View style={styles.inputShim} />
-        <Button
-          onPress={this.onNextPress.bind(this)}
-          downStyle={styles.nextButton.downStyle}
-          downTextStyle={styles.nextButton.downTextStyle}
-          upStyle={styles.nextButton.upStyle}
-          upTextStyle={styles.nextButton.upTextStyle}
-          label={'DONE'}
-          isThinking={this.state.isProcessing}
-          doesThink
-        />
-      </View>
-    )
-  }
-  renderModal (style) {
-    if (this.state.showModal) {
-      return (
-        <CustomModal style={style.modal}>
-          <ChangePasswordModalConnector
-            style={style.modal.skip}
-            onClick={this.onCloseModal.bind(this)}
-          />
-        </CustomModal>
-      )
-    }
-    return null
-  }
-  onSetNextFocus () {
-    this.setState({
-      focusFirst: false,
-      focusSecond: true
-    })
-  }
-  onNextPress () {
-    this.setState({
-      isProcessing: true
-    })
-    this.props.changePassword(this.props.password)
-
-    /* if (!this.props.passwordStatus) {
-      // TODO Skip component
-      this.setState({
-        isProcessing: false
-      })
-      return
-    }
-    if (this.props.createPasswordErrorMessage) {
-      console.log('Error ' + this.props.createPasswordErrorMessage)
-      this.setState({
-        isProcessing: false
-      })
-      return
-    }
-    console.log(this.props.createPasswordErrorMessage)
-    this.props.nextScreen() */
   }
 }

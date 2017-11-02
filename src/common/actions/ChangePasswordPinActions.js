@@ -7,7 +7,7 @@ export function changePassword (data) {
     accountObject
       .changePassword(data)
       .then(response => {
-        dispatch(dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL))
+        dispatch(dispatchAction(Constants.LAUNCH_NOTIFICATION_MODAL))
       })
       .catch(e => {
         console.log('CHANGE PASSWOD ERROR')
@@ -22,7 +22,7 @@ export function changePIN (data) {
     accountObject
       .changePIN(data)
       .then(response => {
-        dispatch(dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL))
+        dispatch(dispatchAction(Constants.LAUNCH_NOTIFICATION_MODAL))
       })
       .catch(e => {
         console.log('CHANGE PIN ERROR')

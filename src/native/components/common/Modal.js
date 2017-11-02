@@ -28,7 +28,7 @@ cancel()
 } */
 class MyModal extends Component {
   /* static defaultProps = {
-    showcancelButton: true
+    showcancelButton: true #############
   } */
   constructor (props) {
     super(props)

@@ -47,3 +47,7 @@ export const AUTH_UPDATE_CONFIRM_PASSWORD = 'authUpdatePasswordConfirm'
 export const AUTH_UPDATE_PIN = 'authUpdatePin'
 
 export const DELETE_USER_FROM_DEVICE = 'deleteUserFromDevice'
+
+// Change Password Pin Actions =
+export const LAUNCH_NOTIFICATION_MODAL = 'launchNotificationmodal'
+export const CLOSE_NOTIFICATION_MODAL = 'closeNotificationmodal'
