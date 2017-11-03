@@ -55,6 +55,9 @@ export default class LandingScreenComponent extends Component {
     )
   }
   onNextPress () {
+    if (this.props.usernameErrorMessage) {
+      return
+    }
     this.setState({
       isProcessing: true
     })
