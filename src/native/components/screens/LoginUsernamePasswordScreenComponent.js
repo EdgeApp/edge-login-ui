@@ -3,7 +3,8 @@ import { View, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import {
   BackgroundImage,
   Button,
-  FormField
+  FormField,
+  FormFieldWithDropComponent
 } from '../../components/common'
 /* import UsernameDropConnector
   from '../../connectors/componentConnectors/UsernameDropConnector' */
@@ -21,10 +22,19 @@ import {
 
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
-    this.keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      this.noFocus.bind(this)
-    )
+    const { LoginPasswordScreenStyle } = this.props.styles
+    this.style = LoginPasswordScreenStyle
+    this.keyboardDidHideListener = null
+    this.noFocus = () => {
+      Keyboard.dismiss()
+      this.setState({
+        focusFirst: false,
+        focusSecond: false,
+        offset: Offsets.LOGIN_SCREEN_NO_OFFSET
+      })
+    }
+    setTimeout(this.setListener, 2000, this.noFocus)
+
     this.setState({
       username: '',
       password: '',
@@ -34,10 +44,23 @@ export default class LandingScreenComponent extends Component {
       offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN
     })
   }
+  setListener (callback) {
+    /* this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      callback) */
+  }
   componentWillUnmount () {
-    this.keyboardDidHideListener.remove()
+    // this.keyboardDidHideListener.remove()
   }
   componentDidMount () {
+    this.setState({
+      username: '',
+      password: '',
+      loggingIn: false,
+      focusFirst: true,
+      focusSecond: false,
+      offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN
+    })
     if (this.props.previousUsers.lastUser) {
       this.props.launchUserLoginWithTouchId({
         username: this.props.previousUsers.lastUser.username
@@ -50,45 +73,47 @@ export default class LandingScreenComponent extends Component {
         loggingIn: false
       })
     }
+    /* if (!this.keyboardDidHideListener) {
+      this.keyboardDidHideListener = Keyboard.addListener(
+        'keyboardDidHide',
+        this.noFocus.bind(this)
+      )
+    } */
   }
   render () {
-    const { LoginPasswordScreenStyle } = this.props.styles
     return (
       <KeyboardAwareScrollView
-        style={LoginPasswordScreenStyle.container}
+        style={this.style.container}
         keyboardShouldPersistTaps={Constants.ALWAYS}
-        contentContainerStyle={LoginPasswordScreenStyle.mainScrollView}
+        contentContainerStyle={this.style.mainScrollView}
       >
         <BackgroundImage
           src={Assets.LOGIN_BACKGROUND}
-          style={LoginPasswordScreenStyle.backgroundImage}
+          style={this.style.backgroundImage}
           content={this.renderOverImage()}
+          callback={this.noFocus}
         />
       </KeyboardAwareScrollView>
     )
   }
   renderOverImage () {
-    const { LoginPasswordScreenStyle } = this.props.styles
     if (this.props.loginSuccess) {
       /* return (
-        <View style={LoginPasswordScreenStyle.featureBox}>
+        <View style={style.featureBox}>
           <Text>LOGIN SUCCESS</Text>
         </View>
       ) */
       return null
     }
     return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View
-          style={LoginPasswordScreenStyle.featureBox}
-          onPress={Keyboard.dismiss}
-        >
-          <LogoImageHeader style={LoginPasswordScreenStyle.logoHeader} />
-          <View style={LoginPasswordScreenStyle.shimSmall} />
-          {this.renderUsername(LoginPasswordScreenStyle)}
-          <View style={LoginPasswordScreenStyle.shimSmall} />
+      <TouchableWithoutFeedback onPress={this.noFocus}>
+        <View style={this.style.featureBox}>
+          <LogoImageHeader style={this.style.logoHeader} />
+          <View style={this.style.shimSmall} />
+          {this.renderUsername(this.style)}
+          <View style={this.style.shimSmall} />
           <FormField
-            style={LoginPasswordScreenStyle.input2}
+            style={this.style.input2}
             onChangeText={this.updatePassword.bind(this)}
             value={this.state.password}
             label={'Password'}
@@ -99,18 +124,18 @@ export default class LandingScreenComponent extends Component {
             onFocus={this.onfocusTwo.bind(this)}
             onFinish={this.onStartLogin.bind(this)}
           />
-          <View style={LoginPasswordScreenStyle.shim} />
-          {this.renderButtons(LoginPasswordScreenStyle)}
-          {this.renderModal(LoginPasswordScreenStyle)}
+          <View style={this.style.shim} />
+          {this.renderButtons(this.style)}
+          {this.renderModal(this.style)}
         </View>
       </TouchableWithoutFeedback>
     )
   }
   renderUsername (styles) {
-    if (this.props.previousUsers.length < 1) {
+    if (this.props.previousUsers.length > 1) {
       return (
-        <FormField
-          style={styles.input2}
+        <FormFieldWithDropComponent
+          style={styles.inputWithDrop}
           onChangeText={this.updateUsername.bind(this)}
           value={this.props.username}
           label={'Username'}
@@ -118,7 +143,10 @@ export default class LandingScreenComponent extends Component {
           autoFocus={this.state.focusFirst}
           forceFocus={this.state.focusFirst}
           onFocus={this.onfocusOne.bind(this)}
+          isFocused={this.state.focusFirst}
           onFinish={this.onSetNextFocus.bind(this)}
+          renderRow={this.renderRow.bind(this)}
+          data={this.props.filteredUsernameList}
         />
       )
     }
@@ -135,29 +163,17 @@ export default class LandingScreenComponent extends Component {
         onFinish={this.onSetNextFocus.bind(this)}
       />
     )
-    /* return (
-      <UsernameDropConnector
-        style={styles.inputWithDrop}
-        onChangeText={this.updateUsername.bind(this)}
-        autoFocus={this.state.focusFirst}
-        forceFocus={this.state.focusFirst}
-        onFocus={this.onfocusOne.bind(this)}
-        onFinish={this.onSetNextFocus.bind(this)}
-        getListItemsFunction={this.renderItems.bind(this)}
-        dataList={this.props.usernameList}
-      />
-    ) */
   }
-  renderItems (style, dataList) {
-    return dataList.map(Item => (
+  renderRow (data) {
+    return (
       <UserListItem
-        key={'key ' + Item}
-        data={Item}
-        style={style}
+        key={data.index}
+        data={data.item}
+        style={this.style.inputWithDrop.listItem}
         onClick={this.selectUser.bind(this)}
         onDelete={this.onDelete.bind(this)}
       />
-    ))
+    )
   }
   onDelete (user) {
     //
@@ -230,13 +246,7 @@ export default class LandingScreenComponent extends Component {
       offset: Offsets.PASSWORD_OFFSET_LOGIN_SCREEN
     })
   }
-  noFocus () {
-    this.setState({
-      focusFirst: false,
-      focusSecond: false,
-      offset: Offsets.LOGIN_SCREEN_NO_OFFSET
-    })
-  }
+
   onSetNextFocus () {
     this.setState({
       focusFirst: false,

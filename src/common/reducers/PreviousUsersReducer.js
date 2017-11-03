@@ -1,6 +1,6 @@
 import * as Constants from '../../common/constants'
 
-// schema {lastUser:{}, userList: [], usersWithPinList:[], usernameOnlyList:[], filteredUsernameList:[]}
+// schema {lastUser:{}, userList: [], usersWithPinList:[], usernameOnlyList:[], filteredUsernameList:[], charactersFiltered}
 export default function (state = null, action) {
   switch (action.type) {
     case Constants.AUTH_UPDATE_USERNAME:
@@ -11,10 +11,11 @@ export default function (state = null, action) {
       const username = action.data
       const num = username.length - 1
       const char = username.charAt(num)
+      const arrayToBeFiltered = num > state.charactersFiltered ? state.filteredUsernameList : state.usernameOnlyList
       const tempArray = []
       if (state.filteredUsernameList) {
-        for (let i = 0; i < state.filteredUsernameList.length; i++) {
-          const item = state.filteredUsernameList[i]
+        for (let i = 0; i < arrayToBeFiltered.length; i++) {
+          const item = arrayToBeFiltered[i]
           if (item.charAt(num) === char.toLowerCase()) {
             tempArray.push(item)
           }
@@ -22,7 +23,7 @@ export default function (state = null, action) {
       }
 
       // get the character at
-      return { ...state, filteredUsernameList: tempArray }
+      return {...state, filteredUsernameList: tempArray, charactersFiltered: num}
 
     case Constants.SET_PREVIOUS_USERS:
       return action.data

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
-import { Button } from '../common'
-
+import { IconButton } from '../common'
+import * as Constants from '../../../common/constants'
 /* type Props= {
   data: any,
   style: any,
@@ -10,10 +10,18 @@ import { Button } from '../common'
 } */
 
 class UserListItem extends Component {
+  componentWillMount () {
+    this.deleteThis = () => {
+      this.props.onDelete(this.props.data)
+    }
+    this.onPress = () => {
+      this.props.onClick(this.props.data)
+    }
+  }
   render () {
     const Style = this.props.style
     return (
-      <TouchableOpacity onPress={this.onPress.bind(this)}>
+      <TouchableOpacity onPress={this.onPress}>
         {this.renderInside(Style)}
       </TouchableOpacity>
     )
@@ -22,15 +30,14 @@ class UserListItem extends Component {
     if (this.props.onDelete) {
       return (
         <View style={Style.container}>
-          <Text style={Style.text}>{this.props.data}</Text>
-          <Button
-            onPress={this.deleteThis.bind(this)}
-            label={'X'}
-            downStyle={Style.deleteButton.downStyle}
-            downTextStyle={Style.deleteButton.downTextStyle}
-            upStyle={Style.deleteButton.upStyle}
-            upTextStyle={Style.deleteButton.upTextStyle}
-          />
+          <View style={Style.textComtainer} >
+            <Text style={Style.text}>{this.props.data}</Text>
+          </View>
+          <IconButton
+            style={Style.iconButton}
+            icon={Constants.CLOSE_ICON}
+            iconType={Constants.MATERIAL_ICONS}
+            onPress={this.deleteThis} />
         </View>
       )
     }
@@ -39,12 +46,6 @@ class UserListItem extends Component {
         <Text style={Style.text}>{this.props.data}</Text>
       </View>
     )
-  }
-  deleteThis () {
-    this.props.onDelete(this.props.data)
-  }
-  onPress () {
-    this.props.onClick(this.props.data)
   }
 }
 

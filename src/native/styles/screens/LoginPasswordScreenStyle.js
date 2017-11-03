@@ -36,7 +36,7 @@ const LoginPasswordScreenStyle = {
     alignItems: 'center'
   },
   input2: Styles.MaterialInput,
-  inputWithDrop: Styles.FormFieldWithDropStyle,
+  inputWithDrop: Styles.MaterialInputWithDrop,
   forgotButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, fontSize: 14, color: Constants.WHITE},

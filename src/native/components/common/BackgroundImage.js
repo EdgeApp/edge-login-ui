@@ -1,10 +1,19 @@
 import React from 'react'
 import { ImageBackground, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
-const BackgroundImage = ({ style, src, content, enableTouch = true }) => {
+const BackgroundImage = ({ style, src, content, enableTouch = true, callback = null }) => {
+  const onPress = () => {
+    if (callback) {
+      return () => {
+        callback()
+        Keyboard.dismiss()
+      }
+    }
+    return Keyboard.dismiss()
+  }
   if (enableTouch) {
     return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <TouchableWithoutFeedback onPress={onPress}>
         <ImageBackground source={src} style={style}>
           {content}
         </ImageBackground>

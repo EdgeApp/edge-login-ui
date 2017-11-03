@@ -109,7 +109,8 @@ const FormFieldWithDropStyle = {
   container: {
     position: 'relative',
     width: hs(230),
-    height: vs(60)
+    height: vs(60),
+    backgroundColor: Constants.ACCENT_RED
   },
 
   helperCheckbox: BasicCheckBoxWithLabelAlignRight,
@@ -157,7 +158,7 @@ const MaterialInput = {
   container: {
     position: 'relative',
     width: Constants.LOGIN_LABEL_WIDTH,
-    height: Constants.LOGIN_LABEL_HEIGHT
+    minHeight: Constants.LOGIN_LABEL_HEIGHT
   },
   baseColor: Constants.WHITE,
   tintColor: Constants.ACCENT_MINT,
@@ -170,6 +171,64 @@ const MaterialInput = {
     color: Constants.WHITE
   }
 }
+
+const MaterialInputWithDrop = {
+  container: {
+    position: 'relative',
+    width: Constants.LOGIN_LABEL_WIDTH,
+    minHeight: Constants.LOGIN_LABEL_HEIGHT
+  },
+  materialInput: MaterialInput,
+  searchContainer: {
+    width: '100%',
+    minHeight: 100,
+    maxHeight: 200
+  },
+  row: {
+   // backgroundColor: THEME.COLORS.WHITE, padding: 10
+  },
+  listItem: {
+    container: {
+      height: 30,
+      width: '100%',
+      backgroundColor: Constants.WHITE,
+      borderBottomColor: Constants.GRAY_4,
+      borderBottomWidth: 1,
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    textComtainer: {
+      flex: 9,
+      height: '100%',
+      flexDirection: 'column',
+      justifyContent: 'space-around'
+    },
+    iconButton: {
+      container: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        height: '100%'
+      },
+      icon: {
+        color: Constants.PRIMARY
+      },
+      iconPressed: {
+        color: Constants.SECONDARY
+      },
+      iconSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+      underlayColor: Constants.TRANSPARENT
+    },
+    text: {
+      color: Constants.PRIMARY,
+      backgroundColor: Constants.TRANSPARENT,
+      marginLeft: 8,
+      fontSize: Constants.DEFAULT_FONT_TEXT_SIZE
+    }
+  }
+}
+
 const MaterialInputOnWhite = {
   container: {
     position: 'relative',
@@ -189,5 +248,6 @@ const MaterialInputOnWhite = {
 }
 export { MaterialInputOnWhite }
 export { MaterialInput }
+export { MaterialInputWithDrop }
 export { FormFieldStyle }
 export { FormFieldWithDropStyle }
