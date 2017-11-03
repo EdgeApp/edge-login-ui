@@ -4,7 +4,7 @@ import webStyles from './Divider.webStyle.scss'
 import mobileStyles from './Divider.mobileStyle.scss'
 
 export default () => (
-  <section style={{width: '100%'}}>
+  <section>
     <MediaQuery minWidth={720}>
       <div className={webStyles.divider}>
         <div className={webStyles.line} />
@@ -13,7 +13,7 @@ export default () => (
         </div>
       </div>
     </MediaQuery>
-    <MediaQuery maxWidth={719}>
+    <MediaQuery maxWidth={719} >
       <div className={mobileStyles.divider}>
         <div className={mobileStyles.line} />
         <div className={mobileStyles.circle}>
