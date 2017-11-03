@@ -6,14 +6,14 @@ import * as Constants from '../../../common/constants'
 export const mapStateToProps = (state, ownProps) => {
   return {
     headerText: 'EDGE WALLET BETA',
-    middleText: 'The software is currently in beta. it is recommended to use small amounts of currency to play with and test. Do Not use as your primary wallet until production release',
+    headerSubtext: 'Warning!',
+    middleText: 'This software is currently in beta. Use only small amounts of currency for testing. \n\nDo NOT login to Edge Wallet with your existing Airbitz username and password',
     icon: Constants.EXCLAMATION,
     iconType: Constants.SIMPLE_ICONS,
     actionLabel: 'I Understand',
     cancelLabel: 'Cancel',
     singleButton: true,
-    buttonTimerSeconds: 1,
-    modalDismissTimerSeconds: 10,
+    buttonTimerSeconds: 8,
     hideCancelX: true
   }
 }

@@ -25,6 +25,18 @@ export default class LandingScreenComponent extends Component {
     const { LoginPasswordScreenStyle } = this.props.styles
     this.style = LoginPasswordScreenStyle
     this.keyboardDidHideListener = null
+    this.renderModal = (style) => {
+      if (this.props.showModal) {
+        return (
+          <DeleteUserConnector
+            style={style.modal.skip}
+            username={this.state.username}
+          />
+        )
+      }
+      return null
+    }
+
     this.noFocus = () => {
       Keyboard.dismiss()
       this.setState({
@@ -32,6 +44,14 @@ export default class LandingScreenComponent extends Component {
         focusSecond: false,
         offset: Offsets.LOGIN_SCREEN_NO_OFFSET
       })
+    }
+    this.onDelete = (user) => {
+      //
+      // this.props.deleteUserFromDevice(user) TODO
+      this.setState({
+        username: user
+      })
+      this.props.launchDeleteModal()
     }
     setTimeout(this.setListener, 2000, this.noFocus)
 
@@ -167,7 +187,6 @@ export default class LandingScreenComponent extends Component {
   renderRow (data) {
     return (
       <UserListItem
-        key={data.index}
         data={data.item}
         style={this.style.inputWithDrop.listItem}
         onClick={this.selectUser.bind(this)}
@@ -175,14 +194,7 @@ export default class LandingScreenComponent extends Component {
       />
     )
   }
-  onDelete (user) {
-    //
-    // this.props.deleteUserFromDevice(user) TODO
-    this.setState({
-      username: user
-    })
-    this.props.launchDeleteModal()
-  }
+
   renderButtons (style) {
     return (
       <View style={style.buttonsBox}>
@@ -218,18 +230,6 @@ export default class LandingScreenComponent extends Component {
       </View>
     )
   }
-  renderModal (style) {
-    if (this.props.showModal) {
-      return (
-        <DeleteUserConnector
-          style={style.modal.skip}
-          username={this.state.username}
-        />
-      )
-    }
-    return null
-  }
-
   onfocusOne () {
     this.setState({
       focusFirst: true,
