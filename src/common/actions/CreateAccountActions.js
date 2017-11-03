@@ -98,7 +98,7 @@ export function validatePassword (data) {
     // the timeout is a hack until we put in interaction manager.
     const passwordEval = context.checkPasswordRules(data)
     const passwordCheckResult = passwordCheck(data)
-    let passwordCheckString: string
+    let passwordCheckString
 
     if (
       passwordCheckResult &&

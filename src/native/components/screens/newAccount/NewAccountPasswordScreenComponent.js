@@ -117,7 +117,7 @@ export default class NewAccountPasswordScreenComponent extends Component {
       })
       return
     }
-    if (this.props.createPasswordErrorMessage) {
+    if (this.props.error !== '' || this.props.error2 !== '') {
       this.setState({
         isProcessing: false
       })
