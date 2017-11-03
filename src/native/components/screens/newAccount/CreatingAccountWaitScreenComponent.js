@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
-import { LOGO_DOT } from '../../../../native/assets'
+import { View, Text } from 'react-native'
+// import { LOGO_DOT } from '../../../../native/assets'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnector.js'
-
+import { Spinner } from '../../common'
 // import * as Constants from '../../../../common/constants'
 
 export default class CreatingAccountWaitScreenComponent extends Component {
@@ -21,7 +21,7 @@ export default class CreatingAccountWaitScreenComponent extends Component {
         <View style={CreatingAccountWaitScreenStyle.pageContainer}>
           <View style={CreatingAccountWaitScreenStyle.topPad} />
           <View style={CreatingAccountWaitScreenStyle.iconContianer}>
-            <Image source={LOGO_DOT} />
+            <Spinner />
           </View>
           <View style={CreatingAccountWaitScreenStyle.headlineConainer}>
             <Text style={CreatingAccountWaitScreenStyle.headlineText}>Good job!</Text>
