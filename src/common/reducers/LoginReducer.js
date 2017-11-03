@@ -5,7 +5,8 @@ const initialState = {
   password: null,
   pin: null,
   loginSuccess: false,
-  errorMessage: null
+  errorMessage: null,
+  isLoggingInWithPin: false
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -26,9 +27,11 @@ export default function (state = initialState, action) {
     case Constants.AUTH_UPDATE_PIN:
       return { ...state, pin: action.data }
     case Constants.LOGIN_SUCCEESS:
-      return { ...state, loginSuccess: true, loginPasswordErrorMessage: null }
+      return { ...state, loginSuccess: true, loginPasswordErrorMessage: null, isLoggingInWithPin: false }
     case Constants.LOGIN_USERNAME_PASSWORD_FAIL:
-      return { ...state, errorMessage: action.data, pin: '' }
+      return { ...state, errorMessage: action.data, pin: '', isLoggingInWithPin: false }
+    case Constants.AUTH_LOGGING_IN_WITH_PIN:
+      return { ...state, isLoggingInWithPin: true }
 
     default:
       return state

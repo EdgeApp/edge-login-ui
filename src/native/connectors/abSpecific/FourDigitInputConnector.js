@@ -8,7 +8,8 @@ export const mapStateToProps = (state, ownProps) => {
     pin: state.login.pin,
     username: state.login.username,
     error: state.login.errorMessage,
-    autoLogIn: true
+    autoLogIn: true,
+    isLogginginWithPin: state.login.isLoggingInWithPin
 
   }
 }

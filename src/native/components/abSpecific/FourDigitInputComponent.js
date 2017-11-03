@@ -10,8 +10,16 @@ import { Spinner } from '../common'
 class FourDigitInputComponent extends Component {
   componentWillMount () {
     this.setState({
-      autoFocus: true
+      autoFocus: true,
+      touchId: false
     })
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.isLogginginWithPin) {
+      this.setState({
+        touchId: true
+      })
+    }
   }
   render () {
     const Style = this.props.style
@@ -43,7 +51,7 @@ class FourDigitInputComponent extends Component {
   }
   renderDotContainer (style) {
     const pinLength = this.props.pin ? this.props.pin.length : 0
-    if (pinLength === 4 && this.props.autoLogIn) {
+    if ((pinLength === 4 || this.state.touchId) && this.props.autoLogIn) {
       return <Spinner />
     }
     return (

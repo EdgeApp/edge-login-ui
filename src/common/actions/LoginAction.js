@@ -24,13 +24,16 @@ export function userLoginWithTouchId (data) {
     let context = imports.context
     let callback = imports.callback
     let accountOptions = imports.accountOptions
-
+    const startFunction = () => {
+      dispatch(dispatchAction(Constants.AUTH_LOGGING_IN_WITH_PIN))
+    }
     loginWithTouchId(
       context,
       data.username,
       'Touch to login user: `' + data.username + '`',
       null,
-      accountOptions
+      accountOptions,
+      startFunction
     ).then(async response => {
       if (response) {
         context.io.folder
@@ -45,7 +48,6 @@ export function userLoginWithTouchId (data) {
     })
   }
 }
-
 export function userLoginWithPin (data) {
   return (dispatch, getState, imports) => {
     let context = imports.context

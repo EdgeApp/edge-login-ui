@@ -45,7 +45,7 @@ export const AUTH_UPDATE_USERNAME = 'authUpdateUsername'
 export const AUTH_UPDATE_PASSWORD = 'authUpdatePassword'
 export const AUTH_UPDATE_CONFIRM_PASSWORD = 'authUpdatePasswordConfirm'
 export const AUTH_UPDATE_PIN = 'authUpdatePin'
-
+export const AUTH_LOGGING_IN_WITH_PIN = 'authLoggingInWithPin'
 export const DELETE_USER_FROM_DEVICE = 'deleteUserFromDevice'
 
 // Change Password Pin Actions =
