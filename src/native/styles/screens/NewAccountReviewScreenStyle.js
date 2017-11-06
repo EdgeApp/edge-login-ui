@@ -32,7 +32,10 @@ const NewAccountReviewScreenStyle = {
       flexDirection: 'column-reverse'
     },
     top: {
-      flex: 1
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'space-around',
+      alignItems: 'center'
     },
     bottom: {
       flex: 9,
@@ -48,8 +51,6 @@ const NewAccountReviewScreenStyle = {
     },
     iconWrapBottom: {
       position: 'relative',
-      left: '42%',
-      top: -8,
       borderRadius: 27,
       backgroundColor: Constants.ACCENT_RED,
       height: 30,

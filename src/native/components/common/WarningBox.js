@@ -6,7 +6,7 @@ import * as Constants from '../../../common/constants'
 const WarningBox = ({ style, message }) => {
   const renderGradient = (styles, icon, iconType) => {
     return (
-      <View style={[styles.iconWrapBottom]}>
+      <View style={styles.iconWrapBottom}>
         <View style={styles.iconWrapTop} >
           <Icon
             style={styles.iconStyle}
