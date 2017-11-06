@@ -38,7 +38,7 @@ const initialState = {
         subTitle: ''
       },
       {
-        back: true,
+        back: false,
         skip: false,
         title: 'Write it down',
         subTitle: 'ACCOUNT CONFIRMATION'
