@@ -15,7 +15,6 @@ export default class LandingScreenComponent extends Component {
     return null
   }
   render () {
-    console.log('WTF')
     const { LandingScreenStyle } = this.props.styles
     return (
       <View style={LandingScreenStyle.container}>
@@ -29,7 +28,6 @@ export default class LandingScreenComponent extends Component {
   }
   renderOverImage () {
     const { LandingScreenStyle } = this.props.styles
-    console.log('WTF')
     return (
       <View style={LandingScreenStyle.inner}>
         {this.renderModal()}
