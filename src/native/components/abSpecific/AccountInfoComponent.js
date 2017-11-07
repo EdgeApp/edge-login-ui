@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import {TextAndIconButton} from '../common'
+import { TextAndIconButton } from '../common'
 import * as Constants from '../../../common/constants/'
 
 /* type Props = {
@@ -21,9 +21,11 @@ class AccountInfoComponent extends Component {
   renderPasswordWarning (style) {
     if (!this.props.password) {
       return (
-        <Text style={style.bottomWarningText}>
-          You did not set your password. We strongly encourage you to create a password and backup your account as soon as possible. You can set a password in the Settings screen in the app.
-        </Text>
+        <View style={style.bottomWarning}>
+          <Text style={style.bottomWarningText}>
+            You did not set your password. We strongly encourage you to create a password and backup your account as soon as possible. You can set a password in the Settings screen in the app.
+          </Text>
+        </View>
       )
     }
     return null
@@ -31,23 +33,89 @@ class AccountInfoComponent extends Component {
   renderAccountInfo (style) {
     if (!this.props.password) {
       return (
-        <View style={style.bottomInfo}>
-          <Text style={style.accountText}>
-            {'Username ' + this.props.username}
-          </Text>
-          <Text style={style.accountText}>{'PIN ' + this.props.pin}</Text>
+        <View
+          style={[
+            style.bottomInfo,
+            !this.props.password && {
+              ...style.bottomInfo,
+              borderBottomColor: Constants.TRANSPARENT
+            }
+          ]}
+        >
+          <View style={style.shim} />
+          <View style={style.bRow}>
+            <View style={style.bInfoLeft} />
+            <View style={style.bInfoCenter}>
+              <Text style={style.accountText}>
+                Username:
+              </Text>
+            </View>
+            <View style={style.bInforRight}>
+              <Text style={style.accountText}>
+                {this.props.username}
+              </Text>
+            </View>
+          </View>
+          <View style={style.bRow}>
+            <View style={style.bInfoLeft} />
+            <View style={style.bInfoCenter}>
+              <Text style={style.accountText}>
+                PIN:
+              </Text>
+            </View>
+            <View style={style.bInforRight}>
+              <Text style={style.accountText}>
+                {this.props.pin}
+              </Text>
+            </View>
+          </View>
+          <View style={style.shim} />
         </View>
       )
     }
     return (
       <View style={style.bottomInfo}>
-        <Text style={style.accountText}>
-          {'Username ' + this.props.username}
-        </Text>
-        <Text style={style.accountText}>
-          {'Password ' + this.props.password}
-        </Text>
-        <Text style={style.accountText}>{'PIN ' + this.props.pin}</Text>
+        <View style={style.shim} />
+        <View style={style.bRow}>
+          <View style={style.bInfoLeft} />
+          <View style={style.bInfoCenter}>
+            <Text style={style.accountText}>
+              Username:
+            </Text>
+          </View>
+          <View style={style.bInforRight}>
+            <Text style={style.accountText}>
+              {this.props.username}
+            </Text>
+          </View>
+        </View>
+        <View style={style.bRow}>
+          <View style={style.bInfoLeft} />
+          <View style={style.bInfoCenter}>
+            <Text style={style.accountText}>
+              Password:
+            </Text>
+          </View>
+          <View style={style.bInforRight}>
+            <Text style={style.accountText}>
+              {this.props.password}
+            </Text>
+          </View>
+        </View>
+        <View style={style.bRow}>
+          <View style={style.bInfoLeft} />
+          <View style={style.bInfoCenter}>
+            <Text style={style.accountText}>
+              PIN:
+            </Text>
+          </View>
+          <View style={style.bInforRight}>
+            <Text style={style.accountText}>
+              {this.props.pin}
+            </Text>
+          </View>
+        </View>
+        <View style={style.shim} />
       </View>
     )
   }
@@ -56,24 +124,30 @@ class AccountInfoComponent extends Component {
       return (
         <View style={style.bottom}>
           {this.renderAccountInfo(style)}
-          <View style={style.bottomWarning}>
-            {this.renderPasswordWarning(style)}
-          </View>
+          {this.renderPasswordWarning(style)}
         </View>
       )
     }
     return <View style={style.bottom} />
   }
   renderTop (style) {
-    const msg = this.state.collapsed ? 'Show account information' : 'Hide account information'
-    const icon = this.state.collapsed ? Constants.KEYBOARD_ARROW_DOWN : Constants.KEYBOARD_ARROW_UP
-    return <View style={style.top}>
-      <TextAndIconButton style={style.textIconButton}
-        icon={icon}
-        iconType={Constants.MATERIAL_ICONS}
-        onPress={this.onPress.bind(this)}
-        title={msg} />
-    </View>
+    const msg = this.state.collapsed
+      ? 'Show account information'
+      : 'Hide account information'
+    const icon = this.state.collapsed
+      ? Constants.KEYBOARD_ARROW_DOWN
+      : Constants.KEYBOARD_ARROW_UP
+    return (
+      <View style={style.top}>
+        <TextAndIconButton
+          style={style.textIconButton}
+          icon={icon}
+          iconType={Constants.MATERIAL_ICONS}
+          onPress={this.onPress.bind(this)}
+          title={msg}
+        />
+      </View>
+    )
   }
   onPress () {
     this.setState({
@@ -88,7 +162,7 @@ class AccountInfoComponent extends Component {
           Style.container,
           !this.state.collapsed && {
             ...Style.container,
-            borderWidth: 1,
+            borderWidth: 0,
             borderColor: Constants.GRAY_3
           }
         ]}

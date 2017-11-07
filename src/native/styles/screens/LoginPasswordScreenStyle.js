@@ -1,6 +1,5 @@
 import * as Styles from '../'
 import * as Constants from '../../../common/constants/'
-import { vs } from '../../../common/util/PixelUtil'
 
 const LoginPasswordScreenStyle = {
   container: Styles.ScreenStyle,
@@ -17,9 +16,8 @@ const LoginPasswordScreenStyle = {
   },
   featureBox: {
     position: 'relative',
-    top: vs(55),
+    top: 55,
     width: '100%',
-    height: vs(376),
     alignItems: 'center'
   },
   innerView: {
@@ -27,7 +25,7 @@ const LoginPasswordScreenStyle = {
     alignItems: 'center',
     justifyContent: 'space-around'
   },
-  logoHeader: Styles.LogoHeaderStyle,
+  logoHeader: {...Styles.LogoHeaderStyle, container: {...Styles.LogoHeaderStyle.container, height: 90}},
   shimTiny: {...Styles.Shim, height: 10},
   shimSmall: {...Styles.Shim, height: 25},
   shim: Styles.Shim,

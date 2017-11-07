@@ -82,7 +82,8 @@ const NewAccountReviewScreenStyle = {
   accountDetailsBox: {
     container: {
       flex: 1,
-      width: '100%'
+      width: '100%',
+      flexDirection: 'column'
     },
     textIconButton: {...Styles.TextAndIconButtonStyle,
       text: {...Styles.TextAndIconButtonStyle.text,
@@ -98,23 +99,44 @@ const NewAccountReviewScreenStyle = {
       }
     },
     top: {
-      flex: 1,
       alignItems: 'center',
       justifyContent: 'space-around',
-      backgroundColor: Constants.GRAY_3
+      backgroundColor: Constants.GRAY_3,
+      height: Constants.BUTTON_HEIGHT
     },
+    shim: { ...Styles.Shim, height: 10, backgroundColor: Constants.TRANSPARENT },
     bottom: {
-      flex: 6,
-      alignItems: 'center'
+      width: '100%',
+      flexDirection: 'column'
     },
     bottomInfo: {
-      width: '80%',
-      flex: 1,
-      justifyContent: 'space-around'
+      width: '100%',
+      minHeight: 60,
+      borderLeftWidth: 1,
+      borderRightWidth: 1,
+      borderBottomWidth: 1,
+      borderColor: Constants.GRAY_3
+    },
+    bRow: {
+      width: '100%',
+      height: 20,
+      flexDirection: 'row'
+    },
+    bInfoLeft: {
+      flex: 2
+    },
+    bInfoCenter: {
+      flex: 3
+    },
+    bInforRight: {
+      flex: 5
     },
     bottomWarning: {
-      width: '80%',
-      flex: 2
+      width: '100%',
+      borderLeftWidth: 1,
+      borderRightWidth: 1,
+      borderBottomWidth: 1,
+      borderColor: Constants.GRAY_3
     },
     accountText: {
       fontSize: fontSize(12),
@@ -122,7 +144,8 @@ const NewAccountReviewScreenStyle = {
     },
     bottomWarningText: {
       fontSize: fontSize(10),
-      color: Constants.ACCENT_RED
+      color: Constants.ACCENT_RED,
+      padding: 15
     }
   },
   nextButton: {
