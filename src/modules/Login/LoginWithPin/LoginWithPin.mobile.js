@@ -1,6 +1,6 @@
 import React from 'react'
 import Input from 'react-toolbox/lib/input'
-import CachedUsers from '../../CachedUsers/CachedUsers.js'
+import CachedUsers from '../CachedUsers/CachedUsers.js'
 import dropdown from '../../../img/dropdown.png'
 import styles from './LoginWithPin.mobileStyle.scss'
 

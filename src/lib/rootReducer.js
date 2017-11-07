@@ -11,7 +11,7 @@ import * as ReviewDetailsStates from '../modules/Signup/ReviewDetails/ReviewDeta
 // Login
 import * as Login from '../modules/Login/Login.reducer'
 import { mobileShowQRCode } from '../modules/Login/LoginEdge/LoginEdge.mobileState.js'
-import * as CachedUsers from '../modules/CachedUsers/CachedUsers.reducer'
+import * as CachedUsers from '../modules/Login/CachedUsers/CachedUsers.reducer'
 import { user } from '../modules/User/User.reducer'
 
 // Account Management

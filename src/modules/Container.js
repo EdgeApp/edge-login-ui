@@ -6,7 +6,7 @@ import FontIcon from 'react-toolbox/lib/font_icon'
 import abcctx from 'lib/web/abcContext'
 
 import { openLogin } from './Login/Login.action'
-import { selectUserToLogin, setCachedUsers, setCachedUsersWithPin } from './CachedUsers/CachedUsers.action'
+import { selectUserToLogin, setCachedUsers, setCachedUsersWithPin } from './Login/CachedUsers/CachedUsers.action'
 
 import Layout from './Layout/Layout.js'
 import layoutTheme from 'theme/layoutTheme'
