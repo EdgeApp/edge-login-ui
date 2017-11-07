@@ -1,4 +1,3 @@
-import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 import { loginWithPassword } from '../Login/Login.middleware.js'
 
@@ -10,9 +9,6 @@ export const signupUser = (username, password, pin, callback) => {
     abcContext(ctx => {
       ctx.createAccount(username, password, pin, undefined, (err, result) => {
         dispatch(closeLoading())
-        if (err) {
-          return dispatch(openErrorModal(t('activity_signup_failed') + ': ' + err.message))
-        }
         if (!err) {
           return dispatch(
             loginWithPassword(

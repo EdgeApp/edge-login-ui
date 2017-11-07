@@ -29,8 +29,6 @@ import { accountCacheDelete } from '../modules/Modals/AccountCacheDelete/Account
 import { success } from '../modules/Modals/Success/Success.reducer.js'
 
 import * as Loader from '../modules/Loader/Loader.reducer'
-import * as WarningModal from '../modules/WarningModal/WarningModal.reducer'
-import * as ErrorModal from '../modules/ErrorModal/ErrorModal.reducer'
 
 const store = combineReducers({
   signupPage,
@@ -87,16 +85,6 @@ const store = combineReducers({
     loading: Loader.loading,
     message: Loader.message
     // style: Loader.style
-  }),
-  warningModal: combineReducers({
-    visible: WarningModal.visible,
-    module: WarningModal.module,
-    title: WarningModal.title,
-    message: WarningModal.message
-  }),
-  errorModal: combineReducers({
-    visible: ErrorModal.visible,
-    message: ErrorModal.message
   }),
   cachedUsers: combineReducers({
     users: CachedUsers.users,

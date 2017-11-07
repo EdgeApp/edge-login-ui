@@ -1,4 +1,3 @@
-import { closeWarningModal } from '../WarningModal/WarningModal.action'
 import { deleteUserFromUserCache } from './CachedUsers.action'
 
 export const deleteUserToCache = username => {
@@ -10,6 +9,5 @@ export const deleteUserToCache = username => {
     abcctx(ctx => ctx.removeUsername(username))
     if (lastUser === username) localStorage.removeItem('lastUser')
     dispatch(deleteUserFromUserCache(username))
-    dispatch(closeWarningModal())
   }
 }
