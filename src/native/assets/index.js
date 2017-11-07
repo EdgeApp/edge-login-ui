@@ -10,6 +10,7 @@ const PASSWORD_REQ_CHECKED = require('./icons/passwordRequirements/checked.png')
 const PASSWORD_REQ_UNCHECKED = require('./icons/passwordRequirements/unchecked.png')
 const PERMISSIONS_CAMREA = require('./icons/permissions/permissions-camera.png')
 const WELCOME = require('./icons/welcome/new_account_welcome.png')
+const TOUCH = require('./touch/touchid.png')
 
 export {LOGIN_BACKGROUND}
 export {LOGO_BIG}
@@ -23,4 +24,5 @@ export {PASSWORD_REQ_CHECKED}
 export {PASSWORD_REQ_UNCHECKED}
 export {PERMISSIONS_CAMREA}
 export {WELCOME}
+export {TOUCH}
 
