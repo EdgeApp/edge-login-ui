@@ -129,9 +129,8 @@ export default class LandingScreenComponent extends Component {
       <TouchableWithoutFeedback onPress={this.noFocus}>
         <View style={this.style.featureBox}>
           <LogoImageHeader style={this.style.logoHeader} />
-          <View style={this.style.shimSmall} />
           {this.renderUsername(this.style)}
-          <View style={this.style.shimSmall} />
+          <View style={this.style.shimTiny} />
           <FormField
             style={this.style.input2}
             onChangeText={this.updatePassword.bind(this)}
@@ -144,7 +143,6 @@ export default class LandingScreenComponent extends Component {
             onFocus={this.onfocusTwo.bind(this)}
             onFinish={this.onStartLogin.bind(this)}
           />
-          <View style={this.style.shim} />
           {this.renderButtons(this.style)}
           {this.renderModal(this.style)}
         </View>
