@@ -4,6 +4,7 @@ import FAIcon from 'react-native-vector-icons/FontAwesome'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
+import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as Constants from '../../../common/constants'
 
 /* type Props= {
@@ -19,6 +20,8 @@ const Icon = ({ style, name, size, type }) => {
       return <Entypo style={style} name={name} size={size} />
     case Constants.MATERIAL_ICONS:
       return <MaterialIcon style={style} name={name} size={size} />
+    case Constants.MATERIAL_COMMUNITY:
+      return <MaterialCommunity style={style} name={name} size={size} />
     case Constants.FONT_AWESOME:
       return <FAIcon style={style} name={name} size={size} />
     case Constants.ION_ICONS:

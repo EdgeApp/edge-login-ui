@@ -149,10 +149,10 @@ const NewAccountReviewScreenStyle = {
     }
   },
   nextButton: {
-    upStyle: Styles.PrimaryButtonUpStyle,
+    upStyle: {...Styles.PrimaryButtonUpStyle, width: '80%'},
+    downStyle: {...Styles.PrimaryButtonDownStyle, width: '80%'},
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: Styles.PrimaryButtonDownStyle
+    downTextStyle: Styles.PrimaryButtonUpTextStyle
   }
 }
 

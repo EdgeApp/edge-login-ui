@@ -19,3 +19,6 @@ export const SWAP_VERT = 'swap-vert'
 export const SWAP_HORIZ = 'swap-horiz'
 export const EXCLAMATION = 'exclamation'
 
+//
+export const MATERIAL_COMMUNITY = 'materialCommunity'
+
