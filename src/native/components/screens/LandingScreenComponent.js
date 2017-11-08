@@ -8,7 +8,6 @@ import BetaWarningModalConnector
   from '../../connectors/abSpecific/BetaWarningModalConnector'
 export default class LandingScreenComponent extends Component {
   renderModal () {
-    console.log('renderModal ')
     if (this.props.showModal) {
       return <BetaWarningModalConnector />
     }

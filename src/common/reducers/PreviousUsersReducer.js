@@ -13,7 +13,7 @@ export default function (state = null, action) {
       const char = username.charAt(num)
       const arrayToBeFiltered = num > state.charactersFiltered ? state.filteredUsernameList : state.usernameOnlyList
       const tempArray = []
-      if (state.filteredUsernameList) {
+      if (state.arrayToBeFiltered) {
         for (let i = 0; i < arrayToBeFiltered.length; i++) {
           const item = arrayToBeFiltered[i]
           if (item.charAt(num) === char.toLowerCase()) {
