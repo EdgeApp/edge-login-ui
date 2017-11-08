@@ -68,7 +68,7 @@ class Input extends Component {
         returnKeyType={returnKeyType}
         onBlur={this.onBlur.bind(this)}
         onFocus={this.onFocus.bind(this)}
-        onSubmitEditing={this.onSubmitEdit.bind(this)}
+        onSubmitEditing={this.onSubmitEditing.bind(this)}
       />
     )
   }
@@ -86,9 +86,9 @@ class Input extends Component {
     this.props.onChangeText(text)
   }
 
-  onSubmitEdit (event) {
-    if (this.props.onFinish) {
-      this.props.onFinish()
+  onSubmitEditing (event) {
+    if (this.props.onSubmitEditing) {
+      this.props.onSubmitEditing()
     }
   }
   onFocus () {

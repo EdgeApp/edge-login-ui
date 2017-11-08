@@ -42,9 +42,9 @@ class FormFieldWithDropComponent extends Component {
       autoFocus: this.props.autoFocus,
       isFocused: this.props.isFocused
     })
-    this.onSubmitEdit = event => {
-      if (this.props.onFinish) {
-        this.props.onFinish()
+    this.onSubmitEditing = (event) => {
+      if (this.props.onSubmitEditing) {
+        this.props.onSubmitEditing()
       }
     }
   }
@@ -105,7 +105,7 @@ class FormFieldWithDropComponent extends Component {
           console.log('catch and release ')
         }}
         autoCapitalize={'none'}
-        // onSubmitEdit={this.onSubmitEdit}
+        onSubmitEditing={this.onSubmitEditing}
       />
     )
   }

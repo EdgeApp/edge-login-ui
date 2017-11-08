@@ -69,7 +69,7 @@ class FormField extends Component {
         forceFocus={this.props.forceFocus}
         onFocus={this.props.onFocus}
         autoCapitalize={'none'}
-        // onSubmitEdit={this.onSubmitEdit.bind(this)}
+        onSubmitEditing={this.onSubmitEditing.bind(this)}
         />
     )
   }
@@ -101,9 +101,9 @@ class FormField extends Component {
       secure: arg
     })
   } */
-  onSubmitEdit (event) {
-    if (this.props.onFinish) {
-      this.props.onFinish()
+  onSubmitEditing (event) {
+    if (this.props.onSubmitEditing) {
+      this.props.onSubmitEditing()
     }
   }
 }

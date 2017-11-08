@@ -141,7 +141,7 @@ export default class LandingScreenComponent extends Component {
             returnKeyType={'go'}
             forceFocus={this.state.focusSecond}
             onFocus={this.onfocusTwo.bind(this)}
-            onFinish={this.onStartLogin.bind(this)}
+            onSubmitEditing={this.onStartLogin.bind(this)}
           />
           {this.renderButtons(this.style)}
           {this.renderModal(this.style)}
@@ -162,7 +162,7 @@ export default class LandingScreenComponent extends Component {
           forceFocus={this.state.focusFirst}
           onFocus={this.onfocusOne.bind(this)}
           isFocused={this.state.focusFirst}
-          onFinish={this.onSetNextFocus.bind(this)}
+          onSubmitEditing={this.onSetNextFocus.bind(this)}
           renderRow={this.renderRow.bind(this)}
           data={this.props.filteredUsernameList}
         />
@@ -178,7 +178,7 @@ export default class LandingScreenComponent extends Component {
         autoFocus={this.state.focusFirst}
         forceFocus={this.state.focusFirst}
         onFocus={this.onfocusOne.bind(this)}
-        onFinish={this.onSetNextFocus.bind(this)}
+        onSubmitEditing={this.onSetNextFocus.bind(this)}
       />
     )
   }
