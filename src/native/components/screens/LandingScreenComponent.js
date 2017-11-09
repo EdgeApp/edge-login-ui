@@ -31,7 +31,6 @@ export default class LandingScreenComponent extends Component {
       <View style={LandingScreenStyle.inner}>
         {this.renderModal()}
         <View style={LandingScreenStyle.featureBox}>
-          <BetaWarningModalConnector />
           <LogoImageHeader style={LandingScreenStyle.logoHeader} />
           <View style={LandingScreenStyle.featureBoxContent}>
             <View style={LandingScreenStyle.featureBoxDescription}>
