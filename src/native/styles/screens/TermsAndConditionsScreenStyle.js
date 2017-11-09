@@ -24,8 +24,9 @@ const TermsAndConditionsScreenStyle = {
     height: 20
   },
   agreeText: {
-    fontSize: fontSize(11),
-    textAlign: 'center'
+    fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+    textAlign: 'center',
+    width: '80%'
   },
   midSection: {
     height: vs(250)
@@ -38,6 +39,7 @@ const TermsAndConditionsScreenStyle = {
     width: '80%',
     marginBottom: 20
   },
+  shim: {...Styles.shim, height: 10},
   checkboxes: MultiLineTextCheckBox,
   nextButton: {
     upStyle: Styles.PrimaryButtonUpStyle,
@@ -49,14 +51,14 @@ const TermsAndConditionsScreenStyle = {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: { ...Styles.TextOnlyButtonTextUpStyle,
       fontSize: Constants.DEFAULT_FONT_TEXT_SIZE },
-    downTextStyle: {...Styles.TextOnlyButtonDownStyle,
+    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle,
       fontSize: Constants.DEFAULT_FONT_TEXT_SIZE },
-    downStyle: Styles.TextOnlyButtonTextDownStyle
+    downStyle: Styles.TextOnlyButtonDownStyle
   },
   inputBox: {
     ...Styles.FormFieldStyle
   },
-  inputShim: { ...Styles.Shim, height: 10 }
+  inputShim: { ...Styles.Shim, height: 20 }
 }
 
 export { TermsAndConditionsScreenStyle }
