@@ -34,13 +34,13 @@ const PinLoginScreenStyle = {
     container: {
       height: vs(40),
       width: '100%',
-      backgroundColor: Constants.PRIMARY,
+      backgroundColor: Constants.WHITE,
       flexDirection: 'row',
       alignItems: 'center'
     },
     text: {
       paddingLeft: 20,
-      color: Constants.ACCENT_RED,
+      color: Constants.PRIMARY,
       backgroundColor: Constants.TRANSPARENT
     }
   },
