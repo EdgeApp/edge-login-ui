@@ -31,7 +31,7 @@
     "start": "webpack-dev-server --open"
   },
   "dependencies": {
-    "airbitz-core-js": "git+ssh://git@github.com/Airbitz/airbitz-core-js.git#develop",
+    "airbitz-core-js": "git://github.com/Airbitz/airbitz-core-js.git#develop",
     "async": "~2.0.1",
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",
@@ -50,7 +50,7 @@
     "react-dom": "^15.4.2",
     "react-native-keyboard-aware-scroll-view": "^0.4.1",
     "react-native-linear-gradient": "^2.0.0",
-    "react-native-material-textfield": "git+ssh://git@github.com:Airbitz/react-native-material-textfield.git",
+    "react-native-material-textfield": "git://github.com/Airbitz/react-native-material-textfield.git",
     "react-native-modal": "^4.1.0",
     "react-native-vector-icons": "^4.4.2",
     "react-redux": "~4.4.5",
