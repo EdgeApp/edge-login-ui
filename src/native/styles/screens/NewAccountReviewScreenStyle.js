@@ -11,12 +11,14 @@ const NewAccountReviewScreenStyle = {
   },
   instructionsContainer: {
     height: vs(80),
-    width: '100%',
+    width: '80%',
     alignItems: 'center',
     justifyContent: 'space-around'
   },
   instructionsText: {
-    fontSize: fontSize(14),
+    fontSize: 16,
+    color: Constants.GRAY_1,
+    fontFamily: Constants.FONT_REGUALR,
     textAlign: 'center'
   },
   shim: { ...Styles.Shim, height: 10 },
@@ -33,6 +35,7 @@ const NewAccountReviewScreenStyle = {
     },
     top: {
       flex: 1,
+      paddingTop: 5,
       flexDirection: 'column',
       justifyContent: 'space-around',
       alignItems: 'center'
@@ -47,12 +50,13 @@ const NewAccountReviewScreenStyle = {
     },
     text: {
       fontSize: fontSize(10),
-      textAlign: 'center'
+      textAlign: 'center',
+      color: Constants.GRAY_1
     },
     iconWrapBottom: {
       position: 'relative',
       borderRadius: 27,
-      backgroundColor: Constants.ACCENT_RED,
+      backgroundColor: Constants.WHITE,
       height: 30,
       width: 30
     },
@@ -71,6 +75,7 @@ const NewAccountReviewScreenStyle = {
     },
     iconSize: 24,
     iconStyle: {
+      marginTop: 10,
       color: Constants.ACCENT_RED,
       backgroundColor: Constants.TRANSPARENT
     }
@@ -88,20 +93,20 @@ const NewAccountReviewScreenStyle = {
     textIconButton: {...Styles.TextAndIconButtonStyle,
       text: {...Styles.TextAndIconButtonStyle.text,
         fontSize: Constants.DEFAULT_FONT_TEXT_SIZE + 2,
-        color: Constants.BLACK
+        color: Constants.SECONDARY
       },
       textPressed: {...Styles.TextAndIconButtonStyle.text,
         fontSize: Constants.DEFAULT_FONT_TEXT_SIZE + 2,
-        color: Constants.GRAY_2
+        color: Constants.SECONDARY
       },
       icon: {...Styles.TextAndIconButtonStyle.icon,
-        color: Constants.BLACK
+        color: Constants.SECONDARY
       }
     },
     top: {
       alignItems: 'center',
       justifyContent: 'space-around',
-      backgroundColor: Constants.GRAY_3,
+      backgroundColor: Constants.GRAY_4,
       height: Constants.BUTTON_HEIGHT
     },
     shim: { ...Styles.Shim, height: 10, backgroundColor: Constants.TRANSPARENT },
@@ -115,7 +120,7 @@ const NewAccountReviewScreenStyle = {
       borderLeftWidth: 1,
       borderRightWidth: 1,
       borderBottomWidth: 1,
-      borderColor: Constants.GRAY_3
+      borderColor: Constants.GRAY_4
     },
     bRow: {
       width: '100%',
@@ -136,11 +141,11 @@ const NewAccountReviewScreenStyle = {
       borderLeftWidth: 1,
       borderRightWidth: 1,
       borderBottomWidth: 1,
-      borderColor: Constants.GRAY_3
+      borderColor: Constants.GRAY_4
     },
     accountText: {
       fontSize: fontSize(12),
-      color: Constants.PRIMARY
+      color: Constants.GRAY_1
     },
     bottomWarningText: {
       fontSize: fontSize(10),

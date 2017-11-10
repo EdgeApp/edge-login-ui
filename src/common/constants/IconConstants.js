@@ -21,4 +21,5 @@ export const EXCLAMATION = 'exclamation'
 
 //
 export const MATERIAL_COMMUNITY = 'materialCommunity'
+export const EVIL_ICONS = 'EvilIcons'
 

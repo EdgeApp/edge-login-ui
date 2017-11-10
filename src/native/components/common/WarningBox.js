@@ -12,7 +12,7 @@ const WarningBox = ({ style, message }) => {
             style={styles.iconStyle}
             name={Constants.EXCLAMATION}
             size={styles.iconSize}
-            type={Constants.MATERIAL_COMMUNITY}
+            type={Constants.EVIL_ICONS}
           />
         </View>
       </View>

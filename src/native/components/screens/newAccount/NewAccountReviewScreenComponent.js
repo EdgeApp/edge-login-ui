@@ -16,7 +16,7 @@ export default class NewAccountReviewScreenComponent extends Component {
         <View style={NewAccountReviewScreenStyle.pageContainer}>
           <View style={NewAccountReviewScreenStyle.instructionsContainer}>
             <Text style={NewAccountReviewScreenStyle.instructionsText}>
-              Last step! Let’s finish with a quick review
+              Almost done! Let's write down your account information
             </Text>
           </View>
           <View style={NewAccountReviewScreenStyle.warningBoxContainer}>
@@ -40,7 +40,7 @@ export default class NewAccountReviewScreenComponent extends Component {
             downTextStyle={NewAccountReviewScreenStyle.nextButton.downTextStyle}
             upStyle={NewAccountReviewScreenStyle.nextButton.upStyle}
             upTextStyle={NewAccountReviewScreenStyle.nextButton.upTextStyle}
-            label={'REVIEW'}
+            label={'Done'}
           />
         </View>
       </View>

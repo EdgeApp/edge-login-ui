@@ -5,6 +5,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons'
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import * as Constants from '../../../common/constants'
 
 /* type Props= {
@@ -16,6 +17,8 @@ import * as Constants from '../../../common/constants'
 
 const Icon = ({ style, name, size, type }) => {
   switch (type) {
+    case Constants.EVIL_ICONS:
+      return <EvilIcons style={style} name={name} size={size} />
     case Constants.ENTYPO:
       return <Entypo style={style} name={name} size={size} />
     case Constants.MATERIAL_ICONS:
