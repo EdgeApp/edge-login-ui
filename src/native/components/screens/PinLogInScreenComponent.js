@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { BackgroundImage, Button, ScrollingList } from '../../components/common'
+import { BackgroundImage, Button, ScrollingList, ImageButton } from '../../components/common'
 import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
 import FourDigitInputConnector
   from '../../connectors/abSpecific/FourDigitInputConnector'
@@ -14,6 +14,18 @@ export default class PinLogInScreenComponent extends Component {
       loggingIn: false,
       focusOn: 'pin'
     })
+    this.relaunchTouchId = () => {
+      console.log('BUTTON PRESSEd ')
+      this.props.launchUserLoginWithTouchId({username: this.props.username})
+    }
+    this.renderTouchButton = (style) => {
+      if (this.props.username) {
+        return <ImageButton style={style.thumbprintButton}
+          source={Assets.TOUCH}
+          onPress={this.relaunchTouchId} />
+      }
+      return null
+    }
   }
   componentDidMount () {
     if (this.props.username) {
@@ -49,6 +61,7 @@ export default class PinLogInScreenComponent extends Component {
         <View style={PinLoginScreenStyle.featureBoxBody}>
           {this.renderBottomHalf(PinLoginScreenStyle)}
         </View>
+        {this.renderTouchButton(PinLoginScreenStyle)}
       </View>
     )
   }

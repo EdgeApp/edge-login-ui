@@ -25,7 +25,21 @@ const PinLoginScreenStyle = {
     width: '100%'
   },
   logoHeader: Styles.LogoHeaderStyleShort,
+  thumbprintButton: {
+    container: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      flexDirection: 'column',
+      alignItems: 'flex-end'
 
+    },
+    image: {
+      position: 'relative',
+      marginRight: '5%'
+    }
+  },
   listView: {
     height: vs(250),
     width: hs(160)
