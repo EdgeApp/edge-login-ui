@@ -223,6 +223,7 @@ const MaterialInputWithDrop = {
     text: {
       color: Constants.PRIMARY,
       backgroundColor: Constants.TRANSPARENT,
+      fontFamily: Constants.FONTS.fontFamilyRegular,
       marginLeft: 8,
       fontSize: Constants.FONTS.defaultFontSize
     }
@@ -240,10 +241,12 @@ const MaterialInputOnWhite = {
   errorColor: Constants.ACCENT_RED,
   textColor: Constants.BLACK,
   affixTextStyle: {
-    color: Constants.ACCENT_RED
+    color: Constants.ACCENT_RED,
+    fontFamily: Constants.FONTS.fontFamilyRegular
   },
   titleTextStyle: {
-    color: Constants.PRIMARY
+    color: Constants.PRIMARY,
+    fontFamily: Constants.FONTS.fontFamilyRegular
   }
 }
 export { MaterialInputOnWhite }

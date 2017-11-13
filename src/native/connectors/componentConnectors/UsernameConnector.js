@@ -9,13 +9,13 @@ export const mapStateToProps = (state, ownProps) => {
     error: state.create.usernameErrorMessage,
     label: 'Username',
     returnKeyType: 'go',
-    autoFocus: true, // ownProps.autoFocus,
-    onFinish: ownProps.onFinish
+    autoFocus: true // ownProps.autoFocus,
   }
 }
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onChangeText: data => dispatch(loginAction.validateUsername(data))
+    onChangeText: data => dispatch(loginAction.validateUsername(data)),
+    onSubmitEditing: ownProps.onFinish
   }
 }
 

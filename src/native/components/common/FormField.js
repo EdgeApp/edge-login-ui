@@ -21,6 +21,7 @@ import { STANDARD_CHECKED, STANDARD_UNCHECKED } from '../../../native/assets'
   onFinish():void,
   onFocus():void,
   onChangeText():void,
+  onSubmitEditing():void
 } */
 
 class FormField extends Component {

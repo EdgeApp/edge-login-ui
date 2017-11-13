@@ -22,6 +22,7 @@ const NewAccountWelcomeScreenStyle = {
   logoHeader: Styles.LogoHeaderStyle,
   instructionsText: {
     fontSize: Constants.FONTS.defaultFontSize,
+    fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Constants.GRAY_2,
     textAlign: 'center',
     paddingLeft: 20,
@@ -29,7 +30,7 @@ const NewAccountWelcomeScreenStyle = {
   },
   callToAction: {
     fontSize: Constants.FONTS.defaultFontSize,
-    fontFamily: Constants.FONT_BLACK,
+    fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Constants.GRAY_2,
     textAlign: 'center'
   },
