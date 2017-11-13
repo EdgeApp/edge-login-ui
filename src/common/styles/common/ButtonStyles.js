@@ -13,6 +13,7 @@ const PrimaryButtonUpTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
   fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
 }
@@ -20,6 +21,7 @@ const PrimaryButtonDownTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
   fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
 }
@@ -82,6 +84,7 @@ const TertiaryButtonUpStyle = {
 const TertiaryButtonTextUpStyle = {
   color: Constants.ACCENT_MINT,
   fontSize: 22,
+  fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
 }
@@ -99,7 +102,8 @@ const TertiaryButtonDownStyle = {
 
 const TertiaryButtonTextDownStyle = {
   color: Constants.PRIMARY,
-  fontSize: 18,
+  fontSize: 22,
+  fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
 }
@@ -112,6 +116,7 @@ const TextOnlyButtonUpStyle = {
 const TextOnlyButtonTextUpStyle = {
   color: Constants.SECONDARY,
   fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
 }
@@ -124,6 +129,7 @@ const TextOnlyButtonDownStyle = {
 const TextOnlyButtonTextDownStyle = {
   color: Constants.PRIMARY,
   fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
 }
