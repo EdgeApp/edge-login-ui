@@ -98,6 +98,82 @@ Logoff a user
 
 See a sample implementation at [airbitz-core-js-sample](https://github.com/Airbitz/airbitz-core-js-sample)
 
+## Basic usage for react native mobile application
+
+Required: Node ^8.2.1 and NPM ^5.3.0
+
+Get an API key from
+
+https://developer.airbitz.co
+
+You'll need an account on the Airbitz Mobile App which you can download for iOS and Android at
+
+https://airbitz.co/app
+
+On the `developer.airbitz.co` page, scan the QR code using the Airbitz Mobile App after signing in and register an email address.
+
+Install from npm
+
+    npm install airbitz-core-js-ui --save
+    
+Dependencies required in packages.json
+```javascript
+    "dependencies": {
+        "airbitz-core-js-ui": "git+ssh://git@github.com/Airbitz/airbitz-core-js-ui.git#react-native",
+        "airbitz-core-react-native": "git+ssh://git@github.com/airbitz/airbitz-core-react-native.git",
+        "react": "16.0.0-alpha.12",
+        "react-native": "0.46.4",
+        "rfc4648": "^1.0.0",
+        "secure-random": "^1.1.1"
+      }
+```
+After adding the dependencies to the package.json file run npm install. 
+To use the component in your app you will need to two airbitz core libraries  
+```javascript
+    import { LoginScreen } from ‘airbitz-core-js-ui’
+    import { makeReactNAtiveContext } from ‘airbitz-core-react-native’
+```
+Outside of the component class, in the file that you want to add the login you will need to set up a function to validate your app with Airbitz .
+```javascript
+      function setupCore () {
+        return makeReactNativeContext({
+          // Replace this with your own API key from https://developer.airbitz.co:
+          apiKey: ‘<your api key >’,
+          appId: 'com.mydomain.myapp',
+          vendorName: ‘<Your vendor name >’,
+          vendorImageUrl: 'https://airbitz.co/go/wp-content/uploads/2016/10/GenericEdgeLoginIcon.png'
+        })
+      } 
+```
+In your component that will utilize the login component add the following code to the constructor method:
+```javascript
+    this.state = { context: null, account: null }
+    // Creating the context is async, so we store it in our state:
+    setupCore().then(context => this.setState(state => ({ ...state, context })))
+```
+Set up your render function 
+```javascript
+    render () {
+        const onLogin = account => this.setState(state => ({ ...state, account }))
+
+        // Once the context is ready, we can show the login screen:
+        return (
+          <View style={styles.container}>
+            {this.state.context
+              ? <LoginScreen context={this.state.context} onLogin={onLogin} />
+              :  <Text style={styles.welcome}>Loading</Text>}
+          </View>
+        )
+      }
+    }
+```
+In order to customize the experience and integrate with your app. change the const onLogin function to handle getting back the account information. 
+
+## Sample ReactNative App repo
+
+See a sample implementation at [airbitz-core-js-sample](https://github.com/Airbitz/airbitz-core-js-sample)
+code is in src/native/index.js
+
 ## Test server
 
 Besides the production authentication servers, Airbitz also maintains a test authentication server with a completely separate account namespace. If you would like to use this server for testing, rather than the production server, please run the following code:
