@@ -1,6 +1,6 @@
 import * as Styles from '../'
-import * as Constants from '../../../common/constants/Colors'
-import { vs, fontSize } from '../../../common/util'
+import * as Constants from '../../../common/constants/'
+import { vs } from '../../../common/util'
 const LandingScreenStyle = {
   container: Styles.ScreenStyle,
   backgroundImage: {
@@ -48,6 +48,7 @@ const LandingScreenStyle = {
     marginRight: '10%',
     color: Constants.WHITE,
     backgroundColor: Constants.TRANSPARENT,
+    fontFamily: Constants.FONTS.fontFamilyRegular,
     textAlign: 'center'
   },
   createButton: {
@@ -58,8 +59,8 @@ const LandingScreenStyle = {
   },
   loginButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, fontSize: fontSize(14), color: Constants.WHITE},
-    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, fontSize: fontSize(14), color: Constants.WHITE},
+    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, fontSize: 12, color: Constants.WHITE},
+    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, fontSize: 12, color: Constants.WHITE},
     downStyle: Styles.TextOnlyButtonDownStyle
   }
 }

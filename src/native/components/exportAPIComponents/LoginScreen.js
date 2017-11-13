@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
 import { setLocal } from '../../../common/locale'
+import {updateFontStyles} from '../../../common/constants/Fonts'
 
 /* type Props = {
   context: any,
@@ -13,6 +14,7 @@ import { setLocal } from '../../../common/locale'
   language: string,
   username: string,
   accountOptions: any,
+  fontDescription:any
   onLogin(): void,
 } */
 
@@ -25,6 +27,7 @@ class LoginScreen extends Component {
   }
 
   componentWillMount () {
+    updateFontStyles(this.props)
     setLocal(this.props.locale, this.props.language)
     const composeEnhancers = typeof window === 'object' &&
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

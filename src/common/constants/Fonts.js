@@ -14,8 +14,15 @@ let FONTS = {
   fontFamilyBlack: FONT_BLACK
 }
 
-function updateFontStyles (obj) {
-
+const updateFontStyles = (obj) => {
+  if (!obj.fontDescription) {
+    return
+  }
+  const {fontDescription} = obj
+  const regular = fontDescription.regularFontFamily ? fontDescription.regularFontFamily : FONTS.fontFamilyRegular
+  FONTS = {...FONTS,
+    fontFamilyRegular: regular
+  }
 }
 
 export {FONTS, updateFontStyles}
