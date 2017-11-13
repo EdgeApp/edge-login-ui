@@ -95,7 +95,7 @@ const ModalStyle = {
     paddingTop: 4
   },
   modalMiddleText: {
-    fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+    fontSize: Constants.FONTS.defaultFontSize,
     color: Constants.GRAY_1,
     textAlign: 'center',
     paddingTop: 4

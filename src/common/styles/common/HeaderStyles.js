@@ -1,5 +1,5 @@
 import * as Constants from '../../constants/'
-import { vs, fontSize } from '../../util'
+import { vs } from '../../util'
 import * as Styles from '../'
 
 const HeaderContainerStyle = {
@@ -25,13 +25,13 @@ const HeaderContainerStyle = {
     // alignItems: 'center'
   },
   headlineText: {
-    fontSize: fontSize(17),
+    fontSize: 17,
     width: '100%',
     textAlign: 'center',
     color: Constants.WHITE
   },
   subHeadText: {
-    fontSize: fontSize(11),
+    fontSize: 11,
     width: '100%',
     textAlign: 'center',
     color: Constants.ACCENT_ORANGE
@@ -42,13 +42,13 @@ const HeaderContainerStyle = {
       ...Styles.TextOnlyButtonTextUpStyle,
       width: '100%',
       color: Constants.WHITE,
-      fontSize: fontSize(12)
+      fontSize: Constants.FONTS.defaultButtonTextSize
     },
     downTextStyle: {
       ...Styles.TextOnlyButtonTextDownStyle,
       width: '100%',
       color: Constants.SECONDARY,
-      fontSize: fontSize(12)
+      fontSize: Constants.FONTS.defaultButtonTextSize
     },
     downStyle: {
       ...Styles.TextOnlyButtonDownStyle,

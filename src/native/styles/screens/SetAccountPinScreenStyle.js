@@ -16,8 +16,8 @@ const SetAccountPinScreenStyle = {
   instructions: {
     position: 'relative',
     width: '80%',
-    fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
-    fontFamily: Constants.FONT_REGUALR,
+    fontSize: Constants.FONTS.defaultFontSize,
+    fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Constants.GRAY_2,
     textAlign: 'center'
   },

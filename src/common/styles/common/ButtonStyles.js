@@ -1,5 +1,5 @@
 import * as Constants from '../../constants/'
-import { hs, fontSize } from '../../util'
+import { hs } from '../../util'
 const PrimaryButtonUpStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_UP,
@@ -12,14 +12,14 @@ const PrimaryButtonUpStyle = {
 const PrimaryButtonUpTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
-  fontSize: Constants.BUTTON_TEXT_SIZE,
+  fontSize: Constants.FONTS.defaultButtonTextSize,
   width: '100%',
   textAlign: 'center'
 }
 const PrimaryButtonDownTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
-  fontSize: Constants.BUTTON_TEXT_SIZE,
+  fontSize: Constants.FONTS.defaultButtonTextSize,
   width: '100%',
   textAlign: 'center'
 }
@@ -56,14 +56,14 @@ const SecondaryButtonDownStyle = {
 const SecondaryButtonUpTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
-  fontSize: Constants.BUTTON_TEXT_SIZE,
+  fontSize: Constants.FONTS.defaultButtonTextSize,
   width: '100%',
   textAlign: 'center'
 }
 const SecondaryButtonDownTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
-  fontSize: Constants.BUTTON_TEXT_SIZE,
+  fontSize: Constants.FONTS.defaultButtonTextSize,
   width: '100%',
   textAlign: 'center'
 }
@@ -111,7 +111,7 @@ const TextOnlyButtonUpStyle = {
 
 const TextOnlyButtonTextUpStyle = {
   color: Constants.SECONDARY,
-  fontSize: fontSize(17),
+  fontSize: Constants.FONTS.defaultButtonTextSize,
   width: '100%',
   textAlign: 'center'
 }
@@ -123,7 +123,7 @@ const TextOnlyButtonDownStyle = {
 
 const TextOnlyButtonTextDownStyle = {
   color: Constants.PRIMARY,
-  fontSize: fontSize(17),
+  fontSize: Constants.FONTS.defaultButtonTextSize,
   width: '100%',
   textAlign: 'center'
 }

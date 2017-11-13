@@ -72,10 +72,10 @@ const FourDotInputDarkStyle = {
   },
   errorText: {
     width: '100%',
+    height: 40,
     textAlign: 'center',
     color: Colors.ACCENT_RED,
-    backgroundColor: Colors.TRANSPARENT,
-    padding: 20
+    padding: 5
   },
   input: {
     position: 'absolute',

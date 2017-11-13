@@ -217,14 +217,14 @@ const MaterialInputWithDrop = {
       iconPressed: {
         color: Constants.SECONDARY
       },
-      iconSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+      iconSize: Constants.FONTS.defaultFontSize,
       underlayColor: Constants.TRANSPARENT
     },
     text: {
       color: Constants.PRIMARY,
       backgroundColor: Constants.TRANSPARENT,
       marginLeft: 8,
-      fontSize: Constants.DEFAULT_FONT_TEXT_SIZE
+      fontSize: Constants.FONTS.defaultFontSize
     }
   }
 }

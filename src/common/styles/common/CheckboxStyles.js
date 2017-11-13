@@ -28,7 +28,7 @@ const BasicCheckBoxWithLabelAlignRight = {
     flexDirection: 'row'
   },
   text: {
-    fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+    fontSize: Constants.FONTS.defaultFontSize,
     color: Constants.GRAY_2
   },
   checkbox: {
@@ -43,7 +43,7 @@ const MultiLineTextCheckBox = {
     flexDirection: 'row'
   },
   text: {
-    fontSize: (Constants.DEFAULT_FONT_TEXT_SIZE + 2),
+    fontSize: (Constants.FONTS.defaultFontSize + 2),
     color: Constants.GRAY_2
   },
   checkbox: {

@@ -21,7 +21,7 @@ const NewAccountUsernameScreenStyle = {
     height: 30
   },
   instructionsText: {
-    fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+    fontSize: Constants.FONTS.defaultFontSize,
     color: Constants.GRAY_1,
     textAlign: 'center',
     paddingTop: 20,

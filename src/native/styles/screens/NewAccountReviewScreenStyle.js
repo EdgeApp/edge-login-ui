@@ -18,7 +18,7 @@ const NewAccountReviewScreenStyle = {
   instructionsText: {
     fontSize: 16,
     color: Constants.GRAY_1,
-    fontFamily: Constants.FONT_REGUALR,
+    fontFamily: Constants.FONTS.fontFamilyRegular,
     textAlign: 'center'
   },
   shim: { ...Styles.Shim, height: 10 },
@@ -92,11 +92,11 @@ const NewAccountReviewScreenStyle = {
     },
     textIconButton: {...Styles.TextAndIconButtonStyle,
       text: {...Styles.TextAndIconButtonStyle.text,
-        fontSize: Constants.DEFAULT_FONT_TEXT_SIZE + 2,
+        fontSize: Constants.FONTS.defaultFontSize + 2,
         color: Constants.SECONDARY
       },
       textPressed: {...Styles.TextAndIconButtonStyle.text,
-        fontSize: Constants.DEFAULT_FONT_TEXT_SIZE + 2,
+        fontSize: Constants.FONTS.defaultFontSize + 2,
         color: Constants.SECONDARY
       },
       icon: {...Styles.TextAndIconButtonStyle.icon,

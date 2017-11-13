@@ -24,7 +24,7 @@ const TermsAndConditionsScreenStyle = {
     height: 20
   },
   agreeText: {
-    fontSize: Constants.DEFAULT_FONT_TEXT_SIZE,
+    fontSize: Constants.FONTS.defaultFontSize,
     textAlign: 'center',
     width: '80%'
   },
@@ -50,9 +50,9 @@ const TermsAndConditionsScreenStyle = {
   termsButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: { ...Styles.TextOnlyButtonTextUpStyle,
-      fontSize: Constants.DEFAULT_FONT_TEXT_SIZE },
+      fontSize: Constants.FONTS.defaultFontSize },
     downTextStyle: {...Styles.TextOnlyButtonTextDownStyle,
-      fontSize: Constants.DEFAULT_FONT_TEXT_SIZE },
+      fontSize: Constants.FONTS.defaultFontSize },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
   inputBox: {

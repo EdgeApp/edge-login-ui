@@ -1,9 +1,21 @@
-export const BUTTON_TEXT_SIZE = 16
-export const DEFAULT_FONT_TEXT_SIZE = 12
+import { Platform } from 'react-native'
 
-export const FONT_EXTRA = 'SourceSansPro-ExtraLight'
-export const FONT_LIGHT = 'SourceSansPro-Light'
-export const FONT_REGUALR = 'SourceSansPro-Regular'
-export const FONT_SEMIBOLD = 'SourceSansPro-Semibold'
-export const FONT_BOLD = 'SourceSansPro-Bold'
-export const FONT_BLACK = 'SourceSansPro-Black'
+const platform = Platform.OS
+const IOS = 'ios'
+const BUTTON_TEXT_SIZE = platform === IOS ? 16 : 12
+const DEFAULT_FONT_TEXT_SIZE = 12
+const FONT_REGULAR = 'SourceSansPro-Regular'
+const FONT_BLACK = 'SourceSansPro-Black'
+
+let FONTS = {
+  defaultButtonTextSize: BUTTON_TEXT_SIZE,
+  defaultFontSize: DEFAULT_FONT_TEXT_SIZE,
+  fontFamilyRegular: FONT_REGULAR,
+  fontFamilyBlack: FONT_BLACK
+}
+
+function updateFontStyles (obj) {
+
+}
+
+export {FONTS, updateFontStyles}
