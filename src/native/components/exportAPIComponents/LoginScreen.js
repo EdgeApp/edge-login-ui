@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import reducers from '../../../common/reducers'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
@@ -26,18 +26,24 @@ class LoginScreen extends Component {
 
   componentWillMount () {
     setLocal(this.props.locale, this.props.language)
+    const composeEnhancers = typeof window === 'object' &&
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'core-ui' })
+      : compose
     this.store = createStore(
       reducers,
       {},
-      applyMiddleware(
-        thunk.withExtraArgument({
-          context: this.props.context,
-          callback: this.props.onLogin,
-          accountOptions: this.props.accountOptions,
-          username: this.props.username,
-          locale: this.props.local,
-          language: this.props.language
-        })
+      composeEnhancers(
+        applyMiddleware(
+          thunk.withExtraArgument({
+            context: this.props.context,
+            callback: this.props.onLogin,
+            accountOptions: this.props.accountOptions,
+            username: this.props.username,
+            locale: this.props.local,
+            language: this.props.language
+          })
+        )
       )
     )
   }
