@@ -3,7 +3,7 @@ import * as Constants from '../../../common/constants/'
 import {
   MultiLineTextCheckBox
 } from '../../../common/styles/common/CheckboxStyles'
-import { vs, fontSize } from '../../../common/util'
+
 const TermsAndConditionsScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   header: Styles.HeaderContainerStyle,
@@ -12,12 +12,13 @@ const TermsAndConditionsScreenStyle = {
     alignItems: 'center'
   },
   instructionsContainer: {
-    height: vs(100),
+    height: 100,
     alignItems: 'center',
     justifyContent: 'space-around'
   },
   instructionsText: {
-    fontSize: fontSize(14),
+    fontSize: 14,
+    fontFamily: Constants.FONTS.fontFamilyRegular,
     textAlign: 'center'
   },
   instructionsSubShim: {
@@ -26,13 +27,14 @@ const TermsAndConditionsScreenStyle = {
   agreeText: {
     fontSize: Constants.FONTS.defaultFontSize,
     textAlign: 'center',
-    width: '80%'
+    width: '80%',
+    fontFamily: Constants.FONTS.fontFamilyRegular
   },
   midSection: {
-    height: vs(250)
+    height: 250
   },
   buttonContainer: {
-    height: vs(100),
+    height: 100,
     alignItems: 'center'
   },
   checkboxContainer: {
@@ -42,10 +44,10 @@ const TermsAndConditionsScreenStyle = {
   shim: {...Styles.shim, height: 10},
   checkboxes: MultiLineTextCheckBox,
   nextButton: {
-    upStyle: Styles.PrimaryButtonUpStyle,
+    upStyle: {...Styles.PrimaryButtonUpStyle, width: 240},
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: Styles.PrimaryButtonDownStyle
+    downStyle: {...Styles.PrimaryButtonDownStyle, width: 240}
   },
   termsButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,

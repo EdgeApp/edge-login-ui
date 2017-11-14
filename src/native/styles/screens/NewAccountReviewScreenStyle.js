@@ -1,5 +1,4 @@
 import * as Styles from '../'
-import { vs, fontSize } from '../../../common/util'
 import * as Constants from '../../../common/constants/'
 
 const NewAccountReviewScreenStyle = {
@@ -10,7 +9,7 @@ const NewAccountReviewScreenStyle = {
     alignItems: 'center'
   },
   instructionsContainer: {
-    height: vs(80),
+    height: 80,
     width: '80%',
     alignItems: 'center',
     justifyContent: 'space-around'
@@ -23,7 +22,7 @@ const NewAccountReviewScreenStyle = {
   },
   shim: { ...Styles.Shim, height: 10 },
   warningBoxContainer: {
-    height: vs(80),
+    height: 80,
     width: '100%',
     alignItems: 'center'
   },
@@ -49,8 +48,9 @@ const NewAccountReviewScreenStyle = {
       justifyContent: 'space-around'
     },
     text: {
-      fontSize: fontSize(10),
+      fontSize: Constants.FONTS.defaultFontSize,
       textAlign: 'center',
+      fontFamily: Constants.FONTS.fontFamilyRegular,
       color: Constants.GRAY_1
     },
     iconWrapBottom: {
@@ -81,7 +81,7 @@ const NewAccountReviewScreenStyle = {
     }
   },
   detailsContainer: {
-    height: vs(180),
+    height: 180,
     width: '80%'
   },
   accountDetailsBox: {
@@ -144,11 +144,12 @@ const NewAccountReviewScreenStyle = {
       borderColor: Constants.GRAY_4
     },
     accountText: {
-      fontSize: fontSize(12),
+      fontSize: Constants.FONTS.defaultFontSize + 1,
       color: Constants.GRAY_1
     },
     bottomWarningText: {
-      fontSize: fontSize(10),
+      fontSize: Constants.FONTS.defaultFontSize,
+      fontFamily: Constants.FONTS.fontFamilyRegular,
       color: Constants.ACCENT_RED,
       padding: 15
     }
