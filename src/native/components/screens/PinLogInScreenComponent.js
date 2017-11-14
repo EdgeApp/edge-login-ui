@@ -73,19 +73,19 @@ export default class PinLogInScreenComponent extends Component {
           <Button
             onPress={this.showDrop.bind(this)}
             label={this.props.username}
-            downStyle={style.forgotButton.downStyle}
-            downTextStyle={style.forgotButton.downTextStyle}
-            upStyle={style.forgotButton.upStyle}
-            upTextStyle={style.forgotButton.upTextStyle}
+            downStyle={style.usernameButton.downStyle}
+            downTextStyle={style.usernameButton.downTextStyle}
+            upStyle={style.usernameButton.upStyle}
+            upTextStyle={style.usernameButton.upTextStyle}
           />
           <FourDigitInputConnector style={style.fourPin} />
           <Button
             onPress={this.exitPin.bind(this)}
             label={'EXIT PIN'}
-            downStyle={style.forgotButton.downStyle}
-            downTextStyle={style.forgotButton.downTextStyle}
-            upStyle={style.forgotButton.upStyle}
-            upTextStyle={style.forgotButton.upTextStyle}
+            downStyle={style.exitButton.downStyle}
+            downTextStyle={style.exitButton.downTextStyle}
+            upStyle={style.exitButton.upStyle}
+            upTextStyle={style.exitButton.upTextStyle}
           />
         </View>
       )

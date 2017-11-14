@@ -67,11 +67,16 @@ const PinLoginScreenStyle = {
     }
   },
   fourPin: Styles.FourDotInputStyle,
-
-  forgotButton: {
+  usernameButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, color: Constants.WHITE},
-    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, color: Constants.WHITE},
+    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, color: Constants.WHITE, fontSize: 24},
+    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, color: Constants.WHITE, fontSize: 24},
+    downStyle: Styles.TextOnlyButtonDownStyle
+  },
+  exitButton: {
+    upStyle: Styles.TextOnlyButtonUpStyle,
+    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, color: Constants.WHITE, fontSize: 16},
+    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, color: Constants.WHITE, fontSize: 16},
     downStyle: Styles.TextOnlyButtonDownStyle
   }
 }
