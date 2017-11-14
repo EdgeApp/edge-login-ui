@@ -1,4 +1,3 @@
-import { fontSize } from '../../../common/util'
 import * as Constants from '../../constants/'
 const BasicCheckBoxWithLabel = {
   container: {
@@ -10,8 +9,9 @@ const BasicCheckBoxWithLabel = {
     flexDirection: 'row'
   },
   text: {
-    fontSize: fontSize(11),
-    color: Constants.GRAY_2
+    fontSize: 13,
+    color: Constants.GRAY_2,
+    fontFamily: Constants.FONTS.fontFamilyRegular
   },
   checkbox: {
     padding: 2
@@ -29,6 +29,7 @@ const BasicCheckBoxWithLabelAlignRight = {
   },
   text: {
     fontSize: Constants.FONTS.defaultFontSize,
+    fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Constants.GRAY_2
   },
   checkbox: {
@@ -43,8 +44,9 @@ const MultiLineTextCheckBox = {
     flexDirection: 'row'
   },
   text: {
-    fontSize: (Constants.FONTS.defaultFontSize + 2),
-    color: Constants.GRAY_2
+    fontSize: (Constants.FONTS.defaultFontSize + 4),
+    color: Constants.GRAY_2,
+    fontFamily: Constants.FONTS.fontFamilyRegular
   },
   checkbox: {
     position: 'relative',

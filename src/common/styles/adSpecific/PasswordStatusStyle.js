@@ -1,6 +1,6 @@
-import { vs, fontSize } from '../../util'
+import { vs } from '../../util'
 import { BasicCheckBoxWithLabel } from '../'
-import * as Colors from '../../constants/Colors'
+import * as Constants from '../../constants/'
 
 const PasswordStatusStyle = {
   container: {
@@ -8,12 +8,13 @@ const PasswordStatusStyle = {
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: Colors.GRAY_4
+    backgroundColor: Constants.GRAY_4
   },
   instructions: {
-    fontSize: fontSize(14),
+    fontSize: 14,
     textAlign: 'center',
-    width: '80%'
+    width: '80%',
+    fontFamily: Constants.FONTS.fontFamilyRegular
   },
   boxes: {
     flex: 5,
@@ -41,6 +42,7 @@ const PasswordStatusStyle = {
   checkboxes: BasicCheckBoxWithLabel,
   text: {
     textAlign: 'center',
+    fontFamily: Constants.FONTS.fontFamilyRegular,
     width: '80%',
     marginLeft: '10%',
     marginRight: '10%',

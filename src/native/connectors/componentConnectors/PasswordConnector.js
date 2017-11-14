@@ -15,16 +15,16 @@ export const mapStateToProps = (state, ownProps) => {
     showSecureCheckboxLabel: 'Show Password',
     label: label, // TODO localize
     returnKeyType: 'next',
-    autoFocus: ownProps.autoFocus,
-    onFinish: ownProps.onFinish,
-    onBlur: ownProps.onBlur,
-    onFocus: ownProps.onFocus
+    autoFocus: ownProps.autoFocus
   }
 }
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onChangeText: (data) => dispatch(actions.validatePassword(data))
+    onChangeText: (data) => dispatch(actions.validatePassword(data)),
+    onSubmitEditing: ownProps.onFinish,
+    onBlur: ownProps.onBlur,
+    onFocus: ownProps.onFocus
   }
 }
 
