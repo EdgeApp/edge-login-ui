@@ -9,6 +9,8 @@ import PasswordConfirmConnector
   from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import ChangePasswordModalConnector
   from '../../../connectors/abSpecific/ChangePasswordModalConnector'
+import PasswordStatusConnector
+  from '../../../connectors/abSpecific/PasswordStatusConnector'
 
 /* type Props = {
   styles: any,
@@ -32,6 +34,19 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
       this.setState({
         isProcessing: true
       })
+      if (!this.props.passwordStatus) {
+        // TODO Skip component
+        this.setState({
+          isProcessing: false
+        })
+        return
+      }
+      if (this.props.error !== '' || this.props.error2 !== '') {
+        this.setState({
+          isProcessing: false
+        })
+        return
+      }
       this.props.changePassword(this.props.password)
     }
     this.renderHeader = (style) => {
@@ -43,6 +58,7 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
     this.renderInterior = (styles) => {
       return (
         <View style={styles.innerView}>
+          <PasswordStatusConnector style={styles.status} />
           <PasswordConnector
             style={styles.inputBox}
             autoFocus={this.state.focusFirst}

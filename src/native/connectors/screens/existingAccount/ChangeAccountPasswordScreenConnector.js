@@ -4,6 +4,8 @@ import * as actions from '../../../../common/actions'
 import * as Constants from '../../../../common/constants'
 
 export const mapStateToProps = (state, ownProps) => {
+  const error = state.create.confirmPasswordErrorMessage ? state.create.confirmPasswordErrorMessage : ''
+  const error2 = state.create.createPasswordErrorMessage ? state.create.createPasswordErrorMessage : ''
   return {
     styles: ownProps.styles,
     password: state.create.password,
@@ -12,7 +14,9 @@ export const mapStateToProps = (state, ownProps) => {
     createPasswordErrorMessage: state.create.createPasswordErrorMessage,
     workflow: state.workflow,
     showHeader: ownProps.showHeader,
-    showModal: state.create.showModal
+    showModal: state.create.showModal,
+    error,
+    error2
   }
 }
 
