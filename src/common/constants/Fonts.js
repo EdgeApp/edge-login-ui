@@ -4,14 +4,13 @@ const platform = Platform.OS
 const IOS = 'ios'
 const BUTTON_TEXT_SIZE = platform === IOS ? 16 : 16
 const DEFAULT_FONT_TEXT_SIZE = 12
-const FONT_REGULAR = 'SourceSansPro-Regular'
-const FONT_BLACK = 'SourceSansPro-Black'
+const SYSTEM = 'System'
 
 let FONTS = {
   defaultButtonTextSize: BUTTON_TEXT_SIZE,
   defaultFontSize: DEFAULT_FONT_TEXT_SIZE,
-  fontFamilyRegular: FONT_REGULAR,
-  fontFamilyBlack: FONT_BLACK
+  fontFamilyRegular: SYSTEM,
+  fontFamilyBlack: SYSTEM
 }
 
 const updateFontStyles = (obj) => {
