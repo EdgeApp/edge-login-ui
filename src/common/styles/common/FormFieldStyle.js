@@ -178,9 +178,13 @@ const MaterialInputWithDrop = {
     width: Constants.LOGIN_LABEL_WIDTH,
     minHeight: Constants.LOGIN_LABEL_HEIGHT
   },
-  materialInput: MaterialInput,
+  materialInput: {...MaterialInput,
+    container: {...MaterialInput.container,
+      width: '144%'
+    }
+  },
   searchContainer: {
-    width: '100%',
+    width: '144%',
     minHeight: 100,
     maxHeight: 200
   },
