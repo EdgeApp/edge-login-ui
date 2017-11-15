@@ -175,8 +175,7 @@ const MaterialInput = {
 const MaterialInputWithDrop = {
   container: {
     position: 'relative',
-    width: Constants.LOGIN_LABEL_WIDTH,
-    minHeight: Constants.LOGIN_LABEL_HEIGHT
+    width: Constants.LOGIN_LABEL_WIDTH
   },
   materialInput: {...MaterialInput,
     container: {...MaterialInput.container,
@@ -184,9 +183,12 @@ const MaterialInputWithDrop = {
     }
   },
   searchContainer: {
+    position: 'absolute',
+    top: Constants.LOGIN_LABEL_HEIGHT + 8,
     width: '144%',
-    minHeight: 100,
-    maxHeight: 200
+    zIndex: 100,
+    backgroundColor: Constants.ACCENT_ORANGE
+
   },
   row: {
    // backgroundColor: THEME.COLORS.WHITE, padding: 10
