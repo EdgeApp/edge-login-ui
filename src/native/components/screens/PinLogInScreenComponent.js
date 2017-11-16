@@ -65,9 +65,6 @@ export default class PinLogInScreenComponent extends Component {
       </View>
     )
   }
-  setFourDigit (ref) {
-    ref.refocus()
-  }
 
   renderBottomHalf (style) {
     if (this.state.focusOn === 'pin') {
@@ -81,7 +78,7 @@ export default class PinLogInScreenComponent extends Component {
             upStyle={style.usernameButton.upStyle}
             upTextStyle={style.usernameButton.upTextStyle}
           />
-          <FourDigitInputConnector style={style.fourPin} ref={this.setFourDigit.bind(this)} />
+          <FourDigitInputConnector style={style.fourPin} />
           <Button
             onPress={this.exitPin.bind(this)}
             label={'EXIT PIN'}

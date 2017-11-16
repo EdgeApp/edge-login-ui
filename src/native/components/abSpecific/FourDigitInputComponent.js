@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native'
 import { Spinner } from '../common'
+import * as Constants from '../../../common/constants'
 
 /* type Props = {
   style: any,
@@ -47,6 +48,8 @@ class FourDigitInputComponent extends Component {
               maxLength={4}
               keyboardType='numeric'
               value={this.props.pin}
+              onFocus={this.onFocus.bind(this)}
+              onBlur={this.onBlur.bind(this)}
               autoFocus
             />
           </View>
@@ -57,22 +60,47 @@ class FourDigitInputComponent extends Component {
       </TouchableWithoutFeedback>
     )
   }
+  onFocus () {
+    this.setState({
+      isFocused: true
+    })
+  }
+  onBlur () {
+    this.setState({
+      isFocused: false
+    })
+  }
   refocus () {
     this.setState({
-      autoFocus: true
+      autoFocus: true,
+      isFocused: false
     })
+  }
+  renderCircleTest (style) {
+    if (this.state.isFocused) {
+      return {...style, borderColor: Constants.ACCENT_RED}
+    }
+    return style
   }
   renderDotContainer (style) {
     const pinLength = this.props.pin ? this.props.pin.length : 0
     if ((pinLength === 4 || this.state.touchId) && this.props.autoLogIn) {
       return <Spinner />
     }
-    return (
+    /* return (
       <View style={style.dotContainer}>
         <View style={[style.circle, pinLength > 0 && style.circleSected]} />
         <View style={[style.circle, pinLength > 1 && style.circleSected]} />
         <View style={[style.circle, pinLength > 2 && style.circleSected]} />
         <View style={[style.circle, pinLength > 3 && style.circleSected]} />
+      </View>
+    ) */
+    return (
+      <View style={style.dotContainer}>
+        <View style={[this.renderCircleTest(style.circle), pinLength > 0 && style.circleSected]} />
+        <View style={[this.renderCircleTest(style.circle), pinLength > 1 && style.circleSected]} />
+        <View style={[this.renderCircleTest(style.circle), pinLength > 2 && style.circleSected]} />
+        <View style={[this.renderCircleTest(style.circle), pinLength > 3 && style.circleSected]} />
       </View>
     )
   }
