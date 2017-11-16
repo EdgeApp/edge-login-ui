@@ -12,7 +12,7 @@ class FourDigitInputComponent extends Component {
 
   componentWillMount () {
     this.setState({
-      autoFocus: true,
+      autoFocus: false,
       touchId: false,
       circleColor: Constants.WHITE
     })
@@ -43,6 +43,13 @@ class FourDigitInputComponent extends Component {
     }
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide)
+
+    setTimeout(() => {
+      this.inputRef.focus()
+      this.setState({
+        autoFocus: true
+      })
+    }, 1000)
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.isLogginginWithPin) {
@@ -52,6 +59,7 @@ class FourDigitInputComponent extends Component {
     }
   }
   render () {
+    console.log('State ' + this.state.autoFocus)
     const Style = this.props.style
     return (
       <TouchableWithoutFeedback onPress={this.refocus.bind(this)} >
@@ -67,7 +75,7 @@ class FourDigitInputComponent extends Component {
               value={this.props.pin}
               onFocus={this.onFocus.bind(this)}
               onBlur={this.onBlur.bind(this)}
-              autoFocus
+              autoFocus={this.state.autoFocus}
               keyboardShouldPersistTaps
             />
           </View>
