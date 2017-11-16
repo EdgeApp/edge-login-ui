@@ -16,11 +16,6 @@ class FourDigitInputComponent extends Component {
     })
     this.loadedInput = (ref) => {
       if (ref) {
-        console.log('I have loaded ')
-        console.log('I have loaded ')
-        console.log('I have loaded ')
-        console.log('I have loaded ')
-        console.log('I have loaded ')
         this.inputRef = ref
         this.inputRef.focus()
       }
