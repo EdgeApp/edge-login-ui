@@ -1,6 +1,7 @@
 import * as Styles from '../'
 import * as Colors from '../../../common/constants/Colors'
-import {vs, fontSize} from '../../../common/util'
+import * as Constants from '../../../common/constants/'
+
 const CreatingAccountWaitScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   header: Styles.HeaderContainerStyle,
@@ -10,37 +11,39 @@ const CreatingAccountWaitScreenStyle = {
   },
   topPad: {
     width: '100%',
-    height: vs(35)
+    height: 35
   },
   iconContianer: {
     width: '100%',
-    height: vs(80),
+    height: 80,
     alignItems: 'center',
     justifyContent: 'space-around'
   },
   headlineConainer: {
     width: '100%',
-    height: vs(55),
+    height: 55,
     alignItems: 'center',
     justifyContent: 'space-around'
   },
   bodyCopyContainer: {
     width: '100%',
-    height: vs(35),
+    height: 35,
     alignItems: 'center',
     justifyContent: 'space-around'
   },
   encriptingContainer: {
     width: '100%',
-    height: vs(50),
+    height: 50,
     alignItems: 'center',
     justifyContent: 'space-around'
   },
   headlineText: {
-    fontSize: fontSize(17)
+    fontSize: 17,
+    fontFamily: Constants.FONTS.fontFamilyRegular
   },
   bodyText: {
-    fontSize: fontSize(14),
+    fontSize: 14,
+    fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Colors.GRAY_2
   }
 }
