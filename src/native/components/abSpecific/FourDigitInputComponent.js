@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { Spinner } from '../common'
 import * as Constants from '../../../common/constants'
 
@@ -11,15 +11,28 @@ import * as Constants from '../../../common/constants'
 class FourDigitInputComponent extends Component {
 
   componentWillMount () {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide)
     this.setState({
       autoFocus: true,
-      touchId: false
+      touchId: false,
+      circleColor: Constants.WHITE
     })
     this.loadedInput = (ref) => {
       if (ref) {
         this.inputRef = ref
         this.inputRef.focus()
       }
+    }
+    this._keyboardDidShow = () => {
+      this.setState({
+        circleColor: Constants.ACCENT_ORANGE
+      })
+    }
+    this._keyboardDidShow = () => {
+      this.setState({
+        circleColor: Constants.ACCENT_RED
+      })
     }
   }
   componentDidMount () {
@@ -37,7 +50,7 @@ class FourDigitInputComponent extends Component {
   render () {
     const Style = this.props.style
     return (
-      <TouchableWithoutFeedback onPress={this.refocus.bind(this)}>
+      <TouchableWithoutFeedback onPress={this.refocus.bind(this)} >
         <View style={Style.container}>
           <View style={Style.interactiveContainer}>
             {this.renderDotContainer(Style)}
@@ -51,6 +64,7 @@ class FourDigitInputComponent extends Component {
               onFocus={this.onFocus.bind(this)}
               onBlur={this.onBlur.bind(this)}
               autoFocus
+              keyboardShouldPersistTaps
             />
           </View>
           <View style={Style.errorContainer}>
@@ -61,26 +75,27 @@ class FourDigitInputComponent extends Component {
     )
   }
   onFocus () {
+    this.inputRef.focus()
     this.setState({
       isFocused: true
     })
   }
   onBlur () {
+    this.inputRef.focus()
     this.setState({
-      isFocused: false
+      isFocused: false,
+      circleColor: Constants.BLACK
     })
   }
   refocus () {
+    this.inputRef.focus()
     this.setState({
       autoFocus: true,
       isFocused: false
     })
   }
   renderCircleTest (style) {
-    if (this.state.isFocused) {
-      return {...style, borderColor: Constants.ACCENT_RED}
-    }
-    return style
+    return {...style, borderColor: this.state.circleColor}
   }
   renderDotContainer (style) {
     const pinLength = this.props.pin ? this.props.pin.length : 0
