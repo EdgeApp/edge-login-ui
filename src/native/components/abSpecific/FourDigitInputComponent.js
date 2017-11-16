@@ -13,6 +13,11 @@ class FourDigitInputComponent extends Component {
       autoFocus: true,
       touchId: false
     })
+    this.loadedInput = (ref) => {
+      if (ref) {
+        ref.focus()
+      }
+    }
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.isLogginginWithPin) {
@@ -29,12 +34,13 @@ class FourDigitInputComponent extends Component {
           <View style={Style.interactiveContainer}>
             {this.renderDotContainer(Style)}
             <TextInput
+              ref={this.loadedInput}
               style={Style.input}
               onChangeText={this.updatePin.bind(this)}
               maxLength={4}
               keyboardType='numeric'
               value={this.props.pin}
-              autoFocus={this.state.autoFocus}
+              autoFocus
             />
           </View>
           <View style={Style.errorContainer}>
