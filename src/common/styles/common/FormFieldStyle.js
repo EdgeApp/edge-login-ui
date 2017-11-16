@@ -4,7 +4,7 @@ const MaterialInput = {
   container: {
     position: 'relative',
     width: Constants.LOGIN_LABEL_WIDTH,
-    overflow: 'visible'
+    minHeight: Constants.LOGIN_LABEL_HEIGHT
   },
   baseColor: Constants.WHITE,
   tintColor: Constants.ACCENT_MINT,
@@ -21,7 +21,8 @@ const MaterialInput = {
 const MaterialInputWithDrop = {
   container: {
     position: 'relative',
-    width: Constants.LOGIN_LABEL_WIDTH
+    width: Constants.LOGIN_LABEL_WIDTH,
+    minHeight: Constants.LOGIN_LABEL_HEIGHT
   },
   materialInput: {...MaterialInput,
     container: {...MaterialInput.container,
@@ -29,11 +30,9 @@ const MaterialInputWithDrop = {
     }
   },
   searchContainer: {
-    position: 'absolute',
-    top: Constants.LOGIN_LABEL_HEIGHT + 8,
     width: '144%',
-    zIndex: 100,
-    maxHeight: Constants.DROP_LABEL_HEIGHT * 4
+    minHeight: 0,
+    backgroundColor: Constants.ACCENT_ORANGE
 
   },
   row: {

@@ -11,7 +11,7 @@ export const BUTTON_BORDER_RADIUS = 3
 export const LOGIN_LABEL_WIDTH = '70%'
 export const LOGIN_LABEL_HEIGHT = 60
 export const LOGIN_TEXT_ONLY_BUTTON_TEXT_HEIGHT = 14
-export const DROP_LABEL_HEIGHT = 30
+export const DROP_LABEL_HEIGHT = 40
 
 // Create Username
 export const USERNAME_INSTRUCTIONS_HEIGHT = 90
