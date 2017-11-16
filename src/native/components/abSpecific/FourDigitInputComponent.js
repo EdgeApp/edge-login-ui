@@ -8,6 +8,7 @@ import { Spinner } from '../common'
 } */
 
 class FourDigitInputComponent extends Component {
+
   componentWillMount () {
     this.setState({
       autoFocus: true,
@@ -15,8 +16,19 @@ class FourDigitInputComponent extends Component {
     })
     this.loadedInput = (ref) => {
       if (ref) {
-        ref.focus()
+        console.log('I have loaded ')
+        console.log('I have loaded ')
+        console.log('I have loaded ')
+        console.log('I have loaded ')
+        console.log('I have loaded ')
+        this.inputRef = ref
+        this.inputRef.focus()
       }
+    }
+  }
+  componentDidMount () {
+    if (this.inputRef) {
+      this.inputRef.focus()
     }
   }
   componentWillReceiveProps (nextProps) {
