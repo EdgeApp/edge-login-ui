@@ -57,9 +57,6 @@ const TermsAndConditionsScreenStyle = {
       fontSize: Constants.FONTS.defaultFontSize },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
-  inputBox: {
-    ...Styles.FormFieldStyle
-  },
   inputShim: { ...Styles.Shim, height: 20 }
 }
 

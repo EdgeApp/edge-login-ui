@@ -26,10 +26,10 @@ const NewAccountPasswordScreenStyle = {
     downStyle: Styles.PrimaryButtonDownStyle
   },
   inputBox: {
-    ...Styles.FormFieldStyle
+    ...Styles.MaterialInputOnWhite
   },
 
-  inputShim: {...Styles.Shim, height: 20},
+  inputShim: {...Styles.Shim, height: 30},
   modal: Styles.SkipModalStyle
 }
 
