@@ -11,8 +11,6 @@ import * as Constants from '../../../common/constants'
 class FourDigitInputComponent extends Component {
 
   componentWillMount () {
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide)
     this.setState({
       autoFocus: true,
       touchId: false,
@@ -29,11 +27,13 @@ class FourDigitInputComponent extends Component {
         circleColor: Constants.ACCENT_ORANGE
       })
     }
-    this._keyboardDidShow = () => {
+    this._keyboardDidHide = () => {
       this.setState({
         circleColor: Constants.ACCENT_RED
       })
     }
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide)
   }
   componentDidMount () {
     if (this.inputRef) {

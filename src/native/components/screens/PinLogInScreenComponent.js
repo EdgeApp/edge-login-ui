@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View } from 'react-native'
 import { BackgroundImage, Button, ScrollingList, ImageButton } from '../../components/common'
 import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
 import FourDigitInputConnector
@@ -56,13 +56,13 @@ export default class PinLogInScreenComponent extends Component {
       return null
     }
     return (
-      <ScrollView style={PinLoginScreenStyle.featureBox} keyboardShouldPersistTaps>
+      <View style={PinLoginScreenStyle.featureBox}>
         <LogoImageHeader style={PinLoginScreenStyle.logoHeader} />
         <View style={PinLoginScreenStyle.featureBoxBody}>
           {this.renderBottomHalf(PinLoginScreenStyle)}
         </View>
         {this.renderTouchButton(PinLoginScreenStyle)}
-      </ScrollView>
+      </View>
     )
   }
 
