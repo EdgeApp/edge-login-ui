@@ -84,7 +84,7 @@ class FourDigitInputComponent extends Component {
     this.inputRef.focus()
     this.setState({
       isFocused: false,
-      circleColor: Constants.BLACK
+      circleColor: Constants.WHITE
     })
   }
   refocus () {
@@ -95,21 +95,14 @@ class FourDigitInputComponent extends Component {
     })
   }
   renderCircleTest (style) {
-    return {...style, borderColor: this.state.circleColor}
+    return style
+    // return {...style, borderColor: this.state.circleColor}
   }
   renderDotContainer (style) {
     const pinLength = this.props.pin ? this.props.pin.length : 0
     if ((pinLength === 4 || this.state.touchId) && this.props.autoLogIn) {
       return <Spinner />
     }
-    /* return (
-      <View style={style.dotContainer}>
-        <View style={[style.circle, pinLength > 0 && style.circleSected]} />
-        <View style={[style.circle, pinLength > 1 && style.circleSected]} />
-        <View style={[style.circle, pinLength > 2 && style.circleSected]} />
-        <View style={[style.circle, pinLength > 3 && style.circleSected]} />
-      </View>
-    ) */
     return (
       <View style={style.dotContainer}>
         <View style={[this.renderCircleTest(style.circle), pinLength > 0 && style.circleSected]} />
