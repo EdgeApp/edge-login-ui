@@ -22,6 +22,15 @@ class FourDigitInputComponent extends Component {
         this.inputRef.focus()
       }
     }
+  }
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove()
+    this.keyboardDidHideListener.remove()
+  }
+  componentDidMount () {
+    if (this.inputRef) {
+      this.inputRef.focus()
+    }
     this._keyboardDidShow = () => {
       this.setState({
         circleColor: Constants.ACCENT_ORANGE
@@ -34,11 +43,6 @@ class FourDigitInputComponent extends Component {
     }
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide)
-  }
-  componentDidMount () {
-    if (this.inputRef) {
-      this.inputRef.focus()
-    }
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.isLogginginWithPin) {
