@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native'
 import { Spinner } from '../common'
 import * as Constants from '../../../common/constants'
 
@@ -22,7 +22,7 @@ class FourDigitInputComponent extends Component {
         this.inputRef.focus()
       }
     }
-    this._keyboardDidShow = () => {
+    /* this._keyboardDidShow = () => {
       this.setState({
         circleColor: Constants.ACCENT_ORANGE
       })
@@ -33,7 +33,7 @@ class FourDigitInputComponent extends Component {
       })
     }
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide)
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide) */
   }
   componentDidMount () {
     if (this.inputRef) {
@@ -83,8 +83,7 @@ class FourDigitInputComponent extends Component {
   onBlur () {
     this.inputRef.focus()
     this.setState({
-      isFocused: false,
-      circleColor: Constants.BLACK
+      isFocused: false
     })
   }
   refocus () {

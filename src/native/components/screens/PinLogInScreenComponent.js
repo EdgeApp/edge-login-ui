@@ -40,6 +40,7 @@ export default class PinLogInScreenComponent extends Component {
           src={Assets.LOGIN_BACKGROUND}
           style={PinLoginScreenStyle.backgroundImage}
           content={this.renderOverImage()}
+          enableTouch={false}
         />
       </View>
     )
