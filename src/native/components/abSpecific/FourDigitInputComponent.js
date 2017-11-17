@@ -49,7 +49,7 @@ class FourDigitInputComponent extends Component {
       this.setState({
         autoFocus: true
       })
-    }, 1000)
+    }, 2000)
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.isLogginginWithPin) {
