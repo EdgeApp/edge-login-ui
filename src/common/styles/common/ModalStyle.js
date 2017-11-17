@@ -46,21 +46,13 @@ const ModalStyle = {
     left: screenDimensions.width / 2 - 27,
     top: screenDimensions.height / 8 - 28,
     borderRadius: 27,
-    backgroundColor: Constants.PRIMARY,
+    borderWidth: 2,
+    borderColor: Constants.PRIMARY,
+    backgroundColor: Constants.WHITE,
     height: 54,
     width: 54,
-    zIndex: 50
-  },
-  modalHeaderIconWrapTop: {
-    position: 'relative',
-    top: 3,
-    left: 3,
-    borderRadius: 27,
-    backgroundColor: Constants.WHITE,
-    zIndex: 100,
-    elevation: 100,
-    height: 48,
-    width: 48,
+    zIndex: 50,
+    overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'space-around'
   },
@@ -73,7 +65,8 @@ const ModalStyle = {
   iconSize: 30,
   iconStyle: {
     color: Constants.PRIMARY,
-    backgroundColor: Constants.TRANSPARENT
+    backgroundColor: Constants.TRANSPARENT,
+    overflow: 'hidden'
   },
   modalBody: {
     position: 'relative',
