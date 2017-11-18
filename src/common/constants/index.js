@@ -51,3 +51,6 @@ export const DELETE_USER_FROM_DEVICE = 'deleteUserFromDevice'
 // Change Password Pin Actions =
 export const LAUNCH_NOTIFICATION_MODAL = 'launchNotificationmodal'
 export const CLOSE_NOTIFICATION_MODAL = 'closeNotificationmodal'
+
+export const RESET_APP = 'resetApplication'
+

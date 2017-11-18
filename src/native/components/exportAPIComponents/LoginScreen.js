@@ -6,7 +6,7 @@ import thunk from 'redux-thunk'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
 import { setLocal } from '../../../common/locale'
-import {updateFontStyles} from '../../../common/constants/Fonts'
+import { updateFontStyles } from '../../../common/constants/Fonts'
 
 /* type Props = {
   context: any,

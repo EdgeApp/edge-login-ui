@@ -2,28 +2,23 @@ import * as Constants from '../constants'
 import { dispatchAction, dispatchActionWithData } from './'
 import { enableTouchId, loginWithTouchId } from '../../native/keychain.js'
 
-/* export function loginPIN (data) {
-  return {
-    type: Constants.LOG_IN_PIN,
-    data
-  }
-} */
-
-export function testAction (data) {
-  return (dispatch, getState, imports) => {
-    dispatch(dispatchActionWithData('JUST A TEST DO NOTHING', data))
-  }
-}
-
 /**
  * Make it Thunky
  */
 
 export function userLoginWithTouchId (data) {
   return (dispatch, getState, imports) => {
-    let context = imports.context
-    let callback = imports.callback
-    let accountOptions = imports.accountOptions
+    const context = imports.context
+    const callback = imports.callback
+    const myAccountOptions = {
+      ...imports.accountOptions,
+      callbacks: {
+        ...imports.accountOptions.callbacks,
+        onLoggedOut: () => {
+          dispatch(dispatchAction(Constants.RESET_APP))
+        }
+      }
+    }
     const startFunction = () => {
       dispatch(dispatchAction(Constants.AUTH_LOGGING_IN_WITH_PIN))
     }
@@ -32,7 +27,7 @@ export function userLoginWithTouchId (data) {
       data.username,
       'Touch to login user: `' + data.username + '`',
       null,
-      accountOptions,
+      myAccountOptions,
       startFunction
     ).then(async response => {
       if (response) {
@@ -50,14 +45,22 @@ export function userLoginWithTouchId (data) {
 }
 export function userLoginWithPin (data) {
   return (dispatch, getState, imports) => {
-    let context = imports.context
-    let callback = imports.callback
-    let accountOptions = imports.accountOptions
+    const context = imports.context
+    const callback = imports.callback
+    const myAccountOptions = {
+      ...imports.accountOptions,
+      callbacks: {
+        ...imports.accountOptions.callbacks,
+        onLoggedOut: () => {
+          dispatch(dispatchAction(Constants.RESET_APP))
+        }
+      }
+    }
     dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PIN, data.pin))
     if (data.pin.length === 4) {
       setTimeout(() => {
         context
-          .loginWithPIN(data.username, data.pin, accountOptions)
+          .loginWithPIN(data.username, data.pin, myAccountOptions)
           .then(async response => {
             enableTouchId(response)
             await context.io.folder
@@ -90,14 +93,22 @@ export function userLoginWithPin (data) {
 
 export function userLogin (data) {
   return (dispatch, getState, imports) => {
-    let context = imports.context
-    let callback = imports.callback
-    let accountOptions = imports.accountOptions
+    const context = imports.context
+    const callback = imports.callback
+    const myAccountOptions = {
+      ...imports.accountOptions,
+      callbacks: {
+        ...imports.accountOptions.callbacks,
+        onLoggedOut: () => {
+          dispatch(dispatchAction(Constants.RESET_APP))
+        }
+      }
+    }
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     setTimeout(() => {
       context
-        .loginWithPassword(data.username, data.password, accountOptions)
+        .loginWithPassword(data.username, data.password, myAccountOptions)
         .then(async response => {
           await context.io.folder
             .file('lastuser.json')
