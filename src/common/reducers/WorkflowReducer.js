@@ -95,6 +95,8 @@ export default function (state = initialState, action) {
       return { ...state, showModal: false, modalView: null }
     case Constants.WORKFLOW_CANCEL_BETA_MODAL:
       return {...state, betaModal: false}
+    case Constants.RESET_APP:
+      return {initialState}
     default:
       return state
   }

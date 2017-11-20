@@ -139,6 +139,10 @@ export function createUser (data) {
             dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, response)
           )
           dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
+          await context.io.folder
+            .file('lastuser.json')
+            .setText(JSON.stringify({ username: data.username }))
+            .catch(e => null)
         })
         .catch(e => {
           console.log(e)

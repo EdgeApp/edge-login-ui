@@ -56,7 +56,8 @@ export default function (state = initialState, action) {
         confirmPassword: action.data.password,
         confirmPasswordErrorMessage: action.data.error
       }
-
+    case Constants.RESET_APP:
+      return {initialState}
     default:
       return state
   }
