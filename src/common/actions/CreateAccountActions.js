@@ -128,12 +128,20 @@ export function validatePassword (data) {
 
 export function createUser (data) {
   return (dispatch, getState, imports) => {
-    let context = imports.context
-    let accountOptions = imports.accountOptions
+    const context = imports.context
+    const myAccountOptions = {
+      ...imports.accountOptions,
+      callbacks: {
+        ...imports.accountOptions.callbacks,
+        onLoggedOut: () => {
+          dispatch(dispatchAction(Constants.RESET_APP))
+        }
+      }
+    }
     dispatch(WorkflowActions.nextScreen())
     setTimeout(() => {
       context
-        .createAccount(data.username, data.password, data.pin, accountOptions)
+        .createAccount(data.username, data.password, data.pin, myAccountOptions)
         .then(async response => {
           dispatch(
             dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, response)
