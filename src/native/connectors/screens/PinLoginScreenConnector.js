@@ -10,7 +10,8 @@ export const mapStateToProps = (state, ownProps) => {
     loginSuccess: state.login.loginSuccess,
     previousUsers: state.previousUsers.userList,
     usersWithPin: state.previousUsers.usersWithPinList,
-    workflow: state.workflow
+    workflow: state.workflow,
+    showModal: state.workflow.showModal
   }
 }
 
@@ -22,6 +23,9 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
       ),
     userLogin: data => dispatch(actions.userLoginWithPin(data)),
     launchUserLoginWithTouchId: (data) => dispatch(actions.userLoginWithTouchId(data)),
+    deleteUserFromDevice: data => dispatch(actions.deleteUserFromDevice(data)),
+    launchDeleteModal: () =>
+      dispatch(actions.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL)),
     gotoLoginPage: () =>
       dispatch(actions.startWorkflow(Constants.WORKFLOW_PASSWORD))
   }

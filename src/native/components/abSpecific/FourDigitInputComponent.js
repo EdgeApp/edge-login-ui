@@ -44,12 +44,10 @@ class FourDigitInputComponent extends Component {
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide)
 
-    setTimeout(() => {
-      this.inputRef.focus()
-      this.setState({
-        autoFocus: true
-      })
-    }, 2000)
+    this.inputRef.focus()
+    this.setState({
+      autoFocus: true
+    })
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.isLogginginWithPin) {

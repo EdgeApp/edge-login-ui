@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { BackgroundImage, Button, ScrollingList, ImageButton } from '../../components/common'
+import { BackgroundImage, Button, DropDownList, ImageButton } from '../../components/common'
 import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
 import FourDigitInputConnector
   from '../../connectors/abSpecific/FourDigitInputConnector'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
+import DeleteUserConnector
+from '../../../native/connectors/abSpecific/DeleteUserConnector'
 
 export default class PinLogInScreenComponent extends Component {
   componentWillMount () {
@@ -15,7 +17,6 @@ export default class PinLogInScreenComponent extends Component {
       focusOn: 'pin'
     })
     this.relaunchTouchId = () => {
-      console.log('BUTTON PRESSEd ')
       this.props.launchUserLoginWithTouchId({username: this.props.username})
     }
     this.renderTouchButton = (style) => {
@@ -23,6 +24,17 @@ export default class PinLogInScreenComponent extends Component {
         return <ImageButton style={style.thumbprintButton}
           source={Assets.TOUCH}
           onPress={this.relaunchTouchId} />
+      }
+      return null
+    }
+    this.renderModal = (style) => {
+      if (this.props.showModal) {
+        return (
+          <DeleteUserConnector
+            style={style.modal.skip}
+            username={this.state.username}
+          />
+        )
       }
       return null
     }
@@ -63,6 +75,7 @@ export default class PinLogInScreenComponent extends Component {
           {this.renderBottomHalf(PinLoginScreenStyle)}
         </View>
         {this.renderTouchButton(PinLoginScreenStyle)}
+        {this.renderModal(PinLoginScreenStyle)}
       </View>
     )
   }
@@ -93,10 +106,10 @@ export default class PinLogInScreenComponent extends Component {
     }
     return (
       <View style={style.innerView}>
-        <ScrollingList
+        <DropDownList
           style={style.listView}
-          getListItemsFunction={this.renderItems.bind(this)}
-          dataList={this.props.usersWithPin}
+          data={this.props.usersWithPin}
+          renderRow={this.renderItems.bind(this)}
         />
       </View>
     )
@@ -109,12 +122,19 @@ export default class PinLogInScreenComponent extends Component {
     const { PinLoginScreenStyle } = this.props.styles
     return (
       <UserListItem
-        key={'key ' + item}
-        data={item}
+        data={item.item}
         style={PinLoginScreenStyle.listItem}
         onClick={this.selectUser.bind(this)}
+        onDelete={this.deleteUser.bind(this)}
       />
     )
+  }
+  deleteUser (arg) {
+    this.setState({
+      focusOn: 'pin',
+      username: arg
+    })
+    this.props.launchDeleteModal()
   }
   selectUser (arg) {
     this.props.launchUserLoginWithTouchId({username: arg})

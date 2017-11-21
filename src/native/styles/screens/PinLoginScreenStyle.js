@@ -52,10 +52,35 @@ const PinLoginScreenStyle = {
       flexDirection: 'row',
       alignItems: 'center'
     },
+    textComtainer: {
+      flex: 25,
+      height: '100%',
+      flexDirection: 'column',
+      justifyContent: 'space-around'
+    },
+    iconButton: {
+      container: {
+        flex: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        height: '100%'
+      },
+      icon: {
+        color: Constants.WHITE
+      },
+      iconPressed: {
+        color: Constants.WHITE
+      },
+      iconSize: Constants.FONTS.defaultFontSize,
+      underlayColor: Constants.TRANSPARENT
+    },
     text: {
       paddingLeft: 20,
       color: Constants.WHITE,
-      backgroundColor: Constants.TRANSPARENT
+      backgroundColor: Constants.TRANSPARENT,
+      fontFamily: Constants.FONTS.fontFamilyRegular,
+      fontSize: Constants.FONTS.defaultFontSize
     }
   },
   dropInput: {
@@ -78,7 +103,8 @@ const PinLoginScreenStyle = {
     upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, color: Constants.WHITE, fontSize: 16},
     downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, color: Constants.WHITE, fontSize: 16},
     downStyle: Styles.TextOnlyButtonDownStyle
-  }
+  },
+  modal: Styles.SkipModalStyle
 }
 
 export { PinLoginScreenStyle }
