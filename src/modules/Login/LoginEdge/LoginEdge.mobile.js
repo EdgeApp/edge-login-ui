@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './LoginEdge.mobileStyle.scss'
 import QRCode from './QRCode.js'
+import t from 'lib/web/LocaleStrings'
 
 export default ({
   view,
@@ -48,8 +49,7 @@ export default ({
       </div>
       <div className={styles.rectangle}>
         <p className={styles.text}>
-          Tap to login with the <br />
-          Airbitz mobile wallet
+          {t('string_scan_barcode_to_register')}<br />{t('string_scan_barcode_edge_wallet')}
         </p>
       </div>
       {renderQRCode()}

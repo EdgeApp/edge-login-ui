@@ -58,8 +58,9 @@ const strings = {
   string_wallet: 'Wallet',
   string_capitalize_back: 'Back',
   string_capitalize_exit: 'Exit',
-  string_scan_barcode_to_register: 'Scan or Tap to Sign Up with the Edge Wallet:',
-  string_scan_barcode_to_signin: 'Scan or Tap To Log In with the Edge Wallet:',
+  string_scan_barcode_to_register: 'Scan or Tap to Sign Up with',
+  string_scan_barcode_to_signin: 'Scan or Tap To Log In with',
+  string_scan_barcode_edge_wallet: 'the Edge Wallet:',
 
   loading_wallets: 'Loading Wallets...\nThis may take a few minutes as it is the first time logging into this device.',
   loading_n_wallets: 'Loading %1$d of %2$d wallets.\nThis may take a few minutes as it is the first time logging into this device.',

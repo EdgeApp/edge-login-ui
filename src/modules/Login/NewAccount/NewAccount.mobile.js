@@ -37,8 +37,7 @@ export default ({
     <div className={styles.container}>
       <div className={styles.rectangle}>
         <p className={styles.text}>
-          Tap to login with the <br />
-          Airbitz mobile wallet
+          Edge vs Airbitz
         </p>
       </div>
       {renderQRCode()}
