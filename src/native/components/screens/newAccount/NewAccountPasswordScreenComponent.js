@@ -123,6 +123,13 @@ export default class NewAccountPasswordScreenComponent extends Component {
       })
       return
     }
+    if (this.props.password && this.props.password !== this.props.confirmPassword) {
+      this.setState({
+        isProcessing: false
+      })
+      this.props.checkTheConfirmPassword()
+      return
+    }
     this.props.nextScreen()
   }
 }
