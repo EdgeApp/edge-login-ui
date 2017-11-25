@@ -7,14 +7,12 @@ const WarningBox = ({ style, message }) => {
   const renderGradient = (styles, icon, iconType) => {
     return (
       <View style={styles.iconWrapBottom}>
-        <View style={styles.iconWrapTop} >
-          <Icon
-            style={styles.iconStyle}
-            name={Constants.EXCLAMATION}
-            size={styles.iconSize}
-            type={Constants.EVIL_ICONS}
-          />
-        </View>
+        <Icon
+          style={styles.iconStyle}
+          name={Constants.EXCLAMATION}
+          size={styles.iconSize}
+          type={Constants.EVIL_ICONS}
+        />
       </View>
     )
     /* return <View style={styles.iconWrapBottom}>
