@@ -47,6 +47,13 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
         })
         return
       }
+      if (this.props.password && this.props.password !== this.props.confirmPassword) {
+        this.setState({
+          isProcessing: false
+        })
+        this.props.checkTheConfirmPassword()
+        return
+      }
       this.props.changePassword(this.props.password)
     }
     this.renderHeader = (style) => {
