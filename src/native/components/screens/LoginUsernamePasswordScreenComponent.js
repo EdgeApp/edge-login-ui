@@ -103,6 +103,7 @@ export default class LandingScreenComponent extends Component {
   render () {
     return (
       <KeyboardAwareScrollView
+        accessible={true}
         style={this.style.container}
         keyboardShouldPersistTaps={Constants.ALWAYS}
         contentContainerStyle={this.style.mainScrollView}
