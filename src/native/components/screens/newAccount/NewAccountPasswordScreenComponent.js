@@ -40,9 +40,8 @@ export default class NewAccountPasswordScreenComponent extends Component {
         contentContainerStyle={NewAccountPasswordScreenStyle.mainScrollView}
       >
         <HeaderConnector style={NewAccountPasswordScreenStyle.header} />
-        {this.renderModal(NewAccountPasswordScreenStyle)}
         {this.renderMain(NewAccountPasswordScreenStyle)}
-
+        {this.renderModal(NewAccountPasswordScreenStyle)}
       </KeyboardAwareScrollView>
     )
   }

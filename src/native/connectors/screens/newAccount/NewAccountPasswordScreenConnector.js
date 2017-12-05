@@ -20,6 +20,7 @@ export const mapStateToProps = (state, ownProps) => {
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     checkTheConfirmPassword: () => dispatch(actions.validateConfirmPassword()),
+    skipPassword: () => dispatch(actions.validateConfirmPassword()),
     nextScreen: () => dispatch(actions.nextScreen())
   }
 }
