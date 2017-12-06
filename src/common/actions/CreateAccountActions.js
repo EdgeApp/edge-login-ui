@@ -75,7 +75,7 @@ export function validateUsername (data) {
 export function validateConfirmPassword (data = null) {
   return (dispatch, getState, imports) => {
     const state = getState()
-    const confirmPassword = data || state.create.confirmPassword
+    const confirmPassword = data !== null ? data : state.create.confirmPassword
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     let error = null
