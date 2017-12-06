@@ -3,29 +3,30 @@ import * as Colors from '../../../common/constants/Colors.js'
 
 const FourDotInputStyle = {
   container: {
-    width: 200,
+    width: '100%',
     height: 60
   },
   interactiveContainer: {
     flex: 1,
-    width: '100%'
+    width: '100%',
+    alignItems: 'center'
   },
   errorContainer: {
     flex: 1,
-    width: '100%'
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
   },
   dotContainer: {
     height: '100%',
-    width: '100%',
+    width: 190,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
   errorText: {
-    width: '100%',
-    textAlign: 'center',
     color: Colors.ACCENT_RED,
-    backgroundColor: Colors.TRANSPARENT,
-    padding: 20
+    backgroundColor: Colors.TRANSPARENT
   },
   input: {
     position: 'absolute',
