@@ -76,7 +76,7 @@ export function userLoginWithPin (data) {
             dispatch(
               dispatchActionWithData(
                 Constants.LOGIN_USERNAME_PASSWORD_FAIL,
-                e.message
+                e.name === 'PasswordError' ? 'Invalid PIN' : e.message
               )
             )
             callback(e.message, null)
@@ -133,4 +133,3 @@ export function userLogin (data) {
   }
 }
 // validateUsername check
-
