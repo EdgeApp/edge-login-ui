@@ -31,7 +31,7 @@ export default class LoginAppComponent extends Component {
   render () {
     const { ScreenStyle } = this.props.styles
     return (
-      <View style={ScreenStyle}>
+      <View accessible={true} style={ScreenStyle}>
         {this.renderContent()}
       </View>
     )
