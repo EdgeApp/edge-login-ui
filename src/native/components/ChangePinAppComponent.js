@@ -9,7 +9,7 @@ export default class ChangePinAppComponent extends Component {
   render () {
     const { ScreenStyle } = this.props.styles
     return (
-      <View accessible={true} style={ScreenStyle}>
+      <View accessible style={ScreenStyle}>
         <ChangeAccountPinScreenConnector styles={this.props.styles} />
       </View>
     )

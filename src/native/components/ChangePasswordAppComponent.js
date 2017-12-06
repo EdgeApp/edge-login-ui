@@ -9,7 +9,7 @@ export default class ChangePasswordAppComponent extends Component {
   render () {
     const { ScreenStyle } = this.props.styles
     return (
-      <View accessible={true} style={ScreenStyle}>
+      <View style={ScreenStyle} accessible>
         <ChangeAccountPasswordScreenConnector
           styles={this.props.styles}
           showHeader={this.props.showHeader}

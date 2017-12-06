@@ -32,8 +32,9 @@ export default class NewAccountReviewScreenComponent extends Component {
             <AccountInfoContainer
               style={NewAccountReviewScreenStyle.accountDetailsBox}
             />
+            <View style={NewAccountReviewScreenStyle.shim} />
           </View>
-          <View style={NewAccountReviewScreenStyle.shim} />
+
           <Button
             onPress={this.onNextPress.bind(this)}
             downStyle={NewAccountReviewScreenStyle.nextButton.downStyle}

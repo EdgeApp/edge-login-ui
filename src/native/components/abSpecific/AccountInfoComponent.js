@@ -25,6 +25,7 @@ class AccountInfoComponent extends Component {
           <Text style={style.bottomWarningText}>
             You did not set your password. We strongly encourage you to create a password and backup your account as soon as possible. You can set a password in the Settings screen in the app.
           </Text>
+          <View style={style.shim} />
         </View>
       )
     }

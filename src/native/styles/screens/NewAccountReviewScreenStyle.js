@@ -81,7 +81,7 @@ const NewAccountReviewScreenStyle = {
     }
   },
   detailsContainer: {
-    height: 180,
+    height: 220,
     width: '80%'
   },
   accountDetailsBox: {
@@ -109,7 +109,7 @@ const NewAccountReviewScreenStyle = {
       backgroundColor: Constants.GRAY_4,
       height: Constants.BUTTON_HEIGHT
     },
-    shim: { ...Styles.Shim, height: 10, backgroundColor: Constants.TRANSPARENT },
+    shim: { ...Styles.Shim, height: 5, backgroundColor: Constants.TRANSPARENT },
     bottom: {
       width: '100%',
       flexDirection: 'column'
@@ -151,7 +151,9 @@ const NewAccountReviewScreenStyle = {
       fontSize: Constants.FONTS.defaultFontSize,
       fontFamily: Constants.FONTS.fontFamilyRegular,
       color: Constants.ACCENT_RED,
-      padding: 15
+      paddingLeft: 15,
+      paddingRight: 15,
+      paddingBottom: 15
     }
   },
   nextButton: {
