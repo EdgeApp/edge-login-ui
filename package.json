@@ -28,7 +28,7 @@
     "updot": "updot"
   },
   "dependencies": {
-    "airbitz-core-js": "git+ssh://git@github.com:Airbitz/airbitz-core-js.git#develop",
+    "airbitz-core-js": "git://github.com/Airbitz/airbitz-core-js.git#develop",
     "async": "~2.0.1",
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",
