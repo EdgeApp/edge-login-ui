@@ -130,7 +130,7 @@ export default class LandingScreenComponent extends Component {
         <View style={this.style.featureBox}>
           <LogoImageHeader style={this.style.logoHeader} />
           {this.renderUsername(this.style)}
-          <View style={this.style.shimTiny} />
+          <View style={this.style.shimTiny} accessible = {true} />
           <FormField
             testID={'passwordFormField'}
             style={this.style.input2}
@@ -199,7 +199,7 @@ export default class LandingScreenComponent extends Component {
   renderButtons (style) {
     return (
       <View style={style.buttonsBox}>
-        <View style={style.shimTiny} />
+        <View style={style.shimTiny} accessible = {true} />
         <Button
           onPress={this.onForgotPassword.bind(this)}
           label={'Forgot Password'}
@@ -208,7 +208,7 @@ export default class LandingScreenComponent extends Component {
           upStyle={style.forgotButton.upStyle}
           upTextStyle={style.forgotButton.upTextStyle}
         />
-        <View style={style.shimTiny} />
+        <View style={style.shimTiny} accessible = {true} />
         <Button
           testID={'loginButton'}
           onPress={this.onStartLogin.bind(this)}
@@ -220,7 +220,7 @@ export default class LandingScreenComponent extends Component {
           isThinking={this.state.loggingIn}
           doesThink
         />
-        <View style={style.shimTiny} />
+        <View style={style.shimTiny} accessible = {true} />
         <Button
           testID={'createAccountButton'}
           onPress={this.onCreateAccount.bind(this)}
