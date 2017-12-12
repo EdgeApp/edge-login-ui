@@ -33,7 +33,7 @@ export default function (state = initialState, action) {
     case Constants.AUTH_LOGGING_IN_WITH_PIN:
       return { ...state, isLoggingInWithPin: true }
     case Constants.RESET_APP:
-      return {initialState}
+      return initialState
     default:
       return state
   }

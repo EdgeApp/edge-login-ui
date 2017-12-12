@@ -96,7 +96,7 @@ export default function (state = initialState, action) {
     case Constants.WORKFLOW_CANCEL_BETA_MODAL:
       return {...state, betaModal: false}
     case Constants.RESET_APP:
-      return {initialState}
+      return initialState
     default:
       return state
   }
