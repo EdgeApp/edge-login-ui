@@ -53,6 +53,7 @@ export default class LandingScreenComponent extends Component {
             />
             <View style={LandingScreenStyle.shim} />
             <Button
+              testID={'alreadyHaveAccountButton'}
               onPress={this.onStartLogin.bind(this)}
               label={'Already have an account? Sign in'}
               downStyle={LandingScreenStyle.loginButton.downStyle}

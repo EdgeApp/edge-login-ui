@@ -103,7 +103,6 @@ export default class LandingScreenComponent extends Component {
   render () {
     return (
       <KeyboardAwareScrollView
-        accessible
         style={this.style.container}
         keyboardShouldPersistTaps={Constants.ALWAYS}
         contentContainerStyle={this.style.mainScrollView}
@@ -133,6 +132,7 @@ export default class LandingScreenComponent extends Component {
           {this.renderUsername(this.style)}
           <View style={this.style.shimTiny} />
           <FormField
+            testID={'passwordFormField'}
             style={this.style.input2}
             onChangeText={this.updatePassword.bind(this)}
             value={this.state.password}
@@ -154,6 +154,7 @@ export default class LandingScreenComponent extends Component {
     if (this.props.previousUsers.length > 1) {
       return (
         <FormFieldWithDropComponent
+          testID={'usernameFormField'}
           style={styles.inputWithDrop}
           onChangeText={this.updateUsername.bind(this)}
           value={this.props.username}
@@ -171,6 +172,7 @@ export default class LandingScreenComponent extends Component {
     }
     return (
       <FormField
+        testID={'usernameFormField'}
         style={styles.input2}
         onChangeText={this.updateUsername.bind(this)}
         value={this.props.username}
@@ -208,6 +210,7 @@ export default class LandingScreenComponent extends Component {
         />
         <View style={style.shimTiny} />
         <Button
+          testID={'loginButton'}
           onPress={this.onStartLogin.bind(this)}
           label={localize(KEYS.BUTTONS.LOGIN)}
           downStyle={style.loginButton.downStyle}
@@ -219,6 +222,7 @@ export default class LandingScreenComponent extends Component {
         />
         <View style={style.shimTiny} />
         <Button
+          testID={'createAccountButton'}
           onPress={this.onCreateAccount.bind(this)}
           label={'Create an account'}
           downStyle={style.signupButton.downStyle}
