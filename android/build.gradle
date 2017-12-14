@@ -24,6 +24,10 @@ android {
     lintOptions {
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 repositories {
@@ -33,5 +37,5 @@ repositories {
 dependencies {
     compile 'com.facebook.react:react-native:+'
     compile 'com.squareup.whorlwind:whorlwind:1.0.1'
-    compile "com.android.support:appcompat-v7:25.3.1"
+    compile 'com.android.support:appcompat-v7:25.3.1'
 }

@@ -53,13 +53,17 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-import static co.airbitz.AbcCoreJsUi.AppConstants.DEFAULT_KEY_NAME;
-import static co.airbitz.AbcCoreJsUi.AppConstants.DIALOG_FRAGMENT_TAG;
-import static co.airbitz.AbcCoreJsUi.PreferenceHelper.getPrefernceHelperInstace;
+//import static co.airbitz.AbcCoreJsUi.AppConstants.DEFAULT_KEY_NAME;
+//import static co.airbitz.AbcCoreJsUi.AppConstants.DIALOG_FRAGMENT_TAG;
+//import static co.airbitz.AbcCoreJsUi.PreferenceHelper.getPrefernceHelperInstace;
 
 import com.squareup.whorlwind.ReadResult;
 import com.squareup.whorlwind.SharedPreferencesStorage;
 import com.squareup.whorlwind.Whorlwind;
+
+import okio.ByteString;
+import rx.Observable;
+import rx.schedulers.Schedulers;
 
 
 public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
@@ -77,8 +81,6 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     private Cipher cipherNotInvalidated;
     private Callback errorCallback;
     private Callback successCallback;
-    private KeyStoreEncrypt encryptor;
-    private KeyStoreDecrypt decryptor;
     private JSONObject jsonObject;
     private Activity mActivity = null;
     private SharedPreferencesStorage mStorage;
@@ -89,20 +91,29 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     public AbcCoreJsUiModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.AppContext = reactContext;
-
-        encryptor = new KeyStoreEncrypt();
-
-        try {
-            decryptor = new KeyStoreDecrypt();
-        } catch (CertificateException | NoSuchAlgorithmException | KeyStoreException |
-                IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public String getName() {
         return ABC_CORE_JS_UI_MODULE;
+    }
+
+    @ReactMethod
+    public void supportsTouchId(Promise promise) {
+        promise.resolve(checkHardwareSupport());
+    }
+
+    @ReactMethod
+    public void setKeychainString (String value, String key, Promise promise) {
+        Observable.just(value)
+                .observeOn(Schedulers.io())
+                .subscribe(val -> mWhorlwind.write(key, ByteString.encodeUtf8(val)));
+//        mWhorlwind.write(key, ByteString.encodeUtf8(value));
+        promise.resolve(true);
+    }
+
+    public void clearKeychain (String key, Promise promise) {
+        setKeychainString("", key, promise);
     }
 
     private boolean isFingerprintAvailable() {
@@ -124,14 +135,7 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
                     mHasSecureElement = true;
                 }
             }
-            return mHasSecureElement;
-        } else {
-            return mHasSecureElement;
         }
-    }
-
-    @ReactMethod
-    public void supportsTouchId(Promise promise) {
-        promise.resolve(checkHardwareSupport());
+        return mHasSecureElement;
     }
 }
