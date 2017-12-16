@@ -122,16 +122,64 @@ Dependencies required in packages.json
         "airbitz-core-js-ui": "git+ssh://git@github.com/Airbitz/airbitz-core-js-ui.git#react-native",
         "airbitz-core-react-native": "git+ssh://git@github.com/airbitz/airbitz-core-react-native.git",
         "react": "16.0.0-alpha.12",
-        "react-native": "0.46.4",
+        "react-native": "0.47.0",
         "rfc4648": "^1.0.0",
         "secure-random": "^1.1.1"
       }
 ```
 After adding the dependencies to the package.json file run npm install. 
+
+## Android build
+
+You must be running Android Studio 3.0+. Make the following changes to the Android build files
+in your React Native app
+
+### `android/app/build.gradle`
+  * `compileSdkVersion 27` or higher
+  * `minSdkVersion 23` or higher
+  * `targetSdkVersion 25` or higher
+  * `buildToolsVersion "25.0.3"` or higher
+  * Add the following
+
+```
+android {
+      ...
+      compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+      }
+}
+
+dependencies {
+      ...
+      compile 'com.android.support:appcompat-v7:27.0.1'
+}
+```
+
+### `android/build.gradle`
+
+```
+repositories {
+      ...
+      google()
+}
+
+dependencies {
+      ...
+      classpath 'com.android.tools.build:gradle:3.0.1'
+}
+```
+
+### `android/gradle-wrapper.properties`
+```
+distributionUrl=https\://services.gradle.org/distributions/gradle-4.1-all.zip
+```
+
+
 To use the component in your app you will need to two airbitz core libraries  
 ```javascript
     import { LoginScreen } from ‘airbitz-core-js-ui’
-    import { makeReactNAtiveContext } from ‘airbitz-core-react-native’
+    import { makeReactNativeContext } from ‘airbitz-core-react-native’
 ```
 Outside of the component class, in the file that you want to add the login you will need to set up a function to validate your app with Airbitz .
 ```javascript

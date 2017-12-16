@@ -1,4 +1,4 @@
-import { NativeModules } from 'react-native'
+import { NativeModules, Platform } from 'react-native'
 const { AbcCoreJsUi } = NativeModules
 
 const LOGINKEY_KEY = 'key_loginkey'
@@ -62,30 +62,45 @@ export async function loginWithTouchId (
 
   if (supported) {
     const loginKeyKey = createKeyWithUsername(username, LOGINKEY_KEY)
-    const loginKey = await AbcCoreJsUi.getKeychainString(loginKeyKey)
-    if (loginKey && loginKey.length > 10) {
-      console.log('loginKey valid. Launching TouchID modal...')
 
-      const success = await AbcCoreJsUi.authenticateTouchID(
-        promptString,
-        fallbackString
-      )
-      if (success) {
-        console.log('TouchID authenticated. Calling loginWithKey')
+    if (Platform.OS === 'ios') {
+      const loginKey = await AbcCoreJsUi.getKeychainString(loginKeyKey)
+      if (loginKey && loginKey.length > 10) {
+        console.log('loginKey valid. Launching TouchID modal...')
+
+        const success = await AbcCoreJsUi.authenticateTouchID(
+          promptString,
+          fallbackString
+        )
+        if (success) {
+          console.log('TouchID authenticated. Calling loginWithKey')
+          callback()
+          const abcAccount = abcContext.loginWithKey(username, loginKey, opts)
+          console.log('abcAccount logged in: ' + username)
+          return abcAccount
+        } else {
+          console.log('Failed to authenticate TouchID')
+          return null
+        }
+      } else {
+        console.log('No valid loginKey for TouchID')
+        return null
+      }
+    } else if (Platform.OS === 'android') {
+      try {
+        const loginKey = await AbcCoreJsUi.getKeychainStringWithFingerprint(loginKeyKey, promptString)
         callback()
         const abcAccount = abcContext.loginWithKey(username, loginKey, opts)
         console.log('abcAccount logged in: ' + username)
         return abcAccount
-      } else {
-        console.log('Failed to authenticate TouchID')
+      } catch (e) {
+        console.log(e)
         return null
       }
-    } else {
-      console.log('No valid loginKey for TouchID')
-      return null
     }
   } else {
     console.log('TouchIdNotSupportedError')
+    return null
     // throw new Error('TouchIdNotSupportedError')
   }
 }
