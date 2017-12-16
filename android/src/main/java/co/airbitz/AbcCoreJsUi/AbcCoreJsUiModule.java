@@ -2,9 +2,7 @@
 package co.airbitz.AbcCoreJsUi;
 import android.Manifest;
 import android.app.Activity;
-import android.app.KeyguardManager;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
@@ -13,12 +11,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -26,12 +22,6 @@ import com.facebook.react.bridge.Promise;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-
-import org.json.JSONObject;
-
-import java.security.KeyStore;
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 
 import com.squareup.whorlwind.SharedPreferencesStorage;
 import com.squareup.whorlwind.Whorlwind;
@@ -44,19 +34,6 @@ import rx.android.schedulers.AndroidSchedulers;
 public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     private static final String TAG = AbcCoreJsUiModule.class.getSimpleName();
     private static final String ABC_CORE_JS_UI_MODULE = "AbcCoreJsUi";
-//    private static final String SAMPLE_ALIAS = "MYALIAS";
-//    private KeyStore mKeyStore;
-//    private KeyGenerator mKeyGenerator;
-//    private SharedPreferences mSharedPreferences;
-//    private MaterialDialog mFingerprintDialog;
-//    private Activity activityContext;
-//    private KeyguardManager keyguardManager;
-//    private FingerprintManagerCompat fingerprintManager;
-//    private Cipher defaultCipher;
-//    private Cipher cipherNotInvalidated;
-//    private Callback errorCallback;
-//    private Callback successCallback;
-//    private JSONObject jsonObject;
     private Context AppContext;
     private Activity mActivity = null;
     private SharedPreferencesStorage mStorage;
@@ -90,7 +67,6 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
         Observable.just(value)
                 .observeOn(Schedulers.io())
                 .subscribe(val -> mWhorlwind.write(key, ByteString.encodeUtf8(val)));
-//        mWhorlwind.write(key, ByteString.encodeUtf8(value));
         promise.resolve(true);
     }
 
@@ -199,7 +175,6 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     }
 
     private void showFingerPrintDialog(String promptString, GetKeychainCallbacks callbacks) {
-
         mFingerprintDialog = new MaterialDialog.Builder(mActivity)
                 .title(promptString)
                 .customView(R.layout.fingerprint_dialog_container, false)
@@ -276,5 +251,4 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
             mFingerprintStatus.postDelayed(mResetErrorTextRunnable, ERROR_TIMEOUT_MILLIS);
         }
     }
-
 }
