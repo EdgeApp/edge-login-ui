@@ -145,8 +145,12 @@ in your React Native app
 android {
       ...
       compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+          sourceCompatibility JavaVersion.VERSION_1_8
+          targetCompatibility JavaVersion.VERSION_1_8
+      }
+      defaultConfig {
+          ...
+          multiDexEnabled true
       }
 }
 
@@ -172,7 +176,11 @@ dependencies {
 
 ### `android/gradle-wrapper.properties`
 ```
-distributionUrl=https\://services.gradle.org/distributions/gradle-4.1-all.zip
+classpath 'com.android.tools.build:gradle:3.0.0'
+distributionUrl=https://services.gradle.org/distributions/gradle-4.1-all.zip
+android.enableAapt2=false
+android.threadPoolSize=4
+android.useDeprecatedNdk=true
 ```
 
 
