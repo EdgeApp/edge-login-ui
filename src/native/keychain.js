@@ -10,11 +10,8 @@ function createKeyWithUsername (username, key) {
 }
 
 export async function isTouchEnabled (abcAccount) {
-  console.log('Touch Enabled Check ')
-  // const supported = await supportsTouchId()
-  // console.log(supported)
-  console.log(' Dont throw error , what do we got. ')
-  return false
+  const supported = await supportsTouchId()
+  return supported
 }
 
 export async function supportsTouchId () {
