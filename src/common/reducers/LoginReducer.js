@@ -6,7 +6,10 @@ const initialState = {
   pin: null,
   loginSuccess: false,
   errorMessage: null,
-  isLoggingInWithPin: false
+  isLoggingInWithPin: false,
+  otpResetToken: null,
+  otpResetDate: null,
+  otpUserBackupKey: null // S7UQ66VYNZKAX4EV
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -27,11 +30,29 @@ export default function (state = initialState, action) {
     case Constants.AUTH_UPDATE_PIN:
       return { ...state, pin: action.data }
     case Constants.LOGIN_SUCCEESS:
-      return { ...state, loginSuccess: true, loginPasswordErrorMessage: null, isLoggingInWithPin: false }
+      return {
+        ...state,
+        loginSuccess: true,
+        loginPasswordErrorMessage: null,
+        isLoggingInWithPin: false
+      }
     case Constants.LOGIN_USERNAME_PASSWORD_FAIL:
-      return { ...state, errorMessage: action.data, pin: '', isLoggingInWithPin: false }
+      return {
+        ...state,
+        errorMessage: action.data,
+        pin: '',
+        isLoggingInWithPin: false
+      }
     case Constants.AUTH_LOGGING_IN_WITH_PIN:
       return { ...state, isLoggingInWithPin: true }
+    case Constants.AUTH_SET_OTP_BACKUP_KEY:
+      return { ...state, otpUserBackupKey: action.data }
+    case Constants.OTP_ERROR:
+      return {
+        ...state,
+        otpResetToken: action.data.resetToken,
+        otpResetDate: action.data.resetDate
+      }
     case Constants.RESET_APP:
       return initialState
     default:

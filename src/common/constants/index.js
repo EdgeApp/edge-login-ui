@@ -19,6 +19,7 @@ export const WORKFLOW_PIN = 'pinWF'
 
 export const WORKFLOW_RECOVERY = 'recoveryWF'
 export const WORKFLOW_FINGERPRINT = 'fingerprintWF'
+export const WORKFLOW_OTP = 'workflowOTP'
 
 export const WORKFLOW_START = 'workflowStart'
 export const WORKFLOW_SKIP = 'workflowSkip'
@@ -46,11 +47,14 @@ export const AUTH_UPDATE_PASSWORD = 'authUpdatePassword'
 export const AUTH_UPDATE_CONFIRM_PASSWORD = 'authUpdatePasswordConfirm'
 export const AUTH_UPDATE_PIN = 'authUpdatePin'
 export const AUTH_LOGGING_IN_WITH_PIN = 'authLoggingInWithPin'
+export const AUTH_SET_OTP_BACKUP_KEY = 'authSetOtpBackupKey'
 export const DELETE_USER_FROM_DEVICE = 'deleteUserFromDevice'
 
 // Change Password Pin Actions =
 export const LAUNCH_NOTIFICATION_MODAL = 'launchNotificationmodal'
 export const CLOSE_NOTIFICATION_MODAL = 'closeNotificationmodal'
+
+export const OTP_ERROR = 'otpError'
 
 export const RESET_APP = 'resetApplication'
 

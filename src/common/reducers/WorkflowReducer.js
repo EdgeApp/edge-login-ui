@@ -53,7 +53,9 @@ const initialState = {
   },
   passwordWF: {
     scenes: 1,
-    details: [{ back: true, skip: false, title: 'Change Password', subTitle: '' }]
+    details: [
+      { back: true, skip: false, title: 'Change Password', subTitle: '' }
+    ]
   },
   pinWF: {
     scenes: 1,
@@ -66,6 +68,10 @@ const initialState = {
   fingerprintWF: {
     scenes: 1,
     details: [{ back: false, skip: false, title: 'title', subTitle: '' }]
+  },
+  otpWorkflow: {
+    scenes: 1,
+    details: [{ back: false, skip: false, title: '2FA', subTitle: '' }]
   }
 }
 export default function (state = initialState, action) {
@@ -73,6 +79,12 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case Constants.SET_PREVIOUS_USERS:
       return { ...state, showModal: false, modalView: null }
+    case Constants.OTP_ERROR:
+      return {
+        ...state,
+        currentKey: Constants.WORKFLOW_OTP,
+        currentSceneIndex: 0
+      }
     case Constants.WORKFLOW_START:
       return { ...state, currentKey: action.data, currentSceneIndex: 0 }
     case Constants.WORKFLOW_BACK:
@@ -94,7 +106,7 @@ export default function (state = initialState, action) {
     case Constants.WORKFLOW_CANCEL_MODAL:
       return { ...state, showModal: false, modalView: null }
     case Constants.WORKFLOW_CANCEL_BETA_MODAL:
-      return {...state, betaModal: false}
+      return { ...state, betaModal: false }
     case Constants.RESET_APP:
       return initialState
     default:

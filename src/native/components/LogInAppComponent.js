@@ -23,6 +23,7 @@ import LoginUsernamePasswordScreenConnector
   from '../connectors/screens/LogInUsernamePasswordScreenConnector'
 import PinLoginScreenConnector
   from '../connectors/screens/PinLoginScreenConnector'
+import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 
 export default class LoginAppComponent extends Component {
   componentWillMount () {
@@ -64,6 +65,8 @@ export default class LoginAppComponent extends Component {
         return this.getPinScreen()
       case Constants.WORKFLOW_CREATE:
         return this.getCreateScreen()
+      case Constants.WORKFLOW_OTP:
+        return this.getOtpScreen()
     }
   }
 
@@ -102,5 +105,8 @@ export default class LoginAppComponent extends Component {
 
   getPinScreen (arg) {
     return <PinLoginScreenConnector styles={this.props.styles} />
+  }
+  getOtpScreen () {
+    return <OtpErrorScreenConnector styles={this.props.styles} />
   }
 }
