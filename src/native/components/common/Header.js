@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { Button } from '../common'
+import { Button, HeaderBackButton } from '../common'
 import * as Colors from '../../../common/constants/Colors'
 import LinearGradient from 'react-native-linear-gradient'
 
@@ -8,17 +8,6 @@ import LinearGradient from 'react-native-linear-gradient'
 class Header extends Component {
   render () {
     const Style = this.props.style
-    /* return (
-      <View style={{...Style.container, backgroundColor: '#FFcc00'}}>
-        <View style={Style.left}>
-          {this.renderBack(Style)}
-        </View>
-        {this.renderText(Style)}
-        <View style={Style.right}>
-          {this.renderSkip(Style)}
-        </View>
-      </View>
-    ) */
     return (
       <LinearGradient
         style={Style.container}
@@ -45,13 +34,11 @@ class Header extends Component {
       label = 'CANCEL' // TODO localize
     }
     return (
-      <Button
+      <HeaderBackButton
         onPress={this.onBack.bind(this)}
-        downStyle={style.textButton.downStyle}
-        downTextStyle={style.textButton.downTextStyle}
-        upStyle={style.textButton.upStyle}
-        upTextStyle={style.textButton.upTextStyle}
+        styles={style.headerBackButtonStyle}
         label={label}
+        withArro
       />
     )
   }
