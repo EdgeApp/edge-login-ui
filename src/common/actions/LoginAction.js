@@ -6,6 +6,16 @@ import { enableTouchId, loginWithTouchId, isTouchEnabled, supportsTouchId } from
  * Make it Thunky
  */
 
+export function retryWithOtp (arg) {
+  return (dispatch, getState, imports) => {
+    const state = getState()
+    const previousAttemptType = state.login.previousAttemptType
+    if (previousAttemptType === 'PASSWORD') {
+      return
+    }
+    return userLoginWithPin({username: state.login.username, pin: state.login.pin}, arg)(dispatch, getState, imports)
+  }
+}
 export function userLoginWithTouchId (data) {
   return (dispatch, getState, imports) => {
     const context = imports.context
@@ -47,9 +57,8 @@ export function userLoginWithTouchId (data) {
     })
   }
 }
-export function userLoginWithPin (data) {
+export function userLoginWithPin (data, backupKey = null) {
   return (dispatch, getState, imports) => {
-    const state = getState()
     const context = imports.context
     const callback = imports.callback
     const myAccountOptions = {
@@ -61,7 +70,11 @@ export function userLoginWithPin (data) {
         }
       }
     }
-    if (state.login.otpUserBackupKey) myAccountOptions.otp = state.login.otpUserBackupKey
+    if (backupKey) {
+      console.log(backupKey)
+      myAccountOptions.otp = backupKey
+    }
+    console.log(myAccountOptions)
     dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PIN, data.pin))
     if (data.pin.length === 4) {
       setTimeout(async () => {
@@ -84,6 +97,7 @@ export function userLoginWithPin (data) {
           console.log('LOG IN WITH PIN ERROR ')
           console.log(e.message)
           if (e.name === 'OtpError') {
+            e.loginAttempt = 'PIN'
             dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
             return
           }
@@ -102,9 +116,8 @@ export function userLoginWithPin (data) {
   }
 }
 
-export function userLogin (data) {
+export function userLogin (data, backupKey = null) {
   return (dispatch, getState, imports) => {
-    const state = getState()
     const context = imports.context
     const callback = imports.callback
     const myAccountOptions = {
@@ -116,7 +129,7 @@ export function userLogin (data) {
         }
       }
     }
-    if (state.login.otpUserBackupKey) myAccountOptions.otp = state.login.otpUserBackupKey
+    if (backupKey) myAccountOptions.otp = backupKey
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     setTimeout(async() => {
@@ -136,6 +149,7 @@ export function userLogin (data) {
         callback(null, response, touchIdInformation)
       } catch (e) {
         if (e.name === 'OtpError') {
+          e.loginAttempt = 'PASSWORD'
           dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
           return
         }

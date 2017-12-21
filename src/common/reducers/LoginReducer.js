@@ -9,7 +9,8 @@ const initialState = {
   isLoggingInWithPin: false,
   otpResetToken: null,
   otpResetDate: null,
-  otpUserBackupKey: null // S7UQ66VYNZKAX4EV
+  otpUserBackupKey: null, // S7UQ66VYNZKAX4EV
+  previousAttemptType: null
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -51,7 +52,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         otpResetToken: action.data.resetToken,
-        otpResetDate: action.data.resetDate
+        otpResetDate: action.data.resetDate,
+        previousAttemptType: action.data.loginAttempt
       }
     case Constants.RESET_APP:
       return initialState
