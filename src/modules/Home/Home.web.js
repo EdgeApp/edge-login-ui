@@ -55,7 +55,7 @@ class Home extends Component {
   render () {
     return (
       <div className={styles.container}>
-        <h4>Manage Account</h4>
+        <h4>{t('manage_account')}</h4>
         <h5 className={styles.username}><b>{ this.props.user ? this.props.user.username : '' }</b></h5>
         {this.props.user.edgeLogin ? (
           <div className={styles.edgeLoginManage}>

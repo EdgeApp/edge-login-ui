@@ -55,9 +55,9 @@ class Review extends Component {
         return (
           <div className={styles.container}>
             <div className={styles.section}>
-              <p className={styles.credentials}>username: {this.props.details.username}</p>
-              <p className={styles.credentials}>pin: {this.props.details.pin}</p>
-              <p className={styles.credentials}>password: {this.props.details.password}</p>
+              <p className={styles.credentials}>{t('string_username_with_colon')} {this.props.details.username}</p>
+              <p className={styles.credentials}>{t('string_pin_with_colon')} {this.props.details.pin}</p>
+              <p className={styles.credentials}>{t('string_password_with_colon')} {this.props.details.password}</p>
             </div>
             <div className={styles.buttonSection}>
               <Button className={styles.buttonShow} type='button' raised onClick={this._handleHideDetails}>{t('fragment_setup_writeitdown_hide')}</Button>

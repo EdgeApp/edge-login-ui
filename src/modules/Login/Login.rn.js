@@ -7,7 +7,7 @@ import { loginWithPassword } from './Login.middleware'
 import { View, Text, TouchableOpacity, Keyboard } from 'react-native'
 
 import TemplateTextInput from '../tpl/TextInput.ui'
-import t from '../../lib/LocaleStrings'
+import t from '../../lib/web/LocaleStrings'
 import CachedUsers from '../CachedUsers/CachedUsers.ui'
 import style from '../Style'
 import { showWhiteOverlay } from '../Landing.action'
@@ -137,7 +137,7 @@ class Login extends Component {
         />
           </Animatable.View>
           <TouchableOpacity style={style.button} onPress={this.submit}>
-            <Text style={style.buttonText}> Sign In </Text>
+            <Text style={style.buttonText}>{t('fragment_landing_signin_button')}</Text>
           </TouchableOpacity>
           <Animatable.View ref='fieldsBelowView' style={[{height: heightBelowView}]} />
 

@@ -738,6 +738,7 @@ const strings = {
   app_name: 'Airbitz',
   app_url_prefix: 'airbitz',
   app_homepage: 'https://airbitz.co',
+  app_download_link: 'https://airbitz.co/app',
   app_support_email: 'support@airbitz.co',
   app_support_phone: '+1-844-928-9744',
   app_support_telegram: 'https://telegram.airbitz.co',
@@ -843,7 +844,16 @@ const strings = {
   bitid_login_title: 'BitID Login',
 
   bitid_login_success: 'Successfully Logged In',
-  bitid_login_failure: 'Error Logging In'
+  bitid_login_failure: 'Error Logging In',
+
+  string_home_page: 'Home Page',
+  string_logout: 'Log Out',
+  string_username_with_colon: 'Username:',
+  string_pin_with_colon: 'Pin:',
+  string_password_with_colon: 'Password:',
+  string_replace_me: 'Replace Me',
+  manage_account: 'Manage Account',
+  already_have_an_account: 'Already have an account?'
 }
 
 export default strings

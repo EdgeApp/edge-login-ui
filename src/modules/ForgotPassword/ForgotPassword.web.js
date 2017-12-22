@@ -20,6 +20,7 @@ class ForgotPassword extends Component {
   }
 
   render () {
+    const downloadLink = t('app_download_link')
     if (this._checkLoading()) {
       return (
         <Dialog
@@ -31,7 +32,7 @@ class ForgotPassword extends Component {
           <div>
             <p>{t('recovery_not_setup4')}</p>
             <br />
-            <p><a target='_blank' href='https://airbitz.co/app'>https://airbitz.co/app</a></p>
+            <p><a target='_blank' href={downloadLink}>{downloadLink}</a></p>
             <br />
             <p>{t('recovery_not_setup5')}</p>
             <br />
