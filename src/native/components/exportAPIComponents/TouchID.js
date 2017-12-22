@@ -1,21 +1,18 @@
-// import * as keychain from '../../../native/keychain'
+import * as keychain from '../../../native/keychain'
 
-function touchIdEnabled (account) {
-  /* const out = keychain.isTouchEnabled()
-  console.log('touch Id Enabled ' + out)
-  return out */
-  // TODO: Allen get integrated with keychain
-  return false
+async function touchIdEnabled (account) {
+  const out = await keychain.isTouchEnabled(account)
+  return out
 }
 function enableTouchId (arg, account) {
-  // TODO: Allen- This is where we turn on or off
+  if (arg) {
+    return keychain.enableTouchId(account)
+  }
+  keychain.disableTouchId(account)
 }
 
-function supportsTouchId () {
-  // TODO: integrate with Keychain call
-  // currently throwing an error
-  // keychain.supportsTouchId()
-  return true
+async function supportsTouchId () {
+  return await keychain.supportsTouchId()
 }
 
 export { touchIdEnabled, supportsTouchId, enableTouchId }

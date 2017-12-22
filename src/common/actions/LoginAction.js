@@ -1,6 +1,6 @@
 import * as Constants from '../constants'
 import { dispatchAction, dispatchActionWithData } from './'
-import { enableTouchId, loginWithTouchId } from '../../native/keychain.js'
+import { enableTouchId, loginWithTouchId, isTouchEnabled, supportsTouchId } from '../../native/keychain.js'
 
 /**
  * Make it Thunky
@@ -36,7 +36,11 @@ export function userLoginWithTouchId (data) {
         .setText(JSON.stringify({ username: data.username }))
         .catch(e => null)
         dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
-        callback(null, response)
+        const touchIdInformation = {
+          isTouchSupported: true,
+          isTouchEnabled: true
+        }
+        callback(null, response, touchIdInformation)
       }
     }).catch(e => {
       console.log(e)
@@ -58,32 +62,33 @@ export function userLoginWithPin (data) {
     }
     dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PIN, data.pin))
     if (data.pin.length === 4) {
-      setTimeout(() => {
-        context
-          .loginWithPIN(data.username, data.pin, myAccountOptions)
-          .then(async response => {
-            enableTouchId(response)
-            await context.io.folder
+      setTimeout(async () => {
+        try {
+          const response = await context.loginWithPIN(data.username, data.pin, myAccountOptions)
+          await enableTouchId(response)
+          await context.io.folder
               .file('lastuser.json')
               .setText(JSON.stringify({ username: data.username }))
               .catch(e => null)
-            dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
-            return response
-          })
-          .catch(e => {
-            console.log('LOG IN WITH PIN ERROR ')
-            console.log(e.message)
-            dispatch(
-              dispatchActionWithData(
-                Constants.LOGIN_USERNAME_PASSWORD_FAIL,
-                e.name === 'PasswordError' ? 'Invalid PIN' : e.message
-              )
+          const isTouchSupported = await !!supportsTouchId()
+          const touchEnabled = await !!isTouchEnabled(response)
+          const touchIdInformation = {
+            isTouchSupported,
+            isTouchEnabled: touchEnabled
+          }
+          dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
+          callback(null, response, touchIdInformation)
+        } catch (e) {
+          console.log('LOG IN WITH PIN ERROR ')
+          console.log(e.message)
+          dispatch(
+            dispatchActionWithData(
+              Constants.LOGIN_USERNAME_PASSWORD_FAIL,
+              e.name === 'PasswordError' ? 'Invalid PIN' : e.name === 'UsernameError' ? 'PIN is not enabled for this account' : e.message
             )
-            callback(e.message, null)
-          })
-          .then((response) => {
-            callback(null, response)
-          })
+          )
+          callback(e.message, null)
+        }
       }, 300)
     }
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
@@ -106,29 +111,30 @@ export function userLogin (data) {
     }
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
-    setTimeout(() => {
-      context
-        .loginWithPassword(data.username, data.password, myAccountOptions)
-        .then(async response => {
-          await context.io.folder
-            .file('lastuser.json')
-            .setText(JSON.stringify({ username: data.username }))
-            .catch(e => null)
-          dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
-          return response
-        })
-        .catch(e => {
-          dispatch(
-            dispatchActionWithData(
-              Constants.LOGIN_USERNAME_PASSWORD_FAIL,
-              e.message
-            )
+    setTimeout(async() => {
+      try {
+        const response = await context.loginWithPassword(data.username, data.password, myAccountOptions)
+        await context.io.folder
+          .file('lastuser.json')
+          .setText(JSON.stringify({ username: data.username }))
+          .catch(e => null)
+        const touchEnabled = await !!isTouchEnabled()
+        const isTouchSupported = await !!supportsTouchId()
+        const touchIdInformation = {
+          isTouchSupported,
+          isTouchEnabled: touchEnabled
+        }
+        dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
+        callback(null, response, touchIdInformation)
+      } catch (e) {
+        dispatch(
+          dispatchActionWithData(
+            Constants.LOGIN_USERNAME_PASSWORD_FAIL,
+            e.message
           )
-          callback(e.message, null)
-        })
-        .then((response) => {
-          callback(null, response)
-        })
+        )
+        callback(e.message, null)
+      }
     }, 300)
   }
 }

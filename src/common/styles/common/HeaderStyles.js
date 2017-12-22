@@ -10,6 +10,30 @@ const HeaderContainerStyle = {
     backgroundColor: Constants.TRANSPARENT,
     flexDirection: 'row'
   },
+  headerBackButtonStyle: {
+    backButton: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    backIconStyle: {
+      paddingLeft: 10,
+      paddingRight: 5,
+      paddingTop: 3,
+      color: Constants.WHITE
+    },
+    sideText: {
+      color: Constants.WHITE,
+      fontSize: 18
+    },
+    icon: {
+      color: Constants.WHITE,
+      fontSize: 25
+    },
+    default: {
+      backgroundColor: Constants.TRANSPARENT,
+      color: Constants.WHITE
+    }
+  },
   left: {
     flex: 1,
     justifyContent: 'flex-end'
