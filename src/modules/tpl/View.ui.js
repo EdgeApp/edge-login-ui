@@ -5,6 +5,7 @@ import { LayoutAnimation, Text } from 'react-native'
 import { Container, Content } from 'native-base'
 import Loader from '../Loader/Loader.ui'
 import ErrorModal from '../ErrorModal/ErrorModal.ui'
+import t from '../../lib/web/LocaleStrings'
 
 class TemplateView extends Component {
   componentWillMount () {
@@ -22,7 +23,7 @@ class TemplateView extends Component {
     return null // (<Footer><Text>Replace Me</Text></Footer>)
   }
   renderContent () {
-    return (<Text>Replace Me</Text>)
+    return (<Text>{t('string_replace_me')}</Text>)
   }
   renderContainer () {
     return (

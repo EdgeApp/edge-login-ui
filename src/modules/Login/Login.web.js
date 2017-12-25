@@ -148,7 +148,7 @@ class Login extends Component {
           <div className={styles.buttonGroup}>
             <Button raised primary style={{textTransform: 'none', marginLeft: '0px'}} theme={signinButton} onClick={this._handleGoToSignupPage}>{t('fragment_landing_create_account')}</Button>
             <div ref='fieldsBelowView' style={{height: '45px'}} />
-            <a onClick={this._handleOpenLoginWithPasswordPage}>Already have an account?<br />Log in</a>
+            <a onClick={this._handleOpenLoginWithPasswordPage}>{t('already_have_an_account')}<br />{t('fragment_landing_signin_button')}</a>
           </div>
           <ForgotPassword />
           {this._renderNotification()}

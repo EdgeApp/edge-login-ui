@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { BackAndroid, View, Text, Button } from 'react-native'
 import style from '../Style'
+import t from '../../lib/web/LocaleStrings'
 
 import { fadeWhiteOverlay } from '../Landing.action'
 
@@ -27,8 +28,8 @@ class Home extends Component {
     return (
       <View style={style.container} >
         <View style={style.form}>
-          <Text style={{fontSize: 40}}>Home Page</Text>
-          <Button style={{flex: 1}} onPress={this.handleBack} title='Log Out'>Log Out</Button>
+          <Text style={{fontSize: 40}}>{t('string_home_page')}</Text>
+          <Button style={{flex: 1}} onPress={this.handleBack} title={t('string_logout')}>{t('string_logout')}</Button>
         </View>
       </View>
     )
