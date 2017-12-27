@@ -56,7 +56,8 @@ export default function (state = initialState, action) {
         previousAttemptType: action.data.loginAttempt
       }
     case Constants.RESET_APP:
-      return initialState
+      const username = state.username
+      return {...initialState, username: username}
     default:
       return state
   }
