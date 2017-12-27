@@ -88,7 +88,7 @@ export default class LandingScreenComponent extends Component {
     }
   }
   componentWillReceiveProps (nextProps) {
-    if (nextProps.error && this.state.loggingIn) {
+    if ((nextProps.error && this.state.loggingIn) || (this.state.loggingIn && nextProps.loginSuccess)) {
       this.setState({
         loggingIn: false
       })
