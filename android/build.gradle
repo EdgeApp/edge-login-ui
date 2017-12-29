@@ -2,18 +2,22 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.3.1'
+        classpath 'com.android.tools.build:gradle:2.3.0'
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 27
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         minSdkVersion 16
@@ -24,13 +28,27 @@ android {
     lintOptions {
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://jitpack.io"
+    }
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
 }
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
+    compile 'com.squareup.whorlwind:whorlwind:1.0.1'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.android.support:appcompat-v7:27.0.1'
+    compile 'com.afollestad.material-dialogs:core:0.9.6.0'
 }
-  
