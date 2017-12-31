@@ -1,4 +1,5 @@
 export const SIMPLE_ICONS = 'simpleIcons'
+export const CHECK_CIRCLE = 'check'
 
 // Entypp
 export const ENTYPO = 'entypo'
@@ -22,4 +23,5 @@ export const EXCLAMATION = 'exclamation'
 //
 export const MATERIAL_COMMUNITY = 'materialCommunity'
 export const EVIL_ICONS = 'EvilIcons'
+export const CHECK_CIRCLE_OUTLINE = 'check-circle-outline'
 

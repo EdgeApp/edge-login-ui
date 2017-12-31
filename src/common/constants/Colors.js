@@ -29,3 +29,4 @@ export const OVERLAY_BOX = 'rgba(255,255,255,.6)'
 export const MODAL_BOX = 'rgba(0,0,0,.6)'
 export const TRANSPARENT = 'transparent'
 export const GRADIENT = ['#0E4B75', '#0D2145']
+export const GRADIENT_REVERSE = ['#0D2145', '#0E4B75']

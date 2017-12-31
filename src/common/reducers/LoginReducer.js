@@ -46,8 +46,10 @@ export default function (state = initialState, action) {
       }
     case Constants.AUTH_LOGGING_IN_WITH_PIN:
       return { ...state, isLoggingInWithPin: true }
-    case Constants.AUTH_SET_OTP_BACKUP_KEY:
+    case Constants.AUTH_UPDATE_OTP_BACKUP_KEY:
       return { ...state, otpUserBackupKey: action.data }
+    case Constants.AUTH_UPDATE_LOGIN_PASSWORD:
+      return {...state, password: action.data}
     case Constants.OTP_ERROR:
       return {
         ...state,

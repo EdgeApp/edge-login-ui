@@ -15,7 +15,7 @@ import * as Offsets from '../../constants'
 import DeleteUserConnector
   from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import { localize, KEYS } from '../../../common/locale'
-// import PasswordConnector from '../../connectors/componentConnectors/PasswordConnector'
+
 import {
   KeyboardAwareScrollView
 } from 'react-native-keyboard-aware-scroll-view'
@@ -135,7 +135,7 @@ export default class LandingScreenComponent extends Component {
             testID={'passwordFormField'}
             style={this.style.input2}
             onChangeText={this.updatePassword.bind(this)}
-            value={this.state.password}
+            value={this.props.password}
             label={'Password'}
             error={this.props.error}
             secureTextEntry
@@ -280,9 +280,7 @@ export default class LandingScreenComponent extends Component {
     this.props.updateUsername(data)
   }
   updatePassword (data) {
-    this.setState({
-      password: data
-    })
+    this.props.updatePassword(data)
   }
   onForgotPassword () {
     this.props.onForgotPassword()
@@ -295,7 +293,7 @@ export default class LandingScreenComponent extends Component {
     })
     this.props.userLogin({
       username: this.props.username,
-      password: this.state.password
+      password: this.props.password
     })
   }
   onCreateAccount () {

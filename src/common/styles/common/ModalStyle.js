@@ -136,5 +136,57 @@ const ModalStyle = {
     }
   }
 }
+const StaticModalStyle = {
+  container: {
+    position: 'absolute',
+    top: OFFSET_HACK,
+    left: OFFSET_HACK,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Constants.MODAL_BOX
+  },
+  touchOut: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    backgroundColor: Constants.TRANSPARENT
+  },
+  modalBox: {
+    top: screenDimensions.height / 4,
+    left: screenDimensions.width / 8,
+    width: screenDimensions.width * 3 / 4,
+    alignItems: 'stretch',
+    position: 'absolute',
+    // height: (screenDimensions.height) / 3,
+    backgroundColor: Constants.WHITE,
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+  },
+  header: {
+    position: 'relative',
+    height: Constants.STATIC_MODAL_HEADER_HEIGHT,
+    width: '100%',
+    backgroundColor: Constants.TRANSPARENT,
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  bottom: {
+    position: 'relative',
+    width: '100%',
+    backgroundColor: Constants.WHITE
+  },
+  bodyRow: {
+    width: '100%',
+    padding: 15
+  },
+  shim: Styles.Shim.height,
+  icon: {
+    color: Constants.WHITE
+  },
+  iconSize: 36
 
+}
+export { StaticModalStyle }
 export { ModalStyle }

@@ -6,14 +6,31 @@ import { enableTouchId, loginWithTouchId, isTouchEnabled, supportsTouchId } from
  * Make it Thunky
  */
 
-export function retryWithOtp (arg) {
+export function resetOtpReset () {
+  return async (dispatch, getState, imports) => {
+    const state = getState()
+    const context = imports.context
+    const username = state.login.username
+    const otpResetToken = state.login.otpResetToken
+    try {
+      const response = await context.requestOtpReset(username, otpResetToken)
+      console.log(response)
+      console.log('Make it to the next scent ')
+    } catch (e) {
+      console.log(e)
+      console.log('stop')
+    }
+  }
+}
+export function retryWithOtp () {
   return (dispatch, getState, imports) => {
     const state = getState()
+    const userBackUpKey = state.login.otpUserBackupKey
     const previousAttemptType = state.login.previousAttemptType
     if (previousAttemptType === 'PASSWORD') {
-      return
+      return userLogin({username: state.login.username, password: state.login.password}, userBackUpKey)(dispatch, getState, imports)
     }
-    return userLoginWithPin({username: state.login.username, pin: state.login.pin}, arg)(dispatch, getState, imports)
+    return userLoginWithPin({username: state.login.username, pin: state.login.pin}, userBackUpKey)(dispatch, getState, imports)
   }
 }
 export function userLoginWithTouchId (data) {

@@ -69,9 +69,9 @@ const initialState = {
     scenes: 1,
     details: [{ back: false, skip: false, title: 'title', subTitle: '' }]
   },
-  otpWorkflow: {
+  otpWF: {
     scenes: 1,
-    details: [{ back: false, skip: false, title: '2FA', subTitle: '' }]
+    details: [{ back: true, skip: false, title: 'Two Factor Authentication', subTitle: '' }]
   }
 }
 export default function (state = initialState, action) {

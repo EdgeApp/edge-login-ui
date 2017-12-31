@@ -1,5 +1,6 @@
 // import { hs, vs, fontSize } from '../../util'
 export const HEADER_HEIGHT = 66
+export const STATIC_MODAL_HEADER_HEIGHT = 62
 
 export const BUTTON_HEIGHT = 44
 export const BUTTON_WIDTH_1 = '70%'

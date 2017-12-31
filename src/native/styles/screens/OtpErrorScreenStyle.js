@@ -3,48 +3,89 @@ import * as Constants from '../../../common/constants/'
 
 const OtpErrorScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  row1: {
-    ...Styles.ScreenRow,
-    flex: 1,
-    justifyContent: 'flex-start',
-    marginTop: 10,
-    flexDirection: 'row'
-  },
-  row2: { ...Styles.ScreenRow, flex: 4 },
-  row3: { ...Styles.ScreenRow, flex: 3 },
-  row4: { ...Styles.ScreenRow, flex: 3 },
-  row5: { ...Styles.ScreenRow, flex: 1 },
-  row6: {
-    ...Styles.ScreenRow,
-    flex: 3,
+  header: Styles.HeaderContainerStyle,
+  pageContainer: {
+    ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'
   },
-  logoHeader: Styles.LogoHeaderStyle,
-  instructionsText: {
-    fontSize: Constants.FONTS.defaultFontSize,
-    fontFamily: Constants.FONTS.fontFamilyRegular,
-    color: Constants.GRAY_2,
-    textAlign: 'center',
-    paddingLeft: 20,
-    paddingRight: 20
+  hero: {
+    container: {
+      position: 'relative',
+      width: '100%'
+    },
+    colorField: {
+      position: 'relative',
+      width: '100%',
+      height: 100,
+      backgroundColor: Constants.GRAY_3,
+      flexDirection: 'row',
+      paddingTop: 20
+    },
+    leftField: {
+      flex: 2
+    },
+    rightField: {
+      flex: 8
+    },
+    heroTitleText: {
+      color: Constants.PRIMARY,
+      fontSize: 17
+    },
+    heroText: {
+      color: Constants.GRAY_1,
+      fontSize: 14,
+      marginTop: 7
+    },
+    orOption: {
+      position: 'relative',
+      height: 100,
+      width: '100%',
+      backgroundColor: Constants.WHITE
+    },
+    orRow: {
+      height: 48,
+      alignItems: 'center',
+      justifyContent: 'space-around'
+    },
+    instructionsRow: {
+      height: 52
+    },
+    instructionsText: {
+      width: '90%',
+      textAlign: 'center',
+      marginLeft: '5%',
+      marginRight: '5%',
+      color: Constants.GRAY_1
+    },
+    shim: {...Styles.Shim, height: 20}
+
   },
-  callToAction: {
-    fontSize: Constants.FONTS.defaultFontSize,
-    fontFamily: Constants.FONTS.fontFamilyRegular,
-    color: Constants.GRAY_2,
-    textAlign: 'center'
-  },
-  nextButton: {
-    upStyle: Styles.PrimaryButtonUpStyle,
-    upTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: Styles.PrimaryButtonDownStyle
+  shim: {...Styles.Shim, height: 20},
+  qrRow: {
+    position: 'relative',
+    width: '100%',
+    height: 150
   },
   exitButton: {
     upStyle: { ...Styles.TextOnlyButtonUpStyle, width: null },
     upTextStyle: Styles.TextOnlyButtonTextUpStyle,
     downTextStyle: Styles.TextOnlyButtonTextDownStyle,
     downStyle: Styles.TextOnlyButtonDownStyle
+  },
+  staticModalText: {
+    color: Constants.GRAY_1,
+    width: '100%',
+    fontSize: 15,
+    textAlign: 'center'
+  },
+  modalMiddle: {
+    position: 'relative',
+    width: '100%'
+  },
+  modalInput: {...Styles.MaterialInputOnWhite,
+    container: {
+      ...Styles.MaterialInputOnWhite.container, width: '100%'
+    }
   }
 }
 

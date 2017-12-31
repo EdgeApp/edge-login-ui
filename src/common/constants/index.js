@@ -3,6 +3,7 @@ export * from './Fonts'
 export * from './Theme'
 export * from './ErrorConstants'
 export * from './IconConstants'
+export * from './OtpConstants'
 
 /* export const LEFT_TO_RIGHT = 'leftToRight'
 export const RIGHT_TO_LEFT = 'rightToLeft'
@@ -19,7 +20,7 @@ export const WORKFLOW_PIN = 'pinWF'
 
 export const WORKFLOW_RECOVERY = 'recoveryWF'
 export const WORKFLOW_FINGERPRINT = 'fingerprintWF'
-export const WORKFLOW_OTP = 'workflowOTP'
+export const WORKFLOW_OTP = 'otpWF'
 
 export const WORKFLOW_START = 'workflowStart'
 export const WORKFLOW_SKIP = 'workflowSkip'
@@ -44,10 +45,11 @@ export const SET_PREVIOUS_USERS = 'SET_PREVIOUS_USERS'
 // Login Actions
 export const AUTH_UPDATE_USERNAME = 'authUpdateUsername'
 export const AUTH_UPDATE_PASSWORD = 'authUpdatePassword'
+export const AUTH_UPDATE_LOGIN_PASSWORD = 'authUpdateLoginPassword'
 export const AUTH_UPDATE_CONFIRM_PASSWORD = 'authUpdatePasswordConfirm'
 export const AUTH_UPDATE_PIN = 'authUpdatePin'
 export const AUTH_LOGGING_IN_WITH_PIN = 'authLoggingInWithPin'
-export const AUTH_SET_OTP_BACKUP_KEY = 'authSetOtpBackupKey'
+export const AUTH_UPDATE_OTP_BACKUP_KEY = 'authSetOtpBackupKey'
 export const DELETE_USER_FROM_DEVICE = 'deleteUserFromDevice'
 
 // Change Password Pin Actions =

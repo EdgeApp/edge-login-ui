@@ -15,6 +15,7 @@ export const mapStateToProps = (state, ownProps) => {
     loginSuccess: state.login.loginSuccess,
     workflow: state.workflow,
     username: state.login.username,
+    password: state.login.password,
     error: state.login.errorMessage,
     previousUsers: state.previousUsers.userList,
     usernameList: state.previousUsers.usernameOnlyList,
@@ -36,6 +37,10 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
     updateUsername: data =>
       dispatch(
         action.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data)
+      ),
+    updatePassword: data =>
+      dispatch(
+        action.dispatchActionWithData(Constants.AUTH_UPDATE_LOGIN_PASSWORD, data)
       ),
     deleteUserFromDevice: data => dispatch(action.deleteUserFromDevice(data)),
     launchDeleteModal: () =>
