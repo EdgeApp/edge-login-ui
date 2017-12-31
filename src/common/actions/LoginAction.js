@@ -1,6 +1,6 @@
 import * as Constants from '../constants'
 import { dispatchAction, dispatchActionWithData } from './'
-import { enableTouchId, loginWithTouchId, isTouchEnabled, supportsTouchId } from '../../native/keychain.js'
+import { enableTouchId, loginWithTouchId, isTouchEnabled, supportsTouchId, isTouchDisabled } from '../../native/keychain.js'
 
 /**
  * Make it Thunky
@@ -96,20 +96,23 @@ export function userLoginWithPin (data, backupKey = null) {
     if (data.pin.length === 4) {
       setTimeout(async () => {
         try {
-          const response = await context.loginWithPIN(data.username, data.pin, myAccountOptions)
-          await enableTouchId(response)
+          const abcAccount = await context.loginWithPIN(data.username, data.pin, myAccountOptions)
+          const touchDisabled = await isTouchDisabled(context, abcAccount.username)
+          if (!touchDisabled) {
+            await enableTouchId(context, abcAccount)
+          }
           await context.io.folder
               .file('lastuser.json')
-              .setText(JSON.stringify({ username: data.username }))
+              .setText(JSON.stringify({ username: abcAccount.username }))
               .catch(e => null)
-          const isTouchSupported = await !!supportsTouchId()
-          const touchEnabled = await !!isTouchEnabled(response)
+          const isTouchSupported = await supportsTouchId()
+          const touchEnabled = await isTouchEnabled(context, abcAccount.username)
           const touchIdInformation = {
             isTouchSupported,
             isTouchEnabled: touchEnabled
           }
           dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
-          callback(null, response, touchIdInformation)
+          callback(null, abcAccount, touchIdInformation)
         } catch (e) {
           console.log('LOG IN WITH PIN ERROR ')
           console.log(e.message)
@@ -151,19 +154,23 @@ export function userLogin (data, backupKey = null) {
     // the timeout is a hack until we put in interaction manager.
     setTimeout(async() => {
       try {
-        const response = await context.loginWithPassword(data.username, data.password, myAccountOptions)
+        const abcAccount = await context.loginWithPassword(data.username, data.password, myAccountOptions)
+        const touchDisabled = await isTouchDisabled(context, abcAccount.username)
+        if (!touchDisabled) {
+          await enableTouchId(context, abcAccount)
+        }
         await context.io.folder
           .file('lastuser.json')
-          .setText(JSON.stringify({ username: data.username }))
+          .setText(JSON.stringify({ username: abcAccount.username }))
           .catch(e => null)
-        const touchEnabled = await !!isTouchEnabled()
-        const isTouchSupported = await !!supportsTouchId()
+        const touchEnabled = await isTouchEnabled(context, abcAccount.username)
+        const isTouchSupported = await supportsTouchId()
         const touchIdInformation = {
           isTouchSupported,
           isTouchEnabled: touchEnabled
         }
         dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
-        callback(null, response, touchIdInformation)
+        callback(null, abcAccount, touchIdInformation)
       } catch (e) {
         if (e.name === 'OtpError') {
           e.loginAttempt = 'PASSWORD'
