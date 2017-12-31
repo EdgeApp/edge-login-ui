@@ -10,6 +10,7 @@ import DisableOtpModalConnector
 import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'
 import * as Constants from '../../../../common/constants'
 import OtpBackupKeyConnector from '../../../../native/connectors/componentConnectors/OtpBackupKeyConnector'
+import EdgeLoginQrConnector from '../../../../native/connectors/componentConnectors/EdgeLoginQrConnector'
 export default class OtpErrorScreenComponent extends Component {
   componentWillMount () {
     this.setState({
@@ -43,7 +44,7 @@ export default class OtpErrorScreenComponent extends Component {
       showDisableModal: false,
       showstaticModal: true
     })
-    // this.props.resetOtpReset()
+    this.props.resetOtpToken()
   }
 
   showBackupModal () {
@@ -111,7 +112,9 @@ export default class OtpErrorScreenComponent extends Component {
         <View style={OtpErrorScreenStyle.pageContainer}>
           <OtpHeroComponent style={OtpErrorScreenStyle.hero}
             screen={this.state.screen} />
-          <View style={OtpErrorScreenStyle.qrRow} />
+          <View style={OtpErrorScreenStyle.qrRow} >
+            <EdgeLoginQrConnector />
+          </View>
           <View style={OtpErrorScreenStyle.shim} />
           <Button
             onPress={this.showBackupModal.bind(this)}

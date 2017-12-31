@@ -1,6 +1,7 @@
 export * from '../../common/styles'
 export * from './components/LogoHeaderStyle'
 export * from './components/FourDotInputStyle'
+export * from './components/EdgeLoginQrStyle'
 export * from './screens/LoginPasswordScreenStyle'
 export * from './screens/LandingScreenStyle'
 export * from './screens/PinLoginScreenStyle'

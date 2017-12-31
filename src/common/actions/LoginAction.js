@@ -181,4 +181,12 @@ export function userLogin (data, backupKey = null) {
     }, 300)
   }
 }
+
+export function getEdgeLoginQrCode () {
+  return (dispatch, getState, imports) => async () => {
+    // const context = imports.context
+    // context.
+  }
+}
+
 // validateUsername check
