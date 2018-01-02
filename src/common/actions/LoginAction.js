@@ -116,11 +116,11 @@ export function userLoginWithPin (data, backupKey = null) {
         } catch (e) {
           console.log('LOG IN WITH PIN ERROR ')
           console.log(e.message)
-          /* if (e.name === 'OtpError') {
+          if (e.name === 'OtpError') {
             e.loginAttempt = 'PIN'
             dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
             return
-          } */
+          }
           dispatch(
             dispatchActionWithData(
               Constants.LOGIN_USERNAME_PASSWORD_FAIL,
@@ -172,11 +172,11 @@ export function userLogin (data, backupKey = null) {
         dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
         callback(null, abcAccount, touchIdInformation)
       } catch (e) {
-        /* if (e.name === 'OtpError') {
+        if (e.name === 'OtpError') {
           e.loginAttempt = 'PASSWORD'
           dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
           return
-        } */
+        }
         dispatch(
           dispatchActionWithData(
             Constants.LOGIN_USERNAME_PASSWORD_FAIL,
