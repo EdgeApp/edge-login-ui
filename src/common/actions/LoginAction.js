@@ -190,9 +190,26 @@ export function userLogin (data, backupKey = null) {
 }
 
 export function getEdgeLoginQrCode () {
-  return (dispatch, getState, imports) => async () => {
-    // const context = imports.context
-    // context.
+  return async (dispatch, getState, imports) => {
+    const context = imports.context
+    const myAccountOptions = {
+      ...imports.accountOptions,
+      callbacks: {
+        ...imports.accountOptions.callbacks,
+        onLoggedOut: () => {
+          dispatch(dispatchAction(Constants.RESET_APP))
+        }
+      }
+    }
+    try {
+      const qr = await context.requestEdgeLogin(myAccountOptions)
+      console.log(qr)
+      dispatch(dispatchActionWithData(Constants.START_EDGE_LOGIN_REQUEST, qr))
+    } catch (e) {
+      console.log(e.name)
+      console.log(e.message)
+      console.log(e)
+    }
   }
 }
 

@@ -4,7 +4,20 @@ const EdgeLoginQrStyle = {
     position: 'relative',
     width: '100%',
     height: '100%',
-    backgroundColor: Comstants.ACCENT_ORANGE
-  }
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  qrCodeBorder: {
+    backgroundColor: Comstants.WHITE,
+    borderRadius: 4,
+    padding: 10
+  },
+  qrCodeForeground: {
+    color: Comstants.BLACK
+  },
+  qrCodeBackground: {
+    color: Comstants.WHITE
+  },
+  qrCodeSize: 120
 }
 export { EdgeLoginQrStyle }

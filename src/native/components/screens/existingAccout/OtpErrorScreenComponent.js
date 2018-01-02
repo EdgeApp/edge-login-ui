@@ -17,7 +17,7 @@ export default class OtpErrorScreenComponent extends Component {
       showDisableModal: false,
       showBackupCodeModal: false,
       showstaticModal: false,
-      screen: Constants.OTP_SCREEN_ONE
+      screen: this.props.screen
     })
   }
   closeModals () {
@@ -111,7 +111,8 @@ export default class OtpErrorScreenComponent extends Component {
         <HeaderConnector style={OtpErrorScreenStyle.header} />
         <View style={OtpErrorScreenStyle.pageContainer}>
           <OtpHeroComponent style={OtpErrorScreenStyle.hero}
-            screen={this.state.screen} />
+            screen={this.state.screen}
+            otpResetDate={this.props.otpResetDate} />
           <View style={OtpErrorScreenStyle.qrRow} >
             <EdgeLoginQrConnector />
           </View>

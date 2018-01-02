@@ -10,7 +10,9 @@ const initialState = {
   otpResetToken: null,
   otpResetDate: null,
   otpUserBackupKey: null, // S7UQ66VYNZKAX4EV
-  previousAttemptType: null
+  previousAttemptType: null,
+  edgeLoginId: null,
+  cancelEdgeLoginRequest: null
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -56,6 +58,18 @@ export default function (state = initialState, action) {
         otpResetToken: action.data.resetToken,
         otpResetDate: action.data.resetDate,
         previousAttemptType: action.data.loginAttempt
+      }
+    case Constants.START_EDGE_LOGIN_REQUEST:
+      return {
+        ...state,
+        edgeLoginId: action.data.id,
+        cancelEdgeLoginRequest: action.data.cancelRequest
+      }
+    case Constants.CANCEL_EDGE_LOGIN_REQUEST:
+      return {
+        ...state,
+        edgeLoginId: null,
+        cancelEdgeLoginRequest: null
       }
     case Constants.RESET_APP:
       const username = state.username

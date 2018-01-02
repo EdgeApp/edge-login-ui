@@ -57,6 +57,8 @@ export const LAUNCH_NOTIFICATION_MODAL = 'launchNotificationmodal'
 export const CLOSE_NOTIFICATION_MODAL = 'closeNotificationmodal'
 
 export const OTP_ERROR = 'otpError'
+export const START_EDGE_LOGIN_REQUEST = 'onEdgeLoginRequest'
+export const CANCEL_EDGE_LOGIN_REQUEST = 'cancelEdgeLoginRequest'
 
 export const RESET_APP = 'resetApplication'
 

@@ -6,17 +6,16 @@ import * as Constants from '../../../common/constants'
 export const mapStateToProps = (state, ownProps) => {
   return {
     style: EdgeLoginQrStyle,
-    isVisible: state.workflow.currentKey === Constants.WORKFLOW_OTP || false
+    isVisible: state.workflow.currentKey === Constants.WORKFLOW_OTP || false,
+    edgeLoginId: state.login.edgeLoginId,
+    cancelEdgeLogin: state.login.cancelEdgeLoginRequest
   }
 }
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getQrCode: () => dispatch(actions.getEdgeLoginQrCode())
-   /*  onChangeText: (data) => dispatch(actions.dispatchActionWithData(Constants.AUTH_UPDATE_OTP_BACKUP_KEY, data)),
-    onSubmitEditing: ownProps.onSubmitEditing */
-    /* onBlur: ownProps.onBlur,
-    onFocus: ownProps.onFocus */
+    getQrCode: () => dispatch(actions.getEdgeLoginQrCode()),
+    cancelRequest: () => dispatch(actions.dispatchAction(Constants.CANCEL_EDGE_LOGIN_REQUEST))
   }
 }
 
