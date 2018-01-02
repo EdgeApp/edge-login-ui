@@ -1,7 +1,7 @@
 import * as Constants from '../constants'
 import * as WorkflowActions from './WorkflowActions'
 import { isASCII } from '../util'
-import { dispatchAction, dispatchActionWithData } from './'
+import { dispatchAction, dispatchActionWithData, getPreviousUsers } from './'
 import passwordCheck from 'zxcvbn'
 import { sprintf } from 'sprintf-js'
 
@@ -152,6 +152,7 @@ export function createUser (data) {
             .file('lastuser.json')
             .setText(JSON.stringify({ username: data.username }))
             .catch(e => null)
+          dispatch(getPreviousUsers(context))
         })
         .catch(e => {
           console.log(e)
