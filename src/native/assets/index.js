@@ -11,9 +11,9 @@ const PASSWORD_REQ_UNCHECKED = require('./icons/passwordRequirements/unchecked.p
 const PERMISSIONS_CAMREA = require('./icons/permissions/permissions-camera.png')
 const WELCOME = require('./icons/welcome/new_account_welcome.png')
 const TOUCH = require('./touch/touchid.png')
-const OTP = require('./otp/2FA-badge.png')
-const OTP_SMALL = require('./otp/2FA-badge_sm.png')
-const OTP_DISABLE = require('./otp/2FA-disable.png')
+const OTP = require('./icons/otp/OTP-badge.png')
+const OTP_SMALL = require('./icons/otp/OTP-badge_sm.png')
+const OTP_DISABLE = require('./icons/otp/OTP-disable.png')
 
 export {LOGIN_BACKGROUND}
 export {LOGO_BIG}
