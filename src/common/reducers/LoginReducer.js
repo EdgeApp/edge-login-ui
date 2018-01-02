@@ -62,7 +62,7 @@ export default function (state = initialState, action) {
     case Constants.START_EDGE_LOGIN_REQUEST:
       return {
         ...state,
-        edgeLoginId: action.data.id,
+        edgeLoginId: 'airbitz://edge/' + action.data.id,
         cancelEdgeLoginRequest: action.data.cancelRequest
       }
     case Constants.CANCEL_EDGE_LOGIN_REQUEST:

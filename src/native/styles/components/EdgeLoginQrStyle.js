@@ -8,15 +8,15 @@ const EdgeLoginQrStyle = {
     justifyContent: 'space-around'
   },
   qrCodeBorder: {
-    backgroundColor: Comstants.WHITE,
+    backgroundColor: Comstants.W,
     borderRadius: 4,
     padding: 10
   },
   qrCodeForeground: {
-    color: Comstants.BLACK
+    color: Comstants.WHITE
   },
   qrCodeBackground: {
-    color: Comstants.WHITE
+    color: Comstants.BLACK
   },
   qrCodeSize: 120
 }
