@@ -222,4 +222,10 @@ export function getEdgeLoginQrCode () {
   }
 }
 
+export function forgotPassword () {
+  return async (dispatch, getState, imports) => {
+
+  }
+}
+
 // validateUsername check
