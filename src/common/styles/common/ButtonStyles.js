@@ -194,7 +194,56 @@ const TextAndIconButtonStyle = {
   iconSize: 25,
   underlayColor: Constants.TRANSPARENT
 }
+const TextAndIconButtonAlignEdgesStyle = {
+  container: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderColor: Constants.GRAY_1,
+    borderBottomWidth: 2
 
+  },
+  centeredContent: {
+    width: '100%'
+    // alignItems: 'center'
+  },
+  inner: {
+    position: 'relative',
+    flexDirection: 'row'
+  },
+  textContainer: {
+    flex: 17,
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
+  iconContainer: {
+    flex: 3,
+    height: '100%',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-around'
+
+  },
+  text: {
+    color: Constants.GRAY_2,
+    fontSize: 18
+  },
+  textPressed: {
+    color: Constants.GRAY_1,
+    fontSize: 18
+  },
+  icon: {
+    color: Constants.GRAY_2
+  },
+  iconPressed: {
+    color: Constants.GRAY_1
+  },
+  iconSize: 25,
+  underlayColor: Constants.TRANSPARENT
+}
+
+export { TextAndIconButtonAlignEdgesStyle }
 export { TextAndIconButtonStyle }
 export { IconButtonStyle }
 export { PrimaryButtonUpStyle }

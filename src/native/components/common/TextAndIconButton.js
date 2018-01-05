@@ -14,10 +14,12 @@ type State = {
 } */
 
 class TextAndIconButton extends Component /* <Props, State> */ {
+
   componentWillMount () {
     this.setState({
       pressed: false
     })
+    this.numberOfLines = this.props.numberOfLines || 1
   }
   _onPressButton () {
     this.props.onPress()
@@ -77,7 +79,7 @@ class TextAndIconButton extends Component /* <Props, State> */ {
               <Text
                 style={[text, this.state.pressed && textPressed]}
                 ellipsizeMode={'middle'}
-                numberOfLines={1}
+                numberOfLines={this.numberOfLines}
               >
                 {this.props.title + ' '}
               </Text>

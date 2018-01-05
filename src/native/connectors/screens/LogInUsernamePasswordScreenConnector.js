@@ -33,7 +33,7 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(action.startWorkflow(Constants.WORKFLOW_CREATE)),
     gotoPinLoginPage: () =>
       dispatch(action.startWorkflow(Constants.WORKFLOW_PIN)),
-    onForgotPassword: () => dispatch(action.testAction()),
+    onForgotPassword: () => dispatch(action.forgotPassword()),
     updateUsername: data =>
       dispatch(
         action.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data)
