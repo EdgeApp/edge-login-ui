@@ -2,6 +2,7 @@ import * as Constants from '../constants'
 import * as WorkflowActions from './WorkflowActions'
 import { isASCII } from '../util'
 import { dispatchAction, dispatchActionWithData, getPreviousUsers } from './'
+import { enableTouchId, isTouchDisabled } from '../../native/keychain.js'
 import passwordCheck from 'zxcvbn'
 import { sprintf } from 'sprintf-js'
 
@@ -140,26 +141,26 @@ export function createUser (data) {
       }
     }
     dispatch(WorkflowActions.nextScreen())
-    setTimeout(() => {
-      context
-        .createAccount(data.username, data.password, data.pin, myAccountOptions)
-        .then(async response => {
-          dispatch(
-            dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, response)
-          )
-          dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
-          await context.io.folder
-            .file('lastuser.json')
-            .setText(JSON.stringify({ username: data.username }))
-            .catch(e => null)
-          dispatch(getPreviousUsers(context))
-        })
-        .catch(e => {
-          console.log(e)
-          dispatch(
-            dispatchActionWithData(Constants.CREATE_ACCOUNT_FAIL, e.message)
-          )
-        })
+    setTimeout(async () => {
+      try {
+        const abcAccount = await context.createAccount(data.username, data.password, data.pin, myAccountOptions)
+        const touchDisabled = await isTouchDisabled(context, abcAccount.username)
+        if (!touchDisabled) {
+          await enableTouchId(context, abcAccount)
+        }
+        dispatch(dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, abcAccount))
+        dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
+        await context.io.folder
+        .file('lastuser.json')
+        .setText(JSON.stringify({ username: abcAccount.username }))
+        .catch(e => null)
+        dispatch(getPreviousUsers(context))
+      } catch (e) {
+        console.log(e)
+        dispatch(
+          dispatchActionWithData(Constants.CREATE_ACCOUNT_FAIL, e.message)
+        )
+      }
     }, 300)
   }
 }
