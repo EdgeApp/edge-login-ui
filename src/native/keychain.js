@@ -116,6 +116,14 @@ export async function loginWithTouchId (
   const supported = await supportsTouchId()
 
   if (supported) {
+    const disabled = await isTouchDisabled(abcContext, username)
+    if (disabled) {
+      return null
+    }
+    const enabled = await isTouchEnabled(abcContext, username)
+    if (!enabled) {
+      return null
+    }
     const loginKeyKey = createKeyWithUsername(username, LOGINKEY_KEY)
 
     if (Platform.OS === 'ios') {
