@@ -1,18 +1,18 @@
 import { connect } from 'react-redux'
 import PasswordRecoveryAppComponent from '../components/PasswordRecoveryAppComponent'
-// import * as loginAction from '../../common/actions/'
+import * as actions from '../../common/actions/'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
-    showHeader: ownProps.showHeader
+    showHeader: ownProps.showHeader,
+    accountObject: ownProps.accountObject
   }
 }
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-   /*  userLogin: (data) => dispatch(loginAction.userLogin(data)),
-    getPreviousUsers: () => dispatch(loginAction.getPreviousUsers()) */
+    initializePasswordRecovery: (account) => dispatch(actions.initializePasswordRecovery(account))
   }
 }
 

@@ -5,7 +5,9 @@ import LinkedComponent from '../../../components/screens/existingAccout/RecoverP
 export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
-    showHeader: ownProps.showHeader
+    showHeader: ownProps.showHeader,
+    questionsList: state.passwordRecovery.questionsList,
+    submitButton: 'Submit'
   }
 }
 

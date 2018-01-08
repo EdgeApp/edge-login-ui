@@ -4,7 +4,7 @@ import RecoverPasswordScreenConnector
   from '../connectors/screens/existingAccount/RecoverPasswordScreenConnector'
 export default class ChangePasswordAppComponent extends Component {
   componentWillMount () {
-    // this.props.setWorkflow()
+    this.props.initializePasswordRecovery()
   }
   render () {
     const { ScreenStyle } = this.props.styles

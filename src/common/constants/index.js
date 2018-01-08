@@ -4,6 +4,7 @@ export * from './Theme'
 export * from './ErrorConstants'
 export * from './IconConstants'
 export * from './OtpConstants'
+export * from './ToLocalizeConstants'
 
 /* export const LEFT_TO_RIGHT = 'leftToRight'
 export const RIGHT_TO_LEFT = 'rightToLeft'
@@ -60,5 +61,6 @@ export const OTP_ERROR = 'otpError'
 export const START_EDGE_LOGIN_REQUEST = 'onEdgeLoginRequest'
 export const CANCEL_EDGE_LOGIN_REQUEST = 'cancelEdgeLoginRequest'
 
-export const RESET_APP = 'resetApplication'
+export const PASSWORD_RECOVERY_INITIALIZED = 'passwordRecoveryInitialized'
 
+export const RESET_APP = 'resetApplication'

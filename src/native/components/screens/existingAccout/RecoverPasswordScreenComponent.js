@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { Button, FormField, TextAndIconButton } from '../../common/'
+import { Button,
+  FormField,
+  TextAndIconButton,
+  DropDownList,
+  TextRowComponent
+ } from '../../common/'
 /* import Gradient from '../../components/Gradient/Gradient.ui.js' */
 /* import { PrimaryButton } from '../../components/Buttons/index' */
 /* import s from '../../../../locales/strings.js'
@@ -30,7 +35,11 @@ export default class PasswordRecovery extends Component {
       answer2: '',
       showQuestionPicker: false,
       focusFirst: false,
-      focusSecond: false
+      focusSecond: false,
+      errorOne: false,
+      errorTwo: false,
+      errorQuestionOne: false,
+      errorQuestionTwo: false
     })
     this.renderHeader = (style) => {
       if (this.props.showHeader) {
@@ -38,18 +47,35 @@ export default class PasswordRecovery extends Component {
       }
       return null
     }
-    this.onSumbit = () => {
-      this.props.setAnswers()
+    this.onSubmit = () => {
+      let errorOne = this.state.answer1.length < 1 || false
+      let errorTwo = this.state.answer2.length < 1 || false
+      let errorQuestionOne = this.state.question1 === Constants.CHOOSE_RECOVERY_QUESTION || false
+      let errorQuestionTwo = this.state.question2 === Constants.CHOOSE_RECOVERY_QUESTION || false
+
+      this.setState({
+        errorOne,
+        errorTwo,
+        errorQuestionOne,
+        errorQuestionTwo
+      })
+      if (errorOne || errorTwo || errorQuestionOne || errorQuestionTwo) {
+        return
+      }
+
+      // this.props.setAnswers()
     }
     this.onSelectQuestionOne = () => {
       this.setState({
         showQuestionPicker: true,
-        focusFirst: true
+        focusFirst: true,
+        focusSecond: false
       })
     }
     this.onSelectQuestionTwo = () => {
       this.setState({
         showQuestionPicker: true,
+        focusFirst: false,
         focusSecond: true
       })
     }
@@ -63,24 +89,49 @@ export default class PasswordRecovery extends Component {
         answer2: arg
       })
     }
-
+    this.questionSelected = (data) => {
+      const question = data.question
+      if (this.state.focusFirst) {
+        this.setState({
+          question1: question,
+          showQuestionPicker: false
+        })
+        return
+      }
+      this.setState({
+        question2: question,
+        showQuestionPicker: false
+      })
+    }
+    this.renderItems = (item) => {
+      const { RecoverPasswordSceneStyles } = this.props.styles
+      console.log(item)
+      return (
+        <TextRowComponent
+          style={RecoverPasswordSceneStyles.listItem}
+          data={item.item}
+          title={item.item.question}
+          onPress={this.questionSelected}
+          numberOfLines={3} />
+      )
+    }
     this.renderQuestions = (styles) => {
+      console.log(this.props.questionsList)
       return (
         <View style={styles.body}>
-          <View style={styles.buttonContainer}>
-            <Button
-              onPress={this.onSumbit}
-              downStyle={styles.nextButton.downStyle}
-              downTextStyle={styles.nextButton.downTextStyle}
-              upStyle={styles.nextButton.upStyle}
-              upTextStyle={styles.nextButton.upTextStyle}
-              label={'DONE'}
-            />
-          </View>
+          <DropDownList
+            style={styles.questionsList}
+            data={this.props.questionsList}
+            renderRow={this.renderItems.bind(this)} />
         </View>
       )
     }
     this.renderForm = (styles) => {
+      const form1Style = this.state.errorOne ? styles.inputError : styles.input
+      const form2Style = this.state.errorTwo ? styles.inputError : styles.input
+      const questionOneStyle = this.state.errorQuestionOne ? styles.textIconButtonErrorError : styles.textIconButton
+      const questionTwoStyle = this.state.errorQuestionOne ? styles.textIconButtonErrorError : styles.textIconButton
+
       return (
         <View style={styles.body}>
           <View style={styles.questionRow}>
@@ -88,13 +139,13 @@ export default class PasswordRecovery extends Component {
               onPress={this.onSelectQuestionOne}
               icon={Constants.KEYBOARD_ARROW_DOWN}
               iconStyle={Constants.MATERIAL_ICONS}
-              style={styles.textIconButton}
+              style={questionOneStyle}
               numberOfLines={2}
-              title={'Choose a Question'}
+              title={this.state.question1}
             />
           </View>
           <View style={styles.answerRow} >
-            <FormField style={styles.input}
+            <FormField style={form1Style}
               autoFocus={this.state.focusFirst}
               autoCorrect={false}
               autoCapitalize={'none'}
@@ -109,13 +160,13 @@ export default class PasswordRecovery extends Component {
               onPress={this.onSelectQuestionTwo}
               icon={Constants.KEYBOARD_ARROW_DOWN}
               iconStyle={Constants.MATERIAL_ICONS}
-              style={styles.textIconButton}
+              style={questionTwoStyle}
               numberOfLines={2}
-              title={'Choose a Question'}
+              title={this.state.question2}
             />
           </View>
           <View style={styles.answerRow} >
-            <FormField style={styles.input}
+            <FormField style={form2Style}
               autoFocus={this.state.focusSecond}
               autoCorrect={false}
               autoCapitalize={'none'}
@@ -132,7 +183,7 @@ export default class PasswordRecovery extends Component {
               downTextStyle={styles.nextButton.downTextStyle}
               upStyle={styles.nextButton.upStyle}
               upTextStyle={styles.nextButton.upTextStyle}
-              label={'DONE'}
+              label={this.props.submitButton}
             />
           </View>
         </View>
@@ -142,7 +193,6 @@ export default class PasswordRecovery extends Component {
 
   render () {
     const { RecoverPasswordSceneStyles } = this.props.styles
-    // const styles = RecoverPasswordSceneStyles
     const middle = this.state.showQuestionPicker
       ? this.renderQuestions(RecoverPasswordSceneStyles)
       : this.renderForm(RecoverPasswordSceneStyles)

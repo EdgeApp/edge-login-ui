@@ -5,6 +5,7 @@ import PreviousUsersReducer from './PreviousUsersReducer'
 import WorkflowReducer from './WorkflowReducer'
 import PasswordStatusReducer from './PasswordStatusReducer'
 import TermsAndConditinsReducer from './TermsAndConditinsReducer'
+import PasswordRecoveryReducer from './PasswordRecoveryReducer'
 
 export default combineReducers({
   login: LoginReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   previousUsers: PreviousUsersReducer,
   workflow: WorkflowReducer,
   passwordStatus: PasswordStatusReducer,
-  terms: TermsAndConditinsReducer
+  terms: TermsAndConditinsReducer,
+  passwordRecovery: PasswordRecoveryReducer
 })

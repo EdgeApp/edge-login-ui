@@ -36,16 +36,39 @@ const RecoverPasswordSceneStyles = {
     },
     container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
   },
+  inputError: {...Styles.MaterialInputOnWhite,
+    errorColor: Constants.ACCENT_RED,
+    baseColor: Constants.ACCENT_RED,
+    textColor: Constants.ACCENT_RED,
+    titleTextStyle: {
+      color: Constants.ACCENT_RED
+    },
+    affixTextStyle: {
+      color: Constants.ACCENT_RED
+    },
+    container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
+  },
   shim: {
     height: 20
   },
   textIconButton: Styles.TextAndIconButtonAlignEdgesStyle,
+  textIconButtonErrorError: {...Styles.TextAndIconButtonAlignEdgesStyle,
+    text: {...Styles.TextAndIconButtonAlignEdgesStyle.text, color: Constants.ACCENT_RED},
+    icon: {...Styles.TextAndIconButtonAlignEdgesStyle.icon, color: Constants.ACCENT_RED}
+  },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpStyle,
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
     downStyle: Styles.PrimaryButtonDownStyle
-  }
+  },
+  questionsList: {
+    width: '100%',
+    height: 400,
+    borderColor: Constants.GRAY_3,
+    borderWidth: 1
+  },
+  listItem: Styles.ListItemTextOnly
 }
 
 export {RecoverPasswordSceneStyles}

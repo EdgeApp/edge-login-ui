@@ -4,6 +4,7 @@ export * from './PreviousUsersActions'
 export * from './WorkflowActions'
 export * from './UserActions'
 export * from './ChangePasswordPinActions'
+export * from './PasswordRecoveryActions'
 
 export function dispatchAction (type) {
   return {
