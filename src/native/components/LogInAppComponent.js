@@ -23,6 +23,12 @@ import LoginUsernamePasswordScreenConnector
   from '../connectors/screens/LogInUsernamePasswordScreenConnector'
 import PinLoginScreenConnector
   from '../connectors/screens/PinLoginScreenConnector'
+import LoginWithRecoveryQuestionsSceenConnector
+  from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
+import ForgotPasswordChangePasswordConnector
+  from '../connectors/screens/existingAccount/ForgotPasswordChangePasswordConnector'
+import ForgotPinChangePinConnector
+  from '../connectors/screens/existingAccount/ForgotPinChangePinConnector'
 import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 
 export default class LoginAppComponent extends Component {
@@ -67,6 +73,8 @@ export default class LoginAppComponent extends Component {
         return this.getCreateScreen()
       case Constants.WORKFLOW_OTP:
         return this.getOtpScreen()
+      case Constants.WORKFLOW_RECOVERY_LOGIN:
+        return this.getRecoveryLoginScreen()
     }
   }
 
@@ -108,5 +116,15 @@ export default class LoginAppComponent extends Component {
   }
   getOtpScreen () {
     return <OtpErrorScreenConnector styles={this.props.styles} />
+  }
+  getRecoveryLoginScreen () {
+    switch (this.props.workflow.currentSceneIndex) {
+      case 0:
+        return <LoginWithRecoveryQuestionsSceenConnector styles={this.props.styles} />
+      case 1:
+        return <ForgotPasswordChangePasswordConnector styles={this.props.styles} />
+      case 2:
+        return <ForgotPinChangePinConnector styles={this.props.styles} />
+    }
   }
 }

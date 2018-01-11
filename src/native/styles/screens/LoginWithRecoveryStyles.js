@@ -2,7 +2,7 @@ import * as Styles from '../'
 import * as Constants from '../../../common/constants'
 // import {Image} from 'react-native'
 
-const RecoverPasswordSceneStyles = {
+const LoginWithRecoveryStyles = {
   screen: { ...Styles.ScreenStyle },
   header: { ...Styles.HeaderContainerStyle, backgroundColor: Constants.PRIMARY },
   /* gradient: {
@@ -13,7 +13,13 @@ const RecoverPasswordSceneStyles = {
   },
   questionRow: {
     height: 50,
-    width: '100%'
+    width: '100%',
+    borderBottomWidth: 1,
+    borderColor: Constants.GRAY_2
+  },
+  questionText: {
+    color: Constants.GRAY_2,
+    fontSize: 18
   },
   answerRow: {
     width: '100%',
@@ -34,9 +40,6 @@ const RecoverPasswordSceneStyles = {
     affixTextStyle: {
       color: Constants.GRAY_2
     },
-    container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
-  },
-  inputModal: {...Styles.MaterialInputOnWhite,
     container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
   },
   inputError: {...Styles.MaterialInputOnWhite,
@@ -83,8 +86,14 @@ const RecoverPasswordSceneStyles = {
     fontSize: 15,
     textAlign: 'center'
   },
-  listItem: Styles.ListItemTextOnly,
-  emailModal: Styles.SkipModalStyle
+  errorText: {
+    color: Constants.ACCENT_RED,
+    width: '90%',
+    fontSize: 14,
+    textAlign: 'center',
+    paddingBottom: 5
+  },
+  listItem: Styles.ListItemTextOnly
 }
 
-export {RecoverPasswordSceneStyles}
+export {LoginWithRecoveryStyles}

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { View, Keyboard, TouchableWithoutFeedback, Text } from 'react-native'
 import {
   BackgroundImage,
   Button,
   FormField,
-  FormFieldWithDropComponent
+  FormFieldWithDropComponent,
+  StaticModal
 } from '../../components/common'
 /* import UsernameDropConnector
   from '../../connectors/componentConnectors/UsernameDropConnector' */
@@ -14,6 +15,8 @@ import * as Assets from '../../assets/'
 import * as Offsets from '../../constants'
 import DeleteUserConnector
   from '../../../native/connectors/abSpecific/DeleteUserConnector'
+import ForgotPasswordModalConnector
+  from '../../../native/connectors/abSpecific/ForgotPasswordModalConnector'
 import { localize, KEYS } from '../../../common/locale'
 
 import {
@@ -34,7 +37,51 @@ export default class LandingScreenComponent extends Component {
           />
         )
       }
+      if (this.state.showRecoveryModal) {
+        const middle = <View style={this.style.modalMiddle}>
+          <Text style={this.style.staticModalText}>
+            Please enter the username of the account you want to recover.
+          </Text>
+          <FormField
+            testID={'passwordFormField'}
+            style={this.style.inputModal}
+            onChangeText={this.updateUsername.bind(this)}
+            value={this.props.username}
+            label={'Ueername'}
+            error={this.props.error}
+            returnKeyType={'go'}
+            forceFocus
+            onSubmitEditing={this.recoverPasswordLogin}
+          />
+        </View>
+
+        return (
+          <ForgotPasswordModalConnector
+            modalMiddleComponent={middle}
+            cancel={this.cancelForgotPassword}
+            action={this.recoverPasswordLogin}
+          />
+        )
+      }
+      if (this.props.recoveryLoginEnabledError) {
+        const body = <Text style={style.staticModalText}>Recovery was not setup or was done on another device. If recovery was setup you should have emailed yourself a recovery token with a link. \nPlease find the email and click on the link using this device initiate recovery.</Text>
+        return <StaticModal
+          cancel={this.props.dismissRecoveryError}
+          body={body}
+          modalDismissTimerSeconds={5} />
+      }
       return null
+    }
+    this.recoverPasswordLogin = () => {
+      this.setState({
+        showRecoveryModal: false
+      })
+      this.props.recoverPasswordLogin()
+    }
+    this.cancelForgotPassword = () => {
+      this.setState({
+        showRecoveryModal: false
+      })
     }
 
     this.noFocus = () => {
@@ -61,7 +108,8 @@ export default class LandingScreenComponent extends Component {
       loggingIn: false,
       focusFirst: true,
       focusSecond: false,
-      offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN
+      offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN,
+      showRecoveryModal: false
     })
   }
   setListener (callback) {
@@ -93,12 +141,6 @@ export default class LandingScreenComponent extends Component {
         loggingIn: false
       })
     }
-    /* if (!this.keyboardDidHideListener) {
-      this.keyboardDidHideListener = Keyboard.addListener(
-        'keyboardDidHide',
-        this.noFocus.bind(this)
-      )
-    } */
   }
   render () {
     return (
@@ -283,7 +325,10 @@ export default class LandingScreenComponent extends Component {
     this.props.updatePassword(data)
   }
   onForgotPassword () {
-    this.props.onForgotPassword()
+    // this.props.onForgotPassword()
+    this.setState({
+      showRecoveryModal: true
+    })
   }
   onStartLogin () {
     this.noFocus()

@@ -21,7 +21,8 @@ export const mapStateToProps = (state, ownProps) => {
     usernameList: state.previousUsers.usernameOnlyList,
     filteredUsernameList: state.previousUsers.usernameOnlyList,
     hasUsers: pv,
-    showModal: state.workflow.showModal
+    showModal: state.workflow.showModal,
+    recoveryLoginEnabledError: state.passwordRecovery.recoveryLoginEnabledError
   }
 }
 
@@ -33,7 +34,6 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(action.startWorkflow(Constants.WORKFLOW_CREATE)),
     gotoPinLoginPage: () =>
       dispatch(action.startWorkflow(Constants.WORKFLOW_PIN)),
-    onForgotPassword: () => dispatch(action.forgotPassword()),
     updateUsername: data =>
       dispatch(
         action.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data)
@@ -44,7 +44,9 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
       ),
     deleteUserFromDevice: data => dispatch(action.deleteUserFromDevice(data)),
     launchDeleteModal: () =>
-      dispatch(action.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL))
+      dispatch(action.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL)),
+    recoverPasswordLogin: () => dispatch(action.recoverPasswordLogin()),
+    dismissRecoveryError: () => dispatch(action.dispatchAction(Constants.DISMISS_REOVERY_ERROR))
   }
 }
 

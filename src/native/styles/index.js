@@ -14,4 +14,4 @@ export * from './screens/CreatingAccountWaitScreenStyle'
 export * from './screens/NewAccountReviewScreenStyle'
 export * from './screens/TermsAndConditionsScreenStyle'
 export * from './screens/OtpErrorScreenStyle'
-
+export * from './screens/LoginWithRecoveryStyles'

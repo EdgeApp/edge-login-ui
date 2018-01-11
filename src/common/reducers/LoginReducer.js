@@ -12,7 +12,9 @@ const initialState = {
   otpUserBackupKey: null, // S7UQ66VYNZKAX4EV
   previousAttemptType: null,
   edgeLoginId: null,
-  cancelEdgeLoginRequest: null
+  cancelEdgeLoginRequest: null,
+  account: null,
+  touchIdInformation: null
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -74,6 +76,10 @@ export default function (state = initialState, action) {
     case Constants.RESET_APP:
       const username = state.username
       return {...initialState, username: username}
+    case Constants.LOGIN_RECOVERY_SUCCEESS:
+      return {...state, account: action.data.account, touchIdInformation: action.data.touchIdInformation}
+    case Constants.ON_RECOVERY_LOGIN_ERROR:
+      return {...state, errorMessage: action.data}
     default:
       return state
   }

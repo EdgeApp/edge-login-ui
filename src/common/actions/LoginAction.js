@@ -5,6 +5,50 @@ import { enableTouchId, loginWithTouchId, isTouchEnabled, supportsTouchId, isTou
 /**
  * Make it Thunky
  */
+export function loginWithRecovery (answers) {
+  return async (dispatch, getState, imports) => {
+    const state = getState()
+    const backupKey = state.passwordRecovery.recoveryKey
+    const username = state.login.username
+    const context = imports.context
+    const myAccountOptions = {
+      ...imports.accountOptions,
+      callbacks: {
+        ...imports.accountOptions.callbacks,
+        onLoggedOut: () => {
+          dispatch(dispatchAction(Constants.RESET_APP))
+        }
+      }
+    }
+    try {
+      const account = await context.loginWithRecovery2(backupKey, username, answers, myAccountOptions)
+      const touchDisabled = await isTouchDisabled(context, account.username)
+      if (!touchDisabled) {
+        await enableTouchId(context, account)
+      }
+      await context.io.folder
+          .file('lastuser.json')
+          .setText(JSON.stringify({ username: account.username }))
+          .catch(e => null)
+      const isTouchSupported = await supportsTouchId()
+      const touchEnabled = await isTouchEnabled(context, account.username)
+      const touchIdInformation = {
+        isTouchSupported,
+        isTouchEnabled: touchEnabled
+      }
+      const obj = {
+        account,
+        touchIdInformation
+      }
+      dispatch(dispatchActionWithData(Constants.LOGIN_RECOVERY_SUCCEESS, obj))
+    } catch (e) {
+      console.log('there was an error')
+      console.log(e.message)
+      const incorrect = 'The answers you provided are incorrect. '
+      dispatch(dispatchActionWithData(Constants.ON_RECOVERY_LOGIN_ERROR, incorrect))
+    }
+  }
+}
 
 export function resetOtpReset () {
   return async (dispatch, getState, imports) => {
@@ -219,6 +263,16 @@ export function getEdgeLoginQrCode () {
       console.log(e.message)
       console.log(e)
     }
+  }
+}
+export function recoveryLoginComplete () {
+  return (dispatch, getState, imports) => {
+    const state = getState()
+    const account = state.login.account
+    const touchIdInformation = state.login.touchIdInformation
+    const callback = imports.callback
+    dispatch(dispatchAction(Constants.CLOSE_NOTIFICATION_MODAL))
+    callback(null, account, touchIdInformation)
   }
 }
 // validateUsername check

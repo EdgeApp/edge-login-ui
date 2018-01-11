@@ -28,6 +28,12 @@ const SetAccountPinScreenStyle = {
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
     downStyle: Styles.PrimaryButtonDownStyle
   },
+  staticModalText: {
+    color: Constants.GRAY_1,
+    width: '100%',
+    fontSize: 15,
+    textAlign: 'center'
+  },
   modal: Styles.SkipModalStyle
 }
 

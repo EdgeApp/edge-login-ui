@@ -72,6 +72,29 @@ const initialState = {
   otpWF: {
     scenes: 1,
     details: [{ back: true, skip: false, title: 'Two Factor Authentication', subTitle: '' }]
+  },
+  recoveryLoginWF: {
+    scenes: 3,
+    details: [
+      {
+        back: true,
+        skip: false,
+        title: 'Recovery Questions',
+        subTitle: 'step 1/3'
+      },
+      {
+        back: true,
+        skip: false,
+        title: 'Change Password',
+        subTitle: 'step 2/3'
+      },
+      {
+        back: true,
+        skip: false,
+        title: 'Change PIN',
+        subTitle: 'step 3/3'
+      }
+    ]
   }
 }
 export default function (state = initialState, action) {
@@ -95,7 +118,7 @@ export default function (state = initialState, action) {
       return { ...state, currentSceneIndex: nextIndex }
     case Constants.WORKFLOW_NEXT:
       nextIndex = state.currentSceneIndex + 1
-      if (nextIndex === state[state.currentKey.scenes]) {
+      if (nextIndex === state[state.currentKey].scenes) {
         nextIndex = state.currentSceneIndex
       }
       return { ...state, currentSceneIndex: nextIndex, showModal: false }
@@ -107,6 +130,10 @@ export default function (state = initialState, action) {
       return { ...state, showModal: false, modalView: null }
     case Constants.WORKFLOW_CANCEL_BETA_MODAL:
       return { ...state, betaModal: false }
+    case Constants.ON_RECOVERY_LOGIN_IS_ENABLED:
+      return { ...state, currentKey: Constants.WORKFLOW_RECOVERY_LOGIN, currentSceneIndex: 0 }
+    case Constants.LOGIN_RECOVERY_SUCCEESS:
+      return { ...state, currentKey: Constants.WORKFLOW_RECOVERY_LOGIN, currentSceneIndex: 1 }
     case Constants.RESET_APP:
       return initialState
     default:

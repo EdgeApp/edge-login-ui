@@ -33,7 +33,14 @@ const LoginPasswordScreenStyle = {
     width: '100%',
     alignItems: 'center'
   },
+  modalMiddle: {
+    width: '100%',
+    height: 100
+  },
   input2: Styles.MaterialInput,
+  inputModal: {...Styles.MaterialInputOnWhite,
+    container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
+  },
   inputWithDrop: Styles.MaterialInputWithDrop,
   forgotButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
@@ -52,6 +59,12 @@ const LoginPasswordScreenStyle = {
     upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, fontSize: 14, color: Constants.WHITE},
     downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, fontSize: 14, color: Constants.WHITE},
     downStyle: Styles.TextOnlyButtonDownStyle
+  },
+  staticModalText: {
+    color: Constants.GRAY_1,
+    width: '100%',
+    fontSize: 15,
+    textAlign: 'center'
   },
   modal: Styles.SkipModalStyle
 }

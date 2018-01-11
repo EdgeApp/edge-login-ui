@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Button,
+import { View, Text } from 'react-native'
+import {
+  Button,
   FormField,
   TextAndIconButton,
   DropDownList,
-  TextRowComponent
- } from '../../common/'
+  TextRowComponent,
+  StaticModal
+} from '../../common/'
 /* import Gradient from '../../components/Gradient/Gradient.ui.js' */
 /* import { PrimaryButton } from '../../components/Buttons/index' */
 /* import s from '../../../../locales/strings.js'
@@ -13,6 +15,7 @@ import {FormField} from '../../../../components/FormField.js' */
 import * as Constants from '../../../../common/constants'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
+import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
 /* type Props = {
   recoveryQuestions: Array<String>,
   setAnswers(): void,
@@ -29,8 +32,8 @@ import HeaderConnector
 export default class PasswordRecovery extends Component {
   componentWillMount () {
     this.setState({
-      question1: 'Choose recovery question',
-      question2: 'Choose recovery question',
+      question1: this.props.question1,
+      question2: this.props.question2,
       answer1: '',
       answer2: '',
       showQuestionPicker: false,
@@ -39,19 +42,32 @@ export default class PasswordRecovery extends Component {
       errorOne: false,
       errorTwo: false,
       errorQuestionOne: false,
-      errorQuestionTwo: false
+      errorQuestionTwo: false,
+      disableConfirmationModal: false,
+      emailAddress: ''
     })
-    this.renderHeader = (style) => {
+    this.renderHeader = style => {
       if (this.props.showHeader) {
         return <HeaderConnector style={style.header} />
       }
       return null
     }
+    this.onDisable = () => {
+      this.props.deleteRecovery()
+      this.setState({
+        disableConfirmationModal: true
+      })
+    }
+    this.onDisableModalClose = () => {
+      this.props.cancel()
+    }
     this.onSubmit = () => {
       let errorOne = this.state.answer1.length < 1 || false
       let errorTwo = this.state.answer2.length < 1 || false
-      let errorQuestionOne = this.state.question1 === Constants.CHOOSE_RECOVERY_QUESTION || false
-      let errorQuestionTwo = this.state.question2 === Constants.CHOOSE_RECOVERY_QUESTION || false
+      let errorQuestionOne =
+        this.state.question1 === Constants.CHOOSE_RECOVERY_QUESTION || false
+      let errorQuestionTwo =
+        this.state.question2 === Constants.CHOOSE_RECOVERY_QUESTION || false
 
       this.setState({
         errorOne,
@@ -62,8 +78,9 @@ export default class PasswordRecovery extends Component {
       if (errorOne || errorTwo || errorQuestionOne || errorQuestionTwo) {
         return
       }
-
-      // this.props.setAnswers()
+      const questions = [this.state.question1, this.state.question2]
+      const answers = [this.state.answer1, this.state.answer2]
+      this.props.submit(questions, answers)
     }
     this.onSelectQuestionOne = () => {
       this.setState({
@@ -79,17 +96,17 @@ export default class PasswordRecovery extends Component {
         focusSecond: true
       })
     }
-    this.setAnswer1 = (arg) => {
+    this.setAnswer1 = arg => {
       this.setState({
         answer1: arg
       })
     }
-    this.setAnswer2 = (arg) => {
+    this.setAnswer2 = arg => {
       this.setState({
         answer2: arg
       })
     }
-    this.questionSelected = (data) => {
+    this.questionSelected = data => {
       const question = data.question
       if (this.state.focusFirst) {
         this.setState({
@@ -103,7 +120,7 @@ export default class PasswordRecovery extends Component {
         showQuestionPicker: false
       })
     }
-    this.renderItems = (item) => {
+    this.renderItems = item => {
       const { RecoverPasswordSceneStyles } = this.props.styles
       console.log(item)
       return (
@@ -112,25 +129,39 @@ export default class PasswordRecovery extends Component {
           data={item.item}
           title={item.item.question}
           onPress={this.questionSelected}
-          numberOfLines={3} />
+          numberOfLines={3}
+        />
       )
     }
-    this.renderQuestions = (styles) => {
+    this.renderQuestions = styles => {
       console.log(this.props.questionsList)
       return (
         <View style={styles.body}>
           <DropDownList
             style={styles.questionsList}
             data={this.props.questionsList}
-            renderRow={this.renderItems.bind(this)} />
+            renderRow={this.renderItems.bind(this)}
+          />
         </View>
       )
     }
-    this.renderForm = (styles) => {
+    this.updateEmail = email => {
+      this.setState({
+        emailAddress: email
+      })
+    }
+    this.openEmailApp = () => {
+
+    }
+    this.renderForm = styles => {
       const form1Style = this.state.errorOne ? styles.inputError : styles.input
       const form2Style = this.state.errorTwo ? styles.inputError : styles.input
-      const questionOneStyle = this.state.errorQuestionOne ? styles.textIconButtonErrorError : styles.textIconButton
-      const questionTwoStyle = this.state.errorQuestionOne ? styles.textIconButtonErrorError : styles.textIconButton
+      const questionOneStyle = this.state.errorQuestionOne
+        ? styles.textIconButtonErrorError
+        : styles.textIconButton
+      const questionTwoStyle = this.state.errorQuestionOne
+        ? styles.textIconButtonErrorError
+        : styles.textIconButton
 
       return (
         <View style={styles.body}>
@@ -144,15 +175,17 @@ export default class PasswordRecovery extends Component {
               title={this.state.question1}
             />
           </View>
-          <View style={styles.answerRow} >
-            <FormField style={form1Style}
+          <View style={styles.answerRow}>
+            <FormField
+              style={form1Style}
               autoFocus={this.state.focusFirst}
               autoCorrect={false}
               autoCapitalize={'none'}
               onChangeText={this.setAnswer1}
               value={this.state.answer1}
               label={'Your Answer'}
-              error={'Answers are case sensitive'} />
+              error={'Answers are case sensitive'}
+            />
           </View>
           <View style={styles.shim} />
           <View style={styles.questionRow}>
@@ -165,29 +198,102 @@ export default class PasswordRecovery extends Component {
               title={this.state.question2}
             />
           </View>
-          <View style={styles.answerRow} >
-            <FormField style={form2Style}
+          <View style={styles.answerRow}>
+            <FormField
+              style={form2Style}
               autoFocus={this.state.focusSecond}
               autoCorrect={false}
               autoCapitalize={'none'}
               onChangeText={this.setAnswer2}
               value={this.state.answer2}
               label={'Your Answer'}
-              error={'Answers are case sensitive'} />
-          </View>
-          <View style={styles.buttonContainer}>
-            <View style={styles.shim} />
-            <Button
-              onPress={this.onSubmit}
-              downStyle={styles.nextButton.downStyle}
-              downTextStyle={styles.nextButton.downTextStyle}
-              upStyle={styles.nextButton.upStyle}
-              upTextStyle={styles.nextButton.upTextStyle}
-              label={this.props.submitButton}
+              error={'Answers are case sensitive'}
             />
           </View>
+          {this.renderButtons(styles)}
         </View>
       )
+    }
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.isEnabled !== this.props.isEnabled) {
+      this.setState({
+        question1: nextProps.question1,
+        question2: nextProps.question2
+      })
+    }
+  }
+
+  renderButtons (styles) {
+    if (this.props.isEnabled) {
+      return (
+        <View style={styles.buttonContainer}>
+          <View style={styles.shim} />
+          <Button
+            onPress={this.onDisable}
+            downStyle={styles.disableButton.downStyle}
+            downTextStyle={styles.disableButton.downTextStyle}
+            upStyle={styles.disableButton.upStyle}
+            upTextStyle={styles.disableButton.upTextStyle}
+            label={this.props.disableButton}
+          />
+          <View style={styles.shim} />
+          <Button
+            onPress={this.onSubmit}
+            downStyle={styles.submitButton.downStyle}
+            downTextStyle={styles.submitButton.downTextStyle}
+            upStyle={styles.submitButton.upStyle}
+            upTextStyle={styles.submitButton.upTextStyle}
+            label={this.props.submitButton}
+          />
+        </View>
+      )
+    }
+    return (
+      <View style={styles.buttonContainer}>
+        <View style={styles.shim} />
+        <Button
+          onPress={this.onSubmit}
+          downStyle={styles.submitButton.downStyle}
+          downTextStyle={styles.submitButton.downTextStyle}
+          upStyle={styles.submitButton.upStyle}
+          upTextStyle={styles.submitButton.upTextStyle}
+          label={this.props.submitButton}
+        />
+      </View>
+    )
+  }
+  renderDisableModal (styles) {
+    if (this.state.disableConfirmationModal) {
+      const body = <Text style={styles.staticModalText}>Password Recovery has been disabled. You can enable it again by going into Password Recovery anytime</Text>
+      return <StaticModal
+        cancel={this.onDisableModalClose.bind(this)}
+        body={body}
+        modalDismissTimerSeconds={5} />
+    }
+    return null
+  }
+  showEmailDialog (styles) {
+    const middle = <View style={this.style.modalMiddle}>
+      <Text style={this.style.staticModalText}>
+        Please enter the username of the account you want to recover.
+      </Text>
+      <FormField
+        style={this.style.inputModal}
+        onChangeText={this.updateEmail.bind(this)}
+        value={this.state.emailAddress}
+        label={'Email Address'}
+        error={''}
+        returnKeyType={'go'}
+        forceFocus
+        onSubmitEditing={this.openEmailApp}
+      />
+    </View>
+    if (this.props.showEmailDialog) {
+      return <SaveRecoveryTokenModalConnector
+        modalMiddleComponent={middle}
+        cancel={this.cancelForgotPassword}
+        action={this.openEmailApp} />
     }
   }
 
@@ -200,6 +306,8 @@ export default class PasswordRecovery extends Component {
       <View style={RecoverPasswordSceneStyles.screen}>
         {this.renderHeader(RecoverPasswordSceneStyles)}
         {middle}
+        {this.renderDisableModal(RecoverPasswordSceneStyles)}
+        {this.showEmailDialog(RecoverPasswordSceneStyles)}
       </View>
     )
   }

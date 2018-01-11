@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { Button } from '../../common'
+import { Button, StaticModal } from '../../common'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import CreateFourDigitPinConnector
@@ -21,6 +21,18 @@ export default class ChangeAccountPinScreenComponent extends Component {
 
     this.renderModal = (style) => {
       if (this.props.showModal) {
+        if (this.props.forgotPasswordModal) {
+          const body = <View>
+            <Text style={style.staticModalText}>Password And Pin Successfully Changed.</Text>
+            <Text style={style.staticModalText}>Don't forget your password or recovery answers. You will permanently lose access to your funds if you lose your password and recovery answers</Text>
+          </View>
+          return (
+            <StaticModal
+              cancel={this.props.login}
+              body={body}
+              modalDismissTimerSeconds={3} />
+          )
+        }
         return (
           <ChangePinModalConnector
             style={style.modal.skip}
