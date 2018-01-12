@@ -23,6 +23,7 @@ class LoginScreen extends Component {
     locale: 'US',
     language: 'en_us',
     username: null,
+    recoveryLogin: false,
     accountOptions: null
   }
 
@@ -58,6 +59,7 @@ class LoginScreen extends Component {
         <LoginAppConnector
           context={this.props.context}
           onLogin={this.props.onLogin}
+          recoveryLogin={this.props.recoveryLogin}
           styles={Styles}
         />
       </Provider>

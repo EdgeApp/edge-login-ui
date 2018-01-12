@@ -39,7 +39,9 @@ export function initializePasswordRecovery (accountObj) {
       const userQuestions = await context.fetchRecovery2Questions(recoveryKey, account.username)
       const obj = {
         questionsList,
-        userQuestions
+        userQuestions,
+        account,
+        username: account.username
       }
       dispatch(actions.dispatchActionWithData(Constants.PASSWORD_RECOVERY_INITIALIZED, obj))
       return
@@ -53,7 +55,9 @@ export function initializePasswordRecovery (accountObj) {
 
     const obj = {
       questionsList,
-      userQuestions: []
+      userQuestions: [],
+      account: null,
+      username: account.username
     }
     dispatch(actions.dispatchActionWithData(Constants.PASSWORD_RECOVERY_INITIALIZED, obj))
   }

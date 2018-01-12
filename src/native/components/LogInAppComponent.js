@@ -53,6 +53,9 @@ export default class LoginAppComponent extends Component {
           // we have previous user data but there are no users ever logged in.
           return this.getLandingScreen()
         }
+        if (this.props.recoveryLogin) {
+          return this.getRecoveryLoginScreen()
+        }
         if (
           this.props.previousUsers.lastUser &&
           this.props.previousUsers.lastUser.pinEnabled

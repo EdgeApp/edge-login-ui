@@ -1,12 +1,14 @@
 
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
+
 import * as actions from '../../../../common/actions'
-// import * as Constants from '../../../../common/constants'
+import * as Constants from '../../../../common/constants'
 export const mapStateToProps = (state, ownProps) => {
   const isEnabled = state.passwordRecovery.userQuestions.length > 0 || false
   const question1 = state.passwordRecovery.userQuestions.length > 0 ? state.passwordRecovery.userQuestions[0] : 'Choose recovery question'
   const question2 = state.passwordRecovery.userQuestions.length > 1 ? state.passwordRecovery.userQuestions[1] : 'Choose recovery question'
+  const username = returnTrunatedUsername(state.login.username)
   return {
     styles: ownProps.styles,
     showHeader: ownProps.showHeader,
@@ -17,7 +19,9 @@ export const mapStateToProps = (state, ownProps) => {
     submitButton: 'Submit',
     disableButton: 'Disable',
     isEnabled,
-    showEmailDialog: state.passwordRecovery.recoveryLoginEnabledError
+    username,
+    backupKey: state.passwordRecovery.recoveryKey,
+    showEmailDialog: state.passwordRecovery.showRecoveryEmailDialog
   }
 }
 
@@ -25,10 +29,20 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     submit: (questions, answers) => dispatch(actions.changeRecoveryAnswers(questions, answers)),
     deleteRecovery: () => dispatch(actions.deleteRecovery()),
-    cancel: () => dispatch(actions.cancelRecoverySettingsScene())
+    cancel: () => {
+      dispatch(actions.deleteRecovery())
+      dispatch(actions.cancelRecoverySettingsScene())
+      dispatch(actions.dispatchAction(Constants.DISMISS_EMAIL_MODAL))
+    }
   }
 }
 
+function returnTrunatedUsername (arg) {
+  if (arg) {
+    return arg.charAt(0) + arg.charAt(1) + '***'
+  }
+  return arg
+}
 export default connect(mapStateToProps, mapDispatchToProps)(LinkedComponent)
 
 /*

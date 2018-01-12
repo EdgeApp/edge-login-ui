@@ -16,6 +16,7 @@ import * as Constants from '../../../../common/constants'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
+import EmailAppFailedModalConnector from '../../../connectors/abSpecific/EmailAppFailedModalConnector'
 /* type Props = {
   recoveryQuestions: Array<String>,
   setAnswers(): void,
@@ -29,6 +30,8 @@ import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/Save
   focusFirst: boolean,
   focusSecond: boolean
 } */
+import Mailer from 'react-native-mail'
+
 export default class PasswordRecovery extends Component {
   componentWillMount () {
     this.setState({
@@ -44,7 +47,8 @@ export default class PasswordRecovery extends Component {
       errorQuestionOne: false,
       errorQuestionTwo: false,
       disableConfirmationModal: false,
-      emailAddress: ''
+      emailAddress: '',
+      emailAppNotAvailable: false
     })
     this.renderHeader = style => {
       if (this.props.showHeader) {
@@ -151,7 +155,23 @@ export default class PasswordRecovery extends Component {
       })
     }
     this.openEmailApp = () => {
+      const body = 'Please click the link below from a mobile device with Airbitz installed to initiate account recovery for username ' + this.props.username + '<br>' +
+      'iOS <br>edgesecure://recovery?token=' + this.props.backupKey +
+      'Android https://recovery.edgesecure.co/recovery?token=' + this.props.backupKey
 
+      Mailer.mail({
+        subject: 'Edge Recovery Token',
+        recipients: ['allen@missionvi.com'],
+        body: body,
+        isHTML: true
+      }, (error, event) => {
+        console.log(error)
+        console.log('FICK IT DIDNT WORK> ')
+        this.setState({
+          emailAppNotAvailable: true
+        })
+      })
+      // this.props.cancel()
     }
     this.renderForm = styles => {
       const form1Style = this.state.errorOne ? styles.inputError : styles.input
@@ -273,13 +293,40 @@ export default class PasswordRecovery extends Component {
     }
     return null
   }
-  showEmailDialog (styles) {
-    const middle = <View style={this.style.modalMiddle}>
-      <Text style={this.style.staticModalText}>
+  showEmailPending (styles) {
+    return <View style={styles.modalMiddle}>
+      <Text style={styles.staticModalText}>
         Please enter the username of the account you want to recover.
       </Text>
       <FormField
-        style={this.style.inputModal}
+        style={styles.inputModal}
+        onChangeText={this.updateEmail.bind(this)}
+        value={this.state.emailAddress}
+        label={'Email Address'}
+        error={''}
+        returnKeyType={'go'}
+        forceFocus
+        onSubmitEditing={this.openEmailApp}
+      />
+    </View>
+  }
+  showEmaiFailed (styles) {
+    if (this.props.showEmailDialog) {
+      return <EmailAppFailedModalConnector
+        action={this.props.cancel} />
+    }
+    return null
+  }
+  showEmailDialog (styles) {
+    if (this.state.emailAppNotAvailable) {
+      return this.showEmaiFailed(styles)
+    }
+    const middle = <View style={styles.modalMiddle}>
+      <Text style={styles.staticModalText}>
+        Please enter the username of the account you want to recover.
+      </Text>
+      <FormField
+        style={styles.inputModal}
         onChangeText={this.updateEmail.bind(this)}
         value={this.state.emailAddress}
         label={'Email Address'}
@@ -292,9 +339,10 @@ export default class PasswordRecovery extends Component {
     if (this.props.showEmailDialog) {
       return <SaveRecoveryTokenModalConnector
         modalMiddleComponent={middle}
-        cancel={this.cancelForgotPassword}
+        cancel={this.props.cancel}
         action={this.openEmailApp} />
     }
+    return null
   }
 
   render () {

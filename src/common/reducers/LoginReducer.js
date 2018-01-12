@@ -80,6 +80,8 @@ export default function (state = initialState, action) {
       return {...state, account: action.data.account, touchIdInformation: action.data.touchIdInformation}
     case Constants.ON_RECOVERY_LOGIN_ERROR:
       return {...state, errorMessage: action.data}
+    case Constants.PASSWORD_RECOVERY_INITIALIZED:
+      return {...state, account: action.data.account, username: action.data.username}
     default:
       return state
   }
