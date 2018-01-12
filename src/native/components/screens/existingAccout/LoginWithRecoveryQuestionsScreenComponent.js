@@ -10,6 +10,7 @@ import HeaderConnector
 
 export default class PasswordRecovery extends Component {
   componentWillMount () {
+    this.props.getQuestions()
     this.setState({
       question1: this.props.question1,
       question2: this.props.question2,
@@ -18,6 +19,7 @@ export default class PasswordRecovery extends Component {
       showQuestionPicker: false,
       focusFirst: false,
       focusSecond: false,
+      focusThird: false,
       errorOne: false,
       errorTwo: false,
       errorQuestionOne: false,
@@ -74,11 +76,13 @@ export default class PasswordRecovery extends Component {
     }
     return null
   }
-  renderError (styles) {
-    if (this.props.loginError) {
-      return <Text style={styles.errorText} >{this.props.loginError}</Text>
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.question1 !== this.props.question1) {
+      this.setState({
+        question1: nextProps.question1,
+        question2: nextProps.question2
+      })
     }
-    return null
   }
 
   render () {
@@ -92,13 +96,25 @@ export default class PasswordRecovery extends Component {
       <View style={styles.screen}>
         {this.renderHeader(styles)}
         <View style={styles.body}>
+          <View style={styles.answerRow}>
+            <FormField
+              style={styles.inputUsername}
+              autoFocus={this.state.focusFirst}
+              autoCorrect={false}
+              autoCapitalize={'none'}
+              onChangeText={this.props.updateUsername}
+              value={this.props.username}
+              label={'Username'}
+              error={this.props.loginError}
+            />
+          </View>
           <View style={styles.questionRow}>
             <Text style={styles.questionText}>{this.props.question1}</Text>
           </View>
           <View style={styles.answerRow}>
             <FormField
               style={form1Style}
-              autoFocus={this.state.focusFirst}
+              autoFocus={this.state.focusSecond}
               autoCorrect={false}
               autoCapitalize={'none'}
               onChangeText={this.setAnswer1}
@@ -114,7 +130,7 @@ export default class PasswordRecovery extends Component {
           <View style={styles.answerRow}>
             <FormField
               style={form2Style}
-              autoFocus={this.state.focusSecond}
+              autoFocus={this.state.focusThird}
               autoCorrect={false}
               autoCapitalize={'none'}
               onChangeText={this.setAnswer2}
@@ -125,7 +141,6 @@ export default class PasswordRecovery extends Component {
           </View>
           <View style={styles.buttonContainer}>
             <View style={styles.shim} />
-            {this.renderError(styles)}
             <Button
               onPress={this.onSubmit}
               downStyle={styles.submitButton.downStyle}

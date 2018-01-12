@@ -42,6 +42,18 @@ const LoginWithRecoveryStyles = {
     },
     container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
   },
+  inputUsername: {...Styles.MaterialInputOnWhite,
+    errorColor: Constants.ACCENT_RED,
+    baseColor: Constants.GRAY_2,
+    textColor: Constants.GRAY_2,
+    titleTextStyle: {
+      color: Constants.GRAY_2
+    },
+    affixTextStyle: {
+      color: Constants.GRAY_2
+    },
+    container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
+  },
   inputError: {...Styles.MaterialInputOnWhite,
     errorColor: Constants.ACCENT_RED,
     baseColor: Constants.ACCENT_RED,

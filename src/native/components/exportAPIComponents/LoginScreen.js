@@ -44,6 +44,7 @@ class LoginScreen extends Component {
             callback: this.props.onLogin,
             accountOptions: this.props.accountOptions,
             username: this.props.username,
+            recoveryKey: this.props.recoveryLogin,
             locale: this.props.local,
             language: this.props.language
           })

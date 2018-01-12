@@ -25,6 +25,29 @@ export function recoverPasswordLogin () {
     }
   }
 }
+export function getRecoveryQuestions () {
+  return async (dispatch, getState, imports) => {
+    const state = getState()
+    const context = imports.context
+    const username = state.login.username
+    const recoveryKey = imports.recoveryKey
+    try {
+      const userQuestions = await context.fetchRecovery2Questions(recoveryKey, username)
+      const obj = {
+        recoveryKey,
+        userQuestions
+      }
+      dispatch(actions.dispatchActionWithData(Constants.ON_RECOVERY_LOGIN_IS_ENABLED, obj))
+    } catch (e) {
+      if (e.message === 'No recovery key stored locally.') {
+        dispatch(actions.dispatchAction(Constants.ON_RECOVERY_LOGIN_NOT_ENABLED))
+      }
+      console.log(e)
+      console.log(e.title)
+      console.log(e.message)
+    }
+  }
+}
 
 export function initializePasswordRecovery (accountObj) {
   return async (dispatch, getState, imports) => {

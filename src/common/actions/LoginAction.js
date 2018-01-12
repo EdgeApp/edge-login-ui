@@ -5,7 +5,7 @@ import { enableTouchId, loginWithTouchId, isTouchEnabled, supportsTouchId, isTou
 /**
  * Make it Thunky
  */
-export function loginWithRecovery (answers) {
+export function loginWithRecovery (answers, username) {
   return async (dispatch, getState, imports) => {
     const state = getState()
     const backupKey = state.passwordRecovery.recoveryKey
