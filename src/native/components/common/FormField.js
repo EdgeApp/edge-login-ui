@@ -71,6 +71,7 @@ class FormField extends Component {
         onFocus={this.props.onFocus}
         onBlur={this.props.onBlur}
         autoCapitalize={'none'}
+        autoCorrect={this.props.autoCorrect}
         onSubmitEditing={this.onSubmitEditing.bind(this)}
         />
     )

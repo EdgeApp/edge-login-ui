@@ -40,6 +40,7 @@ class Input extends Component {
   render () {
     const value = this.props.value ? this.props.value : ''
     const error = this.props.error ? this.props.error : ''
+    const autoCorrect = typeof this.props.autoCorrect === 'undefined' ? true : this.props.autoCorrect
     const {
       containerStyle,
       baseColor,
@@ -50,6 +51,7 @@ class Input extends Component {
       secureTextEntry,
       returnKeyType
     } = this.props
+    console.log(this.props.autoCorrect)
     return (
       <TextField
         ref={this.addRef.bind(this)}
@@ -68,6 +70,7 @@ class Input extends Component {
         returnKeyType={returnKeyType}
         onBlur={this.onBlur.bind(this)}
         onFocus={this.onFocus.bind(this)}
+        autoCorrect={autoCorrect}
         onSubmitEditing={this.onSubmitEditing.bind(this)}
       />
     )

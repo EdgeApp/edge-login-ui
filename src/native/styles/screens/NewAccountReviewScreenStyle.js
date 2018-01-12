@@ -124,8 +124,9 @@ const NewAccountReviewScreenStyle = {
     },
     bRow: {
       width: '100%',
-      height: 20,
-      flexDirection: 'row'
+      flexDirection: 'row',
+      paddingRight: 25,
+      paddingVertical: 4
     },
     bInfoLeft: {
       flex: 2
