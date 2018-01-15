@@ -156,7 +156,7 @@ export default class PasswordRecovery extends Component {
     }
     this.openEmailApp = () => {
       const body = 'Please click the link below from a mobile device with Airbitz installed to initiate account recovery for username ' + this.props.username + '<br>' +
-      'iOS <br>edgesecure://recovery?token=' + this.props.backupKey + '<br><br>' +
+      'iOS <br>edge://recovery?token=' + this.props.backupKey + '<br><br>' +
       'Android https://recovery.edgesecure.co/recovery?token=' + this.props.backupKey
 
       Mailer.mail({
