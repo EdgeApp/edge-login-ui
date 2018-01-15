@@ -2,7 +2,7 @@ import { showContainerNotification } from '../modules/Container.action'
 
 export default function (error, dispatch) {
   let syntax
-  switch (error.type) {
+  switch (error.name) {
     case 'NetworkError':
       syntax = 'There was a network error with your request. Please try again later.'
       break

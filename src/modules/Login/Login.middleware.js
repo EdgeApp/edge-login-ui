@@ -15,7 +15,7 @@ export const loginWithPassword = (username, password, callback) => {
         context.loginWithPassword(username, password, null, (error, account) => {
           if (error) {
             dispatch(closeLoading())
-            const type = (error.type === 'OtpError') ? 'server_error_bad_otp' : 'server_error_bad_password'
+            const type = (error.name === 'OtpError') ? 'server_error_bad_otp' : 'server_error_bad_password'
             // dispatch(openErrorModal(t(type)))
 
             if (error.wait > 0) {
