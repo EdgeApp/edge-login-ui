@@ -33,7 +33,9 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(actions.deleteRecovery())
       dispatch(actions.cancelRecoverySettingsScene())
       dispatch(actions.dispatchAction(Constants.DISMISS_EMAIL_MODAL))
-    }
+    },
+    returnToSettings: () => dispatch(actions.cancelRecoverySettingsScene())
+
   }
 }
 

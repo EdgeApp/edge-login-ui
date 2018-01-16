@@ -158,7 +158,7 @@ export default class PasswordRecovery extends Component {
       const body = 'Please click the link below from a mobile device with Airbitz installed to initiate account recovery for username ' + this.props.username + '<br>' +
       'iOS <br>edge://recovery?token=' + this.props.backupKey + '<br><br>' +
       'Android https://recovery.edgesecure.co/recovery?token=' + this.props.backupKey
-
+      let mailError = false
       Mailer.mail({
         subject: 'Edge Recovery Token',
         recipients: [this.state.email],
@@ -166,10 +166,15 @@ export default class PasswordRecovery extends Component {
         isHTML: true
       }, (error, event) => {
         console.log(error)
+        mailError = true
         this.setState({
           emailAppNotAvailable: true
         })
       })
+      if (!mailError) {
+        // if we launched the mail app successfully , lets go back to settins.
+        this.props.returnToSettings()
+      }
       // this.props.cancel()
     }
     this.renderForm = styles => {
