@@ -18,6 +18,7 @@ import DeleteUserConnector
 import ForgotPasswordModalConnector
   from '../../../native/connectors/abSpecific/ForgotPasswordModalConnector'
 import { localize, KEYS } from '../../../common/locale'
+import RecoverPasswordUsernameModalConnector from '../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
 
 import {
   KeyboardAwareScrollView
@@ -28,6 +29,7 @@ export default class LandingScreenComponent extends Component {
     const { LoginPasswordScreenStyle } = this.props.styles
     this.style = LoginPasswordScreenStyle
     this.keyboardDidHideListener = null
+
     this.renderModal = (style) => {
       if (this.props.showModal) {
         return (
@@ -42,15 +44,8 @@ export default class LandingScreenComponent extends Component {
           <Text style={this.style.staticModalText}>
             Please enter the username of the account you want to recover.
           </Text>
-          <FormField
-            testID={'passwordFormField'}
+          <RecoverPasswordUsernameModalConnector
             style={this.style.inputModal}
-            onChangeText={this.updateUsername.bind(this)}
-            value={this.props.username}
-            label={'Username'}
-            error={this.props.error}
-            returnKeyType={'go'}
-            forceFocus
             onSubmitEditing={this.recoverPasswordLogin}
           />
         </View>
@@ -141,6 +136,13 @@ export default class LandingScreenComponent extends Component {
         loggingIn: false
       })
     }
+  }
+  shouldComponentUpdate (nextProps, nextState) {
+    if (nextProps.username !== this.props.username && this.state.showRecoveryModal) {
+      return false
+    }
+    // return a boolean value
+    return true
   }
   render () {
     return (
