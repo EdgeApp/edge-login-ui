@@ -64,7 +64,7 @@ export default class LandingScreenComponent extends Component {
         )
       }
       if (this.props.recoveryLoginEnabledError) {
-        const body = <Text style={style.staticModalText}>Recovery was not setup or was done on another device. If recovery was setup you should have emailed yourself a recovery token with a link. \nPlease find the email and click on the link using this device initiate recovery.</Text>
+        const body = <Text style={style.staticModalText}>{'Recovery was not setup or was done on another device. \n\nIf recovery was setup you should have emailed yourself a recovery token with a link. \n\nPlease find the email and click on the link using this device initiate recovery.'}</Text>
         return <StaticModal
           cancel={this.props.dismissRecoveryError}
           body={body}
