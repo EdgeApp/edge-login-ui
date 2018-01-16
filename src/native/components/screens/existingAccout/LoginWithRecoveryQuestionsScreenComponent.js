@@ -6,7 +6,7 @@ import {
   StaticModal
 } from '../../common/'
 import HeaderConnector
-  from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
+  from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
 
 export default class PasswordRecovery extends Component {
   componentWillMount () {

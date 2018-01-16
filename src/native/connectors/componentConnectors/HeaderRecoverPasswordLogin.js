@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { Header } from '../../components/common/'
 import * as actions from '../../../common/actions'
-
+import * as Constants from '../../../common/constants'
 export const mapStateToProps = (state, ownProps) => {
   const workflow = state.workflow
   const currentWorkflow = workflow[state.workflow.currentKey]
@@ -18,7 +18,7 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    goBack: () => dispatch(actions.cancel()),
+    goBack: () => dispatch(actions.dispatchActionWithData(Constants.WORKFLOW_START, Constants.WORKFLOW_PASSWORD)),
     skipScreen: () => dispatch(actions.skipStep())
   }
 }
