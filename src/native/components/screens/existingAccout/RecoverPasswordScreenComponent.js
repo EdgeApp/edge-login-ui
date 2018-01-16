@@ -322,7 +322,7 @@ export default class PasswordRecovery extends Component {
     }
     const middle = <View style={styles.modalMiddle}>
       <Text style={styles.staticModalText}>
-        Please enter the username of the account you want to recover.
+        Please enter the email of the account you want to recover.
       </Text>
       <FormField
         style={styles.inputModal}
