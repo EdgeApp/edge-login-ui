@@ -88,7 +88,11 @@ const RecoverPasswordSceneStyles = {
     textAlign: 'center'
   },
   listItem: Styles.ListItemTextOnly,
-  emailModal: Styles.SkipModalStyle
+  emailModal: Styles.SkipModalStyle,
+  errorText: {
+    color: Constants.ACCENT_RED,
+    fontSize: 14
+  }
 }
 
 export {RecoverPasswordSceneStyles}

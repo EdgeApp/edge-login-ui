@@ -76,6 +76,16 @@ export default class PasswordRecovery extends Component {
     }
     return null
   }
+  renderError (styles) {
+    if (this.props.loginError) {
+      return <View>
+        <View style={styles.shim} />
+        <Text style={styles.errorText}>{this.props.loginError}</Text>
+        <View style={styles.shim} />
+      </View>
+    }
+    return <View style={styles.shim} />
+  }
   componentWillReceiveProps (nextProps) {
     if (nextProps.question1 !== this.props.question1) {
       this.setState({
@@ -105,7 +115,7 @@ export default class PasswordRecovery extends Component {
               onChangeText={this.props.updateUsername}
               value={this.props.username}
               label={'Username'}
-              error={this.props.loginError}
+              error={''}
             />
           </View>
           <View style={styles.questionRow}>
@@ -140,7 +150,7 @@ export default class PasswordRecovery extends Component {
             />
           </View>
           <View style={styles.buttonContainer}>
-            <View style={styles.shim} />
+            {this.renderError(styles)}
             <Button
               onPress={this.onSubmit}
               downStyle={styles.submitButton.downStyle}
