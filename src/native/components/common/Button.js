@@ -15,10 +15,10 @@ import { Spinner } from './Spinner'
 
 class Button extends Component {
   componentWillMount () {
-    this.state = {
+    this.setState({
       isThinking: false,
       pressed: false
-    }
+    })
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.isThinking !== this.state.isThinking) {
