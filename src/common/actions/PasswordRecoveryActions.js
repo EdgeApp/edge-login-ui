@@ -5,7 +5,7 @@ export function recoverPasswordLogin () {
   return async (dispatch, getState, imports) => {
     const state = getState()
     const context = imports.context
-    const username = state.username.login
+    const username = state.login.username
     try {
       const recoveryKey = await context.getRecovery2Key(username)
       const userQuestions = await context.fetchRecovery2Questions(recoveryKey, username)

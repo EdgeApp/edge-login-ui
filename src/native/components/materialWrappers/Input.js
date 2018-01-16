@@ -51,7 +51,6 @@ class Input extends Component {
       secureTextEntry,
       returnKeyType
     } = this.props
-    console.log(this.props.autoCorrect)
     return (
       <TextField
         ref={this.addRef.bind(this)}

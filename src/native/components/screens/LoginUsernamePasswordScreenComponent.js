@@ -47,7 +47,7 @@ export default class LandingScreenComponent extends Component {
             style={this.style.inputModal}
             onChangeText={this.updateUsername.bind(this)}
             value={this.props.username}
-            label={'Ueername'}
+            label={'Username'}
             error={this.props.error}
             returnKeyType={'go'}
             forceFocus
