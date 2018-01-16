@@ -61,6 +61,11 @@ export default function (state = initialState, action) {
         otpResetDate: action.data.resetDate,
         previousAttemptType: action.data.loginAttempt
       }
+    case Constants.OTP_RESET_REQUEST:
+      return {
+        ...state,
+        otpResetDate: action.data
+      }
     case Constants.START_EDGE_LOGIN_REQUEST:
       return {
         ...state,

@@ -59,6 +59,7 @@ export function resetOtpReset () {
     try {
       const response = await context.requestOtpReset(username, otpResetToken)
       console.log(response)
+      dispatch(dispatchActionWithData(Constants.OTP_RESET_REQUEST, response))
       console.log('Make it to the next scent ')
     } catch (e) {
       console.log(e)
