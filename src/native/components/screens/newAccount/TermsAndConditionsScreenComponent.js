@@ -50,7 +50,7 @@ export default class TermsAndConditionsScreenComponent extends Component {
             downTextStyle={style.nextButton.downTextStyle}
             upStyle={style.nextButton.upStyle}
             upTextStyle={style.nextButton.upTextStyle}
-            label={'Confirm & finish'}
+            label={'Confirm & Finish'}
           />
         </View>
       )
