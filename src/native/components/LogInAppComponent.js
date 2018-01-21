@@ -54,7 +54,9 @@ export default class LoginAppComponent extends Component {
           return this.getLandingScreen()
         }
         if (this.props.recoveryLogin) {
-          return this.getRecoveryLoginScreen()
+          this.props.startRecoveryWorkflow()
+          return null
+          // change that key
         }
         if (
           this.props.previousUsers.lastUser &&
