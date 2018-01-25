@@ -28,6 +28,7 @@ const TermsAndConditionsScreenStyle = {
     fontSize: Constants.FONTS.defaultFontSize,
     textAlign: 'center',
     width: '80%',
+    paddingHorizontal: 35,
     fontFamily: Constants.FONTS.fontFamilyRegular
   },
   midSection: {
