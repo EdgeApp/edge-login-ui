@@ -222,11 +222,18 @@ export function userLogin (data, backupKey = null) {
           dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
           return
         }
+        if (myAccountOptions.otp) {
+          dispatch(dispatchActionWithData(
+            Constants.OTP_LOGIN_BACKUPKEY_FAIL,
+            'Backup Key was incorrect'
+          ))
+          return
+        }
         dispatch(
-          dispatchActionWithData(
+          dispatch(dispatchActionWithData(
             Constants.LOGIN_USERNAME_PASSWORD_FAIL,
             e.message
-          )
+          ))
         )
         callback(e.message, null)
       }

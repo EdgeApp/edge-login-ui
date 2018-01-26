@@ -20,6 +20,14 @@ export default class OtpErrorScreenComponent extends Component {
       screen: this.props.screen
     })
   }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.loginSuccess) {
+      this.closeModals()
+    }
+  }
+  componentWillUnMount () {
+    this.closeModals()
+  }
   closeModals () {
     this.setState({
       showDisableModal: false,
@@ -35,7 +43,6 @@ export default class OtpErrorScreenComponent extends Component {
     })
   }
   sendCode () {
-    this.closeModals()
     this.props.setbackupKey()
   }
 
@@ -69,6 +76,7 @@ export default class OtpErrorScreenComponent extends Component {
         </Text>
         <OtpBackupKeyConnector style={style.modalInput}
           onSubmitEditing={this.sendCode.bind(this)} />
+        <View style={style.shim} />
       </View>
       return <OtpAuthCodeModalConnector
         cancel={this.closeModals.bind(this)}

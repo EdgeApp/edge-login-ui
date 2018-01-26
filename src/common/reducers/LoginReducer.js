@@ -6,6 +6,7 @@ const initialState = {
   pin: null,
   loginSuccess: false,
   errorMessage: null,
+  otpErrorMessage: null,
   isLoggingInWithPin: false,
   otpResetToken: null,
   otpResetDate: null,
@@ -39,7 +40,9 @@ export default function (state = initialState, action) {
         ...state,
         loginSuccess: true,
         loginPasswordErrorMessage: null,
-        isLoggingInWithPin: false
+        isLoggingInWithPin: false,
+        errorMessage: null,
+        otpErrorMessage: null
       }
     case Constants.LOGIN_USERNAME_PASSWORD_FAIL:
       return {
@@ -47,6 +50,12 @@ export default function (state = initialState, action) {
         errorMessage: action.data,
         pin: '',
         isLoggingInWithPin: false
+      }
+    case Constants.OTP_LOGIN_BACKUPKEY_FAIL:
+      return {
+        ...state,
+        otpErrorMessage: action.data,
+        errorMessage: null
       }
     case Constants.AUTH_LOGGING_IN_WITH_PIN:
       return { ...state, isLoggingInWithPin: true }

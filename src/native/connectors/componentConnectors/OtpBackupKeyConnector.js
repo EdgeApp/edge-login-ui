@@ -3,11 +3,13 @@ import {FormField} from '../../components/common'
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants/'
 export const mapStateToProps = (state, ownProps) => {
-  const value = state.login.otpUserBackupKey ? state.login.otpUserBackupKey : ''
+  const value = state.login.otpUserBackupKey || ''
+  const error = state.login.otpErrorMessage || ''
   return {
     style: ownProps.style,
     value,
-    label: 'backup key',
+    label: 'Backup Key',
+    error,
     returnKeyType: 'next',
     autoFocus: true
   }

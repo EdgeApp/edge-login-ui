@@ -8,7 +8,8 @@ export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,
     otpResetDate,
-    screen
+    screen,
+    loginSuccess: state.login.loginSuccess
   }
 }
 
