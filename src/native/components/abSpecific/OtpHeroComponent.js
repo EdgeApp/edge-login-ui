@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import * as Constants from '../../../common/constants/'
+import { OTP_SMALL } from '../../assets/'
 import moment from 'moment'
 
 class OtpHeroComponent extends Component {
@@ -42,6 +43,9 @@ class OtpHeroComponent extends Component {
     }
     return 'If you don\'t take any action, 2FA will be \ndisabled on ' + moment(this.props.otpResetDate).format('MMMM DD, YYYY')
   }
+  renderImage () {
+    return <Image source={OTP_SMALL} />
+  }
 
   render () {
     const style = this.props.style
@@ -49,7 +53,9 @@ class OtpHeroComponent extends Component {
     const bodyCopy = this.renderBodyCopy()
     return <View style={style.container}>
       <View style={style.colorField}>
-        <View style={style.leftField} />
+        <View style={style.leftField} >
+          {this.renderImage()}
+        </View>
         <View style={style.rightField}>
           <Text style={style.heroTitleText}>
             {title}

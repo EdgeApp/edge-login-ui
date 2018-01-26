@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ModalStyle } from '../../../common/styles/'
-import { View, Text /* TouchableOpacity,
+import { View, Text, Image /* TouchableOpacity,
   Platform */ } from 'react-native'
 import { IconButton, Icon, Button } from './'
 import Modal from 'react-native-modal'
@@ -80,10 +80,12 @@ class MyModal extends Component {
         </View>
       )
     }
-    this.renderGradient = (styles, icon, iconType) => {
-      /* return <View style={[styles.modalHeaderIconWrapBottom]}>
-        <Icon style={styles.iconStyle} icon={icon} size={styles.iconSize} type={iconType} />
-      </View> */
+    this.renderGradient = (styles, icon, iconType, image) => {
+      if (image) {
+        return <View style={styles.modalHeaderIconWrapBottom}>
+          <Image source={image} />
+        </View>
+      }
       return (
         <View style={styles.modalHeaderIconWrapBottom}>
           <Icon
@@ -128,7 +130,7 @@ class MyModal extends Component {
   }
   render () {
     const styles = this.props.styles ? this.props.styles : ModalStyle
-    const { headerText, headerSubtext, icon, iconType } = this.props
+    const { headerText, headerSubtext, icon, iconType, image } = this.props
     return (
       <Modal
         style={styles.container}
@@ -151,7 +153,7 @@ class MyModal extends Component {
             </View>
           </View>
         </View>
-        {this.renderGradient(styles, icon, iconType)}
+        {this.renderGradient(styles, icon, iconType, image)}
       </Modal>
     )
   }

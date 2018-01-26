@@ -22,7 +22,10 @@ const OtpErrorScreenStyle = {
       paddingTop: 20
     },
     leftField: {
-      flex: 2
+      flex: 2,
+      paddingRight: 10,
+      paddingTop: 2,
+      alignItems: 'flex-end'
     },
     rightField: {
       flex: 8
