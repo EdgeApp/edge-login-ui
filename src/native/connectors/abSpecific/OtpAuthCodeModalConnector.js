@@ -10,7 +10,8 @@ export const mapStateToProps = (state, ownProps) => {
     image: OTP_SMALL,
     actionLabel: 'Done',
     cancelLabel: 'Cancel',
-    hideCancelX: true
+    hideCancelX: true,
+    thinking: ownProps.thinking
   }
 }
 export const mapDispatchToProps = (dispatch, ownProps) => {

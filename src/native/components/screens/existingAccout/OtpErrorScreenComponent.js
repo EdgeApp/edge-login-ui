@@ -17,12 +17,18 @@ export default class OtpErrorScreenComponent extends Component {
       showDisableModal: false,
       showBackupCodeModal: false,
       showstaticModal: false,
-      screen: this.props.screen
+      screen: this.props.screen,
+      backupKeyEntered: false
     })
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.loginSuccess) {
       this.closeModals()
+    }
+    if (nextProps.backupKeyError) {
+      this.setState({
+        backupKeyEntered: false
+      })
     }
   }
   componentWillUnMount () {
@@ -32,7 +38,8 @@ export default class OtpErrorScreenComponent extends Component {
     this.setState({
       showDisableModal: false,
       showBackupCodeModal: false,
-      showstaticModal: false
+      showstaticModal: false,
+      backupKeyEntered: false
     })
   }
   closeStaticModal () {
@@ -43,6 +50,9 @@ export default class OtpErrorScreenComponent extends Component {
     })
   }
   sendCode () {
+    this.setState({
+      backupKeyEntered: true
+    })
     this.props.setbackupKey()
   }
 
@@ -81,7 +91,8 @@ export default class OtpErrorScreenComponent extends Component {
       return <OtpAuthCodeModalConnector
         cancel={this.closeModals.bind(this)}
         action={this.sendCode.bind(this)}
-        middle={middle} />
+        middle={middle}
+        thinking={this.state.backupKeyEntered} />
     }
     if (this.state.showDisableModal) {
       return <DisableOtpModalConnector

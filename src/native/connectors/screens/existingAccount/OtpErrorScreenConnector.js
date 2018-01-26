@@ -5,11 +5,13 @@ import * as Constants from '../../../../common/constants'
 export const mapStateToProps = (state, ownProps) => {
   const otpResetDate = state.login.otpResetDate
   const screen = otpResetDate ? Constants.OTP_SCREEN_TWO : Constants.OTP_SCREEN_ONE
+  const backupKeyError = state.login.otpErrorMessage || false
   return {
     styles: ownProps.styles,
     otpResetDate,
     screen,
-    loginSuccess: state.login.loginSuccess
+    loginSuccess: state.login.loginSuccess,
+    backupKeyError
   }
 }
 

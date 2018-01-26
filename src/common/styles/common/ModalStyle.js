@@ -108,6 +108,16 @@ const ModalStyle = {
     flexDirection: 'row',
     alignSelf: 'flex-end'
   },
+  activityWrap: {
+    position: 'relative',
+    marginTop: 20,
+    flex: 1,
+    height: Constants.BUTTON_HEIGHT,
+    width: '100%',
+    flexDirection: 'column',
+    aligItems: 'center',
+    justifyContent: 'space-around'
+  },
   twoButtonConfig: {
     cancelButtonWrap: {
       position: 'relative',

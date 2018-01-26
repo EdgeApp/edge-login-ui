@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { ModalStyle } from '../../../common/styles/'
-import { View, Text, Image /* TouchableOpacity,
-  Platform */ } from 'react-native'
+import { View, Text, Image, /* TouchableOpacity,
+  Platform */
+ActivityIndicator} from 'react-native'
 import { IconButton, Icon, Button } from './'
 import Modal from 'react-native-modal'
 import * as Constants from '../../../common/constants'
@@ -40,6 +41,11 @@ class MyModal extends Component {
     this.renderBottom = styles => {
       if (!this.state.showButtons) {
         return <View style={styles.buttonsWrap} />
+      }
+      if (this.props.thinking) {
+        return <View style={styles.activityWrap} >
+          <ActivityIndicator />
+        </View>
       }
       if (this.props.singleButton) {
         return (
