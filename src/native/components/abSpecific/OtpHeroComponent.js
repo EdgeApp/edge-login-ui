@@ -40,7 +40,7 @@ class OtpHeroComponent extends Component {
     if (this.state.screen === Constants.OTP_SCREEN_ONE) {
       return 'Scan the QR code using the device that enabled 2FA to give access to this device'
     }
-    return 'If you don\'t take any action, 2FA will be disabled on ' + moment(this.props.otpResetDate).format('MMMM DD, YYYY')
+    return 'If you don\'t take any action, 2FA will be \ndisabled on ' + moment(this.props.otpResetDate).format('MMMM DD, YYYY')
   }
 
   render () {
