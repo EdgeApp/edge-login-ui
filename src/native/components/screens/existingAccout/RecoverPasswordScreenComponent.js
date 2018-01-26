@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Platform } from 'react-native'
 import {
   Button,
   FormField,
@@ -66,11 +66,11 @@ export default class PasswordRecovery extends Component {
       this.props.cancel()
     }
     this.onSubmit = () => {
-      let errorOne = this.state.answer1.length < 1 || false
-      let errorTwo = this.state.answer2.length < 1 || false
-      let errorQuestionOne =
+      const errorOne = this.state.answer1.length < 1 || false
+      const errorTwo = this.state.answer2.length < 1 || false
+      const errorQuestionOne =
         this.state.question1 === Constants.CHOOSE_RECOVERY_QUESTION || false
-      let errorQuestionTwo =
+      const errorQuestionTwo =
         this.state.question2 === Constants.CHOOSE_RECOVERY_QUESTION || false
 
       this.setState({
@@ -175,6 +175,11 @@ export default class PasswordRecovery extends Component {
           this.props.returnToSettings()
         }
       })
+      if (Platform.OS === 'android') {
+        setTimeout(() => {
+          this.props.returnToSettings()
+        }, 1000)
+      }
     }
     this.renderForm = styles => {
       const form1Style = this.state.errorOne ? styles.inputError : styles.input
