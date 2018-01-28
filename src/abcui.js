@@ -1,4 +1,4 @@
-import { makeContext } from 'airbitz-core-js'
+import { makeContext } from 'edge-login'
 import 'whatwg-fetch'
 
 const setDocument = () => {

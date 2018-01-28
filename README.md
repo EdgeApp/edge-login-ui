@@ -1,6 +1,6 @@
 # Airbitz Javascript UI
 
-This repo implements a UI layer on top of [airbitz-core-js](https://github.com/Airbitz/airbitz-core-js) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
+This repo implements a UI layer on top of [edge-login](https://github.com/Airbitz/edge-login) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
 
 ## Build from source repo (not needed if using NPM)
 
@@ -115,7 +115,7 @@ On the `developer.airbitz.co` page, scan the QR code using the Airbitz Mobile Ap
 Install from npm
 
     npm install airbitz-core-js-ui --save
-    
+
 Dependencies required in packages.json
 ```javascript
     "dependencies": {
@@ -127,8 +127,8 @@ Dependencies required in packages.json
         "secure-random": "^1.1.1"
       }
 ```
-After adding the dependencies to the package.json file run npm install. 
-To use the component in your app you will need to two airbitz core libraries  
+After adding the dependencies to the package.json file run npm install.
+To use the component in your app you will need to two airbitz core libraries
 ```javascript
     import { LoginScreen } from ‘airbitz-core-js-ui’
     import { makeReactNAtiveContext } from ‘airbitz-core-react-native’
@@ -143,7 +143,7 @@ Outside of the component class, in the file that you want to add the login you w
           vendorName: ‘<Your vendor name >’,
           vendorImageUrl: 'https://airbitz.co/go/wp-content/uploads/2016/10/GenericEdgeLoginIcon.png'
         })
-      } 
+      }
 ```
 In your component that will utilize the login component add the following code to the constructor method:
 ```javascript
@@ -151,7 +151,7 @@ In your component that will utilize the login component add the following code t
     // Creating the context is async, so we store it in our state:
     setupCore().then(context => this.setState(state => ({ ...state, context })))
 ```
-Set up your render function 
+Set up your render function
 ```javascript
     render () {
         const onLogin = account => this.setState(state => ({ ...state, account }))
@@ -167,7 +167,7 @@ Set up your render function
       }
     }
 ```
-In order to customize the experience and integrate with your app. change the const onLogin function to handle getting back the account information. 
+In order to customize the experience and integrate with your app. change the const onLogin function to handle getting back the account information.
 
 ## Sample ReactNative App repo
 

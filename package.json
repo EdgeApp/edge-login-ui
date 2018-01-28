@@ -28,10 +28,10 @@
     "updot": "updot"
   },
   "dependencies": {
-    "airbitz-core-js": "git://github.com/Airbitz/airbitz-core-js.git#develop",
     "async": "~2.0.1",
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",
+    "edge-login": "^0.5.0",
     "file-loader": "~0.9.0",
     "joi-browser": "~9.0.1",
     "jsbarcode": "~3.5.8",
