@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import {
   Button,
-  FormField,
-  StaticModal
+  FormField
 } from '../../common/'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
+import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
+import SetRecoveryUsernameModalConnector
+  from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
 
 export default class PasswordRecovery extends Component {
   componentWillMount () {
-    this.props.getQuestions()
+    this.props.updateUsername('')
     this.setState({
       question1: this.props.question1,
       question2: this.props.question2,
@@ -19,12 +21,12 @@ export default class PasswordRecovery extends Component {
       showQuestionPicker: false,
       focusFirst: false,
       focusSecond: false,
-      focusThird: false,
       errorOne: false,
       errorTwo: false,
       errorQuestionOne: false,
       errorQuestionTwo: false,
-      disableConfirmationModal: false
+      disableConfirmationModal: false,
+      showUsernameModal: true
     })
     this.renderHeader = (style) => {
       if (this.props.showHeader) {
@@ -65,16 +67,25 @@ export default class PasswordRecovery extends Component {
         answer2: arg
       })
     }
-  }
-  renderDisableModal (styles) {
-    if (this.state.disableConfirmationModal) {
-      const body = <Text style={styles.staticModalText}>Password Recovery has been disabled. You can enable it again by going into Password Recovery anytime</Text>
-      return <StaticModal
-        cancel={this.onDisableModalClose.bind(this)}
-        body={body}
-        modalDismissTimerSeconds={5} />
+    this.renderModal = (styles) => {
+      if (!this.state.showUsernameModal) return null
+      const middle = <View style={styles.modalMiddle}>
+        <Text style={styles.staticModalText}>
+          Please enter the username of the account you want to recover.
+        </Text>
+        <RecoverPasswordUsernameModalConnector
+          style={styles.inputModal}
+          onSubmitEditing={this.props.getQuestions}
+        />
+      </View>
+      return (
+        <SetRecoveryUsernameModalConnector
+          modalMiddleComponent={middle}
+          cancel={this.props.getQuestions}
+          action={this.props.getQuestions}
+        />
+      )
     }
-    return null
   }
   renderError (styles) {
     if (this.props.loginError) {
@@ -90,7 +101,8 @@ export default class PasswordRecovery extends Component {
     if (nextProps.question1 !== this.props.question1) {
       this.setState({
         question1: nextProps.question1,
-        question2: nextProps.question2
+        question2: nextProps.question2,
+        showUsernameModal: false
       })
     }
   }
@@ -106,25 +118,13 @@ export default class PasswordRecovery extends Component {
       <View style={styles.screen}>
         {this.renderHeader(styles)}
         <View style={styles.body}>
-          <View style={styles.answerRow}>
-            <FormField
-              style={styles.inputUsername}
-              autoFocus={this.state.focusFirst}
-              autoCorrect={false}
-              autoCapitalize={'none'}
-              onChangeText={this.props.updateUsername}
-              value={this.props.username}
-              label={'Username'}
-              error={''}
-            />
-          </View>
           <View style={styles.questionRow}>
             <Text style={styles.questionText}>{this.props.question1}</Text>
           </View>
           <View style={styles.answerRow}>
             <FormField
               style={form1Style}
-              autoFocus={this.state.focusSecond}
+              autoFocus={this.state.focusFirst}
               autoCorrect={false}
               autoCapitalize={'none'}
               onChangeText={this.setAnswer1}
@@ -140,7 +140,7 @@ export default class PasswordRecovery extends Component {
           <View style={styles.answerRow}>
             <FormField
               style={form2Style}
-              autoFocus={this.state.focusThird}
+              autoFocus={this.state.focusSecond}
               autoCorrect={false}
               autoCapitalize={'none'}
               onChangeText={this.setAnswer2}
@@ -161,6 +161,7 @@ export default class PasswordRecovery extends Component {
             />
           </View>
         </View>
+        {this.renderModal(styles)}
       </View>
     )
   }

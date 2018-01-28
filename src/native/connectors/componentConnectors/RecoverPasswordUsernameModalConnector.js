@@ -5,18 +5,9 @@ import * as Constants from '../../../common/constants'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
-   /*
-    value,
-    error,
-    secureTextEntry: true,
-    showSecureCheckbox: true,
-    showSecureCheckboxLabel: 'Show Password',
-    label: label, // TODO localize
-    returnKeyType: 'next',
-    autoFocus: ownProps.autoFocus */
     value: state.login.username,
     label: 'Username',
-    error: state.login.errorMessage,
+    error: state.passwordRecovery.recoveryErrorMessage,
     style: ownProps.style,
     returnKeyType: 'go',
     forceFocus: true

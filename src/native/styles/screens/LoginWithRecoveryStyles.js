@@ -21,6 +21,13 @@ const LoginWithRecoveryStyles = {
     color: Constants.GRAY_2,
     fontSize: 18
   },
+  modalMiddle: {
+    width: '100%',
+    height: 100
+  },
+  inputModal: {...Styles.MaterialInputOnWhite,
+    container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
+  },
   answerRow: {
     width: '100%',
     height: 100

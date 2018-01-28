@@ -5,6 +5,7 @@ const initialState = {
   userQuestions: [],
   recoveryKey: null,
   recoveryLoginEnabledError: false,
+  recoveryErrorMessage: null,
   showRecoveryEmailDialog: false
 }
 
@@ -22,9 +23,9 @@ export default function (state = initialState, action) {
     case Constants.ON_RECOVERY_LOGIN_IS_ENABLED:
       return {...state, recoveryKey: action.data.recoveryKey, userQuestions: action.data.userQuestions}
     case Constants.ON_RECOVERY_LOGIN_NOT_ENABLED:
-      return {...state, recoveryLoginEnabledError: true}
+      return {...state, recoveryLoginEnabledError: true, recoveryErrorMessage: action.data}
     case Constants.DISMISS_REOVERY_ERROR:
-      return {...state, recoveryLoginEnabledError: false}
+      return {...state, recoveryLoginEnabledError: false, recoveryErrorMessage: null}
     case Constants.DISMISS_EMAIL_MODAL:
       return {...state, showRecoveryEmailDialog: false}
     default:

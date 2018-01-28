@@ -40,8 +40,10 @@ export function getRecoveryQuestions () {
       dispatch(actions.dispatchActionWithData(Constants.ON_RECOVERY_LOGIN_IS_ENABLED, obj))
     } catch (e) {
       if (e.message === 'No recovery key stored locally.') {
-        dispatch(actions.dispatchAction(Constants.ON_RECOVERY_LOGIN_NOT_ENABLED))
+        dispatch(actions.dispatchActionWithData(Constants.ON_RECOVERY_LOGIN_NOT_ENABLED, e.message))
+        return
       }
+      dispatch(actions.dispatchActionWithData(Constants.ON_RECOVERY_LOGIN_NOT_ENABLED, e.message))
       console.log(e)
       console.log(e.title)
       console.log(e.message)
