@@ -27,7 +27,7 @@
     "fix": "standard --parser babel-eslint --fix",
     "lint": "standard --parser babel-eslint",
     "precommit": "npm run lint",
-    "prepare": "npm run build",
+    "diabled-prepare": "npm run build",
     "start": "webpack-dev-server --open"
   },
   "dependencies": {
