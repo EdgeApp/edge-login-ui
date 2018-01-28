@@ -1,4 +1,4 @@
-const abc = require('airbitz-core-js')
+const abc = require('edge-login')
 import 'whatwg-fetch'
 
 const context = {
