@@ -74,3 +74,5 @@ export const ON_DISABLE_RECOVERY = 'onDisableRecovery'
 export const DISMISS_REOVERY_ERROR = 'dismissRecoveryError'
 export const DISMISS_EMAIL_MODAL = 'dismissRecoveryError'
 export const RESET_APP = 'resetApplication'
+
+export const SET_RECOVERY_KEY = 'resetRecoveryKey'

@@ -54,7 +54,7 @@ export default class LoginAppComponent extends Component {
           return this.getLandingScreen()
         }
         if (this.props.recoveryLogin) {
-          this.props.startRecoveryWorkflow()
+          this.props.startRecoveryWorkflow(this.props.recoveryLogin)
           return null
           // change that key
         }
@@ -72,7 +72,9 @@ export default class LoginAppComponent extends Component {
         return this.getLandingScreen()
       case Constants.WORKFLOW_PASSWORD:
         if (this.props.recoveryLogin) {
-          return this.getRecoveryLoginScreen()
+          this.props.startRecoveryWorkflow(this.props.recoveryLogin)
+          return
+          // return this.getRecoveryLoginScreen()
         }
         return this.getPasswordScreen()
       case Constants.WORKFLOW_PIN:

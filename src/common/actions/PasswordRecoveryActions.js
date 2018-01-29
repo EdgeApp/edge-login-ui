@@ -19,9 +19,7 @@ export function recoverPasswordLogin () {
         dispatch(actions.dispatchAction(Constants.ON_RECOVERY_LOGIN_NOT_ENABLED))
       }
 
-      console.log(e)
-      console.log(e.title)
-      console.log(e.message)
+      console.log('eerr ', e)
     }
   }
 }
@@ -30,7 +28,7 @@ export function getRecoveryQuestions () {
     const state = getState()
     const context = imports.context
     const username = state.login.username
-    const recoveryKey = imports.recoveryKey
+    const recoveryKey = state.login.recoveryToken
     try {
       const userQuestions = await context.fetchRecovery2Questions(recoveryKey, username)
       const obj = {
@@ -45,8 +43,6 @@ export function getRecoveryQuestions () {
       }
       dispatch(actions.dispatchActionWithData(Constants.ON_RECOVERY_LOGIN_NOT_ENABLED, e.message))
       console.log(e)
-      console.log(e.title)
-      console.log(e.message)
     }
   }
 }

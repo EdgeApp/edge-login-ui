@@ -15,7 +15,9 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     userLogin: (data) => dispatch(loginAction.userLogin(data)),
     getPreviousUsers: () => dispatch(loginAction.getPreviousUsers()),
-    startRecoveryWorkflow: () => dispatch(loginAction.dispatchActionWithData(Constants.WORKFLOW_START, Constants.WORKFLOW_RECOVERY_LOGIN))
+    startRecoveryWorkflow: (backupKey) => {
+      dispatch(loginAction.dispatchActionWithData(Constants.SET_RECOVERY_KEY, backupKey))
+    }
   }
 }
 
