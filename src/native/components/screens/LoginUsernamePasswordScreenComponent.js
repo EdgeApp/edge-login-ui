@@ -15,10 +15,7 @@ import * as Assets from '../../assets/'
 import * as Offsets from '../../constants'
 import DeleteUserConnector
   from '../../../native/connectors/abSpecific/DeleteUserConnector'
-import ForgotPasswordModalConnector
-  from '../../../native/connectors/abSpecific/ForgotPasswordModalConnector'
 import { localize, KEYS } from '../../../common/locale'
-import RecoverPasswordUsernameModalConnector from '../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
 
 import {
   KeyboardAwareScrollView
@@ -40,28 +37,9 @@ export default class LandingScreenComponent extends Component {
         )
       }
       if (this.state.showRecoveryModal) {
-        const middle = <View style={this.style.modalMiddle}>
-          <Text style={this.style.staticModalText}>
-            Please enter the username of the account you want to recover.
-          </Text>
-          <RecoverPasswordUsernameModalConnector
-            style={this.style.inputModal}
-            onSubmitEditing={this.recoverPasswordLogin}
-          />
-        </View>
-
-        return (
-          <ForgotPasswordModalConnector
-            modalMiddleComponent={middle}
-            cancel={this.cancelForgotPassword}
-            action={this.recoverPasswordLogin}
-          />
-        )
-      }
-      if (this.props.recoveryLoginEnabledError) {
-        const body = <Text style={style.staticModalText}>{'Recovery was not setup or was done on another device. \n\nIf recovery was setup you should have emailed yourself a recovery token with a link. \n\nPlease find the email and click on the link using this device initiate recovery.'}</Text>
+        const body = <Text style={style.staticModalText}>{'Please find the email and click on the link using this device initiate recovery \n\nIf recovery was setup you should have emailed yourself a recovery token with a link.'}</Text>
         return <StaticModal
-          cancel={this.props.dismissRecoveryError}
+          cancel={this.closeForgotPasswordModal.bind(this)}
           body={body}
           modalDismissTimerSeconds={5} />
       }
@@ -330,6 +308,12 @@ export default class LandingScreenComponent extends Component {
     // this.props.onForgotPassword()
     this.setState({
       showRecoveryModal: true
+    })
+  }
+  closeForgotPasswordModal () {
+    // this.props.onForgotPassword()
+    this.setState({
+      showRecoveryModal: false
     })
   }
   onStartLogin () {

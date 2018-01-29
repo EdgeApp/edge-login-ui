@@ -21,8 +21,7 @@ export const mapStateToProps = (state, ownProps) => {
     usernameList: state.previousUsers.usernameOnlyList,
     filteredUsernameList: state.previousUsers.usernameOnlyList,
     hasUsers: pv,
-    showModal: state.workflow.showModal,
-    recoveryLoginEnabledError: state.passwordRecovery.recoveryLoginEnabledError
+    showModal: state.workflow.showModal
   }
 }
 

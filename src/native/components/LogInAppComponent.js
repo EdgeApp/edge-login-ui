@@ -71,6 +71,9 @@ export default class LoginAppComponent extends Component {
       case Constants.WORKFLOW_INIT:
         return this.getLandingScreen()
       case Constants.WORKFLOW_PASSWORD:
+        if (this.props.recoveryLogin) {
+          return this.getRecoveryLoginScreen()
+        }
         return this.getPasswordScreen()
       case Constants.WORKFLOW_PIN:
         return this.getPinScreen()
