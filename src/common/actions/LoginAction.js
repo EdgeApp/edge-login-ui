@@ -136,7 +136,6 @@ export function userLoginWithPin (data, backupKey = null) {
       console.log(backupKey)
       myAccountOptions.otp = backupKey
     }
-    console.log(myAccountOptions)
     dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PIN, data.pin))
     if (data.pin.length === 4) {
       setTimeout(async () => {
