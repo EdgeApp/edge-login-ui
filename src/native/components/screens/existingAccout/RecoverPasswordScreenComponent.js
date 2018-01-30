@@ -66,8 +66,8 @@ export default class PasswordRecovery extends Component {
       this.props.cancel()
     }
     this.onSubmit = () => {
-      const errorOne = this.state.answer1.length < 1 || false
-      const errorTwo = this.state.answer2.length < 1 || false
+      const errorOne = this.state.answer1.length < 4 || false
+      const errorTwo = this.state.answer2.length < 4 || false
       const errorQuestionOne =
         this.state.question1 === Constants.CHOOSE_RECOVERY_QUESTION || false
       const errorQuestionTwo =
@@ -184,6 +184,8 @@ export default class PasswordRecovery extends Component {
     this.renderForm = styles => {
       const form1Style = this.state.errorOne ? styles.inputError : styles.input
       const form2Style = this.state.errorTwo ? styles.inputError : styles.input
+      const errorMessageOne = this.state.errorOne ? 'Answers should be minimum of 4 characters' : 'Answers are case sensitive'
+      const errorMessageTwo = this.state.errorTwo ? 'Answers should be minimum of 4 characters' : 'Answers are case sensitive'
       const questionOneStyle = this.state.errorQuestionOne
         ? styles.textIconButtonErrorError
         : styles.textIconButton
@@ -212,7 +214,7 @@ export default class PasswordRecovery extends Component {
               onChangeText={this.setAnswer1}
               value={this.state.answer1}
               label={'Your Answer'}
-              error={'Answers are case sensitive'}
+              error={errorMessageOne}
             />
           </View>
           <View style={styles.shim} />
@@ -235,7 +237,7 @@ export default class PasswordRecovery extends Component {
               onChangeText={this.setAnswer2}
               value={this.state.answer2}
               label={'Your Answer'}
-              error={'Answers are case sensitive'}
+              error={errorMessageTwo}
             />
           </View>
           {this.renderButtons(styles)}
