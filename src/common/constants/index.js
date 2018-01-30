@@ -17,6 +17,7 @@ export const WORKFLOW_FIRST_LOAD = 'firstLoadWF'
 export const WORKFLOW_INIT = 'initalizeWF'
 export const WORKFLOW_CREATE = 'createWF'
 export const WORKFLOW_PASSWORD = 'passwordWF'
+export const WORKFLOW_PASSWORD_FORCED = 'passwordWFForced'
 export const WORKFLOW_PIN = 'pinWF'
 
 export const WORKFLOW_RECOVERY = 'recoveryWF'
@@ -76,3 +77,4 @@ export const DISMISS_EMAIL_MODAL = 'dismissRecoveryError'
 export const RESET_APP = 'resetApplication'
 
 export const SET_RECOVERY_KEY = 'resetRecoveryKey'
+export const CANCEL_RECOVERY_KEY = 'cancelRecoveryKey'

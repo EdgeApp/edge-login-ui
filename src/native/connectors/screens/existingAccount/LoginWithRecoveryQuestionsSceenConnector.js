@@ -27,6 +27,7 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     submit: (answers) => dispatch(actions.loginWithRecovery(answers)),
     getQuestions: () => dispatch(actions.getRecoveryQuestions()),
+    onCancel: () => dispatch(actions.dispatchAction(Constants.CANCEL_RECOVERY_KEY)),
     updateUsername: (username) => dispatch(actions.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, username))
   }
 }

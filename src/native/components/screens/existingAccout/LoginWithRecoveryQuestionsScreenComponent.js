@@ -81,7 +81,7 @@ export default class PasswordRecovery extends Component {
       return (
         <SetRecoveryUsernameModalConnector
           modalMiddleComponent={middle}
-          cancel={this.props.getQuestions}
+          cancel={this.props.onCancel}
           action={this.props.getQuestions}
         />
       )

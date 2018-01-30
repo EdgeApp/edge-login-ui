@@ -136,6 +136,8 @@ export default function (state = initialState, action) {
       return { ...state, currentKey: Constants.WORKFLOW_RECOVERY_LOGIN, currentSceneIndex: 1 }
     case Constants.SET_RECOVERY_KEY:
       return {...state, currentKey: Constants.WORKFLOW_RECOVERY_LOGIN, currentSceneIndex: 0}
+    case Constants.CANCEL_RECOVERY_KEY:
+      return {...state, currentKey: Constants.WORKFLOW_PASSWORD_FORCED, currentSceneIndex: 0}
     case Constants.RESET_APP:
       return initialState
     default:

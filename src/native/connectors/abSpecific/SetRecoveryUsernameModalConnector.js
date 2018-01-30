@@ -9,7 +9,7 @@ export const mapStateToProps = (state, ownProps) => {
     icon: Constants.TRASH_O,
     iconType: Constants.FONT_AWESOME,
     actionLabel: 'Next',
-    hideCancelX: true,
+    hideCancelX: false,
     singleButton: true
   }
 }
