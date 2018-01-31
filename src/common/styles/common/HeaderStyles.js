@@ -58,7 +58,7 @@ const HeaderContainerStyle = {
     fontSize: 11,
     width: '100%',
     textAlign: 'center',
-    color: Constants.ACCENT_ORANGE
+    color: Constants.ACCENT_MINT
   },
   textButton: {
     upStyle: { ...Styles.TextOnlyButtonUpStyle, width: '100%' },
