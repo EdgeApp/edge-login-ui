@@ -103,7 +103,7 @@ export default class OtpErrorScreenComponent extends Component {
       return <StaticModal
         cancel={this.closeStaticModal.bind(this)}
         body={this.getStaticBody(style)}
-        modalDismissTimerSeconds={4} />
+        modalDismissTimerSeconds={8} />
     }
     return null
   }

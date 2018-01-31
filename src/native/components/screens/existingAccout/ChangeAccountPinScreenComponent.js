@@ -30,7 +30,7 @@ export default class ChangeAccountPinScreenComponent extends Component {
             <StaticModal
               cancel={this.props.login}
               body={body}
-              modalDismissTimerSeconds={3} />
+              modalDismissTimerSeconds={8} />
           )
         }
         return (

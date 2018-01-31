@@ -299,7 +299,7 @@ export default class PasswordRecovery extends Component {
       return <StaticModal
         cancel={this.onDisableModalClose.bind(this)}
         body={body}
-        modalDismissTimerSeconds={5} />
+        modalDismissTimerSeconds={8} />
     }
     return null
   }

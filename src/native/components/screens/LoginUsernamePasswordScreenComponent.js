@@ -41,7 +41,7 @@ export default class LandingScreenComponent extends Component {
         return <StaticModal
           cancel={this.closeForgotPasswordModal.bind(this)}
           body={body}
-          modalDismissTimerSeconds={5} />
+          modalDismissTimerSeconds={8} />
       }
       return null
     }
