@@ -36,7 +36,7 @@ class DeleteUserModal extends Component {
               {' '}
               {this.props.username}
               {' '}
-              on this device. this will sizable access via PIN if 2FA is enabled on the account., this device will not be able to login without a 2FA reset which takes 7 days.
+              on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.
             </Text>
           </View>
           <View style={Style.buttonsContainer}>
