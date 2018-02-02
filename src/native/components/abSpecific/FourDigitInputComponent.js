@@ -57,7 +57,6 @@ class FourDigitInputComponent extends Component {
     }
   }
   render () {
-    console.log('State ' + this.state.autoFocus)
     const Style = this.props.style
     return (
       <TouchableWithoutFeedback onPress={this.refocus.bind(this)} >
