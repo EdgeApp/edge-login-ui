@@ -23,8 +23,8 @@ export default class ChangeAccountPinScreenComponent extends Component {
       if (this.props.showModal) {
         if (this.props.forgotPasswordModal) {
           const body = <View>
-            <Text style={style.staticModalText}>Password And Pin Successfully Changed.</Text>
-            <Text style={style.staticModalText}>Don't forget your password or recovery answers. You will permanently lose access to your funds if you lose your password and recovery answers</Text>
+            <Text style={style.staticModalText}>{'Password And pin successfully changed.\n\n'}</Text>
+            <Text style={style.staticModalText}>Don't forget your password or recovery answers. You will permanently lose access to your funds if you lose your password and recovery answers.</Text>
           </View>
           return (
             <StaticModal
