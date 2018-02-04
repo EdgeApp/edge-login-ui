@@ -25,8 +25,7 @@ const RecoverPasswordSceneStyles = {
     // height: THEME.BUTTONS.HEIGHT
   },
   modalMiddle: {
-    width: '100%',
-    height: 100
+    width: '100%'
   },
   input: {...Styles.MaterialInputOnWhite,
     errorColor: Constants.GRAY_2,

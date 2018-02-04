@@ -62,7 +62,7 @@ const ModalStyle = {
     icon: { ...Styles.IconButtonStyle.icon, color: Constants.GRAY_2 },
     iconPressed: { ...Styles.IconButtonStyle.icon, color: Constants.GRAY_1 }
   },
-  iconSize: 30,
+  iconSize: 32,
   iconStyle: {
     color: Constants.PRIMARY,
     backgroundColor: Constants.TRANSPARENT,

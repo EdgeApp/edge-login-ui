@@ -5,9 +5,9 @@ import * as Constants from '../../../common/constants'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
-    headerText: 'Password Recovery',
-    icon: Constants.TRASH_O,
-    iconType: Constants.FONT_AWESOME,
+    headerText: 'Save recovery token',
+    icon: Constants.MAIL,
+    iconType: Constants.ION_ICONS,
     actionLabel: 'Next',
     cancelLabel: 'Cancel',
     hideCancelX: true

@@ -333,7 +333,7 @@ export default class PasswordRecovery extends Component {
     }
     const middle = <View style={styles.modalMiddle}>
       <Text style={styles.staticModalText}>
-        Please enter the email of the account you want to recover.
+        {'To complete account recovery set up you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. \n\n Please enter your email below to send yourself a recovery token.'}
       </Text>
       <FormField
         style={styles.inputModal}
