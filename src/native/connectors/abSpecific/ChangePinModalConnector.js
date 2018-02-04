@@ -6,7 +6,7 @@ export const mapStateToProps = (state, ownProps) => {
   return {
     style: ownProps.style,
     headerText: 'PIN Changed',
-    headerSubtext: 'Pin Successfully Changed',
+    headerSubtext: 'PIN Successfully Changed',
     middleText: '',
     icon: Constants.EXCLAMATION,
     iconType: Constants.SIMPLE_ICONS,
