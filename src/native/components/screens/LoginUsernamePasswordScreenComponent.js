@@ -36,24 +36,32 @@ export default class LandingScreenComponent extends Component {
           />
         )
       }
-      if (this.state.showRecoveryModal) {
-        const body = <Text style={style.staticModalText}>{'Please find the email and click on the link using this device initiate recovery \n\nIf recovery was setup you should have emailed yourself a recovery token with a link.'}</Text>
+      if (this.state.showRecoveryModalOne) {
+        const body = <Text style={style.staticModalText}>{'If recovery was set up, you should have emailed yourself a recovery token with a link.'}</Text>
         return <StaticModal
           cancel={this.closeForgotPasswordModal.bind(this)}
           body={body}
           modalDismissTimerSeconds={8} />
       }
+      if (this.state.showRecoveryModalTwo) {
+        const body = <Text style={style.staticModalText}>{'Please find the email and click o the link from this device to initiate recovery. '}</Text>
+        return <StaticModal
+          cancel={this.closeForgotPasswordModalTwo.bind(this)}
+          body={body}
+          modalDismissTimerSeconds={8} />
+      }
+
       return null
     }
     this.recoverPasswordLogin = () => {
       this.setState({
-        showRecoveryModal: false
+        showRecoveryModalOne: false
       })
       this.props.recoverPasswordLogin()
     }
     this.cancelForgotPassword = () => {
       this.setState({
-        showRecoveryModal: false
+        showRecoveryModalOne: false
       })
     }
 
@@ -82,7 +90,8 @@ export default class LandingScreenComponent extends Component {
       focusFirst: true,
       focusSecond: false,
       offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN,
-      showRecoveryModal: false
+      showRecoveryModalOne: false,
+      showRecoveryModalTwo: false
     })
   }
   setListener (callback) {
@@ -116,7 +125,7 @@ export default class LandingScreenComponent extends Component {
     }
   }
   shouldComponentUpdate (nextProps, nextState) {
-    if (nextProps.username !== this.props.username && this.state.showRecoveryModal) {
+    if (nextProps.username !== this.props.username && this.state.showRecoveryModalOne) {
       return false
     }
     // return a boolean value
@@ -307,13 +316,20 @@ export default class LandingScreenComponent extends Component {
   onForgotPassword () {
     // this.props.onForgotPassword()
     this.setState({
-      showRecoveryModal: true
+      showRecoveryModalOne: true
     })
   }
   closeForgotPasswordModal () {
     // this.props.onForgotPassword()
     this.setState({
-      showRecoveryModal: false
+      showRecoveryModalOne: false,
+      showRecoveryModalTwo: true
+    })
+  }
+  closeForgotPasswordModalTwo () {
+    // this.props.onForgotPassword()
+    this.setState({
+      showRecoveryModalTwo: false
     })
   }
   onStartLogin () {
