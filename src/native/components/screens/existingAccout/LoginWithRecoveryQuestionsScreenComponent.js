@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import {
   Button,
-  FormField
+  FormField,
+  StaticModal
 } from '../../common/'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
@@ -68,6 +69,13 @@ export default class PasswordRecovery extends Component {
       })
     }
     this.renderModal = (styles) => {
+      if (this.props.showRecoverSuccessDialog) { // render static modal
+        const body = <Text style={styles.staticModalText}>Recovery successful! Please change your password and PIN.</Text>
+        return <StaticModal
+          cancel={this.props.changePassword}
+          body={body}
+          modalDismissTimerSeconds={8} />
+      }
       if (!this.state.showUsernameModal) return null
       const middle = <View style={styles.modalMiddle}>
         <Text style={styles.staticModalText}>

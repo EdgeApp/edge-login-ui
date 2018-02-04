@@ -16,7 +16,8 @@ const initialState = {
   edgeLoginId: null,
   cancelEdgeLoginRequest: null,
   account: null,
-  touchIdInformation: null
+  touchIdInformation: null,
+  showRecoverSuccessDialog: false
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -96,7 +97,7 @@ export default function (state = initialState, action) {
       const username = state.username
       return {...initialState, username: username}
     case Constants.LOGIN_RECOVERY_SUCCEESS:
-      return {...state, account: action.data.account, touchIdInformation: action.data.touchIdInformation}
+      return {...state, account: action.data.account, touchIdInformation: action.data.touchIdInformation, showRecoverSuccessDialog: true}
     case Constants.ON_RECOVERY_LOGIN_ERROR:
       return {...state, errorMessage: action.data}
     case Constants.PASSWORD_RECOVERY_INITIALIZED:

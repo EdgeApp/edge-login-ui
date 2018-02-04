@@ -10,10 +10,13 @@ import LinearGradient from 'react-native-linear-gradient'
 class StaticModal extends Component {
   componentDidMount () {
     if (this.props.modalDismissTimerSeconds) {
-      setTimeout(() => {
+      this.reset = setTimeout(() => {
         this.props.cancel()
       }, this.props.modalDismissTimerSeconds * 1000)
     }
+  }
+  componentWillUnmount () {
+    clearTimeout(this.reset)
   }
   render () {
     const styles = StaticModalStyle
