@@ -4,15 +4,7 @@ import { BackgroundImage, Button } from '../common'
 import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 import { LogoImageHeader } from '../abSpecific'
-import BetaWarningModalConnector
-  from '../../connectors/abSpecific/BetaWarningModalConnector'
 export default class LandingScreenComponent extends Component {
-  renderModal () {
-    if (this.props.showModal) {
-      return <BetaWarningModalConnector />
-    }
-    return null
-  }
   render () {
     const { LandingScreenStyle } = this.props.styles
     return (
@@ -29,7 +21,6 @@ export default class LandingScreenComponent extends Component {
     const { LandingScreenStyle } = this.props.styles
     return (
       <View style={LandingScreenStyle.inner}>
-        {this.renderModal()}
         <View style={LandingScreenStyle.featureBox}>
           <LogoImageHeader style={LandingScreenStyle.logoHeader} />
           <View style={LandingScreenStyle.featureBoxContent}>
