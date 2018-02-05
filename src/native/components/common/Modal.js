@@ -129,10 +129,13 @@ class MyModal extends Component {
       }, this.props.buttonTimerSeconds * 1000)
     }
     if (this.props.modalDismissTimerSeconds) {
-      setTimeout(() => {
+      this.reset = setTimeout(() => {
         this.props.cancel()
       }, this.props.modalDismissTimerSeconds * 1000)
     }
+  }
+  componentWillUnmount () {
+    clearInterval(this.reset)
   }
   render () {
     const styles = this.props.styles ? this.props.styles : ModalStyle
