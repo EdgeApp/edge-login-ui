@@ -34,7 +34,10 @@ const SetAccountPinScreenStyle = {
     fontSize: 15,
     textAlign: 'center'
   },
-  modal: Styles.SkipModalStyle
+  modal: Styles.SkipModalStyle,
+  shim: {
+    height: 5
+  }
 }
 
 export { SetAccountPinScreenStyle }
