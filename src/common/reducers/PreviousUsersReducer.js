@@ -5,6 +5,9 @@ export default function (state = null, action) {
   switch (action.type) {
     case Constants.AUTH_UPDATE_USERNAME:
       if (action.data === '' || action.data.length === 0) {
+        if (!state) {
+          return state
+        }
         return { ...state, filteredUsernameList: state.usernameOnlyList }
       }
       // get the length of the string

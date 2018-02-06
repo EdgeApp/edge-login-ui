@@ -9,6 +9,8 @@ export const mapStateToProps = (state, ownProps) => {
   if (state.previousUsers.userList.length > 0) {
     pv = true
   }
+  const usernameList = state.previousUsers.usernameOnlyList || []
+  const filteredUsernameList = state.previousUsers.usernameOnlyList || []
   return {
     styles: ownProps.styles,
     auth: state.login,
@@ -18,8 +20,8 @@ export const mapStateToProps = (state, ownProps) => {
     password: state.login.password,
     error: state.login.errorMessage,
     previousUsers: state.previousUsers.userList,
-    usernameList: state.previousUsers.usernameOnlyList,
-    filteredUsernameList: state.previousUsers.usernameOnlyList,
+    usernameList,
+    filteredUsernameList,
     hasUsers: pv,
     showModal: state.workflow.showModal
   }
