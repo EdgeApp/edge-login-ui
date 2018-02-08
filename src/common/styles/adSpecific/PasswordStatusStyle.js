@@ -10,6 +10,13 @@ const PasswordStatusStyle = {
     alignItems: 'center',
     backgroundColor: Constants.GRAY_4
   },
+  containerWhite: {
+    height: vs(129),
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: Constants.WHITE
+  },
   instructions: {
     fontSize: 14,
     textAlign: 'center',

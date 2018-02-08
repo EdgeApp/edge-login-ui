@@ -47,7 +47,7 @@ export default class PaswordStatusComponent extends Component {
       )
     }
     return (
-      <View style={style.container}>
+      <View style={style.containerWhite}>
         <Text style={style.instructions}>
           The password is used to login and change sensitive settings
         </Text>
