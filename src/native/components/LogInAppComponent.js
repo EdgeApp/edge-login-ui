@@ -49,7 +49,7 @@ export default class LoginAppComponent extends Component {
     }
     switch (this.props.workflow.currentKey) {
       case Constants.WORKFLOW_FIRST_LOAD:
-        if (this.props.previousUsers.userList.length === 0 && !this.props.recoveryLogin) {
+        if ((!this.props.previousUsers || this.props.previousUsers.userList.length === 0) && !this.props.recoveryLogin) {
           // we have previous user data but there are no users ever logged in.
           return this.getLandingScreen()
         }
