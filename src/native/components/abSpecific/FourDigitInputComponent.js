@@ -91,6 +91,9 @@ class FourDigitInputComponent extends Component {
     })
   }
   onBlur () {
+    if (this.props.dontForceFocus) {
+      return
+    }
     this.inputRef.focus()
     this.setState({
       isFocused: false,
