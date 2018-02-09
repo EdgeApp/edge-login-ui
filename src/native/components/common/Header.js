@@ -38,7 +38,6 @@ class Header extends Component {
         onPress={this.onBack.bind(this)}
         styles={style.headerBackButtonStyle}
         label={label}
-        withArro
       />
     )
   }

@@ -5,6 +5,7 @@ import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnector'
 import CreateFourDigitPinConnector
   from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
+import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 // import * as Constants from '../../../common/constants'
 
 export default class SetAccountPinScreenComponent extends Component {
@@ -19,34 +20,36 @@ export default class SetAccountPinScreenComponent extends Component {
   render () {
     const { SetAccountPinScreenStyle } = this.props.styles
     return (
-      <View style={SetAccountPinScreenStyle.screen}>
-        <HeaderConnector style={SetAccountPinScreenStyle.header} />
-        <View style={SetAccountPinScreenStyle.pageContainer}>
-          <View style={SetAccountPinScreenStyle.row1}>
-            <Text style={SetAccountPinScreenStyle.instructions}>
-              Your PIN is a 4 digit code used to do quick re-logins into your account
-            </Text>
-          </View>
-          <View style={SetAccountPinScreenStyle.row2}>
-            <CreateFourDigitPinConnector
-              style={SetAccountPinScreenStyle.fourPin}
-            />
-          </View>
-          <View style={SetAccountPinScreenStyle.row3}>
-            <Button
-              onPress={this.onNextPress.bind(this)}
-              downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
-              downTextStyle={SetAccountPinScreenStyle.nextButton.downTextStyle}
-              upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
-              upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
-              label={'NEXT'}
-              isThinking={this.state.isProcessing}
-              doesThink
-            />
-          </View>
+      <SafeAreaView>
+        <View style={SetAccountPinScreenStyle.screen}>
+          <HeaderConnector style={SetAccountPinScreenStyle.header} />
+          <View style={SetAccountPinScreenStyle.pageContainer}>
+            <View style={SetAccountPinScreenStyle.row1}>
+              <Text style={SetAccountPinScreenStyle.instructions}>
+                Your PIN is a 4 digit code used to do quick re-logins into your account
+              </Text>
+            </View>
+            <View style={SetAccountPinScreenStyle.row2}>
+              <CreateFourDigitPinConnector
+                style={SetAccountPinScreenStyle.fourPin}
+              />
+            </View>
+            <View style={SetAccountPinScreenStyle.row3}>
+              <Button
+                onPress={this.onNextPress.bind(this)}
+                downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
+                downTextStyle={SetAccountPinScreenStyle.nextButton.downTextStyle}
+                upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
+                upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
+                label={'NEXT'}
+                isThinking={this.state.isProcessing}
+                doesThink
+              />
+            </View>
 
+          </View>
         </View>
-      </View>
+      </SafeAreaView>
     )
   }
   onNextPress () {
