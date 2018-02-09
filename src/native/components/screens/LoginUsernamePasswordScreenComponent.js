@@ -44,7 +44,7 @@ export default class LandingScreenComponent extends Component {
           modalDismissTimerSeconds={8} />
       }
       if (this.state.showRecoveryModalTwo) {
-        const body = <Text style={style.staticModalText}>{'Please find the email and click o the link from this device to initiate recovery. '}</Text>
+        const body = <Text style={style.staticModalText}>{'Please find the email and click on the link from this device to initiate recovery. '}</Text>
         return <StaticModal
           cancel={this.closeForgotPasswordModalTwo.bind(this)}
           body={body}

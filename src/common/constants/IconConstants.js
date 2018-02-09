@@ -13,6 +13,8 @@ export const TRASH_O = 'trash-o'
 export const ION_ICONS = 'ionIcons'
 export const CLOSE_ICON = 'close'
 export const MAIL = 'ios-mail-outline'
+export const UNLOCKED_ICON = 'ios-unlock-outline'
+export const LOCKED_ICON = 'ios-lock-outline'
 // Materieal
 export const MATERIAL_ICONS = 'material'
 export const KEYBOARD_ARROW_DOWN = 'keyboard-arrow-down'

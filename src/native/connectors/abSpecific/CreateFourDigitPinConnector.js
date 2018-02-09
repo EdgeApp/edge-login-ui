@@ -6,7 +6,8 @@ export const mapStateToProps = (state, ownProps) => {
   return {
     style: ownProps.style,
     pin: state.create.pin,
-    error: state.create.pinErrorMessage
+    error: state.create.pinErrorMessage,
+    dontForceFocus: true
 
   }
 }
