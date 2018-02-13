@@ -15,6 +15,7 @@ import * as Constants from '../../../../common/constants'
 import {
   KeyboardAwareScrollView
 } from 'react-native-keyboard-aware-scroll-view'
+import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 /* type Props = {
   styles: any,
   confirmPasswordErrorMessage: string,
@@ -34,15 +35,17 @@ export default class NewAccountPasswordScreenComponent extends Component {
   render () {
     const { NewAccountPasswordScreenStyle } = this.props.styles
     return (
-      <KeyboardAwareScrollView
-        style={NewAccountPasswordScreenStyle.screen}
-        keyboardShouldPersistTaps={Constants.ALWAYS}
-        contentContainerStyle={NewAccountPasswordScreenStyle.mainScrollView}
-      >
-        <HeaderConnector style={NewAccountPasswordScreenStyle.header} />
-        {this.renderMain(NewAccountPasswordScreenStyle)}
-        {this.renderModal(NewAccountPasswordScreenStyle)}
-      </KeyboardAwareScrollView>
+      <SafeAreaView>
+        <KeyboardAwareScrollView
+          style={NewAccountPasswordScreenStyle.screen}
+          keyboardShouldPersistTaps={Constants.ALWAYS}
+          contentContainerStyle={NewAccountPasswordScreenStyle.mainScrollView}
+        >
+          <HeaderConnector style={NewAccountPasswordScreenStyle.header} />
+          {this.renderMain(NewAccountPasswordScreenStyle)}
+          {this.renderModal(NewAccountPasswordScreenStyle)}
+        </KeyboardAwareScrollView>
+      </SafeAreaView>
     )
   }
   renderMain (styles) {

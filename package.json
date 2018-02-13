@@ -26,6 +26,7 @@
     "build": "rimraf assets lib && rollup -c && webpack -p --color --progress",
     "fix": "standard --parser babel-eslint --fix",
     "lint": "standard --parser babel-eslint",
+    "lint:fix": "standard --parser babel-eslint --fix",
     "precommit": "npm run lint",
     "diabled-prepare": "npm run build",
     "start": "webpack-dev-server --open"

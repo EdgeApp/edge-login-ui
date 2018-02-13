@@ -6,6 +6,7 @@ import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
 import HeaderConnector
   from '../../../connectors/componentConnectors/HeaderConnector'
 // import * as Constants from '../../../common/constants'
+import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 export default class TermsAndConditionsScreenComponent extends Component {
   componentWillMount () {
@@ -71,16 +72,18 @@ export default class TermsAndConditionsScreenComponent extends Component {
   render () {
     const { TermsAndConditionsScreenStyle } = this.props.styles
     return (
-      <View style={TermsAndConditionsScreenStyle.screen}>
-        <HeaderConnector style={TermsAndConditionsScreenStyle.header} />
-        <View style={TermsAndConditionsScreenStyle.pageContainer}>
-          {this.renderInstructions(TermsAndConditionsScreenStyle)}
-          <View style={TermsAndConditionsScreenStyle.midSection}>
-            {this.renderItems(TermsAndConditionsScreenStyle)}
+      <SafeAreaView>
+        <View style={TermsAndConditionsScreenStyle.screen}>
+          <HeaderConnector style={TermsAndConditionsScreenStyle.header} />
+          <View style={TermsAndConditionsScreenStyle.pageContainer}>
+            {this.renderInstructions(TermsAndConditionsScreenStyle)}
+            <View style={TermsAndConditionsScreenStyle.midSection}>
+              {this.renderItems(TermsAndConditionsScreenStyle)}
+            </View>
+            {this.renderButton(TermsAndConditionsScreenStyle)}
           </View>
-          {this.renderButton(TermsAndConditionsScreenStyle)}
         </View>
-      </View>
+      </SafeAreaView>
     )
   }
   onNextPress () {

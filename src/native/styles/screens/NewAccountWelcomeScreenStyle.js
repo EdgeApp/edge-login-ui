@@ -7,7 +7,6 @@ const NewAccountWelcomeScreenStyle = {
     ...Styles.ScreenRow,
     flex: 1,
     justifyContent: 'flex-start',
-    marginTop: 10,
     flexDirection: 'row'
   },
   row2: { ...Styles.ScreenRow, flex: 4 },
@@ -45,6 +44,30 @@ const NewAccountWelcomeScreenStyle = {
     upTextStyle: Styles.TextOnlyButtonTextUpStyle,
     downTextStyle: Styles.TextOnlyButtonTextDownStyle,
     downStyle: Styles.TextOnlyButtonDownStyle
+  },
+  exitBackButtonStyle: {
+    backButton: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    backIconStyle: {
+      paddingLeft: 10,
+      paddingRight: 5,
+      paddingTop: 3,
+      color: Constants.SECONDARY
+    },
+    sideText: {
+      color: Constants.SECONDARY,
+      fontSize: 18
+    },
+    icon: {
+      color: Constants.SECONDARY,
+      fontSize: 25
+    },
+    default: {
+      backgroundColor: Constants.TRANSPARENT,
+      color: Constants.SECONDARY
+    }
   }
 }
 
