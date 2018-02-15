@@ -1,0 +1,143 @@
+# Edge React Native UI
+
+This repo implements a UI layer on top of [airbitz-core-js](https://github.com/Airbitz/airbitz-core-js) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
+
+## Basic usage for react native mobile application
+
+Add to your project:
+
+`npm install airbitz-core-js-ui --save`
+
+Required: Node ^8.2.1 and NPM ^5.3.0
+
+Get an API key from
+
+https://developer.airbitz.co
+
+You'll need an account on the Airbitz Mobile App which you can download for iOS and Android at
+
+https://airbitz.co/app
+
+On the `developer.airbitz.co` page, scan the QR code using the Airbitz Mobile App after signing in and register an email address.
+
+Install from npm
+
+    npm install airbitz-core-js-ui --save
+    
+Dependencies required in packages.json
+```javascript
+    "dependencies": {
+        "airbitz-core-js-ui": "git+ssh://git@github.com/Airbitz/airbitz-core-js-ui.git#react-native",
+        "airbitz-core-react-native": "git+ssh://git@github.com/airbitz/airbitz-core-react-native.git",
+        "react": "16.0.0-alpha.12",
+        "react-native": "0.47.0",
+        "rfc4648": "^1.0.0",
+        "secure-random": "^1.1.1"
+      }
+```
+After adding the dependencies to the package.json file run npm install. 
+
+## Android build
+
+You must be running Android Studio 3.0+. Make the following changes to the Android build files
+in your React Native app
+
+### `android/app/build.gradle`
+  * `compileSdkVersion 27` or higher
+  * `minSdkVersion 23` or higher
+  * `targetSdkVersion 25` or higher
+  * `buildToolsVersion "25.0.3"` or higher
+  * Add the following
+
+```
+android {
+      ...
+      compileOptions {
+          sourceCompatibility JavaVersion.VERSION_1_8
+          targetCompatibility JavaVersion.VERSION_1_8
+      }
+      defaultConfig {
+          ...
+          multiDexEnabled true
+      }
+}
+
+dependencies {
+      ...
+      compile 'com.android.support:appcompat-v7:27.0.1'
+}
+```
+
+### `android/build.gradle`
+
+```
+repositories {
+      ...
+      google()
+}
+
+dependencies {
+      ...
+      classpath 'com.android.tools.build:gradle:3.0.1'
+}
+```
+
+### `android/gradle-wrapper.properties`
+```
+classpath 'com.android.tools.build:gradle:3.0.0'
+distributionUrl=https://services.gradle.org/distributions/gradle-4.1-all.zip
+android.enableAapt2=false
+android.threadPoolSize=4
+android.useDeprecatedNdk=true
+```
+
+
+To use the component in your app you will need to two airbitz core libraries  
+```javascript
+    import { LoginScreen } from ‘airbitz-core-js-ui’
+    import { makeReactNativeContext } from ‘airbitz-core-react-native’
+```
+Outside of the component class, in the file that you want to add the login you will need to set up a function to validate your app with Airbitz .
+```javascript
+      function setupCore () {
+        return makeReactNativeContext({
+          // Replace this with your own API key from https://developer.airbitz.co:
+          apiKey: ‘<your api key >’,
+          appId: 'com.mydomain.myapp',
+          vendorName: ‘<Your vendor name >’,
+          vendorImageUrl: 'https://airbitz.co/go/wp-content/uploads/2016/10/GenericEdgeLoginIcon.png'
+        })
+      } 
+```
+In your component that will utilize the login component add the following code to the constructor method:
+```javascript
+    this.state = { context: null, account: null }
+    // Creating the context is async, so we store it in our state:
+    setupCore().then(context => this.setState(state => ({ ...state, context })))
+```
+Set up your render function 
+```javascript
+    render () {
+        const onLogin = account => this.setState(state => ({ ...state, account }))
+
+        // Once the context is ready, we can show the login screen:
+        return (
+          <View style={styles.container}>
+            {this.state.context
+              ? <LoginScreen context={this.state.context} onLogin={onLogin} />
+              :  <Text style={styles.welcome}>Loading</Text>}
+          </View>
+        )
+      }
+    }
+```
+In order to customize the experience and integrate with your app. change the const onLogin function to handle getting back the account information. 
+
+## Sample ReactNative App repo
+
+See a sample implementation at [airbitz-core-js-sample](https://github.com/Airbitz/airbitz-core-js-sample)
+code is in src/native/index.js
+
+# Detailed Docs
+
+https://developer.airbitz.co/javascript/#airbitz-account-management-ui

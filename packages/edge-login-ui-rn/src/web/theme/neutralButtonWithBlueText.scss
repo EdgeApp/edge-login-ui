@@ -1,0 +1,16 @@
+.neutral:not([disabled]) {
+
+  text-transform: none;
+
+  &.flat {
+    color: #007AFF;
+  }
+  &.raised {
+    color: #007AFF;
+  }
+}
+
+.button {
+  max-width: 50%;
+  min-width: 120px;
+}

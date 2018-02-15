@@ -1,9 +1,5 @@
-/assets
-/lib
-
 .DS_Store
 .idea
-config.json
 node_modules
 npm-debug.log
 yarn-error.log

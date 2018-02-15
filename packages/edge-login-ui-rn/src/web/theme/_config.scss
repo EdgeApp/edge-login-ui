@@ -1,0 +1,46 @@
+@import "~react-toolbox/lib/colors";
+@import "~react-toolbox/lib/mixins";
+@import "responsive.scss";
+// @import "~react-toolbox/lib/globals";
+// @import "~react-toolbox/lib/commons";
+// @import "~react-toolbox/lib/button/theme";
+
+// Global CSS
+$unit: 1.4rem;
+$preferred-font: 'Source Sans Pro', sans-serif;
+
+//Color Pallete CSS
+$color-primary: $palette-blue-500;
+$color-primary-dark: $palette-blue-700;
+
+
+//Input
+$input-padding: 1.4 * $unit;
+$input-field-font-size: 1.3 * $unit;
+
+$dialog-content-padding: 2.4 * $unit 4 * $unit;
+// $card-font-size: 1rem;
+// $button-squared-min-width: 44;
+
+p {
+  font-size: $unit * 1.2;
+  line-height: $unit * 1.6;
+}
+
+.button {
+  // font-size: $unit * 1.8;
+}
+
+a {
+  font-size: $unit * 1.4;
+  color: #007AFF;
+}
+
+a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}

@@ -1,0 +1,11 @@
+.neutral:not([disabled]) {
+
+  text-transform: none;
+
+  &.flat {
+    color: #007AFF;
+  }
+  &.raised {
+    color: #007AFF;
+  }
+}
