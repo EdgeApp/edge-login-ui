@@ -2933,7 +2933,7 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.2.2, core-js@^2.5.0, core-js@^2.5.1:
+core-js@^2.2.2, core-js@^2.5.0:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.3.tgz#8acc38345824f16d8365b7c9b4259168e8ed603e"
 
@@ -3528,15 +3528,14 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-edge-login@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/edge-login/-/edge-login-0.5.0.tgz#6f064bca4ba2ff68907a0eb4ed10c437505195d4"
+edge-login@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/edge-login/-/edge-login-0.5.6.tgz#d7f142758e848df625f2fe3057731433c37394ae"
   dependencies:
     aes-js "^3.1.0"
     base-x "^1.0.4"
     biggystring "^1.0.7"
     chai "^4.1.2"
-    core-js "^2.5.1"
     currency-codes "^1.1.2"
     detect-bundler "^1.0.0"
     disklet "^0.2.2"
@@ -3547,9 +3546,11 @@ edge-login@^0.5.0:
     node-fetch "^1.7.3"
     redux "^3.6.0"
     redux-keto "^0.3.2"
-    redux-pixies "^0.3.3"
+    redux-pixies "^0.3.4"
     redux-thunk "^2.2.0"
+    regenerator-runtime "^0.11.1"
     rfc4648 "^1.0.0"
+    rollup-plugin-alias "^1.4.0"
     scrypt-js "^2.0.3"
     utf8 "^2.1.2"
 
@@ -8324,9 +8325,9 @@ redux-mock-store@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/redux-mock-store/-/redux-mock-store-1.2.2.tgz#38007dc38f12ca8d965c7521afee5ccacc234d03"
 
-redux-pixies@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/redux-pixies/-/redux-pixies-0.3.3.tgz#8e7b95271328a4c1eee520cca8c2cb6503f6b85c"
+redux-pixies@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/redux-pixies/-/redux-pixies-0.3.4.tgz#e9b88f059c246931a6a17fc63392cbbd30724954"
 
 redux-thunk@^2.2.0:
   version "2.2.0"
@@ -8366,7 +8367,7 @@ regenerator-runtime@^0.10.5:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
 
-regenerator-runtime@^0.11.0:
+regenerator-runtime@^0.11.0, regenerator-runtime@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
 
@@ -8642,6 +8643,12 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
 rndm@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/rndm/-/rndm-1.2.0.tgz#f33fe9cfb52bbfd520aa18323bc65db110a1b76c"
+
+rollup-plugin-alias@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-alias/-/rollup-plugin-alias-1.4.0.tgz#120cba7c46621c03138f0ca6fd5dd2ade9872db9"
+  dependencies:
+    slash "^1.0.0"
 
 rollup-plugin-babel@^2.7.1:
   version "2.7.1"
