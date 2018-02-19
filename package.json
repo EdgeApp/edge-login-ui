@@ -4,6 +4,7 @@
     "precommit": "lerna exec npm run precommit"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
     "lerna": "^2.8.0"
   },
   "workspaces": [
