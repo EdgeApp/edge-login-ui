@@ -7,4 +7,4 @@ class PasswordHelper {
   }
 }
 
-export {PasswordHelper}
+export { PasswordHelper }

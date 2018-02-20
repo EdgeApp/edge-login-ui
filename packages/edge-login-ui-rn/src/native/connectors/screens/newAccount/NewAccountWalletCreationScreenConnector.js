@@ -12,7 +12,7 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    submitPin: (data) => dispatch(loginAction.submitPin(data))
+    submitPin: data => dispatch(loginAction.submitPin(data))
   }
 }
 

@@ -1,6 +1,12 @@
 import * as Constants from '../constants'
 import { dispatchAction, dispatchActionWithData } from './'
-import { enableTouchId, loginWithTouchId, isTouchEnabled, supportsTouchId, isTouchDisabled } from '../../native/keychain.js'
+import {
+  enableTouchId,
+  loginWithTouchId,
+  isTouchEnabled,
+  supportsTouchId,
+  isTouchDisabled
+} from '../../native/keychain.js'
 
 /**
  * Make it Thunky
@@ -21,7 +27,12 @@ export function loginWithRecovery (answers, username) {
       }
     }
     try {
-      const account = await context.loginWithRecovery2(backupKey, username, answers, myAccountOptions)
+      const account = await context.loginWithRecovery2(
+        backupKey,
+        username,
+        answers,
+        myAccountOptions
+      )
       const touchDisabled = await isTouchDisabled(context, account.username)
       if (!touchDisabled) {
         await enableTouchId(context, account)
@@ -45,7 +56,9 @@ export function loginWithRecovery (answers, username) {
       console.log('there was an error')
       console.log(e.message)
       const incorrect = 'The answers you provided are incorrect. '
-      dispatch(dispatchActionWithData(Constants.ON_RECOVERY_LOGIN_ERROR, incorrect))
+      dispatch(
+        dispatchActionWithData(Constants.ON_RECOVERY_LOGIN_ERROR, incorrect)
+      )
     }
   }
 }
@@ -73,9 +86,15 @@ export function retryWithOtp () {
     const userBackUpKey = state.login.otpUserBackupKey
     const previousAttemptType = state.login.previousAttemptType
     if (previousAttemptType === 'PASSWORD') {
-      return userLogin({username: state.login.username, password: state.login.password}, userBackUpKey)(dispatch, getState, imports)
+      return userLogin(
+        { username: state.login.username, password: state.login.password },
+        userBackUpKey
+      )(dispatch, getState, imports)
     }
-    return userLoginWithPin({username: state.login.username, pin: state.login.pin}, userBackUpKey)(dispatch, getState, imports)
+    return userLoginWithPin(
+      { username: state.login.username, pin: state.login.pin },
+      userBackUpKey
+    )(dispatch, getState, imports)
   }
 }
 export function userLoginWithTouchId (data) {
@@ -101,22 +120,24 @@ export function userLoginWithTouchId (data) {
       null,
       myAccountOptions,
       startFunction
-    ).then(async response => {
-      if (response) {
-        context.io.folder
-          .file('lastuser.json')
-          .setText(JSON.stringify({ username: data.username }))
-          .catch(e => null)
-        dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
-        const touchIdInformation = {
-          isTouchSupported: true,
-          isTouchEnabled: true
+    )
+      .then(async response => {
+        if (response) {
+          context.io.folder
+            .file('lastuser.json')
+            .setText(JSON.stringify({ username: data.username }))
+            .catch(e => null)
+          dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
+          const touchIdInformation = {
+            isTouchSupported: true,
+            isTouchEnabled: true
+          }
+          callback(null, response, touchIdInformation)
         }
-        callback(null, response, touchIdInformation)
-      }
-    }).catch(e => {
-      console.log(e)
-    })
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
 }
 export function userLoginWithPin (data, backupKey = null) {
@@ -140,8 +161,15 @@ export function userLoginWithPin (data, backupKey = null) {
     if (data.pin.length === 4) {
       setTimeout(async () => {
         try {
-          const abcAccount = await context.loginWithPIN(data.username, data.pin, myAccountOptions)
-          const touchDisabled = await isTouchDisabled(context, abcAccount.username)
+          const abcAccount = await context.loginWithPIN(
+            data.username,
+            data.pin,
+            myAccountOptions
+          )
+          const touchDisabled = await isTouchDisabled(
+            context,
+            abcAccount.username
+          )
           if (!touchDisabled) {
             await enableTouchId(context, abcAccount)
           }
@@ -150,7 +178,10 @@ export function userLoginWithPin (data, backupKey = null) {
             .setText(JSON.stringify({ username: abcAccount.username }))
             .catch(e => null)
           const isTouchSupported = await supportsTouchId()
-          const touchEnabled = await isTouchEnabled(context, abcAccount.username)
+          const touchEnabled = await isTouchEnabled(
+            context,
+            abcAccount.username
+          )
           const touchIdInformation = {
             isTouchSupported,
             isTouchEnabled: touchEnabled
@@ -168,7 +199,11 @@ export function userLoginWithPin (data, backupKey = null) {
           dispatch(
             dispatchActionWithData(
               Constants.LOGIN_USERNAME_PASSWORD_FAIL,
-              e.name === 'PasswordError' ? 'Invalid PIN' : e.name === 'UsernameError' ? 'PIN is not enabled for this account' : e.message
+              e.name === 'PasswordError'
+                ? 'Invalid PIN'
+                : e.name === 'UsernameError'
+                  ? 'PIN is not enabled for this account'
+                  : e.message
             )
           )
           callback(e.message, null)
@@ -198,8 +233,15 @@ export function userLogin (data, backupKey = null) {
     // the timeout is a hack until we put in interaction manager.
     setTimeout(async () => {
       try {
-        const abcAccount = await context.loginWithPassword(data.username, data.password, myAccountOptions)
-        const touchDisabled = await isTouchDisabled(context, abcAccount.username)
+        const abcAccount = await context.loginWithPassword(
+          data.username,
+          data.password,
+          myAccountOptions
+        )
+        const touchDisabled = await isTouchDisabled(
+          context,
+          abcAccount.username
+        )
         if (!touchDisabled) {
           await enableTouchId(context, abcAccount)
         }
@@ -222,17 +264,21 @@ export function userLogin (data, backupKey = null) {
           return
         }
         if (myAccountOptions.otp) {
-          dispatch(dispatchActionWithData(
-            Constants.OTP_LOGIN_BACKUPKEY_FAIL,
-            'Backup Key was incorrect'
-          ))
+          dispatch(
+            dispatchActionWithData(
+              Constants.OTP_LOGIN_BACKUPKEY_FAIL,
+              'Backup Key was incorrect'
+            )
+          )
           return
         }
         dispatch(
-          dispatch(dispatchActionWithData(
-            Constants.LOGIN_USERNAME_PASSWORD_FAIL,
-            e.message
-          ))
+          dispatch(
+            dispatchActionWithData(
+              Constants.LOGIN_USERNAME_PASSWORD_FAIL,
+              e.message
+            )
+          )
         )
         callback(e.message, null)
       }
@@ -252,9 +298,10 @@ export function getEdgeLoginQrCode () {
           dispatch(dispatchAction(Constants.RESET_APP))
         }
       },
-      displayImageUrl: 'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
+      displayImageUrl:
+        'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
       displayName: 'Edge Wallet',
-      onProcessLogin: (username) => {
+      onProcessLogin: username => {
         // throw spinner
       },
       onLogin: (e, account) => {

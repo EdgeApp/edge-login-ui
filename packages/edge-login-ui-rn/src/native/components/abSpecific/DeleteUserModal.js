@@ -32,11 +32,9 @@ class DeleteUserModal extends Component {
           </View>
           <View style={Style.textContainer}>
             <Text style={Style.copyText}>
-              Delete
-              {' '}
-              {this.props.username}
-              {' '}
-              on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.
+              Delete {this.props.username} on this device? This will disable
+              access via PIN. If 2FA is enabled on this account, this device
+              will not be able to login without a 2FA reset which takes 7 days.
             </Text>
           </View>
           <View style={Style.buttonsContainer}>

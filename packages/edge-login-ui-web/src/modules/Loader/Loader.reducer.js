@@ -2,10 +2,10 @@ import * as ACTION from './Loader.action'
 
 export const loading = (state = false, action) => {
   switch (action.type) {
-    case ACTION.LOADING_ON :
+    case ACTION.LOADING_ON:
       return true
 
-    case ACTION.LOADING_OFF :
+    case ACTION.LOADING_OFF:
       return false
 
     default:
@@ -15,10 +15,10 @@ export const loading = (state = false, action) => {
 
 export const message = (state = 'Please wait', action) => {
   switch (action.type) {
-    case ACTION.LOADING_ON :
+    case ACTION.LOADING_ON:
       return action.message
 
-    case ACTION.LOADING_OFF :
+    case ACTION.LOADING_OFF:
       return ''
 
     default:
@@ -28,7 +28,7 @@ export const message = (state = 'Please wait', action) => {
 
 export const style = (state = 'grey', action) => {
   switch (action.type) {
-    case ACTION.LOADING_ON :
+    case ACTION.LOADING_ON:
       return action.style
 
     default:

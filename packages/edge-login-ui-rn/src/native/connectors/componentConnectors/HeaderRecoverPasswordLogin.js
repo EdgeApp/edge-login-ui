@@ -18,7 +18,13 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    goBack: () => dispatch(actions.dispatchActionWithData(Constants.WORKFLOW_START, Constants.WORKFLOW_PASSWORD)),
+    goBack: () =>
+      dispatch(
+        actions.dispatchActionWithData(
+          Constants.WORKFLOW_START,
+          Constants.WORKFLOW_PASSWORD
+        )
+      ),
     skipScreen: () => dispatch(actions.skipStep())
   }
 }

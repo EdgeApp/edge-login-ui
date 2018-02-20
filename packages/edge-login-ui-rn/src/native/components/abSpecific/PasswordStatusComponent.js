@@ -28,7 +28,6 @@ export default class PaswordStatusComponent extends Component {
           disabled
         />
       </View>
-
     ))
   }
   renderInterior () {
@@ -36,9 +35,7 @@ export default class PaswordStatusComponent extends Component {
     if (this.props.status) {
       return (
         <View style={style.container}>
-          <View style={style.boxes}>
-            {this.renderStatusList(style)}
-          </View>
+          <View style={style.boxes}>{this.renderStatusList(style)}</View>
           <View style={style.shim} />
           <View style={style.textContainer}>
             <Text style={style.text}>{this.props.secondsToCrack} </Text>

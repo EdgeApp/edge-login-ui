@@ -42,7 +42,7 @@ class FormFieldWithDropComponent extends Component {
       autoFocus: this.props.autoFocus,
       isFocused: this.props.isFocused
     })
-    this.onSubmitEditing = (event) => {
+    this.onSubmitEditing = event => {
       if (this.props.onSubmitEditing) {
         this.props.onSubmitEditing()
       }

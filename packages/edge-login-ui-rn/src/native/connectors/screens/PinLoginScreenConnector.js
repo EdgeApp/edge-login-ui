@@ -17,12 +17,13 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    changeUser: (data) =>
+    changeUser: data =>
       dispatch(
         actions.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data)
       ),
     userLogin: data => dispatch(actions.userLoginWithPin(data)),
-    launchUserLoginWithTouchId: (data) => dispatch(actions.userLoginWithTouchId(data)),
+    launchUserLoginWithTouchId: data =>
+      dispatch(actions.userLoginWithTouchId(data)),
     deleteUserFromDevice: data => dispatch(actions.deleteUserFromDevice(data)),
     launchDeleteModal: () =>
       dispatch(actions.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL)),

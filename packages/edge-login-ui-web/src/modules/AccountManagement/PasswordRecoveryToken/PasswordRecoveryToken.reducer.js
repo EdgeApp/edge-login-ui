@@ -3,9 +3,9 @@ import * as ACTION from './PasswordRecoveryToken.action.js'
 
 const token = (state = '', action) => {
   switch (action.type) {
-    case ACTION.PASSWORD_RECOVERY_TOKEN :
+    case ACTION.PASSWORD_RECOVERY_TOKEN:
       return action.data
-    case ACTION.DONE_PASSWORD_RECOVERY_TOKEN :
+    case ACTION.DONE_PASSWORD_RECOVERY_TOKEN:
       return ''
     default:
       return state
@@ -14,9 +14,9 @@ const token = (state = '', action) => {
 
 const email = (state = '', action) => {
   switch (action.type) {
-    case ACTION.CHANGE_PASSWORD_RECOVERY_EMAIL :
+    case ACTION.CHANGE_PASSWORD_RECOVERY_EMAIL:
       return action.data
-    case ACTION.DONE_PASSWORD_RECOVERY_TOKEN :
+    case ACTION.DONE_PASSWORD_RECOVERY_TOKEN:
       return ''
     default:
       return state
@@ -25,11 +25,11 @@ const email = (state = '', action) => {
 
 const error = (state = '', action) => {
   switch (action.type) {
-    case ACTION.ERROR_PASSWORD_RECOVERY_EMAIL :
+    case ACTION.ERROR_PASSWORD_RECOVERY_EMAIL:
       return action.data
-    case ACTION.CLEAR_PASSWORD_RECOVERY_EMAIL :
+    case ACTION.CLEAR_PASSWORD_RECOVERY_EMAIL:
       return ''
-    case ACTION.DONE_PASSWORD_RECOVERY_TOKEN :
+    case ACTION.DONE_PASSWORD_RECOVERY_TOKEN:
       return ''
     default:
       return state

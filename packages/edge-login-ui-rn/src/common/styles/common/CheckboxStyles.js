@@ -44,7 +44,7 @@ const MultiLineTextCheckBox = {
     flexDirection: 'row'
   },
   text: {
-    fontSize: (Constants.FONTS.defaultFontSize + 2),
+    fontSize: Constants.FONTS.defaultFontSize + 2,
     color: Constants.GRAY_2,
     fontFamily: Constants.FONTS.fontFamilyRegular
   },

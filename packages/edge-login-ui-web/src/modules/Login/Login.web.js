@@ -7,12 +7,7 @@ import Divider from './Divider/Divider.js'
 
 import styles from './Login.scss'
 
-export default ({
-  password,
-  pin,
-  mobileLogin,
-  history
-}) => {
+export default ({ password, pin, mobileLogin, history }) => {
   if (!pin && !password) {
     return (
       <div className={styles.webContainer}>

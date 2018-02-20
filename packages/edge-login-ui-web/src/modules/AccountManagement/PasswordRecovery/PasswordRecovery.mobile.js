@@ -24,15 +24,21 @@ export default ({
     if (!loader) {
       return (
         <div className={styles.rowButtonsHorizontalMobile}>
-          <button className={styles.primaryMobile} onClick={handleSubmit}>Submit</button>
-          <button className={styles.secondaryMobile} onClick={gotoAccount}>Back</button>
+          <button className={styles.primaryMobile} onClick={handleSubmit}>
+            Submit
+          </button>
+          <button className={styles.secondaryMobile} onClick={gotoAccount}>
+            Back
+          </button>
         </div>
       )
     }
     if (loader) {
       return (
         <div className={styles.rowButtonsHorizontalMobile}>
-          <button className={styles.primaryLoadMobile}><div className={styles.loader} /></button>
+          <button className={styles.primaryLoadMobile}>
+            <div className={styles.loader} />
+          </button>
           <button className={styles.secondaryLoadMobile}>Back</button>
         </div>
       )
@@ -51,8 +57,8 @@ export default ({
           required
         />
         <Input
-          type='text'
-          name='firstAnswer'
+          type="text"
+          name="firstAnswer"
           onChange={handleOnChangeFirstAnswer}
           value={firstAnswer}
           label={t('activity_recovery_first_answer')}
@@ -60,7 +66,9 @@ export default ({
           error={error.firstAnswer}
           required
         />
-        <p className={styles.note}>{error.firstAnswer ? '' : 'Answers are case sensitive' }</p>
+        <p className={styles.note}>
+          {error.firstAnswer ? '' : 'Answers are case sensitive'}
+        </p>
         <Dropdown
           source={renderQuestions2()}
           onChange={handleOnChangeSecondQuestion}
@@ -71,8 +79,8 @@ export default ({
           required
         />
         <Input
-          type='text'
-          name='secondAnswer'
+          type="text"
+          name="secondAnswer"
           onChange={handleOnChangeSecondAnswer}
           value={secondAnswer}
           label={t('activity_recovery_second_answer')}
@@ -80,7 +88,9 @@ export default ({
           error={error.secondAnswer}
           required
         />
-        <p className={styles.note}>{error.secondAnswer ? '' : 'Answers are case sensitive'}</p>
+        <p className={styles.note}>
+          {error.secondAnswer ? '' : 'Answers are case sensitive'}
+        </p>
       </form>
       {renderButtons()}
     </div>

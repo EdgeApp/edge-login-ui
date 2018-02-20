@@ -12,8 +12,11 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    initializePasswordRecovery: (account) => dispatch(actions.initializePasswordRecovery(account))
+    initializePasswordRecovery: account =>
+      dispatch(actions.initializePasswordRecovery(account))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordRecoveryAppComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  PasswordRecoveryAppComponent
+)

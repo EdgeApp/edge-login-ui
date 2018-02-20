@@ -7,11 +7,7 @@ type props = {
 }
 
 const SafeAreaViewComponent = ({ style, children }: props) => {
-  return (
-    <SafeAreaView style={[ style, { flex: 1 } ]}>
-      {children}
-    </SafeAreaView>
-  )
+  return <SafeAreaView style={[style, { flex: 1 }]}>{children}</SafeAreaView>
 }
 
 export default SafeAreaViewComponent

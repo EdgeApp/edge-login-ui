@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
-import LinkedComponent
-  from '../../components/screens/LoginUsernamePasswordScreenComponent'
+import LinkedComponent from '../../components/screens/LoginUsernamePasswordScreenComponent'
 import * as action from '../../../common/actions'
 import * as Constants from '../../../common/constants'
 
@@ -29,7 +28,8 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    launchUserLoginWithTouchId: (data) => dispatch(action.userLoginWithTouchId(data)),
+    launchUserLoginWithTouchId: data =>
+      dispatch(action.userLoginWithTouchId(data)),
     userLogin: data => dispatch(action.userLogin(data)),
     gotoCreatePage: () =>
       dispatch(action.startWorkflow(Constants.WORKFLOW_CREATE)),
@@ -41,13 +41,17 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
       ),
     updatePassword: data =>
       dispatch(
-        action.dispatchActionWithData(Constants.AUTH_UPDATE_LOGIN_PASSWORD, data)
+        action.dispatchActionWithData(
+          Constants.AUTH_UPDATE_LOGIN_PASSWORD,
+          data
+        )
       ),
     deleteUserFromDevice: data => dispatch(action.deleteUserFromDevice(data)),
     launchDeleteModal: () =>
       dispatch(action.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL)),
     recoverPasswordLogin: () => dispatch(action.recoverPasswordLogin()),
-    dismissRecoveryError: () => dispatch(action.dispatchAction(Constants.DISMISS_REOVERY_ERROR))
+    dismissRecoveryError: () =>
+      dispatch(action.dispatchAction(Constants.DISMISS_REOVERY_ERROR))
   }
 }
 

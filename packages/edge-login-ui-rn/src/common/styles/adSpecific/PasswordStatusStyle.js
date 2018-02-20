@@ -27,7 +27,6 @@ const PasswordStatusStyle = {
     flex: 5,
     flexDirection: 'column',
     top: 5
-
   },
   checkboxContainer: {
     height: vs(20),
@@ -55,7 +54,6 @@ const PasswordStatusStyle = {
     marginRight: '10%',
     marginBottom: 6,
     fontSize: 11
-
   }
 }
 

@@ -15,4 +15,6 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoadingScreenComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  LoadingScreenComponent
+)

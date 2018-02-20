@@ -17,10 +17,17 @@ const emptyTouchIdUsers = {
 export async function isTouchEnabled (context, username) {
   const supported = await supportsTouchId()
   if (supported) {
-    const fingerprint = await context.io.folder.file('fingerprint.json').getText().then(text => JSON.parse(text)).catch(e => emptyTouchIdUsers)
+    const fingerprint = await context.io.folder
+      .file('fingerprint.json')
+      .getText()
+      .then(text => JSON.parse(text))
+      .catch(e => emptyTouchIdUsers)
 
     // Check if user is in array
-    if (fingerprint.enabledUsers && fingerprint.enabledUsers.indexOf(username) !== -1) {
+    if (
+      fingerprint.enabledUsers &&
+      fingerprint.enabledUsers.indexOf(username) !== -1
+    ) {
       return true
     }
   }
@@ -30,10 +37,17 @@ export async function isTouchEnabled (context, username) {
 export async function isTouchDisabled (context, username) {
   const supported = await supportsTouchId()
   if (supported) {
-    const fingerprint = await context.io.folder.file('fingerprint.json').getText().then(text => JSON.parse(text)).catch(e => emptyTouchIdUsers)
+    const fingerprint = await context.io.folder
+      .file('fingerprint.json')
+      .getText()
+      .then(text => JSON.parse(text))
+      .catch(e => emptyTouchIdUsers)
 
     // Check if user is in array
-    if (fingerprint.disabledUsers && fingerprint.disabledUsers.indexOf(username) !== -1) {
+    if (
+      fingerprint.disabledUsers &&
+      fingerprint.disabledUsers.indexOf(username) !== -1
+    ) {
       return true
     } else {
       return false
@@ -52,7 +66,11 @@ export async function supportsTouchId () {
 }
 
 async function addTouchIdUser (context, username) {
-  const fingerprint = await context.io.folder.file('fingerprint.json').getText().then(text => JSON.parse(text)).catch(e => emptyTouchIdUsers)
+  const fingerprint = await context.io.folder
+    .file('fingerprint.json')
+    .getText()
+    .then(text => JSON.parse(text))
+    .catch(e => emptyTouchIdUsers)
 
   if (fingerprint.enabledUsers.indexOf(username) === -1) {
     fingerprint.enabledUsers.push(username)
@@ -66,7 +84,11 @@ async function addTouchIdUser (context, username) {
 }
 
 async function removeTouchIdUser (context, username) {
-  const fingerprint = await context.io.folder.file('fingerprint.json').getText().then(text => JSON.parse(text)).catch(e => emptyTouchIdUsers)
+  const fingerprint = await context.io.folder
+    .file('fingerprint.json')
+    .getText()
+    .then(text => JSON.parse(text))
+    .catch(e => emptyTouchIdUsers)
 
   if (fingerprint.disabledUsers.indexOf(username) === -1) {
     fingerprint.disabledUsers.push(username)
@@ -151,7 +173,10 @@ export async function loginWithTouchId (
       }
     } else if (Platform.OS === 'android') {
       try {
-        const loginKey = await AbcCoreJsUi.getKeychainStringWithFingerprint(loginKeyKey, promptString)
+        const loginKey = await AbcCoreJsUi.getKeychainStringWithFingerprint(
+          loginKeyKey,
+          promptString
+        )
         callback()
         const abcAccount = abcContext.loginWithKey(username, loginKey, opts)
         console.log('abcAccount logged in: ' + username)

@@ -30,10 +30,10 @@ class LoginScreen extends Component {
   componentWillMount () {
     updateFontStyles(this.props)
     setLocal(this.props.locale, this.props.language)
-    const composeEnhancers = typeof window === 'object' &&
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'core-ui' })
-      : compose
+    const composeEnhancers =
+      typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'core-ui' })
+        : compose
     this.store = createStore(
       reducers,
       {},

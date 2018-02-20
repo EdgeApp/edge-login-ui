@@ -1,7 +1,6 @@
-
-import React, {Component} from 'react'
-import {View, TouchableHighlight} from 'react-native'
-import {Icon} from './'
+import React, { Component } from 'react'
+import { View, TouchableHighlight } from 'react-native'
+import { Icon } from './'
 // import * as Constants from '../../../../constants/indexConstants'
 
 /* type Props = {
@@ -15,7 +14,7 @@ type State = {
 }
  */
 class IconButton extends Component {
-/*   static defaultProps = {
+  /*   static defaultProps = {
     iconType: Constants.MATERIAL_ICONS
   }
   static propsTypes = {
@@ -48,11 +47,14 @@ class IconButton extends Component {
     if (this.state.pressed) {
       style = iconPressed
     }
-    return <Icon
-      style={style}
-      name={this.props.icon}
-      size={iconSize}
-      type={this.props.iconType} />
+    return (
+      <Icon
+        style={style}
+        name={this.props.icon}
+        size={iconSize}
+        type={this.props.iconType}
+      />
+    )
   }
 
   render () {
@@ -71,12 +73,10 @@ class IconButton extends Component {
         onHideUnderlay={this._onHideUnderlay.bind(this)}
         underlayColor={underlayColor}
       >
-        <View>
-          {this.renderIcon(icon, iconPressed, iconSize)}
-        </View>
+        <View>{this.renderIcon(icon, iconPressed, iconSize)}</View>
       </TouchableHighlight>
     )
   }
 }
 
-export {IconButton}
+export { IconButton }

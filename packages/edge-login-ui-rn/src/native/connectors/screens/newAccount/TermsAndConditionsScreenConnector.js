@@ -13,7 +13,7 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    agreeToCondition: (data) => dispatch(actions.agreeToConditions(data))
+    agreeToCondition: data => dispatch(actions.agreeToConditions(data))
   }
 }
 

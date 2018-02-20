@@ -33,7 +33,6 @@ const PinLoginScreenStyle = {
       width: '100%',
       flexDirection: 'column',
       alignItems: 'flex-end'
-
     },
     image: {
       position: 'relative',
@@ -94,14 +93,30 @@ const PinLoginScreenStyle = {
   fourPin: Styles.FourDotInputStyle,
   usernameButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, color: Constants.WHITE, fontSize: 24},
-    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, color: Constants.WHITE, fontSize: 24},
+    upTextStyle: {
+      ...Styles.TextOnlyButtonTextUpStyle,
+      color: Constants.WHITE,
+      fontSize: 24
+    },
+    downTextStyle: {
+      ...Styles.TextOnlyButtonTextDownStyle,
+      color: Constants.WHITE,
+      fontSize: 24
+    },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
   exitButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, color: Constants.WHITE, fontSize: 16},
-    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, color: Constants.WHITE, fontSize: 16},
+    upTextStyle: {
+      ...Styles.TextOnlyButtonTextUpStyle,
+      color: Constants.WHITE,
+      fontSize: 16
+    },
+    downTextStyle: {
+      ...Styles.TextOnlyButtonTextDownStyle,
+      color: Constants.WHITE,
+      fontSize: 16
+    },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
   modal: Styles.SkipModalStyle

@@ -42,7 +42,11 @@ export default class QRCodeEdge extends Component {
   }
   render () {
     return (
-      <a target='_blank' rel="noopener noreferrer" href={this._renderLoginLink()}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href={this._renderLoginLink()}
+      >
         {this._renderBarcode()}
       </a>
     )

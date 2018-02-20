@@ -30,14 +30,15 @@ class UserListItem extends Component {
     if (this.props.onDelete) {
       return (
         <View style={Style.container}>
-          <View style={Style.textComtainer} >
+          <View style={Style.textComtainer}>
             <Text style={Style.text}>{this.props.data}</Text>
           </View>
           <IconButton
             style={Style.iconButton}
             icon={Constants.CLOSE_ICON}
             iconType={Constants.MATERIAL_ICONS}
-            onPress={this.deleteThis} />
+            onPress={this.deleteThis}
+          />
         </View>
       )
     }

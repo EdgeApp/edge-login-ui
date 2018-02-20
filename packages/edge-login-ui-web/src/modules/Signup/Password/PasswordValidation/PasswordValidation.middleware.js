@@ -1,6 +1,6 @@
 import * as action from './PasswordValidation.action'
 
-export const validate = (password) => {
+export const validate = password => {
   return (dispatch, getState, imports) => {
     const abcContext = imports.abcContext
 

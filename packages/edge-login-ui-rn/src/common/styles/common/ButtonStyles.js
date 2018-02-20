@@ -175,7 +175,6 @@ const TextAndIconButtonStyle = {
     height: '100%',
     flexDirection: 'column',
     alignItems: 'center'
-
   },
   text: {
     color: Constants.WHITE,
@@ -202,7 +201,6 @@ const TextAndIconButtonAlignEdgesStyle = {
     alignItems: 'center',
     borderColor: Constants.GRAY_1,
     borderBottomWidth: 2
-
   },
   centeredContent: {
     width: '100%'
@@ -223,7 +221,6 @@ const TextAndIconButtonAlignEdgesStyle = {
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-around'
-
   },
   text: {
     color: Constants.GRAY_2,

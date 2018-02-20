@@ -17,27 +17,22 @@ class Username extends Component {
     }
     if (this.props.username.length >= 3) {
       return this.props.dispatch(
-        checkUsername(
-          this.props.username,
-          (errorMessage) => {
-            if (errorMessage) {
-              return this.props.dispatch(error(errorMessage))
-            }
-            if (!errorMessage) {
-              this.props.dispatch(clearError())
-              return this.props.dispatch(changeSignupPage('pin'))
-            }
+        checkUsername(this.props.username, errorMessage => {
+          if (errorMessage) {
+            return this.props.dispatch(error(errorMessage))
           }
-        )
+          if (!errorMessage) {
+            this.props.dispatch(clearError())
+            return this.props.dispatch(changeSignupPage('pin'))
+          }
+        })
       )
     }
   }
-  handleOnChangeText = (username) => {
-    this.props.dispatch(
-      changeUsernameValue(username)
-    )
+  handleOnChangeText = username => {
+    this.props.dispatch(changeUsernameValue(username))
   }
-  handleKeyEnter = (e) => {
+  handleKeyEnter = e => {
     if (e.nativeEvent.charCode === 13) {
       return this.handleSubmit()
     }

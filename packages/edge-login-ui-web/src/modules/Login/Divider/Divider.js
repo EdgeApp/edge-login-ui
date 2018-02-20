@@ -13,7 +13,7 @@ export default () => (
         </div>
       </div>
     </MediaQuery>
-    <MediaQuery maxWidth={719} >
+    <MediaQuery maxWidth={719}>
       <div className={mobileStyles.divider}>
         <div className={mobileStyles.line} />
         <div className={mobileStyles.circle}>

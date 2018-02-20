@@ -9,45 +9,40 @@ import Desktop from './PinNumber.web.js'
 import Mobile from './PinNumber.mobile.js'
 
 class Pin extends Component {
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     this.props.dispatch(
-      checkPIN(
-        this.props.pin,
-        (errorMessage) => {
-          if (errorMessage) {
-            return this.props.dispatch(error(errorMessage))
-          }
-          if (!errorMessage) {
-            this.props.dispatch(clearError())
-            return this.props.dispatch(changeSignupPage('password'))
-          }
+      checkPIN(this.props.pin, errorMessage => {
+        if (errorMessage) {
+          return this.props.dispatch(error(errorMessage))
         }
-      )
+        if (!errorMessage) {
+          this.props.dispatch(clearError())
+          return this.props.dispatch(changeSignupPage('password'))
+        }
+      })
     )
   }
-  handleOnChangeText = (pin) => {
+  handleOnChangeText = pin => {
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
     }
     if (/^\d+$/.test(pin) || pin.length === 0) {
-      this.props.dispatch(
-        changePinNumberValue(pin)
-      )
+      this.props.dispatch(changePinNumberValue(pin))
     }
   }
-  handleKeyEnter = (e) => {
+  handleKeyEnter = e => {
     if (e.nativeEvent.charCode === 13) {
       return this.handleSubmit()
     }
   }
-  gotoUsername= (e) => {
+  gotoUsername = e => {
     return this.props.dispatch(changeSignupPage('username'))
   }
   pinStyle = () => {
     if (this.props.pin.length > 0) {
-      return {textAlign: 'center', fontSize: '70px', height: '80px'}
+      return { textAlign: 'center', fontSize: '70px', height: '80px' }
     } else {
-      return {textAlign: 'center', fontSize: '35px', height: '80px'}
+      return { textAlign: 'center', fontSize: '35px', height: '80px' }
     }
   }
   render () {

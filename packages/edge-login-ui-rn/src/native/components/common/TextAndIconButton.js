@@ -74,7 +74,7 @@ class TextAndIconButton extends Component /* <Props, State> */ {
       >
         <View style={centeredContent}>
           <View style={inner}>
-            <View style={textContainer} >
+            <View style={textContainer}>
               <Text
                 style={[text, this.state.pressed && textPressed]}
                 ellipsizeMode={'middle'}

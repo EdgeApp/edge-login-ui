@@ -50,7 +50,6 @@ class FormField extends Component {
       textColor,
       errorColor,
       titleTextStyle
-
     } = this.props.style
     return (
       <Input

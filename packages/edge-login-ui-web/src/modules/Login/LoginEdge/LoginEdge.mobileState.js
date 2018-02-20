@@ -15,9 +15,9 @@ export function hideQRCode () {
 
 export const mobileShowQRCode = (state = false, action) => {
   switch (action.type) {
-    case SHOW_QR_CODE :
+    case SHOW_QR_CODE:
       return true
-    case HIDE_QR_CODE :
+    case HIDE_QR_CODE:
       return false
     default:
       return state

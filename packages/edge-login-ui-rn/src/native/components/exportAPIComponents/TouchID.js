@@ -1,1 +1,5 @@
-export { isTouchEnabled, enableTouchId, disableTouchId } from '../../../native/keychain'
+export {
+  isTouchEnabled,
+  enableTouchId,
+  disableTouchId
+} from '../../../native/keychain'

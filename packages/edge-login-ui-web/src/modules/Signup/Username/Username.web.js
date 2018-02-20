@@ -16,8 +16,12 @@ export default ({
     if (!loader) {
       return (
         <div className={styles.rowButtons}>
-          <button className={styles.secondary} onClick={gotoLogin}>Back</button>
-          <button className={styles.primary} onClick={handleSubmit}>Next</button>
+          <button className={styles.secondary} onClick={gotoLogin}>
+            Back
+          </button>
+          <button className={styles.primary} onClick={handleSubmit}>
+            Next
+          </button>
         </div>
       )
     }
@@ -25,7 +29,9 @@ export default ({
       return (
         <div className={styles.rowButtons}>
           <button className={styles.secondaryLoad}>Back</button>
-          <button className={styles.primaryLoad}><div className={styles.loader} /></button>
+          <button className={styles.primaryLoad}>
+            <div className={styles.loader} />
+          </button>
         </div>
       )
     }
@@ -36,8 +42,8 @@ export default ({
       <p className={styles.header}>Choose a Username</p>
       <Input
         autoFocus
-        type='text'
-        name='username'
+        type="text"
+        name="username"
         onChange={handleOnChangeText}
         onKeyPress={handleKeyEnter}
         value={username}
@@ -46,9 +52,18 @@ export default ({
         error={error}
       />
       <div className={styles.bullets}>
-        <p className={styles.bullet}><span className={styles.bulletIcon}>•</span> This is not your email or real name.</p>
-        <p className={styles.bullet}><span className={styles.bulletIcon}>•</span> This is the username to login into your account on this and other devices.</p>
-        <p className={styles.bullet}><span className={styles.bulletIcon}>•</span> Your username and password are known only to you and never stored unencrypted.</p>
+        <p className={styles.bullet}>
+          <span className={styles.bulletIcon}>•</span> This is not your email or
+          real name.
+        </p>
+        <p className={styles.bullet}>
+          <span className={styles.bulletIcon}>•</span> This is the username to
+          login into your account on this and other devices.
+        </p>
+        <p className={styles.bullet}>
+          <span className={styles.bulletIcon}>•</span> Your username and
+          password are known only to you and never stored unencrypted.
+        </p>
       </div>
       {renderButton()}
     </div>

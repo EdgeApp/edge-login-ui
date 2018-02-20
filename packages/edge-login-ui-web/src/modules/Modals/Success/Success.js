@@ -18,7 +18,13 @@ class Success extends Component {
             icon={desktopIcon}
           >
             <p className={desktopStyles.header}>{this.props.header}</p>
-            <button className={desktopStyles.primary} onClick={this.props.close} autoFocus >Close</button>
+            <button
+              className={desktopStyles.primary}
+              onClick={this.props.close}
+              autoFocus
+            >
+              Close
+            </button>
           </Modal>
         </MediaQuery>
         <MediaQuery maxWidth={719}>
@@ -28,11 +34,16 @@ class Success extends Component {
             icon={mobileIcon}
           >
             <p className={MobileStyles.header}>{this.props.header}</p>
-            <button className={MobileStyles.close} onClick={this.props.close} autoFocus >Close</button>
+            <button
+              className={MobileStyles.close}
+              onClick={this.props.close}
+              autoFocus
+            >
+              Close
+            </button>
           </Modal>
         </MediaQuery>
       </section>
-
     )
   }
 }

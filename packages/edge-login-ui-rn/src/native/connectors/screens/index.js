@@ -1,4 +1,4 @@
-export {LandingScreenConnector} from './LandingScreenConnector'
+export { LandingScreenConnector } from './LandingScreenConnector'
 /* export * from './LogInUsernamePasswordScreenConnector'
 export * from './PinLoginScreenConnector'
 export * from './PermissionScreenConnector'

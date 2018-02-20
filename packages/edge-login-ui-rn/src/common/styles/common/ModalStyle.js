@@ -133,15 +133,27 @@ const ModalStyle = {
       marginLeft: '2%'
     },
     actionButton: {
-      up: {...Styles.PrimaryButtonUpStyle, width: Constants.BUTTON_100_PERCENT},
+      up: {
+        ...Styles.PrimaryButtonUpStyle,
+        width: Constants.BUTTON_100_PERCENT
+      },
       upText: Styles.PrimaryButtonUpTextStyle,
-      down: {...Styles.PrimaryButtonDownStyle, width: Constants.BUTTON_100_PERCENT},
+      down: {
+        ...Styles.PrimaryButtonDownStyle,
+        width: Constants.BUTTON_100_PERCENT
+      },
       downText: Styles.PrimaryButtonDownTextStyle
     },
     cancelButton: {
-      up: {...Styles.SecondaryButtonUpStyle, width: Constants.BUTTON_100_PERCENT},
+      up: {
+        ...Styles.SecondaryButtonUpStyle,
+        width: Constants.BUTTON_100_PERCENT
+      },
       upText: Styles.SecondaryButtonUpTextStyle,
-      down: {...Styles.SecondaryButtonDownStyle, width: Constants.BUTTON_100_PERCENT},
+      down: {
+        ...Styles.SecondaryButtonDownStyle,
+        width: Constants.BUTTON_100_PERCENT
+      },
       downText: Styles.SecondaryButtonDownTextStyle
     }
   }
@@ -196,7 +208,6 @@ const StaticModalStyle = {
     color: Constants.WHITE
   },
   iconSize: 36
-
 }
 export { StaticModalStyle }
 export { ModalStyle }

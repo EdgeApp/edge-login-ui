@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import RecoverPasswordScreenConnector
-  from '../connectors/screens/existingAccount/RecoverPasswordScreenConnector'
+import RecoverPasswordScreenConnector from '../connectors/screens/existingAccount/RecoverPasswordScreenConnector'
 export default class ChangePasswordAppComponent extends Component {
   componentWillMount () {
     this.props.initializePasswordRecovery()

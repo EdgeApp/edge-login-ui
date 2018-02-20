@@ -15,7 +15,7 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    createUser: (data) => dispatch(loginAction.createUser(data))
+    createUser: data => dispatch(loginAction.createUser(data))
   }
 }
 

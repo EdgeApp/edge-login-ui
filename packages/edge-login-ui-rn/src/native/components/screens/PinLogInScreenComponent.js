@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { BackgroundImage, Button, DropDownList, ImageButton } from '../../components/common'
+import {
+  BackgroundImage,
+  Button,
+  DropDownList,
+  ImageButton
+} from '../../components/common'
 import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
-import FourDigitInputConnector
-  from '../../connectors/abSpecific/FourDigitInputConnector'
+import FourDigitInputConnector from '../../connectors/abSpecific/FourDigitInputConnector'
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
-import DeleteUserConnector
-  from '../../../native/connectors/abSpecific/DeleteUserConnector'
+import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 
 export default class PinLogInScreenComponent extends Component {
   componentWillMount () {
@@ -17,17 +20,21 @@ export default class PinLogInScreenComponent extends Component {
       focusOn: 'pin'
     })
     this.relaunchTouchId = () => {
-      this.props.launchUserLoginWithTouchId({username: this.props.username})
+      this.props.launchUserLoginWithTouchId({ username: this.props.username })
     }
-    this.renderTouchButton = (style) => {
+    this.renderTouchButton = style => {
       if (this.props.username) {
-        return <ImageButton style={style.thumbprintButton}
-          source={Assets.TOUCH}
-          onPress={this.relaunchTouchId} />
+        return (
+          <ImageButton
+            style={style.thumbprintButton}
+            source={Assets.TOUCH}
+            onPress={this.relaunchTouchId}
+          />
+        )
       }
       return null
     }
-    this.renderModal = (style) => {
+    this.renderModal = style => {
       if (this.props.showModal) {
         return (
           <DeleteUserConnector
@@ -41,7 +48,7 @@ export default class PinLogInScreenComponent extends Component {
   }
   componentDidMount () {
     if (this.props.username) {
-      this.props.launchUserLoginWithTouchId({username: this.props.username})
+      this.props.launchUserLoginWithTouchId({ username: this.props.username })
     }
   }
   render () {
@@ -52,7 +59,6 @@ export default class PinLogInScreenComponent extends Component {
           src={Assets.LOGIN_BACKGROUND}
           style={PinLoginScreenStyle.backgroundImage}
           content={this.renderOverImage()}
-
         />
       </View>
     )
@@ -137,7 +143,7 @@ export default class PinLogInScreenComponent extends Component {
     this.props.launchDeleteModal()
   }
   selectUser (arg) {
-    this.props.launchUserLoginWithTouchId({username: arg})
+    this.props.launchUserLoginWithTouchId({ username: arg })
     this.props.changeUser(arg)
     this.setState({
       focusOn: 'pin'

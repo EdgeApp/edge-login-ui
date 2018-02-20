@@ -5,10 +5,6 @@ import { Text } from 'react-native'
 
 export default class LandingScreenComponent extends Component {
   render () {
-    return (
-      <Text>
-        Holding Text
-      </Text>
-    )
+    return <Text>Holding Text</Text>
   }
 }

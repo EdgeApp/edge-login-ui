@@ -11,7 +11,9 @@ export default ({
   gotoChangePasswordRecovery
 }) => (
   <div className={styles.container}>
-    <p className={styles.header}><span className={styles.heavy}>Account name:</span> { account.username }</p>
+    <p className={styles.header}>
+      <span className={styles.heavy}>Account name:</span> {account.username}
+    </p>
     <div className={styles.main}>
       <div className={styles.square} onClick={gotoChangePin}>
         <img src={pinIcon} />
@@ -23,7 +25,9 @@ export default ({
       </div>
       <div className={styles.square} onClick={gotoChangePasswordRecovery}>
         <img src={recoveryIcon} />
-        <p className={styles.label}>Setup / Change<br />Password Recovery</p>
+        <p className={styles.label}>
+          Setup / Change<br />Password Recovery
+        </p>
       </div>
     </div>
   </div>

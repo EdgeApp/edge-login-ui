@@ -3,7 +3,9 @@ import { FormFieldWithDropComponent } from '../../components/common/'
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
 export const mapStateToProps = (state, ownProps) => {
-  const dataList = state.previousUsers.filteredUsernameList ? state.previousUsers.filteredUsernameList : []
+  const dataList = state.previousUsers.filteredUsernameList
+    ? state.previousUsers.filteredUsernameList
+    : []
   return {
     style: ownProps.style,
     value: state.login.username,
@@ -19,8 +21,13 @@ export const mapStateToProps = (state, ownProps) => {
 }
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onChangeText: data => dispatch(actions.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data))
+    onChangeText: data =>
+      dispatch(
+        actions.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data)
+      )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormFieldWithDropComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  FormFieldWithDropComponent
+)

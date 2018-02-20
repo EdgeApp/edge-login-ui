@@ -10,7 +10,7 @@ type props = {
 
 const SafeAreaViewComponent = ({ style, children }: props) => {
   return (
-    <SafeAreaView style={[ style, { flex: 1 } ]}>
+    <SafeAreaView style={[style, { flex: 1 }]}>
       {children}
       <LinearGradient
         style={{

@@ -13,8 +13,7 @@ import {
 /* import s from '../../../../locales/strings.js'
 import {FormField} from '../../../../components/FormField.js' */
 import * as Constants from '../../../../common/constants'
-import HeaderConnector
-  from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
 import EmailAppFailedModalConnector from '../../../connectors/abSpecific/EmailAppFailedModalConnector'
 /* type Props = {
@@ -155,26 +154,35 @@ export default class PasswordRecovery extends Component {
       })
     }
     this.openEmailApp = () => {
-      const body = 'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ' + this.props.username + '<br><br>' +
-      'iOS <br>edge://recovery?token=' + this.props.backupKey + '<br><br>' +
-      'Android https://recovery.edgesecure.co/recovery?token=' + this.props.backupKey
+      const body =
+        'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ' +
+        this.props.username +
+        '<br><br>' +
+        'iOS <br>edge://recovery?token=' +
+        this.props.backupKey +
+        '<br><br>' +
+        'Android https://recovery.edgesecure.co/recovery?token=' +
+        this.props.backupKey
 
-      Mailer.mail({
-        subject: 'Edge Recovery Token',
-        recipients: [this.state.emailAddress],
-        body: body,
-        isHTML: true
-      }, (error, event) => {
-        if (error) {
-          console.log(error)
-          this.setState({
-            emailAppNotAvailable: true
-          })
+      Mailer.mail(
+        {
+          subject: 'Edge Recovery Token',
+          recipients: [this.state.emailAddress],
+          body: body,
+          isHTML: true
+        },
+        (error, event) => {
+          if (error) {
+            console.log(error)
+            this.setState({
+              emailAppNotAvailable: true
+            })
+          }
+          if (event === 'sent') {
+            this.props.returnToSettings()
+          }
         }
-        if (event === 'sent') {
-          this.props.returnToSettings()
-        }
-      })
+      )
       if (Platform.OS === 'android') {
         setTimeout(() => {
           this.props.returnToSettings()
@@ -184,8 +192,12 @@ export default class PasswordRecovery extends Component {
     this.renderForm = styles => {
       const form1Style = this.state.errorOne ? styles.inputError : styles.input
       const form2Style = this.state.errorTwo ? styles.inputError : styles.input
-      const errorMessageOne = this.state.errorOne ? 'Answers should be minimum of 4 characters' : 'Answers are case sensitive'
-      const errorMessageTwo = this.state.errorTwo ? 'Answers should be minimum of 4 characters' : 'Answers are case sensitive'
+      const errorMessageOne = this.state.errorOne
+        ? 'Answers should be minimum of 4 characters'
+        : 'Answers are case sensitive'
+      const errorMessageTwo = this.state.errorTwo
+        ? 'Answers should be minimum of 4 characters'
+        : 'Answers are case sensitive'
       const questionOneStyle = this.state.errorQuestionOne
         ? styles.textIconButtonErrorError
         : styles.textIconButton
@@ -295,35 +307,44 @@ export default class PasswordRecovery extends Component {
   }
   renderDisableModal (styles) {
     if (this.state.disableConfirmationModal) {
-      const body = <Text style={styles.staticModalText}>Password Recovery has been disabled. You can enable it again by going into Password Recovery anytime</Text>
-      return <StaticModal
-        cancel={this.onDisableModalClose.bind(this)}
-        body={body}
-        modalDismissTimerSeconds={8} />
+      const body = (
+        <Text style={styles.staticModalText}>
+          Password Recovery has been disabled. You can enable it again by going
+          into Password Recovery anytime
+        </Text>
+      )
+      return (
+        <StaticModal
+          cancel={this.onDisableModalClose.bind(this)}
+          body={body}
+          modalDismissTimerSeconds={8}
+        />
+      )
     }
     return null
   }
   showEmailPending (styles) {
-    return <View style={styles.modalMiddle}>
-      <Text style={styles.staticModalText}>
-        Please enter the username of the account you want to recover.
-      </Text>
-      <FormField
-        style={styles.inputModal}
-        onChangeText={this.updateEmail.bind(this)}
-        value={this.state.emailAddress}
-        label={'Email Address'}
-        error={''}
-        returnKeyType={'go'}
-        forceFocus
-        onSubmitEditing={this.openEmailApp}
-      />
-    </View>
+    return (
+      <View style={styles.modalMiddle}>
+        <Text style={styles.staticModalText}>
+          Please enter the username of the account you want to recover.
+        </Text>
+        <FormField
+          style={styles.inputModal}
+          onChangeText={this.updateEmail.bind(this)}
+          value={this.state.emailAddress}
+          label={'Email Address'}
+          error={''}
+          returnKeyType={'go'}
+          forceFocus
+          onSubmitEditing={this.openEmailApp}
+        />
+      </View>
+    )
   }
   showEmaiFailed (styles) {
     if (this.props.showEmailDialog) {
-      return <EmailAppFailedModalConnector
-        action={this.props.cancel} />
+      return <EmailAppFailedModalConnector action={this.props.cancel} />
     }
     return null
   }
@@ -331,26 +352,33 @@ export default class PasswordRecovery extends Component {
     if (this.state.emailAppNotAvailable) {
       return this.showEmaiFailed(styles)
     }
-    const middle = <View style={styles.modalMiddle}>
-      <Text style={styles.staticModalText}>
-        {'To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. \n\n Please enter your email below to send yourself a recovery token.'}
-      </Text>
-      <FormField
-        style={styles.inputModal}
-        onChangeText={this.updateEmail.bind(this)}
-        value={this.state.emailAddress}
-        label={'Email Address'}
-        error={''}
-        returnKeyType={'go'}
-        forceFocus
-        onSubmitEditing={this.openEmailApp}
-      />
-    </View>
+    const middle = (
+      <View style={styles.modalMiddle}>
+        <Text style={styles.staticModalText}>
+          {
+            'To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. \n\n Please enter your email below to send yourself a recovery token.'
+          }
+        </Text>
+        <FormField
+          style={styles.inputModal}
+          onChangeText={this.updateEmail.bind(this)}
+          value={this.state.emailAddress}
+          label={'Email Address'}
+          error={''}
+          returnKeyType={'go'}
+          forceFocus
+          onSubmitEditing={this.openEmailApp}
+        />
+      </View>
+    )
     if (this.props.showEmailDialog) {
-      return <SaveRecoveryTokenModalConnector
-        modalMiddleComponent={middle}
-        cancel={this.props.cancel}
-        action={this.openEmailApp} />
+      return (
+        <SaveRecoveryTokenModalConnector
+          modalMiddleComponent={middle}
+          cancel={this.props.cancel}
+          action={this.openEmailApp}
+        />
+      )
     }
     return null
   }

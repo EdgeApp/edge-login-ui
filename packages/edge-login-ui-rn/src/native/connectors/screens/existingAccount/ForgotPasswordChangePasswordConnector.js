@@ -3,8 +3,12 @@ import LinkedComponent from '../../../components/screens/existingAccout/ChangeAc
 import * as actions from '../../../../common/actions'
 
 export const mapStateToProps = (state, ownProps) => {
-  const error = state.create.confirmPasswordErrorMessage ? state.create.confirmPasswordErrorMessage : ''
-  const error2 = state.create.createPasswordErrorMessage ? state.create.createPasswordErrorMessage : ''
+  const error = state.create.confirmPasswordErrorMessage
+    ? state.create.confirmPasswordErrorMessage
+    : ''
+  const error2 = state.create.createPasswordErrorMessage
+    ? state.create.createPasswordErrorMessage
+    : ''
   return {
     styles: ownProps.styles,
     password: state.create.password,
@@ -25,7 +29,7 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
       console.log('dont use on this component')
     },
     checkTheConfirmPassword: () => dispatch(actions.validateConfirmPassword()),
-    changePassword: (data) => dispatch(actions.recoveryChangePassword(data))
+    changePassword: data => dispatch(actions.recoveryChangePassword(data))
   }
 }
 

@@ -18,17 +18,17 @@ export const obfuscateUsername = username => {
 }
 
 export const calculateTime = second => {
-  const roundOff = (num) => Math.round(num * 100) / 100
+  const roundOff = num => Math.round(num * 100) / 100
   const minute = 60
-  const hour = (minute * 60)
-  const day = (hour * 24)
-  const week = (day * 7)
-  const month = (day * 30)
-  const year = (month * 12)
-  const decade = (year * 10)
-  const century = (decade * 10)
-  const millenium = (century * 10)
-  const toomuch = (millenium * 1000000)
+  const hour = minute * 60
+  const day = hour * 24
+  const week = day * 7
+  const month = day * 30
+  const year = month * 12
+  const decade = year * 10
+  const century = decade * 10
+  const millenium = century * 10
+  const toomuch = millenium * 1000000
 
   if (second < minute) {
     return second + ' seconds'

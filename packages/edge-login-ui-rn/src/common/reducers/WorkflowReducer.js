@@ -23,7 +23,12 @@ const initialState = {
         title: 'Choose a username',
         subTitle: 'step 1/3'
       },
-      { back: true, skip: false, title: 'Set a password', subTitle: 'step 2/3' },
+      {
+        back: true,
+        skip: false,
+        title: 'Set a password',
+        subTitle: 'step 2/3'
+      },
       {
         back: true,
         skip: false,
@@ -70,7 +75,14 @@ const initialState = {
   },
   otpWF: {
     scenes: 1,
-    details: [{ back: true, skip: false, title: 'Two Factor Authentication', subTitle: '' }]
+    details: [
+      {
+        back: true,
+        skip: false,
+        title: 'Two Factor Authentication',
+        subTitle: ''
+      }
+    ]
   },
   recoveryLoginWF: {
     scenes: 3,
@@ -128,11 +140,23 @@ export default function (state = initialState, action) {
     case Constants.WORKFLOW_CANCEL_MODAL:
       return { ...state, showModal: false, modalView: null }
     case Constants.ON_RECOVERY_LOGIN_IS_ENABLED:
-      return { ...state, currentKey: Constants.WORKFLOW_RECOVERY_LOGIN, currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentKey: Constants.WORKFLOW_RECOVERY_LOGIN,
+        currentSceneIndex: 0
+      }
     case Constants.SET_RECOVERY_KEY:
-      return {...state, currentKey: Constants.WORKFLOW_RECOVERY_LOGIN, currentSceneIndex: 0}
+      return {
+        ...state,
+        currentKey: Constants.WORKFLOW_RECOVERY_LOGIN,
+        currentSceneIndex: 0
+      }
     case Constants.CANCEL_RECOVERY_KEY:
-      return {...state, currentKey: Constants.WORKFLOW_PASSWORD_FORCED, currentSceneIndex: 0}
+      return {
+        ...state,
+        currentKey: Constants.WORKFLOW_PASSWORD_FORCED,
+        currentSceneIndex: 0
+      }
     case Constants.RESET_APP:
       return initialState
     default:

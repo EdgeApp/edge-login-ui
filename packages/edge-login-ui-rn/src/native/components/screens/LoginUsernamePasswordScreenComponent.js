@@ -13,13 +13,10 @@ import { LogoImageHeader, UserListItem } from '../abSpecific'
 import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 import * as Offsets from '../../constants'
-import DeleteUserConnector
-  from '../../../native/connectors/abSpecific/DeleteUserConnector'
+import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import { localize, KEYS } from '../../../common/locale'
 
-import {
-  KeyboardAwareScrollView
-} from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class LandingScreenComponent extends Component {
   componentWillMount () {
@@ -27,7 +24,7 @@ export default class LandingScreenComponent extends Component {
     this.style = LoginPasswordScreenStyle
     this.keyboardDidHideListener = null
 
-    this.renderModal = (style) => {
+    this.renderModal = style => {
       if (this.props.showModal) {
         return (
           <DeleteUserConnector
@@ -37,18 +34,36 @@ export default class LandingScreenComponent extends Component {
         )
       }
       if (this.state.showRecoveryModalOne) {
-        const body = <Text style={style.staticModalText}>{'If recovery was set up, you should have emailed yourself a recovery token with a link.'}</Text>
-        return <StaticModal
-          cancel={this.closeForgotPasswordModal.bind(this)}
-          body={body}
-          modalDismissTimerSeconds={8} />
+        const body = (
+          <Text style={style.staticModalText}>
+            {
+              'If recovery was set up, you should have emailed yourself a recovery token with a link.'
+            }
+          </Text>
+        )
+        return (
+          <StaticModal
+            cancel={this.closeForgotPasswordModal.bind(this)}
+            body={body}
+            modalDismissTimerSeconds={8}
+          />
+        )
       }
       if (this.state.showRecoveryModalTwo) {
-        const body = <Text style={style.staticModalText}>{'Please find the email and click on the link from this device to initiate recovery. '}</Text>
-        return <StaticModal
-          cancel={this.closeForgotPasswordModalTwo.bind(this)}
-          body={body}
-          modalDismissTimerSeconds={8} />
+        const body = (
+          <Text style={style.staticModalText}>
+            {
+              'Please find the email and click on the link from this device to initiate recovery. '
+            }
+          </Text>
+        )
+        return (
+          <StaticModal
+            cancel={this.closeForgotPasswordModalTwo.bind(this)}
+            body={body}
+            modalDismissTimerSeconds={8}
+          />
+        )
       }
 
       return null
@@ -73,7 +88,7 @@ export default class LandingScreenComponent extends Component {
         offset: Offsets.LOGIN_SCREEN_NO_OFFSET
       })
     }
-    this.onDelete = (user) => {
+    this.onDelete = user => {
       //
       // this.props.deleteUserFromDevice(user) TODO
       this.setState({
@@ -118,14 +133,20 @@ export default class LandingScreenComponent extends Component {
     }
   }
   componentWillReceiveProps (nextProps) {
-    if ((nextProps.error && this.state.loggingIn) || (this.state.loggingIn && nextProps.loginSuccess)) {
+    if (
+      (nextProps.error && this.state.loggingIn) ||
+      (this.state.loggingIn && nextProps.loginSuccess)
+    ) {
       this.setState({
         loggingIn: false
       })
     }
   }
   shouldComponentUpdate (nextProps, nextState) {
-    if (nextProps.username !== this.props.username && this.state.showRecoveryModalOne) {
+    if (
+      nextProps.username !== this.props.username &&
+      this.state.showRecoveryModalOne
+    ) {
       return false
     }
     // return a boolean value

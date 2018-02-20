@@ -90,16 +90,20 @@ const NewAccountReviewScreenStyle = {
       width: '100%',
       flexDirection: 'column'
     },
-    textIconButton: {...Styles.TextAndIconButtonStyle,
-      text: {...Styles.TextAndIconButtonStyle.text,
+    textIconButton: {
+      ...Styles.TextAndIconButtonStyle,
+      text: {
+        ...Styles.TextAndIconButtonStyle.text,
         fontSize: Constants.FONTS.defaultFontSize + 2,
         color: Constants.SECONDARY
       },
-      textPressed: {...Styles.TextAndIconButtonStyle.text,
+      textPressed: {
+        ...Styles.TextAndIconButtonStyle.text,
         fontSize: Constants.FONTS.defaultFontSize + 2,
         color: Constants.SECONDARY
       },
-      icon: {...Styles.TextAndIconButtonStyle.icon,
+      icon: {
+        ...Styles.TextAndIconButtonStyle.icon,
         color: Constants.SECONDARY
       }
     },
@@ -158,8 +162,8 @@ const NewAccountReviewScreenStyle = {
     }
   },
   nextButton: {
-    upStyle: {...Styles.PrimaryButtonUpStyle, width: '80%'},
-    downStyle: {...Styles.PrimaryButtonDownStyle, width: '80%'},
+    upStyle: { ...Styles.PrimaryButtonUpStyle, width: '80%' },
+    downStyle: { ...Styles.PrimaryButtonDownStyle, width: '80%' },
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
     downTextStyle: Styles.PrimaryButtonUpTextStyle
   }

@@ -23,12 +23,7 @@ class TextRowComponent extends Component {
   }
 
   render () {
-    const {
-      container,
-      text,
-      textPressed,
-      underlayColor
-    } = this.props.style
+    const { container, text, textPressed, underlayColor } = this.props.style
     return (
       <TouchableHighlight
         style={container}

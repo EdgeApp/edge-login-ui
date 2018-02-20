@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button } from '../../common'
-import HeaderConnector
-  from '../../../connectors/componentConnectors/HeaderConnector'
-import CreateFourDigitPinConnector
-  from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 // import * as Constants from '../../../common/constants'
 
@@ -26,7 +24,8 @@ export default class SetAccountPinScreenComponent extends Component {
           <View style={SetAccountPinScreenStyle.pageContainer}>
             <View style={SetAccountPinScreenStyle.row1}>
               <Text style={SetAccountPinScreenStyle.instructions}>
-                Your PIN is a 4 digit code used to do quick re-logins into your account
+                Your PIN is a 4 digit code used to do quick re-logins into your
+                account
               </Text>
             </View>
             <View style={SetAccountPinScreenStyle.row2}>
@@ -38,7 +37,9 @@ export default class SetAccountPinScreenComponent extends Component {
               <Button
                 onPress={this.onNextPress.bind(this)}
                 downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
-                downTextStyle={SetAccountPinScreenStyle.nextButton.downTextStyle}
+                downTextStyle={
+                  SetAccountPinScreenStyle.nextButton.downTextStyle
+                }
                 upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
                 upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
                 label={'NEXT'}
@@ -46,7 +47,6 @@ export default class SetAccountPinScreenComponent extends Component {
                 doesThink
               />
             </View>
-
           </View>
         </View>
       </SafeAreaView>

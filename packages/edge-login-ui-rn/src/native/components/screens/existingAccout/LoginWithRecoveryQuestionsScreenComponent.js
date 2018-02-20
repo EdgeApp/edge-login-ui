@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import {
-  Button,
-  FormField,
-  StaticModal
-} from '../../common/'
-import HeaderConnector
-  from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
+import { Button, FormField, StaticModal } from '../../common/'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
 import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
-import SetRecoveryUsernameModalConnector
-  from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
+import SetRecoveryUsernameModalConnector from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
 
 export default class PasswordRecovery extends Component {
   componentWillMount () {
@@ -29,7 +23,7 @@ export default class PasswordRecovery extends Component {
       disableConfirmationModal: false,
       showUsernameModal: true
     })
-    this.renderHeader = (style) => {
+    this.renderHeader = style => {
       if (this.props.showHeader) {
         return <HeaderConnector style={style.header} />
       }
@@ -68,24 +62,34 @@ export default class PasswordRecovery extends Component {
         answer2: arg
       })
     }
-    this.renderModal = (styles) => {
-      if (this.props.showRecoverSuccessDialog) { // render static modal
-        const body = <Text style={styles.staticModalText}>Recovery successful! Please change your password and PIN.</Text>
-        return <StaticModal
-          cancel={this.props.changePassword}
-          body={body}
-          modalDismissTimerSeconds={8} />
+    this.renderModal = styles => {
+      if (this.props.showRecoverSuccessDialog) {
+        // render static modal
+        const body = (
+          <Text style={styles.staticModalText}>
+            Recovery successful! Please change your password and PIN.
+          </Text>
+        )
+        return (
+          <StaticModal
+            cancel={this.props.changePassword}
+            body={body}
+            modalDismissTimerSeconds={8}
+          />
+        )
       }
       if (!this.state.showUsernameModal) return null
-      const middle = <View style={styles.modalMiddle}>
-        <Text style={styles.staticModalText}>
-          Please enter the username of the account you want to recover.
-        </Text>
-        <RecoverPasswordUsernameModalConnector
-          style={styles.inputModal}
-          onSubmitEditing={this.props.getQuestions}
-        />
-      </View>
+      const middle = (
+        <View style={styles.modalMiddle}>
+          <Text style={styles.staticModalText}>
+            Please enter the username of the account you want to recover.
+          </Text>
+          <RecoverPasswordUsernameModalConnector
+            style={styles.inputModal}
+            onSubmitEditing={this.props.getQuestions}
+          />
+        </View>
+      )
       return (
         <SetRecoveryUsernameModalConnector
           modalMiddleComponent={middle}
@@ -97,11 +101,13 @@ export default class PasswordRecovery extends Component {
   }
   renderError (styles) {
     if (this.props.loginError) {
-      return <View>
-        <View style={styles.shim} />
-        <Text style={styles.errorText}>{this.props.loginError}</Text>
-        <View style={styles.shim} />
-      </View>
+      return (
+        <View>
+          <View style={styles.shim} />
+          <Text style={styles.errorText}>{this.props.loginError}</Text>
+          <View style={styles.shim} />
+        </View>
+      )
     }
     return <View style={styles.shim} />
   }

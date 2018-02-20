@@ -16,4 +16,4 @@ const InputStyles = {
   }
 }
 
-export {InputStyles}
+export { InputStyles }

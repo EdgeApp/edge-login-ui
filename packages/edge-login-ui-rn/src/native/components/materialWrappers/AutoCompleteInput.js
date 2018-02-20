@@ -16,10 +16,10 @@ export default class AutoCompleteInput extends Component {
     return (
       <div>
         <AutoComplete
-          hintText='Type anything'
+          hintText="Type anything"
           dataSource={this.state.dataSource}
           onUpdateInput={this.handleUpdateInput}
-          floatingLabelText='Full width'
+          floatingLabelText="Full width"
           fullWidth
         />
       </div>

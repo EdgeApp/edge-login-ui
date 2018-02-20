@@ -1,8 +1,18 @@
-import { passwordNotificationHide, changePasswordValue } from './Password.action'
+import {
+  passwordNotificationHide,
+  changePasswordValue
+} from './Password.action'
 import { signupUser } from '../Signup.middleware'
 
 /* eslint-disable standard/no-callback-literal */
-export const checkPassword = (password, passwordRepeat, validation, username, pinNumber, callback) => {
+export const checkPassword = (
+  password,
+  passwordRepeat,
+  validation,
+  username,
+  pinNumber,
+  callback
+) => {
   return (dispatch, getState, imports) => {
     const t = imports.t
 
@@ -21,9 +31,7 @@ export const checkPassword = (password, passwordRepeat, validation, username, pi
         })
       }
       if (check.passed && password === passwordRepeat) {
-        return dispatch(
-          signupUser(username, password, pinNumber, callback)
-        )
+        return dispatch(signupUser(username, password, pinNumber, callback))
       } else {
         return callback({
           type: 'password',
@@ -38,8 +46,6 @@ export const skipPassword = (username, pinNumber, callback) => {
   return (dispatch, getState, imports) => {
     dispatch(changePasswordValue(''))
     dispatch(passwordNotificationHide())
-    return dispatch(
-      signupUser(username, null, pinNumber, callback)
-    )
+    return dispatch(signupUser(username, null, pinNumber, callback))
   }
 }

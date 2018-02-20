@@ -54,21 +54,21 @@ class Password extends Component {
       )
     )
   }
-  passwordKeyPressed = (e) => {
+  passwordKeyPressed = e => {
     if (e.charCode === 13) {
       this.passwordRepeat.getWrappedInstance().focus()
     }
   }
-  passwordRepeatKeyPressed = (e) => {
+  passwordRepeatKeyPressed = e => {
     if (e.charCode === 13) {
       return this.handleSubmit()
     }
   }
-  handleOnChangePassword = (password) => {
+  handleOnChangePassword = password => {
     this.props.dispatch(changePasswordValue(password))
     this.props.dispatch(validate(password))
   }
-  handleOnChangePasswordRepeat = (passwordRepeat) => {
+  handleOnChangePasswordRepeat = passwordRepeat => {
     this.props.dispatch(changePasswordRepeatValue(passwordRepeat))
   }
   toggleRevealPassword = () => {
@@ -93,8 +93,12 @@ class Password extends Component {
             error={this.props.error}
             loader={this.props.loader.loading}
             handleSubmit={this.handleSubmit}
-            refPassword={input => { this.password = input }}
-            refPasswordRepeat={input => { this.passwordRepeat = input }}
+            refPassword={input => {
+              this.password = input
+            }}
+            refPasswordRepeat={input => {
+              this.passwordRepeat = input
+            }}
             passwordKeyPressed={this.passwordKeyPressed}
             passwordRepeatKeyPressed={this.passwordRepeatKeyPressed}
             handleOnChangePassword={this.handleOnChangePassword}
@@ -112,8 +116,12 @@ class Password extends Component {
             error={this.props.error}
             loader={this.props.loader.loading}
             handleSubmit={this.handleSubmit}
-            refPassword={input => { this.password = input }}
-            refPasswordRepeat={input => { this.passwordRepeat = input }}
+            refPassword={input => {
+              this.password = input
+            }}
+            refPasswordRepeat={input => {
+              this.passwordRepeat = input
+            }}
             passwordKeyPressed={this.passwordKeyPressed}
             passwordRepeatKeyPressed={this.passwordRepeatKeyPressed}
             handleOnChangePassword={this.handleOnChangePassword}

@@ -19,9 +19,7 @@ export default class BaseModal extends Component {
             <div className={desktopStyles.circle}>
               <img src={this.props.icon} />
             </div>
-            <div className={desktopStyles.main}>
-              {this.props.children}
-            </div>
+            <div className={desktopStyles.main}>{this.props.children}</div>
           </Dialog>
         </MediaQuery>
         <MediaQuery maxWidth={719}>
@@ -34,9 +32,7 @@ export default class BaseModal extends Component {
             <div className={mobileStyles.circle}>
               <img src={this.props.icon} />
             </div>
-            <div className={mobileStyles.main}>
-              {this.props.children}
-            </div>
+            <div className={mobileStyles.main}>{this.props.children}</div>
           </Dialog>
         </MediaQuery>
       </section>

@@ -40,21 +40,15 @@ class LoginWithPin extends Component {
       }
     }
     return this.props.dispatch(
-      loginWithPin(
-        this.props.user,
-        this.props.pin,
-        callback
-      )
+      loginWithPin(this.props.user, this.props.pin, callback)
     )
   }
-  handleChangePin = (pin) => {
+  handleChangePin = pin => {
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
     }
     if (/^\d+$/.test(pin) || pin.length === 0) {
-      this.props.dispatch(
-        loginPIN(pin)
-      )
+      this.props.dispatch(loginPIN(pin))
     }
     if (pin.length === 4) {
       setTimeout(this.handleSubmit, 200)
@@ -80,7 +74,9 @@ class LoginWithPin extends Component {
             error={this.props.error}
             loader={this.props.loader.loading}
             handleChangePin={this.handleChangePin}
-            refPin={input => { this.pin = input }}
+            refPin={input => {
+              this.pin = input
+            }}
             showCachedUsers={this.showCachedUsers}
             hideCachedUsers={this.hideCachedUsers}
             openViewPassword={this.openViewPassword}
@@ -93,7 +89,9 @@ class LoginWithPin extends Component {
             error={this.props.error}
             loader={this.props.loader.loading}
             handleChangePin={this.handleChangePin}
-            refPin={input => { this.pin = input }}
+            refPin={input => {
+              this.pin = input
+            }}
             showCachedUsers={this.showCachedUsers}
             hideCachedUsers={this.hideCachedUsers}
             openViewPassword={this.openViewPassword}

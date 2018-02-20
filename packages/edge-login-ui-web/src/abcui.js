@@ -35,7 +35,7 @@ const removeIFrame = function (frame) {
   frame.parentNode.removeChild(frame)
 }
 
-const UIContext = (args) => {
+const UIContext = args => {
   // Checking errors
   if (!args.apiKey) {
     throw new Error('Missing api key')
@@ -55,7 +55,7 @@ const UIContext = (args) => {
     }
   }
 
-  const getAssetPath = (args) => {
+  const getAssetPath = args => {
     if (args.assetPath) {
       return args.assetsPath
     }
@@ -86,7 +86,7 @@ const UIContext = (args) => {
       return airbitzCoreJs
     }
 
-    const openLoginWindow = (callback) => {
+    const openLoginWindow = callback => {
       const frame = createIFrame(getAssetPath(args) + '/index.html')
       const removeCallbacks = () => {
         DomWindow.abcui.loginCallback = null
@@ -136,7 +136,7 @@ const UIContext = (args) => {
   }
 }
 
-const makeABCUIContext = (args) => {
+const makeABCUIContext = args => {
   return UIContext(args)
 }
 

@@ -13,7 +13,6 @@ class PasswordComponent extends Component {
       textColor,
       errorColor,
       titleTextStyle
-
     } = this.props.style
     return (
       <TextField

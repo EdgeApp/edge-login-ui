@@ -16,4 +16,6 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChangePinAppComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ChangePinAppComponent
+)

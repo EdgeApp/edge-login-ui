@@ -4,7 +4,10 @@ import * as Constants from '../../../common/constants'
 
 const RecoverPasswordSceneStyles = {
   screen: { ...Styles.ScreenStyle },
-  header: { ...Styles.HeaderContainerStyle, backgroundColor: Constants.PRIMARY },
+  header: {
+    ...Styles.HeaderContainerStyle,
+    backgroundColor: Constants.PRIMARY
+  },
   /* gradient: {
     height: THEME.HEADER
   }, */
@@ -27,7 +30,8 @@ const RecoverPasswordSceneStyles = {
   modalMiddle: {
     width: '100%'
   },
-  input: {...Styles.MaterialInputOnWhite,
+  input: {
+    ...Styles.MaterialInputOnWhite,
     errorColor: Constants.GRAY_2,
     baseColor: Constants.GRAY_2,
     textColor: Constants.GRAY_2,
@@ -37,12 +41,14 @@ const RecoverPasswordSceneStyles = {
     affixTextStyle: {
       color: Constants.GRAY_2
     },
-    container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
+    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
   },
-  inputModal: {...Styles.MaterialInputOnWhite,
-    container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
+  inputModal: {
+    ...Styles.MaterialInputOnWhite,
+    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
   },
-  inputError: {...Styles.MaterialInputOnWhite,
+  inputError: {
+    ...Styles.MaterialInputOnWhite,
     errorColor: Constants.ACCENT_RED,
     baseColor: Constants.ACCENT_RED,
     textColor: Constants.ACCENT_RED,
@@ -52,15 +58,22 @@ const RecoverPasswordSceneStyles = {
     affixTextStyle: {
       color: Constants.ACCENT_RED
     },
-    container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
+    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
   },
   shim: {
     height: 20
   },
   textIconButton: Styles.TextAndIconButtonAlignEdgesStyle,
-  textIconButtonErrorError: {...Styles.TextAndIconButtonAlignEdgesStyle,
-    text: {...Styles.TextAndIconButtonAlignEdgesStyle.text, color: Constants.ACCENT_RED},
-    icon: {...Styles.TextAndIconButtonAlignEdgesStyle.icon, color: Constants.ACCENT_RED}
+  textIconButtonErrorError: {
+    ...Styles.TextAndIconButtonAlignEdgesStyle,
+    text: {
+      ...Styles.TextAndIconButtonAlignEdgesStyle.text,
+      color: Constants.ACCENT_RED
+    },
+    icon: {
+      ...Styles.TextAndIconButtonAlignEdgesStyle.icon,
+      color: Constants.ACCENT_RED
+    }
   },
   submitButton: {
     upStyle: Styles.PrimaryButtonUpStyle,
@@ -94,4 +107,4 @@ const RecoverPasswordSceneStyles = {
   }
 }
 
-export {RecoverPasswordSceneStyles}
+export { RecoverPasswordSceneStyles }

@@ -14,16 +14,10 @@ class ForgotPassword extends Component {
     return (
       <section>
         <MediaQuery minWidth={720}>
-          <Desktop
-            view={this.props.view}
-            close={this.handleClose}
-          />
+          <Desktop view={this.props.view} close={this.handleClose} />
         </MediaQuery>
         <MediaQuery maxWidth={719}>
-          <Mobile
-            view={this.props.view}
-            close={this.handleClose}
-          />
+          <Mobile view={this.props.view} close={this.handleClose} />
         </MediaQuery>
       </section>
     )

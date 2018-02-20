@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button, WarningBox } from '../../common'
-import AccountInfoContainer
-  from '../../../connectors/abSpecific/AccountInfoConnector'
-import HeaderConnector
-  from '../../../connectors/componentConnectors/HeaderConnector'
+import AccountInfoContainer from '../../../connectors/abSpecific/AccountInfoConnector'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 // import * as Constants from '../../../common/constants'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
@@ -40,7 +38,9 @@ export default class NewAccountReviewScreenComponent extends Component {
             <Button
               onPress={this.onNextPress.bind(this)}
               downStyle={NewAccountReviewScreenStyle.nextButton.downStyle}
-              downTextStyle={NewAccountReviewScreenStyle.nextButton.downTextStyle}
+              downTextStyle={
+                NewAccountReviewScreenStyle.nextButton.downTextStyle
+              }
               upStyle={NewAccountReviewScreenStyle.nextButton.upStyle}
               upTextStyle={NewAccountReviewScreenStyle.nextButton.upTextStyle}
               label={'Done'}

@@ -6,11 +6,14 @@ const context = {
   appId: 'com.mydomain.myapp',
   bundlePath: 'abc-react',
   vendorName: 'Edge React Dev',
-  vendorImageUrl: 'https://airbitz.co/go/wp-content/uploads/2016/10/GenericEdgeLoginIcon.png'
+  vendorImageUrl:
+    'https://airbitz.co/go/wp-content/uploads/2016/10/GenericEdgeLoginIcon.png'
 }
 
 const abcctx = callback => {
-  const abcuiContext = window.parent.abcui ? window.parent.abcui.abcuiContext : null
+  const abcuiContext = window.parent.abcui
+    ? window.parent.abcui.abcuiContext
+    : null
   return callback(abcuiContext || abc.makeABCUIContext(context).getABCContext())
 }
 

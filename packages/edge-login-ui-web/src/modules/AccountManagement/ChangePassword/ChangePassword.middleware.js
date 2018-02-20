@@ -1,7 +1,12 @@
 import { openLoading, closeLoading } from '../../Loader/Loader.action'
 
 /* eslint-disable standard/no-callback-literal */
-export const checkPassword = (newPassword, newPasswordRepeat, account, callback) => {
+export const checkPassword = (
+  newPassword,
+  newPasswordRepeat,
+  account,
+  callback
+) => {
   return (dispatch, getState, imports) => {
     const t = imports.t
     dispatch(openLoading())

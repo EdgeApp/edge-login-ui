@@ -15,8 +15,11 @@ export const mapStateToProps = (state, ownProps) => {
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getQrCode: () => dispatch(actions.getEdgeLoginQrCode()),
-    cancelRequest: () => dispatch(actions.dispatchAction(Constants.CANCEL_EDGE_LOGIN_REQUEST))
+    cancelRequest: () =>
+      dispatch(actions.dispatchAction(Constants.CANCEL_EDGE_LOGIN_REQUEST))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EdgeLoginQrComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  EdgeLoginQrComponent
+)
