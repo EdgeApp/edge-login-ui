@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "precommit": "lint-staged",
+    "format": "prettier-eslint --write 'packages/*/*.js' 'packages/*/src/**/*.js'",
     "lint": "eslint 'packages/*/*.js' 'packages/*/src/**/*.js'"
   },
   "devDependencies": {
@@ -15,11 +16,13 @@
     "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",
     "lerna": "^2.8.0",
-    "lint-staged": "^6.1.1"
+    "lint-staged": "^6.1.1",
+    "prettier-eslint-cli": "^4.7.1"
   },
   "lint-staged": {
     "*.js": [
-      "eslint"
+      "eslint",
+      "prettier-eslint --list-different"
     ]
   },
   "workspaces": [

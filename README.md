@@ -6,5 +6,6 @@ To get started developing, just run `yarn`. This will install all the dependenci
 
 You should run the following scripts from this top-level directory:
 
+* yarn format
 * yarn lint
 * yarn lint --fix
