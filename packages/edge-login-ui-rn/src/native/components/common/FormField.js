@@ -73,7 +73,7 @@ class FormField extends Component {
         autoCapitalize={'none'}
         autoCorrect={this.props.autoCorrect}
         onSubmitEditing={this.onSubmitEditing.bind(this)}
-        />
+      />
     )
   }
   /* renderHelperBox (Style) {

@@ -9,7 +9,6 @@ import * as Constants from '../../../common/constants'
 } */
 
 class FourDigitInputComponent extends Component {
-
   componentWillMount () {
     this.setState({
       autoFocus: false,

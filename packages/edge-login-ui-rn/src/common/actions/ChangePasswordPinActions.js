@@ -3,7 +3,7 @@ import { dispatchAction } from './'
 
 export function changePassword (data) {
   return (dispatch, getState, imports) => {
-    let accountObject = imports.accountObject
+    const accountObject = imports.accountObject
     accountObject
       .changePassword(data)
       .then(response => {
@@ -49,7 +49,7 @@ export function recoveryChangePIN (data) {
 
 export function changePIN (data) {
   return (dispatch, getState, imports) => {
-    let accountObject = imports.accountObject
+    const accountObject = imports.accountObject
     accountObject
       .changePIN(data)
       .then(response => {

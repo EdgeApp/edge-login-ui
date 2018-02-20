@@ -7,7 +7,7 @@ import FourDigitInputConnector
 // import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 import DeleteUserConnector
-from '../../../native/connectors/abSpecific/DeleteUserConnector'
+  from '../../../native/connectors/abSpecific/DeleteUserConnector'
 
 export default class PinLogInScreenComponent extends Component {
   componentWillMount () {

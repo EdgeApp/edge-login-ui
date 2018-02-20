@@ -18,7 +18,7 @@ export default class NewAccountReviewScreenComponent extends Component {
           <View style={NewAccountReviewScreenStyle.pageContainer}>
             <View style={NewAccountReviewScreenStyle.instructionsContainer}>
               <Text style={NewAccountReviewScreenStyle.instructionsText}>
-                Almost done! Let's write down your account information
+                Almost done! Let&apos;s write down your account information
               </Text>
             </View>
             <View style={NewAccountReviewScreenStyle.warningBoxContainer}>

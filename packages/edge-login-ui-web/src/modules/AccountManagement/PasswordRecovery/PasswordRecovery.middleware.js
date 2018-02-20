@@ -1,5 +1,6 @@
 import { openLoading, closeLoading } from '../../Loader/Loader.action'
 
+/* eslint-disable standard/no-callback-literal */
 export const checkPasswordRecovery = (payload, callback) => {
   return (dispatch, getState, imports) => {
     const t = imports.t

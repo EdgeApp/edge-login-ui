@@ -46,7 +46,7 @@ class PasswordRecovery extends Component {
         ],
         account: this.props.account
       },
-        callback
+      callback
       )
     )
   }

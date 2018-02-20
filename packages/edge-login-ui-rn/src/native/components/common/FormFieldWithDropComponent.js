@@ -55,7 +55,7 @@ class FormFieldWithDropComponent extends Component {
   }
 
   render () {
-    let Style = this.props.style
+    const Style = this.props.style
 
     /* return (
       <View style={Style.container}>

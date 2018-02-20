@@ -1,11 +1,26 @@
 {
   "private": true,
   "scripts": {
-    "precommit": "lerna exec npm run precommit"
+    "precommit": "lint-staged",
+    "lint": "eslint 'packages/*/*.js' 'packages/*/src/**/*.js'"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.18.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",
-    "lerna": "^2.8.0"
+    "lerna": "^2.8.0",
+    "lint-staged": "^6.1.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
   },
   "workspaces": [
     "packages/*"

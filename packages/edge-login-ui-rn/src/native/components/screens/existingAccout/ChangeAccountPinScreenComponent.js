@@ -25,7 +25,7 @@ export default class ChangeAccountPinScreenComponent extends Component {
           const body = <View>
             <Text style={style.staticModalText}>Password and PIN successfully changed.</Text>
             <View style={style.shim} />
-            <Text style={style.staticModalText}>Don't forget your password or recovery answers. You will permanently lose access to your funds if you lose your password and recovery answers.</Text>
+            <Text style={style.staticModalText}>Don&apos;t forget your password or recovery answers. You will permanently lose access to your funds if you lose your password and recovery answers.</Text>
           </View>
           return (
             <StaticModal

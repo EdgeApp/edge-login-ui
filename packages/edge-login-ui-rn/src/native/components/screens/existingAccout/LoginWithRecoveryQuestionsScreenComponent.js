@@ -45,8 +45,8 @@ export default class PasswordRecovery extends Component {
       this.props.cancel()
     }
     this.onSubmit = () => {
-      let errorOne = this.state.answer1.length < 1 || false
-      let errorTwo = this.state.answer2.length < 1 || false
+      const errorOne = this.state.answer1.length < 1 || false
+      const errorTwo = this.state.answer2.length < 1 || false
 
       this.setState({
         errorOne,

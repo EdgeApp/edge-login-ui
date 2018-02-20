@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ModalStyle } from '../../../common/styles/'
 import { View, Text, Image, /* TouchableOpacity,
   Platform */
-ActivityIndicator} from 'react-native'
+  ActivityIndicator} from 'react-native'
 import { IconButton, Icon, Button } from './'
 import Modal from 'react-native-modal'
 import * as Constants from '../../../common/constants'

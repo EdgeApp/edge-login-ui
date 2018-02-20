@@ -24,7 +24,7 @@ const SafeAreaViewComponent = ({ style, children }: props) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={Colors.GRADIENT}
-       />
+      />
     </SafeAreaView>
   )
 }

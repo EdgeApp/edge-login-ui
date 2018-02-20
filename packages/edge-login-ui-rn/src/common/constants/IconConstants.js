@@ -27,4 +27,3 @@ export const EXCLAMATION = 'exclamation'
 export const MATERIAL_COMMUNITY = 'materialCommunity'
 export const EVIL_ICONS = 'EvilIcons'
 export const CHECK_CIRCLE_OUTLINE = 'check-circle-outline'
-

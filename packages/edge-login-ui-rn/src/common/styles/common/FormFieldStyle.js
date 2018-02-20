@@ -36,7 +36,7 @@ const MaterialInputWithDrop = {
 
   },
   row: {
-   // backgroundColor: THEME.COLORS.WHITE, padding: 10
+    // backgroundColor: THEME.COLORS.WHITE, padding: 10
   },
   listItem: {
     container: {
@@ -103,4 +103,3 @@ const MaterialInputOnWhite = {
 export { MaterialInputOnWhite }
 export { MaterialInput }
 export { MaterialInputWithDrop }
-

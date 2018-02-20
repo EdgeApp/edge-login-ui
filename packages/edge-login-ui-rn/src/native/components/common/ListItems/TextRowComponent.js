@@ -28,7 +28,7 @@ class TextRowComponent extends Component {
       text,
       textPressed,
       underlayColor
-      } = this.props.style
+    } = this.props.style
     return (
       <TouchableHighlight
         style={container}
@@ -50,4 +50,3 @@ class TextRowComponent extends Component {
 }
 
 export { TextRowComponent }
-

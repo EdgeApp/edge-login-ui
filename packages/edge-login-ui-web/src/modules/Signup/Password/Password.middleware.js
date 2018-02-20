@@ -1,6 +1,7 @@
 import { passwordNotificationHide, changePasswordValue } from './Password.action'
 import { signupUser } from '../Signup.middleware'
 
+/* eslint-disable standard/no-callback-literal */
 export const checkPassword = (password, passwordRepeat, validation, username, pinNumber, callback) => {
   return (dispatch, getState, imports) => {
     const t = imports.t

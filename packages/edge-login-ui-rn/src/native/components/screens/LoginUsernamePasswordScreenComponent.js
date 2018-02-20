@@ -300,7 +300,7 @@ export default class LandingScreenComponent extends Component {
 
   checkPinEnabled (user) {
     for (let i = 0; i < this.props.previousUsers.length; i++) {
-      let obj = this.props.previousUsers[i]
+      const obj = this.props.previousUsers[i]
       if (user === obj.username && obj.pinEnabled) {
         return true
       }

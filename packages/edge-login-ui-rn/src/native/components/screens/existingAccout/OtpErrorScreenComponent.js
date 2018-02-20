@@ -75,14 +75,14 @@ export default class OtpErrorScreenComponent extends Component {
     })
   }
   getStaticBody (style) {
-    return <Text style={style.staticModalText}>2FA disable request has been sent. You'll be able to login with your username and password after 7 days.</Text>
+    return <Text style={style.staticModalText}>2FA disable request has been sent. You&apos;ll be able to login with your username and password after 7 days.</Text>
   }
 
   renderModal (style) {
     if (this.state.showBackupCodeModal) {
       const middle = <View style={style.modalMiddle}>
         <Text style={style.staticModalText}>
-          Sign into your account using the device you setup 2FA with, and go to Settings > 2 Factor Authentication to find the code.
+          Sign into your account using the device you setup 2FA with, and go to Settings &gt; 2 Factor Authentication to find the code.
         </Text>
         <OtpBackupKeyConnector style={style.modalInput}
           onSubmitEditing={this.sendCode.bind(this)} />

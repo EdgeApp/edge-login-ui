@@ -16,7 +16,6 @@ class HeaderBackButton extends Component {
       </TouchableOpacity>
     )
   }
-
 }
 
 export {HeaderBackButton}

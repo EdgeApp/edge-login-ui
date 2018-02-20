@@ -3,8 +3,8 @@
   "version": "0.1.6",
   "description": "Edge login UI components, as a library for the web",
   "keywords": [
-    "Edge",
     "Airbitz",
+    "Edge",
     "bitcoin",
     "blockchain",
     "ethereum",
@@ -21,9 +21,6 @@
   "module": "lib/abcui.es6.js",
   "scripts": {
     "build": "rimraf assets lib && rollup -c && webpack -p --color --progress",
-    "precommit": "npm run lint",
-    "fix": "standard --parser babel-eslint --fix",
-    "lint": "standard --parser babel-eslint",
     "prepare": "npm run build",
     "start": "webpack-dev-server --open",
     "updot": "updot"
@@ -67,7 +64,6 @@
     "rollup-plugin-buble": "^0.15.0",
     "sass-lint": "~1.10.2",
     "sass-loader": "^6.0.6",
-    "standard": "~8.6.0",
     "style-loader": "^0.18.2",
     "updot": "^1.1.4",
     "webpack": "^3.4.1",

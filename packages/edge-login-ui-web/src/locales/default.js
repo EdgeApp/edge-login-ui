@@ -66,18 +66,18 @@ const strings = {
   loading_n_wallets: 'Loading %1$d of %2$d wallets.\nThis may take a few minutes as it is the first time logging into this device.',
   loading_transactions: 'Loading Transactions...',
 
-    //  Nav Bar strings
+  //  Nav Bar strings
   nav_bar_directory_text: 'DIRECTORY',
   nav_bar_request_text: 'RECEIVE',
   nav_bar_send_text: 'SEND',
   nav_bar_wallets_text: 'WALLETS',
   nav_bar_more_text: 'MORE',
 
-    //  Calculator strings
+  //  Calculator strings
   calculator_back: '&lt;&#160;Del',
   calculator_done: 'Done',
 
-    //  Connectivity
+  //  Connectivity
   string_connection_problem_title: 'Connection Problem',
   string_no_connection_title: 'No connection',
   string_no_connection_message: 'Please turn on WiFi or Mobile Data',
@@ -85,7 +85,7 @@ const strings = {
   string_no_connection_response: 'There is a problem reaching the server. Please try again.',
   string_connection_error_server: 'Connection Error: Cannot reach server',
 
-    //  Strings for Business Directory fragment
+  //  Strings for Business Directory fragment
   directory_title: 'Directory',
   restaurants: 'Restaurants',
   restaurant_and_food_trucks: 'Restaurants &amp; Food Trucks',
@@ -117,7 +117,7 @@ const strings = {
   keep: 'Keep',
   discard: 'Discard',
 
-    //  Strings for DirectoryDetail
+  //  Strings for DirectoryDetail
   fragment_directory_detail_getting_venue_data: 'Getting venue data…',
   fragment_directory_detail_timeout_retrieving_data: 'Timeout retrieving data…',
   fragment_directory_detail_directions: 'Directions',
@@ -129,7 +129,7 @@ const strings = {
   fragment_directory_detail_yelp: 'Yelp',
   fragment_directory_detail_foursquare: 'Foursquare',
 
-    //  Strings for errors from server
+  //  Strings for errors from server
   server_error_account_already_exists: 'This account already exists.',
   server_error_account_does_not_exists: 'We were unable to find your account. Be sure your username is correct.',
   server_error_bad_password: 'Incorrect username or password',
@@ -151,7 +151,7 @@ const strings = {
   account_needs_password_title: 'WARNING: missing password',
   account_needs_password_message: 'Account [{0}] needs a password. Account is not accessible on a new device without a password.',
 
-    //  Strings related to Landing
+  //  Strings related to Landing
   fragment_landing_logo_description: 'An image of the logo',
   fragment_landing_detail_text: 'Bitcoin Wallet',
   fragment_landing_swipe_text: 'Swipe to View Business Directory',
@@ -174,7 +174,7 @@ const strings = {
   fragment_landing_create_account: 'Create Account',
   fragment_landing_create_a_new_account: 'Create a New Account',
 
-    // Strings for Signup and Sign-in
+  // Strings for Signup and Sign-in
   activity_signup_title: 'Sign Up',
   activity_navigation_signin_failed: 'Sign-in failed',
   activity_navigation_signin_failed_unexpected: 'Sign-in failed unexpectedly',
@@ -253,7 +253,7 @@ const strings = {
   fragment_setup_header_right: 'Powered by Edge',
   fragment_setup_header_left: 'Login to %1$s',
 
-    //  Strings for PasswordRecovery
+  //  Strings for PasswordRecovery
   activity_recovery_button_title: 'Setup/Change Password Recovery',
   activity_recovery_title: 'Password Recovery',
   activity_recovery_setup_title: 'Password Recovery Setup',
@@ -294,10 +294,10 @@ const strings = {
   fragment_recovery_account_created_fragment_3: 'Would you like to setup password recovery questions to reset your account in case of a forgotten password?',
   fragment_recovery_account_setup_recovery: 'Setup Recovery',
 
-    //  Strings for ForgotPassword
+  //  Strings for ForgotPassword
   activity_forgot_title: 'Forgot Password',
 
-    //  Strings for Settings fragment
+  //  Strings for Settings fragment
   settings_title: 'Settings',
   settings_denomination_title: 'BITCOIN DENOMINATION',
   settings_denomination_buttons_bitcoin: 'Bitcoin',
@@ -344,7 +344,7 @@ const strings = {
   settings_ble_turn_on_message: 'Bluetooth is used to allow payments wirelessly without needing to scan a QR code. Would you like to turn it on now?',
   settings_currency_change_note_popup: 'Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.',
 
-    //  Strings for Spending Limits
+  //  Strings for Spending Limits
   fragment_spending_limits_title: 'Spending Limits',
   fragment_spending_limits_save: 'Save',
   fragment_spending_limits_daily_title: 'Daily Spending Limit',
@@ -354,17 +354,17 @@ const strings = {
   fragment_spending_limits_incorrect_password: 'Incorrect Password',
   fragment_spending_limits_daily_subtext: '(Requires password above daily limit)',
 
-    //  Strings for Category Fragment
+  //  Strings for Category Fragment
   fragment_category_cancel_title: 'Cancel Changes',
   fragment_category_cancel_message: 'Are you sure you want to cancel any changes you made?',
   fragment_category_deleted: '{0} Deleted',
   fragment_category_add: 'Add Category',
 
-    //  Strings for AutoLogoff Dialog
+  //  Strings for AutoLogoff Dialog
   dialog_title: 'Set Auto Logoff time',
   dialog_select_an_item: 'Select an item',
 
-    //  Strings for Send fragment
+  //  Strings for Send fragment
   send_title: 'Send Bitcoin',
   send_from_title: 'From:',
   send_to_title: 'To:',
@@ -398,7 +398,7 @@ const strings = {
   fragment_send_import_or_send_import_funds: 'Import Funds',
   fragment_send_import_or_send_send_funds: 'Send Funds',
 
-    //  Strings for Send Confirmation fragment
+  //  Strings for Send Confirmation fragment
   send_confirmation_title: 'Send Confirmation',
   send_confirmation_from_title: 'From:',
   send_confirmation_to_title: 'To:',
@@ -419,7 +419,7 @@ const strings = {
   fragment_send_confirmation_dust_alert_more: 'Please send at least {0} (~{1})',
   fragment_send_confirmation_error_payment_processor: 'Error connecting to payment processor. Send directly to bitcoin address\n\n%s',
 
-    //  Strings for Wallets fragment
+  //  Strings for Wallets fragment
   fragment_wallets_title: 'Wallets',
   fragment_wallets_add_wallet: 'Add Wallet',
   fragment_wallets_deleting_wallet: 'Deleting wallet...',
@@ -442,7 +442,7 @@ const strings = {
   fragment_wallets_created_wallet_failed: 'Failed to create wallet',
   fragment_wallets_archive_help: 'To archive a wallet, tap and hold the 3 dots to the right of a wallet and drag it below the [ARCHIVE] header',
 
-    //  Strings for Wallet fragment
+  //  Strings for Wallet fragment
   fragment_wallet_title: 'Transactions',
   fragment_wallet_export_button_description: 'Button to export a wallet',
   fragment_wallet_unconfirmed: 'Pending',
@@ -457,7 +457,7 @@ const strings = {
   fragment_transaction_list_rbf: 'Warning: Replace by Fee Detected. Double spend likely',
   fragment_transaction_list_double_spend: 'Warning: Double Spend',
 
-    //  Strings for Request fragment
+  //  Strings for Request fragment
   address_request_title: 'Address Request',
   address_request_message: '{0} has requested a bitcoin address to send money to. Please choose a wallet to receive funds.',
   fragment_request_subtitle: 'Request',
@@ -465,7 +465,7 @@ const strings = {
   fragment_request_email_title: 'Email',
   fragment_request_sms_title: 'SMS',
 
-    //  Strings for Request fragment
+  //  Strings for Request fragment
   request_title: 'Request Bitcoin',
   request_wallet_title: 'Wallet:',
   request_button_import: 'IMPORT',
@@ -473,7 +473,7 @@ const strings = {
   request_next: 'NEXT',
   request_invalid_amount: 'Invalid Amount',
 
-    //  Strings for Request QR Code fragment
+  //  Strings for Request QR Code fragment
   request_qr_email_title: '{0} Bitcoin Request',
   request_qr_bitmap_error: 'A QR code could not be attached.',
   request_qr_image_store_error: 'Warning: The QR code cannot be attached to the email.',
@@ -489,7 +489,7 @@ const strings = {
   request_qr_first_usage: 'Present QR code to Sender and have them scan to send you payment',
   request_qr_top_message: 'Scan to Send, Import, or Edge Login',
 
-    //  Strings for Import Wallet fragment
+  //  Strings for Import Wallet fragment
   import_title: 'Import Wallet',
   import_wallet_timeout_message: 'Import failed. Try Again.',
   import_wallet_hidden_bits_submit: 'Submit',
@@ -504,7 +504,7 @@ const strings = {
   import_wallet_private_key_title: 'Private Key:',
   import_wallet_private_key_hint: 'Enter bitcoin address (optional)',
 
-    //  Strings for Transaction Details fragment
+  //  Strings for Transaction Details fragment
   transaction_details_title: 'Transaction Details',
   transaction_details_advanced_title: 'Advanced',
   transaction_details_outputs_unavailable: 'The outputs to this transaction are unavailable at this time.',
@@ -524,7 +524,7 @@ const strings = {
   transaction_details_advanced_fee: ' fee',
   transaction_details_transaction_save_failed: 'Unable to save all transaction data',
 
-    //  Strings for Export fragment
+  //  Strings for Export fragment
   export_title: 'Export',
   export_subtitle: 'Export',
   export_account_this_week: 'This Week',
@@ -540,7 +540,7 @@ const strings = {
   export_print_title: 'Wallet Private Seed (advanced)',
   export_xpub: 'Wallet Public Seed (XPub)',
 
-    //  Strings for Export Saving fragment
+  //  Strings for Export Saving fragment
   export_saving_title: 'Export',
   export_saving_wallet_label: 'Wallet:',
   export_saving_from_label: 'From:',
@@ -552,7 +552,7 @@ const strings = {
   export_saving_share_label: 'Share',
   export_saving_view_label: 'View',
 
-    //  Strings for Export Saving Option fragment
+  //  Strings for Export Saving Option fragment
   export_saving_option_no_transactions_title: 'No Transactions',
   export_saving_option_no_transactions_message: 'There are no transactions to export in your date range',
   export_saving_option_email_subject: 'Edge Bitcoin Wallet Transactions',
@@ -561,23 +561,23 @@ const strings = {
   export_saving_option_xpub: 'XPub',
   export_saving_option_pick_date: 'Pick a Date',
 
-    //  Strings for Offline Wallet fragment
+  //  Strings for Offline Wallet fragment
   offline_wallet_title: 'Offline Wallet',
   offline_wallet_public_address_title: 'PUBLIC ADDRESS',
   offline_wallet_private_key_title: 'PRIVATE KEY',
   offline_wallet_copy_button_title: 'Copy Public Address',
   offline_wallet_print_button_title: 'External Storage / Print',
 
-    //  Strings for Received Success fragment
+  //  Strings for Received Success fragment
   received_success_sending_title: 'Send Bitcoin',
   received_success_sending: 'Sending',
   received_success_receiving: 'Receiving',
 
-    //  Strings for Contact Picker fragment
+  //  Strings for Contact Picker fragment
   fragment_contact_picker_title_email: 'Email Search',
   fragment_contact_picker_title_sms: 'SMS Search',
 
-    //  Strings for Debug fragment
+  //  Strings for Debug fragment
   fragment_debug_title: 'Debug View',
   fragment_debug_version_title: 'Version:',
   fragment_debug_core_version_title: 'Core Version:',
@@ -585,10 +585,10 @@ const strings = {
   fragment_debug_clear_watcher_button: 'Clear Watcher Cache',
   fragment_debug_upload_log_files_button: 'Upload Log Files',
 
-    //  Strings for MapBusinessDirectory fragment
+  //  Strings for MapBusinessDirectory fragment
   fragment_map_directory_unable_create_map: 'Sorry! unable to create maps, check for updates to Google Play Services',
 
-    //  Strings for BluetoothListView
+  //  Strings for BluetoothListView
   bluetoothlistview_connection_failed: 'Bluetooth connection failed. Try again.',
   bluetoothlistview_discovery_failed: 'Bluetooth service discovery failed. Try again.',
   bluetoothlistview_scan_failed: 'Bluetooth scan failed. Try again.',
@@ -597,17 +597,17 @@ const strings = {
   ble_invalid_request: 'Invalid Bluetooth Request',
   ble_invalid_contact_support: 'Please have Requestor contact support',
 
-    //  Errors
+  //  Errors
   error_invalid_credentials: 'Invalid User Name or Password',
   error_invalid_wallet_name_title: 'Invalid Wallet Name',
   error_invalid_wallet_name_description: 'You must provide a wallet name',
   error_filler: 'This is just sample error.',
 
-    //  OS Notifications
+  //  OS Notifications
   alert_notification_message: 'Touch to read critical messages',
   alert_new_business_message: 'Touch to see new businesses',
 
-    //  User Review
+  //  User Review
   user_review_title: '{0}',
   user_review_message: 'How are you liking {0}?',
   user_review_not_good: 'Not so good',
@@ -618,7 +618,7 @@ const strings = {
   user_review_support_subject: '{0} Feedback',
   user_review_support_title: 'Choose Email',
 
-    //  Two Factor screens
+  //  Two Factor screens
   fragment_twofactor_show_title: 'Two Factor',
   fragment_twofactor_menu_title: 'Two Factor',
   fragment_twofactor_scan_title: 'Scan Two Factor',
@@ -659,7 +659,7 @@ const strings = {
 
   receiver_alert_title: '{0} Notification',
 
-    //  Other
+  //  Other
   remote_password_change_title: 'Password Changed Remotely',
   remote_password_change_message: 'The Password to this account was changed by another device. Please login using the new credentials',
   received_bitcoin_title: 'Received Bitcoin',
@@ -677,7 +677,7 @@ const strings = {
   action_settings: 'Settings',
   wait_until_wallets_loaded: 'Please wait until your wallets are loaded.',
 
-    //  Remember Password Checks
+  //  Remember Password Checks
   password_check_incorrect_password_title: 'Incorrect Password.',
   password_check_incorrect_password_message: 'Incorrect Password. Try again?',
   password_check_skip: 'Please create a new account and transfer your funds if you forgot your password.',
@@ -689,7 +689,7 @@ const strings = {
   password_check_checking: 'Checking password…',
   password_check_current_password: 'Current password',
 
-    // Upload Logs
+  // Upload Logs
   upload_log_alert_title: 'Upload Debug Log',
   upload_log_alert_message: 'Enter any notes you would like to send to our support staff',
   upload_log_alert_upload_logs: 'Upload Logs',
@@ -698,22 +698,22 @@ const strings = {
   upload_log_alert_succeeded: 'Upload complete',
   upload_log_alert_failed: 'Upload failed. Please check network connection.',
 
-    //  Password Set
+  //  Password Set
   password_set_title: 'No password set',
   password_set_message: 'Please create a password for this account or you will not be able to recover your account if your device is lost or stolen',
   password_set_skip: 'Skip',
 
-    //  PIN Set
+  //  PIN Set
   pin_set_title: 'No PIN set',
   pin_set_message: 'Please create a PIN for this account to enable quick re-logins',
 
-    //  Settings
+  //  Settings
   settings_category_title: 'Categories',
 
-    //  Logout
+  //  Logout
   logout_message: 'Please wait while {0} gracefully exits your account. This may take a while on slow networks',
 
-    //  Navigation Drawer
+  //  Navigation Drawer
   drawer_signin_or_signup: 'Sign In or Sign Up',
   drawer_buy_sell: 'Buy / Sell Bitcoin',
   drawer_spend_bitcoin: 'Spend Bitcoin (Plugins)',
@@ -757,7 +757,7 @@ const strings = {
   request_footer_link_title: 'Download Edge for iOS or Android',
   request_footer_contact: 'mailto:info@airbitz.co?subject=Edge+Bitcoin+Email+Request',
 
-    //  Plugin text
+  //  Plugin text
   plugin_starbucks_discount: '(Up to 20% Off)',
   plugin_target_discount: '(Up to 10% Off)',
   plugin_wholefoods_discount: '(Up to 10% Off)',
@@ -789,7 +789,7 @@ const strings = {
   change_mining_fee_title: 'Change Mining Fee',
   change_mining_fee_body: 'Warning: Low Fees may cause long delays in transaction confirmation',
 
-    // Password Recovery Text
+  // Password Recovery Text
   save_recovery_token_popup: 'Save Recovery Token',
   save_recovery_token_popup_message: 'To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.',
   recovery_token_email_subject: '%s Recovery Token',
@@ -816,7 +816,7 @@ const strings = {
   password_recovery_app: 'Send Using Email App',
   password_recovery_invalid_email: 'Please enter a valid email address',
 
-    //  SSO
+  //  SSO
   edge_login: 'Edge Login',
   edge_login_manage: 'Login to the Edge Wallet to change your password/PIN or setup password recovery',
   edge_description: 'This application would like to access the following repositories linked to your Edge account. It will not have access to any other accounts or wallets.',

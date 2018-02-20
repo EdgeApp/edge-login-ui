@@ -15,11 +15,11 @@ const setDocument = () => {
     }
   }
 }
-const DomWindow = typeof window === undefined ? {} : window
-const DomDocument = typeof document === undefined ? setDocument() : document
+const DomWindow = typeof window === 'undefined' ? {} : window
+const DomDocument = typeof document === 'undefined' ? setDocument() : document
 const createIFrame = function (path) {
-  let frame = DomDocument.createElement('iframe')
-  let body = DomDocument.getElementsByTagName('BODY')[0]
+  const frame = DomDocument.createElement('iframe')
+  const body = DomDocument.getElementsByTagName('BODY')[0]
   body.appendChild(frame, body)
   frame.setAttribute('src', path)
   frame.setAttribute('frameborder', '0')

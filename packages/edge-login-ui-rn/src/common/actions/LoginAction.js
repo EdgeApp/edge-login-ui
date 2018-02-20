@@ -27,9 +27,9 @@ export function loginWithRecovery (answers, username) {
         await enableTouchId(context, account)
       }
       await context.io.folder
-          .file('lastuser.json')
-          .setText(JSON.stringify({ username: account.username }))
-          .catch(e => null)
+        .file('lastuser.json')
+        .setText(JSON.stringify({ username: account.username }))
+        .catch(e => null)
       const isTouchSupported = await supportsTouchId()
       const touchEnabled = await isTouchEnabled(context, account.username)
       const touchIdInformation = {
@@ -104,9 +104,9 @@ export function userLoginWithTouchId (data) {
     ).then(async response => {
       if (response) {
         context.io.folder
-        .file('lastuser.json')
-        .setText(JSON.stringify({ username: data.username }))
-        .catch(e => null)
+          .file('lastuser.json')
+          .setText(JSON.stringify({ username: data.username }))
+          .catch(e => null)
         dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
         const touchIdInformation = {
           isTouchSupported: true,
@@ -146,9 +146,9 @@ export function userLoginWithPin (data, backupKey = null) {
             await enableTouchId(context, abcAccount)
           }
           await context.io.folder
-              .file('lastuser.json')
-              .setText(JSON.stringify({ username: abcAccount.username }))
-              .catch(e => null)
+            .file('lastuser.json')
+            .setText(JSON.stringify({ username: abcAccount.username }))
+            .catch(e => null)
           const isTouchSupported = await supportsTouchId()
           const touchEnabled = await isTouchEnabled(context, abcAccount.username)
           const touchIdInformation = {
@@ -196,7 +196,7 @@ export function userLogin (data, backupKey = null) {
     if (backupKey) myAccountOptions.otp = backupKey
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
-    setTimeout(async() => {
+    setTimeout(async () => {
       try {
         const abcAccount = await context.loginWithPassword(data.username, data.password, myAccountOptions)
         const touchDisabled = await isTouchDisabled(context, abcAccount.username)

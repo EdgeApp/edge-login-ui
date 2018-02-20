@@ -21,12 +21,6 @@
     "android/**"
   ],
   "main": "src/native/index.js",
-  "scripts": {
-    "precommit": "npm run lint",
-    "fix": "standard --parser babel-eslint --fix",
-    "lint": "standard --parser babel-eslint",
-    "lint:fix": "standard --parser babel-eslint --fix"
-  },
   "dependencies": {
     "edge-login": "^0.5.6",
     "material-ui": "^0.20.0",
@@ -47,9 +41,6 @@
     "redux-thunk": "~2.1.0",
     "sprintf-js": "^1.0.3",
     "zxcvbn": "^4.4.2"
-  },
-  "devDependencies": {
-    "standard": "~8.6.0"
   },
   "rnpm": {
     "assets": [

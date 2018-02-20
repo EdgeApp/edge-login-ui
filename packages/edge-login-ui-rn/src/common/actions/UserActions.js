@@ -3,7 +3,7 @@ import { dispatchActionWithData, getPreviousUsers } from './'
 
 export function deleteUserFromDevice (data) {
   return (dispatch, getState, imports) => {
-    let context = imports.context
+    const context = imports.context
     setTimeout(() => {
       context
         .deleteLocalAccount(data)

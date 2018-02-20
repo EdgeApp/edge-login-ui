@@ -36,4 +36,3 @@ export function finishPasswordRecoveryToken () {
     type: DONE_PASSWORD_RECOVERY_TOKEN
   }
 }
-

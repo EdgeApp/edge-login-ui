@@ -57,7 +57,7 @@ class Checkbox extends Component {
     )
   }
   onPress () {
-    let onOff = this.state.onOff
+    const onOff = this.state.onOff
     let newOnOff = false
     if (!onOff) {
       newOnOff = true

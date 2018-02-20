@@ -61,8 +61,8 @@ export default ({
     <button className={loader ? styles.primaryLoad : styles.primary} onClick={submit}>
       { loader ? <div className={styles.loader} /> : 'Sign In' }
     </button>
-    <p className={styles.createAccountText}>Don't have an account?
-      <span className={styles.link} onClick={goToSignupPage}> Create Account</span>
+    <p className={styles.createAccountText}>Don&apos;t have an account?
+    <span className={styles.link} onClick={goToSignupPage}> Create Account</span>
     </p>
   </div>
 )

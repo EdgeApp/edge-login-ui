@@ -22,4 +22,3 @@ const styles = {
 }
 
 export { CardSection }
-

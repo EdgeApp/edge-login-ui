@@ -11,4 +11,3 @@ export * from './newAccount/NewAccountWalletCreationScreenConnector'
 export * from './newAccount/NewAccountWelcomeScreenConnector'
 export * from './newAccount/SetAccountPinScreenConnector'
 export * from './newAccount/WriteitDownScreenConnector' */
-

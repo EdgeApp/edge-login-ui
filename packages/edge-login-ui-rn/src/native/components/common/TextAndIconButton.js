@@ -14,7 +14,6 @@ type State = {
 } */
 
 class TextAndIconButton extends Component /* <Props, State> */ {
-
   componentWillMount () {
     this.setState({
       pressed: false

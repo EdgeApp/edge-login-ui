@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import {MyModal}
-from '../../components/common/'
+  from '../../components/common/'
 import * as Constants from '../../../common/constants'
 
 export const mapStateToProps = (state, ownProps) => {
