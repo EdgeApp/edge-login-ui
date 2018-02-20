@@ -14,15 +14,18 @@ export default class RouterComponent extends Component {
   render () {
     return (
       <Router history={hashHistory}>
-        <Route path='/' component={Container}>
-          <IndexRedirect to='/login' />
-          <Route path='/login' component={Login} />
-          <Route path='/signup' component={Signup} />
-          <Route path='/account' component={AccountManagement} />
-          <Route path='/changepin' component={ChangePin} />
-          <Route path='/changepassword' component={ChangePassword} />
-          <Route path='/passwordrecovery' component={PasswordRecovery} />
-          <Route path='/passwordrecoverytoken' component={PasswordRecoveryToken} />
+        <Route path="/" component={Container}>
+          <IndexRedirect to="/login" />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/account" component={AccountManagement} />
+          <Route path="/changepin" component={ChangePin} />
+          <Route path="/changepassword" component={ChangePassword} />
+          <Route path="/passwordrecovery" component={PasswordRecovery} />
+          <Route
+            path="/passwordrecoverytoken"
+            component={PasswordRecoveryToken}
+          />
         </Route>
       </Router>
     )

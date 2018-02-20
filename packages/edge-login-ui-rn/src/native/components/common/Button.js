@@ -50,12 +50,21 @@ class Button extends Component {
   renderInside () {
     if (!this.props.isThinking) {
       return (
-        <Text style={[this.props.upTextStyle, this.state.pressed && this.props.downTextStyle]}>
+        <Text
+          style={[
+            this.props.upTextStyle,
+            this.state.pressed && this.props.downTextStyle
+          ]}
+        >
           {this.props.label}
         </Text>
       )
     }
-    return <View><Spinner /></View>
+    return (
+      <View>
+        <Spinner />
+      </View>
+    )
   }
   onPress () {
     this.props.onPress()

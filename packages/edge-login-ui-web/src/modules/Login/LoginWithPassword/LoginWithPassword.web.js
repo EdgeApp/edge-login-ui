@@ -27,9 +27,9 @@ export default ({
       <CachedUsers
         component={
           <Input
-            type='text'
-            label='Username'
-            name='username'
+            type="text"
+            label="Username"
+            name="username"
             onKeyPress={usernameKeyPress}
             onChange={changeUsernameValue}
             value={username}
@@ -39,14 +39,14 @@ export default ({
             className={styles.usernameForm}
           />
         }
-        area='passwordLogin'
+        area="passwordLogin"
         containerClassName={styles.cachedUsers}
         userListClassName={styles.userListClassName}
       />
       <Input
-        type='password'
-        label='Password'
-        name='password'
+        type="password"
+        label="Password"
+        name="password"
         onKeyPress={passwordKeyPress}
         onChange={changePasswordValue}
         value={password}
@@ -58,11 +58,18 @@ export default ({
     <p className={styles.forgotPasswordLink} onClick={toggleForgotPassword}>
       Forgot Password
     </p>
-    <button className={loader ? styles.primaryLoad : styles.primary} onClick={submit}>
-      { loader ? <div className={styles.loader} /> : 'Sign In' }
+    <button
+      className={loader ? styles.primaryLoad : styles.primary}
+      onClick={submit}
+    >
+      {loader ? <div className={styles.loader} /> : 'Sign In'}
     </button>
-    <p className={styles.createAccountText}>Don't have an account?
-      <span className={styles.link} onClick={goToSignupPage}> Create Account</span>
+    <p className={styles.createAccountText}>
+      Don&apos;t have an account?
+      <span className={styles.link} onClick={goToSignupPage}>
+        {' '}
+        Create Account
+      </span>
     </p>
   </div>
 )

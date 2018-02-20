@@ -12,9 +12,8 @@ const InputStyles = {
     color: '#FFFFFF'
     // fontSize: 24,
     // lineHeight: 40,
-   // margin: 20
+    // margin: 20
   }
 }
 
-export {InputStyles}
-
+export { InputStyles }

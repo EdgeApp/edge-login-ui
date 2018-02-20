@@ -4,17 +4,23 @@ import _ from 'lodash'
 import classnames from 'classnames'
 import FontIcon from 'react-toolbox/lib/font_icon'
 
-import {loginUsername} from '../../Login/Login.action'
-import { selectUserToLogin, selectUserToDeleteFromUserCache } from './CachedUsers.action'
+import { loginUsername } from '../../Login/Login.action'
+import {
+  selectUserToLogin,
+  selectUserToDeleteFromUserCache
+} from './CachedUsers.action'
 import { deleteUserToCache } from './CachedUsers.middleware.js'
-import { openAccountCacheDeleteModal, closeAccountCacheDeleteModal } from '../../Modals/AccountCacheDelete/AccountCacheDelete.action.js'
+import {
+  openAccountCacheDeleteModal,
+  closeAccountCacheDeleteModal
+} from '../../Modals/AccountCacheDelete/AccountCacheDelete.action.js'
 
 import AccountCacheDelete from '../../Modals/AccountCacheDelete/AccountCacheDelete.js'
 
 import styles from './CachedUsers.scss'
 
 class UserList extends Component {
-  _handleLoginUser = (user) => {
+  _handleLoginUser = user => {
     if (this.props.area === 'pinLogin') {
       this.props.dispatch(selectUserToLogin(user))
     } else {
@@ -25,11 +31,11 @@ class UserList extends Component {
       }
     }
   }
-  _handleOpenDeleteUserCacheModal = (user) => {
+  _handleOpenDeleteUserCacheModal = user => {
     this.props.dispatch(selectUserToDeleteFromUserCache(user))
     return this.props.dispatch(openAccountCacheDeleteModal())
   }
-  _handleDeleteUserFromCache = (user) => {
+  _handleDeleteUserFromCache = user => {
     this.props.dispatch(deleteUserToCache(this.props.userToDeleteFromUserCache))
     return this.props.dispatch(closeAccountCacheDeleteModal())
   }
@@ -43,14 +49,27 @@ class UserList extends Component {
       return (
         <li key={idx} className={styles.userList}>
           <div className={styles.userrows}>
-            <span className={userItemclassName} onMouseDown={e => this._handleLoginUser(item)}>{ item }</span>
-            <span className={styles.userdelete} onMouseDown={e => this._handleOpenDeleteUserCacheModal(item)}><FontIcon value='clear' /></span>
+            <span
+              className={userItemclassName}
+              onMouseDown={e => this._handleLoginUser(item)}
+            >
+              {item}
+            </span>
+            <span
+              className={styles.userdelete}
+              onMouseDown={e => this._handleOpenDeleteUserCacheModal(item)}
+            >
+              <FontIcon value="clear" />
+            </span>
           </div>
         </li>
       )
     }
 
-    const userList = (this.props.area === 'pinLogin') ? this.props.cachedUsersWithPinEnabled : this.props.users
+    const userList =
+      this.props.area === 'pinLogin'
+        ? this.props.cachedUsersWithPinEnabled
+        : this.props.users
 
     const containerClassname = classnames(
       { [styles.active]: this.props.showCachedUsers },
@@ -59,8 +78,8 @@ class UserList extends Component {
     )
 
     return (
-      <div data-react-toolbox='dropdown' className={containerClassname}>
-        { this.props.component }
+      <div data-react-toolbox="dropdown" className={containerClassname}>
+        {this.props.component}
         <ul className={classnames(this.props.userListClassName, styles.values)}>
           {_.map(userList, renderValue)}
         </ul>

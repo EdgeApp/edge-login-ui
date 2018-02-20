@@ -24,10 +24,7 @@ const WarningBox = ({ style, message }) => {
       <View style={style.bottom}>
         <Text style={style.text}>{message}</Text>
       </View>
-      <View style={style.top}>
-        {renderGradient(style)}
-      </View>
-
+      <View style={style.top}>{renderGradient(style)}</View>
     </View>
   )
 }

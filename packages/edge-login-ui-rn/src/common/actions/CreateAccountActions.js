@@ -16,7 +16,7 @@ export function validatePin (data) {
     if (pin.length > 4) {
       return
     }
-    var obj = {
+    const obj = {
       pin: pin,
       error: error
     }
@@ -26,7 +26,7 @@ export function validatePin (data) {
 }
 export function checkUsernameForAvailabilty (data) {
   return (dispatch, getState, imports) => {
-    let context = imports.context
+    const context = imports.context
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     setTimeout(() => {
@@ -62,9 +62,7 @@ export function checkUsernameForAvailabilty (data) {
 export function validateUsername (data) {
   return (dispatch, getState, imports) => {
     // TODO evaluate client side evaluations.
-    let error = data.length > 2
-      ? null
-      : Constants.USERNAME_3_CHARACTERS_ERROR // TODO: Localize string
+    let error = data.length > 2 ? null : Constants.USERNAME_3_CHARACTERS_ERROR // TODO: Localize string
     error = isASCII(data) ? error : Constants.USERNAME_ASCII_ERROR // TODO: localize
     const obj = {
       username: data,
@@ -83,7 +81,7 @@ export function validateConfirmPassword (data = null) {
     if (confirmPassword !== state.create.password) {
       error = Constants.CONFIRM_PASSWORD_ERROR
     }
-    var obj = {
+    const obj = {
       password: confirmPassword,
       error
     }
@@ -94,7 +92,7 @@ export function validateConfirmPassword (data = null) {
 }
 export function validatePassword (data) {
   return (dispatch, getState, imports) => {
-    let context = imports.context
+    const context = imports.context
     let error = null
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
@@ -105,11 +103,17 @@ export function validatePassword (data) {
     if (
       passwordCheckResult &&
       passwordCheckResult.crack_times_display &&
-      passwordCheckResult.crack_times_display.online_no_throttling_10_per_second) {
-      passwordCheckString = passwordCheckResult.crack_times_display.online_no_throttling_10_per_second
+      passwordCheckResult.crack_times_display.online_no_throttling_10_per_second
+    ) {
+      passwordCheckString =
+        passwordCheckResult.crack_times_display
+          .online_no_throttling_10_per_second
     }
 
-    passwordCheckString = sprintf(Constants.IT_WOULD_TAKE_XX_TO_CRACK, passwordCheckString)
+    passwordCheckString = sprintf(
+      Constants.IT_WOULD_TAKE_XX_TO_CRACK,
+      passwordCheckString
+    )
     if (passwordCheckResult.score < 3) {
       passwordCheckString += Constants.RECOMMEND_CHOOSING_A_STRONGER
     }
@@ -143,17 +147,27 @@ export function createUser (data) {
     dispatch(WorkflowActions.nextScreen())
     setTimeout(async () => {
       try {
-        const abcAccount = await context.createAccount(data.username, data.password, data.pin, myAccountOptions)
-        const touchDisabled = await isTouchDisabled(context, abcAccount.username)
+        const abcAccount = await context.createAccount(
+          data.username,
+          data.password,
+          data.pin,
+          myAccountOptions
+        )
+        const touchDisabled = await isTouchDisabled(
+          context,
+          abcAccount.username
+        )
         if (!touchDisabled) {
           await enableTouchId(context, abcAccount)
         }
-        dispatch(dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, abcAccount))
+        dispatch(
+          dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, abcAccount)
+        )
         dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
         await context.io.folder
-        .file('lastuser.json')
-        .setText(JSON.stringify({ username: abcAccount.username }))
-        .catch(e => null)
+          .file('lastuser.json')
+          .setText(JSON.stringify({ username: abcAccount.username }))
+          .catch(e => null)
         dispatch(getPreviousUsers(context))
       } catch (e) {
         console.log(e)
@@ -166,9 +180,10 @@ export function createUser (data) {
 }
 export function agreeToConditions (account) {
   return (dispatch, getState, imports) => {
-    let context = imports.context
-    let callback = imports.callback
+    const context = imports.context
+    const callback = imports.callback
     // write to disklet
+    // eslint-disable-next-line no-unused-expressions
     async response => {
       await context.io.folder
         .file('acceptTermsAndConditions.json')
@@ -183,4 +198,3 @@ export function agreeToConditions (account) {
     // dispatch(WorkflowActions.nextScreen())
   }
 }
-

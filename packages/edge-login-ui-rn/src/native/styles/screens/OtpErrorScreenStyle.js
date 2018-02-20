@@ -60,10 +60,9 @@ const OtpErrorScreenStyle = {
       marginRight: '5%',
       color: Constants.GRAY_1
     },
-    shim: {...Styles.Shim, height: 20}
-
+    shim: { ...Styles.Shim, height: 20 }
   },
-  shim: {...Styles.Shim, height: 20},
+  shim: { ...Styles.Shim, height: 20 },
   qrRow: {
     position: 'relative',
     width: '100%',
@@ -85,9 +84,11 @@ const OtpErrorScreenStyle = {
     position: 'relative',
     width: '100%'
   },
-  modalInput: {...Styles.MaterialInputOnWhite,
+  modalInput: {
+    ...Styles.MaterialInputOnWhite,
     container: {
-      ...Styles.MaterialInputOnWhite.container, width: '100%'
+      ...Styles.MaterialInputOnWhite.container,
+      width: '100%'
     }
   }
 }

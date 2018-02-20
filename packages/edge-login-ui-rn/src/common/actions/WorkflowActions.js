@@ -33,7 +33,7 @@ export function goBack () {
 }
 export function cancel () {
   return (dispatch, getState, imports) => {
-    let onCancel = imports.onCancel
+    const onCancel = imports.onCancel
     onCancel()
   }
 }

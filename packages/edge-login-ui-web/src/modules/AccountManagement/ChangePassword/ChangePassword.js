@@ -12,7 +12,10 @@ import {
   clearChangePassword,
   passwordChanged
 } from './ChangePassword.action'
-import { openSuccessModal, closeSuccessModal } from '../../Modals/Success/Success.action.js'
+import {
+  openSuccessModal,
+  closeSuccessModal
+} from '../../Modals/Success/Success.action.js'
 import { validate } from '../../Signup/Password/PasswordValidation/PasswordValidation.middleware'
 import { checkPassword } from './ChangePassword.middleware'
 
@@ -22,7 +25,7 @@ import Mobile from './ChangePassword.mobile.js'
 
 class ChangePassword extends Component {
   handleSubmit = () => {
-    const callback = (error) => {
+    const callback = error => {
       this.props.dispatch(clearChangePassword())
       if (error) {
         if (error.type === 'password') {
@@ -50,26 +53,26 @@ class ChangePassword extends Component {
     this.props.dispatch(closeSuccessModal())
     return this.props.history.push('/account')
   }
-  handleOnChangeNewPassword = (newPassword) => {
+  handleOnChangeNewPassword = newPassword => {
     this.props.dispatch(changeNewPasswordValue(newPassword))
     this.props.dispatch(validate(newPassword))
   }
-  handleOnChangeNewPasswordRepeat = (newPasswordRepeat) => {
+  handleOnChangeNewPasswordRepeat = newPasswordRepeat => {
     this.props.dispatch(changeNewPasswordRepeatValue(newPasswordRepeat))
   }
-  passwordKeyPress = (e) => {
+  passwordKeyPress = e => {
     if (e.charCode === 13) {
       return this.passwordRepeat.getWrappedInstance().focus()
     }
   }
-  passwordRepeatKeyPress = (e) => {
+  passwordRepeatKeyPress = e => {
     if (e.charCode === 13) {
       if (!this.props.loader.loading) {
         return this.handleSubmit()
       }
     }
   }
-  toggleRevealPassword = (e) => {
+  toggleRevealPassword = e => {
     if (this.props.revealPassword) {
       return this.props.dispatch(changePasswordHidePassword())
     } else {
@@ -95,9 +98,15 @@ class ChangePassword extends Component {
             passwordKeyPress={this.passwordKeyPress}
             passwordRepeatKeyPress={this.passwordRepeatKeyPress}
             handleOnChangeNewPassword={this.handleOnChangeNewPassword}
-            handleOnChangeNewPasswordRepeat={this.handleOnChangeNewPasswordRepeat}
-            refPassword={input => { this.password = input }}
-            refPasswordRepeat={input => { this.passwordRepeat = input }}
+            handleOnChangeNewPasswordRepeat={
+              this.handleOnChangeNewPasswordRepeat
+            }
+            refPassword={input => {
+              this.password = input
+            }}
+            refPasswordRepeat={input => {
+              this.passwordRepeat = input
+            }}
             toggleRevealPassword={this.toggleRevealPassword}
             gotoAccount={this.gotoAccount}
           />
@@ -115,14 +124,23 @@ class ChangePassword extends Component {
             passwordKeyPress={this.passwordKeyPress}
             passwordRepeatKeyPress={this.passwordRepeatKeyPress}
             handleOnChangeNewPassword={this.handleOnChangeNewPassword}
-            handleOnChangeNewPasswordRepeat={this.handleOnChangeNewPasswordRepeat}
-            refPassword={input => { this.password = input }}
-            refPasswordRepeat={input => { this.passwordRepeat = input }}
+            handleOnChangeNewPasswordRepeat={
+              this.handleOnChangeNewPasswordRepeat
+            }
+            refPassword={input => {
+              this.password = input
+            }}
+            refPasswordRepeat={input => {
+              this.passwordRepeat = input
+            }}
             toggleRevealPassword={this.toggleRevealPassword}
             gotoAccount={this.gotoAccount}
           />
         </MediaQuery>
-        <Success header='Password successfully changed' close={this.handleSuccess} />
+        <Success
+          header="Password successfully changed"
+          close={this.handleSuccess}
+        />
       </section>
     )
   }

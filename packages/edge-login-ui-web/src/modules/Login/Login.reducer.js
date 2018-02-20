@@ -1,19 +1,23 @@
 import * as ACTION from './Login.action'
-import { SELECT_USER_LOGIN, REMOVE_USER_LOGIN, DELETE_USER_FROM_CACHE } from './CachedUsers/CachedUsers.action'
+import {
+  SELECT_USER_LOGIN,
+  REMOVE_USER_LOGIN,
+  DELETE_USER_FROM_CACHE
+} from './CachedUsers/CachedUsers.action'
 
 export const viewPassword = (state = false, action) => {
   switch (action.type) {
-    case ACTION.OPEN_LOG_IN :
+    case ACTION.OPEN_LOG_IN:
       return true
-    case ACTION.CLOSE_LOG_IN :
+    case ACTION.CLOSE_LOG_IN:
       return false
     case ACTION.OPEN_LOG_IN_USING_PIN:
       return false
-    case ACTION.CLOSE_LOG_IN_USING_PIN :
+    case ACTION.CLOSE_LOG_IN_USING_PIN:
       return true
-    case SELECT_USER_LOGIN :
+    case SELECT_USER_LOGIN:
       return false
-    case DELETE_USER_FROM_CACHE :
+    case DELETE_USER_FROM_CACHE:
       return true
     default:
       return state
@@ -22,19 +26,19 @@ export const viewPassword = (state = false, action) => {
 
 export const viewPIN = (state = false, action) => {
   switch (action.type) {
-    case ACTION.OPEN_LOG_IN_USING_PIN :
+    case ACTION.OPEN_LOG_IN_USING_PIN:
       return true
-    case ACTION.CLOSE_LOG_IN_USING_PIN :
+    case ACTION.CLOSE_LOG_IN_USING_PIN:
       return false
-    case ACTION.OPEN_LOG_IN :
+    case ACTION.OPEN_LOG_IN:
       return false
-    case ACTION.CLOSE_LOG_IN :
+    case ACTION.CLOSE_LOG_IN:
       return true
-    case SELECT_USER_LOGIN :
+    case SELECT_USER_LOGIN:
       return true
-    case REMOVE_USER_LOGIN :
+    case REMOVE_USER_LOGIN:
       return false
-    case DELETE_USER_FROM_CACHE :
+    case DELETE_USER_FROM_CACHE:
       return false
     default:
       return state
@@ -43,13 +47,13 @@ export const viewPIN = (state = false, action) => {
 
 export const username = (state = '', action) => {
   switch (action.type) {
-    case ACTION.LOG_IN_USERNAME :
+    case ACTION.LOG_IN_USERNAME:
       return action.data
 
-    case SELECT_USER_LOGIN :
+    case SELECT_USER_LOGIN:
       return action.data
 
-    case DELETE_USER_FROM_CACHE :
+    case DELETE_USER_FROM_CACHE:
       return ''
 
     default:
@@ -59,13 +63,13 @@ export const username = (state = '', action) => {
 
 export const password = (state = '', action) => {
   switch (action.type) {
-    case ACTION.LOG_IN_PASSWORD :
+    case ACTION.LOG_IN_PASSWORD:
       return action.data
 
-    case ACTION.USER_LOGIN :
+    case ACTION.USER_LOGIN:
       return ''
 
-    case DELETE_USER_FROM_CACHE :
+    case DELETE_USER_FROM_CACHE:
       return ''
 
     default:
@@ -75,16 +79,16 @@ export const password = (state = '', action) => {
 
 export const showCachedUsers = (state = false, action) => {
   switch (action.type) {
-    case ACTION.OPEN_USER_LIST :
+    case ACTION.OPEN_USER_LIST:
       return true
 
-    case ACTION.CLOSE_USER_LIST :
+    case ACTION.CLOSE_USER_LIST:
       return false
 
-    case ACTION.LOG_IN_USERNAME :
+    case ACTION.LOG_IN_USERNAME:
       return false
 
-    case SELECT_USER_LOGIN :
+    case SELECT_USER_LOGIN:
       return false
 
     default:
@@ -94,10 +98,10 @@ export const showCachedUsers = (state = false, action) => {
 
 export const pin = (state = '', action) => {
   switch (action.type) {
-    case ACTION.LOG_IN_PIN :
+    case ACTION.LOG_IN_PIN:
       return action.data
 
-    case ACTION.USER_LOGIN :
+    case ACTION.USER_LOGIN:
       return ''
 
     default:
@@ -113,7 +117,7 @@ export const pinDummy = (state = '', action) => {
         retval += '·'
       }
       return retval
-    case ACTION.USER_LOGIN :
+    case ACTION.USER_LOGIN:
       return ''
     default:
       return state

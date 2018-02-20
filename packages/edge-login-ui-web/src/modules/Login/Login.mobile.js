@@ -4,12 +4,7 @@ import LoginWithPassword from './LoginWithPassword/LoginWithPassword.js'
 import NewAccount from './NewAccount/NewAccount.js'
 import LoginWithPin from './LoginWithPin/LoginWithPin.js'
 
-export default ({
-  password,
-  pin,
-  mobileLogin,
-  history
-}) => {
+export default ({ password, pin, mobileLogin, history }) => {
   if (!password && !pin) {
     return <NewAccount history={history} />
   }

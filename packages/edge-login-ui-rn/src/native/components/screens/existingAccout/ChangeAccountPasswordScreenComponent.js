@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
 import { Button } from '../../common'
-import HeaderConnector
-  from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
-import PasswordConnector
-  from '../../../connectors/componentConnectors/PasswordConnector.js'
-import PasswordConfirmConnector
-  from '../../../connectors/componentConnectors/PasswordConfirmConnector'
-import ChangePasswordModalConnector
-  from '../../../connectors/abSpecific/ChangePasswordModalConnector'
-import PasswordStatusConnector
-  from '../../../connectors/abSpecific/PasswordStatusConnector'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
+import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
+import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
+import ChangePasswordModalConnector from '../../../connectors/abSpecific/ChangePasswordModalConnector'
+import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 
 /* type Props = {
   styles: any,
@@ -47,7 +42,10 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
         })
         return
       }
-      if (this.props.password && this.props.password !== this.props.confirmPassword) {
+      if (
+        this.props.password &&
+        this.props.password !== this.props.confirmPassword
+      ) {
         this.setState({
           isProcessing: false
         })
@@ -56,13 +54,13 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
       }
       this.props.changePassword(this.props.password)
     }
-    this.renderHeader = (style) => {
+    this.renderHeader = style => {
       if (this.props.showHeader) {
         return <HeaderConnector style={style.header} />
       }
       return null
     }
-    this.renderInterior = (styles) => {
+    this.renderInterior = styles => {
       return (
         <View style={styles.innerView}>
           <PasswordStatusConnector style={styles.status} />
@@ -94,7 +92,7 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
       )
     }
 
-    this.renderMain = (styles) => {
+    this.renderMain = styles => {
       if (this.state.focusSecond) {
         return (
           <KeyboardAvoidingView
@@ -108,19 +106,13 @@ export default class ChangeAccountPasswordScreenComponent extends Component {
         )
       }
       return (
-        <View style={styles.pageContainer}>
-          {this.renderInterior(styles)}
-        </View>
+        <View style={styles.pageContainer}>{this.renderInterior(styles)}</View>
       )
     }
 
-    this.renderModal = (style) => {
+    this.renderModal = style => {
       if (this.props.showModal) {
-        return (
-          <ChangePasswordModalConnector
-            style={style.modal.skip}
-          />
-        )
+        return <ChangePasswordModalConnector style={style.modal.skip} />
       }
       return null
     }

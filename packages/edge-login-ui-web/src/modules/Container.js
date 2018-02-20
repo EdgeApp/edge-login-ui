@@ -6,7 +6,11 @@ import FontIcon from 'react-toolbox/lib/font_icon'
 import abcctx from 'lib/web/abcContext'
 
 import { openLogin } from './Login/Login.action'
-import { selectUserToLogin, setCachedUsers, setCachedUsersWithPin } from './Login/CachedUsers/CachedUsers.action'
+import {
+  selectUserToLogin,
+  setCachedUsers,
+  setCachedUsersWithPin
+} from './Login/CachedUsers/CachedUsers.action'
 
 import Layout from './Layout/Layout.js'
 import layoutTheme from 'theme/layoutTheme'
@@ -15,7 +19,8 @@ import styles from './Container.scss'
 const findUsernamesWithPin = (ctx, usernames) => {
   const promises = usernames.map(username => ctx.pinLoginEnabled(username))
   return Promise.all(promises).then(bools =>
-    usernames.filter((username, i) => bools[i]))
+    usernames.filter((username, i) => bools[i])
+  )
 }
 
 class Container extends Component {
@@ -32,26 +37,28 @@ class Container extends Component {
     const dispatch = this.props.dispatch
     abcctx(ctx => {
       return ctx.listUsernames().then(cachedUsers => {
-        return findUsernamesWithPin(ctx, cachedUsers).then(cachedUsersWithPin => {
-          const lastUser = window.localStorage.getItem('lastUser')
-          dispatch(setCachedUsersWithPin(cachedUsersWithPin))
-          dispatch(setCachedUsers(cachedUsers))
-          if (cachedUsers.length >= 1) {
-            if (lastUser && cachedUsersWithPin.includes(lastUser)) {
-              return dispatch(selectUserToLogin(lastUser))
-            } else {
-              return dispatch(openLogin())
+        return findUsernamesWithPin(ctx, cachedUsers).then(
+          cachedUsersWithPin => {
+            const lastUser = window.localStorage.getItem('lastUser')
+            dispatch(setCachedUsersWithPin(cachedUsersWithPin))
+            dispatch(setCachedUsers(cachedUsers))
+            if (cachedUsers.length >= 1) {
+              if (lastUser && cachedUsersWithPin.includes(lastUser)) {
+                return dispatch(selectUserToLogin(lastUser))
+              } else {
+                return dispatch(openLogin())
+              }
             }
+            return null
           }
-          return null
-        })
+        )
       })
     })
   }
   componentWillMount () {
     this.loadData()
   }
-  selectDialogHeight = (pathname) => {
+  selectDialogHeight = pathname => {
     const checkSignupPage = () => {
       switch (this.props.signupPage) {
         case 'pin':
@@ -83,7 +90,7 @@ class Container extends Component {
   }
   render () {
     return (
-      <div className='app'>
+      <div className="app">
         <MediaQuery minWidth={720}>
           <Dialog
             active
@@ -91,12 +98,9 @@ class Container extends Component {
             onOverlayClick={this._handleToggle}
             className={this.selectDialogHeight(this.props.location.pathname)}
           >
-            <Layout
-              theme={layoutTheme}
-              location={this.props.location}
-            >
+            <Layout theme={layoutTheme} location={this.props.location}>
               <FontIcon
-                value='clear'
+                value="clear"
                 className={styles.exitTooltip}
                 onClick={this._handleToggle}
               />
@@ -111,12 +115,9 @@ class Container extends Component {
             onOverlayClick={this._handleToggle}
             className={styles.mobileWidth}
           >
-            <Layout
-              theme={layoutTheme}
-              location={this.props.location}
-            >
+            <Layout theme={layoutTheme} location={this.props.location}>
               <FontIcon
-                value='clear'
+                value="clear"
                 className={styles.exitTooltip}
                 onClick={this._handleToggle}
               />

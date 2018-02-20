@@ -11,13 +11,9 @@ export default ({
   gotoChangePasswordRecovery
 }) => (
   <div className={styles.container}>
-    <p className={styles.header}>
-      Account name:
-    </p>
-    <p className={styles.accountName}>
-      { account.username }
-    </p>
-    <div className={styles.square} onClick={gotoChangePin} >
+    <p className={styles.header}>Account name:</p>
+    <p className={styles.accountName}>{account.username}</p>
+    <div className={styles.square} onClick={gotoChangePin}>
       <img src={pinIcon} />
       <p className={styles.label}>Change Pin</p>
     </div>

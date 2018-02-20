@@ -25,8 +25,8 @@ export default ({
           <p className={styles.placeholder}>&#8226;&#8226;&#8226;&#8226;</p>
           <Input
             autoFocus
-            type='password'
-            name='password'
+            type="password"
+            name="password"
             ref={refPin}
             className={styles.input}
             onChange={handleChangePin}
@@ -47,13 +47,20 @@ export default ({
             component={
               <div className={styles.usernameContainer}>
                 <p className={styles.label}>Username</p>
-                <div className={styles.inputRow} tabIndex={1} onFocus={showCachedUsers} onBlur={hideCachedUsers}>
-                  <p className={styles.username}>{ user || 'No User Selected' }</p>
+                <div
+                  className={styles.inputRow}
+                  tabIndex={1}
+                  onFocus={showCachedUsers}
+                  onBlur={hideCachedUsers}
+                >
+                  <p className={styles.username}>
+                    {user || 'No User Selected'}
+                  </p>
                   <img src={dropdown} className={styles.caret} />
                 </div>
               </div>
             }
-            area='pinLogin'
+            area="pinLogin"
             containerClassName={styles.containerClassName}
             userListClassName={styles.userList}
           />
@@ -62,7 +69,9 @@ export default ({
             {renderLoader()}
           </div>
         </div>
-        <p className={styles.exitLink} onClick={openViewPassword}>Exit PIN Login</p>
+        <p className={styles.exitLink} onClick={openViewPassword}>
+          Exit PIN Login
+        </p>
       </div>
     </div>
   )

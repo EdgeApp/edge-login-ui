@@ -6,9 +6,7 @@ class CustomModal extends Component {
     const Style = this.props.style
     return (
       <Modal style={Style.modal} animationType={'slide'} transparent visible>
-        <View style={Style.container}>
-          {this.props.children}
-        </View>
+        <View style={Style.container}>{this.props.children}</View>
       </Modal>
     )
   }

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
-import {MyModal}
-  from '../../components/common/'
-import {OTP_SMALL} from '../../assets/'
+import { MyModal } from '../../components/common/'
+import { OTP_SMALL } from '../../assets/'
 export const mapStateToProps = (state, ownProps) => {
   return {
     headerText: 'Enter Authentication Code',

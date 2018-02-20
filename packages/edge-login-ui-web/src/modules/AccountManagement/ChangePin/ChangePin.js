@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 
-import { changePinValue, showPinChangeError, clearPinChangeError } from './ChangePin.action'
+import {
+  changePinValue,
+  showPinChangeError,
+  clearPinChangeError
+} from './ChangePin.action'
 import { checkPin } from './ChangePin.middleware'
-import { openSuccessModal, closeSuccessModal } from '../../Modals/Success/Success.action.js'
+import {
+  openSuccessModal,
+  closeSuccessModal
+} from '../../Modals/Success/Success.action.js'
 
 import Success from '../../Modals/Success/Success.js'
 import Desktop from './ChangePin.web.js'
@@ -12,7 +19,7 @@ import Mobile from './ChangePin.mobile.js'
 
 class ChangePin extends Component {
   handleSubmit = () => {
-    const callback = (error) => {
+    const callback = error => {
       if (error) {
         return this.props.dispatch(showPinChangeError(error))
       }
@@ -22,27 +29,20 @@ class ChangePin extends Component {
       }
     }
     return this.props.dispatch(
-      checkPin(
-        this.props.password,
-        this.props.pin,
-        this.props.user,
-        callback
-      )
+      checkPin(this.props.password, this.props.pin, this.props.user, callback)
     )
   }
-  passwordKeyPressed = (e) => {
+  passwordKeyPressed = e => {
     if (e.charCode === 13) {
       return this.handleSubmit()
     }
   }
-  handleOnChangePin = (pin) => {
+  handleOnChangePin = pin => {
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
     }
     if (/^\d+$/.test(pin) || pin.length === 0) {
-      this.props.dispatch(
-        changePinValue(pin)
-      )
+      this.props.dispatch(changePinValue(pin))
     }
   }
   gotoAccount = () => {
@@ -77,7 +77,10 @@ class ChangePin extends Component {
             gotoAccount={this.gotoAccount}
           />
         </MediaQuery>
-        <Success header='PIN successfully changed' close={this._handleSuccess} />
+        <Success
+          header="PIN successfully changed"
+          close={this._handleSuccess}
+        />
       </section>
     )
   }

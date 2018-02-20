@@ -2,10 +2,10 @@ import * as ACTION from './CachedUsers.action'
 
 export const users = (state = [], action) => {
   switch (action.type) {
-    case ACTION.SET_CACHED_USERS :
+    case ACTION.SET_CACHED_USERS:
       return action.data
 
-    case ACTION.DELETE_USER_FROM_CACHE :
+    case ACTION.DELETE_USER_FROM_CACHE:
       return state.filter(user => user !== action.data)
 
     default:
@@ -15,10 +15,10 @@ export const users = (state = [], action) => {
 
 export const selectedUserToLogin = (state = null, action) => {
   switch (action.type) {
-    case ACTION.SELECT_USER_LOGIN :
+    case ACTION.SELECT_USER_LOGIN:
       return action.data
 
-    case ACTION.REMOVE_USER_LOGIN :
+    case ACTION.REMOVE_USER_LOGIN:
       return null
 
     default:
@@ -28,7 +28,7 @@ export const selectedUserToLogin = (state = null, action) => {
 
 export const userToDeleteFromUserCache = (state = '', action) => {
   switch (action.type) {
-    case ACTION.USER_TO_DELETE_FROM_CACHE :
+    case ACTION.USER_TO_DELETE_FROM_CACHE:
       return action.data
 
     default:
@@ -40,6 +40,7 @@ export const usersWithPinEnabled = (state = '', action) => {
   switch (action.type) {
     case ACTION.SET_CACHED_USERS_WITH_PIN:
       return action.data
-    default: return state
+    default:
+      return state
   }
 }

@@ -24,8 +24,10 @@ const MaterialInputWithDrop = {
     width: Constants.LOGIN_LABEL_WIDTH,
     minHeight: Constants.LOGIN_LABEL_HEIGHT
   },
-  materialInput: {...MaterialInput,
-    container: {...MaterialInput.container,
+  materialInput: {
+    ...MaterialInput,
+    container: {
+      ...MaterialInput.container,
       width: '144%'
     }
   },
@@ -33,10 +35,9 @@ const MaterialInputWithDrop = {
     width: '144%',
     minHeight: 0,
     backgroundColor: Constants.ACCENT_ORANGE
-
   },
   row: {
-   // backgroundColor: THEME.COLORS.WHITE, padding: 10
+    // backgroundColor: THEME.COLORS.WHITE, padding: 10
   },
   listItem: {
     container: {
@@ -103,4 +104,3 @@ const MaterialInputOnWhite = {
 export { MaterialInputOnWhite }
 export { MaterialInput }
 export { MaterialInputWithDrop }
-

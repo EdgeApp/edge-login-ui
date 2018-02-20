@@ -15,15 +15,21 @@ export default ({
     if (!loader) {
       return (
         <div className={styles.rowButtonsHorizontalMobile}>
-          <button className={styles.primaryMobile} onClick={handleSubmit}>Submit</button>
-          <button className={styles.secondaryMobile} onClick={gotoAccount}>Back</button>
+          <button className={styles.primaryMobile} onClick={handleSubmit}>
+            Submit
+          </button>
+          <button className={styles.secondaryMobile} onClick={gotoAccount}>
+            Back
+          </button>
         </div>
       )
     }
     if (loader) {
       return (
         <div className={styles.rowButtonsHorizontalMobile}>
-          <button className={styles.primaryLoadMobile}><div className={styles.loader} /></button>
+          <button className={styles.primaryLoadMobile}>
+            <div className={styles.loader} />
+          </button>
           <button className={styles.secondaryLoadMobile}>Back</button>
         </div>
       )
@@ -36,9 +42,9 @@ export default ({
         onKeyPress={passwordKeyPressed}
         onChange={handleOnChangePin}
         value={pin}
-        type='password'
-        placeholder='New PIN'
-        name='pin'
+        type="password"
+        placeholder="New PIN"
+        name="pin"
         className={pin.length > 0 ? styles.inputed : styles.input}
         error={error}
       />

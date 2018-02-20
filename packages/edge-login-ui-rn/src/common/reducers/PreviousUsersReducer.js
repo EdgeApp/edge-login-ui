@@ -14,7 +14,10 @@ export default function (state = null, action) {
       const username = action.data
       const num = username.length - 1
       const char = username.charAt(num)
-      const arrayToBeFiltered = num > state.charactersFiltered ? state.filteredUsernameList : state.usernameOnlyList
+      const arrayToBeFiltered =
+        num > state.charactersFiltered
+          ? state.filteredUsernameList
+          : state.usernameOnlyList
       const tempArray = []
       if (state.arrayToBeFiltered) {
         for (let i = 0; i < arrayToBeFiltered.length; i++) {
@@ -26,7 +29,11 @@ export default function (state = null, action) {
       }
 
       // get the character at
-      return {...state, filteredUsernameList: tempArray, charactersFiltered: num}
+      return {
+        ...state,
+        filteredUsernameList: tempArray,
+        charactersFiltered: num
+      }
 
     case Constants.SET_PREVIOUS_USERS:
       return action.data

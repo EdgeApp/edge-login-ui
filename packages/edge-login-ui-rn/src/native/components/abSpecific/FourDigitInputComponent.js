@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard
+} from 'react-native'
 import { Spinner } from '../common'
 import * as Constants from '../../../common/constants'
 
@@ -9,14 +15,13 @@ import * as Constants from '../../../common/constants'
 } */
 
 class FourDigitInputComponent extends Component {
-
   componentWillMount () {
     this.setState({
       autoFocus: false,
       touchId: false,
       circleColor: Constants.WHITE
     })
-    this.loadedInput = (ref) => {
+    this.loadedInput = ref => {
       if (ref) {
         this.inputRef = ref
         this.inputRef.focus()
@@ -41,8 +46,14 @@ class FourDigitInputComponent extends Component {
         circleColor: Constants.ACCENT_RED
       })
     }
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow)
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide)
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this._keyboardDidShow
+    )
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this._keyboardDidHide
+    )
 
     this.inputRef.focus()
     this.setState({
@@ -59,7 +70,7 @@ class FourDigitInputComponent extends Component {
   render () {
     const Style = this.props.style
     return (
-      <TouchableWithoutFeedback onPress={this.refocus.bind(this)} >
+      <TouchableWithoutFeedback onPress={this.refocus.bind(this)}>
         <View style={Style.container}>
           <View style={Style.interactiveContainer}>
             {this.renderDotContainer(Style)}
@@ -68,7 +79,7 @@ class FourDigitInputComponent extends Component {
               style={Style.input}
               onChangeText={this.updatePin.bind(this)}
               maxLength={4}
-              keyboardType='numeric'
+              keyboardType="numeric"
               value={this.props.pin}
               onFocus={this.onFocus.bind(this)}
               onBlur={this.onBlur.bind(this)}
@@ -117,10 +128,30 @@ class FourDigitInputComponent extends Component {
     }
     return (
       <View style={style.dotContainer}>
-        <View style={[this.renderCircleTest(style.circle), pinLength > 0 && style.circleSected]} />
-        <View style={[this.renderCircleTest(style.circle), pinLength > 1 && style.circleSected]} />
-        <View style={[this.renderCircleTest(style.circle), pinLength > 2 && style.circleSected]} />
-        <View style={[this.renderCircleTest(style.circle), pinLength > 3 && style.circleSected]} />
+        <View
+          style={[
+            this.renderCircleTest(style.circle),
+            pinLength > 0 && style.circleSected
+          ]}
+        />
+        <View
+          style={[
+            this.renderCircleTest(style.circle),
+            pinLength > 1 && style.circleSected
+          ]}
+        />
+        <View
+          style={[
+            this.renderCircleTest(style.circle),
+            pinLength > 2 && style.circleSected
+          ]}
+        />
+        <View
+          style={[
+            this.renderCircleTest(style.circle),
+            pinLength > 3 && style.circleSected
+          ]}
+        />
       </View>
     )
   }

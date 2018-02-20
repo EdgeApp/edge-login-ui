@@ -15,20 +15,19 @@ const OTP = require('./icons/otp/OTP-badge.png')
 const OTP_SMALL = require('./icons/otp/OTP-badge_sm.png')
 const OTP_DISABLE = require('./icons/otp/OTP-disable.png')
 
-export {LOGIN_BACKGROUND}
-export {LOGO_BIG}
-export {LOGO_DOT}
-export {LOGO_SMALL}
-export {REVIEW_CHECKED}
-export {REVIEW_UNCHECKED}
-export {STANDARD_CHECKED}
-export {STANDARD_UNCHECKED}
-export {PASSWORD_REQ_CHECKED}
-export {PASSWORD_REQ_UNCHECKED}
-export {PERMISSIONS_CAMREA}
-export {WELCOME}
-export {TOUCH}
-export {OTP}
-export {OTP_SMALL}
-export {OTP_DISABLE}
-
+export { LOGIN_BACKGROUND }
+export { LOGO_BIG }
+export { LOGO_DOT }
+export { LOGO_SMALL }
+export { REVIEW_CHECKED }
+export { REVIEW_UNCHECKED }
+export { STANDARD_CHECKED }
+export { STANDARD_UNCHECKED }
+export { PASSWORD_REQ_CHECKED }
+export { PASSWORD_REQ_UNCHECKED }
+export { PERMISSIONS_CAMREA }
+export { WELCOME }
+export { TOUCH }
+export { OTP }
+export { OTP_SMALL }
+export { OTP_DISABLE }

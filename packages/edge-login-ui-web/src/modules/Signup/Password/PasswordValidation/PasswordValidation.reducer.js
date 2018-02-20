@@ -4,16 +4,16 @@ import { GET_DETAILS } from '../../ReviewDetails/ReviewDetails.action'
 
 export const upperCaseChar = (state = false, action) => {
   switch (action.type) {
-    case ACTION.UPPER_CASE_PASS :
+    case ACTION.UPPER_CASE_PASS:
       return true
 
-    case ACTION.UPPER_CASE_FAIL :
+    case ACTION.UPPER_CASE_FAIL:
       return false
 
-    case PASSWORD_CHANGED :
+    case PASSWORD_CHANGED:
       return false
 
-    case GET_DETAILS :
+    case GET_DETAILS:
       return false
 
     default:
@@ -23,16 +23,16 @@ export const upperCaseChar = (state = false, action) => {
 
 export const passwordValid = (state = false, action) => {
   switch (action.type) {
-    case ACTION.VALIDATE_PASSWORD :
+    case ACTION.VALIDATE_PASSWORD:
       return true
 
-    case ACTION.INVALIDATE_PASSWORD :
+    case ACTION.INVALIDATE_PASSWORD:
       return false
 
-    case PASSWORD_CHANGED :
+    case PASSWORD_CHANGED:
       return false
 
-    case GET_DETAILS :
+    case GET_DETAILS:
       return false
 
     default:
@@ -42,16 +42,16 @@ export const passwordValid = (state = false, action) => {
 
 export const lowerCaseChar = (state = false, action) => {
   switch (action.type) {
-    case ACTION.LOWER_CASE_PASS :
+    case ACTION.LOWER_CASE_PASS:
       return true
 
-    case ACTION.LOWER_CASE_FAIL :
+    case ACTION.LOWER_CASE_FAIL:
       return false
 
-    case PASSWORD_CHANGED :
+    case PASSWORD_CHANGED:
       return false
 
-    case GET_DETAILS :
+    case GET_DETAILS:
       return false
 
     default:
@@ -61,16 +61,16 @@ export const lowerCaseChar = (state = false, action) => {
 
 export const number = (state = false, action) => {
   switch (action.type) {
-    case ACTION.NUMBER_PASS :
+    case ACTION.NUMBER_PASS:
       return true
 
-    case ACTION.NUMBER_FAIL :
+    case ACTION.NUMBER_FAIL:
       return false
 
-    case PASSWORD_CHANGED :
+    case PASSWORD_CHANGED:
       return false
 
-    case GET_DETAILS :
+    case GET_DETAILS:
       return false
 
     default:
@@ -80,16 +80,16 @@ export const number = (state = false, action) => {
 
 export const characterLength = (state = false, action) => {
   switch (action.type) {
-    case ACTION.CHARACTER_LENGTH_PASS :
+    case ACTION.CHARACTER_LENGTH_PASS:
       return true
 
-    case ACTION.CHARACTER_LENGTH_FAIL :
+    case ACTION.CHARACTER_LENGTH_FAIL:
       return false
 
-    case PASSWORD_CHANGED :
+    case PASSWORD_CHANGED:
       return false
 
-    case GET_DETAILS :
+    case GET_DETAILS:
       return false
 
     default:
@@ -99,13 +99,13 @@ export const characterLength = (state = false, action) => {
 
 export const timeToCrackPassword = (state = 0, action) => {
   switch (action.type) {
-    case ACTION.TIME_TO_CRACK_PASSWORD :
+    case ACTION.TIME_TO_CRACK_PASSWORD:
       return action.data
 
-    case PASSWORD_CHANGED :
+    case PASSWORD_CHANGED:
       return false
 
-    case GET_DETAILS :
+    case GET_DETAILS:
       return false
 
     default:

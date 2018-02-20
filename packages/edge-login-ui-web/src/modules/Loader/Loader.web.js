@@ -5,7 +5,10 @@ import ProgressBar from 'react-toolbox/lib/progress_bar'
 
 class Loader extends Component {
   _checkLoading = () => {
-    if (this.props.loader.loading === true && this.props.errorModal.visible === false) {
+    if (
+      this.props.loader.loading === true &&
+      this.props.errorModal.visible === false
+    ) {
       return true
     } else {
       return false
@@ -16,13 +19,18 @@ class Loader extends Component {
     // this.props.dispatch(hideLoading())
   }
 
-  actions = [
-    { label: 'Ok', onClick: this.handleToggle }
-  ];
+  actions = [{ label: 'Ok', onClick: this.handleToggle }]
 
   _renderMessage = () => {
     if (this.props.loader.message) {
-      return <div><p><b>{this.props.loader.message}</b></p><br /></div>
+      return (
+        <div>
+          <p>
+            <b>{this.props.loader.message}</b>
+          </p>
+          <br />
+        </div>
+      )
     } else {
       return null
     }
@@ -31,13 +39,22 @@ class Loader extends Component {
   render () {
     if (this._checkLoading()) {
       return (
-        <Dialog style={{zIndex: 2}}
+        <Dialog
+          style={{ zIndex: 2 }}
           action={this.actions}
           active={this._checkLoading()}
         >
-          <div style={{padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-            { this._renderMessage() }
-            <ProgressBar type='circular' mode='indeterminate' multicolor />
+          <div
+            style={{
+              padding: '20px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            {this._renderMessage()}
+            <ProgressBar type="circular" mode="indeterminate" multicolor />
           </div>
         </Dialog>
       )
@@ -47,8 +64,6 @@ class Loader extends Component {
 }
 
 export default connect(state => ({
-
   loader: state.loader,
   errorModal: state.errorModal
-
 }))(Loader)

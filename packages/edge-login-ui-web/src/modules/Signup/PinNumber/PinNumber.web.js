@@ -13,9 +13,9 @@ export default ({
 }) => {
   const pinStyle = () => {
     if (pin.length > 0) {
-      return {textAlign: 'center', fontSize: '70px', height: '80px'}
+      return { textAlign: 'center', fontSize: '70px', height: '80px' }
     } else {
-      return {textAlign: 'center', fontSize: '35px', height: '80px'}
+      return { textAlign: 'center', fontSize: '35px', height: '80px' }
     }
   }
   return (
@@ -24,8 +24,8 @@ export default ({
       <div className={styles.password}>
         <Input
           autoFocus
-          type='password'
-          name='pin'
+          type="password"
+          name="pin"
           placeholder={t('activity_signup_pin_hint')}
           style={pinStyle()}
           onChange={handleOnChangeText}
@@ -35,10 +35,16 @@ export default ({
           className={styles.input}
         />
       </div>
-      <p className={styles.bullet}>Your PIN is a 4 digit code used to do quick re-logins into your account</p>
+      <p className={styles.bullet}>
+        Your PIN is a 4 digit code used to do quick re-logins into your account
+      </p>
       <div className={styles.rowButtons}>
-        <button className={styles.secondary} onClick={gotoUsername}>Back</button>
-        <button className={styles.primary} onClick={handleSubmit}>Next</button>
+        <button className={styles.secondary} onClick={gotoUsername}>
+          Back
+        </button>
+        <button className={styles.primary} onClick={handleSubmit}>
+          Next
+        </button>
       </div>
     </div>
   )

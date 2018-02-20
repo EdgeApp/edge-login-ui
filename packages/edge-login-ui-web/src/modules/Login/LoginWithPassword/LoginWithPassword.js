@@ -2,7 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 
-import { loginUsername, loginPassword, openUserList, closeUserList, showMobileLoginEdgeView, showErrorLoginMessage, clearErrorLoginMessage } from '../Login.action'
+import {
+  loginUsername,
+  loginPassword,
+  openUserList,
+  closeUserList,
+  showMobileLoginEdgeView,
+  showErrorLoginMessage,
+  clearErrorLoginMessage
+} from '../Login.action'
 import { loginWithPassword } from '../Login.middleware'
 import { closeLoading } from '../../Loader/Loader.action'
 import { openForgotPasswordModal } from '../../Modals/ForgotPassword/ForgotPassword.action.js'
@@ -34,30 +42,24 @@ class LoginWithPassword extends Component {
         return this.props.dispatch(showErrorLoginMessage(error))
       }
     }
-    return this.props.dispatch(
-      loginWithPassword(
-        username,
-        password,
-        callback
-      )
-    )
+    return this.props.dispatch(loginWithPassword(username, password, callback))
   }
   goToSignupPage = () => {
     return this.props.history.push('/signup')
   }
-  usernameKeyPress = (e) => {
+  usernameKeyPress = e => {
     if (e.charCode === 13) {
       return this.password.getWrappedInstance().focus()
     }
   }
-  passwordKeyPress = (e) => {
+  passwordKeyPress = e => {
     if (e.charCode === 13) {
       if (!this.props.loader.loading) {
         return this.handleSubmit()
       }
     }
   }
-  toggleMobileLoginView = (e) => {
+  toggleMobileLoginView = e => {
     return this.props.dispatch(showMobileLoginEdgeView())
   }
   showCachedUsers = () => {
@@ -66,10 +68,10 @@ class LoginWithPassword extends Component {
   hideCachedUsers = () => {
     return this.props.dispatch(closeUserList())
   }
-  changeUsernameValue = (value) => {
+  changeUsernameValue = value => {
     return this.props.dispatch(loginUsername(value))
   }
-  changePasswordValue = (value) => {
+  changePasswordValue = value => {
     return this.props.dispatch(loginPassword(value))
   }
   toggleForgotPassword = () => {
@@ -89,8 +91,12 @@ class LoginWithPassword extends Component {
             changeUsernameValue={this.changeUsernameValue}
             changePasswordValue={this.changePasswordValue}
             toggleForgotPassword={this.toggleForgotPassword}
-            refUsername={input => { this.username = input }}
-            refPassword={input => { this.password = input }}
+            refUsername={input => {
+              this.username = input
+            }}
+            refPassword={input => {
+              this.password = input
+            }}
             username={this.props.username}
             password={this.props.password}
             loader={this.props.loader.loading}
@@ -109,8 +115,12 @@ class LoginWithPassword extends Component {
             changePasswordValue={this.changePasswordValue}
             toggleForgotPassword={this.toggleForgotPassword}
             toggleMobileLoginView={this.toggleMobileLoginView}
-            refUsername={input => { this.username = input }}
-            refPassword={input => { this.password = input }}
+            refUsername={input => {
+              this.username = input
+            }}
+            refPassword={input => {
+              this.password = input
+            }}
             username={this.props.username}
             password={this.props.password}
             loader={this.props.loader.loading}

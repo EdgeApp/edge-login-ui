@@ -25,9 +25,12 @@ const LoginPasswordScreenStyle = {
     alignItems: 'center',
     justifyContent: 'space-around'
   },
-  logoHeader: {...Styles.LogoHeaderStyle, container: {...Styles.LogoHeaderStyle.container, height: 90}},
-  shimTiny: {...Styles.Shim, height: 10},
-  shimSmall: {...Styles.Shim, height: 25},
+  logoHeader: {
+    ...Styles.LogoHeaderStyle,
+    container: { ...Styles.LogoHeaderStyle.container, height: 90 }
+  },
+  shimTiny: { ...Styles.Shim, height: 10 },
+  shimSmall: { ...Styles.Shim, height: 25 },
   shim: Styles.Shim,
   buttonsBox: {
     width: '100%',
@@ -38,14 +41,23 @@ const LoginPasswordScreenStyle = {
     height: 100
   },
   input2: Styles.MaterialInput,
-  inputModal: {...Styles.MaterialInputOnWhite,
-    container: {...Styles.MaterialInputOnWhite.container, width: '100%'}
+  inputModal: {
+    ...Styles.MaterialInputOnWhite,
+    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
   },
   inputWithDrop: Styles.MaterialInputWithDrop,
   forgotButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, fontSize: 14, color: Constants.WHITE},
-    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, fontSize: 14, color: Constants.WHITE},
+    upTextStyle: {
+      ...Styles.TextOnlyButtonTextUpStyle,
+      fontSize: 14,
+      color: Constants.WHITE
+    },
+    downTextStyle: {
+      ...Styles.TextOnlyButtonTextDownStyle,
+      fontSize: 14,
+      color: Constants.WHITE
+    },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
   loginButton: {
@@ -56,8 +68,16 @@ const LoginPasswordScreenStyle = {
   },
   signupButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, fontSize: 14, color: Constants.WHITE},
-    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, fontSize: 14, color: Constants.WHITE},
+    upTextStyle: {
+      ...Styles.TextOnlyButtonTextUpStyle,
+      fontSize: 14,
+      color: Constants.WHITE
+    },
+    downTextStyle: {
+      ...Styles.TextOnlyButtonTextDownStyle,
+      fontSize: 14,
+      color: Constants.WHITE
+    },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
   staticModalText: {

@@ -5,7 +5,7 @@ export default function (state = null, action) {
     case Constants.AUTH_UPDATE_PASSWORD:
       // action.data.passwordStatus
       const status = action.data.passwordStatus
-      var array = [
+      const array = [
         { title: 'Must have at least 10 characters', value: !status.tooShort },
         {
           title: 'Must have at least 1 lowercase letter',

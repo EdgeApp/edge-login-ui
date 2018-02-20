@@ -27,7 +27,6 @@ const LandingScreenStyle = {
     height: vs(186),
     alignItems: 'center',
     justifyContent: 'flex-start'
-
   },
   featureBoxDescription: {
     // height: vs(186), 306- 125 - remaining space.
@@ -59,8 +58,16 @@ const LandingScreenStyle = {
   },
   loginButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {...Styles.TextOnlyButtonTextUpStyle, fontSize: 12, color: Constants.WHITE},
-    downTextStyle: {...Styles.TextOnlyButtonTextDownStyle, fontSize: 12, color: Constants.WHITE},
+    upTextStyle: {
+      ...Styles.TextOnlyButtonTextUpStyle,
+      fontSize: 12,
+      color: Constants.WHITE
+    },
+    downTextStyle: {
+      ...Styles.TextOnlyButtonTextDownStyle,
+      fontSize: 12,
+      color: Constants.WHITE
+    },
     downStyle: Styles.TextOnlyButtonDownStyle
   }
 }

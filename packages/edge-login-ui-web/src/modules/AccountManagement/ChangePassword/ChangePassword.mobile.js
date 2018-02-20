@@ -27,15 +27,21 @@ export default ({
     if (!loader) {
       return (
         <div className={styles.rowButtonsHorizontalMobile}>
-          <button className={styles.primaryMobile} onClick={handleSubmit}>Submit</button>
-          <button className={styles.secondaryMobile} onClick={gotoAccount}>Back</button>
+          <button className={styles.primaryMobile} onClick={handleSubmit}>
+            Submit
+          </button>
+          <button className={styles.secondaryMobile} onClick={gotoAccount}>
+            Back
+          </button>
         </div>
       )
     }
     if (loader) {
       return (
         <div className={styles.rowButtonsHorizontalMobile}>
-          <button className={styles.primaryLoadMobile}><div className={styles.loader} /></button>
+          <button className={styles.primaryLoadMobile}>
+            <div className={styles.loader} />
+          </button>
           <button className={styles.secondaryLoadMobile}>Back</button>
         </div>
       )
@@ -46,19 +52,35 @@ export default ({
       <div className={styles.requirements}>
         <p className={styles.textHeader}>Password Requirements:</p>
         <p className={styles.text}>
-          {validation.upperCaseChar ? <FontIcon value='done' className={styles.check} /> : <span className={styles.bullet}>•</span>}
+          {validation.upperCaseChar ? (
+            <FontIcon value="done" className={styles.check} />
+          ) : (
+            <span className={styles.bullet}>•</span>
+          )}
           Must have at least one upper case letter
         </p>
         <p className={styles.text}>
-          {validation.lowerCaseChar ? <FontIcon value='done' className={styles.check} /> : <span className={styles.bullet}>•</span>}
+          {validation.lowerCaseChar ? (
+            <FontIcon value="done" className={styles.check} />
+          ) : (
+            <span className={styles.bullet}>•</span>
+          )}
           Must have at least one lower case letter
         </p>
         <p className={styles.text}>
-          {validation.number ? <FontIcon value='done' className={styles.check} /> : <span className={styles.bullet}>•</span>}
+          {validation.number ? (
+            <FontIcon value="done" className={styles.check} />
+          ) : (
+            <span className={styles.bullet}>•</span>
+          )}
           Must have at least one number
         </p>
         <p className={styles.text}>
-          {validation.characterLength ? <FontIcon value='done' className={styles.check} /> : <span className={styles.bullet}>•</span>}
+          {validation.characterLength ? (
+            <FontIcon value="done" className={styles.check} />
+          ) : (
+            <span className={styles.bullet}>•</span>
+          )}
           Must have at least 10 characters
         </p>
       </div>
@@ -69,19 +91,23 @@ export default ({
             autoFocus
             type={revealPassword ? 'text' : 'password'}
             onChange={handleOnChangeNewPassword}
-            label='Password'
+            label="Password"
             value={newPassword}
             className={styles.form}
             error={errorPassword}
             onKeyPress={passwordKeyPress}
             ref={refPassword}
           />
-          <img src={revealPassword ? eyeHide : eyeShow} className={styles.icon} onClick={toggleRevealPassword} />
+          <img
+            src={revealPassword ? eyeHide : eyeShow}
+            className={styles.icon}
+            onClick={toggleRevealPassword}
+          />
         </div>
         <Input
           type={revealPassword ? 'text' : 'password'}
           onChange={handleOnChangeNewPasswordRepeat}
-          label='Re-enter Password'
+          label="Re-enter Password"
           value={newPasswordRepeat}
           className={styles.form}
           error={errorPasswordRepeat}

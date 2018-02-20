@@ -29,7 +29,9 @@ class NewAccount extends Component {
         <MediaQuery minWidth={720}>
           <Desktop
             goToSignupPage={this.goToSignupPage}
-            handleOpenLoginWithPasswordPage={this.handleOpenLoginWithPasswordPage}
+            handleOpenLoginWithPasswordPage={
+              this.handleOpenLoginWithPasswordPage
+            }
           />
         </MediaQuery>
         <MediaQuery maxWidth={719}>
@@ -41,7 +43,9 @@ class NewAccount extends Component {
             edgeAccount={this.props.edgeAccount}
             edgeObject={this.props.edgeObject}
             goToSignupPage={this.goToSignupPage}
-            handleOpenLoginWithPasswordPage={this.handleOpenLoginWithPasswordPage}
+            handleOpenLoginWithPasswordPage={
+              this.handleOpenLoginWithPasswordPage
+            }
             toggleQRCode={this.toggleQRCode}
           />
         </MediaQuery>

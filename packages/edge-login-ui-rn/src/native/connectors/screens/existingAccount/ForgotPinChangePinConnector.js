@@ -16,7 +16,7 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    changePin: (data) => dispatch(actions.recoveryChangePIN(data)),
+    changePin: data => dispatch(actions.recoveryChangePIN(data)),
     login: () => dispatch(actions.recoveryLoginComplete())
   }
 }

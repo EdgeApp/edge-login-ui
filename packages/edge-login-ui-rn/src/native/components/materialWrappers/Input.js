@@ -40,7 +40,10 @@ class Input extends Component {
   render () {
     const value = this.props.value ? this.props.value : ''
     const error = this.props.error ? this.props.error : ''
-    const autoCorrect = typeof this.props.autoCorrect === 'undefined' ? true : this.props.autoCorrect
+    const autoCorrect =
+      typeof this.props.autoCorrect === 'undefined'
+        ? true
+        : this.props.autoCorrect
     const {
       containerStyle,
       baseColor,

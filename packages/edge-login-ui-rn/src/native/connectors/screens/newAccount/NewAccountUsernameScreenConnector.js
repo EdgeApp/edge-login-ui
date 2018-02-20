@@ -13,7 +13,8 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    checkUsernameForAvailabilty: (data) => dispatch(loginAction.checkUsernameForAvailabilty(data))
+    checkUsernameForAvailabilty: data =>
+      dispatch(loginAction.checkUsernameForAvailabilty(data))
   }
 }
 

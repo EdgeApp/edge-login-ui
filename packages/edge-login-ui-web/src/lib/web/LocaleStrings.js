@@ -7,7 +7,10 @@ const supportedLocales = {
 const LocaleStrings = function (inputKey, reqLocale) {
   // if no locale specified, use device
   if (!reqLocale) {
-    reqLocale = (navigator.languages && navigator.languages.length) ? navigator.languages[0] : navigator.language
+    reqLocale =
+      navigator.languages && navigator.languages.length
+        ? navigator.languages[0]
+        : navigator.language
   }
   const localeFormatted = reqLocale.replace('-', '_') // in iOS, locales are - so we standardize to android
 

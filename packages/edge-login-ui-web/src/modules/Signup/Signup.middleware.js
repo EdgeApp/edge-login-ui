@@ -10,13 +10,7 @@ export const signupUser = (username, password, pin, callback) => {
       ctx.createAccount(username, password, pin, undefined, (err, result) => {
         dispatch(closeLoading())
         if (!err) {
-          return dispatch(
-            loginWithPassword(
-              username,
-              password,
-              callback
-            )
-          )
+          return dispatch(loginWithPassword(username, password, callback))
         }
       })
     })

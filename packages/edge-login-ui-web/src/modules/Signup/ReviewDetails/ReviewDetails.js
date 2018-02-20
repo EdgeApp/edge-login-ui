@@ -70,4 +70,3 @@ export default connect(state => ({
   account: state.user,
   view: state.reviewDetails.view
 }))(Review)
-

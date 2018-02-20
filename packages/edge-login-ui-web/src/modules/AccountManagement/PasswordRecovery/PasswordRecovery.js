@@ -17,13 +17,15 @@ class PasswordRecovery extends Component {
     const callback = (error, token) => {
       if (error) {
         switch (error.type) {
-          case 'firstQuestion' :
+          case 'firstQuestion':
             return this.props.dispatch(action.errorFirstQuestion(error.message))
-          case 'secondQuestion' :
-            return this.props.dispatch(action.errorSecondQuestion(error.message))
-          case 'firstAnswer' :
+          case 'secondQuestion':
+            return this.props.dispatch(
+              action.errorSecondQuestion(error.message)
+            )
+          case 'firstAnswer':
             return this.props.dispatch(action.errorFirstAnswer(error.message))
-          case 'secondAnswer' :
+          case 'secondAnswer':
             return this.props.dispatch(action.errorSecondAnswer(error.message))
         }
       }
@@ -35,17 +37,12 @@ class PasswordRecovery extends Component {
     }
     this.props.dispatch(action.clearPasswordRecovery())
     return this.props.dispatch(
-      checkPasswordRecovery({
-        questions: [
-          this.props.firstQuestion,
-          this.props.secondQuestion
-        ],
-        answers: [
-          this.props.firstAnswer,
-          this.props.secondAnswer
-        ],
-        account: this.props.account
-      },
+      checkPasswordRecovery(
+        {
+          questions: [this.props.firstQuestion, this.props.secondQuestion],
+          answers: [this.props.firstAnswer, this.props.secondAnswer],
+          account: this.props.account
+        },
         callback
       )
     )
@@ -55,11 +52,17 @@ class PasswordRecovery extends Component {
     abcctx(ctx => {
       ctx.listRecoveryQuestionChoices((error, results) => {
         if (error) {
-          this.props.dispatch(action.errorFirstQuestion(t('string_connection_error_server')))
-          return this.props.dispatch(action.errorSecondQuestion(t('string_connection_error_server')))
+          this.props.dispatch(
+            action.errorFirstQuestion(t('string_connection_error_server'))
+          )
+          return this.props.dispatch(
+            action.errorSecondQuestion(t('string_connection_error_server'))
+          )
         }
         if (!error) {
-          const questions = results.filter(result => result.category === 'recovery2').map(result => result.question)
+          const questions = results
+            .filter(result => result.category === 'recovery2')
+            .map(result => result.question)
           dispatch(action.setPasswordRecoveryQuestions(questions))
         }
       })
@@ -68,27 +71,53 @@ class PasswordRecovery extends Component {
   componentWillMount = () => {
     this.loadQuestions()
   }
-  handleOnChangeFirstQuestion = (firstQuestion) => {
-    this.props.dispatch(action.changeFirstPasswordRecoveryQuestionValue(firstQuestion))
+  handleOnChangeFirstQuestion = firstQuestion => {
+    this.props.dispatch(
+      action.changeFirstPasswordRecoveryQuestionValue(firstQuestion)
+    )
   }
-  handleOnChangeFirstAnswer = (firstAnswer) => {
-    this.props.dispatch(action.changeFirstPasswordRecoveryAnswerValue(firstAnswer))
+  handleOnChangeFirstAnswer = firstAnswer => {
+    this.props.dispatch(
+      action.changeFirstPasswordRecoveryAnswerValue(firstAnswer)
+    )
   }
-  handleOnChangeSecondQuestion = (secondQuestion) => {
-    this.props.dispatch(action.changeSecondPasswordRecoveryQuestionValue(secondQuestion))
+  handleOnChangeSecondQuestion = secondQuestion => {
+    this.props.dispatch(
+      action.changeSecondPasswordRecoveryQuestionValue(secondQuestion)
+    )
   }
-  handleOnChangeSecondAnswer = (secondAnswer) => {
-    this.props.dispatch(action.changeSecondPasswordRecoveryAnswerValue(secondAnswer))
+  handleOnChangeSecondAnswer = secondAnswer => {
+    this.props.dispatch(
+      action.changeSecondPasswordRecoveryAnswerValue(secondAnswer)
+    )
   }
   renderQuestions1 = () => {
-    const filtered = _.filter(this.props.questions, question => this.props.secondQuestion !== question)
-    const questions = _.map(filtered, question => ({ value: question, label: question }))
-    return [ {value: 'Choose a question', label: 'Choose a question'}, ...questions ]
+    const filtered = _.filter(
+      this.props.questions,
+      question => this.props.secondQuestion !== question
+    )
+    const questions = _.map(filtered, question => ({
+      value: question,
+      label: question
+    }))
+    return [
+      { value: 'Choose a question', label: 'Choose a question' },
+      ...questions
+    ]
   }
   renderQuestions2 = () => {
-    const filtered = _.filter(this.props.questions, question => this.props.firstQuestion !== question)
-    const questions = _.map(filtered, question => ({ value: question, label: question }))
-    return [ {value: 'Choose a question', label: 'Choose a question'}, ...questions ]
+    const filtered = _.filter(
+      this.props.questions,
+      question => this.props.firstQuestion !== question
+    )
+    const questions = _.map(filtered, question => ({
+      value: question,
+      label: question
+    }))
+    return [
+      { value: 'Choose a question', label: 'Choose a question' },
+      ...questions
+    ]
   }
   gotoAccount = () => {
     return this.props.history.push('/account')

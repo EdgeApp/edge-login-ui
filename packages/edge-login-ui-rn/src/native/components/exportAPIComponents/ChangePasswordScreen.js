@@ -3,8 +3,7 @@ import { Provider } from 'react-redux'
 import reducers from '../../../common/reducers'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import ChangePasswordAppConnector
-  from '../../connectors/ChangePasswordAppConnector'
+import ChangePasswordAppConnector from '../../connectors/ChangePasswordAppConnector'
 import * as Styles from '../../styles'
 import { setLocal } from '../../../common/locale'
 

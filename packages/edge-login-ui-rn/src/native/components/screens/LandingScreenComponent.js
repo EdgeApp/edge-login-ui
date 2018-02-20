@@ -31,7 +31,6 @@ export default class LandingScreenComponent extends Component {
                 }
               </Text>
             </View>
-
           </View>
           <View style={LandingScreenStyle.featureBoxButtons}>
             <Button

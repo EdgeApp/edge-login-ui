@@ -14,7 +14,11 @@ export default ({
   goToSignupPage
 }) => (
   <div className={styles.container}>
-    <p className={styles.header}>{t('string_scan_barcode_to_signin')}<br />{t('string_scan_barcode_edge_wallet')}</p>
+    <p className={styles.header}>
+      {t('string_scan_barcode_to_signin')}
+      <br />
+      {t('string_scan_barcode_edge_wallet')}
+    </p>
     <QRCode
       dispatch={dispatch}
       edgeId={edgeId}

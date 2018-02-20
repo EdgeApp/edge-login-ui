@@ -7,7 +7,11 @@ export default () => (
   <div className={styles.container}>
     <div className={styles.text1Container}>
       <p className={styles.text1}>
-        <a href='https://airbitz.co/app' target='_blank'>
+        <a
+          href="https://airbitz.co/app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Increase your Account Security. <br />
           Download Edge & enable 2FA
         </a>
@@ -16,7 +20,15 @@ export default () => (
     <div className={styles.text2Container}>
       <img src={logo} />
       <p className={styles.text2}>
-        Powered by <a href='https://airbitz.co/app' target='_blank' className={styles.link}>Edge</a>
+        Powered by{' '}
+        <a
+          href="https://airbitz.co/app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          Edge
+        </a>
       </p>
     </div>
   </div>

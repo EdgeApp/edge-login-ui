@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
-import PasswordStatusComponent
-  from '../../components/abSpecific/PasswordStatusComponent'
+import PasswordStatusComponent from '../../components/abSpecific/PasswordStatusComponent'
 
 export const mapStateToProps = (state, ownProps) => {
-  const secondsToCrack = state.passwordStatus ? state.passwordStatus.secondsToCrack : ''
+  const secondsToCrack = state.passwordStatus
+    ? state.passwordStatus.secondsToCrack
+    : ''
   return {
     style: ownProps.style,
     status: state.passwordStatus,

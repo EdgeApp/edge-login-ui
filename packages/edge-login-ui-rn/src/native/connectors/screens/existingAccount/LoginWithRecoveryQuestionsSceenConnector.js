@@ -1,16 +1,17 @@
 import { connect } from 'react-redux'
-import LinkedComponent
-  from '../../../components/screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent'
+import LinkedComponent from '../../../components/screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent'
 import * as actions from '../../../../common/actions'
 import * as Constants from '../../../../common/constants'
 export const mapStateToProps = (state, ownProps) => {
   const isEnabled = true
-  const question1 = state.passwordRecovery.userQuestions.length > 0
-    ? state.passwordRecovery.userQuestions[0]
-    : 'Choose recovery question'
-  const question2 = state.passwordRecovery.userQuestions.length > 1
-    ? state.passwordRecovery.userQuestions[1]
-    : 'Choose recovery question'
+  const question1 =
+    state.passwordRecovery.userQuestions.length > 0
+      ? state.passwordRecovery.userQuestions[0]
+      : 'Choose recovery question'
+  const question2 =
+    state.passwordRecovery.userQuestions.length > 1
+      ? state.passwordRecovery.userQuestions[1]
+      : 'Choose recovery question'
   const loginError = state.login.errorMessage || ''
   const username = state.login.username || ''
   return {
@@ -39,7 +40,8 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(
         actions.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, username)
       ),
-    changePassword: () => dispatch(actions.dispatchAction(Constants.WORKFLOW_NEXT))
+    changePassword: () =>
+      dispatch(actions.dispatchAction(Constants.WORKFLOW_NEXT))
   }
 }
 

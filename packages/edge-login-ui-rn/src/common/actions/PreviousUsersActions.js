@@ -24,10 +24,10 @@ async function getDiskStuff (context) {
 
 export function getPreviousUsers (context) {
   return (dispatch, getState, imports) => {
-    let context = imports.context
-    let username = imports.username
+    const context = imports.context
+    const username = imports.username
     getDiskStuff(context).then(data => {
-      let focusUser = username || data.lastUser
+      const focusUser = username || data.lastUser
       if (data.lastUser) {
         data.usersWithPinList = []
         data.usernameOnlyList = []

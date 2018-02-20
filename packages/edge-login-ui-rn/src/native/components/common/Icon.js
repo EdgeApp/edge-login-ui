@@ -32,7 +32,9 @@ const Icon = ({ style, name, size, type }) => {
     case Constants.SIMPLE_ICONS:
       return <SimpleIcon style={style} name={name} size={size} />
   }
-  console.warn('No icon: Probably forgot the type ' + type + 'or ' + name + 'doesnt exist')
+  console.warn(
+    'No icon: Probably forgot the type ' + type + 'or ' + name + 'doesnt exist'
+  )
   return null
 }
 

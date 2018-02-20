@@ -19,7 +19,7 @@ class AccountManagementPassword extends Component {
     return this.props.dispatch(closeAccountManagementModal())
   }
   handleSubmit = () => {
-    const callback = (error) => {
+    const callback = error => {
       if (error) {
         this.props.dispatch(clearAccountManagementModal())
         return this.props.dispatch(errorAccountManagementModal(error))
@@ -30,20 +30,18 @@ class AccountManagementPassword extends Component {
       }
     }
     return this.props.dispatch(
-      checkPassword(
-        this.props.password,
-        this.props.user,
-        callback
-      )
+      checkPassword(this.props.password, this.props.user, callback)
     )
   }
-  passwordKeyPressed = (e) => {
+  passwordKeyPressed = e => {
     if (e.charCode === 13) {
       return this.handleSubmit()
     }
   }
-  changePasswordValue = (value) => {
-    return this.props.dispatch(changeAccountManagementPasswordModalPassword(value))
+  changePasswordValue = value => {
+    return this.props.dispatch(
+      changeAccountManagementPasswordModalPassword(value)
+    )
   }
   render () {
     return (

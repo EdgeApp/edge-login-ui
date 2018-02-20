@@ -37,19 +37,17 @@ export default ({
     <div className={styles.container}>
       <div className={styles.navigation}>
         <div className={styles.navBoxActive}>
-          <p className={styles.text}>
-            Edge Login
-          </p>
+          <p className={styles.text}>Edge Login</p>
         </div>
         <div className={styles.navBox} onClick={showMobilePasswordView}>
-          <p className={styles.text}>
-            Username Login
-          </p>
+          <p className={styles.text}>Username Login</p>
         </div>
       </div>
       <div className={styles.rectangle}>
         <p className={styles.text}>
-          {t('string_scan_barcode_to_register')}<br />{t('string_scan_barcode_edge_wallet')}
+          {t('string_scan_barcode_to_register')}
+          <br />
+          {t('string_scan_barcode_edge_wallet')}
         </p>
       </div>
       {renderQRCode()}
@@ -58,9 +56,7 @@ export default ({
       </p>
       <div className={styles.divider} />
       <div className={styles.signUp}>
-        <p className={styles.question}>
-          Don’t have an account?
-        </p>
+        <p className={styles.question}>Don’t have an account?</p>
         <p className={styles.create} onClick={goToSignupPage}>
           Create account
         </p>

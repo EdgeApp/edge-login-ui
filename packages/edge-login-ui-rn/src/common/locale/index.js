@@ -10,7 +10,7 @@ function setLocal (arg, arg2) {
 }
 
 function localize (arg, array = null) {
-  let string = translations[arg][language]
+  const string = translations[arg][language]
   if (array && array.length > 0) {
     // this is where we sfprint the string swaps with a try catch
   }

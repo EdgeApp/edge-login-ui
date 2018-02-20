@@ -15,13 +15,9 @@ class Header extends Component {
         end={{ x: 1, y: 0 }}
         colors={Colors.GRADIENT}
       >
-        <View style={Style.left}>
-          {this.renderBack(Style)}
-        </View>
+        <View style={Style.left}>{this.renderBack(Style)}</View>
         {this.renderText(Style)}
-        <View style={Style.right}>
-          {this.renderSkip(Style)}
-        </View>
+        <View style={Style.right}>{this.renderSkip(Style)}</View>
       </LinearGradient>
     )
   }

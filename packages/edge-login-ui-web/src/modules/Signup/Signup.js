@@ -11,11 +11,11 @@ class Container extends Component {
     switch (this.props.page) {
       case 'username':
         return <Username {...this.props} />
-      case 'pin' :
+      case 'pin':
         return <PinNumber {...this.props} />
-      case 'password' :
+      case 'password':
         return <Password {...this.props} />
-      case 'review' :
+      case 'review':
         return <ReviewDetails {...this.props} />
       default:
         return <Username {...this.props} />

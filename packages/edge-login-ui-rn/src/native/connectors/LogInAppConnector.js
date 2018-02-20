@@ -13,10 +13,15 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    userLogin: (data) => dispatch(loginAction.userLogin(data)),
+    userLogin: data => dispatch(loginAction.userLogin(data)),
     getPreviousUsers: () => dispatch(loginAction.getPreviousUsers()),
-    startRecoveryWorkflow: (backupKey) => {
-      dispatch(loginAction.dispatchActionWithData(Constants.SET_RECOVERY_KEY, backupKey))
+    startRecoveryWorkflow: backupKey => {
+      dispatch(
+        loginAction.dispatchActionWithData(
+          Constants.SET_RECOVERY_KEY,
+          backupKey
+        )
+      )
     }
   }
 }

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import {AccountInfoComponent} from '../../components/abSpecific/'
+import { AccountInfoComponent } from '../../components/abSpecific/'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
@@ -8,7 +8,6 @@ export const mapStateToProps = (state, ownProps) => {
     password: state.create.password,
     pin: state.create.pin,
     passwordMessage: null
-
   }
 }
 

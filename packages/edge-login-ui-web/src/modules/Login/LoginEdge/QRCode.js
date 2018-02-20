@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-const QRCode = require('qrcode.react')
 import { edgeLogin } from '../Login.middleware'
 import { closeLoading } from '../../Loader/Loader.action'
+const QRCode = require('qrcode.react')
 
 export default class QRCodeEdge extends Component {
   componentWillUnmount () {
@@ -11,19 +11,19 @@ export default class QRCodeEdge extends Component {
   }
   componentDidMount () {
     this.props.dispatch(
-        edgeLogin((error, account) => {
-          const abcuiCallback = window.parent.abcui
-          if (!error) {
-            if (abcuiCallback.loginCallback) {
-              return abcuiCallback.loginCallback(null, account)
-            }
-            if (!window.parent.loginCallback) {
-              this.props.dispatch(closeLoading())
-              return this.props.history.push('/account')
-            }
+      edgeLogin((error, account) => {
+        const abcuiCallback = window.parent.abcui
+        if (!error) {
+          if (abcuiCallback.loginCallback) {
+            return abcuiCallback.loginCallback(null, account)
           }
-        })
-      )
+          if (!window.parent.loginCallback) {
+            this.props.dispatch(closeLoading())
+            return this.props.history.push('/account')
+          }
+        }
+      })
+    )
   }
   _renderBarcode = () => {
     const { edgeId } = this.props
@@ -42,7 +42,11 @@ export default class QRCodeEdge extends Component {
   }
   render () {
     return (
-      <a target='_blank' href={this._renderLoginLink()}>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href={this._renderLoginLink()}
+      >
         {this._renderBarcode()}
       </a>
     )

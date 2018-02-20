@@ -25,7 +25,8 @@ class ChangePasswordModalComponent extends Component {
           </View>
           <View style={Style.textContainer}>
             <Text style={Style.copyText}>
-              Password Successfully Changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!
+              Password Successfully Changed. DO NOT FORGET YOUR PASSWORD OR
+              RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!
             </Text>
           </View>
           <View style={Style.buttonsContainer}>

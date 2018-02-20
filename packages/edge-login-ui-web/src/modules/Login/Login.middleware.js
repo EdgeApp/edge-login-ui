@@ -1,6 +1,15 @@
 // import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
-import { userLogin, requestEdgeLogin, enablePinTimeout, disablePinTimeout, refreshPinTimeout, enablePasswordTimeout, disablePasswordTimeout, refreshPasswordTimeout } from './Login.action'
+import {
+  userLogin,
+  requestEdgeLogin,
+  enablePinTimeout,
+  disablePinTimeout,
+  refreshPinTimeout,
+  enablePasswordTimeout,
+  disablePasswordTimeout,
+  refreshPasswordTimeout
+} from './Login.action'
 import { selectUserToLogin } from './CachedUsers/CachedUsers.action'
 
 export const loginWithPassword = (username, password, callback) => {
@@ -12,26 +21,34 @@ export const loginWithPassword = (username, password, callback) => {
     dispatch(openLoading())
     setTimeout(() => {
       abcContext(context => {
-        context.loginWithPassword(username, password, null, (error, account) => {
-          if (error) {
-            dispatch(closeLoading())
-            const type = (error.name === 'OtpError') ? 'server_error_bad_otp' : 'server_error_bad_password'
-            // dispatch(openErrorModal(t(type)))
+        context.loginWithPassword(
+          username,
+          password,
+          null,
+          (error, account) => {
+            if (error) {
+              dispatch(closeLoading())
+              const type =
+                error.name === 'OtpError'
+                  ? 'server_error_bad_otp'
+                  : 'server_error_bad_password'
+              // dispatch(openErrorModal(t(type)))
 
-            if (error.wait > 0) {
-              const currentWaitSpan = error.wait
-              const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-              enableTimer(reEnableLoginTime, 'password', dispatch)
+              if (error.wait > 0) {
+                const currentWaitSpan = error.wait
+                const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
+                enableTimer(reEnableLoginTime, 'password', dispatch)
+              }
+              return callback(t(type), null)
             }
-            return callback(t(type), null)
+            if (!error) {
+              localStorage.setItem('lastUser', username)
+              dispatch(userLogin(account))
+              dispatch(closeLoading())
+              callback(null, account)
+            }
           }
-          if (!error) {
-            localStorage.setItem('lastUser', username)
-            dispatch(userLogin(account))
-            dispatch(closeLoading())
-            callback(null, account)
-          }
-        })
+        )
       })
     }, 300)
   }
@@ -88,7 +105,10 @@ export const scheduleTick = (targetTime, source, disp) => {
       disp(refreshPasswordTimeout(difference))
     }
   } else {
-    const scheduleTickTimeout = setTimeout(() => scheduleTick(targetTime, source, disp), 1000)
+    const scheduleTickTimeout = setTimeout(
+      () => scheduleTick(targetTime, source, disp),
+      1000
+    )
 
     clearTimeout(scheduleTickTimeout, source)
     if (source === 'pin') {
@@ -99,14 +119,16 @@ export const scheduleTick = (targetTime, source, disp) => {
   }
 }
 
-export const edgeLogin = (callback) => {
+export const edgeLogin = callback => {
   return (dispatch, getState, imports) => {
     const abcContext = imports.abcContext
     const t = imports.t
 
-    const onProcess = (username) => {
+    const onProcess = username => {
       dispatch(selectUserToLogin(username))
-      return dispatch(openLoading(String.format(t('edge_logging_in'), username)))
+      return dispatch(
+        openLoading(String.format(t('edge_logging_in'), username))
+      )
     }
 
     const onLogin = (error, account) => {
@@ -116,18 +138,21 @@ export const edgeLogin = (callback) => {
     }
 
     abcContext(context => {
-      context.requestEdgeLogin({
-        displayName: context.displayName,
-        displayImageUrl: context.displayImageUrl,
-        onLogin: onLogin,
-        onProcessLogin: onProcess
-      }, (error, results) => {
-        if (error) {
-          // dispatch(showContainerNotification(t('error_edge_login'), 'error'))
-        } else if (results) {
-          dispatch(requestEdgeLogin(results))
+      context.requestEdgeLogin(
+        {
+          displayName: context.displayName,
+          displayImageUrl: context.displayImageUrl,
+          onLogin: onLogin,
+          onProcessLogin: onProcess
+        },
+        (error, results) => {
+          if (error) {
+            // dispatch(showContainerNotification(t('error_edge_login'), 'error'))
+          } else if (results) {
+            dispatch(requestEdgeLogin(results))
+          }
         }
-      })
+      )
     })
   }
 }

@@ -3,8 +3,7 @@ import { View, Text } from 'react-native'
 import { Button, Checkbox } from '../../common'
 // import {  } from '../../common/Checkbox'
 import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
-import HeaderConnector
-  from '../../../connectors/componentConnectors/HeaderConnector'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 // import * as Constants from '../../../common/constants'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
@@ -33,7 +32,9 @@ export default class TermsAndConditionsScreenComponent extends Component {
     if (this.state.totalChecks < 3) {
       return (
         <View style={style.instructionsContainer}>
-          <Text style={style.instructionsText}>Last step! Let’s finish with a quick review</Text>
+          <Text style={style.instructionsText}>
+            Last step! Let’s finish with a quick review
+          </Text>
         </View>
       )
     }
@@ -43,7 +44,9 @@ export default class TermsAndConditionsScreenComponent extends Component {
     if (this.state.totalChecks === 3) {
       return (
         <View style={style.buttonContainer}>
-          <Text style={style.agreeText}>I have read, understood, and agree to the Terms of Use</Text>
+          <Text style={style.agreeText}>
+            I have read, understood, and agree to the Terms of Use
+          </Text>
           <View style={style.shim} />
           <Button
             onPress={this.onNextPress.bind(this)}

@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { ModalStyle } from '../../../common/styles/'
-import { View, Text, Image, /* TouchableOpacity,
-  Platform */
-ActivityIndicator} from 'react-native'
+import {
+  View,
+  Text,
+  Image /* TouchableOpacity,
+  Platform */,
+  ActivityIndicator
+} from 'react-native'
 import { IconButton, Icon, Button } from './'
 import Modal from 'react-native-modal'
 import * as Constants from '../../../common/constants'
@@ -34,7 +38,9 @@ class MyModal extends Component {
   constructor (props) {
     super(props)
     this.renderMiddle = styles => {
-      if (this.props.modalMiddleComponent) { return this.props.modalMiddleComponent }
+      if (this.props.modalMiddleComponent) {
+        return this.props.modalMiddleComponent
+      }
 
       return <Text style={styles.modalMiddleText}>{this.props.middleText}</Text>
     }
@@ -43,9 +49,11 @@ class MyModal extends Component {
         return <View style={styles.buttonsWrap} />
       }
       if (this.props.thinking) {
-        return <View style={styles.activityWrap} >
-          <ActivityIndicator />
-        </View>
+        return (
+          <View style={styles.activityWrap}>
+            <ActivityIndicator />
+          </View>
+        )
       }
       if (this.props.singleButton) {
         return (
@@ -88,9 +96,11 @@ class MyModal extends Component {
     }
     this.renderGradient = (styles, icon, iconType, image) => {
       if (image) {
-        return <View style={styles.modalHeaderIconWrapBottom}>
-          <Image source={image} />
-        </View>
+        return (
+          <View style={styles.modalHeaderIconWrapBottom}>
+            <Image source={image} />
+          </View>
+        )
       }
       return (
         <View style={styles.modalHeaderIconWrapBottom}>
@@ -103,16 +113,18 @@ class MyModal extends Component {
         </View>
       )
     }
-    this.renderCloseX = (styles) => {
+    this.renderCloseX = styles => {
       if (this.props.hideCancelX) {
         return null
       }
-      return <IconButton
-        style={styles.closeIconButton}
-        icon={Constants.CLOSE_ICON}
-        iconType={Constants.MATERIAL_ICONS}
-        onPress={this.props.cancel}
-      />
+      return (
+        <IconButton
+          style={styles.closeIconButton}
+          icon={Constants.CLOSE_ICON}
+          iconType={Constants.MATERIAL_ICONS}
+          onPress={this.props.cancel}
+        />
+      )
     }
   }
   componentWillMount () {
@@ -148,9 +160,7 @@ class MyModal extends Component {
         visible
       >
         <View style={styles.modalBox}>
-          <View style={styles.exitRow}>
-            {this.renderCloseX(styles)}
-          </View>
+          <View style={styles.exitRow}>{this.renderCloseX(styles)}</View>
           <View style={styles.modalBody}>
             <View style={styles.modalTopTextWrap}>
               <Text style={styles.modalTopText}>{headerText}</Text>

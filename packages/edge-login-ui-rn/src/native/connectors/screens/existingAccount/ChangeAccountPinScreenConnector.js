@@ -15,7 +15,7 @@ export const mapStateToProps = (state, ownProps) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    changePin: (data) => dispatch(actions.changePIN(data))
+    changePin: data => dispatch(actions.changePIN(data))
   }
 }
 

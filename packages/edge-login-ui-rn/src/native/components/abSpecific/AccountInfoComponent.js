@@ -23,7 +23,9 @@ class AccountInfoComponent extends Component {
       return (
         <View style={style.bottomWarning}>
           <Text style={style.bottomWarningText}>
-            You did not set your password. We strongly encourage you to create a password and backup your account as soon as possible. You can set a password in the Settings screen in the app.
+            You did not set your password. We strongly encourage you to create a
+            password and backup your account as soon as possible. You can set a
+            password in the Settings screen in the app.
           </Text>
           <View style={style.shim} />
         </View>
@@ -47,27 +49,19 @@ class AccountInfoComponent extends Component {
           <View style={style.bRow}>
             <View style={style.bInfoLeft} />
             <View style={style.bInfoCenter}>
-              <Text style={style.accountText}>
-                Username:
-              </Text>
+              <Text style={style.accountText}>Username:</Text>
             </View>
             <View style={style.bInforRight}>
-              <Text style={style.accountText}>
-                {this.props.username}
-              </Text>
+              <Text style={style.accountText}>{this.props.username}</Text>
             </View>
           </View>
           <View style={style.bRow}>
             <View style={style.bInfoLeft} />
             <View style={style.bInfoCenter}>
-              <Text style={style.accountText}>
-                PIN:
-              </Text>
+              <Text style={style.accountText}>PIN:</Text>
             </View>
             <View style={style.bInforRight}>
-              <Text style={style.accountText}>
-                {this.props.pin}
-              </Text>
+              <Text style={style.accountText}>{this.props.pin}</Text>
             </View>
           </View>
           <View style={style.shim} />
@@ -80,40 +74,28 @@ class AccountInfoComponent extends Component {
         <View style={style.bRow}>
           <View style={style.bInfoLeft} />
           <View style={style.bInfoCenter}>
-            <Text style={style.accountText}>
-              Username:
-            </Text>
+            <Text style={style.accountText}>Username:</Text>
           </View>
           <View style={style.bInforRight}>
-            <Text style={style.accountText}>
-              {this.props.username}
-            </Text>
+            <Text style={style.accountText}>{this.props.username}</Text>
           </View>
         </View>
         <View style={style.bRow}>
           <View style={style.bInfoLeft} />
           <View style={style.bInfoCenter}>
-            <Text style={style.accountText}>
-              Password:
-            </Text>
+            <Text style={style.accountText}>Password:</Text>
           </View>
           <View style={style.bInforRight}>
-            <Text style={style.accountText}>
-              {this.props.password}
-            </Text>
+            <Text style={style.accountText}>{this.props.password}</Text>
           </View>
         </View>
         <View style={style.bRow}>
           <View style={style.bInfoLeft} />
           <View style={style.bInfoCenter}>
-            <Text style={style.accountText}>
-              PIN:
-            </Text>
+            <Text style={style.accountText}>PIN:</Text>
           </View>
           <View style={style.bInforRight}>
-            <Text style={style.accountText}>
-              {this.props.pin}
-            </Text>
+            <Text style={style.accountText}>{this.props.pin}</Text>
           </View>
         </View>
         <View style={style.shim} />
