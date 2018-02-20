@@ -42,6 +42,9 @@
     "sprintf-js": "^1.0.3",
     "zxcvbn": "^4.4.2"
   },
+  "devDependencies": {
+    "flow-bin": "^0.66.0"
+  },
   "rnpm": {
     "assets": [
       "./src/assets/fonts"

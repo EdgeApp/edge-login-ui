@@ -6,6 +6,9 @@ To get started developing, just run `yarn`. This will install all the dependenci
 
 You should run the following scripts from this top-level directory:
 
+* yarn flow
 * yarn format
 * yarn lint
 * yarn lint --fix
+
+This project uses a git pre-commit hook to automatically run flow & lint before every commit.
