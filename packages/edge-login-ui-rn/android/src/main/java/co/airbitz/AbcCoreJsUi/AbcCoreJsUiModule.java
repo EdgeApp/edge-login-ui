@@ -23,6 +23,7 @@ import com.facebook.react.bridge.Promise;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import com.squareup.whorlwind.ReadResult;
 import com.squareup.whorlwind.SharedPreferencesStorage;
 import com.squareup.whorlwind.Whorlwind;
 
@@ -97,8 +98,19 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     }
 
     private void getKeychainString (String key, String prompt, GetKeychainCallbacks callbacks) {
-
-        mSubscription = mWhorlwind.read(key)
+        boolean failedOnNote8 = false;
+        Observable<ReadResult> readResultObservable = null;
+        try {
+            readResultObservable = mWhorlwind.read(key);
+        } catch (Exception e) {
+            if(e.getMessage() != null && e.getMessage().equals("Can't create handler inside thread that has not called Looper.prepare()"))  {
+                failedOnNote8 = true;
+            }
+        }
+        if (failedOnNote8 || readResultObservable == null) {
+            return;
+        }
+        mSubscription = readResultObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
@@ -106,7 +118,12 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
                         case NEEDS_AUTH:
                             // An encrypted value was found, prompt for fingerprint to decrypt.
                             // The fingerprint reader is active.
-                            showFingerPrintDialog(prompt, callbacks);
+                            try {
+                                showFingerPrintDialog(prompt, callbacks);
+                            } catch (Throwable t) {
+                                mSubscription.unsubscribe();
+                                mSubscription = null;
+                            }
                             break;
                         case UNRECOVERABLE_ERROR:
                         case AUTHORIZATION_ERROR:
