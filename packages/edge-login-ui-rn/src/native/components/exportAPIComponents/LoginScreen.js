@@ -1,4 +1,7 @@
+// @flow
+
 import React, { Component } from 'react'
+import type { Store } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from '../../../common/reducers'
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -8,17 +11,23 @@ import * as Styles from '../../styles'
 import { setLocal } from '../../../common/locale'
 import { updateFontStyles } from '../../../common/constants/Fonts'
 
-/* type Props = {
+type Props = {
   context: any,
   locale: string,
   language: string,
   username: string,
+  recoveryLogin: boolean,
   accountOptions: any,
-  fontDescription:any
-  onLogin(): void,
-} */
+  fontDescription: any,
+  onLogin(): void
+}
 
-class LoginScreen extends Component {
+type State = {}
+type Action = { type: string }
+
+class LoginScreen extends Component<Props> {
+  store: Store<State, Action>
+
   static defaultProps = {
     locale: 'US',
     language: 'en_us',
@@ -45,14 +54,14 @@ class LoginScreen extends Component {
             accountOptions: this.props.accountOptions,
             username: this.props.username,
             recoveryKey: this.props.recoveryLogin,
-            locale: this.props.local,
+            locale: this.props.locale,
             language: this.props.language
           })
         )
       )
     )
   }
-  componentWillReceiveProps (props) {}
+  componentWillReceiveProps (props: Props) {}
 
   render () {
     return (
