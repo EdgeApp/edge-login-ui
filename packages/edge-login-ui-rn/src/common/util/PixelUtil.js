@@ -1,3 +1,4 @@
+// @flow
 import { Dimensions, PixelRatio } from 'react-native'
 const { width, height } = Dimensions.get('window')
 
@@ -5,12 +6,13 @@ const { width, height } = Dimensions.get('window')
 const guidelineBaseWidth = 320
 const guidelineBaseHeight = 480
 
-const hs = size => width / guidelineBaseWidth * size // horizontal scale
-const vs = size => height / guidelineBaseHeight * size // verical scale
-const ms = (size, factor = 0.5) => size + (hs(size) - size) * factor // moderate scale.... this allows you to adjust the refactor size
+const hs = (size: number) => width / guidelineBaseWidth * size // horizontal scale
+const vs = (size: number) => height / guidelineBaseHeight * size // verical scale
+const ms = (size: number, factor: number = 0.5) =>
+  size + (hs(size) - size) * factor // moderate scale.... this allows you to adjust the refactor size
 
 const pixelRatio = PixelRatio.get()
-const fontSize = size => {
+const fontSize = (size: number) => {
   if (pixelRatio === 2) {
     return size * 1.15
   }
