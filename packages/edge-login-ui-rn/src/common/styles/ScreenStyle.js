@@ -1,3 +1,4 @@
+// @flow
 import * as Colors from '../constants/Colors'
 
 const ScreenStyle = {

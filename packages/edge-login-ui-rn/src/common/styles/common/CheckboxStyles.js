@@ -1,3 +1,4 @@
+// @flow
 import * as Constants from '../../constants/'
 const BasicCheckBoxWithLabel = {
   container: {

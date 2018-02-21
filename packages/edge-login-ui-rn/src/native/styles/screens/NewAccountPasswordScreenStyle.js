@@ -1,3 +1,4 @@
+// @flow
 import * as Styles from '../'
 // import * as Colors from '../../../common/constants/Colors'
 

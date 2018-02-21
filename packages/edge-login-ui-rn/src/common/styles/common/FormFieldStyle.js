@@ -1,3 +1,4 @@
+// @flow
 import * as Constants from '../../../common/constants/'
 
 const MaterialInput = {

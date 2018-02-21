@@ -1,3 +1,4 @@
+// @flow
 import * as Styles from '../'
 import * as Constants from '../../../common/constants/'
 import { MultiLineTextCheckBox } from '../../../common/styles/common/CheckboxStyles'
@@ -40,7 +41,7 @@ const TermsAndConditionsScreenStyle = {
     width: '80%',
     marginBottom: 20
   },
-  shim: { ...Styles.shim, height: 10 },
+  shim: { ...Styles.Shim, height: 10 },
   checkboxes: MultiLineTextCheckBox,
   nextButton: {
     upStyle: { ...Styles.PrimaryButtonUpStyle, width: 240 },

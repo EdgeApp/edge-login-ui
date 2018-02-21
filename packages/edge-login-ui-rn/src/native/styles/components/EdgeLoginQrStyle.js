@@ -1,3 +1,4 @@
+// @flow
 import * as Comstants from '../../../common/constants/'
 const EdgeLoginQrStyle = {
   container: {

@@ -1,3 +1,4 @@
+// @flow
 import * as Constants from '../../constants/'
 import { hs } from '../../util'
 const PrimaryButtonUpStyle = {
