@@ -3,12 +3,16 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import RecoverPasswordScreenConnector from '../connectors/screens/existingAccount/RecoverPasswordScreenConnector'
 
-type Props = {
+export type OwnProps = {
   styles: Object,
-  showHeader: boolean,
+  showHeader: boolean
+}
+type DispatchProps = {
   initializePasswordRecovery(): void
 }
-export default class ChangePasswordAppComponent extends Component<Props> {
+type Props = OwnProps & DispatchProps
+
+export default class PasswordRecoveryAppComponent extends Component<Props> {
   componentWillMount () {
     this.props.initializePasswordRecovery()
   }

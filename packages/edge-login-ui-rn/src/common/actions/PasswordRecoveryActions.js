@@ -75,7 +75,7 @@ export function getRecoveryQuestions () {
   }
 }
 
-export function initializePasswordRecovery (accountObj) {
+export function initializePasswordRecovery () {
   return async (dispatch, getState, imports) => {
     const context = imports.context
     const account = imports.accountObject
