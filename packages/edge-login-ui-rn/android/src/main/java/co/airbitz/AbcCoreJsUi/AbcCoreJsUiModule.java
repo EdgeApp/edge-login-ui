@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -67,8 +68,13 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     public void setKeychainString (String value, String key, Promise promise) {
         Observable.just(value)
                 .observeOn(Schedulers.io())
-                .subscribe(val -> mWhorlwind.write(key, ByteString.encodeUtf8(val)));
-        promise.resolve(true);
+                .subscribe(val -> {
+                    mWhorlwind.write(key, ByteString.encodeUtf8(val));
+                    promise.resolve(true);
+                }, throwable -> {
+                    Log.e("ERROR", "setKeyChainString threw error", throwable);
+                    promise.resolve(false);
+                });
     }
 
     @ReactMethod
@@ -98,68 +104,57 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     }
 
     private void getKeychainString (String key, String prompt, GetKeychainCallbacks callbacks) {
-        boolean failedOnNote8 = false;
-        Observable<ReadResult> readResultObservable = null;
         try {
-            readResultObservable = mWhorlwind.read(key);
-        } catch (Exception e) {
-            if(e.getMessage() != null && e.getMessage().equals("Can't create handler inside thread that has not called Looper.prepare()"))  {
-                failedOnNote8 = true;
-            }
-        }
-        if (failedOnNote8 || readResultObservable == null) {
-            return;
-        }
-        mSubscription = readResultObservable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                    switch (result.readState) {
-                        case NEEDS_AUTH:
-                            // An encrypted value was found, prompt for fingerprint to decrypt.
-                            // The fingerprint reader is active.
-                            try {
+            mSubscription = mWhorlwind.read(key)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(result -> {
+                        switch (result.readState) {
+                            case NEEDS_AUTH:
+                                // An encrypted value was found, prompt for fingerprint to decrypt.
+                                // The fingerprint reader is active.
                                 showFingerPrintDialog(prompt, callbacks);
-                            } catch (Throwable t) {
-                                mSubscription.unsubscribe();
-                                mSubscription = null;
-                            }
-                            break;
-                        case UNRECOVERABLE_ERROR:
-                        case AUTHORIZATION_ERROR:
-                        case RECOVERABLE_ERROR:
-                            // Show an error message. One may be provided in result.message.
-                            // Unless the state is UNRECOVERABLE_ERROR, the fingerprint reader is still
-                            // active and this stream will continue to emit result updates.
-                            fingerprintDialogError("Error reading finger");
-                            break;
-                        case READY:
-                            if (result.value != null) {
-                                // Value was found and has been decrypted.
-                                fingerprintDialogAuthenticated(result.value.utf8(), callbacks);
-                            } else {
-                                // No value was found. Fall back to password or fail silently, depending on
-                                // your use case.
-                                fingerprintDialogError("No fingerprint login key");
-                                if (mFingerprintDialog != null) {
-                                    mFingerprintDialog.dismiss();
-                                    mFingerprintDialog = null;
+                                break;
+                            case UNRECOVERABLE_ERROR:
+                            case AUTHORIZATION_ERROR:
+                            case RECOVERABLE_ERROR:
+                                // Show an error message. One may be provided in result.message.
+                                // Unless the state is UNRECOVERABLE_ERROR, the fingerprint reader is still
+                                // active and this stream will continue to emit result updates.
+                                fingerprintDialogError("Error reading finger");
+                                break;
+                            case READY:
+                                if (result.value != null) {
+                                    // Value was found and has been decrypted.
+                                    fingerprintDialogAuthenticated(result.value.utf8(), callbacks);
+                                } else {
+                                    // No value was found. Fall back to password or fail silently, depending on
+                                    // your use case.
+                                    fingerprintDialogError("No fingerprint login key");
+                                    if (mFingerprintDialog != null) {
+                                        mFingerprintDialog.dismiss();
+                                        mFingerprintDialog = null;
+                                    }
+                                    callbacks.onError();
                                 }
-                                callbacks.onError();
-                            }
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mSubscription = null;
-                                }
-                            }, 100);
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mSubscription = null;
+                                    }
+                                }, 100);
 
-                            break;
-                        default:
-                            throw new IllegalArgumentException("Unknown state: " + result.readState);
-                    }
-                });
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Unknown state: " + result.readState);
+                        }
+                    }, throwable -> {
+                        Log.e("ERROR", "getKeyChainString:subscribe threw onError", throwable);
+                    });
+        } catch (Exception e) {
+            Log.e("ERROR", "getKeyChainString:subscribe threw error");
+        }
     }
 
     private interface GetKeychainCallbacks {
