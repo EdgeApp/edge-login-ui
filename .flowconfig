@@ -2,6 +2,7 @@
 
 .*/node_modules/react-native/.*
 .*/node_modules/react-native-keyboard-aware-scroll-view/.*
+.*/node_modules/edge-login/.*
 
 [include]
 
