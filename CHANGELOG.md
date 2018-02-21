@@ -1,5 +1,14 @@
 # airbitz-core-js-ui
 
+## 0.2.1
+
+* Fix react-native build issues
+* Fix the Samsung Note 8 crash
+
+## 0.2.0
+
+* Split the project into two NPM packages
+
 ## 0.1.6
 
 * Upgrade to airbitz-core-js v0.3.5, which fixes edge logins.
