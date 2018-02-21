@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from 'react-native'
+import type { AbcContext, AbcAccount } from 'edge-login'
 const { AbcCoreJsUi } = NativeModules
 
 const LOGINKEY_KEY = 'key_loginkey'
@@ -14,7 +15,7 @@ const emptyTouchIdUsers = {
   disabledUsers: []
 }
 
-export async function isTouchEnabled (context, username) {
+export async function isTouchEnabled (context: AbcContext, username: string) {
   const supported = await supportsTouchId()
   if (supported) {
     const fingerprint = await context.io.folder
@@ -34,7 +35,7 @@ export async function isTouchEnabled (context, username) {
   return false
 }
 
-export async function isTouchDisabled (context, username) {
+export async function isTouchDisabled (context: AbcContext, username: string) {
   const supported = await supportsTouchId()
   if (supported) {
     const fingerprint = await context.io.folder
@@ -65,7 +66,7 @@ export async function supportsTouchId () {
   return !!out
 }
 
-async function addTouchIdUser (context, username) {
+async function addTouchIdUser (context: AbcContext, username: string) {
   const fingerprint = await context.io.folder
     .file('fingerprint.json')
     .getText()
@@ -83,7 +84,7 @@ async function addTouchIdUser (context, username) {
   await context.io.folder.file('fingerprint.json').setText(fingerprintJson)
 }
 
-async function removeTouchIdUser (context, username) {
+async function removeTouchIdUser (context: AbcContext, username: string) {
   const fingerprint = await context.io.folder
     .file('fingerprint.json')
     .getText()
@@ -103,7 +104,10 @@ async function removeTouchIdUser (context, username) {
   await context.io.folder.file('fingerprint.json').setText(fingerprintJson)
 }
 
-export async function enableTouchId (context, abcAccount) {
+export async function enableTouchId (
+  context: AbcContext,
+  abcAccount: AbcAccount
+) {
   const supported = await supportsTouchId()
 
   if (supported) {
@@ -115,7 +119,10 @@ export async function enableTouchId (context, abcAccount) {
   }
 }
 
-export async function disableTouchId (context, abcAccount) {
+export async function disableTouchId (
+  context: AbcContext,
+  abcAccount: AbcAccount
+) {
   const supported = await supportsTouchId()
 
   if (supported) {
@@ -128,12 +135,12 @@ export async function disableTouchId (context, abcAccount) {
 }
 
 export async function loginWithTouchId (
-  abcContext,
-  username,
-  promptString,
-  fallbackString,
-  opts,
-  callback
+  abcContext: AbcContext,
+  username: string,
+  promptString: string,
+  fallbackString: string,
+  opts: Object,
+  callback: any
 ) {
   const supported = await supportsTouchId()
 
