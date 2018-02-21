@@ -1,21 +1,28 @@
+// @flow
 import { connect } from 'react-redux'
-import LoginAppComponent from '../components/LogInAppComponent'
+import type { Dispatch, State } from '../../types/ReduxTypes'
+import { LoginAppComponent } from '../components/LogInAppComponent'
+import type { OwnProps } from '../components/LogInAppComponent'
 import * as loginAction from '../../common/actions/'
 import * as Constants from '../../common/constants'
-export const mapStateToProps = (state, ownProps) => {
+
+export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+  const previousUsers = state.previousUsers
+  const lastUser = state.previousUsers ? state.previousUsers.lastUser : null
+  const lastUserPinEnabled = lastUser ? lastUser.lastUserPinEnabled : false
   return {
-    context: ownProps.context,
-    onLogin: ownProps.onLogin,
-    previousUsers: state.previousUsers,
+    styles: ownProps.styles,
+    previousUsers,
+    lastUser,
+    lastUserPinEnabled,
     workflow: state.workflow
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    userLogin: data => dispatch(loginAction.userLogin(data)),
     getPreviousUsers: () => dispatch(loginAction.getPreviousUsers()),
-    startRecoveryWorkflow: backupKey => {
+    startRecoveryWorkflow: (backupKey: string) => {
       dispatch(
         loginAction.dispatchActionWithData(
           Constants.SET_RECOVERY_KEY,

@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import * as Constants from '../../common/constants'
@@ -17,7 +18,25 @@ import ForgotPasswordChangePasswordConnector from '../connectors/screens/existin
 import ForgotPinChangePinConnector from '../connectors/screens/existingAccount/ForgotPinChangePinConnector'
 import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 
-export default class LoginAppComponent extends Component {
+export type StateProps = {
+  workflow: Object,
+  recoveryLogin: string,
+  previousUsers: ?Object,
+  lastUser: Object,
+  lastUserPinEnabled: boolean
+}
+export type OwnProps = {
+  styles: Object
+}
+export type DispatchProps = {
+  getPreviousUsers(): void,
+  startRecoveryWorkflow(string): void
+}
+type State = {}
+
+type Props = StateProps & OwnProps & DispatchProps
+
+export class LoginAppComponent extends Component<Props, State> {
   componentWillMount () {
     this.props.getPreviousUsers()
   }
@@ -48,10 +67,7 @@ export default class LoginAppComponent extends Component {
           return null
           // change that key
         }
-        if (
-          this.props.previousUsers.lastUser &&
-          this.props.previousUsers.lastUser.pinEnabled
-        ) {
+        if (this.props.lastUser && this.props.lastUserPinEnabled) {
           // we have previous users, a last user, and that user has pin enabled.
           return this.getPinScreen()
         }
@@ -80,16 +96,13 @@ export default class LoginAppComponent extends Component {
     }
   }
 
-  onButtonPress () {
-    this.props.userLogin({ username: 'bob20', password: 'bob20' })
-  }
   getLoadingScreen () {
     return <LoadingScreenConnector styles={this.props.styles} />
   }
   getLandingScreen () {
     return <LandingScreenConnector styles={this.props.styles} />
   }
-  getCreateScreen (arg) {
+  getCreateScreen () {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
         return <NewAccountWelcomeScreenConnector styles={this.props.styles} /> // NewAccountWelcomeScreenConnector
@@ -109,11 +122,11 @@ export default class LoginAppComponent extends Component {
         return <NewAccountWelcomeScreenConnector styles={this.props.styles} />
     }
   }
-  getPasswordScreen (arg) {
+  getPasswordScreen () {
     return <LoginUsernamePasswordScreenConnector styles={this.props.styles} />
   }
 
-  getPinScreen (arg) {
+  getPinScreen () {
     return <PinLoginScreenConnector styles={this.props.styles} />
   }
   getOtpScreen () {
