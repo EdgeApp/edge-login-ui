@@ -1,23 +1,26 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
+// import type { Store } from '../../../types/ReduxTypes'
 import reducers from '../../../common/reducers'
+import type { AbcContext, AbcAccount } from 'edge-login'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import ChangePasswordAppConnector from '../../connectors/ChangePasswordAppConnector'
 import * as Styles from '../../styles'
 import { setLocal } from '../../../common/locale'
 
-/* type Props = {
-  account: any,
-  context: any,
+type Props = {
+  account: AbcAccount,
+  context: AbcContext,
   showHeader: boolean,
   locale: string,
   language: string,
   onComplete(): void,
-  onCancel(): void,
-} */
+  onCancel(): void
+}
 
-class ChangePasswordScreen extends Component {
+class ChangePasswordScreen extends Component<Props> {
+  store: any
   static defaultProps = {
     locale: 'US',
     language: 'en_us',
@@ -36,13 +39,13 @@ class ChangePasswordScreen extends Component {
           context: this.props.context,
           onComplete: this.props.onComplete,
           onCancel: this.props.onComplete,
-          locale: this.props.local,
+          locale: this.props.locale,
           language: this.props.language
         })
       )
     )
   }
-  componentWillReceiveProps (props) {}
+  componentWillReceiveProps (props: Props) {}
 
   render () {
     return (

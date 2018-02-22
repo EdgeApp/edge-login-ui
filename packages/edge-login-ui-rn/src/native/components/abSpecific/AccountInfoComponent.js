@@ -4,16 +4,20 @@ import { View, Text } from 'react-native'
 import { TextAndIconButton } from '../common'
 import * as Constants from '../../../common/constants/'
 
-type Props = {
-  style: Object,
+export type StateProps = {
   username?: string,
   password?: string,
   pin: string,
   passwordMessage?: string
 }
+export type OwnProps = {
+  style: Object
+}
 type State = {
   collapsed: boolean
 }
+
+type Props = OwnProps & StateProps
 
 class AccountInfoComponent extends Component<Props, State> {
   componentWillMount () {

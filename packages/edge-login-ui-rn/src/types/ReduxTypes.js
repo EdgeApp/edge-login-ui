@@ -26,6 +26,24 @@ export type State = {
   },
   workflow: {
     currentKey: string
+  },
+  create: {
+    username: string,
+    password: string,
+    pin: string,
+    pinErrorMessage: string
+  },
+  login: {
+    username: string,
+    pin: string,
+    password: string,
+    errorMessage: string,
+    isLoggingInWithPin: boolean
+  },
+  passwordStatus: {
+    secondsToCrack: number,
+    passed: boolean,
+    list: Array<Object>
   }
 }
 

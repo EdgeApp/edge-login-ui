@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import {
   View,
@@ -11,48 +12,57 @@ import * as Constants from '../../../common/constants'
 
 type Props = {
   style: Object,
+  pin: string,
+  username: string,
   autoLogIn: boolean,
-  onChangeText(string): void
+  error: string,
+  isLogginginWithPin: boolean,
+  onChangeText(Object): void
 }
 
 type State = {
   autoFocus: boolean,
+  isFocused: boolean,
   touchId: boolean,
   circleColor: string
 }
 
 class FourDigitInputComponent extends Component<Props, State> {
   inputRef: TextInput
+  keyboardDidShowListener: any
+  keyboardDidHideListener: any
   componentWillMount () {
     this.setState({
       autoFocus: false,
       touchId: false,
       circleColor: Constants.WHITE
     })
-    this.loadedInput = ref => {
-      if (ref) {
-        this.inputRef = ref
-        this.inputRef.focus()
-      }
-    }
   }
   componentWillUnmount () {
     this.keyboardDidShowListener.remove()
     this.keyboardDidHideListener.remove()
   }
+
+  loadedInput = (ref: TextInput) => {
+    if (ref) {
+      this.inputRef = ref
+      this.inputRef.focus()
+    }
+  }
+  _keyboardDidShow = () => {
+    this.setState({
+      circleColor: Constants.ACCENT_ORANGE
+    })
+  }
+  _keyboardDidHide = () => {
+    this.setState({
+      circleColor: Constants.ACCENT_RED
+    })
+  }
+
   componentDidMount () {
     if (this.inputRef) {
       this.inputRef.focus()
-    }
-    this._keyboardDidShow = () => {
-      this.setState({
-        circleColor: Constants.ACCENT_ORANGE
-      })
-    }
-    this._keyboardDidHide = () => {
-      this.setState({
-        circleColor: Constants.ACCENT_RED
-      })
     }
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -62,13 +72,12 @@ class FourDigitInputComponent extends Component<Props, State> {
       'keyboardDidHide',
       this._keyboardDidHide
     )
-
     this.inputRef.focus()
     this.setState({
       autoFocus: true
     })
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (nextProps.isLogginginWithPin) {
       this.setState({
         touchId: true

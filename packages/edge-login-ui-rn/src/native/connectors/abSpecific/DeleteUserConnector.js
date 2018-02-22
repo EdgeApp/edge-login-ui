@@ -1,9 +1,14 @@
+// @flow
 import { connect } from 'react-redux'
 import { MyModal } from '../../components/common/'
+import type { State, Dispatch } from '../../../types/ReduxTypes'
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
 
-export const mapStateToProps = (state, ownProps) => {
+type OwnProps = {
+  username: string
+}
+export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const middleText =
     'Delete ' +
     ownProps.username +
@@ -17,7 +22,7 @@ export const mapStateToProps = (state, ownProps) => {
     cancelLabel: 'Cancel'
   }
 }
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     cancel: () => dispatch(actions.cancelSkipStep()),
     action: () => dispatch(actions.deleteUserFromDevice(ownProps.username))

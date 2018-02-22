@@ -28,6 +28,7 @@ type Props = {
   hideCancelX: boolean,
   middleText: string,
   modalMiddleComponent?: any,
+  thinking: boolean,
   action(): void,
   cancel(): void
 }

@@ -1,8 +1,13 @@
+// @flow
 import { connect } from 'react-redux'
 import { MyModal } from '../../components/common/'
+import type { State, Dispatch } from '../../../types/ReduxTypes'
 import * as Constants from '../../../common/constants'
 
-export const mapStateToProps = (state, ownProps) => {
+type OwnProps = {
+  action(): void
+}
+export const mapStateToProps = (state: State) => {
   return {
     headerText: "Can't send email",
     middleText:
@@ -14,7 +19,7 @@ export const mapStateToProps = (state, ownProps) => {
     singleButton: true
   }
 }
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     action: ownProps.action
   }
