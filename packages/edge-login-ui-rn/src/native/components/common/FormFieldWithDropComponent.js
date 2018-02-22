@@ -1,38 +1,35 @@
+// @flow
 import React, { Component } from 'react'
-// import * as Colors from '../../../common/constants/Colors'
 import { KeyboardAvoidingView } from 'react-native'
 import { DropDownList } from './DropDownList'
 import { Input } from '../materialWrappers/indexMaterial'
 
-/* type Props = {
-  dataList: Array,
+type Props = {
+  data: any,
   style: any,
   label: string,
   value: string,
   placeholder: string,
-  autoCorrect: boolean,
   autoFocus: boolean,
+  isFocused: boolean,
   forceFocus: boolean,
   autoCapitalize: string,
   secureTextEntry: boolean,
-  showSecureCheckbox: boolean,
   returnKeyType: string,
   error: string,
-  onFinish(): void,
   onFocus(): void,
+  onBlur(): void,
   onChangeText(): void,
-  renderListRow(): void,
-} */
-class FormFieldWithDropComponent extends Component {
-  /* static defaultProps = {
-    autoCapitalize: 'none',
-    autoCorrect: false,
-    autoFocus: false,
-    forceFocus: false,
-    returnKeyType: 'go',
-    onFocus: null
-  } */
+  renderRow(): void,
+  onSubmitEditing(): void
+}
+type State = {
+  secure: boolean,
+  autoFocus: boolean,
+  isFocused: boolean
+}
 
+class FormFieldWithDropComponent extends Component<Props, State> {
   componentWillMount () {
     const secure = this.props.secureTextEntry
       ? this.props.secureTextEntry
@@ -42,27 +39,22 @@ class FormFieldWithDropComponent extends Component {
       autoFocus: this.props.autoFocus,
       isFocused: this.props.isFocused
     })
-    this.onSubmitEditing = event => {
-      if (this.props.onSubmitEditing) {
-        this.props.onSubmitEditing()
-      }
-    }
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     this.setState({
       isFocused: nextProps.isFocused
     })
   }
+  onSubmitEditing = (event: any) => {
+    if (this.props.onSubmitEditing) {
+      this.props.onSubmitEditing()
+    }
+  }
+
+  handleSelectListItem = () => {}
 
   render () {
     const Style = this.props.style
-
-    /* return (
-      <View style={Style.container}>
-        {this.renderInput(Style.materialInput)}
-        {this.renderDropList(Style)}
-      </View>
-    ) */
     return (
       <KeyboardAvoidingView
         style={Style.container}
@@ -75,7 +67,7 @@ class FormFieldWithDropComponent extends Component {
       </KeyboardAvoidingView>
     )
   }
-  renderInput (style) {
+  renderInput (style: Object) {
     const {
       container,
       baseColor,
@@ -109,7 +101,7 @@ class FormFieldWithDropComponent extends Component {
       />
     )
   }
-  renderDropList (style) {
+  renderDropList (style: Object) {
     if (this.state.isFocused) {
       return (
         <DropDownList

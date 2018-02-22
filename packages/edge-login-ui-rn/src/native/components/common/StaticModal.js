@@ -1,13 +1,20 @@
+// @flow
 import React, { Component } from 'react'
 import { StaticModalStyle } from '../../../common/styles/'
-// import { View, Text, TouchableOpacity, Platform } from 'react-native'
 import { View, TouchableOpacity } from 'react-native'
 import { Icon } from './'
 import Modal from 'react-native-modal'
 import * as Constants from '../../../common/constants'
 import LinearGradient from 'react-native-linear-gradient'
 
-class StaticModal extends Component {
+type Props = {
+  modalDismissTimerSeconds: number,
+  body: any,
+  cancel(): void
+}
+class StaticModal extends Component<Props> {
+  // $FlowFixMe
+  reset: number
   componentDidMount () {
     if (this.props.modalDismissTimerSeconds) {
       this.reset = setTimeout(() => {

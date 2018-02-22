@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { ModalStyle } from '../../../common/styles/'
 import {
@@ -10,123 +11,33 @@ import {
 import { IconButton, Icon, Button } from './'
 import Modal from 'react-native-modal'
 import * as Constants from '../../../common/constants'
-/* type Props = {
-  styles
-headerText
-iconSize
-headerSubtext
-icon: string,
-actionLabel string
-cancelLabel string
-singleButton? boolean
-buttonTimerSeconds? number,
-modalDismissTimerSeconds? number
-hideCancelX:boolean
-middleText
-modalMiddleComponent? any
-action()
-cancel()
-} */
 
-/* type State = {
-  showButtons:boolean default true
-} */
-class MyModal extends Component {
-  /* static defaultProps = {
-    showcancelButton: true #############
-  } */
-  constructor (props) {
-    super(props)
-    this.renderMiddle = styles => {
-      if (this.props.modalMiddleComponent) {
-        return this.props.modalMiddleComponent
-      }
+type Props = {
+  styles: Object,
+  headerText: string,
+  iconSize: number,
+  headerSubtext: string,
+  icon: string,
+  iconType: string,
+  image: string,
+  actionLabel: string,
+  cancelLabel: string,
+  singleButton: boolean,
+  buttonTimerSeconds?: number,
+  modalDismissTimerSeconds?: number,
+  hideCancelX: boolean,
+  middleText: string,
+  modalMiddleComponent?: any,
+  action(): void,
+  cancel(): void
+}
 
-      return <Text style={styles.modalMiddleText}>{this.props.middleText}</Text>
-    }
-    this.renderBottom = styles => {
-      if (!this.state.showButtons) {
-        return <View style={styles.buttonsWrap} />
-      }
-      if (this.props.thinking) {
-        return (
-          <View style={styles.activityWrap}>
-            <ActivityIndicator />
-          </View>
-        )
-      }
-      if (this.props.singleButton) {
-        return (
-          <View style={styles.buttonsWrap}>
-            <Button
-              label={this.props.actionLabel}
-              upStyle={styles.twoButtonConfig.actionButton.up}
-              upTextStyle={styles.twoButtonConfig.actionButton.upText}
-              downStyle={styles.twoButtonConfig.actionButton.down}
-              downTextStyle={styles.twoButtonConfig.actionButton.downText}
-              onPress={this.props.action}
-            />
-          </View>
-        )
-      }
-      return (
-        <View style={styles.buttonsWrap}>
-          <View style={styles.twoButtonConfig.cancelButtonWrap}>
-            <Button
-              label={this.props.cancelLabel}
-              upStyle={styles.twoButtonConfig.cancelButton.up}
-              upTextStyle={styles.twoButtonConfig.cancelButton.upText}
-              downStyle={styles.twoButtonConfig.cancelButton.down}
-              downTextStyle={styles.twoButtonConfig.cancelButton.downText}
-              onPress={this.props.cancel}
-            />
-          </View>
-          <View style={styles.twoButtonConfig.actionButtonWrap}>
-            <Button
-              label={this.props.actionLabel}
-              upStyle={styles.twoButtonConfig.actionButton.up}
-              upTextStyle={styles.twoButtonConfig.actionButton.upText}
-              downStyle={styles.twoButtonConfig.actionButton.down}
-              downTextStyle={styles.twoButtonConfig.actionButton.downText}
-              onPress={this.props.action}
-            />
-          </View>
-        </View>
-      )
-    }
-    this.renderGradient = (styles, icon, iconType, image) => {
-      if (image) {
-        return (
-          <View style={styles.modalHeaderIconWrapBottom}>
-            <Image source={image} />
-          </View>
-        )
-      }
-      return (
-        <View style={styles.modalHeaderIconWrapBottom}>
-          <Icon
-            style={styles.iconStyle}
-            name={icon}
-            size={styles.iconSize}
-            type={iconType}
-          />
-        </View>
-      )
-    }
-    this.renderCloseX = styles => {
-      if (this.props.hideCancelX) {
-        return null
-      }
-      return (
-        <IconButton
-          style={styles.closeIconButton}
-          icon={Constants.CLOSE_ICON}
-          iconType={Constants.MATERIAL_ICONS}
-          onPress={this.props.cancel}
-        />
-      )
-    }
-  }
+type State = {
+  showButtons: boolean
+}
+class MyModal extends Component<Props, State> {
+  // $FlowFixMe
+  reset: number
   componentWillMount () {
     this.setState({
       showButtons: !this.props.buttonTimerSeconds
@@ -149,6 +60,105 @@ class MyModal extends Component {
   componentWillUnmount () {
     clearInterval(this.reset)
   }
+
+  renderMiddle = (styles: Object) => {
+    if (this.props.modalMiddleComponent) {
+      return this.props.modalMiddleComponent
+    }
+
+    return <Text style={styles.modalMiddleText}>{this.props.middleText}</Text>
+  }
+
+  renderBottom = (styles: Object) => {
+    if (!this.state.showButtons) {
+      return <View style={styles.buttonsWrap} />
+    }
+    if (this.props.thinking) {
+      return (
+        <View style={styles.activityWrap}>
+          <ActivityIndicator />
+        </View>
+      )
+    }
+    if (this.props.singleButton) {
+      return (
+        <View style={styles.buttonsWrap}>
+          <Button
+            label={this.props.actionLabel}
+            upStyle={styles.twoButtonConfig.actionButton.up}
+            upTextStyle={styles.twoButtonConfig.actionButton.upText}
+            downStyle={styles.twoButtonConfig.actionButton.down}
+            downTextStyle={styles.twoButtonConfig.actionButton.downText}
+            onPress={this.props.action}
+          />
+        </View>
+      )
+    }
+    return (
+      <View style={styles.buttonsWrap}>
+        <View style={styles.twoButtonConfig.cancelButtonWrap}>
+          <Button
+            label={this.props.cancelLabel}
+            upStyle={styles.twoButtonConfig.cancelButton.up}
+            upTextStyle={styles.twoButtonConfig.cancelButton.upText}
+            downStyle={styles.twoButtonConfig.cancelButton.down}
+            downTextStyle={styles.twoButtonConfig.cancelButton.downText}
+            onPress={this.props.cancel}
+          />
+        </View>
+        <View style={styles.twoButtonConfig.actionButtonWrap}>
+          <Button
+            label={this.props.actionLabel}
+            upStyle={styles.twoButtonConfig.actionButton.up}
+            upTextStyle={styles.twoButtonConfig.actionButton.upText}
+            downStyle={styles.twoButtonConfig.actionButton.down}
+            downTextStyle={styles.twoButtonConfig.actionButton.downText}
+            onPress={this.props.action}
+          />
+        </View>
+      </View>
+    )
+  }
+
+  renderGradient = (
+    styles: Object,
+    icon: string,
+    iconType: string,
+    image: string
+  ) => {
+    if (image) {
+      return (
+        <View style={styles.modalHeaderIconWrapBottom}>
+          <Image source={image} />
+        </View>
+      )
+    }
+    return (
+      <View style={styles.modalHeaderIconWrapBottom}>
+        <Icon
+          style={styles.iconStyle}
+          name={icon}
+          size={styles.iconSize}
+          type={iconType}
+        />
+      </View>
+    )
+  }
+
+  renderCloseX = (styles: Object) => {
+    if (this.props.hideCancelX) {
+      return null
+    }
+    return (
+      <IconButton
+        style={styles.closeIconButton}
+        icon={Constants.CLOSE_ICON}
+        iconType={Constants.MATERIAL_ICONS}
+        onPress={this.props.cancel}
+      />
+    )
+  }
+
   render () {
     const styles = this.props.styles ? this.props.styles : ModalStyle
     const { headerText, headerSubtext, icon, iconType, image } = this.props

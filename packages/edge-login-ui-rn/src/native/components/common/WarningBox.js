@@ -1,9 +1,15 @@
+// @flow
 import React from 'react'
 import { View, Text } from 'react-native'
 import { Icon } from './'
 import * as Constants from '../../../common/constants'
-// <Icon style={styles.iconStyle} icon={Constants.CLOSE_ICON} size={styles.iconSize} type={Constants.MATERIAL_ICONS} />
-const WarningBox = ({ style, message }) => {
+
+type Props = {
+  style: Object,
+  message: string
+}
+
+const WarningBox = ({ style, message }: Props) => {
   const renderGradient = (styles, icon, iconType) => {
     return (
       <View style={styles.iconWrapBottom}>
@@ -15,9 +21,6 @@ const WarningBox = ({ style, message }) => {
         />
       </View>
     )
-    /* return <View style={styles.iconWrapBottom}>
-      <View style={styles.iconWrapTop} />
-    </View> */
   }
   return (
     <View style={style.container}>

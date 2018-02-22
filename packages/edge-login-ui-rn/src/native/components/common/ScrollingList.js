@@ -1,13 +1,14 @@
+// @flow
 import React, { Component } from 'react'
 import { View, ListView } from 'react-native'
 
-/* type Props = {
-  style: any,
-  dataList: Array,
-  getListItemsFunction(): void
+type Props = {
+  style: Object,
+  dataList: Array<any>,
+  getListItemsFunction(any): void
 }
- */
-class ScrollingList extends Component {
+class ScrollingList extends Component<Props> {
+  dataSource: any
   componentWillMount () {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     this.dataSource = ds.cloneWithRows(this.props.dataList)
@@ -22,7 +23,7 @@ class ScrollingList extends Component {
       </View>
     )
   }
-  renderRow (item) {
+  renderRow (item: any) {
     return this.props.getListItemsFunction(item)
   }
 }

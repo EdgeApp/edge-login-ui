@@ -1,7 +1,8 @@
+// @flow
 import React, { Component } from 'react'
 import { Text, View, Image, TouchableWithoutFeedback } from 'react-native'
 
-/* type Props = {
+type Props = {
   style: any,
   label: string,
   checkedImage: number,
@@ -9,24 +10,27 @@ import { Text, View, Image, TouchableWithoutFeedback } from 'react-native'
   value: boolean,
   disabled: boolean,
   isSelected: boolean,
-  onChange(): void,
+  onChange(boolean): void
 }
- */
-class Checkbox extends Component {
+
+type State = {
+  onOff: boolean
+}
+class Checkbox extends Component<Props, State> {
   componentWillMount () {
     const onOff = this.props.value ? this.props.value : false
     this.setState({
       onOff: onOff
     })
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (this.props.disabled) {
       this.setState({
         onOff: nextProps.value
       })
     }
   }
-  renderImage (style) {
+  renderImage (style: Object) {
     if (this.state.onOff) {
       return (
         <View style={style.checkbox}>

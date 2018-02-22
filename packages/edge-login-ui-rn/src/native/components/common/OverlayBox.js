@@ -1,7 +1,12 @@
+// @flow
 import React from 'react'
 import { View } from 'react-native'
 
-const OverlayBox = ({ children, style }) => {
+type Props = {
+  children: any,
+  syle: Object
+}
+const OverlayBox = ({ children, style }: Props) => {
   return (
     <View>
       <View />

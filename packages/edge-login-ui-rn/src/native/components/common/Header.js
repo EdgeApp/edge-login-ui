@@ -1,11 +1,20 @@
+// @flow
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { Button, HeaderBackButton } from '../common'
 import * as Colors from '../../../common/constants/Colors'
 import LinearGradient from 'react-native-linear-gradient'
 
+type Props = {
+  style: Object,
+  subTitle: string,
+  title: string,
+  showBackButton: boolean,
+  skipScreen(): void,
+  goBack(): void
+}
 // Make a component
-class Header extends Component {
+class Header extends Component<Props> {
   render () {
     const Style = this.props.style
     return (
@@ -21,7 +30,7 @@ class Header extends Component {
       </LinearGradient>
     )
   }
-  renderBack (style) {
+  renderBack (style: Object) {
     if (!this.props.showBackButton) {
       return
     }
@@ -31,13 +40,13 @@ class Header extends Component {
     }
     return (
       <HeaderBackButton
-        onPress={this.onBack.bind(this)}
+        onPress={this.onBack}
         styles={style.headerBackButtonStyle}
         label={label}
       />
     )
   }
-  renderText (style) {
+  renderText (style: Object) {
     return (
       <View style={style.center}>
         <Text style={style.subHeadText}>{this.props.subTitle}</Text>
@@ -45,13 +54,13 @@ class Header extends Component {
       </View>
     )
   }
-  renderSkip (style) {
+  renderSkip (style: Object) {
     if (!this.props.showSkipButton) {
       return
     }
     return (
       <Button
-        onPress={this.onSkip.bind(this)}
+        onPress={this.onSkip}
         downStyle={style.textButton.downStyle}
         downTextStyle={style.textButton.downTextStyle}
         upStyle={style.textButton.upStyle}
@@ -60,10 +69,10 @@ class Header extends Component {
       />
     )
   }
-  onSkip () {
+  onSkip = () => {
     this.props.skipScreen()
   }
-  onBack () {
+  onBack = () => {
     this.props.goBack()
   }
 }

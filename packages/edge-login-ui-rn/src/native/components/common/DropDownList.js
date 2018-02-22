@@ -1,7 +1,14 @@
+// @flow
 import React, { Component } from 'react'
 import { FlatList } from 'react-native'
 
-class DropDownList extends Component {
+type Props = {
+  style: Object,
+  data: any,
+  renderRow(): void
+}
+class DropDownList extends Component<Props> {
+  keyExtractor: Function
   componentWillMount () {
     this.keyExtractor = (item, index) => index
   }

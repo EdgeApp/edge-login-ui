@@ -2,25 +2,30 @@ import React, { Component } from 'react'
 import { Text, TouchableHighlight, View } from 'react-native'
 import { Spinner } from './Spinner'
 
-/* type Props = {
+type Props = {
   label: string,
-  downStyle: object,
-  upStyle: any,
-  downTextStyle: any,
-  upTextStyle: any,
+  downStyle: Object,
+  upStyle: Object,
+  downTextStyle: Object,
+  upTextStyle: Object,
   isThinking: boolean,
   doesThink: boolean,
   onPress(): void // if doesThink is used, then isThinking is also required
-} */
+}
 
-class Button extends Component {
+type State = {
+  isThinking: boolean,
+  pressed: boolean
+}
+
+class Button extends Component<Props, State> {
   componentWillMount () {
     this.setState({
       isThinking: false,
       pressed: false
     })
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (nextProps.isThinking !== this.state.isThinking) {
       this.setState({
         isThinking: nextProps.isThinking

@@ -1,12 +1,13 @@
+// @flow
 import React from 'react'
 import { SafeAreaView } from 'react-native'
 
-type props = {
+type Props = {
   style: any,
   children: any
 }
 
-const SafeAreaViewComponent = ({ style, children }: props) => {
+const SafeAreaViewComponent = ({ style, children }: Props) => {
   return <SafeAreaView style={[style, { flex: 1 }]}>{children}</SafeAreaView>
 }
 

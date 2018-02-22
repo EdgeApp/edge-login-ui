@@ -1,14 +1,15 @@
+// @flow
 import React from 'react'
 import { SafeAreaView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import * as Colors from '../../../common/constants/Colors'
 
-type props = {
+type Props = {
   style: any,
   children: any
 }
 
-const SafeAreaViewComponent = ({ style, children }: props) => {
+const SafeAreaViewComponent = ({ style, children }: Props) => {
   return (
     <SafeAreaView style={[style, { flex: 1 }]}>
       {children}
