@@ -4,7 +4,7 @@ import { Image, View } from 'react-native'
 import * as Assets from '../../assets/'
 
 type Props = {
-  small: boolean,
+  small?: boolean,
   style: Object
 }
 

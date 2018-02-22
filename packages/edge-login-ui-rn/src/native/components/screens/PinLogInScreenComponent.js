@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import {
@@ -8,48 +9,68 @@ import {
 } from '../../components/common'
 import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
 import FourDigitInputConnector from '../../connectors/abSpecific/FourDigitInputConnector'
-// import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 
-export default class PinLogInScreenComponent extends Component {
+type Props = {
+  styles: Object,
+  usersWithPin: Array<string>,
+  username: string,
+  launchUserLoginWithTouchId(Object): void,
+  changeUser(string): void,
+  launchDeleteModal(): void,
+  gotoLoginPage(): void
+  /* pin: string,
+  showHeader: boolean,
+  showModal: boolean,
+  forgotPasswordModal: boolean,
+  changePin(string): void,
+  login(): void */
+}
+type State = {
+  loggingIn: boolean,
+  pin: string,
+  username: string,
+  focusOn: string
+}
+export default class PinLogInScreenComponent extends Component<Props, State> {
   componentWillMount () {
     this.setState({
       pin: '',
       loggingIn: false,
       focusOn: 'pin'
     })
-    this.relaunchTouchId = () => {
-      this.props.launchUserLoginWithTouchId({ username: this.props.username })
-    }
-    this.renderTouchButton = style => {
-      if (this.props.username) {
-        return (
-          <ImageButton
-            style={style.thumbprintButton}
-            source={Assets.TOUCH}
-            onPress={this.relaunchTouchId}
-          />
-        )
-      }
-      return null
-    }
-    this.renderModal = style => {
-      if (this.props.showModal) {
-        return (
-          <DeleteUserConnector
-            style={style.modal.skip}
-            username={this.state.username}
-          />
-        )
-      }
-      return null
-    }
   }
   componentDidMount () {
     if (this.props.username) {
       this.props.launchUserLoginWithTouchId({ username: this.props.username })
     }
+  }
+  relaunchTouchId = () => {
+    this.props.launchUserLoginWithTouchId({ username: this.props.username })
+  }
+  renderTouchButton = (style: Object) => {
+    if (this.props.username) {
+      return (
+        <ImageButton
+          style={style.thumbprintButton}
+          source={Assets.TOUCH}
+          onPress={this.relaunchTouchId}
+        />
+      )
+    }
+    return null
+  }
+  renderModal = (style: Object) => {
+    if (this.props.showModal) {
+      return (
+        <DeleteUserConnector
+          style={style.modal.skip}
+          username={this.state.username}
+        />
+      )
+    }
+    return null
   }
   render () {
     const { PinLoginScreenStyle } = this.props.styles
@@ -67,11 +88,6 @@ export default class PinLogInScreenComponent extends Component {
   renderOverImage () {
     const { PinLoginScreenStyle } = this.props.styles
     if (this.props.loginSuccess) {
-      /* return (
-        <View style={PinLoginScreenStyle.featureBox}>
-          <Text>LOGIN SUCCESS</Text>
-        </View>
-      ) */
       return null
     }
     return (
@@ -86,7 +102,7 @@ export default class PinLogInScreenComponent extends Component {
     )
   }
 
-  renderBottomHalf (style) {
+  renderBottomHalf (style: Object) {
     if (this.state.focusOn === 'pin') {
       return (
         <View style={style.innerView}>
@@ -124,7 +140,7 @@ export default class PinLogInScreenComponent extends Component {
     this.props.gotoLoginPage()
   }
 
-  renderItems (item) {
+  renderItems (item: Object) {
     const { PinLoginScreenStyle } = this.props.styles
     return (
       <UserListItem
@@ -135,14 +151,14 @@ export default class PinLogInScreenComponent extends Component {
       />
     )
   }
-  deleteUser (arg) {
+  deleteUser (arg: string) {
     this.setState({
       focusOn: 'pin',
       username: arg
     })
     this.props.launchDeleteModal()
   }
-  selectUser (arg) {
+  selectUser (arg: string) {
     this.props.launchUserLoginWithTouchId({ username: arg })
     this.props.changeUser(arg)
     this.setState({
