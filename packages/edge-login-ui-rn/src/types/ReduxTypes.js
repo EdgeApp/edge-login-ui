@@ -36,7 +36,9 @@ export type State = {
     pinErrorMessage: string,
     confirmPassword: string,
     confirmPasswordErrorMessage: string,
-    usernameErrorMessage: string
+    usernameErrorMessage: string,
+    showModal: boolean,
+    passwordStatus: Object
   },
   login: {
     username: string,

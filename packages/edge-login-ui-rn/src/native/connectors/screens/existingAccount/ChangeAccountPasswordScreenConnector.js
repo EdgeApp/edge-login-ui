@@ -1,9 +1,13 @@
+// @flow
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/existingAccout/ChangeAccountPasswordScreenComponent'
+import type { OwnProps } from '../../../components/screens/existingAccout/ChangeAccountPasswordScreenComponent'
+
 import * as actions from '../../../../common/actions'
 import * as Constants from '../../../../common/constants'
+import type { State, Dispatch } from '../../../../types/ReduxTypes'
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const error = state.create.confirmPasswordErrorMessage
     ? state.create.confirmPasswordErrorMessage
     : ''
@@ -24,12 +28,12 @@ export const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     setWorkflow: () =>
       dispatch(actions.startWorkflow(Constants.WORKFLOW_PASSWORD)),
     checkTheConfirmPassword: () => dispatch(actions.validateConfirmPassword()),
-    changePassword: data => dispatch(actions.changePassword(data))
+    changePassword: (data: string) => dispatch(actions.changePassword(data))
   }
 }
 

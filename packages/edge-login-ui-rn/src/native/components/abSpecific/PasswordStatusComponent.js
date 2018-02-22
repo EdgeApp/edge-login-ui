@@ -9,16 +9,17 @@ import {
 
 type Props = {
   style: Object,
-  secondsToCrack: number,
-  status: Object,
-  isSelected: boolean,
-  onChange(boolean): void
+  secondsToCrack?: string,
+  status: Object
 }
 
 export default class PaswordStatusComponent extends Component<Props> {
   componentWillMount () {}
   render () {
     return this.renderInterior()
+  }
+  onChange = () => {
+    // do nothing
   }
   renderStatusList (style: Object) {
     return this.props.status.list.map(Item => (
@@ -27,8 +28,8 @@ export default class PaswordStatusComponent extends Component<Props> {
           style={style.checkboxes}
           label={Item.title}
           value={Item.value}
-          isSelected={this.props.isSelected}
-          onChange={this.props.onChange}
+          isSelected={false}
+          onChange={this.onChange}
           checkedImage={PASSWORD_REQ_CHECKED}
           uncheckedImage={PASSWORD_REQ_UNCHECKED}
           disabled

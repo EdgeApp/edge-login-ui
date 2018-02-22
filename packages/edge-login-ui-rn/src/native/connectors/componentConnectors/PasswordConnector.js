@@ -7,9 +7,7 @@ import type { State, Dispatch } from '../../../types/ReduxTypes'
 type OwnProps = {
   label: string,
   autoFocus: boolean,
-  onFinish(): void,
-  onBlur(): void,
-  onFocus(): void
+  onFinish(): void
 }
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
@@ -33,9 +31,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
 export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     onChangeText: (data: string) => dispatch(actions.validatePassword(data)),
-    onSubmitEditing: ownProps.onFinish,
-    onBlur: ownProps.onBlur,
-    onFocus: ownProps.onFocus
+    onSubmitEditing: ownProps.onFinish
   }
 }
 
