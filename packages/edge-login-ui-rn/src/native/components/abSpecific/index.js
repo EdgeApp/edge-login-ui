@@ -1,6 +1,6 @@
+// @flow
 export * from './LogoImageHeader'
 export * from './ImageHeaderComponent'
-// export * from './PasswordStatusComponent'
 export * from './FourDigitInputComponent'
 export * from './UserListItem'
 export * from './AccountInfoComponent'

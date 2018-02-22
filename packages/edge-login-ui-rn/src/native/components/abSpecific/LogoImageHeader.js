@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { Image, View } from 'react-native'
 import * as Assets from '../../assets/'
 
-/* type Props = {
+type Props = {
   small: boolean,
-  style: any
-} */
+  style: Object
+}
 
-class LogoImageHeader extends Component {
+class LogoImageHeader extends Component<Props> {
   render () {
     let src = Assets.LOGO_BIG
     if (this.props.small) {

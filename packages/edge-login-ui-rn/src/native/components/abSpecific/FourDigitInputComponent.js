@@ -9,12 +9,20 @@ import {
 import { Spinner } from '../common'
 import * as Constants from '../../../common/constants'
 
-/* type Props = {
-  style: any,
-  autoLogIn: boolean
-} */
+type Props = {
+  style: Object,
+  autoLogIn: boolean,
+  onChangeText(string): void
+}
 
-class FourDigitInputComponent extends Component {
+type State = {
+  autoFocus: boolean,
+  touchId: boolean,
+  circleColor: string
+}
+
+class FourDigitInputComponent extends Component<Props, State> {
+  inputRef: TextInput
   componentWillMount () {
     this.setState({
       autoFocus: false,
@@ -70,19 +78,19 @@ class FourDigitInputComponent extends Component {
   render () {
     const Style = this.props.style
     return (
-      <TouchableWithoutFeedback onPress={this.refocus.bind(this)}>
+      <TouchableWithoutFeedback onPress={this.refocus}>
         <View style={Style.container}>
           <View style={Style.interactiveContainer}>
             {this.renderDotContainer(Style)}
             <TextInput
               ref={this.loadedInput}
               style={Style.input}
-              onChangeText={this.updatePin.bind(this)}
+              onChangeText={this.updatePin}
               maxLength={4}
               keyboardType="numeric"
               value={this.props.pin}
-              onFocus={this.onFocus.bind(this)}
-              onBlur={this.onBlur.bind(this)}
+              onFocus={this.onFocus}
+              onBlur={this.onBlur}
               autoFocus={this.state.autoFocus}
               keyboardShouldPersistTaps
             />
@@ -94,13 +102,13 @@ class FourDigitInputComponent extends Component {
       </TouchableWithoutFeedback>
     )
   }
-  onFocus () {
+  onFocus = () => {
     this.inputRef.focus()
     this.setState({
       isFocused: true
     })
   }
-  onBlur () {
+  onBlur = () => {
     if (this.props.dontForceFocus) {
       return
     }
@@ -110,18 +118,18 @@ class FourDigitInputComponent extends Component {
       circleColor: Constants.WHITE
     })
   }
-  refocus () {
+  refocus = () => {
     this.inputRef.focus()
     this.setState({
       autoFocus: true,
       isFocused: false
     })
   }
-  renderCircleTest (style) {
+  renderCircleTest (style: Object) {
     return style
     // return {...style, borderColor: this.state.circleColor}
   }
-  renderDotContainer (style) {
+  renderDotContainer (style: Object) {
     const pinLength = this.props.pin ? this.props.pin.length : 0
     if ((pinLength === 4 || this.state.touchId) && this.props.autoLogIn) {
       return <Spinner />
@@ -155,7 +163,7 @@ class FourDigitInputComponent extends Component {
       </View>
     )
   }
-  updatePin (arg) {
+  updatePin = (arg: string) => {
     this.props.onChangeText({ username: this.props.username, pin: arg })
   }
 }

@@ -6,17 +6,18 @@ import {
   PASSWORD_REQ_UNCHECKED
 } from '../../../native/assets'
 
-/* type Props = {
-  style: any,
-  status: any
+type Props = {
+  style: Object,
+  secondsToCrack: number,
+  status: Array<Object>
 }
- */
-export default class PaswordStatusComponent extends Component {
+
+export default class PaswordStatusComponent extends Component<Props> {
   componentWillMount () {}
   render () {
     return this.renderInterior()
   }
-  renderStatusList (style) {
+  renderStatusList (style: Object) {
     return this.props.status.list.map(Item => (
       <View style={style.checkboxContainer} key={Item.title}>
         <Checkbox

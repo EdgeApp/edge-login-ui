@@ -2,39 +2,38 @@ import React, { Component } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import { IconButton } from '../common'
 import * as Constants from '../../../common/constants'
-/* type Props= {
-  data: any,
-  style: any,
-  onClick():void,
-  onDelete():void
-} */
 
-class UserListItem extends Component {
-  componentWillMount () {
-    this.deleteThis = () => {
-      this.props.onDelete(this.props.data)
-    }
-    this.onPress = () => {
-      this.props.onClick(this.props.data)
-    }
+type Props = {
+  data: string,
+  style: Object,
+  onClick(string): void,
+  onDelete(string): void
+}
+
+class UserListItem extends Component<Props> {
+  deleteThis = () => {
+    this.props.onDelete(this.props.data)
+  }
+  onPress = () => {
+    this.props.onClick(this.props.data)
   }
   render () {
-    const Style = this.props.style
+    const style = this.props.style
     return (
       <TouchableOpacity onPress={this.onPress}>
-        {this.renderInside(Style)}
+        {this.renderInside(style)}
       </TouchableOpacity>
     )
   }
-  renderInside (Style) {
+  renderInside (style: Object) {
     if (this.props.onDelete) {
       return (
-        <View style={Style.container}>
-          <View style={Style.textComtainer}>
-            <Text style={Style.text}>{this.props.data}</Text>
+        <View style={style.container}>
+          <View style={style.textComtainer}>
+            <Text style={style.text}>{this.props.data}</Text>
           </View>
           <IconButton
-            style={Style.iconButton}
+            style={style.iconButton}
             icon={Constants.CLOSE_ICON}
             iconType={Constants.MATERIAL_ICONS}
             onPress={this.deleteThis}
@@ -43,8 +42,8 @@ class UserListItem extends Component {
       )
     }
     return (
-      <View style={Style.container}>
-        <Text style={Style.text}>{this.props.data}</Text>
+      <View style={style.container}>
+        <Text style={style.text}>{this.props.data}</Text>
       </View>
     )
   }

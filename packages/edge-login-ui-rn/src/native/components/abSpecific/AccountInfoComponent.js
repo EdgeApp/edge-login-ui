@@ -1,24 +1,27 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { TextAndIconButton } from '../common'
 import * as Constants from '../../../common/constants/'
 
-/* type Props = {
+type Props = {
+  style: Object,
   username?: string,
   password?: string,
-  pin: string.isRequired,
+  pin: string,
   passwordMessage?: string
-} */
-/* <TouchableWithoutFeedback onPress={this.onPress.bind(this)}>
-{this.renderTop(Style)}
-</TouchableWithoutFeedback> */
-class AccountInfoComponent extends Component {
+}
+type State = {
+  collapsed: boolean
+}
+
+class AccountInfoComponent extends Component<Props, State> {
   componentWillMount () {
     this.setState({
       collapsed: true
     })
   }
-  renderPasswordWarning (style) {
+  renderPasswordWarning (style: Object) {
     if (!this.props.password) {
       return (
         <View style={style.bottomWarning}>
@@ -33,7 +36,7 @@ class AccountInfoComponent extends Component {
     }
     return null
   }
-  renderAccountInfo (style) {
+  renderAccountInfo (style: Object) {
     if (!this.props.password) {
       return (
         <View
@@ -102,7 +105,7 @@ class AccountInfoComponent extends Component {
       </View>
     )
   }
-  renderBottom (style) {
+  renderBottom (style: Object) {
     if (!this.state.collapsed) {
       return (
         <View style={style.bottom}>
@@ -113,7 +116,7 @@ class AccountInfoComponent extends Component {
     }
     return <View style={style.bottom} />
   }
-  renderTop (style) {
+  renderTop (style: Object) {
     const msg = this.state.collapsed
       ? 'Show account information'
       : 'Hide account information'
@@ -126,13 +129,13 @@ class AccountInfoComponent extends Component {
           style={style.textIconButton}
           icon={icon}
           iconType={Constants.MATERIAL_ICONS}
-          onPress={this.onPress.bind(this)}
+          onPress={this.onPress}
           title={msg}
         />
       </View>
     )
   }
-  onPress () {
+  onPress = () => {
     this.setState({
       collapsed: !this.state.collapsed
     })

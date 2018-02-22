@@ -1,22 +1,32 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import * as Constants from '../../../common/constants/'
 import { OTP_SMALL } from '../../assets/'
 import moment from 'moment'
 
-class OtpHeroComponent extends Component {
+type Props = {
+  screen: string,
+  style: Object,
+  otpResetDate: string
+}
+
+type State = {
+  screen: string
+}
+class OtpHeroComponent extends Component<Props, State> {
   componentWillMount () {
     this.setState({
       screen: this.props.screen
     })
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     this.setState({
       screen: nextProps.screen
     })
   }
 
-  renderOr (style) {
+  renderOr (style: Object) {
     if (this.state.screen === Constants.OTP_SCREEN_TWO) {
       return (
         <View style={style.orOption}>
