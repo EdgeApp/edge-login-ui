@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text, Platform } from 'react-native'
 import {
@@ -8,30 +9,57 @@ import {
   TextRowComponent,
   StaticModal
 } from '../../common/'
-/* import Gradient from '../../components/Gradient/Gradient.ui.js' */
-/* import { PrimaryButton } from '../../components/Buttons/index' */
-/* import s from '../../../../locales/strings.js'
-import {FormField} from '../../../../components/FormField.js' */
 import * as Constants from '../../../../common/constants'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
 import EmailAppFailedModalConnector from '../../../connectors/abSpecific/EmailAppFailedModalConnector'
-/* type Props = {
+import Mailer from 'react-native-mail'
+
+export type OwnProps = {
+  styles: Object,
+  showHeader: boolean
+}
+
+type StateProps = {
+  question1: string,
+  question2: string,
   recoveryQuestions: Array<String>,
+  backupKey: string,
+  showEmailDialog: boolean,
+  isEnabled: boolean,
+  submitButton: string,
+  disableButton: string,
+  username: string,
+  questionsList: Array<string>
+}
+type DispatchProps = {
   setAnswers(): void,
-} */
-/* type State = {
+  cancel(): void,
+  returnToSettings(): void,
+  submit(Array<string>, Array<string>): void,
+  deleteRecovery(): void
+}
+
+type Props = OwnProps & StateProps & DispatchProps
+
+type State = {
   question1: string,
   question2: string,
   answer1: string,
   answer2: string,
   showQuestionPicker: boolean,
   focusFirst: boolean,
-  focusSecond: boolean
-} */
-import Mailer from 'react-native-mail'
+  focusSecond: boolean,
+  errorOne: boolean,
+  errorTwo: boolean,
+  errorQuestionOne: boolean,
+  errorQuestionTwo: boolean,
+  disableConfirmationModal: boolean,
+  emailAddress: string,
+  emailAppNotAvailable: boolean
+}
 
-export default class PasswordRecovery extends Component {
+export default class PasswordRecovery extends Component<Props, State> {
   componentWillMount () {
     this.setState({
       question1: this.props.question1,
@@ -49,215 +77,8 @@ export default class PasswordRecovery extends Component {
       emailAddress: '',
       emailAppNotAvailable: false
     })
-    this.renderHeader = style => {
-      if (this.props.showHeader) {
-        return <HeaderConnector style={style.header} />
-      }
-      return null
-    }
-    this.onDisable = () => {
-      this.props.deleteRecovery()
-      this.setState({
-        disableConfirmationModal: true
-      })
-    }
-    this.onDisableModalClose = () => {
-      this.props.cancel()
-    }
-    this.onSubmit = () => {
-      const errorOne = this.state.answer1.length < 4 || false
-      const errorTwo = this.state.answer2.length < 4 || false
-      const errorQuestionOne =
-        this.state.question1 === Constants.CHOOSE_RECOVERY_QUESTION || false
-      const errorQuestionTwo =
-        this.state.question2 === Constants.CHOOSE_RECOVERY_QUESTION || false
-
-      this.setState({
-        errorOne,
-        errorTwo,
-        errorQuestionOne,
-        errorQuestionTwo
-      })
-      if (errorOne || errorTwo || errorQuestionOne || errorQuestionTwo) {
-        return
-      }
-      const questions = [this.state.question1, this.state.question2]
-      const answers = [this.state.answer1, this.state.answer2]
-      this.props.submit(questions, answers)
-    }
-    this.onSelectQuestionOne = () => {
-      this.setState({
-        showQuestionPicker: true,
-        focusFirst: true,
-        focusSecond: false
-      })
-    }
-    this.onSelectQuestionTwo = () => {
-      this.setState({
-        showQuestionPicker: true,
-        focusFirst: false,
-        focusSecond: true
-      })
-    }
-    this.setAnswer1 = arg => {
-      this.setState({
-        answer1: arg
-      })
-    }
-    this.setAnswer2 = arg => {
-      this.setState({
-        answer2: arg
-      })
-    }
-    this.questionSelected = data => {
-      const question = data.question
-      if (this.state.focusFirst) {
-        this.setState({
-          question1: question,
-          showQuestionPicker: false
-        })
-        return
-      }
-      this.setState({
-        question2: question,
-        showQuestionPicker: false
-      })
-    }
-    this.renderItems = item => {
-      const { RecoverPasswordSceneStyles } = this.props.styles
-      console.log(item)
-      return (
-        <TextRowComponent
-          style={RecoverPasswordSceneStyles.listItem}
-          data={item.item}
-          title={item.item.question}
-          onPress={this.questionSelected}
-          numberOfLines={3}
-        />
-      )
-    }
-    this.renderQuestions = styles => {
-      console.log(this.props.questionsList)
-      return (
-        <View style={styles.body}>
-          <DropDownList
-            style={styles.questionsList}
-            data={this.props.questionsList}
-            renderRow={this.renderItems.bind(this)}
-          />
-        </View>
-      )
-    }
-    this.updateEmail = email => {
-      this.setState({
-        emailAddress: email
-      })
-    }
-    this.openEmailApp = () => {
-      const body =
-        'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ' +
-        this.props.username +
-        '<br><br>' +
-        'iOS <br>edge://recovery?token=' +
-        this.props.backupKey +
-        '<br><br>' +
-        'Android https://recovery.edgesecure.co/recovery?token=' +
-        this.props.backupKey
-
-      Mailer.mail(
-        {
-          subject: 'Edge Recovery Token',
-          recipients: [this.state.emailAddress],
-          body: body,
-          isHTML: true
-        },
-        (error, event) => {
-          if (error) {
-            console.log(error)
-            this.setState({
-              emailAppNotAvailable: true
-            })
-          }
-          if (event === 'sent') {
-            this.props.returnToSettings()
-          }
-        }
-      )
-      if (Platform.OS === 'android') {
-        setTimeout(() => {
-          this.props.returnToSettings()
-        }, 1000)
-      }
-    }
-    this.renderForm = styles => {
-      const form1Style = this.state.errorOne ? styles.inputError : styles.input
-      const form2Style = this.state.errorTwo ? styles.inputError : styles.input
-      const errorMessageOne = this.state.errorOne
-        ? 'Answers should be minimum of 4 characters'
-        : 'Answers are case sensitive'
-      const errorMessageTwo = this.state.errorTwo
-        ? 'Answers should be minimum of 4 characters'
-        : 'Answers are case sensitive'
-      const questionOneStyle = this.state.errorQuestionOne
-        ? styles.textIconButtonErrorError
-        : styles.textIconButton
-      const questionTwoStyle = this.state.errorQuestionOne
-        ? styles.textIconButtonErrorError
-        : styles.textIconButton
-
-      return (
-        <View style={styles.body}>
-          <View style={styles.questionRow}>
-            <TextAndIconButton
-              onPress={this.onSelectQuestionOne}
-              icon={Constants.KEYBOARD_ARROW_DOWN}
-              iconStyle={Constants.MATERIAL_ICONS}
-              style={questionOneStyle}
-              numberOfLines={2}
-              title={this.state.question1}
-            />
-          </View>
-          <View style={styles.answerRow}>
-            <FormField
-              style={form1Style}
-              autoFocus={this.state.focusFirst}
-              autoCorrect={false}
-              autoCapitalize={'none'}
-              onChangeText={this.setAnswer1}
-              value={this.state.answer1}
-              label={'Your Answer'}
-              error={errorMessageOne}
-            />
-          </View>
-          <View style={styles.shim} />
-          <View style={styles.questionRow}>
-            <TextAndIconButton
-              onPress={this.onSelectQuestionTwo}
-              icon={Constants.KEYBOARD_ARROW_DOWN}
-              iconStyle={Constants.MATERIAL_ICONS}
-              style={questionTwoStyle}
-              numberOfLines={2}
-              title={this.state.question2}
-            />
-          </View>
-          <View style={styles.answerRow}>
-            <FormField
-              style={form2Style}
-              autoFocus={this.state.focusSecond}
-              autoCorrect={false}
-              autoCapitalize={'none'}
-              onChangeText={this.setAnswer2}
-              value={this.state.answer2}
-              label={'Your Answer'}
-              error={errorMessageTwo}
-            />
-          </View>
-          {this.renderButtons(styles)}
-        </View>
-      )
-    }
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (nextProps.isEnabled !== this.props.isEnabled) {
       this.setState({
         question1: nextProps.question1,
@@ -265,8 +86,214 @@ export default class PasswordRecovery extends Component {
       })
     }
   }
+  renderHeader = (styles: Object) => {
+    if (this.props.showHeader) {
+      return <HeaderConnector style={styles.header} />
+    }
+    return null
+  }
+  onDisable = () => {
+    this.props.deleteRecovery()
+    this.setState({
+      disableConfirmationModal: true
+    })
+  }
+  onDisableModalClose = () => {
+    this.props.cancel()
+  }
+  onSubmit = () => {
+    const errorOne = this.state.answer1.length < 4 || false
+    const errorTwo = this.state.answer2.length < 4 || false
+    const errorQuestionOne =
+      this.state.question1 === Constants.CHOOSE_RECOVERY_QUESTION || false
+    const errorQuestionTwo =
+      this.state.question2 === Constants.CHOOSE_RECOVERY_QUESTION || false
 
-  renderButtons (styles) {
+    this.setState({
+      errorOne,
+      errorTwo,
+      errorQuestionOne,
+      errorQuestionTwo
+    })
+    if (errorOne || errorTwo || errorQuestionOne || errorQuestionTwo) {
+      return
+    }
+    const questions = [this.state.question1, this.state.question2]
+    const answers = [this.state.answer1, this.state.answer2]
+    this.props.submit(questions, answers)
+  }
+  onSelectQuestionOne = () => {
+    this.setState({
+      showQuestionPicker: true,
+      focusFirst: true,
+      focusSecond: false
+    })
+  }
+  onSelectQuestionTwo = () => {
+    this.setState({
+      showQuestionPicker: true,
+      focusFirst: false,
+      focusSecond: true
+    })
+  }
+  setAnswer1 = (arg: string) => {
+    this.setState({
+      answer1: arg
+    })
+  }
+  setAnswer2 = (arg: string) => {
+    this.setState({
+      answer2: arg
+    })
+  }
+  questionSelected = (data: Object) => {
+    const question = data.question
+    if (this.state.focusFirst) {
+      this.setState({
+        question1: question,
+        showQuestionPicker: false
+      })
+      return
+    }
+    this.setState({
+      question2: question,
+      showQuestionPicker: false
+    })
+  }
+  renderItems = (item: Object) => {
+    const { RecoverPasswordSceneStyles } = this.props.styles
+    return (
+      <TextRowComponent
+        style={RecoverPasswordSceneStyles.listItem}
+        data={item.item}
+        title={item.item.question}
+        onPress={this.questionSelected}
+        numberOfLines={3}
+      />
+    )
+  }
+  renderQuestions = (styles: Object) => {
+    console.log(this.props.questionsList)
+    return (
+      <View style={styles.body}>
+        <DropDownList
+          style={styles.questionsList}
+          data={this.props.questionsList}
+          renderRow={this.renderItems.bind(this)}
+        />
+      </View>
+    )
+  }
+  updateEmail = (email: string) => {
+    this.setState({
+      emailAddress: email
+    })
+  }
+  openEmailApp = () => {
+    const body =
+      'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ' +
+      this.props.username +
+      '<br><br>' +
+      'iOS <br>edge://recovery?token=' +
+      this.props.backupKey +
+      '<br><br>' +
+      'Android https://recovery.edgesecure.co/recovery?token=' +
+      this.props.backupKey
+
+    Mailer.mail(
+      {
+        subject: 'Edge Recovery Token',
+        recipients: [this.state.emailAddress],
+        body: body,
+        isHTML: true
+      },
+      (error, event) => {
+        if (error) {
+          console.log(error)
+          this.setState({
+            emailAppNotAvailable: true
+          })
+        }
+        if (event === 'sent') {
+          this.props.returnToSettings()
+        }
+      }
+    )
+    if (Platform.OS === 'android') {
+      setTimeout(() => {
+        this.props.returnToSettings()
+      }, 1000)
+    }
+  }
+  renderForm = (styles: Object) => {
+    const form1Style = this.state.errorOne ? styles.inputError : styles.input
+    const form2Style = this.state.errorTwo ? styles.inputError : styles.input
+    const errorMessageOne = this.state.errorOne
+      ? 'Answers should be minimum of 4 characters'
+      : 'Answers are case sensitive'
+    const errorMessageTwo = this.state.errorTwo
+      ? 'Answers should be minimum of 4 characters'
+      : 'Answers are case sensitive'
+    const questionOneStyle = this.state.errorQuestionOne
+      ? styles.textIconButtonErrorError
+      : styles.textIconButton
+    const questionTwoStyle = this.state.errorQuestionOne
+      ? styles.textIconButtonErrorError
+      : styles.textIconButton
+
+    return (
+      <View style={styles.body}>
+        <View style={styles.questionRow}>
+          <TextAndIconButton
+            onPress={this.onSelectQuestionOne}
+            icon={Constants.KEYBOARD_ARROW_DOWN}
+            iconStyle={Constants.MATERIAL_ICONS}
+            style={questionOneStyle}
+            numberOfLines={2}
+            title={this.state.question1}
+          />
+        </View>
+        <View style={styles.answerRow}>
+          <FormField
+            style={form1Style}
+            autoFocus={this.state.focusFirst}
+            autoCorrect={false}
+            autoCapitalize={'none'}
+            onChangeText={this.setAnswer1}
+            value={this.state.answer1}
+            label={'Your Answer'}
+            error={errorMessageOne}
+          />
+        </View>
+        <View style={styles.shim} />
+        <View style={styles.questionRow}>
+          <TextAndIconButton
+            onPress={this.onSelectQuestionTwo}
+            icon={Constants.KEYBOARD_ARROW_DOWN}
+            iconStyle={Constants.MATERIAL_ICONS}
+            style={questionTwoStyle}
+            numberOfLines={2}
+            title={this.state.question2}
+          />
+        </View>
+        <View style={styles.answerRow}>
+          <FormField
+            style={form2Style}
+            autoFocus={this.state.focusSecond}
+            autoCorrect={false}
+            autoCapitalize={'none'}
+            onChangeText={this.setAnswer2}
+            value={this.state.answer2}
+            label={'Your Answer'}
+            error={errorMessageTwo}
+          />
+        </View>
+        {this.renderButtons(styles)}
+      </View>
+    )
+  }
+
+  renderButtons (styles: Object) {
     if (this.props.isEnabled) {
       return (
         <View style={styles.buttonContainer}>
@@ -305,7 +332,7 @@ export default class PasswordRecovery extends Component {
       </View>
     )
   }
-  renderDisableModal (styles) {
+  renderDisableModal (styles: Object) {
     if (this.state.disableConfirmationModal) {
       const body = (
         <Text style={styles.staticModalText}>
@@ -323,7 +350,7 @@ export default class PasswordRecovery extends Component {
     }
     return null
   }
-  showEmailPending (styles) {
+  showEmailPending (styles: Object) {
     return (
       <View style={styles.modalMiddle}>
         <Text style={styles.staticModalText}>
@@ -342,13 +369,13 @@ export default class PasswordRecovery extends Component {
       </View>
     )
   }
-  showEmaiFailed (styles) {
+  showEmaiFailed (styles: Object) {
     if (this.props.showEmailDialog) {
       return <EmailAppFailedModalConnector action={this.props.cancel} />
     }
     return null
   }
-  showEmailDialog (styles) {
+  showEmailDialog (styles: Object) {
     if (this.state.emailAppNotAvailable) {
       return this.showEmaiFailed(styles)
     }

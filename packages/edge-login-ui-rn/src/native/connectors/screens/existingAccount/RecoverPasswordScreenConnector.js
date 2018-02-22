@@ -1,9 +1,13 @@
+// @flow
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 
 import * as actions from '../../../../common/actions'
 import * as Constants from '../../../../common/constants'
-export const mapStateToProps = (state, ownProps) => {
+import type { State, Dispatch } from '../../../../types/ReduxTypes.js'
+import type { OwnProps } from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
+
+export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const isEnabled = state.passwordRecovery.userQuestions.length > 0 || false
   const question1 =
     state.passwordRecovery.userQuestions.length > 0
@@ -15,7 +19,6 @@ export const mapStateToProps = (state, ownProps) => {
       : 'Choose recovery question'
   const username = returnTrunatedUsername(state.login.username)
   return {
-    styles: ownProps.styles,
     showHeader: ownProps.showHeader,
     questionsList: state.passwordRecovery.questionsList,
     userQuestions: state.passwordRecovery.userQuestions,
@@ -30,9 +33,9 @@ export const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    submit: (questions, answers) =>
+    submit: (questions: Array<string>, answers: Array<string>) =>
       dispatch(actions.changeRecoveryAnswers(questions, answers)),
     deleteRecovery: () => dispatch(actions.deleteRecovery()),
     cancel: () => {

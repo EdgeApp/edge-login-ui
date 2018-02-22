@@ -1,3 +1,4 @@
+// @flow
 import { connect } from 'react-redux'
 import type { Dispatch, State } from '../../types/ReduxTypes'
 import ChangePasswordAppComponent from '../components/ChangePasswordAppComponent'

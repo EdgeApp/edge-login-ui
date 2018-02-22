@@ -55,7 +55,11 @@ export type State = {
     list: Array<Object>
   },
   passwordRecovery: {
-    recoveryErrorMessage: string
+    recoveryErrorMessage: string,
+    userQuestions: Array<string>,
+    questionsList: Array<string>,
+    recoveryKey: string,
+    showRecoveryEmailDialog: boolean
   }
 }
 
