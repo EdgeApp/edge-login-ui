@@ -1,15 +1,34 @@
+// @flow
 import React, { Component } from 'react'
 import { TextField } from 'react-native-material-textfield'
 
-class Input extends Component {
-  /* static defaultProps = {
-    autoCapitalize: 'none',
-    autoCorrect: false,
-    autoFocus: false,
-    forceFocus: false,
-    returnKeyType: 'go',
-    onFocus: null
-  } */
+type Props = {
+  label: string,
+  value: string,
+  containerStyle: Object,
+  baseColor: string,
+  tintColor: string,
+  textColor: string,
+  errorColor: string,
+  titleTextStyle: Object,
+  secureTextEntry: boolean,
+  autoCapitalize: string,
+  autoCorrect: string,
+  autoFocus: boolean,
+  forceFocus: boolean,
+  returnKeyType: string,
+  onFocus(): void,
+  onBlur(): void,
+  onChangeText(string): void,
+  onSubmitEditing(): void
+}
+type State = {
+  inputText: string,
+  autoFocus: boolean
+}
+class Input extends Component<Props, State> {
+  textInput: TextField
+
   componentWillMount () {
     this.setState({
       inputText: '',
@@ -22,7 +41,7 @@ class Input extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (nextProps.value !== this.state.inputText) {
       this.setState({
         inputText: nextProps.value,
@@ -40,10 +59,6 @@ class Input extends Component {
   render () {
     const value = this.props.value ? this.props.value : ''
     const error = this.props.error ? this.props.error : ''
-    const autoCorrect =
-      typeof this.props.autoCorrect === 'undefined'
-        ? true
-        : this.props.autoCorrect
     const {
       containerStyle,
       baseColor,
@@ -54,12 +69,16 @@ class Input extends Component {
       secureTextEntry,
       returnKeyType
     } = this.props
+    const autoCorrectConfigured =
+      typeof this.props.autoCorrect === 'undefined'
+        ? true
+        : this.props.autoCorrect
     return (
       <TextField
-        ref={this.addRef.bind(this)}
+        ref={this.addRef}
         label={this.props.label}
         value={value}
-        onChangeText={this.onChange.bind(this)}
+        onChangeText={this.onChange}
         error={error}
         containerStyle={containerStyle}
         baseColor={baseColor}
@@ -70,38 +89,38 @@ class Input extends Component {
         secureTextEntry={secureTextEntry}
         autoCapitalize={this.props.autoCapitalize}
         returnKeyType={returnKeyType}
-        onBlur={this.onBlur.bind(this)}
-        onFocus={this.onFocus.bind(this)}
-        autoCorrect={autoCorrect}
-        onSubmitEditing={this.onSubmitEditing.bind(this)}
+        onBlur={this.onBlur}
+        onFocus={this.onFocus}
+        autoCorrect={autoCorrectConfigured}
+        onSubmitEditing={this.onSubmitEditing}
       />
     )
   }
 
-  addRef (arg) {
+  addRef = (arg: TextField) => {
     if (arg) {
       this.textInput = arg
     }
   }
 
-  onChange (text) {
+  onChange = (text: string) => {
     this.setState({
       inputText: text
     })
     this.props.onChangeText(text)
   }
 
-  onSubmitEditing (event) {
+  onSubmitEditing = (event: any) => {
     if (this.props.onSubmitEditing) {
       this.props.onSubmitEditing()
     }
   }
-  onFocus () {
+  onFocus = () => {
     if (this.props.onFocus) {
       this.props.onFocus()
     }
   }
-  onBlur () {
+  onBlur = () => {
     if (this.props.onBlur) {
       this.props.onBlur()
     }

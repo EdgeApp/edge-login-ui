@@ -10,6 +10,7 @@ type Props = {
   label: string,
   value: string,
   placeholder: string,
+  autoCorrect: string,
   autoFocus: boolean,
   isFocused: boolean,
   forceFocus: boolean,
@@ -91,6 +92,7 @@ class FormFieldWithDropComponent extends Component<Props, State> {
         errorColor={errorColor}
         titleTextStyle={titleTextStyle}
         autoFocus={this.state.autoFocus}
+        autoCorrect={this.props.autoCorrect}
         forceFocus={this.props.forceFocus}
         onFocus={this.props.onFocus}
         onBlur={() => {

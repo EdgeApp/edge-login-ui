@@ -1,7 +1,17 @@
+// @flow
 import React, { Component } from 'react'
 import AutoComplete from 'material-ui/AutoComplete'
 
-export default class AutoCompleteInput extends Component {
+type Props = {}
+type State = {
+  username: string,
+  password: string,
+  loggingIn: boolean,
+  focusFirst: boolean,
+  focusSecond: boolean,
+  dataSource: string
+}
+export default class AutoCompleteInput extends Component<Props, State> {
   componentWillMount () {
     this.setState({
       username: '',
@@ -9,9 +19,9 @@ export default class AutoCompleteInput extends Component {
       loggingIn: false,
       focusFirst: true,
       focusSecond: false
-      // offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN
     })
   }
+  handleUpdateInput = (arg: string) => {}
   render () {
     return (
       <div>

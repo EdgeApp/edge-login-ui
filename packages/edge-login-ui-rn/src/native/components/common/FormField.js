@@ -5,15 +5,15 @@ import { Input } from '../materialWrappers/indexMaterial'
 type Props = {
   style: Object,
   label: string,
-  value?: string,
+  value: string,
   placeholder?: string,
-  autoCorrect: boolean,
+  autoCorrect: string,
   autoFocus: boolean,
   forceFocus: boolean,
   autoCapitalize?: string,
   secureTextEntry: boolean,
   showSecureCheckbox: boolean,
-  returnKeyType?: string,
+  returnKeyType: string,
   error?: string,
   onFinish(): void,
   onFocus(): void,
@@ -28,6 +28,10 @@ type State = {
 }
 
 class FormField extends Component<Props, State> {
+  static defaultProps = {
+    value: '',
+    returnKeyType: 'done'
+  }
   componentWillMount () {
     const secure = this.props.secureTextEntry
       ? this.props.secureTextEntry

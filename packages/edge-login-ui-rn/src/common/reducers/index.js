@@ -1,3 +1,4 @@
+// @flow
 import { combineReducers } from 'redux'
 import LoginReducer from './LoginReducer'
 import CreateUserReducer from './CreateUserReducer'
