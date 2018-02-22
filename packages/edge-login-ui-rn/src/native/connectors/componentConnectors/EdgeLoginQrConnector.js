@@ -1,9 +1,12 @@
+// @flow
 import { connect } from 'react-redux'
 import { EdgeLoginQrComponent } from '../../components/abSpecific'
 import { EdgeLoginQrStyle } from '../../../native/styles'
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
-export const mapStateToProps = (state, ownProps) => {
+import type { State, Dispatch } from '../../../types/ReduxTypes'
+
+export const mapStateToProps = (state: State) => {
   return {
     style: EdgeLoginQrStyle,
     isVisible: state.workflow.currentKey === Constants.WORKFLOW_OTP || false,
@@ -12,7 +15,7 @@ export const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     getQrCode: () => dispatch(actions.getEdgeLoginQrCode()),
     cancelRequest: () =>

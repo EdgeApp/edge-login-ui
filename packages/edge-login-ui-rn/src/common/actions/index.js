@@ -18,3 +18,10 @@ export function dispatchActionWithData (type, data) {
     data
   }
 }
+
+export function dispatchActionWitString (type, data) {
+  return {
+    type,
+    data
+  }
+}

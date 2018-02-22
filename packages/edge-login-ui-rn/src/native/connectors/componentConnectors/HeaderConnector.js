@@ -1,13 +1,14 @@
+// @flow
 import { connect } from 'react-redux'
 import { Header } from '../../components/common/'
 import * as actions from '../../../common/actions'
+import type { State, Dispatch } from '../../../types/ReduxTypes'
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: State) => {
   const workflow = state.workflow
   const currentWorkflow = workflow[state.workflow.currentKey]
   const currentScene = currentWorkflow.details[state.workflow.currentSceneIndex]
   return {
-    style: ownProps.style,
     showBackButton: currentScene.back,
     showSkipButton: currentScene.skip,
     title: currentScene.title,
@@ -15,7 +16,7 @@ export const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     goBack: () => dispatch(actions.goBack()),
     skipScreen: () => dispatch(actions.skipStep())

@@ -25,25 +25,35 @@ export type State = {
     userList: Array<Object>
   },
   workflow: {
-    currentKey: string
+    currentKey: string,
+    details: Array<Object>,
+    currentSceneIndex: number
   },
   create: {
     username: string,
     password: string,
     pin: string,
-    pinErrorMessage: string
+    pinErrorMessage: string,
+    confirmPassword: string,
+    confirmPasswordErrorMessage: string,
+    usernameErrorMessage: string
   },
   login: {
     username: string,
     pin: string,
     password: string,
     errorMessage: string,
-    isLoggingInWithPin: boolean
+    isLoggingInWithPin: boolean,
+    edgeLoginId: string,
+    cancelEdgeLoginRequest(): void
   },
   passwordStatus: {
     secondsToCrack: number,
     passed: boolean,
     list: Array<Object>
+  },
+  passwordRecovery: {
+    recoveryErrorMessage: string
   }
 }
 
