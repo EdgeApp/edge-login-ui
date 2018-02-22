@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button, FormField, StaticModal } from '../../common/'
@@ -5,7 +6,37 @@ import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecov
 import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
 import SetRecoveryUsernameModalConnector from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
 
-export default class PasswordRecovery extends Component {
+type Props = {
+  styles: Object,
+  question1: string,
+  question2: string,
+  showHeader: boolean,
+  submitButton: string,
+  updateUsername(string): void,
+  deleteRecovery(): void,
+  onCancel(): void,
+  cancel(): void,
+  submit(Array<string>): void,
+  getQuestions(): void,
+  changePassword(): void
+}
+
+type State = {
+  question1: string,
+  question2: string,
+  answer1: string,
+  answer2: string,
+  showQuestionPicker: boolean,
+  focusFirst: boolean,
+  focusSecond: boolean,
+  errorOne: boolean,
+  errorTwo: boolean,
+  errorQuestionOne: boolean,
+  errorQuestionTwo: boolean,
+  disableConfirmationModal: boolean,
+  showUsernameModal: boolean
+}
+export default class PasswordRecovery extends Component<Props, State> {
   componentWillMount () {
     this.props.updateUsername('')
     this.setState({
@@ -23,83 +54,83 @@ export default class PasswordRecovery extends Component {
       disableConfirmationModal: false,
       showUsernameModal: true
     })
-    this.renderHeader = style => {
-      if (this.props.showHeader) {
-        return <HeaderConnector style={style.header} />
-      }
-      return null
+  }
+  renderHeader = (style: Object) => {
+    if (this.props.showHeader) {
+      return <HeaderConnector style={style.header} />
     }
-    this.onDisable = () => {
-      this.props.deleteRecovery()
-      this.setState({
-        disableConfirmationModal: true
-      })
-    }
-    this.onDisableModalClose = () => {
-      this.props.cancel()
-    }
-    this.onSubmit = () => {
-      const errorOne = this.state.answer1.length < 1 || false
-      const errorTwo = this.state.answer2.length < 1 || false
+    return null
+  }
+  onDisable = () => {
+    this.props.deleteRecovery()
+    this.setState({
+      disableConfirmationModal: true
+    })
+  }
+  onDisableModalClose = () => {
+    this.props.cancel()
+  }
+  onSubmit = () => {
+    const errorOne = this.state.answer1.length < 1 || false
+    const errorTwo = this.state.answer2.length < 1 || false
 
-      this.setState({
-        errorOne,
-        errorTwo
-      })
-      if (errorOne || errorTwo) {
-        return
-      }
-      const answers = [this.state.answer1, this.state.answer2]
-      this.props.submit(answers)
+    this.setState({
+      errorOne,
+      errorTwo
+    })
+    if (errorOne || errorTwo) {
+      return
     }
-    this.setAnswer1 = arg => {
-      this.setState({
-        answer1: arg
-      })
-    }
-    this.setAnswer2 = arg => {
-      this.setState({
-        answer2: arg
-      })
-    }
-    this.renderModal = styles => {
-      if (this.props.showRecoverSuccessDialog) {
-        // render static modal
-        const body = (
-          <Text style={styles.staticModalText}>
-            Recovery successful! Please change your password and PIN.
-          </Text>
-        )
-        return (
-          <StaticModal
-            cancel={this.props.changePassword}
-            body={body}
-            modalDismissTimerSeconds={8}
-          />
-        )
-      }
-      if (!this.state.showUsernameModal) return null
-      const middle = (
-        <View style={styles.modalMiddle}>
-          <Text style={styles.staticModalText}>
-            Please enter the username of the account you want to recover.
-          </Text>
-          <RecoverPasswordUsernameModalConnector
-            style={styles.inputModal}
-            onSubmitEditing={this.props.getQuestions}
-          />
-        </View>
+    const answers = [this.state.answer1, this.state.answer2]
+    this.props.submit(answers)
+  }
+  setAnswer1 = (arg: string) => {
+    this.setState({
+      answer1: arg
+    })
+  }
+  setAnswer2 = (arg: string) => {
+    this.setState({
+      answer2: arg
+    })
+  }
+  renderModal = (styles: Object) => {
+    if (this.props.showRecoverSuccessDialog) {
+      // render static modal
+      const body = (
+        <Text style={styles.staticModalText}>
+          Recovery successful! Please change your password and PIN.
+        </Text>
       )
       return (
-        <SetRecoveryUsernameModalConnector
-          modalMiddleComponent={middle}
-          cancel={this.props.onCancel}
-          action={this.props.getQuestions}
+        <StaticModal
+          cancel={this.props.changePassword}
+          body={body}
+          modalDismissTimerSeconds={8}
         />
       )
     }
+    if (!this.state.showUsernameModal) return null
+    const middle = (
+      <View style={styles.modalMiddle}>
+        <Text style={styles.staticModalText}>
+          Please enter the username of the account you want to recover.
+        </Text>
+        <RecoverPasswordUsernameModalConnector
+          style={styles.inputModal}
+          onSubmitEditing={this.props.getQuestions}
+        />
+      </View>
+    )
+    return (
+      <SetRecoveryUsernameModalConnector
+        modalMiddleComponent={middle}
+        cancel={this.props.onCancel}
+        action={this.props.getQuestions}
+      />
+    )
   }
-  renderError (styles) {
+  renderError (styles: Object) {
     if (this.props.loginError) {
       return (
         <View>
@@ -111,7 +142,7 @@ export default class PasswordRecovery extends Component {
     }
     return <View style={styles.shim} />
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (nextProps.question1 !== this.props.question1) {
       this.setState({
         question1: nextProps.question1,

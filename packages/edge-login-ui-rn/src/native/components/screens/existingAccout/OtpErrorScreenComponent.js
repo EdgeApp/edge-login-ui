@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button, StaticModal } from '../../common'
@@ -8,7 +9,25 @@ import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'
 import * as Constants from '../../../../common/constants'
 import OtpBackupKeyConnector from '../../../../native/connectors/componentConnectors/OtpBackupKeyConnector'
 import EdgeLoginQrConnector from '../../../../native/connectors/componentConnectors/EdgeLoginQrConnector'
-export default class OtpErrorScreenComponent extends Component {
+
+type Props = {
+  styles: Object,
+  screen: string,
+  otpResetDate: string,
+  resetOtpToken(): void,
+  setbackupKey(): void
+}
+
+type State = {
+  showDisableModal: boolean,
+  showBackupCodeModal: boolean,
+  showDisableModal: boolean,
+  showstaticModal: boolean,
+  screen: string,
+  backupKeyEntered: boolean
+}
+
+export default class OtpErrorScreenComponent extends Component<Props, State> {
   componentWillMount () {
     this.setState({
       showDisableModal: false,
@@ -18,7 +37,7 @@ export default class OtpErrorScreenComponent extends Component {
       backupKeyEntered: false
     })
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (nextProps.loginSuccess) {
       this.closeModals()
     }
@@ -70,7 +89,7 @@ export default class OtpErrorScreenComponent extends Component {
       showDisableModal: true
     })
   }
-  getStaticBody (style) {
+  getStaticBody (style: Object) {
     return (
       <Text style={style.staticModalText}>
         2FA disable request has been sent. You&apos;ll be able to login with
@@ -79,7 +98,7 @@ export default class OtpErrorScreenComponent extends Component {
     )
   }
 
-  renderModal (style) {
+  renderModal (style: Object) {
     if (this.state.showBackupCodeModal) {
       const middle = (
         <View style={style.modalMiddle}>
@@ -123,7 +142,7 @@ export default class OtpErrorScreenComponent extends Component {
     return null
   }
 
-  renderDisableButton (style) {
+  renderDisableButton (style: Object) {
     if (this.state.screen === Constants.OTP_SCREEN_ONE) {
       return (
         <Button

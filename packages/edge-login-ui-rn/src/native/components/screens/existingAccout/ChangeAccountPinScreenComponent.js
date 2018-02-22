@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button, StaticModal } from '../../common'
@@ -6,59 +7,25 @@ import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFo
 import ChangePinModalConnector from '../../../connectors/abSpecific/ChangePinModalConnector'
 // import * as Constants from '../../../common/constants'
 
-export default class ChangeAccountPinScreenComponent extends Component {
-  constructor (props) {
-    super(props)
-    this.renderHeader = style => {
-      if (this.props.showHeader) {
-        return <HeaderConnector style={style.header} />
-      }
-      return null
-    }
-
-    this.renderModal = style => {
-      if (this.props.showModal) {
-        if (this.props.forgotPasswordModal) {
-          const body = (
-            <View>
-              <Text style={style.staticModalText}>
-                Password and PIN successfully changed.
-              </Text>
-              <View style={style.shim} />
-              <Text style={style.staticModalText}>
-                Don&apos;t forget your password or recovery answers. You will
-                permanently lose access to your funds if you lose your password
-                and recovery answers.
-              </Text>
-            </View>
-          )
-          return (
-            <StaticModal
-              cancel={this.props.login}
-              body={body}
-              modalDismissTimerSeconds={8}
-            />
-          )
-        }
-        return <ChangePinModalConnector style={style.modal.skip} />
-      }
-      return null
-    }
-    this.onNextPress = () => {
-      this.setState({
-        isProcessing: true
-      })
-      // validation.
-      // is there no error message ,
-      if (this.props.pin.length !== 4 || this.props.pinError) {
-        this.setState({
-          isProcessing: false
-        })
-        return
-      }
-      this.props.changePin(this.props.pin)
-    }
-  }
+type Props = {
+  styles: Object,
+  pin: string,
+  showHeader: boolean,
+  showModal: boolean,
+  forgotPasswordModal: boolean,
+  changePin(string): void,
+  login(): void
+}
+type State = {
+  isProcessing: boolean,
+  pin: string,
+  username: string,
+  focusOn: string
+}
+export default class ChangeAccountPinScreenComponent extends Component<
+  Props,
+  State
+> {
   componentWillMount () {
     this.setState({
       username: '',
@@ -66,6 +33,56 @@ export default class ChangeAccountPinScreenComponent extends Component {
       isProcessing: false,
       focusOn: 'pin'
     })
+  }
+  renderHeader = (style: Object) => {
+    if (this.props.showHeader) {
+      return <HeaderConnector style={style.header} />
+    }
+    return null
+  }
+
+  renderModal = (style: Object) => {
+    if (this.props.showModal) {
+      if (this.props.forgotPasswordModal) {
+        const body = (
+          <View>
+            <Text style={style.staticModalText}>
+              Password and PIN successfully changed.
+            </Text>
+            <View style={style.shim} />
+            <Text style={style.staticModalText}>
+              Don&apos;t forget your password or recovery answers. You will
+              permanently lose access to your funds if you lose your password
+              and recovery answers.
+            </Text>
+          </View>
+        )
+        return (
+          <StaticModal
+            cancel={this.props.login}
+            body={body}
+            modalDismissTimerSeconds={8}
+          />
+        )
+      }
+      return <ChangePinModalConnector style={style.modal.skip} />
+    }
+    return null
+  }
+
+  onNextPress = () => {
+    this.setState({
+      isProcessing: true
+    })
+    // validation.
+    // is there no error message ,
+    if (this.props.pin.length !== 4 || this.props.pinError) {
+      this.setState({
+        isProcessing: false
+      })
+      return
+    }
+    this.props.changePin(this.props.pin)
   }
 
   render () {
