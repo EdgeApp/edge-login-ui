@@ -1,18 +1,13 @@
+// @flow
 import { connect } from 'react-redux'
 import LandingScreenComponent from '../../components/screens/LandingScreenComponent'
 import * as actions from '../../../common/actions'
-export const mapStateToProps = (state, ownProps) => {
+import type { Dispatch } from '../../../types/ReduxTypes'
+
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    styles: ownProps.styles
+    startFlow: (data: string) => dispatch(actions.startWorkflow(data))
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    startFlow: data => dispatch(actions.startWorkflow(data))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  LandingScreenComponent
-)
+export default connect(null, mapDispatchToProps)(LandingScreenComponent)

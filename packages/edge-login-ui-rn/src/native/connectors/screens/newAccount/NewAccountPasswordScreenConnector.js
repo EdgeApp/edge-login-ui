@@ -1,8 +1,10 @@
+// @Flow
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/newAccount/NewAccountPasswordScreenComponent'
 import * as actions from '../../../../common/actions'
+import type { State, Dispatch } from '../../../../types/ReduxTypes'
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: State) => {
   const error = state.create.confirmPasswordErrorMessage
     ? state.create.confirmPasswordErrorMessage
     : ''
@@ -10,7 +12,6 @@ export const mapStateToProps = (state, ownProps) => {
     ? state.create.createPasswordErrorMessage
     : ''
   return {
-    styles: ownProps.styles,
     password: state.create.password,
     passwordStatus: state.create.passwordStatus,
     confirmPassword: state.create.confirmPassword,
@@ -21,7 +22,7 @@ export const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     checkTheConfirmPassword: () => dispatch(actions.validateConfirmPassword()),
     skipPassword: () => dispatch(actions.validateConfirmPassword()),

@@ -1,17 +1,6 @@
 // @flow
 
-/* import type {
-  AbcAccount,
-  AbcContext,
-  AbcCurrencyPlugin,
-  AbcCurrencyWallet,
-  AbcDenomination,
-  AbcLobby,
-  AbcParsedUri,
-  AbcReceiveAddress,
-  AbcTransaction,
-  EdgeReceiveAddress
-} from 'edge-login' */
+import type { AbcAccount } from 'edge-login'
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
 export type Action = { type: string, data?: any }
@@ -27,18 +16,21 @@ export type State = {
   workflow: {
     currentKey: string,
     details: Array<Object>,
-    currentSceneIndex: number
+    currentSceneIndex: number,
+    showModal: boolean
   },
   create: {
     username: string,
     password: string,
     pin: string,
+    pinError: string,
     pinErrorMessage: string,
     confirmPassword: string,
     confirmPasswordErrorMessage: string,
     usernameErrorMessage: string,
     showModal: boolean,
-    passwordStatus: Object
+    passwordStatus: Object,
+    accountObject: AbcAccount
   },
   login: {
     username: string,
@@ -46,6 +38,7 @@ export type State = {
     password: string,
     errorMessage: string,
     isLoggingInWithPin: boolean,
+    loginSuccess: boolean,
     edgeLoginId: string,
     cancelEdgeLoginRequest(): void
   },
@@ -60,7 +53,8 @@ export type State = {
     questionsList: Array<string>,
     recoveryKey: string,
     showRecoveryEmailDialog: boolean
-  }
+  },
+  terms: {}
 }
 
 type ThunkDispatch<A> = ((Dispatch, GetState) => Promise<void> | void) => A

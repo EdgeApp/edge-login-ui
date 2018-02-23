@@ -1,18 +1,19 @@
+// @flow
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/newAccount/NewAccountWalletCreationScreenComponent'
 import * as loginAction from '../../../../common/actions'
+import type { State, Dispatch } from '../../../../types/ReduxTypes'
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: State) => {
   return {
-    styles: ownProps.styles,
     auth: state.login,
     workflow: state.workflow
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    submitPin: data => dispatch(loginAction.submitPin(data))
+    submitPin: (data: string) => dispatch(loginAction.submitPin(data))
   }
 }
 

@@ -1,16 +1,16 @@
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/newAccount/CreatingAccountWaitScreenComponent'
 import * as actions from '../../../../common/actions'
+import type { State, Dispatch } from '../../../../types/ReduxTypes'
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: State) => {
   return {
-    styles: ownProps.styles,
     createSuccess: state.login.creationSuccess,
     createErrorMessage: state.login.createErrorMessage
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     nextScreen: () => dispatch(actions.nextScreen())
   }
