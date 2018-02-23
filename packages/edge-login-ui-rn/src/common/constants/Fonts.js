@@ -1,3 +1,4 @@
+// @flow
 import { Platform } from 'react-native'
 
 const platform = Platform.OS
@@ -13,7 +14,7 @@ let FONTS = {
   fontFamilyBlack: SYSTEM
 }
 
-const updateFontStyles = obj => {
+const updateFontStyles = (obj: Object) => {
   if (!obj.fontDescription) {
     return
   }
