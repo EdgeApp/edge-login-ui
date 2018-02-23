@@ -43,7 +43,7 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
-    "flow-bin": "^0.66.0"
+    "flow-bin": "^0.62.0"
   },
   "rnpm": {
     "assets": [
