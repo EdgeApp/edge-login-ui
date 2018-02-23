@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcAccount } from 'edge-login'
+import type { AbcAccount, AbcContext } from 'edge-login'
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
 export type Action = { type: string, data?: any }
@@ -62,3 +62,14 @@ type ThunkDispatch<A> = ((Dispatch, GetState) => Promise<void> | void) => A
 export type Store = ReduxStore<State, Action>
 export type GetState = () => State
 export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
+export type Imports = {
+  onCancel: Function,
+  accountObject: AbcAccount,
+  context: AbcContext,
+  onComplete: Function,
+  locale: string,
+  language: string,
+  callback: Function,
+  username: string,
+  recoveryKey: string
+}

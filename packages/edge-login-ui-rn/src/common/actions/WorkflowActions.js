@@ -1,6 +1,8 @@
+// @flow
 import * as Constants from '../constants'
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
-export function startWorkflow (data) {
+export function startWorkflow (data: string) {
   return {
     type: Constants.WORKFLOW_START,
     data
@@ -13,7 +15,7 @@ export function nextScreen () {
   }
 }
 
-export function skipStep (data) {
+export function skipStep (data: string) {
   return {
     type: Constants.WORKFLOW_SKIP,
     data
@@ -32,7 +34,7 @@ export function goBack () {
   }
 }
 export function cancel () {
-  return (dispatch, getState, imports) => {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const onCancel = imports.onCancel
     onCancel()
   }

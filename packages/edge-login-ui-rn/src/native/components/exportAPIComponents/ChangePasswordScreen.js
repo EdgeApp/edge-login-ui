@@ -1,6 +1,7 @@
+// @flow
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-// import type { Store } from '../../../types/ReduxTypes'
+import type { Store } from 'redux'
 import reducers from '../../../common/reducers'
 import type { AbcContext, AbcAccount } from 'edge-login'
 import { createStore, applyMiddleware } from 'redux'
@@ -18,9 +19,11 @@ type Props = {
   onComplete(): void,
   onCancel(): void
 }
+type State = {}
+type Action = { type: string }
 
 class ChangePasswordScreen extends Component<Props> {
-  store: any
+  store: Store<State, Action>
   static defaultProps = {
     locale: 'US',
     language: 'en_us',

@@ -1,4 +1,7 @@
+// @flow
 import React, { Component } from 'react'
+import type { Store } from 'redux'
+import type { AbcAccount, AbcContext } from 'edge-login'
 import { Provider } from 'react-redux'
 import reducers from '../../../common/reducers'
 import { createStore, applyMiddleware } from 'redux'
@@ -7,23 +10,25 @@ import ChangePinConnector from '../../connectors/ChangePinConnector'
 import * as Styles from '../../styles'
 import { setLocal } from '../../../common/locale'
 
-/* type Props = {
-  account: object,
-  context: object,
+type Props = {
+  account: AbcAccount,
+  context: AbcContext,
   showHeader: boolean,
   locale: string,
   language: string,
   onComplete(): void,
-  onCancel():void
+  onCancel(): void
 }
- */
+type State = {}
+type Action = { type: string }
 
-class ChangePinScreen extends Component {
+class ChangePinScreen extends Component<Props> {
   static defaultProps = {
     locale: 'US',
     language: 'en_us',
     account: null
   }
+  store: Store<State, Action>
   componentWillMount () {
     setLocal(this.props.locale, this.props.language)
     this.store = createStore(
@@ -35,13 +40,13 @@ class ChangePinScreen extends Component {
           context: this.props.context,
           onComplete: this.props.onComplete,
           onCancel: this.props.onComplete,
-          locale: this.props.local,
+          locale: this.props.locale,
           language: this.props.language
         })
       )
     )
   }
-  componentWillReceiveProps (props) {}
+  componentWillReceiveProps (props: Props) {}
 
   render () {
     return (
