@@ -19,8 +19,7 @@ export const mapStateToProps = (state: State) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    goBack: () => dispatch(actions.cancel()),
-    skipScreen: () => dispatch(actions.skipStep())
+    goBack: () => dispatch(actions.cancel())
   }
 }
 

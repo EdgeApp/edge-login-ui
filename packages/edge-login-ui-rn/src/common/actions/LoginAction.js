@@ -1,6 +1,10 @@
 // @flow
 import * as Constants from '../constants'
-import { dispatchAction, dispatchActionWithData } from './'
+import {
+  dispatchAction,
+  dispatchActionWithData,
+  dispatchActionWitString
+} from './'
 import {
   enableTouchId,
   loginWithTouchId,
@@ -59,7 +63,7 @@ export function loginWithRecovery (answers: Array<string>, username: string) {
       console.log(e.message)
       const incorrect = 'The answers you provided are incorrect. '
       dispatch(
-        dispatchActionWithData(Constants.ON_RECOVERY_LOGIN_ERROR, incorrect)
+        dispatchActionWitString(Constants.ON_RECOVERY_LOGIN_ERROR, incorrect)
       )
     }
   }
@@ -199,7 +203,7 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
             return
           }
           dispatch(
-            dispatchActionWithData(
+            dispatchActionWitString(
               Constants.LOGIN_USERNAME_PASSWORD_FAIL,
               e.name === 'PasswordError'
                 ? 'Invalid PIN'
@@ -267,7 +271,7 @@ export function userLogin (data: Object, backupKey?: string) {
         }
         if (myAccountOptions.otp) {
           dispatch(
-            dispatchActionWithData(
+            dispatchActionWitString(
               Constants.OTP_LOGIN_BACKUPKEY_FAIL,
               'Backup Key was incorrect'
             )

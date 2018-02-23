@@ -22,7 +22,7 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     onChangeText: (data: string) =>
       dispatch(
-        actions.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, data)
+        actions.dispatchActionWitString(Constants.AUTH_UPDATE_USERNAME, data)
       ),
     onSubmitEditing: ownProps.onSubmitEditing
   }

@@ -23,7 +23,7 @@ export const mapStateToProps = (state: State) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
-    onChangeText: (data: String) =>
+    onChangeText: (data: string) =>
       dispatch(
         actions.dispatchActionWitString(
           Constants.AUTH_UPDATE_OTP_BACKUP_KEY,

@@ -25,7 +25,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
     userLogin: (data: Object) => dispatch(actions.userLoginWithPin(data)),
     launchUserLoginWithTouchId: (data: Object) =>
       dispatch(actions.userLoginWithTouchId(data)),
-    deleteUserFromDevice: (data: Object) =>
+    deleteUserFromDevice: (data: string) =>
       dispatch(actions.deleteUserFromDevice(data)),
     launchDeleteModal: () =>
       dispatch(actions.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL)),

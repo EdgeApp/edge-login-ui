@@ -36,7 +36,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
       dispatch(action.startWorkflow(Constants.WORKFLOW_CREATE)),
     gotoPinLoginPage: () =>
       dispatch(action.startWorkflow(Constants.WORKFLOW_PIN)),
-    updateUsername: (data: String) =>
+    updateUsername: (data: string) =>
       dispatch(
         action.dispatchActionWitString(Constants.AUTH_UPDATE_USERNAME, data)
       ),
@@ -48,7 +48,9 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
         )
       ),
     deleteUserFromDevice: (data: string) =>
-      dispatch(action.dispatchActionWitString(data)),
+      dispatch(
+        action.dispatchActionWitString(Constants.DELETE_USER_FROM_DEVICE, data)
+      ),
     launchDeleteModal: () =>
       dispatch(action.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL)),
     recoverPasswordLogin: () => dispatch(action.recoverPasswordLogin()),

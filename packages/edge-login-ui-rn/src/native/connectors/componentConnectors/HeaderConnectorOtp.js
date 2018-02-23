@@ -21,12 +21,11 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     goBack: () =>
       dispatch(
-        actions.dispatchActionWithData(
+        actions.dispatchActionWitString(
           Constants.WORKFLOW_START,
           Constants.WORKFLOW_PASSWORD
         )
-      ),
-    skipScreen: () => dispatch(actions.skipStep())
+      )
   }
 }
 

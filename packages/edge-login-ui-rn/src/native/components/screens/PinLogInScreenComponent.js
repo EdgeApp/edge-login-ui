@@ -20,12 +20,6 @@ type Props = {
   changeUser(string): void,
   launchDeleteModal(): void,
   gotoLoginPage(): void
-  /* pin: string,
-  showHeader: boolean,
-  showModal: boolean,
-  forgotPasswordModal: boolean,
-  changePin(string): void,
-  login(): void */
 }
 type State = {
   loggingIn: boolean,

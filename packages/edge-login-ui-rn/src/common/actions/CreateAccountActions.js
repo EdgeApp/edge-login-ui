@@ -171,7 +171,7 @@ export function createUser (data: Object) {
           .file('lastuser.json')
           .setText(JSON.stringify({ username: abcAccount.username }))
           .catch(e => null)
-        dispatch(getPreviousUsers(context))
+        dispatch(getPreviousUsers())
       } catch (e) {
         console.log(e)
         dispatch(

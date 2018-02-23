@@ -63,7 +63,9 @@ export type State = {
   terms: {}
 }
 
-type ThunkDispatch<A> = ((Dispatch, GetState) => Promise<void> | void) => A
+type ThunkDispatch<A> = (
+  (Dispatch, GetState, Imports) => Promise<void> | void
+) => A
 
 export type Store = ReduxStore<State, Action>
 export type GetState = () => State

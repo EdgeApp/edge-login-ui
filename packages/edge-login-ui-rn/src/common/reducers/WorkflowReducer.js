@@ -135,8 +135,6 @@ export default function (state = initialState, action) {
       return { ...state, currentSceneIndex: nextIndex, showModal: false }
     case Constants.WORKFLOW_LAUNCH_MODAL:
       return { ...state, showModal: true }
-    case Constants.WORKFLOW_SKIP:
-      return { ...state, showModal: true, modalView: action.data }
     case Constants.WORKFLOW_CANCEL_MODAL:
       return { ...state, showModal: false, modalView: null }
     case Constants.ON_RECOVERY_LOGIN_IS_ENABLED:

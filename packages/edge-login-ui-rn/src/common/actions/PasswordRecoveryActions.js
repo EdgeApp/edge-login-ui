@@ -156,7 +156,7 @@ export function changeRecoveryAnswers (
     try {
       const recoveryKey = await account.changeRecovery(questions, answers)
       dispatch(
-        actions.dispatchActionWithData(Constants.ON_RECOVERY_KEY, recoveryKey)
+        actions.dispatchActionWitString(Constants.ON_RECOVERY_KEY, recoveryKey)
       )
     } catch (e) {
       console.log(e)

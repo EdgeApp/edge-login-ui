@@ -25,7 +25,7 @@ async function getDiskStuff (context: AbcContext) {
   return { lastUser, userList }
 }
 
-export function getPreviousUsers (context: AbcContext) {
+export function getPreviousUsers () {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const username = imports.username

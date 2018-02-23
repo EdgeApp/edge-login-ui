@@ -15,13 +15,6 @@ export function nextScreen () {
   }
 }
 
-export function skipStep (data: string) {
-  return {
-    type: Constants.WORKFLOW_SKIP,
-    data
-  }
-}
-
 export function cancelSkipStep () {
   return {
     type: Constants.WORKFLOW_CANCEL_MODAL
