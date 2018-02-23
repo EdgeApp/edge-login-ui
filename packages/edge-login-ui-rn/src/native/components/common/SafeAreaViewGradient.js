@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import * as Colors from '../../../common/constants/Colors'
 
 type Props = {
-  style: any,
+  style?: any,
   children: any
 }
 

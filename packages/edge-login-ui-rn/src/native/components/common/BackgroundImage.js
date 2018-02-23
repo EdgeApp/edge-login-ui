@@ -11,7 +11,7 @@ type Props = {
   src: string,
   content: any,
   enableTouch: boolean,
-  callback?: Function
+  callback?: Function | null
 }
 const BackgroundImage = ({
   style,
@@ -23,6 +23,7 @@ const BackgroundImage = ({
   const onPress = () => {
     if (callback) {
       return () => {
+        // $FlowFixMe
         callback()
         Keyboard.dismiss()
       }

@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button, WarningBox } from '../../common'
@@ -6,7 +7,11 @@ import HeaderConnector from '../../../connectors/componentConnectors/HeaderConne
 // import * as Constants from '../../../common/constants'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-export default class NewAccountReviewScreenComponent extends Component {
+type Props = {
+  styles: Object,
+  nextScreen(): void
+}
+export default class NewAccountReviewScreenComponent extends Component<Props> {
   render () {
     const { NewAccountReviewScreenStyle } = this.props.styles
     return (
@@ -36,7 +41,7 @@ export default class NewAccountReviewScreenComponent extends Component {
             </View>
 
             <Button
-              onPress={this.onNextPress.bind(this)}
+              onPress={this.onNextPress}
               downStyle={NewAccountReviewScreenStyle.nextButton.downStyle}
               downTextStyle={
                 NewAccountReviewScreenStyle.nextButton.downTextStyle
@@ -50,7 +55,7 @@ export default class NewAccountReviewScreenComponent extends Component {
       </SafeAreaView>
     )
   }
-  onNextPress () {
+  onNextPress = () => {
     this.props.nextScreen()
   }
 }

@@ -1,19 +1,31 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button, Checkbox } from '../../common'
-// import {  } from '../../common/Checkbox'
 import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
-// import * as Constants from '../../../common/constants'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import type { AbcAccount } from 'edge-login'
 
-export default class TermsAndConditionsScreenComponent extends Component {
+type Props = {
+  styles: Object,
+  accountObject: AbcAccount,
+  terms: Object,
+  agreeToCondition(AbcAccount): void
+}
+type State = {
+  totalChecks: number
+}
+export default class TermsAndConditionsScreenComponent extends Component<
+  Props,
+  State
+> {
   componentWillMount () {
     this.setState({
       totalChecks: 0
     })
   }
-  renderItems (style) {
+  renderItems (style: Object) {
     return this.props.terms.items.map(Item => (
       <View style={style.checkboxContainer} key={Item.title}>
         <Checkbox
@@ -28,7 +40,7 @@ export default class TermsAndConditionsScreenComponent extends Component {
       </View>
     ))
   }
-  renderInstructions (style) {
+  renderInstructions (style: Object) {
     if (this.state.totalChecks < 3) {
       return (
         <View style={style.instructionsContainer}>
@@ -40,7 +52,7 @@ export default class TermsAndConditionsScreenComponent extends Component {
     }
     return <View style={style.instructionsSubShim} />
   }
-  renderButton (style) {
+  renderButton (style: Object) {
     if (this.state.totalChecks === 3) {
       return (
         <View style={style.buttonContainer}>
@@ -49,7 +61,7 @@ export default class TermsAndConditionsScreenComponent extends Component {
           </Text>
           <View style={style.shim} />
           <Button
-            onPress={this.onNextPress.bind(this)}
+            onPress={this.onNextPress}
             downStyle={style.nextButton.downStyle}
             downTextStyle={style.nextButton.downTextStyle}
             upStyle={style.nextButton.upStyle}
@@ -61,7 +73,7 @@ export default class TermsAndConditionsScreenComponent extends Component {
     }
     return null
   }
-  changeStatus (event) {
+  changeStatus (event: any) {
     if (!event) {
       this.setState({
         totalChecks: this.state.totalChecks + 1
@@ -89,7 +101,7 @@ export default class TermsAndConditionsScreenComponent extends Component {
       </SafeAreaView>
     )
   }
-  onNextPress () {
+  onNextPress = () => {
     this.props.agreeToCondition(this.props.accountObject)
   }
 }

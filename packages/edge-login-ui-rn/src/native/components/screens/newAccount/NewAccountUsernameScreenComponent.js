@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button } from '../../common'
@@ -5,15 +6,21 @@ import UsernameConnector from '../../../connectors/componentConnectors/UsernameC
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-// import * as Constants from '../../../common/constants'
-
-export default class LandingScreenComponent extends Component {
+type Props = {
+  styles: Object,
+  username: string,
+  checkUsernameForAvailabilty(string): void
+}
+type State = {
+  isProcessing: boolean
+}
+export default class LandingScreenComponent extends Component<Props, State> {
   componentWillMount () {
     this.setState({
       isProcessing: false
     })
   }
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate (prevProps: Props) {
     if (this.props !== prevProps) {
       this.setState({
         isProcessing: false
@@ -36,7 +43,7 @@ export default class LandingScreenComponent extends Component {
             </View>
             <UsernameConnector
               style={NewAccountUsernameScreenStyle.inputBox}
-              onFinish={this.onNextPress.bind(this)}
+              onFinish={this.onNextPress}
             />
             <View style={NewAccountUsernameScreenStyle.shim} />
             <Button
@@ -56,7 +63,7 @@ export default class LandingScreenComponent extends Component {
       </SafeAreaView>
     )
   }
-  onNextPress () {
+  onNextPress = () => {
     if (this.props.usernameErrorMessage) {
       return
     }

@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button } from '../../common'
@@ -6,7 +7,24 @@ import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFo
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 // import * as Constants from '../../../common/constants'
 
-export default class SetAccountPinScreenComponent extends Component {
+type Props = {
+  styles: Object,
+  password: string,
+  username: string,
+  pin: string,
+  createUser(Object): void
+}
+
+type State = {
+  username: string,
+  pin: string,
+  isProcessing: boolean,
+  focusOn: string
+}
+export default class SetAccountPinScreenComponent extends Component<
+  Props,
+  State
+> {
   componentWillMount () {
     this.setState({
       username: '',
@@ -35,7 +53,7 @@ export default class SetAccountPinScreenComponent extends Component {
             </View>
             <View style={SetAccountPinScreenStyle.row3}>
               <Button
-                onPress={this.onNextPress.bind(this)}
+                onPress={this.onNextPress}
                 downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
                 downTextStyle={
                   SetAccountPinScreenStyle.nextButton.downTextStyle
@@ -52,7 +70,7 @@ export default class SetAccountPinScreenComponent extends Component {
       </SafeAreaView>
     )
   }
-  onNextPress () {
+  onNextPress = () => {
     this.setState({
       isProcessing: true
     })

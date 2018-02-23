@@ -3,7 +3,7 @@ import React from 'react'
 import { SafeAreaView } from 'react-native'
 
 type Props = {
-  style: any,
+  style?: any,
   children: any
 }
 

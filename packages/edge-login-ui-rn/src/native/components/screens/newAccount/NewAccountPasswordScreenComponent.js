@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
 import { Button } from '../../common'
@@ -9,15 +10,30 @@ import SkipModalConnector from '../../../connectors/abSpecific/SkipModalConnecto
 import * as Constants from '../../../../common/constants'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-/* type Props = {
-  styles: any,
-  confirmPasswordErrorMessage: string,
-  passwordStatus: any,
-  password: string,
-  confirmPassword: string
-} */
 
-export default class NewAccountPasswordScreenComponent extends Component {
+type Props = {
+  styles: Object,
+  confirmPasswordErrorMessage: string,
+  passwordStatus: Object,
+  password: string,
+  confirmPassword: string,
+  workflow: Object,
+  error: string,
+  error2: string,
+  checkTheConfirmPassword(): void,
+  nextScreen(): void
+}
+
+type State = {
+  isProcessing: boolean,
+  focusFirst: boolean,
+  focusSecond: boolean
+}
+
+export default class NewAccountPasswordScreenComponent extends Component<
+  Props,
+  State
+> {
   componentWillMount () {
     this.setState({
       isProcessing: false,
@@ -41,7 +57,7 @@ export default class NewAccountPasswordScreenComponent extends Component {
       </SafeAreaView>
     )
   }
-  renderMain (styles) {
+  renderMain (styles: Object) {
     if (this.state.focusSecond) {
       return (
         <KeyboardAvoidingView
@@ -58,24 +74,25 @@ export default class NewAccountPasswordScreenComponent extends Component {
       <View style={styles.pageContainer}>{this.renderInterior(styles)}</View>
     )
   }
-  renderInterior (styles) {
+  renderInterior (styles: Object) {
     return (
       <View style={styles.innerView}>
         <PasswordStatusConnector style={styles.status} />
         <PasswordConnector
+          label={'Password'}
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}
-          onFinish={this.onSetNextFocus.bind(this)}
+          onFinish={this.onSetNextFocus}
         />
         <View style={styles.inputShim} />
         <PasswordConfirmConnector
           style={styles.inputBox}
           autoFocus={this.state.focusSecond}
-          onFinish={this.onNextPress.bind(this)}
+          onFinish={this.onNextPress}
         />
         <View style={styles.inputShim} />
         <Button
-          onPress={this.onNextPress.bind(this)}
+          onPress={this.onNextPress}
           downStyle={styles.nextButton.downStyle}
           downTextStyle={styles.nextButton.downTextStyle}
           upStyle={styles.nextButton.upStyle}
@@ -87,19 +104,19 @@ export default class NewAccountPasswordScreenComponent extends Component {
       </View>
     )
   }
-  renderModal (style) {
+  renderModal (style: Object) {
     if (this.props.workflow.showModal) {
       return <SkipModalConnector />
     }
     return null
   }
-  onSetNextFocus () {
+  onSetNextFocus = () => {
     this.setState({
       focusFirst: false,
       focusSecond: true
     })
   }
-  onNextPress () {
+  onNextPress = () => {
     this.setState({
       isProcessing: true
     })
