@@ -1,8 +1,10 @@
+// @flow
 import * as Constants from '../constants'
 import { dispatchActionWithData, getPreviousUsers } from './'
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
-export function deleteUserFromDevice (data) {
-  return (dispatch, getState, imports) => {
+export function deleteUserFromDevice (data: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     setTimeout(() => {
       context

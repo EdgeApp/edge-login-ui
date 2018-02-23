@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcAccount, AbcContext } from 'edge-login'
+import type { AbcAccount, AbcContext, AbcAccountOptions } from 'edge-login'
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
 export type Action = { type: string, data?: any }
@@ -33,6 +33,7 @@ export type State = {
     accountObject: AbcAccount
   },
   login: {
+    account: AbcAccount,
     username: string,
     pin: string,
     password: string,
@@ -40,7 +41,12 @@ export type State = {
     isLoggingInWithPin: boolean,
     loginSuccess: boolean,
     edgeLoginId: string,
-    cancelEdgeLoginRequest(): void
+    cancelEdgeLoginRequest(): void,
+    otpResetToken: string,
+    otpUserBackupKey: string,
+    previousAttemptType: string,
+    touchIdInformation: Object,
+    recoveryToken: string
   },
   passwordStatus: {
     secondsToCrack: number,
@@ -64,6 +70,7 @@ export type GetState = () => State
 export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
 export type Imports = {
   onCancel: Function,
+  accountOptions: AbcAccountOptions,
   accountObject: AbcAccount,
   context: AbcContext,
   onComplete: Function,

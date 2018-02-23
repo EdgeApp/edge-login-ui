@@ -1,3 +1,4 @@
+// @flow
 import * as Constants from '../constants'
 import * as WorkflowActions from './WorkflowActions'
 import { isASCII } from '../util'
@@ -5,10 +6,12 @@ import { dispatchAction, dispatchActionWithData, getPreviousUsers } from './'
 import { enableTouchId, isTouchDisabled } from '../../native/keychain.js'
 import passwordCheck from 'zxcvbn'
 import { sprintf } from 'sprintf-js'
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
+import type { AbcAccount } from 'edge-login'
 
-export function validatePin (data) {
+export function validatePin (data: Object) {
   const pin = data.pin
-  return (dispatch, getState, imports) => {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     let error = null
     if (pin.length !== 4) {
       error = Constants.FOUR_DIGIT_PIN_ERROR
@@ -24,8 +27,8 @@ export function validatePin (data) {
     // dispatch(updatePin(obj))
   }
 }
-export function checkUsernameForAvailabilty (data) {
-  return (dispatch, getState, imports) => {
+export function checkUsernameForAvailabilty (data: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
@@ -59,8 +62,8 @@ export function checkUsernameForAvailabilty (data) {
   }
 }
 
-export function validateUsername (data) {
-  return (dispatch, getState, imports) => {
+export function validateUsername (data: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     // TODO evaluate client side evaluations.
     let error = data.length > 2 ? null : Constants.USERNAME_3_CHARACTERS_ERROR // TODO: Localize string
     error = isASCII(data) ? error : Constants.USERNAME_ASCII_ERROR // TODO: localize
@@ -71,8 +74,8 @@ export function validateUsername (data) {
     dispatch(dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj))
   }
 }
-export function validateConfirmPassword (data = null) {
-  return (dispatch, getState, imports) => {
+export function validateConfirmPassword (data?: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const confirmPassword = data !== null ? data : state.create.confirmPassword
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
@@ -90,8 +93,8 @@ export function validateConfirmPassword (data = null) {
     )
   }
 }
-export function validatePassword (data) {
-  return (dispatch, getState, imports) => {
+export function validatePassword (data: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     let error = null
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
@@ -132,8 +135,8 @@ export function validatePassword (data) {
   }
 }
 
-export function createUser (data) {
-  return (dispatch, getState, imports) => {
+export function createUser (data: Object) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const myAccountOptions = {
       ...imports.accountOptions,
@@ -178,8 +181,8 @@ export function createUser (data) {
     }, 300)
   }
 }
-export function agreeToConditions (account) {
-  return (dispatch, getState, imports) => {
+export function agreeToConditions (account: AbcAccount) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const callback = imports.callback
     // write to disklet

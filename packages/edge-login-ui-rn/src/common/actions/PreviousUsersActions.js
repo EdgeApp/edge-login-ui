@@ -1,7 +1,10 @@
+// @flow
 import * as Constants from '../constants'
 import { dispatchActionWithData } from './'
+import type { AbcContext } from 'edge-login'
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
-async function getDiskStuff (context) {
+async function getDiskStuff (context: AbcContext) {
   const userList = await context.listUsernames().then(usernames =>
     Promise.all(
       usernames.map(username => {
@@ -22,11 +25,11 @@ async function getDiskStuff (context) {
   return { lastUser, userList }
 }
 
-export function getPreviousUsers (context) {
-  return (dispatch, getState, imports) => {
+export function getPreviousUsers (context: AbcContext) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const username = imports.username
-    getDiskStuff(context).then(data => {
+    getDiskStuff(context).then((data: Object) => {
       const focusUser = username || data.lastUser
       if (data.lastUser) {
         data.usersWithPinList = []
