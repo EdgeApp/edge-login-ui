@@ -36,5 +36,5 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
     onSubmitEditing: ownProps.onFinish
   }
 }
-
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps)(FormField)

@@ -11,7 +11,6 @@ type OwnProps = {
 }
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
-  const label = ownProps.label ? ownProps.label : 'Password'
   const value = state.create.password ? state.create.password : ''
   const error = state.create.createPasswordErrorMessage
     ? state.create.createPasswordErrorMessage
@@ -22,7 +21,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
     secureTextEntry: true,
     showSecureCheckbox: true,
     showSecureCheckboxLabel: 'Show Password',
-    label: label, // TODO localize
+    label: ownProps.label, // TODO localize
     returnKeyType: 'next',
     autoFocus: ownProps.autoFocus
   }
@@ -34,5 +33,5 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
     onSubmitEditing: ownProps.onFinish
   }
 }
-
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps)(FormField)
