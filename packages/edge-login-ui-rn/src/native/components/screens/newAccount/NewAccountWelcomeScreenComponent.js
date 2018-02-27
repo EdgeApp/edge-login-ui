@@ -1,12 +1,23 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Button, HeaderBackButton } from '../../common'
-import { ImageHeaderComponent } from '../../abSpecific'
+import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
 import * as Assets from '../../../assets'
 import SafeAreaView from '../../common/SafeAreaView.js'
 // import * as Constants from '../../../common/constants'
 
-export default class NewAccountWelcomeScreenComponent extends Component {
+type Props = {
+  styles: Object,
+  nextScreen(): void,
+  exitScreen(): void
+}
+
+type State = {}
+export default class NewAccountWelcomeScreenComponent extends Component<
+  Props,
+  State
+> {
   render () {
     const { NewAccountWelcomeScreenStyle } = this.props.styles
 

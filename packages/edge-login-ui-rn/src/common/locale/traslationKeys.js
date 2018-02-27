@@ -1,3 +1,4 @@
+// @flow
 export const BUTTONS = {
   OK: 'ok',
   LOGIN: 'login'

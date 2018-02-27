@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import {
   ImageBackground,
@@ -5,16 +6,24 @@ import {
   Keyboard
 } from 'react-native'
 
+type Props = {
+  style: Object,
+  src: string,
+  content: any,
+  enableTouch: boolean,
+  callback?: Function | null
+}
 const BackgroundImage = ({
   style,
   src,
   content,
   enableTouch = true,
-  callback = null
-}) => {
+  callback
+}: Props) => {
   const onPress = () => {
     if (callback) {
       return () => {
+        // $FlowFixMe
         callback()
         Keyboard.dismiss()
       }

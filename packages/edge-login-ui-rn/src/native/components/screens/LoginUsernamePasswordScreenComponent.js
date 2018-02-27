@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Keyboard, TouchableWithoutFeedback, Text } from 'react-native'
 import {
@@ -7,8 +8,6 @@ import {
   FormFieldWithDropComponent,
   StaticModal
 } from '../../components/common'
-/* import UsernameDropConnector
-  from '../../connectors/componentConnectors/UsernameDropConnector' */
 import { LogoImageHeader, UserListItem } from '../abSpecific'
 import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
@@ -18,86 +17,45 @@ import { localize, KEYS } from '../../../common/locale'
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-export default class LandingScreenComponent extends Component {
+type Props = {
+  styles: Object,
+  username: string,
+  password: string,
+  previousUsers: Object,
+  filteredUsernameList: Array<string>,
+  error: string,
+  gotoCreatePage(): void,
+  updateUsername(string): void,
+  updatePassword(string): void,
+  userLogin(Object): void,
+  launchUserLoginWithTouchId(Object): void,
+  gotoPinLoginPage(): void,
+  launchDeleteModal(): void,
+  recoverPasswordLogin(): void
+}
+
+type State = {
+  username: string,
+  password: string,
+  loggingIn: boolean,
+  focusFirst: boolean,
+  focusSecond: boolean,
+  offset: number,
+  showRecoveryModalOne: boolean,
+  showRecoveryModalTwo: boolean
+}
+
+export default class LoginUsernamePasswordScreenComponent extends Component<
+  Props,
+  State
+> {
+  keyboardDidHideListener: ?Function
+  style: Object
   componentWillMount () {
     const { LoginPasswordScreenStyle } = this.props.styles
     this.style = LoginPasswordScreenStyle
     this.keyboardDidHideListener = null
-
-    this.renderModal = style => {
-      if (this.props.showModal) {
-        return (
-          <DeleteUserConnector
-            style={style.modal.skip}
-            username={this.state.username}
-          />
-        )
-      }
-      if (this.state.showRecoveryModalOne) {
-        const body = (
-          <Text style={style.staticModalText}>
-            {
-              'If recovery was set up, you should have emailed yourself a recovery token with a link.'
-            }
-          </Text>
-        )
-        return (
-          <StaticModal
-            cancel={this.closeForgotPasswordModal.bind(this)}
-            body={body}
-            modalDismissTimerSeconds={8}
-          />
-        )
-      }
-      if (this.state.showRecoveryModalTwo) {
-        const body = (
-          <Text style={style.staticModalText}>
-            {
-              'Please find the email and click on the link from this device to initiate recovery. '
-            }
-          </Text>
-        )
-        return (
-          <StaticModal
-            cancel={this.closeForgotPasswordModalTwo.bind(this)}
-            body={body}
-            modalDismissTimerSeconds={8}
-          />
-        )
-      }
-
-      return null
-    }
-    this.recoverPasswordLogin = () => {
-      this.setState({
-        showRecoveryModalOne: false
-      })
-      this.props.recoverPasswordLogin()
-    }
-    this.cancelForgotPassword = () => {
-      this.setState({
-        showRecoveryModalOne: false
-      })
-    }
-
-    this.noFocus = () => {
-      Keyboard.dismiss()
-      this.setState({
-        focusFirst: false,
-        focusSecond: false,
-        offset: Offsets.LOGIN_SCREEN_NO_OFFSET
-      })
-    }
-    this.onDelete = user => {
-      //
-      // this.props.deleteUserFromDevice(user) TODO
-      this.setState({
-        username: user
-      })
-      this.props.launchDeleteModal()
-    }
     setTimeout(this.setListener, 2000, this.noFocus)
-
     this.setState({
       username: '',
       password: '',
@@ -109,7 +67,79 @@ export default class LandingScreenComponent extends Component {
       showRecoveryModalTwo: false
     })
   }
-  setListener (callback) {
+  renderModal = (style: Object) => {
+    if (this.props.showModal) {
+      return (
+        <DeleteUserConnector
+          style={style.modal.skip}
+          username={this.state.username}
+        />
+      )
+    }
+    if (this.state.showRecoveryModalOne) {
+      const body = (
+        <Text style={style.staticModalText}>
+          {
+            'If recovery was set up, you should have emailed yourself a recovery token with a link.'
+          }
+        </Text>
+      )
+      return (
+        <StaticModal
+          cancel={this.closeForgotPasswordModal.bind(this)}
+          body={body}
+          modalDismissTimerSeconds={8}
+        />
+      )
+    }
+    if (this.state.showRecoveryModalTwo) {
+      const body = (
+        <Text style={style.staticModalText}>
+          {
+            'Please find the email and click on the link from this device to initiate recovery. '
+          }
+        </Text>
+      )
+      return (
+        <StaticModal
+          cancel={this.closeForgotPasswordModalTwo.bind(this)}
+          body={body}
+          modalDismissTimerSeconds={8}
+        />
+      )
+    }
+
+    return null
+  }
+  recoverPasswordLogin = () => {
+    this.setState({
+      showRecoveryModalOne: false
+    })
+    this.props.recoverPasswordLogin()
+  }
+  cancelForgotPassword = () => {
+    this.setState({
+      showRecoveryModalOne: false
+    })
+  }
+
+  noFocus = () => {
+    Keyboard.dismiss()
+    this.setState({
+      focusFirst: false,
+      focusSecond: false,
+      offset: Offsets.LOGIN_SCREEN_NO_OFFSET
+    })
+  }
+  onDelete = (user: string) => {
+    //
+    // this.props.deleteUserFromDevice(user) TODO
+    this.setState({
+      username: user
+    })
+    this.props.launchDeleteModal()
+  }
+  setListener (callback: Function) {
     /* this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       callback) */
@@ -132,7 +162,7 @@ export default class LandingScreenComponent extends Component {
       })
     }
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (
       (nextProps.error && this.state.loggingIn) ||
       (this.state.loggingIn && nextProps.loginSuccess)
@@ -142,7 +172,7 @@ export default class LandingScreenComponent extends Component {
       })
     }
   }
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate (nextProps: Props) {
     if (
       nextProps.username !== this.props.username &&
       this.state.showRecoveryModalOne
@@ -202,7 +232,7 @@ export default class LandingScreenComponent extends Component {
       </TouchableWithoutFeedback>
     )
   }
-  renderUsername (styles) {
+  renderUsername (styles: Object) {
     if (this.props.previousUsers.length > 1) {
       return (
         <FormFieldWithDropComponent
@@ -237,7 +267,7 @@ export default class LandingScreenComponent extends Component {
       />
     )
   }
-  renderRow (data) {
+  renderRow (data: Object) {
     return (
       <UserListItem
         data={data.item}
@@ -248,7 +278,7 @@ export default class LandingScreenComponent extends Component {
     )
   }
 
-  renderButtons (style) {
+  renderButtons (style: Object) {
     return (
       <View style={style.buttonsBox}>
         <View style={style.shimTiny} />
@@ -309,7 +339,7 @@ export default class LandingScreenComponent extends Component {
       offset: Offsets.PASSWORD_OFFSET_LOGIN_SCREEN
     })
   }
-  selectUser (user) {
+  selectUser (user: string) {
     this.updateUsername(user)
     if (this.checkPinEnabled(user)) {
       this.props.gotoPinLoginPage()
@@ -319,7 +349,7 @@ export default class LandingScreenComponent extends Component {
     this.onSetNextFocus()
   }
 
-  checkPinEnabled (user) {
+  checkPinEnabled (user: string) {
     for (let i = 0; i < this.props.previousUsers.length; i++) {
       const obj = this.props.previousUsers[i]
       if (user === obj.username && obj.pinEnabled) {
@@ -328,10 +358,10 @@ export default class LandingScreenComponent extends Component {
     }
     return false
   }
-  updateUsername (data) {
+  updateUsername (data: string) {
     this.props.updateUsername(data)
   }
-  updatePassword (data) {
+  updatePassword (data: string) {
     this.props.updatePassword(data)
   }
   onForgotPassword () {

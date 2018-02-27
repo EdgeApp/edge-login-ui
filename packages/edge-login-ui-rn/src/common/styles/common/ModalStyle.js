@@ -1,3 +1,4 @@
+// @flow
 import * as Styles from '../'
 import * as Constants from '../../constants/'
 import { Dimensions } from 'react-native'

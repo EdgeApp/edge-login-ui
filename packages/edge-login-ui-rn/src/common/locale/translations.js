@@ -1,3 +1,4 @@
+// @flow
 const translations = {
   ok: {
     en_us: 'ok'

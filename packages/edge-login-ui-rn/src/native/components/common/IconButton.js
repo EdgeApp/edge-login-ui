@@ -1,9 +1,10 @@
+// @flow
 import React, { Component } from 'react'
 import { View, TouchableHighlight } from 'react-native'
 import { Icon } from './'
 // import * as Constants from '../../../../constants/indexConstants'
 
-/* type Props = {
+type Props = {
   icon: string,
   style: any,
   onPress: Function,
@@ -12,37 +13,28 @@ import { Icon } from './'
 type State = {
   pressed: boolean
 }
- */
-class IconButton extends Component {
-  /*   static defaultProps = {
-    iconType: Constants.MATERIAL_ICONS
-  }
-  static propsTypes = {
-    icon: PropTypes.string.isRequired,
-    style: PropTypes.object.isRequired,
-    onPress: PropTypes.func.isRequired,
-    iconType: PropTypes.string.isRequired
-  } */
+
+class IconButton extends Component<Props, State> {
   componentWillMount () {
     this.setState({
       pressed: false
     })
   }
 
-  _onPressButton () {
+  _onPressButton = () => {
     this.props.onPress()
   }
-  _onShowUnderlay () {
+  _onShowUnderlay = () => {
     this.setState({
       pressed: true
     })
   }
-  _onHideUnderlay () {
+  _onHideUnderlay = () => {
     this.setState({
       pressed: false
     })
   }
-  renderIcon (icon, iconPressed, iconSize) {
+  renderIcon (icon: Object, iconPressed: Object, iconSize: number) {
     let style = icon
     if (this.state.pressed) {
       style = iconPressed
@@ -68,9 +60,9 @@ class IconButton extends Component {
     return (
       <TouchableHighlight
         style={container}
-        onPress={this._onPressButton.bind(this)}
-        onShowUnderlay={this._onShowUnderlay.bind(this)}
-        onHideUnderlay={this._onHideUnderlay.bind(this)}
+        onPress={this._onPressButton}
+        onShowUnderlay={this._onShowUnderlay}
+        onHideUnderlay={this._onHideUnderlay}
         underlayColor={underlayColor}
       >
         <View>{this.renderIcon(icon, iconPressed, iconSize)}</View>

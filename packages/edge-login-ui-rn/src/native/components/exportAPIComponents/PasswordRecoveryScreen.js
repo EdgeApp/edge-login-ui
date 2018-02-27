@@ -1,4 +1,6 @@
+// @flow
 import React, { Component } from 'react'
+import type { Store } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from '../../../common/reducers'
 import { createStore, applyMiddleware } from 'redux'
@@ -7,24 +9,20 @@ import PasswordRecoveryConnector from '../../connectors/PasswordRecoveryConnecto
 import * as Styles from '../../styles'
 import { setLocal } from '../../../common/locale'
 
-/* type Props = {
+type Props = {
   account: any,
   context: any,
-  showHeader: bool,
+  showHeader: boolean,
   locale: string,
   language: string,
-  onComplete():void,
-  onCancel():void
+  onComplete(): void,
+  onCancel(): void
 }
- */
+type State = {}
+type Action = { type: string }
 
-class PasswordRecoveryScreen extends Component {
-  /* static defaultProps = {
-    locale: 'US',
-    language: 'en_us',
-    accountObject: null
-  } */
-
+class PasswordRecoveryScreen extends Component<Props> {
+  store: Store<State, Action>
   componentWillMount () {
     setLocal(this.props.locale, this.props.language)
     this.store = createStore(
@@ -36,13 +34,13 @@ class PasswordRecoveryScreen extends Component {
           context: this.props.context,
           onComplete: this.props.onComplete,
           onCancel: this.props.onComplete,
-          locale: this.props.local,
+          locale: this.props.locale,
           language: this.props.language
         })
       )
     )
   }
-  componentWillReceiveProps (props) {}
+  componentWillReceiveProps (props: Props) {}
 
   render () {
     console.log(Styles)

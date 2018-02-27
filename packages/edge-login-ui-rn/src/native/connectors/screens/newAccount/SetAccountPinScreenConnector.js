@@ -1,10 +1,11 @@
+// @flow
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/newAccount/SetAccountPinScreenComponent'
 import * as loginAction from '../../../../common/actions'
+import type { State, Dispatch } from '../../../../types/ReduxTypes'
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: State) => {
   return {
-    styles: ownProps.styles,
     username: state.create.username,
     password: state.create.password,
     pin: state.create.pin,
@@ -13,9 +14,9 @@ export const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    createUser: data => dispatch(loginAction.createUser(data))
+    createUser: (data: Object) => dispatch(loginAction.createUser(data))
   }
 }
 

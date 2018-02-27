@@ -1,3 +1,4 @@
+// @flow
 import * as Colors from '../../../common/constants/Colors'
 
 const InputStyles = {

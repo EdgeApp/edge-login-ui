@@ -1,38 +1,37 @@
+// @flow
 import React, { Component } from 'react'
-// import * as Constants from '../../../common/constants'
 import { Input } from '../materialWrappers/indexMaterial'
-/* import { Checkbox } from './Checkbox'
-import { STANDARD_CHECKED, STANDARD_UNCHECKED } from '../../../native/assets'
- */
-/* type Props = {
 
-  style: object.isRequired,
-  label: string.isRequired,
-  value?: string,
+type Props = {
+  style: Object,
+  label: string,
+  value: string,
   placeholder?: string,
-  autoCorrect: boolean,
+  autoCorrect: string,
   autoFocus: boolean,
   forceFocus: boolean,
   autoCapitalize?: string,
   secureTextEntry: boolean,
   showSecureCheckbox: boolean,
-  returnKeyType?: string,
+  returnKeyType: string,
   error?: string,
-  onFinish():void,
-  onFocus():void,
-  onChangeText():void,
-  onSubmitEditing():void
-} */
+  onFinish(): void,
+  onFocus(): void,
+  onBlur(): void,
+  onChangeText(): void,
+  onSubmitEditing(): void
+}
 
-class FormField extends Component {
-  /* static defaultProps = {
-    autoCapitalize: 'none',
-    autoCorrect: false,
-    autoFocus: false,
-    forceFocus: false,
-    returnKeyType: 'go',
-    onFocus: null
-  } */
+type State = {
+  secure: boolean,
+  autoFocus: boolean
+}
+
+class FormField extends Component<Props, State> {
+  static defaultProps = {
+    value: '',
+    returnKeyType: 'done'
+  }
   componentWillMount () {
     const secure = this.props.secureTextEntry
       ? this.props.secureTextEntry
@@ -71,39 +70,11 @@ class FormField extends Component {
         onBlur={this.props.onBlur}
         autoCapitalize={'none'}
         autoCorrect={this.props.autoCorrect}
-        onSubmitEditing={this.onSubmitEditing.bind(this)}
+        onSubmitEditing={this.onSubmitEditing}
       />
     )
   }
-  /* renderHelperBox (Style) {
-    if (this.props.showSecureCheckbox) {
-      return (
-        <Checkbox
-          style={Style.helperCheckbox}
-          onChange={this.setSecurity.bind(this)}
-          label={this.props.showSecureCheckboxLabel}
-          checkedImage={STANDARD_CHECKED}
-          uncheckedImage={STANDARD_UNCHECKED}
-        />
-      )
-    }
-    return null
-  }
-  renderLabel () {
-    return this.props.label
-  }
-  renderError () {
-    if (this.props.error) {
-      return this.props.error
-    }
-    return null
-  } */
-  /* setSecurity (arg) {
-    this.setState({
-      secure: arg
-    })
-  } */
-  onSubmitEditing (event) {
+  onSubmitEditing = (event: any) => {
     if (this.props.onSubmitEditing) {
       this.props.onSubmitEditing()
     }

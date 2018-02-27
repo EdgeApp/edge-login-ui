@@ -1,7 +1,21 @@
+// @flow
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import ChangeAccountPasswordScreenConnector from '../connectors/screens/existingAccount/ChangeAccountPasswordScreenConnector'
-export default class ChangePasswordAppComponent extends Component {
+
+export type OwnProps = {
+  styles: Object,
+  showHeader: boolean
+}
+export type StateProps = {
+  workflow: Object
+}
+export type DispatchProps = {
+  setWorkflow(): void
+}
+type Props = OwnProps & DispatchProps & StateProps
+
+export default class ChangePasswordAppComponent extends Component<Props> {
   componentWillMount () {
     this.props.setWorkflow()
   }

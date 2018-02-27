@@ -1,8 +1,10 @@
+// @flow
 import * as Constants from '../../common/constants'
 import * as actions from '../../common/actions'
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
 export function recoverPasswordLogin () {
-  return async (dispatch, getState, imports) => {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const context = imports.context
     const username = state.login.username
@@ -34,7 +36,7 @@ export function recoverPasswordLogin () {
   }
 }
 export function getRecoveryQuestions () {
-  return async (dispatch, getState, imports) => {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const context = imports.context
     const username = state.login.username
@@ -75,8 +77,8 @@ export function getRecoveryQuestions () {
   }
 }
 
-export function initializePasswordRecovery (accountObj) {
-  return async (dispatch, getState, imports) => {
+export function initializePasswordRecovery () {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const account = imports.accountObject
     const questionsList = await context.listRecoveryQuestionChoices()
@@ -126,7 +128,7 @@ export function initializePasswordRecovery (accountObj) {
 }
 
 export function deleteRecovery () {
-  return async (dispatch, getState, imports) => {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const account = imports.accountObject
     try {
       await account.deleteRecovery()
@@ -140,18 +142,21 @@ export function deleteRecovery () {
 }
 
 export function cancelRecoverySettingsScene () {
-  return async (dispatch, getState, imports) => {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     imports.onComplete()
   }
 }
 
-export function changeRecoveryAnswers (questions, answers) {
-  return async (dispatch, getState, imports) => {
+export function changeRecoveryAnswers (
+  questions: Array<string>,
+  answers: Array<string>
+) {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const account = imports.accountObject
     try {
       const recoveryKey = await account.changeRecovery(questions, answers)
       dispatch(
-        actions.dispatchActionWithData(Constants.ON_RECOVERY_KEY, recoveryKey)
+        actions.dispatchActionWitString(Constants.ON_RECOVERY_KEY, recoveryKey)
       )
     } catch (e) {
       console.log(e)

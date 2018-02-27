@@ -1,19 +1,23 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text, TouchableHighlight } from 'react-native'
 import FAIcon from 'react-native-vector-icons/MaterialIcons'
 
-/* type Props = {
+type Props = {
   icon: string,
   style: any,
   onPress: Function,
   title: string,
-  iconType
+  iconType: string,
+  numberOfLines?: number
 }
+
 type State = {
   pressed: boolean
-} */
+}
 
-class TextAndIconButton extends Component /* <Props, State> */ {
+class TextAndIconButton extends Component<Props, State> {
+  numberOfLines: number
   componentWillMount () {
     this.setState({
       pressed: false
@@ -34,7 +38,7 @@ class TextAndIconButton extends Component /* <Props, State> */ {
     })
   }
   // TODO: allen- test with icon on main app. - not working on sample.
-  renderIcon (iconStyle, iconPressedStyle, iconSize) {
+  renderIcon (iconStyle: Object, iconPressedStyle: Object, iconSize: number) {
     try {
       /* return <Text style={[iconStyle, this.state.pressed && iconPressedStyle]}>
         {this.props.icon}

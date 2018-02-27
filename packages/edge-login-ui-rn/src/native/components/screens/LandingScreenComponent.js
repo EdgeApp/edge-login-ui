@@ -1,10 +1,18 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { BackgroundImage, Button } from '../common'
 import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 import { LogoImageHeader } from '../abSpecific'
-export default class LandingScreenComponent extends Component {
+
+type Props = {
+  styles: Object,
+  startFlow(string): void
+}
+
+type State = {}
+export default class LandingScreenComponent extends Component<Props, State> {
   render () {
     const { LandingScreenStyle } = this.props.styles
     return (

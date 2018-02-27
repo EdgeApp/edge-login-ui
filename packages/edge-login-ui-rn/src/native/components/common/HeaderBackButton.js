@@ -1,10 +1,16 @@
+// @flow
 import React, { Component } from 'react'
 import { TouchableOpacity, Platform, Text } from 'react-native'
 import { Icon } from 'native-base'
 
 const isIos = Platform.OS === 'ios'
 
-class HeaderBackButton extends Component {
+type Props = {
+  styles: Object,
+  label: string,
+  onPress(): void
+}
+class HeaderBackButton extends Component<Props> {
   render () {
     const withArrow = true
     const icon = isIos ? 'ios-arrow-back-outline' : 'md-arrow-back'

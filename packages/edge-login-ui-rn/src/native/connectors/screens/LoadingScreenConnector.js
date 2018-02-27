@@ -1,20 +1,13 @@
+// @flow
 import { connect } from 'react-redux'
 import LoadingScreenComponent from '../../components/screens/LoadingScreenComponent'
+import type { State } from '../../../types/ReduxTypes'
 // import * as loginAction from '../../common/actions/'
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: State) => {
   return {
-    styles: ownProps.styles,
     workflow: state.workflow
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    // userLogin: (data) => dispatch(loginAction.userLogin(data)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  LoadingScreenComponent
-)
+export default connect(mapStateToProps, null)(LoadingScreenComponent)

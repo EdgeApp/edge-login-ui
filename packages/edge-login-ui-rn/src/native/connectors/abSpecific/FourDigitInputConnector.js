@@ -1,10 +1,11 @@
+// @flow
 import { connect } from 'react-redux'
 import { FourDigitInputComponent } from '../../components/abSpecific/'
+import type { State, Dispatch } from '../../../types/ReduxTypes'
 import * as actions from '../../../common/actions'
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: State) => {
   return {
-    style: ownProps.style,
     pin: state.login.pin,
     username: state.login.username,
     error: state.login.errorMessage,
@@ -12,9 +13,9 @@ export const mapStateToProps = (state, ownProps) => {
     isLogginginWithPin: state.login.isLoggingInWithPin
   }
 }
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onChangeText: data => dispatch(actions.userLoginWithPin(data))
+    onChangeText: (data: Object) => dispatch(actions.userLoginWithPin(data))
   }
 }
 

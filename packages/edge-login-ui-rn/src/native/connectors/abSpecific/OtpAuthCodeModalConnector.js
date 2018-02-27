@@ -1,7 +1,17 @@
+// @flow
 import { connect } from 'react-redux'
 import { MyModal } from '../../components/common/'
 import { OTP_SMALL } from '../../assets/'
-export const mapStateToProps = (state, ownProps) => {
+import type { State, Dispatch } from '../../../types/ReduxTypes'
+
+type OwnProps = {
+  middle: any,
+  thinking: boolean,
+  cancel(): void,
+  action(): void
+}
+
+export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   return {
     headerText: 'Enter Authentication Code',
     // middleText: 'Sign into your account using the device you setup 2FA with, and go to Settings > 2 Factor Authentication to find the code.',
@@ -13,7 +23,7 @@ export const mapStateToProps = (state, ownProps) => {
     thinking: ownProps.thinking
   }
 }
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     cancel: () => ownProps.cancel(),
     action: () => ownProps.action()

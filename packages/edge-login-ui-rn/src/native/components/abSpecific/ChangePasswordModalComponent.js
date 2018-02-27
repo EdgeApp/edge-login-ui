@@ -1,14 +1,15 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import { Button } from '../common'
 import { LOGO_DOT } from '../../../native/assets/'
 
-/* type Props = {
+type Props = {
   style: any,
   cancelFunc(): void
-} */
+}
 
-class ChangePasswordModalComponent extends Component {
+class ChangePasswordModalComponent extends Component<Props> {
   render () {
     const Style = this.props.style
     return (
@@ -31,7 +32,7 @@ class ChangePasswordModalComponent extends Component {
           </View>
           <View style={Style.buttonsContainer}>
             <Button
-              onPress={this.onSkipPress.bind(this)}
+              onPress={this.onSkipPress}
               downStyle={Style.skipButton.downStyle}
               downTextStyle={Style.skipButton.downTextStyle}
               upStyle={Style.skipButton.upStyle}
@@ -43,7 +44,7 @@ class ChangePasswordModalComponent extends Component {
       </View>
     )
   }
-  onSkipPress () {
+  onSkipPress = () => {
     this.props.cancelFunc()
   }
 }

@@ -1,10 +1,12 @@
+// @flow
 import { connect } from 'react-redux'
 import { MyModal } from '../../components/common/'
+import type { State, Dispatch } from '../../../types/ReduxTypes'
 import * as Constants from '../../../common/constants'
 import * as actions from '../../../common/actions/index'
-export const mapStateToProps = (state, ownProps) => {
+
+export const mapStateToProps = (state: State) => {
   return {
-    style: ownProps.style,
     headerText: 'Password Changed',
     headerSubtext: 'Password Successfully Changed',
     middleText:
@@ -16,7 +18,7 @@ export const mapStateToProps = (state, ownProps) => {
     singleButton: true
   }
 }
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     cancel: () => {
       dispatch(actions.dispatchAction(Constants.CLOSE_NOTIFICATION_MODAL))

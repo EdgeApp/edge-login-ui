@@ -1,12 +1,18 @@
+// @flow
 import { connect } from 'react-redux'
 import { FormField } from '../../components/common'
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants/'
-export const mapStateToProps = (state, ownProps) => {
+import type { State, Dispatch } from '../../../types/ReduxTypes'
+
+type OwnProps = {
+  onSubmitEditing(): void
+}
+
+export const mapStateToProps = (state: State) => {
   const value = state.login.otpUserBackupKey || ''
   const error = state.login.otpErrorMessage || ''
   return {
-    style: ownProps.style,
     value,
     label: 'Backup Key',
     error,
@@ -15,18 +21,16 @@ export const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
-    onChangeText: data =>
+    onChangeText: (data: string) =>
       dispatch(
-        actions.dispatchActionWithData(
+        actions.dispatchActionWitString(
           Constants.AUTH_UPDATE_OTP_BACKUP_KEY,
           data
         )
       ),
     onSubmitEditing: ownProps.onSubmitEditing
-    /* onBlur: ownProps.onBlur,
-    onFocus: ownProps.onFocus */
   }
 }
 

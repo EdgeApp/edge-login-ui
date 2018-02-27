@@ -1,5 +1,10 @@
+// @flow
 import * as Constants from '../constants'
-import { dispatchAction, dispatchActionWithData } from './'
+import {
+  dispatchAction,
+  dispatchActionWithData,
+  dispatchActionWitString
+} from './'
 import {
   enableTouchId,
   loginWithTouchId,
@@ -7,12 +12,13 @@ import {
   supportsTouchId,
   isTouchDisabled
 } from '../../native/keychain.js'
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
 /**
  * Make it Thunky
  */
-export function loginWithRecovery (answers, username) {
-  return async (dispatch, getState, imports) => {
+export function loginWithRecovery (answers: Array<string>, username: string) {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const backupKey = state.passwordRecovery.recoveryKey
     const username = state.login.username
@@ -57,14 +63,14 @@ export function loginWithRecovery (answers, username) {
       console.log(e.message)
       const incorrect = 'The answers you provided are incorrect. '
       dispatch(
-        dispatchActionWithData(Constants.ON_RECOVERY_LOGIN_ERROR, incorrect)
+        dispatchActionWitString(Constants.ON_RECOVERY_LOGIN_ERROR, incorrect)
       )
     }
   }
 }
 
 export function resetOtpReset () {
-  return async (dispatch, getState, imports) => {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const context = imports.context
     const username = state.login.username
@@ -81,7 +87,7 @@ export function resetOtpReset () {
   }
 }
 export function retryWithOtp () {
-  return (dispatch, getState, imports) => {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const userBackUpKey = state.login.otpUserBackupKey
     const previousAttemptType = state.login.previousAttemptType
@@ -97,8 +103,8 @@ export function retryWithOtp () {
     )(dispatch, getState, imports)
   }
 }
-export function userLoginWithTouchId (data) {
-  return (dispatch, getState, imports) => {
+export function userLoginWithTouchId (data: Object) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const callback = imports.callback
     const myAccountOptions = {
@@ -140,8 +146,8 @@ export function userLoginWithTouchId (data) {
       })
   }
 }
-export function userLoginWithPin (data, backupKey = null) {
-  return (dispatch, getState, imports) => {
+export function userLoginWithPin (data: Object, backupKey?: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const callback = imports.callback
     const myAccountOptions = {
@@ -197,7 +203,7 @@ export function userLoginWithPin (data, backupKey = null) {
             return
           }
           dispatch(
-            dispatchActionWithData(
+            dispatchActionWitString(
               Constants.LOGIN_USERNAME_PASSWORD_FAIL,
               e.name === 'PasswordError'
                 ? 'Invalid PIN'
@@ -215,8 +221,8 @@ export function userLoginWithPin (data, backupKey = null) {
   }
 }
 
-export function userLogin (data, backupKey = null) {
-  return (dispatch, getState, imports) => {
+export function userLogin (data: Object, backupKey?: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const callback = imports.callback
     const myAccountOptions = {
@@ -265,7 +271,7 @@ export function userLogin (data, backupKey = null) {
         }
         if (myAccountOptions.otp) {
           dispatch(
-            dispatchActionWithData(
+            dispatchActionWitString(
               Constants.OTP_LOGIN_BACKUPKEY_FAIL,
               'Backup Key was incorrect'
             )
@@ -287,7 +293,7 @@ export function userLogin (data, backupKey = null) {
 }
 
 export function getEdgeLoginQrCode () {
-  return async (dispatch, getState, imports) => {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const callback = imports.callback
     const myAccountOptions = {
@@ -320,7 +326,7 @@ export function getEdgeLoginQrCode () {
   }
 }
 export function recoveryLoginComplete () {
-  return (dispatch, getState, imports) => {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const account = state.login.account
     const touchIdInformation = state.login.touchIdInformation

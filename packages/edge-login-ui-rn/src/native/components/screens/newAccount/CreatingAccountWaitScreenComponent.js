@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 // import { LOGO_DOT } from '../../../../native/assets'
@@ -6,8 +7,15 @@ import { Spinner } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 // import * as Constants from '../../../../common/constants'
 
-export default class CreatingAccountWaitScreenComponent extends Component {
-  componentWillReceiveProps (nextProps) {
+type Props = {
+  styles: Object,
+  createSuccess: boolean,
+  nextScreen(): void
+}
+export default class CreatingAccountWaitScreenComponent extends Component<
+  Props
+> {
+  componentWillReceiveProps (nextProps: Props) {
     if (nextProps.createSuccess) {
       this.props.nextScreen()
     }

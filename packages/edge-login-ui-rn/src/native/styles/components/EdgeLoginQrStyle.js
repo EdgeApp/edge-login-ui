@@ -1,3 +1,4 @@
+// @flow
 import * as Comstants from '../../../common/constants/'
 const EdgeLoginQrStyle = {
   container: {
@@ -8,7 +9,7 @@ const EdgeLoginQrStyle = {
     justifyContent: 'space-around'
   },
   qrCodeBorder: {
-    backgroundColor: Comstants.W,
+    backgroundColor: Comstants.WHITE,
     borderRadius: 4,
     padding: 10
   },

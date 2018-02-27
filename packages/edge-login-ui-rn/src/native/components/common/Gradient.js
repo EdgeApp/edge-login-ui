@@ -1,11 +1,13 @@
+// @flow
 import React, { Component } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-export default class Gradient extends Component {
+
+type Props = {
+  style: Object,
+  children: any
+}
+export default class Gradient extends Component<Props> {
   render () {
-    /* const {
-      lightColor,
-      rightColor
-    } = this.props */
     const UPPER_LEFT = { x: 0, y: 0 }
     const UPPER_RIGHT = { x: 1, y: 0 }
     return (

@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
@@ -8,14 +9,14 @@ import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import * as Constants from '../../../common/constants'
 
-/* type Props= {
-  style: any, {color min}
+type Props = {
+  style: Object,
   name: string,
   size: number,
   type: string
-} */
+}
 
-const Icon = ({ style, name, size, type }) => {
+const Icon = ({ style, name, size, type }: Props) => {
   switch (type) {
     case Constants.EVIL_ICONS:
       return <EvilIcons style={style} name={name} size={size} />

@@ -1,7 +1,13 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Modal } from 'react-native'
 
-class CustomModal extends Component {
+type Props = {
+  style: Object,
+  children: any
+}
+
+class CustomModal extends Component<Props> {
   render () {
     const Style = this.props.style
     return (

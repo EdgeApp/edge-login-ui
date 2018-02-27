@@ -1,12 +1,13 @@
+// @ flow
 import React, { Component } from 'react'
 import { Image, View } from 'react-native'
 
-/* type Props = {
+type Props = {
   small: boolean,
-  style: any
-} */
+  style: Object
+}
 
-class ImageHeaderComponent extends Component {
+class ImageHeaderComponent extends Component<Props> {
   render () {
     return (
       <View style={this.props.style.container}>

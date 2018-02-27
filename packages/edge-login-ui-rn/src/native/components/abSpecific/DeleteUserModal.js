@@ -1,16 +1,21 @@
+// @flow
 import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import { Button } from '../common'
 import { LOGO_DOT } from '../../../native/assets/'
 
-/*
 type Props = {
   style: any,
+  username: string,
   cancelFunc(): void,
-  deleteFunc(): void
+  deleteFunc(string): void
 }
-*/
-class DeleteUserModal extends Component {
+
+type State = {
+  isDeleting: boolean
+}
+
+class DeleteUserModal extends Component<Props, State> {
   componentWillMount () {
     this.setState({
       isDeleting: false

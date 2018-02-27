@@ -1,19 +1,21 @@
+// @flow
 import { connect } from 'react-redux'
 import PasswordRecoveryAppComponent from '../components/PasswordRecoveryAppComponent'
+import type { OwnProps } from '../components/PasswordRecoveryAppComponent'
+import type { Dispatch, State } from '../../types/ReduxTypes'
 import * as actions from '../../common/actions/'
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   return {
     styles: ownProps.styles,
-    showHeader: ownProps.showHeader,
-    accountObject: ownProps.accountObject
+    showHeader: ownProps.showHeader
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    initializePasswordRecovery: account =>
-      dispatch(actions.initializePasswordRecovery(account))
+    initializePasswordRecovery: () =>
+      dispatch(actions.initializePasswordRecovery())
   }
 }
 

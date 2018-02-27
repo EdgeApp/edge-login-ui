@@ -1,8 +1,10 @@
+// @flow
 import * as Constants from '../constants'
 import { dispatchAction } from './'
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
-export function changePassword (data) {
-  return (dispatch, getState, imports) => {
+export function changePassword (data: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const accountObject = imports.accountObject
     accountObject
       .changePassword(data)
@@ -15,8 +17,8 @@ export function changePassword (data) {
       })
   }
 }
-export function recoveryChangePassword (data) {
-  return (dispatch, getState, imports) => {
+export function recoveryChangePassword (data: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const account = state.login.account
     account
@@ -31,8 +33,8 @@ export function recoveryChangePassword (data) {
   }
 }
 
-export function recoveryChangePIN (data) {
-  return (dispatch, getState, imports) => {
+export function recoveryChangePIN (data: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const account = state.login.account
     account
@@ -47,8 +49,8 @@ export function recoveryChangePIN (data) {
   }
 }
 
-export function changePIN (data) {
-  return (dispatch, getState, imports) => {
+export function changePIN (data: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const accountObject = imports.accountObject
     accountObject
       .changePIN(data)

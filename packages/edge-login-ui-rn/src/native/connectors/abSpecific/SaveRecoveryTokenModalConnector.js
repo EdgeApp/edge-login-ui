@@ -1,8 +1,13 @@
 import { connect } from 'react-redux'
 import { MyModal } from '../../components/common/'
 import * as Constants from '../../../common/constants'
+import { Dispatch, State } from '../../../types/ReduxTypes'
 
-export const mapStateToProps = (state, ownProps) => {
+type OwnProps = {
+  cancel(): void,
+  action(): void
+}
+export const mapStateToProps = (state: State) => {
   return {
     headerText: 'Save recovery token',
     icon: Constants.MAIL,
@@ -12,7 +17,7 @@ export const mapStateToProps = (state, ownProps) => {
     hideCancelX: true
   }
 }
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     cancel: ownProps.cancel,
     action: ownProps.action

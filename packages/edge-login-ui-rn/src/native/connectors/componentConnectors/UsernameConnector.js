@@ -1,10 +1,14 @@
+// @flow
 import { connect } from 'react-redux'
 import { FormField } from '../../components/common/'
 import * as loginAction from '../../../common/actions'
+import type { State, Dispatch } from '../../../types/ReduxTypes'
 
-export const mapStateToProps = (state, ownProps) => {
+type OwnProps = {
+  onFinish(): void
+}
+export const mapStateToProps = (state: State) => {
   return {
-    style: ownProps.style,
     value: state.create.username,
     error: state.create.usernameErrorMessage,
     label: 'Username',
@@ -13,9 +17,10 @@ export const mapStateToProps = (state, ownProps) => {
     autoFocus: true // ownProps.autoFocus,
   }
 }
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
-    onChangeText: data => dispatch(loginAction.validateUsername(data)),
+    onChangeText: (data: string) =>
+      dispatch(loginAction.validateUsername(data)),
     onSubmitEditing: ownProps.onFinish
   }
 }

@@ -1,7 +1,13 @@
+// = @flow
 import React, { Component } from 'react'
 import { Image, View, TouchableWithoutFeedback } from 'react-native'
 
-class ImageButton extends Component {
+type Props = {
+  style: Object,
+  source: string,
+  onPress(): void
+}
+class ImageButton extends Component<Props> {
   render () {
     return (
       <TouchableWithoutFeedback onPress={this.props.onPress}>

@@ -1,15 +1,22 @@
+// @flow
 import { connect } from 'react-redux'
 import { FormField } from '../../components/common'
 import * as actions from '../../../common/actions'
+import type { State, Dispatch } from '../../../types/ReduxTypes'
 
-export const mapStateToProps = (state, ownProps) => {
+type OwnProps = {
+  label: string,
+  autoFocus: boolean,
+  onFinish(): void
+}
+
+export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const label = ownProps.label ? ownProps.label : 'Confirm Password'
   const value = state.create.confirmPassword ? state.create.confirmPassword : ''
   const error = state.create.confirmPasswordErrorMessage
     ? state.create.confirmPasswordErrorMessage
     : ''
   return {
-    style: ownProps.style,
     value,
     error,
     secureTextEntry: true,
@@ -22,11 +29,12 @@ export const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
-    onChangeText: data => dispatch(actions.validateConfirmPassword(data)),
+    onChangeText: (data: string) =>
+      dispatch(actions.validateConfirmPassword(data)),
     onSubmitEditing: ownProps.onFinish
   }
 }
-
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps)(FormField)

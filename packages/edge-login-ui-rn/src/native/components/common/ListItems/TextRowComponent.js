@@ -1,22 +1,39 @@
+// @flow
 import React, { Component } from 'react'
 import { Text, TouchableHighlight } from 'react-native'
 
-class TextRowComponent extends Component {
+export type OwnProps = {
+  style: Object,
+  numberOfLines: number,
+  title: string,
+  data: any
+}
+export type DispatchProps = {
+  onPress(any): void
+}
+
+type State = {
+  pressed: boolean
+}
+
+type Props = OwnProps & DispatchProps
+class TextRowComponent extends Component<Props, State> {
+  numberOfLines: number
   componentWillMount () {
     this.setState({
       pressed: false
     })
     this.numberOfLines = this.props.numberOfLines || 1
   }
-  _onPressButton () {
+  _onPressButton = () => {
     this.props.onPress(this.props.data)
   }
-  _onShowUnderlay () {
+  _onShowUnderlay = () => {
     this.setState({
       pressed: true
     })
   }
-  _onHideUnderlay () {
+  _onHideUnderlay = () => {
     this.setState({
       pressed: false
     })
@@ -27,9 +44,9 @@ class TextRowComponent extends Component {
     return (
       <TouchableHighlight
         style={container}
-        onPress={this._onPressButton.bind(this)}
-        onShowUnderlay={this._onShowUnderlay.bind(this)}
-        onHideUnderlay={this._onHideUnderlay.bind(this)}
+        onPress={this._onPressButton}
+        onShowUnderlay={this._onShowUnderlay}
+        onHideUnderlay={this._onHideUnderlay}
         underlayColor={underlayColor}
       >
         <Text
