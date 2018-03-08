@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, Modal } from 'react-native'
+import { Modal, View } from 'react-native'
 
 type Props = {
   style: Object,

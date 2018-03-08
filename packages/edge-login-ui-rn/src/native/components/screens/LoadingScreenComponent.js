@@ -2,8 +2,9 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { BackgroundImage, Spinner } from '../common'
+
 import * as Assets from '../../assets/'
+import { BackgroundImage, Spinner } from '../common'
 
 type Props = {
   styles: Object

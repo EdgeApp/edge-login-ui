@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
-import Modal from '../BaseModal.js'
-import desktopStyles from './Success.webStyle.scss'
-import MobileStyles from './Success.mobileStyle.scss'
-import desktopIcon from '../../../img/modals/success-W.png'
+
 import mobileIcon from '../../../img/modals/success-MW.png'
+import desktopIcon from '../../../img/modals/success-W.png'
+import Modal from '../BaseModal.js'
+import MobileStyles from './Success.mobileStyle.scss'
+import desktopStyles from './Success.webStyle.scss'
 
 class Success extends Component {
   render () {

@@ -1,6 +1,7 @@
 import React from 'react'
-import QRCode from '../LoginEdge/QRCode.js'
+
 import Divider from '../Divider/Divider.js'
+import QRCode from '../LoginEdge/QRCode.js'
 import styles from './NewAccount.mobileStyle.scss'
 
 export default ({

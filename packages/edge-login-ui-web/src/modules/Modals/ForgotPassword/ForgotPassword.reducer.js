@@ -1,6 +1,6 @@
 import {
-  OPEN_FORGOT_PASSWORD_MODAL,
-  CLOSE_FORGOT_PASSWORD_MODAL
+  CLOSE_FORGOT_PASSWORD_MODAL,
+  OPEN_FORGOT_PASSWORD_MODAL
 } from './ForgotPassword.action.js'
 
 export const forgotPassword = (state = false, action) => {

@@ -1,8 +1,8 @@
 // @flow
 
+import * as Constants from '../../constants/'
 import { vs } from '../../util'
 import { BasicCheckBoxWithLabel } from '../'
-import * as Constants from '../../constants/'
 
 const PasswordStatusStyle = {
   container: {

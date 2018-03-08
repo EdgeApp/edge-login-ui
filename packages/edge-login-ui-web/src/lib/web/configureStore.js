@@ -1,9 +1,10 @@
 /* eslint-disable global-require */
 /* eslint-disable no-undef */
-import { createStore, applyMiddleware } from 'redux'
-import rootReducer from '../rootReducer'
-import thunk from 'redux-thunk'
+import { applyMiddleware, createStore } from 'redux'
 import createLogger from 'redux-logger'
+import thunk from 'redux-thunk'
+
+import rootReducer from '../rootReducer'
 import abcContext from './abcContext'
 import t from './LocaleStrings'
 

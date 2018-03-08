@@ -3,7 +3,7 @@
   "scripts": {
     "precommit": "lint-staged && flow",
     "flow": "flow",
-    "format": "prettier-eslint --write 'packages/*/*.js' 'packages/*/src/**/*.js'",
+    "format": "import-sort -l --write 'packages/*/*.js' 'packages/*/src/**/*.js'; prettier-eslint --write 'packages/*/*.js' 'packages/*/src/**/*.js'",
     "lint": "eslint 'packages/*/*.js' 'packages/*/src/**/*.js'"
   },
   "devDependencies": {
@@ -16,9 +16,18 @@
     "eslint-plugin-react": "^7.6.1",
     "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",
+    "import-sort-cli": "^4.2.0",
+    "import-sort-parser-babylon": "^4.2.0",
+    "import-sort-style-module": "^4.2.0",
     "lerna": "^2.8.0",
     "lint-staged": "^6.1.1",
     "prettier-eslint-cli": "^4.7.1"
+  },
+  "importSort": {
+    ".js, .es": {
+      "parser": "babylon",
+      "style": "module"
+    }
   },
   "lint-staged": {
     "linters": {

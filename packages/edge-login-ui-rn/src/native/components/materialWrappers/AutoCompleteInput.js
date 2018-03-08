@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Component } from 'react'
 import AutoComplete from 'material-ui/AutoComplete'
+import React, { Component } from 'react'
 
 type Props = {}
 type State = {

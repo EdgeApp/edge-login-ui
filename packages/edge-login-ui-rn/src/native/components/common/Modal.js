@@ -1,11 +1,12 @@
 // @flow
 
 import React, { Component } from 'react'
-import { ModalStyle } from '../../../common/styles/'
-import { View, Text, Image, ActivityIndicator } from 'react-native'
-import { IconButton, Icon, Button } from './'
+import { ActivityIndicator, Image, Text, View } from 'react-native'
 import Modal from 'react-native-modal'
+
 import * as Constants from '../../../common/constants'
+import { ModalStyle } from '../../../common/styles/'
+import { Button, Icon, IconButton } from './'
 
 type Props = {
   styles: Object,

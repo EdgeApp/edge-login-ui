@@ -1,5 +1,6 @@
 import React from 'react'
 import FontIcon from 'react-toolbox/lib/font_icon'
+
 import styles from './ReviewDetails.webStyle.scss'
 
 export default ({

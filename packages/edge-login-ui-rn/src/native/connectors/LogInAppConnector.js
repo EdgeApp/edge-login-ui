@@ -1,11 +1,12 @@
 // @flow
 
 import { connect } from 'react-redux'
+
+import * as loginAction from '../../common/actions/'
+import * as Constants from '../../common/constants'
 import type { Dispatch, State } from '../../types/ReduxTypes'
 import { LoginAppComponent } from '../components/LogInAppComponent'
 import type { OwnProps } from '../components/LogInAppComponent'
-import * as loginAction from '../../common/actions/'
-import * as Constants from '../../common/constants'
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const previousUsers = state.previousUsers

@@ -1,13 +1,14 @@
 // @flow
 
 import React from 'react'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import Entypo from 'react-native-vector-icons/Entypo'
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
 import IonIcon from 'react-native-vector-icons/Ionicons'
-import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
-import Entypo from 'react-native-vector-icons/Entypo'
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons'
-import EvilIcons from 'react-native-vector-icons/EvilIcons'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
+
 import * as Constants from '../../../common/constants'
 
 type Props = {

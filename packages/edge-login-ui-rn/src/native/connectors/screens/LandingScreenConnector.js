@@ -1,9 +1,10 @@
 // @flow
 
 import { connect } from 'react-redux'
-import LandingScreenComponent from '../../components/screens/LandingScreenComponent'
+
 import * as actions from '../../../common/actions'
 import type { Dispatch } from '../../../types/ReduxTypes'
+import LandingScreenComponent from '../../components/screens/LandingScreenComponent'
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {

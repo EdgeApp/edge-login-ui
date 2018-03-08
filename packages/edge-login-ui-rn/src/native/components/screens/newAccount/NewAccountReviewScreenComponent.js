@@ -1,10 +1,11 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Button, WarningBox } from '../../common'
+import { Text, View } from 'react-native'
+
 import AccountInfoContainer from '../../../connectors/abSpecific/AccountInfoConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import { Button, WarningBox } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type Props = {

@@ -1,7 +1,8 @@
 import React from 'react'
+
+import recoverySetupIcon from '../../../img/modals/recovery-setup-W.png'
 import Modal from '../BaseModal.js'
 import styles from './PasswordRecoverySuccess.webStyle.scss'
-import recoverySetupIcon from '../../../img/modals/recovery-setup-W.png'
 
 export default ({ view, close, finish }) => (
   <Modal active={view} close={close} icon={recoverySetupIcon}>

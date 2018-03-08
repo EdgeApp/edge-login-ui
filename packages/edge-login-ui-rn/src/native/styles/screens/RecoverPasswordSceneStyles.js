@@ -1,7 +1,7 @@
 // @flow
 
-import * as Styles from '../'
 import * as Constants from '../../../common/constants'
+import * as Styles from '../'
 
 const RecoverPasswordSceneStyles = {
   screen: { ...Styles.ScreenStyle },

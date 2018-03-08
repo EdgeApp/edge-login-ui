@@ -2,9 +2,10 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { Button, HeaderBackButton } from '../common'
-import * as Colors from '../../../common/constants/Colors'
 import LinearGradient from 'react-native-linear-gradient'
+
+import * as Colors from '../../../common/constants/Colors'
+import { Button, HeaderBackButton } from '../common'
 
 type Props = {
   style: Object,

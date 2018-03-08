@@ -1,7 +1,8 @@
 import React from 'react'
+
+import successIcon from '../../../img/modals/success-W.png'
 import Modal from '../BaseModal.js'
 import styles from './AccountCreated.webStyle.scss'
-import successIcon from '../../../img/modals/success-W.png'
 
 export default ({ view, name, close, cancel, submit }) => (
   <Modal active={view} close={close} icon={successIcon}>

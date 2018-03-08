@@ -1,8 +1,9 @@
 // @Flow
 import { connect } from 'react-redux'
-import LinkedComponent from '../../../components/screens/newAccount/NewAccountPasswordScreenComponent'
+
 import * as actions from '../../../../common/actions'
-import type { State, Dispatch } from '../../../../types/ReduxTypes'
+import type { Dispatch, State } from '../../../../types/ReduxTypes'
+import LinkedComponent from '../../../components/screens/newAccount/NewAccountPasswordScreenComponent'
 
 export const mapStateToProps = (state: State) => {
   const error = state.create.confirmPasswordErrorMessage

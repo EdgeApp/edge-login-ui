@@ -1,5 +1,5 @@
-import * as ACTION from './Username.action'
 import { GET_DETAILS } from '../ReviewDetails/ReviewDetails.action'
+import * as ACTION from './Username.action'
 
 export const username = (state = '', action) => {
   switch (action.type) {

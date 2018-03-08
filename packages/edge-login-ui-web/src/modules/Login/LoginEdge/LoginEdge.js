@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import MediaQuery from 'react-responsive'
 import { connect } from 'react-redux'
-import { showMobileLoginWithPasswordView } from '../Login.action'
-import { showQRCode, hideQRCode } from './LoginEdge.mobileState.js'
+import MediaQuery from 'react-responsive'
 
-import Desktop from './LoginEdge.web.js'
+import { showMobileLoginWithPasswordView } from '../Login.action'
 import Mobile from './LoginEdge.mobile.js'
+import { hideQRCode, showQRCode } from './LoginEdge.mobileState.js'
+import Desktop from './LoginEdge.web.js'
 import webStyle from './LoginEdge.webStyle.scss'
 
 class LoginEdge extends Component {

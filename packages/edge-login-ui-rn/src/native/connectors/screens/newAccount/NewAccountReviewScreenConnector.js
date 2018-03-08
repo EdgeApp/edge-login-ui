@@ -1,9 +1,10 @@
 // @flow
 
 import { connect } from 'react-redux'
-import LinkedComponent from '../../../components/screens/newAccount/NewAccountReviewScreenComponent'
+
 import * as actions from '../../../../common/actions/'
-import type { State, Dispatch } from '../../../../types/ReduxTypes'
+import type { Dispatch, State } from '../../../../types/ReduxTypes'
+import LinkedComponent from '../../../components/screens/newAccount/NewAccountReviewScreenComponent'
 
 export const mapStateToProps = (state: State) => {
   return {

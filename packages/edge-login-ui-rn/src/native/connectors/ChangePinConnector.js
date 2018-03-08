@@ -1,10 +1,11 @@
 // @flow
 
 import { connect } from 'react-redux'
-import type { Dispatch, State } from '../../types/ReduxTypes'
-import ChangePinAppComponent from '../components/ChangePinAppComponent'
+
 import * as actions from '../../common/actions/'
 import * as Constants from '../../common/constants'
+import type { Dispatch, State } from '../../types/ReduxTypes'
+import ChangePinAppComponent from '../components/ChangePinAppComponent'
 
 export const mapStateToProps = (state: State) => {
   return {

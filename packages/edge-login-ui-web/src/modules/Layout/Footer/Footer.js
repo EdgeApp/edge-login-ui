@@ -1,7 +1,8 @@
 import React from 'react'
 import MediaQuery from 'react-responsive'
-import Desktop from './Footer.web.js'
+
 import Mobile from './Footer.mobile.js'
+import Desktop from './Footer.web.js'
 
 export default () => (
   <section>

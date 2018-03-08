@@ -1,8 +1,8 @@
 // @flow
 
-import * as Styles from '../'
 import * as Constants from '../../../common/constants/'
 import { hs, vs } from '../../../common/util'
+import * as Styles from '../'
 
 const PinLoginScreenStyle = {
   container: Styles.ScreenStyle,

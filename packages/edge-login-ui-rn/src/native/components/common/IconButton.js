@@ -1,7 +1,8 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, TouchableHighlight } from 'react-native'
+import { TouchableHighlight, View } from 'react-native'
+
 import { Icon } from './'
 
 type Props = {

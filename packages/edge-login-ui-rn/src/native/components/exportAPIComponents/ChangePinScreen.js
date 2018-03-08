@@ -1,15 +1,16 @@
 // @flow
 
-import React, { Component } from 'react'
-import type { Store } from 'redux'
 import type { AbcAccount, AbcContext } from 'edge-login'
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import reducers from '../../../common/reducers'
-import { createStore, applyMiddleware } from 'redux'
+import type { Store } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
+
+import { setLocal } from '../../../common/locale'
+import reducers from '../../../common/reducers'
 import ChangePinConnector from '../../connectors/ChangePinConnector'
 import * as Styles from '../../styles'
-import { setLocal } from '../../../common/locale'
 
 type Props = {
   account: AbcAccount,

@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
-import type { State, Dispatch } from '../../../types/ReduxTypes'
-import { FourDigitInputComponent } from '../../components/abSpecific/'
+
 import * as actions from '../../../common/actions'
+import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { FourDigitInputComponent } from '../../components/abSpecific/'
 
 export const mapStateToProps = (state: State) => {
   return {

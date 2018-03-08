@@ -1,8 +1,8 @@
 // @flow
 
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import { dispatchAction } from './'
-import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
 export function changePassword (data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {

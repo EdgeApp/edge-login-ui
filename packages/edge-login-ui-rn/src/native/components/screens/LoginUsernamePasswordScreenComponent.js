@@ -1,7 +1,13 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, Keyboard, TouchableWithoutFeedback, Text } from 'react-native'
+import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+import * as Constants from '../../../common/constants'
+import { KEYS, localize } from '../../../common/locale'
+import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
+import * as Assets from '../../assets/'
 import {
   BackgroundImage,
   Button,
@@ -9,14 +15,8 @@ import {
   FormFieldWithDropComponent,
   StaticModal
 } from '../../components/common'
-import { LogoImageHeader, UserListItem } from '../abSpecific'
-import * as Constants from '../../../common/constants'
-import * as Assets from '../../assets/'
 import * as Offsets from '../../constants'
-import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
-import { localize, KEYS } from '../../../common/locale'
-
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { LogoImageHeader, UserListItem } from '../abSpecific'
 
 type Props = {
   styles: Object,

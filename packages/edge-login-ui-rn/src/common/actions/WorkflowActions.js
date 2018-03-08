@@ -1,7 +1,7 @@
 // @flow
 
-import * as Constants from '../constants'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
+import * as Constants from '../constants'
 
 export function startWorkflow (data: string) {
   return {

@@ -1,9 +1,10 @@
 // @flow
 
 import React from 'react'
-import { View, Text } from 'react-native'
-import { Icon } from './'
+import { Text, View } from 'react-native'
+
 import * as Constants from '../../../common/constants'
+import { Icon } from './'
 
 type Props = {
   style: Object,

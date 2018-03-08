@@ -1,4 +1,4 @@
-import { OPEN_SUCCESS_MODAL, CLOSE_SUCCESS_MODAL } from './Success.action.js'
+import { CLOSE_SUCCESS_MODAL, OPEN_SUCCESS_MODAL } from './Success.action.js'
 
 export const success = (state = false, action) => {
   switch (action.type) {

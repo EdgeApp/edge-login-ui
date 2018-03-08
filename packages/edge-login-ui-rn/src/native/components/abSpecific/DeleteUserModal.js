@@ -1,9 +1,10 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
-import { Button } from '../common'
+import { Image, Text, View } from 'react-native'
+
 import { LOGO_DOT } from '../../../native/assets/'
+import { Button } from '../common'
 
 type Props = {
   style: any,

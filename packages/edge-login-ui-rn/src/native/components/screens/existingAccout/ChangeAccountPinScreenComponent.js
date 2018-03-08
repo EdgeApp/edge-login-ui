@@ -1,11 +1,12 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Button, StaticModal } from '../../common'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
-import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
+import { Text, View } from 'react-native'
+
 import ChangePinModalConnector from '../../../connectors/abSpecific/ChangePinModalConnector'
+import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
+import { Button, StaticModal } from '../../common'
 
 type Props = {
   styles: Object,

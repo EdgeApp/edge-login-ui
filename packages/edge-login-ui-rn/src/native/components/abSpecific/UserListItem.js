@@ -1,9 +1,10 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text } from 'react-native'
-import { IconButton } from '../common'
+import { Text, TouchableOpacity, View } from 'react-native'
+
 import * as Constants from '../../../common/constants'
+import { IconButton } from '../common'
 
 type Props = {
   data: string,

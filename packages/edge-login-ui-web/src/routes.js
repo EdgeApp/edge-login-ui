@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { Router, Route, hashHistory, IndexRedirect } from 'react-router'
+import { IndexRedirect, Route, Router, hashHistory } from 'react-router'
 
-import Container from './modules/Container.js'
-import Signup from './modules/Signup/Signup.js'
-import Login from './modules/Login/Login.js'
 import AccountManagement from './modules/AccountManagement/AccountManagement.js'
-import ChangePin from './modules/AccountManagement/ChangePin/ChangePin.js'
 import ChangePassword from './modules/AccountManagement/ChangePassword/ChangePassword.js'
+import ChangePin from './modules/AccountManagement/ChangePin/ChangePin.js'
 import PasswordRecovery from './modules/AccountManagement/PasswordRecovery/PasswordRecovery.js'
 import PasswordRecoveryToken from './modules/AccountManagement/PasswordRecoveryToken/PasswordRecoveryToken.js'
+import Container from './modules/Container.js'
+import Login from './modules/Login/Login.js'
+import Signup from './modules/Signup/Signup.js'
 
 export default class RouterComponent extends Component {
   render () {

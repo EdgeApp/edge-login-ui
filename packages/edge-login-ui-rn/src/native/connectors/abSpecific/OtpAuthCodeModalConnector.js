@@ -1,9 +1,10 @@
 // @flow
 
 import { connect } from 'react-redux'
-import { MyModal } from '../../components/common/'
+
+import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { OTP_SMALL } from '../../assets/'
-import type { State, Dispatch } from '../../../types/ReduxTypes'
+import { MyModal } from '../../components/common/'
 
 type OwnProps = {
   middle: any,

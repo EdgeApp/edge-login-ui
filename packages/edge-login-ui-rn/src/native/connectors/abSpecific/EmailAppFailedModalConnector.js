@@ -1,9 +1,10 @@
 // @flow
 
 import { connect } from 'react-redux'
-import { MyModal } from '../../components/common/'
-import type { State, Dispatch } from '../../../types/ReduxTypes'
+
 import * as Constants from '../../../common/constants'
+import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { MyModal } from '../../components/common/'
 
 type OwnProps = {
   action(): void

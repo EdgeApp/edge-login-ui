@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+
 import RecoverPasswordScreenConnector from '../connectors/screens/existingAccount/RecoverPasswordScreenConnector'
 
 export type OwnProps = {

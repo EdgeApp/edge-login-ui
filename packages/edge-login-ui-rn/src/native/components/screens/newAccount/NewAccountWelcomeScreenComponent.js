@@ -1,10 +1,11 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Button, HeaderBackButton } from '../../common'
-import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
+import { Text, View } from 'react-native'
+
 import * as Assets from '../../../assets'
+import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
+import { Button, HeaderBackButton } from '../../common'
 import SafeAreaView from '../../common/SafeAreaView.js'
 
 type Props = {

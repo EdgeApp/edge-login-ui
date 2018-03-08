@@ -1,11 +1,12 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Button, FormField, StaticModal } from '../../common/'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
-import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
+import { Text, View } from 'react-native'
+
 import SetRecoveryUsernameModalConnector from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
+import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
+import { Button, FormField, StaticModal } from '../../common/'
 
 type Props = {
   styles: Object,

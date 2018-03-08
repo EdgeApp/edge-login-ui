@@ -1,12 +1,13 @@
 // @flow
 
+import type { AbcAccount } from 'edge-login'
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Button, Checkbox } from '../../common'
+import { Text, View } from 'react-native'
+
 import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import { Button, Checkbox } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-import type { AbcAccount } from 'edge-login'
 
 type Props = {
   styles: Object,
