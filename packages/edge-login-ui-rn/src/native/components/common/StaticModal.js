@@ -1,11 +1,13 @@
 // @flow
+
 import React, { Component } from 'react'
-import { StaticModalStyle } from '../../../common/styles/'
-import { View, TouchableOpacity } from 'react-native'
-import { Icon } from './'
-import Modal from 'react-native-modal'
-import * as Constants from '../../../common/constants'
+import { TouchableOpacity, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import Modal from 'react-native-modal'
+
+import * as Constants from '../../../common/constants'
+import { StaticModalStyle } from '../../../common/styles/'
+import { Icon } from './'
 
 type Props = {
   modalDismissTimerSeconds: number,

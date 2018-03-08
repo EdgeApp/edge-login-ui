@@ -1,6 +1,6 @@
 import {
-  OPEN_ACCOUNT_CACHE_DELETE_MODAL,
-  CLOSE_ACCOUNT_CACHE_DELETE_MODAL
+  CLOSE_ACCOUNT_CACHE_DELETE_MODAL,
+  OPEN_ACCOUNT_CACHE_DELETE_MODAL
 } from './AccountCacheDelete.action.js'
 
 export const accountCacheDelete = (state = false, action) => {

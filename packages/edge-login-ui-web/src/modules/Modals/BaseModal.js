@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import MediaQuery from 'react-responsive'
 import Dialog from 'react-toolbox/lib/dialog'
 
-import desktopStyles from './BaseModal.webStyle.scss'
 import mobileStyles from './BaseModal.mobileStyle.scss'
+import desktopStyles from './BaseModal.webStyle.scss'
 
 export default class BaseModal extends Component {
   render () {

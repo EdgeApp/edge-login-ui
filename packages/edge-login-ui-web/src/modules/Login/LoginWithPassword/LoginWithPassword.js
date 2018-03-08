@@ -2,22 +2,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 
-import {
-  loginUsername,
-  loginPassword,
-  openUserList,
-  closeUserList,
-  showMobileLoginEdgeView,
-  showErrorLoginMessage,
-  clearErrorLoginMessage
-} from '../Login.action'
-import { loginWithPassword } from '../Login.middleware'
 import { closeLoading } from '../../Loader/Loader.action'
 import { openForgotPasswordModal } from '../../Modals/ForgotPassword/ForgotPassword.action.js'
-
 import ForgotPassword from '../../Modals/ForgotPassword/ForgotPassword.js'
-import Desktop from './LoginWithPassword.web.js'
+import {
+  clearErrorLoginMessage,
+  closeUserList,
+  loginPassword,
+  loginUsername,
+  openUserList,
+  showErrorLoginMessage,
+  showMobileLoginEdgeView
+} from '../Login.action'
+import { loginWithPassword } from '../Login.middleware'
 import Mobile from './LoginWithPassword.mobile.js'
+import Desktop from './LoginWithPassword.web.js'
 import webStyle from './LoginWithPassword.webStyle.scss'
 
 class LoginWithPassword extends Component {

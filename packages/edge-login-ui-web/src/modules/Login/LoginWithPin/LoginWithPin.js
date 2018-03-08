@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
-import MediaQuery from 'react-responsive'
 import { connect } from 'react-redux'
+import MediaQuery from 'react-responsive'
+
+import { closeLoading } from '../../Loader/Loader.action'
 import {
-  openLogin,
-  loginPIN,
-  openUserList,
-  closeUserList,
+  clearErrorLoginPinMessage,
   closeLoginUsingPin,
-  showErrorLoginPinMessage,
-  clearErrorLoginPinMessage
+  closeUserList,
+  loginPIN,
+  openLogin,
+  openUserList,
+  showErrorLoginPinMessage
 } from '../Login.action'
 import { loginWithPin } from '../Login.middleware'
-import { closeLoading } from '../../Loader/Loader.action'
-
-import Desktop from './LoginWithPin.web.js'
 import Mobile from './LoginWithPin.mobile.js'
+import Desktop from './LoginWithPin.web.js'
 
 class LoginWithPin extends Component {
   componentWillReceiveProps (nextProps) {

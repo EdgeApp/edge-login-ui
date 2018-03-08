@@ -1,5 +1,7 @@
 // @flow
+
 import React, { Component } from 'react'
+
 import { Input } from '../materialWrappers/indexMaterial'
 
 type Props = {

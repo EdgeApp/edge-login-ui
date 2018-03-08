@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import MediaQuery from 'react-responsive'
 import { connect } from 'react-redux'
-import { openLogin } from '../Login.action'
-import { showQRCode, hideQRCode } from '../LoginEdge/LoginEdge.mobileState.js'
+import MediaQuery from 'react-responsive'
 
-import Desktop from './NewAccount.web.js'
+import { openLogin } from '../Login.action'
+import { hideQRCode, showQRCode } from '../LoginEdge/LoginEdge.mobileState.js'
 import Mobile from './NewAccount.mobile.js'
+import Desktop from './NewAccount.web.js'
 import webStyle from './NewAccount.webStyle.scss'
 
 class NewAccount extends Component {

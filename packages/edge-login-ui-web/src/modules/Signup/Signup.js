@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Username from './Username/Username.js'
-import PinNumber from './PinNumber/PinNumber.js'
 import Password from './Password/Password.js'
+import PinNumber from './PinNumber/PinNumber.js'
 import ReviewDetails from './ReviewDetails/ReviewDetails.js'
+import Username from './Username/Username.js'
 
 class Container extends Component {
   render () {

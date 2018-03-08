@@ -1,4 +1,5 @@
 // @flow
+
 import { Platform } from 'react-native'
 
 const platform = Platform.OS

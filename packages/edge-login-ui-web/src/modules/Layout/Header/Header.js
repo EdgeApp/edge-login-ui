@@ -1,9 +1,10 @@
+import t from 'lib/web/LocaleStrings'
 import React from 'react'
 import MediaQuery from 'react-responsive'
 import { sprintf } from 'sprintf-js'
-import t from 'lib/web/LocaleStrings'
-import webStyles from './Header.webStyle.scss'
+
 import mobileStyles from './Header.mobileStyle.scss'
+import webStyles from './Header.webStyle.scss'
 
 export default ({ location }) => {
   const headerText = pathname => {

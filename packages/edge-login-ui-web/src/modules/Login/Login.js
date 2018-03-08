@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 
-import Desktop from './Login.web.js'
 import Mobile from './Login.mobile.js'
+import Desktop from './Login.web.js'
 
 class Login extends Component {
   render () {

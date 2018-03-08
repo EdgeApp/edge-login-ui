@@ -1,14 +1,16 @@
 // @flow
+
 import React, { Component } from 'react'
-import { View, KeyboardAvoidingView } from 'react-native'
-import { Button } from '../../common'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
-import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
-import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
+import { KeyboardAvoidingView, View } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+import * as Constants from '../../../../common/constants'
 import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 import SkipModalConnector from '../../../connectors/abSpecific/SkipModalConnector'
-import * as Constants from '../../../../common/constants'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
+import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
+import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type Props = {

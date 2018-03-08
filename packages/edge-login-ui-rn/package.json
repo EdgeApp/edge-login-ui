@@ -24,7 +24,7 @@
   "main": "src/native/index.js",
   "dependencies": {
     "material-ui": "^0.20.0",
-    "moment": "~2.14.1",
+    "moment": "^2.19.3",
     "native-base": "^2.3.9",
     "react-native-keyboard-aware-scroll-view": "^0.4.1",
     "react-native-linear-gradient": "^2.0.0",

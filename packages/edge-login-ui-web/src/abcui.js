@@ -1,5 +1,6 @@
-import { makeContext } from 'edge-login'
 import 'whatwg-fetch'
+
+import { makeContext } from 'edge-login'
 
 const setDocument = () => {
   return {

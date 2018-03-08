@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { edgeLogin } from '../Login.middleware'
+
 import { closeLoading } from '../../Loader/Loader.action'
+import { edgeLogin } from '../Login.middleware'
+
 const QRCode = require('qrcode.react')
 
 export default class QRCodeEdge extends Component {

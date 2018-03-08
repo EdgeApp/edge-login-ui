@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
-import { closeAccountCacheDeleteModal } from './AccountCacheDelete.action.js'
 
-import Desktop from './AccountCacheDelete.web.js'
+import { closeAccountCacheDeleteModal } from './AccountCacheDelete.action.js'
 import Mobile from './AccountCacheDelete.mobile.js'
+import Desktop from './AccountCacheDelete.web.js'
 
 class AccountCacheDelete extends Component {
   closeModal = () => {

@@ -1,11 +1,11 @@
 import React from 'react'
+
+import Divider from './Divider/Divider.js'
+import styles from './Login.scss'
 import LoginEdge from './LoginEdge/LoginEdge.js'
-import NewAccountSection from './NewAccount/NewAccount.js'
 import LoginWithPasswordSection from './LoginWithPassword/LoginWithPassword.js'
 import LoginWithPinSection from './LoginWithPin/LoginWithPin.js'
-import Divider from './Divider/Divider.js'
-
-import styles from './Login.scss'
+import NewAccountSection from './NewAccount/NewAccount.js'
 
 export default ({ password, pin, mobileLogin, history }) => {
   if (!pin && !password) {

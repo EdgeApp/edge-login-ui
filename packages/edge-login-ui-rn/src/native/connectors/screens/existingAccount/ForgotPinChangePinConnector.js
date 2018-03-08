@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
-import LinkedComponent from '../../../components/screens/existingAccout/ChangeAccountPinScreenComponent'
+
 import * as actions from '../../../../common/actions'
-// import * as Constants from '../../../../common/constants'
+import LinkedComponent from '../../../components/screens/existingAccout/ChangeAccountPinScreenComponent'
+
 export const mapStateToProps = (state, ownProps) => {
   return {
     styles: ownProps.styles,

@@ -1,6 +1,7 @@
 import React from 'react'
-import Header from './Header/Header.js'
+
 import Footer from './Footer/Footer.js'
+import Header from './Header/Header.js'
 import styles from './Layout.scss'
 
 export default ({ location, children }) => (

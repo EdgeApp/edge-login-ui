@@ -1,8 +1,10 @@
 // @flow
+
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { TextAndIconButton } from '../common'
+import { Text, View } from 'react-native'
+
 import * as Constants from '../../../common/constants/'
+import { TextAndIconButton } from '../common'
 
 export type StateProps = {
   username?: string,

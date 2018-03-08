@@ -1,6 +1,8 @@
 // @flow
+
 import React, { Component } from 'react'
 import { View } from 'react-native'
+
 import ChangeAccountPinScreenConnector from '../connectors/screens/existingAccount/ChangeAccountPinScreenConnector'
 
 export type OwnProps = {

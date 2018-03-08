@@ -1,8 +1,9 @@
 import React from 'react'
+
 import LoginEdge from './LoginEdge/LoginEdge.js'
 import LoginWithPassword from './LoginWithPassword/LoginWithPassword.js'
-import NewAccount from './NewAccount/NewAccount.js'
 import LoginWithPin from './LoginWithPin/LoginWithPin.js'
+import NewAccount from './NewAccount/NewAccount.js'
 
 export default ({ password, pin, mobileLogin, history }) => {
   if (!password && !pin) {

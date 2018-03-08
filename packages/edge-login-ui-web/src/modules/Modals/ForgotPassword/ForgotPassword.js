@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
-import { closeForgotPasswordModal } from './ForgotPassword.action.js'
 
-import Desktop from './ForgotPassword.web.js'
+import { closeForgotPasswordModal } from './ForgotPassword.action.js'
 import Mobile from './ForgotPassword.mobile.js'
+import Desktop from './ForgotPassword.web.js'
 
 class ForgotPassword extends Component {
   handleClose = () => {

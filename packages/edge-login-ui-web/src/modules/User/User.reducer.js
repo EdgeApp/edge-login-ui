@@ -1,5 +1,5 @@
-import * as ACTION from './User.action'
 import { USER_LOGIN } from '../Login/Login.action'
+import * as ACTION from './User.action'
 
 export const user = (state = {}, action) => {
   switch (action.type) {

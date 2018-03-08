@@ -1,4 +1,5 @@
 import React from 'react'
+
 import styles from './NewAccount.webStyle.scss'
 
 export default ({ goToSignupPage, handleOpenLoginWithPasswordPage }) => {

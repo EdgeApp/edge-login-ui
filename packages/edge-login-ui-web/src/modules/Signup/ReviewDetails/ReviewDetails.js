@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 
-import { showSignInDetails, hideSignInDetails } from './ReviewDetails.action'
 import { openAccountCreatedModal } from '../../Modals/AccountCreated/AccountCreated.action.js'
-
 import AccountCreated from '../../Modals/AccountCreated/AccountCreated.js'
-import Desktop from './ReviewDetails.web.js'
+import { hideSignInDetails, showSignInDetails } from './ReviewDetails.action'
 import Mobile from './ReviewDetails.mobile.js'
+import Desktop from './ReviewDetails.web.js'
 
 class Review extends Component {
   toggleInfo = () => {

@@ -1,6 +1,7 @@
 // @flow
+
 import React from 'react'
-import { View, ActivityIndicator } from 'react-native'
+import { ActivityIndicator, View } from 'react-native'
 
 type Props = {
   style: Object

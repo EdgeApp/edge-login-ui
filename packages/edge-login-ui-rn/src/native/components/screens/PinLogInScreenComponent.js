@@ -1,16 +1,18 @@
 // @flow
+
 import React, { Component } from 'react'
 import { View } from 'react-native'
+
+import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
+import * as Assets from '../../assets/'
+import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
 import {
   BackgroundImage,
   Button,
   DropDownList,
   ImageButton
 } from '../../components/common'
-import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
 import FourDigitInputConnector from '../../connectors/abSpecific/FourDigitInputConnector'
-import * as Assets from '../../assets/'
-import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 
 type Props = {
   styles: Object,

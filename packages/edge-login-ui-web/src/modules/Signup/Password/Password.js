@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
-import { validate } from './PasswordValidation/PasswordValidation.middleware'
-import { checkPassword } from './Password.middleware'
+
+import { getDetails } from '../ReviewDetails/ReviewDetails.action'
 import { changeSignupPage } from '../Signup.action'
 import {
-  showPassword,
-  hidePassword,
-  changePasswordValue,
   changePasswordRepeatValue,
-  errorPasswordValue,
+  changePasswordValue,
+  clearPasswordError,
   errorPasswordRepeatValue,
-  clearPasswordError
+  errorPasswordValue,
+  hidePassword,
+  showPassword
 } from './Password.action'
-import { getDetails } from '../ReviewDetails/ReviewDetails.action'
-
-import Desktop from './Password.web.js'
+import { checkPassword } from './Password.middleware'
 import Mobile from './Password.mobile.js'
+import Desktop from './Password.web.js'
+import { validate } from './PasswordValidation/PasswordValidation.middleware'
 
 class Password extends Component {
   handleSubmit = () => {

@@ -1,6 +1,7 @@
 // @flow
-import * as KEYS from './traslationKeys'
+
 import translations from './translations'
+import * as KEYS from './traslationKeys'
 
 let language = 'this gets replaced'
 // let region = 'this gets replaced'

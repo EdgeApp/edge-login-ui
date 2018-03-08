@@ -1,12 +1,14 @@
 // @flow
+
 import { combineReducers } from 'redux'
-import LoginReducer from './LoginReducer'
+
 import CreateUserReducer from './CreateUserReducer'
-import PreviousUsersReducer from './PreviousUsersReducer'
-import WorkflowReducer from './WorkflowReducer'
-import PasswordStatusReducer from './PasswordStatusReducer'
-import TermsAndConditinsReducer from './TermsAndConditinsReducer'
+import LoginReducer from './LoginReducer'
 import PasswordRecoveryReducer from './PasswordRecoveryReducer'
+import PasswordStatusReducer from './PasswordStatusReducer'
+import PreviousUsersReducer from './PreviousUsersReducer'
+import TermsAndConditinsReducer from './TermsAndConditinsReducer'
+import WorkflowReducer from './WorkflowReducer'
 
 export default combineReducers({
   login: LoginReducer,

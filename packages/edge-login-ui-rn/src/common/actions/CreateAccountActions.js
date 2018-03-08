@@ -1,13 +1,15 @@
 // @flow
+
+import type { AbcAccount } from 'edge-login'
+import { sprintf } from 'sprintf-js'
+import passwordCheck from 'zxcvbn'
+
+import { enableTouchId, isTouchDisabled } from '../../native/keychain.js'
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
-import * as WorkflowActions from './WorkflowActions'
 import { isASCII } from '../util'
 import { dispatchAction, dispatchActionWithData, getPreviousUsers } from './'
-import { enableTouchId, isTouchDisabled } from '../../native/keychain.js'
-import passwordCheck from 'zxcvbn'
-import { sprintf } from 'sprintf-js'
-import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
-import type { AbcAccount } from 'edge-login'
+import * as WorkflowActions from './WorkflowActions'
 
 export function validatePin (data: Object) {
   const pin = data.pin

@@ -1,10 +1,12 @@
 // @flow
+
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { BackgroundImage, Button } from '../common'
+import { Text, View } from 'react-native'
+
 import * as Constants from '../../../common/constants'
 import * as Assets from '../../assets/'
 import { LogoImageHeader } from '../abSpecific'
+import { BackgroundImage, Button } from '../common'
 
 type Props = {
   styles: Object,

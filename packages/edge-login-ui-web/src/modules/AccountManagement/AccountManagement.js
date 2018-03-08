@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import MediaQuery from 'react-responsive'
 import { connect } from 'react-redux'
-import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
+import MediaQuery from 'react-responsive'
+
 import { userLogin } from '../Login/Login.action'
+import { openAccountManagementModal } from '../Modals/AccountManagementPassword/AccountManagementPassword.action.js'
 import EnterPassword from '../Modals/AccountManagementPassword/AccountManagementPassword.js'
-import Desktop from './AccountManagement.web.js'
 import Mobile from './AccountManagement.mobile.js'
+import Desktop from './AccountManagement.web.js'
 
 class AccountManager extends Component {
   componentWillMount () {

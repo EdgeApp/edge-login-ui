@@ -1,7 +1,9 @@
 // @flow
+
 import { connect } from 'react-redux'
-import { AccountInfoComponent } from '../../components/abSpecific/'
+
 import type { State } from '../../../types/ReduxTypes'
+import { AccountInfoComponent } from '../../components/abSpecific/'
 import type { OwnProps } from '../../components/abSpecific/'
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {

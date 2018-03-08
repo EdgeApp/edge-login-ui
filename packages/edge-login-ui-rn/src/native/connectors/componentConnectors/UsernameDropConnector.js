@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
-import { FormFieldWithDropComponent } from '../../components/common/'
+
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
-import type { State, Dispatch } from '../../../types/ReduxTypes'
+import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { FormFieldWithDropComponent } from '../../components/common/'
 
 type OwnProps = {
   autoFocus: boolean,

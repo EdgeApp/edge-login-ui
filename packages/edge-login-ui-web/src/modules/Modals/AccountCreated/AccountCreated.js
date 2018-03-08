@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
-import { closeAccountCreatedModal } from './AccountCreated.action.js'
 
-import Desktop from './AccountCreated.web.js'
+import { closeAccountCreatedModal } from './AccountCreated.action.js'
 import Mobile from './AccountCreated.mobile.js'
+import Desktop from './AccountCreated.web.js'
 
 class AccountCreated extends Component {
   closeModal = () => {

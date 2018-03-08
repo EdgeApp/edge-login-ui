@@ -1,6 +1,7 @@
 // @flow
-import * as Constants from '../../common/constants'
+
 import * as actions from '../../common/actions'
+import * as Constants from '../../common/constants'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
 export function recoverPasswordLogin () {

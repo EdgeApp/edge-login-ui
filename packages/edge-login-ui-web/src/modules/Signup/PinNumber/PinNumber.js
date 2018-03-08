@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import MediaQuery from 'react-responsive'
 import { connect } from 'react-redux'
-import { changeSignupPage } from '../Signup.action'
-import { changePinNumberValue, error, clearError } from './PinNumber.action'
-import { checkPIN } from './PinNumber.middleware'
+import MediaQuery from 'react-responsive'
 
-import Desktop from './PinNumber.web.js'
+import { changeSignupPage } from '../Signup.action'
+import { changePinNumberValue, clearError, error } from './PinNumber.action'
+import { checkPIN } from './PinNumber.middleware'
 import Mobile from './PinNumber.mobile.js'
+import Desktop from './PinNumber.web.js'
 
 class Pin extends Component {
   handleSubmit = e => {

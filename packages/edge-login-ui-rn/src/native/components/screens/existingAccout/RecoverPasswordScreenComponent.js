@@ -1,19 +1,21 @@
 // @flow
+
 import React, { Component } from 'react'
-import { View, Text, Platform } from 'react-native'
+import { Platform, Text, View } from 'react-native'
+import Mailer from 'react-native-mail'
+
+import * as Constants from '../../../../common/constants'
+import EmailAppFailedModalConnector from '../../../connectors/abSpecific/EmailAppFailedModalConnector'
+import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import {
   Button,
-  FormField,
-  TextAndIconButton,
   DropDownList,
-  TextRowComponent,
-  StaticModal
+  FormField,
+  StaticModal,
+  TextAndIconButton,
+  TextRowComponent
 } from '../../common/'
-import * as Constants from '../../../../common/constants'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
-import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
-import EmailAppFailedModalConnector from '../../../connectors/abSpecific/EmailAppFailedModalConnector'
-import Mailer from 'react-native-mail'
 
 export type OwnProps = {
   styles: Object,

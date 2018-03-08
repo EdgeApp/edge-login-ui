@@ -1,4 +1,4 @@
-import { openLoading, closeLoading } from '../Loader/Loader.action'
+import { closeLoading, openLoading } from '../Loader/Loader.action'
 import { loginWithPassword } from '../Login/Login.middleware.js'
 
 export const signupUser = (username, password, pin, callback) => {

@@ -1,7 +1,8 @@
+import t from 'lib/web/LocaleStrings'
 import React from 'react'
+
 import styles from './LoginEdge.mobileStyle.scss'
 import QRCode from './QRCode.js'
-import t from 'lib/web/LocaleStrings'
 
 export default ({
   view,

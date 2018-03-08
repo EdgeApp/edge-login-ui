@@ -1,5 +1,5 @@
+import type { AbcAccount, AbcContext } from 'edge-login'
 import { NativeModules, Platform } from 'react-native'
-import type { AbcContext, AbcAccount } from 'edge-login'
 const { AbcCoreJsUi } = NativeModules
 
 const LOGINKEY_KEY = 'key_loginkey'

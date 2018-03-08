@@ -1,6 +1,7 @@
 // @flow
+
 import React, { Component } from 'react'
-import { Text, View, Image, TouchableWithoutFeedback } from 'react-native'
+import { Image, Text, TouchableWithoutFeedback, View } from 'react-native'
 
 type Props = {
   style: any,

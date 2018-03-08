@@ -1,7 +1,8 @@
 // @flow
-import React, { Component } from 'react'
-import { TouchableOpacity, Platform, Text } from 'react-native'
+
 import { Icon } from 'native-base'
+import React, { Component } from 'react'
+import { Platform, Text, TouchableOpacity } from 'react-native'
 
 const isIos = Platform.OS === 'ios'
 

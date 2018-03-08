@@ -1,11 +1,12 @@
 // @flow
+
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Button } from '../../common'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import { Text, View } from 'react-native'
+
 import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-// import * as Constants from '../../../common/constants'
 
 type Props = {
   styles: Object,

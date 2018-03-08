@@ -1,7 +1,8 @@
 import React from 'react'
+
+import recoveryIcon from '../../../img/modals/recovery-modal-MW.png'
 import Modal from '../BaseModal.js'
 import styles from './ForgotPassword.mobileStyle.scss'
-import recoveryIcon from '../../../img/modals/recovery-modal-MW.png'
 
 export default ({ view, close }) => (
   <Modal active={view} close={close} icon={recoveryIcon}>

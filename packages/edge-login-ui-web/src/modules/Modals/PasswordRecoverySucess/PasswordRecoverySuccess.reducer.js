@@ -1,6 +1,6 @@
 import {
-  OPEN_PASSWORD_RECOVERY_SUCCESS_MODAL,
-  CLOSE_PASSWORD_RECOVERY_SUCCESS_MODAL
+  CLOSE_PASSWORD_RECOVERY_SUCCESS_MODAL,
+  OPEN_PASSWORD_RECOVERY_SUCCESS_MODAL
 } from './PasswordRecoverySuccess.action.js'
 
 export const passwordRecoverySuccess = (state = false, action) => {

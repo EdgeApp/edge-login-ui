@@ -1,9 +1,11 @@
 // @flow
+
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Button } from '../../common'
-import UsernameConnector from '../../../connectors/componentConnectors/UsernameConnector'
+import { Text, View } from 'react-native'
+
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import UsernameConnector from '../../../connectors/componentConnectors/UsernameConnector'
+import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type Props = {

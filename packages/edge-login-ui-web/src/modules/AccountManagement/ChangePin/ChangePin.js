@@ -3,19 +3,18 @@ import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 
 import {
+  closeSuccessModal,
+  openSuccessModal
+} from '../../Modals/Success/Success.action.js'
+import Success from '../../Modals/Success/Success.js'
+import {
   changePinValue,
-  showPinChangeError,
-  clearPinChangeError
+  clearPinChangeError,
+  showPinChangeError
 } from './ChangePin.action'
 import { checkPin } from './ChangePin.middleware'
-import {
-  openSuccessModal,
-  closeSuccessModal
-} from '../../Modals/Success/Success.action.js'
-
-import Success from '../../Modals/Success/Success.js'
-import Desktop from './ChangePin.web.js'
 import Mobile from './ChangePin.mobile.js'
+import Desktop from './ChangePin.web.js'
 
 class ChangePin extends Component {
   handleSubmit = () => {

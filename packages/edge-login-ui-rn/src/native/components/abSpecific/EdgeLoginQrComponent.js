@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import QrCode from 'react-native-qrcode'

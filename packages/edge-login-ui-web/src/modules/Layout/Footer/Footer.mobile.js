@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './Footer.mobileStyle.scss'
 
 import logo from '../../../img/global/logo_edge_white.png'
+import styles from './Footer.mobileStyle.scss'
 
 export default () => (
   <div className={styles.container}>

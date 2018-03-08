@@ -1,6 +1,8 @@
 // @flow
+
 import React, { Component } from 'react'
 import { Image, View } from 'react-native'
+
 import * as Assets from '../../assets/'
 
 type Props = {

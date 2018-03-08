@@ -1,6 +1,7 @@
 import React from 'react'
-import Input from 'react-toolbox/lib/input'
 import Dropdown from 'react-toolbox/lib/dropdown'
+import Input from 'react-toolbox/lib/input'
+
 import t from '../../../lib/web/LocaleStrings'
 import styles from './PasswordRecovery.mobileStyle.scss'
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Platform, ActivityIndicator, Text } from 'react-native'
+import { ActivityIndicator, Platform, Text } from 'react-native'
 import Modal from 'react-native-modalbox'
 import { connect } from 'react-redux'
 

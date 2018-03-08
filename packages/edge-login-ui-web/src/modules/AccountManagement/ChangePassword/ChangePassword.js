@@ -3,25 +3,24 @@ import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 
 import {
+  closeSuccessModal,
+  openSuccessModal
+} from '../../Modals/Success/Success.action.js'
+import Success from '../../Modals/Success/Success.js'
+import { validate } from '../../Signup/Password/PasswordValidation/PasswordValidation.middleware'
+import {
+  changeNewPasswordRepeatValue,
+  changeNewPasswordValue,
   changePasswordHidePassword,
   changePasswordShowPassword,
-  changeNewPasswordValue,
-  changeNewPasswordRepeatValue,
+  clearChangePassword,
   errorChangePassword,
   errorChangePasswordRepeat,
-  clearChangePassword,
   passwordChanged
 } from './ChangePassword.action'
-import {
-  openSuccessModal,
-  closeSuccessModal
-} from '../../Modals/Success/Success.action.js'
-import { validate } from '../../Signup/Password/PasswordValidation/PasswordValidation.middleware'
 import { checkPassword } from './ChangePassword.middleware'
-
-import Success from '../../Modals/Success/Success.js'
-import Desktop from './ChangePassword.web.js'
 import Mobile from './ChangePassword.mobile.js'
+import Desktop from './ChangePassword.web.js'
 
 class ChangePassword extends Component {
   handleSubmit = () => {

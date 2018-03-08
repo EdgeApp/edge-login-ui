@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import MediaQuery from 'react-responsive'
 import { connect } from 'react-redux'
-import { checkUsername } from './Username.middleware'
-import { changeUsernameValue, error, clearError } from './Username.action'
-import { changeSignupPage } from '../Signup.action'
+import MediaQuery from 'react-responsive'
 
-import Desktop from './Username.web.js'
+import { changeSignupPage } from '../Signup.action'
+import { changeUsernameValue, clearError, error } from './Username.action'
+import { checkUsername } from './Username.middleware'
 import Mobile from './Username.mobile.js'
+import Desktop from './Username.web.js'
 
 class Username extends Component {
   handleSubmit = () => {

@@ -1,10 +1,12 @@
 // @flow
+
 import { connect } from 'react-redux'
-import { EdgeLoginQrComponent } from '../../components/abSpecific'
-import { EdgeLoginQrStyle } from '../../../native/styles'
+
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
-import type { State, Dispatch } from '../../../types/ReduxTypes'
+import { EdgeLoginQrStyle } from '../../../native/styles'
+import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { EdgeLoginQrComponent } from '../../components/abSpecific'
 
 export const mapStateToProps = (state: State) => {
   return {

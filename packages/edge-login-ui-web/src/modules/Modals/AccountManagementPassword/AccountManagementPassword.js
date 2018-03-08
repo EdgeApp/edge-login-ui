@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
+
 import {
   changeAccountManagementPasswordModalPassword,
+  clearAccountManagementModal,
   closeAccountManagementModal,
-  errorAccountManagementModal,
-  clearAccountManagementModal
+  errorAccountManagementModal
 } from './AccountManagementPassword.action.js'
 import { checkPassword } from './AccountManagementPassword.middleware.js'
-
-import Desktop from './AccountManagementPassword.web.js'
 import Mobile from './AccountManagementPassword.mobile.js'
+import Desktop from './AccountManagementPassword.web.js'
 
 class AccountManagementPassword extends Component {
   handleClose = () => {

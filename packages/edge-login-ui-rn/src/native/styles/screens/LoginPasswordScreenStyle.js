@@ -1,6 +1,7 @@
 // @flow
-import * as Styles from '../'
+
 import * as Constants from '../../../common/constants/'
+import * as Styles from '../'
 
 const LoginPasswordScreenStyle = {
   container: Styles.ScreenStyle,
