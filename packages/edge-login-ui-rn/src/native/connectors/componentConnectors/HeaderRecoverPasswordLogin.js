@@ -12,7 +12,6 @@ export const mapStateToProps = (state: State) => {
     showBackButton: currentScene.back,
     showSkipButton: currentScene.skip,
     title: currentScene.title,
-    subTitle: currentScene.subTitle,
     useCancel: true
   }
 }

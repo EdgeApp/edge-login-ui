@@ -5,6 +5,7 @@ import { Button, FormField, StaticModal } from '../../common/'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
 import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
 import SetRecoveryUsernameModalConnector from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
+import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
 
 type Props = {
   styles: Object,
@@ -160,54 +161,56 @@ export default class PasswordRecovery extends Component<Props, State> {
     const form2Style = this.state.errorTwo ? styles.inputError : styles.input
 
     return (
-      <View style={styles.screen}>
-        {this.renderHeader(styles)}
-        <View style={styles.body}>
-          <View style={styles.questionRow}>
-            <Text style={styles.questionText}>{this.props.question1}</Text>
+      <SafeAreaViewGradient>
+        <View style={styles.screen}>
+          {this.renderHeader(styles)}
+          <View style={styles.body}>
+            <View style={styles.questionRow}>
+              <Text style={styles.questionText}>{this.props.question1}</Text>
+            </View>
+            <View style={styles.answerRow}>
+              <FormField
+                style={form1Style}
+                autoFocus={this.state.focusFirst}
+                autoCorrect={false}
+                autoCapitalize={'none'}
+                onChangeText={this.setAnswer1}
+                value={this.state.answer1}
+                label={'Your Answer'}
+                error={'Answers are case sensitive'}
+              />
+            </View>
+            <View style={styles.shim} />
+            <View style={styles.questionRow}>
+              <Text style={styles.questionText}>{this.props.question2}</Text>
+            </View>
+            <View style={styles.answerRow}>
+              <FormField
+                style={form2Style}
+                autoFocus={this.state.focusSecond}
+                autoCorrect={false}
+                autoCapitalize={'none'}
+                onChangeText={this.setAnswer2}
+                value={this.state.answer2}
+                label={'Your Answer'}
+                error={'Answers are case sensitive'}
+              />
+            </View>
+            <View style={styles.buttonContainer}>
+              {this.renderError(styles)}
+              <Button
+                onPress={this.onSubmit}
+                downStyle={styles.submitButton.downStyle}
+                downTextStyle={styles.submitButton.downTextStyle}
+                upStyle={styles.submitButton.upStyle}
+                upTextStyle={styles.submitButton.upTextStyle}
+                label={this.props.submitButton}
+              />
+            </View>
           </View>
-          <View style={styles.answerRow}>
-            <FormField
-              style={form1Style}
-              autoFocus={this.state.focusFirst}
-              autoCorrect={false}
-              autoCapitalize={'none'}
-              onChangeText={this.setAnswer1}
-              value={this.state.answer1}
-              label={'Your Answer'}
-              error={'Answers are case sensitive'}
-            />
-          </View>
-          <View style={styles.shim} />
-          <View style={styles.questionRow}>
-            <Text style={styles.questionText}>{this.props.question2}</Text>
-          </View>
-          <View style={styles.answerRow}>
-            <FormField
-              style={form2Style}
-              autoFocus={this.state.focusSecond}
-              autoCorrect={false}
-              autoCapitalize={'none'}
-              onChangeText={this.setAnswer2}
-              value={this.state.answer2}
-              label={'Your Answer'}
-              error={'Answers are case sensitive'}
-            />
-          </View>
-          <View style={styles.buttonContainer}>
-            {this.renderError(styles)}
-            <Button
-              onPress={this.onSubmit}
-              downStyle={styles.submitButton.downStyle}
-              downTextStyle={styles.submitButton.downTextStyle}
-              upStyle={styles.submitButton.upStyle}
-              upTextStyle={styles.submitButton.upTextStyle}
-              label={this.props.submitButton}
-            />
-          </View>
+          {this.renderModal(styles)}
         </View>
-        {this.renderModal(styles)}
-      </View>
+      </SafeAreaViewGradient>
     )
   }
 }

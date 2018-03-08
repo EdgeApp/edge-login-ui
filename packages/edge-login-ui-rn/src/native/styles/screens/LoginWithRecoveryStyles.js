@@ -4,7 +4,7 @@ import * as Constants from '../../../common/constants'
 // import {Image} from 'react-native'
 
 const LoginWithRecoveryStyles = {
-  screen: { ...Styles.ScreenStyle },
+  screen: { ...Styles.ScreenStyle, marginTop: 5 },
   header: {
     ...Styles.HeaderContainerStyle,
     backgroundColor: Constants.PRIMARY
