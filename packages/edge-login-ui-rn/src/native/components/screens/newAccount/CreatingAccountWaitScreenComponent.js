@@ -2,11 +2,9 @@
 
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-// import { LOGO_DOT } from '../../../../native/assets'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector.js'
 import { Spinner } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-// import * as Constants from '../../../../common/constants'
 
 type Props = {
   styles: Object,

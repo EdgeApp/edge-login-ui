@@ -6,7 +6,6 @@ import { Button, StaticModal } from '../../common'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
 import ChangePinModalConnector from '../../../connectors/abSpecific/ChangePinModalConnector'
-// import * as Constants from '../../../common/constants'
 
 type Props = {
   styles: Object,

@@ -1,4 +1,3 @@
-// import { openErrorModal } from '../ErrorModal/ErrorModal.action'
 import { openLoading, closeLoading } from '../Loader/Loader.action'
 import {
   userLogin,

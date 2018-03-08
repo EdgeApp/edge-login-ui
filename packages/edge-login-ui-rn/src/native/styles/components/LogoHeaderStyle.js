@@ -1,7 +1,5 @@
 // @flow
 
-// import * as Colors from '../../../common/constants/Colors.js'
-// import { vs } from '../../../common/util'
 const LogoHeaderStyle = {
   container: {
     position: 'relative',

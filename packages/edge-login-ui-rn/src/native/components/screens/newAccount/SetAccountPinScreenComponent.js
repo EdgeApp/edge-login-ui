@@ -6,7 +6,6 @@ import { Button } from '../../common'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-// import * as Constants from '../../../common/constants'
 
 type Props = {
   styles: Object,

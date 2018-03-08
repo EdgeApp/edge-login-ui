@@ -6,7 +6,6 @@ import { Button, HeaderBackButton } from '../../common'
 import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
 import * as Assets from '../../../assets'
 import SafeAreaView from '../../common/SafeAreaView.js'
-// import * as Constants from '../../../common/constants'
 
 type Props = {
   styles: Object,
