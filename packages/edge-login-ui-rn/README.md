@@ -17,6 +17,18 @@ You will also need to install several native libraries that Edge depends on:
 npm install --save react-native-fast-crypto react-native-fs
 npm install --save git://github.com/Airbitz/react-native-randombytes.git
 npm install --save git://github.com/Airbitz/react-native-tcp.git
+npm install --save-dev rn-nodeify
+
+# Set up post install
+add to package.json scripts object
+"postinstall": "sh ./postinstall.sh"
+
+# create post install file
+# in root of project create postinstall.sh
+# add the following lines
+
+#!/bin/bash
+rn-nodeify --hack
 
 # Link support libraries into the native project files:
 react-native link react-native-fast-crypto
@@ -24,6 +36,10 @@ react-native link react-native-fs
 react-native link react-native-randombytes
 react-native link react-native-tcp
 react-native link edge-login-ui-rn
+
+# delete node modules and re-install
+rm -rf node_modules
+yarn
 ```
 
 ## Android build
