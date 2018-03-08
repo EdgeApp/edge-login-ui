@@ -1,4 +1,5 @@
 // @flow
+
 import * as Constants from '../constants'
 import { dispatchActionWithData, getPreviousUsers } from './'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'

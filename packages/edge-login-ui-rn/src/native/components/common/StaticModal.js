@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Component } from 'react'
 import { StaticModalStyle } from '../../../common/styles/'
 import { View, TouchableOpacity } from 'react-native'

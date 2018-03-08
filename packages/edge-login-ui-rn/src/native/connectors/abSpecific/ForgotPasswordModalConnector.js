@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import { MyModal } from '../../components/common/'
 import type { State, Dispatch } from '../../../types/ReduxTypes'

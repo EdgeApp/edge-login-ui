@@ -1,4 +1,5 @@
 // @flow
+
 class PasswordHelper {
   tooShort: boolean
   noLowerCase: boolean

@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import { FourDigitInputComponent } from '../../components/abSpecific/'
 import type { State, Dispatch } from '../../../types/ReduxTypes'

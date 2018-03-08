@@ -1,4 +1,5 @@
 // @flow
+
 import React from 'react'
 import { SafeAreaView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'

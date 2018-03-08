@@ -1,4 +1,5 @@
 // @flow
+
 import * as Styles from '../'
 import * as Constants from '../../../common/constants'
 const NewAccountUsernameScreenStyle = {

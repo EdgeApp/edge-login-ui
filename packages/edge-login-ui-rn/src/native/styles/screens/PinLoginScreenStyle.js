@@ -1,4 +1,5 @@
 // @flow
+
 import * as Styles from '../'
 import * as Constants from '../../../common/constants/'
 import { hs, vs } from '../../../common/util'

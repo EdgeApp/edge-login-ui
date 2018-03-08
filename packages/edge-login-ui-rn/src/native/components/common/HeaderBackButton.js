@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Component } from 'react'
 import { TouchableOpacity, Platform, Text } from 'react-native'
 import { Icon } from 'native-base'

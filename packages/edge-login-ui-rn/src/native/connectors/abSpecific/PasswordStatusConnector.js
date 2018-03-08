@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import PasswordStatusComponent from '../../components/abSpecific/PasswordStatusComponent'
 import type { State } from '../../../types/ReduxTypes'

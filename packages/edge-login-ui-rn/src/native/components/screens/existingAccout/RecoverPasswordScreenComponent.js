@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Component } from 'react'
 import { View, Text, Platform } from 'react-native'
 import {

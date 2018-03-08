@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Component } from 'react'
 import type { Store } from 'redux'
 import { Provider } from 'react-redux'

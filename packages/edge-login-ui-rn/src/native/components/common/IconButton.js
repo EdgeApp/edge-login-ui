@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Component } from 'react'
 import { View, TouchableHighlight } from 'react-native'
 import { Icon } from './'

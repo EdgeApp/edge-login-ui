@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 // import { LOGO_DOT } from '../../../../native/assets'

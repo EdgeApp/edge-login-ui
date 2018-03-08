@@ -1,4 +1,5 @@
 // @flow
+
 // import { hs, vs, fontSize } from '../../util'
 import { Platform } from 'react-native'
 

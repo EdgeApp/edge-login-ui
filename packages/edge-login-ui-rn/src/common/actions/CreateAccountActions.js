@@ -1,4 +1,5 @@
 // @flow
+
 import * as Constants from '../constants'
 import * as WorkflowActions from './WorkflowActions'
 import { isASCII } from '../util'

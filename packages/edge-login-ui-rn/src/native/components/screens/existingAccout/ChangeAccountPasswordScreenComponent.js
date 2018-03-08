@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Component } from 'react'
 import { View, KeyboardAvoidingView } from 'react-native'
 import { Button } from '../../common'

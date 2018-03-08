@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import { MyModal } from '../../components/common/'
 import { OTP_SMALL } from '../../assets/'

@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import LandingScreenComponent from '../../components/screens/LandingScreenComponent'
 import * as actions from '../../../common/actions'

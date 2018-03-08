@@ -1,4 +1,5 @@
 // @flow
+
 import * as Styles from '../'
 import * as Colors from '../../constants/Colors'
 import { vs, hs, fontSize } from '../../util'

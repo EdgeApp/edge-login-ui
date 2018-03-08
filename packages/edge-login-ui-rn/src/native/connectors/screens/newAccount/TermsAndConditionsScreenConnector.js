@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/newAccount/TermsAndConditionsScreenComponent'
 import * as actions from '../../../../common/actions/'

@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import { EdgeLoginQrComponent } from '../../components/abSpecific'
 import { EdgeLoginQrStyle } from '../../../native/styles'

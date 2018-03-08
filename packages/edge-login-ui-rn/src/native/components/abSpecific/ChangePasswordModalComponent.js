@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import { Button } from '../common'

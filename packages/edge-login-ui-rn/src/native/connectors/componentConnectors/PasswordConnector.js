@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import { FormField } from '../../components/common'
 import * as actions from '../../../common/actions'

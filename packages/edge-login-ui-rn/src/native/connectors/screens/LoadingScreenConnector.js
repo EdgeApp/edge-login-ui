@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import LoadingScreenComponent from '../../components/screens/LoadingScreenComponent'
 import type { State } from '../../../types/ReduxTypes'

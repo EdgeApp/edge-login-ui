@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import type { Dispatch, State } from '../../types/ReduxTypes'
 import { LoginAppComponent } from '../components/LogInAppComponent'

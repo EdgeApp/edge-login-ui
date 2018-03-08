@@ -1,4 +1,5 @@
 // @flow
+
 import { connect } from 'react-redux'
 import LinkedComponent from '../../../components/screens/existingAccout/ChangeAccountPasswordScreenComponent'
 import type { OwnProps } from '../../../components/screens/existingAccout/ChangeAccountPasswordScreenComponent'
