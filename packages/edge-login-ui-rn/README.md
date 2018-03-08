@@ -38,7 +38,7 @@ react-native link react-native-tcp
 react-native link edge-login-ui-rn
 
 # delete node modules and re-install
-rm rf node_modules
+rm -rf node_modules
 yarn
 ```
 
