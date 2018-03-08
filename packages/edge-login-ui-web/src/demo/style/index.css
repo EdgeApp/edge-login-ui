@@ -1,0 +1,72 @@
+body {
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font: 10pt Arial;
+  line-height: 1.5em;
+}
+
+#page {
+  background: top repeat-x url("./gradient.png");
+  padding: 20px 0 0;
+}
+
+#header {
+  background: center no-repeat url("./edge-logo.png");
+  color: #fff;
+  font-size: 1px; /* Hide the text */
+  height: 82px;
+  margin: 50px 0;
+}
+
+#content {
+  padding: 0 2em;
+  margin: 0 auto;
+  max-width: 40em;
+  text-align: justify;
+}
+
+.center {
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: inherit;
+  font-weight: normal;
+}
+
+button {
+  background: #0e4b75;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font: inherit;
+  margin: 0 1em;
+  min-width: 10em;
+  padding: 0.75em;
+  text-align: center;
+}
+
+button:active {
+  background: #0d2145;
+}
+
+button.secondary {
+  background: #fff;
+  border: 1px solid #0e4b75;
+  color: #0e4b75;
+}
+
+button.secondary:active {
+  background: #f4f5f6;
+}
+
+button[disabled] {
+  background: #c0c0c0;
+  border: none;
+  color: #e0e0e0;
+}
