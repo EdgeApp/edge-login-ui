@@ -1,6 +1,6 @@
-import t from 'lib/web/LocaleStrings'
 import React from 'react'
 
+import t from '../../../lib/web/LocaleStrings.js'
 import styles from './LoginEdge.webStyle.scss'
 import QRCode from './QRCode.js'
 

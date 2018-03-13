@@ -45,12 +45,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.scss', '.css', '.js', '.jsx', '.json'],
-    modules: [
-      'node_modules',
-      path.resolve(__dirname, './node_modules'),
-      path.resolve('./src')
-    ]
+    extensions: ['.scss', '.css', '.js', '.jsx', '.json']
   },
 
   plugins: [

@@ -1,7 +1,7 @@
-import t from 'lib/web/LocaleStrings'
 import React from 'react'
 import Input from 'react-toolbox/lib/input'
 
+import t from '../../../lib/web/LocaleStrings.js'
 import styles from './Username.mobileStyle.scss'
 
 export default ({
