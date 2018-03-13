@@ -1,7 +1,8 @@
 [ignore]
 
-.*/node_modules/react-native/.*
+.*/node_modules/config-chain/.*
 .*/node_modules/react-native-keyboard-aware-scroll-view/.*
+.*/node_modules/react-native/.*
 
 [include]
 
