@@ -1,6 +1,6 @@
 import {
-  OPEN_ACCOUNT_CREATED_MODAL,
-  CLOSE_ACCOUNT_CREATED_MODAL
+  CLOSE_ACCOUNT_CREATED_MODAL,
+  OPEN_ACCOUNT_CREATED_MODAL
 } from './AccountCreated.action.js'
 
 export const accountCreated = (state = false, action) => {

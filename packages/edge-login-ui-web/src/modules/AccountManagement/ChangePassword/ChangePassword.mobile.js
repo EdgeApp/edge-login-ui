@@ -1,9 +1,10 @@
 import React from 'react'
-import Input from 'react-toolbox/lib/input'
 import FontIcon from 'react-toolbox/lib/font_icon'
-import styles from './ChangePassword.mobileStyle.scss'
-import eyeShow from '../../../img/create-account/show-password.png'
+import Input from 'react-toolbox/lib/input'
+
 import eyeHide from '../../../img/create-account/hide-password.png'
+import eyeShow from '../../../img/create-account/show-password.png'
+import styles from './ChangePassword.mobileStyle.scss'
 
 export default ({
   revealPassword,

@@ -1,4 +1,4 @@
-import { openLoading, closeLoading } from '../../Loader/Loader.action'
+import { closeLoading, openLoading } from '../../Loader/Loader.action'
 
 /* eslint-disable standard/no-callback-literal */
 export const checkPassword = (

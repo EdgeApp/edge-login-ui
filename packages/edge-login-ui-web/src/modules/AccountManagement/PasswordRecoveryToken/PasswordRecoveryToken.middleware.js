@@ -1,4 +1,4 @@
-import { validateEmail, obfuscateUsername } from '../../../lib/helper'
+import { obfuscateUsername, validateEmail } from '../../../lib/helper'
 
 export const checkEmail = (
   address,

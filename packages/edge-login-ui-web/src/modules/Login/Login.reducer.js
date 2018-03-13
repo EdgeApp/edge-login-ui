@@ -1,9 +1,9 @@
-import * as ACTION from './Login.action'
 import {
-  SELECT_USER_LOGIN,
+  DELETE_USER_FROM_CACHE,
   REMOVE_USER_LOGIN,
-  DELETE_USER_FROM_CACHE
+  SELECT_USER_LOGIN
 } from './CachedUsers/CachedUsers.action'
+import * as ACTION from './Login.action'
 
 export const viewPassword = (state = false, action) => {
   switch (action.type) {

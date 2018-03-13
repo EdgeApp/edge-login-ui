@@ -1,14 +1,16 @@
 // @flow
+
 import React, { Component } from 'react'
 import {
-  View,
+  Keyboard,
   Text,
   TextInput,
   TouchableWithoutFeedback,
-  Keyboard
+  View
 } from 'react-native'
-import { Spinner } from '../common'
+
 import * as Constants from '../../../common/constants'
+import { Spinner } from '../common'
 
 type Props = {
   style: Object,

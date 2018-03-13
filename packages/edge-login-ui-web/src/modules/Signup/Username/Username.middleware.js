@@ -1,4 +1,4 @@
-import { openLoading, closeLoading } from '../../Loader/Loader.action'
+import { closeLoading, openLoading } from '../../Loader/Loader.action'
 
 export const checkUsername = (username, callback) => {
   return (dispatch, getState, imports) => {

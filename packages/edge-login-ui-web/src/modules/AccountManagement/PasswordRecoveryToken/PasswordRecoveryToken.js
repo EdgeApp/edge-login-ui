@@ -3,19 +3,18 @@ import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 
 import {
+  closePasswordRecoverySuccessModal,
+  openPasswordRecoverySuccessModal
+} from '../../Modals/PasswordRecoverySucess/PasswordRecoverySuccess.action.js'
+import PasswordRecoveryTokenSuccess from '../../Modals/PasswordRecoverySucess/PasswordRecoverySuccess.js'
+import {
   changePasswordRecoveryEmail,
   errorPasswordRecoveryEmail,
   finishPasswordRecoveryToken
 } from './PasswordRecoveryToken.action.js'
-import {
-  openPasswordRecoverySuccessModal,
-  closePasswordRecoverySuccessModal
-} from '../../Modals/PasswordRecoverySucess/PasswordRecoverySuccess.action.js'
 import { checkEmail } from './PasswordRecoveryToken.middleware.js'
-
-import PasswordRecoveryTokenSuccess from '../../Modals/PasswordRecoverySucess/PasswordRecoverySuccess.js'
-import Desktop from './PasswordRecoveryToken.web.js'
 import Mobile from './PasswordRecoveryToken.mobile.js'
+import Desktop from './PasswordRecoveryToken.web.js'
 
 class PasswordRecoveryToken extends Component {
   handleSubmit = address => {

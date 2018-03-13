@@ -1,5 +1,5 @@
+import { closeLoading, openLoading } from '../../Loader/Loader.action'
 import { pinChanged } from './ChangePin.action'
-import { openLoading, closeLoading } from '../../Loader/Loader.action'
 
 export const checkPin = (password, pin, account, callback) => {
   return (dispatch, getState, imports) => {

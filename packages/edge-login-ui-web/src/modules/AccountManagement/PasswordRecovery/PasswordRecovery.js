@@ -1,16 +1,15 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
-import _ from 'lodash'
+
 import abcctx from '../../../lib/web/abcContext'
 import t from '../../../lib/web/LocaleStrings'
-
-import * as action from './PasswordRecovery.action.js'
 import { setPasswordRecoveryToken } from '../PasswordRecoveryToken/PasswordRecoveryToken.action.js'
+import * as action from './PasswordRecovery.action.js'
 import { checkPasswordRecovery } from './PasswordRecovery.middleware.js'
-
-import Desktop from './PasswordRecovery.web.js'
 import Mobile from './PasswordRecovery.mobile.js'
+import Desktop from './PasswordRecovery.web.js'
 
 class PasswordRecovery extends Component {
   handleSubmit = () => {

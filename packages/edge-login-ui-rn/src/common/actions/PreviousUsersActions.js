@@ -1,8 +1,10 @@
 // @flow
+
+import type { AbcContext } from 'edge-login'
+
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import { dispatchActionWithData } from './'
-import type { AbcContext } from 'edge-login'
-import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
 async function getDiskStuff (context: AbcContext) {
   const userList = await context.listUsernames().then(usernames =>

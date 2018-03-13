@@ -1,7 +1,8 @@
 import React from 'react'
 import MediaQuery from 'react-responsive'
-import webStyles from './Divider.webStyle.scss'
+
 import mobileStyles from './Divider.mobileStyle.scss'
+import webStyles from './Divider.webStyle.scss'
 
 export default () => (
   <section>

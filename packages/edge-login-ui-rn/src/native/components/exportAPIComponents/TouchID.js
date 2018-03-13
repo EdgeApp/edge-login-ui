@@ -1,4 +1,5 @@
 // @flow
+
 export {
   isTouchEnabled,
   enableTouchId,

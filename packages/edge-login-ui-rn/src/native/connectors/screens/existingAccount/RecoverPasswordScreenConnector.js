@@ -1,10 +1,11 @@
 // @flow
+
 import { connect } from 'react-redux'
-import LinkedComponent from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 
 import * as actions from '../../../../common/actions'
 import * as Constants from '../../../../common/constants'
-import type { State, Dispatch } from '../../../../types/ReduxTypes.js'
+import type { Dispatch, State } from '../../../../types/ReduxTypes.js'
+import LinkedComponent from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 import type { OwnProps } from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
@@ -56,7 +57,6 @@ function returnTrunatedUsername (arg) {
 export default connect(mapStateToProps, mapDispatchToProps)(LinkedComponent)
 
 /*
-// @flow
 import {connect} from 'react-redux'
 import * as SETTINGS_SELECTORS from '../../modules/UI/Settings/selectors.js'
 import type {Dispatch, State} from '../../modules/ReduxTypes'

@@ -1,20 +1,19 @@
+import abcctx from 'lib/web/abcContext'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 import { Dialog } from 'react-toolbox/lib/dialog'
 import FontIcon from 'react-toolbox/lib/font_icon'
-import abcctx from 'lib/web/abcContext'
+import layoutTheme from 'theme/layoutTheme'
 
-import { openLogin } from './Login/Login.action'
+import styles from './Container.scss'
+import Layout from './Layout/Layout.js'
 import {
   selectUserToLogin,
   setCachedUsers,
   setCachedUsersWithPin
 } from './Login/CachedUsers/CachedUsers.action'
-
-import Layout from './Layout/Layout.js'
-import layoutTheme from 'theme/layoutTheme'
-import styles from './Container.scss'
+import { openLogin } from './Login/Login.action'
 
 const findUsernamesWithPin = (ctx, usernames) => {
   const promises = usernames.map(username => ctx.pinLoginEnabled(username))

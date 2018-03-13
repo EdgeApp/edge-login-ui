@@ -1,8 +1,9 @@
 import React from 'react'
-import styles from './AccountManagement.webStyle.scss'
-import pinIcon from '../../img/account-settings/PIN-W.png'
+
 import passwordIcon from '../../img/account-settings/password-W.png'
+import pinIcon from '../../img/account-settings/PIN-W.png'
 import recoveryIcon from '../../img/account-settings/recovery-W.png'
+import styles from './AccountManagement.webStyle.scss'
 
 export default ({
   account,

@@ -1,15 +1,16 @@
 // @flow
 
 import React, { Component } from 'react'
-import type { Store } from 'redux'
 import { Provider } from 'react-redux'
-import reducers from '../../../common/reducers'
-import { createStore, applyMiddleware, compose } from 'redux'
+import type { Store } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
+
+import { updateFontStyles } from '../../../common/constants/Fonts'
+import { setLocal } from '../../../common/locale'
+import reducers from '../../../common/reducers'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
-import { setLocal } from '../../../common/locale'
-import { updateFontStyles } from '../../../common/constants/Fonts'
 
 type Props = {
   context: any,

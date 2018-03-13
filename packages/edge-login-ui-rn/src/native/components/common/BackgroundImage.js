@@ -1,9 +1,10 @@
 // @flow
+
 import React from 'react'
 import {
   ImageBackground,
-  TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  TouchableWithoutFeedback
 } from 'react-native'
 
 type Props = {

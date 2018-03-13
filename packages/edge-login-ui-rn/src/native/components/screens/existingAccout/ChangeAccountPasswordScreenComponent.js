@@ -1,12 +1,14 @@
 // @flow
+
 import React, { Component } from 'react'
-import { View, KeyboardAvoidingView } from 'react-native'
-import { Button } from '../../common'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
-import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
-import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
+import { KeyboardAvoidingView, View } from 'react-native'
+
 import ChangePasswordModalConnector from '../../../connectors/abSpecific/ChangePasswordModalConnector'
 import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
+import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
+import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
+import { Button } from '../../common'
 
 export type OwnProps = {
   showHeader: boolean,

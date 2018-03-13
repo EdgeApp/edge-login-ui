@@ -1,9 +1,12 @@
 // @flow
-import { connect } from 'react-redux'
-import LinkedComponent from '../../../components/screens/newAccount/TermsAndConditionsScreenComponent'
-import * as actions from '../../../../common/actions/'
-import type { State, Dispatch } from '../../../../types/ReduxTypes'
+
 import type { AbcAccount } from 'edge-login'
+import { connect } from 'react-redux'
+
+import * as actions from '../../../../common/actions/'
+import type { Dispatch, State } from '../../../../types/ReduxTypes'
+import LinkedComponent from '../../../components/screens/newAccount/TermsAndConditionsScreenComponent'
+
 export const mapStateToProps = (state: State) => {
   return {
     workflow: state.workflow,

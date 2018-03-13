@@ -1,6 +1,7 @@
 // @flow
+
 import React, { Component } from 'react'
-import { View, Text, TouchableHighlight } from 'react-native'
+import { Text, TouchableHighlight, View } from 'react-native'
 import FAIcon from 'react-native-vector-icons/MaterialIcons'
 
 type Props = {

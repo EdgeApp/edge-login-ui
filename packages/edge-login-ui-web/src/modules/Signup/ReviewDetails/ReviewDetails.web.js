@@ -1,6 +1,6 @@
 import React from 'react'
 import FontIcon from 'react-toolbox/lib/font_icon'
-// import t from 'lib/web/LocaleStrings'
+
 import styles from './ReviewDetails.webStyle.scss'
 
 export default ({

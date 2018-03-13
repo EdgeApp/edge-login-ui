@@ -1,6 +1,6 @@
 // @flow
+
 import * as Styles from '../'
-// import * as Colors from '../../../common/constants/Colors'
 
 const NewAccountPasswordScreenStyle = {
   screen: { ...Styles.ScreenStyle },

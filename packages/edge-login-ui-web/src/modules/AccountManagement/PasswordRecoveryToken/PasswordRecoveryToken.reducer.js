@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+
 import * as ACTION from './PasswordRecoveryToken.action.js'
 
 const token = (state = '', action) => {

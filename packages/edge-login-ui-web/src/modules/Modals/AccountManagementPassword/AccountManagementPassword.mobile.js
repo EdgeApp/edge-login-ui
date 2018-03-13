@@ -1,8 +1,9 @@
 import React from 'react'
 import Input from 'react-toolbox/lib/input'
+
+import passwordIcon from '../../../img/account-settings/password-MW.png'
 import Modal from '../BaseModal.js'
 import styles from './AccountManagementPassword.mobileStyle.scss'
-import passwordIcon from '../../../img/account-settings/password-MW.png'
 
 export default ({
   close,

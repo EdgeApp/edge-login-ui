@@ -1,9 +1,11 @@
 // @flow
+
+import moment from 'moment'
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import { Image, Text, View } from 'react-native'
+
 import * as Constants from '../../../common/constants/'
 import { OTP_SMALL } from '../../assets/'
-import moment from 'moment'
 
 type Props = {
   screen: string,

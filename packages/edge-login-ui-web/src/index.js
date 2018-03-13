@@ -1,10 +1,11 @@
-import React from 'react'
 import 'react-toolbox/lib/commons.scss'
-import { Provider } from 'react-redux'
-import { render } from 'react-dom'
 
-import Router from './routes.js'
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+
 import createStore from './lib/web/configureStore'
+import Router from './routes.js'
 
 const store = createStore()
 const rootElement = document.getElementById('app')

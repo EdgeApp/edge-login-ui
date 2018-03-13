@@ -1,6 +1,6 @@
-import * as ACTION from './PasswordValidation.action'
 import { PASSWORD_CHANGED } from '../../../AccountManagement/ChangePassword/ChangePassword.action'
 import { GET_DETAILS } from '../../ReviewDetails/ReviewDetails.action'
+import * as ACTION from './PasswordValidation.action'
 
 export const upperCaseChar = (state = false, action) => {
   switch (action.type) {

@@ -1,22 +1,20 @@
+import classnames from 'classnames'
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
-import classnames from 'classnames'
 import FontIcon from 'react-toolbox/lib/font_icon'
 
 import { loginUsername } from '../../Login/Login.action'
 import {
-  selectUserToLogin,
-  selectUserToDeleteFromUserCache
+  closeAccountCacheDeleteModal,
+  openAccountCacheDeleteModal
+} from '../../Modals/AccountCacheDelete/AccountCacheDelete.action.js'
+import AccountCacheDelete from '../../Modals/AccountCacheDelete/AccountCacheDelete.js'
+import {
+  selectUserToDeleteFromUserCache,
+  selectUserToLogin
 } from './CachedUsers.action'
 import { deleteUserToCache } from './CachedUsers.middleware.js'
-import {
-  openAccountCacheDeleteModal,
-  closeAccountCacheDeleteModal
-} from '../../Modals/AccountCacheDelete/AccountCacheDelete.action.js'
-
-import AccountCacheDelete from '../../Modals/AccountCacheDelete/AccountCacheDelete.js'
-
 import styles from './CachedUsers.scss'
 
 class UserList extends Component {

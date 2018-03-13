@@ -1,5 +1,6 @@
 import React from 'react'
 import Input from 'react-toolbox/lib/input'
+
 import styles from './ChangePin.webStyle.scss'
 
 export default ({

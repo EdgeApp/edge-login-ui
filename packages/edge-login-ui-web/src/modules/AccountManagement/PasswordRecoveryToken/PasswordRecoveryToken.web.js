@@ -1,10 +1,11 @@
 import React from 'react'
 import Input from 'react-toolbox/lib/input'
-import styles from './PasswordRecoveryToken.webStyle.scss'
-import yahoo from '../../../img/password-recovery/yahoo.png'
+
 import gmail from '../../../img/password-recovery/gmail.png'
-import windows from '../../../img/password-recovery/windows.png'
 import mail from '../../../img/password-recovery/mail.png'
+import windows from '../../../img/password-recovery/windows.png'
+import yahoo from '../../../img/password-recovery/yahoo.png'
+import styles from './PasswordRecoveryToken.webStyle.scss'
 
 export default ({ email, error, handleSubmit, handleChangeEmail }) => (
   <div className={styles.container}>

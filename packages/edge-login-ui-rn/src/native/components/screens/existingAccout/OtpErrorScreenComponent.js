@@ -1,14 +1,16 @@
 // @flow
+
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Button, StaticModal } from '../../common'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorOtp'
-import OtpAuthCodeModalConnector from '../../../connectors/abSpecific/OtpAuthCodeModalConnector'
-import DisableOtpModalConnector from '../../../connectors/abSpecific/DisableOtpModalConnector'
-import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'
+import { Text, View } from 'react-native'
+
 import * as Constants from '../../../../common/constants'
-import OtpBackupKeyConnector from '../../../../native/connectors/componentConnectors/OtpBackupKeyConnector'
 import EdgeLoginQrConnector from '../../../../native/connectors/componentConnectors/EdgeLoginQrConnector'
+import OtpBackupKeyConnector from '../../../../native/connectors/componentConnectors/OtpBackupKeyConnector'
+import DisableOtpModalConnector from '../../../connectors/abSpecific/DisableOtpModalConnector'
+import OtpAuthCodeModalConnector from '../../../connectors/abSpecific/OtpAuthCodeModalConnector'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorOtp'
+import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'
+import { Button, StaticModal } from '../../common'
 
 type Props = {
   styles: Object,

@@ -1,7 +1,8 @@
 import React from 'react'
+
+import deleteIcon from '../../../img/modals/delete-MW.png'
 import Modal from '../BaseModal.js'
 import styles from './AccountCacheDelete.mobileStyle.scss'
-import deleteIcon from '../../../img/modals/delete-MW.png'
 
 export default ({ view, name, close, deleteAccount }) => (
   <Modal active={view} close={name} icon={deleteIcon}>

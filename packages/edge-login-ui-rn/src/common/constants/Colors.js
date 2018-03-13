@@ -1,4 +1,5 @@
 // @flow
+
 export const GR_DARK = '#0D2145'
 export const GR_LIGHT = '#0E4B75'
 export const PRIMARY = '#0D2145'

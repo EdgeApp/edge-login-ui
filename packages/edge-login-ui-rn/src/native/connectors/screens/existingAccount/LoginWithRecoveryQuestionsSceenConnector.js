@@ -1,7 +1,9 @@
 import { connect } from 'react-redux'
-import LinkedComponent from '../../../components/screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent'
+
 import * as actions from '../../../../common/actions'
 import * as Constants from '../../../../common/constants'
+import LinkedComponent from '../../../components/screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent'
+
 export const mapStateToProps = (state, ownProps) => {
   const isEnabled = true
   const question1 =

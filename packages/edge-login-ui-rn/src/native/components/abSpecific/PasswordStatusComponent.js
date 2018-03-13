@@ -1,11 +1,13 @@
 // @flow
+
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Checkbox } from '../common/Checkbox'
+import { Text, View } from 'react-native'
+
 import {
   PASSWORD_REQ_CHECKED,
   PASSWORD_REQ_UNCHECKED
 } from '../../../native/assets'
+import { Checkbox } from '../common/Checkbox'
 
 type Props = {
   style: Object,

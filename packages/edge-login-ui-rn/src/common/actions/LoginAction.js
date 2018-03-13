@@ -1,18 +1,19 @@
 // @flow
+
+import {
+  enableTouchId,
+  isTouchDisabled,
+  isTouchEnabled,
+  loginWithTouchId,
+  supportsTouchId
+} from '../../native/keychain.js'
+import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import {
   dispatchAction,
-  dispatchActionWithData,
-  dispatchActionWitString
+  dispatchActionWitString,
+  dispatchActionWithData
 } from './'
-import {
-  enableTouchId,
-  loginWithTouchId,
-  isTouchEnabled,
-  supportsTouchId,
-  isTouchDisabled
-} from '../../native/keychain.js'
-import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
 /**
  * Make it Thunky

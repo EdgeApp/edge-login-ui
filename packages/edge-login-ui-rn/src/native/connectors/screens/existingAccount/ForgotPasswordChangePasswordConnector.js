@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import LinkedComponent from '../../../components/screens/existingAccout/ChangeAccountPasswordScreenComponent'
+
 import * as actions from '../../../../common/actions'
+import LinkedComponent from '../../../components/screens/existingAccout/ChangeAccountPasswordScreenComponent'
 
 export const mapStateToProps = (state, ownProps) => {
   const error = state.create.confirmPasswordErrorMessage

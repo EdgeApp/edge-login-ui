@@ -1,4 +1,5 @@
 // @flow
+
 const LogoImageStyles = {
   container: {
     position: 'relative',

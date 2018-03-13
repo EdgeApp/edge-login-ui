@@ -1,5 +1,5 @@
-import * as ACTION from './PinNumber.action'
 import { GET_DETAILS } from '../ReviewDetails/ReviewDetails.action'
+import * as ACTION from './PinNumber.action'
 
 export const pin = (state = '', action) => {
   switch (action.type) {
