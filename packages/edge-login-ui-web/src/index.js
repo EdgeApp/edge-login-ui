@@ -1,4 +1,4 @@
-import 'react-toolbox/lib/commons.scss'
+import './theme/globals.scss'
 
 import React from 'react'
 import { render } from 'react-dom'

@@ -1,9 +1,6 @@
 @import "~react-toolbox/lib/_colors.scss";
 @import "~react-toolbox/lib/_mixins.scss";
 @import "./responsive.scss";
-// @import "~react-toolbox/lib/globals";
-// @import "~react-toolbox/lib/commons";
-// @import "~react-toolbox/lib/button/theme";
 
 //Color Pallete
 $color-gradient: linear-gradient(270deg, #0e4b75 0%, #0d2145 100%);
@@ -44,20 +41,3 @@ $dropdown-color-primary: $color-accent-blue !default;
 
 //Dialog
 $dialog-content-padding: 0;
-
-//CSS Global
-p {
-  font-size: 16px;
-  line-height: 24px;
-  color: $color-grey-01;
-}
-
-a {
-  font-size: 16px;
-  color: #007aff;
-}
-
-body {
-  font-family: $preferred-font;
-  color: $color-grey-01;
-}
