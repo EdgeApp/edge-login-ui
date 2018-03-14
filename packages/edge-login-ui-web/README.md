@@ -1,6 +1,6 @@
 # Airbitz Javascript UI
 
-This repo implements a UI layer on top of [edge-login](https://github.com/Airbitz/edge-login) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
+This repo implements a UI layer on top of [edge-core-js](https://github.com/Airbitz/edge-core-js) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
 
 ## Build from source repo (not needed if using NPM)
 

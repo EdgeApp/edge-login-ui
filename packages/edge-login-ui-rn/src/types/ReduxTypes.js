@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcAccount, AbcAccountOptions, AbcContext } from 'edge-login'
+import type { AbcAccount, AbcAccountOptions, AbcContext } from 'edge-core-js'
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
 export type Action = { type: string, data?: any }
