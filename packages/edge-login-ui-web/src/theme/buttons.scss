@@ -1,5 +1,5 @@
 .primary {
-	height: 50px;
+  height: 50px;
   width: 200px;
   border-radius: 3px;
   border-style: none;
@@ -30,7 +30,7 @@
 }
 
 .primaryLoad {
-	height: 50px;
+  height: 50px;
   width: 200px;
   border-radius: 3px;
   border-style: none;
@@ -50,7 +50,7 @@
 }
 
 .secondary {
-	height: 50px;
+  height: 50px;
   width: 200px;
   border-radius: 3px;
   border-style: none;
@@ -82,7 +82,7 @@
 }
 
 .secondaryLoad {
-	height: 50px;
+  height: 50px;
   width: 200px;
   border-radius: 3px;
   border-style: none;
@@ -113,7 +113,7 @@
 
 .link:active {
   text-decoration: none;
-  color: #2A5799;;
+  color: #2a5799;
 }
 
 .rowButtons {
@@ -151,7 +151,7 @@
 
   .secondaryMobile,
   .secondaryLoadMobile {
-      margin-right:5px;
+    margin-right: 5px;
   }
 }
 
@@ -170,7 +170,6 @@
   .primaryLoadMobile,
   .secondaryMobile,
   .secondaryLoadMobile {
-      margin:5px 0px;
+    margin: 5px 0px;
   }
-
 }

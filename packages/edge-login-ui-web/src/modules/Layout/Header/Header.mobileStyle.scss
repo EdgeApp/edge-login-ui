@@ -1,29 +1,29 @@
-@import 'theme/_config.scss';
+@import "theme/_config.scss";
 
-.container{
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: column;
-    -webkit-flex-direction: column;
-    justify-content: center;
-    -webkit-justify-content: center;
-    align-items: center;
-    -webkit-align-items: center;
+.container {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
 
-    height: 70px;
-    background: $color-gradient;
-    .text {
-      opacity: 0.6;
-      color: $color-white;
-      font-size: 16px;
-      font-weight: bold;
-      text-align: center;
-      text-transform: uppercase;
-      line-height: 16px;
-    }
+  height: 70px;
+  background: $color-gradient;
+  .text {
+    opacity: 0.6;
+    color: $color-white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 16px;
+  }
 
-    .icon {
-      max-width: 35px;
-      max-height: 35px;
-    }
+  .icon {
+    max-width: 35px;
+    max-height: 35px;
+  }
 }

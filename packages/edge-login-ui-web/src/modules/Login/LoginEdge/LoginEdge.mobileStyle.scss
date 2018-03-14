@@ -68,12 +68,11 @@
         text-align: center;
       }
     }
-
   }
 
   .rectangle {
     @extend .max-width;
-	  height: 100px;
+    height: 100px;
     border: 1px solid $color-secondary-navy;
     border-radius: 3px;
     margin-top: 15px;
@@ -121,7 +120,7 @@
     cursor: pointer;
   }
   .signUp {
-  @extend .margins;
+    @extend .margins;
     .question {
       color: $color-grey-02;
       font-size: 16px;

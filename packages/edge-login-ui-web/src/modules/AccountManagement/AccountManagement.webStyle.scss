@@ -5,7 +5,7 @@
   flex-direction: column;
   -webkit-flex-direction: column;
   justify-content: flex-start;
-  -webkit-justify-content:  flex-start;
+  -webkit-justify-content: flex-start;
 
   height: 303px;
 
@@ -44,12 +44,12 @@
       margin: 0px 15px;
       height: 160px;
       width: 160px;
-      border: 1px solid #D8D6D6;
+      border: 1px solid #d8d6d6;
       border-radius: 3px;
       cursor: pointer;
 
       a:hover {
-          text-decoration: none !important;
+        text-decoration: none !important;
       }
 
       .label {
@@ -60,8 +60,8 @@
     }
 
     .square:active {
-      border: 1px solid #4977BB;
-      background-color: rgba(14,75,117,0.1);
+      border: 1px solid #4977bb;
+      background-color: rgba(14, 75, 117, 0.1);
     }
   }
 }
