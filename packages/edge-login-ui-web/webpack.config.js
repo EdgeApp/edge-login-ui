@@ -44,10 +44,6 @@ module.exports = {
     publicPath: './'
   },
 
-  resolve: {
-    extensions: ['.scss', '.css', '.js', '.jsx', '.json']
-  },
-
   plugins: [
     new ExtractTextPlugin('bundle.css', { allChunks: true }),
     ...productionPlugins,
@@ -90,8 +86,10 @@ module.exports = {
             {
               loader: 'sass-loader',
               options: {
-                data: '@import "theme/_config.scss";',
-                includePaths: [path.resolve(__dirname, './src')]
+                data: `@import "${path.resolve(
+                  __dirname,
+                  'src/theme/_config.scss'
+                )}";`
               }
             }
           ]

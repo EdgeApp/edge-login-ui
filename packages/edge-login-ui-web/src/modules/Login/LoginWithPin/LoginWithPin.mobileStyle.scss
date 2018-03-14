@@ -1,6 +1,6 @@
-@import "~theme/buttons";
-@import "~theme/mobile";
-@import "~theme/loader";
+@import "../../../theme/buttons.scss";
+@import "../../../theme/mobile.scss";
+@import "../../../theme/loader.scss";
 
 .container {
   flex: 1;
