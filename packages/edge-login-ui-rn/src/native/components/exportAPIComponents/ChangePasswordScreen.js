@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcAccount, AbcContext } from 'edge-login'
+import type { AbcAccount, AbcContext } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'

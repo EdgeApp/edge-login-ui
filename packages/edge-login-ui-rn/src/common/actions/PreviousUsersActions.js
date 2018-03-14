@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcContext } from 'edge-login'
+import type { AbcContext } from 'edge-core-js'
 
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'

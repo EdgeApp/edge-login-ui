@@ -1,12 +1,12 @@
 # Edge React Native UI
 
-This repo implements a UI layer on top of [edge-login](https://github.com/Airbitz/airbitz-core-js) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
+This repo implements a UI layer on top of [edge-core-js](https://github.com/Airbitz/edge-core-js) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
 
 ## Basic usage for react native mobile application
 
 Add the Edge libraries to your project:
 
-`npm install --save edge-login edge-login-ui-rn`
+`npm install --save edge-core-js edge-login-ui-rn`
 
 Required: Node ^8.2.1 and NPM ^5.3.0
 
@@ -114,7 +114,7 @@ To use the component in your app you will need to two airbitz core libraries
 
 ```javascript
 import { LoginScreen } from ‘edge-login-ui-rn’
-import { makeEdgeContext } from ‘edge-login’
+import { makeEdgeContext } from ‘edge-core-js’
 ```
 
 Outside of the component class, in the file that you want to add the login you will need to set up a function to validate your app with Edge.

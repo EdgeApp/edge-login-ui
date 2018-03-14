@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcAccount } from 'edge-login'
+import type { AbcAccount } from 'edge-core-js'
 import { sprintf } from 'sprintf-js'
 import passwordCheck from 'zxcvbn'
 
