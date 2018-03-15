@@ -41,7 +41,6 @@
     "react-dom": "^15.4.2",
     "react-redux": "~4.4.5",
     "react-responsive": "^4.0.3",
-    "react-router": "~2.6.0",
     "react-toolbox": "v1.1.2",
     "redux": "~3.5.2",
     "redux-logger": "~2.7.4",
