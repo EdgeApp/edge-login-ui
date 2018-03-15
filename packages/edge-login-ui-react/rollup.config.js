@@ -28,33 +28,21 @@ const external = [
   ...Object.keys(packageJson.devDependencies)
 ]
 
-export default [
-  {
-    external,
-    input: 'src/index.js',
-    output: { file: './lib/components.js', format: 'cjs' },
-    plugins: [
-      commonjs({ exclude: 'src/**' }),
-      nodeResolve(),
-      url(),
-      postcss({
-        extract: true,
-        loaders: [sassLoader],
-        modules: true,
-        plugins: [autoprefixer]
-      }),
-      babel(babelOpts)
-    ],
-    sourcemap: true
-  },
-  {
-    external,
-    input: './src/abcui.js',
-    output: [
-      { file: packageJson.main, format: 'cjs' },
-      { file: packageJson.module, format: 'es' }
-    ],
-    plugins: [babel(babelOpts)],
-    sourcemap: true
-  }
-]
+export default {
+  external,
+  input: 'src/index.js',
+  output: { file: packageJson.main, format: 'cjs' },
+  plugins: [
+    commonjs({ exclude: 'src/**' }),
+    nodeResolve(),
+    url(),
+    postcss({
+      extract: 'lib/styles.css',
+      loaders: [sassLoader],
+      modules: true,
+      plugins: [autoprefixer]
+    }),
+    babel(babelOpts)
+  ],
+  sourcemap: true
+}

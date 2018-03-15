@@ -11,7 +11,9 @@ import Container from './modules/Container.js'
 import Login from './modules/Login/Login.js'
 import Signup from './modules/Signup/Signup.js'
 
-export type RouterComponentProps = {}
+export type RouterComponentProps = {
+  defaultPage: string
+}
 export type RouterComponentState = {
   page: string
 }
@@ -23,7 +25,9 @@ export default class RouterComponent extends Component<
   constructor (props: RouterComponentProps) {
     super(props)
     this.state = {
-      page: /account/.test(window.location) ? '/account' : '/login'
+      page:
+        props.defaultPage ||
+        (/account/.test(window.location) ? '/account' : '/login')
     }
   }
 

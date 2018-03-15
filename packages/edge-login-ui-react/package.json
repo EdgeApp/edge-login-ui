@@ -1,7 +1,7 @@
 {
   "name": "edge-login-ui-react",
   "version": "0.2.0",
-  "description": "Edge login UI components, as a library for the web",
+  "description": "Edge login UI, as React components",
   "keywords": [
     "Airbitz",
     "Edge",
@@ -15,18 +15,17 @@
   "author": "Airbitz, Inc.",
   "files": [
     "LICENSE",
-    "assets/**",
-    "lib/**"
+    "lib",
+    "src"
   ],
-  "main": "lib/abcui.cjs.js",
-  "module": "lib/abcui.es6.js",
+  "main": "lib/edge-login-ui-react.js",
   "scripts": {
-    "build": "npm-run-all build:lib build:frame",
-    "build:frame": "rimraf assets && parcel build -d assets src/index.html",
-    "build:lib": "rimraf lib && rollup -c",
-    "prepare": "npm run build",
+    "build": "npm-run-all build:lib build:demo",
+    "build:demo": "rimraf dist && parcel build --public-url ./ src/demo/index.html",
+    "build:lib": "rimraf lib && rollup -c && cp flow-entry lib/edge-login-ui-react.js.flow",
+    "prepare": "npm-run-all build:lib",
     "start": "npm-run-all -p start:*",
-    "start:frame": "parcel -d assets src/index.html",
+    "start:demo": "parcel --open src/demo/index.html",
     "start:lib": "rollup -cw"
   },
   "dependencies": {
