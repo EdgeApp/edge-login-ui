@@ -27,13 +27,11 @@ class LoginWithPin extends Component {
       this.props.dispatch(loginPIN(''))
       this.props.dispatch(clearErrorLoginPinMessage())
       if (!error) {
-        if (window.parent.abcui.loginCallback) {
-          return window.parent.abcui.loginCallback(null, account)
+        if (window.abcui.loginCallback) {
+          return window.abcui.loginCallback(null, account)
         }
-        if (!window.parent.abcui.loginCallback) {
-          this.props.dispatch(closeLoading())
-          return this.props.history.push('/account')
-        }
+        this.props.dispatch(closeLoading())
+        return this.props.history.push('/account')
       }
       if (error) {
         return this.props.dispatch(showErrorLoginPinMessage(error))

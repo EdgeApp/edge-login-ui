@@ -16,29 +16,28 @@ export const checkPassword = (
   return (dispatch, getState, imports) => {
     const t = imports.t
 
-    imports.abcContext(context => {
-      const check = context.checkPasswordRules(password)
-      if (!check.passed) {
-        return callback({
-          type: 'password',
-          message: t('activity_signup_insufficient_password')
-        })
-      }
-      if (password !== passwordRepeat) {
-        return callback({
-          type: 'passwordRepeat',
-          message: 'Password does not match'
-        })
-      }
-      if (check.passed && password === passwordRepeat) {
-        return dispatch(signupUser(username, password, pinNumber, callback))
-      } else {
-        return callback({
-          type: 'password',
-          message: t('activity_signup_insufficient_password')
-        })
-      }
-    })
+    const context = window.abcui.abcuiContext
+    const check = context.checkPasswordRules(password)
+    if (!check.passed) {
+      return callback({
+        type: 'password',
+        message: t('activity_signup_insufficient_password')
+      })
+    }
+    if (password !== passwordRepeat) {
+      return callback({
+        type: 'passwordRepeat',
+        message: 'Password does not match'
+      })
+    }
+    if (check.passed && password === passwordRepeat) {
+      return dispatch(signupUser(username, password, pinNumber, callback))
+    } else {
+      return callback({
+        type: 'password',
+        message: t('activity_signup_insufficient_password')
+      })
+    }
   }
 }
 

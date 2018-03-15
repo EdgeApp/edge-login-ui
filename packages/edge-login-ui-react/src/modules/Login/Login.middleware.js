@@ -14,40 +14,33 @@ import {
 export const loginWithPassword = (username, password, callback) => {
   return (dispatch, getState, imports) => {
     const t = imports.t
-    const abcContext = imports.abcContext
     const localStorage = global ? global.localStorage : window.localStorage
 
     dispatch(openLoading())
     setTimeout(() => {
-      abcContext(context => {
-        context.loginWithPassword(
-          username,
-          password,
-          null,
-          (error, account) => {
-            if (error) {
-              dispatch(closeLoading())
-              const type =
-                error.name === 'OtpError'
-                  ? 'server_error_bad_otp'
-                  : 'server_error_bad_password'
-              // dispatch(openErrorModal(t(type)))
+      const context = window.abcui.abcuiContext
+      context.loginWithPassword(username, password, null, (error, account) => {
+        if (error) {
+          dispatch(closeLoading())
+          const type =
+            error.name === 'OtpError'
+              ? 'server_error_bad_otp'
+              : 'server_error_bad_password'
+          // dispatch(openErrorModal(t(type)))
 
-              if (error.wait > 0) {
-                const currentWaitSpan = error.wait
-                const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-                enableTimer(reEnableLoginTime, 'password', dispatch)
-              }
-              return callback(t(type), null)
-            }
-            if (!error) {
-              localStorage.setItem('lastUser', username)
-              dispatch(userLogin(account))
-              dispatch(closeLoading())
-              callback(null, account)
-            }
+          if (error.wait > 0) {
+            const currentWaitSpan = error.wait
+            const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
+            enableTimer(reEnableLoginTime, 'password', dispatch)
           }
-        )
+          return callback(t(type), null)
+        }
+        if (!error) {
+          localStorage.setItem('lastUser', username)
+          dispatch(userLogin(account))
+          dispatch(closeLoading())
+          callback(null, account)
+        }
       })
     }, 300)
   }
@@ -58,28 +51,26 @@ export const loginWithPin = (username, pin, callback) => {
     const t = imports.t
     dispatch(openLoading())
     const localStorage = global ? global.localStorage : window.localStorage
-    const abcctx = imports.abcContext
 
     setTimeout(() => {
-      abcctx(context => {
-        context.loginWithPIN(username, pin, undefined, (error, account) => {
-          dispatch(closeLoading())
-          if (error) {
-            // dispatch(openErrorModal(t('server_error_bad_pin')))
-            if (error.wait > 0) {
-              const currentWaitSpan = error.wait
-              const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
-              enableTimer(reEnableLoginTime, 'pin', dispatch)
-            }
-            return callback(t('server_error_bad_pin'), null)
+      const context = window.abcui.abcuiContext
+      context.loginWithPIN(username, pin, undefined, (error, account) => {
+        dispatch(closeLoading())
+        if (error) {
+          // dispatch(openErrorModal(t('server_error_bad_pin')))
+          if (error.wait > 0) {
+            const currentWaitSpan = error.wait
+            const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
+            enableTimer(reEnableLoginTime, 'pin', dispatch)
           }
+          return callback(t('server_error_bad_pin'), null)
+        }
 
-          if (!error) {
-            localStorage.setItem('lastUser', username)
-            dispatch(userLogin(account))
-            return callback(null, account)
-          }
-        })
+        if (!error) {
+          localStorage.setItem('lastUser', username)
+          dispatch(userLogin(account))
+          return callback(null, account)
+        }
       })
     }, 300)
   }
@@ -120,7 +111,6 @@ export const scheduleTick = (targetTime, source, disp) => {
 
 export const edgeLogin = callback => {
   return (dispatch, getState, imports) => {
-    const abcContext = imports.abcContext
     const t = imports.t
 
     const onProcess = username => {
@@ -136,22 +126,21 @@ export const edgeLogin = callback => {
       return callback(error, account)
     }
 
-    abcContext(context => {
-      context.requestEdgeLogin(
-        {
-          displayName: context.displayName,
-          displayImageUrl: context.displayImageUrl,
-          onLogin: onLogin,
-          onProcessLogin: onProcess
-        },
-        (error, results) => {
-          if (error) {
-            // dispatch(showContainerNotification(t('error_edge_login'), 'error'))
-          } else if (results) {
-            dispatch(requestEdgeLogin(results))
-          }
+    const context = window.abcui.abcuiContext
+    context.requestEdgeLogin(
+      {
+        displayName: context.displayName,
+        displayImageUrl: context.displayImageUrl,
+        onLogin: onLogin,
+        onProcessLogin: onProcess
+      },
+      (error, results) => {
+        if (error) {
+          // dispatch(showContainerNotification(t('error_edge_login'), 'error'))
+        } else if (results) {
+          dispatch(requestEdgeLogin(results))
         }
-      )
-    })
+      }
+    )
   }
 }

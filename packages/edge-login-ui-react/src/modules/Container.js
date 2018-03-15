@@ -4,7 +4,6 @@ import MediaQuery from 'react-responsive'
 import { Dialog } from 'react-toolbox/lib/dialog'
 import FontIcon from 'react-toolbox/lib/font_icon'
 
-import abcctx from '../lib/web/abcContext.js'
 import layoutTheme from '../theme/layoutTheme.scss'
 import styles from './Container.scss'
 import Layout from './Layout/Layout.js'
@@ -24,33 +23,29 @@ const findUsernamesWithPin = (ctx, usernames) => {
 
 class Container extends Component {
   _handleToggle = () => {
-    const abcuiCallback = window.parent.abcui
-    if (abcuiCallback.exitCallback) {
-      if (this.props.edgeObject) {
-        this.props.edgeObject.cancelRequest()
-      }
-      return abcuiCallback.exitCallback()
+    if (this.props.edgeObject) {
+      this.props.edgeObject.cancelRequest()
+    }
+    if (window.abcui.exitCallback) {
+      return window.abcui.exitCallback()
     }
   }
   loadData () {
     const dispatch = this.props.dispatch
-    abcctx(ctx => {
-      return ctx.listUsernames().then(cachedUsers => {
-        return findUsernamesWithPin(ctx, cachedUsers).then(
-          cachedUsersWithPin => {
-            const lastUser = window.localStorage.getItem('lastUser')
-            dispatch(setCachedUsersWithPin(cachedUsersWithPin))
-            dispatch(setCachedUsers(cachedUsers))
-            if (cachedUsers.length >= 1) {
-              if (lastUser && cachedUsersWithPin.includes(lastUser)) {
-                return dispatch(selectUserToLogin(lastUser))
-              } else {
-                return dispatch(openLogin())
-              }
-            }
-            return null
+    const ctx = window.abcui.abcuiContext
+    return ctx.listUsernames().then(cachedUsers => {
+      return findUsernamesWithPin(ctx, cachedUsers).then(cachedUsersWithPin => {
+        const lastUser = window.localStorage.getItem('lastUser')
+        dispatch(setCachedUsersWithPin(cachedUsersWithPin))
+        dispatch(setCachedUsers(cachedUsers))
+        if (cachedUsers.length >= 1) {
+          if (lastUser && cachedUsersWithPin.includes(lastUser)) {
+            return dispatch(selectUserToLogin(lastUser))
+          } else {
+            return dispatch(openLogin())
           }
-        )
+        }
+        return null
       })
     })
   }

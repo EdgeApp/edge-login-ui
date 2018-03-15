@@ -14,15 +14,12 @@ export default class QRCodeEdge extends Component {
   componentDidMount () {
     this.props.dispatch(
       edgeLogin((error, account) => {
-        const abcuiCallback = window.parent.abcui
         if (!error) {
-          if (abcuiCallback.loginCallback) {
-            return abcuiCallback.loginCallback(null, account)
+          if (window.abcui.loginCallback) {
+            return window.abcui.loginCallback(null, account)
           }
-          if (!window.parent.loginCallback) {
-            this.props.dispatch(closeLoading())
-            return this.props.history.push('/account')
-          }
+          this.props.dispatch(closeLoading())
+          return this.props.history.push('/account')
         }
       })
     )

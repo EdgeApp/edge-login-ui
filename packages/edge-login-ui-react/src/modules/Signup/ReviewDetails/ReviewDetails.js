@@ -18,23 +18,16 @@ class Review extends Component {
     }
   }
   cancel = () => {
-    const abcuiCallback = window.parent.abcui
-    if (!abcuiCallback.loginCallback) {
-      return this.props.history.push('/account')
+    if (window.abcui.loginCallback) {
+      return window.abcui.loginCallback(null, this.props.account)
     }
-    if (abcuiCallback.loginCallback) {
-      return abcuiCallback.loginCallback(null, this.props.account)
-    }
+    return this.props.history.push('/account')
   }
   submit = () => {
-    const abcuiCallback = window.parent.abcui
-    if (!abcuiCallback.loginWithoutClosingCallback) {
-      return this.props.history.push('/passwordrecovery')
+    if (window.abcui.loginWithoutClosingCallback) {
+      window.abcui.loginWithoutClosingCallback(null, this.props.account)
     }
-    if (abcuiCallback.loginWithoutClosingCallback) {
-      abcuiCallback.loginWithoutClosingCallback(null, this.props.account)
-      return this.props.history.push('/passwordrecovery')
-    }
+    return this.props.history.push('/passwordrecovery')
   }
   handleOpenAccountCreatedModal = () => {
     return this.props.dispatch(openAccountCreatedModal())

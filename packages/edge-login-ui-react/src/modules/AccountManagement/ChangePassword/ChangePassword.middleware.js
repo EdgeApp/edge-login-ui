@@ -11,37 +11,36 @@ export const checkPassword = (
     const t = imports.t
     dispatch(openLoading())
 
-    imports.abcContext(context => {
-      const check = context.checkPasswordRules(newPassword)
+    const context = window.abcui.abcuiContext
+    const check = context.checkPasswordRules(newPassword)
 
-      if (!check.passed) {
+    if (!check.passed) {
+      dispatch(closeLoading())
+      return callback({
+        type: 'password',
+        message: t('activity_signup_insufficient_password')
+      })
+    }
+    if (newPassword !== newPasswordRepeat) {
+      dispatch(closeLoading())
+      return callback({
+        type: 'passwordRepeat',
+        message: t('activity_signup_passwords_dont_match')
+      })
+    }
+    if (check.passed && newPassword === newPasswordRepeat) {
+      account.changePassword(newPassword, error => {
         dispatch(closeLoading())
-        return callback({
-          type: 'password',
-          message: t('activity_signup_insufficient_password')
-        })
-      }
-      if (newPassword !== newPasswordRepeat) {
-        dispatch(closeLoading())
-        return callback({
-          type: 'passwordRepeat',
-          message: t('activity_signup_passwords_dont_match')
-        })
-      }
-      if (check.passed && newPassword === newPasswordRepeat) {
-        account.changePassword(newPassword, error => {
-          dispatch(closeLoading())
-          if (error) {
-            return callback({
-              type: 'passwordRepeat',
-              message: t('server_error_no_connection')
-            })
-          }
-          if (!error) {
-            return callback(null)
-          }
-        })
-      }
-    })
+        if (error) {
+          return callback({
+            type: 'passwordRepeat',
+            message: t('server_error_no_connection')
+          })
+        }
+        if (!error) {
+          return callback(null)
+        }
+      })
+    }
   }
 }

@@ -10,9 +10,8 @@ import Desktop from './AccountManagement.web.js'
 
 class AccountManager extends Component {
   componentWillMount () {
-    const abcuiCallback = window.parent.abcui
-    if (abcuiCallback.abcAccount) {
-      this.props.dispatch(userLogin(window.parent.abcui.abcAccount))
+    if (window.abcui.abcAccount) {
+      this.props.dispatch(userLogin(window.abcui.abcAccount))
     }
   }
   gotoChangePin = () => {

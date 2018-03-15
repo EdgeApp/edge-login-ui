@@ -11,7 +11,7 @@ class AccountCreated extends Component {
     return this.props.dispatch(closeAccountCreatedModal())
   }
   render () {
-    const name = window.parent.abcui.vendorName || window.abcui.vendorName
+    const name = window.abcui.vendorName
     return (
       <section>
         <MediaQuery minWidth={720}>

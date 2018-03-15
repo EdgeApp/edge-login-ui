@@ -22,20 +22,17 @@ import webStyle from './LoginWithPassword.webStyle.scss'
 class LoginWithPassword extends Component {
   handleSubmit = () => {
     const { username, password } = this.props
-    const abcuiCallback = window.parent.abcui
     this.props.dispatch(clearErrorLoginMessage())
     const callback = (error, account) => {
       if (!error) {
-        if (abcuiCallback.loginCallback) {
+        if (window.abcui.loginCallback) {
           if (this.props.edgeObject) {
             this.props.edgeObject.cancelRequest()
           }
-          return abcuiCallback.loginCallback(null, account)
+          return window.abcui.loginCallback(null, account)
         }
-        if (!abcuiCallback.loginCallback) {
-          this.props.dispatch(closeLoading())
-          return this.props.history.push('/account')
-        }
+        this.props.dispatch(closeLoading())
+        return this.props.history.push('/account')
       }
       if (error) {
         return this.props.dispatch(showErrorLoginMessage(error))

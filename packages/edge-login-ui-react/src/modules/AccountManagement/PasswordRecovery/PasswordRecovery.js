@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 
-import abcctx from '../../../lib/web/abcContext'
 import t from '../../../lib/web/LocaleStrings'
 import { setPasswordRecoveryToken } from '../PasswordRecoveryToken/PasswordRecoveryToken.action.js'
 import * as action from './PasswordRecovery.action.js'
@@ -48,23 +47,22 @@ class PasswordRecovery extends Component {
   }
   loadQuestions = () => {
     const dispatch = this.props.dispatch
-    abcctx(ctx => {
-      ctx.listRecoveryQuestionChoices((error, results) => {
-        if (error) {
-          this.props.dispatch(
-            action.errorFirstQuestion(t('string_connection_error_server'))
-          )
-          return this.props.dispatch(
-            action.errorSecondQuestion(t('string_connection_error_server'))
-          )
-        }
-        if (!error) {
-          const questions = results
-            .filter(result => result.category === 'recovery2')
-            .map(result => result.question)
-          dispatch(action.setPasswordRecoveryQuestions(questions))
-        }
-      })
+    const ctx = window.abcui.abcuiContext
+    ctx.listRecoveryQuestionChoices((error, results) => {
+      if (error) {
+        this.props.dispatch(
+          action.errorFirstQuestion(t('string_connection_error_server'))
+        )
+        return this.props.dispatch(
+          action.errorSecondQuestion(t('string_connection_error_server'))
+        )
+      }
+      if (!error) {
+        const questions = results
+          .filter(result => result.category === 'recovery2')
+          .map(result => result.question)
+        dispatch(action.setPasswordRecoveryQuestions(questions))
+      }
     })
   }
   componentWillMount = () => {
