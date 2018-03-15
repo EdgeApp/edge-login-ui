@@ -1,5 +1,3 @@
-import 'whatwg-fetch'
-
 import { makeABCUIContext } from '../../abcui.js'
 
 const context = {
