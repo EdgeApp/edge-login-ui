@@ -11,5 +11,7 @@
 [lints]
 
 [options]
+module.name_mapper.extension='css' -> 'css-module-flow'
+module.name_mapper.extension='scss' -> 'css-module-flow'
 
 [strict]

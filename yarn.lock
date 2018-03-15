@@ -2263,6 +2263,10 @@ css-mediaquery@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/css-mediaquery/-/css-mediaquery-0.1.2.tgz#6a2c37344928618631c54bd33cedd301da18bea0"
 
+css-module-flow@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/css-module-flow/-/css-module-flow-1.0.0.tgz#b2b9be3566a8f5d2b9073f31fd7a35e27ab2131e"
+
 css-select@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/css-select/-/css-select-1.2.0.tgz#2b3a110539c5355f1cd8d314623e870b121ec858"
