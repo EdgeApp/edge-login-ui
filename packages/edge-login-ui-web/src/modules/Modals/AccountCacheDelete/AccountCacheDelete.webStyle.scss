@@ -1,4 +1,4 @@
-@import "~theme/buttons";
+@import "../../../theme/buttons.scss";
 
 .header {
   color: $color-primary-navy;
@@ -12,7 +12,7 @@
   font-size: 18px;
   line-height: 24px;
   text-align: center;
-	margin: 20px 40px 30px 40px;
+  margin: 20px 40px 30px 40px;
 }
 
 .close {

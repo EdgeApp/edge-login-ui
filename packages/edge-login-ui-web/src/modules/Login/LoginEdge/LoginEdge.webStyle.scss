@@ -1,4 +1,4 @@
-@import "~theme/buttons";
+@import "../../../theme/buttons.scss";
 
 .rootContainer {
   flex: 1;
@@ -7,7 +7,7 @@
 }
 
 .container {
-  flex:1;
+  flex: 1;
   display: flex;
   display: -webkit-flex;
   flex-direction: column;

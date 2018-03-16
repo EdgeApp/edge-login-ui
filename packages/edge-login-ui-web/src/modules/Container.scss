@@ -1,29 +1,29 @@
 .baseWidth {
-  width :870px;
+  width: 870px;
 }
 
 .mobileWidth {
-  width :720px;
+  width: 720px;
 }
 
 .dialogLogin {
   @extend .baseWidth;
-  height : 550px;
+  height: 550px;
 }
 
 .dialogPin {
   @extend .baseWidth;
-  height : 402px;
+  height: 402px;
 }
 
 .dialogPassword {
   @extend .baseWidth;
-  height : 565px;
+  height: 565px;
 }
 
 .dialogSignUp {
   @extend .baseWidth;
-  height : 550px;
+  height: 550px;
 }
 
 .dialogSignUpPin {
@@ -33,22 +33,22 @@
 
 .dialogAccount {
   @extend .baseWidth;
-  height : 431px;
+  height: 431px;
 }
 
 .dialogChangePassword {
   @extend .baseWidth;
-  height : 480px;
+  height: 480px;
 }
 
 .dialogPasswordRecovery {
   @extend .baseWidth;
-  height : 594px;
+  height: 594px;
 }
 
 .dialogPasswordRecoveryToken {
   @extend .baseWidth;
-  height : 528px;
+  height: 528px;
 }
 
 .topLevelDialog section {
@@ -62,4 +62,3 @@
   cursor: pointer;
   font-weight: 700;
 }
-

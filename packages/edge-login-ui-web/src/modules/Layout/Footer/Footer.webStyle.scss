@@ -1,79 +1,79 @@
-@import 'theme/buttons';
+@import "../../../theme/buttons";
 
 .container {
-	  height: 42px;
+  height: 42px;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: stretch;
+  -webkit-align-items: stretch;
+
+  .main {
+    flex: 1;
+    background: $color-gradient;
     display: flex;
     display: -webkit-flex;
-    flex-direction: column;
-    -webkit-flex-direction: column;
+    flex-direction: row;
+    -webkit-flex-direction: row;
     justify-content: center;
     -webkit-justify-content: center;
-    align-items: stretch;
-    -webkit-align-items: stretch;
+    align-items: center;
+    -webkit-align-items: center;
 
-    .main {
+    .left {
+      width: 125px;
+      margin: 0px 20px;
+    }
+
+    .mid {
       flex: 1;
-      background: $color-gradient;
-      display: flex;
-      display: -webkit-flex;
-      flex-direction: row;
-      -webkit-flex-direction: row;
+      flex-direction: column;
+      -webkit-flex-direction: column;
       justify-content: center;
       -webkit-justify-content: center;
       align-items: center;
       -webkit-align-items: center;
 
-      .left {
-        width: 125px;
-        margin: 0px 20px;
-      }
-
-      .mid {
-        flex: 1;
-        flex-direction: column;
-        -webkit-flex-direction: column;
-        justify-content: center;
-        -webkit-justify-content: center;
-        align-items: center;
-        -webkit-align-items: center;
-
-        .text {
-          text-align: center;
-        }
-
-        .text > a,
-        .text > a:hover,
-        .text > a:active {
-          @extend .link;
-          color: $color-white;
-          font-size: 16px;
-          line-height: 16px;
-        }
-      }
-
-      .right {
-        width: 125px;
-        margin: 0px 20px;
-        color: $color-white;
-        font-size: 14px;
+      .text {
         text-align: center;
+      }
 
-        .airbitzLink {
-          @extend .link;
-          color: $color-white;
-          font-size: 14px;
-          font-weight: bold;
-          text-decoration: none;
-        }
-
-        .airbitzLink:hover,
-        .airbitzLink:active {
-          @extend .link;
-          color: $color-white;
-          font-size: 14px;
-          font-weight: bold;
-          text-decoration: none;
-        }
+      .text > a,
+      .text > a:hover,
+      .text > a:active {
+        @extend .link;
+        color: $color-white;
+        font-size: 16px;
+        line-height: 16px;
       }
     }
+
+    .right {
+      width: 125px;
+      margin: 0px 20px;
+      color: $color-white;
+      font-size: 14px;
+      text-align: center;
+
+      .airbitzLink {
+        @extend .link;
+        color: $color-white;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .airbitzLink:hover,
+      .airbitzLink:active {
+        @extend .link;
+        color: $color-white;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+  }
 }

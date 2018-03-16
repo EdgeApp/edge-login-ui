@@ -1,8 +1,8 @@
-import t from 'lib/web/LocaleStrings'
 import React from 'react'
 
 import logo from '../../../img/global/logo_edge_white.png'
-import styles from './Footer.webStyle'
+import t from '../../../lib/web/LocaleStrings.js'
+import styles from './Footer.webStyle.scss'
 
 export default () => (
   <div className={styles.container}>

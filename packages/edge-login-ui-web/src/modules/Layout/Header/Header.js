@@ -1,8 +1,8 @@
-import t from 'lib/web/LocaleStrings'
 import React from 'react'
 import MediaQuery from 'react-responsive'
 import { sprintf } from 'sprintf-js'
 
+import t from '../../../lib/web/LocaleStrings.js'
 import mobileStyles from './Header.mobileStyle.scss'
 import webStyles from './Header.webStyle.scss'
 

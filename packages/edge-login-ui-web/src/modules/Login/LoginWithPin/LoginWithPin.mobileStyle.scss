@@ -1,6 +1,6 @@
-@import "~theme/buttons";
-@import "~theme/mobile";
-@import "~theme/loader";
+@import "../../../theme/buttons.scss";
+@import "../../../theme/mobile.scss";
+@import "../../../theme/loader.scss";
 
 .container {
   flex: 1;
@@ -17,7 +17,7 @@
   .background {
     background: $color-gradient;
     height: 196px;
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     width: 100%;
   }
 
@@ -51,7 +51,7 @@
       width: 100%;
       border-radius: 3px;
       background-color: $color-white;
-      box-shadow: 0 0 4px 0 rgba(37,41,44,0.5);
+      box-shadow: 0 0 4px 0 rgba(37, 41, 44, 0.5);
       padding: 10px 20px 0px 20px;
 
       display: flex;
@@ -98,7 +98,6 @@
             margin-left: 10px;
           }
         }
-
       }
 
       .containerClassName {
@@ -152,11 +151,11 @@
             position: absolute;
             font-size: 72px;
             letter-spacing: 1px;
-            color: #F6F6F6;
+            color: #f6f6f6;
             margin-top: -14px;
           }
 
-          .input  {
+          .input {
             width: 120px;
             padding-top: 8px;
 
@@ -174,10 +173,8 @@
               margin: 0px auto;
               line-height: 22px;
             }
-
           }
         }
-
       }
     }
 
@@ -186,7 +183,5 @@
       font-size: 16px;
       margin-top: 10px;
     }
-
   }
-
 }

@@ -5,23 +5,19 @@ $break-sm: 768px;
 $break-md: 992px;
 $break-lg: 1200px;
 
-$layout-breakpoint-xs:     600px !default;
-$layout-breakpoint-sm:     960px !default;
-$layout-breakpoint-md:     1280px !default;
-$layout-breakpoint-lg:     1920px !default;
-
+$layout-breakpoint-xs: 600px !default;
+$layout-breakpoint-sm: 960px !default;
+$layout-breakpoint-md: 1280px !default;
+$layout-breakpoint-lg: 1920px !default;
 
 /* Small Devices, Tablets */
-@media only screen and (min-width : $layout-breakpoint-sm) {
-
+@media only screen and (min-width: $layout-breakpoint-sm) {
 }
 
 /* Medium Devices, Desktops */
-@media only screen and (min-width : $layout-breakpoint-md) {
-
+@media only screen and (min-width: $layout-breakpoint-md) {
 }
 
 /* Large Devices, Wide Screens */
-@media only screen and (min-width : $layout-breakpoint-lg) {
-
+@media only screen and (min-width: $layout-breakpoint-lg) {
 }

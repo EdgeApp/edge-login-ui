@@ -1,4 +1,4 @@
-@import "~theme/buttons";
+@import "../../../theme/buttons.scss";
 
 .header {
   color: $color-primary-navy;
@@ -15,7 +15,7 @@
 
 .heavy {
   @extend .text;
-  font-weight: 700
+  font-weight: 700;
 }
 
 .customButtons {

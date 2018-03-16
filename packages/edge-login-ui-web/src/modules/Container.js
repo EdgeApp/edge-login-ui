@@ -1,11 +1,11 @@
-import abcctx from 'lib/web/abcContext'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 import { Dialog } from 'react-toolbox/lib/dialog'
 import FontIcon from 'react-toolbox/lib/font_icon'
-import layoutTheme from 'theme/layoutTheme'
 
+import abcctx from '../lib/web/abcContext.js'
+import layoutTheme from '../theme/layoutTheme.scss'
 import styles from './Container.scss'
 import Layout from './Layout/Layout.js'
 import {

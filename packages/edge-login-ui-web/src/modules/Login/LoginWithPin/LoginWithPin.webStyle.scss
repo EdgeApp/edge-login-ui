@@ -1,6 +1,6 @@
-@import "~theme/buttons";
-@import "~theme/input";
-@import "~theme/loader";
+@import "../../../theme/buttons.scss";
+@import "../../../theme/input.scss";
+@import "../../../theme/loader.scss";
 
 .container {
   flex: 1;
@@ -17,7 +17,7 @@
   .background {
     background: $color-gradient;
     height: 198px;
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     width: 100%;
   }
 
@@ -58,7 +58,7 @@
       width: 380px;
       border-radius: 3px;
       background-color: $color-white;
-      box-shadow: 0 0 4px 0 rgba(37,41,44,0.5);
+      box-shadow: 0 0 4px 0 rgba(37, 41, 44, 0.5);
       margin: 30px 0px;
       padding-top: 10px;
 
@@ -132,7 +132,7 @@
           border-top: 4px solid $color-secondary-navy;
           border-right: 4px solid $color-secondary-navy;
           border-bottom: 4px solid $color-secondary-navy;
-          border-left: 4px solid rgba(14,75,117,0.4);
+          border-left: 4px solid rgba(14, 75, 117, 0.4);
         }
 
         .pinLabel {
@@ -157,11 +157,11 @@
             position: absolute;
             font-size: 72px;
             letter-spacing: 1px;
-            color: #F6F6F6;
+            color: #f6f6f6;
             margin-top: -14px;
           }
 
-          .input  {
+          .input {
             width: 120px;
             padding-top: 8px;
 

@@ -1,5 +1,4 @@
-import 'whatwg-fetch'
-const abc = require('../../abcui.js')
+import { makeABCUIContext } from '../../abcui.js'
 
 const context = {
   apiKey: '3ad0717b3eb31f745aba7bd9d51e7fd1b2926431',
@@ -14,7 +13,7 @@ const abcctx = callback => {
   const abcuiContext = window.parent.abcui
     ? window.parent.abcui.abcuiContext
     : null
-  return callback(abcuiContext || abc.makeABCUIContext(context).getABCContext())
+  return callback(abcuiContext || makeABCUIContext(context).getABCContext())
 }
 
 export default abcctx

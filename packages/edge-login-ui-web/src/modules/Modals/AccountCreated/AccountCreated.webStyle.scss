@@ -1,5 +1,5 @@
-@import "~theme/buttons";
-@import "~theme/input";
+@import "../../../theme/buttons.scss";
+@import "../../../theme/input.scss";
 
 .container {
   flex: 1;
@@ -8,7 +8,7 @@
   flex-direction: column;
   -webkit-flex-direction: column;
   justify-content: center;
-  -webkit-justify-content:  center;
+  -webkit-justify-content: center;
   align-items: center;
   -webkit-align-items: center;
 
@@ -29,7 +29,7 @@
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 20px;
-    text-align: center
+    text-align: center;
   }
 
   .p2 {
@@ -74,5 +74,4 @@
     margin-top: 40px;
     margin-bottom: 30px;
   }
-
 }
