@@ -1,5 +1,5 @@
 {
-  "name": "edge-login-ui-web",
+  "name": "edge-login-ui-react",
   "version": "0.2.0",
   "description": "Edge login UI components, as a library for the web",
   "keywords": [
