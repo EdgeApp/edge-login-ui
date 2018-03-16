@@ -1,103 +1,70 @@
-# Airbitz Javascript UI
+# Edge Login UI React Components
 
-This repo implements a UI layer on top of [edge-core-js](https://github.com/Airbitz/edge-core-js) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
+This library exports a collection of React components which implement the Edge login user interface. These components are currently compatible with the web version of React, but we will eventually merge the React Native components into this library as well.
 
-## Build from source repo (not needed if using NPM)
+If you are building your project for the web, consider using `edge-login-ui-web` instead of this library. That library bundles these components in a way that provides a simpler coding interface and better security.
 
-`npm install` to fetch the dependencies.
-`npm run build` to create the web bundle.
+# Usage
 
-## Or just use the NPM package from your own repo
+Install this library into your project using a tool like NPM or Yarn, and then import it into your project:
 
-`npm install airbitz-core-js-ui --save`
+```js
+import { LoginScreen, AccountScreen } from 'edge-login-ui-react'
+```
 
-## Basic usage for web
+You will also have to import `edge-login-ui-react/lib/styles.css` into your HTML for these components to receive the proper CSS styling. You will also need the following line for mobile responsiveness:
 
-Get an API key from
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
 
-https://developer.airbitz.co
+This library provides the following components:
 
-You'll need an account on the Airbitz Mobile App which you can download for iOS and Android at
+* LoginScreen - Provides the ability to create or log into accounts.
+* AccountScreen - Provides controls for changing the credentials on an account.
 
-https://airbitz.co/app
+You can render them in the normal way:
 
-On the `developer.airbitz.co` page, scan the QR code using the Airbitz Mobile App after signing in and register an email address.
+```js
+// Inside some React component:
+render () {
+  return (
+    <LoginScreen
+      accountOptions={{ callbacks: this.accountCallbacks }}
+      context={this.props.context}
+      onClose={this.onClose}
+      onError={this.onError}
+      onLogin={this.onLogin}
+      vendorName={strings.APP_NAME}
+      vendorImageUrl={strings.APP_LOGO}
+    />
+  )
+}
+```
 
-Install from npm
+## LoginScreen
 
-    npm install airbitz-core-js-ui --save
+The `LoginScreen` component accepts the following props:
 
-Include the `abcui.js` file in your code (using Webpack or any other bundler of your choice):
+* `accountOptions` - An `EdgeAccountOptions` structure to pass to the `EdgeAccount` object on login.
+* `context` - An `EdgeContext` object, created using the `makeEdgeAccount` function from [edge-core-js](https://github.com/Airbitz/edge-core-js).
+* `onClose` - Called when the user closes the window.
+* `onError` - Called if the screen encounters an error.
+* `onLogin` - Receives an `EdgeAccount` object when the user logs in.
+* `vendorImageUrl` - A logo to display at the top of the window.
+* `vendorName` - An application name to display in the window.
 
-    var abcui = require('airbitz-core-js-ui')
+## AccountScreen
 
-Now start diving in and make some calls
+The `AccountScreen` component accepts the following props:
 
-Initialize the library
+* `account` - An `EdgeAccount` object for the logged-in user.
+* `context` - The `EdgeContext` that was used to log the user in.
+* `onClose` - Called when the user closes the window.
+* `onError` - Called if the screen encounters an error.
+* `vendorImageUrl` - A logo to display at the top of the window.
+* `vendorName` - An application name to display in the window.
 
-    _abcUi = abcui.makeABCUIContext({'apiKey': 'api-key-here',
-                                     'appId': 'com.mydomain.myapp',
-                                     'assetsPath': '/path-to-assets/',
-                                     'vendorName': 'My Awesome Project',
-                                     'vendorImageUrl': 'https://mydomain.com/mylogo.png'});
+# Contributing
 
-where `/path-to-assets/` tells the UI where to find the contents of the `assets` directory of this node module via HTTP. When updating this node module, you must keep the `assets` directory up-to-date on your server. We suggest automating this using NPM scripts or any other tool or your choice.
-
-Create an overlay popup where a user can register a new account or login to a previously created account via password or PIN.
-
-    _abcUi.openLoginWindow(function(error, account) {
-      _account = account;
-    });
-
-![Login UI](https://airbitz.co/go/wp-content/uploads/2016/08/Screen-Shot-2016-08-26-at-12.50.04-PM.png)
-
-Launch an account management window for changing password, PIN, and recovery questions
-
-    _abcUi.openManageWindow(_account, function(error) {
-
-    });
-
-![Manage UI](https://airbitz.co/go/wp-content/uploads/2016/08/Screen-Shot-2016-08-26-at-12.50.26-PM.png)
-
-Get or create a wallet inside of the account
-
-    _abcUi.openLoginWindow(function(error, account) {
-      _account = account;
-
-      // Get the first wallet in the account that matches our required wallet type
-      const abcWallet = account.getFirstWallet('wallet:repo:ethereum');
-      if (abcWallet == null) {
-        // Create an ethereum wallet if one doesn't exist:
-        const keys = {
-          ethereumKey: new Buffer(secureRandom(32)).toString('hex')
-        }
-        account.createWallet("wallet:repo:ethereum", keys, function (err, id) {
-          if (err) {
-            // Yikes. This shouldn't fail except for network or disk errors
-          } else {
-            _wallet = account.getWallet(id)
-            _key = _wallet.keys.ethereumKey
-            // Update your UI here
-          }
-        })
-      } else {
-        _wallet = abcWallet
-        _key = _wallet.keys.ethereumKey
-        // Update your UI here
-      }
-    }
-
-`_key` can then be used as a secure source of entropy for this wallet within your app
-
-
-Logoff a user
-
-    _account.logout();
-
-## Sample website repo
-
-See a sample implementation at [airbitz-core-js-sample](https://github.com/Airbitz/airbitz-core-js-sample)
-
-# Detailed Docs
-
-https://developer.airbitz.co/javascript/#airbitz-account-management-ui
+Run `yarn` to install the project depenencies and perform the initial build. Then use `yarn start` to launch a development server.
