@@ -4,10 +4,10 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
 import SetRecoveryUsernameModalConnector from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
-import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
 import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
 import { Button, FormField, StaticModal } from '../../common/'
+import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
 
 type Props = {
   styles: Object,
