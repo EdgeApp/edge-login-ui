@@ -28,6 +28,7 @@ const strings = {
   pin_changed: 'PIN Changed',
   delete_account: 'Delete Account?',
   pin_successfully_changed: 'PIN Successfully Changed',
+  delete_account_header: 'Delete Account',
   delete_username_account:
     'Delete %1$s on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.',
   disable_otp_header: 'Are you sure you want to disable 2FA',

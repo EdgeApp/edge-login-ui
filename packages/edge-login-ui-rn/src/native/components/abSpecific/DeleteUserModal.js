@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react'
 import { Image, Text, View } from 'react-native'
+import { sprintf } from 'sprintf-js'
 
+import s from '../../../common/locales/strings'
 import { LOGO_DOT } from '../../../native/assets/'
 import { Button } from '../common'
 
@@ -35,13 +37,13 @@ class DeleteUserModal extends Component<Props, State> {
             <Image source={LOGO_DOT} />
           </View>
           <View style={Style.headlineContainer}>
-            <Text style={Style.headlineText}>Delete Account</Text>
+            <Text style={Style.headlineText}>
+              {s.strings.delete_account_header}
+            </Text>
           </View>
           <View style={Style.textContainer}>
             <Text style={Style.copyText}>
-              Delete {this.props.username} on this device? This will disable
-              access via PIN. If 2FA is enabled on this account, this device
-              will not be able to login without a 2FA reset which takes 7 days.
+              {sprintf(s.strings.delete_username_account, this.props.username)}
             </Text>
           </View>
           <View style={Style.buttonsContainer}>
@@ -51,7 +53,7 @@ class DeleteUserModal extends Component<Props, State> {
               downTextStyle={Style.cancelButton.downTextStyle}
               upStyle={Style.cancelButton.upStyle}
               upTextStyle={Style.cancelButton.upTextStyle}
-              label={'Cancel'} // TODO localize
+              label={s.strings.cancel}
             />
             <Button
               onPress={this.onDeletePress.bind(this)}
@@ -59,7 +61,7 @@ class DeleteUserModal extends Component<Props, State> {
               downTextStyle={Style.skipButton.downTextStyle}
               upStyle={Style.skipButton.upStyle}
               upTextStyle={Style.skipButton.upTextStyle}
-              label={'Delete'} // TODO localize
+              label={s.strings.delete}
               isThinking={this.state.isDeleting}
               doesThink
             />
