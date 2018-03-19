@@ -1,5 +1,5 @@
 import * as Constants from '../../common/constants'
-
+import s from '../../common/locales/strings.js'
 const initialState = {
   currentSceneIndex: 0,
   currentKey: 'firstLoadWF',
@@ -7,11 +7,11 @@ const initialState = {
   modalView: null,
   firstLoadWF: {
     scenes: 1,
-    details: [{ back: false, skip: false, title: 'firstLoad', subTitle: '' }]
+    details: [{ back: false, skip: false, title: '', subTitle: '' }]
   },
   initalizeWF: {
     scenes: 1,
-    details: [{ back: false, skip: false, title: 'initialize', subTitle: '' }]
+    details: [{ back: false, skip: false, title: '', subTitle: '' }]
   },
   createWF: {
     scenes: 7,
@@ -20,58 +20,67 @@ const initialState = {
       {
         back: true,
         skip: false,
-        title: 'Choose a username',
-        subTitle: 'step 1/3'
+        title: s.strings.choose_title_username,
+        subTitle: s.strings.step_one
       },
       {
         back: true,
         skip: false,
-        title: 'Set a password',
-        subTitle: 'step 2/3'
+        title: s.strings.choose_title_password,
+        subTitle: s.strings.step_two
       },
       {
         back: true,
         skip: false,
-        title: 'Set a 4-digit PIN ',
-        subTitle: 'step 3/3'
+        title: s.strings.set_four_digit_pin,
+        subTitle: s.strings.step_three
       },
       {
         back: false,
         skip: false,
-        title: 'Creating your account',
+        title: s.strings.create_your_account,
         subTitle: ''
       },
       {
         back: false,
         skip: false,
-        title: 'Write it down',
-        subTitle: 'ACCOUNT CONFIRMATION'
+        title: s.strings.write_it_down,
+        subTitle: s.strings.account_confirmation
       },
       {
         back: true,
         skip: false,
-        title: 'Quick Review',
-        subTitle: 'ACCOUNT CONFIRMATION'
+        title: s.strings.quick_review,
+        subTitle: s.strings.account_confirmation
       }
     ]
   },
   passwordWF: {
     scenes: 1,
     details: [
-      { back: true, skip: false, title: 'Change Password', subTitle: '' }
+      {
+        back: true,
+        skip: false,
+        title: s.strings.change_password,
+        subTitle: ''
+      }
     ]
   },
   pinWF: {
     scenes: 1,
-    details: [{ back: true, skip: false, title: 'Change Pin', subTitle: '' }]
+    details: [
+      { back: true, skip: false, title: s.strings.change_pin, subTitle: '' }
+    ]
   },
   recoveryWF: {
     scenes: 1,
-    details: [{ back: true, skip: false, title: 'Recovery', subTitle: '' }]
+    details: [
+      { back: true, skip: false, title: s.strings.recovery, subTitle: '' }
+    ]
   },
   fingerprintWF: {
     scenes: 1,
-    details: [{ back: false, skip: false, title: 'title', subTitle: '' }]
+    details: [{ back: false, skip: false, title: '', subTitle: '' }]
   },
   otpWF: {
     scenes: 1,
@@ -79,7 +88,7 @@ const initialState = {
       {
         back: true,
         skip: false,
-        title: 'Two Factor Authentication',
+        title: s.strings.otp_header,
         subTitle: ''
       }
     ]
@@ -90,19 +99,19 @@ const initialState = {
       {
         back: true,
         skip: false,
-        title: 'Recovery Questions',
+        title: s.strings.recovery_questions_header,
         subTitle: ''
       },
       {
         back: true,
         skip: false,
-        title: 'Change Password',
+        title: s.strings.change_password,
         subTitle: ''
       },
       {
         back: true,
         skip: false,
-        title: 'Change PIN',
+        title: s.strings.change_pin,
         subTitle: ''
       }
     ]

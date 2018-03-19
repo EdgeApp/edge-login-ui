@@ -1,21 +1,21 @@
 import * as Constants from '../../common/constants'
-
+import s from '../../common/locales/strings'
 export default function (state = null, action) {
   switch (action.type) {
     case Constants.AUTH_UPDATE_PASSWORD:
       // action.data.passwordStatus
       const status = action.data.passwordStatus
       const array = [
-        { title: 'Must have at least 10 characters', value: !status.tooShort },
+        { title: s.strings.must_ten_characters, value: !status.tooShort },
         {
-          title: 'Must have at least 1 lowercase letter',
+          title: s.strings.must_one_lowercase,
           value: !status.noLowerCase
         },
         {
-          title: 'Must have at least 1 uppercase letter',
+          title: s.strings.must_one_uppercase,
           value: !status.noUpperCase
         },
-        { title: 'Must have at least 1 number', value: !status.noNumber }
+        { title: s.strings.must_one_number, value: !status.noNumber }
       ]
 
       return {

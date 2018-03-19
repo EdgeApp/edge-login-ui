@@ -25,6 +25,8 @@ const strings = {
   done: 'Done',
   skip: 'SKIP',
   cancel: 'Cancel',
+  change_password: 'Change Password',
+  change_pin: 'Change Pin',
   pin_changed: 'PIN Changed',
   delete_account: 'Delete Account?',
   pin_successfully_changed: 'PIN Successfully Changed',
@@ -43,7 +45,30 @@ const strings = {
   save_recovery_token: 'Save recovery token',
   skip_modal_header: 'Are you sure you want to skip?',
   skip_modal_body:
-    'Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled.'
+    'Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled.',
+  must_ten_characters: 'Must have at least 10 characters',
+  must_one_lowercase: 'Must have at least 1 lowercase letter',
+  must_one_uppercase: 'Must have at least 1 uppercase letter',
+  must_one_number: 'Must have at least 1 number',
+  terms_one:
+    'I understand that my funds are held securely on this device, not by Edge',
+  terms_two:
+    'I understand that if I lose this device or uninstall the app, my digital assets can only be recovered with my username and password',
+  terms_three:
+    'I understand that if I lose my username and password, Edge will not be able to recover my account, unless I setup password recovery',
+  step_one: 'step 1/3',
+  step_two: 'step 2/3',
+  step_three: 'step 3/3',
+  choose_title_username: 'Choose a username',
+  choose_title_password: 'Set a password',
+  set_four_digit_pin: 'Set a 4-digit PIN ',
+  create_your_account: 'Creating your account',
+  write_it_down: 'Write it down',
+  quick_review: 'Quick Review',
+  recovery: 'Recovery',
+  account_confirmation: 'ACCOUNT CONFIRMATION',
+  otp_header: 'Two Factor Authentication',
+  recovery_questions_header: 'Recovery Questions'
 }
 
 export default strings
