@@ -4,6 +4,7 @@ const strings = {
   login_button: 'Login',
   username: 'Username',
   password: 'Password',
+  pin: 'PIN',
   forgot_password: 'Forgot Password',
   create_an_account: 'Create an account',
   initiate_password_recovery:
@@ -68,7 +69,11 @@ const strings = {
   recovery: 'Recovery',
   account_confirmation: 'ACCOUNT CONFIRMATION',
   otp_header: 'Two Factor Authentication',
-  recovery_questions_header: 'Recovery Questions'
+  recovery_questions_header: 'Recovery Questions',
+  account_info_warning:
+    'You did not set your password. We strongly encourage you to create a password and backup your account as soon as possible. You can set a password in the Settings screen in the app.',
+  show_account_info: 'Show account information',
+  hide_account_info: 'Hide account information'
 }
 
 export default strings
