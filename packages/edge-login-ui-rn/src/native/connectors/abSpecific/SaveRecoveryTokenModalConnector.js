@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import { Dispatch, State } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
@@ -10,11 +11,11 @@ type OwnProps = {
 }
 export const mapStateToProps = (state: State) => {
   return {
-    headerText: 'Save recovery token',
+    headerText: s.strings.save_recovery_token,
     icon: Constants.MAIL,
     iconType: Constants.ION_ICONS,
-    actionLabel: 'Next',
-    cancelLabel: 'Cancel',
+    actionLabel: s.strings.next_label,
+    cancelLabel: s.strings.cancel,
     hideCancelX: true
   }
 }

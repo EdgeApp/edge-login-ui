@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common'
 
@@ -13,7 +14,7 @@ type OwnProps = {
 export const mapStateToProps = (state: State) => {
   return {
     value: state.login.username,
-    label: 'Username',
+    label: s.strings.username,
     error: state.passwordRecovery.recoveryErrorMessage,
     returnKeyType: 'go',
     forceFocus: true

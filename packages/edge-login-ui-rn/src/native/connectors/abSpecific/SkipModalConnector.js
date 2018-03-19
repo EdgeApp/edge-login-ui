@@ -4,18 +4,18 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
 export const mapStateToProps = (state: State) => {
   return {
-    headerText: 'Are you sure you want to skip?',
-    middleText:
-      'Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled.',
+    headerText: s.strings.skip_modal_header,
+    middleText: s.strings.skip_modal_body,
     icon: Constants.EXCLAMATION,
     iconType: Constants.SIMPLE_ICONS,
-    actionLabel: 'SKIP',
-    cancelLabel: 'Cancel'
+    actionLabel: s.strings.skip,
+    cancelLabel: s.strings.cancel
   }
 }
 export const mapDispatchToProps = (dispatch: Dispatch) => {

@@ -4,18 +4,19 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions/index'
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
 export const mapStateToProps = (state: State) => {
   return {
-    headerText: 'PIN Changed',
-    headerSubtext: 'PIN Successfully Changed',
+    headerText: s.strings.pin_changed,
+    headerSubtext: s.strings.pin_successfully_changed,
     middleText: '',
     icon: Constants.EXCLAMATION,
     iconType: Constants.SIMPLE_ICONS,
-    actionLabel: 'OK',
-    cancelLabel: 'Cancel',
+    actionLabel: s.strings.ok,
+    cancelLabel: s.strings.cancel,
     singleButton: true
   }
 }

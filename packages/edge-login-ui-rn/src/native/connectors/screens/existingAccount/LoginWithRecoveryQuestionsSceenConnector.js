@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions'
 import * as Constants from '../../../../common/constants'
+import s from '../../../../common/locales/strings.js'
 import LinkedComponent from '../../../components/screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent'
 
 export const mapStateToProps = (state, ownProps) => {
@@ -9,11 +10,11 @@ export const mapStateToProps = (state, ownProps) => {
   const question1 =
     state.passwordRecovery.userQuestions.length > 0
       ? state.passwordRecovery.userQuestions[0]
-      : 'Choose recovery question'
+      : s.strings.choose_recovery_question
   const question2 =
     state.passwordRecovery.userQuestions.length > 1
       ? state.passwordRecovery.userQuestions[1]
-      : 'Choose recovery question'
+      : s.strings.choose_recovery_question
   const loginError = state.login.errorMessage || ''
   const username = state.login.username || ''
   return {
@@ -23,8 +24,8 @@ export const mapStateToProps = (state, ownProps) => {
     userQuestions: state.passwordRecovery.userQuestions,
     question1,
     question2,
-    submitButton: 'Submit',
-    disableButton: 'Disable',
+    submitButton: s.strings.submit,
+    disableButton: s.strings.disable,
     isEnabled,
     loginError,
     username,

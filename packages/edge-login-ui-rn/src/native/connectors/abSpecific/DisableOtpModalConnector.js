@@ -3,6 +3,7 @@
 import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
@@ -12,13 +13,13 @@ type OwnProps = {
 }
 export const mapStateToProps = (state: State) => {
   return {
-    headerText: 'Are you sure you want to disable 2FA',
-    middleText:
-      '2FA will take 7 days to disable if no action is taken by the account user on authentiacated devices',
+    headerText: s.strings.disable_otp_header,
+    middleText: s.strings.disable_otp_modal_body,
+
     icon: Constants.EXCLAMATION,
     iconType: Constants.SIMPLE_ICONS,
-    actionLabel: 'Disable 2FA',
-    cancelLabel: 'Cancel',
+    actionLabel: s.strings.disable_otp_button,
+    cancelLabel: s.strings.cancel,
     hideCancelX: true
   }
 }

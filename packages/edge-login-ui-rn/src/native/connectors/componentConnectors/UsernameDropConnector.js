@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { FormFieldWithDropComponent } from '../../components/common/'
 
@@ -19,7 +20,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
     : []
   return {
     value: state.login.username,
-    label: 'Username', // TODO: Localization
+    label: s.strings.usernmae, // TODO: Localization
     returnKeyType: 'next',
     autoFocus: ownProps.autoFocus,
     forceFocus: ownProps.forceFocus,

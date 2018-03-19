@@ -1,9 +1,11 @@
 // @flow
 
 import { connect } from 'react-redux'
+import { sprintf } from 'sprintf-js'
 
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
@@ -11,17 +13,17 @@ type OwnProps = {
   username: string
 }
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
-  const middleText =
-    'Delete ' +
-    ownProps.username +
-    ' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.'
+  const middleText = sprintf(
+    s.strings.delete_username_account,
+    ownProps.username
+  )
   return {
-    headerText: 'Delete Account?',
+    headerText: s.strings.delete_account,
     middleText,
     icon: Constants.TRASH_O,
     iconType: Constants.FONT_AWESOME,
-    actionLabel: 'DELETE',
-    cancelLabel: 'Cancel'
+    actionLabel: s.strings.delete,
+    cancelLabel: s.strings.cancel
   }
 }
 export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
