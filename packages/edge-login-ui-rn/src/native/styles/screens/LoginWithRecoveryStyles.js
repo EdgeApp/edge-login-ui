@@ -4,7 +4,7 @@ import * as Constants from '../../../common/constants'
 import * as Styles from '../'
 
 const LoginWithRecoveryStyles = {
-  screen: { ...Styles.ScreenStyle },
+  screen: { ...Styles.ScreenStyle, marginTop: 5 },
   header: {
     ...Styles.HeaderContainerStyle,
     backgroundColor: Constants.PRIMARY

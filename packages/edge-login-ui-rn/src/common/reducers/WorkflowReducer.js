@@ -91,19 +91,19 @@ const initialState = {
         back: true,
         skip: false,
         title: 'Recovery Questions',
-        subTitle: 'step 1/3'
+        subTitle: ''
       },
       {
         back: true,
         skip: false,
         title: 'Change Password',
-        subTitle: 'step 2/3'
+        subTitle: ''
       },
       {
         back: true,
         skip: false,
         title: 'Change PIN',
-        subTitle: 'step 3/3'
+        subTitle: ''
       }
     ]
   }
