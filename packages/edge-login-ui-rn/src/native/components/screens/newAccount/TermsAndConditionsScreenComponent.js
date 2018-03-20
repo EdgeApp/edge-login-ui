@@ -4,11 +4,11 @@ import type { AbcAccount } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+import s from '../../../../common/locales/strings'
 import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import { Button, Checkbox } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-
 type Props = {
   styles: Object,
   accountObject: AbcAccount,
@@ -47,7 +47,7 @@ export default class TermsAndConditionsScreenComponent extends Component<
       return (
         <View style={style.instructionsContainer}>
           <Text style={style.instructionsText}>
-            Last step! Let’s finish with a quick review
+            {s.strings.last_step_review}
           </Text>
         </View>
       )
@@ -58,9 +58,7 @@ export default class TermsAndConditionsScreenComponent extends Component<
     if (this.state.totalChecks === 3) {
       return (
         <View style={style.buttonContainer}>
-          <Text style={style.agreeText}>
-            I have read, understood, and agree to the Terms of Use
-          </Text>
+          <Text style={style.agreeText}>{s.strings.read_understod}</Text>
           <View style={style.shim} />
           <Button
             onPress={this.onNextPress}
@@ -68,7 +66,7 @@ export default class TermsAndConditionsScreenComponent extends Component<
             downTextStyle={style.nextButton.downTextStyle}
             upStyle={style.nextButton.upStyle}
             upTextStyle={style.nextButton.upTextStyle}
-            label={'Confirm & Finish'}
+            label={s.strings.confirm_finish}
           />
         </View>
       )

@@ -5,7 +5,7 @@ import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import * as Constants from '../../../common/constants'
-import { KEYS, localize } from '../../../common/locale'
+import s from '../../../common/locales/strings.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import * as Assets from '../../assets/'
 import {
@@ -79,11 +79,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     }
     if (this.state.showRecoveryModalOne) {
       const body = (
-        <Text style={style.staticModalText}>
-          {
-            'If recovery was set up, you should have emailed yourself a recovery token with a link.'
-          }
-        </Text>
+        <Text style={style.staticModalText}>{s.strings.if_recovery_modal}</Text>
       )
       return (
         <StaticModal
@@ -96,9 +92,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     if (this.state.showRecoveryModalTwo) {
       const body = (
         <Text style={style.staticModalText}>
-          {
-            'Please find the email and click on the link from this device to initiate recovery. '
-          }
+          {s.strings.initiate_password_recovery}
         </Text>
       )
       return (
@@ -219,7 +213,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
             style={this.style.input2}
             onChangeText={this.updatePassword.bind(this)}
             value={this.props.password}
-            label={'Password'}
+            label={s.strings.password}
             error={this.props.error}
             secureTextEntry
             returnKeyType={'go'}
@@ -241,7 +235,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
           style={styles.inputWithDrop}
           onChangeText={this.updateUsername.bind(this)}
           value={this.props.username}
-          label={'Username'}
+          label={s.strings.username}
           returnKeyType={'next'}
           autoFocus={this.state.focusFirst}
           forceFocus={this.state.focusFirst}
@@ -259,7 +253,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         style={styles.input2}
         onChangeText={this.updateUsername.bind(this)}
         value={this.props.username}
-        label={'Username'}
+        label={s.strings.username}
         returnKeyType={'next'}
         autoFocus={this.state.focusFirst}
         forceFocus={this.state.focusFirst}
@@ -285,7 +279,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         <View style={style.shimTiny} />
         <Button
           onPress={this.onForgotPassword.bind(this)}
-          label={'Forgot Password'}
+          label={s.strings.forgot_password}
           downStyle={style.forgotButton.downStyle}
           downTextStyle={style.forgotButton.downTextStyle}
           upStyle={style.forgotButton.upStyle}
@@ -295,7 +289,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         <Button
           testID={'loginButton'}
           onPress={this.onStartLogin.bind(this)}
-          label={localize(KEYS.BUTTONS.LOGIN)}
+          label={s.strings.login_button}
           downStyle={style.loginButton.downStyle}
           downTextStyle={style.loginButton.downTextStyle}
           upStyle={style.loginButton.upStyle}
@@ -307,7 +301,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         <Button
           testID={'createAccountButton'}
           onPress={this.onCreateAccount.bind(this)}
-          label={'Create an account'}
+          label={s.strings.create_an_account}
           downStyle={style.signupButton.downStyle}
           downTextStyle={style.signupButton.downTextStyle}
           upStyle={style.signupButton.upStyle}

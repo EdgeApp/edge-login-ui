@@ -3,6 +3,7 @@
 import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
@@ -11,12 +12,11 @@ type OwnProps = {
 }
 export const mapStateToProps = (state: State) => {
   return {
-    headerText: "Can't send email",
-    middleText:
-      "Please set up an email client that is default to your device's OS in order to send a token to yourself",
+    headerText: s.strings.send_email_error_header,
+    middleText: s.strings.email_error_modal,
     icon: Constants.EXCLAMATION,
     iconType: Constants.MATERIAL_ICONS,
-    actionLabel: 'Ok',
+    actionLabel: s.strings.ok,
     hideCancelX: true,
     singleButton: true
   }

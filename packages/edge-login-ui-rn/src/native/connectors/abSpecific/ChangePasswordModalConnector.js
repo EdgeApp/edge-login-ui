@@ -4,19 +4,19 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions/index'
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
 export const mapStateToProps = (state: State) => {
   return {
-    headerText: 'Password Changed',
-    headerSubtext: 'Password Successfully Changed',
-    middleText:
-      'DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!',
+    headerText: s.strings.password_changed,
+    headerSubtext: s.strings.pwd_change_success,
+    middleText: s.strings.pwd_change_modal,
     icon: Constants.EXCLAMATION,
     iconType: Constants.SIMPLE_ICONS,
-    actionLabel: 'OK',
-    cancelLabel: 'Cancel',
+    actionLabel: s.strings.ok,
+    cancelLabel: s.strings.cancel,
     singleButton: true
   }
 }

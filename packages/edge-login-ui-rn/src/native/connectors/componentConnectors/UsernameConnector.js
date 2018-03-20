@@ -3,6 +3,7 @@
 import { connect } from 'react-redux'
 
 import * as loginAction from '../../../common/actions'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common/'
 
@@ -13,7 +14,7 @@ export const mapStateToProps = (state: State) => {
   return {
     value: state.create.username,
     error: state.create.usernameErrorMessage,
-    label: 'Username',
+    label: s.strings.username,
     returnKeyType: 'go',
     autoCorrect: false,
     autoFocus: true // ownProps.autoFocus,

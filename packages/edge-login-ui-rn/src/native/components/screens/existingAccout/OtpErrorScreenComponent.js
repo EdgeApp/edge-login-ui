@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
 import * as Constants from '../../../../common/constants'
+import s from '../../../../common/locales/strings'
 import EdgeLoginQrConnector from '../../../../native/connectors/componentConnectors/EdgeLoginQrConnector'
 import OtpBackupKeyConnector from '../../../../native/connectors/componentConnectors/OtpBackupKeyConnector'
 import DisableOtpModalConnector from '../../../connectors/abSpecific/DisableOtpModalConnector'
@@ -94,8 +95,7 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
   getStaticBody (style: Object) {
     return (
       <Text style={style.staticModalText}>
-        2FA disable request has been sent. You&apos;ll be able to login with
-        your username and password after 7 days.
+        {s.strings.otp_dispable_req_sent}
       </Text>
     )
   }
@@ -105,8 +105,7 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
       const middle = (
         <View style={style.modalMiddle}>
           <Text style={style.staticModalText}>
-            Sign into your account using the device you setup 2FA with, and go
-            to Settings &gt; 2 Factor Authentication to find the code.
+            {s.strings.otp_instructions}
           </Text>
           <OtpBackupKeyConnector
             style={style.modalInput}
@@ -153,7 +152,7 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
           downTextStyle={style.exitButton.downTextStyle}
           upStyle={style.exitButton.upStyle}
           upTextStyle={style.exitButton.upTextStyle}
-          label={'Disable 2 Factor Authentication'}
+          label={s.strings.disable_otp_button_two}
         />
       )
     }
@@ -182,7 +181,7 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
             downTextStyle={OtpErrorScreenStyle.exitButton.downTextStyle}
             upStyle={OtpErrorScreenStyle.exitButton.upStyle}
             upTextStyle={OtpErrorScreenStyle.exitButton.upTextStyle}
-            label={'Type in authentication code instead'}
+            label={s.strings.type_auth_button}
           />
           {this.renderDisableButton(OtpErrorScreenStyle)}
         </View>

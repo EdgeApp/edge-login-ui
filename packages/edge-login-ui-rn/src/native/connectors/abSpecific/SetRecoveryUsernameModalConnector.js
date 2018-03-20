@@ -3,6 +3,7 @@
 import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
@@ -13,10 +14,10 @@ type OwnProps = {
 
 export const mapStateToProps = (state: State) => {
   return {
-    headerText: 'Password Recovery',
+    headerText: s.strings.password_recovery,
     icon: Constants.LOCKED_ICON,
     iconType: Constants.ION_ICONS,
-    actionLabel: 'Next',
+    actionLabel: s.strings.next_label,
     hideCancelX: false,
     singleButton: true
   }

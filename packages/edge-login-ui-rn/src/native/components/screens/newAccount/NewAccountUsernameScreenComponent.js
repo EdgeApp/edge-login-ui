@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+import s from '../../../../common/locales/strings'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import UsernameConnector from '../../../connectors/componentConnectors/UsernameConnector'
 import { Button } from '../../common'
@@ -39,8 +40,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
           <View style={NewAccountUsernameScreenStyle.pageContainer}>
             <View style={NewAccountUsernameScreenStyle.instructions}>
               <Text style={NewAccountUsernameScreenStyle.instructionsText}>
-                Your username will be required to sign in to your Edge account
-                on this and other devices.
+                {s.strings.username_desc}
               </Text>
             </View>
             <UsernameConnector
@@ -56,7 +56,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
               }
               upStyle={NewAccountUsernameScreenStyle.nextButton.upStyle}
               upTextStyle={NewAccountUsernameScreenStyle.nextButton.upTextStyle}
-              label={'NEXT'}
+              label={s.strings.next_label_caps}
               isThinking={this.state.isProcessing}
               doesThink
             />

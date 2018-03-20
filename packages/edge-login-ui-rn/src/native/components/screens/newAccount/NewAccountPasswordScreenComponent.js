@@ -5,6 +5,7 @@ import { KeyboardAvoidingView, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import * as Constants from '../../../../common/constants'
+import s from '../../../../common/locales/strings'
 import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 import SkipModalConnector from '../../../connectors/abSpecific/SkipModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
@@ -81,7 +82,7 @@ export default class NewAccountPasswordScreenComponent extends Component<
       <View style={styles.innerView}>
         <PasswordStatusConnector style={styles.status} />
         <PasswordConnector
-          label={'Password'}
+          label={s.strings.password}
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}
           onFinish={this.onSetNextFocus}
@@ -99,7 +100,7 @@ export default class NewAccountPasswordScreenComponent extends Component<
           downTextStyle={styles.nextButton.downTextStyle}
           upStyle={styles.nextButton.upStyle}
           upTextStyle={styles.nextButton.upTextStyle}
-          label={'NEXT'}
+          label={s.strings.next_label_caps}
           isThinking={this.state.isProcessing}
           doesThink
         />

@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
 import * as Constants from '../../../common/constants/'
+import s from '../../../common/locales/strings.js'
 import { TextAndIconButton } from '../common'
 
 export type StateProps = {
@@ -32,9 +33,7 @@ class AccountInfoComponent extends Component<Props, State> {
       return (
         <View style={style.bottomWarning}>
           <Text style={style.bottomWarningText}>
-            You did not set your password. We strongly encourage you to create a
-            password and backup your account as soon as possible. You can set a
-            password in the Settings screen in the app.
+            {s.strings.account_info_warning}
           </Text>
           <View style={style.shim} />
         </View>
@@ -58,7 +57,7 @@ class AccountInfoComponent extends Component<Props, State> {
           <View style={style.bRow}>
             <View style={style.bInfoLeft} />
             <View style={style.bInfoCenter}>
-              <Text style={style.accountText}>Username:</Text>
+              <Text style={style.accountText}>{s.strings.username}:</Text>
             </View>
             <View style={style.bInforRight}>
               <Text style={style.accountText}>{this.props.username}</Text>
@@ -67,7 +66,7 @@ class AccountInfoComponent extends Component<Props, State> {
           <View style={style.bRow}>
             <View style={style.bInfoLeft} />
             <View style={style.bInfoCenter}>
-              <Text style={style.accountText}>PIN:</Text>
+              <Text style={style.accountText}>{s.strings.pin}:</Text>
             </View>
             <View style={style.bInforRight}>
               <Text style={style.accountText}>{this.props.pin}</Text>
@@ -83,7 +82,7 @@ class AccountInfoComponent extends Component<Props, State> {
         <View style={style.bRow}>
           <View style={style.bInfoLeft} />
           <View style={style.bInfoCenter}>
-            <Text style={style.accountText}>Username:</Text>
+            <Text style={style.accountText}>{s.strings.username}:</Text>
           </View>
           <View style={style.bInforRight}>
             <Text style={style.accountText}>{this.props.username}</Text>
@@ -92,7 +91,7 @@ class AccountInfoComponent extends Component<Props, State> {
         <View style={style.bRow}>
           <View style={style.bInfoLeft} />
           <View style={style.bInfoCenter}>
-            <Text style={style.accountText}>Password:</Text>
+            <Text style={style.accountText}>{s.strings.password}:</Text>
           </View>
           <View style={style.bInforRight}>
             <Text style={style.accountText}>{this.props.password}</Text>
@@ -101,7 +100,7 @@ class AccountInfoComponent extends Component<Props, State> {
         <View style={style.bRow}>
           <View style={style.bInfoLeft} />
           <View style={style.bInfoCenter}>
-            <Text style={style.accountText}>PIN:</Text>
+            <Text style={style.accountText}>{s.strings.pin}:</Text>
           </View>
           <View style={style.bInforRight}>
             <Text style={style.accountText}>{this.props.pin}</Text>
@@ -124,8 +123,8 @@ class AccountInfoComponent extends Component<Props, State> {
   }
   renderTop (style: Object) {
     const msg = this.state.collapsed
-      ? 'Show account information'
-      : 'Hide account information'
+      ? s.strings.show_account_info
+      : s.strings.hide_account_info
     const icon = this.state.collapsed
       ? Constants.KEYBOARD_ARROW_DOWN
       : Constants.KEYBOARD_ARROW_UP

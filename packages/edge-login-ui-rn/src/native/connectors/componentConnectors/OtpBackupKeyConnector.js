@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants/'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common'
 
@@ -16,7 +17,7 @@ export const mapStateToProps = (state: State) => {
   const error = state.login.otpErrorMessage || ''
   return {
     value,
-    label: 'Backup Key',
+    label: s.strings.backup_key_label,
     error,
     returnKeyType: 'next',
     autoFocus: true

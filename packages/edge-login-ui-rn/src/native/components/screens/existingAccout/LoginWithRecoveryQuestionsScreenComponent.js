@@ -3,11 +3,12 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+import s from '../../../../common/locales/strings'
 import SetRecoveryUsernameModalConnector from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
-import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
 import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
 import { Button, FormField, StaticModal } from '../../common/'
+import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
 
 type Props = {
   styles: Object,
@@ -102,7 +103,7 @@ export default class PasswordRecovery extends Component<Props, State> {
       // render static modal
       const body = (
         <Text style={styles.staticModalText}>
-          Recovery successful! Please change your password and PIN.
+          {s.strings.recovery_successful}
         </Text>
       )
       return (
@@ -117,7 +118,7 @@ export default class PasswordRecovery extends Component<Props, State> {
     const middle = (
       <View style={styles.modalMiddle}>
         <Text style={styles.staticModalText}>
-          Please enter the username of the account you want to recover.
+          {s.strings.recover_by_username}
         </Text>
         <RecoverPasswordUsernameModalConnector
           style={styles.inputModal}
@@ -178,8 +179,8 @@ export default class PasswordRecovery extends Component<Props, State> {
                 autoCapitalize={'none'}
                 onChangeText={this.setAnswer1}
                 value={this.state.answer1}
-                label={'Your Answer'}
-                error={'Answers are case sensitive'}
+                label={s.strings.your_answer_label}
+                error={s.strings.answer_case_sensitive}
               />
             </View>
             <View style={styles.shim} />
@@ -194,8 +195,8 @@ export default class PasswordRecovery extends Component<Props, State> {
                 autoCapitalize={'none'}
                 onChangeText={this.setAnswer2}
                 value={this.state.answer2}
-                label={'Your Answer'}
-                error={'Answers are case sensitive'}
+                label={s.strings.your_answer_label}
+                error={s.strings.answer_case_sensitive}
               />
             </View>
             <View style={styles.buttonContainer}>

@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+import s from '../../../../common/locales/strings'
 import ChangePinModalConnector from '../../../connectors/abSpecific/ChangePinModalConnector'
 import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
@@ -48,13 +49,11 @@ export default class ChangeAccountPinScreenComponent extends Component<
         const body = (
           <View>
             <Text style={style.staticModalText}>
-              Password and PIN successfully changed.
+              {s.strings.pswd_and_pin_changed}
             </Text>
             <View style={style.shim} />
             <Text style={style.staticModalText}>
-              Don&apos;t forget your password or recovery answers. You will
-              permanently lose access to your funds if you lose your password
-              and recovery answers.
+              {s.strings.change_pwd_body}
             </Text>
           </View>
         )
@@ -94,8 +93,7 @@ export default class ChangeAccountPinScreenComponent extends Component<
         <View style={SetAccountPinScreenStyle.pageContainer}>
           <View style={SetAccountPinScreenStyle.row1}>
             <Text style={SetAccountPinScreenStyle.instructions}>
-              Your PIN is a 4 digit code used to do quick re-logins into your
-              account
+              {s.strings.pin_desc}
             </Text>
           </View>
           <View style={SetAccountPinScreenStyle.row2}>
@@ -110,7 +108,7 @@ export default class ChangeAccountPinScreenComponent extends Component<
               downTextStyle={SetAccountPinScreenStyle.nextButton.downTextStyle}
               upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
               upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
-              label={'DONE'}
+              label={s.strings.done_caps}
               isThinking={this.state.isProcessing}
               doesThink
             />

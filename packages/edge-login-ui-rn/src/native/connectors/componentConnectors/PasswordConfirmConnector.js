@@ -3,6 +3,7 @@
 import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions'
+import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common'
 
@@ -23,11 +24,10 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
     error,
     secureTextEntry: true,
     showSecureCheckbox: true,
-    showSecureCheckboxLabel: 'Show Password',
+    showSecureCheckboxLabel: s.strings.show_password,
     label: label,
     returnKeyType: 'go',
     autoFocus: ownProps.autoFocus
-    // TODO localize
   }
 }
 

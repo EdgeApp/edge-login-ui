@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions'
 import * as Constants from '../../../../common/constants'
+import s from '../../../../common/locales/strings'
 import type { Dispatch, State } from '../../../../types/ReduxTypes.js'
 import LinkedComponent from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 import type { OwnProps } from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
@@ -17,7 +18,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const question2 =
     state.passwordRecovery.userQuestions.length > 1
       ? state.passwordRecovery.userQuestions[1]
-      : 'Choose recovery question'
+      : s.strings.choose_recovery_question
   const username = returnTrunatedUsername(state.login.username)
   return {
     showHeader: ownProps.showHeader,
@@ -25,8 +26,8 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
     userQuestions: state.passwordRecovery.userQuestions,
     question1,
     question2,
-    submitButton: 'Submit',
-    disableButton: 'Disable',
+    submitButton: s.strings.submit,
+    disableButton: s.strings.disable,
     isEnabled,
     username,
     backupKey: state.passwordRecovery.recoveryKey,
