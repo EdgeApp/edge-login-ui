@@ -24,7 +24,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
     secureTextEntry: true,
     showSecureCheckbox: true,
     showSecureCheckboxLabel: s.strings.show_password,
-    label: ownProps.label, // TODO localize
+    label: ownProps.label,
     returnKeyType: 'next',
     autoFocus: ownProps.autoFocus
   }

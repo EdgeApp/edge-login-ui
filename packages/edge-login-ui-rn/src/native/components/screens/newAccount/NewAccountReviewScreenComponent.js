@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+import s from '../../../../common/locales/strings'
 import AccountInfoContainer from '../../../connectors/abSpecific/AccountInfoConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import { Button, WarningBox } from '../../common'
@@ -22,15 +23,13 @@ export default class NewAccountReviewScreenComponent extends Component<Props> {
           <View style={NewAccountReviewScreenStyle.pageContainer}>
             <View style={NewAccountReviewScreenStyle.instructionsContainer}>
               <Text style={NewAccountReviewScreenStyle.instructionsText}>
-                Almost done! Let&apos;s write down your account information
+                {s.strings.almost_done}
               </Text>
             </View>
             <View style={NewAccountReviewScreenStyle.warningBoxContainer}>
               <WarningBox
                 style={NewAccountReviewScreenStyle.warningBox}
-                message={
-                  'If you lose your account information, you’ll lose access to your funds permanently. Write down and store it securely.'
-                } // TODO localize
+                message={s.strings.warning_message}
               />
             </View>
             <View style={NewAccountReviewScreenStyle.shim} />
@@ -49,7 +48,7 @@ export default class NewAccountReviewScreenComponent extends Component<Props> {
               }
               upStyle={NewAccountReviewScreenStyle.nextButton.upStyle}
               upTextStyle={NewAccountReviewScreenStyle.nextButton.upTextStyle}
-              label={'Done'}
+              label={s.strings.done}
             />
           </View>
         </View>

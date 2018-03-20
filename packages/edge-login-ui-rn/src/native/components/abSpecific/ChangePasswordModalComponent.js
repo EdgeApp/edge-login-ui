@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Image, Text, View } from 'react-native'
 
+import s from '../../../common/locales/strings'
 import { LOGO_DOT } from '../../../native/assets/'
 import { Button } from '../common'
 
@@ -24,12 +25,11 @@ class ChangePasswordModalComponent extends Component<Props> {
             <Image source={LOGO_DOT} />
           </View>
           <View style={Style.headlineContainer}>
-            <Text style={Style.headlineText}>Password Changed</Text>
+            <Text style={Style.headlineText}>{s.strings.password_changed}</Text>
           </View>
           <View style={Style.textContainer}>
             <Text style={Style.copyText}>
-              Password Successfully Changed. DO NOT FORGET YOUR PASSWORD OR
-              RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!
+              {s.strings.password_successfully_changed}
             </Text>
           </View>
           <View style={Style.buttonsContainer}>

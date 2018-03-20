@@ -20,7 +20,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
     : []
   return {
     value: state.login.username,
-    label: s.strings.usernmae, // TODO: Localization
+    label: s.strings.username,
     returnKeyType: 'next',
     autoFocus: ownProps.autoFocus,
     forceFocus: ownProps.forceFocus,

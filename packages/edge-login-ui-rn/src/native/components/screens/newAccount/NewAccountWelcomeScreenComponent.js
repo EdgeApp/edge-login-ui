@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+import s from '../../../../common/locales/strings'
 import * as Assets from '../../../assets'
 import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
 import { Button, HeaderBackButton } from '../../common'
@@ -29,7 +30,7 @@ export default class NewAccountWelcomeScreenComponent extends Component<
             <HeaderBackButton
               onPress={this.props.exitScreen}
               styles={NewAccountWelcomeScreenStyle.exitBackButtonStyle}
-              label={'Exit'}
+              label={s.strings.exit}
             />
           </View>
           <View style={NewAccountWelcomeScreenStyle.row2}>
@@ -40,16 +41,13 @@ export default class NewAccountWelcomeScreenComponent extends Component<
           </View>
           <View style={NewAccountWelcomeScreenStyle.row3}>
             <Text style={NewAccountWelcomeScreenStyle.instructionsText}>
-              Let’s get started by creating your account login. You’ll choose a
-              username and password, which we’ll use to encrypt your account.
-              Not even Edge has access to your information, so you have full and
-              complete control over your digital assets.
+              {s.strings.welcome_one}
             </Text>
           </View>
           <View style={NewAccountWelcomeScreenStyle.row4} />
           <View style={NewAccountWelcomeScreenStyle.row5}>
             <Text style={NewAccountWelcomeScreenStyle.callToAction}>
-              Let’s get started with choosing a username
+              {s.strings.start_username}
             </Text>
           </View>
           <View style={NewAccountWelcomeScreenStyle.row6}>
@@ -61,7 +59,7 @@ export default class NewAccountWelcomeScreenComponent extends Component<
               }
               upStyle={NewAccountWelcomeScreenStyle.nextButton.upStyle}
               upTextStyle={NewAccountWelcomeScreenStyle.nextButton.upTextStyle}
-              label={'Get started'}
+              label={s.strings.get_started}
             />
           </View>
         </View>

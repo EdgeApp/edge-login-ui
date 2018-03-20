@@ -5,6 +5,7 @@ import { Platform, Text, View } from 'react-native'
 import Mailer from 'react-native-mail'
 
 import * as Constants from '../../../../common/constants'
+import s from '../../../../common/locales/strings'
 import EmailAppFailedModalConnector from '../../../connectors/abSpecific/EmailAppFailedModalConnector'
 import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
@@ -193,7 +194,7 @@ export default class PasswordRecovery extends Component<Props, State> {
   }
   openEmailApp = () => {
     const body =
-      'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ' +
+      s.strings.otp_email_body +
       this.props.username +
       '<br><br>' +
       'iOS <br>edge://recovery?token=' +
@@ -204,7 +205,7 @@ export default class PasswordRecovery extends Component<Props, State> {
 
     Mailer.mail(
       {
-        subject: 'Edge Recovery Token',
+        subject: s.strings.otp_email_subject,
         recipients: [this.state.emailAddress],
         body: body,
         isHTML: true
@@ -231,11 +232,11 @@ export default class PasswordRecovery extends Component<Props, State> {
     const form1Style = this.state.errorOne ? styles.inputError : styles.input
     const form2Style = this.state.errorTwo ? styles.inputError : styles.input
     const errorMessageOne = this.state.errorOne
-      ? 'Answers should be minimum of 4 characters'
-      : 'Answers are case sensitive'
+      ? s.strings.answers_four_chanracters
+      : s.strings.answer_case_sensitive
     const errorMessageTwo = this.state.errorTwo
-      ? 'Answers should be minimum of 4 characters'
-      : 'Answers are case sensitive'
+      ? s.strings.answers_four_chanracters
+      : s.strings.answer_case_sensitive
     const questionOneStyle = this.state.errorQuestionOne
       ? styles.textIconButtonErrorError
       : styles.textIconButton
@@ -263,7 +264,7 @@ export default class PasswordRecovery extends Component<Props, State> {
             autoCapitalize={'none'}
             onChangeText={this.setAnswer1}
             value={this.state.answer1}
-            label={'Your Answer'}
+            label={s.strings.your_answer_label}
             error={errorMessageOne}
           />
         </View>
@@ -286,7 +287,7 @@ export default class PasswordRecovery extends Component<Props, State> {
             autoCapitalize={'none'}
             onChangeText={this.setAnswer2}
             value={this.state.answer2}
-            label={'Your Answer'}
+            label={s.strings.your_answer_label}
             error={errorMessageTwo}
           />
         </View>
@@ -338,8 +339,7 @@ export default class PasswordRecovery extends Component<Props, State> {
     if (this.state.disableConfirmationModal) {
       const body = (
         <Text style={styles.staticModalText}>
-          Password Recovery has been disabled. You can enable it again by going
-          into Password Recovery anytime
+          {s.strings.recovery_disabled}
         </Text>
       )
       return (
@@ -356,13 +356,13 @@ export default class PasswordRecovery extends Component<Props, State> {
     return (
       <View style={styles.modalMiddle}>
         <Text style={styles.staticModalText}>
-          Please enter the username of the account you want to recover.
+          {s.strings.recovery_what_account}
         </Text>
         <FormField
           style={styles.inputModal}
           onChangeText={this.updateEmail.bind(this)}
           value={this.state.emailAddress}
-          label={'Email Address'}
+          label={s.strings.email_address}
           error={''}
           returnKeyType={'go'}
           forceFocus
@@ -384,15 +384,13 @@ export default class PasswordRecovery extends Component<Props, State> {
     const middle = (
       <View style={styles.modalMiddle}>
         <Text style={styles.staticModalText}>
-          {
-            'To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. \n\n Please enter your email below to send yourself a recovery token.'
-          }
+          {s.strings.recovery_instructions_complete}
         </Text>
         <FormField
           style={styles.inputModal}
           onChangeText={this.updateEmail.bind(this)}
           value={this.state.emailAddress}
-          label={'Email Address'}
+          label={s.strings.email_address}
           error={''}
           returnKeyType={'go'}
           forceFocus

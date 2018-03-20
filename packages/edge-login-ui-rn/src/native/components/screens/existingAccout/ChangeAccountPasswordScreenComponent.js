@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
 
+import s from '../../../../common/locales/strings.js'
 import ChangePasswordModalConnector from '../../../connectors/abSpecific/ChangePasswordModalConnector'
 import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
@@ -91,13 +92,13 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
         <PasswordConnector
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}
-          label={'New Password'}
+          label={s.strings.new_password}
           onFinish={this.onSetNextFocus}
         />
         <View style={styles.inputShim} />
         <PasswordConfirmConnector
           style={styles.inputBox}
-          label={'Re-enter New Password'}
+          label={s.strings.re_enter_new_password}
           isSelected={this.state.focusSecond}
           autoFocus={this.state.focusSecond}
           onFinish={this.onNextPress}
@@ -109,7 +110,7 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
           downTextStyle={styles.nextButton.downTextStyle}
           upStyle={styles.nextButton.upStyle}
           upTextStyle={styles.nextButton.upTextStyle}
-          label={'DONE'}
+          label={s.strings.done_caps}
           isThinking={this.state.isProcessing}
           doesThink
         />

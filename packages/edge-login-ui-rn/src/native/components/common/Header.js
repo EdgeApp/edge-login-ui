@@ -5,6 +5,7 @@ import { Text, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import * as Colors from '../../../common/constants/Colors'
+import s from '../../../common/locales/strings'
 import { Button, HeaderBackButton } from '../common'
 
 type Props = {
@@ -36,9 +37,9 @@ class Header extends Component<Props> {
     if (!this.props.showBackButton) {
       return
     }
-    let label = 'BACK'
+    let label = s.strings.back_caps
     if (this.props.useCancel) {
-      label = 'CANCEL' // TODO localize
+      label = s.strings.cancel_caps
     }
     return (
       <HeaderBackButton
@@ -67,7 +68,7 @@ class Header extends Component<Props> {
         downTextStyle={style.textButton.downTextStyle}
         upStyle={style.textButton.upStyle}
         upTextStyle={style.textButton.upTextStyle}
-        label={'SKIP'}
+        label={s.strings.skip}
       />
     )
   }

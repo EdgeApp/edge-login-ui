@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+import s from '../../../../common/locales/strings'
 import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import { Button } from '../../common'
@@ -43,8 +44,7 @@ export default class SetAccountPinScreenComponent extends Component<
           <View style={SetAccountPinScreenStyle.pageContainer}>
             <View style={SetAccountPinScreenStyle.row1}>
               <Text style={SetAccountPinScreenStyle.instructions}>
-                Your PIN is a 4 digit code used to do quick re-logins into your
-                account
+                {s.strings.pin_desc}
               </Text>
             </View>
             <View style={SetAccountPinScreenStyle.row2}>
@@ -61,7 +61,7 @@ export default class SetAccountPinScreenComponent extends Component<
                 }
                 upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
                 upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
-                label={'NEXT'}
+                label={s.strings.next_label_caps}
                 isThinking={this.state.isProcessing}
                 doesThink
               />

@@ -28,7 +28,6 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
     label: label,
     returnKeyType: 'go',
     autoFocus: ownProps.autoFocus
-    // TODO localize
   }
 }
 

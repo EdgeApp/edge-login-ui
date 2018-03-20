@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+import s from '../../../common/locales/strings.js'
 import {
   PASSWORD_REQ_CHECKED,
   PASSWORD_REQ_UNCHECKED
@@ -54,9 +55,7 @@ export default class PaswordStatusComponent extends Component<Props> {
     }
     return (
       <View style={style.containerWhite}>
-        <Text style={style.instructions}>
-          The password is used to login and change sensitive settings
-        </Text>
+        <Text style={style.instructions}>{s.strings.password_desc}</Text>
       </View>
     )
   }

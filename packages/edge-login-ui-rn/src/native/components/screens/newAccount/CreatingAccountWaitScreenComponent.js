@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+import s from '../../../../common/locales/strings'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector.js'
 import { Spinner } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
@@ -34,20 +35,20 @@ export default class CreatingAccountWaitScreenComponent extends Component<
             </View>
             <View style={CreatingAccountWaitScreenStyle.headlineConainer}>
               <Text style={CreatingAccountWaitScreenStyle.headlineText}>
-                Good job!
+                {s.strings.good_job}
               </Text>
             </View>
             <View style={CreatingAccountWaitScreenStyle.bodyCopyContainer}>
               <Text style={CreatingAccountWaitScreenStyle.bodyText}>
-                Hang tight while we create
+                {s.strings.hang_tight}
               </Text>
               <Text style={CreatingAccountWaitScreenStyle.bodyText}>
-                and secure your account
+                {s.strings.secure_account}
               </Text>
             </View>
             <View style={CreatingAccountWaitScreenStyle.encriptingContainer}>
               <Text style={CreatingAccountWaitScreenStyle.bodyText}>
-                Encrypting wallet...
+                {s.strings.encrypting_wallet}
               </Text>
             </View>
           </View>

@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { Image, Text, View } from 'react-native'
 
 import * as Constants from '../../../common/constants/'
+import s from '../../../common/locales/strings.js'
 import { OTP_SMALL } from '../../assets/'
 
 type Props = {
@@ -33,12 +34,13 @@ class OtpHeroComponent extends Component<Props, State> {
       return (
         <View style={style.orOption}>
           <View style={style.orRow}>
-            <Text style={style.instructionsText}>──────── OR ────────</Text>
+            <Text style={style.instructionsText}>
+              ──────── {s.strings.or} ────────
+            </Text>
           </View>
           <View style={style.intructionsRow}>
             <Text style={style.instructionsText}>
-              Scan the QR code below using the device that enabled 2FA to give
-              access to the device{' '}
+              {s.strings.otp_hero_scan}
             </Text>
           </View>
         </View>
