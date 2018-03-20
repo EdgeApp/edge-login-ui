@@ -1,13 +1,11 @@
 import * as Constants from '../../common/constants'
 import s from '../../common/locales/strings.js'
-const titleOne = s.strings.terms_one
-const titleTwo = s.strings.terms_two
-const titleThree = s.strings.terms_three
+
 const initialState = {
   items: [
-    { title: titleOne, value: false },
-    { title: titleTwo, value: false },
-    { title: titleThree, value: false }
+    { title: s.strings.terms_one, value: false },
+    { title: s.strings.terms_two, value: false },
+    { title: s.strings.terms_three, value: false }
   ]
 }
 

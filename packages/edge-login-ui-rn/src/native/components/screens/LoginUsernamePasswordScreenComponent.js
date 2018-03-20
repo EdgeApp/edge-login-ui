@@ -5,7 +5,6 @@ import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import * as Constants from '../../../common/constants'
-// import { KEYS, localize } from '../../../common/locale'
 import s from '../../../common/locales/strings.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import * as Assets from '../../assets/'
