@@ -23,7 +23,7 @@
   ],
   "main": "src/native/index.js",
   "scripts": {
-    "prepare": ""
+    "prepare": "echo nothing to do"
   },
   "dependencies": {
     "material-ui": "^0.20.0",
