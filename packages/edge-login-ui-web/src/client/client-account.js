@@ -2,11 +2,7 @@
 
 import type { ClientState } from './client-state.js'
 import { showFrame } from './iframe.js'
-import type {
-  EdgeManageWindowOptions,
-  EdgeUiAccount,
-  EdgeWalletInfo
-} from './index.js'
+import type { EdgeManageWindowOptions, EdgeUiAccount } from './index.js'
 
 /**
  * Returns a context API object with all the required methods.
@@ -46,8 +42,13 @@ export function makeAccountApi (
     get walletInfos () {
       return account.walletInfos
     },
-    createWallet (): Promise<EdgeWalletInfo> {
-      throw new Error('not implemented')
+    createWallet (type: string, keys: {}): Promise<string> {
+      return state
+        .createWallet(accountId, type, keys)
+        .then(({ walletId, walletInfos }) => {
+          account.walletInfos = walletInfos
+          return walletId
+        })
     }
   }
 }

@@ -6,6 +6,7 @@ import type {
   ClientMessage,
   ConnectionMessage,
   ConnectionReply,
+  FrameCreateWallet,
   FrameMessage,
   PostRobotEvent
 } from '../protocol.js'
@@ -39,6 +40,7 @@ export type ClientState = {
   onLogin: ?(account: EdgeUiAccount) => mixed,
 
   // Frame callbacks:
+  createWallet: FrameCreateWallet,
   frameDispatch: (message: FrameMessage) => Promise<mixed>
 }
 
@@ -117,6 +119,7 @@ export function makeClientState (
       state = {
         accounts: {},
         appId,
+        createWallet: reply.data.createWallet,
         frame,
         frameDispatch,
         onClose: void 0,

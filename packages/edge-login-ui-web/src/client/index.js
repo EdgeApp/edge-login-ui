@@ -51,5 +51,5 @@ export type EdgeUiAccount = {
 
   // All wallet infos:
   walletInfos: { [walletId: string]: EdgeWalletInfo },
-  createWallet(): Promise<EdgeWalletInfo>
+  createWallet(type: string, keys: {}): Promise<string>
 }

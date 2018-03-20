@@ -9,6 +9,8 @@ export type PostRobotEvent<Data> = {
   source: Object
 }
 
+export type EdgeWalletInfos = { [walletId: string]: EdgeWalletInfo }
+
 // client -------------------------------------------------------------------
 
 /** The current window was closed. */
@@ -28,7 +30,7 @@ export type ClientLogin = {
   payload: {
     accountId: string,
     username: string,
-    walletInfos: { [walletId: string]: EdgeWalletInfo }
+    walletInfos: EdgeWalletInfos
   }
 }
 
@@ -37,7 +39,7 @@ export type ClientWalletListChanged = {
   type: 'wallet-list-changed',
   payload: {
     accountId: string,
-    walletInfos: { [walletId: string]: EdgeWalletInfo }
+    walletInfos: EdgeWalletInfos
   }
 }
 
@@ -75,7 +77,6 @@ export type FrameMessage =
 // connection ---------------------------------------------------------------
 
 export type ClientDispatch = (message: ClientMessage) => mixed
-export type FrameDispatch = (message: FrameMessage) => mixed
 
 /** The client sends this to connect to the iframe. */
 export type ConnectionMessage = {
@@ -87,8 +88,15 @@ export type ConnectionMessage = {
   clientDispatch: ClientDispatch
 }
 
-export type ConnectionReply = {
-  // We can add other API methods here...
+export type FrameCreateWallet = (
+  accountId: string,
+  type: string,
+  keys: {}
+) => Promise<{ walletId: string, walletInfos: EdgeWalletInfos }>
 
+export type FrameDispatch = (message: FrameMessage) => mixed
+
+export type ConnectionReply = {
+  createWallet: FrameCreateWallet,
   frameDispatch: FrameDispatch
 }

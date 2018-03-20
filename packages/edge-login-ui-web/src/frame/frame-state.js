@@ -116,7 +116,18 @@ export function awaitConnection () {
     return makeFrameState(event.data).then(state => {
       updateView(state)
       const reply: ConnectionReply = {
-        frameDispatch: message => frameDispatch(state, message)
+        createWallet (accountId: string, type: string, keys: {}) {
+          return state.accounts[accountId]
+            .createWallet(type, keys)
+            .then(walletId => {
+              const walletInfos = getWalletInfos(state, accountId)
+              return { walletId, walletInfos }
+            })
+        },
+
+        frameDispatch (message: FrameMessage) {
+          return frameDispatch(state, message)
+        }
       }
       return reply
     })
