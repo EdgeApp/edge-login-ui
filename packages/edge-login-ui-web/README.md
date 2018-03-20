@@ -1,102 +1,107 @@
-# Airbitz Javascript UI
+# Edge Web Login UI
 
-This repo implements a UI layer on top of [edge-core-js](https://github.com/Airbitz/edge-core-js) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
-
-## Build from source repo (not needed if using NPM)
-
-`npm install` to fetch the dependencies.
-`npm run build` to create the web bundle.
-
-## Or just use the NPM package from your own repo
-
-`npm install airbitz-core-js-ui --save`
+This repo implements an iframe wrapper around `edge-login-ui-react`. It provides a simple, framework-agnostic way to do login and account management with just a small handful of Javascript API calls.
 
 ## Basic usage for web
 
-Get an API key from
+First, install the library from NPM:
 
-https://developer.airbitz.co
+```sh
+npm install --save edge-login-ui-web
+```
 
-You'll need an account on the Airbitz Mobile App which you can download for iOS and Android at
+Import the library into your project:
 
-https://airbitz.co/app
+```js
+import { makeEdgeUiContext } from 'edge-login-ui-web'
+// or:
+const { makeEdgeUiContext } = require('edge-login-ui-web')
+```
 
-On the `developer.airbitz.co` page, scan the QR code using the Airbitz Mobile App after signing in and register an email address.
+To get an API key, download the [Airbitz app](https://airbitz.co/app), create an account, and log in to the [Airbitz developer portal](https://developer.airbitz.co) using the "send" screen. Note: the new Edge app doesn't have BitID support yet, so the Airbitz app is still required for this step.
 
-Install from npm
+Now you can initialize the library:
 
-    npm install airbitz-core-js-ui --save
+```js
+const edgeUiContext = makeEdgeUiContext({
+  'apiKey': 'api-key-here',
+  'appId': 'com.mydomain.myapp',
+  'assetsPath': '/path-to-assets/',
+  'vendorName': 'My Awesome Project',
+  'vendorImageUrl': 'https://mydomain.com/mylogo.png'
+});
+```
 
-Include the `abcui.js` file in your code (using Webpack or any other bundler of your choice):
+The Edge Login UI relies on an iframe for most of its functionality. You can install the iframe contents using the following terminal command, which is available as part of this library:
 
-    var abcui = require('airbitz-core-js-ui')
+```sh
+copy-edge-assets <dest-directory>
+```
 
-Now start diving in and make some calls
+The `assetsPath` parameter to `makeEdgeUiContext` should point to the HTTP location of these files on your web server. If you want to isolate your application code from access to the account credentials, you should also consider hosting this content on a different domain from your main application.
 
-Initialize the library
+To create an overlay popup where a user can register a new account or log in to a previously created account via password or PIN, do:
 
-    _abcUi = abcui.makeABCUIContext({'apiKey': 'api-key-here',
-                                     'appId': 'com.mydomain.myapp',
-                                     'assetsPath': '/path-to-assets/',
-                                     'vendorName': 'My Awesome Project',
-                                     'vendorImageUrl': 'https://mydomain.com/mylogo.png'});
-
-where `/path-to-assets/` tells the UI where to find the contents of the `assets` directory of this node module via HTTP. When updating this node module, you must keep the `assets` directory up-to-date on your server. We suggest automating this using NPM scripts or any other tool or your choice.
-
-Create an overlay popup where a user can register a new account or login to a previously created account via password or PIN.
-
-    _abcUi.openLoginWindow(function(error, account) {
-      _account = account;
-    });
+```js
+edgeUiContext.openLoginWindow({
+  onLogin (edgeUiAccount) {
+    // The user logged in, so save the account somewhere
+  },
+  onClose () {
+    // The user has dismissed the login window
+  }
+})
+```
 
 ![Login UI](https://airbitz.co/go/wp-content/uploads/2016/08/Screen-Shot-2016-08-26-at-12.50.04-PM.png)
 
-Launch an account management window for changing password, PIN, and recovery questions
+Once the user logs in, you receive an `edgeUiAccount` object. You can use this object to open an account management window for changing the password, PIN, and recovery questions:
 
-    _abcUi.openManageWindow(_account, function(error) {
+```js
+edgeUiAccount.openManageWindow({
+  onClose() {
+    // The user has dismissed the management window
+  }
+})
+```
 
-    });
+![Management UI](https://airbitz.co/go/wp-content/uploads/2016/08/Screen-Shot-2016-08-26-at-12.50.26-PM.png)
 
-![Manage UI](https://airbitz.co/go/wp-content/uploads/2016/08/Screen-Shot-2016-08-26-at-12.50.26-PM.png)
+You can also use the account object to manage wallets (each with their own private key):
 
-Get or create a wallet inside of the account
+```js
+// Find the first Ethereum wallet in the account:
+const edgeWalletInfo = edgeUiAccount.getFirstWalletInfo('wallet:ethereum')
 
-    _abcUi.openLoginWindow(function(error, account) {
-      _account = account;
+if (edgeWalletInfo != null) {
+  // We have a wallet, so grab the private key:
+  const privateKey = edgeWalletInfo.keys.ethereumKey
+} else {
+  // There are no Ethereum wallets, so make one:
+  const keys = {
+    ethereumKey: new Buffer(secureRandom(32)).toString('hex')
+  }
+  edgeUiAccount.createWallet("wallet:ethereum", keys).then(walletId => {
+    const edgeWalletInfo = edgeUiAccount.walletInfos[walletId]
+    const privateKey = edgeWalletInfo.keys.ethereumKey
+    // Now you can do whatever you like with the key...
+  })
+}
+```
 
-      // Get the first wallet in the account that matches our required wallet type
-      const abcWallet = account.getFirstWallet('wallet:repo:ethereum');
-      if (abcWallet == null) {
-        // Create an ethereum wallet if one doesn't exist:
-        const keys = {
-          ethereumKey: new Buffer(secureRandom(32)).toString('hex')
-        }
-        account.createWallet("wallet:repo:ethereum", keys, function (err, id) {
-          if (err) {
-            // Yikes. This shouldn't fail except for network or disk errors
-          } else {
-            _wallet = account.getWallet(id)
-            _key = _wallet.keys.ethereumKey
-            // Update your UI here
-          }
-        })
-      } else {
-        _wallet = abcWallet
-        _key = _wallet.keys.ethereumKey
-        // Update your UI here
-      }
-    }
+The `privateKey` can then be used as a secure source of entropy for this wallet within your app.
 
-`_key` can then be used as a secure source of entropy for this wallet within your app
+To log a user out, do:
 
+```js
+edgeUiAccount.logout()
+```
 
-Logoff a user
+## Demo App
 
-    _account.logout();
+This project contains a demo application in the `src/demo` directory. You can launch this demo using the `npm start` command.
 
-## Sample website repo
-
-See a sample implementation at [airbitz-core-js-sample](https://github.com/Airbitz/airbitz-core-js-sample)
+Loading the iframe might time out the first time you launch the demo, since bundling can take a while. If the "Login With Edge" button does not turn blue after 5 seconds, just reload the page and it will work. In production, this content would already be bundled and being served statically.
 
 # Detailed Docs
 

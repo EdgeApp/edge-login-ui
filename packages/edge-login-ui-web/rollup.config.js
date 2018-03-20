@@ -1,20 +1,32 @@
-import buble from 'rollup-plugin-buble'
-const packageJson = require('./package.json')
+import babel from 'rollup-plugin-babel'
+
+import packageJson from './package.json'
+
+const babelOpts = {
+  babelrc: false,
+  presets: ['es2015-rollup', 'flow', 'react'],
+  plugins: [
+    'transform-async-to-generator',
+    'transform-class-properties',
+    'transform-object-rest-spread',
+    'transform-regenerator',
+    ['transform-es2015-for-of', { loose: true }]
+  ]
+}
+
+const external = [
+  'regenerator-runtime/runtime',
+  ...Object.keys(packageJson.dependencies),
+  ...Object.keys(packageJson.devDependencies)
+]
 
 export default {
-  entry: 'src/abcui.js',
-  external: Object.keys(packageJson.dependencies),
-  plugins: [buble()],
-  targets: [
-    {
-      dest: packageJson['main'],
-      format: 'cjs',
-      sourceMap: true
-    },
-    {
-      dest: packageJson['module'],
-      format: 'es',
-      sourceMap: true
-    }
-  ]
+  external,
+  input: 'src/client/index.js',
+  output: [
+    { file: packageJson.main, format: 'cjs' },
+    { file: packageJson.module, format: 'es' }
+  ],
+  plugins: [babel(babelOpts)],
+  sourcemap: true
 }

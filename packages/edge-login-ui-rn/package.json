@@ -22,6 +22,9 @@
     "android/**"
   ],
   "main": "src/native/index.js",
+  "scripts": {
+    "prepare": ""
+  },
   "dependencies": {
     "material-ui": "^0.20.0",
     "moment": "^2.19.3",
