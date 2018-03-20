@@ -23,7 +23,11 @@ class View extends Component<ViewProps> {
     callbacks: {}
   }
 
-  onClose = () => this.props.state.clientDispatch({ type: 'close' })
+  onClose = () => {
+    this.props.state.page = ''
+    this.forceUpdate()
+    this.props.state.clientDispatch({ type: 'close' })
+  }
 
   onError = (e: Error) => {
     this.props.state.clientDispatch({ type: 'error', payload: e })
@@ -45,6 +49,8 @@ class View extends Component<ViewProps> {
   render () {
     const { state } = this.props
     switch (this.props.state.page) {
+      case '':
+        return null
       case 'login':
         return (
           <LoginScreen
