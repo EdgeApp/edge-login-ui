@@ -11,6 +11,10 @@ const PrimaryButtonUpStyle = {
   justifyContent: 'space-around',
   borderRadius: Constants.BUTTON_BORDER_RADIUS
 }
+const PrimaryWidthButtonUpStyle = {
+  ...PrimaryButtonUpStyle,
+  width: Constants.BUTTON_100_PERCENT
+}
 const PrimaryButtonUpTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
@@ -27,7 +31,6 @@ const PrimaryButtonDownTextStyle = {
   width: '100%',
   textAlign: 'center'
 }
-
 const PrimaryButtonDownStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_DOWN,
@@ -37,7 +40,10 @@ const PrimaryButtonDownStyle = {
   justifyContent: 'space-around',
   borderRadius: Constants.BUTTON_BORDER_RADIUS
 }
-
+const PrimaryWidthButtonDownStyle = {
+  ...PrimaryButtonDownStyle,
+  width: Constants.BUTTON_100_PERCENT
+}
 const SecondaryButtonUpStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_SECONDARY_UP,
@@ -108,6 +114,57 @@ const TertiaryButtonTextDownStyle = {
   fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
+}
+
+const DefaultButtonUpStyle = {
+  position: 'relative',
+  backgroundColor: Constants.BUTTON_DEFAULT_UP,
+  width: Constants.BUTTON_WIDTH_1,
+  height: Constants.BUTTON_HEIGHT,
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderColor: Constants.BUTTON_DEFAULT_UP_TEXT,
+  borderWidth: Constants.BUTTON_BORDER_STROKE,
+  borderRadius: Constants.BUTTON_BORDER_RADIUS
+}
+
+const DefaultWidthButtonUpStyle = {
+  ...DefaultButtonUpStyle,
+  width: Constants.BUTTON_100_PERCENT
+}
+
+const DefaultButtonUpTextStyle = {
+  position: 'relative',
+  color: Constants.BUTTON_DEFAULT_UP_TEXT,
+  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontFamily: Constants.FONTS.fontFamilyRegular,
+  width: '100%',
+  textAlign: 'center'
+}
+const DefaultButtonDownTextStyle = {
+  position: 'relative',
+  color: Constants.BUTTON_DEFAULT_DOWN_TEXT,
+  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontFamily: Constants.FONTS.fontFamilyRegular,
+  width: '100%',
+  textAlign: 'center'
+}
+
+const DefaultButtonDownStyle = {
+  position: 'relative',
+  backgroundColor: Constants.BUTTON_DEFAULT_UP,
+  width: Constants.BUTTON_WIDTH_1,
+  height: Constants.BUTTON_HEIGHT,
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderColor: Constants.BUTTON_DEFAULT_DOWN_TEXT,
+  borderWidth: Constants.BUTTON_BORDER_STROKE,
+  borderRadius: Constants.BUTTON_BORDER_RADIUS
+}
+
+const DefaultWidthButtonDownStyle = {
+  ...DefaultButtonDownStyle,
+  width: Constants.BUTTON_100_PERCENT
 }
 
 const TextOnlyButtonUpStyle = {
@@ -246,9 +303,11 @@ export { TextAndIconButtonAlignEdgesStyle }
 export { TextAndIconButtonStyle }
 export { IconButtonStyle }
 export { PrimaryButtonUpStyle }
+export { PrimaryWidthButtonUpStyle }
 export { PrimaryButtonUpTextStyle }
 export { PrimaryButtonDownTextStyle }
 export { PrimaryButtonDownStyle }
+export { PrimaryWidthButtonDownStyle }
 export { SecondaryButtonUpStyle }
 export { SecondaryButtonUpTextStyle }
 export { SecondaryButtonDownStyle }
@@ -257,6 +316,12 @@ export { TertiaryButtonUpStyle }
 export { TertiaryButtonTextUpStyle }
 export { TertiaryButtonDownStyle }
 export { TertiaryButtonTextDownStyle }
+export { DefaultButtonUpStyle }
+export { DefaultWidthButtonUpStyle }
+export { DefaultButtonUpTextStyle }
+export { DefaultButtonDownStyle }
+export { DefaultWidthButtonDownStyle }
+export { DefaultButtonDownTextStyle }
 export { TextOnlyButtonUpStyle }
 export { TextOnlyButtonTextUpStyle }
 export { TextOnlyButtonDownStyle }

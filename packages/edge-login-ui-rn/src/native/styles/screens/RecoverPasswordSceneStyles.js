@@ -77,16 +77,16 @@ const RecoverPasswordSceneStyles = {
     }
   },
   submitButton: {
-    upStyle: Styles.PrimaryButtonUpStyle,
+    upStyle: Styles.PrimaryWidthButtonUpStyle,
     upTextStyle: Styles.PrimaryButtonUpTextStyle,
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: Styles.PrimaryButtonDownStyle
+    downStyle: Styles.PrimaryWidthButtonDownStyle
   },
   disableButton: {
-    upStyle: Styles.TertiaryButtonUpStyle,
-    upTextStyle: Styles.TertiaryButtonTextUpStyle,
-    downTextStyle: Styles.TertiaryButtonTextDownStyle,
-    downStyle: Styles.TertiaryButtonDownStyle
+    upStyle: Styles.DefaultWidthButtonUpStyle,
+    upTextStyle: Styles.DefaultButtonUpTextStyle,
+    downTextStyle: Styles.DefaultButtonDownTextStyle,
+    downStyle: Styles.DefaultWidthButtonDownStyle
   },
   questionsList: {
     width: '100%',

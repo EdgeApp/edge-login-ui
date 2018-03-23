@@ -31,6 +31,8 @@ type StateProps = {
   showEmailDialog: boolean,
   isEnabled: boolean,
   submitButton: string,
+  doneButton: string,
+  saveButton: string,
   disableButton: string,
   username: string,
   questionsList: Array<string>
@@ -302,21 +304,21 @@ export default class PasswordRecovery extends Component<Props, State> {
         <View style={styles.buttonContainer}>
           <View style={styles.shim} />
           <Button
+            onPress={this.onSubmit}
+            downStyle={styles.submitButton.downStyle}
+            downTextStyle={styles.submitButton.downTextStyle}
+            upStyle={styles.submitButton.upStyle}
+            upTextStyle={styles.submitButton.upTextStyle}
+            label={this.props.saveButton}
+          />
+          <View style={styles.shim} />
+          <Button
             onPress={this.onDisable}
             downStyle={styles.disableButton.downStyle}
             downTextStyle={styles.disableButton.downTextStyle}
             upStyle={styles.disableButton.upStyle}
             upTextStyle={styles.disableButton.upTextStyle}
             label={this.props.disableButton}
-          />
-          <View style={styles.shim} />
-          <Button
-            onPress={this.onSubmit}
-            downStyle={styles.submitButton.downStyle}
-            downTextStyle={styles.submitButton.downTextStyle}
-            upStyle={styles.submitButton.upStyle}
-            upTextStyle={styles.submitButton.upTextStyle}
-            label={this.props.submitButton}
           />
         </View>
       )
@@ -330,7 +332,7 @@ export default class PasswordRecovery extends Component<Props, State> {
           downTextStyle={styles.submitButton.downTextStyle}
           upStyle={styles.submitButton.upStyle}
           upTextStyle={styles.submitButton.upTextStyle}
-          label={this.props.submitButton}
+          label={this.props.doneButton}
         />
       </View>
     )
