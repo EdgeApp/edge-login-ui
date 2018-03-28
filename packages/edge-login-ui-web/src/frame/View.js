@@ -8,7 +8,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 
 import type { FrameState } from './frame-state.js'
-import { getWalletInfos } from './frame-state.js'
+import { getLocalUsers, getWalletInfos } from './frame-state.js'
 
 type ViewProps = {
   state: FrameState
@@ -38,11 +38,12 @@ class View extends Component<ViewProps> {
     const accountId = `account${state.nextAccountId++}`
     state.accounts[accountId] = account
     const username = account.username
+    const localUsers = getLocalUsers(state)
     const walletInfos = getWalletInfos(state, accountId)
 
     return state.clientDispatch({
       type: 'login',
-      payload: { accountId, username, walletInfos }
+      payload: { accountId, username, localUsers, walletInfos }
     })
   }
 

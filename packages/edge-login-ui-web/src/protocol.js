@@ -1,6 +1,6 @@
 // @flow
 
-import type { EdgeWalletInfos } from './edge-types.js'
+import type { EdgeUserInfos, EdgeWalletInfos } from './edge-types.js'
 
 // We need this until post-robot ships with its own types:
 export type PostRobotEvent<Data> = {
@@ -27,6 +27,7 @@ export type ClientLogin = {
   type: 'login',
   payload: {
     accountId: string,
+    localUsers: EdgeUserInfos,
     username: string,
     walletInfos: EdgeWalletInfos
   }
@@ -95,6 +96,8 @@ export type FrameCreateWallet = (
 export type FrameDispatch = (message: FrameMessage) => mixed
 
 export type ConnectionReply = {
+  localUsers: EdgeUserInfos,
+
   createWallet: FrameCreateWallet,
   frameDispatch: FrameDispatch
 }

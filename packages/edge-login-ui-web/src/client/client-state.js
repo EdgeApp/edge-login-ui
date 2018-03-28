@@ -2,7 +2,7 @@
 
 import postRobot from 'post-robot'
 
-import type { EdgeWalletInfos } from '../edge-types.js'
+import type { EdgeUserInfos, EdgeWalletInfos } from '../edge-types.js'
 import type {
   ClientMessage,
   ConnectionMessage,
@@ -30,6 +30,7 @@ export type ClientState = {
   accounts: { [accountId: string]: AccountState },
   appId: string,
   frame: HTMLIFrameElement,
+  localUsers: EdgeUserInfos,
 
   // Client callbacks:
   onClose: ?() => mixed,
@@ -58,8 +59,9 @@ function clientDispatch (state: ClientState, message: ClientMessage) {
     }
 
     case 'login': {
-      const { accountId, username, walletInfos } = message.payload
+      const { accountId, localUsers, username, walletInfos } = message.payload
       state.accounts[accountId] = { username, walletInfos }
+      state.localUsers = localUsers
       const account = makeAccountApi(state, accountId)
 
       hideFrame(state.frame)
@@ -119,6 +121,7 @@ export function makeClientState (
         createWallet: reply.data.createWallet,
         frame,
         frameDispatch,
+        localUsers: reply.data.localUsers,
         onClose: void 0,
         onError,
         onLogin: void 0

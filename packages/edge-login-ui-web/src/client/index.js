@@ -3,7 +3,7 @@
 
 import type { EdgeWalletInfo } from 'edge-core-js'
 
-import type { EdgeWalletInfos } from '../edge-types.js'
+import type { EdgeUserInfos, EdgeWalletInfos } from '../edge-types.js'
 
 export { makeEdgeUiContext } from './client-context.js'
 
@@ -30,6 +30,8 @@ export type EdgeLoginWindowOptions = {
 
 export type EdgeUiContext = {
   dispose(): mixed,
+
+  localUsers: EdgeUserInfos,
   openLoginWindow(opts: EdgeLoginWindowOptions): Promise<mixed>
 }
 

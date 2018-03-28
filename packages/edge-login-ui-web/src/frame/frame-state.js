@@ -4,6 +4,7 @@ import type { EdgeAccount, EdgeContext, EdgeContextOptions } from 'edge-core-js'
 import { makeContext } from 'edge-core-js'
 import postRobot from 'post-robot'
 
+import type { EdgeUserInfos } from '../edge-types.js'
 import type {
   ClientDispatch,
   ConnectionMessage,
@@ -34,6 +35,22 @@ export type FrameState = {
 
   // Frame callbacks:
   clientDispatch: ClientDispatch
+}
+
+/**
+ * Builds a table of users that are available on this device.
+ */
+export async function getLocalUsers (state: FrameState): EdgeUserInfos {
+  const usernames: Array<string> = await state.context.listUsernames()
+
+  const out: EdgeUserInfos = {}
+  for (const username of usernames) {
+    out[username] = {
+      hasPin: await state.context.pinLoginEnabled(username),
+      username
+    }
+  }
+  return out
 }
 
 /**
@@ -116,8 +133,11 @@ export function awaitConnection () {
     ): Promise<ConnectionReply> => {
       const state = await makeFrameState(event.data)
       updateView(state)
+      const localUsers = await getLocalUsers(state)
 
       return {
+        localUsers,
+
         createWallet (accountId: string, type: string, keys: {}) {
           return state.accounts[accountId]
             .createWallet(type, keys)
