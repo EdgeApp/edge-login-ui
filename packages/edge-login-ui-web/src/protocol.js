@@ -1,6 +1,6 @@
 // @flow
 
-import type { EdgeWalletInfo } from 'edge-core-js'
+import type { EdgeWalletInfos } from './edge-types.js'
 
 // We need this until post-robot ships with its own types:
 export type PostRobotEvent<Data> = {
@@ -8,8 +8,6 @@ export type PostRobotEvent<Data> = {
   origin: string,
   source: Object
 }
-
-export type EdgeWalletInfos = { [walletId: string]: EdgeWalletInfo }
 
 // client -------------------------------------------------------------------
 

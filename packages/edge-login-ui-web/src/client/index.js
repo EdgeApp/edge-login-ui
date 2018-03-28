@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-use-before-define */
 
-import type { EdgeWalletInfo } from 'edge-core-js'
+import type { EdgeWalletInfos } from '../edge-types.js'
 
 export { makeEdgeUiContext } from './client-context.js'
 
@@ -50,6 +50,6 @@ export type EdgeUiAccount = {
   openManageWindow(opts?: EdgeManageWindowOptions): Promise<mixed>,
 
   // All wallet infos:
-  walletInfos: { [walletId: string]: EdgeWalletInfo },
+  walletInfos: EdgeWalletInfos,
   createWallet(type: string, keys: {}): Promise<string>
 }

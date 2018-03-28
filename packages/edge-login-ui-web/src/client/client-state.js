@@ -2,6 +2,7 @@
 
 import postRobot from 'post-robot'
 
+import type { EdgeWalletInfos } from '../edge-types.js'
 import type {
   ClientMessage,
   ConnectionMessage,
@@ -12,18 +13,14 @@ import type {
 } from '../protocol.js'
 import { makeAccountApi } from './client-account.js'
 import { hideFrame, makeFrame } from './iframe.js'
-import type {
-  EdgeUiAccount,
-  EdgeUiContextOptions,
-  EdgeWalletInfo
-} from './index.js'
+import type { EdgeUiAccount, EdgeUiContextOptions } from './index.js'
 
 /**
  * The state we store per-account.
  */
 export type AccountState = {
   username: string,
-  walletInfos: { [walletId: string]: EdgeWalletInfo }
+  walletInfos: EdgeWalletInfos
 }
 
 /**
