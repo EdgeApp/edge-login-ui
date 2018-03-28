@@ -1,5 +1,7 @@
 // @flow
 
+import type { EdgeWalletInfo } from 'edge-core-js'
+
 import type { ClientState } from './client-state.js'
 import { showFrame } from './iframe.js'
 import type { EdgeManageWindowOptions, EdgeUiAccount } from './index.js'
@@ -42,6 +44,7 @@ export function makeAccountApi (
     get walletInfos () {
       return account.walletInfos
     },
+
     createWallet (type: string, keys: {}): Promise<string> {
       return state
         .createWallet(accountId, type, keys)
@@ -49,6 +52,14 @@ export function makeAccountApi (
           account.walletInfos = walletInfos
           return walletId
         })
+    },
+
+    getFirstWallet (type: string): EdgeWalletInfo | null {
+      for (const walletId of Object.keys(account.walletInfos)) {
+        const walletInfo = account.walletInfos[walletId]
+        if (walletInfo.type === type) return walletInfo
+      }
+      return null
     }
   }
 }
