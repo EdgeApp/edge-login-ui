@@ -16,7 +16,7 @@ import { updateView } from './View.js'
 /**
  * Hacking around incorrect environment detection in the core.
  */
-function makeEdgeContext (opts) {
+function makeEdgeContext (opts: EdgeContextOptions) {
   return Promise.resolve(makeContext(opts))
 }
 
@@ -85,7 +85,7 @@ function frameDispatch (state: FrameState, message: FrameMessage) {
 /**
  * Creates the initial frame state object.
  */
-function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
+async function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
   const {
     apiKey,
     appId,
@@ -93,28 +93,31 @@ function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
     vendorImageUrl = '',
     clientDispatch
   } = opts
-  const coreOpts: EdgeContextOptions = { apiKey, appId }
+  const context = await makeEdgeContext({ apiKey, appId })
 
-  return makeEdgeContext(coreOpts).then(context => {
-    return {
-      accounts: {},
-      context,
-      nextAccountId: 0,
-      page: '',
-      pageAccountId: '',
-      vendorImageUrl,
-      vendorName,
+  return {
+    accounts: {},
+    context,
+    nextAccountId: 0,
+    page: '',
+    pageAccountId: '',
+    vendorImageUrl,
+    vendorName,
 
-      clientDispatch
-    }
-  })
+    clientDispatch
+  }
 }
 
 export function awaitConnection () {
-  return postRobot.on('connect', (event: PostRobotEvent<ConnectionMessage>) => {
-    return makeFrameState(event.data).then(state => {
+  return postRobot.on(
+    'connect',
+    async (
+      event: PostRobotEvent<ConnectionMessage>
+    ): Promise<ConnectionReply> => {
+      const state = await makeFrameState(event.data)
       updateView(state)
-      const reply: ConnectionReply = {
+
+      return {
         createWallet (accountId: string, type: string, keys: {}) {
           return state.accounts[accountId]
             .createWallet(type, keys)
@@ -128,7 +131,6 @@ export function awaitConnection () {
           return frameDispatch(state, message)
         }
       }
-      return reply
-    })
-  })
+    }
+  )
 }
