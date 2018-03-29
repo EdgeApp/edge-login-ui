@@ -9,6 +9,7 @@ import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import { Button, Checkbox } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+
 type Props = {
   styles: Object,
   accountObject: AbcAccount,
