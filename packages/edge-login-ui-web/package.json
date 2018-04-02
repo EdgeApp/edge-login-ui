@@ -1,12 +1,13 @@
 {
   "name": "edge-login-ui-web",
-  "version": "0.2.2",
-  "private": true,
+  "version": "0.2.3",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
-    "LICENSE",
     "assets",
     "lib",
+    "LICENSE",
+    "package.json",
+    "README.md",
     "src"
   ],
   "main": "lib/edge-login-ui-web.js",

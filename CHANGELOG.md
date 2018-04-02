@@ -1,5 +1,16 @@
 # airbitz-core-js-ui
 
+## 0.2.3
+
+* Publish `edge-login-ui-web`.
+* web: Fix the `copy-edge-assets` script.
+
+## 0.2.2
+
+* Publish `edge-login-ui-react`.
+* Fix minor visual glitches on the React Native login screens.
+* Begin preparing React Native login screens for localization.
+
 ## 0.2.1
 
 * Fix react-native build issues
