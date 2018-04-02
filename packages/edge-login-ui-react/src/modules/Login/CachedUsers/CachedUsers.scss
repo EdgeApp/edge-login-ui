@@ -1,0 +1,70 @@
+@import "~react-toolbox/lib/dropdown/theme.scss";
+
+.userList {
+  padding: 0;
+}
+
+.values {
+  overflow-y: auto;
+  padding: 0px;
+  max-height: 141px !important;
+  border-radius: 0px;
+}
+
+.cachedDropdownList {
+  max-width: inherit;
+  span {
+    &.useritem {
+      word-wrap: break-word;
+      overflow-x: auto;
+      display: inline;
+      width: calc(70% - 52px);
+    }
+    &.material-icons {
+      float: right;
+    }
+  }
+}
+
+.userrows {
+  height: 47px;
+  display: flex;
+  display: -webkit-flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid $color-grey-03;
+}
+
+.useritem {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  -webkit-flex: 1 0 auto;
+  flex: 1 0 auto;
+
+  z-index: 5;
+  padding: $unit;
+
+  color: $color-grey-02;
+  font-size: 16px;
+}
+
+.useritemSelected {
+  color: $color-accent-blue;
+}
+
+.userdelete {
+  display: flex;
+  display: -webkit-flex;
+
+  align-items: center;
+  -webkit-align-items: center;
+
+  z-index: 5;
+  padding: $unit;
+  float: right;
+}
+
+.userdelete:hover {
+  color: $color-accent-red;
+}

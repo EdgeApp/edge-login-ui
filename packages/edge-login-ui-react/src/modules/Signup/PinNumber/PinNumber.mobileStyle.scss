@@ -1,0 +1,63 @@
+@import "../../../theme/buttons.scss";
+@import "../../../theme/input.scss";
+
+.container {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  align-items: center;
+  -webkit-align-items: center;
+  padding: 20px;
+
+  .header {
+    color: $color-grey-02;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .input {
+    width: 120px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    span[class*="error"] {
+      display: block;
+      text-align: center;
+      margin: 0px auto;
+    }
+    input {
+      height: 40px;
+      font-size: 24px;
+      text-align: center;
+      color: $color-grey-03;
+      padding-bottom: 25px;
+    }
+  }
+
+  .inputed {
+    width: 120px;
+    span[class*="error"] {
+      display: block;
+      text-align: center;
+      margin: 0px auto;
+    }
+    input {
+      height: 40px;
+      text-align: center;
+      font-size: 55px;
+      color: $color-grey-02;
+      padding-bottom: 25px;
+    }
+  }
+
+  .text {
+    color: $color-grey-02;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+}

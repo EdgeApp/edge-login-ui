@@ -1,0 +1,10 @@
+{
+  "presets": ["env", "flow", "react"],
+  "plugins": [
+    "transform-async-to-generator",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "transform-regenerator",
+    ["transform-es2015-for-of", { "loose": true }]
+  ]
+}

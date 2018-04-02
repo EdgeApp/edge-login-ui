@@ -1,0 +1,187 @@
+@import "../../../theme/buttons.scss";
+@import "../../../theme/mobile.scss";
+@import "../../../theme/loader.scss";
+
+.container {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  align-items: center;
+  -webkit-align-items: center;
+  height: 325px;
+
+  .background {
+    background: $color-gradient;
+    height: 196px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+  }
+
+  .main {
+    position: absolute;
+    width: 100%;
+    height: 330px;
+    background: transparent;
+    padding: 20px 20px 0px 20px;
+
+    flex: 1;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    align-items: center;
+    -webkit-align-items: center;
+
+    .header {
+      color: $color-white;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .box {
+      @extend .margins;
+      height: 192px;
+      width: 100%;
+      border-radius: 3px;
+      background-color: $color-white;
+      box-shadow: 0 0 4px 0 rgba(37, 41, 44, 0.5);
+      padding: 10px 20px 0px 20px;
+
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      justify-content: center;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
+
+      .usernameContainer {
+        border-bottom: 1px solid $color-grey-02;
+
+        .label {
+          color: $color-grey-02;
+          font-size: 14px;
+          line-height: 16px;
+          margin-bottom: 5px;
+        }
+
+        .inputRow {
+          display: flex;
+          display: -webkit-flex;
+          flex-direction: row;
+          -webkit-flex-direction: row;
+          cursor: pointer;
+
+          .username {
+            width: 100%;
+            color: $color-grey-01;
+            font-size: 18px;
+            line-height: 24px;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .caret {
+            width: 10px;
+            height: 6px;
+            margin-top: 10px;
+            margin-left: 10px;
+          }
+        }
+      }
+
+      .containerClassName {
+        width: 100%;
+      }
+
+      .userListClassName {
+      }
+
+      .pinForm {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        -webkit-flex-direction: column;
+        justify-content: flex-start;
+        -webkit-justify-content: flex-start;
+        align-items: center;
+        -webkit-align-items: center;
+        margin-top: 25px;
+        height: 90px;
+
+        .loading {
+          @extend .loader;
+          width: 32px;
+          height: 32px;
+          border-top: 4px solid $color-secondary-navy;
+          border-right: 4px solid $color-secondary-navy;
+          border-bottom: 4px solid $color-secondary-navy;
+          border-left: 4px solid rgba(73, 119, 187, 0.4);
+        }
+
+        .pinLabel {
+          color: $color-grey-02;
+          font-size: 18px;
+          text-align: center;
+        }
+
+        .pinInput {
+          display: flex;
+          display: -webkit-flex;
+          flex-direction: column;
+          -webkit-flex-direction: column;
+          justify-content: center;
+          -webkit-justify-content: center;
+          align-items: center;
+          -webkit-align-items: center;
+          position: relative;
+          height: 65px;
+
+          .placeholder {
+            position: absolute;
+            font-size: 72px;
+            letter-spacing: 1px;
+            color: #f6f6f6;
+            margin-top: -14px;
+          }
+
+          .input {
+            width: 120px;
+            padding-top: 8px;
+
+            input {
+              color: $color-grey-02;
+              font-size: 69px;
+              letter-spacing: 2px;
+              padding-left: 14px;
+              padding-bottom: 26px;
+              height: 0px;
+            }
+            span[class*="error"] {
+              display: block;
+              text-align: center;
+              margin: 0px auto;
+              line-height: 22px;
+            }
+          }
+        }
+      }
+    }
+
+    .exitLink {
+      @extend .link;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  }
+}

@@ -1,0 +1,61 @@
+.container {
+  width: 500px;
+  border-radius: 3px;
+  background-color: $color-white;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+
+  section {
+    display: flex;
+    display: -webkit-flex;
+
+    flex-direction: column;
+    -webkit-flex-direction: column;
+
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    align-items: center;
+    -webkit-align-items: center;
+  }
+
+  .circle {
+    position: absolute;
+    width: 92px;
+    height: 92px;
+    border-color: $color-secondary-navy;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 46px;
+    background-color: $color-white;
+    top: -46px;
+    z-index: 5;
+
+    display: flex;
+    display: -webkit-flex;
+
+    flex-direction: column;
+    -webkit-flex-direction: column;
+
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    align-items: center;
+    -webkit-align-items: center;
+  }
+
+  .main {
+    padding: 66px 0px 40px 0;
+
+    display: flex;
+    display: -webkit-flex;
+
+    flex-direction: column;
+    -webkit-flex-direction: column;
+
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    align-items: center;
+    -webkit-align-items: center;
+  }
+}

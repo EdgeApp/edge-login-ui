@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="semi_black_text">#FF505050</color>
+    <color name="dark_text_hint">#990C578C</color>
+    <color name="warning_color">#f4511e</color>
+</resources>
