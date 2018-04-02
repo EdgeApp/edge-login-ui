@@ -3,6 +3,8 @@
 
 import type { EdgeWalletInfo } from 'edge-core-js'
 
+import type { EdgeWalletInfos } from '../edge-types.js'
+
 export { makeEdgeUiContext } from './client-context.js'
 
 // context ------------------------------------------------------------
@@ -50,6 +52,7 @@ export type EdgeUiAccount = {
   openManageWindow(opts?: EdgeManageWindowOptions): Promise<mixed>,
 
   // All wallet infos:
-  walletInfos: { [walletId: string]: EdgeWalletInfo },
-  createWallet(type: string, keys: {}): Promise<string>
+  walletInfos: EdgeWalletInfos,
+  createWallet(type: string, keys: {}): Promise<string>,
+  getFirstWallet(type: string): EdgeWalletInfo | null
 }
