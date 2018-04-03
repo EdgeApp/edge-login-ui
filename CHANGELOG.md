@@ -1,5 +1,10 @@
 # airbitz-core-js-ui
 
+## 0.2.4
+
+* web: Hack the library not to crash in node.js environments.
+* react: Upgrade vulnerable moment.js.
+
 ## 0.2.3
 
 * Publish `edge-login-ui-web`.
