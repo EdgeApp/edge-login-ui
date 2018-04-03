@@ -1,5 +1,9 @@
 # airbitz-core-js-ui
 
+## 0.2.5
+
+* web: Re-publish library due to packaging error.
+
 ## 0.2.4
 
 * web: Hack the library not to crash in node.js environments.
