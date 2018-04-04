@@ -1,5 +1,4 @@
 // @flow
-/** @jsx h */
 
 import type { EdgeAccount, EdgeContext, EdgeContextOptions } from 'edge-core-js'
 import { makeContext } from 'edge-core-js'
