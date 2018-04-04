@@ -32,7 +32,7 @@ export class Root extends Component<RootProps, RootState> {
 
     const assetsPath = /localhost/.test(window.location)
       ? 'http://localhost:11234/'
-      : '../assets/index.html'
+      : './iframe/index.html'
 
     // Create the Edge context:
     makeEdgeUiContext({
