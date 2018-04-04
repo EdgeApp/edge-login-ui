@@ -1,6 +1,6 @@
 # Edge Web Login UI
 
-This repo implements an iframe wrapper around `edge-login-ui-react`. It provides a simple, framework-agnostic way to do login and account management with just a small handful of Javascript API calls.
+This library provides a simple, framework-agnostic way to do login and account management with just a small handful of Javascript API calls.
 
 ## Basic usage for web
 
@@ -18,12 +18,12 @@ import { makeEdgeUiContext } from 'edge-login-ui-web'
 const { makeEdgeUiContext } = require('edge-login-ui-web')
 ```
 
-To get an API key, download the [Airbitz app](https://airbitz.co/app), create an account, and log in to the [Airbitz developer portal](https://developer.airbitz.co) using the "send" screen. Note: the new Edge app doesn't have BitID support yet, so the Airbitz app is still required for this step.
+To get an API key, download the [Airbitz app](https://airbitz.co/app), create an account, and log in to the [Airbitz developer portal](https://developer.airbitz.co) using the barcode scanner. Note: the new Edge app doesn't have BitID support yet, so the Airbitz app is still required for this step.
 
 Now you can initialize the library:
 
 ```js
-const edgeUiContext = makeEdgeUiContext({
+const edgeUiContext = await makeEdgeUiContext({
   'apiKey': 'api-key-here',
   'appId': 'com.mydomain.myapp',
   'assetsPath': '/path-to-assets/',
@@ -38,7 +38,7 @@ The Edge Login UI relies on an iframe for most of its functionality. You can ins
 copy-edge-assets <dest-directory>
 ```
 
-The `assetsPath` parameter to `makeEdgeUiContext` should point to the HTTP location of these files on your web server. If you want to isolate your application code from access to the account credentials, you should also consider hosting this content on a different domain from your main application.
+The `assetsPath` parameter to `makeEdgeUiContext` should point to the HTTP location of these files on your web server. If you want to firewall your application code from having access to the Edge account credentials, just host the iframe content on a different domain from your main application.
 
 To create an overlay popup where a user can register a new account or log in to a previously created account via password or PIN, do:
 
@@ -70,26 +70,26 @@ edgeUiAccount.openManageWindow({
 You can also use the account object to manage wallets (each with their own private key):
 
 ```js
-// Find the first Ethereum wallet in the account:
-const edgeWalletInfo = edgeUiAccount.getFirstWalletInfo('wallet:ethereum')
+async function getAppPrivateKey (edgeUiAccount) {
+  // Find the first Ethereum wallet in the account:
+  const edgeWalletInfo = edgeUiAccount.getFirstWalletInfo('wallet:ethereum')
 
-if (edgeWalletInfo != null) {
-  // We have a wallet, so grab the private key:
-  const privateKey = edgeWalletInfo.keys.ethereumKey
-} else {
+  // If an Ethereum wallet already exists, return its key:
+  if (edgeWalletInfo != null) {
+    return edgeWalletInfo.keys.ethereumKey
+  }
+
   // There are no Ethereum wallets, so make one:
   const keys = {
     ethereumKey: new Buffer(secureRandom(32)).toString('hex')
   }
-  edgeUiAccount.createWallet("wallet:ethereum", keys).then(walletId => {
-    const edgeWalletInfo = edgeUiAccount.walletInfos[walletId]
-    const privateKey = edgeWalletInfo.keys.ethereumKey
-    // Now you can do whatever you like with the key...
-  })
+  const walletId = await edgeUiAccount.createWallet("wallet:ethereum", keys)
+  const edgeWalletInfo = edgeUiAccount.walletInfos[walletId]
+  return edgeWalletInfo.keys.ethereumKey
 }
 ```
 
-The `privateKey` can then be used as a secure source of entropy for this wallet within your app.
+The returned key can then be used as a secure source of entropy for this wallet within your app.
 
 To log a user out, do:
 
@@ -99,9 +99,9 @@ edgeUiAccount.logout()
 
 ## Demo App
 
-This project contains a demo application in the `src/demo` directory. You can launch this demo using the `npm start` command.
+This project contains a demo application in the `src/demo` directory. You can launch this demo using the `yarn start` command. You can also find the [demo](https://developer.airbitz.co/jsuisample) on our website.
 
-Loading the iframe might time out the first time you launch the demo, since bundling can take a while. If the "Login With Edge" button does not turn blue after 5 seconds, just reload the page and it will work. In production, this content would already be bundled and being served statically.
+If the "Login With Edge" button does not turn blue after 10 seconds, just reload the page and it will work. Building the iframe can take a while the first time the demo loads, so things can time out. This would not be a problem in production where the iframe is already built.
 
 # Detailed Docs
 
