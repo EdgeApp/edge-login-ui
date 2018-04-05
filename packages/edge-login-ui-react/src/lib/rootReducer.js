@@ -106,18 +106,11 @@ const store = combineReducers({
     error: ChangePin.error
   }),
   passwordRecovery: combineReducers({
-    view: PasswordRecovery.view,
-    viewToken: PasswordRecovery.viewToken,
-    viewFinishModal: PasswordRecovery.viewFinishModal,
-    finishButton: PasswordRecovery.finishButton,
     questions: PasswordRecovery.questions,
     firstQuestion: PasswordRecovery.firstQuestion,
     firstAnswer: PasswordRecovery.firstAnswer,
     secondQuestion: PasswordRecovery.secondQuestion,
     secondAnswer: PasswordRecovery.secondAnswer,
-    password: PasswordRecovery.password,
-    token: PasswordRecovery.token,
-    email: PasswordRecovery.email,
     error: combineReducers({
       firstQuestion: PasswordRecovery.errorFirstQuestion,
       secondQuestion: PasswordRecovery.errorSecondQuestion,
