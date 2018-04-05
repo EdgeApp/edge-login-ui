@@ -45,6 +45,7 @@
     "react": "~15.4.2",
     "react-dom": "^15.4.2",
     "react-json-view": "^1.16.1",
+    "regenerator-runtime": "^0.11.1",
     "rimraf": "^2.6.1",
     "rollup": "0.48.0",
     "rollup-plugin-babel": "^3.0.2"

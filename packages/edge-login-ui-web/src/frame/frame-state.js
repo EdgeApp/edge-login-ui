@@ -1,10 +1,10 @@
 // @flow
-/** @jsx h */
 
 import type { EdgeAccount, EdgeContext, EdgeContextOptions } from 'edge-core-js'
 import { makeContext } from 'edge-core-js'
 import postRobot from 'post-robot'
 
+import type { EdgeUserInfos } from '../edge-types.js'
 import type {
   ClientDispatch,
   ConnectionMessage,
@@ -17,7 +17,7 @@ import { updateView } from './View.js'
 /**
  * Hacking around incorrect environment detection in the core.
  */
-function makeEdgeContext (opts) {
+function makeEdgeContext (opts: EdgeContextOptions) {
   return Promise.resolve(makeContext(opts))
 }
 
@@ -35,6 +35,22 @@ export type FrameState = {
 
   // Frame callbacks:
   clientDispatch: ClientDispatch
+}
+
+/**
+ * Builds a table of users that are available on this device.
+ */
+export async function getLocalUsers (state: FrameState): EdgeUserInfos {
+  const usernames: Array<string> = await state.context.listUsernames()
+
+  const out: EdgeUserInfos = {}
+  for (const username of usernames) {
+    out[username] = {
+      hasPin: await state.context.pinLoginEnabled(username),
+      username
+    }
+  }
+  return out
 }
 
 /**
@@ -86,7 +102,7 @@ function frameDispatch (state: FrameState, message: FrameMessage) {
 /**
  * Creates the initial frame state object.
  */
-function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
+async function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
   const {
     apiKey,
     appId,
@@ -94,28 +110,34 @@ function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
     vendorImageUrl = '',
     clientDispatch
   } = opts
-  const coreOpts: EdgeContextOptions = { apiKey, appId }
+  const context = await makeEdgeContext({ apiKey, appId })
 
-  return makeEdgeContext(coreOpts).then(context => {
-    return {
-      accounts: {},
-      context,
-      nextAccountId: 0,
-      page: '',
-      pageAccountId: '',
-      vendorImageUrl,
-      vendorName,
+  return {
+    accounts: {},
+    context,
+    nextAccountId: 0,
+    page: '',
+    pageAccountId: '',
+    vendorImageUrl,
+    vendorName,
 
-      clientDispatch
-    }
-  })
+    clientDispatch
+  }
 }
 
 export function awaitConnection () {
-  return postRobot.on('connect', (event: PostRobotEvent<ConnectionMessage>) => {
-    return makeFrameState(event.data).then(state => {
+  return postRobot.on(
+    'connect',
+    async (
+      event: PostRobotEvent<ConnectionMessage>
+    ): Promise<ConnectionReply> => {
+      const state = await makeFrameState(event.data)
       updateView(state)
-      const reply: ConnectionReply = {
+      const localUsers = await getLocalUsers(state)
+
+      return {
+        localUsers,
+
         createWallet (accountId: string, type: string, keys: {}) {
           return state.accounts[accountId]
             .createWallet(type, keys)
@@ -129,7 +151,6 @@ export function awaitConnection () {
           return frameDispatch(state, message)
         }
       }
-      return reply
-    })
-  })
+    }
+  )
 }

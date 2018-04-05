@@ -2,6 +2,21 @@
 
 import type { EdgeUiAccount, EdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
+import ReactJson from 'react-json-view'
+
+function ContextInfo (props: { context: EdgeUiContext | void }) {
+  if (!props.context) return null
+  if (!Object.keys(props.context.localUsers).length) return null
+
+  return (
+    <ReactJson
+      displayDataTypes={false}
+      displayObjectSize={false}
+      name="localUsers"
+      src={props.context.localUsers}
+    />
+  )
+}
 
 export type WelcomeProps = {
   context: EdgeUiContext | void,
@@ -23,6 +38,7 @@ export class WelcomeScene extends Component<WelcomeProps> {
             Login With Edge
           </button>
         </p>
+        <ContextInfo context={this.props.context} />
       </div>
     )
   }
