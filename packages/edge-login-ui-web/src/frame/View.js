@@ -7,8 +7,8 @@ import { AccountScreen, LoginScreen } from 'edge-login-ui-react'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
+import { getLocalUsers, getWalletInfos } from './frame-selectors.js'
 import type { FrameState } from './frame-state.js'
-import { getLocalUsers, getWalletInfos } from './frame-state.js'
 
 type ViewProps = {
   state: FrameState

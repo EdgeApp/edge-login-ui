@@ -4,7 +4,6 @@ import type { EdgeAccount, EdgeContext, EdgeContextOptions } from 'edge-core-js'
 import { makeContext } from 'edge-core-js'
 import postRobot from 'post-robot'
 
-import type { EdgeUserInfos } from '../edge-types.js'
 import type {
   ClientDispatch,
   ConnectionMessage,
@@ -12,6 +11,7 @@ import type {
   FrameMessage,
   PostRobotEvent
 } from '../protocol.js'
+import { getLocalUsers, getWalletInfos } from './frame-selectors.js'
 import { updateView } from './View.js'
 
 /**
@@ -35,41 +35,6 @@ export type FrameState = {
 
   // Frame callbacks:
   clientDispatch: ClientDispatch
-}
-
-/**
- * Builds a table of users that are available on this device.
- */
-export async function getLocalUsers (state: FrameState): EdgeUserInfos {
-  const usernames: Array<string> = await state.context.listUsernames()
-
-  const out: EdgeUserInfos = {}
-  for (const username of usernames) {
-    out[username] = {
-      hasPin: await state.context.pinLoginEnabled(username),
-      username
-    }
-  }
-  return out
-}
-
-/**
- * Grabs the wallet infos out of an account object, sanitizing them as needed.
- */
-export function getWalletInfos (state: FrameState, accountId: string) {
-  const account = state.accounts[accountId]
-  const locked: boolean = false
-
-  const out = {}
-  for (const walletInfo of account.allKeys) {
-    const { type, id, archived, deleted, sortIndex } = walletInfo
-    out[walletInfo.id] = { type, id, archived, deleted, sortIndex }
-    if (!locked) {
-      out[walletInfo.id].keys = walletInfo.keys
-      out[walletInfo.id].appIds = walletInfo.appIds
-    }
-  }
-  return out
 }
 
 function frameDispatch (state: FrameState, message: FrameMessage) {
