@@ -29,7 +29,7 @@ export type FrameState = {
   context: EdgeContext,
   nextAccountId: number,
   page: '' | 'login' | 'account',
-  pageAccountId: string,
+  pageAccount: EdgeAccount | null,
   vendorImageUrl: string,
   vendorName: string,
 
@@ -41,6 +41,8 @@ function frameDispatch (state: FrameState, message: FrameMessage) {
   switch (message.type) {
     case 'logout': {
       const { accountId } = message.payload
+      if (!state.accounts[accountId]) throw new Error('Invalid accountId')
+
       state.accounts[accountId].logout()
       delete state.accounts[accountId]
       return
@@ -48,14 +50,17 @@ function frameDispatch (state: FrameState, message: FrameMessage) {
 
     case 'open-login-window': {
       state.page = 'login'
+      state.pageAccount = null
       updateView(state)
       return
     }
 
     case 'open-manage-window': {
-      state.page = 'account'
       const { accountId } = message.payload
-      state.pageAccountId = accountId
+      if (!state.accounts[accountId]) throw new Error('Invalid accountId')
+
+      state.page = 'account'
+      state.pageAccount = state.accounts[accountId]
       updateView(state)
       return
     }
@@ -82,7 +87,7 @@ async function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
     context,
     nextAccountId: 0,
     page: '',
-    pageAccountId: '',
+    pageAccount: null,
     vendorImageUrl,
     vendorName,
 
