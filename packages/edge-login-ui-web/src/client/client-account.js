@@ -54,12 +54,18 @@ export function makeAccountApi (
         })
     },
 
-    getFirstWallet (type: string): EdgeWalletInfo | null {
+    getFirstWalletInfo (type: string): EdgeWalletInfo | null {
       for (const walletId of Object.keys(account.walletInfos)) {
         const walletInfo = account.walletInfos[walletId]
         if (walletInfo.type === type) return walletInfo
       }
       return null
+    },
+
+    // Deprecated stuff:
+    getFirstWallet (type: string) {
+      console.warn('EdgeUiAccount.getFirstWallet is deprecated')
+      return this.getFirstWalletInfo(type)
     }
   }
 }
