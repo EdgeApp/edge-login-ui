@@ -138,7 +138,7 @@ export const edgeLogin = callback => {
   }
 }
 
-const errorHandling = (name) => {
+const errorHandling = name => {
   switch (name) {
     case 'NetworkError':
       return 'server_error_timeout'
