@@ -13,7 +13,7 @@ export default () => (
       <div className={styles.mid}>
         <p className={styles.text}>
           <a
-            href="https://airbitz.co/app"
+            href="https://edgesecure.co/"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -24,7 +24,7 @@ export default () => (
       <p className={styles.right}>
         Powered by{' '}
         <a
-          href="https://airbitz.co/app"
+          href="https://edgesecure.co/"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.airbitzLink}
