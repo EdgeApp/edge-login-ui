@@ -6,7 +6,6 @@
     "format": "import-sort -l --write 'packages/*/*.js' 'packages/*/src/**/*.js'; prettier-eslint --write 'packages/*/*.js' 'packages/*/src/**/*.js'",
     "lint": "eslint 'packages/*/*.js' 'packages/*/src/**/*.js'",
     "prepare": "lerna exec yarn prepare"
-
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
