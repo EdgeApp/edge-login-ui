@@ -1,5 +1,9 @@
 # airbitz-core-js-ui
 
+## 0.2.7
+
+* web: Re-publish due to Lerna bug.
+
 ## 0.2.6
 
 * all: Fix build scripts to work correctly on Windows.
