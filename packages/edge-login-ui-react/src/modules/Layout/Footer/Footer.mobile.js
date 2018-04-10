@@ -8,7 +8,7 @@ export default () => (
     <div className={styles.text1Container}>
       <p className={styles.text1}>
         <a
-          href="https://airbitz.co/app"
+          href="https://edgesecure.co/"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -22,7 +22,7 @@ export default () => (
       <p className={styles.text2}>
         Powered by{' '}
         <a
-          href="https://airbitz.co/app"
+          href="https://edgesecure.co/"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.link}

@@ -17,7 +17,7 @@ export default ({ view, close }) => (
         href="https://airbitz.co/app"
         className={styles.linked}
       >
-        https://airbitz.co/app
+        https://edgesecure.co/
       </a>
     </p>
     <br />

@@ -170,6 +170,7 @@ const strings = {
   account_needs_password_title: 'WARNING: missing password',
   account_needs_password_message:
     'Account [{0}] needs a password. Account is not accessible on a new device without a password.',
+  server_error_timeout: 'Network cannot be reached. Please try again later',
 
   //  Strings related to Landing
   fragment_landing_logo_description: 'An image of the logo',
@@ -313,6 +314,8 @@ const strings = {
     'The given answers were incorrect. Please try again',
   activity_recovery_error_answer_length:
     'Answer does not meet length requirements',
+  activity_recovery_error_answer_length_specific:
+    'Answers should be minimum of 4 characters',
   activity_recovery_error_questions_different:
     'Please select 2 different questions',
   activity_recovery_error_password: 'Password does not match',
