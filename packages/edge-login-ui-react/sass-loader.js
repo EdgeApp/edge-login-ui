@@ -6,9 +6,11 @@ import resolve from 'resolve'
 
 const moduleRe = /^~([a-z0-9]|@).+/i
 
-// Copied from rollup-plugin-postcss,
-// then hacked to inject the react-toolbox theme into every file.
+// We need to hack the following file into every other CSS file:
+const injectFile = path.resolve(__dirname, 'src/theme/_config.scss')
 
+// Copied from rollup-plugin-postcss,
+// then hacked to inject the react-toolbox theme into every file:
 export default {
   name: 'sass',
   test: /\.s[ac]ss$/,
@@ -16,9 +18,7 @@ export default {
     const res = await pify(sass.render.bind(sass))(
       Object.assign({}, this.options, {
         file: this.id,
-        data:
-          `@import "${path.resolve(__dirname, 'src/theme/_config.scss')}";` +
-          code,
+        data: `@import "${injectFile.replace(/\\/g, '\\\\')}";` + code,
         indentedSyntax: /\.sass$/.test(this.id),
         sourceMap: this.sourceMap,
         importer: [

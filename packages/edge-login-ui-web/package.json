@@ -1,6 +1,6 @@
 {
   "name": "edge-login-ui-web",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
     "assets",
@@ -17,9 +17,9 @@
   },
   "scripts": {
     "build": "npm-run-all -p build:lib build:frame -s build:demo",
-    "build:demo": "rimraf dist && parcel build --public-url ./ src/demo/index.html",
+    "build:demo": "rimraf dist && parcel build --public-url ./ src/demo/index.html && node ./src/copy-edge-assets.js ./dist/iframe",
     "build:frame": "rimraf assets && parcel build --public-url ./ -d assets src/frame/index.html",
-    "build:lib": "rimraf lib && rollup -c && cp flow-entry lib/edge-login-ui-web.js.flow && ./hack-entry-point.js",
+    "build:lib": "rimraf lib && rollup -c && cpr flow-entry lib/edge-login-ui-web.js.flow && node ./hack-entry-point.js",
     "prepare": "npm-run-all -p build:lib build:frame",
     "start": "npm-run-all -p start:*",
     "start:demo": "parcel --open src/demo/index.html",
@@ -33,18 +33,22 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
     "edge-core-js": "^0.6.0",
-    "edge-login-ui-react": "^0.2.4",
+    "edge-login-ui-react": "^0.2.6",
     "flow-bin": "^0.62.0",
     "npm-run-all": "^4.1.2",
     "parcel-bundler": "^1.6.2",
     "react": "~15.4.2",
     "react-dom": "^15.4.2",
     "react-json-view": "^1.16.1",
+    "regenerator-runtime": "^0.11.1",
     "rimraf": "^2.6.1",
     "rollup": "0.48.0",
     "rollup-plugin-babel": "^3.0.2"

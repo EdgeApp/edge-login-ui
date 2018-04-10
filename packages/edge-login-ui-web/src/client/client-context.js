@@ -27,6 +27,10 @@ function makeContextApi (state: ClientState): EdgeUiContext {
       state.frame.remove()
     },
 
+    get localUsers () {
+      return state.localUsers
+    },
+
     openLoginWindow (opts: EdgeLoginWindowOptions = {}) {
       state.onClose = opts.onClose
       state.onLogin = opts.onLogin

@@ -1,5 +1,4 @@
 // @flow
-/** @jsx h */
 
 import type { EdgeAccount, EdgeContext, EdgeContextOptions } from 'edge-core-js'
 import { makeContext } from 'edge-core-js'
@@ -12,12 +11,13 @@ import type {
   FrameMessage,
   PostRobotEvent
 } from '../protocol.js'
+import { getLocalUsers, getWalletInfos } from './frame-selectors.js'
 import { updateView } from './View.js'
 
 /**
  * Hacking around incorrect environment detection in the core.
  */
-function makeEdgeContext (opts) {
+function makeEdgeContext (opts: EdgeContextOptions) {
   return Promise.resolve(makeContext(opts))
 }
 
@@ -29,7 +29,7 @@ export type FrameState = {
   context: EdgeContext,
   nextAccountId: number,
   page: '' | 'login' | 'account',
-  pageAccountId: string,
+  pageAccount: EdgeAccount | null,
   vendorImageUrl: string,
   vendorName: string,
 
@@ -37,29 +37,12 @@ export type FrameState = {
   clientDispatch: ClientDispatch
 }
 
-/**
- * Grabs the wallet infos out of an account object, sanitizing them as needed.
- */
-export function getWalletInfos (state: FrameState, accountId: string) {
-  const account = state.accounts[accountId]
-  const locked: boolean = false
-
-  const out = {}
-  for (const walletInfo of account.allKeys) {
-    const { type, id, archived, deleted, sortIndex } = walletInfo
-    out[walletInfo.id] = { type, id, archived, deleted, sortIndex }
-    if (!locked) {
-      out[walletInfo.id].keys = walletInfo.keys
-      out[walletInfo.id].appIds = walletInfo.appIds
-    }
-  }
-  return out
-}
-
 function frameDispatch (state: FrameState, message: FrameMessage) {
   switch (message.type) {
     case 'logout': {
       const { accountId } = message.payload
+      if (!state.accounts[accountId]) throw new Error('Invalid accountId')
+
       state.accounts[accountId].logout()
       delete state.accounts[accountId]
       return
@@ -67,14 +50,17 @@ function frameDispatch (state: FrameState, message: FrameMessage) {
 
     case 'open-login-window': {
       state.page = 'login'
+      state.pageAccount = null
       updateView(state)
       return
     }
 
     case 'open-manage-window': {
-      state.page = 'account'
       const { accountId } = message.payload
-      state.pageAccountId = accountId
+      if (!state.accounts[accountId]) throw new Error('Invalid accountId')
+
+      state.page = 'account'
+      state.pageAccount = state.accounts[accountId]
       updateView(state)
       return
     }
@@ -86,7 +72,7 @@ function frameDispatch (state: FrameState, message: FrameMessage) {
 /**
  * Creates the initial frame state object.
  */
-function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
+async function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
   const {
     apiKey,
     appId,
@@ -94,28 +80,34 @@ function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
     vendorImageUrl = '',
     clientDispatch
   } = opts
-  const coreOpts: EdgeContextOptions = { apiKey, appId }
+  const context = await makeEdgeContext({ apiKey, appId })
 
-  return makeEdgeContext(coreOpts).then(context => {
-    return {
-      accounts: {},
-      context,
-      nextAccountId: 0,
-      page: '',
-      pageAccountId: '',
-      vendorImageUrl,
-      vendorName,
+  return {
+    accounts: {},
+    context,
+    nextAccountId: 0,
+    page: '',
+    pageAccount: null,
+    vendorImageUrl,
+    vendorName,
 
-      clientDispatch
-    }
-  })
+    clientDispatch
+  }
 }
 
 export function awaitConnection () {
-  return postRobot.on('connect', (event: PostRobotEvent<ConnectionMessage>) => {
-    return makeFrameState(event.data).then(state => {
+  return postRobot.on(
+    'connect',
+    async (
+      event: PostRobotEvent<ConnectionMessage>
+    ): Promise<ConnectionReply> => {
+      const state = await makeFrameState(event.data)
       updateView(state)
-      const reply: ConnectionReply = {
+      const localUsers = await getLocalUsers(state)
+
+      return {
+        localUsers,
+
         createWallet (accountId: string, type: string, keys: {}) {
           return state.accounts[accountId]
             .createWallet(type, keys)
@@ -129,7 +121,6 @@ export function awaitConnection () {
           return frameDispatch(state, message)
         }
       }
-      return reply
-    })
-  })
+    }
+  )
 }

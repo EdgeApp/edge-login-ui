@@ -20,7 +20,7 @@ export const checkPasswordRecovery = (payload, callback) => {
       callback(
         {
           type: 'firstAnswer',
-          message: t('activity_recovery_error_answer_length')
+          message: t('activity_recovery_error_answer_length_specific')
         },
         null
       )
@@ -40,7 +40,7 @@ export const checkPasswordRecovery = (payload, callback) => {
       callback(
         {
           type: 'secondAnswer',
-          message: t('activity_recovery_error_answer_length')
+          message: t('activity_recovery_error_answer_length_specific')
         },
         null
       )

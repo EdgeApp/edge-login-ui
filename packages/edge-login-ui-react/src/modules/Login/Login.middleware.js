@@ -22,18 +22,12 @@ export const loginWithPassword = (username, password, callback) => {
       context.loginWithPassword(username, password, null, (error, account) => {
         if (error) {
           dispatch(closeLoading())
-          const type =
-            error.name === 'OtpError'
-              ? 'server_error_bad_otp'
-              : 'server_error_bad_password'
-          // dispatch(openErrorModal(t(type)))
-
           if (error.wait > 0) {
             const currentWaitSpan = error.wait
             const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
             enableTimer(reEnableLoginTime, 'password', dispatch)
           }
-          return callback(t(type), null)
+          return callback(t(errorHandling(error.name)), null)
         }
         if (!error) {
           localStorage.setItem('lastUser', username)
@@ -57,7 +51,6 @@ export const loginWithPin = (username, pin, callback) => {
       context.loginWithPIN(username, pin, undefined, (error, account) => {
         dispatch(closeLoading())
         if (error) {
-          // dispatch(openErrorModal(t('server_error_bad_pin')))
           if (error.wait > 0) {
             const currentWaitSpan = error.wait
             const reEnableLoginTime = Date.now() + currentWaitSpan * 1000
@@ -142,5 +135,20 @@ export const edgeLogin = callback => {
         }
       }
     )
+  }
+}
+
+const errorHandling = name => {
+  switch (name) {
+    case 'NetworkError':
+      return 'server_error_timeout'
+    case 'UsernameError':
+      return 'server_error_bad_password'
+    case 'PasswordError':
+      return 'server_error_bad_password'
+    case 'OtpError':
+      return 'server_error_bad_otp'
+    default:
+      return 'server_error_other'
   }
 }

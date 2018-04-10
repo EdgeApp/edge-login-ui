@@ -41,8 +41,6 @@ export const newPassword = (state = '', action) => {
       return action.data
     case ACTION.PASSWORD_CHANGED:
       return ''
-    case ACTION.NOTIFY_SUCCESS_PASSWORD_CHANGED:
-      return true
     default:
       return state
   }
