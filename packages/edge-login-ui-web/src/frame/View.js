@@ -7,8 +7,8 @@ import { AccountScreen, LoginScreen } from 'edge-login-ui-react'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
+import { getLocalUsers, getWalletInfos } from './frame-selectors.js'
 import type { FrameState } from './frame-state.js'
-import { getLocalUsers, getWalletInfos } from './frame-state.js'
 
 type ViewProps = {
   state: FrameState
@@ -49,33 +49,34 @@ class View extends Component<ViewProps> {
 
   render () {
     const { state } = this.props
-    switch (this.props.state.page) {
-      case '':
-        return null
-      case 'login':
-        return (
-          <LoginScreen
-            accountOptions={this.accountOptions}
-            context={state.context}
-            onClose={this.onClose}
-            onError={this.onError}
-            onLogin={this.onLogin}
-            vendorImageUrl={state.vendorImageUrl}
-            vendorName={state.vendorName}
-          />
-        )
-      case 'account':
-        return (
-          <AccountScreen
-            account={state.accounts[state.pageAccountId]}
-            context={state.context}
-            onClose={this.onClose}
-            onError={this.onError}
-            vendorImageUrl={state.vendorImageUrl}
-            vendorName={state.vendorName}
-          />
-        )
+
+    if (state.page === 'login') {
+      return (
+        <LoginScreen
+          accountOptions={this.accountOptions}
+          context={state.context}
+          onClose={this.onClose}
+          onError={this.onError}
+          onLogin={this.onLogin}
+          vendorImageUrl={state.vendorImageUrl}
+          vendorName={state.vendorName}
+        />
+      )
     }
+
+    if (state.page === 'account' && state.pageAccount) {
+      return (
+        <AccountScreen
+          account={state.pageAccount}
+          context={state.context}
+          onClose={this.onClose}
+          onError={this.onError}
+          vendorImageUrl={state.vendorImageUrl}
+          vendorName={state.vendorName}
+        />
+      )
+    }
+
     return null
   }
 }
