@@ -1,5 +1,13 @@
 # airbitz-core-js-ui
 
+## 0.2.6
+
+* all: Fix build scripts to work correctly on Windows.
+* rn: Fix corrupted header on 2fa screen.
+* web: Fix various typos and visual glitches.
+* web: Add a user list to the `EdgeUiContext` object.
+* web: Rename `EdgeUiAccount.getFirstWallet` to `getFirstWalletInfo`.
+
 ## 0.2.5
 
 * web: Re-publish library due to packaging error.
