@@ -1,6 +1,11 @@
 // @flow
 
-import type { EdgeUiContext, EdgeUiContextOptions } from 'edge-login-ui-web'
+import type {
+  EdgeUiAccount,
+  EdgeUiContext,
+  EdgeUiContextOptions,
+  EdgeWalletInfo
+} from 'edge-login-ui-web'
 import { makeEdgeUiContext } from 'edge-login-ui-web'
 
 // Customize these constants for your own application:
@@ -30,4 +35,34 @@ export function prepareContext (): Promise<EdgeUiContext> {
   }
 
   return makeEdgeUiContext(options)
+}
+
+/**
+ * Makes an Edge account ready for the application to use
+ * by ensuring that it contains the necessary private keys.
+ */
+export function prepareAccount (
+  account: EdgeUiAccount
+): Promise<EdgeWalletInfo> {
+  // Find the first Ethereum wallet in the account:
+  const walletInfo = account.getFirstWalletInfo('wallet:ethereum')
+
+  // If the account already has the necessary wallet, just return its info:
+  if (walletInfo != null) {
+    return Promise.resolve(walletInfo)
+  }
+
+  // If there is no Ethereum wallet, make one and return its info:
+  const keys = {
+    ethereumKey: Buffer.from(secureRandom(32)).toString('hex')
+  }
+  return account
+    .createWallet('wallet:ethereum', keys)
+    .then(walletId => account.walletInfos[walletId])
+}
+
+function secureRandom (size) {
+  const out = new Uint8Array(size)
+  window.crypto.getRandomValues(out)
+  return out
 }

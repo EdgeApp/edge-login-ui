@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 
 import { Layout } from './components/Layout.js'
-import { prepareContext } from './edgeHelpers.js'
+import { prepareAccount, prepareContext } from './edgeHelpers.js'
 import { restoreCachedState } from './hmrCache.js'
 
 // Props and state for the root component:
@@ -32,7 +32,8 @@ class Root extends Component<RootProps, RootState> {
 
   // Event handlers:
   onLogin = (account: EdgeUiAccount) => {
-    this.setState({ account })
+    // Make sure the account has the keys we need before finishing the login:
+    prepareAccount(account).then(() => this.setState({ account }))
   }
   onLogout = () => {
     this.setState({ account: void 0 })
