@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 
 import { prepareContext } from './edgeHelpers.js'
+import { restoreCachedState } from './hmrCache.js'
 import { AccountScene } from './scenes/AccountScene.js'
 import { WelcomeScene } from './scenes/WelcomeScene.js'
 
@@ -22,16 +23,12 @@ export type RootState = {
 class Root extends Component<RootProps, RootState> {
   constructor (props: RootProps) {
     super(props)
-    this.state = { account: void 0, context: void 0 }
 
-    // Create the Edge context:
-    prepareContext().then(context => {
-      this.setState({ context })
-
-      // Close the context if our page reloads during development:
-      // $FlowFixMe
-      if (module.hot) module.hot.dispose(() => context.dispose())
-    })
+    // Create the Edge context on the initial page load:
+    if (!restoreCachedState(module, this)) {
+      this.state = { account: void 0, context: void 0 }
+      prepareContext().then(context => this.setState({ context }))
+    }
   }
 
   // Event handlers:
