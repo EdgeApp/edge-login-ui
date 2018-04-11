@@ -4,10 +4,9 @@ import type { EdgeUiAccount, EdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
+import { Layout } from './components/Layout.js'
 import { prepareContext } from './edgeHelpers.js'
 import { restoreCachedState } from './hmrCache.js'
-import { AccountScene } from './scenes/AccountScene.js'
-import { WelcomeScene } from './scenes/WelcomeScene.js'
 
 // Props and state for the root component:
 export type RootProps = {}
@@ -18,7 +17,7 @@ export type RootState = {
 
 /**
  * The top-level component in the demo.
- * Manages the edge context and app state, switching between screens as needed.
+ * Manages the edge context and login state.
  */
 class Root extends Component<RootProps, RootState> {
   constructor (props: RootProps) {
@@ -40,23 +39,13 @@ class Root extends Component<RootProps, RootState> {
   }
 
   render () {
-    // Select the appropriate screen to render based on login state:
-    const scene =
-      this.state.account && this.state.context ? (
-        <AccountScene
-          context={this.state.context}
-          account={this.state.account}
-          onLogout={this.onLogout}
-        />
-      ) : (
-        <WelcomeScene context={this.state.context} onLogin={this.onLogin} />
-      )
-
     return (
-      <div id="page">
-        <div id="header">Edge Login Demo</div>
-        {scene}
-      </div>
+      <Layout
+        account={this.state.account}
+        context={this.state.context}
+        onLogin={this.onLogin}
+        onLogout={this.onLogout}
+      />
     )
   }
 }
