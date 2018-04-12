@@ -1,78 +1,56 @@
 // @flow
 
+import 'regenerator-runtime/runtime'
+
 import type { EdgeUiAccount, EdgeUiContext } from 'edge-login-ui-web'
-import { makeEdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
-import { AccountScene } from './scenes/AccountScene.js'
-import { WelcomeScene } from './scenes/WelcomeScene.js'
+import { Layout } from './components/Layout.js'
+import { prepareAccount, prepareContext } from './edgeHelpers.js'
+import { restoreCachedState } from './hmrCache.js'
 
+// Props and state for the root component:
 export type RootProps = {}
 export type RootState = {
   account: EdgeUiAccount | void,
   context: EdgeUiContext | void
 }
 
-// Constants:
-const apiKey = '0b5776a91bf409ac10a3fe5f3944bf50417209a0' // <- your key here
-const appId = 'com.mydomain.myapp'
-const vendorName = 'Cloud Chain'
-const vendorImageUrl =
-  'https://airbitz.co/go/wp-content/uploads/2016/10/GenericEdgeLoginIcon.png'
-
 /**
  * The top-level component in the demo.
- * Manages the edge context and app state, switching between screens as needed.
+ * Manages the edge context and login state.
  */
-export class Root extends Component<RootProps, RootState> {
+class Root extends Component<RootProps, RootState> {
   constructor (props: RootProps) {
     super(props)
-    this.state = { account: void 0, context: void 0 }
 
-    const assetsPath = /localhost/.test(window.location)
-      ? 'http://localhost:11234/'
-      : './iframe/index.html'
-
-    // Create the Edge context:
-    makeEdgeUiContext({
-      apiKey,
-      appId,
-      assetsPath,
-      frameTimeout: 10000,
-      vendorName,
-      vendorImageUrl
-    }).then(context => {
-      this.setState({ context })
-
-      // Close the context if our page reloads during development:
-      // $FlowFixMe
-      if (module.hot) module.hot.dispose(() => context.dispose())
-    })
+    // Create the Edge context on the initial page load:
+    if (!restoreCachedState(module, this)) {
+      this.state = { account: void 0, context: void 0 }
+      prepareContext().then(context => this.setState({ context }))
+    }
   }
 
   // Event handlers:
-  onLogin = (account: EdgeUiAccount) => this.setState({ account })
-  onLogout = () => this.setState({ account: void 0 })
+  onLogin = async (account: EdgeUiAccount) => {
+    // Make sure the account has the keys we need before finishing the login:
+    await prepareAccount(account)
+
+    this.setState({ account })
+  }
+  onLogout = () => {
+    this.setState({ account: void 0 })
+  }
 
   render () {
-    // Select the appropriate screen to render based on login state:
-    const scene =
-      this.state.account && this.state.context ? (
-        <AccountScene
-          context={this.state.context}
-          account={this.state.account}
-          onLogout={this.onLogout}
-        />
-      ) : (
-        <WelcomeScene context={this.state.context} onLogin={this.onLogin} />
-      )
-
     return (
-      <div id="page">
-        <div id="header">Edge Login Demo</div>
-        {scene}
-      </div>
+      <Layout
+        account={this.state.account}
+        context={this.state.context}
+        onLogin={this.onLogin}
+        onLogout={this.onLogout}
+      />
     )
   }
 }
