@@ -64,7 +64,6 @@ function clientDispatch (state: ClientState, message: ClientMessage) {
       state.localUsers = localUsers
       const account = makeAccountApi(state, accountId)
 
-      hideFrame(state.frame)
       if (state.onLogin) state.onLogin(account)
       return
     }
