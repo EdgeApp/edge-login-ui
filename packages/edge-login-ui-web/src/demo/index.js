@@ -1,5 +1,7 @@
 // @flow
 
+import 'regenerator-runtime/runtime'
+
 import type { EdgeUiAccount, EdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
@@ -31,9 +33,11 @@ class Root extends Component<RootProps, RootState> {
   }
 
   // Event handlers:
-  onLogin = (account: EdgeUiAccount) => {
+  onLogin = async (account: EdgeUiAccount) => {
     // Make sure the account has the keys we need before finishing the login:
-    prepareAccount(account).then(() => this.setState({ account }))
+    await prepareAccount(account)
+
+    this.setState({ account })
   }
   onLogout = () => {
     this.setState({ account: void 0 })

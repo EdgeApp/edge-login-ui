@@ -3,8 +3,7 @@
 import type {
   EdgeUiAccount,
   EdgeUiContext,
-  EdgeUiContextOptions,
-  EdgeWalletInfo
+  EdgeUiContextOptions
 } from 'edge-login-ui-web'
 import { makeEdgeUiContext } from 'edge-login-ui-web'
 
@@ -19,7 +18,7 @@ const YOUR_APP_NAME = 'Cloud Chain'
 /**
  * Creates an EdgeUiContext object with the app-specific settings.
  */
-export function prepareContext (): Promise<EdgeUiContext> {
+export async function prepareContext (): Promise<EdgeUiContext> {
   const options: EdgeUiContextOptions = {
     apiKey: EDGE_API_KEY,
     appId: YOUR_APP_ID,
@@ -41,24 +40,14 @@ export function prepareContext (): Promise<EdgeUiContext> {
  * Makes an Edge account ready for the application to use
  * by ensuring that it contains the necessary private keys.
  */
-export function prepareAccount (
-  account: EdgeUiAccount
-): Promise<EdgeWalletInfo> {
-  // Find the first Ethereum wallet in the account:
-  const walletInfo = account.getFirstWalletInfo('wallet:ethereum')
-
-  // If the account already has the necessary wallet, just return its info:
-  if (walletInfo != null) {
-    return Promise.resolve(walletInfo)
+export async function prepareAccount (account: EdgeUiAccount): Promise<void> {
+  // If there is no Ethereum wallet, make one:
+  if (account.getFirstWalletInfo('wallet:ethereum') == null) {
+    const keys = {
+      ethereumKey: Buffer.from(secureRandom(32)).toString('hex')
+    }
+    await account.createWallet('wallet:ethereum', keys)
   }
-
-  // If there is no Ethereum wallet, make one and return its info:
-  const keys = {
-    ethereumKey: Buffer.from(secureRandom(32)).toString('hex')
-  }
-  return account
-    .createWallet('wallet:ethereum', keys)
-    .then(walletId => account.walletInfos[walletId])
 }
 
 function secureRandom (size) {
