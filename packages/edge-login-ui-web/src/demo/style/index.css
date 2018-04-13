@@ -27,8 +27,9 @@ body {
   text-align: justify;
 }
 
-.center {
+#buttons {
   text-align: center;
+  margin-bottom: 50px;
 }
 
 h1,

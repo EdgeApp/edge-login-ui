@@ -33,12 +33,12 @@ class View extends Component<ViewProps> {
     this.props.state.clientDispatch({ type: 'error', payload: e })
   }
 
-  onLogin = (account: EdgeAccount) => {
+  onLogin = async (account: EdgeAccount) => {
     const { state } = this.props
     const accountId = `account${state.nextAccountId++}`
     state.accounts[accountId] = account
     const username = account.username
-    const localUsers = getLocalUsers(state)
+    const localUsers = await getLocalUsers(state)
     const walletInfos = getWalletInfos(state, accountId)
 
     return state.clientDispatch({

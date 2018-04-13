@@ -1,12 +1,12 @@
 // @flow
 
-import type { EdgeUserInfos } from '../edge-types.js'
+import type { EdgeUserInfos, EdgeWalletInfos } from '../edge-types.js'
 import type { FrameState } from './frame-state.js'
 
 /**
  * Builds a table of users that are available on this device.
  */
-export async function getLocalUsers (state: FrameState): EdgeUserInfos {
+export async function getLocalUsers (state: FrameState): Promise<EdgeUserInfos> {
   const usernames: Array<string> = await state.context.listUsernames()
 
   const out: EdgeUserInfos = {}
@@ -22,7 +22,10 @@ export async function getLocalUsers (state: FrameState): EdgeUserInfos {
 /**
  * Grabs the wallet infos out of an account object, sanitizing them as needed.
  */
-export function getWalletInfos (state: FrameState, accountId: string) {
+export function getWalletInfos (
+  state: FrameState,
+  accountId: string
+): EdgeWalletInfos {
   const account = state.accounts[accountId]
   const locked: boolean = false
 
