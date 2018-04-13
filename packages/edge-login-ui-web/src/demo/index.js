@@ -32,13 +32,12 @@ class Root extends Component<RootProps, RootState> {
     }
   }
 
-  // Event handlers:
   onLogin = async (account: EdgeUiAccount) => {
     // Make sure the account has the keys we need before finishing the login:
     await prepareAccount(account)
-
     this.setState({ account })
   }
+
   onLogout = () => {
     this.setState({ account: void 0 })
   }
