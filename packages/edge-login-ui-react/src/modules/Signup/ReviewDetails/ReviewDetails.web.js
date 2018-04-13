@@ -28,15 +28,18 @@ export default ({
 
   return (
     <div className={styles.container}>
-      <p className={styles.header}>Write down your account info</p>
-      <p className={styles.p1}>
-        Your username and password are known only to you and cannot be recovered
-        if forgotten.
+      <p className={styles.header}>
+        Almost done! Let&apos;s write down your account information
       </p>
-      <p className={styles.p2}>
-        You WILL lose access to funds if your password is lost.
-      </p>
-      <p className={styles.caution}>Write down and store securely!</p>
+      <div className={styles.caution}>
+        <div className={styles.icon}>
+          <FontIcon className={styles.font} value="warning" />
+        </div>
+        <p>
+          If you lose your account information, you’ll lose access to your funds
+          permanently. Write down and store it securely.
+        </p>
+      </div>
       <div className={styles.infoBox} onClick={toggleInfo}>
         {view ? <FontIcon className={styles.close} value="clear" /> : null}
         <div className={styles.infoText}>{renderInfo()}</div>

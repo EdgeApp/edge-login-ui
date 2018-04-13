@@ -19,6 +19,7 @@
     text-align: center;
     margin-top: 40px;
     margin-bottom: 30px;
+    line-height: 1;
   }
 
   .p1 {
@@ -37,10 +38,39 @@
   }
 
   .caution {
-    color: $color-accent-red;
-    font-size: 16px;
-    line-height: 20px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    align-items: center;
+    -webkit-align-items: center;
+    position: relative;
+    width: 70%;
+    border: 1px solid $color-accent-red;
+    padding: 13px 5px;
     text-align: center;
+    margin-top: 10px;
+
+    .icon {
+      position: absolute;
+      top: -15px;
+      margin: 0 auto;
+      height: 30px;
+      width: 30px;
+      background-color: #FFF;
+
+      .font {
+        font-size: 25px;
+        color: $color-accent-red;
+      }
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 
   .input {
@@ -53,7 +83,7 @@
     border: 1px solid $color-grey-03;
     border-radius: 3px;
     background-color: $color-white;
-    margin: 30px 0px;
+    margin: 20px 0px;
     cursor: pointer;
     position: relative;
     display: flex;
