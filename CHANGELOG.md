@@ -1,5 +1,11 @@
 # airbitz-core-js-ui
 
+## 0.2.9
+
+* all: Upgrade edge-login-js.
+* web: Update the demo.
+* web: Do not wipe out the context user list on login.
+
 ## 0.2.8
 
 * web: Re-publish without using buggy Lerna.
