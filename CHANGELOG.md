@@ -1,5 +1,11 @@
 # airbitz-core-js-ui
 
+## 0.2.10
+
+* react: Add missing files to the NPM module.
+* web: Improve the account-creation screen.
+* web: Fix screen height issues.
+
 ## 0.2.9
 
 * all: Upgrade edge-login-js.
