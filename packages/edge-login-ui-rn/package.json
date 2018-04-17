@@ -18,6 +18,7 @@
     "src/assets/**",
     "src/common/**",
     "src/native/**",
+    "src/types/**",
     "ios/**",
     "android/**"
   ],
