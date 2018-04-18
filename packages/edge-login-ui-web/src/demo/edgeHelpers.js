@@ -30,7 +30,7 @@ export async function prepareContext (): Promise<EdgeUiContext> {
   // This demo needs some adjustments in development mode:
   if (/localhost/.test(window.location)) {
     options.assetsPath = 'http://localhost:11234/'
-    options.frameTimeout = 15000 // Give the asset bundler more time
+    options.frameTimeout = 30000 // Give the asset bundler more time
   }
 
   return makeEdgeUiContext(options)

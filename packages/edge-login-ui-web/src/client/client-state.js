@@ -93,7 +93,7 @@ export function makeClientState (
     appId,
     assetsPath,
     callbacks = {},
-    frameTimeout = 5000,
+    frameTimeout = 15000,
     vendorImageUrl,
     vendorName
   } = opts
