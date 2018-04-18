@@ -1,5 +1,12 @@
 # airbitz-core-js-ui
 
+## 0.2.11
+
+* web: Fix recovery email contents to refer to "Edge".
+* web: Do not show the account settings when they aren't available.
+* web: Increase iframe timeouts.
+* all: Upgrade edge-core-js to fix errors with really long passwords.
+
 ## 0.2.10
 
 * react: Add missing files to the NPM module.
