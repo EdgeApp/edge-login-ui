@@ -2414,9 +2414,9 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-edge-core-js@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.7.1.tgz#fb124e733a75d08ecc56e11642954ec28e933b4b"
+edge-core-js@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.7.2.tgz#be18cefcfeb05a87c05cd10390f8710ea197e36e"
   dependencies:
     aes-js "^3.1.0"
     base-x "^1.0.4"

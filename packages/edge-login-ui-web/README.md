@@ -101,7 +101,7 @@ edgeUiAccount.logout()
 
 This project contains a demo application in the `src/demo` directory. You can launch this demo using the `yarn start` command. You can also find the [demo](https://developer.airbitz.co/jsuisample) on our website.
 
-If the "Login With Edge" button does not turn blue after 10 seconds, just reload the page and it will work. Building the iframe can take a while the first time the demo loads, so things can time out. This would not be a problem in production where the iframe is already built.
+If the "Login With Edge" button does not turn blue after 30 seconds, just reload the page and it will work. Building the iframe can take a while the first time the demo loads, so things can time out. This would not be a problem in production where the iframe is already built.
 
 # Detailed Docs
 

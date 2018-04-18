@@ -25,21 +25,16 @@ const processEmail = (address, email, token, accountUsername, callback) => {
     const username = obfuscateUsername(accountUsername)
     const mobileLink =
       'iOS\n' +
-      'airbitz' +
+      'edge' +
       '://recovery?token=' +
       token +
-      '\n\nAndroid\nhttps://recovery.airbitz.co/recovery?token=' +
+      '\n\nAndroid\nhttps://recovery.edgesecure.co/recovery?token=' +
       token
     const to = email
-    let subject = 'Airbitz ' + 'Recovery Token' // this should have a vendors name. Hardcoded Airbitz
+    let subject = 'Edge ' + 'Recovery Token' // this should have a vendors name. Hardcoded Airbitz
     let body =
-      'To recover your account, install the ' +
-      'Airbitz' +
-      ' Mobile App on iOS or Android from https://airbitz.co/app\n\nPlease click one of the links below from a device with ' +
-      'Airbitz' +
-      ' installed to initiate account recovery for username [' +
+      'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ' +
       username +
-      '] ' +
       '\n\n' +
       mobileLink
     subject = encodeURI(subject)
