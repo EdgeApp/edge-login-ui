@@ -51,19 +51,16 @@ export const checkPasswordRecovery = (payload, callback) => {
       !payload.questions[0] !== 'Choose a question' &&
       !payload.questions[1] !== 'Choose a question'
     ) {
-      payload.account.setupRecovery2Questions(
-        payload.questions,
-        payload.answers,
-        (error, token) => {
+      payload.account
+        .changeRecovery(payload.questions, payload.answers)
+        .then(token => {
           dispatch(closeLoading())
-          if (error) {
-            return callback(t('server_error_no_connection'), null)
-          }
-          if (!error) {
-            return callback(null, token)
-          }
-        }
-      )
+          return callback(null, token)
+        })
+        .catch(e => {
+          dispatch(closeLoading())
+          return callback(t('server_error_no_connection'), null)
+        })
     }
   }
 }

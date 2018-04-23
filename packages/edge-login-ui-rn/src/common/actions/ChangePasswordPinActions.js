@@ -13,7 +13,7 @@ export function changePassword (data: string) {
         dispatch(dispatchAction(Constants.LAUNCH_NOTIFICATION_MODAL))
       })
       .catch(e => {
-        console.log('CHANGE PASSWOD ERROR')
+        console.log('CHANGE PASSWORD ERROR')
         console.log(e)
       })
   }
@@ -28,7 +28,7 @@ export function recoveryChangePassword (data: string) {
         dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
       })
       .catch(e => {
-        console.log('CHANGE PASSWOD ERROR')
+        console.log('CHANGE PASSWORD ERROR')
         console.log(e)
       })
   }
@@ -39,7 +39,7 @@ export function recoveryChangePIN (data: string) {
     const state = getState()
     const account = state.login.account
     account
-      .changePIN(data)
+      .changePin({ pin: data })
       .then(response => {
         dispatch(dispatchAction(Constants.LAUNCH_NOTIFICATION_MODAL))
       })
@@ -54,7 +54,7 @@ export function changePIN (data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const accountObject = imports.accountObject
     accountObject
-      .changePIN(data)
+      .changePin({ pin: data })
       .then(response => {
         dispatch(dispatchAction(Constants.LAUNCH_NOTIFICATION_MODAL))
       })
