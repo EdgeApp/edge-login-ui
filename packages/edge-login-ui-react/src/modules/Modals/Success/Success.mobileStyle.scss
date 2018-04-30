@@ -8,6 +8,14 @@
   margin-bottom: 20px;
 }
 
+.message {
+  color: $color-accent-red;
+  text-align: center;
+  font-size: 14px;
+  margin: 0px 5% 20px 5%;
+  line-height: 1.4;
+}
+
 .close {
   @extend .primaryMobile;
   width: 80px;

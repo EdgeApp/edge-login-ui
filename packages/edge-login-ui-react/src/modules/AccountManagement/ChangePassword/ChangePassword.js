@@ -36,7 +36,11 @@ class ChangePassword extends Component {
       }
       if (!error) {
         this.props.dispatch(passwordChanged())
-        this.props.dispatch(openSuccessModal())
+        this.props.dispatch(
+          openSuccessModal(
+            'DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!'
+          )
+        )
       }
     }
     return this.props.dispatch(
