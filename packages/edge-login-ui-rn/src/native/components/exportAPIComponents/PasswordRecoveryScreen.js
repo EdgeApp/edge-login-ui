@@ -45,7 +45,6 @@ class PasswordRecoveryScreen extends Component<Props> {
   componentWillReceiveProps (props: Props) {}
 
   render () {
-    console.log(Styles)
     return (
       <Provider store={this.store}>
         <PasswordRecoveryConnector
