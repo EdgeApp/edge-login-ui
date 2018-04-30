@@ -48,8 +48,8 @@ export const checkPasswordRecovery = (payload, callback) => {
     if (
       payload.answers[0].length > 3 &&
       payload.answers[1].length > 3 &&
-      !payload.questions[0] !== 'Choose a question' &&
-      !payload.questions[1] !== 'Choose a question'
+      payload.questions[0] !== 'Choose a question' &&
+      payload.questions[1] !== 'Choose a question'
     ) {
       payload.account
         .changeRecovery(payload.questions, payload.answers)
