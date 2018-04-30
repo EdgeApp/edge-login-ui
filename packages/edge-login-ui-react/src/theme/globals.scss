@@ -22,3 +22,7 @@ body {
   font-family: $preferred-font;
   color: $color-grey-01;
 }
+
+input:required {
+    box-shadow: none;
+}
