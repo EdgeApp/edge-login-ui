@@ -178,7 +178,6 @@ export default class PasswordRecovery extends Component<Props, State> {
     )
   }
   renderQuestions = (styles: Object) => {
-    console.log(this.props.questionsList)
     return (
       <View style={styles.body}>
         <DropDownList
