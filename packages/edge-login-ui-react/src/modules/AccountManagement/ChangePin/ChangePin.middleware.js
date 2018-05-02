@@ -9,13 +9,16 @@ export const checkPin = (password, pin, account, callback) => {
       dispatch(closeLoading())
       return callback(t('activity_change_pin_length'))
     }
-    return account.changePIN(pin, error => {
-      dispatch(closeLoading())
-      if (error != null) {
+    return account
+      .changePin({ pin })
+      .then(() => {
+        dispatch(closeLoading())
+        dispatch(pinChanged())
+        return callback(null)
+      })
+      .catch(e => {
+        dispatch(closeLoading())
         return callback(t('server_error_no_connection'))
-      }
-      dispatch(pinChanged())
-      return callback(null)
-    })
+      })
   }
 }
