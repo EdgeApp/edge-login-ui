@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
-import { Dialog } from 'react-toolbox/lib/dialog'
-import FontIcon from 'react-toolbox/lib/font_icon'
 
 import layoutTheme from '../theme/layoutTheme.scss'
 import styles from './Container.scss'
@@ -86,38 +84,14 @@ class Container extends Component {
     return (
       <div className="app">
         <MediaQuery minWidth={720}>
-          <Dialog
-            active
-            onEscKeyDown={this._handleToggle}
-            onOverlayClick={this._handleToggle}
-            className={this.selectDialogHeight(this.props.location.pathname)}
-          >
-            <Layout theme={layoutTheme} location={this.props.location}>
-              <FontIcon
-                value="clear"
-                className={styles.exitTooltip}
-                onClick={this._handleToggle}
-              />
-              {this.props.children}
-            </Layout>
-          </Dialog>
+          <Layout theme={layoutTheme} location={this.props.location}>
+            {this.props.children}
+          </Layout>
         </MediaQuery>
         <MediaQuery maxWidth={719}>
-          <Dialog
-            active
-            onEscKeyDown={this._handleToggle}
-            onOverlayClick={this._handleToggle}
-            className={styles.mobileWidth}
-          >
-            <Layout theme={layoutTheme} location={this.props.location}>
-              <FontIcon
-                value="clear"
-                className={styles.exitTooltip}
-                onClick={this._handleToggle}
-              />
-              {this.props.children}
-            </Layout>
-          </Dialog>
+          <Layout theme={layoutTheme} location={this.props.location}>
+            {this.props.children}
+          </Layout>
         </MediaQuery>
       </div>
     )

@@ -9,6 +9,7 @@ import { render } from 'react-dom'
 
 import { getLocalUsers, getWalletInfos } from './frame-selectors.js'
 import type { FrameState } from './frame-state.js'
+import { ModalContainer } from './ModalContainer'
 
 type ViewProps = {
   state: FrameState
@@ -49,31 +50,42 @@ class View extends Component<ViewProps> {
 
   render () {
     const { state } = this.props
-
     if (state.page === 'login') {
       return (
-        <LoginScreen
-          accountOptions={this.accountOptions}
-          context={state.context}
+        <ModalContainer
           onClose={this.onClose}
-          onError={this.onError}
-          onLogin={this.onLogin}
-          vendorImageUrl={state.vendorImageUrl}
+          location={'/account'}
           vendorName={state.vendorName}
-        />
+        >
+          <LoginScreen
+            accountOptions={this.accountOptions}
+            context={state.context}
+            onClose={this.onClose}
+            onError={this.onError}
+            onLogin={this.onLogin}
+            vendorImageUrl={state.vendorImageUrl}
+            vendorName={state.vendorName}
+          />
+        </ModalContainer>
       )
     }
 
     if (state.page === 'account' && state.pageAccount) {
       return (
-        <AccountScreen
-          account={state.pageAccount}
-          context={state.context}
+        <ModalContainer
           onClose={this.onClose}
-          onError={this.onError}
-          vendorImageUrl={state.vendorImageUrl}
+          location={'/account'}
           vendorName={state.vendorName}
-        />
+        >
+          <AccountScreen
+            account={state.pageAccount}
+            context={state.context}
+            onClose={this.onClose}
+            onError={this.onError}
+            vendorImageUrl={state.vendorImageUrl}
+            vendorName={state.vendorName}
+          />
+        </ModalContainer>
       )
     }
 

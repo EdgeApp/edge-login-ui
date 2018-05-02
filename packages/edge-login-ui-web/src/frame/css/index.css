@@ -1,0 +1,154 @@
+.modalContainerBackground {
+  background: #000000;
+  opacity:0.4;
+  position:fixed !important;
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+}
+.modalContainer {
+  position:fixed !important;
+  top:0;
+  bottom:0;
+  display: -webkit-flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: space-around;
+
+}
+
+.modalBaseWidth {
+  width: 870px;
+}
+
+.modalMobileWidth {
+  width: 720px;
+}
+
+.header {
+  background: linear-gradient(270deg, #0e4b75 0%, #0d2145 100%);
+  height: 86px;
+  width:100%;
+  display: -webkit-flex;
+}
+.headerRight {
+  flex:1;
+  display: -webkit-flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.headerCloseButton {
+  color:#FFF;
+  position: relative;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.headerLeft {
+  display: 'flex';
+  position: relative;
+  flex: 1;
+}
+.headerCenter {
+  display: -webkit-flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  flex:18;
+  padding-top: 10px;
+}
+.headerIcon {
+  width: 35px;
+  height:35px;
+}
+.headerText {
+  color:white;
+  font-size: 30px;
+}
+.footer {
+  background: linear-gradient(270deg, #0e4b75 0%, #0d2145 100%);
+  height: 42px;
+  width:100%;
+  display: -webkit-flex;
+  flex-direction: row;
+}
+.footerMobile {
+  background: linear-gradient(270deg, #0e4b75 0%, #0d2145 100%);
+  height: 42px;
+  width:100%;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.footerLeft {
+  display: -webkit-flex;
+  align-items: center;
+  padding-left: 10px;
+  flex: 3;
+}
+.footerCenter {
+  display: -webkit-flex;
+  flex: 14;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+}
+.footerRight {
+  display: -webkit-flex;
+
+  flex: 3;
+  align-items: center;
+  justify-content: space-around;
+}
+.loginSystemContainer {
+  min-height: 300px;
+}
+.bigSquare {
+  min-width: 70vw;
+  max-height: 96vh;
+  min-height: 422px;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  background-color: #FFF;
+  border-radius: .28em;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, .4);
+}
+
+.bigSquareMobile {
+  min-width: 100vw;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  background-color: #FFF;
+}
+
+.airbitzLink {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.airbitzLink:hover,
+.airbitzLink:active {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.footerText {
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+}
