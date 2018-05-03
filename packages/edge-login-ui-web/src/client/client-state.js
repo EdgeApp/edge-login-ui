@@ -9,6 +9,7 @@ import type {
   ConnectionReply,
   FrameCreateWallet,
   FrameMessage,
+  FrameSignEthereumTransaction,
   PostRobotEvent
 } from '../protocol.js'
 import { makeAccountApi } from './client-account.js'
@@ -39,7 +40,8 @@ export type ClientState = {
 
   // Frame callbacks:
   createWallet: FrameCreateWallet,
-  frameDispatch: (message: FrameMessage) => Promise<mixed>
+  frameDispatch: (message: FrameMessage) => Promise<mixed>,
+  signEthereumTransaction: FrameSignEthereumTransaction
 }
 
 /**
@@ -120,6 +122,7 @@ export function makeClientState (
         accounts: {},
         appId,
         createWallet: reply.data.createWallet,
+        signEthereumTransaction: reply.data.signEthereumTransaction,
         frame,
         frameDispatch,
         localUsers: reply.data.localUsers,

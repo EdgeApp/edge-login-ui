@@ -1,5 +1,6 @@
 // @flow
 
+import { Transaction } from 'ethereumjs-tx'
 import { privateToAddress, toChecksumAddress } from 'ethereumjs-util'
 
 import type { EdgeUserInfos, EdgeWalletInfos } from '../edge-types.js'
@@ -53,4 +54,24 @@ export function getWalletInfos (
     }
   }
   return out
+}
+
+/**
+ * Signs an Ethereum transaction using one of the keys an account.
+ */
+export function signEthereumTransaction (
+  state: FrameState,
+  accountId: string,
+  walletId: string,
+  transaction: string
+): string {
+  const account = state.accounts[accountId]
+  const walletInfo = account.allKeys.find(info => info.id === walletId)
+  if (!walletInfo || !walletInfo.keys || !walletInfo.keys.ethereumKey) {
+    throw new Error('Cannot find the requested private key in the account')
+  }
+
+  const tx = new Transaction(Buffer.from(transaction, 'hex'))
+  tx.sign(hexToBuffer(walletInfo.keys.ethereumKey))
+  return tx.serialize().toString('hex')
 }

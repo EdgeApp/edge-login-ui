@@ -57,5 +57,12 @@ export type EdgeUiAccount = {
   // All wallet infos:
   walletInfos: EdgeWalletInfos,
   createWallet(type: string, keys: {}): Promise<string>,
-  getFirstWalletInfo(type: string): EdgeWalletInfo | null
+  getFirstWalletInfo(type: string): EdgeWalletInfo | null,
+
+  // Temporary solution for Ethereum apps, pending proper wallet API.
+  // The transaction should RLP serialized and put into a hex string.
+  signEthereumTransaction(
+    walletId: string,
+    transaction: string
+  ): Promise<string>
 }

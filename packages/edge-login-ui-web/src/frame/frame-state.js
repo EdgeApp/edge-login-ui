@@ -11,7 +11,11 @@ import type {
   FrameMessage,
   PostRobotEvent
 } from '../protocol.js'
-import { getLocalUsers, getWalletInfos } from './frame-selectors.js'
+import {
+  getLocalUsers,
+  getWalletInfos,
+  signEthereumTransaction
+} from './frame-selectors.js'
 import { updateView } from './View.js'
 
 /**
@@ -122,6 +126,16 @@ export function awaitConnection () {
 
         frameDispatch (message: FrameMessage) {
           return frameDispatch(state, message)
+        },
+
+        signEthereumTransaction (
+          accountId: string,
+          walletId: string,
+          transaction: string
+        ): Promise<string> {
+          return Promise.resolve(
+            signEthereumTransaction(state, accountId, walletId, transaction)
+          )
         }
       }
     }
