@@ -93,6 +93,7 @@ export function makeClientState (
     appId,
     assetsPath,
     callbacks = {},
+    hideKeys = false,
     frameTimeout = 15000,
     vendorImageUrl,
     vendorName
@@ -103,6 +104,7 @@ export function makeClientState (
   const message: ConnectionMessage = {
     apiKey,
     appId,
+    hideKeys,
     vendorName,
     vendorImageUrl,
     clientDispatch: message => clientDispatch(state, message)

@@ -81,6 +81,7 @@ export type ClientDispatch = (message: ClientMessage) => mixed
 export type ConnectionMessage = {
   apiKey: string,
   appId: string,
+  hideKeys: boolean,
   vendorName?: string,
   vendorImageUrl?: string,
 

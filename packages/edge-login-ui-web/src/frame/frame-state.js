@@ -27,6 +27,7 @@ function makeEdgeContext (opts: EdgeContextOptions) {
 export type FrameState = {
   accounts: { [accountId: string]: EdgeAccount },
   context: EdgeContext,
+  hideKeys: boolean,
   nextAccountId: number,
   page: '' | 'login' | 'account',
   pageAccount: EdgeAccount | null,
@@ -76,6 +77,7 @@ async function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
   const {
     apiKey,
     appId,
+    hideKeys,
     vendorName = '',
     vendorImageUrl = '',
     clientDispatch
@@ -85,6 +87,7 @@ async function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
   return {
     accounts: {},
     context,
+    hideKeys,
     nextAccountId: 0,
     page: '',
     pageAccount: null,

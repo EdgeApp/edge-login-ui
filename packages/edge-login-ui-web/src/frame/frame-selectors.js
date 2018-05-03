@@ -27,13 +27,12 @@ export function getWalletInfos (
   accountId: string
 ): EdgeWalletInfos {
   const account = state.accounts[accountId]
-  const locked: boolean = false
 
   const out = {}
   for (const walletInfo of account.allKeys) {
     const { type, id, archived, deleted, sortIndex } = walletInfo
     out[walletInfo.id] = { type, id, archived, deleted, sortIndex }
-    if (!locked) {
+    if (!state.hideKeys) {
       out[walletInfo.id].keys = walletInfo.keys
       out[walletInfo.id].appIds = walletInfo.appIds
     }
