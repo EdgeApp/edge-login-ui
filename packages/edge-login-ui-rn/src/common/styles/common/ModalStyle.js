@@ -11,7 +11,23 @@ const screenDimensions = {
   height: Dimensions.get('window').height,
   width: Dimensions.get('window').width
 }
-
+const FullScreenModalStyle = {
+  container: {
+    position: 'absolute',
+    top: OFFSET_HACK,
+    left: OFFSET_HACK,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Constants.MODAL_BOX
+  },
+  modalBox: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: Constants.WHITE
+  }
+}
 const ModalStyle = {
   container: {
     position: 'absolute',
@@ -214,3 +230,4 @@ const StaticModalStyle = {
 }
 export { StaticModalStyle }
 export { ModalStyle }
+export { FullScreenModalStyle }
