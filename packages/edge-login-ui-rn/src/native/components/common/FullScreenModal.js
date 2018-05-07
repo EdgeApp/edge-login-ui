@@ -12,9 +12,7 @@ type Props = {
 
 class FullScreenModal extends Component<Props> {
   render () {
-    console.log('PR: I am rendering ')
     const styles = FullScreenModalStyle
-
     return (
       <Modal
         style={styles.container}
