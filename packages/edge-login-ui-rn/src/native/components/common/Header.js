@@ -13,6 +13,7 @@ type Props = {
   subTitle: string,
   title: string,
   showBackButton: boolean,
+  customLabel?: string,
   skipScreen(): void,
   goBack(): void
 }
@@ -40,6 +41,9 @@ class Header extends Component<Props> {
     let label = s.strings.back_caps
     if (this.props.useCancel) {
       label = s.strings.cancel_caps
+    }
+    if (this.props.customLabel) {
+      label = this.props.customLabel
     }
     return (
       <HeaderBackButton

@@ -6,6 +6,7 @@ const strings = {
   password: 'Password',
   pin: 'PIN',
   back_caps: 'BACK',
+  back: 'Back',
   forgot_password: 'Forgot Password',
   create_an_account: 'Create an account',
   initiate_password_recovery:
@@ -133,7 +134,8 @@ const strings = {
   good_job: 'Good job!',
   hang_tight: 'Hang tight while we create',
   secure_account: 'and secure your account',
-  encrypting_wallet: 'Encrypting wallet...'
+  encrypting_wallet: 'Encrypting wallet...',
+  confirm_recovery_questions: 'Confirm Recovery'
 }
 
 export default strings
