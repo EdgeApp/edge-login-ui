@@ -1,5 +1,10 @@
 # airbitz-core-js-ui
 
+## 0.2.12
+
+* all: Stop using deprecated core API's.
+* rn: Add Confirmation Screen for Password Recovery.
+
 ## 0.2.11
 
 * web: Fix recovery email contents to refer to "Edge".
