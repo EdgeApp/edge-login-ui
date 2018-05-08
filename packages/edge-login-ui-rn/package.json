@@ -44,7 +44,7 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
-    "edge-core-js": "^0.7.2",
+    "edge-core-js": "^0.8.1",
     "flow-bin": "^0.62.0"
   },
   "peerDependencies": {

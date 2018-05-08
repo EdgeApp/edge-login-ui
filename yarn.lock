@@ -2414,9 +2414,9 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-edge-core-js@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.7.2.tgz#be18cefcfeb05a87c05cd10390f8710ea197e36e"
+edge-core-js@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.8.1.tgz#2dea183448cad2d37fbe78e778caa1dfdff248ab"
   dependencies:
     aes-js "^3.1.0"
     base-x "^1.0.4"
@@ -2427,6 +2427,7 @@ edge-core-js@^0.7.2:
     elliptic "^6.4.0"
     hash.js "^1.0.3"
     hmac-drbg "^1.0.1"
+    json-csv "^1.5.0"
     node-fetch "^2.0.0"
     redux "^3.6.0"
     redux-keto "^0.3.2"
@@ -2436,6 +2437,7 @@ edge-core-js@^0.7.2:
     rfc4648 "^1.0.0"
     scrypt-js "^2.0.3"
     utf8 "^3.0.0"
+    ws "^5.1.1"
 
 editorconfig@^0.13.2:
   version "0.13.3"
@@ -2706,7 +2708,7 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
-event-stream@~3.3.0:
+event-stream@^3.3.4, event-stream@~3.3.0:
   version "3.3.4"
   resolved "http://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
   dependencies:
@@ -4139,6 +4141,14 @@ jsesc@^2.5.1:
 jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
+
+json-csv@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/json-csv/-/json-csv-1.5.0.tgz#cbecf02bbe63909ab7cca718d1f8832e8abe45e7"
+  dependencies:
+    concat-stream "^1.6.0"
+    event-stream "^3.3.4"
+    lodash "^4.17.4"
 
 json-parse-better-errors@^1.0.1:
   version "1.0.1"
@@ -7892,6 +7902,12 @@ ws@^4.0.0:
   dependencies:
     async-limiter "~1.0.0"
     safe-buffer "~5.1.0"
+
+ws@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-5.1.1.tgz#1d43704689711ac1942fd2f283e38f825c4b8b95"
+  dependencies:
+    async-limiter "~1.0.0"
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.1"
