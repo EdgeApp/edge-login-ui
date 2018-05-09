@@ -1,5 +1,9 @@
 # airbitz-core-js-ui
 
+## 0.2.13
+
+* rn: Expose & fix some sneaky flow errors.
+
 ## 0.2.12
 
 * all: Stop using deprecated core API's.
