@@ -29,18 +29,19 @@ export const checkPassword = (
       })
     }
     if (check.passed && newPassword === newPasswordRepeat) {
-      account.changePassword(newPassword, error => {
-        dispatch(closeLoading())
-        if (error) {
+      account
+        .changePassword(newPassword)
+        .then(() => {
+          dispatch(closeLoading())
+          return callback(null)
+        })
+        .catch(e => {
+          dispatch(closeLoading())
           return callback({
             type: 'passwordRepeat',
             message: t('server_error_no_connection')
           })
-        }
-        if (!error) {
-          return callback(null)
-        }
-      })
+        })
     }
   }
 }

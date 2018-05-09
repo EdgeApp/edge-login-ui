@@ -11,4 +11,4 @@ export const mapStateToProps = (state: State) => {
   }
 }
 
-export default connect(mapStateToProps, null)(LoadingScreenComponent)
+export default connect(mapStateToProps, {})(LoadingScreenComponent)

@@ -16,8 +16,8 @@ type Props = {
   account: AbcAccount,
   context: AbcContext,
   showHeader: boolean,
-  locale: string,
-  language: string,
+  locale: ?string,
+  language: ?string,
   onComplete(): void,
   onCancel(): void
 }
@@ -32,7 +32,10 @@ class ChangePinScreen extends Component<Props> {
   }
   store: Store<State, Action>
   componentWillMount () {
-    setLocal(this.props.locale, this.props.language)
+    setLocal(
+      this.props.locale || ChangePinScreen.defaultProps.locale,
+      this.props.language || ChangePinScreen.defaultProps.language
+    )
     this.store = createStore(
       reducers,
       {},

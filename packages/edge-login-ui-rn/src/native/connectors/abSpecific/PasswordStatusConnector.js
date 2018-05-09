@@ -15,4 +15,4 @@ export const mapStateToProps = (state: State) => {
   }
 }
 
-export default connect(mapStateToProps, null)(PasswordStatusComponent)
+export default connect(mapStateToProps, {})(PasswordStatusComponent)

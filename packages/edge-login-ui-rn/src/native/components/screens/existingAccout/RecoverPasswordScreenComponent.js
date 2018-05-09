@@ -6,6 +6,7 @@ import Mailer from 'react-native-mail'
 
 import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings'
+import { FullScreenModal } from '../../../components/common/FullScreenModal.js'
 import EmailAppFailedModalConnector from '../../../connectors/abSpecific/EmailAppFailedModalConnector'
 import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
@@ -17,6 +18,7 @@ import {
   TextAndIconButton,
   TextRowComponent
 } from '../../common/'
+import ConfirmPasswordRecoveryScreen from './ConfirmPasswordRecoveryScreen'
 
 export type OwnProps = {
   styles: Object,
@@ -61,7 +63,8 @@ type State = {
   errorQuestionTwo: boolean,
   disableConfirmationModal: boolean,
   emailAddress: string,
-  emailAppNotAvailable: boolean
+  emailAppNotAvailable: boolean,
+  showConfirmationModal: boolean
 }
 
 export default class PasswordRecovery extends Component<Props, State> {
@@ -80,7 +83,8 @@ export default class PasswordRecovery extends Component<Props, State> {
       errorQuestionTwo: false,
       disableConfirmationModal: false,
       emailAddress: '',
-      emailAppNotAvailable: false
+      emailAppNotAvailable: false,
+      showConfirmationModal: false
     })
   }
   componentWillReceiveProps (nextProps: Props) {
@@ -107,6 +111,7 @@ export default class PasswordRecovery extends Component<Props, State> {
     this.props.cancel()
   }
   onSubmit = () => {
+    // Launch Modal full Screen
     const errorOne = this.state.answer1.length < 4 || false
     const errorTwo = this.state.answer2.length < 4 || false
     const errorQuestionOne =
@@ -123,9 +128,24 @@ export default class PasswordRecovery extends Component<Props, State> {
     if (errorOne || errorTwo || errorQuestionOne || errorQuestionTwo) {
       return
     }
+    this.setState({
+      showConfirmationModal: true
+    })
+  }
+  onConfirmQuestionsAndAnseers = () => {
+    console.log('PR: we got thsi .. what ')
+    this.setState({
+      showConfirmationModal: false
+    })
     const questions = [this.state.question1, this.state.question2]
     const answers = [this.state.answer1, this.state.answer2]
     this.props.submit(questions, answers)
+  }
+
+  onCancelConfirmation = () => {
+    this.setState({
+      showConfirmationModal: false
+    })
   }
   onSelectQuestionOne = () => {
     this.setState({
@@ -178,7 +198,6 @@ export default class PasswordRecovery extends Component<Props, State> {
     )
   }
   renderQuestions = (styles: Object) => {
-    console.log(this.props.questionsList)
     return (
       <View style={styles.body}>
         <DropDownList
@@ -354,6 +373,23 @@ export default class PasswordRecovery extends Component<Props, State> {
     }
     return null
   }
+  renderConfirmationScreenModal = (styles: Object) => {
+    if (this.state.showConfirmationModal) {
+      return (
+        <FullScreenModal>
+          <ConfirmPasswordRecoveryScreen
+            cancel={this.onCancelConfirmation}
+            confirm={this.onConfirmQuestionsAndAnseers}
+            question1={this.state.question1}
+            answer1={this.state.answer1}
+            question2={this.state.question2}
+            answer2={this.state.answer2}
+          />
+        </FullScreenModal>
+      )
+    }
+    return null
+  }
   showEmailPending (styles: Object) {
     return (
       <View style={styles.modalMiddle}>
@@ -423,6 +459,7 @@ export default class PasswordRecovery extends Component<Props, State> {
         {middle}
         {this.renderDisableModal(RecoverPasswordSceneStyles)}
         {this.showEmailDialog(RecoverPasswordSceneStyles)}
+        {this.renderConfirmationScreenModal(RecoverPasswordSceneStyles)}
       </View>
     )
   }

@@ -16,7 +16,7 @@ type Props = {
   context: any,
   locale: string,
   language: string,
-  username: string,
+  username: ?string,
   recoveryLogin: boolean,
   accountOptions: any,
   fontDescription: any,
