@@ -7,6 +7,7 @@ import { ConfirmPasswordRecoverySceneStyles } from '../../../styles/index'
 import { Button, Header } from '../../common/'
 // import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+
 type Props = {
   question1: string,
   answer1: string,

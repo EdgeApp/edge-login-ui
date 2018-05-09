@@ -15,8 +15,8 @@ type Props = {
   account: any,
   context: any,
   showHeader: boolean,
-  locale: string,
-  language: string,
+  locale: ?string,
+  language: ?string,
   onComplete(): void,
   onCancel(): void
 }
@@ -24,9 +24,17 @@ type State = {}
 type Action = { type: string }
 
 class PasswordRecoveryScreen extends Component<Props> {
+  static defaultProps = {
+    locale: 'US',
+    language: 'en_us',
+    account: null
+  }
   store: Store<State, Action>
   componentWillMount () {
-    setLocal(this.props.locale, this.props.language)
+    setLocal(
+      this.props.locale || PasswordRecoveryScreen.defaultProps.locale,
+      this.props.language || PasswordRecoveryScreen.defaultProps.language
+    )
     this.store = createStore(
       reducers,
       {},
