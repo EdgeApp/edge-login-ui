@@ -16,4 +16,4 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   }
 }
 
-export default connect(mapStateToProps, null)(AccountInfoComponent)
+export default connect(mapStateToProps, {})(AccountInfoComponent)
