@@ -1,7 +1,18 @@
 // @flow
 
+import { privateToAddress, toChecksumAddress } from 'ethereumjs-util'
+
 import type { EdgeUserInfos, EdgeWalletInfos } from '../edge-types.js'
 import type { FrameState } from './frame-state.js'
+
+function hexToBuffer (hex: string): Buffer {
+  return Buffer.from(hex.replace(/^0x/, ''), 'hex')
+}
+
+function ethereumKeyToAddress (key: string): string {
+  const addressBytes = privateToAddress(hexToBuffer(key))
+  return toChecksumAddress(addressBytes.toString('hex'))
+}
 
 /**
  * Builds a table of users that are available on this device.
@@ -35,6 +46,10 @@ export function getWalletInfos (
     if (!state.hideKeys) {
       out[walletInfo.id].keys = walletInfo.keys
       out[walletInfo.id].appIds = walletInfo.appIds
+    } else if (type === 'wallet:ethereum') {
+      out[walletInfo.id].keys = {
+        ethereumAddress: ethereumKeyToAddress(walletInfo.keys.ethereumKey)
+      }
     }
   }
   return out
