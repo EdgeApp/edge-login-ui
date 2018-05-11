@@ -1,5 +1,11 @@
 # airbitz-core-js-ui
 
+## 0.3.0
+
+* web: Add transaction signing & private-key lockdown mode.
+* web: Host iframe contents on the web for easier setup.
+* react: Many UI fixes
+
 ## 0.2.13
 
 * rn: Expose & fix some sneaky flow errors.
