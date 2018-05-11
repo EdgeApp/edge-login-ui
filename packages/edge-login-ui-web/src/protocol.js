@@ -81,6 +81,7 @@ export type ClientDispatch = (message: ClientMessage) => mixed
 export type ConnectionMessage = {
   apiKey: string,
   appId: string,
+  hideKeys: boolean,
   vendorName?: string,
   vendorImageUrl?: string,
 
@@ -93,11 +94,18 @@ export type FrameCreateWallet = (
   keys: {}
 ) => Promise<{ walletId: string, walletInfos: EdgeWalletInfos }>
 
+export type FrameSignEthereumTransaction = (
+  accountId: string,
+  walletId: string,
+  transaction: string
+) => Promise<string>
+
 export type FrameDispatch = (message: FrameMessage) => mixed
 
 export type ConnectionReply = {
   localUsers: EdgeUserInfos,
 
   createWallet: FrameCreateWallet,
-  frameDispatch: FrameDispatch
+  frameDispatch: FrameDispatch,
+  signEthereumTransaction: FrameSignEthereumTransaction
 }

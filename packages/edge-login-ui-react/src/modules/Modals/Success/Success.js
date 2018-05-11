@@ -19,6 +19,7 @@ class Success extends Component {
             icon={desktopIcon}
           >
             <p className={desktopStyles.header}>{this.props.header}</p>
+            <p className={desktopStyles.message}>{this.props.message}</p>
             <button
               className={desktopStyles.primary}
               onClick={this.props.close}
@@ -35,6 +36,7 @@ class Success extends Component {
             icon={mobileIcon}
           >
             <p className={MobileStyles.header}>{this.props.header}</p>
+            <p className={MobileStyles.message}>{this.props.message}</p>
             <button
               className={MobileStyles.close}
               onClick={this.props.close}
@@ -50,5 +52,6 @@ class Success extends Component {
 }
 
 export default connect(state => ({
-  view: state.modal.success
+  view: state.modal.success.modal,
+  message: state.modal.success.message
 }))(Success)

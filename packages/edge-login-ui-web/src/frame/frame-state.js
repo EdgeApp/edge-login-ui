@@ -11,7 +11,11 @@ import type {
   FrameMessage,
   PostRobotEvent
 } from '../protocol.js'
-import { getLocalUsers, getWalletInfos } from './frame-selectors.js'
+import {
+  getLocalUsers,
+  getWalletInfos,
+  signEthereumTransaction
+} from './frame-selectors.js'
 import { updateView } from './View.js'
 
 /**
@@ -27,6 +31,7 @@ function makeEdgeContext (opts: EdgeContextOptions) {
 export type FrameState = {
   accounts: { [accountId: string]: EdgeAccount },
   context: EdgeContext,
+  hideKeys: boolean,
   nextAccountId: number,
   page: '' | 'login' | 'account',
   pageAccount: EdgeAccount | null,
@@ -76,6 +81,7 @@ async function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
   const {
     apiKey,
     appId,
+    hideKeys,
     vendorName = '',
     vendorImageUrl = '',
     clientDispatch
@@ -85,6 +91,7 @@ async function makeFrameState (opts: ConnectionMessage): Promise<FrameState> {
   return {
     accounts: {},
     context,
+    hideKeys,
     nextAccountId: 0,
     page: '',
     pageAccount: null,
@@ -119,6 +126,16 @@ export function awaitConnection () {
 
         frameDispatch (message: FrameMessage) {
           return frameDispatch(state, message)
+        },
+
+        signEthereumTransaction (
+          accountId: string,
+          walletId: string,
+          transaction: string
+        ): Promise<string> {
+          return Promise.resolve(
+            signEthereumTransaction(state, accountId, walletId, transaction)
+          )
         }
       }
     }

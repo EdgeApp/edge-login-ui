@@ -16,7 +16,7 @@ import { accountCreated } from '../modules/Modals/AccountCreated/AccountCreated.
 import * as AccountManagementPassword from '../modules/Modals/AccountManagementPassword/AccountManagementPassword.reducer.js'
 import { forgotPassword } from '../modules/Modals/ForgotPassword/ForgotPassword.reducer.js'
 import { passwordRecoverySuccess } from '../modules/Modals/PasswordRecoverySucess/PasswordRecoverySuccess.reducer.js'
-import { success } from '../modules/Modals/Success/Success.reducer.js'
+import success from '../modules/Modals/Success/Success.reducer.js'
 import * as PasswordStates from '../modules/Signup/Password/Password.reducer'
 import * as PasswordValidation from '../modules/Signup/Password/PasswordValidation/PasswordValidation.reducer'
 import * as PinNumber from '../modules/Signup/PinNumber/PinNumber.reducer'

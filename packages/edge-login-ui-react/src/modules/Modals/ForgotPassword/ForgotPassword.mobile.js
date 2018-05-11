@@ -9,8 +9,8 @@ export default ({ view, close }) => (
     <p className={styles.header}>Password Recovery</p>
     <p className={styles.text}>
       If recovery was setup, you should have emailed yourself a recovery token
-      with a link. To recover your account, install the Airbitz Mobile App on
-      iOS or Android at: <br />
+      with a link. To recover your account, install the Edge Mobile App on iOS
+      or Android at: <br />
       <a
         target="_blank"
         rel="noopener noreferrer"
@@ -22,8 +22,8 @@ export default ({ view, close }) => (
     </p>
     <br />
     <p className={styles.text}>
-      Then click one of the links in the recovery email from a device with
-      Airbitz installed.
+      Then click one of the links in the recovery email from a device with Edge
+      installed.
     </p>
     <button className={styles.close} onClick={close}>
       Ok

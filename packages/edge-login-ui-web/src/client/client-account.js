@@ -62,6 +62,13 @@ export function makeAccountApi (
       return null
     },
 
+    signEthereumTransaction (
+      walletId: string,
+      transaction: string
+    ): Promise<string> {
+      return state.signEthereumTransaction(accountId, walletId, transaction)
+    },
+
     // Deprecated stuff:
     getFirstWallet (type: string) {
       console.warn('EdgeUiAccount.getFirstWallet is deprecated')

@@ -2,6 +2,7 @@
 
 import postRobot from 'post-robot'
 
+import { version } from '../../package.json'
 import type { EdgeUserInfos, EdgeWalletInfos } from '../edge-types.js'
 import type {
   ClientMessage,
@@ -9,6 +10,7 @@ import type {
   ConnectionReply,
   FrameCreateWallet,
   FrameMessage,
+  FrameSignEthereumTransaction,
   PostRobotEvent
 } from '../protocol.js'
 import { makeAccountApi } from './client-account.js'
@@ -39,7 +41,8 @@ export type ClientState = {
 
   // Frame callbacks:
   createWallet: FrameCreateWallet,
-  frameDispatch: (message: FrameMessage) => Promise<mixed>
+  frameDispatch: (message: FrameMessage) => Promise<mixed>,
+  signEthereumTransaction: FrameSignEthereumTransaction
 }
 
 /**
@@ -91,8 +94,9 @@ export function makeClientState (
   const {
     apiKey,
     appId,
-    assetsPath,
+    assetsPath = `https://developer.airbitz.co/iframe/v${version}/`,
     callbacks = {},
+    hideKeys = false,
     frameTimeout = 15000,
     vendorImageUrl,
     vendorName
@@ -103,6 +107,7 @@ export function makeClientState (
   const message: ConnectionMessage = {
     apiKey,
     appId,
+    hideKeys,
     vendorName,
     vendorImageUrl,
     clientDispatch: message => clientDispatch(state, message)
@@ -118,6 +123,7 @@ export function makeClientState (
         accounts: {},
         appId,
         createWallet: reply.data.createWallet,
+        signEthereumTransaction: reply.data.signEthereumTransaction,
         frame,
         frameDispatch,
         localUsers: reply.data.localUsers,
