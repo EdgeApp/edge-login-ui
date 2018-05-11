@@ -16,7 +16,7 @@ export type EdgeUiContextCallbacks = {
 export type EdgeUiContextOptions = {
   apiKey: string,
   appId: string,
-  assetsPath: string,
+  assetsPath?: string,
   callbacks?: EdgeUiContextCallbacks,
   hideKeys?: boolean,
   frameTimeout?: number,

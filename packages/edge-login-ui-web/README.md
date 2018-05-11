@@ -32,14 +32,6 @@ const edgeUiContext = await makeEdgeUiContext({
 });
 ```
 
-The Edge Login UI relies on an iframe for most of its functionality. You can install the iframe contents using the following terminal command, which is available as part of this library:
-
-```sh
-copy-edge-assets <dest-directory>
-```
-
-The `assetsPath` parameter to `makeEdgeUiContext` should point to the HTTP location of these files on your web server. If you want to firewall your application code from having access to the Edge account credentials, just host the iframe content on a different domain from your main application.
-
 To create an overlay popup where a user can register a new account or log in to a previously created account via password or PIN, do:
 
 ```js
@@ -96,6 +88,20 @@ To log a user out, do:
 ```js
 edgeUiAccount.logout()
 ```
+
+## Hosting Login IFrame Contents
+
+The Edge Login UI relies on an iframe for most of its functionality. Although we host a copy of these files on our own servers, you may want to host the iframe contents yourself as part of your application. This would be especially useful if you are building a desktop app using Electron or similar technologies where the user's own computer hosts the contents.
+
+You can obtain the iframe contents using the following terminal command, which is available as part of this library:
+
+```sh
+copy-edge-assets <dest-directory>
+```
+
+The `makeEdgeUiContext` function takes an `assetsPath` parameter, which is a URI that points to the iframe contents.
+
+To properly firewall your application code from having access to the Edge account credentials, you need to host the iframe content on a different domain from your main application. For example, if your main application is served from `http://localhost:8080`, you might want to serve the iframe contents from `http://localhost:8081`.
 
 ## Demo App
 

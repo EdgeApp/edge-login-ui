@@ -2,6 +2,7 @@
 
 import postRobot from 'post-robot'
 
+import { version } from '../../package.json'
 import type { EdgeUserInfos, EdgeWalletInfos } from '../edge-types.js'
 import type {
   ClientMessage,
@@ -93,7 +94,7 @@ export function makeClientState (
   const {
     apiKey,
     appId,
-    assetsPath,
+    assetsPath = `https://developer.airbitz.co/iframe/v${version}/`,
     callbacks = {},
     hideKeys = false,
     frameTimeout = 15000,

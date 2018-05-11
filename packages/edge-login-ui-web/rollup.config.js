@@ -1,4 +1,5 @@
 import babel from 'rollup-plugin-babel'
+import json from 'rollup-plugin-json'
 
 import packageJson from './package.json'
 
@@ -27,6 +28,6 @@ export default {
     { file: packageJson.main, format: 'cjs' },
     { file: packageJson.module, format: 'es' }
   ],
-  plugins: [babel(babelOpts)],
+  plugins: [json({ preferConst: true }), babel(babelOpts)],
   sourcemap: true
 }
