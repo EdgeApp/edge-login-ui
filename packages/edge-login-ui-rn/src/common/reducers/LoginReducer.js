@@ -23,6 +23,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case Constants.CANCEL_RECOVERY_KEY:
       return { ...state, recoveryToken: null }
+    case Constants.START_RECOVERY_LOGIN:
+      return { ...state, otpErrorMessage: null }
     case Constants.SET_PREVIOUS_USERS:
       if (action.data.lastUser) {
         return { ...state, username: action.data.lastUser.username }
