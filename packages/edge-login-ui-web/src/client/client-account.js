@@ -2,6 +2,7 @@
 
 import type { EdgeWalletInfo } from 'edge-core-js'
 
+import type { EthererumTransaction } from '../edge-types.js'
 import type { ClientState } from './client-state.js'
 import { showFrame } from './iframe.js'
 import type { EdgeManageWindowOptions, EdgeUiAccount } from './index.js'
@@ -64,7 +65,7 @@ export function makeAccountApi (
 
     signEthereumTransaction (
       walletId: string,
-      transaction: string
+      transaction: EthererumTransaction
     ): Promise<string> {
       return state.signEthereumTransaction(accountId, walletId, transaction)
     },

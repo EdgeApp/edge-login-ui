@@ -4,6 +4,7 @@ import type { EdgeAccount, EdgeContext, EdgeContextOptions } from 'edge-core-js'
 import { makeContext } from 'edge-core-js'
 import postRobot from 'post-robot'
 
+import type { EthererumTransaction } from '../edge-types.js'
 import type {
   ClientDispatch,
   ConnectionMessage,
@@ -131,7 +132,7 @@ export function awaitConnection () {
         signEthereumTransaction (
           accountId: string,
           walletId: string,
-          transaction: string
+          transaction: EthererumTransaction
         ): Promise<string> {
           return Promise.resolve(
             signEthereumTransaction(state, accountId, walletId, transaction)
