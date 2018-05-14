@@ -1,5 +1,9 @@
 # airbitz-core-js-ui
 
+## 0.3.1
+
+* rn: Fix endless spinning on incorrect OTP login.
+
 ## 0.3.0
 
 * web: Add transaction signing & private-key lockdown mode.

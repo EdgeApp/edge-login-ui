@@ -89,6 +89,7 @@ export function resetOtpReset () {
 }
 export function retryWithOtp () {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
+    dispatch(dispatchAction(Constants.START_RECOVERY_LOGIN))
     const state = getState()
     const userBackUpKey = state.login.otpUserBackupKey
     const previousAttemptType = state.login.previousAttemptType
@@ -265,12 +266,12 @@ export function userLogin (data: Object, backupKey?: string) {
         dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
         callback(null, abcAccount, touchIdInformation)
       } catch (e) {
-        if (e.name === 'OtpError') {
+        if (e.name === 'OtpError' && !myAccountOptions.otp) {
           e.loginAttempt = 'PASSWORD'
           dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
           return
         }
-        if (myAccountOptions.otp) {
+        if (e.name === 'OtpError' && myAccountOptions.otp) {
           dispatch(
             dispatchActionWitString(
               Constants.OTP_LOGIN_BACKUPKEY_FAIL,
