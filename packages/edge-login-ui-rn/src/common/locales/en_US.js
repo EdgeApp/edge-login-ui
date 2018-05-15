@@ -135,6 +135,7 @@ const strings = {
   hang_tight: 'Hang tight while we create',
   secure_account: 'and secure your account',
   encrypting_wallet: 'Encrypting wallet...',
+  unexpected_end_of_data: 'Not enough characters in field',
   confirm_recovery_questions: 'Confirm Recovery'
 }
 

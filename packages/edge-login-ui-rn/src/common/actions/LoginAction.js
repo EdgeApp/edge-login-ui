@@ -9,6 +9,7 @@ import {
 } from '../../native/keychain.js'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
+import { translateError } from '../util'
 import {
   dispatchAction,
   dispatchActionWitString,
@@ -266,6 +267,8 @@ export function userLogin (data: Object, backupKey?: string) {
         dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
         callback(null, abcAccount, touchIdInformation)
       } catch (e) {
+        console.log('loginError', e)
+        console.log('stop')
         if (e.name === 'OtpError' && !myAccountOptions.otp) {
           e.loginAttempt = 'PASSWORD'
           dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
@@ -278,6 +281,16 @@ export function userLogin (data: Object, backupKey?: string) {
               'Backup Key was incorrect'
             )
           )
+          return
+        }
+        if (myAccountOptions.otp) {
+          dispatch(
+            dispatchActionWitString(
+              Constants.OTP_LOGIN_BACKUPKEY_FAIL,
+              translateError(e.message)
+            )
+          )
+          console.log('stop')
           return
         }
         dispatch(
