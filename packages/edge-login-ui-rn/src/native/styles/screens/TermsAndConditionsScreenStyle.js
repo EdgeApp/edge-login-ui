@@ -19,6 +19,7 @@ const TermsAndConditionsScreenStyle = {
   instructionsText: {
     fontSize: Styles.CreateAccountFont.headerFontSize,
     fontFamily: Constants.FONTS.fontFamilyRegular,
+    paddingHorizontal: 30,
     textAlign: 'center'
   },
   instructionsSubShim: {

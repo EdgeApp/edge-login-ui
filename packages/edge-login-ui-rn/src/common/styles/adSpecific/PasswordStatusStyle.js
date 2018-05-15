@@ -54,8 +54,9 @@ const PasswordStatusStyle = {
     width: '80%',
     marginLeft: '10%',
     marginRight: '10%',
+    marginTop: 10,
     marginBottom: 6,
-    fontSize: 12
+    fontSize: 11
   }
 }
 

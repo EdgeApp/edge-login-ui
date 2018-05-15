@@ -151,7 +151,7 @@ const NewAccountReviewScreenStyle = {
       borderColor: Constants.GRAY_4
     },
     accountText: {
-      fontSize: Styles.CreateAccountFont.defaultFontSize,
+      fontSize: 13,
       color: Constants.GRAY_1
     },
     bottomWarningText: {
