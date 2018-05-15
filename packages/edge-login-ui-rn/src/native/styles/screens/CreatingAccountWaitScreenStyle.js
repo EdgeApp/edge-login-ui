@@ -40,11 +40,11 @@ const CreatingAccountWaitScreenStyle = {
     justifyContent: 'space-around'
   },
   headlineText: {
-    fontSize: 17,
+    fontSize: Styles.CreateAccountFont.headerFontSize,
     fontFamily: Constants.FONTS.fontFamilyRegular
   },
   bodyText: {
-    fontSize: 14,
+    fontSize: Styles.CreateAccountFont.defaultFontSize,
     fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Colors.GRAY_2
   }

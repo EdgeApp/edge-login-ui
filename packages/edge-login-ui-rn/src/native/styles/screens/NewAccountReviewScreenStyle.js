@@ -17,7 +17,7 @@ const NewAccountReviewScreenStyle = {
     justifyContent: 'space-around'
   },
   instructionsText: {
-    fontSize: 16,
+    fontSize: Styles.CreateAccountFont.headerFontSize,
     color: Constants.GRAY_1,
     fontFamily: Constants.FONTS.fontFamilyRegular,
     textAlign: 'center'
@@ -96,12 +96,12 @@ const NewAccountReviewScreenStyle = {
       ...Styles.TextAndIconButtonStyle,
       text: {
         ...Styles.TextAndIconButtonStyle.text,
-        fontSize: Constants.FONTS.defaultFontSize + 2,
+        fontSize: Styles.CreateAccountFont.defaultFontSize,
         color: Constants.SECONDARY
       },
       textPressed: {
         ...Styles.TextAndIconButtonStyle.text,
-        fontSize: Constants.FONTS.defaultFontSize + 2,
+        fontSize: Styles.CreateAccountFont.defaultFontSize,
         color: Constants.SECONDARY
       },
       icon: {
@@ -151,7 +151,7 @@ const NewAccountReviewScreenStyle = {
       borderColor: Constants.GRAY_4
     },
     accountText: {
-      fontSize: Constants.FONTS.defaultFontSize + 1,
+      fontSize: Styles.CreateAccountFont.defaultFontSize,
       color: Constants.GRAY_1
     },
     bottomWarningText: {

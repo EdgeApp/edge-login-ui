@@ -1,3 +1,5 @@
+// @flow
+
 const CreateAccountFont = {
   defaultFontSize: 14,
   headerFontSize: 17
