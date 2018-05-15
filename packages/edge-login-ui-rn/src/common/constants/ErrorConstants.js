@@ -10,3 +10,4 @@ export const IT_WOULD_TAKE_XX_TO_CRACK =
   'It would take %s to crack your password'
 export const RECOMMEND_CHOOSING_A_STRONGER =
   '\nWe recommend choosing a stronger password'
+export const UNEXPECTED_END_OF_DATA = 'Unexpected end of data'
