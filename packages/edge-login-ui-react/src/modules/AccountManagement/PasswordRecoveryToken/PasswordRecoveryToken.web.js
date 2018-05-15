@@ -13,9 +13,9 @@ export default ({ email, error, handleSubmit, handleChangeEmail }) => (
       <p className={styles.header}>Save Recovery Token</p>
       <p className={styles.text}>
         To complete account recovery setup you MUST save an account recovery
-        token. This will be required to rercover your account in addition to
-        your username and recovery answers. Please enter your email below to
-        send youreslf the recovery token.
+        token. This will be required to recover your account in addition to your
+        username and recovery answers. Please enter your email below to send
+        youreslf the recovery token.
       </p>
       <Input
         type="text"
