@@ -267,8 +267,6 @@ export function userLogin (data: Object, backupKey?: string) {
         dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
         callback(null, abcAccount, touchIdInformation)
       } catch (e) {
-        console.log('loginError', e)
-        console.log('stop')
         if (e.name === 'OtpError' && !myAccountOptions.otp) {
           e.loginAttempt = 'PASSWORD'
           dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
