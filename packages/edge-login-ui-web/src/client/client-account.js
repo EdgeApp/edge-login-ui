@@ -63,6 +63,10 @@ export function makeAccountApi (
       return null
     },
 
+    createCurrencyWallet (type: string): Promise<mixed> {
+      return state.createCurrencyWallet(accountId, type)
+    },
+
     signEthereumTransaction (
       walletId: string,
       transaction: EthererumTransaction

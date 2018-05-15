@@ -8,6 +8,7 @@ import type {
   ClientMessage,
   ConnectionMessage,
   ConnectionReply,
+  FrameCreateCurrencyWallet,
   FrameCreateWallet,
   FrameMessage,
   FrameSignEthereumTransaction,
@@ -40,6 +41,7 @@ export type ClientState = {
   onLogin: ?(account: EdgeUiAccount) => mixed,
 
   // Frame callbacks:
+  createCurrencyWallet: FrameCreateCurrencyWallet,
   createWallet: FrameCreateWallet,
   frameDispatch: (message: FrameMessage) => Promise<mixed>,
   signEthereumTransaction: FrameSignEthereumTransaction
@@ -122,6 +124,7 @@ export function makeClientState (
       state = {
         accounts: {},
         appId,
+        createCurrencyWallet: reply.data.createCurrencyWallet,
         createWallet: reply.data.createWallet,
         signEthereumTransaction: reply.data.signEthereumTransaction,
         frame,

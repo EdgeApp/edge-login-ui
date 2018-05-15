@@ -63,6 +63,9 @@ export type EdgeUiAccount = {
   createWallet(type: string, keys: {}): Promise<string>,
   getFirstWalletInfo(type: string): EdgeWalletInfo | null,
 
+  // Currency wallets:
+  createCurrencyWallet(type: string): Promise<mixed>,
+
   // Temporary solution for Ethereum apps, pending proper wallet API:
   signEthereumTransaction(
     walletId: string,
