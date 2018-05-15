@@ -3,7 +3,9 @@
 import type { EdgeAccount, EdgeContext, EdgeContextOptions } from 'edge-core-js'
 import { makeContext } from 'edge-core-js'
 import postRobot from 'post-robot'
+import { base16 } from 'rfc4648'
 
+import type { EthererumTransaction } from '../edge-types.js'
 import type {
   ClientDispatch,
   ConnectionMessage,
@@ -115,6 +117,27 @@ export function awaitConnection () {
       return {
         localUsers,
 
+        createCurrencyWallet (accountId: string, type: string) {
+          // Hack in basic Ethereum support for Augur:
+          if (type === 'wallet:ethereum') {
+            return state.accounts[accountId]
+              .createWallet(type, {
+                ethereumKey: base16.encode(state.context.io.random(32))
+              })
+              .then(walletId => {
+                const walletInfos = getWalletInfos(state, accountId)
+                return { walletId, walletInfos }
+              })
+          }
+
+          return state.accounts[accountId]
+            .createCurrencyWallet(type, {})
+            .then(currencyWallet => {
+              const walletInfos = getWalletInfos(state, accountId)
+              return { walletId: currencyWallet.id, walletInfos }
+            })
+        },
+
         createWallet (accountId: string, type: string, keys: {}) {
           return state.accounts[accountId]
             .createWallet(type, keys)
@@ -131,7 +154,7 @@ export function awaitConnection () {
         signEthereumTransaction (
           accountId: string,
           walletId: string,
-          transaction: string
+          transaction: EthererumTransaction
         ): Promise<string> {
           return Promise.resolve(
             signEthereumTransaction(state, accountId, walletId, transaction)

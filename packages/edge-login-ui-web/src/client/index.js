@@ -3,7 +3,11 @@
 
 import type { EdgeWalletInfo } from 'edge-core-js'
 
-import type { EdgeUserInfos, EdgeWalletInfos } from '../edge-types.js'
+import type {
+  EdgeUserInfos,
+  EdgeWalletInfos,
+  EthererumTransaction
+} from '../edge-types.js'
 
 export { makeEdgeUiContext } from './client-context.js'
 
@@ -59,10 +63,12 @@ export type EdgeUiAccount = {
   createWallet(type: string, keys: {}): Promise<string>,
   getFirstWalletInfo(type: string): EdgeWalletInfo | null,
 
-  // Temporary solution for Ethereum apps, pending proper wallet API.
-  // The transaction should RLP serialized and put into a hex string.
+  // Currency wallets:
+  createCurrencyWallet(type: string): Promise<mixed>,
+
+  // Temporary solution for Ethereum apps, pending proper wallet API:
   signEthereumTransaction(
     walletId: string,
-    transaction: string
+    transaction: EthererumTransaction
   ): Promise<string>
 }

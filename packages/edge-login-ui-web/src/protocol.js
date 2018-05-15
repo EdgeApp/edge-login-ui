@@ -1,6 +1,10 @@
 // @flow
 
-import type { EdgeUserInfos, EdgeWalletInfos } from './edge-types.js'
+import type {
+  EdgeUserInfos,
+  EdgeWalletInfos,
+  EthererumTransaction
+} from './edge-types.js'
 
 // We need this until post-robot ships with its own types:
 export type PostRobotEvent<Data> = {
@@ -88,6 +92,11 @@ export type ConnectionMessage = {
   clientDispatch: ClientDispatch
 }
 
+export type FrameCreateCurrencyWallet = (
+  accountId: string,
+  type: string
+) => Promise<{ walletId: string, walletInfos: EdgeWalletInfos }>
+
 export type FrameCreateWallet = (
   accountId: string,
   type: string,
@@ -97,7 +106,7 @@ export type FrameCreateWallet = (
 export type FrameSignEthereumTransaction = (
   accountId: string,
   walletId: string,
-  transaction: string
+  transaction: EthererumTransaction
 ) => Promise<string>
 
 export type FrameDispatch = (message: FrameMessage) => mixed
@@ -105,6 +114,7 @@ export type FrameDispatch = (message: FrameMessage) => mixed
 export type ConnectionReply = {
   localUsers: EdgeUserInfos,
 
+  createCurrencyWallet: FrameCreateCurrencyWallet,
   createWallet: FrameCreateWallet,
   frameDispatch: FrameDispatch,
   signEthereumTransaction: FrameSignEthereumTransaction

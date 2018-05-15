@@ -1,9 +1,13 @@
 // @flow
 
-import { Transaction } from 'ethereumjs-tx'
+import Transaction from 'ethereumjs-tx'
 import { privateToAddress, toChecksumAddress } from 'ethereumjs-util'
 
-import type { EdgeUserInfos, EdgeWalletInfos } from '../edge-types.js'
+import type {
+  EdgeUserInfos,
+  EdgeWalletInfos,
+  EthererumTransaction
+} from '../edge-types.js'
 import type { FrameState } from './frame-state.js'
 
 function hexToBuffer (hex: string): Buffer {
@@ -63,15 +67,16 @@ export function signEthereumTransaction (
   state: FrameState,
   accountId: string,
   walletId: string,
-  transaction: string
+  transaction: EthererumTransaction
 ): string {
+  console.log('Edge is signing: ', transaction)
   const account = state.accounts[accountId]
   const walletInfo = account.allKeys.find(info => info.id === walletId)
   if (!walletInfo || !walletInfo.keys || !walletInfo.keys.ethereumKey) {
     throw new Error('Cannot find the requested private key in the account')
   }
 
-  const tx = new Transaction(Buffer.from(transaction, 'hex'))
+  const tx = new Transaction(transaction)
   tx.sign(hexToBuffer(walletInfo.keys.ethereumKey))
   return tx.serialize().toString('hex')
 }

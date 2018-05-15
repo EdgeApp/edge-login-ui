@@ -1,5 +1,12 @@
 # airbitz-core-js-ui
 
+## 0.3.2
+
+* react: Fix a spelling mistake.
+* rn: Fix endless spinning on incorrect OTP login (again).
+* web: Implement `createCurrencyWallet`.
+* web: Fix Ethereum transaction signing.
+
 ## 0.3.1
 
 * rn: Fix endless spinning on incorrect OTP login.
