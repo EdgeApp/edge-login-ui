@@ -20,7 +20,7 @@ const PasswordStatusStyle = {
     backgroundColor: Constants.WHITE
   },
   instructions: {
-    fontSize: 14,
+    fontSize: 17,
     textAlign: 'center',
     width: '80%',
     fontFamily: Constants.FONTS.fontFamilyRegular
@@ -54,6 +54,7 @@ const PasswordStatusStyle = {
     width: '80%',
     marginLeft: '10%',
     marginRight: '10%',
+    marginTop: 10,
     marginBottom: 6,
     fontSize: 11
   }

@@ -17,18 +17,19 @@ const TermsAndConditionsScreenStyle = {
     justifyContent: 'space-around'
   },
   instructionsText: {
-    fontSize: 14,
+    fontSize: Styles.CreateAccountFont.headerFontSize,
     fontFamily: Constants.FONTS.fontFamilyRegular,
+    paddingHorizontal: 30,
     textAlign: 'center'
   },
   instructionsSubShim: {
     height: 20
   },
   agreeText: {
-    fontSize: Constants.FONTS.defaultFontSize,
+    fontSize: Styles.CreateAccountFont.defaultFontSize,
     textAlign: 'center',
-    width: '80%',
-    paddingHorizontal: 35,
+    paddingHorizontal: 50,
+    marginBottom: 20,
     fontFamily: Constants.FONTS.fontFamilyRegular
   },
   midSection: {

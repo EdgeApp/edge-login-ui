@@ -64,7 +64,12 @@ export function makeAccountApi (
     },
 
     createCurrencyWallet (type: string): Promise<mixed> {
-      return state.createCurrencyWallet(accountId, type)
+      return state
+        .createCurrencyWallet(accountId, type)
+        .then(({ walletId, walletInfos }) => {
+          account.walletInfos = walletInfos
+          return null // TODO: EdgeCurrencyWallet type
+        })
     },
 
     signEthereumTransaction (

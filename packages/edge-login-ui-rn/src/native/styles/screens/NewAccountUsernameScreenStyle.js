@@ -24,7 +24,7 @@ const NewAccountUsernameScreenStyle = {
     height: 30
   },
   instructionsText: {
-    fontSize: Constants.FONTS.defaultFontSize,
+    fontSize: Styles.CreateAccountFont.defaultFontSize,
     fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Constants.GRAY_1,
     textAlign: 'center',
