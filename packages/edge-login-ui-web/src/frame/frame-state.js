@@ -122,7 +122,7 @@ export function awaitConnection () {
           if (type === 'wallet:ethereum') {
             return state.accounts[accountId]
               .createWallet(type, {
-                ethereumKey: base16.encode(state.context.io.random(32))
+                ethereumKey: base16.stringify(state.context.io.random(32))
               })
               .then(walletId => {
                 const walletInfos = getWalletInfos(state, accountId)
