@@ -1,5 +1,10 @@
 # airbitz-core-js-ui
 
+## 0.3.3
+
+* rn: Various font & style fixes.
+* web: Fix currency wallet creation.
+
 ## 0.3.2
 
 * react: Fix a spelling mistake.
