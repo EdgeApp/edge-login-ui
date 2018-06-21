@@ -19,8 +19,9 @@ export const loginWithPassword = (username, password, callback) => {
     dispatch(openLoading())
     setTimeout(() => {
       const context = window.abcui.abcuiContext
+      const accountOptions = window.abcui.accountOptions
       context
-        .loginWithPassword(username, password)
+        .loginWithPassword(username, password, accountOptions)
         .then(account => {
           localStorage.setItem('lastUser', username)
           dispatch(userLogin(account))
@@ -48,8 +49,9 @@ export const loginWithPin = (username, pin, callback) => {
 
     setTimeout(() => {
       const context = window.abcui.abcuiContext
+      const accountOptions = window.abcui.accountOptions
       context
-        .loginWithPIN(username, pin)
+        .loginWithPIN(username, pin, accountOptions)
         .then(account => {
           dispatch(closeLoading())
           localStorage.setItem('lastUser', username)
@@ -120,12 +122,14 @@ export const edgeLogin = callback => {
     }
 
     const context = window.abcui.abcuiContext
+    const accountOptions = window.abcui.accountOptions
     context
       .requestEdgeLogin({
         displayName: context.displayName,
         displayImageUrl: context.displayImageUrl,
         onLogin: onLogin,
-        onProcessLogin: onProcess
+        onProcessLogin: onProcess,
+        ...accountOptions
       })
       .then(results => {
         dispatch(requestEdgeLogin(results))
@@ -136,7 +140,7 @@ export const edgeLogin = callback => {
   }
 }
 
-const errorHandling = name => {
+export const errorHandling = name => {
   switch (name) {
     case 'NetworkError':
       return 'server_error_timeout'
