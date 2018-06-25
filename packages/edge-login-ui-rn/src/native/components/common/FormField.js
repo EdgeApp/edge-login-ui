@@ -9,7 +9,7 @@ type Props = {
   label: string,
   value: string,
   placeholder?: string,
-  autoCorrect: string,
+  autoCorrect: boolean,
   autoFocus: boolean,
   forceFocus: boolean,
   autoCapitalize?: string,

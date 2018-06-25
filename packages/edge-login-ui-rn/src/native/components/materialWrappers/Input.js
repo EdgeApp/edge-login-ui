@@ -14,7 +14,7 @@ type Props = {
   titleTextStyle: Object,
   secureTextEntry: boolean,
   autoCapitalize: string,
-  autoCorrect: string,
+  autoCorrect: boolean,
   autoFocus: boolean,
   forceFocus: boolean,
   returnKeyType: string,
