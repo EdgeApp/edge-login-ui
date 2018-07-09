@@ -10,7 +10,7 @@ const strings = {
   forgot_password: 'Forgot Password',
   create_an_account: 'Create an account',
   initiate_password_recovery:
-    'Please find the email and click on the link from this device to initiate recovery. ',
+    'To recover your password, you must have setup password recovery prior. Please find the recovery email you sent yourself and click on the link from this device. ',
   if_recovery_modal:
     'If recovery was set up, you should have emailed yourself a recovery token with a link.',
   choose_recovery_question: 'Choose recovery question',
