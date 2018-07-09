@@ -215,6 +215,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
             value={this.props.password}
             label={s.strings.password}
             error={this.props.error}
+            autoCorrect={false}
             secureTextEntry
             returnKeyType={'go'}
             forceFocus={this.state.focusSecond}
@@ -240,6 +241,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
           autoFocus={this.state.focusFirst}
           forceFocus={this.state.focusFirst}
           onFocus={this.onfocusOne.bind(this)}
+          autoCorrect={false}
           isFocused={this.state.focusFirst}
           onSubmitEditing={this.onSetNextFocus.bind(this)}
           renderRow={this.renderRow.bind(this)}
@@ -255,6 +257,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         value={this.props.username}
         label={s.strings.username}
         returnKeyType={'next'}
+        autoCorrect={false}
         autoFocus={this.state.focusFirst}
         forceFocus={this.state.focusFirst}
         onFocus={this.onfocusOne.bind(this)}
