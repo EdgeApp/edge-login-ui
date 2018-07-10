@@ -71,14 +71,14 @@ export type Store = ReduxStore<State, Action>
 export type GetState = () => State
 export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
 export type Imports = {
-  onCancel: Function,
-  accountOptions: AbcAccountOptions,
   accountObject: AbcAccount,
-  context: AbcContext,
-  onComplete: Function,
-  locale: string,
-  language: string,
+  accountOptions: AbcAccountOptions,
   callback: Function,
-  username: string,
-  recoveryKey: string
+  context: AbcContext,
+  language: string,
+  locale: string,
+  onCancel: Function,
+  onComplete: Function,
+  recoveryKey: string,
+  username: ?string
 }

@@ -9,6 +9,7 @@ import thunk from 'redux-thunk'
 import { updateFontStyles } from '../../../common/constants/Fonts'
 import { setLocal } from '../../../common/locale'
 import reducers from '../../../common/reducers'
+import type { Imports } from '../../../types/ReduxTypes.js'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
 
@@ -44,22 +45,29 @@ class LoginScreen extends Component<Props> {
       typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'core-ui' })
         : compose
+
+    // Hack to make Flow happy, since it expects these objects to exist:
+    const missing: any = void 0
+    // Another hack, since `recoveryKey` is `string`
+    // but `recoveryLogin` is `boolean`:
+    const recoveryKey: any = this.props.recoveryLogin
+
+    const imports: Imports = {
+      accountObject: missing,
+      accountOptions: this.props.accountOptions,
+      callback: this.props.onLogin,
+      context: this.props.context,
+      language: this.props.language,
+      locale: this.props.locale,
+      onCancel: missing,
+      onComplete: missing,
+      recoveryKey,
+      username: this.props.username
+    }
     this.store = createStore(
       reducers,
       {},
-      composeEnhancers(
-        applyMiddleware(
-          thunk.withExtraArgument({
-            context: this.props.context,
-            callback: this.props.onLogin,
-            accountOptions: this.props.accountOptions,
-            username: this.props.username,
-            recoveryKey: this.props.recoveryLogin,
-            locale: this.props.locale,
-            language: this.props.language
-          })
-        )
-      )
+      composeEnhancers(applyMiddleware(thunk.withExtraArgument(imports)))
     )
   }
   componentWillReceiveProps (props: Props) {}
