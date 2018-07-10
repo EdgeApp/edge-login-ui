@@ -1,5 +1,6 @@
 // @flow
 
+import { makeReactNativeFolder } from 'disklet'
 import type { AbcAccount, AbcContext } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
@@ -47,6 +48,7 @@ class ChangePinScreen extends Component<Props> {
       accountOptions: missing,
       callback: missing,
       context: this.props.context,
+      folder: makeReactNativeFolder(),
       language,
       locale,
       onCancel: this.props.onComplete,

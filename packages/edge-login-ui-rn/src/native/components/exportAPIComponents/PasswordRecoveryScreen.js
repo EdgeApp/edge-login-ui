@@ -1,5 +1,6 @@
 // @flow
 
+import { makeReactNativeFolder } from 'disklet'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
@@ -48,6 +49,7 @@ class PasswordRecoveryScreen extends Component<Props> {
       accountOptions: missing,
       callback: missing,
       context: this.props.context,
+      folder: makeReactNativeFolder(),
       language,
       locale,
       onCancel: this.props.onComplete,
