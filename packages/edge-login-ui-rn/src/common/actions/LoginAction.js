@@ -24,7 +24,7 @@ export function loginWithRecovery (answers: Array<string>, username: string) {
     const state = getState()
     const backupKey = state.passwordRecovery.recoveryKey
     const username = state.login.username
-    const context = imports.context
+    const { context, folder } = imports
     const myAccountOptions = {
       ...imports.accountOptions,
       callbacks: {
@@ -41,16 +41,16 @@ export function loginWithRecovery (answers: Array<string>, username: string) {
         answers,
         myAccountOptions
       )
-      const touchDisabled = await isTouchDisabled(context, account.username)
+      const touchDisabled = await isTouchDisabled(folder, account.username)
       if (!touchDisabled) {
-        await enableTouchId(context, account)
+        await enableTouchId(folder, account)
       }
-      await context.io.folder
+      await folder
         .file('lastuser.json')
         .setText(JSON.stringify({ username: account.username }))
         .catch(e => null)
       const isTouchSupported = await supportsTouchId()
-      const touchEnabled = await isTouchEnabled(context, account.username)
+      const touchEnabled = await isTouchEnabled(folder, account.username)
       const touchIdInformation = {
         isTouchSupported,
         isTouchEnabled: touchEnabled
@@ -108,8 +108,7 @@ export function retryWithOtp () {
 }
 export function userLoginWithTouchId (data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const context = imports.context
-    const callback = imports.callback
+    const { callback, context, folder } = imports
     const myAccountOptions = {
       ...imports.accountOptions,
       callbacks: {
@@ -124,6 +123,7 @@ export function userLoginWithTouchId (data: Object) {
     }
     loginWithTouchId(
       context,
+      folder,
       data.username,
       'Touch to login user: `' + data.username + '`',
       'Login with password',
@@ -132,7 +132,7 @@ export function userLoginWithTouchId (data: Object) {
     )
       .then(async response => {
         if (response) {
-          context.io.folder
+          folder
             .file('lastuser.json')
             .setText(JSON.stringify({ username: data.username }))
             .catch(e => null)
@@ -151,8 +151,7 @@ export function userLoginWithTouchId (data: Object) {
 }
 export function userLoginWithPin (data: Object, backupKey?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const context = imports.context
-    const callback = imports.callback
+    const { callback, context, folder } = imports
     const myAccountOptions = {
       ...imports.accountOptions,
       callbacks: {
@@ -176,21 +175,18 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
             myAccountOptions
           )
           const touchDisabled = await isTouchDisabled(
-            context,
+            folder,
             abcAccount.username
           )
           if (!touchDisabled) {
-            await enableTouchId(context, abcAccount)
+            await enableTouchId(folder, abcAccount)
           }
-          await context.io.folder
+          await folder
             .file('lastuser.json')
             .setText(JSON.stringify({ username: abcAccount.username }))
             .catch(e => null)
           const isTouchSupported = await supportsTouchId()
-          const touchEnabled = await isTouchEnabled(
-            context,
-            abcAccount.username
-          )
+          const touchEnabled = await isTouchEnabled(folder, abcAccount.username)
           const touchIdInformation = {
             isTouchSupported,
             isTouchEnabled: touchEnabled
@@ -226,8 +222,7 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
 
 export function userLogin (data: Object, backupKey?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const context = imports.context
-    const callback = imports.callback
+    const { callback, context, folder } = imports
     const myAccountOptions = {
       ...imports.accountOptions,
       callbacks: {
@@ -247,18 +242,15 @@ export function userLogin (data: Object, backupKey?: string) {
           data.password,
           myAccountOptions
         )
-        const touchDisabled = await isTouchDisabled(
-          context,
-          abcAccount.username
-        )
+        const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
         if (!touchDisabled) {
-          await enableTouchId(context, abcAccount)
+          await enableTouchId(folder, abcAccount)
         }
-        await context.io.folder
+        await folder
           .file('lastuser.json')
           .setText(JSON.stringify({ username: abcAccount.username }))
           .catch(e => null)
-        const touchEnabled = await isTouchEnabled(context, abcAccount.username)
+        const touchEnabled = await isTouchEnabled(folder, abcAccount.username)
         const isTouchSupported = await supportsTouchId()
         const touchIdInformation = {
           isTouchSupported,
