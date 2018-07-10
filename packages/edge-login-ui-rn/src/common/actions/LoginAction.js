@@ -126,7 +126,7 @@ export function userLoginWithTouchId (data: Object) {
       context,
       data.username,
       'Touch to login user: `' + data.username + '`',
-      null,
+      'Login with password',
       myAccountOptions,
       startFunction
     )
