@@ -1,4 +1,6 @@
-import type { AbcAccount, AbcContext } from 'edge-core-js'
+// @flow
+
+import type { AbcAccount, AbcContext, DiskletFolder } from 'edge-core-js'
 import { NativeModules, Platform } from 'react-native'
 const { AbcCoreJsUi } = NativeModules
 
@@ -15,10 +17,10 @@ const emptyTouchIdUsers = {
   disabledUsers: []
 }
 
-export async function isTouchEnabled (context: AbcContext, username: string) {
+export async function isTouchEnabled (folder: DiskletFolder, username: string) {
   const supported = await supportsTouchId()
   if (supported) {
-    const fingerprint = await context.io.folder
+    const fingerprint = await folder
       .file('fingerprint.json')
       .getText()
       .then(text => JSON.parse(text))
@@ -35,10 +37,10 @@ export async function isTouchEnabled (context: AbcContext, username: string) {
   return false
 }
 
-export async function isTouchDisabled (context: AbcContext, username: string) {
+export async function isTouchDisabled (folder: DiskletFolder, username: string) {
   const supported = await supportsTouchId()
   if (supported) {
-    const fingerprint = await context.io.folder
+    const fingerprint = await folder
       .file('fingerprint.json')
       .getText()
       .then(text => JSON.parse(text))
@@ -66,8 +68,8 @@ export async function supportsTouchId () {
   return !!out
 }
 
-async function addTouchIdUser (context: AbcContext, username: string) {
-  const fingerprint = await context.io.folder
+async function addTouchIdUser (folder: DiskletFolder, username: string) {
+  const fingerprint = await folder
     .file('fingerprint.json')
     .getText()
     .then(text => JSON.parse(text))
@@ -81,11 +83,11 @@ async function addTouchIdUser (context: AbcContext, username: string) {
     fingerprint.disabledUsers.splice(index, 1)
   }
   const fingerprintJson = JSON.stringify(fingerprint)
-  await context.io.folder.file('fingerprint.json').setText(fingerprintJson)
+  await folder.file('fingerprint.json').setText(fingerprintJson)
 }
 
-async function removeTouchIdUser (context: AbcContext, username: string) {
-  const fingerprint = await context.io.folder
+async function removeTouchIdUser (folder: DiskletFolder, username: string) {
+  const fingerprint = await folder
     .file('fingerprint.json')
     .getText()
     .then(text => JSON.parse(text))
@@ -101,11 +103,11 @@ async function removeTouchIdUser (context: AbcContext, username: string) {
   }
 
   const fingerprintJson = JSON.stringify(fingerprint)
-  await context.io.folder.file('fingerprint.json').setText(fingerprintJson)
+  await folder.file('fingerprint.json').setText(fingerprintJson)
 }
 
 export async function enableTouchId (
-  context: AbcContext,
+  folder: DiskletFolder,
   abcAccount: AbcAccount
 ) {
   const supported = await supportsTouchId()
@@ -113,14 +115,14 @@ export async function enableTouchId (
   if (supported) {
     const loginKeyKey = createKeyWithUsername(abcAccount.username, LOGINKEY_KEY)
     await AbcCoreJsUi.setKeychainString(abcAccount.loginKey, loginKeyKey)
-    await addTouchIdUser(context, abcAccount.username)
+    await addTouchIdUser(folder, abcAccount.username)
   } else {
     throw new Error('TouchIdNotSupportedError')
   }
 }
 
 export async function disableTouchId (
-  context: AbcContext,
+  folder: DiskletFolder,
   abcAccount: AbcAccount
 ) {
   const supported = await supportsTouchId()
@@ -128,7 +130,7 @@ export async function disableTouchId (
   if (supported) {
     const loginKeyKey = createKeyWithUsername(abcAccount.username, LOGINKEY_KEY)
     await AbcCoreJsUi.clearKeychain(loginKeyKey)
-    await removeTouchIdUser(context, abcAccount.username)
+    await removeTouchIdUser(folder, abcAccount.username)
   } else {
     // throw new Error('TouchIdNotSupportedError')
   }
@@ -136,6 +138,7 @@ export async function disableTouchId (
 
 export async function loginWithTouchId (
   abcContext: AbcContext,
+  folder: DiskletFolder,
   username: string,
   promptString: string,
   fallbackString: string,
@@ -145,11 +148,11 @@ export async function loginWithTouchId (
   const supported = await supportsTouchId()
 
   if (supported) {
-    const disabled = await isTouchDisabled(abcContext, username)
+    const disabled = await isTouchDisabled(folder, username)
     if (disabled) {
       return null
     }
-    const enabled = await isTouchEnabled(abcContext, username)
+    const enabled = await isTouchEnabled(folder, username)
     if (!enabled) {
       return null
     }

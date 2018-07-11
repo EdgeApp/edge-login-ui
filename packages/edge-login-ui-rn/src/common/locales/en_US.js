@@ -136,7 +136,8 @@ const strings = {
   secure_account: 'and secure your account',
   encrypting_wallet: 'Encrypting wallet...',
   unexpected_end_of_data: 'Not enough characters in field',
-  confirm_recovery_questions: 'Confirm Recovery'
+  confirm_recovery_questions: 'Confirm Recovery',
+  login_with_password: 'Login with password'
 }
 
 export default strings

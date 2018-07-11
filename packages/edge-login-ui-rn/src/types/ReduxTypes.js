@@ -1,6 +1,11 @@
 // @flow
 
-import type { AbcAccount, AbcAccountOptions, AbcContext } from 'edge-core-js'
+import type {
+  AbcAccount,
+  AbcAccountOptions,
+  AbcContext,
+  DiskletFolder
+} from 'edge-core-js'
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
 export type Action = { type: string, data?: any }
@@ -73,12 +78,13 @@ export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
 export type Imports = {
   onCancel: Function,
   accountOptions: AbcAccountOptions,
-  accountObject: AbcAccount,
+  accountObject?: AbcAccount,
   context: AbcContext,
+  folder: DiskletFolder,
   onComplete: Function,
   locale: string,
   language: string,
   callback: Function,
-  username: string,
-  recoveryKey: string
+  username?: string | null,
+  recoveryKey?: string
 }
