@@ -1,5 +1,6 @@
 // @flow
 
+import { makeReactNativeFolder } from 'disklet'
 import type { AbcAccount, AbcContext } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
@@ -38,6 +39,7 @@ class ChangePasswordScreen extends Component<Props> {
     setLocal(this.props.locale, this.props.language)
     const imports: Imports = {
       accountOptions: {},
+      folder: makeReactNativeFolder(),
       accountObject: this.props.account,
       context: this.props.context,
       onComplete: this.props.onComplete,

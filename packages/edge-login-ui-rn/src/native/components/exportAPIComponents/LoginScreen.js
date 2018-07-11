@@ -1,5 +1,6 @@
 // @flow
 
+import { makeReactNativeFolder } from 'disklet'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
@@ -50,6 +51,7 @@ class LoginScreen extends Component<Props> {
       callback: this.props.onLogin,
       onCancel: () => {},
       onComplete: () => {},
+      folder: makeReactNativeFolder(),
       accountOptions: this.props.accountOptions,
       username: this.props.username,
       recoveryKey: this.props.recoveryLogin,

@@ -1,12 +1,12 @@
 // @flow
 
-import type { AbcContext } from 'edge-core-js'
+import type { DiskletFolder, EdgeContext } from 'edge-core-js'
 
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import { dispatchActionWithData } from './'
 
-async function getDiskStuff (context: AbcContext) {
+async function getDiskStuff (context: EdgeContext, folder: DiskletFolder) {
   const userList = await context.listUsernames().then(usernames =>
     Promise.all(
       usernames.map(username => {
@@ -17,7 +17,7 @@ async function getDiskStuff (context: AbcContext) {
     )
   )
 
-  const lastUser = await context.io.folder
+  const lastUser = await folder
     .file('lastuser.json')
     .getText() // setText for later. username
     .then(text => JSON.parse(text))
@@ -29,9 +29,8 @@ async function getDiskStuff (context: AbcContext) {
 
 export function getPreviousUsers () {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const context = imports.context
-    const username = imports.username
-    getDiskStuff(context).then((data: Object) => {
+    const { context, folder, username } = imports
+    getDiskStuff(context, folder).then((data: Object) => {
       const focusUser = username || data.lastUser
       if (data.lastUser) {
         data.usersWithPinList = []
