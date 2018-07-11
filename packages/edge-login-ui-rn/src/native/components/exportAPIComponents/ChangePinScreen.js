@@ -9,6 +9,7 @@ import thunk from 'redux-thunk'
 
 import { setLocal } from '../../../common/locale'
 import reducers from '../../../common/reducers'
+import type { Imports } from '../../../types/ReduxTypes'
 import ChangePinConnector from '../../connectors/ChangePinConnector'
 import * as Styles from '../../styles'
 
@@ -36,19 +37,20 @@ class ChangePinScreen extends Component<Props> {
       this.props.locale || ChangePinScreen.defaultProps.locale,
       this.props.language || ChangePinScreen.defaultProps.language
     )
+    const imports: Imports = {
+      accountOptions: {},
+      accountObject: this.props.account,
+      context: this.props.context,
+      onComplete: this.props.onComplete,
+      onCancel: this.props.onComplete,
+      locale: this.props.locale || ChangePinScreen.defaultProps.locale,
+      language: this.props.language || ChangePinScreen.defaultProps.locale,
+      callback: () => {}
+    }
     this.store = createStore(
       reducers,
       {},
-      applyMiddleware(
-        thunk.withExtraArgument({
-          accountObject: this.props.account,
-          context: this.props.context,
-          onComplete: this.props.onComplete,
-          onCancel: this.props.onComplete,
-          locale: this.props.locale,
-          language: this.props.language
-        })
-      )
+      applyMiddleware(thunk.withExtraArgument(imports))
     )
   }
   componentWillReceiveProps (props: Props) {}

@@ -1,3 +1,5 @@
+// @flow
+
 import type { AbcAccount, AbcContext } from 'edge-core-js'
 import { NativeModules, Platform } from 'react-native'
 const { AbcCoreJsUi } = NativeModules

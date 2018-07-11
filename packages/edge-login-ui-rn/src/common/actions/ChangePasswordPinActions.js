@@ -7,6 +7,9 @@ import { dispatchAction } from './'
 export function changePassword (data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const accountObject = imports.accountObject
+    if (!accountObject) {
+      return
+    }
     accountObject
       .changePassword(data)
       .then(response => {
@@ -38,6 +41,9 @@ export function recoveryChangePIN (data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const account = state.login.account
+    if (!account) {
+      return
+    }
     account
       .changePin({ pin: data })
       .then(response => {
@@ -53,6 +59,9 @@ export function recoveryChangePIN (data: string) {
 export function changePIN (data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const accountObject = imports.accountObject
+    if (!accountObject) {
+      return
+    }
     accountObject
       .changePin({ pin: data })
       .then(response => {

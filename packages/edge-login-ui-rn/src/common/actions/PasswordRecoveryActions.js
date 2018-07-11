@@ -82,6 +82,9 @@ export function initializePasswordRecovery () {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const account = imports.accountObject
+    if (!account) {
+      return
+    }
     const questionsList = await context.listRecoveryQuestionChoices()
     try {
       const recoveryKey = await context.getRecovery2Key(account.username)
@@ -131,6 +134,9 @@ export function initializePasswordRecovery () {
 export function deleteRecovery () {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const account = imports.accountObject
+    if (!account) {
+      return
+    }
     try {
       await account.deleteRecovery()
       dispatch(actions.dispatchAction(Constants.ON_DISABLE_RECOVERY))
@@ -154,6 +160,9 @@ export function changeRecoveryAnswers (
 ) {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const account = imports.accountObject
+    if (!account) {
+      return
+    }
     try {
       const recoveryKey = await account.changeRecovery(questions, answers)
       dispatch(

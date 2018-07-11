@@ -9,6 +9,7 @@ import thunk from 'redux-thunk'
 
 import { setLocal } from '../../../common/locale'
 import reducers from '../../../common/reducers'
+import type { Imports } from '../../../types/ReduxTypes.js'
 import ChangePasswordAppConnector from '../../connectors/ChangePasswordAppConnector'
 import * as Styles from '../../styles'
 
@@ -35,19 +36,20 @@ class ChangePasswordScreen extends Component<Props> {
 
   componentWillMount () {
     setLocal(this.props.locale, this.props.language)
+    const imports: Imports = {
+      accountOptions: {},
+      accountObject: this.props.account,
+      context: this.props.context,
+      onComplete: this.props.onComplete,
+      onCancel: this.props.onComplete,
+      locale: this.props.locale,
+      language: this.props.language,
+      callback: () => {}
+    }
     this.store = createStore(
       reducers,
       {},
-      applyMiddleware(
-        thunk.withExtraArgument({
-          accountObject: this.props.account,
-          context: this.props.context,
-          onComplete: this.props.onComplete,
-          onCancel: this.props.onComplete,
-          locale: this.props.locale,
-          language: this.props.language
-        })
-      )
+      applyMiddleware(thunk.withExtraArgument(imports))
     )
   }
   componentWillReceiveProps (props: Props) {}

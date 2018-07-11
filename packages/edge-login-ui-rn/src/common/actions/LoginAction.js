@@ -9,6 +9,7 @@ import {
 } from '../../native/keychain.js'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
+import s from '../locales/strings.js'
 import { translateError } from '../util'
 import {
   dispatchAction,
@@ -126,7 +127,7 @@ export function userLoginWithTouchId (data: Object) {
       context,
       data.username,
       'Touch to login user: `' + data.username + '`',
-      null,
+      s.strings.login_with_password,
       myAccountOptions,
       startFunction
     )

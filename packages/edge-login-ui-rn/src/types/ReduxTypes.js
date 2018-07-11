@@ -73,12 +73,12 @@ export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
 export type Imports = {
   onCancel: Function,
   accountOptions: AbcAccountOptions,
-  accountObject: AbcAccount,
+  accountObject?: AbcAccount,
   context: AbcContext,
   onComplete: Function,
   locale: string,
   language: string,
   callback: Function,
-  username: string,
-  recoveryKey: string
+  username?: string | null,
+  recoveryKey?: string
 }
