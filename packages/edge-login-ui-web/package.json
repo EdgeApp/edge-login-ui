@@ -22,7 +22,7 @@
     "build:lib": "rimraf lib && rollup -c && cpr flow-entry lib/edge-login-ui-web.js.flow && node ./hack-entry-point.js",
     "prepare": "npm-run-all build:lib build:frame",
     "start": "npm-run-all -p start:*",
-    "start:demo": "parcel --open src/demo/index.html",
+    "start:demo": "parcel -p 11235 --open src/demo/index.html",
     "start:frame": "parcel -p 11234 -d assets src/frame/index.html",
     "start:lib": "rollup -cw"
   },
@@ -49,6 +49,7 @@
     "parcel-bundler": "^1.6.2",
     "react": "~15.4.2",
     "react-dom": "^15.4.2",
+    "react-icons": "^2.2.7",
     "react-json-view": "^1.16.1",
     "regenerator-runtime": "^0.11.1",
     "rfc4648": "^1.1.0",
