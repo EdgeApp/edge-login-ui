@@ -134,6 +134,8 @@ export default class NewAccountPasswordScreenComponent extends Component<
       this.setState({
         isProcessing: false
       })
+      global.firebase &&
+        global.firebase.analytics().logEvent(`Signup_Password_Invalid`)
       return
     }
     if (
@@ -144,8 +146,12 @@ export default class NewAccountPasswordScreenComponent extends Component<
         isProcessing: false
       })
       this.props.checkTheConfirmPassword()
+      global.firebase &&
+        global.firebase.analytics().logEvent(`Signup_Password_Invalid`)
       return
     }
+    global.firebase &&
+      global.firebase.analytics().logEvent(`Signup_Password_Valid`)
     this.props.nextScreen()
   }
 }
