@@ -43,6 +43,8 @@ export function checkUsernameForAvailabilty (data: string) {
               username: data,
               error: null
             }
+            global.firebase &&
+              global.firebase.analytics().logEvent(`Signup_Username_Available`)
             dispatch(
               dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
             )
@@ -53,6 +55,8 @@ export function checkUsernameForAvailabilty (data: string) {
             username: data,
             error: Constants.USERNAME_EXISTS_ERROR
           }
+          global.firebase &&
+            global.firebase.analytics().logEvent(`Signup_Username_Unavailable`)
           dispatch(
             dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
           )

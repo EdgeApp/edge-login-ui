@@ -67,6 +67,8 @@ export default class LandingScreenComponent extends Component<Props, State> {
     )
   }
   onStartCreate () {
+    global.firebase &&
+      global.firebase.analytics().logEvent(`Signup_Create_Account`)
     this.props.startFlow(Constants.WORKFLOW_CREATE)
   }
 

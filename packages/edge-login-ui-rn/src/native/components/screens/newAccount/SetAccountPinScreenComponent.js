@@ -81,8 +81,12 @@ export default class SetAccountPinScreenComponent extends Component<
       this.setState({
         isProcessing: false
       })
+      global.firebase &&
+        global.firebase.analytics().logEvent(`Signup_PIN_Invalid`)
       return
     }
+    global.firebase &&
+      global.firebase.analytics().logEvent(`Signup_Create_User`)
     this.props.createUser({
       username: this.props.username,
       password: this.props.password,

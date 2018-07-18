@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Component } from 'react'
 import { makeReactNativeFolder } from 'disklet'
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
 import { applyMiddleware, createStore } from 'redux'
