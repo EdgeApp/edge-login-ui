@@ -8,7 +8,6 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
 import { updateFontStyles } from '../../../common/constants/Fonts'
-import { setLocal } from '../../../common/locale'
 import reducers from '../../../common/reducers'
 import type { Imports } from '../../../types/ReduxTypes'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
@@ -16,8 +15,6 @@ import * as Styles from '../../styles'
 
 type Props = {
   context: any,
-  locale: string,
-  language: string,
   username: ?string,
   recoveryLogin?: string,
   accountOptions: any,
@@ -32,8 +29,6 @@ class LoginScreen extends Component<Props> {
   store: Store<State, Action>
 
   static defaultProps = {
-    locale: 'US',
-    language: 'en_us',
     username: null,
     recoveryLogin: null,
     accountOptions: null
@@ -41,7 +36,6 @@ class LoginScreen extends Component<Props> {
 
   componentWillMount () {
     updateFontStyles(this.props)
-    setLocal(this.props.locale, this.props.language)
     const composeEnhancers =
       typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'core-ui' })
@@ -54,9 +48,7 @@ class LoginScreen extends Component<Props> {
       folder: makeReactNativeFolder(),
       accountOptions: this.props.accountOptions,
       username: this.props.username,
-      recoveryKey: this.props.recoveryLogin,
-      locale: this.props.locale,
-      language: this.props.language
+      recoveryKey: this.props.recoveryLogin
     }
     this.store = createStore(
       reducers,

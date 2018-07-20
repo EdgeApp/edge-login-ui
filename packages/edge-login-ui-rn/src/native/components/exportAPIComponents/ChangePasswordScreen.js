@@ -8,7 +8,6 @@ import type { Store } from 'redux'
 import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
-import { setLocal } from '../../../common/locale'
 import reducers from '../../../common/reducers'
 import type { Imports } from '../../../types/ReduxTypes.js'
 import ChangePasswordAppConnector from '../../connectors/ChangePasswordAppConnector'
@@ -18,8 +17,6 @@ type Props = {
   account: AbcAccount,
   context: AbcContext,
   showHeader: boolean,
-  locale: string,
-  language: string,
   onComplete(): void,
   onCancel(): void
 }
@@ -29,14 +26,11 @@ type Action = { type: string }
 class ChangePasswordScreen extends Component<Props> {
   store: Store<State, Action>
   static defaultProps = {
-    locale: 'US',
-    language: 'en_us',
     accountObject: null,
     showHeader: true
   }
 
   componentWillMount () {
-    setLocal(this.props.locale, this.props.language)
     const imports: Imports = {
       accountOptions: {},
       folder: makeReactNativeFolder(),
@@ -44,8 +38,6 @@ class ChangePasswordScreen extends Component<Props> {
       context: this.props.context,
       onComplete: this.props.onComplete,
       onCancel: this.props.onComplete,
-      locale: this.props.locale,
-      language: this.props.language,
       callback: () => {}
     }
     this.store = createStore(

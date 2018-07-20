@@ -82,8 +82,6 @@ export type Imports = {
   context: AbcContext,
   folder: DiskletFolder,
   onComplete: Function,
-  locale: string,
-  language: string,
   callback: Function,
   username?: string | null,
   recoveryKey?: string

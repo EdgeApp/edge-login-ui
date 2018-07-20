@@ -8,7 +8,6 @@ import type { Store } from 'redux'
 import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
-import { setLocal } from '../../../common/locale'
 import reducers from '../../../common/reducers'
 import type { Imports } from '../../../types/ReduxTypes'
 import ChangePinConnector from '../../connectors/ChangePinConnector'
@@ -18,8 +17,6 @@ type Props = {
   account: AbcAccount,
   context: AbcContext,
   showHeader: boolean,
-  locale: ?string,
-  language: ?string,
   onComplete(): void,
   onCancel(): void
 }
@@ -28,16 +25,10 @@ type Action = { type: string }
 
 class ChangePinScreen extends Component<Props> {
   static defaultProps = {
-    locale: 'US',
-    language: 'en_us',
     account: null
   }
   store: Store<State, Action>
   componentWillMount () {
-    setLocal(
-      this.props.locale || ChangePinScreen.defaultProps.locale,
-      this.props.language || ChangePinScreen.defaultProps.language
-    )
     const imports: Imports = {
       accountOptions: {},
       accountObject: this.props.account,
@@ -45,8 +36,6 @@ class ChangePinScreen extends Component<Props> {
       context: this.props.context,
       onComplete: this.props.onComplete,
       onCancel: this.props.onComplete,
-      locale: this.props.locale || ChangePinScreen.defaultProps.locale,
-      language: this.props.language || ChangePinScreen.defaultProps.locale,
       callback: () => {}
     }
     this.store = createStore(
