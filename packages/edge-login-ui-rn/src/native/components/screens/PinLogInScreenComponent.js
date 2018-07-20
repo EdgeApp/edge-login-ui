@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
+import s from '../../../common/locales/strings.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import * as Assets from '../../assets/'
 import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
@@ -113,7 +114,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
           <FourDigitInputConnector style={style.fourPin} />
           <Button
             onPress={this.exitPin.bind(this)}
-            label={'EXIT PIN'}
+            label={s.strings.exit_pin}
             downStyle={style.exitButton.downStyle}
             downTextStyle={style.exitButton.downTextStyle}
             upStyle={style.exitButton.upStyle}

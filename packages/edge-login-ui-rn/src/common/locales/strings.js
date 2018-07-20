@@ -1,12 +1,14 @@
+import DeviceInfo from 'react-native-device-info'
+
 // @flow
-import enUS from './en_US'
+import en from './en_US'
 import es from './es'
 
-const allLocales = { enUS, es }
+const allLocales = { en, es }
 
 // Set default of US English
-const out = { strings: enUS }
-
+const out = { strings: en }
+selectLocale(DeviceInfo.getDeviceLocale())
 // Locale formats can be in the form 'en', 'en-US', 'en_US', or 'enUS'
 export function selectLocale (locale: string): boolean {
   // Break up local into language and region
@@ -31,7 +33,7 @@ export function selectLocale (locale: string): boolean {
   }
 
   if (choice) {
-    out.strings = Object.assign(enUS, choice)
+    out.strings = Object.assign(en, choice)
   }
 
   return !!choice
