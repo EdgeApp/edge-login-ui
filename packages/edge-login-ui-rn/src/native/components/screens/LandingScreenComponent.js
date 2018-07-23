@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import * as Assets from '../../assets/'
 import { LogoImageHeader } from '../abSpecific'
 import { BackgroundImage, Button } from '../common'
@@ -36,16 +37,14 @@ export default class LandingScreenComponent extends Component<Props, State> {
           <View style={LandingScreenStyle.featureBoxContent}>
             <View style={LandingScreenStyle.featureBoxDescription}>
               <Text style={LandingScreenStyle.tagText}>
-                {
-                  'The secure and easy to use wallet for your blockchain assets and tokens'
-                }
+                {s.strings.landing_tagline}
               </Text>
             </View>
           </View>
           <View style={LandingScreenStyle.featureBoxButtons}>
             <Button
               onPress={this.onStartCreate.bind(this)}
-              label={'Create account'}
+              label={s.strings.landing_create_account_button}
               downStyle={LandingScreenStyle.createButton.downStyle}
               downTextStyle={LandingScreenStyle.createButton.downTextStyle}
               upStyle={LandingScreenStyle.createButton.upStyle}
@@ -55,7 +54,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
             <Button
               testID={'alreadyHaveAccountButton'}
               onPress={this.onStartLogin.bind(this)}
-              label={'Already have an account? Sign in'}
+              label={s.strings.landing_already_have_account}
               downStyle={LandingScreenStyle.loginButton.downStyle}
               downTextStyle={LandingScreenStyle.loginButton.downTextStyle}
               upStyle={LandingScreenStyle.loginButton.upStyle}

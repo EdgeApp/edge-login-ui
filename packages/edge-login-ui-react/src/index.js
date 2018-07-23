@@ -14,8 +14,6 @@ import Router from './routes.js'
 
 export type LoginScreenProps = {
   // fontDescription: any,
-  // language: string,
-  // locale: string,
   // recoveryLogin: boolean,
   // username: string,
   accountOptions: EdgeAccountOptions,
@@ -56,8 +54,6 @@ export class LoginScreen extends Component<LoginScreenProps> {
 
 export type AccountScreenProps = {
   // fontDescription: any,
-  // language: string,
-  // locale: string,
   account: EdgeAccount,
   context: EdgeContext,
   onClose(): mixed,

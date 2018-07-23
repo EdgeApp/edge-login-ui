@@ -15,7 +15,9 @@ type Props = {
   showBackButton: boolean,
   customLabel?: string,
   skipScreen(): void,
-  goBack(): void
+  goBack(): void,
+  useCancel(): void,
+  skipButton(): void
 }
 // Make a component
 class Header extends Component<Props> {
