@@ -42,6 +42,10 @@ rm -rf node_modules
 yarn
 ```
 
+## iOS build
+
+  Disable BITCODE in your app's build settings
+
 ## Android build
 
 You must be running Android Studio 3.0+. Make the following changes to the Android build files in your React Native app:
@@ -106,7 +110,9 @@ https://developer.airbitz.co
 
 You'll need an account on the Airbitz Mobile App which you can download for iOS and Android at
 
-https://airbitz.co/app
+  [iOS App Store](https://itunes.apple.com/us/app/airbitz-bitcoin-wallet/id843536046)
+  
+  [Google Play Store](https://play.google.com/store/apps/details?id=com.airbitz)
 
 On the `developer.airbitz.co` page, scan the QR code using the Airbitz Mobile App after signing in and register an email address.
 
@@ -158,11 +164,29 @@ render () {
 
 In order to customize the experience and integrate with your app, change the `onLogin` function to handle getting back the account information.
 
+
+Use the `account` object to create and restore wallet private keys
+
+```js
+async function getAppPrivateKey (account) {
+  // Find the first Ethereum wallet in the account:
+  const edgeWalletInfo = account.getFirstWalletInfo('wallet:ethereum')
+
+  // If an Ethereum wallet already exists, return its key:
+  if (edgeWalletInfo != null) {
+    return edgeWalletInfo.keys.ethereumKey
+  }
+
+  // There are no Ethereum wallets, so make one:
+  const keys = {
+    ethereumKey: new Buffer(secureRandom(32)).toString('hex')
+  }
+  const walletId = await account.createWallet("wallet:ethereum", keys)
+  const edgeWalletInfo = account.walletInfos[walletId]
+  return edgeWalletInfo.keys.ethereumKey
+}
+```
+
 ## Sample ReactNative App repo
 
-See a sample implementation at [airbitz-core-js-sample](https://github.com/Airbitz/airbitz-core-js-sample)
-code is in src/native/index.js
-
-# Detailed Docs
-
-https://developer.airbitz.co/javascript/#airbitz-account-management-ui
+See a sample implementation at [edge-login-ui-rn-demo](https://github.com/EdgeApp/edge-login-ui-rn-demo)
