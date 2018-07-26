@@ -1,10 +1,11 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
 import s from '../../../../common/locales/strings'
 import * as Assets from '../../../assets'
+import T from '../../../components/common/FormattedText.js'
 import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
 import { Button, HeaderBackButton } from '../../common'
 import SafeAreaView from '../../common/SafeAreaView.js'
@@ -40,15 +41,15 @@ export default class NewAccountWelcomeScreenComponent extends Component<
             />
           </View>
           <View style={NewAccountWelcomeScreenStyle.row3}>
-            <Text style={NewAccountWelcomeScreenStyle.instructionsText}>
+            <T style={NewAccountWelcomeScreenStyle.instructionsText}>
               {s.strings.welcome_one}
-            </Text>
+            </T>
           </View>
           <View style={NewAccountWelcomeScreenStyle.row4} />
           <View style={NewAccountWelcomeScreenStyle.row5}>
-            <Text style={NewAccountWelcomeScreenStyle.callToAction}>
+            <T style={NewAccountWelcomeScreenStyle.callToAction}>
               {s.strings.start_username}
-            </Text>
+            </T>
           </View>
           <View style={NewAccountWelcomeScreenStyle.row6}>
             <Button
