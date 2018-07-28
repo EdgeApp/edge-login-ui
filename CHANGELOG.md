@@ -1,5 +1,10 @@
 # airbitz-core-js-ui
 
+## 1.0.0-alpha.0
+
+* rn: Update packages to work with RN 0.56
+* web: n/a
+
 ## 0.3.3
 
 * rn: Various font & style fixes.
