@@ -1,6 +1,6 @@
 {
   "name": "edge-login-ui-rn",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Edge login UI components, as a React Native library",
   "keywords": [
     "Airbitz",
@@ -56,5 +56,6 @@
     "assets": [
       "./src/assets/fonts"
     ]
-  }
+  },
+  "gitHead": "579c272235e1e6f76552d2f3871beaff988bee3d"
 }
