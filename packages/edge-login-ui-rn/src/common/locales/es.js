@@ -1,4 +1,4 @@
 // @flow
-const strings = require('./strings/es_MX.json')
+const strings = require('./strings/es.json')
 
 export default strings
