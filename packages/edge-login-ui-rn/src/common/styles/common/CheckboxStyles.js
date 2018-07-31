@@ -1,6 +1,8 @@
 // @flow
 
 import * as Constants from '../../constants/'
+import { scale } from '../../util/scaling.js'
+
 const BasicCheckBoxWithLabel = {
   container: {
     position: 'relative',
@@ -11,12 +13,12 @@ const BasicCheckBoxWithLabel = {
     flexDirection: 'row'
   },
   text: {
-    fontSize: 13,
+    fontSize: scale(13),
     color: Constants.GRAY_2,
     fontFamily: Constants.FONTS.fontFamilyRegular
   },
   checkbox: {
-    padding: 2
+    padding: scale(2)
   }
 }
 

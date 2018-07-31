@@ -1,7 +1,8 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+import T from '../../components/common/FormattedText.js'
 
 import s from '../../../common/locales/strings.js'
 import {
@@ -48,14 +49,14 @@ export default class PaswordStatusComponent extends Component<Props> {
           <View style={style.boxes}>{this.renderStatusList(style)}</View>
           <View style={style.shim} />
           <View style={style.textContainer}>
-            <Text style={style.text}>{this.props.secondsToCrack} </Text>
+            <T style={style.text}>{this.props.secondsToCrack} </T>
           </View>
         </View>
       )
     }
     return (
       <View style={style.containerWhite}>
-        <Text style={style.instructions}>{s.strings.password_desc}</Text>
+        <T style={style.instructions}>{s.strings.password_desc}</T>
       </View>
     )
   }
