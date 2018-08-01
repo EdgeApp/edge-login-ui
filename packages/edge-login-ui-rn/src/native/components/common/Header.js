@@ -1,11 +1,12 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import * as Colors from '../../../common/constants/Colors'
 import s from '../../../common/locales/strings'
+import T from '../../../native/components/common/FormattedText.js'
 import { Button, HeaderBackButton } from '../common'
 
 type Props = {
@@ -58,8 +59,8 @@ class Header extends Component<Props> {
   renderText (style: Object) {
     return (
       <View style={style.center}>
-        <Text style={style.subHeadText}>{this.props.subTitle}</Text>
-        <Text style={style.headlineText}>{this.props.title}</Text>
+        <T style={style.subHeadText}>{this.props.subTitle}</T>
+        <T style={style.headlineText}>{this.props.title}</T>
       </View>
     )
   }

@@ -1,8 +1,8 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import * as Styles from '../'
 import { scale } from '../../../common/util/scaling.js'
+import * as Styles from '../'
 
 const NewAccountWelcomeScreenStyle = {
   screen: { ...Styles.ScreenStyle },
@@ -57,6 +57,7 @@ const NewAccountWelcomeScreenStyle = {
       paddingLeft: scale(10),
       paddingRight: scale(5),
       paddingTop: scale(3),
+      fontSize: scale(20),
       color: Constants.SECONDARY
     },
     sideText: {
@@ -64,8 +65,7 @@ const NewAccountWelcomeScreenStyle = {
       fontSize: scale(18)
     },
     icon: {
-      color: Constants.SECONDARY,
-      fontSize: scale(25)
+      color: Constants.SECONDARY
     },
     default: {
       backgroundColor: Constants.TRANSPARENT,

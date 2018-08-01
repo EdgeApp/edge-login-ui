@@ -1,12 +1,13 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
+import { scale } from '../../../common/util/scaling.js'
 import * as Styles from '../'
 
 const SetAccountPinScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   header: {
-    ...Styles.HeaderContainerStyle,
+    ...Styles.HeaderContainerScaledStyle,
     backgroundColor: Constants.PRIMARY
   },
   pageContainer: Styles.PageContainerWithHeaderStyle,
@@ -21,27 +22,27 @@ const SetAccountPinScreenStyle = {
   instructions: {
     position: 'relative',
     width: '80%',
-    fontSize: Styles.CreateAccountFont.defaultFontSize,
+    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
     fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Constants.GRAY_2,
     textAlign: 'center'
   },
-  fourPin: Styles.FourDotInputDarkStyle,
+  fourPin: Styles.FourDotInputDarkScaledStyle,
   nextButton: {
-    upStyle: Styles.PrimaryButtonUpStyle,
-    upTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: Styles.PrimaryButtonDownStyle
+    upStyle: Styles.PrimaryButtonUpScaledStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downStyle: Styles.PrimaryButtonDownScaledStyle
   },
   staticModalText: {
     color: Constants.GRAY_1,
     width: '100%',
-    fontSize: 15,
+    fontSize: scale(15),
     textAlign: 'center'
   },
   modal: Styles.SkipModalStyle,
   shim: {
-    height: 5
+    height: scale(5)
   }
 }
 

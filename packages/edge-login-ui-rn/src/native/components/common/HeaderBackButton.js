@@ -18,9 +18,7 @@ class HeaderBackButton extends Component<Props> {
     const styles = this.props.styles
     return (
       <TouchableOpacity style={styles.backButton} onPress={this.props.onPress}>
-        {withArrow && (
-          <Icon size={14} name={icon} style={styles.backIconStyle} />
-        )}
+        {withArrow && <Icon name={icon} style={styles.backIconStyle} />}
         {withArrow && !isIos ? null : (
           <Text style={[styles.sideText]}>{this.props.label}</Text>
         )}

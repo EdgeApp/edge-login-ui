@@ -1,5 +1,6 @@
 // @flow
 
+import { scale } from '../../../common/util/scaling.js'
 import * as Constants from '../../constants/'
 import { vs } from '../../util'
 import * as Styles from '../'
@@ -85,4 +86,86 @@ const HeaderContainerStyle = {
   }
 }
 
+const HeaderContainerScaledStyle = {
+  container: {
+    position: 'relative',
+    height: scale(Constants.HEADER_HEIGHT),
+    width: '100%',
+    backgroundColor: Constants.TRANSPARENT,
+    flexDirection: 'row',
+    paddingTop: scale(6)
+  },
+  headerBackButtonStyle: {
+    backButton: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    backIconStyle: {
+      paddingLeft: scale(10),
+      paddingRight: scale(5),
+      paddingTop: scale(3),
+      color: Constants.WHITE,
+      fontSize: scale(20)
+    },
+    sideText: {
+      color: Constants.WHITE,
+      fontSize: scale(14)
+    },
+    icon: {
+      color: Constants.WHITE
+    },
+    default: {
+      backgroundColor: Constants.TRANSPARENT,
+      color: Constants.WHITE
+    }
+  },
+  left: {
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
+  center: {
+    flex: 3,
+    justifyContent: 'flex-end',
+    paddingBottom: scale(5)
+  },
+  right: {
+    flex: 1,
+    justifyContent: 'flex-end' // ,
+    // alignItems: 'center'
+  },
+  headlineText: {
+    fontSize: scale(17),
+    width: '100%',
+    textAlign: 'center',
+    color: Constants.WHITE
+  },
+  subHeadText: {
+    fontSize: scale(11),
+    width: '100%',
+    textAlign: 'center',
+    color: Constants.ACCENT_MINT
+  },
+  textButton: {
+    upStyle: { ...Styles.TextOnlyButtonUpScaledStyle, width: '100%' },
+    upTextStyle: {
+      ...Styles.TextOnlyButtonTextUpScaledStyle,
+      width: '100%',
+      color: Constants.WHITE,
+      fontSize: scale(Constants.FONTS.defaultButtonTextSize)
+    },
+    downTextStyle: {
+      ...Styles.TextOnlyButtonTextDownScaledStyle,
+      width: '100%',
+      color: Constants.SECONDARY,
+      fontSize: scale(Constants.FONTS.defaultButtonTextSize)
+    },
+    downStyle: {
+      ...Styles.TextOnlyButtonDownScaledStyle,
+      width: '100%',
+      height: vs(50)
+    }
+  }
+}
+
 export { HeaderContainerStyle }
+export { HeaderContainerScaledStyle }

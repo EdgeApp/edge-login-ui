@@ -1,12 +1,12 @@
 // @flow
 
 import * as Constants from '../../../common/constants'
-import * as Styles from '../'
 import { scale } from '../../../common/util/scaling.js'
+import * as Styles from '../'
 
 const NewAccountUsernameScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerStyle,
+  header: Styles.HeaderContainerScaledStyle,
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'
@@ -22,7 +22,7 @@ const NewAccountUsernameScreenStyle = {
     width: '90%'
   },
   shim: {
-    height: scale(30)
+    height: scale(50)
   },
   instructionsText: {
     fontSize: scale(Styles.CreateAccountFont.defaultFontSize),

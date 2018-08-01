@@ -2,13 +2,13 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import T from '../../components/common/FormattedText.js'
 
 import s from '../../../common/locales/strings.js'
 import {
   PASSWORD_REQ_CHECKED,
   PASSWORD_REQ_UNCHECKED
 } from '../../../native/assets'
+import T from '../../components/common/FormattedText.js'
 import { Checkbox } from '../common/Checkbox'
 
 type Props = {
