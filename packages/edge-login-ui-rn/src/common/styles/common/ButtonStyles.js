@@ -370,6 +370,49 @@ const TextOnlyButtonTextDownScaledStyle = {
   textAlign: 'center'
 }
 
+const TextAndIconButtonScaledStyle = {
+  container: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  centeredContent: {
+    width: '100%',
+    alignItems: 'center'
+  },
+  inner: {
+    position: 'relative',
+    flexDirection: 'row'
+  },
+  textContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  iconContainer: {
+    height: '100%',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  text: {
+    color: Constants.WHITE,
+    fontSize: scale(20)
+  },
+  textPressed: {
+    color: Constants.GRAY_2,
+    fontSize: scale(20)
+  },
+  icon: {
+    color: Constants.WHITE
+  },
+  iconPressed: {
+    color: Constants.GRAY_2
+  },
+  iconSize: scale(25),
+  underlayColor: Constants.TRANSPARENT
+}
+
 export { TextAndIconButtonAlignEdgesStyle }
 export { TextAndIconButtonStyle }
 export { IconButtonStyle }
@@ -408,3 +451,4 @@ export { TextOnlyButtonUpScaledStyle }
 export { TextOnlyButtonTextUpScaledStyle }
 export { TextOnlyButtonDownScaledStyle }
 export { TextOnlyButtonTextDownScaledStyle }
+export { TextAndIconButtonScaledStyle }

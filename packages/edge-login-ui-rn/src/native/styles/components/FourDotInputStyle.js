@@ -108,7 +108,7 @@ const FourDotInputDarkStyle = {
 const FourDotInputDarkScaledStyle = {
   container: {
     width: scale(200),
-    height: scale(60)
+    height: scale(70)
   },
   interactiveContainer: {
     flex: 1,
@@ -116,7 +116,10 @@ const FourDotInputDarkScaledStyle = {
   },
   errorContainer: {
     flex: 1,
-    width: '100%'
+    width: '100%',
+    height: scale(40),
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   dotContainer: {
     height: '100%',
@@ -126,11 +129,10 @@ const FourDotInputDarkScaledStyle = {
   },
   errorText: {
     width: '100%',
-    height: scale(40),
     textAlign: 'center',
     color: Colors.ACCENT_RED,
     fontSize: scale(14),
-    padding: scale(5)
+    paddingTop: scale(15)
   },
   input: {
     position: 'absolute',

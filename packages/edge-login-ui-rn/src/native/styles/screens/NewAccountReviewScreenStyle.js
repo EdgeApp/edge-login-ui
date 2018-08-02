@@ -1,30 +1,34 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
+import { scale } from '../../../common/util/scaling'
 import * as Styles from '../'
 
 const NewAccountReviewScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerStyle,
+  header: Styles.HeaderContainerScaledStyle,
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'
   },
   instructionsContainer: {
-    height: 80,
+    height: scale(80),
     width: '80%',
     alignItems: 'center',
     justifyContent: 'space-around'
   },
   instructionsText: {
-    fontSize: Styles.CreateAccountFont.headerFontSize,
+    fontSize: scale(Styles.CreateAccountFont.headerFontSize),
     color: Constants.GRAY_1,
     fontFamily: Constants.FONTS.fontFamilyRegular,
     textAlign: 'center'
   },
-  shim: { ...Styles.Shim, height: 10 },
+  shim: {
+    ...Styles.Shim,
+    height: scale(10)
+  },
   warningBoxContainer: {
-    height: 80,
+    height: scale(80),
     width: '100%',
     alignItems: 'center'
   },
@@ -36,21 +40,21 @@ const NewAccountReviewScreenStyle = {
     },
     top: {
       flex: 1,
-      paddingTop: 5,
+      paddingTop: scale(5),
       flexDirection: 'column',
       justifyContent: 'space-around',
       alignItems: 'center'
     },
     bottom: {
-      flex: 9,
+      flex: scale(9),
       borderColor: Constants.ACCENT_RED,
       borderWidth: 1,
-      padding: 5,
+      padding: scale(5),
       alignItems: 'center',
       justifyContent: 'space-around'
     },
     text: {
-      fontSize: Constants.FONTS.defaultFontSize,
+      fontSize: scale(Constants.FONTS.defaultFontSize),
       textAlign: 'center',
       fontFamily: Constants.FONTS.fontFamilyRegular,
       color: Constants.GRAY_1
@@ -59,8 +63,8 @@ const NewAccountReviewScreenStyle = {
       position: 'relative',
       borderRadius: 27,
       backgroundColor: Constants.WHITE,
-      height: 30,
-      width: 30
+      height: scale(30),
+      width: scale(30)
     },
     iconWrapTop: {
       position: 'relative',
@@ -70,20 +74,20 @@ const NewAccountReviewScreenStyle = {
       backgroundColor: Constants.WHITE,
       zIndex: 100,
       elevation: 100,
-      height: 28,
-      width: 28,
+      height: scale(28),
+      width: scale(28),
       alignItems: 'center',
       justifyContent: 'space-around'
     },
-    iconSize: 24,
+    iconSize: scale(24),
     iconStyle: {
-      marginTop: 10,
+      marginTop: scale(10),
       color: Constants.ACCENT_RED,
       backgroundColor: Constants.TRANSPARENT
     }
   },
   detailsContainer: {
-    height: 220,
+    height: scale(220),
     width: '80%'
   },
   accountDetailsBox: {
@@ -93,19 +97,19 @@ const NewAccountReviewScreenStyle = {
       flexDirection: 'column'
     },
     textIconButton: {
-      ...Styles.TextAndIconButtonStyle,
+      ...Styles.TextAndIconButtonScaledStyle,
       text: {
-        ...Styles.TextAndIconButtonStyle.text,
-        fontSize: Styles.CreateAccountFont.defaultFontSize,
+        ...Styles.TextAndIconButtonScaledStyle.text,
+        fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
         color: Constants.SECONDARY
       },
       textPressed: {
-        ...Styles.TextAndIconButtonStyle.text,
-        fontSize: Styles.CreateAccountFont.defaultFontSize,
+        ...Styles.TextAndIconButtonScaledStyle.text,
+        fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
         color: Constants.SECONDARY
       },
       icon: {
-        ...Styles.TextAndIconButtonStyle.icon,
+        ...Styles.TextAndIconButtonScaledStyle.icon,
         color: Constants.SECONDARY
       }
     },
@@ -113,16 +117,20 @@ const NewAccountReviewScreenStyle = {
       alignItems: 'center',
       justifyContent: 'space-around',
       backgroundColor: Constants.GRAY_4,
-      height: Constants.BUTTON_HEIGHT
+      height: scale(Constants.BUTTON_HEIGHT)
     },
-    shim: { ...Styles.Shim, height: 5, backgroundColor: Constants.TRANSPARENT },
+    shim: {
+      ...Styles.Shim,
+      height: scale(5),
+      backgroundColor: Constants.TRANSPARENT
+    },
     bottom: {
       width: '100%',
       flexDirection: 'column'
     },
     bottomInfo: {
       width: '100%',
-      minHeight: 60,
+      minHeight: scale(60),
       borderLeftWidth: 1,
       borderRightWidth: 1,
       borderBottomWidth: 1,
@@ -131,8 +139,8 @@ const NewAccountReviewScreenStyle = {
     bRow: {
       width: '100%',
       flexDirection: 'row',
-      paddingRight: 25,
-      paddingVertical: 4
+      paddingRight: scale(25),
+      paddingVertical: scale(4)
     },
     bInfoLeft: {
       flex: 2
@@ -151,23 +159,23 @@ const NewAccountReviewScreenStyle = {
       borderColor: Constants.GRAY_4
     },
     accountText: {
-      fontSize: 13,
+      fontSize: scale(13),
       color: Constants.GRAY_1
     },
     bottomWarningText: {
-      fontSize: Constants.FONTS.defaultFontSize,
+      fontSize: scale(Constants.FONTS.defaultFontSize),
       fontFamily: Constants.FONTS.fontFamilyRegular,
       color: Constants.ACCENT_RED,
-      paddingLeft: 15,
-      paddingRight: 15,
-      paddingBottom: 15
+      paddingLeft: scale(15),
+      paddingRight: scale(15),
+      paddingBottom: scale(15)
     }
   },
   nextButton: {
-    upStyle: { ...Styles.PrimaryButtonUpStyle, width: '80%' },
-    downStyle: { ...Styles.PrimaryButtonDownStyle, width: '80%' },
-    upTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextStyle
+    upStyle: { ...Styles.PrimaryButtonUpScaledStyle, width: '80%' },
+    downStyle: { ...Styles.PrimaryButtonDownScaledStyle, width: '80%' },
+    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextScaledStyles
   }
 }
 
