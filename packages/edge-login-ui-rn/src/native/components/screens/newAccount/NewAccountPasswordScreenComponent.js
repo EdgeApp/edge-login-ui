@@ -81,20 +81,18 @@ export default class NewAccountPasswordScreenComponent extends Component<
     return (
       <View style={styles.innerView}>
         <PasswordStatusConnector style={styles.status} />
-        <View style={styles.passwordShim} />
         <PasswordConnector
           label={s.strings.password}
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}
           onFinish={this.onSetNextFocus}
         />
-        <View style={styles.passwordShim} />
         <PasswordConfirmConnector
           style={styles.inputBox}
           autoFocus={this.state.focusSecond}
           onFinish={this.onNextPress}
         />
-        <View style={styles.inputShim} />
+        <View style={styles.passwordShim} />
         <Button
           onPress={this.onNextPress}
           downStyle={styles.nextButton.downStyle}

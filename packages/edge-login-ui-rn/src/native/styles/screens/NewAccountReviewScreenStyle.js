@@ -88,7 +88,8 @@ const NewAccountReviewScreenStyle = {
   },
   detailsContainer: {
     height: scale(220),
-    width: '80%'
+    width: '80%',
+    marginTop: scale(20)
   },
   accountDetailsBox: {
     container: {

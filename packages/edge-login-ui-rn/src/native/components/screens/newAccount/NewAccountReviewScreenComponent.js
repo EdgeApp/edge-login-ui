@@ -32,14 +32,12 @@ export default class NewAccountReviewScreenComponent extends Component<Props> {
                 message={s.strings.warning_message}
               />
             </View>
-            <View style={NewAccountReviewScreenStyle.shim} />
             <View style={NewAccountReviewScreenStyle.detailsContainer}>
               <AccountInfoContainer
                 style={NewAccountReviewScreenStyle.accountDetailsBox}
               />
               <View style={NewAccountReviewScreenStyle.shim} />
             </View>
-
             <Button
               onPress={this.onNextPress}
               downStyle={NewAccountReviewScreenStyle.nextButton.downStyle}

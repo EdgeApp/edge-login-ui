@@ -1,6 +1,7 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
+import { scale } from '../../util/scaling'
 
 const MaterialInput = {
   container: {
@@ -103,6 +104,29 @@ const MaterialInputOnWhite = {
     fontFamily: Constants.FONTS.fontFamilyRegular
   }
 }
+
+const MaterialInputOnWhiteScaled = {
+  container: {
+    position: 'relative',
+    width: Constants.LOGIN_LABEL_WIDTH,
+    height: scale(Constants.LOGIN_LABEL_HEIGHT),
+    marginTop: scale(15)
+  },
+  baseColor: Constants.PRIMARY,
+  tintColor: Constants.SECONDARY,
+  errorColor: Constants.ACCENT_RED,
+  textColor: Constants.BLACK,
+  affixTextStyle: {
+    color: Constants.ACCENT_RED,
+    fontFamily: Constants.FONTS.fontFamilyRegular
+  },
+  titleTextStyle: {
+    color: Constants.PRIMARY,
+    fontFamily: Constants.FONTS.fontFamilyRegular
+  }
+}
+
 export { MaterialInputOnWhite }
+export { MaterialInputOnWhiteScaled }
 export { MaterialInput }
 export { MaterialInputWithDrop }

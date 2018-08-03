@@ -1,7 +1,7 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import { MultiLineTextCheckBox } from '../../../common/styles/common/CheckboxStyles'
+import { MultiLineTextCheckBoxScaled } from '../../../common/styles/common/CheckboxStyles'
 import { scale } from '../../../common/util/scaling'
 import * as Styles from '../'
 
@@ -45,26 +45,26 @@ const TermsAndConditionsScreenStyle = {
     marginBottom: scale(20)
   },
   shim: { ...Styles.Shim, height: scale(10) },
-  checkboxes: MultiLineTextCheckBox,
+  checkboxes: MultiLineTextCheckBoxScaled,
   nextButton: {
-    upStyle: { ...Styles.PrimaryButtonUpStyle, width: 240 },
-    upTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: { ...Styles.PrimaryButtonDownStyle, width: 240 }
+    upStyle: { ...Styles.PrimaryButtonUpScaledStyle, width: scale(240) },
+    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downStyle: { ...Styles.PrimaryButtonDownScaledStyle, width: scale(240) }
   },
   termsButton: {
-    upStyle: Styles.TextOnlyButtonUpStyle,
+    upStyle: Styles.TextOnlyButtonUpScaledStyle,
     upTextStyle: {
-      ...Styles.TextOnlyButtonTextUpStyle,
-      fontSize: Constants.FONTS.defaultFontSize
+      ...Styles.TextOnlyButtonTextUpScaledStyle,
+      fontSize: scale(Constants.FONTS.defaultFontSize)
     },
     downTextStyle: {
-      ...Styles.TextOnlyButtonTextDownStyle,
-      fontSize: Constants.FONTS.defaultFontSize
+      ...Styles.TextOnlyButtonTextDownScaledStyle,
+      fontSize: scale(Constants.FONTS.defaultFontSize)
     },
-    downStyle: Styles.TextOnlyButtonDownStyle
+    downStyle: Styles.TextOnlyButtonDownScaledStyle
   },
-  inputShim: { ...Styles.Shim, height: 20 }
+  inputShim: { ...Styles.Shim, height: scale(20) }
 }
 
 export { TermsAndConditionsScreenStyle }

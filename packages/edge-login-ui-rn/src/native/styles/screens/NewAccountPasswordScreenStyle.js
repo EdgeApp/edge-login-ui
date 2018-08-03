@@ -20,7 +20,7 @@ const NewAccountPasswordScreenStyle = {
     flex: 1
   },
   innerView: { ...Styles.InnerView, alignItems: 'center' },
-  status: Styles.PasswordStatusStyle,
+  status: Styles.PasswordStatusScaledStyle,
   nextButton: {
     upStyle: Styles.PrimaryButtonUpScaledStyle,
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
@@ -28,10 +28,10 @@ const NewAccountPasswordScreenStyle = {
     downStyle: Styles.PrimaryButtonDownScaledStyle
   },
   inputBox: {
-    ...Styles.MaterialInputOnWhite
+    ...Styles.MaterialInputOnWhiteScaled,
+    marginTop: scale(15)
   },
-  passwordShim: { ...Styles.Shim, height: scale(15) },
-  inputShim: { ...Styles.Shim, height: scale(50) },
+  passwordShim: { ...Styles.Shim, height: 1, marginTop: scale(35) },
   modal: Styles.SkipModalStyle
 }
 
