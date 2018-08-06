@@ -64,8 +64,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       focusFirst: true,
       focusSecond: false,
       offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN,
-      showRecoveryModalOne: false,
-      showRecoveryModalTwo: false
+      showRecoveryModalOne: false
     })
   }
   renderModal = (style: Object) => {
@@ -79,31 +78,18 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     }
     if (this.state.showRecoveryModalOne) {
       const body = (
-        <Text style={style.staticModalText}>{s.strings.if_recovery_modal}</Text>
-      )
-      return (
-        <StaticModal
-          cancel={this.closeForgotPasswordModal.bind(this)}
-          body={body}
-          modalDismissTimerSeconds={8}
-        />
-      )
-    }
-    if (this.state.showRecoveryModalTwo) {
-      const body = (
         <Text style={style.staticModalText}>
           {s.strings.initiate_password_recovery}
         </Text>
       )
       return (
         <StaticModal
-          cancel={this.closeForgotPasswordModalTwo.bind(this)}
+          cancel={this.closeForgotPasswordModal}
           body={body}
           modalDismissTimerSeconds={8}
         />
       )
     }
-
     return null
   }
   recoverPasswordLogin = () => {
@@ -368,17 +354,10 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       showRecoveryModalOne: true
     })
   }
-  closeForgotPasswordModal () {
+  closeForgotPasswordModal = () => {
     // this.props.onForgotPassword()
     this.setState({
-      showRecoveryModalOne: false,
-      showRecoveryModalTwo: true
-    })
-  }
-  closeForgotPasswordModalTwo () {
-    // this.props.onForgotPassword()
-    this.setState({
-      showRecoveryModalTwo: false
+      showRecoveryModalOne: false
     })
   }
   onStartLogin () {
