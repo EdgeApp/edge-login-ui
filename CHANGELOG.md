@@ -1,5 +1,18 @@
 # airbitz-core-js-ui
 
+## 0.3.5
+
+* rn: added localization auto detect.
+* rn: Machnie translations for Spanish, Portuguese.
+* rn: Fix autocorrect bug on username creation
+* rn: add firebase
+* rn: fix types for imports
+* rn: modified text for clarity
+
+## 0.3.4
+
+* rn: added git tag in failed publish attempt
+
 ## 0.3.3
 
 * rn: Various font & style fixes.
