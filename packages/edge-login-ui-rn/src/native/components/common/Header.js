@@ -40,7 +40,7 @@ class Header extends Component<Props> {
     if (!this.props.showBackButton) {
       return
     }
-    let label = s.strings.back_caps
+    let label = s.strings.back
     if (this.props.useCancel) {
       label = s.strings.cancel_caps
     }
