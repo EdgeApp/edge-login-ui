@@ -48,7 +48,7 @@ export default class NewAccountReviewScreenComponent extends Component<Props> {
               }
               upStyle={NewAccountReviewScreenStyle.nextButton.upStyle}
               upTextStyle={NewAccountReviewScreenStyle.nextButton.upTextStyle}
-              label={s.strings.done}
+              label={s.strings.next_label}
             />
           </View>
         </View>
