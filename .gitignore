@@ -4,3 +4,4 @@ lerna-debug.log
 node_modules
 npm-debug.log
 yarn-error.log
+.vscode/settings.json

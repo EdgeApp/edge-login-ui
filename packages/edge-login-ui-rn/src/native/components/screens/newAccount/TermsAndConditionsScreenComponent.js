@@ -103,6 +103,8 @@ export default class TermsAndConditionsScreenComponent extends Component<
     )
   }
   onNextPress = () => {
+    global.firebase &&
+      global.firebase.analytics().logEvent(`Signup_Terms_Agree`)
     this.props.agreeToCondition(this.props.accountObject)
   }
 }

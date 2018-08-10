@@ -45,7 +45,7 @@ edgeUiContext.openLoginWindow({
 })
 ```
 
-![Login UI](https://airbitz.co/go/wp-content/uploads/2016/08/Screen-Shot-2016-08-26-at-12.50.04-PM.png)
+![Login UI](http://edge.app/wp-content/uploads/2018/06/Screen-Shot-2018-06-29-at-9.15.13-PM-e1530376379411.png)
 
 Once the user logs in, you receive an `edgeUiAccount` object. You can use this object to open an account management window for changing the password, PIN, and recovery questions:
 
@@ -57,7 +57,7 @@ edgeUiAccount.openManageWindow({
 })
 ```
 
-![Management UI](https://airbitz.co/go/wp-content/uploads/2016/08/Screen-Shot-2016-08-26-at-12.50.26-PM.png)
+![Management UI](http://edge.app/wp-content/uploads/2018/06/Screen-Shot-2018-06-29-at-11.34.51-PM-e1530376290752.png)
 
 You can also use the account object to manage wallets (each with their own private key):
 

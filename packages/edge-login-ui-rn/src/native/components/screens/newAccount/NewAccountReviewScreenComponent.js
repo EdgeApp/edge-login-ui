@@ -56,6 +56,8 @@ export default class NewAccountReviewScreenComponent extends Component<Props> {
     )
   }
   onNextPress = () => {
+    global.firebase &&
+      global.firebase.analytics().logEvent(`Signup_Review_Next`)
     this.props.nextScreen()
   }
 }

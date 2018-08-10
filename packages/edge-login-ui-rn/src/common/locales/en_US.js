@@ -1,5 +1,4 @@
 // @flow
-
 const strings = {
   login_button: 'Login',
   username: 'Username',
@@ -10,9 +9,7 @@ const strings = {
   forgot_password: 'Forgot Password',
   create_an_account: 'Create an account',
   initiate_password_recovery:
-    'Please find the email and click on the link from this device to initiate recovery. ',
-  if_recovery_modal:
-    'If recovery was set up, you should have emailed yourself a recovery token with a link.',
+    'To recover your password, you must have setup password recovery prior. Please find the recovery email you sent yourself and click on the link from this device.',
   choose_recovery_question: 'Choose recovery question',
   submit: 'Submit',
   save: 'Save',
@@ -27,6 +24,7 @@ const strings = {
   ok: 'OK',
   or: 'OR',
   exit: 'Exit',
+  exit_pin: 'EXIT PIN',
   next_label: 'Next',
   next_label_caps: 'NEXT',
   delete: 'Delete',
@@ -136,7 +134,12 @@ const strings = {
   secure_account: 'and secure your account',
   encrypting_wallet: 'Encrypting wallet...',
   unexpected_end_of_data: 'Not enough characters in field',
-  confirm_recovery_questions: 'Confirm Recovery'
+  confirm_recovery_questions: 'Confirm Recovery',
+  login_with_password: 'Login with password',
+  landing_tagline:
+    'The secure and easy to use wallet for your blockchain assets and tokens',
+  landing_create_account_button: 'Create account',
+  landing_already_have_account: 'Already have an account? Sign in'
 }
 
-export default strings
+module.exports = strings

@@ -18,6 +18,8 @@ export default class CreatingAccountWaitScreenComponent extends Component<
 > {
   componentWillReceiveProps (nextProps: Props) {
     if (nextProps.createSuccess) {
+      global.firebase &&
+        global.firebase.analytics().logEvent(`Signup_Create_User_Success`)
       this.props.nextScreen()
     }
   }

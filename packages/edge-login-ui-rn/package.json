@@ -1,6 +1,6 @@
 {
   "name": "edge-login-ui-rn",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Edge login UI components, as a React Native library",
   "keywords": [
     "Airbitz",
@@ -30,6 +30,7 @@
     "material-ui": "^0.20.0",
     "moment": "^2.19.3",
     "native-base": "^2.3.9",
+    "react-native-device-info": "^0.11.0",
     "react-native-keyboard-aware-scroll-view": "^0.4.1",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-mail": "^3.0.5",

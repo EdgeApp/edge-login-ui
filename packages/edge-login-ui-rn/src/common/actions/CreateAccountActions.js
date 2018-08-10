@@ -43,6 +43,8 @@ export function checkUsernameForAvailabilty (data: string) {
               username: data,
               error: null
             }
+            global.firebase &&
+              global.firebase.analytics().logEvent(`Signup_Username_Available`)
             dispatch(
               dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
             )
@@ -53,6 +55,8 @@ export function checkUsernameForAvailabilty (data: string) {
             username: data,
             error: Constants.USERNAME_EXISTS_ERROR
           }
+          global.firebase &&
+            global.firebase.analytics().logEvent(`Signup_Username_Unavailable`)
           dispatch(
             dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
           )
@@ -139,7 +143,7 @@ export function validatePassword (data: string) {
 
 export function createUser (data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const context = imports.context
+    const { context, folder } = imports
     const myAccountOptions = {
       ...imports.accountOptions,
       callbacks: {
@@ -158,18 +162,15 @@ export function createUser (data: Object) {
           data.pin,
           myAccountOptions
         )
-        const touchDisabled = await isTouchDisabled(
-          context,
-          abcAccount.username
-        )
+        const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
         if (!touchDisabled) {
-          await enableTouchId(context, abcAccount)
+          await enableTouchId(folder, abcAccount)
         }
         dispatch(
           dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, abcAccount)
         )
         dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
-        await context.io.folder
+        await folder
           .file('lastuser.json')
           .setText(JSON.stringify({ username: abcAccount.username }))
           .catch(e => null)
@@ -185,12 +186,11 @@ export function createUser (data: Object) {
 }
 export function agreeToConditions (account: AbcAccount) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const context = imports.context
-    const callback = imports.callback
+    const { callback, folder } = imports
     // write to disklet
     // eslint-disable-next-line no-unused-expressions
     async response => {
-      await context.io.folder
+      await folder
         .file('acceptTermsAndConditions.json')
         .setText(JSON.stringify({ accepted: true }))
         .catch(e => {
