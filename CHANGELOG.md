@@ -1,5 +1,9 @@
 # airbitz-core-js-ui
 
+## 0.4.1
+
+* rn: update dependencies for rn56 compatibility
+
 ## 0.4.0
 
 * rn: modified text for password recovery.
