@@ -1,12 +1,13 @@
 // @flow
 import DeviceInfo from 'react-native-device-info'
 
-import cn from './cn'
+/* import cn from './cn' */
 import en from './en_US'
-import es from './es'
-import pt from './pt'
 
-const allLocales = { en, es, cn, pt }
+/* import es from './es'
+import pt from './pt' */
+
+const allLocales = { en }
 
 // Set default of US English
 const out = { strings: en }
