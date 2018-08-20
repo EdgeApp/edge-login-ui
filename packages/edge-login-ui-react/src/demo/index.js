@@ -3,7 +3,7 @@
 import 'edge-login-ui-react/lib/styles.css'
 
 import type { EdgeAccount, EdgeContext } from 'edge-core-js'
-import { makeContext } from 'edge-core-js'
+import { makeEdgeContext } from 'edge-core-js'
 import { AccountScreen, LoginScreen } from 'edge-login-ui-react'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
@@ -11,13 +11,6 @@ import { render } from 'react-dom'
 const vendorName = 'Edge React Demo'
 const vendorImageUrl =
   'https://airbitz.co/go/wp-content/uploads/2016/10/GenericEdgeLoginIcon.png'
-
-/**
- * Hacking around incorrect environment detection in the core.
- */
-function makeEdgeContext (opts) {
-  return Promise.resolve(makeContext(opts))
-}
 
 type RootProps = {}
 type RootState = {
