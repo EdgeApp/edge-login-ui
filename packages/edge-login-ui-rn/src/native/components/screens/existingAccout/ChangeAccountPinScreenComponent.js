@@ -108,7 +108,7 @@ export default class ChangeAccountPinScreenComponent extends Component<
               downTextStyle={SetAccountPinScreenStyle.nextButton.downTextStyle}
               upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
               upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
-              label={s.strings.done_caps}
+              label={s.strings.done}
               isThinking={this.state.isProcessing}
               doesThink
             />
