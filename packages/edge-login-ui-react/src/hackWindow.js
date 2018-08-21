@@ -21,6 +21,7 @@ export function hackWindow (
     assetPath: './',
     abcuiContext: context,
     abcAccount: account,
+    accountOptions,
     vendorName,
     vendorImageUrl,
 
