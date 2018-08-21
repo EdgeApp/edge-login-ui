@@ -1,12 +1,13 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
 import s from '../../../../common/locales/strings'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import UsernameConnector from '../../../connectors/componentConnectors/UsernameConnector'
 import { Button } from '../../common'
+import T from '../../common/FormattedText.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type Props = {
@@ -39,9 +40,9 @@ export default class LandingScreenComponent extends Component<Props, State> {
           <HeaderConnector style={NewAccountUsernameScreenStyle.header} />
           <View style={NewAccountUsernameScreenStyle.pageContainer}>
             <View style={NewAccountUsernameScreenStyle.instructions}>
-              <Text style={NewAccountUsernameScreenStyle.instructionsText}>
+              <T style={NewAccountUsernameScreenStyle.instructionsText}>
                 {s.strings.username_desc}
-              </Text>
+              </T>
             </View>
             <UsernameConnector
               style={NewAccountUsernameScreenStyle.inputBox}

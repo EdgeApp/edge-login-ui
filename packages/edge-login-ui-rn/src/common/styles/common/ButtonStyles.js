@@ -2,6 +2,8 @@
 
 import * as Constants from '../../constants/'
 import { hs } from '../../util'
+import { scale } from '../../util/scaling.js'
+
 const PrimaryButtonUpStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_UP,
@@ -299,6 +301,118 @@ const TextAndIconButtonAlignEdgesStyle = {
   underlayColor: Constants.TRANSPARENT
 }
 
+const PrimaryButtonUpScaledStyle = {
+  position: 'relative',
+  backgroundColor: Constants.BUTTON_PRIMARY_UP,
+  width: Constants.BUTTON_WIDTH_1,
+  height: scale(Constants.BUTTON_HEIGHT),
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderRadius: Constants.BUTTON_BORDER_RADIUS
+}
+const PrimaryWidthButtonUpScaledStyle = {
+  ...PrimaryButtonUpStyle,
+  width: Constants.BUTTON_100_PERCENT
+}
+const PrimaryButtonUpTextScaledStyle = {
+  position: 'relative',
+  color: Constants.WHITE,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
+  fontFamily: Constants.FONTS.fontFamilyRegular,
+  width: '100%',
+  textAlign: 'center'
+}
+const PrimaryButtonDownTextScaledStyle = {
+  position: 'relative',
+  color: Constants.WHITE,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
+  fontFamily: Constants.FONTS.fontFamilyRegular,
+  width: '100%',
+  textAlign: 'center'
+}
+const PrimaryButtonDownScaledStyle = {
+  position: 'relative',
+  backgroundColor: Constants.BUTTON_PRIMARY_DOWN,
+  width: Constants.BUTTON_WIDTH_1,
+  height: scale(Constants.BUTTON_HEIGHT),
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  borderRadius: Constants.BUTTON_BORDER_RADIUS
+}
+const PrimaryWidthButtonDownScaledStyle = {
+  ...PrimaryButtonDownStyle,
+  width: Constants.BUTTON_100_PERCENT
+}
+
+const TextOnlyButtonUpScaledStyle = {
+  backgroundColor: Constants.TRANSPARENT,
+  padding: scale(10)
+}
+
+const TextOnlyButtonTextUpScaledStyle = {
+  color: Constants.SECONDARY,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
+  fontFamily: Constants.FONTS.fontFamilyRegular,
+  width: '100%',
+  textAlign: 'center'
+}
+
+const TextOnlyButtonDownScaledStyle = {
+  backgroundColor: Constants.TRANSPARENT,
+  padding: scale(10)
+}
+
+const TextOnlyButtonTextDownScaledStyle = {
+  color: Constants.PRIMARY,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
+  fontFamily: Constants.FONTS.fontFamilyRegular,
+  width: '100%',
+  textAlign: 'center'
+}
+
+const TextAndIconButtonScaledStyle = {
+  container: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  centeredContent: {
+    width: '100%',
+    alignItems: 'center'
+  },
+  inner: {
+    position: 'relative',
+    flexDirection: 'row'
+  },
+  textContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  iconContainer: {
+    height: '100%',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  text: {
+    color: Constants.WHITE,
+    fontSize: scale(20)
+  },
+  textPressed: {
+    color: Constants.GRAY_2,
+    fontSize: scale(20)
+  },
+  icon: {
+    color: Constants.WHITE
+  },
+  iconPressed: {
+    color: Constants.GRAY_2
+  },
+  iconSize: scale(25),
+  underlayColor: Constants.TRANSPARENT
+}
+
 export { TextAndIconButtonAlignEdgesStyle }
 export { TextAndIconButtonStyle }
 export { IconButtonStyle }
@@ -326,3 +440,15 @@ export { TextOnlyButtonUpStyle }
 export { TextOnlyButtonTextUpStyle }
 export { TextOnlyButtonDownStyle }
 export { TextOnlyButtonTextDownStyle }
+
+export { PrimaryButtonUpScaledStyle }
+export { PrimaryWidthButtonUpScaledStyle }
+export { PrimaryButtonUpTextScaledStyle }
+export { PrimaryButtonDownTextScaledStyle }
+export { PrimaryButtonDownScaledStyle }
+export { PrimaryWidthButtonDownScaledStyle }
+export { TextOnlyButtonUpScaledStyle }
+export { TextOnlyButtonTextUpScaledStyle }
+export { TextOnlyButtonDownScaledStyle }
+export { TextOnlyButtonTextDownScaledStyle }
+export { TextAndIconButtonScaledStyle }

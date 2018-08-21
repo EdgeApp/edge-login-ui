@@ -87,13 +87,12 @@ export default class NewAccountPasswordScreenComponent extends Component<
           autoFocus={this.state.focusFirst}
           onFinish={this.onSetNextFocus}
         />
-        <View style={styles.inputShim} />
         <PasswordConfirmConnector
           style={styles.inputBox}
           autoFocus={this.state.focusSecond}
           onFinish={this.onNextPress}
         />
-        <View style={styles.inputShim} />
+        <View style={styles.passwordShim} />
         <Button
           onPress={this.onNextPress}
           downStyle={styles.nextButton.downStyle}
