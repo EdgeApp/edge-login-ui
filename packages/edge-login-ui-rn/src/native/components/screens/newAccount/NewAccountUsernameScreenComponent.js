@@ -57,7 +57,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
               }
               upStyle={NewAccountUsernameScreenStyle.nextButton.upStyle}
               upTextStyle={NewAccountUsernameScreenStyle.nextButton.upTextStyle}
-              label={s.strings.next_label_caps}
+              label={s.strings.next_label}
               isThinking={this.state.isProcessing}
               doesThink
             />

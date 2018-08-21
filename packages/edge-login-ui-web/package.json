@@ -1,6 +1,6 @@
 {
   "name": "edge-login-ui-web",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
     "assets",
@@ -40,8 +40,8 @@
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
-    "edge-core-js": "^0.8.1",
-    "edge-login-ui-react": "^0.3.4",
+    "edge-core-js": "^0.10.0",
+    "edge-login-ui-react": "^0.4.0",
     "ethereumjs-tx": "^1.3.4",
     "ethereumjs-util": "^5.2.0",
     "flow-bin": "^0.62.0",

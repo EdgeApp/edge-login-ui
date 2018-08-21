@@ -110,7 +110,7 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
           downTextStyle={styles.nextButton.downTextStyle}
           upStyle={styles.nextButton.upStyle}
           upTextStyle={styles.nextButton.upTextStyle}
-          label={s.strings.done_caps}
+          label={s.strings.done}
           isThinking={this.state.isProcessing}
           doesThink
         />

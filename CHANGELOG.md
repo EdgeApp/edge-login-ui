@@ -1,5 +1,14 @@
 # airbitz-core-js-ui
 
+## 0.4.1
+
+* rn: update dependencies for rn56 compatibility
+
+## 0.4.0
+
+* rn: modified text for password recovery.
+* rn: changes based on removal of context.io in core
+
 ## 0.3.5
 
 * rn: added localization auto detect.

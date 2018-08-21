@@ -61,7 +61,7 @@ export default class SetAccountPinScreenComponent extends Component<
                 }
                 upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
                 upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
-                label={s.strings.next_label_caps}
+                label={s.strings.next_label}
                 isThinking={this.state.isProcessing}
                 doesThink
               />
