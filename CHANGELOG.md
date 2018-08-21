@@ -1,5 +1,12 @@
 # airbitz-core-js-ui
 
+## 0.4.3
+
+* rn: upgrade dependencies for rn56 compatibility
+* rn: implement AccountOptions
+* rn: upgrade core
+* rn: created account module scaling
+
 ## 0.4.2
 
 * rn: rollback dependencies for rn56 compatibility
