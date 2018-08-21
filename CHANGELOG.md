@@ -1,8 +1,13 @@
 # airbitz-core-js-ui
 
+## 0.4.2
+
+* rn: rollback dependencies for rn56 compatibility
+* rn: remove auto-translated files from being active
+
 ## 0.4.1
 
-* rn: update dependencies for rn56 compatibility
+* rn: upgrade dependencies for rn56 compatibility
 
 ## 0.4.0
 
