@@ -106,7 +106,9 @@ class FourDigitInputComponent extends Component<Props, State> {
               keyboardShouldPersistTaps
             />
           </View>
-          <Text style={Style.errorText}>{this.props.error}</Text>
+          <View style={Style.errorContainer}>
+            <Text style={Style.errorText}>{this.props.error}</Text>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     )
