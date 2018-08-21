@@ -1,6 +1,7 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
+import { scale } from '../../../common/util/scaling.js'
 import * as Styles from '../'
 
 const NewAccountWelcomeScreenStyle = {
@@ -20,32 +21,32 @@ const NewAccountWelcomeScreenStyle = {
     flex: 3,
     alignItems: 'center'
   },
-  logoHeader: Styles.LogoHeaderStyle,
+  logoHeader: Styles.LogoHeaderScaledStyle,
   instructionsText: {
-    fontSize: Styles.CreateAccountFont.defaultFontSize,
+    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
     fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Constants.GRAY_2,
     textAlign: 'center',
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: scale(20),
+    paddingRight: scale(20)
   },
   callToAction: {
-    fontSize: Styles.CreateAccountFont.defaultFontSize,
+    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
     fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Constants.GRAY_2,
     textAlign: 'center'
   },
   nextButton: {
-    upStyle: Styles.PrimaryButtonUpStyle,
-    upTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: Styles.PrimaryButtonDownStyle
+    upStyle: Styles.PrimaryButtonUpScaledStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downStyle: Styles.PrimaryButtonDownScaledStyle
   },
   exitButton: {
-    upStyle: { ...Styles.TextOnlyButtonUpStyle, width: null },
-    upTextStyle: Styles.TextOnlyButtonTextUpStyle,
-    downTextStyle: Styles.TextOnlyButtonTextDownStyle,
-    downStyle: Styles.TextOnlyButtonDownStyle
+    upStyle: { ...Styles.TextOnlyButtonUpScaledStyle, width: null },
+    upTextStyle: Styles.TextOnlyButtonTextUpScaledStyle,
+    downTextStyle: Styles.TextOnlyButtonTextDownScaledStyle,
+    downStyle: Styles.TextOnlyButtonDownScaledStyle
   },
   exitBackButtonStyle: {
     backButton: {
@@ -53,18 +54,18 @@ const NewAccountWelcomeScreenStyle = {
       alignItems: 'center'
     },
     backIconStyle: {
-      paddingLeft: 10,
-      paddingRight: 5,
-      paddingTop: 3,
+      paddingLeft: scale(10),
+      paddingRight: scale(5),
+      paddingTop: scale(3),
+      fontSize: scale(20),
       color: Constants.SECONDARY
     },
     sideText: {
       color: Constants.SECONDARY,
-      fontSize: 18
+      fontSize: scale(18)
     },
     icon: {
-      color: Constants.SECONDARY,
-      fontSize: 25
+      color: Constants.SECONDARY
     },
     default: {
       backgroundColor: Constants.TRANSPARENT,

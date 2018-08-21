@@ -1,35 +1,36 @@
 // @flow
 
 import * as Constants from '../../../common/constants'
+import { scale } from '../../../common/util/scaling.js'
 import * as Styles from '../'
 
 const NewAccountUsernameScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerStyle,
+  header: Styles.HeaderContainerScaledStyle,
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'
   },
   nextButton: {
-    upStyle: Styles.PrimaryButtonUpStyle,
-    upTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: Styles.PrimaryButtonDownStyle
+    upStyle: Styles.PrimaryButtonUpScaledStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downStyle: Styles.PrimaryButtonDownScaledStyle
   },
   instructions: {
-    height: Constants.USERNAME_INSTRUCTIONS_HEIGHT,
+    height: scale(Constants.USERNAME_INSTRUCTIONS_HEIGHT),
     width: '90%'
   },
   shim: {
-    height: 30
+    height: scale(50)
   },
   instructionsText: {
-    fontSize: Styles.CreateAccountFont.defaultFontSize,
+    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
     fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Constants.GRAY_1,
     textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20
+    paddingTop: scale(20),
+    paddingBottom: scale(20)
   },
   inputBox: Styles.MaterialInputOnWhite
 }

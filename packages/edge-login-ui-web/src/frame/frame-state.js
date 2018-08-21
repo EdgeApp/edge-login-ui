@@ -1,7 +1,7 @@
 // @flow
 
-import type { EdgeAccount, EdgeContext, EdgeContextOptions } from 'edge-core-js'
-import { makeContext } from 'edge-core-js'
+import type { EdgeAccount, EdgeContext } from 'edge-core-js'
+import { makeEdgeContext } from 'edge-core-js'
 import postRobot from 'post-robot'
 import { base16 } from 'rfc4648'
 
@@ -20,11 +20,10 @@ import {
 } from './frame-selectors.js'
 import { updateView } from './View.js'
 
-/**
- * Hacking around incorrect environment detection in the core.
- */
-function makeEdgeContext (opts: EdgeContextOptions) {
-  return Promise.resolve(makeContext(opts))
+const makeRandom = size => {
+  const out = new Uint8Array(size)
+  window.crypto.getRandomValues(out)
+  return out
 }
 
 /**
@@ -122,7 +121,7 @@ export function awaitConnection () {
           if (type === 'wallet:ethereum') {
             return state.accounts[accountId]
               .createWallet(type, {
-                ethereumKey: base16.stringify(state.context.io.random(32))
+                ethereumKey: base16.stringify(makeRandom(32))
               })
               .then(walletId => {
                 const walletInfos = getWalletInfos(state, accountId)

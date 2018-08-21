@@ -1,10 +1,11 @@
 // @flow
 
+import { scale } from '../../../common/util/scaling.js'
 import * as Styles from '../'
 
 const NewAccountPasswordScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerStyle,
+  header: Styles.HeaderContainerScaledStyle,
   mainScrollView: {
     position: 'relative',
     width: '100%',
@@ -19,18 +20,18 @@ const NewAccountPasswordScreenStyle = {
     flex: 1
   },
   innerView: { ...Styles.InnerView, alignItems: 'center' },
-  status: Styles.PasswordStatusStyle,
+  status: Styles.PasswordStatusScaledStyle,
   nextButton: {
-    upStyle: Styles.PrimaryButtonUpStyle,
-    upTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextStyle,
-    downStyle: Styles.PrimaryButtonDownStyle
+    upStyle: Styles.PrimaryButtonUpScaledStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downStyle: Styles.PrimaryButtonDownScaledStyle
   },
   inputBox: {
-    ...Styles.MaterialInputOnWhite
+    ...Styles.MaterialInputOnWhiteScaled,
+    marginTop: scale(15)
   },
-
-  inputShim: { ...Styles.Shim, height: 30 },
+  passwordShim: { ...Styles.Shim, height: 1, marginTop: scale(35) },
   modal: Styles.SkipModalStyle
 }
 

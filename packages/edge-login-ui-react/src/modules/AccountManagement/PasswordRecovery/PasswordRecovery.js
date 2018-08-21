@@ -48,22 +48,21 @@ class PasswordRecovery extends Component {
   loadQuestions = () => {
     const dispatch = this.props.dispatch
     const ctx = window.abcui.abcuiContext
-    ctx.listRecoveryQuestionChoices((error, results) => {
-      if (error) {
+    ctx.listRecoveryQuestionChoices
+      .then(results => {
+        const questions = results
+          .filter(result => result.category === 'recovery2')
+          .map(result => result.question)
+        dispatch(action.setPasswordRecoveryQuestions(questions))
+      })
+      .catch(e => {
         this.props.dispatch(
           action.errorFirstQuestion(t('string_connection_error_server'))
         )
         return this.props.dispatch(
           action.errorSecondQuestion(t('string_connection_error_server'))
         )
-      }
-      if (!error) {
-        const questions = results
-          .filter(result => result.category === 'recovery2')
-          .map(result => result.question)
-        dispatch(action.setPasswordRecoveryQuestions(questions))
-      }
-    })
+      })
   }
   componentWillMount = () => {
     this.loadQuestions()

@@ -1,6 +1,7 @@
 // @flow
 
 import * as Colors from '../../../common/constants/Colors'
+import { scale } from '../../util/scaling.js'
 
 const InputStyles = {
   container: {
@@ -15,7 +16,10 @@ const InputStyles = {
     // fontSize: 24,
     // lineHeight: 40,
     // margin: 20
-  }
+  },
+  fontSize: scale(15),
+  titleFontSize: scale(12),
+  labelFontSize: scale(12)
 }
 
 export { InputStyles }
