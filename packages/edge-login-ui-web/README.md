@@ -59,29 +59,34 @@ edgeUiAccount.openManageWindow({
 
 ![Management UI](http://edge.app/wp-content/uploads/2018/06/Screen-Shot-2018-06-29-at-11.34.51-PM-e1530376290752.png)
 
-You can also use the account object to manage wallets (each with their own private key):
+You can also use the account object to manage wallets (each with their own private key). First, ensure that a wallet exists:
 
 ```js
-async function getAppPrivateKey (edgeUiAccount) {
-  // Find the first Ethereum wallet in the account:
-  const edgeWalletInfo = edgeUiAccount.getFirstWalletInfo('wallet:ethereum')
-
-  // If an Ethereum wallet already exists, return its key:
-  if (edgeWalletInfo != null) {
-    return edgeWalletInfo.keys.ethereumKey
-  }
-
-  // There are no Ethereum wallets, so make one:
-  const keys = {
-    ethereumKey: new Buffer(secureRandom(32)).toString('hex')
-  }
-  const walletId = await edgeUiAccount.createWallet("wallet:ethereum", keys)
-  const edgeWalletInfo = edgeUiAccount.walletInfos[walletId]
-  return edgeWalletInfo.keys.ethereumKey
+if (edgeUiAccount.getFirstWalletInfo('wallet:ethereum') == null) {
+  await createCurrencyWallet('wallet:ethereum')
 }
 ```
 
-The returned key can then be used as a secure source of entropy for this wallet within your app.
+Now that a private key exists, the wallet can sign transactions:
+
+```js
+const walletId = edgeUiAccount.getFirstWalletInfo('wallet:ethereum').id
+
+const signedTx = await edgeUiAccount.signEthereumTransaction(
+  walletId,
+  {
+    chainId: 3,
+    nonce: '0x00',
+    gasPrice: '0x09184e72a000',
+    gasLimit: '0x2710',
+    to: '0x0000000000000000000000000000000000000000',
+    value: '0x00',
+    data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057'
+  }
+)
+```
+
+Please see the [ethereumjs-tx](https://github.com/ethereumjs/ethereumjs-tx/blob/master/docs/index.md) library for information on the Ethereum transaction format.
 
 To log a user out, do:
 
@@ -109,6 +114,8 @@ This project contains a demo application in the `src/demo` directory. You can la
 
 If the "Login With Edge" button does not turn blue after 30 seconds, just reload the page and it will work. Building the iframe can take a while the first time the demo loads, so things can time out. This would not be a problem in production where the iframe is already built.
 
+<!--
 # Detailed Docs
 
 https://developer.airbitz.co/javascript/#airbitz-account-management-ui
+-->
