@@ -7,7 +7,7 @@ const strings = {
   back_caps: 'BACK',
   back: 'Back',
   forgot_password: 'Forgot Password',
-  create_an_account: 'Create an account',
+  create_an_account: 'Create an Account', // 'Forgot Password' is capitalized, making consistent
   initiate_password_recovery:
     'To recover your password, you must have setup password recovery prior. Please find the recovery email you sent yourself and click on the link from this device.',
   choose_recovery_question: 'Choose recovery question',
@@ -24,7 +24,7 @@ const strings = {
   ok: 'OK',
   or: 'OR',
   exit: 'Exit',
-  exit_pin: 'EXIT PIN',
+  exit_pin: 'Exit PIN', // nothing should be all-caps
   next_label: 'Next',
   next_label_caps: 'NEXT',
   delete: 'Delete',
@@ -64,17 +64,17 @@ const strings = {
     'I understand that if I lose this device or uninstall the app, my digital assets can only be recovered with my username and password',
   terms_three:
     'I understand that if I lose my username and password, Edge will not be able to recover my account, unless I setup password recovery',
-  step_one: 'step 1/3',
-  step_two: 'step 2/3',
-  step_three: 'step 3/3',
-  choose_title_username: 'Choose a username',
-  choose_title_password: 'Set a password',
+  step_one: 'Step 1/3', // title of scene
+  step_two: 'Step 2/3', // title of scene
+  step_three: 'Step 3/3', // title of scene
+  choose_title_username: 'Choose a Username', // title of scene
+  choose_title_password: 'Set a Password', // title of scene
   set_four_digit_pin: 'Set a 4-digit PIN ',
-  create_your_account: 'Creating your account',
-  write_it_down: 'Write it down',
+  create_your_account: 'Creating Your Account', // title of scene
+  write_it_down: 'Write It Down', // Is this smaller green title even necessary?
   quick_review: 'Quick Review',
   recovery: 'Recovery',
-  account_confirmation: 'ACCOUNT CONFIRMATION',
+  account_confirmation: 'Account Confirmation', // title should be regular capitalization, not all uppercase
   otp_header: 'Two Factor Authentication',
   recovery_questions_header: 'Recovery Questions',
   account_info_warning:
@@ -122,7 +122,7 @@ const strings = {
   welcome_one:
     "Let's get started by creating your account login. You’ll choose a username and password, which we’ll use to encrypt your account. Not even Edge has access to your information, so you have full and complete control over your digital assets.",
   start_username: 'Let’s get started with choosing a username',
-  get_started: 'Get started',
+  get_started: 'Get Started', // button title, not a complete sentence so capitalize first letters
   encrypting: 'Doing the encryption',
   username_desc:
     'Your username will be required to sign in to your Edge account on this and other devices.',
