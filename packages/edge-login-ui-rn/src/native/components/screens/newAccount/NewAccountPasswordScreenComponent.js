@@ -99,7 +99,7 @@ export default class NewAccountPasswordScreenComponent extends Component<
           downTextStyle={styles.nextButton.downTextStyle}
           upStyle={styles.nextButton.upStyle}
           upTextStyle={styles.nextButton.upTextStyle}
-          label={s.strings.next_label_caps}
+          label={s.strings.next_label}
           isThinking={this.state.isProcessing}
           doesThink
         />
