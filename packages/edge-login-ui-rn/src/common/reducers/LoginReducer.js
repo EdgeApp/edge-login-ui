@@ -38,9 +38,9 @@ export default function (state = initialState, action) {
       }
       return state
     case Constants.AUTH_UPDATE_USERNAME:
-      return { ...state, username: action.data }
+      return { ...state, username: action.data, errorMessage: null }
     case Constants.AUTH_UPDATE_PIN:
-      return { ...state, pin: action.data }
+      return { ...state, pin: action.data, errorMessage: null }
     case Constants.LOGIN_SUCCEESS:
       return {
         ...state,
@@ -68,7 +68,7 @@ export default function (state = initialState, action) {
     case Constants.AUTH_UPDATE_OTP_BACKUP_KEY:
       return { ...state, otpUserBackupKey: action.data }
     case Constants.AUTH_UPDATE_LOGIN_PASSWORD:
-      return { ...state, password: action.data }
+      return { ...state, password: action.data, errorMessage: null }
     case Constants.OTP_ERROR:
       return {
         ...state,
