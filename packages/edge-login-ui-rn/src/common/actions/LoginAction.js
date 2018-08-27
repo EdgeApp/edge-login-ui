@@ -195,9 +195,7 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
           dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
           callback(null, abcAccount, touchIdInformation)
         } catch (e) {
-          console.log('LE: LOG IN WITH PIN ERROR ', e)
-          console.log('LE:', e.message)
-          console.log('LE: wait', e.wait)
+          console.log('LOG IN WITH PIN ERROR ', e)
           if (e.name === 'OtpError') {
             e.loginAttempt = 'PIN'
             dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
@@ -205,9 +203,9 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
           }
           const message =
             e.name === 'PasswordError'
-              ? 'Invalid PIN'
+              ? s.strings.invalid_pin
               : e.name === 'UsernameError'
-                ? 'PIN is not enabled for this account'
+                ? s.strings.pin_not_enabled
                 : e.message
           dispatch(
             dispatchActionWithData(Constants.LOGIN_PIN_FAIL, {
