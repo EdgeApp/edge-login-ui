@@ -6,7 +6,7 @@ import { scale } from '../../../common/util/scaling.js'
 const FourDotInputStyle = {
   container: {
     width: '100%',
-    height: 60
+    height: 90
   },
   interactiveContainer: {
     flex: 1,
@@ -28,7 +28,8 @@ const FourDotInputStyle = {
   },
   errorText: {
     color: Colors.ACCENT_RED,
-    backgroundColor: Colors.TRANSPARENT
+    backgroundColor: Colors.TRANSPARENT,
+    textAlign: 'center'
   },
   input: {
     position: 'absolute',
@@ -57,7 +58,7 @@ const FourDotInputStyle = {
 const FourDotInputDarkStyle = {
   container: {
     width: 200,
-    height: 60
+    height: 90
   },
   interactiveContainer: {
     flex: 1,
@@ -108,7 +109,7 @@ const FourDotInputDarkStyle = {
 const FourDotInputDarkScaledStyle = {
   container: {
     width: scale(200),
-    height: scale(70)
+    height: scale(80)
   },
   interactiveContainer: {
     flex: 1,

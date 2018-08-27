@@ -17,7 +17,8 @@ const initialState = {
   cancelEdgeLoginRequest: null,
   account: null,
   touchIdInformation: null,
-  showRecoverSuccessDialog: false
+  showRecoverSuccessDialog: false,
+  wait: 0
 }
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -39,6 +40,8 @@ export default function (state = initialState, action) {
       return state
     case Constants.AUTH_UPDATE_USERNAME:
       return { ...state, username: action.data, errorMessage: null }
+    case Constants.UPDATE_WAIT_TIMER:
+      return { ...state, wait: action.data.seconds }
     case Constants.AUTH_UPDATE_PIN:
       return { ...state, pin: action.data, errorMessage: null }
     case Constants.LOGIN_SUCCEESS:
@@ -48,12 +51,21 @@ export default function (state = initialState, action) {
         loginPasswordErrorMessage: null,
         isLoggingInWithPin: false,
         errorMessage: null,
-        otpErrorMessage: null
+        otpErrorMessage: null,
+        wait: 0
       }
     case Constants.LOGIN_USERNAME_PASSWORD_FAIL:
       return {
         ...state,
         errorMessage: action.data,
+        pin: '',
+        isLoggingInWithPin: false
+      }
+    case Constants.LOGIN_PIN_FAIL:
+      return {
+        ...state,
+        errorMessage: action.data.message,
+        wait: action.data.wait,
         pin: '',
         isLoggingInWithPin: false
       }
