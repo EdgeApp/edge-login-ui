@@ -27,7 +27,7 @@ const LoginWithRecoveryStyles = {
   },
   modalMiddle: {
     width: '100%',
-    height: 100
+    height: 120
   },
   inputModal: {
     ...Styles.MaterialInputOnWhite,
