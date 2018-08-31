@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "precommit": "node localizeLanguage.js && lint-staged && flow",
+    "precommit": "node localizeLanguage.js && npm run lint && lint-staged && flow",
     "flow": "flow",
     "format": "import-sort -l --write 'packages/*/*.js' 'packages/*/src/**/*.js'; prettier-eslint --write 'packages/*/*.js' 'packages/*/src/**/*.js' localizeLanguage.js",
     "lint": "eslint 'packages/*/*.js' 'packages/*/src/**/*.js'",
