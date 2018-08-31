@@ -51,7 +51,8 @@ export type State = {
     otpUserBackupKey: string,
     previousAttemptType: string,
     touchIdInformation: Object,
-    recoveryToken: string
+    recoveryToken: string,
+    wait: number
   },
   passwordStatus: {
     secondsToCrack: number,

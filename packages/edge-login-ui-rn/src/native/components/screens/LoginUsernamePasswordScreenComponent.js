@@ -215,7 +215,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     )
   }
   renderUsername (styles: Object) {
-    if (this.props.previousUsers.length > 1) {
+    if (this.props.previousUsers.length > 0) {
       return (
         <FormFieldWithDropComponent
           testID={'usernameFormField'}

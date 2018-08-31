@@ -34,7 +34,7 @@ const strings = {
   cancel: 'Cancel',
   cancel_caps: 'CANCEL',
   change_password: 'Change Password',
-  change_pin: 'Change Pin',
+  change_pin: 'Change PIN',
   pin_changed: 'PIN Changed',
   delete_account: 'Delete Account?',
   pin_successfully_changed: 'PIN Successfully Changed',
@@ -139,7 +139,10 @@ const strings = {
   landing_tagline:
     'The secure and easy to use wallet for your blockchain assets and tokens',
   landing_create_account_button: 'Create account',
-  landing_already_have_account: 'Already have an account? Sign in'
+  landing_already_have_account: 'Already have an account? Sign in',
+  pin_not_enabled: 'PIN is not enabled for this account',
+  invalid_pin: 'Invalid PIN',
+  account_locked_for: 'Account locked for \n%1$s more seconds'
 }
 
 module.exports = strings

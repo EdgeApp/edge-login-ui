@@ -18,8 +18,10 @@ type Props = {
   username: string,
   autoLogIn: boolean,
   error: string,
+  wait: number,
   isLogginginWithPin: boolean,
-  onChangeText(Object): void
+  onChangeText(Object): void,
+  updateWaitTime(number): void
 }
 
 type State = {
@@ -85,6 +87,15 @@ class FourDigitInputComponent extends Component<Props, State> {
         touchId: true
       })
     }
+    console.log('LE: in conponent', nextProps.wait)
+    if (nextProps.wait > 0) {
+      /* setTimeout(this.props.updateWaitTime((nextProps.wait - 1)), 1000) */
+      const newTime = nextProps.wait - 1
+      // setTimeout(() => { console.log('LE: TIMEOUT ') }, 1000)
+      setTimeout(() => {
+        this.props.updateWaitTime(newTime)
+      }, 1000)
+    }
   }
   render () {
     const Style = this.props.style
@@ -107,7 +118,9 @@ class FourDigitInputComponent extends Component<Props, State> {
             />
           </View>
           <View style={Style.errorContainer}>
-            <Text style={Style.errorText}>{this.props.error}</Text>
+            <Text style={Style.errorText} numberOfLines={2}>
+              {this.props.error}
+            </Text>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -142,6 +155,9 @@ class FourDigitInputComponent extends Component<Props, State> {
   }
   renderDotContainer (style: Object) {
     const pinLength = this.props.pin ? this.props.pin.length : 0
+    if (this.props.wait > 0) {
+      return <Spinner />
+    }
     if ((pinLength === 4 || this.state.touchId) && this.props.autoLogIn) {
       return <Spinner />
     }
