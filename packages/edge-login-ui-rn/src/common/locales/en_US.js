@@ -142,7 +142,10 @@ const strings = {
   landing_already_have_account: 'Already have an account? Sign in',
   pin_not_enabled: 'PIN is not enabled for this account',
   invalid_pin: 'Invalid PIN',
-  account_locked_for: 'Account locked for \n%1$s more seconds'
+  account_locked_for: 'Account locked for \n%1$s more seconds',
+  otp_modal_reset_headline: '2FA Reset Requested',
+  otp_modal_reset_body:
+    '2FA disable has been requested by another device for the following accounts on this device:\n'
 }
 
 module.exports = strings

@@ -1,0 +1,31 @@
+import { Alert } from 'react-native'
+
+import s from '../locales/strings.js'
+
+const checkingForOTP = context => {
+  const accountsPendingReset = []
+  let arrayString = ''
+  context
+    .fetchLoginMessages()
+    .then(async accounts => {
+      for (const key in accounts) {
+        const account = accounts[key]
+        if (account.otpResetPending) {
+          accountsPendingReset.push(key)
+          arrayString = arrayString + (key + '\n')
+        }
+      }
+      if (accountsPendingReset.length > 0) {
+        Alert.alert(
+          s.strings.otp_modal_reset_headline,
+          s.strings.otp_modal_reset_body + arrayString
+        )
+      }
+    })
+    .catch(e => {
+      console.log('CH: error', e)
+      return {}
+    })
+}
+
+export { checkingForOTP }

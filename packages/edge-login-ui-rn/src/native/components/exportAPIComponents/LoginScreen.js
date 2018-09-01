@@ -9,6 +9,7 @@ import thunk from 'redux-thunk'
 
 import { updateFontStyles } from '../../../common/constants/Fonts'
 import reducers from '../../../common/reducers'
+import { checkingForOTP } from '../../../common/util/checkingForOTP.js'
 import type { Imports } from '../../../types/ReduxTypes'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
@@ -35,6 +36,7 @@ class LoginScreen extends Component<Props> {
   }
 
   componentWillMount () {
+    checkingForOTP(this.props.context)
     updateFontStyles(this.props)
     const composeEnhancers =
       typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
