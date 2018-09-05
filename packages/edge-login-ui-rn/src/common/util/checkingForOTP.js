@@ -1,4 +1,5 @@
 import { Alert } from 'react-native'
+import { sprintf } from 'sprintf-js'
 
 import s from '../locales/strings.js'
 
@@ -18,7 +19,7 @@ const checkingForOTP = context => {
       if (accountsPendingReset.length > 0) {
         Alert.alert(
           s.strings.otp_modal_reset_headline,
-          s.strings.otp_modal_reset_body + arrayString
+          sprintf(s.strings.otp_modal_reset_body, arrayString)
         )
       }
     })
