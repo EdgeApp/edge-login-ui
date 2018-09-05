@@ -12,7 +12,7 @@ const checkingForOTP = context => {
         const account = accounts[key]
         if (account.otpResetPending) {
           accountsPendingReset.push(key)
-          arrayString = arrayString + (key + '\n')
+          arrayString = arrayString + (key + ', ')
         }
       }
       if (accountsPendingReset.length > 0) {
