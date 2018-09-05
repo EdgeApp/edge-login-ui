@@ -87,15 +87,6 @@ class FourDigitInputComponent extends Component<Props, State> {
         touchId: true
       })
     }
-    console.log('LE: in conponent', nextProps.wait)
-    if (nextProps.wait > 0) {
-      /* setTimeout(this.props.updateWaitTime((nextProps.wait - 1)), 1000) */
-      const newTime = nextProps.wait - 1
-      // setTimeout(() => { console.log('LE: TIMEOUT ') }, 1000)
-      setTimeout(() => {
-        this.props.updateWaitTime(newTime)
-      }, 1000)
-    }
   }
   render () {
     const Style = this.props.style
@@ -104,18 +95,7 @@ class FourDigitInputComponent extends Component<Props, State> {
         <View style={Style.container}>
           <View style={Style.interactiveContainer}>
             {this.renderDotContainer(Style)}
-            <TextInput
-              ref={this.loadedInput}
-              style={Style.input}
-              onChangeText={this.updatePin}
-              maxLength={4}
-              keyboardType="numeric"
-              value={this.props.pin}
-              onFocus={this.onFocus}
-              onBlur={this.onBlur}
-              autoFocus={this.state.autoFocus}
-              keyboardShouldPersistTaps
-            />
+            {this.renderTextInput(Style)}
           </View>
           <View style={Style.errorContainer}>
             <Text style={Style.errorText} numberOfLines={2}>
@@ -125,6 +105,25 @@ class FourDigitInputComponent extends Component<Props, State> {
         </View>
       </TouchableWithoutFeedback>
     )
+  }
+  renderTextInput = (style: Object) => {
+    if (this.props.wait < 1) {
+      return (
+        <TextInput
+          ref={this.loadedInput}
+          style={style.input}
+          onChangeText={this.updatePin}
+          maxLength={4}
+          keyboardType="numeric"
+          value={this.props.pin}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          autoFocus={this.state.autoFocus}
+          keyboardShouldPersistTaps
+        />
+      )
+    }
+    return null
   }
   onFocus = () => {
     this.inputRef.focus()

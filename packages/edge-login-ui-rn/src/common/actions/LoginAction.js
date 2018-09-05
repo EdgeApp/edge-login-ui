@@ -213,12 +213,36 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
               wait: e.wait
             })
           )
+          if (e.wait) {
+            setTimeout(() => {
+              dispatch(processWait(message))
+            }, 1000)
+          }
           callback(e.message, null)
         }
       }, 300)
     }
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
+  }
+}
+export function processWait (message: string) {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
+    const state = getState()
+    const wait = state.login.wait
+    console.log('RL: wait ', wait)
+    if (wait > 0) {
+      // console.log('RL: got more than 1', wait)
+      dispatch(
+        dispatchActionWithData(Constants.LOGIN_PIN_FAIL, {
+          message,
+          wait: wait - 1
+        })
+      )
+      setTimeout(() => {
+        dispatch(processWait(message))
+      }, 1000)
+    }
   }
 }
 
