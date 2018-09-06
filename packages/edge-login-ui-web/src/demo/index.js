@@ -2,7 +2,7 @@
 
 import 'regenerator-runtime/runtime'
 
-import type { EdgeUiAccount, EdgeUiContext } from 'edge-login-ui-web'
+import type { EdgeAccount, EdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
@@ -13,7 +13,7 @@ import { restoreCachedState } from './hmrCache.js'
 // Props and state for the root component:
 export type RootProps = {}
 export type RootState = {
-  account: EdgeUiAccount | void,
+  account: EdgeAccount | void,
   context: EdgeUiContext | void
 }
 
@@ -25,20 +25,27 @@ class Root extends Component<RootProps, RootState> {
   constructor (props: RootProps) {
     super(props)
 
-    // Create the Edge context on the initial page load:
-    if (!restoreCachedState(module, this)) {
-      this.state = { account: void 0, context: void 0 }
-      prepareContext().then(context => this.setState({ context }))
-    }
-  }
+    // Just use the previous state if the page live-reloads:
+    if (restoreCachedState(module, this)) return
 
-  onLogin = async (account: EdgeUiAccount) => {
-    // Make sure the account has the keys we need before finishing the login:
-    await prepareAccount(account)
-    this.setState({ account })
+    // Create a context object:
+    this.state = { account: void 0, context: void 0 }
+    prepareContext().then(context => {
+      context.on('login', async account => {
+        try {
+          // Make sure the account has the keys we need:
+          await prepareAccount(account)
+          this.setState({ account })
+        } catch (e) {
+          console.error(e)
+        }
+      })
+      this.setState({ context })
+    })
   }
 
   onLogout = () => {
+    if (this.state.account) this.state.account.logout()
     this.setState({ account: void 0 })
   }
 
@@ -47,7 +54,6 @@ class Root extends Component<RootProps, RootState> {
       <Layout
         account={this.state.account}
         context={this.state.context}
-        onLogin={this.onLogin}
         onLogout={this.onLogout}
       />
     )

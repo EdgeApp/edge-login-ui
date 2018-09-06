@@ -1,74 +1,57 @@
 // @flow
-/* eslint-disable no-use-before-define */
 
-import type { EdgeWalletInfo } from 'edge-core-js'
+import 'edge-core-js'
 
-import type {
-  EdgeUserInfos,
-  EdgeWalletInfos,
-  EthererumTransaction
-} from '../edge-types.js'
+import URL from 'url-parse'
+import { Bridge } from 'yaob'
 
-export { makeEdgeUiContext } from './client-context.js'
+import { version } from '../../package.json'
+import type { EdgeUiContext, EdgeUiContextOptions } from '../frame/index.js'
+import type { BridgeRoot } from '../frame/root-api.js'
+import { hideFrame, makeFrame, showFrame } from './iframe.js'
 
-// context ------------------------------------------------------------
+export * from 'edge-core-js'
+export type { EdgeUiContextOptions, EdgeUiContext }
 
-export type EdgeUiContextCallbacks = {
-  +onError?: (e: Error) => mixed
-}
+/**
+ * Sets up the iframe, attaches to it, and returns a context API.
+ */
+export function makeEdgeUiContext (
+  opts: EdgeUiContextOptions
+): Promise<EdgeUiContext> {
+  const {
+    assetsPath = `https://developer.airbitz.co/iframe/v${version}/`
+  } = opts
 
-export type EdgeUiContextOptions = {
-  apiKey: string,
-  appId: string,
-  assetsPath?: string,
-  callbacks?: EdgeUiContextCallbacks,
-  hideKeys?: boolean,
-  frameTimeout?: number,
-  vendorImageUrl?: string,
-  vendorName?: string
-}
+  const frameUrl = new URL(assetsPath)
+  const origin = frameUrl.origin
+  const frame = makeFrame(frameUrl.href)
 
-export type EdgeLoginWindowOptions = {
-  +onLogin?: (account: EdgeUiAccount) => mixed,
-  +onClose?: () => mixed
-}
+  const bridge = new Bridge({
+    sendMessage (message) {
+      frame.contentWindow.postMessage(message, origin)
+    }
+  })
 
-export type EdgeUiContext = {
-  dispose(): mixed,
+  window.addEventListener(
+    'message',
+    event => {
+      if (event.origin !== origin) return
+      // console.log('client got', event.data)
 
-  localUsers: EdgeUserInfos,
-  openLoginWindow(opts: EdgeLoginWindowOptions): Promise<mixed>
-}
+      bridge.handleMessage(event.data)
+    },
+    false
+  )
 
-// account ------------------------------------------------------------
-
-export type { EdgeWalletInfo } from 'edge-core-js'
-
-export type EdgeManageWindowOptions = {
-  +onClose?: () => mixed
-}
-
-export type EdgeUiAccount = {
-  appId: string,
-  username: string,
-
-  // Lifetime:
-  logout(): void,
-
-  // Account credentials:
-  openManageWindow(opts?: EdgeManageWindowOptions): Promise<mixed>,
-
-  // All wallet infos:
-  walletInfos: EdgeWalletInfos,
-  createWallet(type: string, keys: {}): Promise<string>,
-  getFirstWalletInfo(type: string): EdgeWalletInfo | null,
-
-  // Currency wallets:
-  createCurrencyWallet(type: string): Promise<mixed>,
-
-  // Temporary solution for Ethereum apps, pending proper wallet API:
-  signEthereumTransaction(
-    walletId: string,
-    transaction: EthererumTransaction
-  ): Promise<string>
+  return bridge
+    .getRoot()
+    .then((root: BridgeRoot) => root.makeContext(opts))
+    .then((context: EdgeUiContext) => {
+      context.watch(
+        'windowVisible',
+        visible => (visible ? showFrame(frame) : hideFrame(frame))
+      )
+      return context
+    })
 }
