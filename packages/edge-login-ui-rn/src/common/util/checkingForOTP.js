@@ -16,6 +16,7 @@ const checkingForOTP = context => {
           arrayString = arrayString + (key + ', ')
         }
       }
+      arrayString = arrayString.slice(0, -2)
       if (accountsPendingReset.length > 0) {
         Alert.alert(
           s.strings.otp_modal_reset_headline,
