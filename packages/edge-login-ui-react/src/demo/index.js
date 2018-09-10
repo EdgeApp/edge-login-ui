@@ -34,7 +34,10 @@ class Root extends Component<RootProps, RootState> {
     }
   }
 
-  logout = () => this.setState({ account: null })
+  logout = () => {
+    if (this.state.account) this.state.account.logout()
+    this.setState({ account: null })
+  }
   onClose = () => this.setState({ closed: true })
   onError = () => {}
   onLogin = account => this.setState({ account })
