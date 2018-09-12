@@ -1,6 +1,7 @@
 import autoprefixer from 'autoprefixer'
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
+import flowEntry from 'rollup-plugin-flow-entry'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 import url from 'rollup-plugin-url'
@@ -42,7 +43,8 @@ export default {
       modules: true,
       plugins: [autoprefixer]
     }),
-    babel(babelOpts)
+    babel(babelOpts),
+    flowEntry()
   ],
   sourcemap: true
 }
