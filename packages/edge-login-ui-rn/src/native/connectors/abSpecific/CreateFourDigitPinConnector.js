@@ -8,7 +8,8 @@ export const mapStateToProps = (state: State) => {
   return {
     pin: state.create.pin,
     error: state.create.pinErrorMessage,
-    dontForceFocus: true
+    dontForceFocus: true,
+    wait: 0
   }
 }
 export const mapDispatchToProps = (dispatch: Dispatch, ownProps) => {
