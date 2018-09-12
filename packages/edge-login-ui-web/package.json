@@ -19,7 +19,7 @@
     "build": "npm-run-all -p build:lib build:frame -s build:demo",
     "build:demo": "rimraf dist && parcel build --public-url ./ src/demo/index.html && node ./src/copy-edge-assets.js ./dist/iframe",
     "build:frame": "rimraf assets && parcel build --public-url ./ -d assets src/frame/index.html",
-    "build:lib": "rimraf lib && rollup -c && cpr flow-entry lib/edge-login-ui-web.js.flow && node ./hack-entry-point.js",
+    "build:lib": "rimraf lib && rollup -c && node ./hack-entry-point.js",
     "prepare": "npm-run-all build:lib build:frame",
     "start": "npm-run-all -p start:*",
     "start:demo": "parcel --open src/demo/index.html",
@@ -55,6 +55,7 @@
     "rimraf": "^2.6.1",
     "rollup": "0.48.0",
     "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-flow-entry": "^0.2.0",
     "rollup-plugin-json": "^3.0.0"
   }
 }
