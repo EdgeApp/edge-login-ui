@@ -1,5 +1,11 @@
 # airbitz-core-js-ui
 
+## 0.4.5
+
+* rn: surfaced rate limits on accountlogin
+* rn: add alert for any account on the device that is experiencing a 2fa reset
+* rn: fixed removing of usernames from device
+
 ## 0.4.3
 
 * rn: upgrade dependencies for rn56 compatibility

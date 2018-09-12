@@ -39,7 +39,7 @@ export default function (state = initialState, action) {
       }
       return state
     case Constants.AUTH_UPDATE_USERNAME:
-      return { ...state, username: action.data, errorMessage: null }
+      return { ...state, username: action.data, errorMessage: null, wait: 0 }
     case Constants.UPDATE_WAIT_TIMER:
       return { ...state, wait: action.data.seconds }
     case Constants.AUTH_UPDATE_PIN:
