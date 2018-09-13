@@ -1,5 +1,9 @@
 # airbitz-core-js-ui
 
+## 0.4.6
+
+* rn: fix f digit pin connector to prevent crash
+
 ## 0.4.5
 
 * rn: surfaced rate limits on accountlogin
