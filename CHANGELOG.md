@@ -1,5 +1,9 @@
 # airbitz-core-js-ui
 
+## 0.4.7
+
+* rn: Use forked react-native-size-matters to fix iPad horizontal
+
 ## 0.4.6
 
 * rn: fix f digit pin connector to prevent crash
