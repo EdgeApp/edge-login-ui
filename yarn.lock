@@ -6315,9 +6315,9 @@ react-native-mail@^3.0.5:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/react-native-mail/-/react-native-mail-3.0.6.tgz#5e7b4a89bcbe2218e44331465596966a7ff743ab"
 
-"react-native-material-textfield@git://github.com/Airbitz/react-native-material-textfield.git":
+"react-native-material-textfield@git://github.com/EdgeApp/react-native-material-textfield.git":
   version "0.10.2"
-  resolved "git://github.com/Airbitz/react-native-material-textfield.git#c30320fd26e5619c1fe57b3043b8fd9ae2a0c57a"
+  resolved "git://github.com/EdgeApp/react-native-material-textfield.git#c30320fd26e5619c1fe57b3043b8fd9ae2a0c57a"
   dependencies:
     prop-types "^15.5.9"
 
@@ -6336,9 +6336,9 @@ react-native-qrcode@^0.2.6:
     prop-types "^15.5.10"
     qr.js "0.0.0"
 
-react-native-size-matters@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.1.2.tgz#837d939992d5c7b4c2164e689e927276b5459239"
+"react-native-size-matters@git://github.com/EdgeApp/react-native-size-matters.git":
+  version "0.1.3"
+  resolved "git://github.com/EdgeApp/react-native-size-matters.git#8de946405ae93ece9964864e555d1d41acda93e0"
 
 react-native-vector-icons@4.6.0:
   version "4.6.0"
