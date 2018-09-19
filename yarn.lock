@@ -46,6 +46,12 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+"@babel/runtime@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0.tgz#adeb78fedfc855aa05bc041640f3f6f98e85424c"
+  dependencies:
+    regenerator-runtime "^0.12.0"
+
 "@babel/template@7.0.0-beta.42":
   version "7.0.0-beta.42"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.0.0-beta.42.tgz#7186d4e70d44cdec975049ba0a73bdaf5cdee052"
@@ -2336,9 +2342,9 @@ dir-glob@^2.0.0:
     arrify "^1.0.1"
     path-type "^3.0.0"
 
-disklet@^0.2.2:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/disklet/-/disklet-0.2.5.tgz#bf96726e13be18ea99a693daac0ce0575715347c"
+disklet@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/disklet/-/disklet-0.2.7.tgz#03cf699df295043067b6a6215c9f11cb18f15fd0"
   dependencies:
     assert "^1.4.1"
     react "16.0.0-alpha.12"
@@ -2443,29 +2449,32 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-edge-core-js@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.10.0.tgz#a8d42e03be40269df986d469835d063ccaee12f7"
+edge-core-js@0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.11.1.tgz#dcfb8556ce2a63d79dbee37043e379cec8ef0a40"
   dependencies:
+    "@babel/runtime" "^7.0.0"
     aes-js "^3.1.0"
     base-x "^1.0.4"
     biggystring "^3.0.2"
     currency-codes "^1.1.2"
     detect-bundler "^1.0.0"
-    disklet "^0.2.2"
+    disklet "^0.2.7"
     elliptic "^6.4.0"
+    ethereumjs-tx "^1.3.7"
+    ethereumjs-util "^5.2.0"
     hash.js "^1.0.3"
     hmac-drbg "^1.0.1"
     json-csv "^1.5.0"
     node-fetch "^2.0.0"
     redux "^3.6.0"
     redux-keto "^0.3.2"
-    redux-pixies "^0.3.4"
-    regenerator-runtime "^0.11.1"
+    redux-pixies "^0.3.5"
     rfc4648 "^1.1.0"
     scrypt-js "^2.0.3"
     utf8 "^3.0.0"
     ws "^5.1.1"
+    yaob "^0.2.0"
 
 editorconfig@^0.13.2:
   version "0.13.3"
@@ -2747,6 +2756,13 @@ ethereum-common@^0.0.18:
 ethereumjs-tx@^1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/ethereumjs-tx/-/ethereumjs-tx-1.3.4.tgz#c2304912f6c07af03237ad8675ac036e290dad48"
+  dependencies:
+    ethereum-common "^0.0.18"
+    ethereumjs-util "^5.0.0"
+
+ethereumjs-tx@^1.3.7:
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/ethereumjs-tx/-/ethereumjs-tx-1.3.7.tgz#88323a2d875b10549b8347e09f4862b546f3d89a"
   dependencies:
     ethereum-common "^0.0.18"
     ethereumjs-util "^5.0.0"
@@ -6543,9 +6559,9 @@ redux-logger@~2.7.4:
   dependencies:
     deep-diff "0.3.4"
 
-redux-pixies@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/redux-pixies/-/redux-pixies-0.3.4.tgz#e9b88f059c246931a6a17fc63392cbbd30724954"
+redux-pixies@^0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/redux-pixies/-/redux-pixies-0.3.5.tgz#6ff1d83334d73925202d73d72a45e3d652ee4634"
 
 redux-thunk@~2.1.0:
   version "2.1.2"
@@ -6576,6 +6592,10 @@ regenerate@^1.2.1:
 regenerator-runtime@^0.11.0, regenerator-runtime@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
+
+regenerator-runtime@^0.12.0:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
 
 regenerator-transform@^0.10.0:
   version "0.10.1"
@@ -8107,6 +8127,10 @@ y18n@^3.2.1:
 yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
+
+yaob@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/yaob/-/yaob-0.2.0.tgz#991f347bbe4300034c8ee9ec69d9999faedd4643"
 
 yargs-parser@^5.0.0:
   version "5.0.0"

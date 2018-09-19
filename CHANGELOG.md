@@ -1,5 +1,9 @@
 # airbitz-core-js-ui
 
+## 0.4.8
+
+* upgrade to edge-core-js v0.11.1
+
 ## 0.4.7
 
 * rn: Use forked react-native-size-matters to fix iPad horizontal
