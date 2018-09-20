@@ -1,5 +1,9 @@
 # airbitz-core-js-ui
 
+## 0.5.0
+
+* web: Re-write the iframe to use the `yaob` bridge added in edge-core-js v0.11.0. This gives the web access to the full core API, including spending.
+
 ## 0.4.8
 
 * upgrade to edge-core-js v0.11.1
