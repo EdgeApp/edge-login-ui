@@ -1,6 +1,6 @@
 // @flow
 
-import type { EdgeUiAccount, EdgeUiContext } from 'edge-login-ui-web'
+import type { EdgeAccount, EdgeUiContext } from 'edge-login-ui-web'
 import React from 'react'
 
 import { AccountButtons } from './AccountButtons.js'
@@ -10,9 +10,8 @@ import { WelcomeButtons } from './WelcomeButtons.js'
 
 // Props and state for the root component:
 export type LayoutProps = {
-  account: EdgeUiAccount | void,
+  account: EdgeAccount | void,
   context: EdgeUiContext | void,
-  onLogin: (account: EdgeUiAccount) => mixed,
   onLogout: () => mixed
 }
 
@@ -21,15 +20,19 @@ export type LayoutProps = {
  * Manages the edge context and app state, switching between screens as needed.
  */
 export function Layout (props: LayoutProps) {
-  const { account, context, onLogout, onLogin } = props
+  const { account, context, onLogout } = props
 
   return (
     <div id="page">
       <div id="header">Edge Login Demo</div>
-      {account ? (
-        <AccountButtons account={account} onLogout={onLogout} />
+      {account && context ? (
+        <AccountButtons
+          account={account}
+          context={context}
+          onLogout={onLogout}
+        />
       ) : (
-        <WelcomeButtons context={context} onLogin={onLogin} />
+        <WelcomeButtons context={context} />
       )}
       <div id="content">
         {account != null ? <AccountInfo account={account} /> : null}
