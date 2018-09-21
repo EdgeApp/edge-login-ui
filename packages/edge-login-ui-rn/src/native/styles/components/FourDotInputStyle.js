@@ -2,20 +2,21 @@
 
 import * as Colors from '../../../common/constants/Colors.js'
 import { scale } from '../../../common/util/scaling.js'
+import { vs } from '../../../common/util/'
 
 const FourDotInputStyle = {
   container: {
-    paddingTop: 30,
+    paddingTop: 12,
     width: '100%',
-    height: 160
+    height: vs(86)
   },
   interactiveContainer: {
-    flex: 1,
+    height: vs(40),
     width: '100%',
     alignItems: 'center'
   },
   errorContainer: {
-    flex: 1,
+    height: vs(40),
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
@@ -31,7 +32,7 @@ const FourDotInputStyle = {
     color: Colors.ACCENT_RED,
     backgroundColor: Colors.TRANSPARENT,
     textAlign: 'center',
-    fontSize: 26
+    fontSize: vs(12)
   },
   input: {
     position: 'absolute',

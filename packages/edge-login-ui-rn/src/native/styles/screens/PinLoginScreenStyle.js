@@ -24,7 +24,7 @@ const PinLoginScreenStyle = {
     alignItems: 'center'
   },
   featureBoxBody: {
-    height: vs(250),
+    height: vs(240),
     width: '100%'
   },
   logoHeader: Styles.LogoHeaderScaledStyle,
