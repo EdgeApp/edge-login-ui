@@ -34,7 +34,7 @@ const TermsAndConditionsScreenStyle = {
     fontFamily: Constants.FONTS.fontFamilyRegular
   },
   midSection: {
-    height: scale(250)
+    paddingBottom: scale(20)
   },
   buttonContainer: {
     height: scale(100),

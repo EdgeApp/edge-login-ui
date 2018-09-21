@@ -44,16 +44,11 @@ export default class TermsAndConditionsScreenComponent extends Component<
     ))
   }
   renderInstructions (style: Object) {
-    if (this.state.totalChecks < 3) {
-      return (
-        <View style={style.instructionsContainer}>
-          <Text style={style.instructionsText}>
-            {s.strings.last_step_review}
-          </Text>
-        </View>
-      )
-    }
-    return <View style={style.instructionsSubShim} />
+    return (
+      <View style={style.instructionsContainer}>
+        <Text style={style.instructionsText}>{s.strings.last_step_review}</Text>
+      </View>
+    )
   }
   renderButton (style: Object) {
     if (this.state.totalChecks === 3) {

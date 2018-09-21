@@ -2,6 +2,7 @@
 
 import * as Constants from '../../../common/constants/'
 import { hs, vs } from '../../../common/util'
+import { scale } from '../../../common/util/scaling.js'
 import * as Styles from '../'
 
 const PinLoginScreenStyle = {
@@ -17,7 +18,7 @@ const PinLoginScreenStyle = {
   },
   featureBox: {
     position: 'relative',
-    top: 40,
+    top: scale(40),
     width: '100%',
     height: vs(376),
     alignItems: 'center'
@@ -26,7 +27,7 @@ const PinLoginScreenStyle = {
     height: vs(250),
     width: '100%'
   },
-  logoHeader: Styles.LogoHeaderStyleShort,
+  logoHeader: Styles.LogoHeaderScaledStyle,
   thumbprintButton: {
     container: {
       position: 'absolute',
@@ -73,7 +74,7 @@ const PinLoginScreenStyle = {
       iconPressed: {
         color: Constants.WHITE
       },
-      iconSize: Constants.FONTS.defaultFontSize,
+      iconSize: scale(Constants.FONTS.defaultFontSize),
       underlayColor: Constants.TRANSPARENT
     },
     text: {
@@ -81,13 +82,13 @@ const PinLoginScreenStyle = {
       color: Constants.WHITE,
       backgroundColor: Constants.TRANSPARENT,
       fontFamily: Constants.FONTS.fontFamilyRegular,
-      fontSize: Constants.FONTS.defaultFontSize
+      fontSize: scale(Constants.FONTS.defaultFontSize)
     }
   },
   dropInput: {
     container: {
       width: 200,
-      height: 30,
+      height: scale(30),
       // backgroundColor: Constants.WHITE,
       marginBottom: 20
     }
@@ -98,12 +99,12 @@ const PinLoginScreenStyle = {
     upTextStyle: {
       ...Styles.TextOnlyButtonTextUpStyle,
       color: Constants.WHITE,
-      fontSize: 24
+      fontSize: scale(24)
     },
     downTextStyle: {
       ...Styles.TextOnlyButtonTextDownStyle,
       color: Constants.WHITE,
-      fontSize: 24
+      fontSize: scale(24)
     },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
@@ -112,12 +113,12 @@ const PinLoginScreenStyle = {
     upTextStyle: {
       ...Styles.TextOnlyButtonTextUpStyle,
       color: Constants.WHITE,
-      fontSize: 16
+      fontSize: scale(16)
     },
     downTextStyle: {
       ...Styles.TextOnlyButtonTextDownStyle,
       color: Constants.WHITE,
-      fontSize: 16
+      fontSize: scale(16)
     },
     downStyle: Styles.TextOnlyButtonDownStyle
   },

@@ -18,7 +18,11 @@ class LogoImageHeader extends Component<Props> {
     }
     return (
       <View style={this.props.style.container}>
-        <Image source={src} style={this.props.style.image} />
+        <Image
+          source={src}
+          style={this.props.style.image}
+          resizeMode={'contain'}
+        />
       </View>
     )
   }

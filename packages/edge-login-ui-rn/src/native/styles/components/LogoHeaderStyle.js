@@ -1,3 +1,4 @@
+import { vs } from '../../../common/util/PixelUtil.js'
 // @flow
 import { scale } from '../../../common/util/scaling.js'
 
@@ -41,8 +42,8 @@ const LogoHeaderScaledStyle = {
   },
   image: {
     position: 'relative',
-    width: scale(80),
-    height: scale(78)
+    width: vs(80),
+    height: vs(78)
     // resizeMode: 'stretch'
   }
 }
@@ -61,8 +62,9 @@ const LogoHeaderScaledStyleShort = {
     // resizeMode: 'stretch'
   }
 }
-export { LogoHeaderStyleShort }
-export { LogoHeaderStyle }
-
-export { LogoHeaderScaledStyleShort }
-export { LogoHeaderScaledStyle }
+export {
+  LogoHeaderStyleShort,
+  LogoHeaderStyle,
+  LogoHeaderScaledStyleShort,
+  LogoHeaderScaledStyle
+}

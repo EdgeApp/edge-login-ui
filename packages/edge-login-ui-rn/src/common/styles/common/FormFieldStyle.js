@@ -44,7 +44,7 @@ const MaterialInputWithDrop = {
   },
   listItem: {
     container: {
-      height: Constants.DROP_LABEL_HEIGHT,
+      height: scale(Constants.DROP_LABEL_HEIGHT),
       width: '100%',
       backgroundColor: Constants.WHITE,
       borderBottomColor: Constants.GRAY_4,
@@ -72,7 +72,7 @@ const MaterialInputWithDrop = {
       iconPressed: {
         color: Constants.SECONDARY
       },
-      iconSize: Constants.FONTS.defaultFontSize,
+      iconSize: scale(Constants.FONTS.defaultFontSize),
       underlayColor: Constants.TRANSPARENT
     },
     text: {
@@ -80,7 +80,7 @@ const MaterialInputWithDrop = {
       backgroundColor: Constants.TRANSPARENT,
       fontFamily: Constants.FONTS.fontFamilyRegular,
       marginLeft: 8,
-      fontSize: Constants.FONTS.defaultFontSize
+      fontSize: scale(Constants.FONTS.defaultFontSize)
     }
   }
 }
