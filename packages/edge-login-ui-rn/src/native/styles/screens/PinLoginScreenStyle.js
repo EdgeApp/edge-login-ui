@@ -92,7 +92,10 @@ const PinLoginScreenStyle = {
       marginBottom: scale(20)
     }
   },
-  fourPin: Styles.FourDotInputStyle,
+  fourPin: {
+    marginTop: scale(20),
+    ...Styles.FourDotInputStyle
+  },
   usernameButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: {

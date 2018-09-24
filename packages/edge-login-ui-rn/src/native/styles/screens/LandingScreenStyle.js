@@ -1,8 +1,9 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import { vs } from '../../../common/util'
+import { scale, vs } from '../../../common/util'
 import * as Styles from '../'
+
 const LandingScreenStyle = {
   container: Styles.ScreenStyle,
   backgroundImage: {
@@ -41,7 +42,7 @@ const LandingScreenStyle = {
     justifyContent: 'flex-end'
   },
   shim: {
-    height: 20
+    height: scale(20)
   },
   tagText: {
     width: '80%',
@@ -49,6 +50,7 @@ const LandingScreenStyle = {
     marginRight: '10%',
     color: Constants.WHITE,
     backgroundColor: Constants.TRANSPARENT,
+    fontSize: scale(13),
     fontFamily: Constants.FONTS.fontFamilyRegular,
     textAlign: 'center'
   },
@@ -62,12 +64,12 @@ const LandingScreenStyle = {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: {
       ...Styles.TextOnlyButtonTextUpStyle,
-      fontSize: 12,
+      fontSize: scale(12),
       color: Constants.WHITE
     },
     downTextStyle: {
       ...Styles.TextOnlyButtonTextDownStyle,
-      fontSize: 12,
+      fontSize: scale(12),
       color: Constants.WHITE
     },
     downStyle: Styles.TextOnlyButtonDownStyle
