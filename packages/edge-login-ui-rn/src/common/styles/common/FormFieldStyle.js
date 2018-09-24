@@ -7,7 +7,7 @@ const MaterialInput = {
   container: {
     position: 'relative',
     width: Constants.LOGIN_LABEL_WIDTH,
-    minHeight: Constants.LOGIN_LABEL_HEIGHT
+    minHeight: scale(Constants.LOGIN_LABEL_HEIGHT)
   },
   baseColor: Constants.WHITE,
   tintColor: Constants.ACCENT_MINT,
@@ -25,7 +25,7 @@ const MaterialInputWithDrop = {
   container: {
     position: 'relative',
     width: Constants.LOGIN_LABEL_WIDTH,
-    minHeight: Constants.LOGIN_LABEL_HEIGHT
+    minHeight: scale(Constants.LOGIN_LABEL_HEIGHT)
   },
   materialInput: {
     ...MaterialInput,
@@ -44,7 +44,7 @@ const MaterialInputWithDrop = {
   },
   listItem: {
     container: {
-      height: Constants.DROP_LABEL_HEIGHT,
+      height: scale(Constants.DROP_LABEL_HEIGHT),
       width: '100%',
       backgroundColor: Constants.WHITE,
       borderBottomColor: Constants.GRAY_4,
@@ -79,8 +79,8 @@ const MaterialInputWithDrop = {
       color: Constants.PRIMARY,
       backgroundColor: Constants.TRANSPARENT,
       fontFamily: Constants.FONTS.fontFamilyRegular,
-      marginLeft: 8,
-      fontSize: Constants.FONTS.defaultFontSize
+      marginLeft: scale(8),
+      fontSize: scale(Constants.FONTS.defaultFontSize)
     }
   }
 }
