@@ -1,7 +1,7 @@
 // @flow
 
 import type {
-  EdgeUiAccount,
+  EdgeAccount,
   EdgeUiContext,
   EdgeUiContextOptions
 } from 'edge-login-ui-web'
@@ -30,7 +30,6 @@ export async function prepareContext (): Promise<EdgeUiContext> {
   // This demo needs some adjustments in development mode:
   if (/localhost/.test(window.location)) {
     options.assetsPath = 'http://localhost:11234/'
-    options.frameTimeout = 30000 // Give the asset bundler more time
   }
 
   return makeEdgeUiContext(options)
@@ -40,7 +39,7 @@ export async function prepareContext (): Promise<EdgeUiContext> {
  * Makes an Edge account ready for the application to use
  * by ensuring that it contains the necessary private keys.
  */
-export async function prepareAccount (account: EdgeUiAccount): Promise<void> {
+export async function prepareAccount (account: EdgeAccount): Promise<void> {
   // If there is no Ethereum wallet, make one:
   if (account.getFirstWalletInfo('wallet:ethereum') == null) {
     const keys = {

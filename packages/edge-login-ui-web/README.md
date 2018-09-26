@@ -35,14 +35,13 @@ const edgeUiContext = await makeEdgeUiContext({
 To create an overlay popup where a user can register a new account or log in to a previously created account via password or PIN, do:
 
 ```js
-edgeUiContext.openLoginWindow({
-  onLogin (edgeUiAccount) {
+// Set up the callback:
+edgeUiContext.on('login', edgeUiAccount => {
     // The user logged in, so save the account somewhere
-  },
-  onClose () {
-    // The user has dismissed the login window
-  }
 })
+
+// Open the window:
+edgeUiContext.showLoginWindow()
 ```
 
 ![Login UI](http://edge.app/wp-content/uploads/2018/06/Screen-Shot-2018-06-29-at-9.15.13-PM-e1530376379411.png)
@@ -50,11 +49,7 @@ edgeUiContext.openLoginWindow({
 Once the user logs in, you receive an `edgeUiAccount` object. You can use this object to open an account management window for changing the password, PIN, and recovery questions:
 
 ```js
-edgeUiAccount.openManageWindow({
-  onClose() {
-    // The user has dismissed the management window
-  }
-})
+edgeUiContext.showAccountSettingsWindow(edgeUiAccount)
 ```
 
 ![Management UI](http://edge.app/wp-content/uploads/2018/06/Screen-Shot-2018-06-29-at-11.34.51-PM-e1530376290752.png)

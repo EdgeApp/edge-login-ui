@@ -1,17 +1,16 @@
 // @flow
 
-import type { EdgeUiAccount, EdgeUiContext } from 'edge-login-ui-web'
+import type { EdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 
 export type WelcomeButtonProps = {
-  context: EdgeUiContext | void,
-  onLogin: (account: EdgeUiAccount) => mixed
+  context: EdgeUiContext | void
 }
 
 export class WelcomeButtons extends Component<WelcomeButtonProps> {
   openLoginWindow = () => {
     if (this.props.context) {
-      this.props.context.openLoginWindow({ onLogin: this.props.onLogin })
+      this.props.context.showLoginWindow()
     }
   }
 
