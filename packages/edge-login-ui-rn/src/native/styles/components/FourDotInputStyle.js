@@ -1,8 +1,8 @@
 // @flow
 
 import * as Colors from '../../../common/constants/Colors.js'
-import { scale } from '../../../common/util/scaling.js'
 import { vs } from '../../../common/util/'
+import { scale } from '../../../common/util/scaling.js'
 
 const FourDotInputStyle = {
   container: {
@@ -24,7 +24,7 @@ const FourDotInputStyle = {
   },
   dotContainer: {
     height: '100%',
-    width: 190,
+    width: scale(190),
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
@@ -45,17 +45,17 @@ const FourDotInputStyle = {
   circle: {
     borderWidth: 2,
     borderColor: Colors.WHITE,
-    borderRadius: 15,
-    height: 30,
-    width: 30
+    borderRadius: scale(15),
+    height: scale(30),
+    width: scale(30)
   },
   circleSected: {
     backgroundColor: Colors.ACCENT_MINT,
-    borderWidth: 2,
+    borderWidth: scale(2),
     borderColor: Colors.WHITE,
-    borderRadius: 15,
-    height: 30,
-    width: 30
+    borderRadius: scale(15),
+    height: scale(30),
+    width: scale(30)
   }
 }
 const FourDotInputDarkStyle = {

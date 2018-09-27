@@ -1,8 +1,7 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import { hs, vs } from '../../../common/util'
-import { scale } from '../../../common/util/scaling.js'
+import { scale, hs, vs } from '../../../common/util'
 import * as Styles from '../'
 
 const PinLoginScreenStyle = {
@@ -78,7 +77,7 @@ const PinLoginScreenStyle = {
       underlayColor: Constants.TRANSPARENT
     },
     text: {
-      paddingLeft: 20,
+      paddingLeft: scale(20),
       color: Constants.WHITE,
       backgroundColor: Constants.TRANSPARENT,
       fontFamily: Constants.FONTS.fontFamilyRegular,
@@ -90,10 +89,13 @@ const PinLoginScreenStyle = {
       width: 200,
       height: scale(30),
       // backgroundColor: Constants.WHITE,
-      marginBottom: 20
+      marginBottom: scale(20)
     }
   },
-  fourPin: Styles.FourDotInputStyle,
+  fourPin: {
+    marginTop: scale(20),
+    ...Styles.FourDotInputStyle
+  },
   usernameButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: {

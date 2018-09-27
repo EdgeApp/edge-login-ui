@@ -1,8 +1,7 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import { vs } from '../../../common/util'
-import { scale } from '../../../common/util/scaling'
+import { scale, vs } from '../../../common/util'
 import * as Styles from '../'
 
 const LandingScreenStyle = {

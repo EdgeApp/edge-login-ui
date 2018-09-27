@@ -1,8 +1,8 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import { scale } from '../../../common/util/scaling.js'
 import * as Styles from '../'
+import { scale } from '../../../common/util'
 
 const LoginPasswordScreenStyle = {
   container: Styles.ScreenStyle,
@@ -41,7 +41,7 @@ const LoginPasswordScreenStyle = {
   },
   modalMiddle: {
     width: '100%',
-    height: 100
+    height: scale(100)
   },
   input2: Styles.MaterialInput,
   inputModal: {

@@ -6,11 +6,13 @@ const LogoHeaderStyle = {
   container: {
     position: 'relative',
     width: '100%',
-    height: 125,
+    height: scale(125),
     justifyContent: 'space-around',
     alignItems: 'center'
   },
   image: {
+    width: scale(150),
+    height: scale(45),
     position: 'relative'
     // width: null,
     // height: null
@@ -21,7 +23,7 @@ const LogoHeaderStyleShort = {
   container: {
     position: 'relative',
     width: '100%',
-    height: 100,
+    height: scale(100),
     justifyContent: 'space-around',
     alignItems: 'center'
   },
