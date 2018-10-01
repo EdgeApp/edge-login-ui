@@ -1,4 +1,3 @@
-import { vs } from '../../../common/util/PixelUtil.js'
 // @flow
 import { scale } from '../../../common/util/scaling.js'
 
@@ -6,12 +5,12 @@ const LogoHeaderStyle = {
   container: {
     position: 'relative',
     width: '100%',
-    height: scale(125),
+    paddingTop: scale(40),
+    paddingBottom: scale(24),
     justifyContent: 'space-around',
     alignItems: 'center'
   },
   image: {
-    width: scale(150),
     height: scale(45),
     position: 'relative'
     // width: null,
@@ -23,12 +22,14 @@ const LogoHeaderStyleShort = {
   container: {
     position: 'relative',
     width: '100%',
-    height: scale(100),
+    paddingTop: scale(36),
+    paddingBottom: scale(18),
     justifyContent: 'space-around',
     alignItems: 'center'
   },
   image: {
-    position: 'relative'
+    position: 'relative',
+    height: scale(40)
     // width: null,
     // height: null
     // resizeMode: 'stretch'
@@ -38,14 +39,14 @@ const LogoHeaderScaledStyle = {
   container: {
     position: 'relative',
     width: '100%',
-    height: scale(125),
+    paddingTop: scale(42),
+    paddingBottom: scale(24),
     justifyContent: 'space-around',
     alignItems: 'center'
   },
   image: {
     position: 'relative',
-    width: vs(80),
-    height: vs(78)
+    height: scale(44)
     // resizeMode: 'stretch'
   }
 }
@@ -53,12 +54,14 @@ const LogoHeaderScaledStyleShort = {
   container: {
     position: 'relative',
     width: '100%',
-    height: scale(100),
+    paddingTop: scale(32),
+    paddingBottom: scale(20),
     justifyContent: 'space-around',
     alignItems: 'center'
   },
   image: {
-    position: 'relative'
+    position: 'relative',
+    height: scale(38)
     // width: null,
     // height: null
     // resizeMode: 'stretch'
