@@ -1,22 +1,21 @@
 // @flow
 
 import * as Colors from '../../../common/constants/Colors.js'
-import { vs } from '../../../common/util/'
 import { scale } from '../../../common/util/scaling.js'
 
 const FourDotInputStyle = {
   container: {
     paddingTop: 12,
     width: '100%',
-    height: vs(86)
+    height: scale(86)
   },
   interactiveContainer: {
-    height: vs(40),
+    height: scale(40),
     width: '100%',
     alignItems: 'center'
   },
   errorContainer: {
-    height: vs(40),
+    height: scale(40),
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
@@ -32,7 +31,7 @@ const FourDotInputStyle = {
     color: Colors.ACCENT_RED,
     backgroundColor: Colors.TRANSPARENT,
     textAlign: 'center',
-    fontSize: vs(12)
+    fontSize: scale(12)
   },
   input: {
     position: 'absolute',
