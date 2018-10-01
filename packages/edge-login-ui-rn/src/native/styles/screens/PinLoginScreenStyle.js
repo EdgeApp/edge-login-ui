@@ -1,7 +1,7 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import { scale, hs, vs } from '../../../common/util'
+import { hs, scale, vs } from '../../../common/util'
 import * as Styles from '../'
 
 const PinLoginScreenStyle = {

@@ -14,7 +14,9 @@ export const mapStateToProps = (state: State) => {
     previousUsers: state.previousUsers.userList,
     usersWithPin: state.previousUsers.usersWithPinList,
     workflow: state.workflow,
-    showModal: state.workflow.showModal
+    showModal: state.workflow.showModal,
+    isTouchIdDisabled:
+      state.login.isLoggingInWithPin || state.login.loginSuccess
   }
 }
 
