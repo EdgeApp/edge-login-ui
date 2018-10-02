@@ -8,15 +8,20 @@ import type { Dispatch, State } from '../../../types/ReduxTypes'
 import LinkedComponent from '../../components/screens/PinLogInScreenComponent'
 
 export const mapStateToProps = (state: State) => {
+  const pinLength = state.login.pin ? state.login.pin.length : 0
+  const loginSuccess = state.login.loginSuccess
+  const wait = state.login.wait
+  const isTouchIdDisabled =
+    loginSuccess || wait || state.login.isLoggingInWithPin || pinLength === 4
   return {
     username: state.login.username,
-    loginSuccess: state.login.loginSuccess,
+    loginSuccess,
     previousUsers: state.previousUsers.userList,
     usersWithPin: state.previousUsers.usersWithPinList,
     workflow: state.workflow,
     showModal: state.workflow.showModal,
-    isTouchIdDisabled:
-      state.login.isLoggingInWithPin || state.login.loginSuccess
+    wait,
+    isTouchIdDisabled
   }
 }
 
