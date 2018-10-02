@@ -1,8 +1,8 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import * as Styles from '../'
 import { scale } from '../../../common/util'
+import * as Styles from '../'
 
 const LoginPasswordScreenStyle = {
   container: Styles.ScreenStyle,
