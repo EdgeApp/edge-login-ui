@@ -4,6 +4,7 @@ import * as Colors from '../../../common/constants/Colors.js'
 import { scale } from '../../../common/util/scaling.js'
 
 const FourDotInputStyle = {
+  // used for logging *back in* with PIN
   container: {
     paddingTop: 12,
     width: '100%',
@@ -110,17 +111,18 @@ const FourDotInputDarkStyle = {
 }
 
 const FourDotInputDarkScaledStyle = {
+  // for new account PIN
   container: {
     paddingTop: scale(36),
     width: scale(200),
     height: scale(80)
   },
   interactiveContainer: {
-    flex: 1,
-    width: '100%'
+    height: scale(40),
+    width: '100%',
+    alignItems: 'center'
   },
   errorContainer: {
-    flex: 1,
     width: '100%',
     height: scale(40),
     alignItems: 'center',

@@ -46,7 +46,8 @@ const LogoHeaderScaledStyle = {
   },
   image: {
     position: 'relative',
-    height: scale(44)
+    height: scale(44),
+    overflow: 'visible'
     // resizeMode: 'stretch'
   }
 }
