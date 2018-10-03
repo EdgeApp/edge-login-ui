@@ -29,9 +29,12 @@ import com.squareup.whorlwind.SharedPreferencesStorage;
 import com.squareup.whorlwind.Whorlwind;
 
 import okio.ByteString;
-import rx.Observable;
-import rx.schedulers.Schedulers;
-import rx.android.schedulers.AndroidSchedulers;
+
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     private static final String TAG = AbcCoreJsUiModule.class.getSimpleName();
@@ -41,7 +44,7 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     private SharedPreferencesStorage mStorage;
     private boolean mHasSecureElement = false;
     private Whorlwind mWhorlwind;
-    private rx.Subscription mSubscription;
+    private Disposable mSubscription;
     private ImageView mFingerprintIcon;
     private TextView mFingerprintStatus;
     private MaterialDialog mFingerprintDialog;
@@ -68,13 +71,12 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     public void setKeychainString (String value, String key, Promise promise) {
         Observable.just(value)
                 .observeOn(Schedulers.io())
-                .subscribe(val -> {
-                    mWhorlwind.write(key, ByteString.encodeUtf8(val));
+                .flatMapCompletable(val -> {
+                    Completable completable = mWhorlwind.write(key, ByteString.encodeUtf8(val));
                     promise.resolve(true);
-                }, throwable -> {
-                    Log.e("ERROR", "setKeyChainString threw error", throwable);
-                    promise.resolve(false);
-                });
+                    return completable;
+                })
+                .subscribe();
     }
 
     @ReactMethod
@@ -198,7 +200,7 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         materialDialog.cancel();
                         if (mSubscription != null) {
-                            mSubscription.unsubscribe();
+                            mSubscription.dispose();
                             mSubscription = null;
                         }
                         callbacks.onClose();
