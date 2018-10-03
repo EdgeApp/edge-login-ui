@@ -1,12 +1,7 @@
 // @flow
 
 export * from '../../common/styles/index'
-export {
-  LogoHeaderStyleShort,
-  LogoHeaderStyle,
-  LogoHeaderScaledStyleShort,
-  LogoHeaderScaledStyle
-} from './components/LogoHeaderStyle'
+export { LogoHeaderScaledStyle } from './components/LogoHeaderStyle'
 export * from './components/FourDotInputStyle'
 export * from './components/EdgeLoginQrStyle'
 export * from './screens/LoginPasswordScreenStyle'
