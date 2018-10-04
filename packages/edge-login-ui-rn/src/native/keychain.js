@@ -8,6 +8,26 @@ const LOGINKEY_KEY = 'key_loginkey'
 // const USE_TOUCHID_KEY = 'key_use_touchid'
 // const RECOVERY2_KEY = 'key_recovery2'
 
+// TODO: Remove this hack! Pass via io object in Core
+
+if (Platform.OS === 'android' && AbcCoreJsUi.fetch) {
+  global.androidFetch = async (url: string, options: Object) => {
+    const headers: Array<string> = []
+    for (const h in options.headers) {
+      if (options.headers.hasOwnProperty(h)) {
+        headers.push(`${h}______${options.headers[h]}`)
+      }
+    }
+    const result = await AbcCoreJsUi.fetch(
+      url,
+      options.method,
+      options.body,
+      headers
+    )
+    return result
+  }
+}
+
 function createKeyWithUsername (username, key) {
   return username + '___' + key
 }
