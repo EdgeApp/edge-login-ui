@@ -72,7 +72,7 @@ const MaterialInputWithDrop = {
       iconPressed: {
         color: Constants.SECONDARY
       },
-      iconSize: Constants.FONTS.defaultFontSize,
+      iconSize: scale(Constants.FONTS.defaultFontSize),
       underlayColor: Constants.TRANSPARENT
     },
     text: {

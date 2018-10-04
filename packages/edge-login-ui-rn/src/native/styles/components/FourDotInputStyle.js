@@ -4,17 +4,19 @@ import * as Colors from '../../../common/constants/Colors.js'
 import { scale } from '../../../common/util/scaling.js'
 
 const FourDotInputStyle = {
+  // used for logging *back in* with PIN
   container: {
+    paddingTop: 12,
     width: '100%',
-    height: scale(90)
+    height: scale(86)
   },
   interactiveContainer: {
-    flex: 1,
+    height: scale(40),
     width: '100%',
     alignItems: 'center'
   },
   errorContainer: {
-    flex: 1,
+    height: scale(40),
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
@@ -29,7 +31,8 @@ const FourDotInputStyle = {
   errorText: {
     color: Colors.ACCENT_RED,
     backgroundColor: Colors.TRANSPARENT,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: scale(12)
   },
   input: {
     position: 'absolute',
@@ -57,6 +60,7 @@ const FourDotInputStyle = {
 }
 const FourDotInputDarkStyle = {
   container: {
+    paddingTop: 30,
     width: 200,
     height: 90
   },
@@ -107,16 +111,18 @@ const FourDotInputDarkStyle = {
 }
 
 const FourDotInputDarkScaledStyle = {
+  // for new account PIN
   container: {
+    paddingTop: scale(36),
     width: scale(200),
     height: scale(80)
   },
   interactiveContainer: {
-    flex: 1,
-    width: '100%'
+    height: scale(40),
+    width: '100%',
+    alignItems: 'center'
   },
   errorContainer: {
-    flex: 1,
     width: '100%',
     height: scale(40),
     alignItems: 'center',

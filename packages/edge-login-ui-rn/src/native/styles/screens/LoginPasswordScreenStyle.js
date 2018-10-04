@@ -29,8 +29,8 @@ const LoginPasswordScreenStyle = {
     justifyContent: 'space-around'
   },
   logoHeader: {
-    ...Styles.LogoHeaderStyle,
-    container: { ...Styles.LogoHeaderStyle.container, height: scale(90) }
+    ...Styles.LogoHeaderScaledStyle,
+    container: { ...Styles.LogoHeaderScaledStyle.container }
   },
   shimTiny: { ...Styles.Shim, height: scale(10) },
   shimSmall: { ...Styles.Shim, height: scale(25) },

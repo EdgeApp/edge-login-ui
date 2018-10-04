@@ -1,70 +1,19 @@
 // @flow
 import { scale } from '../../../common/util/scaling.js'
 
-const LogoHeaderStyle = {
+export const LogoHeaderScaledStyle = {
   container: {
     position: 'relative',
     width: '100%',
-    height: scale(125),
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  image: {
-    width: scale(150),
-    height: scale(45),
-    position: 'relative'
-    // width: null,
-    // height: null
-    // resizeMode: 'stretch'
-  }
-}
-const LogoHeaderStyleShort = {
-  container: {
-    position: 'relative',
-    width: '100%',
-    height: scale(100),
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  image: {
-    position: 'relative'
-    // width: null,
-    // height: null
-    // resizeMode: 'stretch'
-  }
-}
-const LogoHeaderScaledStyle = {
-  container: {
-    position: 'relative',
-    width: '100%',
-    height: scale(125),
+    paddingTop: scale(42),
+    paddingBottom: scale(24),
     justifyContent: 'space-around',
     alignItems: 'center'
   },
   image: {
     position: 'relative',
-    width: scale(80),
-    height: scale(78)
+    height: scale(44),
+    overflow: 'visible'
     // resizeMode: 'stretch'
   }
 }
-const LogoHeaderScaledStyleShort = {
-  container: {
-    position: 'relative',
-    width: '100%',
-    height: scale(100),
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  image: {
-    position: 'relative'
-    // width: null,
-    // height: null
-    // resizeMode: 'stretch'
-  }
-}
-export { LogoHeaderStyleShort }
-export { LogoHeaderStyle }
-
-export { LogoHeaderScaledStyleShort }
-export { LogoHeaderScaledStyle }

@@ -37,7 +37,7 @@ const PrimaryButtonDownStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_DOWN,
   width: Constants.BUTTON_WIDTH_1,
-  height: Constants.BUTTON_HEIGHT,
+  height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
   borderRadius: Constants.BUTTON_BORDER_RADIUS
@@ -50,7 +50,7 @@ const SecondaryButtonUpStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_SECONDARY_UP,
   width: Constants.BUTTON_WIDTH_1,
-  height: Constants.BUTTON_HEIGHT,
+  height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
   borderRadius: Constants.BUTTON_BORDER_RADIUS
@@ -60,7 +60,7 @@ const SecondaryButtonDownStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_SECONDARY_DOWN,
   width: Constants.BUTTON_WIDTH_1,
-  height: Constants.BUTTON_HEIGHT,
+  height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
   borderRadius: Constants.BUTTON_BORDER_RADIUS
@@ -68,14 +68,14 @@ const SecondaryButtonDownStyle = {
 const SecondaryButtonUpTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
-  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   width: '100%',
   textAlign: 'center'
 }
 const SecondaryButtonDownTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
-  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   width: '100%',
   textAlign: 'center'
 }
@@ -122,7 +122,7 @@ const DefaultButtonUpStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_DEFAULT_UP,
   width: Constants.BUTTON_WIDTH_1,
-  height: Constants.BUTTON_HEIGHT,
+  height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
   borderColor: Constants.BUTTON_DEFAULT_UP_TEXT,
@@ -138,7 +138,7 @@ const DefaultWidthButtonUpStyle = {
 const DefaultButtonUpTextStyle = {
   position: 'relative',
   color: Constants.BUTTON_DEFAULT_UP_TEXT,
-  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
@@ -146,7 +146,7 @@ const DefaultButtonUpTextStyle = {
 const DefaultButtonDownTextStyle = {
   position: 'relative',
   color: Constants.BUTTON_DEFAULT_DOWN_TEXT,
-  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
@@ -156,7 +156,7 @@ const DefaultButtonDownStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_DEFAULT_UP,
   width: Constants.BUTTON_WIDTH_1,
-  height: Constants.BUTTON_HEIGHT,
+  height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
   borderColor: Constants.BUTTON_DEFAULT_DOWN_TEXT,
@@ -171,12 +171,12 @@ const DefaultWidthButtonDownStyle = {
 
 const TextOnlyButtonUpStyle = {
   backgroundColor: Constants.TRANSPARENT,
-  padding: 10
+  padding: scale(10)
 }
 
 const TextOnlyButtonTextUpStyle = {
   color: Constants.SECONDARY,
-  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
@@ -184,12 +184,12 @@ const TextOnlyButtonTextUpStyle = {
 
 const TextOnlyButtonDownStyle = {
   backgroundColor: Constants.TRANSPARENT,
-  padding: 10
+  padding: scale(10)
 }
 
 const TextOnlyButtonTextDownStyle = {
   color: Constants.PRIMARY,
-  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
@@ -198,7 +198,7 @@ const TextOnlyButtonTextDownStyle = {
 const IconButtonStyle = {
   container: {
     width: 40,
-    height: 40,
+    height: scale(40),
     justifyContent: 'space-around',
     alignItems: 'center'
   },
@@ -208,7 +208,7 @@ const IconButtonStyle = {
   iconPressed: {
     color: Constants.GRAY_2
   },
-  iconSize: 36,
+  iconSize: scale(36),
   underlayColor: Constants.TRANSPARENT
 }
 
@@ -239,11 +239,11 @@ const TextAndIconButtonStyle = {
   },
   text: {
     color: Constants.WHITE,
-    fontSize: 20
+    fontSize: scale(20)
   },
   textPressed: {
     color: Constants.GRAY_2,
-    fontSize: 20
+    fontSize: scale(20)
   },
   icon: {
     color: Constants.WHITE
@@ -251,7 +251,7 @@ const TextAndIconButtonStyle = {
   iconPressed: {
     color: Constants.GRAY_2
   },
-  iconSize: 25,
+  iconSize: scale(25),
   underlayColor: Constants.TRANSPARENT
 }
 const TextAndIconButtonAlignEdgesStyle = {
@@ -285,11 +285,11 @@ const TextAndIconButtonAlignEdgesStyle = {
   },
   text: {
     color: Constants.GRAY_2,
-    fontSize: 18
+    fontSize: scale(18)
   },
   textPressed: {
     color: Constants.GRAY_1,
-    fontSize: 18
+    fontSize: scale(18)
   },
   icon: {
     color: Constants.GRAY_2
@@ -297,7 +297,7 @@ const TextAndIconButtonAlignEdgesStyle = {
   iconPressed: {
     color: Constants.GRAY_1
   },
-  iconSize: 25,
+  iconSize: scale(25),
   underlayColor: Constants.TRANSPARENT
 }
 

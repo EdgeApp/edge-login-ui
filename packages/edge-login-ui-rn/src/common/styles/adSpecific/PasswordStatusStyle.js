@@ -113,7 +113,7 @@ const PasswordStatusScaledStyle = {
     marginRight: '10%',
     marginTop: scale(10),
     marginBottom: scale(6),
-    fontSize: scale(11)
+    fontSize: scale(14)
   }
 }
 

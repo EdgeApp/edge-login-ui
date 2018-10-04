@@ -23,10 +23,10 @@ const PinLoginScreenStyle = {
     alignItems: 'center'
   },
   featureBoxBody: {
-    height: vs(250),
+    height: vs(240),
     width: '100%'
   },
-  logoHeader: Styles.LogoHeaderStyleShort,
+  logoHeader: Styles.LogoHeaderScaledStyle,
   thumbprintButton: {
     container: {
       position: 'absolute',
@@ -86,7 +86,7 @@ const PinLoginScreenStyle = {
   },
   dropInput: {
     container: {
-      width: scale(200),
+      width: 200,
       height: scale(30),
       // backgroundColor: Constants.WHITE,
       marginBottom: scale(20)
