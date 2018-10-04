@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -24,9 +26,18 @@ import com.facebook.react.bridge.Promise;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import com.facebook.react.bridge.ReadableArray;
 import com.squareup.whorlwind.ReadResult;
 import com.squareup.whorlwind.SharedPreferencesStorage;
 import com.squareup.whorlwind.Whorlwind;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 import okio.ByteString;
 
@@ -60,6 +71,76 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return ABC_CORE_JS_UI_MODULE;
+    }
+
+    @ReactMethod
+    public void fetch(String url, String method, String body, ReadableArray headers, Promise promise) {
+        StringBuffer stringBuffer = new StringBuffer("");
+        BufferedReader bufferedReader = null;
+        HttpsURLConnection urlConnection = null;
+        Log.d(TAG, method + ": " + url + " ");
+        for (int i = 0; i < headers.size(); i++) {
+            Log.d(TAG, "header: " + headers.getString(i));
+        }
+        try {
+            SSLContext context = SSLContext.getInstance("TLS");
+            context.init(null, null, null);
+
+            URL sendUrl = new URL(url);
+            urlConnection = (HttpsURLConnection) sendUrl.openConnection();
+            urlConnection.setSSLSocketFactory(context.getSocketFactory());
+
+
+            for (int i = 0; i < headers.size(); i++) {
+                String[] property = headers.getString(i).split("______");
+                urlConnection.setRequestProperty(property[0], property[1]);
+            }
+
+            urlConnection.setRequestMethod(method);
+            if ("POST".equalsIgnoreCase(method)) {
+                urlConnection.setRequestProperty("Content-Length", "" +
+                        Integer.toString(body.getBytes().length));
+                urlConnection.setUseCaches(false);
+                urlConnection.setDoInput(true);
+                urlConnection.setDoOutput(true);
+            }
+
+            if ("POST".equalsIgnoreCase(method)) {
+                DataOutputStream wr = new DataOutputStream(
+                        urlConnection.getOutputStream ());
+                wr.writeBytes(body);
+                wr.flush();
+                wr.close();
+            }
+
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            bufferedReader = new BufferedReader(new InputStreamReader(in));
+            String readLine = bufferedReader.readLine();
+            while (readLine != null) {
+                stringBuffer.append(readLine);
+                stringBuffer.append("\n");
+                readLine = bufferedReader.readLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            promise.reject(e);
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        String temp = stringBuffer.toString();
+        if (temp == null) {
+            temp = "{}";
+        }
+        promise.resolve(temp);
     }
 
     @ReactMethod
