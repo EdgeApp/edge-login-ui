@@ -78,16 +78,16 @@ const SkipModalStyle = {
       textAlign: 'center'
     },
     cancelButton: {
-      upStyle: { ...Styles.SecondaryButtonUpStyle, width: 117, height: 44 },
+      upStyle: { ...Styles.SecondaryButtonUpStyle, width: 117 },
       upTextStyle: Styles.SecondaryButtonUpTextStyle,
       downTextStyle: Styles.SecondaryButtonUpTextStyle,
-      downStyle: { ...Styles.SecondaryButtonDownStyle, width: 117, height: 44 }
+      downStyle: { ...Styles.SecondaryButtonDownStyle, width: 117 }
     },
     skipButton: {
-      upStyle: { ...Styles.PrimaryButtonUpStyle, width: 117, height: 44 },
+      upStyle: { ...Styles.PrimaryButtonUpStyle, width: 117 },
       upTextStyle: Styles.PrimaryButtonUpTextStyle,
       downTextStyle: Styles.PrimaryButtonUpTextStyle,
-      downStyle: { ...Styles.PrimaryButtonDownStyle, width: 117, height: 44 }
+      downStyle: { ...Styles.PrimaryButtonDownStyle, width: 117 }
     }
   }
 }

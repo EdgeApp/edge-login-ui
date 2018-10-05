@@ -44,7 +44,7 @@ const ModalStyle = {
     top: screenDimensions.height / 8,
     left: screenDimensions.width / 8,
     width: screenDimensions.width * 3 / 4,
-    borderRadius: 3,
+    borderRadius: scale(3),
     borderWidth: 2,
     borderColor: Constants.GRAY_2,
     alignItems: 'stretch',
@@ -123,7 +123,6 @@ const ModalStyle = {
     position: 'relative',
     marginTop: scale(20),
     flex: 1,
-    height: Constants.BUTTON_HEIGHT,
     width: '100%',
     flexDirection: 'row',
     alignSelf: 'flex-end'
