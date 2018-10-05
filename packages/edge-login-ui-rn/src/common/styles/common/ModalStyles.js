@@ -1,7 +1,7 @@
 // @flow
 
 import * as Colors from '../../constants/Colors'
-import { fontSize, hs, vs } from '../../util'
+import { scale, hs, vs } from '../../util'
 import * as Styles from '../'
 
 const ModalStyles = {
@@ -31,8 +31,7 @@ const SkipModalStyle = {
   },
   skip: {
     container: {
-      width: hs(280),
-      height: vs(229)
+      width: hs(280)
     },
     backgroundContainer: {
       width: '100%',
@@ -58,41 +57,37 @@ const SkipModalStyle = {
       flex: 50
     },
     headlineContainer: {
-      flex: 40,
       alignItems: 'center',
       justifyContent: 'space-around'
     },
     textContainer: {
-      flex: 60,
       alignItems: 'center',
-      marginLeft: 20,
-      marginRight: 20
+      marginHorizontal: 20
     },
     buttonsContainer: {
-      flex: 42,
       justifyContent: 'space-around',
       flexDirection: 'row',
       width: '100%'
     },
     headlineText: {
-      fontSize: fontSize(14),
+      fontSize: scale(14),
       color: Colors.PRIMARY
     },
     copyText: {
-      fontSize: fontSize(11),
+      fontSize: scale(11),
       textAlign: 'center'
     },
     cancelButton: {
-      upStyle: { ...Styles.SecondaryButtonUpStyle, width: 117, height: 44 },
+      upStyle: { ...Styles.SecondaryButtonUpStyle, width: 117 },
       upTextStyle: Styles.SecondaryButtonUpTextStyle,
       downTextStyle: Styles.SecondaryButtonUpTextStyle,
-      downStyle: { ...Styles.SecondaryButtonDownStyle, width: 117, height: 44 }
+      downStyle: { ...Styles.SecondaryButtonDownStyle, width: 117 }
     },
     skipButton: {
-      upStyle: { ...Styles.PrimaryButtonUpStyle, width: 117, height: 44 },
+      upStyle: { ...Styles.PrimaryButtonUpStyle, width: 117 },
       upTextStyle: Styles.PrimaryButtonUpTextStyle,
       downTextStyle: Styles.PrimaryButtonUpTextStyle,
-      downStyle: { ...Styles.PrimaryButtonDownStyle, width: 117, height: 44 }
+      downStyle: { ...Styles.PrimaryButtonDownStyle, width: 117 }
     }
   }
 }

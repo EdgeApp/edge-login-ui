@@ -12,7 +12,7 @@ const HeaderContainerStyle = {
     width: '100%',
     backgroundColor: Constants.TRANSPARENT,
     flexDirection: 'row',
-    paddingVertical: 6
+    paddingVertical: scale(6)
   },
   headerBackButtonStyle: {
     backButton: {
@@ -20,18 +20,19 @@ const HeaderContainerStyle = {
       alignItems: 'center'
     },
     backIconStyle: {
-      paddingLeft: 10,
-      paddingRight: 5,
-      paddingTop: 3,
+      position: 'relative',
+      top: scale(1),
+      paddingLeft: scale(10),
+      paddingRight: scale(6),
       color: Constants.WHITE
     },
     sideText: {
       color: Constants.WHITE,
-      fontSize: 18
+      fontSize: scale(18)
     },
     icon: {
       color: Constants.WHITE,
-      fontSize: 25
+      fontSize: scale(25)
     },
     default: {
       backgroundColor: Constants.TRANSPARENT,
@@ -40,26 +41,26 @@ const HeaderContainerStyle = {
   },
   left: {
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: 'center'
   },
   center: {
     flex: 3,
     justifyContent: 'flex-end',
-    paddingBottom: 5
+    paddingBottom: scale(5)
   },
   right: {
     flex: 1,
-    justifyContent: 'flex-end' // ,
+    justifyContent: 'center' // ,
     // alignItems: 'center'
   },
   headlineText: {
-    fontSize: 17,
+    fontSize: scale(17),
     width: '100%',
     textAlign: 'center',
     color: Constants.WHITE
   },
   subHeadText: {
-    fontSize: 11,
+    fontSize: scale(11),
     width: '100%',
     textAlign: 'center',
     color: Constants.ACCENT_MINT
@@ -101,10 +102,10 @@ const HeaderContainerScaledStyle = {
       alignItems: 'center'
     },
     backIconStyle: {
+      position: 'relative',
+      top: scale(1),
       paddingLeft: scale(10),
-      paddingRight: scale(5),
-      paddingTop: scale(3),
-      paddingBottom: scale(5),
+      paddingRight: scale(6),
       color: Constants.WHITE,
       fontSize: scale(20)
     },
@@ -122,7 +123,7 @@ const HeaderContainerScaledStyle = {
   },
   left: {
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: 'center'
   },
   center: {
     flex: 3,
@@ -131,7 +132,7 @@ const HeaderContainerScaledStyle = {
   },
   right: {
     flex: 1,
-    justifyContent: 'flex-end' // ,
+    justifyContent: 'center' // ,
     // alignItems: 'center'
   },
   headlineText: {
