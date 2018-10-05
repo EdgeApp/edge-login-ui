@@ -103,8 +103,7 @@ const HeaderContainerScaledStyle = {
     backIconStyle: {
       paddingLeft: scale(10),
       paddingRight: scale(5),
-      paddingTop: scale(3),
-      paddingBottom: scale(5),
+      paddingVertical: scale(5),
       color: Constants.WHITE,
       fontSize: scale(20)
     },

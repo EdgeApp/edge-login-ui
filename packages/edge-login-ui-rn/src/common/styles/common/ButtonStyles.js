@@ -8,11 +8,12 @@ const PrimaryButtonUpStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_UP,
   width: Constants.BUTTON_WIDTH_1,
-  height: Constants.BUTTON_HEIGHT,
+  height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
   borderRadius: Constants.BUTTON_BORDER_RADIUS
 }
+
 const PrimaryWidthButtonUpStyle = {
   ...PrimaryButtonUpStyle,
   width: Constants.BUTTON_100_PERCENT
@@ -20,7 +21,7 @@ const PrimaryWidthButtonUpStyle = {
 const PrimaryButtonUpTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
-  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
@@ -28,7 +29,7 @@ const PrimaryButtonUpTextStyle = {
 const PrimaryButtonDownTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
-  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
