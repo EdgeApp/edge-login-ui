@@ -20,8 +20,10 @@ const HeaderContainerStyle = {
       alignItems: 'center'
     },
     backIconStyle: {
-      paddingLeft: 10,
-      paddingRight: 5,
+      position: 'relative',
+      top: scale(1),
+      paddingLeft: scale(10),
+      paddingRight: scale(6),
       color: Constants.WHITE
     },
     sideText: {
@@ -100,8 +102,10 @@ const HeaderContainerScaledStyle = {
       alignItems: 'center'
     },
     backIconStyle: {
+      position: 'relative',
+      top: scale(1),
       paddingLeft: scale(10),
-      paddingRight: scale(5),
+      paddingRight: scale(6),
       color: Constants.WHITE,
       fontSize: scale(20)
     },
