@@ -107,7 +107,7 @@
   "hang_tight": "Espera mientras creamos",
   "secure_account": "y securizamos tu cuenta",
   "encrypting_wallet": "Encriptando cartera...",
-  "unexpected_end_of_data": "No hay suficientes carácteres en el campo",
+  "not_enough_characters_in_field": "No hay suficientes carácteres en el campo",
   "confirm_recovery_questions": "Confirmar recuperación",
   "login_with_password": "Acceder con contraseña",
   "landing_tagline": "La cartera segura y facil de usar para tus tokens y activos blockchain",

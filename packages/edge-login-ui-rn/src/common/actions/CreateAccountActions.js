@@ -7,6 +7,7 @@ import passwordCheck from 'zxcvbn'
 import { enableTouchId, isTouchDisabled } from '../../native/keychain.js'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
+import s from '../locales/strings.js'
 import { isASCII } from '../util'
 import { dispatchAction, dispatchActionWithData, getPreviousUsers } from './'
 import * as WorkflowActions from './WorkflowActions'
@@ -16,7 +17,7 @@ export function validatePin (data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     let error = null
     if (pin.length !== 4) {
-      error = Constants.FOUR_DIGIT_PIN_ERROR
+      error = s.strings.four_digit_pin_error
     }
     if (pin.length > 4) {
       return
@@ -53,7 +54,7 @@ export function checkUsernameForAvailabilty (data: string) {
           }
           const obj = {
             username: data,
-            error: Constants.USERNAME_EXISTS_ERROR
+            error: s.strings.username_exists_error
           }
           global.firebase &&
             global.firebase.analytics().logEvent(`Signup_Username_Unavailable`)
@@ -71,8 +72,8 @@ export function checkUsernameForAvailabilty (data: string) {
 export function validateUsername (data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     // TODO evaluate client side evaluations.
-    let error = data.length > 2 ? null : Constants.USERNAME_3_CHARACTERS_ERROR // TODO: Localize string
-    error = isASCII(data) ? error : Constants.USERNAME_ASCII_ERROR // TODO: localize
+    let error = data.length > 2 ? null : s.strings.username_3_characters_error // TODO: Localize string
+    error = isASCII(data) ? error : s.strings.username_ascii_error // TODO: localize
     const obj = {
       username: data,
       error: error
@@ -88,7 +89,7 @@ export function validateConfirmPassword (data?: string) {
     // the timeout is a hack until we put in interaction manager.
     let error = null
     if (confirmPassword !== state.create.password) {
-      error = Constants.CONFIRM_PASSWORD_ERROR
+      error = s.strings.confirm_password_error
     }
     const obj = {
       password: confirmPassword,
@@ -120,15 +121,15 @@ export function validatePassword (data: string) {
     }
 
     passwordCheckString = sprintf(
-      Constants.IT_WOULD_TAKE_XX_TO_CRACK,
+      s.strings.it_would_take_xx_to_crack,
       passwordCheckString
     )
     if (passwordCheckResult.score < 3) {
-      passwordCheckString += Constants.RECOMMEND_CHOOSING_A_STRONGER
+      passwordCheckString += s.strings.recommend_choosing_a_stronger
     }
 
     if (!passwordEval.passed) {
-      error = Constants.PASSWORD_ERROR // TODO localize.
+      error = s.strings.password_error // TODO localize.
     }
 
     const obj = {

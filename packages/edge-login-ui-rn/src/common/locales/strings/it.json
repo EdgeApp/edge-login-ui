@@ -107,7 +107,7 @@
   "hang_tight": "Tieniti forte mentre creiamo",
   "secure_account": "e rendiamo sicuro il tuo account",
   "encrypting_wallet": "Stiamo cryptando il portafoglio...",
-  "unexpected_end_of_data": "Non ci sono abbastanza caratteri nel campo",
+  "not_enough_characters_in_field": "Non ci sono abbastanza caratteri nel campo",
   "confirm_recovery_questions": "Conferma il Recupero",
   "login_with_password": "Accedi con la password",
   "landing_tagline": "Il portafoglio sicuro e semplice da utilizzare per i tuoi asset e token su blockchain",
