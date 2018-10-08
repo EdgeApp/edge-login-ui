@@ -2,6 +2,10 @@
 
 import type { AbcAccount, AbcContext, DiskletFolder } from 'edge-core-js'
 import { NativeModules, Platform } from 'react-native'
+import { dispatchAction } from '../common/actions/index.js'
+import { type Dispatch } from '../types/ReduxTypes.js'
+import * as Constants from '../common/constants/index.js'
+
 const { AbcCoreJsUi } = NativeModules
 
 const LOGINKEY_KEY = 'key_loginkey'
@@ -163,7 +167,8 @@ export async function loginWithTouchId (
   promptString: string,
   fallbackString: string,
   opts: Object,
-  callback: any
+  callback: any,
+  dispatch: Dispatch
 ) {
   const supported = await supportsTouchId()
 
@@ -190,7 +195,16 @@ export async function loginWithTouchId (
         if (success) {
           console.log('TouchID authenticated. Calling loginWithKey')
           callback()
-          const abcAccount = abcContext.loginWithKey(username, loginKey, opts)
+          const abcAccount = await abcContext.loginWithKey(
+            username,
+            loginKey,
+            opts
+          )
+
+          abcAccount.watch('loggedIn', () => {
+            dispatch(dispatchAction(Constants.RESET_APP))
+          })
+
           console.log('abcAccount logged in: ' + username)
           return abcAccount
         } else {
@@ -208,7 +222,16 @@ export async function loginWithTouchId (
           promptString
         )
         callback()
-        const abcAccount = abcContext.loginWithKey(username, loginKey, opts)
+        const abcAccount = await abcContext.loginWithKey(
+          username,
+          loginKey,
+          opts
+        )
+
+        abcAccount.watch('loggedIn', () => {
+          dispatch(dispatchAction(Constants.RESET_APP))
+        })
+
         console.log('abcAccount logged in: ' + username)
         return abcAccount
       } catch (e) {

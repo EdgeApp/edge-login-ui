@@ -100,12 +100,12 @@ export function validateConfirmPassword (data?: string) {
   }
 }
 export function validatePassword (data: string) {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     let error = null
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
-    const passwordEval = context.checkPasswordRules(data)
+    const passwordEval = await context.checkPasswordRules(data)
     const passwordCheckResult = passwordCheck(data)
     let passwordCheckString
 
@@ -144,15 +144,6 @@ export function validatePassword (data: string) {
 export function createUser (data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder } = imports
-    const myAccountOptions = {
-      ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      }
-    }
     dispatch(WorkflowActions.nextScreen())
     setTimeout(async () => {
       try {
@@ -160,8 +151,13 @@ export function createUser (data: Object) {
           data.username,
           data.password,
           data.pin,
-          myAccountOptions
+          imports.accountOptions
         )
+
+        abcAccount.watch('loggedIn', () => {
+          dispatch(dispatchAction(Constants.RESET_APP))
+        })
+
         const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
         if (!touchDisabled) {
           await enableTouchId(folder, abcAccount)
