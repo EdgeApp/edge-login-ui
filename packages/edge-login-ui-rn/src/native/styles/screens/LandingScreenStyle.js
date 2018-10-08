@@ -1,7 +1,7 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import { scale, vs } from '../../../common/util'
+import { scale } from '../../../common/util'
 import * as Styles from '../'
 
 const LandingScreenStyle = {
@@ -18,26 +18,26 @@ const LandingScreenStyle = {
   },
   featureBox: {
     position: 'relative',
-    top: vs(71),
+    top: scale(71),
     width: '100%',
-    height: vs(286)
+    height: scale(286)
   },
   logoHeader: Styles.LogoHeaderScaledStyle,
   featureBoxContent: {
-    // height: vs(186), 306- 125 - remaining space.
+    // height: scale(186), 306- 125 - remaining space.
     width: '100%',
     flexDirection: 'column',
-    height: vs(166),
+    height: scale(166),
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
   featureBoxDescription: {
-    // height: vs(186), 306- 125 - remaining space.
+    // height: scale(186), 306- 125 - remaining space.
     width: '100%',
     justifyContent: 'flex-end'
   },
   featureBoxButtons: {
-    // height: vs(186),
+    // height: scale(186),
     alignItems: 'center',
     justifyContent: 'flex-end'
   },

@@ -1,7 +1,7 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import { hs, scale, vs } from '../../../common/util'
+import { scale, scaleH } from '../../../common/util'
 import * as Styles from '../'
 
 const PinLoginScreenStyle = {
@@ -19,11 +19,11 @@ const PinLoginScreenStyle = {
     position: 'relative',
     top: scale(40),
     width: '100%',
-    height: vs(376),
+    height: scale(376),
     alignItems: 'center'
   },
   featureBoxBody: {
-    height: vs(240),
+    height: scale(240),
     width: '100%'
   },
   logoHeader: Styles.LogoHeaderScaledStyle,
@@ -42,12 +42,12 @@ const PinLoginScreenStyle = {
     }
   },
   listView: {
-    height: vs(250),
-    width: hs(160)
+    height: scale(250),
+    width: scaleH(160)
   },
   listItem: {
     container: {
-      height: vs(40),
+      height: scale(40),
       width: '100%',
       backgroundColor: Constants.PRIMARY,
       flexDirection: 'row',
