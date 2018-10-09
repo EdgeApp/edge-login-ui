@@ -2867,10 +2867,10 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-edge-core-js@0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.11.1.tgz#dcfb8556ce2a63d79dbee37043e379cec8ef0a40"
-  integrity sha512-Q0/P58sdqi3kz4FB+PTo7obvTUWa9OWWlvBCtR/3tj/uZ94rLc4EOTbx/whhCy4ANC/SrwJovNoGZSilqSPtGA==
+edge-core-js@0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.12.2.tgz#aa72f886494bb5c3fc8aebb8bb22d3e5b655a54e"
+  integrity sha512-eqWPHCGOz1RyF4pzuoBwBhfOgbVoUMJTF8XVPitD3fIzhUvdpB9hK7aOAN5Tt+mSTnMtXPpv5rby9MLkODdL/A==
   dependencies:
     "@babel/runtime" "^7.0.0"
     aes-js "^3.1.0"
@@ -2893,7 +2893,7 @@ edge-core-js@0.11.1:
     scrypt-js "^2.0.3"
     utf8 "^3.0.0"
     ws "^5.1.1"
-    yaob "^0.2.0"
+    yaob "^0.3.1"
 
 edge-currency-ethereum@^0.10.3:
   version "0.10.3"
@@ -9571,10 +9571,10 @@ yallist@^2.1.2:
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
   integrity sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=
 
-yaob@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/yaob/-/yaob-0.2.0.tgz#991f347bbe4300034c8ee9ec69d9999faedd4643"
-  integrity sha512-thLEkiyE2EcJZxTGwN/BW1uzzUBkG9kY/Psc+ORSwt6xA5Cukf8UNAXYO+LqLL1Bah2UmPQFFkv0fyzcbBu2/g==
+yaob@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/yaob/-/yaob-0.3.1.tgz#fb59c4ed7cd79877e850ca1bcf42d0e0ebff11b0"
+  integrity sha512-IAfN5KDwt30SiKfzG57TKd6FIJpq88Hqs57gywJ3OWm6zNACqZqLkr3AFYSlP87Qmvze2VnsgRsLfOW4Jibq+Q==
 
 yargs-parser@^5.0.0:
   version "5.0.0"

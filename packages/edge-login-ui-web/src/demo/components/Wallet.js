@@ -77,12 +77,14 @@ export class Wallet extends Component<WalletProps, WalletState> {
   }
 
   // Spend amount box was edited
-  changeAmount = (event: Object) => {
-    const value = event.currentTarget.value
-    this.setState({ spendAmount: value })
-    this.props.account.exchangeCache
-      .convertCurrency('ETH', 'iso:USD', Number(value) / 1e18)
-      .then(spendFiat => this.setState({ spendFiat }))
+  changeAmount = async (event: Object) => {
+    const spendAmount = event.currentTarget.value
+    const spendFiat = await this.props.account.exchangeCache.convertCurrency(
+      'ETH',
+      'iso:USD',
+      Number(spendAmount) / 1e18
+    )
+    this.setState({ spendAmount, spendFiat })
   }
 
   render () {
@@ -128,12 +130,14 @@ export class Wallet extends Component<WalletProps, WalletState> {
   componentDidMount () {
     const { wallet } = this.props
 
-    this.unsub1 = wallet.watch('balances', balances => {
+    this.unsub1 = wallet.watch('balances', async balances => {
       const balance = balances['ETH']
-      this.setState({ balance })
-      this.props.account.exchangeCache
-        .convertCurrency('ETH', 'iso:USD', Number(balance) / 1e18)
-        .then(balanceFiat => this.setState({ balanceFiat }))
+      const balanceFiat = await this.props.account.exchangeCache.convertCurrency(
+        'ETH',
+        'iso:USD',
+        Number(balance) / 1e18
+      )
+      this.setState({ balance, balanceFiat })
     })
 
     this.unsub2 = wallet.watch('blockHeight', blockHeight => {

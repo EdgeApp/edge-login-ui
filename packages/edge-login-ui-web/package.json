@@ -29,7 +29,7 @@
   "dependencies": {
     "cpr": "^3.0.1",
     "url-parse": "^1.4.3",
-    "yaob": "^0.2.0"
+    "yaob": "^0.3.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -41,7 +41,7 @@
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
-    "edge-core-js": "0.11.1",
+    "edge-core-js": "0.12.2",
     "edge-currency-ethereum": "^0.10.3",
     "edge-exchange-plugins": "^0.2.0",
     "edge-login-ui-react": "^0.4.6",
