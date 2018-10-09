@@ -46,7 +46,7 @@ edgeUiContext.showLoginWindow()
 
 ![Login UI](http://edge.app/wp-content/uploads/2018/06/Screen-Shot-2018-06-29-at-9.15.13-PM-e1530376379411.png)
 
-Once the user logs in, you receive an `edgeUiAccount` object. You can use this object to open an account management window for changing the password, PIN, and recovery questions:
+Once the user logs in, you receive an `edgeUiAccount` object. You can show a management window for this object to let the user change their password, PIN, and recovery questions:
 
 ```js
 edgeUiContext.showAccountSettingsWindow(edgeUiAccount)
@@ -54,15 +54,24 @@ edgeUiContext.showAccountSettingsWindow(edgeUiAccount)
 
 ![Management UI](http://edge.app/wp-content/uploads/2018/06/Screen-Shot-2018-06-29-at-11.34.51-PM-e1530376290752.png)
 
-You can also use the account object to manage wallets (each with their own private key). First, ensure that a wallet exists:
+You can also use the account object to manage wallets (each with their own private key). Use code like the following to create a wallet for your application, or load the existing wallet on future logins:
 
 ```js
-if (edgeUiAccount.getFirstWalletInfo('wallet:ethereum') == null) {
-  await createCurrencyWallet('wallet:ethereum')
-}
+// Find the app wallet, or create one if necessary:
+const walletInfo = account.getFirstWalletInfo('wallet:ethereum')
+const currencyWallet =
+  walletInfo == null
+    ? await account.createCurrencyWallet('walet:ethereum')
+    : await account.waitForCurrencyWallet(walletInfo.id)
+
+// Get an address from the wallet:
+const addressInfo = await currencyWallet.getReceiveAddress()
+const address = addressInfo.publicAddress
 ```
 
-Now that a private key exists, the wallet can sign transactions:
+This `currencyWallet` object has many properties, and can handle sending, receiving, checking balances, and more.
+
+If you need a more low-level API, the keys from the wallet can also sign raw transactions:
 
 ```js
 const walletId = edgeUiAccount.getFirstWalletInfo('wallet:ethereum').id
