@@ -42,7 +42,7 @@ export async function makeUiContext (opts: EdgeUiContextOptions) {
   if (root == null) throw new Error('Cannot find document root')
 
   // State:
-  let localUsers: Array<EdgeUserInfo> = []
+  let localUsers: Array<EdgeUserInfo> = core.localUsers
   let windowVisible = false
 
   const out: EdgeUiContext = {
