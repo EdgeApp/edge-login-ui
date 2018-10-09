@@ -10,8 +10,8 @@
     "README.md",
     "src"
   ],
-  "main": "lib/edge-login-ui-web.js",
-  "module": "lib/edge-login-ui-web.mjs",
+  "main": "lib/edge-login-ui-web.cjs.js",
+  "module": "lib/edge-login-ui-web.js",
   "bin": {
     "copy-edge-assets": "./src/copy-edge-assets.js"
   },
