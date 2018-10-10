@@ -1,16 +1,18 @@
 // @flow
 
-import 'edge-core-js'
+import 'edge-core-js/lib/client-side.js'
 
 import URL from 'url-parse'
 import { Bridge } from 'yaob'
 
 import { version } from '../../package.json'
-import type { EdgeUiContext, EdgeUiContextOptions } from '../frame/index.js'
-import type { BridgeRoot } from '../frame/root-api.js'
+import type {
+  BridgeRoot,
+  EdgeUiContext,
+  EdgeUiContextOptions
+} from '../frame/index.js'
 import { hideFrame, makeFrame, showFrame } from './iframe.js'
 
-export * from 'edge-core-js'
 export type { EdgeUiContextOptions, EdgeUiContext }
 
 /**

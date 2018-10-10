@@ -6,18 +6,18 @@ import URL from 'url-parse'
 import { Bridge, bridgifyObject } from 'yaob'
 
 import { makeUiContext } from './context-api.js'
-import type { EdgeUiContext, EdgeUiContextOptions } from './index.js'
-
-export type BridgeRoot = {
-  makeContext(opts: EdgeUiContextOptions): Promise<EdgeUiContext>
-}
+import type {
+  BridgeRoot,
+  EdgeUiContext,
+  EdgeUiContextOptions
+} from './index.js'
 
 export function sendRoot () {
   const frameUrl = new URL(window.location)
   const parentUrl = new URL(document.referrer)
   const origin = parentUrl.origin
 
-  const out = {
+  const out: BridgeRoot = {
     async makeContext (opts: EdgeUiContextOptions): Promise<EdgeUiContext> {
       if (frameUrl.origin !== parentUrl.origin) opts.hideKeys = true
 

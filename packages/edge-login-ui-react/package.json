@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "edge-core-js": "0.12.2",
+    "edge-core-js": "^0.12.3",
     "lodash": "~4.17.4",
     "moment": "^2.19.3",
     "normalize.css": "v4.2.0",

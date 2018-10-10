@@ -2,12 +2,8 @@
 
 import 'regenerator-runtime/runtime'
 
-import type {
-  EdgeAccount,
-  EdgeCurrencyWallet,
-  EdgeUiContext,
-  EdgeUiContextOptions
-} from 'edge-login-ui-web'
+import type { EdgeAccount, EdgeCurrencyWallet } from 'edge-core-js'
+import type { EdgeUiContext, EdgeUiContextOptions } from 'edge-login-ui-web'
 import { makeEdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 

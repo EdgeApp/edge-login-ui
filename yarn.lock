@@ -2955,10 +2955,10 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-edge-core-js@0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.12.2.tgz#aa72f886494bb5c3fc8aebb8bb22d3e5b655a54e"
-  integrity sha512-eqWPHCGOz1RyF4pzuoBwBhfOgbVoUMJTF8XVPitD3fIzhUvdpB9hK7aOAN5Tt+mSTnMtXPpv5rby9MLkODdL/A==
+edge-core-js@^0.12.3:
+  version "0.12.3"
+  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.12.3.tgz#3cae06559ed27406a804b138b51bcb5577d9d9fd"
+  integrity sha512-U/ywh+UgL6IZTJBxoFCdU6vZbrSAs1baymLG82EO421AO5HCEkSsfgHO+2O0biTnfgfg91593myLim6e1dM8SQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     aes-js "^3.1.0"

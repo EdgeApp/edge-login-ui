@@ -37,3 +37,7 @@ export type EdgeUiContext = {
 
   close(): mixed
 }
+
+export type BridgeRoot = {
+  makeContext(opts: EdgeUiContextOptions): Promise<EdgeUiContext>
+}

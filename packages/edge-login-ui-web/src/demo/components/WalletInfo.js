@@ -1,6 +1,6 @@
 // @flow
 
-import type { EdgeAccount, EdgeCurrencyWallet } from 'edge-login-ui-web'
+import type { EdgeAccount, EdgeCurrencyWallet } from 'edge-core-js'
 import QRCode from 'qrcode.react'
 import React, { Component } from 'react'
 

@@ -1,6 +1,6 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-login-ui-web'
+import type { EdgeAccount } from 'edge-core-js'
 import React from 'react'
 import ReactJson from 'react-json-view'
 

@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel'
 import flowEntry from 'rollup-plugin-flow-entry'
 import json from 'rollup-plugin-json'
+import resolve from 'rollup-plugin-node-resolve'
 
 import packageJson from './package.json'
 
@@ -29,6 +30,11 @@ export default {
     { file: packageJson.main, format: 'cjs' },
     { file: packageJson.module, format: 'es' }
   ],
-  plugins: [json({ preferConst: true }), babel(babelOpts), flowEntry()],
+  plugins: [
+    json({ preferConst: true }),
+    babel(babelOpts),
+    flowEntry(),
+    resolve()
+  ],
   sourcemap: true
 }
