@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcAccount, AbcContext, DiskletFolder } from 'edge-core-js'
+import type { DiskletFolder, EdgeAccount, EdgeContext } from 'edge-core-js'
 import { NativeModules, Platform } from 'react-native'
 const { AbcCoreJsUi } = NativeModules
 
@@ -128,7 +128,7 @@ async function removeTouchIdUser (folder: DiskletFolder, username: string) {
 
 export async function enableTouchId (
   folder: DiskletFolder,
-  abcAccount: AbcAccount
+  abcAccount: EdgeAccount
 ) {
   const supported = await supportsTouchId()
 
@@ -143,7 +143,7 @@ export async function enableTouchId (
 
 export async function disableTouchId (
   folder: DiskletFolder,
-  abcAccount: AbcAccount
+  abcAccount: EdgeAccount
 ) {
   const supported = await supportsTouchId()
 
@@ -157,7 +157,7 @@ export async function disableTouchId (
 }
 
 export async function loginWithTouchId (
-  abcContext: AbcContext,
+  abcContext: EdgeContext,
   folder: DiskletFolder,
   username: string,
   promptString: string,
