@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcAccount } from 'edge-core-js'
+import type { EdgeAccount } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
@@ -12,9 +12,9 @@ import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type Props = {
   styles: Object,
-  accountObject: AbcAccount,
+  accountObject: EdgeAccount,
   terms: Object,
-  agreeToCondition(AbcAccount): void
+  agreeToCondition(EdgeAccount): void
 }
 type State = {
   totalChecks: number

@@ -1,9 +1,9 @@
 // @flow
 
 import type {
-  AbcAccount,
-  AbcAccountOptions,
-  AbcContext,
+  EdgeAccount,
+  EdgeAccountOptions,
+  EdgeContext,
   DiskletFolder
 } from 'edge-core-js'
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
@@ -35,10 +35,10 @@ export type State = {
     usernameErrorMessage: string,
     showModal: boolean,
     passwordStatus: Object,
-    accountObject: AbcAccount
+    accountObject: EdgeAccount
   },
   login: {
-    account: AbcAccount,
+    account: EdgeAccount,
     username: string,
     pin: string,
     password: string,
@@ -78,9 +78,9 @@ export type GetState = () => State
 export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
 export type Imports = {
   onCancel: Function,
-  accountOptions: AbcAccountOptions,
-  accountObject?: AbcAccount,
-  context: AbcContext,
+  accountOptions: EdgeAccountOptions,
+  accountObject?: EdgeAccount,
+  context: EdgeContext,
   folder: DiskletFolder,
   onComplete: Function,
   callback: Function,

@@ -1,7 +1,7 @@
 // @flow
 
 import { makeReactNativeFolder } from 'disklet'
-import type { AbcAccount, AbcContext } from 'edge-core-js'
+import type { EdgeAccount, EdgeContext } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
@@ -14,8 +14,8 @@ import ChangePinConnector from '../../connectors/ChangePinConnector'
 import * as Styles from '../../styles'
 
 type Props = {
-  account: AbcAccount,
-  context: AbcContext,
+  account: EdgeAccount,
+  context: EdgeContext,
   showHeader: boolean,
   onComplete(): void,
   onCancel(): void

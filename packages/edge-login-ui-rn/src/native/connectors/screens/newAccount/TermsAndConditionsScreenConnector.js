@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcAccount } from 'edge-core-js'
+import type { EdgeAccount } from 'edge-core-js'
 import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions/'
@@ -17,7 +17,7 @@ export const mapStateToProps = (state: State) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    agreeToCondition: (data: AbcAccount) =>
+    agreeToCondition: (data: EdgeAccount) =>
       dispatch(actions.agreeToConditions(data))
   }
 }

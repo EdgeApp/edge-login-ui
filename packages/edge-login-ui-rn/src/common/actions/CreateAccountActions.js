@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcAccount } from 'edge-core-js'
+import type { EdgeAccount } from 'edge-core-js'
 import { sprintf } from 'sprintf-js'
 import passwordCheck from 'zxcvbn'
 
@@ -185,7 +185,7 @@ export function createUser (data: Object) {
     }, 300)
   }
 }
-export function agreeToConditions (account: AbcAccount) {
+export function agreeToConditions (account: EdgeAccount) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, folder } = imports
     // write to disklet
