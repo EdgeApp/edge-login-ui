@@ -1,26 +1,20 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-login-ui-web'
+import type { EdgeAccount } from 'edge-core-js'
 import React from 'react'
 import ReactJson from 'react-json-view'
 
-import { Wallet } from './Wallet.js'
+type Props = {
+  account: EdgeAccount
+}
 
-export function AccountInfo (props: { account: EdgeAccount }) {
+export function AccountInfo (props: Props) {
   const { account } = props
 
   return (
     <div>
-      <h1>Edge Account</h1>
+      <h1>Account</h1>
       <p>You are logged in as &quot;{account.username}&quot;.</p>
-      {Object.keys(account.currencyWallets).map(id => (
-        <Wallet
-          account={account}
-          key={id}
-          wallet={account.currencyWallets[id]}
-        />
-      ))}
-      <h2>All Wallet Infos</h2>
       <ReactJson
         collapsed={2}
         displayDataTypes={false}

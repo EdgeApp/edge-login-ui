@@ -1,18 +1,18 @@
 // @flow
 
 import * as Constants from '../../constants/'
-import { hs } from '../../util'
 import { scale } from '../../util/scaling.js'
 
 const PrimaryButtonUpStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_UP,
   width: Constants.BUTTON_WIDTH_1,
-  height: Constants.BUTTON_HEIGHT,
+  height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: Constants.BUTTON_BORDER_RADIUS
+  borderRadius: scale(Constants.BUTTON_BORDER_RADIUS)
 }
+
 const PrimaryWidthButtonUpStyle = {
   ...PrimaryButtonUpStyle,
   width: Constants.BUTTON_100_PERCENT
@@ -20,7 +20,7 @@ const PrimaryWidthButtonUpStyle = {
 const PrimaryButtonUpTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
-  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
@@ -28,7 +28,7 @@ const PrimaryButtonUpTextStyle = {
 const PrimaryButtonDownTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
-  fontSize: Constants.FONTS.defaultButtonTextSize,
+  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
@@ -40,7 +40,7 @@ const PrimaryButtonDownStyle = {
   height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: Constants.BUTTON_BORDER_RADIUS
+  borderRadius: scale(Constants.BUTTON_BORDER_RADIUS)
 }
 const PrimaryWidthButtonDownStyle = {
   ...PrimaryButtonDownStyle,
@@ -53,7 +53,7 @@ const SecondaryButtonUpStyle = {
   height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: Constants.BUTTON_BORDER_RADIUS
+  borderRadius: scale(Constants.BUTTON_BORDER_RADIUS)
 }
 
 const SecondaryButtonDownStyle = {
@@ -63,7 +63,7 @@ const SecondaryButtonDownStyle = {
   height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: Constants.BUTTON_BORDER_RADIUS
+  borderRadius: scale(Constants.BUTTON_BORDER_RADIUS)
 }
 const SecondaryButtonUpTextStyle = {
   position: 'relative',
@@ -86,7 +86,7 @@ const TertiaryButtonUpStyle = {
   height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: hs(3),
+  borderRadius: scale(3),
   borderColor: Constants.ACCENT_MINT,
   borderWidth: Constants.BUTTON_BORDER_STROKE
 }
@@ -105,7 +105,7 @@ const TertiaryButtonDownStyle = {
   height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: hs(3),
+  borderRadius: scale(3),
   borderColor: Constants.ACCENT_MINT,
   borderWidth: Constants.BUTTON_BORDER_STROKE
 }
@@ -127,7 +127,7 @@ const DefaultButtonUpStyle = {
   justifyContent: 'space-around',
   borderColor: Constants.BUTTON_DEFAULT_UP_TEXT,
   borderWidth: Constants.BUTTON_BORDER_STROKE,
-  borderRadius: Constants.BUTTON_BORDER_RADIUS
+  borderRadius: scale(Constants.BUTTON_BORDER_RADIUS)
 }
 
 const DefaultWidthButtonUpStyle = {
@@ -161,7 +161,7 @@ const DefaultButtonDownStyle = {
   justifyContent: 'space-around',
   borderColor: Constants.BUTTON_DEFAULT_DOWN_TEXT,
   borderWidth: Constants.BUTTON_BORDER_STROKE,
-  borderRadius: Constants.BUTTON_BORDER_RADIUS
+  borderRadius: scale(Constants.BUTTON_BORDER_RADIUS)
 }
 
 const DefaultWidthButtonDownStyle = {
@@ -308,7 +308,7 @@ const PrimaryButtonUpScaledStyle = {
   height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: Constants.BUTTON_BORDER_RADIUS
+  borderRadius: scale(Constants.BUTTON_BORDER_RADIUS)
 }
 const PrimaryWidthButtonUpScaledStyle = {
   ...PrimaryButtonUpStyle,
@@ -337,7 +337,7 @@ const PrimaryButtonDownScaledStyle = {
   height: scale(Constants.BUTTON_HEIGHT),
   alignItems: 'center',
   justifyContent: 'space-around',
-  borderRadius: Constants.BUTTON_BORDER_RADIUS
+  borderRadius: scale(Constants.BUTTON_BORDER_RADIUS)
 }
 const PrimaryWidthButtonDownScaledStyle = {
   ...PrimaryButtonDownStyle,

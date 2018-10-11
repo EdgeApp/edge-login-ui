@@ -14,8 +14,6 @@ Import the library into your project:
 
 ```js
 import { makeEdgeUiContext } from 'edge-login-ui-web'
-// or:
-const { makeEdgeUiContext } = require('edge-login-ui-web')
 ```
 
 To get an API key, download the [Airbitz app](https://airbitz.co/app), create an account, and log in to the [Airbitz developer portal](https://developer.airbitz.co) using the barcode scanner. Note: the new Edge app doesn't have BitID support yet, so the Airbitz app is still required for this step.
@@ -36,7 +34,7 @@ To create an overlay popup where a user can register a new account or log in to 
 
 ```js
 // Set up the callback:
-edgeUiContext.on('login', edgeUiAccount => {
+edgeUiContext.on('login', edgeAccount => {
     // The user logged in, so save the account somewhere
 })
 
@@ -46,28 +44,29 @@ edgeUiContext.showLoginWindow()
 
 ![Login UI](http://edge.app/wp-content/uploads/2018/06/Screen-Shot-2018-06-29-at-9.15.13-PM-e1530376379411.png)
 
-Once the user logs in, you receive an `edgeUiAccount` object. You can use this object to open an account management window for changing the password, PIN, and recovery questions:
+Once the user logs in, you receive an `edgeAccount` object. You can also use the account object to manage wallets (each with their own private key). Use code like the following to create a wallet for your application, or load the existing wallet on future logins:
 
 ```js
-edgeUiContext.showAccountSettingsWindow(edgeUiAccount)
+// Find the app wallet, or create one if necessary:
+const walletInfo = account.getFirstWalletInfo('wallet:ethereum')
+const currencyWallet =
+  walletInfo == null
+    ? await account.createCurrencyWallet('walet:ethereum')
+    : await account.waitForCurrencyWallet(walletInfo.id)
+
+// Get an address from the wallet:
+const addressInfo = await currencyWallet.getReceiveAddress()
+const address = addressInfo.publicAddress
 ```
 
-![Management UI](http://edge.app/wp-content/uploads/2018/06/Screen-Shot-2018-06-29-at-11.34.51-PM-e1530376290752.png)
+This `currencyWallet` object has many properties, and can handle sending, receiving, checking balances, and more. Please see the [documentation](https://developer.airbitz.co/javascript/#abccurrencywallet) for more information.
 
-You can also use the account object to manage wallets (each with their own private key). First, ensure that a wallet exists:
-
-```js
-if (edgeUiAccount.getFirstWalletInfo('wallet:ethereum') == null) {
-  await createCurrencyWallet('wallet:ethereum')
-}
-```
-
-Now that a private key exists, the wallet can sign transactions:
+If you need a more low-level API, the keys from the wallet can also sign raw Ethereum transactions:
 
 ```js
-const walletId = edgeUiAccount.getFirstWalletInfo('wallet:ethereum').id
+const walletId = edgeAccount.getFirstWalletInfo('wallet:ethereum').id
 
-const signedTx = await edgeUiAccount.signEthereumTransaction(
+const signedTx = await edgeAccount.signEthereumTransaction(
   walletId,
   {
     chainId: 3,
@@ -83,10 +82,18 @@ const signedTx = await edgeUiAccount.signEthereumTransaction(
 
 Please see the [ethereumjs-tx](https://github.com/ethereumjs/ethereumjs-tx/blob/master/docs/index.md) library for information on the Ethereum transaction format.
 
+To open an account management window, pass the account to the `showAccountSettingsWindow` method on the context:
+
+```js
+edgeUiContext.showAccountSettingsWindow(edgeAccount)
+```
+
+![Management UI](http://edge.app/wp-content/uploads/2018/06/Screen-Shot-2018-06-29-at-11.34.51-PM-e1530376290752.png)
+
 To log a user out, do:
 
 ```js
-edgeUiAccount.logout()
+edgeAccount.logout()
 ```
 
 ## Hosting Login IFrame Contents
@@ -105,12 +112,4 @@ To properly firewall your application code from having access to the Edge accoun
 
 ## Demo App
 
-This project contains a demo application in the `src/demo` directory. You can launch this demo using the `yarn start` command. You can also find the [demo](https://developer.airbitz.co/jsuisample) on our website.
-
-If the "Login With Edge" button does not turn blue after 30 seconds, just reload the page and it will work. Building the iframe can take a while the first time the demo loads, so things can time out. This would not be a problem in production where the iframe is already built.
-
-<!--
-# Detailed Docs
-
-https://developer.airbitz.co/javascript/#airbitz-account-management-ui
--->
+This project contains a demo application in the `src/demo` directory. You can launch this demo using the `yarn start` command. You can also find the [demo](https://developer.airbitz.co/edge-login-ui-web/) on our website.

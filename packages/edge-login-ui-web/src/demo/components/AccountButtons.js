@@ -1,15 +1,16 @@
 // @flow
 
-import type { EdgeAccount, EdgeUiContext } from 'edge-login-ui-web'
+import type { EdgeAccount } from 'edge-core-js'
+import type { EdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 
-export type AccountButtonsProps = {
+type Props = {
   account: EdgeAccount,
   context: EdgeUiContext,
   onLogout: () => mixed
 }
 
-export class AccountButtons extends Component<AccountButtonsProps> {
+export class AccountButtons extends Component<Props> {
   openManageWindow = () => {
     this.props.context.showAccountSettingsWindow(this.props.account)
   }

@@ -1,5 +1,8 @@
 {
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "precommit": "node localizeLanguage.js && npm run lint && lint-staged && flow",
     "flow": "flow",
@@ -18,9 +21,9 @@
     "eslint-plugin-react": "^7.6.1",
     "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",
-    "import-sort-cli": "^4.2.0",
-    "import-sort-parser-babylon": "^4.2.0",
-    "import-sort-style-module": "^4.2.0",
+    "import-sort-cli": "^5.2.0",
+    "import-sort-parser-babylon": "^5.2.0",
+    "import-sort-style-module": "^5.0.0",
     "lerna": "^2.8.0",
     "lint-staged": "^6.1.1",
     "prettier-eslint-cli": "^4.7.1"
@@ -41,8 +44,5 @@
     "ignore": [
       "flow-typed/**"
     ]
-  },
-  "workspaces": [
-    "packages/*"
-  ]
+  }
 }

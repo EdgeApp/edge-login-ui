@@ -3,11 +3,11 @@
 import type { EdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 
-export type WelcomeButtonProps = {
+type Props = {
   context: EdgeUiContext | void
 }
 
-export class WelcomeButtons extends Component<WelcomeButtonProps> {
+export class WelcomeButtons extends Component<Props> {
   openLoginWindow = () => {
     if (this.props.context) {
       this.props.context.showLoginWindow()

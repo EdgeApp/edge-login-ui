@@ -56,7 +56,6 @@ const NewAccountWelcomeScreenStyle = {
     backIconStyle: {
       paddingLeft: scale(10),
       paddingRight: scale(5),
-      paddingTop: scale(3),
       fontSize: scale(20),
       color: Constants.SECONDARY
     },

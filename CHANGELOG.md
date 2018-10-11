@@ -1,5 +1,12 @@
 # airbitz-core-js-ui
 
+## 0.5.2
+
+* rn: Fix more scaling issues.
+* web: Upgrade to edge-core-js v0.12.3 (may affect callback timing).
+* web: Fix build issues.
+* web: Update readme file.
+
 ## 0.5.1
 
 * rn: Fix scaling issues.
