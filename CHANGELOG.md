@@ -1,5 +1,9 @@
 # airbitz-core-js-ui
 
+## 0.5.3
+
+* web: Fix a build issue.
+
 ## 0.5.2
 
 * rn: Fix more scaling issues.

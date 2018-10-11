@@ -1,6 +1,6 @@
 {
   "name": "edge-login-ui-web",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
     "assets",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "cpr": "^3.0.1",
-    "edge-core-js": "^0.12.3",
+    "edge-core-js": "^0.12.4",
     "url-parse": "^1.4.3",
     "yaob": "^0.3.1"
   },
