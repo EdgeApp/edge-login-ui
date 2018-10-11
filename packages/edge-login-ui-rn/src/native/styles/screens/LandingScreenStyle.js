@@ -1,8 +1,9 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
-import { vs } from '../../../common/util'
+import { scale, vs } from '../../../common/util'
 import * as Styles from '../'
+
 const LandingScreenStyle = {
   container: Styles.ScreenStyle,
   backgroundImage: {
@@ -19,14 +20,14 @@ const LandingScreenStyle = {
     position: 'relative',
     top: vs(71),
     width: '100%',
-    height: vs(306)
+    height: vs(286)
   },
-  logoHeader: Styles.LogoHeaderStyle,
+  logoHeader: Styles.LogoHeaderScaledStyle,
   featureBoxContent: {
     // height: vs(186), 306- 125 - remaining space.
     width: '100%',
     flexDirection: 'column',
-    height: vs(186),
+    height: vs(166),
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
@@ -41,7 +42,7 @@ const LandingScreenStyle = {
     justifyContent: 'flex-end'
   },
   shim: {
-    height: 20
+    height: scale(28)
   },
   tagText: {
     width: '80%',
@@ -50,7 +51,9 @@ const LandingScreenStyle = {
     color: Constants.WHITE,
     backgroundColor: Constants.TRANSPARENT,
     fontFamily: Constants.FONTS.fontFamilyRegular,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: scale(14),
+    lineHeight: scale(18)
   },
   createButton: {
     upStyle: Styles.TertiaryButtonUpStyle,
@@ -62,12 +65,12 @@ const LandingScreenStyle = {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: {
       ...Styles.TextOnlyButtonTextUpStyle,
-      fontSize: 12,
+      fontSize: scale(14),
       color: Constants.WHITE
     },
     downTextStyle: {
       ...Styles.TextOnlyButtonTextDownStyle,
-      fontSize: 12,
+      fontSize: scale(14),
       color: Constants.WHITE
     },
     downStyle: Styles.TextOnlyButtonDownStyle

@@ -4,17 +4,19 @@ import * as Colors from '../../../common/constants/Colors.js'
 import { scale } from '../../../common/util/scaling.js'
 
 const FourDotInputStyle = {
+  // used for logging *back in* with PIN
   container: {
+    paddingTop: 12,
     width: '100%',
-    height: 90
+    height: scale(86)
   },
   interactiveContainer: {
-    flex: 1,
+    height: scale(40),
     width: '100%',
     alignItems: 'center'
   },
   errorContainer: {
-    flex: 1,
+    height: scale(40),
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
@@ -22,14 +24,15 @@ const FourDotInputStyle = {
   },
   dotContainer: {
     height: '100%',
-    width: 190,
+    width: scale(190),
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
   errorText: {
     color: Colors.ACCENT_RED,
     backgroundColor: Colors.TRANSPARENT,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: scale(12)
   },
   input: {
     position: 'absolute',
@@ -42,21 +45,22 @@ const FourDotInputStyle = {
   circle: {
     borderWidth: 2,
     borderColor: Colors.WHITE,
-    borderRadius: 15,
-    height: 30,
-    width: 30
+    borderRadius: scale(15),
+    height: scale(30),
+    width: scale(30)
   },
   circleSected: {
     backgroundColor: Colors.ACCENT_MINT,
-    borderWidth: 2,
+    borderWidth: scale(2),
     borderColor: Colors.WHITE,
-    borderRadius: 15,
-    height: 30,
-    width: 30
+    borderRadius: scale(15),
+    height: scale(30),
+    width: scale(30)
   }
 }
 const FourDotInputDarkStyle = {
   container: {
+    paddingTop: 30,
     width: 200,
     height: 90
   },
@@ -107,16 +111,18 @@ const FourDotInputDarkStyle = {
 }
 
 const FourDotInputDarkScaledStyle = {
+  // for new account PIN
   container: {
+    paddingTop: scale(36),
     width: scale(200),
     height: scale(80)
   },
   interactiveContainer: {
-    flex: 1,
-    width: '100%'
+    height: scale(40),
+    width: '100%',
+    alignItems: 'center'
   },
   errorContainer: {
-    flex: 1,
     width: '100%',
     height: scale(40),
     alignItems: 'center',

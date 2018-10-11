@@ -22,7 +22,8 @@ type Props = {
   launchUserLoginWithTouchId(Object): void,
   changeUser(string): void,
   launchDeleteModal(): void,
-  gotoLoginPage(): void
+  gotoLoginPage(): void,
+  isTouchIdDisabled: boolean
 }
 type State = {
   loggingIn: boolean,
@@ -53,6 +54,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
           style={style.thumbprintButton}
           source={Assets.TOUCH}
           onPress={this.relaunchTouchId}
+          disabled={this.props.isTouchIdDisabled}
         />
       )
     }

@@ -1,6 +1,7 @@
 // @flow
 
 import * as Constants from '../../../common/constants/'
+import { scale } from '../../../common/util'
 import * as Styles from '../'
 
 const LoginPasswordScreenStyle = {
@@ -18,7 +19,7 @@ const LoginPasswordScreenStyle = {
   },
   featureBox: {
     position: 'relative',
-    top: 55,
+    top: scale(55),
     width: '100%',
     alignItems: 'center'
   },
@@ -28,11 +29,11 @@ const LoginPasswordScreenStyle = {
     justifyContent: 'space-around'
   },
   logoHeader: {
-    ...Styles.LogoHeaderStyle,
-    container: { ...Styles.LogoHeaderStyle.container, height: 90 }
+    ...Styles.LogoHeaderScaledStyle,
+    container: { ...Styles.LogoHeaderScaledStyle.container }
   },
-  shimTiny: { ...Styles.Shim, height: 10 },
-  shimSmall: { ...Styles.Shim, height: 25 },
+  shimTiny: { ...Styles.Shim, height: scale(10) },
+  shimSmall: { ...Styles.Shim, height: scale(25) },
   shim: Styles.Shim,
   buttonsBox: {
     width: '100%',
@@ -40,7 +41,7 @@ const LoginPasswordScreenStyle = {
   },
   modalMiddle: {
     width: '100%',
-    height: 100
+    height: scale(100)
   },
   input2: Styles.MaterialInput,
   inputModal: {
@@ -52,12 +53,12 @@ const LoginPasswordScreenStyle = {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: {
       ...Styles.TextOnlyButtonTextUpStyle,
-      fontSize: 14,
+      fontSize: scale(14),
       color: Constants.WHITE
     },
     downTextStyle: {
       ...Styles.TextOnlyButtonTextDownStyle,
-      fontSize: 14,
+      fontSize: scale(14),
       color: Constants.WHITE
     },
     downStyle: Styles.TextOnlyButtonDownStyle
@@ -72,12 +73,12 @@ const LoginPasswordScreenStyle = {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: {
       ...Styles.TextOnlyButtonTextUpStyle,
-      fontSize: 14,
+      fontSize: scale(14),
       color: Constants.WHITE
     },
     downTextStyle: {
       ...Styles.TextOnlyButtonTextDownStyle,
-      fontSize: 14,
+      fontSize: scale(14),
       color: Constants.WHITE
     },
     downStyle: Styles.TextOnlyButtonDownStyle
@@ -85,7 +86,7 @@ const LoginPasswordScreenStyle = {
   staticModalText: {
     color: Constants.GRAY_1,
     width: '100%',
-    fontSize: 15,
+    fontSize: scale(15),
     textAlign: 'center'
   },
   modal: Styles.SkipModalStyle
