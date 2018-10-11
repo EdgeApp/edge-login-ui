@@ -1,5 +1,20 @@
 # airbitz-core-js-ui
 
+## 0.5.2
+
+* rn: Fix more scaling issues.
+* web: Upgrade to edge-core-js v0.12.3 (may affect callback timing).
+* web: Fix build issues.
+* web: Update readme file.
+
+## 0.5.1
+
+* rn: Fix scaling issues.
+* rn: Fix React key property error.
+* rn: Disable TouchId during login.
+* rn: Upgrade the Whorlwind library.
+* rn: Add hacked `androidFetch` function to work around Bitpay issue.
+
 ## 0.5.0
 
 * web: Re-write the iframe to use the `yaob` bridge added in edge-core-js v0.11.0. This gives the web access to the full core API, including spending.
