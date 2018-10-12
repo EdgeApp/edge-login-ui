@@ -3,7 +3,6 @@
 export * from './Colors'
 export * from './Fonts'
 export * from './Theme'
-export * from './ErrorConstants'
 export * from './IconConstants'
 export * from './OtpConstants'
 export * from './ToLocalizeConstants'

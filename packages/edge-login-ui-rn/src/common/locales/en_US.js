@@ -133,7 +133,7 @@ const strings = {
   hang_tight: 'Hang tight while we create',
   secure_account: 'and secure your account',
   encrypting_wallet: 'Encrypting wallet...',
-  unexpected_end_of_data: 'Not enough characters in field',
+  not_enough_characters_in_field: 'Not enough characters in field',
   confirm_recovery_questions: 'Confirm Recovery',
   login_with_password: 'Login with password',
   landing_tagline:
@@ -145,7 +145,15 @@ const strings = {
   account_locked_for: 'Account locked for \n%1$s more seconds',
   otp_modal_reset_headline: '2FA Reset Requested',
   otp_modal_reset_body:
-    'URGENT: 2FA reset has been requested by another device for the following accounts:\n %1$s\n\nIf you did not request a 2FA reset, please go to Settings -> 2 Factor and click Keep 2FA. Then change your password.'
+    'URGENT: 2FA reset has been requested by another device for the following accounts:\n %1$s\n\nIf you did not request a 2FA reset, please go to Settings -> 2 Factor and click Keep 2FA. Then change your password.',
+  password_error: "Password doesn't meet requirements",
+  confirm_password_error: 'Does not match password',
+  username_3_characters_error: 'Minimum 3 characters',
+  username_ascii_error: 'Must only be ascii characters',
+  username_exists_error: 'Username already exists',
+  four_digit_pin_error: 'PIN must be four digits',
+  it_would_take_xx_to_crack: 'It would take %s to crack your password',
+  recommend_choosing_a_stronger: '\nWe recommend choosing a stronger password'
 }
 
 module.exports = strings
