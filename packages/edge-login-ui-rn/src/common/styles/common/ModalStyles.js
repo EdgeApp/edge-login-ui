@@ -1,7 +1,7 @@
 // @flow
 
 import * as Colors from '../../constants/Colors'
-import { scale, hs, vs } from '../../util'
+import { scale, scaleH } from '../../util'
 import * as Styles from '../'
 
 const ModalStyles = {
@@ -31,7 +31,7 @@ const SkipModalStyle = {
   },
   skip: {
     container: {
-      width: hs(280)
+      width: scaleH(280)
     },
     backgroundContainer: {
       width: '100%',
@@ -40,8 +40,8 @@ const SkipModalStyle = {
     },
     backgroundBox: {
       backgroundColor: Colors.WHITE,
-      width: hs(280),
-      height: vs(202),
+      width: scaleH(280),
+      height: scale(202),
       borderWidth: 1,
       borderColor: Colors.PRIMARY
     },
