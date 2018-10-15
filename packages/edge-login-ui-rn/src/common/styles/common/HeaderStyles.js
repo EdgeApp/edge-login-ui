@@ -2,7 +2,6 @@
 
 import { scale } from '../../../common/util/scaling.js'
 import * as Constants from '../../constants/'
-import { vs } from '../../util'
 import * as Styles from '../'
 
 const HeaderContainerStyle = {
@@ -82,7 +81,7 @@ const HeaderContainerStyle = {
     downStyle: {
       ...Styles.TextOnlyButtonDownStyle,
       width: '100%',
-      height: vs(50)
+      height: scale(50)
     }
   }
 }
@@ -164,7 +163,7 @@ const HeaderContainerScaledStyle = {
     downStyle: {
       ...Styles.TextOnlyButtonDownScaledStyle,
       width: '100%',
-      height: vs(50)
+      height: scale(50)
     }
   }
 }

@@ -1,5 +1,10 @@
 # airbitz-core-js-ui
 
+## 0.5.4
+
+* rn: clean up of translatable strings.
+* rn: clean up of scaling issues
+
 ## 0.5.3
 
 * web: Fix a build issue.

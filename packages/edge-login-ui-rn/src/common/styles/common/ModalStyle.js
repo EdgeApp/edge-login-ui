@@ -1,9 +1,9 @@
 // @flow
 
 import { Dimensions } from 'react-native'
-import { scale } from '../../util/scaling.js'
 
 import * as Constants from '../../constants/'
+import { scale } from '../../util/scaling.js'
 import * as Styles from '../'
 
 const OFFSET_HACK = -19

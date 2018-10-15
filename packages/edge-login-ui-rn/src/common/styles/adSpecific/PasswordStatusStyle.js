@@ -1,20 +1,19 @@
 // @flow
 
 import * as Constants from '../../constants/'
-import { vs } from '../../util'
 import { scale } from '../../util/scaling'
 import { BasicCheckBoxWithLabelScaled } from '../'
 
 const PasswordStatusStyle = {
   container: {
-    height: vs(129),
+    height: scale(129),
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: Constants.GRAY_4
   },
   containerWhite: {
-    height: vs(129),
+    height: scale(129),
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -32,7 +31,7 @@ const PasswordStatusStyle = {
     top: 5
   },
   checkboxContainer: {
-    height: vs(20),
+    height: scale(20),
     marginTop: 4
   },
   textContainer: {
@@ -63,14 +62,14 @@ const PasswordStatusStyle = {
 
 const PasswordStatusScaledStyle = {
   container: {
-    height: vs(110),
+    height: scale(110),
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: Constants.GRAY_4
   },
   containerWhite: {
-    height: vs(110),
+    height: scale(110),
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
