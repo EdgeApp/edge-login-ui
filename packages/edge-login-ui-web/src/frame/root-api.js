@@ -28,7 +28,7 @@ export function sendRoot () {
 
   const server = new Bridge({
     sendMessage (message) {
-      window.parent.postMessage(JSON.parse(JSON.stringify(message)), origin)
+      window.parent.postMessage(message, origin)
     }
   })
 
