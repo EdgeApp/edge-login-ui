@@ -51,7 +51,7 @@ Once the user logs in, you receive an `edgeAccount` object. You can also use the
 const walletInfo = account.getFirstWalletInfo('wallet:ethereum')
 const currencyWallet =
   walletInfo == null
-    ? await account.createCurrencyWallet('walet:ethereum')
+    ? await account.createCurrencyWallet('wallet:ethereum')
     : await account.waitForCurrencyWallet(walletInfo.id)
 
 // Get an address from the wallet:
