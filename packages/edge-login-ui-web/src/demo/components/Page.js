@@ -73,7 +73,7 @@ export class Page extends Component<Props, State> {
       const walletInfo = account.getFirstWalletInfo('wallet:ethereum')
       const wallet =
         walletInfo == null
-          ? await account.createCurrencyWallet('walet:ethereum')
+          ? await account.createCurrencyWallet('wallet:ethereum')
           : await account.waitForCurrencyWallet(walletInfo.id)
 
       this.setState({ account, wallet })
