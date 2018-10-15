@@ -62,14 +62,14 @@ const PasswordStatusStyle = {
 
 const PasswordStatusScaledStyle = {
   container: {
-    height: scale(110),
+    height: scale(80 + 48),
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: Constants.GRAY_4
   },
   containerWhite: {
-    height: scale(110),
+    height: scale(80 + 48),
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -82,12 +82,11 @@ const PasswordStatusScaledStyle = {
     fontFamily: Constants.FONTS.fontFamilyRegular
   },
   boxes: {
-    flex: 5,
     flexDirection: 'column',
     top: scale(5)
   },
   checkboxContainer: {
-    height: scale(20),
+    height: scale(80),
     marginTop: scale(4)
   },
   textContainer: {
@@ -95,7 +94,7 @@ const PasswordStatusScaledStyle = {
     width: '100%',
     flexDirection: 'column',
     marginTop: scale(5),
-    flex: 2,
+    height: scale(48),
     alignItems: 'center',
     justifyContent: 'flex-end'
   },
@@ -107,12 +106,10 @@ const PasswordStatusScaledStyle = {
   text: {
     textAlign: 'center',
     fontFamily: Constants.FONTS.fontFamilyRegular,
-    width: '80%',
-    marginLeft: '10%',
-    marginRight: '10%',
-    marginTop: scale(10),
+    width: '90%',
+    marginTop: scale(6),
     marginBottom: scale(6),
-    fontSize: scale(14)
+    fontSize: scale(12)
   }
 }
 
