@@ -20,7 +20,13 @@ const NewAccountPasswordScreenStyle = {
     flex: 1
   },
   innerView: { ...Styles.InnerView, alignItems: 'center' },
-  status: Styles.PasswordStatusScaledStyle,
+  status: {
+    ...Styles.PasswordStatusScaledStyle,
+    checkboxContainer: {
+      ...Styles.PasswordStatusScaledStyle.checkboxContainer,
+      height: scale(16)
+    }
+  },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpScaledStyle,
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,

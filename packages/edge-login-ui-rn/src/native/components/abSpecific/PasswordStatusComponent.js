@@ -19,7 +19,22 @@ type Props = {
 export default class PaswordStatusComponent extends Component<Props> {
   componentWillMount () {}
   render () {
-    return this.renderInterior()
+    const style = this.props.style
+    if (this.props.status) {
+      return (
+        <View style={style.container}>
+          <View style={style.boxes}>{this.renderStatusList(style)}</View>
+          <View style={style.textContainer}>
+            <Text style={style.text}>{this.props.secondsToCrack}</Text>
+          </View>
+        </View>
+      )
+    }
+    return (
+      <View style={style.containerWhite}>
+        <Text style={style.instructions}>{s.strings.password_desc}</Text>
+      </View>
+    )
   }
   onChange = () => {
     // do nothing
@@ -39,23 +54,5 @@ export default class PaswordStatusComponent extends Component<Props> {
         />
       </View>
     ))
-  }
-  renderInterior () {
-    const style = this.props.style
-    if (this.props.status) {
-      return (
-        <View style={style.container}>
-          <View style={style.boxes}>{this.renderStatusList(style)}</View>
-          <View style={style.textContainer}>
-            <Text style={style.text}>{this.props.secondsToCrack} </Text>
-          </View>
-        </View>
-      )
-    }
-    return (
-      <View style={style.containerWhite}>
-        <Text style={style.instructions}>{s.strings.password_desc}</Text>
-      </View>
-    )
   }
 }

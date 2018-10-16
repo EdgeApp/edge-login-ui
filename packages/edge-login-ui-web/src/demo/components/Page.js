@@ -7,12 +7,12 @@ import type { EdgeUiContext, EdgeUiContextOptions } from 'edge-login-ui-web'
 import { makeEdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 
+import { restoreCachedState } from '../hmrCache.js'
 import { AccountButtons } from './AccountButtons.js'
 import { AccountInfo } from './AccountInfo.js'
 import { ContextInfo } from './ContextInfo.js'
 import { WalletInfo } from './WalletInfo.js'
 import { WelcomeButtons } from './WelcomeButtons.js'
-import { restoreCachedState } from '../hmrCache.js'
 
 type Props = {}
 
