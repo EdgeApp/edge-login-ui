@@ -68,6 +68,7 @@ const SecondaryButtonDownStyle = {
 const SecondaryButtonUpTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
+  fontFamily: Constants.FONTS.fontFamilyRegular,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   width: '100%',
   textAlign: 'center'
@@ -75,6 +76,7 @@ const SecondaryButtonUpTextStyle = {
 const SecondaryButtonDownTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
+  fontFamily: Constants.FONTS.fontFamilyRegular,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   width: '100%',
   textAlign: 'center'

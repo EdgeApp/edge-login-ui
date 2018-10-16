@@ -424,16 +424,6 @@ export default class PasswordRecovery extends Component<Props, State> {
         <Text style={styles.staticModalText}>
           {s.strings.recovery_instructions_complete}
         </Text>
-        <FormField
-          style={styles.inputModal}
-          onChangeText={this.updateEmail.bind(this)}
-          value={this.state.emailAddress}
-          label={s.strings.email_address}
-          error={''}
-          returnKeyType={'go'}
-          forceFocus
-          onSubmitEditing={this.openEmailApp}
-        />
       </View>
     )
     if (this.props.showEmailDialog) {
