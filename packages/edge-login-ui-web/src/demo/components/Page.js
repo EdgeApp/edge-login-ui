@@ -7,12 +7,12 @@ import type { EdgeUiContext, EdgeUiContextOptions } from 'edge-login-ui-web'
 import { makeEdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 
+import { restoreCachedState } from '../hmrCache.js'
 import { AccountButtons } from './AccountButtons.js'
 import { AccountInfo } from './AccountInfo.js'
 import { ContextInfo } from './ContextInfo.js'
 import { WalletInfo } from './WalletInfo.js'
 import { WelcomeButtons } from './WelcomeButtons.js'
-import { restoreCachedState } from '../hmrCache.js'
 
 type Props = {}
 
@@ -73,7 +73,7 @@ export class Page extends Component<Props, State> {
       const walletInfo = account.getFirstWalletInfo('wallet:ethereum')
       const wallet =
         walletInfo == null
-          ? await account.createCurrencyWallet('walet:ethereum')
+          ? await account.createCurrencyWallet('wallet:ethereum')
           : await account.waitForCurrencyWallet(walletInfo.id)
 
       this.setState({ account, wallet })

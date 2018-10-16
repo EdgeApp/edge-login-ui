@@ -1,5 +1,10 @@
 # airbitz-core-js-ui
 
+## 0.5.5
+
+* web: Fix the demo.
+* rn: Fix styling.
+
 ## 0.5.4
 
 * rn: clean up of translatable strings.
