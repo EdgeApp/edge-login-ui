@@ -289,7 +289,6 @@ export default class PasswordRecovery extends Component<Props, State> {
             error={errorMessageOne}
           />
         </View>
-        <View style={styles.shim} />
         <View style={styles.questionRow}>
           <TextAndIconButton
             onPress={this.onSelectQuestionTwo}
