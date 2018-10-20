@@ -6,8 +6,9 @@ import en from './en_US.js'
 import es from './strings/es.json'
 import it from './strings/it.json'
 import ru from './strings/ru.json'
+import pt from './strings/pt.json'
 
-const allLocales = { en, ru, es, it }
+const allLocales = { en, ru, es, it, pt }
 
 const strings: { [stringCode: string]: string } = {}
 const out = { strings }
