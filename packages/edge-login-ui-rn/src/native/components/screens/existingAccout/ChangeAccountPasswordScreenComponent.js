@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
 
 import s from '../../../../common/locales/strings.js'
-import { scale } from '../../../../common/util/index.js'
 import ChangePasswordModalConnector from '../../../connectors/abSpecific/ChangePasswordModalConnector'
 import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
@@ -104,7 +103,8 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
           autoFocus={this.state.focusSecond}
           onFinish={this.onNextPress}
         />
-        <View style={[styles.inputShim, { height: scale(10) }]} />
+        <View style={[styles.inputShim]} />
+        <View style={[styles.inputShim]} />
         <Button
           onPress={this.onNextPress}
           downStyle={styles.nextButton.downStyle}
