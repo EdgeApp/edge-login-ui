@@ -67,7 +67,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
     )
   }
   onNextPress = () => {
-    if (this.props.usernameErrorMessage) {
+    if (this.props.usernameErrorMessage || !this.props.username) {
       return
     }
     this.setState({

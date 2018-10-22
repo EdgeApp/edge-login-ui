@@ -2,6 +2,7 @@
 
 import * as Constants from '../../../common/constants'
 import * as Styles from '../'
+import { scale } from '../../../common/util'
 
 const RecoverPasswordSceneStyles = {
   screen: { ...Styles.ScreenStyle },
@@ -13,15 +14,15 @@ const RecoverPasswordSceneStyles = {
     height: THEME.HEADER
   }, */
   body: {
-    padding: 18
+    padding: scale(18)
   },
   questionRow: {
-    height: 50,
+    height: scale(60),
     width: '100%'
   },
   answerRow: {
     width: '100%',
-    height: 100
+    height: scale(80)
   },
   buttonContainer: {
     width: '100%',
@@ -62,7 +63,7 @@ const RecoverPasswordSceneStyles = {
     container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
   },
   shim: {
-    height: 20
+    height: scale(20)
   },
   textIconButton: Styles.TextAndIconButtonAlignEdgesStyle,
   textIconButtonErrorError: {
@@ -90,21 +91,21 @@ const RecoverPasswordSceneStyles = {
   },
   questionsList: {
     width: '100%',
-    height: 400,
+    height: scale(400),
     borderColor: Constants.GRAY_3,
     borderWidth: 1
   },
   staticModalText: {
     color: Constants.GRAY_1,
     width: '100%',
-    fontSize: 15,
+    fontSize: scale(15),
     textAlign: 'center'
   },
   listItem: Styles.ListItemTextOnly,
   emailModal: Styles.SkipModalStyle,
   errorText: {
     color: Constants.ACCENT_RED,
-    fontSize: 14
+    fontSize: scale(14)
   }
 }
 

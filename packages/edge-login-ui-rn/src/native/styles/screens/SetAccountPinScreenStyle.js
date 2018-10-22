@@ -13,12 +13,24 @@ const SetAccountPinScreenStyle = {
   pageContainer: Styles.PageContainerWithHeaderStyle,
   row1: {
     ...Styles.ScreenRow,
-    flex: 1,
+    flex: -1,
+    paddingTop: 24,
+    paddingBottom: 12,
     alignItems: 'center',
     justifyContent: 'space-around'
   },
-  row2: { ...Styles.ScreenRow, flex: 1, alignItems: 'center' },
-  row3: { ...Styles.ScreenRow, flex: 3, alignItems: 'center' },
+  row2: {
+    ...Styles.ScreenRow,
+    paddingVertical: 12,
+    flex: -1,
+    alignItems: 'center'
+  },
+  row3: {
+    ...Styles.ScreenRow,
+    paddingVertical: 12,
+    flex: -1,
+    alignItems: 'center'
+  },
   instructions: {
     position: 'relative',
     width: '80%',
@@ -27,7 +39,13 @@ const SetAccountPinScreenStyle = {
     color: Constants.GRAY_2,
     textAlign: 'center'
   },
-  fourPin: Styles.FourDotInputDarkScaledStyle,
+  fourPin: {
+    ...Styles.FourDotInputDarkScaledStyle,
+    container: {
+      ...Styles.FourDotInputDarkScaledStyle.container,
+      height: scale(110)
+    }
+  },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpScaledStyle,
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
