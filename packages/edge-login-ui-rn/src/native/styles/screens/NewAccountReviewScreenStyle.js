@@ -28,7 +28,7 @@ const NewAccountReviewScreenStyle = {
     height: scale(10)
   },
   warningBoxContainer: {
-    height: scale(80),
+    height: scale(90),
     width: '100%',
     alignItems: 'center'
   },
@@ -40,7 +40,7 @@ const NewAccountReviewScreenStyle = {
     },
     top: {
       flex: 1,
-      paddingTop: scale(5),
+      paddingTop: scale(8),
       flexDirection: 'column',
       justifyContent: 'space-around',
       alignItems: 'center'
@@ -49,7 +49,7 @@ const NewAccountReviewScreenStyle = {
       flex: scale(9),
       borderColor: Constants.ACCENT_RED,
       borderWidth: 1,
-      padding: scale(5),
+      padding: scale(7),
       alignItems: 'center',
       justifyContent: 'space-around'
     },
