@@ -1,14 +1,5 @@
 # airbitz-core-js-ui
 
-## 0.5.6
-
-* CreateAccountNextButton UI tweak
-* PasswordChange UI tweak
-* PasswordRecovery scaling
-* Fixes to new account PIN scene
-* Prevent spinner from showing when user taps "Next" without typing a username in Create Account flow
-* Add padding under Confirm Password field
-
 ## 0.5.5
 
 * web: Fix the demo.
