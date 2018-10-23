@@ -38,10 +38,7 @@ const NewAccountPasswordScreenStyle = {
     marginTop: scale(15)
   },
   passwordShim: { ...Styles.Shim, height: 1, marginTop: scale(35) },
-  modal: Styles.SkipModalStyle,
-  inputShim: {
-    height: scale(20)
-  }
+  modal: Styles.SkipModalStyle
 }
 
 export { NewAccountPasswordScreenStyle }
