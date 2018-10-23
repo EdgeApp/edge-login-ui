@@ -18,7 +18,6 @@ const NewAccountUsernameScreenStyle = {
     downStyle: Styles.PrimaryButtonDownScaledStyle
   },
   instructions: {
-    height: scale(Constants.USERNAME_INSTRUCTIONS_HEIGHT),
     width: '90%'
   },
   shim: {
