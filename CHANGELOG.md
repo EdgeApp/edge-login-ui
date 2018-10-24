@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.5.8
+
+* Re-added Password Recovery Questions modal email input
+
 ## 0.5.7
 
 * Added language translations for Spanish, Italian, Russian, and Portuguese
