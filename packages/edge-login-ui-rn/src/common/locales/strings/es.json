@@ -107,7 +107,7 @@
   "hang_tight": "Espera mientras creamos",
   "secure_account": "y securizamos tu cuenta",
   "encrypting_wallet": "Encriptando cartera...",
-  "not_enough_characters_in_field": "No hay suficientes carácteres en el campo",
+  "not_enough_characters_in_field": "No hay suficientes caracteres en el campo",
   "confirm_recovery_questions": "Confirmar recuperación",
   "login_with_password": "Acceder con contraseña",
   "landing_tagline": "La cartera segura y facil de usar para tus tokens y activos blockchain",
@@ -117,5 +117,13 @@
   "invalid_pin": "PIN incorrecto",
   "account_locked_for": "Cuenta bloqueada por %1$s segundos más",
   "otp_modal_reset_headline": "Reseteo de 2FA requerido",
-  "otp_modal_reset_body": "URGENTE: Se ha solicitado un reseteo de 2FAddesde otro dispositivo para las siguientes cuentas:\n%1$s\n\nSi tú no has solicitado un reseteo de 2FA, vete a Configuración -> 2 FActor y haz click en Mantener 2FA. Después cambia tu contraseña."
+  "otp_modal_reset_body": "URGENTE: Se ha solicitado un reseteo de 2FAddesde otro dispositivo para las siguientes cuentas:\n%1$s\n\nSi tú no has solicitado un reseteo de 2FA, vete a Configuración -> 2 FActor y haz click en Mantener 2FA. Después cambia tu contraseña.",
+  "password_error": "La contraseña no cumple los requisitos",
+  "confirm_password_error": "No coincide con la contraseña",
+  "username_3_characters_error": "Mínimo 3 caracteres",
+  "username_ascii_error": "Sólo debe contener caracteres ASCII",
+  "username_exists_error": "El nombre de usuario ya existe",
+  "four_digit_pin_error": "El PIN debe ser de 4 dígitos",
+  "it_would_take_xx_to_crack": "Descubrir tu contraseña llevaría %s",
+  "recommend_choosing_a_stronger": "\nTe recomendamos elegir una contraseña más segura"
 }
