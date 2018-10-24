@@ -117,5 +117,13 @@
   "invalid_pin": "PIN non valido",
   "account_locked_for": "Account bloccato per altri \n%1$s secondi",
   "otp_modal_reset_headline": "Richiesta di reset 2FA",
-  "otp_modal_reset_body": "URGENTE: è stato richiesto un reset 2FA da un altro dispositivo per i seguenti account:\n %1$s\n\nSe non hai richiesto il reset, vai su Impostazioni -> Autenticazione a 2 fattori e clicca Mantieni 2FA. Poi cambia la tua password."
+  "otp_modal_reset_body": "URGENTE: è stato richiesto un reset 2FA da un altro dispositivo per i seguenti account:\n %1$s\n\nSe non hai richiesto il reset, vai su Impostazioni -> Autenticazione a 2 fattori e clicca Mantieni 2FA. Poi cambia la tua password.",
+  "password_error": "La password non soddisfa i requisiti",
+  "confirm_password_error": "La password non corrisponde",
+  "username_3_characters_error": "Minimo 3 caratteri",
+  "username_ascii_error": "Devono essere solo caratteri ascii",
+  "username_exists_error": "Il nome utente è già esistente",
+  "four_digit_pin_error": "Il PIN deve avere 4 numeri",
+  "it_would_take_xx_to_crack": "Occorrerebbero %s per craccare la tua password",
+  "recommend_choosing_a_stronger": "\nTi raccomandiamo di scegliere una password più forte"
 }

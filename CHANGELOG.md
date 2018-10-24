@@ -1,4 +1,9 @@
-# airbitz-core-js-ui
+# edge-login-ui
+
+## 0.5.7
+
+* Added language translations for Spanish, Italian, Russian, and Portuguese
+* Fixes for UI scaling and spacing
 
 ## 0.5.6
 
