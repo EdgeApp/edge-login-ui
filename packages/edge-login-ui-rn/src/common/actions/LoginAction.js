@@ -27,13 +27,7 @@ export function loginWithRecovery (answers: Array<string>, username: string) {
     const username = state.login.username
     const { context, folder } = imports
     const myAccountOptions = {
-      ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      }
+      ...imports.accountOptions
     }
     try {
       const account = await context.loginWithRecovery2(
@@ -111,13 +105,7 @@ export function userLoginWithTouchId (data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports
     const myAccountOptions = {
-      ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      }
+      ...imports.accountOptions
     }
     const startFunction = () => {
       dispatch(dispatchAction(Constants.AUTH_LOGGING_IN_WITH_PIN))
@@ -154,13 +142,7 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports
     const myAccountOptions = {
-      ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      }
+      ...imports.accountOptions
     }
     if (backupKey) {
       console.log(backupKey)
@@ -250,13 +232,7 @@ export function userLogin (data: Object, backupKey?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports
     const myAccountOptions = {
-      ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      }
+      ...imports.accountOptions
     }
     if (backupKey) myAccountOptions.otp = backupKey
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
@@ -329,12 +305,6 @@ export function getEdgeLoginQrCode () {
     const callback = imports.callback
     const myAccountOptions = {
       ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      },
       displayImageUrl:
         'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
       displayName: 'Edge Wallet',
