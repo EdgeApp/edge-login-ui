@@ -165,7 +165,7 @@ export async function loginWithTouchId (
   fallbackString: string,
   opts: Object,
   callback: any
-) {
+): Promise<?EdgeAccount> {
   const supported = await supportsTouchId()
 
   if (supported) {
