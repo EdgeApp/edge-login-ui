@@ -12,6 +12,7 @@ import OtpAuthCodeModalConnector from '../../../connectors/abSpecific/OtpAuthCod
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorOtp'
 import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'
 import { Button, StaticModal } from '../../common'
+import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type Props = {
   styles: Object,
@@ -163,30 +164,32 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
     const { OtpErrorScreenStyle } = this.props.styles
 
     return (
-      <View style={OtpErrorScreenStyle.screen}>
-        <HeaderConnector style={OtpErrorScreenStyle.header} />
-        <View style={OtpErrorScreenStyle.pageContainer}>
-          <OtpHeroComponent
-            style={OtpErrorScreenStyle.hero}
-            screen={this.state.screen}
-            otpResetDate={this.props.otpResetDate}
-          />
-          <View style={OtpErrorScreenStyle.qrRow}>
-            <EdgeLoginQrConnector />
+      <SafeAreaView>
+        <View style={OtpErrorScreenStyle.screen}>
+          <HeaderConnector style={OtpErrorScreenStyle.header} />
+          <View style={OtpErrorScreenStyle.pageContainer}>
+            <OtpHeroComponent
+              style={OtpErrorScreenStyle.hero}
+              screen={this.state.screen}
+              otpResetDate={this.props.otpResetDate}
+            />
+            <View style={OtpErrorScreenStyle.qrRow}>
+              <EdgeLoginQrConnector />
+            </View>
+            <View style={OtpErrorScreenStyle.shim} />
+            <Button
+              onPress={this.showBackupModal.bind(this)}
+              downStyle={OtpErrorScreenStyle.exitButton.downStyle}
+              downTextStyle={OtpErrorScreenStyle.exitButton.downTextStyle}
+              upStyle={OtpErrorScreenStyle.exitButton.upStyle}
+              upTextStyle={OtpErrorScreenStyle.exitButton.upTextStyle}
+              label={s.strings.type_auth_button}
+            />
+            {this.renderDisableButton(OtpErrorScreenStyle)}
           </View>
-          <View style={OtpErrorScreenStyle.shim} />
-          <Button
-            onPress={this.showBackupModal.bind(this)}
-            downStyle={OtpErrorScreenStyle.exitButton.downStyle}
-            downTextStyle={OtpErrorScreenStyle.exitButton.downTextStyle}
-            upStyle={OtpErrorScreenStyle.exitButton.upStyle}
-            upTextStyle={OtpErrorScreenStyle.exitButton.upTextStyle}
-            label={s.strings.type_auth_button}
-          />
-          {this.renderDisableButton(OtpErrorScreenStyle)}
+          {this.renderModal(OtpErrorScreenStyle)}
         </View>
-        {this.renderModal(OtpErrorScreenStyle)}
-      </View>
+      </SafeAreaView>
     )
   }
 }
