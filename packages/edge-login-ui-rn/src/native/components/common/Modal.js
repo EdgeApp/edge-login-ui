@@ -171,7 +171,9 @@ class MyModal extends Component<Props, State> {
           <View style={styles.modalBody}>
             <View style={styles.modalTopTextWrap}>
               <Text style={styles.modalTopText}>{headerText}</Text>
-              <Text style={styles.modalTopSubtext}>{headerSubtext}</Text>
+              {headerSubtext && (
+                <Text style={styles.modalTopSubtext}>{headerSubtext}</Text>
+              )}
               <View style={styles.modalMiddle}>
                 {this.renderMiddle(styles)}
               </View>

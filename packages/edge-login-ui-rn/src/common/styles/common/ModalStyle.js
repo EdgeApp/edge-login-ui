@@ -42,8 +42,8 @@ const ModalStyle = {
   },
   modalBox: {
     top: screenDimensions.height / 8,
-    left: screenDimensions.width / 8,
-    width: screenDimensions.width * 3 / 4,
+    left: screenDimensions.width / 16,
+    width: screenDimensions.width * 7 / 8,
     borderRadius: scale(3),
     borderWidth: 2,
     borderColor: Constants.GRAY_2,
@@ -51,7 +51,7 @@ const ModalStyle = {
     position: 'absolute',
     // height: (screenDimensions.height) / 3,
     backgroundColor: Constants.WHITE,
-    padding: 15,
+    padding: 10,
     paddingTop: 5,
     flexDirection: 'column',
     justifyContent: 'flex-start'
@@ -121,7 +121,7 @@ const ModalStyle = {
   },
   buttonsWrap: {
     position: 'relative',
-    marginTop: scale(20),
+    marginTop: scale(10),
     flex: 1,
     width: '100%',
     flexDirection: 'row',

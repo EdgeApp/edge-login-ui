@@ -1,8 +1,8 @@
 // @flow
 
 import * as Constants from '../../../common/constants'
-import * as Styles from '../'
 import { scale } from '../../../common/util'
+import * as Styles from '../'
 
 const RecoverPasswordSceneStyles = {
   screen: { ...Styles.ScreenStyle },
@@ -47,7 +47,10 @@ const RecoverPasswordSceneStyles = {
   },
   inputModal: {
     ...Styles.MaterialInputOnWhite,
-    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
+    container: {
+      position: 'relative',
+      width: '100%'
+    }
   },
   inputError: {
     ...Styles.MaterialInputOnWhite,
@@ -98,7 +101,7 @@ const RecoverPasswordSceneStyles = {
   staticModalText: {
     color: Constants.GRAY_1,
     width: '100%',
-    fontSize: scale(15),
+    fontSize: scale(13),
     textAlign: 'center'
   },
   listItem: Styles.ListItemTextOnly,
