@@ -27,7 +27,7 @@ const HeaderContainerStyle = {
     },
     sideText: {
       color: Constants.WHITE,
-      fontSize: scale(18)
+      fontSize: scale(14)
     },
     icon: {
       color: Constants.WHITE,
