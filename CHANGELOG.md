@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.5.9
+
+* rn: Adjust height of PIN field on create account slightly
+* rn: Fix styling for passwordRecoveryModal to prevent keyboard covering
+* rn: Adjust font size of the CANCEL button on the Password Recovery screen
+
 ## 0.5.8
 
 * Re-added Password Recovery Questions modal email input
