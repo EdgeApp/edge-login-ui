@@ -305,6 +305,11 @@ export function getEdgeLoginQrCode () {
     const callback = imports.callback
     const myAccountOptions = {
       ...imports.accountOptions,
+      callbacks: {
+        onLoggedOut: () => {
+          dispatch(dispatchAction(Constants.RESET_APP))
+        }
+      },
       displayImageUrl:
         'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
       displayName: 'Edge Wallet',

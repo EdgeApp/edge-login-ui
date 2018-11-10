@@ -146,7 +146,12 @@ export function createUser (data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder } = imports
     const myAccountOptions = {
-      ...imports.accountOptions
+      ...imports.accountOptions,
+      callbacks: {
+        onLoggedOut: () => {
+          dispatch(dispatchAction(Constants.RESET_APP))
+        }
+      }
     }
     dispatch(WorkflowActions.nextScreen())
     setTimeout(async () => {
