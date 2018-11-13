@@ -52,20 +52,23 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
 > {
   keyboardDidHideListener: ?Function
   style: Object
-  componentWillMount () {
+
+  constructor (props: Props) {
+    super(props)
     const { LoginPasswordScreenStyle } = this.props.styles
     this.style = LoginPasswordScreenStyle
     this.keyboardDidHideListener = null
     setTimeout(this.setListener, 2000, this.noFocus)
-    this.setState({
+    this.state = {
       username: '',
       password: '',
       loggingIn: false,
       focusFirst: true,
       focusSecond: false,
       offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN,
-      showRecoveryModalOne: false
-    })
+      showRecoveryModalOne: false,
+      showRecoveryModalTwo: false
+    }
   }
   renderModal = (style: Object) => {
     if (this.props.showModal) {

@@ -34,14 +34,12 @@ class FormField extends Component<Props, State> {
     value: '',
     returnKeyType: 'done'
   }
-  componentWillMount () {
-    const secure = this.props.secureTextEntry
-      ? this.props.secureTextEntry
-      : false
-    this.setState({
-      secure: secure,
+  constructor (props: Props) {
+    super(props)
+    this.state = {
+      secure: this.props.secureTextEntry ? this.props.secureTextEntry : false,
       autoFocus: this.props.autoFocus
-    })
+    }
   }
   render () {
     const {

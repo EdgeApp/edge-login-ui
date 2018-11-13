@@ -18,7 +18,8 @@ export type DispatchProps = {
 type Props = OwnProps & DispatchProps & StateProps
 
 export default class ChangePasswordAppComponent extends Component<Props> {
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     this.props.setWorkflow()
   }
   render () {

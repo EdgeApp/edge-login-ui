@@ -44,6 +44,15 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
   Props,
   State
 > {
+  constructor (props: Props) {
+    super(props)
+    this.state = {
+      isProcessing: false,
+      focusFirst: true,
+      focusSecond: false
+    }
+  }
+
   onSetNextFocus = () => {
     this.setState({
       focusFirst: false,
@@ -142,13 +151,6 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
       return <ChangePasswordModalConnector style={style.modal.skip} />
     }
     return null
-  }
-  componentWillMount () {
-    this.setState({
-      isProcessing: false,
-      focusFirst: true,
-      focusSecond: false
-    })
   }
 
   render () {

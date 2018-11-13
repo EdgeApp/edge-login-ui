@@ -27,13 +27,14 @@ export default class SetAccountPinScreenComponent extends Component<
   Props,
   State
 > {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       username: '',
       pin: '',
       isProcessing: false,
       focusOn: 'pin'
-    })
+    }
   }
   render () {
     const { SetAccountPinScreenStyle } = this.props.styles

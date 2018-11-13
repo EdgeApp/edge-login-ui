@@ -28,7 +28,8 @@ class ChangePinScreen extends Component<Props> {
     account: null
   }
   store: Store<State, Action>
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     const imports: Imports = {
       accountOptions: {},
       accountObject: this.props.account,
@@ -44,7 +45,6 @@ class ChangePinScreen extends Component<Props> {
       applyMiddleware(thunk.withExtraArgument(imports))
     )
   }
-  componentWillReceiveProps (props: Props) {}
 
   render () {
     return (

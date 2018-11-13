@@ -33,15 +33,13 @@ type State = {
 }
 
 class FormFieldWithDropComponent extends Component<Props, State> {
-  componentWillMount () {
-    const secure = this.props.secureTextEntry
-      ? this.props.secureTextEntry
-      : false
-    this.setState({
-      secure: secure,
+  constructor (props: Props) {
+    super(props)
+    this.state = {
+      secure: this.props.secureTextEntry ? this.props.secureTextEntry : false,
       autoFocus: this.props.autoFocus,
       isFocused: this.props.isFocused
-    })
+    }
   }
   componentWillReceiveProps (nextProps: Props) {
     this.setState({

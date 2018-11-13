@@ -68,8 +68,9 @@ type State = {
 }
 
 export default class PasswordRecovery extends Component<Props, State> {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       question1: this.props.question1,
       question2: this.props.question2,
       answer1: '',
@@ -85,7 +86,7 @@ export default class PasswordRecovery extends Component<Props, State> {
       emailAddress: '',
       emailAppNotAvailable: false,
       showConfirmationModal: false
-    })
+    }
   }
   componentWillReceiveProps (nextProps: Props) {
     if (nextProps.isEnabled !== this.props.isEnabled) {

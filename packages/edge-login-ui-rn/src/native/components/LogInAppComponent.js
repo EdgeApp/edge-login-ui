@@ -39,7 +39,8 @@ type State = {}
 type Props = StateProps & OwnProps & DispatchProps
 
 export class LoginAppComponent extends Component<Props, State> {
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     this.props.getPreviousUsers()
   }
   render () {

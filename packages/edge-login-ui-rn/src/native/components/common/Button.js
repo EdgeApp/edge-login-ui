@@ -20,11 +20,12 @@ type State = {
 }
 
 class Button extends Component<Props, State> {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       isThinking: false,
       pressed: false
-    })
+    }
   }
   componentWillReceiveProps (nextProps: Props) {
     if (nextProps.isThinking !== this.state.isThinking) {

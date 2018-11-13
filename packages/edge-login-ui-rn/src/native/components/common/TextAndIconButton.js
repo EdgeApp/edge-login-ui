@@ -19,10 +19,11 @@ type State = {
 
 class TextAndIconButton extends Component<Props, State> {
   numberOfLines: number
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       pressed: false
-    })
+    }
     this.numberOfLines = this.props.numberOfLines || 1
   }
   _onPressButton () {

@@ -14,7 +14,8 @@ export type DispatchProps = {
 type Props = OwnProps & DispatchProps
 
 export default class ChangePinAppComponent extends Component<Props> {
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     this.props.setWorkflow()
   }
   render () {

@@ -19,10 +19,11 @@ type State = {
   isProcessing: boolean
 }
 export default class LandingScreenComponent extends Component<Props, State> {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       isProcessing: false
-    })
+    }
   }
   componentDidUpdate (prevProps: Props) {
     if (this.props !== prevProps) {

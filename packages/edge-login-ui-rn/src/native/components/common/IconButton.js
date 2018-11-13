@@ -16,10 +16,11 @@ type State = {
 }
 
 class IconButton extends Component<Props, State> {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       pressed: false
-    })
+    }
   }
 
   _onPressButton = () => {

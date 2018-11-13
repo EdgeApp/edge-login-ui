@@ -27,7 +27,8 @@ class PasswordRecoveryScreen extends Component<Props> {
     account: null
   }
   store: Store<State, Action>
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     const imports: Imports = {
       accountOptions: {},
       accountObject: this.props.account,

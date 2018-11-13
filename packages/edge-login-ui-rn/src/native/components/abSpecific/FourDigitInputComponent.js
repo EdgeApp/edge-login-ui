@@ -35,12 +35,15 @@ class FourDigitInputComponent extends Component<Props, State> {
   inputRef: TextInput
   keyboardDidShowListener: any
   keyboardDidHideListener: any
-  componentWillMount () {
-    this.setState({
+
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       autoFocus: false,
+      isFocused: false,
       touchId: false,
       circleColor: Constants.WHITE
-    })
+    }
   }
   componentWillUnmount () {
     this.keyboardDidShowListener.remove()
