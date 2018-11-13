@@ -35,9 +35,9 @@ class LoginScreen extends Component<Props> {
     accountOptions: null
   }
 
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     checkingForOTP(this.props.context)
-    updateFontStyles(this.props)
     const composeEnhancers =
       typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'core-ui' })
@@ -58,7 +58,9 @@ class LoginScreen extends Component<Props> {
       composeEnhancers(applyMiddleware(thunk.withExtraArgument(imports)))
     )
   }
-  componentWillReceiveProps (props: Props) {}
+  componentWillMount () {
+    updateFontStyles(this.props) // Can we move this to the constructor?
+  }
 
   render () {
     return (

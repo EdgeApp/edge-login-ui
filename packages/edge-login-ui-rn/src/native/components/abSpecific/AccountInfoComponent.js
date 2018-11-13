@@ -23,11 +23,13 @@ type State = {
 type Props = OwnProps & StateProps
 
 class AccountInfoComponent extends Component<Props, State> {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       collapsed: true
-    })
+    }
   }
+
   renderPasswordWarning (style: Object) {
     if (!this.props.password) {
       return (

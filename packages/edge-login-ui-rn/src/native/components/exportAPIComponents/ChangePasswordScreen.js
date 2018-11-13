@@ -30,7 +30,8 @@ class ChangePasswordScreen extends Component<Props> {
     showHeader: true
   }
 
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     const imports: Imports = {
       accountOptions: {},
       folder: makeReactNativeFolder(),
@@ -46,7 +47,6 @@ class ChangePasswordScreen extends Component<Props> {
       applyMiddleware(thunk.withExtraArgument(imports))
     )
   }
-  componentWillReceiveProps (props: Props) {}
 
   render () {
     return (

@@ -23,10 +23,11 @@ export default class TermsAndConditionsScreenComponent extends Component<
   Props,
   State
 > {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       totalChecks: 0
-    })
+    }
   }
   renderItems (style: Object) {
     return this.props.terms.items.map(Item => (

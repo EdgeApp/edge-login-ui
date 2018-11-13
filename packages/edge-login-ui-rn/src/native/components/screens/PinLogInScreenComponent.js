@@ -32,12 +32,14 @@ type State = {
   focusOn: string
 }
 export default class PinLogInScreenComponent extends Component<Props, State> {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       pin: '',
       loggingIn: false,
+      username: '', // Nobody seems to update this?
       focusOn: 'pin'
-    })
+    }
   }
   componentDidMount () {
     if (this.props.username) {

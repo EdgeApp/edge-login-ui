@@ -17,7 +17,6 @@ type Props = {
 }
 
 export default class PaswordStatusComponent extends Component<Props> {
-  componentWillMount () {}
   render () {
     const style = this.props.style
     if (this.props.status) {

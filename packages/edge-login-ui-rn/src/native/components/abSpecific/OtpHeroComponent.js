@@ -18,10 +18,11 @@ type State = {
   screen: string
 }
 class OtpHeroComponent extends Component<Props, State> {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       screen: this.props.screen
-    })
+    }
   }
   componentWillReceiveProps (nextProps: Props) {
     this.setState({

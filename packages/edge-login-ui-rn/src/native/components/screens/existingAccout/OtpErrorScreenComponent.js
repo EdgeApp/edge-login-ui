@@ -32,14 +32,15 @@ type State = {
 }
 
 export default class OtpErrorScreenComponent extends Component<Props, State> {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       showDisableModal: false,
       showBackupCodeModal: false,
       showstaticModal: false,
       screen: this.props.screen,
       backupKeyEntered: false
-    })
+    }
   }
   componentWillReceiveProps (nextProps: Props) {
     if (nextProps.loginSuccess) {

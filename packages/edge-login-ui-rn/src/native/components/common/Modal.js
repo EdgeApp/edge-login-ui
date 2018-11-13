@@ -35,10 +35,11 @@ type State = {
 class MyModal extends Component<Props, State> {
   // $FlowFixMe
   reset: number
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       showButtons: !this.props.buttonTimerSeconds
-    })
+    }
   }
   componentDidMount () {
     if (this.props.buttonTimerSeconds) {

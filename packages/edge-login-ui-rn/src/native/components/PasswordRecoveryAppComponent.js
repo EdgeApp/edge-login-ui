@@ -15,7 +15,8 @@ type DispatchProps = {
 type Props = OwnProps & DispatchProps
 
 export default class PasswordRecoveryAppComponent extends Component<Props> {
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     this.props.initializePasswordRecovery()
   }
   render () {

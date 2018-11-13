@@ -32,11 +32,12 @@ type State = {
 class Input extends Component<Props, State> {
   textInput: TextField
 
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       inputText: '',
       autoFocus: this.props.autoFocus
-    })
+    }
   }
   componentDidMount () {
     if (this.props.autoFocus) {
