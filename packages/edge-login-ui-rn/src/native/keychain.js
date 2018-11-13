@@ -1,6 +1,7 @@
 // @flow
 
-import type { DiskletFolder, EdgeAccount, EdgeContext } from 'edge-core-js'
+import type { DiskletFolder } from 'disklet'
+import type { EdgeAccount, EdgeContext } from 'edge-core-js'
 import { NativeModules, Platform } from 'react-native'
 const { AbcCoreJsUi } = NativeModules
 

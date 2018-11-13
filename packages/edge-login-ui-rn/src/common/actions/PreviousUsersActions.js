@@ -1,6 +1,7 @@
 // @flow
 
-import type { DiskletFolder, EdgeContext } from 'edge-core-js'
+import type { DiskletFolder } from 'disklet'
+import type { EdgeContext } from 'edge-core-js'
 
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'

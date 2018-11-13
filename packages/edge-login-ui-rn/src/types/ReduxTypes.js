@@ -1,11 +1,7 @@
 // @flow
 
-import type {
-  DiskletFolder,
-  EdgeAccount,
-  EdgeAccountOptions,
-  EdgeContext
-} from 'edge-core-js'
+import type { DiskletFolder } from 'disklet'
+import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
 export type Action = { type: string, data?: any }
