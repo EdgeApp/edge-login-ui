@@ -69,13 +69,8 @@ export type State = {
   terms: {}
 }
 
-type ThunkDispatch<A> = (
-  (Dispatch, GetState, Imports) => Promise<void> | void
-) => A
-
 export type Store = ReduxStore<State, Action>
 export type GetState = () => State
-export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
 export type Imports = {
   onCancel: Function,
   accountOptions: AbcAccountOptions,
@@ -87,3 +82,9 @@ export type Imports = {
   username?: string | null,
   recoveryKey?: string
 }
+
+// eslint-disable-next-line no-use-before-define
+export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
+type ThunkDispatch<A> = (
+  (d: Dispatch, g: GetState, i: Imports) => Promise<void> | void
+) => A
