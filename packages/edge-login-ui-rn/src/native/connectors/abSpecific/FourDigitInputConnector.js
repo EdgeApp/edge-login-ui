@@ -12,11 +12,11 @@ import { FourDigitInputComponent } from '../../components/abSpecific/'
 export const mapStateToProps = (state: State) => {
   const wait = state.login.wait
   const error =
-    wait < 1
-      ? state.login.errorMessage
-      : state.login.errorMessage +
+    wait && wait > 0
+      ? state.login.errorMessage +
         ': ' +
         sprintf(s.strings.account_locked_for, wait)
+      : state.login.errorMessage
   return {
     pin: state.login.pin,
     username: state.login.username,
