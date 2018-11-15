@@ -6,8 +6,7 @@ import * as Styles from '../'
 const OtpErrorScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   header: {
-    ...Styles.HeaderContainerStyle,
-    container: { ...Styles.HeaderContainerStyle.container, height: 66 }
+    ...Styles.HeaderContainerScaledStyle
   },
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,

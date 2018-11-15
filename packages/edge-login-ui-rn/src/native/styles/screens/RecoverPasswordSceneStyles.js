@@ -7,12 +7,9 @@ import * as Styles from '../'
 const RecoverPasswordSceneStyles = {
   screen: { ...Styles.ScreenStyle },
   header: {
-    ...Styles.HeaderContainerStyle,
+    ...Styles.HeaderContainerScaledStyle,
     backgroundColor: Constants.PRIMARY
   },
-  /* gradient: {
-    height: THEME.HEADER
-  }, */
   body: {
     padding: scale(18)
   },
@@ -27,7 +24,6 @@ const RecoverPasswordSceneStyles = {
   buttonContainer: {
     width: '100%',
     alignItems: 'center'
-    // height: THEME.BUTTONS.HEIGHT
   },
   modalMiddle: {
     width: '100%'
