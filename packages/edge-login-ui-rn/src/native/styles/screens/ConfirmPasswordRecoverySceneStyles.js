@@ -6,7 +6,7 @@ import * as Styles from '../'
 const ConfirmPasswordRecoverySceneStyles = {
   screen: { ...Styles.ScreenStyle, alignItems: 'center' },
   header: {
-    ...Styles.HeaderContainerStyle,
+    ...Styles.HeaderContainerScaledStyle,
     backgroundColor: Constants.PRIMARY
   },
   submitButton: {

@@ -59,7 +59,9 @@ class Header extends Component<Props> {
   renderText (style: Object) {
     return (
       <View style={style.center}>
-        <T style={style.subHeadText}>{this.props.subTitle}</T>
+        {this.props.subTitle !== '' && (
+          <T style={style.subHeadText}>{this.props.subTitle}</T>
+        )}
         <T style={style.headlineText}>{this.props.title}</T>
       </View>
     )
