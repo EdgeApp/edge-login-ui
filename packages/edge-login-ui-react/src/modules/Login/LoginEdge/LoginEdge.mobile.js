@@ -26,7 +26,7 @@ export default ({
             edgeAccount={edgeAccount}
             edgeObject={edgeObject}
           />
-          <p className={styles.text}>Scan using Airbitz wallet to login</p>
+          <p className={styles.text}>Scan using Edge wallet to login</p>
         </div>
       )
     }

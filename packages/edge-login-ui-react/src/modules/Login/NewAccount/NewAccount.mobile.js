@@ -26,7 +26,7 @@ export default ({
             edgeAccount={edgeAccount}
             edgeObject={edgeObject}
           />
-          <p className={styles.text}>Scan using Airbitz wallet to login</p>
+          <p className={styles.text}>Scan using Edge wallet to login</p>
         </div>
       )
     }
@@ -37,7 +37,9 @@ export default ({
   return (
     <div className={styles.container}>
       <div className={styles.rectangle}>
-        <p className={styles.text}>Edge vs Airbitz</p>
+        <p className={styles.text}>
+          Scan or Tap to Sign Up with the Edge Wallet
+        </p>
       </div>
       {renderQRCode()}
       <p className={styles.QRTextToggle} onClick={toggleQRCode}>

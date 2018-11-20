@@ -31,7 +31,7 @@ const processEmail = (address, email, token, accountUsername, callback) => {
       '\n\nAndroid\nhttps://recovery.edgesecure.co/recovery?token=' +
       token
     const to = email
-    let subject = 'Edge ' + 'Recovery Token' // this should have a vendors name. Hardcoded Airbitz
+    let subject = 'Edge ' + 'Recovery Token' // this should have a vendors name. Hardcoded Edge
     let body =
       'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ' +
       username +
