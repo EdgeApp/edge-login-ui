@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "cpr": "^3.0.1",
-    "edge-core-js": "^0.12.4",
+    "edge-core-js": "^0.12.16",
     "url-parse": "^1.4.3",
     "yaob": "^0.3.1"
   },

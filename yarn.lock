@@ -435,7 +435,7 @@ assert-plus@^0.2.0:
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-0.2.0.tgz#d74e1b87e7affc0db8aadb7021f3fe48101ab234"
   integrity sha1-104bh+ev/A24qttwIfP+SBAasjQ=
 
-assert@^1.1.1, assert@^1.4.1:
+assert@^1.1.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/assert/-/assert-1.4.1.tgz#99912d591836b5a6f5b345c0f07eefc08fc65d91"
   integrity sha1-mZEtWRg2tab1s0XA8H7vwI/GXZE=
@@ -1209,11 +1209,6 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
-
-base-64@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/base-64/-/base-64-0.1.0.tgz#780a99c84e7d600260361511c4877613bf24f6bb"
-  integrity sha1-eAqZyE59YAJgNhURxId2E78k9rs=
 
 base-x@^1.0.4, base-x@^1.1.0:
   version "1.1.0"
@@ -2391,7 +2386,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.2, create-react-class@^15.6.0:
+create-react-class@^15.6.0:
   version "15.6.3"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
   integrity sha512-M+/3Q6E6DLO6Yx3OwrWjwHBnvfXXYA7W+dFjt/ZDBemHO1DDZhsalX/NUtnTYclN6GfnBDRh4qRHjcDHmlJBJg==
@@ -2853,14 +2848,11 @@ dir-glob@^2.0.0:
     arrify "^1.0.1"
     path-type "^3.0.0"
 
-disklet@^0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/disklet/-/disklet-0.2.7.tgz#03cf699df295043067b6a6215c9f11cb18f15fd0"
-  integrity sha512-VaBAzlwQ+BZJPI4v6Tz4fux7O5EbfeBR3bLgKMWgSj2dCb3UK7sWtP7456px57RPAHe/6TU3YYPKIibWi97Tcg==
+disklet@^0.2.8:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/disklet/-/disklet-0.2.10.tgz#3dff158059c0e5a7886476232dd210bcef751929"
+  integrity sha512-twEQ0yQDvGv1ZWW7r3qzlEpmabv3VrULXPR/c6zCOezyHjubbZpgxAuZO7yNP0ThfzpB9g7WN3n/5FVTGb0v/Q==
   dependencies:
-    assert "^1.4.1"
-    react "16.0.0-alpha.12"
-    react-native-fs "^2.5.1"
     rfc4648 "^0.9.1"
 
 dlv@^1.1.0:
@@ -2979,10 +2971,10 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-edge-core-js@^0.12.4:
-  version "0.12.4"
-  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.12.4.tgz#b0c5ded56432735f60b142590b2ba9f6a0f2e2e0"
-  integrity sha512-FzBF3X80M4kUOJ0IXQaXdOYtasKl+12iTUYvUnX7Z5WYV1nsYzb7/2NkjnlNzI0Mywp1hqBsOV7CX0bvdB/zJQ==
+edge-core-js@^0.12.16:
+  version "0.12.16"
+  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.12.16.tgz#6a2e80961a9f183373b32147817b76f5a7caf59f"
+  integrity sha512-RmeOv0E078XUdTM7X3DJzqAdXnC/z+HPjEdnsFbrSQegMxpByQc0PeXkzT/I9LKvFGPDTHUPexiARn3KdSC5mw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     aes-js "^3.1.0"
@@ -2990,7 +2982,7 @@ edge-core-js@^0.12.4:
     biggystring "^3.0.2"
     currency-codes "^1.1.2"
     detect-bundler "^1.0.0"
-    disklet "^0.2.7"
+    disklet "^0.2.8"
     elliptic "^6.4.0"
     ethereumjs-tx "^1.3.7"
     ethereumjs-util "^5.2.0"
@@ -7843,14 +7835,6 @@ react-native-easy-grid@0.2.0:
   dependencies:
     lodash "^4.11.1"
 
-react-native-fs@^2.5.1:
-  version "2.9.11"
-  resolved "https://registry.yarnpkg.com/react-native-fs/-/react-native-fs-2.9.11.tgz#0fd134ecc8ae53fe8023267f51463eb77287c93a"
-  integrity sha512-AznjEy4ddVmBE2elX6FPjoAojlLHJEQLm+5X6WSfv+BikYT5pnspuT0xciaTlmyQWzEyiPnkOKv94AOy02ojHg==
-  dependencies:
-    base-64 "^0.1.0"
-    utf8 "^2.1.1"
-
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.2.tgz#7dbca530930f7c1ce8633cc8fd13ba94102992e1"
@@ -7980,17 +7964,6 @@ react-tween-state@^0.1.5:
   dependencies:
     raf "^3.1.0"
     tween-functions "^1.0.1"
-
-react@16.0.0-alpha.12:
-  version "16.0.0-alpha.12"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0-alpha.12.tgz#8c59485281485df319b6f77682d8dd0621c08194"
-  integrity sha1-jFlIUoFIXfMZtvd2gtjdBiHAgZQ=
-  dependencies:
-    create-react-class "^15.5.2"
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "^15.5.6"
 
 react@~15.4.2:
   version "15.4.2"
