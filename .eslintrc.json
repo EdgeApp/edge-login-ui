@@ -19,5 +19,10 @@
     "promise/no-return-wrap": "error",
     "react/prop-types": "off",
     "react/display-name": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "15.0"
+    }
   }
 }

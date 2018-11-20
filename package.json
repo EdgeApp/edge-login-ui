@@ -4,29 +4,33 @@
     "packages/*"
   ],
   "scripts": {
-    "precommit": "node localizeLanguage.js && npm run lint && lint-staged && flow",
     "flow": "flow",
     "format": "import-sort -l --write 'packages/*/*.js' 'packages/*/src/**/*.js'; prettier-eslint --write 'packages/*/*.js' 'packages/*/src/**/*.js' localizeLanguage.js",
     "lint": "eslint 'packages/*/*.js' 'packages/*/src/**/*.js'",
     "prepare": "lerna exec yarn prepare"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "^10.0.1",
     "css-module-flow": "^1.0.0",
-    "eslint": "^4.18.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^6.0.0",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-react": "^7.6.1",
-    "eslint-plugin-standard": "^3.0.1",
-    "husky": "^0.14.3",
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.1.4",
     "import-sort-cli": "^5.2.0",
     "import-sort-parser-babylon": "^5.2.0",
     "import-sort-style-module": "^5.0.0",
     "lerna": "^2.8.0",
-    "lint-staged": "^6.1.1",
+    "lint-staged": "^8.0.4",
     "prettier-eslint-cli": "^4.7.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "node localizeLanguage.js && lint-staged && flow"
+    }
   },
   "importSort": {
     ".js, .es": {
@@ -38,6 +42,7 @@
     "linters": {
       "*.js": [
         "eslint",
+        "import-sort --list-different",
         "prettier-eslint --list-different"
       ]
     },
