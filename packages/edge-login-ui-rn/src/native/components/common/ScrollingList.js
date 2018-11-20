@@ -10,7 +10,8 @@ type Props = {
 }
 class ScrollingList extends Component<Props> {
   dataSource: any
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     this.dataSource = ds.cloneWithRows(this.props.dataList)
   }

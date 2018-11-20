@@ -43,7 +43,7 @@ const SetAccountPinScreenStyle = {
     ...Styles.FourDotInputDarkScaledStyle,
     container: {
       ...Styles.FourDotInputDarkScaledStyle.container,
-      height: scale(110)
+      height: scale(120)
     }
   },
   nextButton: {

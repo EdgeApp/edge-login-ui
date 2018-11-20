@@ -18,11 +18,11 @@ type State = {
   onOff: boolean
 }
 class Checkbox extends Component<Props, State> {
-  componentWillMount () {
-    const onOff = this.props.value ? this.props.value : false
-    this.setState({
-      onOff: onOff
-    })
+  constructor (props: Props) {
+    super(props)
+    this.state = {
+      onOff: this.props.value ? this.props.value : false
+    }
   }
   componentWillReceiveProps (nextProps: Props) {
     if (this.props.disabled) {

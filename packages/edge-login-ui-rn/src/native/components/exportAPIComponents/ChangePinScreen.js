@@ -1,7 +1,7 @@
 // @flow
 
 import { makeReactNativeFolder } from 'disklet'
-import type { AbcAccount, AbcContext } from 'edge-core-js'
+import type { EdgeAccount, EdgeContext } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
@@ -14,8 +14,8 @@ import ChangePinConnector from '../../connectors/ChangePinConnector'
 import * as Styles from '../../styles'
 
 type Props = {
-  account: AbcAccount,
-  context: AbcContext,
+  account: EdgeAccount,
+  context: EdgeContext,
   showHeader: boolean,
   onComplete(): void,
   onCancel(): void
@@ -28,7 +28,8 @@ class ChangePinScreen extends Component<Props> {
     account: null
   }
   store: Store<State, Action>
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     const imports: Imports = {
       accountOptions: {},
       accountObject: this.props.account,
@@ -44,7 +45,6 @@ class ChangePinScreen extends Component<Props> {
       applyMiddleware(thunk.withExtraArgument(imports))
     )
   }
-  componentWillReceiveProps (props: Props) {}
 
   render () {
     return (

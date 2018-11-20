@@ -1,11 +1,7 @@
 // @flow
 
-import type {
-  AbcAccount,
-  AbcAccountOptions,
-  AbcContext,
-  DiskletFolder
-} from 'edge-core-js'
+import type { DiskletFolder } from 'disklet'
+import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
 export type Action = { type: string, data?: any }
@@ -35,10 +31,10 @@ export type State = {
     usernameErrorMessage: string,
     showModal: boolean,
     passwordStatus: Object,
-    accountObject: AbcAccount
+    accountObject: EdgeAccount
   },
   login: {
-    account: AbcAccount,
+    account: EdgeAccount,
     username: string,
     pin: string,
     password: string,
@@ -69,21 +65,22 @@ export type State = {
   terms: {}
 }
 
-type ThunkDispatch<A> = (
-  (Dispatch, GetState, Imports) => Promise<void> | void
-) => A
-
 export type Store = ReduxStore<State, Action>
 export type GetState = () => State
-export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
 export type Imports = {
   onCancel: Function,
-  accountOptions: AbcAccountOptions,
-  accountObject?: AbcAccount,
-  context: AbcContext,
+  accountOptions: EdgeAccountOptions,
+  accountObject?: EdgeAccount,
+  context: EdgeContext,
   folder: DiskletFolder,
   onComplete: Function,
   callback: Function,
   username?: string | null,
   recoveryKey?: string
 }
+
+// eslint-disable-next-line no-use-before-define
+export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
+type ThunkDispatch<A> = (
+  (d: Dispatch, g: GetState, i: Imports) => Promise<void> | void
+) => A

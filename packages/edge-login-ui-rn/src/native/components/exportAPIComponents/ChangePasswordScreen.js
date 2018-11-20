@@ -1,7 +1,7 @@
 // @flow
 
 import { makeReactNativeFolder } from 'disklet'
-import type { AbcAccount, AbcContext } from 'edge-core-js'
+import type { EdgeAccount, EdgeContext } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
@@ -14,8 +14,8 @@ import ChangePasswordAppConnector from '../../connectors/ChangePasswordAppConnec
 import * as Styles from '../../styles'
 
 type Props = {
-  account: AbcAccount,
-  context: AbcContext,
+  account: EdgeAccount,
+  context: EdgeContext,
   showHeader: boolean,
   onComplete(): void,
   onCancel(): void
@@ -30,7 +30,8 @@ class ChangePasswordScreen extends Component<Props> {
     showHeader: true
   }
 
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     const imports: Imports = {
       accountOptions: {},
       folder: makeReactNativeFolder(),
@@ -46,7 +47,6 @@ class ChangePasswordScreen extends Component<Props> {
       applyMiddleware(thunk.withExtraArgument(imports))
     )
   }
-  componentWillReceiveProps (props: Props) {}
 
   render () {
     return (

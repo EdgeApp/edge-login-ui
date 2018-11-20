@@ -6,7 +6,7 @@ import * as Styles from '../'
 const LoginWithRecoveryStyles = {
   screen: { ...Styles.ScreenStyle, marginTop: 5 },
   header: {
-    ...Styles.HeaderContainerStyle,
+    ...Styles.HeaderContainerScaledStyle,
     backgroundColor: Constants.PRIMARY
   },
   /* gradient: {

@@ -1,6 +1,6 @@
 // @flow
 
-import type { AbcAccount } from 'edge-core-js'
+import type { EdgeAccount } from 'edge-core-js'
 import { sprintf } from 'sprintf-js'
 import passwordCheck from 'zxcvbn'
 
@@ -145,15 +145,6 @@ export function validatePassword (data: string) {
 export function createUser (data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder } = imports
-    const myAccountOptions = {
-      ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      }
-    }
     dispatch(WorkflowActions.nextScreen())
     setTimeout(async () => {
       try {
@@ -161,8 +152,11 @@ export function createUser (data: Object) {
           data.username,
           data.password,
           data.pin,
-          myAccountOptions
+          imports.accountOptions
         )
+        abcAccount.watch('loggedIn', loggedIn => {
+          if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
+        })
         const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
         if (!touchDisabled) {
           await enableTouchId(folder, abcAccount)
@@ -185,7 +179,7 @@ export function createUser (data: Object) {
     }, 300)
   }
 }
-export function agreeToConditions (account: AbcAccount) {
+export function agreeToConditions (account: EdgeAccount) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, folder } = imports
     // write to disklet

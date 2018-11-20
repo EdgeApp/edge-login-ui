@@ -41,9 +41,9 @@ type State = {
   showUsernameModal: boolean
 }
 export default class PasswordRecovery extends Component<Props, State> {
-  componentWillMount () {
-    this.props.updateUsername('')
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       question1: this.props.question1,
       question2: this.props.question2,
       answer1: '',
@@ -57,7 +57,8 @@ export default class PasswordRecovery extends Component<Props, State> {
       errorQuestionTwo: false,
       disableConfirmationModal: false,
       showUsernameModal: true
-    })
+    }
+    this.props.updateUsername('')
   }
   renderHeader = (style: Object) => {
     if (this.props.showHeader) {

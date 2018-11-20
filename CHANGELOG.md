@@ -1,5 +1,25 @@
 # edge-login-ui
 
+## 0.5.10
+
+* rn: Wrap 2FA scene in SafeAreaView to account for notch on iPhone X
+* rn: update components to remove componentWillMount
+* rn: Adjust header styles
+* rn: fix error message to only show wait when needed
+* rn: Upgrade eslint
+* rn: Change Airbitz texts to Edge, change -Edge vs Airbitz- to -Scan or Ta…
+* rn: remove deprecated apis
+
+## 0.5.9
+
+* rn: Adjust height of PIN field on create account slightly
+* rn: Fix styling for passwordRecoveryModal to prevent keyboard covering
+* rn: Adjust font size of the CANCEL button on the Password Recovery screen
+
+## 0.5.8
+
+* Re-added Password Recovery Questions modal email input
+
 ## 0.5.7
 
 * Added language translations for Spanish, Italian, Russian, and Portuguese

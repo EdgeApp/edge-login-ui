@@ -37,12 +37,13 @@ export default class NewAccountPasswordScreenComponent extends Component<
   Props,
   State
 > {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       isProcessing: false,
       focusFirst: true,
       focusSecond: false
-    })
+    }
   }
   render () {
     const { NewAccountPasswordScreenStyle } = this.props.styles

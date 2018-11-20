@@ -68,8 +68,9 @@ type State = {
 }
 
 export default class PasswordRecovery extends Component<Props, State> {
-  componentWillMount () {
-    this.setState({
+  constructor (props: Props) {
+    super(props)
+    this.state = {
       question1: this.props.question1,
       question2: this.props.question2,
       answer1: '',
@@ -85,7 +86,7 @@ export default class PasswordRecovery extends Component<Props, State> {
       emailAddress: '',
       emailAppNotAvailable: false,
       showConfirmationModal: false
-    })
+    }
   }
   componentWillReceiveProps (nextProps: Props) {
     if (nextProps.isEnabled !== this.props.isEnabled) {
@@ -423,6 +424,16 @@ export default class PasswordRecovery extends Component<Props, State> {
         <Text style={styles.staticModalText}>
           {s.strings.recovery_instructions_complete}
         </Text>
+        <FormField
+          style={styles.inputModal}
+          onChangeText={this.updateEmail.bind(this)}
+          value={this.state.emailAddress}
+          label={s.strings.email_address}
+          error={''}
+          returnKeyType={'go'}
+          forceFocus
+          onSubmitEditing={this.openEmailApp}
+        />
       </View>
     )
     if (this.props.showEmailDialog) {

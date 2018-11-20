@@ -30,7 +30,7 @@ You can render them in the normal way:
 render () {
   return (
     <LoginScreen
-      accountOptions={{ callbacks: this.accountCallbacks }}
+      accountOptions={{}}
       context={this.props.context}
       onClose={this.onClose}
       onError={this.onError}

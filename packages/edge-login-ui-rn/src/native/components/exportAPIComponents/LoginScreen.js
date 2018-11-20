@@ -1,6 +1,7 @@
 // @flow
 
 import { makeReactNativeFolder } from 'disklet'
+import type { EdgeAccount, EdgeContext } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
@@ -15,12 +16,12 @@ import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
 
 type Props = {
-  context: any,
+  context: EdgeContext,
   username: ?string,
   recoveryLogin?: string,
   accountOptions: any,
   fontDescription: any,
-  onLogin(): void
+  onLogin(error: ?Error, account: ?EdgeAccount, touchIdInfo: ?Object): void
 }
 
 type State = {}
@@ -28,6 +29,7 @@ type Action = { type: string }
 
 class LoginScreen extends Component<Props> {
   store: Store<State, Action>
+  cleanups: Array<Function>
 
   static defaultProps = {
     username: null,
@@ -35,9 +37,9 @@ class LoginScreen extends Component<Props> {
     accountOptions: null
   }
 
-  componentWillMount () {
+  constructor (props: Props) {
+    super(props)
     checkingForOTP(this.props.context)
-    updateFontStyles(this.props)
     const composeEnhancers =
       typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'core-ui' })
@@ -57,8 +59,31 @@ class LoginScreen extends Component<Props> {
       {},
       composeEnhancers(applyMiddleware(thunk.withExtraArgument(imports)))
     )
+    this.cleanups = []
   }
-  componentWillReceiveProps (props: Props) {}
+
+  componentDidMount () {
+    // Completed Edge login:
+    this.cleanups = [
+      this.props.context.on('login', account => {
+        this.props.onLogin(null, account)
+      }),
+      this.props.context.on('loginStart', ({ username }) => {
+        // Show spinner for Edge login starting
+      }),
+      this.props.context.on('loginError', ({ error }) => {
+        this.props.onLogin(error)
+      })
+    ]
+  }
+
+  componentWillMount () {
+    updateFontStyles(this.props) // Can we move this to the constructor?
+  }
+
+  componentWillUnmount () {
+    for (const cleanup of this.cleanups) cleanup()
+  }
 
   render () {
     return (

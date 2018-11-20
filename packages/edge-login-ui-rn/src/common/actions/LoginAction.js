@@ -26,22 +26,16 @@ export function loginWithRecovery (answers: Array<string>, username: string) {
     const backupKey = state.passwordRecovery.recoveryKey
     const username = state.login.username
     const { context, folder } = imports
-    const myAccountOptions = {
-      ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      }
-    }
     try {
       const account = await context.loginWithRecovery2(
         backupKey,
         username,
         answers,
-        myAccountOptions
+        imports.accountOptions
       )
+      account.watch('loggedIn', loggedIn => {
+        if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
+      })
       const touchDisabled = await isTouchDisabled(folder, account.username)
       if (!touchDisabled) {
         await enableTouchId(folder, account)
@@ -110,15 +104,6 @@ export function retryWithOtp () {
 export function userLoginWithTouchId (data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports
-    const myAccountOptions = {
-      ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      }
-    }
     const startFunction = () => {
       dispatch(dispatchAction(Constants.AUTH_LOGGING_IN_WITH_PIN))
     }
@@ -128,11 +113,14 @@ export function userLoginWithTouchId (data: Object) {
       data.username,
       'Touch to login user: `' + data.username + '`',
       s.strings.login_with_password,
-      myAccountOptions,
+      imports.accountOptions,
       startFunction
     )
-      .then(async response => {
-        if (response) {
+      .then(async account => {
+        if (account) {
+          account.watch('loggedIn', loggedIn => {
+            if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
+          })
           folder
             .file('lastuser.json')
             .setText(JSON.stringify({ username: data.username }))
@@ -142,7 +130,7 @@ export function userLoginWithTouchId (data: Object) {
             isTouchSupported: true,
             isTouchEnabled: true
           }
-          callback(null, response, touchIdInformation)
+          callback(null, account, touchIdInformation)
         }
       })
       .catch(e => {
@@ -154,16 +142,9 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports
     const myAccountOptions = {
-      ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      }
+      ...imports.accountOptions
     }
     if (backupKey) {
-      console.log(backupKey)
       myAccountOptions.otp = backupKey
     }
     dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PIN, data.pin))
@@ -175,6 +156,9 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
             data.pin,
             myAccountOptions
           )
+          abcAccount.watch('loggedIn', loggedIn => {
+            if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
+          })
           const touchDisabled = await isTouchDisabled(
             folder,
             abcAccount.username
@@ -250,13 +234,7 @@ export function userLogin (data: Object, backupKey?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports
     const myAccountOptions = {
-      ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      }
+      ...imports.accountOptions
     }
     if (backupKey) myAccountOptions.otp = backupKey
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
@@ -268,6 +246,9 @@ export function userLogin (data: Object, backupKey?: string) {
           data.password,
           myAccountOptions
         )
+        abcAccount.watch('loggedIn', loggedIn => {
+          if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
+        })
         const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
         if (!touchDisabled) {
           await enableTouchId(folder, abcAccount)
@@ -326,24 +307,11 @@ export function userLogin (data: Object, backupKey?: string) {
 export function getEdgeLoginQrCode () {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
-    const callback = imports.callback
     const myAccountOptions = {
       ...imports.accountOptions,
-      callbacks: {
-        ...imports.accountOptions.callbacks,
-        onLoggedOut: () => {
-          dispatch(dispatchAction(Constants.RESET_APP))
-        }
-      },
       displayImageUrl:
         'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
-      displayName: 'Edge Wallet',
-      onProcessLogin: username => {
-        // throw spinner
-      },
-      onLogin: (e, account) => {
-        callback(e, account)
-      }
+      displayName: 'Edge Wallet'
     }
     try {
       const qr = await context.requestEdgeLogin(myAccountOptions)

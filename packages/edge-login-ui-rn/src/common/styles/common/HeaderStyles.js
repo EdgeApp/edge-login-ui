@@ -27,7 +27,7 @@ const HeaderContainerStyle = {
     },
     sideText: {
       color: Constants.WHITE,
-      fontSize: scale(18)
+      fontSize: scale(14)
     },
     icon: {
       color: Constants.WHITE,
@@ -44,13 +44,11 @@ const HeaderContainerStyle = {
   },
   center: {
     flex: 3,
-    justifyContent: 'flex-end',
-    paddingBottom: scale(5)
+    justifyContent: 'center'
   },
   right: {
     flex: 1,
-    justifyContent: 'center' // ,
-    // alignItems: 'center'
+    justifyContent: 'center'
   },
   headlineText: {
     fontSize: scale(17),
@@ -126,13 +124,11 @@ const HeaderContainerScaledStyle = {
   },
   center: {
     flex: 3,
-    justifyContent: 'flex-end',
-    paddingBottom: scale(5)
+    justifyContent: 'center'
   },
   right: {
     flex: 1,
-    justifyContent: 'center' // ,
-    // alignItems: 'center'
+    justifyContent: 'center'
   },
   headlineText: {
     fontSize: scale(17),
