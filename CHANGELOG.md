@@ -1,5 +1,15 @@
 # edge-login-ui
 
+## 0.5.10
+
+* rn: Wrap 2FA scene in SafeAreaView to account for notch on iPhone X
+* rn: update components to remove componentWillMount
+* rn: Adjust header styles
+* rn: fix error message to only show wait when needed
+* rn: Upgrade eslint
+* rn: Change Airbitz texts to Edge, change -Edge vs Airbitz- to -Scan or Ta…
+* rn: remove deprecated apis
+
 ## 0.5.9
 
 * rn: Adjust height of PIN field on create account slightly
