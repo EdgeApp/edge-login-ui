@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { TouchableWithoutFeedback, View } from 'react-native'
 
 import s from '../../../common/locales/strings.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
@@ -91,6 +91,20 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     if (this.props.loginSuccess) {
       return null
     }
+    if (this.state.focusOn === 'List') {
+      return (
+        <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
+          <View style={PinLoginScreenStyle.featureBox}>
+            <LogoImageHeader style={PinLoginScreenStyle.logoHeader} />
+            <View style={PinLoginScreenStyle.featureBoxBody}>
+              {this.renderBottomHalf(PinLoginScreenStyle)}
+            </View>
+            {this.renderTouchButton(PinLoginScreenStyle)}
+            {this.renderModal(PinLoginScreenStyle)}
+          </View>
+        </TouchableWithoutFeedback>
+      )
+    }
     return (
       <View style={PinLoginScreenStyle.featureBox}>
         <LogoImageHeader style={PinLoginScreenStyle.logoHeader} />
@@ -98,7 +112,6 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
           {this.renderBottomHalf(PinLoginScreenStyle)}
         </View>
         {this.renderTouchButton(PinLoginScreenStyle)}
-        {this.renderModal(PinLoginScreenStyle)}
       </View>
     )
   }
@@ -172,6 +185,12 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     }
     this.setState({
       focusOn: 'List'
+    })
+  }
+  hideDrop () {
+    console.log('fooobarsas')
+    this.setState({
+      focusOn: 'pin'
     })
   }
 }
