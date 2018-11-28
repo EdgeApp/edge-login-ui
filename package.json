@@ -30,7 +30,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "node localizeLanguage.js && lint-staged && flow"
+      "pre-commit": "npm run precommit"
     }
   },
   "importSort": {
