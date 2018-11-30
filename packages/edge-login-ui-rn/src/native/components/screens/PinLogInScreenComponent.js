@@ -91,28 +91,17 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     if (this.props.loginSuccess) {
       return null
     }
-    if (this.state.focusOn === 'List') {
-      return (
-        <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
-          <View style={PinLoginScreenStyle.featureBox}>
-            <LogoImageHeader style={PinLoginScreenStyle.logoHeader} />
-            <View style={PinLoginScreenStyle.featureBoxBody}>
-              {this.renderBottomHalf(PinLoginScreenStyle)}
-            </View>
-            {this.renderTouchButton(PinLoginScreenStyle)}
-            {this.renderModal(PinLoginScreenStyle)}
-          </View>
-        </TouchableWithoutFeedback>
-      )
-    }
     return (
-      <View style={PinLoginScreenStyle.featureBox}>
-        <LogoImageHeader style={PinLoginScreenStyle.logoHeader} />
-        <View style={PinLoginScreenStyle.featureBoxBody}>
-          {this.renderBottomHalf(PinLoginScreenStyle)}
+      <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
+        <View style={PinLoginScreenStyle.featureBox}>
+          <LogoImageHeader style={PinLoginScreenStyle.logoHeader} />
+          <View style={PinLoginScreenStyle.featureBoxBody}>
+            {this.renderBottomHalf(PinLoginScreenStyle)}
+          </View>
+          {this.renderTouchButton(PinLoginScreenStyle)}
+          {this.renderModal(PinLoginScreenStyle)}
         </View>
-        {this.renderTouchButton(PinLoginScreenStyle)}
-      </View>
+      </TouchableWithoutFeedback>
     )
   }
 
