@@ -185,6 +185,9 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
             dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
             return
           }
+          if (e.message === 'Unexpected end of data') {
+            e.message = s.strings.backup_key_incorrect
+          }
           const message =
             e.name === 'PasswordError'
               ? s.strings.invalid_pin
@@ -271,11 +274,15 @@ export function userLogin (data: Object, backupKey?: string) {
           dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
           return
         }
+        const rawMessage = e.message
+        if (e.message === 'Unexpected end of data') {
+          e.message = s.strings.backup_key_incorrect
+        }
         if (e.name === 'OtpError' && myAccountOptions.otp) {
           dispatch(
             dispatchActionWitString(
               Constants.OTP_LOGIN_BACKUPKEY_FAIL,
-              'Backup Key was incorrect'
+              s.strings.backup_key_incorrect
             )
           )
           return
@@ -294,7 +301,7 @@ export function userLogin (data: Object, backupKey?: string) {
           dispatch(
             dispatchActionWithData(
               Constants.LOGIN_USERNAME_PASSWORD_FAIL,
-              e.message
+              rawMessage
             )
           )
         )
