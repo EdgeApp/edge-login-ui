@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.5.11
+
+* rn: new background images
+* rn: pin login close drop down bug
+* rn: fix OTP error on character length
+
 ## 0.5.10
 
 * rn: Wrap 2FA scene in SafeAreaView to account for notch on iPhone X
