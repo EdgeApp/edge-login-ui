@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.5.12
+
+* rn: added Japanese
+* rn: updated some translations
+
 ## 0.5.11
 
 * rn: new background images
