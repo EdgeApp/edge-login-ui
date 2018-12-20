@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Alert, Text, View } from 'react-native'
 
 import s from '../../../../common/locales/strings'
 import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
@@ -14,12 +14,15 @@ type Props = {
   password: string,
   username: string,
   pin: string,
+  pinError: string | null,
+  createErrorMessage: string | null,
   createUser(Object): void
 }
 
 type State = {
   username: string,
   pin: string,
+  createErrorMessage: string | null,
   isProcessing: boolean,
   focusOn: string
 }
@@ -33,7 +36,20 @@ export default class SetAccountPinScreenComponent extends Component<
       username: '',
       pin: '',
       isProcessing: false,
-      focusOn: 'pin'
+      focusOn: 'pin',
+      createErrorMessage: this.props.createErrorMessage
+    }
+  }
+  checkError = () => {
+    if (this.state.createErrorMessage) {
+      Alert.alert(
+        s.strings.something_went_wrong,
+        this.state.createErrorMessage,
+        [
+          { text: s.strings.cancel },
+          { text: s.strings.try_again, onPress: this.onNextPress }
+        ]
+      )
     }
   }
   render () {
@@ -68,13 +84,15 @@ export default class SetAccountPinScreenComponent extends Component<
               />
             </View>
           </View>
+          {this.checkError()}
         </View>
       </SafeAreaView>
     )
   }
   onNextPress = () => {
     this.setState({
-      isProcessing: true
+      isProcessing: true,
+      createErrorMessage: null
     })
     // validation.
     // is there no error message ,

@@ -154,7 +154,9 @@ const strings = {
   four_digit_pin_error: 'PIN must be four digits',
   it_would_take_xx_to_crack: 'It would take %s to crack your password',
   recommend_choosing_a_stronger: '\nWe recommend choosing a stronger password',
-  backup_key_incorrect: 'Backup Key was incorrect'
+  backup_key_incorrect: 'Backup Key was incorrect',
+  something_went_wrong: 'Something Went Wrong',
+  try_again: 'Try Again'
 }
 
 module.exports = strings
