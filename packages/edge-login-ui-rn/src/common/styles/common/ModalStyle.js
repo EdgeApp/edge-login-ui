@@ -6,7 +6,7 @@ import * as Constants from '../../constants/'
 import { scale } from '../../util/scaling.js'
 import * as Styles from '../'
 
-const OFFSET_HACK = -19
+const OFFSET_HACK = scale(-19)
 
 const screenDimensions = {
   height: Dimensions.get('window').height,
@@ -14,9 +14,7 @@ const screenDimensions = {
 }
 const FullScreenModalStyle = {
   container: {
-    position: 'absolute',
-    top: OFFSET_HACK,
-    left: OFFSET_HACK,
+    margin: 0,
     width: '100%',
     height: '100%',
     justifyContent: 'center',
