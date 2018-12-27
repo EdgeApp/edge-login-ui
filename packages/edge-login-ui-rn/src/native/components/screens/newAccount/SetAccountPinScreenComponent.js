@@ -44,7 +44,7 @@ export default class SetAccountPinScreenComponent extends Component<
     if (this.state.createErrorMessage) {
       Alert.alert(
         s.strings.something_went_wrong,
-        this.state.createErrorMessage,
+        s.strings.create_account_error_message,
         [
           { text: s.strings.cancel },
           { text: s.strings.try_again, onPress: this.onNextPress }
@@ -54,6 +54,7 @@ export default class SetAccountPinScreenComponent extends Component<
   }
   render () {
     const { SetAccountPinScreenStyle } = this.props.styles
+    this.checkError()
     return (
       <SafeAreaView>
         <View style={SetAccountPinScreenStyle.screen}>
@@ -84,7 +85,6 @@ export default class SetAccountPinScreenComponent extends Component<
               />
             </View>
           </View>
-          {this.checkError()}
         </View>
       </SafeAreaView>
     )

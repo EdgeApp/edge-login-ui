@@ -128,5 +128,6 @@
   "recommend_choosing_a_stronger": "\nWe recommend choosing a stronger password",
   "backup_key_incorrect": "Backup Key was incorrect",
   "something_went_wrong": "Something Went Wrong",
+  "create_account_error_message": "An error occurred creating your account. This may have been due to a slow network connection or network interruption. If you receive another error that the account already exists, please restart the app and login with your username and password.",
   "try_again": "Try Again"
 }
