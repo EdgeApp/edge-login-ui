@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.5.13
+
+* all: Upgrade to edge-core-js v0.13.5
+* rn: Fix fullscreen modal positioning
+
 ## 0.5.12
 
 * rn: added Japanese
