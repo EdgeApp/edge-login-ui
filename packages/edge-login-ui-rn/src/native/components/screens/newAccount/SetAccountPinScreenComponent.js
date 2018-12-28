@@ -43,8 +43,10 @@ export default class SetAccountPinScreenComponent extends Component<
   checkError = () => {
     if (this.state.createErrorMessage) {
       Alert.alert(
-        s.strings.something_went_wrong,
-        s.strings.create_account_error_message,
+        s.strings.create_account_error_title,
+        s.strings.create_account_error_message +
+          '\n' +
+          this.state.createErrorMessage,
         [
           { text: s.strings.cancel },
           { text: s.strings.try_again, onPress: this.onNextPress }
