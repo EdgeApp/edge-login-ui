@@ -19,7 +19,7 @@ const PinLoginScreenStyle = {
     position: 'relative',
     top: scale(40),
     width: '100%',
-    height: scale(376),
+    height: '100%',
     alignItems: 'center'
   },
   featureBoxBody: {

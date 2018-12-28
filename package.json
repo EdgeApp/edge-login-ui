@@ -4,6 +4,7 @@
     "packages/*"
   ],
   "scripts": {
+    "precommit": "node localizeLanguage.js && lint-staged && flow",
     "flow": "flow",
     "format": "import-sort -l --write 'packages/*/*.js' 'packages/*/src/**/*.js'; prettier-eslint --write 'packages/*/*.js' 'packages/*/src/**/*.js' localizeLanguage.js",
     "lint": "eslint 'packages/*/*.js' 'packages/*/src/**/*.js'",
@@ -29,7 +30,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "node localizeLanguage.js && lint-staged && flow"
+      "pre-commit": "npm run precommit"
     }
   },
   "importSort": {

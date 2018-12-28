@@ -1,5 +1,21 @@
 # edge-login-ui
 
+## 0.5.13
+
+* all: Upgrade to edge-core-js v0.13.5
+* rn: Fix fullscreen modal positioning
+
+## 0.5.12
+
+* rn: added Japanese
+* rn: updated some translations
+
+## 0.5.11
+
+* rn: new background images
+* rn: pin login close drop down bug
+* rn: fix OTP error on character length
+
 ## 0.5.10
 
 * rn: Wrap 2FA scene in SafeAreaView to account for notch on iPhone X
