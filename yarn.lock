@@ -2848,10 +2848,10 @@ dir-glob@^2.0.0:
     arrify "^1.0.1"
     path-type "^3.0.0"
 
-disklet@^0.2.8:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/disklet/-/disklet-0.2.10.tgz#3dff158059c0e5a7886476232dd210bcef751929"
-  integrity sha512-twEQ0yQDvGv1ZWW7r3qzlEpmabv3VrULXPR/c6zCOezyHjubbZpgxAuZO7yNP0ThfzpB9g7WN3n/5FVTGb0v/Q==
+disklet@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/disklet/-/disklet-0.3.0.tgz#53a9e6af7e8c780050b292e7da79022b0b2e555a"
+  integrity sha512-ZpV1wcs+tqbZWv/etoOhLQ44Ln+21Q+f/adZh1+HNZ9aew5IgVgbQlgqzECKM04WSjgWkjdXT/rwjJOVYqMe0g==
   dependencies:
     rfc4648 "^0.9.1"
 
@@ -2971,10 +2971,10 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-edge-core-js@^0.12.16:
-  version "0.12.16"
-  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.12.16.tgz#6a2e80961a9f183373b32147817b76f5a7caf59f"
-  integrity sha512-RmeOv0E078XUdTM7X3DJzqAdXnC/z+HPjEdnsFbrSQegMxpByQc0PeXkzT/I9LKvFGPDTHUPexiARn3KdSC5mw==
+edge-core-js@^0.13.5:
+  version "0.13.5"
+  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.13.5.tgz#a40f7d201aacca22f9cd88a6a80b0cbf07dda0a2"
+  integrity sha512-Qo47oFEWw6mR9w8e5cVGAVTu2tRx4Le5voM/DahuXaN8/wMnrTmfbeFJOchL6FAasREN4LoroYmmmq1SDW9IjA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     aes-js "^3.1.0"
@@ -2982,7 +2982,7 @@ edge-core-js@^0.12.16:
     biggystring "^3.0.2"
     currency-codes "^1.1.2"
     detect-bundler "^1.0.0"
-    disklet "^0.2.8"
+    disklet "^0.3.0"
     elliptic "^6.4.0"
     ethereumjs-tx "^1.3.7"
     ethereumjs-util "^5.2.0"
@@ -2992,7 +2992,7 @@ edge-core-js@^0.12.16:
     node-fetch "^2.0.0"
     redux "^3.6.0"
     redux-keto "^0.3.2"
-    redux-pixies "^0.3.5"
+    redux-pixies "^0.3.6"
     rfc4648 "^1.1.0"
     scrypt-js "^2.0.3"
     utf8 "^3.0.0"
@@ -8118,10 +8118,10 @@ redux-logger@~2.7.4:
   dependencies:
     deep-diff "0.3.4"
 
-redux-pixies@^0.3.5:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/redux-pixies/-/redux-pixies-0.3.5.tgz#6ff1d83334d73925202d73d72a45e3d652ee4634"
-  integrity sha512-LbJzV7DDiL4Iyy9pjp4DjC+0zHeLfPnS6iR9M75Ikr9AU+GyJcUDHQsQG7Vz0pXCiGNuIUYCBHn32sbpduyy5g==
+redux-pixies@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/redux-pixies/-/redux-pixies-0.3.6.tgz#b2ea20a559ba9238a020f0f329afe7e6abf18e4c"
+  integrity sha512-RXOEaCKEWa2/qTnUX3GZdziVkgCK1CgzPb739Un/fl2Tam+fJo0MOmyqhxewsz+bj0GaqzYfxIJaaNvEKGL/Yg==
 
 redux-thunk@~2.1.0:
   version "2.1.2"
