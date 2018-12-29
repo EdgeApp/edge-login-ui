@@ -36,8 +36,8 @@ const MaterialInputWithDrop = {
   },
   searchContainer: {
     width: '144%',
-    minHeight: 0,
-    backgroundColor: Constants.ACCENT_ORANGE
+    maxHeight: scale(200),
+    backgroundColor: Constants.WHITE
   },
   row: {
     // backgroundColor: THEME.COLORS.WHITE, padding: 10
