@@ -42,9 +42,9 @@
   "lint-staged": {
     "linters": {
       "*.js": [
-        "eslint",
-        "import-sort --list-different",
-        "prettier-eslint --list-different"
+        "import-sort -l --write",
+        "prettier-eslint --write",
+        "git add"
       ]
     },
     "ignore": [

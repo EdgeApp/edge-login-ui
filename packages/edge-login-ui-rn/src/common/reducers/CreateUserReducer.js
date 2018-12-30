@@ -25,6 +25,8 @@ export default function (state = initialState, action) {
       return { ...state, accountObject: action.data, creationSuccess: true }
     case Constants.CREATE_ACCOUNT_FAIL:
       return { ...state, createErrorMessage: action.data }
+    case Constants.CLEAR_CREATE_ERROR_MESSAGE:
+      return { ...state, createErrorMessage: null }
     case Constants.CREATE_UPDATE_USERNAME:
       return {
         ...state,
