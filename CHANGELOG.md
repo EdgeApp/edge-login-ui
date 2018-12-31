@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.5.14
+
+* rn: handle errors thrown during create account
+
 ## 0.5.13
 
 * all: Upgrade to edge-core-js v0.13.5
