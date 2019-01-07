@@ -11,12 +11,14 @@ import * as Assets from '../../assets/'
 import {
   BackgroundImage,
   Button,
+  DropDownList,
   FormField,
   FormFieldWithDropComponent,
   StaticModal
 } from '../../components/common'
 import * as Offsets from '../../constants'
 import { LogoImageHeader, UserListItem } from '../abSpecific'
+import { IconButton } from '../common'
 
 type Props = {
   styles: Object,
@@ -43,7 +45,8 @@ type State = {
   focusSecond: boolean,
   offset: number,
   showRecoveryModalOne: boolean,
-  showRecoveryModalTwo: boolean
+  showRecoveryModalTwo: boolean,
+  usernameList: boolean
 }
 
 export default class LoginUsernamePasswordScreenComponent extends Component<
@@ -67,7 +70,8 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       focusSecond: false,
       offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN,
       showRecoveryModalOne: false,
-      showRecoveryModalTwo: false
+      showRecoveryModalTwo: false,
+      usernameList: false
     }
   }
   renderModal = (style: Object) => {
@@ -218,42 +222,48 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     )
   }
   renderUsername (styles: Object) {
-    if (this.props.previousUsers.length > 0) {
-      return (
-        <FormFieldWithDropComponent
-          testID={'usernameFormField'}
-          style={styles.inputWithDrop}
-          onChangeText={this.updateUsername.bind(this)}
-          value={this.props.username}
-          label={s.strings.username}
-          returnKeyType={'next'}
-          autoFocus={this.state.focusFirst}
-          forceFocus={this.state.focusFirst}
-          onFocus={this.onfocusOne.bind(this)}
-          autoCorrect={false}
-          isFocused={this.state.focusFirst}
-          onSubmitEditing={this.onSetNextFocus.bind(this)}
-          renderRow={this.renderRow.bind(this)}
-          data={this.props.filteredUsernameList}
-        />
-      )
-    }
     return (
-      <FormField
-        testID={'usernameFormField'}
-        style={styles.input2}
-        onChangeText={this.updateUsername.bind(this)}
-        value={this.props.username}
-        label={s.strings.username}
-        returnKeyType={'next'}
-        autoCorrect={false}
-        autoFocus={this.state.focusFirst}
-        forceFocus={this.state.focusFirst}
-        onFocus={this.onfocusOne.bind(this)}
-        onSubmitEditing={this.onSetNextFocus.bind(this)}
+      <View>
+        <View style={styles.usernameWrapper}>
+          <FormField
+            testID={'usernameFormField'}
+            style={styles.input2}
+            onChangeText={this.updateUsername.bind(this)}
+            value={this.props.username}
+            label={s.strings.username}
+            returnKeyType={'next'}
+            autoCorrect={false}
+            autoFocus={this.state.focusFirst}
+            forceFocus={this.state.focusFirst}
+            onFocus={this.onfocusOne.bind(this)}
+            onSubmitEditing={this.onSetNextFocus.bind(this)}
+          />
+          <IconButton
+            style={this.style.iconButton}
+            icon={
+              this.state.usernameList
+                ? Constants.EXPAND_LESS
+                : Constants.EXPAND_MORE
+            }
+            iconType={Constants.MATERIAL_ICONS}
+            onPress={this.toggleUsernameList.bind(this)}
+          />
+        </View>
+        {this.state.usernameList && this.renderDropdownList()}
+      </View>
+    )
+  }
+
+  renderDropdownList () {
+    return (
+      <DropDownList
+        style={this.style.dropDownList}
+        data={this.props.filteredUsernameList}
+        renderRow={this.renderRow.bind(this)}
       />
     )
   }
+
   renderRow (data: Object) {
     return (
       <UserListItem
@@ -302,6 +312,14 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       </View>
     )
   }
+  toggleUsernameList () {
+    Keyboard.dismiss()
+    this.setState({
+      focusFirst: false,
+      focusSecond: false,
+      usernameList: !this.state.usernameList
+    })
+  }
   onfocusOne () {
     this.setState({
       focusFirst: true,
@@ -328,6 +346,9 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
   }
   selectUser (user: string) {
     this.updateUsername(user)
+    this.setState({
+      usernameList: false
+    })
     if (this.checkPinEnabled(user)) {
       this.props.gotoPinLoginPage()
       return
