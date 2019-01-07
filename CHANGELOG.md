@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.5.15
+
+* rn: added ko, fr, and vi language translations
+* rn: improved UX for Login Screen with multiple accounts
+
 ## 0.5.14
 
 * rn: handle errors thrown during create account
