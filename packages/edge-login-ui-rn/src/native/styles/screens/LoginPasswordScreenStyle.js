@@ -89,7 +89,30 @@ const LoginPasswordScreenStyle = {
     fontSize: scale(15),
     textAlign: 'center'
   },
-  modal: Styles.SkipModalStyle
+  modal: Styles.SkipModalStyle,
+  iconButton: {
+    container: {
+      position: 'absolute',
+      right: 0,
+      bottom: (scale(260) - scale(250)) * 1.6
+    },
+    icon: {
+      color: Constants.WHITE
+    },
+    iconPressed: {
+      color: Constants.SECONDARY
+    },
+    iconSize: scale(Constants.FONTS.defaultFontSize + 8),
+    underlayColor: Constants.TRANSPARENT
+  },
+  usernameWrapper: {
+    width: '100%',
+    flexDirection: 'row'
+  },
+  dropDownList: {
+    maxHeight: scale(200),
+    backgroundColor: '#FFFFFF'
+  }
 }
 
 export { LoginPasswordScreenStyle }

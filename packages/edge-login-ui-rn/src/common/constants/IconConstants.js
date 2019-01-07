@@ -24,6 +24,8 @@ export const KEYBOARD_ARROW_UP = 'keyboard-arrow-up'
 export const SWAP_VERT = 'swap-vert'
 export const SWAP_HORIZ = 'swap-horiz'
 export const EXCLAMATION = 'exclamation'
+export const EXPAND_MORE = 'expand-more'
+export const EXPAND_LESS = 'expand-less'
 
 //
 export const MATERIAL_COMMUNITY = 'materialCommunity'
