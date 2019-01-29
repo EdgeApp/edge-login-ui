@@ -67,6 +67,11 @@ const strings = {
   string_scan_barcode_to_register: 'Scan or Tap to Sign Up with',
   string_scan_barcode_to_signin: 'Scan or Tap To Log In with',
   string_scan_barcode_edge_wallet: 'the Edge Wallet:',
+  string_scan_barcode_edge_question: 'Have Edge Wallet on your phone?',
+  string_scan_barcode_edge_tap: 'Tap to Sign In',
+  string_scan_barcode_edge_scan: 'Scan to Sign In',
+  string_new_account_show_code: 'Hide Edge Login QR Code',
+  string_new_account_hide_code: 'Show Edge Login QR Code',
 
   loading_wallets:
     'Loading Wallets...\nThis may take a few minutes as it is the first time logging into this device.',

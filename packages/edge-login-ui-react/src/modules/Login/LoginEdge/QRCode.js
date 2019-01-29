@@ -1,29 +1,8 @@
 import React, { Component } from 'react'
 
-import { closeLoading } from '../../Loader/Loader.action'
-import { edgeLogin } from '../Login.middleware'
-
 const QRCode = require('qrcode.react')
 
 export default class QRCodeEdge extends Component {
-  componentWillUnmount () {
-    if (this.props.edgeObject) {
-      return this.props.edgeObject.cancelRequest()
-    }
-  }
-  componentDidMount () {
-    this.props.dispatch(
-      edgeLogin((error, account) => {
-        if (!error) {
-          if (window.abcui.loginCallback) {
-            return window.abcui.loginCallback(null, account)
-          }
-          this.props.dispatch(closeLoading())
-          return this.props.history.push('/account')
-        }
-      })
-    )
-  }
   _renderBarcode = () => {
     const { edgeId } = this.props
     if (edgeId) {

@@ -8,9 +8,6 @@ export default ({
   view,
   dispatch,
   edgeId,
-  edgeUsername,
-  edgeAccount,
-  edgeObject,
   toggleQRCode,
   goToSignupPage,
   showMobilePasswordView
@@ -19,20 +16,31 @@ export default ({
     if (view) {
       return (
         <div className={styles.qrCode}>
-          <QRCode
-            dispatch={dispatch}
-            edgeId={edgeId}
-            edgeUsername={edgeUsername}
-            edgeAccount={edgeAccount}
-            edgeObject={edgeObject}
-          />
+          <QRCode edgeId={edgeId} />
           <p className={styles.text}>Scan using Edge wallet to login</p>
         </div>
       )
     }
+    return null
+  }
+  const renderRectangle = () => {
     if (!view) {
-      return null
+      return (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={`https://airbitz.co/elf/?address=${edgeId}`}
+          className={styles.rectangle}
+        >
+          <p className={styles.text}>
+            {t('string_scan_barcode_edge_question')}
+            <br />
+            {t('string_scan_barcode_edge_tap')}
+          </p>
+        </a>
+      )
     }
+    return null
   }
   return (
     <div className={styles.container}>
@@ -44,16 +52,12 @@ export default ({
           <p className={styles.text}>Username Login</p>
         </div>
       </div>
-      <div className={styles.rectangle}>
-        <p className={styles.text}>
-          {t('string_scan_barcode_to_register')}
-          <br />
-          {t('string_scan_barcode_edge_wallet')}
-        </p>
-      </div>
+      {renderRectangle()}
       {renderQRCode()}
       <p className={styles.QRTextToggle} onClick={toggleQRCode}>
-        {view ? 'Hide QR code' : 'Show QR code'}
+        {view
+          ? t('string_new_account_show_code')
+          : t('string_new_account_hide_code')}
       </p>
       <div className={styles.divider} />
       <div className={styles.signUp}>
