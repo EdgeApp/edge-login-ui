@@ -4,28 +4,13 @@ import t from '../../../lib/web/LocaleStrings.js'
 import styles from './LoginEdge.webStyle.scss'
 import QRCode from './QRCode.js'
 
-export default ({
-  view,
-  dispatch,
-  edgeId,
-  edgeUsername,
-  edgeAccount,
-  edgeObject,
-  toggleQRCode,
-  goToSignupPage
-}) => (
+export default ({ edgeId }) => (
   <div className={styles.container}>
     <p className={styles.header}>
-      {t('string_scan_barcode_to_signin')}
+      {t('string_scan_barcode_edge_question')}
       <br />
-      {t('string_scan_barcode_edge_wallet')}
+      {t('string_scan_barcode_edge_scan')}
     </p>
-    <QRCode
-      dispatch={dispatch}
-      edgeId={edgeId}
-      edgeUsername={edgeUsername}
-      edgeAccount={edgeAccount}
-      edgeObject={edgeObject}
-    />
+    <QRCode edgeId={edgeId} />
   </div>
 )
