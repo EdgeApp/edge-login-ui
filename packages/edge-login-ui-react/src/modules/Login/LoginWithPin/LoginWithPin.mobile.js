@@ -23,7 +23,20 @@ export default ({
     if (!loader) {
       return (
         <div className={styles.pinInput}>
-          <p className={styles.placeholder}>&#8226;&#8226;&#8226;&#8226;</p>
+          <p className={styles.placeholder}>
+            <span className={pin.length > 0 ? styles.dark : styles.grey}>
+              &#8226;
+            </span>
+            <span className={pin.length > 1 ? styles.dark : styles.grey}>
+              &#8226;
+            </span>
+            <span className={pin.length > 2 ? styles.dark : styles.grey}>
+              &#8226;
+            </span>
+            <span className={pin.length > 3 ? styles.dark : styles.grey}>
+              &#8226;
+            </span>
+          </p>
           <Input
             autoFocus
             type="password"
