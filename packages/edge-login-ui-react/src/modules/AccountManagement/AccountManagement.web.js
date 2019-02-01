@@ -21,7 +21,7 @@ export default ({
           <br />
           <p>
             <a
-              href="https://edgesecure.co/"
+              href="https://edge.app/"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.airbitzLink}
