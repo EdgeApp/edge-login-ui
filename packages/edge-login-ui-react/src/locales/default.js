@@ -858,18 +858,19 @@ const strings = {
   app_support_phone: '+1-844-928-9744',
   app_support_telegram: 'https://telegram.edge.app',
   app_support_slack: 'https://slack.edge.app',
-  appstore_link: 'https://itunes.apple.com/us/app/airbitz/id843536046',
-  playstore_link: 'https://play.google.com/store/apps/details?id=com.airbitz',
+  appstore_link:
+    'https://itunes.apple.com/us/app/edge-bitcoin-wallet/id1344400091',
+  playstore_link:
+    'https://play.google.com/store/apps/details?id=co.edgesecure.app',
   logo_white_link: 'https://edge.app/static/img/logo-nav.png',
   designed_by: 'Designed and Built by Edge in',
   company_location: 'San Diego, California, USA',
 
   request_footer:
     'Sent from the Edge Mobile Bitcoin Wallet + Business Directory',
-  request_footer_link: 'https://edge.app/app',
+  request_footer_link: 'https://edge.app',
   request_footer_link_title: 'Download Edge for iOS or Android',
-  request_footer_contact:
-    'mailto:info@edge.app?subject=Edge+Bitcoin+Email+Request',
+  request_footer_contact: 'mailto:info@edge.app?subject=Edge+Support+Request',
 
   //  Plugin text
   plugin_starbucks_discount: '(Up to 20% Off)',
