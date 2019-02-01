@@ -5,7 +5,7 @@ import Modal from '../BaseModal.js'
 import styles from './AccountCacheDelete.mobileStyle.scss'
 
 export default ({ view, name, close, deleteAccount }) => (
-  <Modal active={view} close={name} icon={deleteIcon}>
+  <Modal active={view} close={close} icon={deleteIcon}>
     <p className={styles.header}>Delete Account</p>
     <p className={styles.text}>
       Delete <span className={styles.heavy}>{name}</span> on this device only?
