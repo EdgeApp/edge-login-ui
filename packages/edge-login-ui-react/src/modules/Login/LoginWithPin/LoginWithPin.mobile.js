@@ -39,7 +39,9 @@ export default ({
           </p>
           <Input
             autoFocus
-            type="password"
+            type="number"
+            pattern="[0-9]*"
+            inputmode="numeric"
             name="password"
             ref={refPin}
             className={styles.input}
