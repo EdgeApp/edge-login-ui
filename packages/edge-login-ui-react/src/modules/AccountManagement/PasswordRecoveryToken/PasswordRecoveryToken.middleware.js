@@ -25,8 +25,7 @@ const processEmail = (address, email, token, accountUsername, callback) => {
     const username = obfuscateUsername(accountUsername)
     const mobileLink =
       'iOS\n' +
-      'edge' +
-      '://recovery?token=' +
+      'edge://recovery?token=' +
       token +
       '\n\nAndroid\nhttps://recovery.edgesecure.co/recovery?token=' +
       token

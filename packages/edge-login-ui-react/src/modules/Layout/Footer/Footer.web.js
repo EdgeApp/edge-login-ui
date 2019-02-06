@@ -12,11 +12,7 @@ export default () => (
       </div>
       <div className={styles.mid}>
         <p className={styles.text}>
-          <a
-            href="https://edgesecure.co/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://edge.app/" target="_blank" rel="noopener noreferrer">
             {t('fragment_setup_footer_1') + t('fragment_setup_footer_2_link')}
           </a>
         </p>
@@ -24,7 +20,7 @@ export default () => (
       <p className={styles.right}>
         Powered by{' '}
         <a
-          href="https://edgesecure.co/"
+          href="https://edge.app/"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.airbitzLink}

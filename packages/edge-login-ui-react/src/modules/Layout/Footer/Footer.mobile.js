@@ -7,11 +7,7 @@ export default () => (
   <div className={styles.container}>
     <div className={styles.text1Container}>
       <p className={styles.text1}>
-        <a
-          href="https://edgesecure.co/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://edge.app/" target="_blank" rel="noopener noreferrer">
           Increase your Account Security. <br />
           Download Edge & enable 2FA
         </a>
@@ -22,7 +18,7 @@ export default () => (
       <p className={styles.text2}>
         Powered by{' '}
         <a
-          href="https://edgesecure.co/"
+          href="https://edge.app/"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.link}

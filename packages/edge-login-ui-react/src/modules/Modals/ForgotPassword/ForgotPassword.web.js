@@ -14,10 +14,10 @@ export default ({ view, close }) => (
       <a
         target="_blank"
         rel="noopener noreferrer"
-        href="https://airbitz.co/app"
+        href="https://edge.app"
         className={styles.linked}
       >
-        https://edgesecure.co/
+        https://edge.app
       </a>
     </p>
     <p className={styles.text}>
