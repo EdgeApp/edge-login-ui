@@ -6,12 +6,13 @@ import * as Constants from '../../constants/'
 import { scale } from '../../util/scaling.js'
 import * as Styles from '../'
 
-const OFFSET_HACK = scale(-19)
-
 const screenDimensions = {
   height: Dimensions.get('window').height,
   width: Dimensions.get('window').width
 }
+
+const OFFSET_HACK = -(screenDimensions.width / 20)
+
 const FullScreenModalStyle = {
   container: {
     margin: 0,
