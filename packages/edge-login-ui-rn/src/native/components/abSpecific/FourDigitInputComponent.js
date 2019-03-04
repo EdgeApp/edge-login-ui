@@ -32,7 +32,7 @@ type State = {
 }
 
 class FourDigitInputComponent extends Component<Props, State> {
-  inputRef: TextInput
+  inputRef: TextInput | null
   keyboardDidShowListener: any
   keyboardDidHideListener: any
 
@@ -51,8 +51,8 @@ class FourDigitInputComponent extends Component<Props, State> {
   }
 
   loadedInput = (ref: TextInput) => {
+    this.inputRef = ref
     if (ref) {
-      this.inputRef = ref
       this.inputRef.focus()
     }
   }
@@ -68,9 +68,7 @@ class FourDigitInputComponent extends Component<Props, State> {
   }
 
   componentDidMount () {
-    if (this.inputRef) {
-      this.inputRef.focus()
-    }
+    this.inputRef && this.inputRef.focus()
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       this._keyboardDidShow
@@ -79,7 +77,7 @@ class FourDigitInputComponent extends Component<Props, State> {
       'keyboardDidHide',
       this._keyboardDidHide
     )
-    this.inputRef.focus()
+    this.inputRef && this.inputRef.focus()
     this.setState({
       autoFocus: true
     })
@@ -129,7 +127,7 @@ class FourDigitInputComponent extends Component<Props, State> {
     return null
   }
   onFocus = () => {
-    this.inputRef.focus()
+    this.inputRef && this.inputRef.focus()
     this.setState({
       isFocused: true
     })
@@ -138,14 +136,14 @@ class FourDigitInputComponent extends Component<Props, State> {
     if (this.props.dontForceFocus) {
       return
     }
-    this.inputRef.focus()
+    this.inputRef && this.inputRef.focus()
     this.setState({
       isFocused: false,
       circleColor: Constants.WHITE
     })
   }
   refocus = () => {
-    this.inputRef.focus()
+    this.inputRef && this.inputRef.focus()
     this.setState({
       autoFocus: true,
       isFocused: false
