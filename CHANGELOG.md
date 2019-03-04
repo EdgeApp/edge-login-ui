@@ -1,5 +1,21 @@
 # edge-login-ui
 
+
+## 0.5.17
+
+* rn: fix mobile safari
+* rn: fix edge login password recovery bug
+* rn: login text and functionality changes
+* rn: fix pin login not displaying correctly on mobile
+* rn: fix bug on delete cached mobile modal
+* rn: fix some locale variables
+* rn: change url links to latest url app
+* rn: track if TextInput is mounted before calling focus()
+
+## 0.5.16
+
+* rn: update srings
+
 ## 0.5.15
 
 * rn: added ko, fr, and vi language translations
