@@ -47,11 +47,9 @@ export default class SetAccountPinScreenComponent extends Component<
         s.strings.create_account_error_message +
           '\n' +
           this.state.createErrorMessage,
-        [
-          { text: s.strings.cancel },
-          { text: s.strings.try_again, onPress: this.onNextPress }
-        ]
+        [{ text: s.strings.ok }]
       )
+      this.setState({ createErrorMessage: null })
     }
   }
   render () {
