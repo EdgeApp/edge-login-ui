@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.5.18 (2019-04-01)
+
+* rn: Fix account creation error popup.
+* web: Fix Edge login barcode not working.
 
 ## 0.5.17
 
