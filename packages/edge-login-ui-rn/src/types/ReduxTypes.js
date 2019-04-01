@@ -26,6 +26,7 @@ export type State = {
     pin: string,
     pinError: string,
     pinErrorMessage: string,
+    createErrorMessage: string | null,
     confirmPassword: string,
     confirmPasswordErrorMessage: string,
     usernameErrorMessage: string,

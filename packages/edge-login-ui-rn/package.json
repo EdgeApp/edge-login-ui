@@ -1,6 +1,6 @@
 {
   "name": "edge-login-ui-rn",
-  "version": "0.5.13",
+  "version": "0.5.18",
   "description": "Edge login UI components, as a React Native library",
   "keywords": [
     "Airbitz",
@@ -11,16 +11,18 @@
     "key management",
     "security"
   ],
+  "homepage": "https://github.com/EdgeApp/edge-login-ui",
   "license": "SEE LICENSE IN LICENSE",
   "author": "Airbitz, Inc.",
   "files": [
+    "android/**",
+    "edge-login-ui-rn.podspec",
+    "ios/**",
     "LICENSE",
     "src/assets/**",
     "src/common/**",
     "src/native/**",
-    "src/types/**",
-    "ios/**",
-    "android/**"
+    "src/types/**"
   ],
   "main": "src/native/index.js",
   "scripts": {

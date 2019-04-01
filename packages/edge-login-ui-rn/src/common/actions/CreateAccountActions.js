@@ -175,6 +175,7 @@ export function createUser (data: Object) {
         dispatch(
           dispatchActionWithData(Constants.CREATE_ACCOUNT_FAIL, e.message)
         )
+        dispatch(WorkflowActions.goBack())
       }
     }, 300)
   }

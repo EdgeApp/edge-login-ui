@@ -30,25 +30,13 @@ class LoginEdge extends Component {
     return (
       <section className={webStyle.rootContainer}>
         <MediaQuery minWidth={720}>
-          <Desktop
-            view={this.props.view}
-            dispatch={this.props.dispatch}
-            edgeId={this.props.edgeId}
-            edgeUsername={this.props.edgeUsername}
-            edgeAccount={this.props.edgeAccount}
-            edgeObject={this.props.edgeObject}
-            toggleQRCode={this.toggleQRCode}
-            goToSignupPage={this.goToSignupPage}
-          />
+          <Desktop edgeId={this.props.edgeId} />
         </MediaQuery>
         <MediaQuery maxWidth={719}>
           <Mobile
             view={this.props.view}
             dispatch={this.props.dispatch}
             edgeId={this.props.edgeId}
-            edgeUsername={this.props.edgeUsername}
-            edgeAccount={this.props.edgeAccount}
-            edgeObject={this.props.edgeObject}
             toggleQRCode={this.toggleQRCode}
             goToSignupPage={this.goToSignupPage}
             showMobilePasswordView={this.showMobilePasswordView}
@@ -61,8 +49,5 @@ class LoginEdge extends Component {
 
 export default connect(state => ({
   edgeId: state.login.edgeLoginResults.id,
-  edgeUsername: state.login.edgeUsername,
-  edgeAccount: state.login.edgeAccount,
-  edgeObject: state.login.edgeLoginResults,
   view: state.login.mobileShowQRCode
 }))(LoginEdge)

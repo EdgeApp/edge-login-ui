@@ -17,11 +17,6 @@ import Mobile from './LoginWithPin.mobile.js'
 import Desktop from './LoginWithPin.web.js'
 
 class LoginWithPin extends Component {
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.edgeObject) {
-      return nextProps.edgeObject.cancelRequest()
-    }
-  }
   handleSubmit = () => {
     const callback = (error, account) => {
       this.props.dispatch(loginPIN(''))

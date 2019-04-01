@@ -48,7 +48,8 @@ class PasswordRecovery extends Component {
   loadQuestions = () => {
     const dispatch = this.props.dispatch
     const ctx = window.abcui.abcuiContext
-    ctx.listRecoveryQuestionChoices
+    ctx
+      .listRecoveryQuestionChoices()
       .then(results => {
         const questions = results
           .filter(result => result.category === 'recovery2')

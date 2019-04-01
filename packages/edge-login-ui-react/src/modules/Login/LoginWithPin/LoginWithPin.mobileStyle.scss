@@ -151,21 +151,31 @@
             position: absolute;
             font-size: 72px;
             letter-spacing: 1px;
-            color: #f6f6f6;
             margin-top: -14px;
+
+            .grey {
+              color: #f6f6f6;
+            }
+            .dark {
+              color: $color-grey-02;
+            }
           }
 
           .input {
             width: 120px;
             padding-top: 8px;
+            z-index: 1;
 
             input {
-              color: $color-grey-02;
-              font-size: 69px;
-              letter-spacing: 2px;
-              padding-left: 14px;
-              padding-bottom: 26px;
-              height: 0px;
+              border: none;
+              color: transparent;
+              display: inline-block;
+              font-size: 1;
+              caret-color: transparent;
+
+              &:focus {
+                outline: none;
+              }
             }
             span[class*="error"] {
               display: block;

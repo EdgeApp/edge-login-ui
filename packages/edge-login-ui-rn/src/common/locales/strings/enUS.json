@@ -126,5 +126,8 @@
   "four_digit_pin_error": "PIN must be four digits",
   "it_would_take_xx_to_crack": "It would take %s to crack your password",
   "recommend_choosing_a_stronger": "\nWe recommend choosing a stronger password",
-  "backup_key_incorrect": "Backup Key was incorrect"
+  "backup_key_incorrect": "Backup Key was incorrect",
+  "create_account_error_title": "Error occurred creating account",
+  "create_account_error_message": "An error occurred creating your account. This may have been due to a slow network connection or network interruption. Please retry and if you receive another error that the account already exists, please restart the app and login with your username and password.",
+  "try_again": "Try Again"
 }
