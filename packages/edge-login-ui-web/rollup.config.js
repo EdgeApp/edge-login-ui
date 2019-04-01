@@ -18,9 +18,10 @@ const babelOpts = {
 }
 
 const external = [
-  'regenerator-runtime/runtime',
   ...Object.keys(packageJson.dependencies),
-  ...Object.keys(packageJson.devDependencies)
+  ...Object.keys(packageJson.devDependencies),
+  'edge-core-js/lib/client-side.js',
+  'regenerator-runtime/runtime'
 ]
 
 export default {
