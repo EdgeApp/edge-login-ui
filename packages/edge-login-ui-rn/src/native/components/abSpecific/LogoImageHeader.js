@@ -12,7 +12,7 @@ type Props = {
 
 class LogoImageHeader extends Component<Props> {
   render () {
-    let src = Assets.LOGO_BIG
+    let src = this.props.src || Assets.LOGO_BIG
     if (this.props.small) {
       src = Assets.LOGO_SMALL
     }

@@ -11,7 +11,9 @@ import { BackgroundImage, Button } from '../common'
 
 type Props = {
   styles: Object,
-  startFlow(string): void
+  startFlow(string): void,
+  backgroundImage: any,
+  primaryLogo: any
 }
 
 type State = {}
@@ -21,7 +23,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
     return (
       <View style={LandingScreenStyle.container}>
         <BackgroundImage
-          src={Assets.LOGIN_BACKGROUND}
+          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
           style={LandingScreenStyle.backgroundImage}
           content={this.renderOverImage()}
         />
@@ -33,7 +35,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
     return (
       <View style={LandingScreenStyle.inner}>
         <View style={LandingScreenStyle.featureBox}>
-          <LogoImageHeader style={LandingScreenStyle.logoHeader} />
+          <LogoImageHeader style={LandingScreenStyle.logoHeader} src={this.props.primaryLogo} />
           <View style={LandingScreenStyle.featureBoxContent}>
             <View style={LandingScreenStyle.featureBoxDescription}>
               <Text style={LandingScreenStyle.tagText}>

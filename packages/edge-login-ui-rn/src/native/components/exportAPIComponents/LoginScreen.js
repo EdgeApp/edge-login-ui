@@ -21,7 +21,9 @@ type Props = {
   recoveryLogin?: string,
   accountOptions: any,
   fontDescription: any,
-  onLogin(error: ?Error, account: ?EdgeAccount, touchIdInfo: ?Object): void
+  onLogin(error: ?Error, account: ?EdgeAccount, touchIdInfo: ?Object): void,
+  backgroundImage: any,
+  primaryLogo: any
 }
 
 type State = {}
@@ -93,6 +95,8 @@ class LoginScreen extends Component<Props> {
           onLogin={this.props.onLogin}
           recoveryLogin={this.props.recoveryLogin}
           styles={Styles}
+          backgroundImage={this.props.backgroundImage}
+          primaryLogo={this.props.primaryLogo}
         />
       </Provider>
     )

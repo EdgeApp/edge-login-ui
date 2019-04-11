@@ -23,7 +23,9 @@ type Props = {
   changeUser(string): void,
   launchDeleteModal(): void,
   gotoLoginPage(): void,
-  isTouchIdDisabled: boolean
+  isTouchIdDisabled: boolean,
+  backgroundImage: any,
+  primaryLogo: any
 }
 type State = {
   loggingIn: boolean,
@@ -78,7 +80,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     return (
       <View style={PinLoginScreenStyle.container}>
         <BackgroundImage
-          src={Assets.LOGIN_BACKGROUND}
+          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
           style={PinLoginScreenStyle.backgroundImage}
           content={this.renderOverImage()}
         />
@@ -94,7 +96,10 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     return (
       <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
         <View style={PinLoginScreenStyle.featureBox}>
-          <LogoImageHeader style={PinLoginScreenStyle.logoHeader} />
+          <LogoImageHeader
+            style={PinLoginScreenStyle.logoHeader}
+            src={this.props.primaryLogo}
+          />
           <View style={PinLoginScreenStyle.featureBoxBody}>
             {this.renderBottomHalf(PinLoginScreenStyle)}
           </View>
@@ -177,7 +182,6 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     })
   }
   hideDrop () {
-    console.log('fooobarsas')
     this.setState({
       focusOn: 'pin'
     })

@@ -16,7 +16,7 @@ export default class LoadingScreenComponent extends Component<Props> {
     return (
       <View style={LandingScreenStyle.container}>
         <BackgroundImage
-          src={Assets.LOGIN_BACKGROUND}
+          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
           style={LandingScreenStyle.backgroundImage}
           content={this.renderSpinner()}
         />

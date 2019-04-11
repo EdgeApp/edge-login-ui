@@ -34,7 +34,9 @@ type Props = {
   launchUserLoginWithTouchId(Object): void,
   gotoPinLoginPage(): void,
   launchDeleteModal(): void,
-  recoverPasswordLogin(): void
+  recoverPasswordLogin(): void,
+  backgroundImage: any,
+  primaryLogo: any
 }
 
 type State = {
@@ -178,7 +180,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         contentContainerStyle={this.style.mainScrollView}
       >
         <BackgroundImage
-          src={Assets.LOGIN_BACKGROUND}
+          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
           style={this.style.backgroundImage}
           content={this.renderOverImage()}
           callback={this.noFocus}
@@ -198,7 +200,10 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     return (
       <TouchableWithoutFeedback onPress={this.noFocus}>
         <View style={this.style.featureBox}>
-          <LogoImageHeader style={this.style.logoHeader} />
+          <LogoImageHeader
+            style={this.style.logoHeader}
+            src={this.props.primaryLogo}
+          />
           {this.renderUsername(this.style)}
           <View style={this.style.shimTiny} />
           <FormField
