@@ -26,8 +26,12 @@ export type StateProps = {
   previousUsers: ?Object,
   lastUser: Object,
   lastUserPinEnabled: boolean,
-  backgroundImage: any,
-  primaryLogo: any
+  appId?: string,
+  appName?: string,
+  backgroundImage?: any,
+  primaryLogo?: any,
+  parentButton?: Object,
+  landingScreenText?: string
 }
 export type OwnProps = {
   styles: Object
@@ -113,8 +117,11 @@ export class LoginAppComponent extends Component<Props, State> {
     return (
       <LandingScreenConnector
         styles={this.props.styles}
+        appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
+        parentButton={this.props.parentButton}
+        landingScreenText={this.props.landingScreenText}
       />
     )
   }
@@ -142,8 +149,10 @@ export class LoginAppComponent extends Component<Props, State> {
     return (
       <LoginUsernamePasswordScreenConnector
         styles={this.props.styles}
+        appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
+        parentButton={this.props.parentButton}
       />
     )
   }
@@ -152,8 +161,10 @@ export class LoginAppComponent extends Component<Props, State> {
     return (
       <PinLoginScreenConnector
         styles={this.props.styles}
+        appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
+        parentButton={this.props.parentButton}
       />
     )
   }

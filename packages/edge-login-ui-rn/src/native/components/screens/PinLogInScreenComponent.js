@@ -11,6 +11,7 @@ import {
   BackgroundImage,
   Button,
   DropDownList,
+  HeaderParentButtons,
   ImageButton
 } from '../../components/common'
 import FourDigitInputConnector from '../../connectors/abSpecific/FourDigitInputConnector'
@@ -24,8 +25,10 @@ type Props = {
   launchDeleteModal(): void,
   gotoLoginPage(): void,
   isTouchIdDisabled: boolean,
-  backgroundImage: any,
-  primaryLogo: any
+  appId?: string,
+  backgroundImage?: any,
+  primaryLogo?: any,
+  parentButton?: Object
 }
 type State = {
   loggingIn: boolean,
@@ -94,19 +97,26 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
       return null
     }
     return (
-      <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
-        <View style={PinLoginScreenStyle.featureBox}>
-          <LogoImageHeader
-            style={PinLoginScreenStyle.logoHeader}
-            src={this.props.primaryLogo}
-          />
-          <View style={PinLoginScreenStyle.featureBoxBody}>
-            {this.renderBottomHalf(PinLoginScreenStyle)}
+      <View style={PinLoginScreenStyle.featureBoxContainer}>
+        <HeaderParentButtons
+          parentButton={this.props.parentButton}
+          styles={this.props.styles.HeaderParentButtons}
+          appId={this.props.appId}
+        />
+        <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
+          <View style={PinLoginScreenStyle.featureBox}>
+            <LogoImageHeader
+              style={PinLoginScreenStyle.logoHeader}
+              src={this.props.primaryLogo}
+            />
+            <View style={PinLoginScreenStyle.featureBoxBody}>
+              {this.renderBottomHalf(PinLoginScreenStyle)}
+            </View>
+            {this.renderTouchButton(PinLoginScreenStyle)}
+            {this.renderModal(PinLoginScreenStyle)}
           </View>
-          {this.renderTouchButton(PinLoginScreenStyle)}
-          {this.renderModal(PinLoginScreenStyle)}
-        </View>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </View>
     )
   }
 

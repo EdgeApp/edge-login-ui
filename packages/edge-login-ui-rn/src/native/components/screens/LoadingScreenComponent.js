@@ -7,7 +7,8 @@ import * as Assets from '../../assets/'
 import { BackgroundImage, Spinner } from '../common'
 
 type Props = {
-  styles: Object
+  styles: Object,
+  backgroundImage?: any
 }
 
 export default class LoadingScreenComponent extends Component<Props> {

@@ -17,6 +17,9 @@ const LoginPasswordScreenStyle = {
     width: '100%',
     height: '100%'
   },
+  featureBoxContainer: {
+    width: '100%'
+  },
   featureBox: {
     position: 'relative',
     top: scale(55),

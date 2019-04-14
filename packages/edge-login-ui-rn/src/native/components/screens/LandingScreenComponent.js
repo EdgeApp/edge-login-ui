@@ -7,13 +7,16 @@ import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
 import * as Assets from '../../assets/'
 import { LogoImageHeader } from '../abSpecific'
-import { BackgroundImage, Button } from '../common'
+import { BackgroundImage, Button, HeaderParentButtons } from '../common'
 
 type Props = {
   styles: Object,
   startFlow(string): void,
-  backgroundImage: any,
-  primaryLogo: any
+  appId?: string,
+  backgroundImage?: any,
+  primaryLogo?: any,
+  parentButton?: Object,
+  landingScreenText?: string
 }
 
 type State = {}
@@ -34,12 +37,20 @@ export default class LandingScreenComponent extends Component<Props, State> {
     const { LandingScreenStyle } = this.props.styles
     return (
       <View style={LandingScreenStyle.inner}>
+        <HeaderParentButtons
+          parentButton={this.props.parentButton}
+          styles={this.props.styles.HeaderParentButtons}
+          appId={this.props.appId}
+        />
         <View style={LandingScreenStyle.featureBox}>
-          <LogoImageHeader style={LandingScreenStyle.logoHeader} src={this.props.primaryLogo} />
+          <LogoImageHeader
+            style={LandingScreenStyle.logoHeader}
+            src={this.props.primaryLogo}
+          />
           <View style={LandingScreenStyle.featureBoxContent}>
             <View style={LandingScreenStyle.featureBoxDescription}>
               <Text style={LandingScreenStyle.tagText}>
-                {s.strings.landing_tagline}
+                {this.props.landingScreenText || s.strings.landing_tagline}
               </Text>
             </View>
           </View>
@@ -69,7 +80,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
   }
   onStartCreate () {
     global.firebase &&
-      global.firebase.analytics().logEvent(`Signup_Create_Account`)
+      global.firebase.analytics().logEvent('Signup_Create_Account')
     this.props.startFlow(Constants.WORKFLOW_CREATE)
   }
 
