@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.5.19 (2019-04-22)
+
+- rn: Fix compatibility with React Native v0.59
+
 ## 0.5.18 (2019-04-01)
 
 * rn: Fix account creation error popup.
