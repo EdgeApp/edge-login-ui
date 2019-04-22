@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { sprintf } from 'sprintf-js'
 
 import s from '../../../../common/locales/strings'
 import * as Assets from '../../../assets'
@@ -13,7 +14,8 @@ import SafeAreaView from '../../common/SafeAreaView.js'
 type Props = {
   styles: Object,
   nextScreen(): void,
-  exitScreen(): void
+  exitScreen(): void,
+  appName: string
 }
 
 type State = {}
@@ -42,7 +44,10 @@ export default class NewAccountWelcomeScreenComponent extends Component<
           </View>
           <View style={NewAccountWelcomeScreenStyle.row3}>
             <T style={NewAccountWelcomeScreenStyle.instructionsText}>
-              {s.strings.welcome_one}
+              {sprintf(
+                s.strings.welcome_one,
+                this.props.appName || s.strings.app_name_default
+              )}
             </T>
           </View>
           <View style={NewAccountWelcomeScreenStyle.row4} />

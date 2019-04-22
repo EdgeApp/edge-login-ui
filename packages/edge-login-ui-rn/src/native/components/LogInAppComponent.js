@@ -128,9 +128,19 @@ export class LoginAppComponent extends Component<Props, State> {
   getCreateScreen () {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <NewAccountWelcomeScreenConnector styles={this.props.styles} /> // NewAccountWelcomeScreenConnector
+        return (
+          <NewAccountWelcomeScreenConnector
+            styles={this.props.styles}
+            appName={this.props.appName}
+          />
+        ) // NewAccountWelcomeScreenConnector
       case 1:
-        return <NewAccountUsernameScreenConnector styles={this.props.styles} />
+        return (
+          <NewAccountUsernameScreenConnector
+            styles={this.props.styles}
+            appName={this.props.appName}
+          />
+        )
       case 2:
         return <NewAccountPasswordScreenConnector styles={this.props.styles} />
       case 3:
@@ -140,7 +150,12 @@ export class LoginAppComponent extends Component<Props, State> {
       case 5:
         return <NewAccountReviewScreenConnector styles={this.props.styles} />
       case 6:
-        return <TermsAndConditionsScreenConnector styles={this.props.styles} />
+        return (
+          <TermsAndConditionsScreenConnector
+            styles={this.props.styles}
+            appName={this.props.appName}
+          />
+        )
       default:
         return <NewAccountWelcomeScreenConnector styles={this.props.styles} />
     }

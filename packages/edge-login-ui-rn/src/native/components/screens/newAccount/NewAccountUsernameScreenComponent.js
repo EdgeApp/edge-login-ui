@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { sprintf } from 'sprintf-js'
 
 import s from '../../../../common/locales/strings'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
@@ -13,7 +14,8 @@ import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 type Props = {
   styles: Object,
   username: string,
-  checkUsernameForAvailabilty(string): void
+  checkUsernameForAvailabilty(string): void,
+  appName: string
 }
 type State = {
   isProcessing: boolean
@@ -42,7 +44,10 @@ export default class LandingScreenComponent extends Component<Props, State> {
           <View style={NewAccountUsernameScreenStyle.pageContainer}>
             <View style={NewAccountUsernameScreenStyle.instructions}>
               <T style={NewAccountUsernameScreenStyle.instructionsText}>
-                {s.strings.username_desc}
+                {sprintf(
+                  s.strings.username_desc,
+                  this.props.appName || s.strings.app_name_default
+                )}
               </T>
             </View>
             <UsernameConnector
