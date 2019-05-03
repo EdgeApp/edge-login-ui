@@ -70,7 +70,7 @@ class Button extends Component<Props, State> {
     }
     return (
       <View>
-        <Spinner />
+        <Spinner size="small" />
       </View>
     )
   }
