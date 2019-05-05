@@ -3,6 +3,7 @@
 import type { EdgeAccount } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { sprintf } from 'sprintf-js'
 
 import s from '../../../../common/locales/strings'
 import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
@@ -14,7 +15,8 @@ type Props = {
   styles: Object,
   accountObject: EdgeAccount,
   terms: Object,
-  agreeToCondition(EdgeAccount): void
+  agreeToCondition(EdgeAccount): void,
+  appName: string
 }
 type State = {
   totalChecks: number
@@ -30,7 +32,8 @@ export default class TermsAndConditionsScreenComponent extends Component<
     }
   }
   renderItems (style: Object) {
-    return this.props.terms.items.map(Item => (
+    const terms = this.changeAppName()
+    return terms.map(Item => (
       <View style={style.checkboxContainer} key={Item.title}>
         <Checkbox
           style={style.checkboxes}
@@ -102,5 +105,29 @@ export default class TermsAndConditionsScreenComponent extends Component<
     global.firebase &&
       global.firebase.analytics().logEvent(`Signup_Terms_Agree`)
     this.props.agreeToCondition(this.props.accountObject)
+  }
+
+  changeAppName = () => {
+    const { terms, appName } = this.props
+    if (appName) {
+      return terms.items.map((item, index) => {
+        if (index === 0) {
+          return {
+            title: sprintf(s.strings.terms_one, appName),
+            value: item.value
+          }
+        }
+        if (index === 1) {
+          return item
+        }
+        if (index === 2) {
+          return {
+            title: sprintf(s.strings.terms_three, appName),
+            value: item.value
+          }
+        }
+      })
+    }
+    return terms.items
   }
 }
