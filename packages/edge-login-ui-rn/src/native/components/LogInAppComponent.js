@@ -25,7 +25,13 @@ export type StateProps = {
   recoveryLogin: string,
   previousUsers: ?Object,
   lastUser: Object,
-  lastUserPinEnabled: boolean
+  lastUserPinEnabled: boolean,
+  appId?: string,
+  appName?: string,
+  backgroundImage?: any,
+  primaryLogo?: any,
+  parentButton?: Object,
+  landingScreenText?: string
 }
 export type OwnProps = {
   styles: Object
@@ -100,10 +106,24 @@ export class LoginAppComponent extends Component<Props, State> {
   }
 
   getLoadingScreen () {
-    return <LoadingScreenConnector styles={this.props.styles} />
+    return (
+      <LoadingScreenConnector
+        styles={this.props.styles}
+        backgroundImage={this.props.backgroundImage}
+      />
+    )
   }
   getLandingScreen () {
-    return <LandingScreenConnector styles={this.props.styles} />
+    return (
+      <LandingScreenConnector
+        styles={this.props.styles}
+        appId={this.props.appId}
+        backgroundImage={this.props.backgroundImage}
+        primaryLogo={this.props.primaryLogo}
+        parentButton={this.props.parentButton}
+        landingScreenText={this.props.landingScreenText}
+      />
+    )
   }
   getCreateScreen () {
     switch (this.props.workflow.currentSceneIndex) {
@@ -126,11 +146,27 @@ export class LoginAppComponent extends Component<Props, State> {
     }
   }
   getPasswordScreen () {
-    return <LoginUsernamePasswordScreenConnector styles={this.props.styles} />
+    return (
+      <LoginUsernamePasswordScreenConnector
+        styles={this.props.styles}
+        appId={this.props.appId}
+        backgroundImage={this.props.backgroundImage}
+        primaryLogo={this.props.primaryLogo}
+        parentButton={this.props.parentButton}
+      />
+    )
   }
 
   getPinScreen () {
-    return <PinLoginScreenConnector styles={this.props.styles} />
+    return (
+      <PinLoginScreenConnector
+        styles={this.props.styles}
+        appId={this.props.appId}
+        backgroundImage={this.props.backgroundImage}
+        primaryLogo={this.props.primaryLogo}
+        parentButton={this.props.parentButton}
+      />
+    )
   }
   getOtpScreen () {
     return <OtpErrorScreenConnector styles={this.props.styles} />

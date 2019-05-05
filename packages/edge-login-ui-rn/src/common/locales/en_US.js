@@ -1,5 +1,6 @@
 // @flow
 const strings = {
+  edge_site: 'https://edge.app/',
   login_button: 'Login',
   username: 'Username',
   password: 'Password',

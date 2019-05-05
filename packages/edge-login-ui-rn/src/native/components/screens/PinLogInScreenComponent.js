@@ -11,6 +11,7 @@ import {
   BackgroundImage,
   Button,
   DropDownList,
+  HeaderParentButtons,
   ImageButton
 } from '../../components/common'
 import FourDigitInputConnector from '../../connectors/abSpecific/FourDigitInputConnector'
@@ -23,7 +24,11 @@ type Props = {
   changeUser(string): void,
   launchDeleteModal(): void,
   gotoLoginPage(): void,
-  isTouchIdDisabled: boolean
+  isTouchIdDisabled: boolean,
+  appId?: string,
+  backgroundImage?: any,
+  primaryLogo?: any,
+  parentButton?: Object
 }
 type State = {
   loggingIn: boolean,
@@ -78,7 +83,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     return (
       <View style={PinLoginScreenStyle.container}>
         <BackgroundImage
-          src={Assets.LOGIN_BACKGROUND}
+          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
           style={PinLoginScreenStyle.backgroundImage}
           content={this.renderOverImage()}
         />
@@ -92,16 +97,26 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
       return null
     }
     return (
-      <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
-        <View style={PinLoginScreenStyle.featureBox}>
-          <LogoImageHeader style={PinLoginScreenStyle.logoHeader} />
-          <View style={PinLoginScreenStyle.featureBoxBody}>
-            {this.renderBottomHalf(PinLoginScreenStyle)}
+      <View style={PinLoginScreenStyle.featureBoxContainer}>
+        <HeaderParentButtons
+          parentButton={this.props.parentButton}
+          styles={this.props.styles.HeaderParentButtons}
+          appId={this.props.appId}
+        />
+        <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
+          <View style={PinLoginScreenStyle.featureBox}>
+            <LogoImageHeader
+              style={PinLoginScreenStyle.logoHeader}
+              src={this.props.primaryLogo}
+            />
+            <View style={PinLoginScreenStyle.featureBoxBody}>
+              {this.renderBottomHalf(PinLoginScreenStyle)}
+            </View>
+            {this.renderTouchButton(PinLoginScreenStyle)}
+            {this.renderModal(PinLoginScreenStyle)}
           </View>
-          {this.renderTouchButton(PinLoginScreenStyle)}
-          {this.renderModal(PinLoginScreenStyle)}
-        </View>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </View>
     )
   }
 
@@ -177,7 +192,6 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     })
   }
   hideDrop () {
-    console.log('fooobarsas')
     this.setState({
       focusOn: 'pin'
     })

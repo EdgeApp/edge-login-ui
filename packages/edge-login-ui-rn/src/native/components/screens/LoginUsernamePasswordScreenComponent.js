@@ -18,7 +18,7 @@ import {
 } from '../../components/common'
 import * as Offsets from '../../constants'
 import { LogoImageHeader, UserListItem } from '../abSpecific'
-import { IconButton } from '../common'
+import { HeaderParentButtons, IconButton } from '../common'
 
 type Props = {
   styles: Object,
@@ -34,7 +34,11 @@ type Props = {
   launchUserLoginWithTouchId(Object): void,
   gotoPinLoginPage(): void,
   launchDeleteModal(): void,
-  recoverPasswordLogin(): void
+  recoverPasswordLogin(): void,
+  appId?: string,
+  backgroundImage?: any,
+  primaryLogo?: any,
+  parentButton?: Object
 }
 
 type State = {
@@ -178,7 +182,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         contentContainerStyle={this.style.mainScrollView}
       >
         <BackgroundImage
-          src={Assets.LOGIN_BACKGROUND}
+          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
           style={this.style.backgroundImage}
           content={this.renderOverImage()}
           callback={this.noFocus}
@@ -196,29 +200,39 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       return null
     }
     return (
-      <TouchableWithoutFeedback onPress={this.noFocus}>
-        <View style={this.style.featureBox}>
-          <LogoImageHeader style={this.style.logoHeader} />
-          {this.renderUsername(this.style)}
-          <View style={this.style.shimTiny} />
-          <FormField
-            testID={'passwordFormField'}
-            style={this.style.input2}
-            onChangeText={this.updatePassword.bind(this)}
-            value={this.props.password}
-            label={s.strings.password}
-            error={this.props.error}
-            autoCorrect={false}
-            secureTextEntry
-            returnKeyType={'go'}
-            forceFocus={this.state.focusSecond}
-            onFocus={this.onfocusTwo.bind(this)}
-            onSubmitEditing={this.onStartLogin.bind(this)}
-          />
-          {this.renderButtons(this.style)}
-          {this.renderModal(this.style)}
-        </View>
-      </TouchableWithoutFeedback>
+      <View style={this.style.featureBoxContainer}>
+        <HeaderParentButtons
+          parentButton={this.props.parentButton}
+          styles={this.props.styles.HeaderParentButtons}
+          appId={this.props.appId}
+        />
+        <TouchableWithoutFeedback onPress={this.noFocus}>
+          <View style={this.style.featureBox}>
+            <LogoImageHeader
+              style={this.style.logoHeader}
+              src={this.props.primaryLogo}
+            />
+            {this.renderUsername(this.style)}
+            <View style={this.style.shimTiny} />
+            <FormField
+              testID={'passwordFormField'}
+              style={this.style.input2}
+              onChangeText={this.updatePassword.bind(this)}
+              value={this.props.password}
+              label={s.strings.password}
+              error={this.props.error}
+              autoCorrect={false}
+              secureTextEntry
+              returnKeyType={'go'}
+              forceFocus={this.state.focusSecond}
+              onFocus={this.onfocusTwo.bind(this)}
+              onSubmitEditing={this.onStartLogin.bind(this)}
+            />
+            {this.renderButtons(this.style)}
+            {this.renderModal(this.style)}
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
     )
   }
   renderUsername (styles: Object) {

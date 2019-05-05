@@ -15,6 +15,9 @@ const PinLoginScreenStyle = {
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
+  featureBoxContainer: {
+    width: '100%'
+  },
   featureBox: {
     position: 'relative',
     top: scale(40),
