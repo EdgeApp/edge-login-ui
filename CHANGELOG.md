@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.5.20 (2019-05-07)
+
+- rn: Provide props for easy customization of text and logos
+- rn: Improve visual appearance of some items
+
 ## 0.5.19 (2019-04-22)
 
 - rn: Fix compatibility with React Native v0.59
