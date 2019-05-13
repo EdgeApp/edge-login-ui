@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.5.21 (2019-05-13)
+
+- rn: Show the exact date of the upcoming 2fa reset.
+
 ## 0.5.20 (2019-05-07)
 
 - rn: Provide props for easy customization of text and logos
