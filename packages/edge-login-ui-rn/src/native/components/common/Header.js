@@ -26,7 +26,7 @@ class Header extends Component<Props> {
     const Style = this.props.style
     return (
       <LinearGradient
-        style={Style.container}
+        style={[Style.container, { paddingTop: 0 }]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={Colors.GRADIENT}

@@ -10,8 +10,7 @@ const HeaderContainerStyle = {
     height: Constants.HEADER_HEIGHT,
     width: '100%',
     backgroundColor: Constants.TRANSPARENT,
-    flexDirection: 'row',
-    paddingVertical: scale(6)
+    flexDirection: 'row'
   },
   headerBackButtonStyle: {
     backButton: {
