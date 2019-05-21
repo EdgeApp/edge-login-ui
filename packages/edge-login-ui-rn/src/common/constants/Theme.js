@@ -2,7 +2,7 @@
 
 import { Platform } from 'react-native'
 
-export const HEADER_HEIGHT = Platform.OS === 'ios' ? 57 : 86
+export const HEADER_HEIGHT = Platform.OS === 'ios' ? 42 : 54
 export const STATIC_MODAL_HEADER_HEIGHT = 62
 
 export const BUTTON_HEIGHT = 44

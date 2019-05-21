@@ -27,7 +27,7 @@ export default class NewAccountWelcomeScreenComponent extends Component<
     const { NewAccountWelcomeScreenStyle } = this.props.styles
 
     return (
-      <SafeAreaView>
+      <SafeAreaView style={{ position: 'relative', top: 32 }}>
         <View style={NewAccountWelcomeScreenStyle.screen}>
           <View style={NewAccountWelcomeScreenStyle.row1}>
             <HeaderBackButton
