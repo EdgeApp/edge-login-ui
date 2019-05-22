@@ -2971,10 +2971,10 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-edge-components@^0.0.23:
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/edge-components/-/edge-components-0.0.23.tgz#2f9e0f229743ea47ab51a83fe238639adbeaddd0"
-  integrity sha512-HDha+U9N88AYTIgLzt6ajZbCw1q38xyGIIKw55WkDDOd1VgKf2P12hxbPqQvWTJ0XwCmmj2nfwimM/J/HbHutQ==
+edge-components@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/edge-components/-/edge-components-0.0.24.tgz#580711166ef290299ebfbd410b0ebad080649b7f"
+  integrity sha512-GHPgEhhMK7YPL1IzXMT+jdoCk5swFy9syAg804/ua4oy4H4FWYsyepeqxqjkAAAo1ZKn7ag7+MVYBhbkGMKC/g==
   dependencies:
     react-native-linear-gradient "^2.4.0"
 
