@@ -23,13 +23,15 @@ class EdgeLoginQrComponent extends Component<Props> {
   renderQR (style: Object) {
     if (this.props.edgeLoginId) {
       return (
-        <QrCode
-          style={style.qrCode}
-          value={this.props.edgeLoginId}
-          bgColor={style.qrCodeBackground.color}
-          fgColor={style.qrCodeForeground.color}
-          size={style.qrCodeSize}
-        />
+        <View style={{ overflow: 'hidden' }}>
+          <QrCode
+            style={style.qrCode}
+            value={this.props.edgeLoginId}
+            bgColor={style.qrCodeBackground.color}
+            fgColor={style.qrCodeForeground.color}
+            size={style.qrCodeSize}
+          />
+        </View>
       )
     }
     return null
