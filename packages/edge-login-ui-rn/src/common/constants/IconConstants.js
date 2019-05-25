@@ -17,8 +17,6 @@ export const CLOSE_ICON = 'close'
 export const MAIL = 'ios-mail'
 export const UNLOCKED_ICON = 'ios-unlock'
 export const LOCKED_ICON = 'ios-lock'
-export const WARNING = 'ios-warning'
-export const CREATE = 'ios-create'
 // Materieal
 export const MATERIAL_ICONS = 'material'
 export const KEYBOARD_ARROW_DOWN = 'keyboard-arrow-down'

@@ -169,11 +169,6 @@ export function createUser (data: Object) {
           .file('lastuser.json')
           .setText(JSON.stringify({ username: abcAccount.username }))
           .catch(e => null)
-        await abcAccount.dataStore.setItem(
-          Constants.OTP_REMINDER_STORE_NAME,
-          Constants.OTP_REMINDER_KEY_NAME_CREATED_AT,
-          Date.now().toString()
-        )
         dispatch(getPreviousUsers())
       } catch (e) {
         console.log(e)
