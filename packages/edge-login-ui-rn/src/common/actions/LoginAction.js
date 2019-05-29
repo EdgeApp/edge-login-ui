@@ -3,8 +3,7 @@
 import {
   createSimpleConfirmModal,
   createThreeButtonModal,
-  createYesNoModal,
-  showModal
+  createYesNoModal
 } from 'edge-components'
 import React from 'react'
 
@@ -19,7 +18,7 @@ import {
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import s from '../locales/strings.js'
-import { translateError } from '../util'
+import { showModal, translateError } from '../util'
 import {
   dispatchAction,
   dispatchActionWitString,
