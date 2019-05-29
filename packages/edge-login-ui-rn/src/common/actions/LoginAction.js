@@ -1,6 +1,14 @@
 // @flow
 
 import {
+  createSimpleConfirmModal,
+  createThreeButtonModal,
+  createYesNoModal
+} from 'edge-components'
+import React from 'react'
+
+import { ModalIcon as Icon } from '../../native/components/common'
+import {
   enableTouchId,
   isTouchDisabled,
   isTouchEnabled,
@@ -10,7 +18,7 @@ import {
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import s from '../locales/strings.js'
-import { translateError } from '../util'
+import { showModal, translateError } from '../util'
 import {
   dispatchAction,
   dispatchActionWitString,
@@ -125,6 +133,7 @@ export function userLoginWithTouchId (data: Object) {
             .file('lastuser.json')
             .setText(JSON.stringify({ username: data.username }))
             .catch(e => null)
+          await twofaReminder(account)
           dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
           const touchIdInformation = {
             isTouchSupported: true,
@@ -176,6 +185,7 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
             isTouchSupported,
             isTouchEnabled: touchEnabled
           }
+          await twofaReminder(abcAccount)
           dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
           callback(null, abcAccount, touchIdInformation)
         } catch (e) {
@@ -266,6 +276,7 @@ export function userLogin (data: Object, backupKey?: string) {
           isTouchSupported,
           isTouchEnabled: touchEnabled
         }
+        await twofaReminder(abcAccount)
         dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
         callback(null, abcAccount, touchIdInformation)
       } catch (e) {
@@ -343,3 +354,183 @@ export function recoveryLoginComplete () {
   }
 }
 // validateUsername check
+
+const twofaReminder = async account => {
+  const { otpKey, dataStore } = account
+  const pluginList = await dataStore.listStoreIds()
+  const storeName = pluginList.includes(Constants.OTP_REMINDER_STORE_NAME)
+    ? Constants.OTP_REMINDER_STORE_NAME
+    : null
+  const itemList = storeName
+    ? await dataStore.listItemIds(Constants.OTP_REMINDER_STORE_NAME)
+    : null
+  const createdAtString =
+    itemList && itemList.includes(Constants.OTP_REMINDER_KEY_NAME_CREATED_AT)
+      ? await dataStore.getItem(
+        Constants.OTP_REMINDER_STORE_NAME,
+        Constants.OTP_REMINDER_KEY_NAME_CREATED_AT
+      )
+      : null
+  const createdAt = createdAtString ? parseInt(createdAtString) : null
+  const reminderCreatedAtDate = createdAt
+    ? createdAt + Constants.OTP_REMINDER_MILLISECONDS
+    : null
+  const lastOtpCheckString =
+    itemList &&
+    itemList.includes(Constants.OTP_REMINDER_KEY_NAME_LAST_OTP_CHECKED)
+      ? await dataStore.getItem(
+        Constants.OTP_REMINDER_STORE_NAME,
+        Constants.OTP_REMINDER_KEY_NAME_LAST_OTP_CHECKED
+      )
+      : null
+  const lastOtpCheck = lastOtpCheckString ? parseInt(lastOtpCheckString) : null
+  const reminderLastOtpCheckDate = lastOtpCheck
+    ? lastOtpCheck + Constants.OTP_REMINDER_MILLISECONDS
+    : null
+  const dontAsk =
+    itemList && itemList.includes(Constants.OTP_REMINDER_KEY_NAME_DONT_ASK)
+      ? await dataStore.getItem(
+        Constants.OTP_REMINDER_STORE_NAME,
+        Constants.OTP_REMINDER_KEY_NAME_DONT_ASK
+      )
+      : null
+
+  const enableOtp = async account => {
+    await account.enableOtp()
+    const modal = createSimpleConfirmModal({
+      title: s.strings.otp_authentication_header,
+      icon: <Icon name={Constants.CREATE} type={Constants.ION_ICONS} />,
+      message: account.otpKey,
+      buttonText: s.strings.ok
+    })
+    return await showModal(modal)
+  }
+
+  const createOtpCheckModal = async () => {
+    const modal = createYesNoModal({
+      title: s.strings.otp_reset_modal_header,
+      icon: (
+        <Icon
+          name={Constants.WARNING}
+          type={Constants.ION_ICONS}
+          style={{ color: Constants.ACCENT_RED }}
+        />
+      ),
+      message: s.strings.otp_reset_modal_message,
+      yesButtonText: s.strings.enable,
+      noButtonText: s.strings.cancel
+    })
+    return await showModal(modal)
+  }
+
+  const createOtpCheckModalDontAsk = async () => {
+    const modal = createThreeButtonModal({
+      title: s.strings.otp_reset_modal_header,
+      icon: (
+        <Icon
+          name={Constants.WARNING}
+          type={Constants.ION_ICONS}
+          style={{ color: Constants.ACCENT_RED }}
+        />
+      ),
+      message: s.strings.otp_reset_modal_message,
+      primaryButton: {
+        text: s.strings.enable,
+        returnValue: 'enable'
+      },
+      secondaryButton: {
+        text: s.strings.cancel,
+        returnValue: 'cancel'
+      },
+      tertiaryButton: {
+        text: s.strings.otp_reset_modal_dont_ask,
+        returnValue: 'dontAsk'
+      }
+    })
+    return await showModal(modal)
+  }
+
+  if (otpKey) {
+    return true
+  }
+
+  if (dontAsk) {
+    return true
+  }
+
+  if (!storeName) {
+    const resolve = await createOtpCheckModal()
+    if (resolve) {
+      await enableOtp(account)
+      await account.dataStore.setItem(
+        Constants.OTP_REMINDER_STORE_NAME,
+        Constants.OTP_REMINDER_KEY_NAME_LAST_OTP_CHECKED,
+        Date.now().toString()
+      )
+      return true
+    }
+    await account.dataStore.setItem(
+      Constants.OTP_REMINDER_STORE_NAME,
+      Constants.OTP_REMINDER_KEY_NAME_LAST_OTP_CHECKED,
+      Date.now().toString()
+    )
+    return false
+  }
+
+  if (
+    lastOtpCheckString &&
+    lastOtpCheck &&
+    reminderLastOtpCheckDate &&
+    Date.now() > reminderLastOtpCheckDate
+  ) {
+    const resolve = await createOtpCheckModalDontAsk()
+    if (resolve === 'enable') {
+      await enableOtp(account)
+      return true
+    }
+    if (resolve === 'dontAsk') {
+      await account.dataStore.setItem(
+        Constants.OTP_REMINDER_STORE_NAME,
+        Constants.OTP_REMINDER_KEY_NAME_DONT_ASK,
+        'true'
+      )
+      return false
+    }
+    await account.dataStore.setItem(
+      Constants.OTP_REMINDER_STORE_NAME,
+      Constants.OTP_REMINDER_KEY_NAME_LAST_OTP_CHECKED,
+      Date.now().toString()
+    )
+    return false
+  }
+
+  if (lastOtpCheckString) {
+    return true
+  }
+
+  if (
+    createdAtString &&
+    createdAt &&
+    reminderCreatedAtDate &&
+    Date.now() > reminderCreatedAtDate
+  ) {
+    const resolve = await createOtpCheckModal()
+    if (resolve) {
+      await enableOtp(account)
+      await account.dataStore.setItem(
+        Constants.OTP_REMINDER_STORE_NAME,
+        Constants.OTP_REMINDER_KEY_NAME_LAST_OTP_CHECKED,
+        Date.now().toString()
+      )
+      return true
+    }
+    await account.dataStore.setItem(
+      Constants.OTP_REMINDER_STORE_NAME,
+      Constants.OTP_REMINDER_KEY_NAME_LAST_OTP_CHECKED,
+      Date.now().toString()
+    )
+    return false
+  }
+
+  return true
+}

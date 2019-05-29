@@ -2971,6 +2971,13 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
+edge-components@^0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/edge-components/-/edge-components-0.0.26.tgz#0c92374779e727bd6813fcfd96340193cd9dcbae"
+  integrity sha512-bBBwU2prluPAFM0IQv0v4gh2LC4qxUxHfo5PY+Pg5zOEf0UE3qi7ISCZ85lSG1IDJJ5gVLPLxIL4dYpuFKW8yw==
+  dependencies:
+    react-native-linear-gradient "^2.4.0"
+
 edge-core-js@^0.13.5:
   version "0.13.5"
   resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.13.5.tgz#a40f7d201aacca22f9cd88a6a80b0cbf07dda0a2"
@@ -7863,6 +7870,11 @@ react-native-linear-gradient@^2.0.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-linear-gradient@^2.4.0:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.4.tgz#dce133526f5a5510a639af94544f1ed0c984bd1e"
+  integrity sha512-FF1NhlerA4uBiS0gFIHa4FBp8/aftv4vPj14Y47lGNkYjSI94tnI6oYO3EfUxXjEyCUPiOVNKZOB9kScyjc5Ew==
+
 react-native-mail@^3.0.5:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/react-native-mail/-/react-native-mail-3.0.6.tgz#5e7b4a89bcbe2218e44331465596966a7ff743ab"
@@ -7882,10 +7894,10 @@ react-native-modal@^6.5.0:
     prop-types "^15.6.1"
     react-native-animatable "^1.2.4"
 
-react-native-qrcode@^0.2.6:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/react-native-qrcode/-/react-native-qrcode-0.2.6.tgz#dd92f151c118860092af9fa5bc0995f2f9dddb16"
-  integrity sha1-3ZLxUcEYhgCSr5+lvAmV8vnd2xY=
+react-native-qrcode@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/react-native-qrcode/-/react-native-qrcode-0.2.7.tgz#d103166fb1a5b53643e8bf7b88c0672e689ac4f8"
+  integrity sha512-Xvc3T1h95zA9tbRxiMkKethDYpPwKcqDPIHe9Cxt7pM+lma9dSzd6yXGGLGeZmFU/SmHMK+4bTnDltUv1s4Jnw==
   dependencies:
     create-react-class "^15.6.0"
     prop-types "^15.5.10"
