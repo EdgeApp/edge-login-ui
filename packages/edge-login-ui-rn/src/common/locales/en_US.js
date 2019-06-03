@@ -35,6 +35,7 @@ const strings = {
   done_caps: 'DONE',
   cancel: 'Cancel',
   cancel_caps: 'CANCEL',
+  enable: 'Enable',
   change_password: 'Change Password',
   change_pin: 'Change PIN',
   pin_changed: 'PIN Changed',
@@ -160,7 +161,12 @@ const strings = {
   create_account_error_title: 'Error occurred creating account',
   create_account_error_message:
     'An error occurred creating your account. This may have been due to a slow network connection or network interruption. Please retry and if you receive another error that the account already exists, please restart the app and login with your username and password.',
-  try_again: 'Try Again'
+  try_again: 'Try Again',
+  otp_reset_modal_header: 'Secure Your Account',
+  otp_reset_modal_message:
+    'It is highly recommended that you enable Two Factor Authentication (2FA) to protect against unauthorized access to your account. Would you like to enable it now?',
+  otp_reset_modal_dont_ask: "Don't ask again",
+  otp_authentication_header: 'Authentication Code'
 }
 
 module.exports = strings

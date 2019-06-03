@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 
 import * as Constants from '../../common/constants'
+import { ModalManager as ModalManagerLogin } from '../../common/util'
 import ForgotPasswordChangePasswordConnector from '../connectors/screens/existingAccount/ForgotPasswordChangePasswordConnector'
 import ForgotPinChangePinConnector from '../connectors/screens/existingAccount/ForgotPinChangePinConnector'
 import LoginWithRecoveryQuestionsSceenConnector from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
@@ -53,6 +54,7 @@ export class LoginAppComponent extends Component<Props, State> {
     const { ScreenStyle } = this.props.styles
     return (
       <View accessible style={ScreenStyle}>
+        <ModalManagerLogin />
         {this.renderContent()}
       </View>
     )
