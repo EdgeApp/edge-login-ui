@@ -1,5 +1,14 @@
 # edge-login-ui
 
+## 0.5.27 (@019-05)
+
+- rn: Implement 2FA reminder modal
+- rn: Fix glitchy QR code issue (2FA)
+
+## 0.5.23 (2019-05-20)
+
+- rn: Fix header dimensions
+
 ## 0.5.21 (2019-05-13)
 
 - rn: Show the exact date of the upcoming 2fa reset.
