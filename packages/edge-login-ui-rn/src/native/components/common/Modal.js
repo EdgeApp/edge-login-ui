@@ -1,7 +1,14 @@
 // @flow
 
 import React, { Component } from 'react'
-import { ActivityIndicator, Image, Text, View } from 'react-native'
+import {
+  ActivityIndicator,
+  Dimensions,
+  Image,
+  Platform,
+  Text,
+  View
+} from 'react-native'
 import Modal from 'react-native-modal'
 
 import * as Constants from '../../../common/constants'
@@ -160,10 +167,21 @@ class MyModal extends Component<Props, State> {
   render () {
     const styles = this.props.styles ? this.props.styles : ModalStyle
     const { headerText, headerSubtext, icon, iconType, image } = this.props
+
+    const deviceWidth = Dimensions.get('window').width
+    const deviceHeight =
+      Platform.OS === 'ios'
+        ? Dimensions.get('window').height
+        : require('react-native-extra-dimensions-android').get(
+          'REAL_WINDOW_HEIGHT'
+        )
+
     return (
       <Modal
-        style={styles.container}
         animationType={'slide'}
+        deviceHeight={deviceHeight}
+        deviceWidth={deviceWidth}
+        style={styles.container}
         transparent
         visible
       >

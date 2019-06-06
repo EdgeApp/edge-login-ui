@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { Dimensions, Platform, TouchableOpacity, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal'
 
@@ -27,12 +27,23 @@ class StaticModal extends Component<Props> {
   componentWillUnmount () {
     clearTimeout(this.reset)
   }
+
   render () {
+    const deviceWidth = Dimensions.get('window').width
+    const deviceHeight =
+      Platform.OS === 'ios'
+        ? Dimensions.get('window').height
+        : require('react-native-extra-dimensions-android').get(
+          'REAL_WINDOW_HEIGHT'
+        )
+
     const styles = StaticModalStyle
     return (
       <Modal
-        style={styles.container}
         animationType={'slide'}
+        deviceHeight={deviceHeight}
+        deviceWidth={deviceWidth}
+        style={styles.container}
         transparent
         visible
       >
