@@ -1,7 +1,8 @@
 // @flow
 
 import React, { type ComponentType } from 'react'
-import { default as Modal } from 'react-native-modal'
+import { Dimensions, Platform } from 'react-native'
+import Modal from 'react-native-modal'
 
 export type ModalProps<Result> = { onDone(result: Result): mixed }
 
@@ -22,43 +23,48 @@ type State = {
  * React component tree.
  */
 export class ModalManager extends React.Component<{}, State> {
+  +id: string
+
   constructor (props: {}) {
     super(props)
     this.state = { isHiding: false, queue: [] }
 
-    // Register as the global modal manager:
-    if (globalModalManager != null) {
-      const errorMessage = 'The ModalManager must only be mounted once'
-      console.warn(errorMessage)
-      const error = new Error(errorMessage)
-      global.bugsnag && global.bugsnag.notify(error)
-    }
-    globalModalManager = this
+    this.id = 'ModalManager' + globalNextId++
+    globalInstances[this.id] = this
+  }
+
+  componentWillUnmount () {
+    delete globalInstances[this.id]
   }
 
   render () {
     // If the queue is empty, render nothing:
     if (this.state.queue.length === 0) return null
 
+    const deviceWidth = Dimensions.get('window').width
+    const deviceHeight =
+      Platform.OS === 'ios'
+        ? Dimensions.get('window').height
+        : require('react-native-extra-dimensions-android').get(
+          'REAL_WINDOW_HEIGHT'
+        )
+
     const { Component, onDone, modalProps } = this.state.queue[0]
     return (
       <Modal
         avoidKeyboard
-        onModalHide={this.removeFromQueue}
-        onBackdropPress={() => onDone(null)}
-        onBackButtonPress={() => onDone(null)}
+        deviceHeight={deviceHeight}
+        deviceWidth={deviceWidth}
         isVisible={!this.state.isHiding}
+        onBackButtonPress={() => onDone(null)}
+        onBackdropPress={() => onDone(null)}
+        onModalHide={this.removeFromQueue}
         useNativeDriver
         {...modalProps}
       >
         <Component onDone={onDone} />
       </Modal>
     )
-  }
-
-  componentWillUnmount () {
-    // Un-register as the global modal manager:
-    globalModalManager = null
   }
 
   // Removes a just-closed modal from the queue:
@@ -89,7 +95,18 @@ export class ModalManager extends React.Component<{}, State> {
   }
 }
 
-let globalModalManager: ModalManager | null = null
+let globalNextId: number = 0
+const globalInstances: { [id: string]: ModalManager } = {}
+
+/**
+ * If there are multiple ModalManagers mounted, just pick one:
+ */
+function getInstance () {
+  for (const id in globalInstances) {
+    return globalInstances[id]
+  }
+  throw new Error('No ModalManager is mounted')
+}
 
 /**
  * Pushes a modal onto the global queue.
@@ -101,8 +118,5 @@ export async function showModal<Result> (
   Component: ComponentType<ModalProps<Result>>,
   modalProps: Object = {}
 ): Promise<Result> {
-  if (globalModalManager == null) {
-    throw new Error('The ModalManager is not mounted')
-  }
-  return globalModalManager.showModal(Component, modalProps)
+  return getInstance().showModal(Component, modalProps)
 }
