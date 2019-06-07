@@ -6,6 +6,7 @@ import {
   createYesNoModal
 } from 'edge-components'
 import React from 'react'
+import { sprintf } from 'sprintf-js'
 
 import { ModalIcon as Icon } from '../../native/components/common'
 import {
@@ -15,6 +16,7 @@ import {
   loginWithTouchId,
   supportsTouchId
 } from '../../native/keychain.js'
+import { OtpModalStyle as styles } from '../../native/styles'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import s from '../locales/strings.js'
@@ -399,8 +401,14 @@ const twofaReminder = async account => {
     await account.enableOtp()
     const modal = createSimpleConfirmModal({
       title: s.strings.otp_authentication_header,
-      icon: <Icon name={Constants.CREATE} type={Constants.ION_ICONS} />,
-      message: account.otpKey,
+      icon: (
+        <Icon
+          name={Constants.CHECK}
+          type={Constants.ION_ICONS}
+          style={styles.otpAuthenticationModalIcon}
+        />
+      ),
+      message: sprintf(s.strings.otp_authentication_message, account.otpKey),
       buttonText: s.strings.ok
     })
     return await showModal(modal)
@@ -413,7 +421,7 @@ const twofaReminder = async account => {
         <Icon
           name={Constants.WARNING}
           type={Constants.ION_ICONS}
-          style={{ color: Constants.ACCENT_RED }}
+          style={styles.otpResetModalIcon}
         />
       ),
       message: s.strings.otp_reset_modal_message,
@@ -430,7 +438,7 @@ const twofaReminder = async account => {
         <Icon
           name={Constants.WARNING}
           type={Constants.ION_ICONS}
-          style={{ color: Constants.ACCENT_RED }}
+          style={styles.otpResetModalIcon}
         />
       ),
       message: s.strings.otp_reset_modal_message,

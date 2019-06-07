@@ -164,9 +164,11 @@ const strings = {
   try_again: 'Try Again',
   otp_reset_modal_header: 'Secure Your Account',
   otp_reset_modal_message:
-    'It is highly recommended that you enable Two Factor Authentication (2FA) to protect against unauthorized access to your account. Would you like to enable it now?',
+    'Two factor authentication (2FA) prevents unauthorized access from other devices, even if your username and password is compromised. You can scan a QR code or type in an authentication code to seamlessly authorize other devices. Would you like to enable 2FA?',
   otp_reset_modal_dont_ask: "Don't ask again",
-  otp_authentication_header: 'Authentication Code'
+  otp_authentication_header: '2FA has been enabled',
+  otp_authentication_message:
+    '2FA has been enabled. A unique authentication code has been generated. If you lose your phone or uninstall the app, it will take 7 days to disable 2FA and access your account from another device without the following authentication code.\n\n%s'
 }
 
 module.exports = strings
