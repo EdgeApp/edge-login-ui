@@ -30,10 +30,10 @@ const FullScreenModalStyle = {
 const ModalStyle = {
   container: {
     position: 'absolute',
-    top: OFFSET_HACK,
+    bottom: OFFSET_HACK,
     left: OFFSET_HACK,
-    width: '100%',
-    height: '100%',
+    right: OFFSET_HACK,
+    top: OFFSET_HACK,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Constants.MODAL_BOX
@@ -178,10 +178,10 @@ const ModalStyle = {
 const StaticModalStyle = {
   container: {
     position: 'absolute',
-    top: OFFSET_HACK,
+    bottom: OFFSET_HACK,
     left: OFFSET_HACK,
-    width: '100%',
-    height: '100%',
+    right: OFFSET_HACK,
+    top: OFFSET_HACK,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Constants.MODAL_BOX
