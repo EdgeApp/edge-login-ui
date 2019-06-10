@@ -3,12 +3,11 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import * as Assets from '../../assets/'
 import { BackgroundImage, Spinner } from '../common'
 
 type Props = {
   styles: Object,
-  backgroundImage?: any
+  backgroundImage: any
 }
 
 export default class LoadingScreenComponent extends Component<Props> {
@@ -17,7 +16,7 @@ export default class LoadingScreenComponent extends Component<Props> {
     return (
       <View style={LandingScreenStyle.container}>
         <BackgroundImage
-          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
+          src={this.props.backgroundImage}
           style={LandingScreenStyle.backgroundImage}
           content={this.renderSpinner()}
         />

@@ -7,7 +7,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
-import * as Assets from '../../assets/'
 import {
   BackgroundImage,
   Button,
@@ -36,8 +35,8 @@ type Props = {
   launchDeleteModal(): void,
   recoverPasswordLogin(): void,
   appId?: string,
-  backgroundImage?: any,
-  primaryLogo?: any,
+  backgroundImage: any,
+  primaryLogo: any,
   parentButton?: Object
 }
 
@@ -182,7 +181,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         contentContainerStyle={this.style.mainScrollView}
       >
         <BackgroundImage
-          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
+          src={this.props.backgroundImage}
           style={this.style.backgroundImage}
           content={this.renderOverImage()}
           callback={this.noFocus}

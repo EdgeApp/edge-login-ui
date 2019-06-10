@@ -26,8 +26,8 @@ type Props = {
   gotoLoginPage(): void,
   isTouchIdDisabled: boolean,
   appId?: string,
-  backgroundImage?: any,
-  primaryLogo?: any,
+  backgroundImage: any,
+  primaryLogo: any,
   parentButton?: Object
 }
 type State = {
@@ -83,7 +83,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     return (
       <View style={PinLoginScreenStyle.container}>
         <BackgroundImage
-          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
+          src={this.props.backgroundImage}
           style={PinLoginScreenStyle.backgroundImage}
           content={this.renderOverImage()}
         />

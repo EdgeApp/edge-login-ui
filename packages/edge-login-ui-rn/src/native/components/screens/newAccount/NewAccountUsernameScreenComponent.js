@@ -44,10 +44,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
           <View style={NewAccountUsernameScreenStyle.pageContainer}>
             <View style={NewAccountUsernameScreenStyle.instructions}>
               <T style={NewAccountUsernameScreenStyle.instructionsText}>
-                {sprintf(
-                  s.strings.username_desc,
-                  this.props.appName || s.strings.app_name_default
-                )}
+                {sprintf(s.strings.username_desc, this.props.appName)}
               </T>
             </View>
             <UsernameConnector

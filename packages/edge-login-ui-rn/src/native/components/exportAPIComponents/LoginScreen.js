@@ -23,9 +23,9 @@ type Props = {
   fontDescription: any,
   onLogin(error: ?Error, account: ?EdgeAccount, touchIdInfo: ?Object): void,
   appId?: string,
-  appName?: string,
-  backgroundImage?: any,
-  primaryLogo?: any,
+  appName: string,
+  backgroundImage: any,
+  primaryLogo: any,
   parentButton?: Object,
   landingScreenText?: string
 }
@@ -66,6 +66,18 @@ class LoginScreen extends Component<Props> {
       composeEnhancers(applyMiddleware(thunk.withExtraArgument(imports)))
     )
     this.cleanups = []
+    if (!props.appName) {
+      throw new Error('Application Name prop is not provided')
+    }
+    if (typeof props.appName !== 'string') {
+      throw new Error('Application Name should be string')
+    }
+    if (!props.backgroundImage) {
+      throw new Error('Background Image prop is not provided')
+    }
+    if (!props.primaryLogo) {
+      throw new Error('Application Logo prop is not provided')
+    }
   }
 
   componentDidMount () {

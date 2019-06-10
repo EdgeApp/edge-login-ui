@@ -44,10 +44,7 @@ export default class NewAccountWelcomeScreenComponent extends Component<
           </View>
           <View style={NewAccountWelcomeScreenStyle.row3}>
             <T style={NewAccountWelcomeScreenStyle.instructionsText}>
-              {sprintf(
-                s.strings.welcome_one,
-                this.props.appName || s.strings.app_name_default
-              )}
+              {sprintf(s.strings.welcome_one, this.props.appName)}
             </T>
           </View>
           <View style={NewAccountWelcomeScreenStyle.row4} />

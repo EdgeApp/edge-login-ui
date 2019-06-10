@@ -28,9 +28,9 @@ export type StateProps = {
   lastUser: Object,
   lastUserPinEnabled: boolean,
   appId?: string,
-  appName?: string,
-  backgroundImage?: any,
-  primaryLogo?: any,
+  appName: string,
+  backgroundImage: any,
+  primaryLogo: any,
   parentButton?: Object,
   landingScreenText?: string
 }
