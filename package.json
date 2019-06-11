@@ -28,6 +28,9 @@
     "lint-staged": "^8.0.4",
     "prettier-eslint-cli": "^4.7.1"
   },
+  "resolutions": {
+    "scrypt.js": "0.3.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run precommit"
