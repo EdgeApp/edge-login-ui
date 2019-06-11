@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.5.31 (2019-06-10)
+
+- rn: Fix modals to cover the entire screen.
+
 ## 0.5.21 (2019-05-13)
 
 - rn: Show the exact date of the upcoming 2fa reset.
