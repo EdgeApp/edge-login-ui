@@ -127,7 +127,6 @@ class FourDigitInputComponent extends Component<Props, State> {
     return null
   }
   onFocus = () => {
-    this.inputRef && this.inputRef.focus()
     this.setState({
       isFocused: true
     })
