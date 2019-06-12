@@ -418,7 +418,7 @@ const twofaReminder = async account => {
       ),
       message: s.strings.otp_reset_modal_message,
       yesButtonText: s.strings.enable,
-      noButtonText: s.strings.cancel
+      noButtonText: s.strings.skip_button
     })
     return await showModal(modal)
   }

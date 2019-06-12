@@ -32,6 +32,7 @@ const strings = {
   delete: 'Delete',
   done: 'Done',
   skip: 'SKIP',
+  skip_button: 'Skip',
   done_caps: 'DONE',
   cancel: 'Cancel',
   cancel_caps: 'CANCEL',
