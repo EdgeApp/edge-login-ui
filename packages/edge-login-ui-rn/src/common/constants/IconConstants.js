@@ -19,6 +19,8 @@ export const UNLOCKED_ICON = 'ios-unlock'
 export const LOCKED_ICON = 'ios-lock'
 export const WARNING = 'ios-warning'
 export const CREATE = 'ios-create'
+export const CHECK = 'ios-checkmark'
+
 // Materieal
 export const MATERIAL_ICONS = 'material'
 export const KEYBOARD_ARROW_DOWN = 'keyboard-arrow-down'
