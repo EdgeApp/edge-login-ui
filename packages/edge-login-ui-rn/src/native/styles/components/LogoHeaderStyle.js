@@ -5,7 +5,6 @@ export const LogoHeaderScaledStyle = {
   container: {
     position: 'relative',
     width: '100%',
-    paddingTop: scale(42),
     paddingBottom: scale(24),
     justifyContent: 'space-around',
     alignItems: 'center'

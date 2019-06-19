@@ -20,6 +20,7 @@ import NewAccountWelcomeScreenConnector from '../connectors/screens/newAccount/N
 import NewAccountPinScreenConnector from '../connectors/screens/newAccount/SetAccountPinScreenConnector'
 import TermsAndConditionsScreenConnector from '../connectors/screens/newAccount/TermsAndConditionsScreenConnector'
 import PinLoginScreenConnector from '../connectors/screens/PinLoginScreenConnector'
+import { getSupportedBiometryType } from '../keychain.js'
 
 export type StateProps = {
   workflow: Object,
@@ -27,6 +28,7 @@ export type StateProps = {
   previousUsers: ?Object,
   lastUser: Object,
   lastUserPinEnabled: boolean,
+  lastUserTouchEnabled: boolean,
   appId?: string,
   appName?: string,
   backgroundImage?: any,
@@ -41,14 +43,20 @@ export type DispatchProps = {
   getPreviousUsers(): void,
   startRecoveryWorkflow(string): void
 }
-type State = {}
+type State = {
+  touch: string | boolean
+}
 
 type Props = StateProps & OwnProps & DispatchProps
 
 export class LoginAppComponent extends Component<Props, State> {
   constructor (props: Props) {
     super(props)
+    this.state = {
+      touch: false
+    }
     this.props.getPreviousUsers()
+    this.checkTouchEnabled()
   }
   render () {
     const { ScreenStyle } = this.props.styles
@@ -78,9 +86,14 @@ export class LoginAppComponent extends Component<Props, State> {
           return null
           // change that key
         }
-        if (this.props.lastUser && this.props.lastUserPinEnabled) {
-          // we have previous users, a last user, and that user has pin enabled.
-          return this.getPinScreen()
+        if (this.props.lastUser) {
+          // we have previous users, a last user, and that user has pin or touch enabled.
+          if (this.props.lastUserPinEnabled) {
+            return this.getPinScreen()
+          }
+          if (this.props.lastUserTouchEnabled && this.state.touch) {
+            return this.getPinScreen()
+          }
         }
         // we have previous users, but no pin enabled previous user.
         return this.getPasswordScreen()
@@ -170,6 +183,7 @@ export class LoginAppComponent extends Component<Props, State> {
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
         parentButton={this.props.parentButton}
+        touch={this.state.touch}
       />
     )
   }
@@ -182,6 +196,7 @@ export class LoginAppComponent extends Component<Props, State> {
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
         parentButton={this.props.parentButton}
+        touch={this.state.touch}
       />
     )
   }
@@ -202,6 +217,19 @@ export class LoginAppComponent extends Component<Props, State> {
         )
       case 2:
         return <ForgotPinChangePinConnector styles={this.props.styles} />
+    }
+  }
+  checkTouchEnabled = async () => {
+    try {
+      const touch = await getSupportedBiometryType()
+      if (touch === 'FaceID') return this.setState({ touch: touch })
+      if (touch === 'TouchID') return this.setState({ touch: touch })
+      if (touch === 'Fingerprint') return this.setState({ touch: 'TouchID' })
+      if (touch) return this.setState({ touch: 'TouchID' })
+      return this.setState({ touch: false })
+    } catch (error) {
+      console.log(error)
+      return this.setState({ touch: false })
     }
   }
 }

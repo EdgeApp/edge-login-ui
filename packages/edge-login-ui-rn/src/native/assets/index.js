@@ -16,6 +16,8 @@ const TOUCH = require('./touch/touchid.png')
 const OTP = require('./icons/otp/OTP-badge.png')
 const OTP_SMALL = require('./icons/otp/OTP-badge_sm.png')
 const OTP_DISABLE = require('./icons/otp/OTP-disable.png')
+const FACE_ID = require('./touch/face-id.png')
+const TOUCH_ID = require('./touch/touch-id.png')
 
 export { LOGIN_BACKGROUND }
 export { LOGO_BIG }
@@ -33,3 +35,5 @@ export { TOUCH }
 export { OTP }
 export { OTP_SMALL }
 export { OTP_DISABLE }
+export { FACE_ID }
+export { TOUCH_ID }

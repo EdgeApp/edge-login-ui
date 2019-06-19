@@ -16,13 +16,15 @@ const PinLoginScreenStyle = {
     alignItems: 'center'
   },
   featureBoxContainer: {
-    width: '100%'
+    width: '100%',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around'
   },
   featureBox: {
     position: 'relative',
     top: scale(40),
     width: '100%',
-    height: '100%',
     alignItems: 'center'
   },
   featureBoxBody: {
@@ -127,7 +129,14 @@ const PinLoginScreenStyle = {
     },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
-  modal: Styles.SkipModalStyle
+  modal: Styles.SkipModalStyle,
+  spacer: {
+    marginTop: scale(35)
+  },
+  spacer_full: {
+    flex: 1
+  },
+  keypad: Styles.PinKeypadStyle
 }
 
 export { PinLoginScreenStyle }

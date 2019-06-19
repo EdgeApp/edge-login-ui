@@ -1,10 +1,17 @@
 // @flow
 
 import React, { Component } from 'react'
-import { TouchableWithoutFeedback, View } from 'react-native'
+import {
+  Image,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native'
 
 import s from '../../../common/locales/strings.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
+import PinKeypadConnector from '../../../native/connectors/abSpecific/PinKeypadConnector'
 import * as Assets from '../../assets/'
 import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
 import {
@@ -14,12 +21,15 @@ import {
   HeaderParentButtons,
   ImageButton
 } from '../../components/common'
-import FourDigitInputConnector from '../../connectors/abSpecific/FourDigitInputConnector'
+import FourDigitConnector from '../../connectors/abSpecific/FourDigitConnector'
 
 type Props = {
   styles: Object,
   usersWithPin: Array<string>,
   username: string,
+  userDetails: Object,
+  userList: Array<Object>,
+  touch: boolean | string,
   launchUserLoginWithTouchId(Object): void,
   changeUser(string): void,
   launchDeleteModal(): void,
@@ -34,16 +44,30 @@ type State = {
   loggingIn: boolean,
   pin: string,
   username: string,
-  focusOn: string
+  focusOn: string,
+  usernameList: Array<string>
 }
 export default class PinLogInScreenComponent extends Component<Props, State> {
   constructor (props: Props) {
     super(props)
+    const getUserNameList = () => {
+      const filteredUserList = props.userList.filter(user => {
+        if (user.pinEnabled) {
+          return true
+        }
+        if (user.touchEnabled && props.touch) {
+          return true
+        }
+        return false
+      })
+      return filteredUserList.map(user => user.username)
+    }
     this.state = {
       pin: '',
       loggingIn: false,
       username: '', // Nobody seems to update this?
-      focusOn: 'pin'
+      focusOn: 'pin',
+      usernameList: props.userList ? getUserNameList() : props.usersWithPin
     }
   }
   componentDidMount () {
@@ -53,19 +77,6 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
   }
   relaunchTouchId = () => {
     this.props.launchUserLoginWithTouchId({ username: this.props.username })
-  }
-  renderTouchButton = (style: Object) => {
-    if (this.props.username) {
-      return (
-        <ImageButton
-          style={style.thumbprintButton}
-          source={Assets.TOUCH}
-          onPress={this.relaunchTouchId}
-          disabled={this.props.isTouchIdDisabled}
-        />
-      )
-    }
-    return null
   }
   renderModal = (style: Object) => {
     if (this.props.showModal) {
@@ -99,7 +110,10 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     return (
       <View style={PinLoginScreenStyle.featureBoxContainer}>
         <HeaderParentButtons
-          parentButton={this.props.parentButton}
+          parentButton={{
+            text: s.strings.exit_pin,
+            callback: this.exitPin.bind(this)
+          }}
           styles={this.props.styles.HeaderParentButtons}
           appId={this.props.appId}
         />
@@ -112,10 +126,11 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
             <View style={PinLoginScreenStyle.featureBoxBody}>
               {this.renderBottomHalf(PinLoginScreenStyle)}
             </View>
-            {this.renderTouchButton(PinLoginScreenStyle)}
             {this.renderModal(PinLoginScreenStyle)}
           </View>
         </TouchableWithoutFeedback>
+        <View style={PinLoginScreenStyle.spacer_full} />
+        <PinKeypadConnector style={PinLoginScreenStyle.keypad} />
       </View>
     )
   }
@@ -132,15 +147,11 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
             upStyle={style.usernameButton.upStyle}
             upTextStyle={style.usernameButton.upTextStyle}
           />
-          <FourDigitInputConnector style={style.fourPin} />
-          <Button
-            onPress={this.exitPin.bind(this)}
-            label={s.strings.exit_pin}
-            downStyle={style.exitButton.downStyle}
-            downTextStyle={style.exitButton.downTextStyle}
-            upStyle={style.exitButton.upStyle}
-            upTextStyle={style.exitButton.upTextStyle}
-          />
+          {this.props.userDetails.pinEnabled && (
+            <FourDigitConnector style={style.fourPin} />
+          )}
+          {!this.props.userDetails.pinEnabled && <View style={style.spacer} />}
+          {this.renderTouchImage()}
         </View>
       )
     }
@@ -148,7 +159,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
       <View style={style.innerView}>
         <DropDownList
           style={style.listView}
-          data={this.props.usersWithPin}
+          data={this.state.usernameList}
           renderRow={this.renderItems.bind(this)}
         />
       </View>
@@ -184,9 +195,6 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     })
   }
   showDrop () {
-    if (this.props.usersWithPin.length < 2) {
-      return
-    }
     this.setState({
       focusOn: 'List'
     })
@@ -195,5 +203,33 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     this.setState({
       focusOn: 'pin'
     })
+  }
+  renderTouchImage = () => {
+    const { touch, userDetails } = this.props
+    const { touchEnabled } = userDetails
+    if (touchEnabled && touch === 'FaceID') {
+      return (
+        <ImageButton
+          style={{}}
+          source={Assets.FACE_ID}
+          onPress={this.relaunchTouchId}
+          disabled={this.props.isTouchIdDisabled}
+        />
+      )
+    }
+    if (touchEnabled && touch === 'TouchID') {
+      return (
+        <ImageButton
+          style={{}}
+          source={Assets.TOUCH_ID}
+          onPress={this.relaunchTouchId}
+          disabled={this.props.isTouchIdDisabled}
+        />
+      )
+    }
+    if (!touchEnabled || !touch) {
+      return null
+    }
+    return null
   }
 }

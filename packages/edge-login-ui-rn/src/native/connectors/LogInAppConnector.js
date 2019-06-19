@@ -11,12 +11,12 @@ import type { OwnProps } from '../components/LogInAppComponent'
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const previousUsers = state.previousUsers
   const lastUser = state.previousUsers ? state.previousUsers.lastUser : null
-  const lastUserPinEnabled = lastUser ? lastUser.pinEnabled : false
   return {
     styles: ownProps.styles,
     previousUsers,
     lastUser,
-    lastUserPinEnabled,
+    lastUserPinEnabled: lastUser ? lastUser.pinEnabled : false,
+    lastUserTouchEnabled: lastUser ? lastUser.touchEnabled : false,
     workflow: state.workflow
   }
 }

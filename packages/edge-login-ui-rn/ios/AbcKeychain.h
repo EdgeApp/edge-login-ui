@@ -8,7 +8,7 @@
 #define SEC_ATTR_SERVICE        @"co.airbitz.airbitz"
 
 
-@interface AbcKeychain : NSObject 
+@interface AbcKeychain : NSObject
 
 + (BOOL) setKeychainData:(NSData *)data key:(NSString *)key authenticated:(BOOL) authenticated;
 + (NSData *) getKeychainData:(NSString *)key error:(NSError **)error;
@@ -27,4 +27,5 @@
 + (void) updateLoginKeychainInfo:(NSString *)username
                         loginKey:(NSString *)key
                       useTouchID:(BOOL) bUseTouchID;
++ (NSString *) getSupportedBiometryType;
 @end

@@ -3,6 +3,7 @@
 import type { DiskletFolder } from 'disklet'
 import type { EdgeContext } from 'edge-core-js'
 
+import { isTouchEnabled } from '../../native/keychain'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import { dispatchActionWithData } from './'
@@ -11,9 +12,13 @@ async function getDiskStuff (context: EdgeContext, folder: DiskletFolder) {
   const userList = await context.listUsernames().then(usernames =>
     Promise.all(
       usernames.map(username => {
-        return context
-          .pinLoginEnabled(username)
-          .then(pinEnabled => ({ username, pinEnabled }))
+        return context.pinLoginEnabled(username).then(async pinEnabled => {
+          return {
+            username,
+            pinEnabled,
+            touchEnabled: await isTouchEnabled(folder, username)
+          }
+        })
       })
     )
   )
@@ -41,7 +46,8 @@ export function getPreviousUsers () {
           if (element.username === focusUser) {
             data.lastUser = {
               username: focusUser,
-              pinEnabled: element.pinEnabled
+              pinEnabled: element.pinEnabled,
+              touchEnabled: element.touchEnabled
             }
           }
           if (element.pinEnabled) {

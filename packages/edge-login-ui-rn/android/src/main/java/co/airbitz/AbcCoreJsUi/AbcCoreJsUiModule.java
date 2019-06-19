@@ -50,6 +50,7 @@ import io.reactivex.schedulers.Schedulers;
 public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     private static final String TAG = AbcCoreJsUiModule.class.getSimpleName();
     private static final String ABC_CORE_JS_UI_MODULE = "AbcCoreJsUi";
+    private static final String FINGERPRINT_SUPPORTED_NAME = "Fingerprint";
     private Context AppContext;
     private Activity mActivity = null;
     private SharedPreferencesStorage mStorage;
@@ -344,6 +345,31 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
             mFingerprintStatus.setTextColor(ContextCompat.getColor(mActivity, R.color.warning_color));
             mFingerprintStatus.removeCallbacks(mResetErrorTextRunnable);
             mFingerprintStatus.postDelayed(mResetErrorTextRunnable, ERROR_TIMEOUT_MILLIS);
+        }
+    }
+
+    private boolean isFingerprintAuthAvailable(Context context) {
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            FingerprintManager fingerprintManager =
+                (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
+            return fingerprintManager != null && fingerprintManager.isHardwareDetected() &&
+                fingerprintManager.hasEnrolledFingerprints();
+        }
+        return false;
+    }
+
+    @ReactMethod
+    public void getSupportedBiometryType(Promise promise) {
+        try {
+            boolean fingerprintAuthAvailable = isFingerprintAuthAvailable(getReactApplicationContext());
+            if (fingerprintAuthAvailable) {
+                promise.resolve(FINGERPRINT_SUPPORTED_NAME);
+            } else {
+                promise.resolve(null);
+            }
+        } catch (Exception e) {
+          Log.e("KEYCHAIN_ERROR", e.getMessage());
+          promise.reject(e);
         }
     }
 }
