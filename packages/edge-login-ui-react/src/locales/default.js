@@ -66,6 +66,7 @@ const strings = {
   string_capitalize_exit: 'Exit',
   string_scan_barcode_to_register: 'Scan or Tap to Sign Up with',
   string_scan_barcode_to_signin: 'Scan or Tap To Log In with',
+  string_scan_barcode_to_signin_full: 'Scan or Tap To Log In with Edge Wallet',
   string_scan_barcode_edge_wallet: 'the Edge Wallet:',
   string_scan_barcode_edge_question: 'Have Edge Wallet on your phone?',
   string_scan_barcode_edge_tap: 'Tap to Sign In',

@@ -10,6 +10,7 @@ import {
   closeUserList,
   loginPassword,
   loginUsername,
+  openLoginUsingEdge,
   openUserList,
   showErrorLoginMessage,
   showMobileLoginEdgeView
@@ -73,56 +74,34 @@ class LoginWithPassword extends Component {
   toggleForgotPassword = () => {
     return this.props.dispatch(openForgotPasswordModal())
   }
+  handleOpenLoginWithEdgePage = () => {
+    return this.props.dispatch(openLoginUsingEdge())
+  }
   render () {
     return (
       <section className={webStyle.rootContainer}>
-        <MediaQuery minWidth={720}>
-          <Desktop
-            submit={this.handleSubmit}
-            goToSignupPage={this.goToSignupPage}
-            hideCachedUsers={this.hideCachedUsers}
-            showCachedUsers={this.showCachedUsers}
-            passwordKeyPress={this.passwordKeyPress}
-            usernameKeyPress={this.usernameKeyPress}
-            changeUsernameValue={this.changeUsernameValue}
-            changePasswordValue={this.changePasswordValue}
-            toggleForgotPassword={this.toggleForgotPassword}
-            refUsername={input => {
-              this.username = input
-            }}
-            refPassword={input => {
-              this.password = input
-            }}
-            username={this.props.username}
-            password={this.props.password}
-            loader={this.props.loader.loading}
-            error={this.props.error}
-          />
-        </MediaQuery>
-        <MediaQuery maxWidth={719}>
-          <Mobile
-            submit={this.handleSubmit}
-            goToSignupPage={this.goToSignupPage}
-            hideCachedUsers={this.hideCachedUsers}
-            showCachedUsers={this.showCachedUsers}
-            passwordKeyPress={this.passwordKeyPress}
-            usernameKeyPress={this.usernameKeyPress}
-            changeUsernameValue={this.changeUsernameValue}
-            changePasswordValue={this.changePasswordValue}
-            toggleForgotPassword={this.toggleForgotPassword}
-            toggleMobileLoginView={this.toggleMobileLoginView}
-            refUsername={input => {
-              this.username = input
-            }}
-            refPassword={input => {
-              this.password = input
-            }}
-            username={this.props.username}
-            password={this.props.password}
-            loader={this.props.loader.loading}
-            error={this.props.error}
-          />
-        </MediaQuery>
+        <Desktop
+          submit={this.handleSubmit}
+          goToSignupPage={this.goToSignupPage}
+          hideCachedUsers={this.hideCachedUsers}
+          showCachedUsers={this.showCachedUsers}
+          passwordKeyPress={this.passwordKeyPress}
+          usernameKeyPress={this.usernameKeyPress}
+          changeUsernameValue={this.changeUsernameValue}
+          changePasswordValue={this.changePasswordValue}
+          toggleForgotPassword={this.toggleForgotPassword}
+          handleOpenLoginWithEdgePage={this.handleOpenLoginWithEdgePage}
+          refUsername={input => {
+            this.username = input
+          }}
+          refPassword={input => {
+            this.password = input
+          }}
+          username={this.props.username}
+          password={this.props.password}
+          loader={this.props.loader.loading}
+          error={this.props.error}
+        />
         <ForgotPassword />
       </section>
     )

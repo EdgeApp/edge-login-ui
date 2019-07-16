@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MediaQuery from 'react-responsive'
 
-import { showMobileLoginWithPasswordView } from '../Login.action'
+import {
+  closeLoginUsingEdge,
+  showMobileLoginWithPasswordView
+} from '../Login.action'
 import Mobile from './LoginEdge.mobile.js'
 import { hideQRCode, showQRCode } from './LoginEdge.mobileState.js'
 import Desktop from './LoginEdge.web.js'
@@ -23,25 +26,20 @@ class LoginEdge extends Component {
   showMobilePasswordView = () => {
     return this.props.dispatch(showMobileLoginWithPasswordView())
   }
+  closeEdgeLoginView = () => {
+    return this.props.dispatch(closeLoginUsingEdge())
+  }
   goToSignupPage = () => {
     return this.props.history.push('/signup')
   }
   render () {
     return (
       <section className={webStyle.rootContainer}>
-        <MediaQuery minWidth={720}>
-          <Desktop edgeId={this.props.edgeId} />
-        </MediaQuery>
-        <MediaQuery maxWidth={719}>
-          <Mobile
-            view={this.props.view}
-            dispatch={this.props.dispatch}
-            edgeId={this.props.edgeId}
-            toggleQRCode={this.toggleQRCode}
-            goToSignupPage={this.goToSignupPage}
-            showMobilePasswordView={this.showMobilePasswordView}
-          />
-        </MediaQuery>
+        <Desktop
+          edgeId={this.props.edgeId}
+          goToSignupPage={this.goToSignupPage}
+          closeEdgeLoginView={this.closeEdgeLoginView}
+        />
       </section>
     )
   }

@@ -2,6 +2,8 @@ export const OPEN_LOG_IN = 'OPEN_LOG_IN'
 export const CLOSE_LOG_IN = 'CLOSE_LOG_IN'
 export const OPEN_LOG_IN_USING_PIN = 'OPEN_LOG_IN_USING_PIN'
 export const CLOSE_LOG_IN_USING_PIN = 'CLOSE_LOG_IN_USING_PIN'
+export const OPEN_LOG_IN_USING_EDGE = 'OPEN_LOG_IN_USING_EDGE'
+export const CLOSE_LOG_IN_USING_EDGE = 'CLOSE_LOG_IN_USING_EDGE'
 export const LOG_IN_USERNAME = 'LOG_IN_USERNAME'
 export const LOG_IN_PASSWORD = 'LOG_IN_PASSWORD'
 export const LOG_IN_PIN = 'LOG_IN_PIN'
@@ -87,6 +89,18 @@ export function openLoginUsingPin () {
 export function closeLoginUsingPin () {
   return {
     type: CLOSE_LOG_IN_USING_PIN
+  }
+}
+
+export function openLoginUsingEdge () {
+  return {
+    type: OPEN_LOG_IN_USING_EDGE
+  }
+}
+
+export function closeLoginUsingEdge () {
+  return {
+    type: CLOSE_LOG_IN_USING_EDGE
   }
 }
 

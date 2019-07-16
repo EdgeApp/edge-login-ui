@@ -61,6 +61,7 @@ const store = combineReducers({
   login: combineReducers({
     viewPassword: Login.viewPassword,
     viewPIN: Login.viewPIN,
+    viewEdge: Login.viewEdge,
     username: Login.username,
     password: Login.password,
     pin: Login.pin,

@@ -7,26 +7,29 @@ import LoginWithPasswordSection from './LoginWithPassword/LoginWithPassword.js'
 import LoginWithPinSection from './LoginWithPin/LoginWithPin.js'
 import NewAccountSection from './NewAccount/NewAccount.js'
 
-export default ({ password, pin, mobileLogin, history }) => {
-  if (!pin && !password) {
+export default ({ password, pin, mobileLogin, edge, history }) => {
+  if (!pin && !password && !edge) {
     return (
       <div className={styles.webContainer}>
-        <LoginEdge />
-        <Divider />
         <NewAccountSection history={history} />
       </div>
     )
   }
-  if (!pin && password) {
+  if (edge && !pin) {
     return (
       <div className={styles.webContainer}>
-        <LoginEdge />
-        <Divider />
+        <LoginEdge history={history} />
+      </div>
+    )
+  }
+  if (!pin && password && !edge) {
+    return (
+      <div className={styles.webContainer}>
         <LoginWithPasswordSection history={history} />
       </div>
     )
   }
-  if (pin && !password) {
+  if (pin && !password && !edge) {
     return (
       <div className={styles.webContainer}>
         <LoginWithPinSection history={history} />

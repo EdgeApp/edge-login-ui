@@ -1,11 +1,11 @@
 .primary {
   height: 50px;
-  width: 200px;
+  width: 230px;
   border-radius: 3px;
   border-style: none;
   background-color: $color-secondary-navy;
   color: $color-white;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
 
   cursor: pointer;
@@ -31,7 +31,7 @@
 
 .primaryLoad {
   height: 50px;
-  width: 200px;
+  width: 230px;
   border-radius: 3px;
   border-style: none;
   background-color: $color-primary-navy;
@@ -51,12 +51,11 @@
 
 .secondary {
   height: 50px;
-  width: 200px;
+  width: 230px;
+  border: 1px solid $color-secondary-navy;
   border-radius: 3px;
-  border-style: none;
-  background-color: $color-grey-02;
-  color: $color-white;
-  font-size: 18px;
+  color: $color-secondary-navy;
+  font-size: 16px;
   line-height: 17px;
   text-align: center;
 
@@ -73,22 +72,24 @@
 
 .secondary:hover,
 .secondaryMobile:hover {
-  background-color: $color-grey-02-dilluted;
+  border: 1px solid $color-secondary-navy-dilluted;
+  color: $color-secondary-navy-dilluted;
 }
 
 .secondary:active,
 .secondaryMobile:active {
-  background-color: $color-grey-01;
+  border: 1px solid $color-primary-navy;
+  color: $color-primary-navy;
 }
 
 .secondaryLoad {
   height: 50px;
-  width: 200px;
+  width: 230px;
   border-radius: 3px;
   border-style: none;
   background-color: $color-grey-02-dilluted;
   color: $color-white;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 17px;
   text-align: center;
   margin: 0px 5px;

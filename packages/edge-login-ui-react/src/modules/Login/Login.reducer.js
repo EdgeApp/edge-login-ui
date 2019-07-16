@@ -34,8 +34,31 @@ export const viewPIN = (state = false, action) => {
       return false
     case ACTION.CLOSE_LOG_IN:
       return true
+    case ACTION.OPEN_LOG_IN_USING_EDGE:
+      return false
     case SELECT_USER_LOGIN:
       return true
+    case REMOVE_USER_LOGIN:
+      return false
+    case DELETE_USER_FROM_CACHE:
+      return false
+    default:
+      return state
+  }
+}
+
+export const viewEdge = (state = false, action) => {
+  switch (action.type) {
+    case ACTION.OPEN_LOG_IN_USING_EDGE:
+      return true
+    case ACTION.CLOSE_LOG_IN_USING_EDGE:
+      return false
+    case ACTION.OPEN_LOG_IN_USING_PIN:
+      return false
+    case ACTION.OPEN_LOG_IN:
+      return false
+    case SELECT_USER_LOGIN:
+      return false
     case REMOVE_USER_LOGIN:
       return false
     case DELETE_USER_FROM_CACHE:

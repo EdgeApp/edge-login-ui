@@ -31,22 +31,13 @@ class Login extends Component {
   render () {
     return (
       <section>
-        <MediaQuery minWidth={720}>
-          <Desktop
-            pin={this.props.pin}
-            password={this.props.password}
-            mobileLogin={this.props.mobileLogin}
-            history={this.props.history}
-          />
-        </MediaQuery>
-        <MediaQuery maxWidth={719}>
-          <Mobile
-            pin={this.props.pin}
-            password={this.props.password}
-            mobileLogin={this.props.mobileLogin}
-            history={this.props.history}
-          />
-        </MediaQuery>
+        <Desktop
+          pin={this.props.pin}
+          password={this.props.password}
+          edge={this.props.edge}
+          mobileLogin={this.props.mobileLogin}
+          history={this.props.history}
+        />
       </section>
     )
   }
@@ -54,6 +45,7 @@ class Login extends Component {
 
 export default connect(state => ({
   pin: state.login.viewPIN,
+  edge: state.login.viewEdge,
   password: state.login.viewPassword,
   mobileLogin: state.login.mobileLoginView,
   edgeObject: state.login.edgeLoginResults

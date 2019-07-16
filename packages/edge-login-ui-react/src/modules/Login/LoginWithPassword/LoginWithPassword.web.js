@@ -15,6 +15,7 @@ export default ({
   changeUsernameValue,
   changePasswordValue,
   toggleForgotPassword,
+  handleOpenLoginWithEdgePage,
   refUsername,
   refPassword,
   username,
@@ -65,9 +66,13 @@ export default ({
     >
       {loader ? <div className={styles.loader} /> : 'Sign In'}
     </button>
+    <div className={styles.spacer} />
+    <button className={styles.secondary} onClick={handleOpenLoginWithEdgePage}>
+      Login With Edge
+    </button>
     <p className={styles.createAccountText}>
       Don&apos;t have an account?
-      <span className={styles.link} onClick={goToSignupPage}>
+      <span className={styles.linkText} onClick={goToSignupPage}>
         {' '}
         Create Account
       </span>

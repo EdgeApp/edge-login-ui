@@ -85,40 +85,21 @@ class Container extends Component {
   render () {
     return (
       <div className="app">
-        <MediaQuery minWidth={720}>
-          <Dialog
-            active
-            onEscKeyDown={this._handleToggle}
-            onOverlayClick={this._handleToggle}
-            className={this.selectDialogHeight(this.props.location.pathname)}
-          >
-            <Layout theme={layoutTheme} location={this.props.location}>
-              <FontIcon
-                value="clear"
-                className={styles.exitTooltip}
-                onClick={this._handleToggle}
-              />
-              {this.props.children}
-            </Layout>
-          </Dialog>
-        </MediaQuery>
-        <MediaQuery maxWidth={719}>
-          <Dialog
-            active
-            onEscKeyDown={this._handleToggle}
-            onOverlayClick={this._handleToggle}
-            className={styles.mobileWidth}
-          >
-            <Layout theme={layoutTheme} location={this.props.location}>
-              <FontIcon
-                value="clear"
-                className={styles.exitTooltip}
-                onClick={this._handleToggle}
-              />
-              {this.props.children}
-            </Layout>
-          </Dialog>
-        </MediaQuery>
+        <Dialog
+          active
+          onEscKeyDown={this._handleToggle}
+          onOverlayClick={this._handleToggle}
+          className={this.selectDialogHeight(this.props.location.pathname)}
+        >
+          <Layout theme={layoutTheme} location={this.props.location}>
+            <FontIcon
+              value="clear"
+              className={styles.exitTooltip}
+              onClick={this._handleToggle}
+            />
+            {this.props.children}
+          </Layout>
+        </Dialog>
       </div>
     )
   }

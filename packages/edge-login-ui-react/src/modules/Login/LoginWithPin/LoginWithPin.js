@@ -60,36 +60,19 @@ class LoginWithPin extends Component {
   render () {
     return (
       <section style={{ width: '100%' }}>
-        <MediaQuery minWidth={720}>
-          <Desktop
-            pin={this.props.pin}
-            user={this.props.user}
-            error={this.props.error}
-            loader={this.props.loader.loading}
-            handleChangePin={this.handleChangePin}
-            refPin={input => {
-              this.pin = input
-            }}
-            showCachedUsers={this.showCachedUsers}
-            hideCachedUsers={this.hideCachedUsers}
-            openViewPassword={this.openViewPassword}
-          />
-        </MediaQuery>
-        <MediaQuery maxWidth={719}>
-          <Mobile
-            pin={this.props.pin}
-            user={this.props.user}
-            error={this.props.error}
-            loader={this.props.loader.loading}
-            handleChangePin={this.handleChangePin}
-            refPin={input => {
-              this.pin = input
-            }}
-            showCachedUsers={this.showCachedUsers}
-            hideCachedUsers={this.hideCachedUsers}
-            openViewPassword={this.openViewPassword}
-          />
-        </MediaQuery>
+        <Desktop
+          pin={this.props.pin}
+          user={this.props.user}
+          error={this.props.error}
+          loader={this.props.loader.loading}
+          handleChangePin={this.handleChangePin}
+          refPin={input => {
+            this.pin = input
+          }}
+          showCachedUsers={this.showCachedUsers}
+          hideCachedUsers={this.hideCachedUsers}
+          openViewPassword={this.openViewPassword}
+        />
       </section>
     )
   }

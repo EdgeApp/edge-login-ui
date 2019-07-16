@@ -13,10 +13,9 @@ export default class QRCodeEdge extends Component {
     }
   }
   _renderLoginLink = () => {
-    const { edgeId } = this.props
-    if (edgeId) {
-      return `https://airbitz.co/elf/?address=${edgeId}`
-    }
+    return this.props.edgeId
+      ? `https://www.edge.app/edgelogin?address=${this.props.edgeId}`
+      : null
   }
   render () {
     return (
