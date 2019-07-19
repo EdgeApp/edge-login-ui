@@ -20,7 +20,6 @@ export const LOCKED_ICON = 'ios-lock'
 export const WARNING = 'ios-warning'
 export const CREATE = 'ios-create'
 export const CHECK = 'ios-checkmark'
-
 // Materieal
 export const MATERIAL_ICONS = 'material'
 export const KEYBOARD_ARROW_DOWN = 'keyboard-arrow-down'
@@ -30,7 +29,7 @@ export const SWAP_HORIZ = 'swap-horiz'
 export const EXCLAMATION = 'exclamation'
 export const EXPAND_MORE = 'expand-more'
 export const EXPAND_LESS = 'expand-less'
-
+export const BACKSPACE = 'backspace'
 //
 export const MATERIAL_COMMUNITY = 'materialCommunity'
 export const EVIL_ICONS = 'EvilIcons'

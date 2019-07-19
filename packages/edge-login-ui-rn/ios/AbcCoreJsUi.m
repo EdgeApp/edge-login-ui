@@ -74,4 +74,12 @@ RCT_REMAP_METHOD(authenticateTouchID, authenticateTouchID:(NSString *) promptStr
                                 resolve(num);
                             }];
 }
+
+RCT_REMAP_METHOD(getSupportedBiometryType, getSupportedBiometryType:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+    NSString *value = [AbcKeychain getSupportedBiometryType];
+    resolve(value);
+}
+
 @end

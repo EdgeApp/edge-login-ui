@@ -2,6 +2,7 @@
 
 export * from '../../common/styles/index'
 export { LogoHeaderScaledStyle } from './components/LogoHeaderStyle'
+export { PinKeypadStyle } from './components/PinKeypadStyle'
 export * from './components/FourDotInputStyle'
 export * from './components/EdgeLoginQrStyle'
 export * from './components/OtpModalStyle'

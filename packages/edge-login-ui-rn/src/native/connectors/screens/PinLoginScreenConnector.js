@@ -13,10 +13,19 @@ export const mapStateToProps = (state: State) => {
   const wait = state.login.wait
   const isTouchIdDisabled =
     loginSuccess || wait || state.login.isLoggingInWithPin || pinLength === 4
+  const getUserDetails = () => {
+    const { previousUsers } = state
+    return previousUsers && previousUsers.userList
+      ? previousUsers.userList.find(
+        user => user.username === state.login.username
+      )
+      : {}
+  }
   return {
     username: state.login.username,
+    userDetails: getUserDetails(),
+    userList: state.previousUsers.userList,
     loginSuccess,
-    previousUsers: state.previousUsers.userList,
     usersWithPin: state.previousUsers.usersWithPinList,
     workflow: state.workflow,
     showModal: state.workflow.showModal,

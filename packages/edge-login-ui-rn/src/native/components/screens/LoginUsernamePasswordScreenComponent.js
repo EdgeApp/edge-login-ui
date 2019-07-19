@@ -35,6 +35,7 @@ type Props = {
   gotoPinLoginPage(): void,
   launchDeleteModal(): void,
   recoverPasswordLogin(): void,
+  touch: string | boolean,
   appId?: string,
   backgroundImage?: any,
   primaryLogo?: any,
@@ -359,26 +360,30 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     })
   }
   selectUser (user: string) {
+    const details = this.getUserDetails(user)
     this.updateUsername(user)
     this.setState({
       usernameList: false
     })
-    if (this.checkPinEnabled(user)) {
+    if (details.pinEnabled) {
+      this.props.gotoPinLoginPage()
+      return
+    }
+    if (details.touchEnabled && this.props.touch) {
       this.props.gotoPinLoginPage()
       return
     }
     this.props.launchUserLoginWithTouchId({ username: user })
     this.onSetNextFocus()
   }
-
-  checkPinEnabled (user: string) {
+  getUserDetails (user: string) {
     for (let i = 0; i < this.props.previousUsers.length; i++) {
       const obj = this.props.previousUsers[i]
-      if (user === obj.username && obj.pinEnabled) {
-        return true
+      if (user === obj.username) {
+        return obj
       }
     }
-    return false
+    return {}
   }
   updateUsername (data: string) {
     this.props.updateUsername(data)

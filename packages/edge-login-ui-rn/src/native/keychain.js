@@ -157,6 +157,19 @@ export async function disableTouchId (
   }
 }
 
+export async function getSupportedBiometryType () {
+  try {
+    const biometryType = await AbcCoreJsUi.getSupportedBiometryType()
+    if (biometryType) {
+      return biometryType
+    }
+    return null
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
 export async function loginWithTouchId (
   abcContext: EdgeContext,
   folder: DiskletFolder,
