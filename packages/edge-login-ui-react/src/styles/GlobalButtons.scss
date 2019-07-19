@@ -1,0 +1,177 @@
+@import './globals.scss';
+
+.primary {
+  height: 37px;
+  width: 100%;
+  border-radius: 30px;
+  border: 1px solid $color-secondary-navy;
+  background-color: transparent;
+  color: $color-secondary-navy;
+  cursor: pointer;
+
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.primaryMobile {
+  @extend .primary;
+  font-size: 16px;
+  margin: 0px;
+  width: 100%;
+}
+
+.primary:hover,
+.primaryMobile:hover {
+  border-color: $color-secondary-navy-dilluted;
+  color: $color-secondary-navy-dilluted;
+}
+
+.primary:active,
+.primaryMobile:active {
+  border-color: $color-primary-navy;
+  color: $color-primary-navy;
+}
+
+.primaryImage {
+  @extend .primary;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  justify-content: center;
+  -webkit-justify-content:  center;
+  align-items: center;
+  -webkit-align-items: center;
+
+  .image {
+    margin-left: 5px;
+  }
+}
+
+.primaryImage:hover,
+.primaryImage:active {
+  color: $color-secondary-navy;
+}
+
+
+.primaryLoad {
+  height: 50px;
+  width: 200px;
+  border-radius: 3px;
+  border-style: none;
+  background-color: $color-primary-navy;
+  color: $color-white;
+  font-size: 18px;
+  line-height: 17px;
+  text-align: center;
+  margin: 0px 5px;
+}
+
+.primaryLoadMobile {
+  @extend .primaryLoad;
+  font-size: 16px;
+  margin: 0px;
+  width: 100%;
+}
+
+.secondary {
+  height: 50px;
+  width: 200px;
+  border-radius: 3px;
+  border-style: none;
+  background-color: $color-grey-02;
+  color: $color-white;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+
+  cursor: pointer;
+  margin: 0px 5px;
+}
+
+.secondaryMobile {
+  @extend .secondary;
+  font-size: 16px;
+  margin: 0px;
+  width: 100%;
+}
+
+.secondary:hover,
+.secondaryMobile:hover {
+  background-color: $color-grey-02-dilluted;
+}
+
+.secondary:active,
+.secondaryMobile:active {
+  background-color: $color-grey-01;
+}
+
+.secondaryLoad {
+  height: 50px;
+  width: 200px;
+  border-radius: 3px;
+  border-style: none;
+  background-color: $color-grey-02-dilluted;
+  color: $color-white;
+  font-size: 18px;
+  line-height: 17px;
+  text-align: center;
+  margin: 0px 5px;
+}
+
+.secondaryLoadMobile {
+  @extend .secondaryLoad;
+  font-size: 16px;
+  width: 100%;
+}
+
+.link {
+  cursor: pointer;
+  color: $color-secondary-navy;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.link:hover {
+  color: $color-secondary-navy-dilluted;
+  text-decoration: none;
+}
+
+.link:active {
+  color: $color-primary-navy;
+  text-decoration: none;
+}
+
+.rowButton {
+  height: 37px;
+  width: 100%;
+  border-radius: 30px;
+  background-color: transparent;
+  cursor: pointer;
+
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.rowButtonNeutral {
+  @extend .rowButton;
+  border: 1px solid $color-grey-02;
+  color: $color-grey-02;
+}
+
+.rowButtonSuccess {
+  @extend .rowButton;
+  border: 1px solid $color-mint;
+  background-color: $color-mint;
+  color: $color-white;
+}
+
+.rowButtonDanger {
+  @extend .rowButton;
+  border: 1px solid $color-accent-red;
+  background-color: $color-accent-red;
+  color: $color-white;
+}

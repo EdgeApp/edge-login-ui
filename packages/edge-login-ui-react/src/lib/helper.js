@@ -1,3 +1,5 @@
+import t from './LocaleStrings'
+
 export const validateEmail = email => {
   const string = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ // eslint-disable-line
   return string.test(email)
@@ -64,3 +66,22 @@ export const calculateTime = second => {
     return 'The world has ended, but your password still stands'
   }
 }
+
+export const errorHandling = name => {
+  switch (name) {
+    case 'NetworkError':
+      return 'error_server_timeout'
+    case 'UsernameError':
+      return 'error_server_bad_password'
+    case 'PasswordError':
+      return 'error_server_bad_password'
+    case 'OtpError':
+      return 'error_server_bad_otp'
+    case 'ObsoleteApiError':
+      return 'error_server_obsolete_api'
+    default:
+      return 'error_server_generic'
+  }
+}
+
+export const lastUser = t('app_edge_local_storage_last_user')

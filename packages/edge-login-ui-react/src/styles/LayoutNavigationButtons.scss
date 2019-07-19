@@ -1,0 +1,82 @@
+@import './globals.scss';
+@import './GlobalLoader.scss';
+
+.container {
+  position: absolute;
+  bottom: 60px;
+  width: 85%;
+
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+
+  .buttonContainer {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+
+    cursor: pointer;
+  }
+
+  .leftContainer {
+    @extend .buttonContainer;
+    background-position: center;
+    transition: background 0.8s;
+  }
+
+  .leftContainer:hover {
+    background: $color-grey-03 radial-gradient(circle, transparent 1%, #d9e3ed 1%) center/15000%;
+  }
+
+  .leftContainer:active {
+    background-color: rgba(217, 227, 237, 0.5);
+    background-size: 100%;
+    transition: background 0s;
+  }
+
+  .leftButton {
+    color: $color-secondary-navy;
+    font-size: 40px;
+    font-weight: 700;
+  }
+
+  .rightContainer {
+    @extend .buttonContainer;
+    background-color: $color-mint;
+    background-position: center;
+    transition: background 0.8s;
+  }
+
+  .rightContainer:hover {
+    @extend .buttonContainer;
+    background: $color-mint-dilluted radial-gradient(circle, transparent 1%, rgba(102, 237, 168, 0.6) 1%) center/15000%;
+  }
+
+  .rightContainer:active {
+    background-color: rgba(102, 237, 168, 0.4);
+    background-size: 100%;
+    transition: background 0s;
+  }
+
+  .rightButton {
+    color: $color-white;
+    font-size: 35px;
+    font-weight: 600;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+}

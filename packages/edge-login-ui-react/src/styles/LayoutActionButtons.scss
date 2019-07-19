@@ -1,0 +1,36 @@
+@import './globals.scss';
+@import './GlobalButtons.scss';
+@import './GlobalLoader.scss';
+
+.container {
+  position: absolute;
+  bottom: 60px;
+  width: 85%;
+
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+
+  .leftButton {
+    @extend .rowButtonNeutral;
+    flex: 1;
+    margin-right: 5px;
+  }
+
+  .rightButtonSuccess {
+    @extend .rowButtonSuccess;
+    flex: 1;
+    margin-left: 5px;
+  }
+
+  .rightButtonDanger {
+    @extend .rowButtonDanger;
+    flex: 1;
+    margin-left: 5px;
+  }
+}

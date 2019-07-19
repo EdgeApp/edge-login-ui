@@ -1,0 +1,22 @@
+@import './GlobalDefaults.scss';
+@import './GlobalButtons.scss';
+@import './LayoutHeaders.scss';
+
+.rootContainer {
+  .container {
+
+    .signInText {
+      font-size: 12px;
+      margin: 8px 0px 50px 0px;
+
+      .link {
+        font-size: 12px;
+      }
+    }
+
+    .createAccountButton {
+      @extend .primary;
+      margin-top: 45px;
+    }
+  }
+}
