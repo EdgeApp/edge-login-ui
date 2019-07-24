@@ -1,5 +1,13 @@
 # edge-login-ui
 
+## 0.5.35 (2019-07-24)
+
+- rn: Fix bugs with the refactored login flow.
+
+## 0.5.34 (2019-07-22)
+
+- rn: Refactor login flow to separate PIN / fingerprint / face methods.
+
 ## 0.5.31 (2019-06-10)
 
 - rn: Fix modals to cover the entire screen.
