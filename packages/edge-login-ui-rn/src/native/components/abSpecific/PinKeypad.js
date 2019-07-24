@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableWithoutFeedback, View } from 'react-native'
 
 import * as Constants from '../../../common/constants'
 import { Icon } from '../common'
@@ -30,94 +30,115 @@ class PinKeypad extends Component<Props> {
     return (
       <View style={style.keypadContainer}>
         <View style={style.keypadRow}>
-          <TouchableOpacity
+          <TouchableWithoutFeedback
             style={style.keypadColumn}
             onPress={() => this.changePin('1')}
             disabled={wait}
           >
-            <Text style={style.keypadKeys}>1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            <View style={style.keypadColumn}>
+              <Text style={style.keypadKeys}>1</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
             style={style.keypadColumn}
             onPress={() => this.changePin('2')}
             disabled={wait}
           >
-            <Text style={style.keypadKeys}>2</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            <View style={style.keypadColumn}>
+              <Text style={style.keypadKeys}>2</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
             style={style.keypadColumn}
             onPress={() => this.changePin('3')}
             disabled={wait}
           >
-            <Text style={style.keypadKeys}>3</Text>
-          </TouchableOpacity>
+            <View style={style.keypadColumn}>
+              <Text style={style.keypadKeys}>3</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
         <View style={style.keypadRow}>
-          <TouchableOpacity
+          <TouchableWithoutFeedback
             style={style.keypadColumn}
             onPress={() => this.changePin('4')}
             disabled={wait}
           >
-            <Text style={style.keypadKeys}>4</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            <View style={style.keypadColumn}>
+              <Text style={style.keypadKeys}>4</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
             style={style.keypadColumn}
             onPress={() => this.changePin('5')}
             disabled={wait}
           >
-            <Text style={style.keypadKeys}>5</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            <View style={style.keypadColumn}>
+              <Text style={style.keypadKeys}>5</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
             style={style.keypadColumn}
             onPress={() => this.changePin('6')}
             disabled={wait}
           >
-            <Text style={style.keypadKeys}>6</Text>
-          </TouchableOpacity>
+            <View style={style.keypadColumn}>
+              <Text style={style.keypadKeys}>6</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
         <View style={style.keypadRow}>
-          <TouchableOpacity
+          <TouchableWithoutFeedback
             style={style.keypadColumn}
             onPress={() => this.changePin('7')}
             disabled={wait}
           >
-            <Text style={style.keypadKeys}>7</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            <View style={style.keypadColumn}>
+              <Text style={style.keypadKeys}>7</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
             style={style.keypadColumn}
             onPress={() => this.changePin('8')}
             disabled={wait}
           >
-            <Text style={style.keypadKeys}>8</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            <View style={style.keypadColumn}>
+              <Text style={style.keypadKeys}>8</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
             style={style.keypadColumn}
             onPress={() => this.changePin('9')}
             disabled={wait}
           >
-            <Text style={style.keypadKeys}>9</Text>
-          </TouchableOpacity>
+            <View style={style.keypadColumn}>
+              <Text style={style.keypadKeys}>9</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
         <View style={style.keypadRow}>
           <View style={style.keypadColumnBlank} />
-          <TouchableOpacity
+          <TouchableWithoutFeedback
             style={style.keypadColumn}
             onPress={() => this.changePin('0')}
             disabled={wait}
           >
-            <Text style={style.keypadKeys}>0</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={style.keypadColumnBack}
+            <View style={style.keypadColumn}>
+              <Text style={style.keypadKeys}>0</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
             onPress={() => this.changePin('back')}
             disabled={wait}
           >
-            <Icon
-              style={style.keypadKeysBack}
-              name={Constants.BACKSPACE}
-              type={Constants.MATERIAL_ICONS}
-            />
-          </TouchableOpacity>
+            <View style={style.keypadColumnBack}>
+              <Icon
+                style={style.keypadKeysBack}
+                name={Constants.BACKSPACE}
+                type={Constants.MATERIAL_ICONS}
+              />
+            </View>
+          </TouchableWithoutFeedback>
         </View>
       </View>
     )
