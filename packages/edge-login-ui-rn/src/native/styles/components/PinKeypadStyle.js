@@ -7,7 +7,7 @@ const PinKeypadStyle = {
     width: '100%',
     height: scale(180),
     maxHeight: 300,
-    marginBottom: isIphoneX ? scale(13) : 0
+    marginBottom: isIphoneX ? scale(28) : 0
   },
   keypadRow: {
     flex: 1,
@@ -29,7 +29,8 @@ const PinKeypadStyle = {
     alignConten: 'center'
   },
   keypadColumnBlank: {
-    flex: 1
+    flex: 1,
+    margin: scale(2)
   },
   keypadKeys: {
     textAlign: 'center',
@@ -38,7 +39,7 @@ const PinKeypadStyle = {
   },
   keypadKeysBack: {
     textAlign: 'center',
-    fontSize: scale(35),
+    fontSize: scale(30),
     color: Constants.ACCENT_MINT
   }
 }

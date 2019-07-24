@@ -22,6 +22,7 @@ import {
   ImageButton
 } from '../../components/common'
 import FourDigitConnector from '../../connectors/abSpecific/FourDigitConnector'
+import { getSupportedBiometryType } from '../../keychain.js'
 
 type Props = {
   styles: Object,
@@ -71,9 +72,11 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     }
   }
   componentDidMount () {
-    if (this.props.username) {
-      this.props.launchUserLoginWithTouchId({ username: this.props.username })
-    }
+    getSupportedBiometryType().then(touch => {
+      if (this.props.username && touch !== 'FaceID') {
+        this.props.launchUserLoginWithTouchId({ username: this.props.username })
+      }
+    })
   }
   relaunchTouchId = () => {
     this.props.launchUserLoginWithTouchId({ username: this.props.username })
@@ -130,7 +133,9 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
           </View>
         </TouchableWithoutFeedback>
         <View style={PinLoginScreenStyle.spacer_full} />
-        <PinKeypadConnector style={PinLoginScreenStyle.keypad} />
+        {this.props.userDetails.pinEnabled && (
+          <PinKeypadConnector style={PinLoginScreenStyle.keypad} />
+        )}
       </View>
     )
   }
