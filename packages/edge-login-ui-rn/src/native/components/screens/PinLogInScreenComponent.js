@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import {
   Image,
+  Platform,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -22,7 +23,6 @@ import {
   ImageButton
 } from '../../components/common'
 import FourDigitConnector from '../../connectors/abSpecific/FourDigitConnector'
-import { getSupportedBiometryType } from '../../keychain.js'
 
 type Props = {
   styles: Object,
@@ -72,11 +72,9 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     }
   }
   componentDidMount () {
-    getSupportedBiometryType().then(touch => {
-      if (this.props.username && touch !== 'FaceID') {
-        this.props.launchUserLoginWithTouchId({ username: this.props.username })
-      }
-    })
+    if (this.props.username && this.props.touch !== 'FaceID') {
+      this.props.launchUserLoginWithTouchId({ username: this.props.username })
+    }
   }
   relaunchTouchId = () => {
     this.props.launchUserLoginWithTouchId({ username: this.props.username })
@@ -157,6 +155,9 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
           )}
           {!this.props.userDetails.pinEnabled && <View style={style.spacer} />}
           {this.renderTouchImage()}
+          <Text style={style.touchImageText}>
+            {this.renderTouchImageText()}
+          </Text>
         </View>
       )
     }
@@ -236,5 +237,18 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
       return null
     }
     return null
+  }
+  renderTouchImageText = () => {
+    const { touch } = this.props
+    if (touch === 'FaceID') {
+      return s.strings.use_faceId
+    }
+    if (touch === 'TouchID' && Platform.OS === 'ios') {
+      return s.strings.use_touchId
+    }
+    if (touch === 'TouchID' && Platform.OS !== 'ios') {
+      return s.strings.use_fingerprint
+    }
+    return ''
   }
 }

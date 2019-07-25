@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { Text, TouchableWithoutFeedback, View } from 'react-native'
 
 import * as Constants from '../../../common/constants'
+import s from '../../../common/locales/strings.js'
 import { Icon } from '../common'
 
 export type Props = {
@@ -36,7 +37,7 @@ class PinKeypad extends Component<Props> {
             disabled={wait}
           >
             <View style={style.keypadColumn}>
-              <Text style={style.keypadKeys}>1</Text>
+              <Text style={style.keypadKeys}>{s.strings.keypad_one}</Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
@@ -45,7 +46,7 @@ class PinKeypad extends Component<Props> {
             disabled={wait}
           >
             <View style={style.keypadColumn}>
-              <Text style={style.keypadKeys}>2</Text>
+              <Text style={style.keypadKeys}>{s.strings.keypad_two}</Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
@@ -54,7 +55,7 @@ class PinKeypad extends Component<Props> {
             disabled={wait}
           >
             <View style={style.keypadColumn}>
-              <Text style={style.keypadKeys}>3</Text>
+              <Text style={style.keypadKeys}>{s.strings.keypad_three}</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -65,7 +66,7 @@ class PinKeypad extends Component<Props> {
             disabled={wait}
           >
             <View style={style.keypadColumn}>
-              <Text style={style.keypadKeys}>4</Text>
+              <Text style={style.keypadKeys}>{s.strings.keypad_four}</Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
@@ -74,7 +75,7 @@ class PinKeypad extends Component<Props> {
             disabled={wait}
           >
             <View style={style.keypadColumn}>
-              <Text style={style.keypadKeys}>5</Text>
+              <Text style={style.keypadKeys}>{s.strings.keypad_five}</Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
@@ -83,7 +84,7 @@ class PinKeypad extends Component<Props> {
             disabled={wait}
           >
             <View style={style.keypadColumn}>
-              <Text style={style.keypadKeys}>6</Text>
+              <Text style={style.keypadKeys}>{s.strings.keypad_six}</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -94,7 +95,7 @@ class PinKeypad extends Component<Props> {
             disabled={wait}
           >
             <View style={style.keypadColumn}>
-              <Text style={style.keypadKeys}>7</Text>
+              <Text style={style.keypadKeys}>{s.strings.keypad_seven}</Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
@@ -103,7 +104,7 @@ class PinKeypad extends Component<Props> {
             disabled={wait}
           >
             <View style={style.keypadColumn}>
-              <Text style={style.keypadKeys}>8</Text>
+              <Text style={style.keypadKeys}>{s.strings.keypad_eight}</Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
@@ -112,7 +113,7 @@ class PinKeypad extends Component<Props> {
             disabled={wait}
           >
             <View style={style.keypadColumn}>
-              <Text style={style.keypadKeys}>9</Text>
+              <Text style={style.keypadKeys}>{s.strings.keypad_nine}</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -124,7 +125,7 @@ class PinKeypad extends Component<Props> {
             disabled={wait}
           >
             <View style={style.keypadColumn}>
-              <Text style={style.keypadKeys}>0</Text>
+              <Text style={style.keypadKeys}>{s.strings.keypad_zero}</Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback

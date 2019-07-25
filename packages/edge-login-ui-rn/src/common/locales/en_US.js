@@ -169,7 +169,20 @@ const strings = {
   otp_reset_modal_dont_ask: "Don't ask again",
   otp_authentication_header: '2FA has been enabled',
   otp_authentication_message:
-    '2FA has been enabled. A unique authentication code has been generated. If you lose your phone or uninstall the app, it will take 7 days to disable 2FA and access your account from another device without the following authentication code.\n\n%s'
+    '2FA has been enabled. A unique authentication code has been generated. If you lose your phone or uninstall the app, it will take 7 days to disable 2FA and access your account from another device without the following authentication code.\n\n%s',
+  keypad_one: '1',
+  keypad_two: '2',
+  keypad_three: '3',
+  keypad_four: '4',
+  keypad_five: '5',
+  keypad_six: '6',
+  keypad_seven: '7',
+  keypad_eight: '8',
+  keypad_nine: '9',
+  keypad_zero: '0',
+  use_faceId: 'Use Face ID',
+  use_touchId: 'Use Touch ID',
+  use_fingerprint: 'Use Fingerprint'
 }
 
 module.exports = strings
