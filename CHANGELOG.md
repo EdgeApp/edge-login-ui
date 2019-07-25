@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.5.36 (2019-07-25)
+
+- rn: Fix icons & messages for the updated login flow.
+
 ## 0.5.35 (2019-07-24)
 
 - rn: Fix bugs with the refactored login flow.
