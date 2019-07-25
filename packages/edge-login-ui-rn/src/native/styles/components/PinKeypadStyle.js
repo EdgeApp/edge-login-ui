@@ -16,7 +16,7 @@ const PinKeypadStyle = {
   keypadColumn: {
     flex: 1,
     borderColor: Constants.ACCENT_MINT,
-    borderWidth: 2,
+    borderWidth: 1,
     margin: scale(2),
     borderRadius: 5,
     justifyContent: 'center',
