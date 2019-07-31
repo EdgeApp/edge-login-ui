@@ -134,7 +134,8 @@ const PinLoginScreenStyle = {
     marginTop: scale(35)
   },
   spacer_full: {
-    flex: 1
+    flex: 1,
+    zIndex: -100
   },
   touchImageText: {
     marginTop: scale(8),

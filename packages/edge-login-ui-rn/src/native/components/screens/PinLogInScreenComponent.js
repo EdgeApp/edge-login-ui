@@ -239,14 +239,15 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     return null
   }
   renderTouchImageText = () => {
-    const { touch } = this.props
-    if (touch === 'FaceID') {
+    const { touch, userDetails } = this.props
+    const { touchEnabled } = userDetails
+    if (touchEnabled && touch === 'FaceID') {
       return s.strings.use_faceId
     }
-    if (touch === 'TouchID' && Platform.OS === 'ios') {
+    if (touchEnabled && touch === 'TouchID' && Platform.OS === 'ios') {
       return s.strings.use_touchId
     }
-    if (touch === 'TouchID' && Platform.OS !== 'ios') {
+    if (touchEnabled && touch === 'TouchID' && Platform.OS !== 'ios') {
       return s.strings.use_fingerprint
     }
     return ''

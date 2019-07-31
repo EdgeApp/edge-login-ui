@@ -5,6 +5,13 @@ import * as Styles from '../'
 const PinKeypadStyle = {
   keypadContainer: {
     width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  keypadInner: {
+    flex: 1,
+    maxWidth: 500,
     height: scale(180),
     maxHeight: 300,
     marginBottom: isIphoneX ? scale(28) : 0
@@ -20,13 +27,13 @@ const PinKeypadStyle = {
     margin: scale(2),
     borderRadius: 5,
     justifyContent: 'center',
-    alignConten: 'center'
+    alignItems: 'center'
   },
   keypadColumnBack: {
     flex: 1,
     margin: scale(2),
     justifyContent: 'center',
-    alignConten: 'center'
+    alignItems: 'center'
   },
   keypadColumnBlank: {
     flex: 1,
