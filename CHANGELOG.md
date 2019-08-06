@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.5.37 (2019-08-06)
+
+- rn: Fix button widths on tablets,
+- rn: Fix Touch ID wording.
+- rn: Update translations.
+
 ## 0.5.36 (2019-07-25)
 
 - rn: Fix icons & messages for the updated login flow.
