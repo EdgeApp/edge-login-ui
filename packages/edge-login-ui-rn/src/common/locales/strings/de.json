@@ -1,4 +1,6 @@
 {
+  "app_name_default": "Edge",
+  "edge_site": "https://edge.app/",
   "login_button": "Login",
   "username": "Benutzername",
   "password": "Passwort",
@@ -27,9 +29,11 @@
   "delete": "Löschen",
   "done": "Fertig",
   "skip": "ÜBERSPRINGEN",
+  "skip_button": "Überspringen",
   "done_caps": "FERTIG",
   "cancel": "Abbrechen",
   "cancel_caps": "ABBRECHEN",
+  "enable": "Aktivieren",
   "change_password": "Passwort ändern",
   "change_pin": "PIN ändern",
   "pin_changed": "PIN wurde erfolgreich geändert",
@@ -100,7 +104,7 @@
   "start_username": "Beginnen wir mit der Wahl eines Benutzernamens",
   "get_started": "Jetzt loslegen",
   "encrypting": "Verschlüsselung läuft",
-  "username_desc": "Ihr Benutzername wird benötigt, um sich auf diesem oder anderen Geräten bei Ihrem Edge-Konto einzuloggen.",
+  "username_desc": "Ihr Benutzername wird benötigt, um sich auf diesem und anderen Geräten bei Ihrem %s -Konto anzumelden.",
   "almost_done": "Fast fertig! Notieren Sie sich die Daten zu ihrem Benutzerkonto",
   "warning_message": "Wenn Sie Ihre Benutzerkonten-Informationen verlieren, werden Sie dauerhaft den Zugang zu Ihrem Vermögen verlieren. Notieren Sie sich diese und bewahren Sie diese sicher auf.",
   "good_job": "Gute Arbeit!",
@@ -125,5 +129,14 @@
   "username_exists_error": "Benutzername bereits vergeben",
   "four_digit_pin_error": "PIN muss vier Zahlen enthalten",
   "it_would_take_xx_to_crack": "Es würde %s dauern um Ihr Passwort zu knacken",
-  "recommend_choosing_a_stronger": "\nWir empfehlen ein noch sichereres Passwort zu wählen"
+  "recommend_choosing_a_stronger": "\nWir empfehlen ein noch sichereres Passwort zu wählen",
+  "backup_key_incorrect": "Backup-Schlüssel war falsch",
+  "create_account_error_title": "Fehler beim Erstellen eines Kontos",
+  "create_account_error_message": "Ein Fehler trat auf beim Erstellen Ihres Kontos. Dies könnte auf eine langsame Netzwerkverbindung oder Netzwerkunterbrechung zurückzuführen sein. Bitte versuchen Sie es erneut und wenn Sie einen anderen Fehler erhalten, den das Konto bereits existiert, starten Sie bitte die App neu und melden Sie sich mit Ihrem Benutzernamen und Passwort an.",
+  "try_again": "Wiederholen",
+  "otp_reset_modal_header": "Machen Sie Ihr Konto sicher",
+  "otp_reset_modal_message": "Zwei-Faktor-Authentifizierung (2FA) verhindert unberechtigten Zugriff von anderen Geräten, auch wenn Ihr Benutzername und Passwort kompromittiert sind. Sie können einen QR-Code scannen oder einen Authentifizierungscode eingeben, um andere Geräte nahtlos zu autorisieren. Möchten Sie 2FA aktivieren?",
+  "otp_reset_modal_dont_ask": "Nicht nochmal fragen",
+  "otp_authentication_header": "2FA wurde aktiviert",
+  "otp_authentication_message": "2FA wurde aktiviert. Ein einzigartiger Authentifizierungscode wurde generiert. Wenn du dein Telefon verlierst oder die App deinstalliert, dauert es 7 Tage, um 2FA zu deaktivieren und auf dein Konto von einem anderen Gerät zuzugreifen, ohne folgenden Authentifizierungscode.\n\n%s"
 }
