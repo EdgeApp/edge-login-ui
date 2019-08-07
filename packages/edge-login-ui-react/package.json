@@ -25,7 +25,7 @@
     "build:lib": "rimraf lib && rollup -c",
     "prepare": "npm-run-all build:lib",
     "start": "npm-run-all -p start:*",
-    "start:demo": "parcel --open src/demo/index.html",
+    "start:demo": "parcel ./src/demo/index.html --open",
     "start:lib": "rollup -cw"
   },
   "dependencies": {
@@ -48,28 +48,31 @@
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.2",
-    "babel-core": "^6.26.0",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-regenerator": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015-rollup": "^3.0.0",
-    "babel-preset-flow": "^6.23.0",
-    "babel-preset-react": "^6.24.1",
-    "node-sass": "^4.5.3",
-    "npm-run-all": "^4.1.2",
-    "parcel-bundler": "^1.6.2",
-    "postcss": "^6.0.19",
-    "rimraf": "^2.6.1",
-    "rollup": "0.48.0",
-    "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-commonjs": "^8.0.0",
-    "rollup-plugin-flow-entry": "^0.2.0",
-    "rollup-plugin-node-resolve": "^3.2.0",
-    "rollup-plugin-postcss": "^1.3.4",
-    "rollup-plugin-sass": "^0.6.0",
-    "rollup-plugin-url": "^1.3.0"
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.5.5",
+    "autoprefixer": "^9.6.1",
+    "flow-bin": "^0.62.0",
+    "node-sass": "^4.12.0",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.3",
+    "postcss": "^7.0.17",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.19.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-flow-entry": "^0.3.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-url": "^2.2.2"
+  },
+  "resolutions": {
+    "js-yaml": "3.13.1",
+    "scrypt.js": "0.3.0"
   }
 }
