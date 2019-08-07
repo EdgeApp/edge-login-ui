@@ -138,5 +138,18 @@
   "otp_reset_modal_message": "L'autenticazione a due fattori (2FA) perviene accessi non autorizzati provenienti da altri dispositivi, anche se il tuo nome utente e la tua password sono stati compromessi. \nPuoi scansionare il QR Code o inserire manualmente il codice di autenticazione per autorizzare altri dispositivi. Vuoi abilitare il 2FA?",
   "otp_reset_modal_dont_ask": "Non chiedermelo più",
   "otp_authentication_header": "2FA è stata attivata",
-  "otp_authentication_message": "2FA è stata attivata. È stato generato un codice di autenticazione univoco. Se perdi il telefono o disinstalli l'app, ci vorranno 7 giorni per disabilitare 2FA e accedere al tuo account da un altro dispositivo senza il seguente codice di autenticazione.\n\n%s"
+  "otp_authentication_message": "2FA è stata attivata. È stato generato un codice di autenticazione univoco. Se perdi il telefono o disinstalli l'app, ci vorranno 7 giorni per disabilitare 2FA e accedere al tuo account da un altro dispositivo senza il seguente codice di autenticazione.\n\n%s",
+  "keypad_one": "",
+  "keypad_two": "",
+  "keypad_three": "",
+  "keypad_four": "",
+  "keypad_five": "",
+  "keypad_six": "",
+  "keypad_seven": "",
+  "keypad_eight": "",
+  "keypad_nine": "",
+  "keypad_zero": "",
+  "use_faceId": "",
+  "use_touchId": "",
+  "use_fingerprint": ""
 }
