@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.5.38 (2019-08-07)
+
+- rn: Update transactions.
+
 ## 0.5.37 (2019-08-06)
 
 - rn: Fix button widths on tablets,
