@@ -1,10 +1,14 @@
 {
-  "presets": ["env", "flow", "react"],
+  "presets": [
+    ["@babel/preset-env", { "loose": true }],
+    "@babel/preset-flow",
+    "@babel/preset-react"
+  ],
   "plugins": [
-    "transform-async-to-generator",
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    "transform-regenerator",
-    ["transform-es2015-for-of", { "loose": true }]
+    "@babel/plugin-proposal-class-properties",
+    [
+      "@babel/plugin-transform-runtime",
+      { "corejs": false, "helpers": false, "regenerator": true }
+    ]
   ]
 }

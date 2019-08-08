@@ -9,18 +9,6 @@ import url from 'rollup-plugin-url'
 import packageJson from './package.json'
 import sassLoader from './sass-loader.js'
 
-const babelOpts = {
-  babelrc: false,
-  presets: ['es2015-rollup', 'flow', 'react'],
-  plugins: [
-    'transform-async-to-generator',
-    'transform-class-properties',
-    'transform-object-rest-spread',
-    'transform-regenerator',
-    ['transform-es2015-for-of', { loose: true }]
-  ]
-}
-
 const external = [
   'regenerator-runtime/runtime',
   ...Object.keys(packageJson.dependencies).filter(
@@ -32,7 +20,11 @@ const external = [
 export default {
   external,
   input: 'src/index.js',
-  output: { file: packageJson.main, format: 'cjs' },
+  output: {
+    file: packageJson.main,
+    format: 'cjs',
+    sourcemap: true
+  },
   plugins: [
     commonjs({ exclude: 'src/**' }),
     nodeResolve(),
@@ -43,8 +35,7 @@ export default {
       modules: true,
       plugins: [autoprefixer]
     }),
-    babel(babelOpts),
+    babel(),
     flowEntry()
-  ],
-  sourcemap: true
+  ]
 }
