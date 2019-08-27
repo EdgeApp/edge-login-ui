@@ -8,7 +8,7 @@ import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common'
 
 type OwnProps = {
-  label: string,
+  label?: string,
   autoFocus: boolean,
   onFinish(): void
 }
@@ -39,4 +39,7 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   }
 }
 // $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps)(FormField)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormField)
