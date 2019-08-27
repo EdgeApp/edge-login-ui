@@ -8,13 +8,15 @@ import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common'
 
 type OwnProps = {
-  label: string,
+  label?: string,
   autoFocus: boolean,
   onFinish(): void
 }
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
-  const label = ownProps.label ? ownProps.label : 'Confirm Password'
+  const label = ownProps.label
+    ? ownProps.label
+    : s.strings.confirm_password_text
   const value = state.create.confirmPassword ? state.create.confirmPassword : ''
   const error = state.create.confirmPasswordErrorMessage
     ? state.create.confirmPasswordErrorMessage
@@ -39,4 +41,7 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   }
 }
 // $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps)(FormField)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormField)
