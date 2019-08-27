@@ -14,7 +14,9 @@ type OwnProps = {
 }
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
-  const label = ownProps.label ? ownProps.label : 'Confirm Password'
+  const label = ownProps.label
+    ? ownProps.label
+    : s.strings.confirm_password_text
   const value = state.create.confirmPassword ? state.create.confirmPassword : ''
   const error = state.create.confirmPasswordErrorMessage
     ? state.create.confirmPasswordErrorMessage
