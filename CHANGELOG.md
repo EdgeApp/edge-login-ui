@@ -1,5 +1,12 @@
 # edge-login-ui
 
+## 0.5.39 (2019-08-07)
+
+- web: Upgrade build tooling.
+- rn: Update transactions.
+- rn: Make "Confirm Password" string translatable.
+- rn: Remove dangling semicolon.
+
 ## 0.5.38 (2019-08-07)
 
 - rn: Update transactions.
