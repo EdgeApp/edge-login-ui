@@ -147,7 +147,8 @@ const NewAccountReviewScreenStyle = {
       flex: 2
     },
     bInfoCenter: {
-      flex: 3
+      flex: 3.5,
+      flexWrap: 'nowrap'
     },
     bInforRight: {
       flex: 5
