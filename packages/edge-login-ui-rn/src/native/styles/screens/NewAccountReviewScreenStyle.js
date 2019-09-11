@@ -63,6 +63,7 @@ const NewAccountReviewScreenStyle = {
       position: 'relative',
       borderRadius: 27,
       backgroundColor: Constants.WHITE,
+      alignItems: 'center',
       height: scale(30),
       width: scale(30)
     },
