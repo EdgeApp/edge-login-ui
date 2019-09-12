@@ -159,7 +159,9 @@ export function createUser (data: Object) {
         })
         const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
         if (!touchDisabled) {
-          await enableTouchId(folder, abcAccount)
+          await enableTouchId(folder, abcAccount).catch(e => {
+            console.log(e) // Fail quietly
+          })
         }
         dispatch(
           dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, abcAccount)

@@ -48,7 +48,9 @@ export function loginWithRecovery (answers: Array<string>, username: string) {
       })
       const touchDisabled = await isTouchDisabled(folder, account.username)
       if (!touchDisabled) {
-        await enableTouchId(folder, account)
+        await enableTouchId(folder, account).catch(e => {
+          console.log(e) // Fail quietly
+        })
       }
       await folder
         .file('lastuser.json')
@@ -175,7 +177,9 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
             abcAccount.username
           )
           if (!touchDisabled) {
-            await enableTouchId(folder, abcAccount)
+            await enableTouchId(folder, abcAccount).catch(e => {
+              console.log(e) // Fail quietly
+            })
           }
           await folder
             .file('lastuser.json')
@@ -266,7 +270,9 @@ export function userLogin (data: Object, backupKey?: string) {
         })
         const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
         if (!touchDisabled) {
-          await enableTouchId(folder, abcAccount)
+          await enableTouchId(folder, abcAccount).catch(e => {
+            console.log(e) // Fail quietly
+          })
         }
         await folder
           .file('lastuser.json')
