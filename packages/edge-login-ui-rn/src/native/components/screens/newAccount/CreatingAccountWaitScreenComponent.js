@@ -13,9 +13,7 @@ type Props = {
   createSuccess: boolean,
   nextScreen(): void
 }
-export default class CreatingAccountWaitScreenComponent extends Component<
-  Props
-> {
+export default class CreatingAccountWaitScreenComponent extends Component<Props> {
   componentWillReceiveProps (nextProps: Props) {
     if (nextProps.createSuccess) {
       global.firebase &&

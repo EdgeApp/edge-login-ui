@@ -31,4 +31,7 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormField)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormField)

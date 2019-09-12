@@ -26,4 +26,7 @@ export const mapStateToProps = (state: State) => {
   }
 }
 
-export default connect(mapStateToProps, {})(FourDigitComponent)
+export default connect(
+  mapStateToProps,
+  {}
+)(FourDigitComponent)

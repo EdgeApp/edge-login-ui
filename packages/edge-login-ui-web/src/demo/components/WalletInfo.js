@@ -137,7 +137,8 @@ export class WalletInfo extends Component<Props, State> {
             type="text"
             value={this.state.spendAmount}
             onChange={this.onSpendAmountChanged}
-          />&nbsp; ${this.state.spendFiat.toFixed(2)}
+          />
+          &nbsp; ${this.state.spendFiat.toFixed(2)}
         </p>
         <p>
           <label>Address:</label>&nbsp;

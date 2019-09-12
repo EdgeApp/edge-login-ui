@@ -12,4 +12,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LandingScreenComponent)
+export default connect(
+  null,
+  mapDispatchToProps
+)(LandingScreenComponent)

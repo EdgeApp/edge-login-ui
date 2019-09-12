@@ -50,7 +50,9 @@ export default ({
         <div className={styles.square} onClick={gotoChangePasswordRecovery}>
           <img src={recoveryIcon} />
           <p className={styles.label}>
-            Setup / Change<br />Password Recovery
+            Setup / Change
+            <br />
+            Password Recovery
           </p>
         </div>
       </div>

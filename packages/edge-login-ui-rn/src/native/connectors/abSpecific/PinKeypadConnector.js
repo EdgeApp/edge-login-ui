@@ -22,4 +22,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PinKeypad)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PinKeypad)

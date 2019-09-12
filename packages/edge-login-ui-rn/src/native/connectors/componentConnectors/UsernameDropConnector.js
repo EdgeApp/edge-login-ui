@@ -39,6 +39,7 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  FormFieldWithDropComponent
-)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormFieldWithDropComponent)

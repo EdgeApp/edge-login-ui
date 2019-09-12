@@ -57,7 +57,10 @@ function returnTrunatedUsername (arg) {
   }
   return arg
 }
-export default connect(mapStateToProps, mapDispatchToProps)(LinkedComponent)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LinkedComponent)
 
 /*
 import {connect} from 'react-redux'

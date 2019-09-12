@@ -61,4 +61,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LinkedComponent)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LinkedComponent)

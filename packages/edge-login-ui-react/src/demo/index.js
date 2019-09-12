@@ -51,7 +51,8 @@ class Root extends Component<RootProps, RootState> {
       if (this.state.closed) {
         return (
           <p>
-            Currently logged in.<br />
+            Currently logged in.
+            <br />
             <button onClick={this.onOpen}>Show Account UI</button>
             <br />
             <button onClick={this.logout}>Logout</button>
@@ -73,7 +74,8 @@ class Root extends Component<RootProps, RootState> {
     if (this.state.closed) {
       return (
         <p>
-          Currently logged out.<br />
+          Currently logged out.
+          <br />
           <button onClick={this.onOpen}>Show Login UI</button>
         </p>
       )

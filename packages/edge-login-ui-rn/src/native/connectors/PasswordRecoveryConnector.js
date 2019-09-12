@@ -21,6 +21,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  PasswordRecoveryAppComponent
-)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PasswordRecoveryAppComponent)

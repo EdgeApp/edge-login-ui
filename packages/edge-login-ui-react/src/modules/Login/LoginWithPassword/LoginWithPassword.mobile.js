@@ -32,7 +32,8 @@ export default ({
       </div>
     </div>
     <p className={styles.header}>
-      Log in with your username and <br />password
+      Log in with your username and <br />
+      password
     </p>
     <div className={styles.forms}>
       <CachedUsers

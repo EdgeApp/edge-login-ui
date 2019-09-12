@@ -33,4 +33,7 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyModal)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MyModal)

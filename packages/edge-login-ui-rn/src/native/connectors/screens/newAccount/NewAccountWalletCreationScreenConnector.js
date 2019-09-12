@@ -12,4 +12,7 @@ export const mapStateToProps = (state: State) => {
   }
 }
 
-export default connect(mapStateToProps, {})(LinkedComponent)
+export default connect(
+  mapStateToProps,
+  {}
+)(LinkedComponent)

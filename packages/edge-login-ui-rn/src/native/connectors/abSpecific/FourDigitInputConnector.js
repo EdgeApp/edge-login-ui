@@ -34,6 +34,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  FourDigitInputComponent
-)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FourDigitInputComponent)

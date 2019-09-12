@@ -50,9 +50,8 @@ export function makeEdgeUiContext (
     .getRoot()
     .then((root: BridgeRoot) => root.makeContext(opts))
     .then((context: EdgeUiContext) => {
-      context.watch(
-        'windowVisible',
-        visible => (visible ? showFrame(frame) : hideFrame(frame))
+      context.watch('windowVisible', visible =>
+        visible ? showFrame(frame) : hideFrame(frame)
       )
       return context
     })

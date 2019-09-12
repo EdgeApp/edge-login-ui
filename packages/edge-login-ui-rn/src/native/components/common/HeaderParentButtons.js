@@ -18,8 +18,7 @@ class HeaderParentButtons extends Component<Props> {
     const openEdgeSite = () => Linking.openURL(s.strings.edge_site)
     return (
       <View style={styles.container}>
-        {parentButton &&
-          parentButton.text && (
+        {parentButton && parentButton.text && (
           <TouchableOpacity onPress={parentButton.callback}>
             <View style={styles.leftButtonContainer}>
               <Text style={parentButton.style || styles.leftButtonText}>

@@ -25,6 +25,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  EdgeLoginQrComponent
-)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EdgeLoginQrComponent)

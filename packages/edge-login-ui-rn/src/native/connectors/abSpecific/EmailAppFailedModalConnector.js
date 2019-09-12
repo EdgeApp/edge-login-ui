@@ -26,4 +26,7 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
     action: ownProps.action
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(MyModal)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MyModal)

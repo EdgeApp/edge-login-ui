@@ -7,12 +7,12 @@ const guidelineBaseWidth = 320
 const guidelineBaseHeight = 568
 
 const scaleVertical = size => {
-  const out = height / guidelineBaseHeight * size
+  const out = (height / guidelineBaseHeight) * size
   return out
 }
 
 const scaleHorizontal = size => {
-  const out = width / guidelineBaseWidth * size
+  const out = (width / guidelineBaseWidth) * size
   return out
 }
 

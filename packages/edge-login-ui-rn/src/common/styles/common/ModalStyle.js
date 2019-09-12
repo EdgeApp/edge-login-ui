@@ -41,7 +41,7 @@ const ModalStyle = {
   modalBox: {
     top: screenDimensions.height / 8,
     left: screenDimensions.width / 16,
-    width: screenDimensions.width * 7 / 8,
+    width: (screenDimensions.width * 7) / 8,
     borderRadius: scale(3),
     borderWidth: 2,
     borderColor: Constants.GRAY_2,
@@ -195,7 +195,7 @@ const StaticModalStyle = {
   modalBox: {
     top: screenDimensions.height / 4,
     left: screenDimensions.width / 8,
-    width: screenDimensions.width * 3 / 4,
+    width: (screenDimensions.width * 3) / 4,
     alignItems: 'stretch',
     position: 'absolute',
     // height: (screenDimensions.height) / 3,
