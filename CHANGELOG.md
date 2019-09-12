@@ -1,6 +1,10 @@
 # edge-login-ui
 
-## 0.5.39 (2019-08-07)
+## 0.5.40 (2019-09-12)
+
+- rn: Fix visual glitches.
+
+## 0.5.39 (2019-09-09)
 
 - web: Upgrade build tooling.
 - rn: Update transactions.
