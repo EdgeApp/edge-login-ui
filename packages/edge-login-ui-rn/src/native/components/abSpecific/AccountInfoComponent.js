@@ -59,7 +59,7 @@ class AccountInfoComponent extends Component<Props, State> {
           <View style={style.bRow}>
             <View style={style.bInfoLeft} />
             <View style={style.bInfoCenter}>
-              <Text style={style.accountText}>{s.strings.username}</Text>
+              <Text style={style.accountText}>{s.strings.username}:</Text>
             </View>
             <View style={style.bInforRight}>
               <Text style={style.accountText}>{this.props.username}</Text>
