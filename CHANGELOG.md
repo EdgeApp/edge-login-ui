@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.5.41 (2019-09-13)
+
+- rn: Fix fingerprint crash at login.
+
 ## 0.5.40 (2019-09-12)
 
 - rn: Fix visual glitches.
