@@ -151,6 +151,7 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setKeychainString (String value, String key, Promise promise) {
+      if (mWhorlwind.canStoreSecurely()) {
         Observable.just(value)
                 .observeOn(Schedulers.io())
                 .flatMapCompletable(val -> {
@@ -159,6 +160,9 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
                     return completable;
                 })
                 .subscribe();
+      } else {
+        promise.reject("EIO", "Cannot write '" + key + "'");
+      }
     }
 
     @ReactMethod
