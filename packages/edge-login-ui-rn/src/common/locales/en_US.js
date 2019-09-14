@@ -5,6 +5,7 @@ const strings = {
   login_button: 'Login',
   username: 'Username',
   password: 'Password',
+  confirm_password: 'Confirm Password',
   pin: 'PIN',
   back_caps: 'BACK',
   back: 'Back',

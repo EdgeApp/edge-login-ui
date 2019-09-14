@@ -89,6 +89,7 @@ export default class NewAccountPasswordScreenComponent extends Component<
           onFinish={this.onSetNextFocus}
         />
         <PasswordConfirmConnector
+          label={s.strings.confirm_password}
           style={styles.inputBox}
           autoFocus={this.state.focusSecond}
           onFinish={this.onNextPress}
