@@ -12,7 +12,7 @@ export const LogoHeaderScaledStyle = {
   image: {
     position: 'relative',
     height: scale(44),
-    overflow: 'visible'
-    // resizeMode: 'stretch'
+    overflow: 'visible',
+    resizeMode: 'contain'
   }
 }
