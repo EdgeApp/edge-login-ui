@@ -14,6 +14,7 @@ type Props = {
   subTitle: string,
   title: string,
   showBackButton: boolean,
+  showSkipButton?: boolean,
   customLabel?: string,
   skipScreen(): void,
   goBack(): void,

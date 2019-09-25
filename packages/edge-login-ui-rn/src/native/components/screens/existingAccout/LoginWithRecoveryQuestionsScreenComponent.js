@@ -16,6 +16,8 @@ type Props = {
   question2: string,
   showHeader: boolean,
   submitButton: string,
+  showRecoverSuccessDialog: boolean,
+  loginError: string,
   updateUsername(string): void,
   deleteRecovery(): void,
   onCancel(): void,

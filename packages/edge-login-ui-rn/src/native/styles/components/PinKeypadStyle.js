@@ -1,6 +1,5 @@
 import * as Constants from '../../../common/constants/'
 import { isIphoneX, scale } from '../../../common/util'
-import * as Styles from '../'
 
 const PinKeypadStyle = {
   keypadContainer: {

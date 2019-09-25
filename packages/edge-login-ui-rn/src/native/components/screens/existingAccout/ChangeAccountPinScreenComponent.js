@@ -15,6 +15,7 @@ type Props = {
   showHeader: boolean,
   showModal: boolean,
   forgotPasswordModal: boolean,
+  pinError: string,
   changePin(string): void,
   login(): void
 }

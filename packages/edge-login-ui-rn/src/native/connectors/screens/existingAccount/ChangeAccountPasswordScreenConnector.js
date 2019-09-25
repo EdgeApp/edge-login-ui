@@ -12,6 +12,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const error = state.create.confirmPasswordErrorMessage
     ? state.create.confirmPasswordErrorMessage
     : ''
+  // $FlowFixMe This doesn't exist in state:
   const error2 = state.create.createPasswordErrorMessage
     ? state.create.createPasswordErrorMessage
     : ''

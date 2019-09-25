@@ -14,6 +14,7 @@ type OwnProps = {
 
 export const mapStateToProps = (state: State) => {
   const value = state.login.otpUserBackupKey || ''
+  // $FlowFixMe This doesn't exist in state:
   const error = state.login.otpErrorMessage || ''
   return {
     value,

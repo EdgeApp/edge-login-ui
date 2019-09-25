@@ -18,6 +18,8 @@ type Props = {
   styles: Object,
   screen: string,
   otpResetDate: string,
+  backupKeyError?: string,
+  loginSuccess: boolean,
   resetOtpToken(): void,
   setbackupKey(): void
 }

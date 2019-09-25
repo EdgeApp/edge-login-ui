@@ -417,7 +417,7 @@ const twofaReminder = async account => {
       message: sprintf(s.strings.otp_authentication_message, account.otpKey),
       buttonText: s.strings.ok
     })
-    return await showModal(modal)
+    return showModal(modal)
   }
 
   const createOtpCheckModal = async () => {
@@ -434,7 +434,7 @@ const twofaReminder = async account => {
       yesButtonText: s.strings.enable,
       noButtonText: s.strings.skip_button
     })
-    return await showModal(modal)
+    return showModal(modal)
   }
 
   const createOtpCheckModalDontAsk = async () => {
@@ -461,7 +461,7 @@ const twofaReminder = async account => {
         returnValue: 'dontAsk'
       }
     })
-    return await showModal(modal)
+    return showModal(modal)
   }
 
   if (otpKey) {
