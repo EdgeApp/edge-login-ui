@@ -2,6 +2,7 @@
 
 .*/node_modules/@parcel/watcher/test/tmp/config.json
 .*/node_modules/config-chain/.*
+.*/node_modules/edge-currency-ethereum/.*
 .*/node_modules/react-native-keyboard-aware-scroll-view/.*
 .*/node_modules/react-native/.*
 

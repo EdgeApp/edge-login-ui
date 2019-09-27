@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "edge-core-js": "^0.13.5",
-    "flow-bin": "^0.62.0"
+    "flow-bin": "^0.75.0"
   },
   "peerDependencies": {
     "react": "*",

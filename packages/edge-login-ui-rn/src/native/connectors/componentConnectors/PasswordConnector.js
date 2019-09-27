@@ -15,6 +15,7 @@ type OwnProps = {
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const value = state.create.password ? state.create.password : ''
+  // $FlowFixMe This doesn't exist in state:
   const error = state.create.createPasswordErrorMessage
     ? state.create.createPasswordErrorMessage
     : ''

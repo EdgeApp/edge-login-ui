@@ -3,10 +3,8 @@
 import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
-import * as actions from '../../../common/actions'
-import { UPDATE_WAIT_TIMER } from '../../../common/constants/index'
 import s from '../../../common/locales/strings.js'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import type { State } from '../../../types/ReduxTypes'
 import { FourDigitComponent } from '../../components/abSpecific/'
 
 export const mapStateToProps = (state: State) => {

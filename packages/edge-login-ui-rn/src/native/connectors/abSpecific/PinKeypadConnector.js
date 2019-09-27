@@ -1,10 +1,8 @@
 // @flow
 
 import { connect } from 'react-redux'
-import { sprintf } from 'sprintf-js'
 
 import * as actions from '../../../common/actions'
-import { UPDATE_WAIT_TIMER } from '../../../common/constants/index'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { PinKeypad } from '../../components/abSpecific/'
 

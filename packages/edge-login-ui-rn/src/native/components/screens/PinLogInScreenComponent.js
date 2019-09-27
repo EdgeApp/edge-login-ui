@@ -2,10 +2,8 @@
 
 import React, { Component } from 'react'
 import {
-  Image,
   Platform,
   Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native'
@@ -31,6 +29,7 @@ type Props = {
   userDetails: Object,
   userList: Array<Object>,
   touch: boolean | string,
+  loginSuccess: boolean,
   launchUserLoginWithTouchId(Object): void,
   changeUser(string): void,
   launchDeleteModal(): void,
@@ -39,7 +38,8 @@ type Props = {
   appId?: string,
   backgroundImage?: any,
   primaryLogo?: any,
-  parentButton?: Object
+  parentButton?: Object,
+  showModal: boolean
 }
 type State = {
   loggingIn: boolean,

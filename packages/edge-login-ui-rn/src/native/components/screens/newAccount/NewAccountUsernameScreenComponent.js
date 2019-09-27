@@ -15,7 +15,8 @@ type Props = {
   styles: Object,
   username: string,
   checkUsernameForAvailabilty(string): void,
-  appName: string
+  appName: string,
+  usernameErrorMessage?: string
 }
 type State = {
   isProcessing: boolean

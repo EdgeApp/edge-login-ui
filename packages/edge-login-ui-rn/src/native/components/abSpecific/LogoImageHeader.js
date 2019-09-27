@@ -7,6 +7,7 @@ import * as Assets from '../../assets/'
 
 type Props = {
   small?: boolean,
+  src?: string,
   style: Object
 }
 

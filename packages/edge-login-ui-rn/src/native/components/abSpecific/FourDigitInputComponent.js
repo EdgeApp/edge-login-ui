@@ -20,6 +20,7 @@ type Props = {
   error: string,
   wait: number,
   isLogginginWithPin: boolean,
+  dontForceFocus?: boolean,
   onChangeText(Object): void,
   updateWaitTime(number): void
 }
