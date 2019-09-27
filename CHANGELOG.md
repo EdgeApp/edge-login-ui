@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.5.43 (2019-09-27)
+
+- Fix cropping of logo on new account welcome scene
+- Upgrade flow and fix new flow errors
+- Upgrade vulnerable dev dependency
+
 ## 0.5.41 (2019-09-13)
 
 - rn: Fix fingerprint crash at login.
