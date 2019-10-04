@@ -8,6 +8,7 @@ import ChangePinModalConnector from '../../../connectors/abSpecific/ChangePinMod
 import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import { Button, StaticModal } from '../../common'
+import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type Props = {
   styles: Object,
@@ -90,34 +91,38 @@ export default class ChangeAccountPinScreenComponent extends Component<
   render () {
     const { SetAccountPinScreenStyle } = this.props.styles
     return (
-      <View style={SetAccountPinScreenStyle.screen}>
-        {this.renderHeader(SetAccountPinScreenStyle)}
-        <View style={SetAccountPinScreenStyle.pageContainer}>
-          <View style={SetAccountPinScreenStyle.row1}>
-            <Text style={SetAccountPinScreenStyle.instructions}>
-              {s.strings.pin_desc}
-            </Text>
+      <SafeAreaView>
+        <View style={SetAccountPinScreenStyle.screen}>
+          {this.renderHeader(SetAccountPinScreenStyle)}
+          <View style={SetAccountPinScreenStyle.pageContainer}>
+            <View style={SetAccountPinScreenStyle.row1}>
+              <Text style={SetAccountPinScreenStyle.instructions}>
+                {s.strings.pin_desc}
+              </Text>
+            </View>
+            <View style={SetAccountPinScreenStyle.row2}>
+              <CreateFourDigitPinConnector
+                style={SetAccountPinScreenStyle.fourPin}
+              />
+            </View>
+            <View style={SetAccountPinScreenStyle.row3}>
+              <Button
+                onPress={this.onNextPress}
+                downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
+                downTextStyle={
+                  SetAccountPinScreenStyle.nextButton.downTextStyle
+                }
+                upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
+                upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
+                label={s.strings.done}
+                isThinking={this.state.isProcessing}
+                doesThink
+              />
+            </View>
           </View>
-          <View style={SetAccountPinScreenStyle.row2}>
-            <CreateFourDigitPinConnector
-              style={SetAccountPinScreenStyle.fourPin}
-            />
-          </View>
-          <View style={SetAccountPinScreenStyle.row3}>
-            <Button
-              onPress={this.onNextPress}
-              downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
-              downTextStyle={SetAccountPinScreenStyle.nextButton.downTextStyle}
-              upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
-              upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
-              label={s.strings.done}
-              isThinking={this.state.isProcessing}
-              doesThink
-            />
-          </View>
+          {this.renderModal(SetAccountPinScreenStyle)}
         </View>
-        {this.renderModal(SetAccountPinScreenStyle)}
-      </View>
+      </SafeAreaView>
     )
   }
 }
