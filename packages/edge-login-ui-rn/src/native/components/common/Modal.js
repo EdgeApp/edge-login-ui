@@ -26,6 +26,7 @@ type Props = {
   actionLabel: string,
   cancelLabel: string,
   singleButton: boolean,
+  singleCancelButton: boolean,
   buttonTimerSeconds?: number,
   modalDismissTimerSeconds?: number,
   hideCancelX: boolean,
@@ -95,6 +96,20 @@ class MyModal extends Component<Props, State> {
             downStyle={styles.twoButtonConfig.actionButton.down}
             downTextStyle={styles.twoButtonConfig.actionButton.downText}
             onPress={this.props.action}
+          />
+        </View>
+      )
+    }
+    if (this.props.singleCancelButton) {
+      return (
+        <View style={styles.buttonsWrap}>
+          <Button
+            label={this.props.cancelLabel}
+            upStyle={styles.twoButtonConfig.cancelButton.up}
+            upTextStyle={styles.twoButtonConfig.cancelButton.upText}
+            downStyle={styles.twoButtonConfig.cancelButton.down}
+            downTextStyle={styles.twoButtonConfig.cancelButton.downText}
+            onPress={this.props.cancel}
           />
         </View>
       )

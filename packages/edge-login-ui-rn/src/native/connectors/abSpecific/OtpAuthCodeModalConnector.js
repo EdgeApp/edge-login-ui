@@ -15,15 +15,16 @@ type OwnProps = {
 }
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+  const { otpUserBackupKey } = state.login
   return {
     headerText: s.strings.otp_auth_code_header,
-    // middleText: 'Sign into your account using the device you setup 2FA with, and go to Settings > 2 Factor Authentication to find the code.',
     modalMiddleComponent: ownProps.middle,
     image: OTP_SMALL,
     actionLabel: s.strings.done,
     cancelLabel: s.strings.cancel,
     hideCancelX: true,
-    thinking: ownProps.thinking
+    thinking: ownProps.thinking,
+    singleCancelButton: !otpUserBackupKey || otpUserBackupKey.length < 16
   }
 }
 export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {

@@ -16,7 +16,7 @@ type Props = {
   errorColor: string,
   titleTextStyle: Object,
   secureTextEntry: boolean,
-  autoCapitalize: string,
+  autoCapitalize?: string,
   autoCorrect: boolean,
   autoFocus: boolean,
   forceFocus: boolean,
