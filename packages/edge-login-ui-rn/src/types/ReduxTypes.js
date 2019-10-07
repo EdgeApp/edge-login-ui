@@ -47,6 +47,7 @@ export type State = {
     otpResetToken: string,
     otpUserBackupKey: string,
     previousAttemptType: string,
+    previousAttemptData: any,
     touchIdInformation: Object,
     recoveryToken: string,
     wait: number

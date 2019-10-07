@@ -13,6 +13,7 @@ const initialState = {
   otpUserBackupKey: null, // S7UQ66VYNZKAX4EV
   recoveryToken: null,
   previousAttemptType: null,
+  previousAttemptData: null,
   edgeLoginId: null,
   cancelEdgeLoginRequest: null,
   account: null,
@@ -86,7 +87,8 @@ export default function (state = initialState, action) {
         ...state,
         otpResetToken: action.data.resetToken,
         otpResetDate: action.data.resetDate,
-        previousAttemptType: action.data.loginAttempt
+        previousAttemptType: action.data.loginAttempt,
+        previousAttemptData: action.data.loginAttemptData
       }
     case Constants.OTP_RESET_REQUEST:
       return {

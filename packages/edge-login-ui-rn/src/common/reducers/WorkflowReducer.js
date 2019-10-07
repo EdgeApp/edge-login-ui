@@ -164,6 +164,12 @@ export default function (state = initialState, action) {
         currentKey: Constants.WORKFLOW_PASSWORD_FORCED,
         currentSceneIndex: 0
       }
+    case Constants.RECOVERY_AFTER_OTP_CHECK:
+      return {
+        ...state,
+        currentKey: Constants.WORKFLOW_RECOVERY_LOGIN,
+        currentSceneIndex: 1
+      }
     case Constants.RESET_APP:
       return initialState
     default:

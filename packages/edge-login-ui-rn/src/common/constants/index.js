@@ -81,6 +81,7 @@ export const SET_RECOVERY_KEY = 'resetRecoveryKey'
 export const CANCEL_RECOVERY_KEY = 'cancelRecoveryKey'
 export const START_RECOVERY_LOGIN = 'startRecoveryKeyLogin'
 export const CLEAR_CREATE_ERROR_MESSAGE = 'clearCreateErrorMessage'
+export const RECOVERY_AFTER_OTP_CHECK = 'recoveryAfterOtpCheck'
 
 export const OTP_REMINDER_MILLISECONDS = 604800000
 export const OTP_REMINDER_STORE_NAME = 'app.edge.login'
