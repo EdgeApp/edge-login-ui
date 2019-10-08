@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.5.44 (2019-10-08)
+
+- rn: Fix layout on change PIN & change password screens.
+- rn: Handle password recovery + 2FA.
+- rn: Fix UX on 2FA entry screen.
+
 ## 0.5.43 (2019-09-27)
 
 - Fix cropping of logo on new account welcome scene
