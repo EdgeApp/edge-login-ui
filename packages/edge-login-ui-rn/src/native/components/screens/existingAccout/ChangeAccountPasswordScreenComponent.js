@@ -11,6 +11,7 @@ import HeaderConnector from '../../../connectors/componentConnectors/HeaderConne
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
 import { Button } from '../../common'
+import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 export type OwnProps = {
   showHeader: boolean,
@@ -156,11 +157,13 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
   render () {
     const { NewAccountPasswordScreenStyle } = this.props.styles
     return (
-      <View style={NewAccountPasswordScreenStyle.screen}>
-        {this.renderHeader(NewAccountPasswordScreenStyle)}
-        {this.renderMain(NewAccountPasswordScreenStyle)}
-        {this.renderModal(NewAccountPasswordScreenStyle)}
-      </View>
+      <SafeAreaView>
+        <View style={NewAccountPasswordScreenStyle.screen}>
+          {this.renderHeader(NewAccountPasswordScreenStyle)}
+          {this.renderMain(NewAccountPasswordScreenStyle)}
+          {this.renderModal(NewAccountPasswordScreenStyle)}
+        </View>
+      </SafeAreaView>
     )
   }
 }
