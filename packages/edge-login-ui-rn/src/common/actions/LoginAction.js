@@ -30,7 +30,10 @@ import {
 /**
  * Make it Thunky
  */
-export function loginWithRecovery (answers: Array<string>, username: string) {
+export function loginWithRecovery (
+  answers: Array<string>,
+  otpBackUpKey?: string
+) {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const backupKey = state.passwordRecovery.recoveryKey
@@ -41,7 +44,10 @@ export function loginWithRecovery (answers: Array<string>, username: string) {
         backupKey,
         username,
         answers,
-        imports.accountOptions
+        {
+          ...imports.accountOptions,
+          otp: otpBackUpKey
+        }
       )
       account.watch('loggedIn', loggedIn => {
         if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
@@ -68,7 +74,12 @@ export function loginWithRecovery (answers: Array<string>, username: string) {
       }
       dispatch(dispatchActionWithData(Constants.LOGIN_RECOVERY_SUCCEESS, obj))
     } catch (e) {
-      console.log('there was an error')
+      if (e.name === 'OtpError') {
+        e.loginAttempt = 'RECOVERY'
+        e.loginAttemptData = answers
+        dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
+        return
+      }
       console.log(e.message)
       const incorrect = 'The answers you provided are incorrect. '
       dispatch(
@@ -101,6 +112,15 @@ export function retryWithOtp () {
     const state = getState()
     const userBackUpKey = state.login.otpUserBackupKey
     const previousAttemptType = state.login.previousAttemptType
+    const previousAttemptData = state.login.previousAttemptData
+    if (previousAttemptType === 'RECOVERY') {
+      loginWithRecovery(previousAttemptData, userBackUpKey)(
+        dispatch,
+        getState,
+        imports
+      )
+      return dispatch(dispatchAction(Constants.RECOVERY_AFTER_OTP_CHECK))
+    }
     if (previousAttemptType === 'PASSWORD') {
       return userLogin(
         { username: state.login.username, password: state.login.password },
