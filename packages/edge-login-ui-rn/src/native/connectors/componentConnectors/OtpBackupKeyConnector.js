@@ -21,7 +21,8 @@ export const mapStateToProps = (state: State) => {
     label: s.strings.backup_key_label,
     error,
     returnKeyType: 'next',
-    autoFocus: true
+    autoFocus: true,
+    autoCapitalize: 'characters'
   }
 }
 

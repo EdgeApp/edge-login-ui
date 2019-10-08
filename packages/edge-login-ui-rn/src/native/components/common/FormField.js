@@ -68,7 +68,7 @@ class FormField extends Component<Props, State> {
         forceFocus={this.props.forceFocus}
         onFocus={this.props.onFocus}
         onBlur={this.props.onBlur}
-        autoCapitalize={'none'}
+        autoCapitalize={this.props.autoCapitalize}
         autoCorrect={this.props.autoCorrect}
         onSubmitEditing={this.onSubmitEditing}
       />
