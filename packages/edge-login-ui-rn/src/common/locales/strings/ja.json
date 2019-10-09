@@ -4,6 +4,7 @@
   "login_button": "ログイン",
   "username": "ユーザー名",
   "password": "パスワード",
+  "confirm_password": "パスワード確認",
   "pin": "PIN",
   "back_caps": "戻る",
   "back": "戻る",

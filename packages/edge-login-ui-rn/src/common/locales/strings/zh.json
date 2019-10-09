@@ -4,6 +4,7 @@
   "login_button": "登录",
   "username": "用户名",
   "password": "密码",
+  "confirm_password": "确认密码",
   "pin": "PIN码",
   "back_caps": "返回",
   "back": "返回",

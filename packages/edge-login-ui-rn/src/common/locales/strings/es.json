@@ -4,6 +4,7 @@
   "login_button": "Registro",
   "username": "Nombre de usuario",
   "password": "Contraseña",
+  "confirm_password": "Confirmar contraseña",
   "pin": "PIN",
   "back_caps": "VOLVER",
   "back": "Volver",

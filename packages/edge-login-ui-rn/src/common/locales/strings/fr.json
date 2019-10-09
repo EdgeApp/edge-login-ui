@@ -4,6 +4,7 @@
   "login_button": "Se connecter",
   "username": "Nom d'utilisateur",
   "password": "Mot de passe",
+  "confirm_password": "Confirmez le mot de passe",
   "pin": "PIN",
   "back_caps": "Précédent",
   "back": "Précédent",

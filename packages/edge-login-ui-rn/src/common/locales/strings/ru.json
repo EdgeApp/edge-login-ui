@@ -4,6 +4,7 @@
   "login_button": "Логин",
   "username": "Имя пользователя",
   "password": "Пароль",
+  "confirm_password": "Подтвердить пароль",
   "pin": "PIN-КОД",
   "back_caps": "Назад",
   "back": "Назад",

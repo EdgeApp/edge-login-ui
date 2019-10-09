@@ -4,6 +4,7 @@
   "login_button": "로그인",
   "username": "사용자명",
   "password": "암호",
+  "confirm_password": "암호 확인",
   "pin": "PIN",
   "back_caps": "뒤로",
   "back": "뒤로",
