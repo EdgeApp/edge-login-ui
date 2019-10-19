@@ -1,0 +1,64 @@
+@import './globals.scss';
+
+.container {
+  width: 100%;
+
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+
+  .screen {
+    flex: 1;
+    border-bottom: 2px solid $color-grey-03;
+
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+
+    .text {
+      margin-bottom: 5px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 500;
+      color: $color-grey-03;
+      text-transform: uppercase;
+    }
+  }
+
+  .screenActive {
+    @extend .screen;
+    border-bottom-color: $color-mint;
+
+    .text {
+      color: $color-grey-01;
+    }
+  }
+
+  .screenInactive {
+    @extend .screen;
+    transition: border-bottom-color .5s;
+
+    .text {
+      transition: color .5s;
+
+    }
+  }
+
+  .screenInactive:hover {
+    cursor: pointer;
+    border-bottom-color: $color-grey-02;
+
+    .text {
+      color: $color-grey-02;
+    }
+  }
+
+}

@@ -1,0 +1,245 @@
+@import './globals.scss';
+
+.formPinGroup {
+  width: auto;
+  margin-top: 23px;
+
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+
+  .pin {
+    width: 0px;
+    height: 0px;
+    border: none;
+  }
+
+  .pinContainer {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+
+    .pinCircle {
+      width: 22px;
+      height: 22px;
+      border: 1px solid $color-secondary-navy;
+      border-radius: 12px;
+      margin: 0px 5px;
+    }
+
+    .pinCircle:first-child {
+      margin-left: 0px;
+    }
+
+    .pinCircle:last-child {
+      margin-right: 0px;
+    }
+
+    .pinShade {
+      @extend .pinCircle;
+      background-color: $color-tertiary-navy;
+    }
+
+    @keyframes shadow-pulse
+    {
+      0% {
+        box-shadow: 0 0 0 0px rgba(14, 75, 117, 0.8);
+      }
+      100% {
+        box-shadow: 0 0 0 5px rgba(14, 75, 117, 0);
+      }
+    }
+
+    .pinGreen {
+      @extend .pinCircle;
+      animation: shadow-pulse 1s infinite;
+    }
+  }
+}
+
+.formPinGroup:hover {
+  cursor: pointer;
+}
+
+.passwordGroupContainer {
+  width: 100%;
+  position: relative;
+
+  .formGroup {
+    margin: 8px 0px;
+    position: relative;
+
+    .caret {
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      justify-content: flex-start;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
+
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      width: 40px;
+      height: 30px;
+      z-index: 100;
+
+      .icon {
+        color: $color-secondary-navy;
+      }
+
+    }
+
+    .caret:hover {
+      cursor: pointer;
+    }
+  }
+
+  .verificationContainer {
+    width: 100%;
+    margin-top: 10px;
+
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items:  flex-start;
+    -webkit-align-items:  flex-start;
+
+    .row {
+      margin: 3px 0px;
+
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: row;
+      -webkit-flex-direction: row;
+      justify-content: flex-start;
+      -webkit-justify-content: flex-start;
+      align-items: center;
+      -webkit-align-items: center;
+
+      .icon {
+        width: 13px;
+        height: 13px;
+        // background-color: $color-secondary-navy;
+        border: 1px solid #979797;
+        border-radius: 13px;
+        margin-right: 8px;
+
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        -webkit-flex-direction: column;
+        justify-content: center;
+        -webkit-justify-content: center;
+        align-items: center;
+        -webkit-align-items: center;
+
+        .check {
+          width: 11px;
+          color: $color-white;
+        }
+      }
+
+      .iconVerified {
+        @extend .icon;
+        border-color: $color-secondary-navy;
+        background-color: $color-secondary-navy;
+      }
+
+      .textVerified {
+        color: $color-secondary-navy;
+      }
+    }
+  }
+}
+
+.dropdownContainer {
+  width: 100%;
+  height: inherit;
+
+  margin-top: 2px;
+  border: 1px solid $color-tertiary-navy;
+  border-radius: 3px;
+  overflow: auto;
+
+  .row {
+    width: 100%;
+    height: 30px;
+    padding: 2px 0px;
+
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    justify-content: flex-start;
+    -webkit-justify-content:  flex-start;
+    align-items: center;
+    -webkit-align-items: center;
+
+    .textContainer {
+      flex: 1;
+      padding: 0px 10px;
+      min-height: 30px;
+
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: row;
+      -webkit-flex-direction: row;
+      justify-content: flex-start;
+      -webkit-justify-content:  flex-start;
+      align-items: center;
+      -webkit-align-items: center;
+
+      .text {
+        color: $color-grey-01;
+        line-height: 1.2;
+      }
+    }
+
+    .iconContainer {
+      margin-right: 8px;
+
+      .icon {
+        width: 18px;
+        height: 30px;
+        color: $color-grey-02;
+        font-weight: 300;
+      }
+    }
+
+    .iconContainer:hover {
+      .icon {
+        color: $color-accent-red;
+      }
+    }
+  }
+
+
+  .row:hover {
+    cursor: pointer;
+    background-color: $color-grey-04;
+  }
+
+  .rowSelected {
+    @extend .row;
+    .text {
+      color: $color-tertiary-navy;
+    }
+  }
+
+}

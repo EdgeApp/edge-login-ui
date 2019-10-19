@@ -2,14 +2,10 @@
 
 import React, { Component } from 'react'
 
-import AccountManagement from './modules/AccountManagement/AccountManagement.js'
-import ChangePassword from './modules/AccountManagement/ChangePassword/ChangePassword.js'
-import ChangePin from './modules/AccountManagement/ChangePin/ChangePin.js'
-import PasswordRecovery from './modules/AccountManagement/PasswordRecovery/PasswordRecovery.js'
-import PasswordRecoveryToken from './modules/AccountManagement/PasswordRecoveryToken/PasswordRecoveryToken.js'
-import Container from './modules/Container.js'
-import Login from './modules/Login/Login.js'
-import Signup from './modules/Signup/Signup.js'
+import Container from './components/Container'
+import Account from './connectors/Account.connector'
+import Login from './connectors/Login.connector'
+import Signup from './connectors/Signup.connector'
 
 export type RouterComponentProps = {
   defaultPage: string
@@ -46,15 +42,7 @@ export default class RouterComponent extends Component<
       case '/signup':
         return this.containerize(Signup)
       case '/account':
-        return this.containerize(AccountManagement)
-      case '/changepin':
-        return this.containerize(ChangePin)
-      case '/changepassword':
-        return this.containerize(ChangePassword)
-      case '/passwordrecovery':
-        return this.containerize(PasswordRecovery)
-      case '/passwordrecoverytoken':
-        return this.containerize(PasswordRecoveryToken)
+        return this.containerize(Account)
     }
   }
 }

@@ -1,0 +1,13 @@
+@import './LayoutHeaders.scss';
+@import './GlobalDefaults.scss';
+
+.container {
+  margin-top: 10px;
+
+  .text {
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 1.36;
+    text-align: center;
+  }
+}

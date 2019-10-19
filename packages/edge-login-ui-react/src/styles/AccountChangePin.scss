@@ -1,0 +1,18 @@
+@import './LayoutHeaders.scss';
+@import './GlobalDefaults.scss';
+@import './GlobalInputs.scss';
+
+.rootContainer {
+  .container {
+    margin-top: 10px;
+
+    .form {
+      width: 100%;
+    }
+
+    .text {
+      margin: 25px 10% 0px 10%;
+      text-align: center;
+    }
+  }
+}

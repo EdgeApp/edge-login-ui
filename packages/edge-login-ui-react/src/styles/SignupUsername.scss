@@ -1,0 +1,24 @@
+@import './LayoutHeaders.scss';
+@import './GlobalDefaults.scss';
+
+.rootContainer {
+  .container {
+    margin-top: 25px;
+
+    .form {
+      margin-top: 20px;
+    }
+
+    .bulletText {
+      width: 100%;
+      padding: 0px;
+      padding-left: 13%;
+      margin-top: 20px;
+      margin-bottom: 0px;
+
+      p {
+        font-size: 11px;
+      }
+    }
+  }
+}

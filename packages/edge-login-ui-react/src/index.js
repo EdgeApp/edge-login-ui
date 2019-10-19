@@ -1,7 +1,9 @@
 // @flow
 
+import 'normalize.css'
+
+import './styles/globals.scss'
 import './polyfill.js'
-import './theme/globals.scss'
 
 import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
 import React, { Component } from 'react'
@@ -9,7 +11,7 @@ import { Provider } from 'react-redux'
 import type { Store } from 'redux'
 
 import { hackWindow } from './hackWindow.js'
-import createStore from './lib/web/configureStore'
+import createStore from './lib/configureStore'
 import Router from './routes.js'
 
 export type LoginScreenProps = {

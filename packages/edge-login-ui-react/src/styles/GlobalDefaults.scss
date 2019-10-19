@@ -1,0 +1,32 @@
+@import './globals.scss';
+
+.rootContainer {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+.container {
+  padding: 0px 8%;
+  margin-top: 20px;
+
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.subHeaderText {
+  margin: 10px 0px 0px 0px;
+}
+
+.lableDisabled {
+  color: $color-grey-03;
+}

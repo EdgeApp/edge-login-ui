@@ -19,7 +19,7 @@ export function sendRoot () {
 
   const out: BridgeRoot = {
     async makeContext (opts: EdgeUiContextOptions): Promise<EdgeUiContext> {
-      if (frameUrl.origin !== parentUrl.origin) opts.hideKeys = true
+      if (frameUrl.origin !== parentUrl.origin) opts.hideKeys = false
 
       return makeUiContext(opts)
     }

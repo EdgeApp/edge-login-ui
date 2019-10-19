@@ -1,0 +1,16 @@
+@import './LayoutHeaders.scss';
+@import './GlobalDefaults.scss';
+@import './GlobalButtons.scss';
+
+.container {
+  .text1 {
+    margin: 40px 0px 20px 0px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .text2 {
+    margin-top: 10px;
+    text-align: center;
+  }
+}

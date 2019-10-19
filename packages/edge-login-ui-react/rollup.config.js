@@ -7,7 +7,6 @@ import postcss from 'rollup-plugin-postcss'
 import url from 'rollup-plugin-url'
 
 import packageJson from './package.json'
-import sassLoader from './sass-loader.js'
 
 const external = [
   'regenerator-runtime/runtime',
@@ -31,7 +30,6 @@ export default {
     url(),
     postcss({
       extract: 'lib/styles.css',
-      loaders: [sassLoader],
       modules: true,
       plugins: [autoprefixer]
     }),

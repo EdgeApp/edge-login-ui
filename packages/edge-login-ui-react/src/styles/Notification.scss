@@ -1,0 +1,59 @@
+@import './globals.scss';
+
+.container {
+  position: absolute;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+
+  width: 100%;
+  height: 50px;
+  background-color: $color-secondary-navy;
+  z-index: 100;
+  transition: height 0.15s ease-in-out;
+
+  .icon {
+    color: $color-white;
+    font-size: 25px;
+    margin-right: 10px;
+  }
+
+  .text {
+    color: $color-white;
+    font-size: 15px;
+  }
+}
+
+.containerClose {
+  @extend .container;
+  height: 0px;
+}
+
+.containerSuccess {
+  @extend .container;
+  background-color: $color-mint;
+}
+
+.containerSuccessClose {
+  @extend .containerSuccess;
+  height: 0px;
+}
+
+.containerError {
+  @extend .container;
+  background-color: $color-accent-red;
+}
+
+.containerErrorClose {
+  @extend .containerError;
+  height: 0px;
+}
+
+.container:hover {
+  cursor: pointer;
+}

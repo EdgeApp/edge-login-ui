@@ -1,0 +1,38 @@
+@import './GlobalDefaults.scss';
+@import './GlobalButtons.scss';
+@import './GlobalLoader.scss';
+@import './LayoutHeaders.scss';
+
+.rootContainer {
+  .container {
+
+    .loaderContainer {
+      width: 160px;
+      height: 163px;
+
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      justify-content: center;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
+    }
+
+    .header {
+      font-size: 12px;
+      text-align: center;
+      margin: 15px 0px 20px 0px;
+    }
+
+    .launchEdgeLink {
+      width: 100%;
+
+      .launchEdgeButton {
+        @extend .primary;
+        margin: 30px 0px 0px 0px;
+      }
+    }
+  }
+}
