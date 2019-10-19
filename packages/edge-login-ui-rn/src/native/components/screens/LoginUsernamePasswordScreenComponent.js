@@ -42,6 +42,7 @@ type Props = {
   appId?: string,
   backgroundImage?: any,
   primaryLogo?: any,
+  primaryLogoCallback?: () => void,
   parentButton?: Object
 }
 
@@ -215,6 +216,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
             <LogoImageHeader
               style={this.style.logoHeader}
               src={this.props.primaryLogo}
+              callback={this.props.primaryLogoCallback}
             />
             {this.renderUsername(this.style)}
             <View style={this.style.shimTiny} />

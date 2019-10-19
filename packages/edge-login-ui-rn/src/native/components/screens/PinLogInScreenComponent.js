@@ -1,12 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import {
-  Platform,
-  Text,
-  TouchableWithoutFeedback,
-  View
-} from 'react-native'
+import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
 
 import s from '../../../common/locales/strings.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
@@ -38,6 +33,7 @@ type Props = {
   appId?: string,
   backgroundImage?: any,
   primaryLogo?: any,
+  primaryLogoCallback?: () => void,
   parentButton?: Object,
   showModal: boolean
 }
@@ -123,6 +119,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
             <LogoImageHeader
               style={PinLoginScreenStyle.logoHeader}
               src={this.props.primaryLogo}
+              callback={this.props.primaryLogoCallback}
             />
             <View style={PinLoginScreenStyle.featureBoxBody}>
               {this.renderBottomHalf(PinLoginScreenStyle)}

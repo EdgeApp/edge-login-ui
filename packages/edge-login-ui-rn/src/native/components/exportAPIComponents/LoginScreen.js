@@ -26,6 +26,7 @@ type Props = {
   appName?: string,
   backgroundImage?: any,
   primaryLogo?: any,
+  primaryLogoCallback?: () => void,
   parentButton?: Object,
   landingScreenText?: string
 }
@@ -103,6 +104,7 @@ class LoginScreen extends Component<Props> {
           appName={this.props.appName}
           backgroundImage={this.props.backgroundImage}
           primaryLogo={this.props.primaryLogo}
+          primaryLogoCallback={this.props.primaryLogoCallback}
           parentButton={this.props.parentButton}
           landingScreenText={this.props.landingScreenText}
         />

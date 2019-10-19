@@ -33,6 +33,7 @@ export type StateProps = {
   appName?: string,
   backgroundImage?: any,
   primaryLogo?: any,
+  primaryLogoCallback?: () => void,
   parentButton?: Object,
   landingScreenText?: string
 }
@@ -135,6 +136,7 @@ export class LoginAppComponent extends Component<Props, State> {
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
+        primaryLogoCallback={this.props.primaryLogoCallback}
         parentButton={this.props.parentButton}
         landingScreenText={this.props.landingScreenText}
       />
@@ -182,6 +184,7 @@ export class LoginAppComponent extends Component<Props, State> {
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
+        primaryLogoCallback={this.props.primaryLogoCallback}
         parentButton={this.props.parentButton}
         touch={this.state.touch}
       />
@@ -195,6 +198,7 @@ export class LoginAppComponent extends Component<Props, State> {
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
+        primaryLogoCallback={this.props.primaryLogoCallback}
         parentButton={this.props.parentButton}
         touch={this.state.touch}
       />
