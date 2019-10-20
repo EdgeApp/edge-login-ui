@@ -15,6 +15,7 @@ type Props = {
   appId?: string,
   backgroundImage?: any,
   primaryLogo?: any,
+  primaryLogoCallback?: () => void,
   parentButton?: Object,
   landingScreenText?: string
 }
@@ -46,6 +47,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
           <LogoImageHeader
             style={LandingScreenStyle.logoHeader}
             src={this.props.primaryLogo}
+            callback={this.props.primaryLogoCallback}
           />
           <View style={LandingScreenStyle.featureBoxContent}>
             <View style={LandingScreenStyle.featureBoxDescription}>
