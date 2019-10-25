@@ -1,7 +1,14 @@
-.DS_Store
-.idea
+# Build output:
+*.jar
+
+# Package managers:
 lerna-debug.log
-node_modules
+node_modules/
 npm-debug.log
+package-lock.json
 yarn-error.log
-.vscode/settings.json
+
+# Editors:
+.DS_Store
+.idea/
+.vscode/
