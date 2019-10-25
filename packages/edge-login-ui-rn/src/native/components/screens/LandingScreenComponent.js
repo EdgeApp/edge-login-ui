@@ -22,7 +22,7 @@ type Props = {
 
 type State = {}
 export default class LandingScreenComponent extends Component<Props, State> {
-  render () {
+  render() {
     const { LandingScreenStyle } = this.props.styles
     return (
       <View style={LandingScreenStyle.container}>
@@ -34,7 +34,8 @@ export default class LandingScreenComponent extends Component<Props, State> {
       </View>
     )
   }
-  renderOverImage () {
+
+  renderOverImage() {
     const { LandingScreenStyle } = this.props.styles
     return (
       <View style={LandingScreenStyle.inner}>
@@ -67,7 +68,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
             />
             <View style={LandingScreenStyle.shim} />
             <Button
-              testID={'alreadyHaveAccountButton'}
+              testID="alreadyHaveAccountButton"
               onPress={this.onStartLogin.bind(this)}
               label={s.strings.landing_already_have_account}
               downStyle={LandingScreenStyle.loginButton.downStyle}
@@ -80,13 +81,14 @@ export default class LandingScreenComponent extends Component<Props, State> {
       </View>
     )
   }
-  onStartCreate () {
+
+  onStartCreate() {
     global.firebase &&
       global.firebase.analytics().logEvent('Signup_Create_Account')
     this.props.startFlow(Constants.WORKFLOW_CREATE)
   }
 
-  onStartLogin () {
+  onStartLogin() {
     this.props.startFlow(Constants.WORKFLOW_PASSWORD)
   }
 }

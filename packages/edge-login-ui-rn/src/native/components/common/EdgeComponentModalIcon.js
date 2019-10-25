@@ -13,7 +13,7 @@ type Props = {
 }
 
 class ModalIcon extends Component<Props> {
-  render () {
+  render() {
     const { style, name, type } = this.props
     return (
       <Icon

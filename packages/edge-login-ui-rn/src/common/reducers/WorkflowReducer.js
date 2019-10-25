@@ -117,7 +117,7 @@ const initialState = {
     ]
   }
 }
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   let nextIndex
   switch (action.type) {
     case Constants.SET_PREVIOUS_USERS:

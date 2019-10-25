@@ -26,176 +26,176 @@ export const CLEAR_ERROR_LOGIN_MESSAGE = 'CLEAR_ERROR_LOGIN_MESSAGE'
 export const SHOW_ERROR_LOGIN_PIN_MESSAGE = 'SHOW_ERROR_LOGIN_PIN_MESSAGE'
 export const CLEAR_ERROR_LOGIN_PIN_MESSAGE = 'CLEAR_ERROR_LOGIN_PIN_MESSAGE'
 
-export function enablePinTimeout (durationLeft) {
+export function enablePinTimeout(durationLeft) {
   return {
     type: ENABLE_PIN_WAIT_DURATION,
     durationLeft
   }
 }
 
-export function disablePinTimeout () {
+export function disablePinTimeout() {
   return {
     type: DISABLE_PIN_WAIT_DURATION
   }
 }
 
-export function refreshPinTimeout (durationLeft) {
+export function refreshPinTimeout(durationLeft) {
   return {
     type: REFRESH_PIN_WAIT_DURATION,
     durationLeft
   }
 }
 
-export function enablePasswordTimeout (durationLeft) {
+export function enablePasswordTimeout(durationLeft) {
   return {
     type: ENABLE_PASSWORD_WAIT_DURATION,
     durationLeft
   }
 }
 
-export function disablePasswordTimeout () {
+export function disablePasswordTimeout() {
   return {
     type: DISABLE_PASSWORD_WAIT_DURATION
   }
 }
 
-export function refreshPasswordTimeout (durationLeft) {
+export function refreshPasswordTimeout(durationLeft) {
   return {
     type: REFRESH_PASSWORD_WAIT_DURATION,
     durationLeft
   }
 }
 
-export function openLogin () {
+export function openLogin() {
   return {
     type: OPEN_LOG_IN
   }
 }
 
-export function closeLogin () {
+export function closeLogin() {
   return {
     type: CLOSE_LOG_IN
   }
 }
 
-export function openLoginUsingPin () {
+export function openLoginUsingPin() {
   return {
     type: OPEN_LOG_IN_USING_PIN
   }
 }
 
-export function closeLoginUsingPin () {
+export function closeLoginUsingPin() {
   return {
     type: CLOSE_LOG_IN_USING_PIN
   }
 }
 
-export function openLoginUsingEdge () {
+export function openLoginUsingEdge() {
   return {
     type: OPEN_LOG_IN_USING_EDGE
   }
 }
 
-export function closeLoginUsingEdge () {
+export function closeLoginUsingEdge() {
   return {
     type: CLOSE_LOG_IN_USING_EDGE
   }
 }
 
-export function loginUsername (data) {
+export function loginUsername(data) {
   return {
     type: LOG_IN_USERNAME,
     data
   }
 }
 
-export function loginPassword (data) {
+export function loginPassword(data) {
   return {
     type: LOG_IN_PASSWORD,
     data
   }
 }
 
-export function loginPIN (data) {
+export function loginPIN(data) {
   return {
     type: LOG_IN_PIN,
     data
   }
 }
 
-export function openUserList () {
+export function openUserList() {
   return {
     type: OPEN_USER_LIST
   }
 }
 
-export function closeUserList () {
+export function closeUserList() {
   return {
     type: CLOSE_USER_LIST
   }
 }
 
-export function userLogin (data) {
+export function userLogin(data) {
   return {
     type: USER_LOGIN,
     data
   }
 }
 
-export function requestEdgeLogin (data) {
+export function requestEdgeLogin(data) {
   return {
     type: REQUEST_EDGE_LOGIN,
     data
   }
 }
 
-export function setEdgeUsername (userName) {
+export function setEdgeUsername(userName) {
   return {
     type: SET_EDGE_USERNAME,
     userName
   }
 }
 
-export function setEdgeAccount (account) {
+export function setEdgeAccount(account) {
   return {
     type: SET_EDGE_ACCOUNT,
     account
   }
 }
 
-export function showLoginNotification () {
+export function showLoginNotification() {
   return {
     type: SHOW_LOGIN_NOTIFICATION
   }
 }
 
-export function hideLoginNotification () {
+export function hideLoginNotification() {
   return {
     type: HIDE_LOGIN_NOTIFICATION
   }
 }
 
-export function showErrorLoginMessage (data) {
+export function showErrorLoginMessage(data) {
   return {
     type: SHOW_ERROR_LOGIN_MESSAGE,
     data
   }
 }
 
-export function clearErrorLoginMessage () {
+export function clearErrorLoginMessage() {
   return {
     type: CLEAR_ERROR_LOGIN_MESSAGE
   }
 }
 
-export function showErrorLoginPinMessage (data) {
+export function showErrorLoginPinMessage(data) {
   return {
     type: SHOW_ERROR_LOGIN_PIN_MESSAGE,
     data
   }
 }
 
-export function clearErrorLoginPinMessage () {
+export function clearErrorLoginPinMessage() {
   return {
     type: CLEAR_ERROR_LOGIN_PIN_MESSAGE
   }

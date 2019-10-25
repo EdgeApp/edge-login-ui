@@ -16,7 +16,7 @@ type State = {
 }
 
 class IconButton extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       pressed: false
@@ -26,17 +26,20 @@ class IconButton extends Component<Props, State> {
   _onPressButton = () => {
     this.props.onPress()
   }
+
   _onShowUnderlay = () => {
     this.setState({
       pressed: true
     })
   }
+
   _onHideUnderlay = () => {
     this.setState({
       pressed: false
     })
   }
-  renderIcon (icon: Object, iconPressed: Object, iconSize: number) {
+
+  renderIcon(icon: Object, iconPressed: Object, iconSize: number) {
     let style = icon
     if (this.state.pressed) {
       style = iconPressed
@@ -51,7 +54,7 @@ class IconButton extends Component<Props, State> {
     )
   }
 
-  render () {
+  render() {
     const {
       container,
       icon,

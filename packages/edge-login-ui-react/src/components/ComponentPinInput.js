@@ -4,18 +4,20 @@ import t from '../lib/LocaleStrings.js'
 import styles from '../styles/GlobalInputs.scss'
 
 export default class PinInput extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       pinFocus: false
     }
   }
-  componentDidMount () {
+
+  componentDidMount() {
     this.setState({ pinFocus: true })
     this.refs.pin.focus()
   }
+
   pinFocus = () => this.refs.pin.focus()
-  render () {
+  render() {
     checkPinStyle = (length, pin) => {
       if (length === pin && this.state.pinFocus) {
         return styles.pinGreen

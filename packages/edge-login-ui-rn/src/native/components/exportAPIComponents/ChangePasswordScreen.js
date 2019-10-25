@@ -30,7 +30,7 @@ class ChangePasswordScreen extends Component<Props> {
     showHeader: true
   }
 
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     const imports: Imports = {
       accountOptions: {},
@@ -48,7 +48,7 @@ class ChangePasswordScreen extends Component<Props> {
     )
   }
 
-  render () {
+  render() {
     return (
       <Provider store={this.store}>
         <ChangePasswordAppConnector

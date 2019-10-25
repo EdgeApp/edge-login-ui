@@ -31,7 +31,8 @@ class Container extends Component {
       return window.abcui.exitCallback()
     }
   }
-  loadData () {
+
+  loadData() {
     const dispatch = this.props.dispatch
     const ctx = window.abcui.abcuiContext
     return ctx.listUsernames().then(cachedUsers => {
@@ -50,16 +51,18 @@ class Container extends Component {
       })
     })
   }
-  componentWillMount () {
+
+  componentWillMount() {
     this.loadData()
   }
-  render () {
+
+  render() {
     return (
       <div className="app">
         <Notification />
         <Modal
-          isOpen={true}
-          shouldCloseOnEsc={true}
+          isOpen
+          shouldCloseOnEsc
           onRequestClose={this._handleToggle}
           overlayClassName={styles.modalOverlay}
           className={styles.modalContainer}

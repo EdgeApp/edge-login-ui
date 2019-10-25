@@ -10,65 +10,65 @@ export const VALIDATE_PASSWORD = 'VALIDATE_PASSWORD'
 export const INVALIDATE_PASSWORD = 'INVALIDATE_PASSWORD'
 export const TIME_TO_CRACK_PASSWORD = 'TIME_TO_CRACK_PASSWORD'
 
-export function validatePassword () {
+export function validatePassword() {
   return {
     type: VALIDATE_PASSWORD
   }
 }
-export function invalidatePassword () {
+export function invalidatePassword() {
   return {
     type: INVALIDATE_PASSWORD
   }
 }
-export function upperCaseCharPass () {
+export function upperCaseCharPass() {
   return {
     type: UPPER_CASE_PASS
   }
 }
 
-export function upperCaseCharFail () {
+export function upperCaseCharFail() {
   return {
     type: UPPER_CASE_FAIL
   }
 }
 
-export function lowerCaseCharPass () {
+export function lowerCaseCharPass() {
   return {
     type: LOWER_CASE_PASS
   }
 }
 
-export function lowerCaseCharFail () {
+export function lowerCaseCharFail() {
   return {
     type: LOWER_CASE_FAIL
   }
 }
 
-export function numberPass () {
+export function numberPass() {
   return {
     type: NUMBER_PASS
   }
 }
 
-export function numberFail () {
+export function numberFail() {
   return {
     type: NUMBER_FAIL
   }
 }
 
-export function characterLengthPass () {
+export function characterLengthPass() {
   return {
     type: CHARACTER_LENGTH_PASS
   }
 }
 
-export function characterLengthFail () {
+export function characterLengthFail() {
   return {
     type: CHARACTER_LENGTH_FAIL
   }
 }
 
-export function changeTimeToCrackPassword (data) {
+export function changeTimeToCrackPassword(data) {
   return {
     type: TIME_TO_CRACK_PASSWORD,
     data

@@ -65,7 +65,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
   keyboardDidHideListener: ?Function
   style: Object
 
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     const { LoginPasswordScreenStyle } = this.props.styles
     this.style = LoginPasswordScreenStyle
@@ -83,6 +83,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       usernameList: false
     }
   }
+
   renderModal = (style: Object) => {
     if (this.props.showModal) {
       return (
@@ -108,12 +109,14 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     }
     return null
   }
+
   recoverPasswordLogin = () => {
     this.setState({
       showRecoveryModalOne: false
     })
     this.props.recoverPasswordLogin()
   }
+
   cancelForgotPassword = () => {
     this.setState({
       showRecoveryModalOne: false
@@ -128,6 +131,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       offset: Offsets.LOGIN_SCREEN_NO_OFFSET
     })
   }
+
   onDelete = (user: string) => {
     //
     // this.props.deleteUserFromDevice(user) TODO
@@ -136,15 +140,18 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     })
     this.props.launchDeleteModal()
   }
-  setListener (callback: Function) {
+
+  setListener(callback: Function) {
     /* this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       callback) */
   }
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     // this.keyboardDidHideListener.remove()
   }
-  componentDidMount () {
+
+  componentDidMount() {
     this.setState({
       username: '',
       password: '',
@@ -159,7 +166,8 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       })
     }
   }
-  componentWillReceiveProps (nextProps: Props) {
+
+  componentWillReceiveProps(nextProps: Props) {
     if (
       (nextProps.error && this.state.loggingIn) ||
       (this.state.loggingIn && nextProps.loginSuccess)
@@ -169,7 +177,8 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       })
     }
   }
-  shouldComponentUpdate (nextProps: Props) {
+
+  shouldComponentUpdate(nextProps: Props) {
     if (
       nextProps.username !== this.props.username &&
       this.state.showRecoveryModalOne
@@ -179,7 +188,8 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     // return a boolean value
     return true
   }
-  render () {
+
+  render() {
     return (
       <KeyboardAwareScrollView
         style={this.style.container}
@@ -195,7 +205,8 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       </KeyboardAwareScrollView>
     )
   }
-  renderOverImage () {
+
+  renderOverImage() {
     if (this.props.loginSuccess) {
       /* return (
         <View style={style.featureBox}>
@@ -221,7 +232,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
             {this.renderUsername(this.style)}
             <View style={this.style.shimTiny} />
             <FormField
-              testID={'passwordFormField'}
+              testID="passwordFormField"
               style={this.style.input2}
               onChangeText={this.updatePassword.bind(this)}
               value={this.props.password}
@@ -229,7 +240,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
               error={this.props.error}
               autoCorrect={false}
               secureTextEntry
-              returnKeyType={'go'}
+              returnKeyType="go"
               forceFocus={this.state.focusSecond}
               onFocus={this.onfocusTwo.bind(this)}
               onSubmitEditing={this.onStartLogin.bind(this)}
@@ -241,17 +252,18 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       </View>
     )
   }
-  renderUsername (styles: Object) {
+
+  renderUsername(styles: Object) {
     return (
       <View>
         <View style={styles.usernameWrapper}>
           <FormField
-            testID={'usernameFormField'}
+            testID="usernameFormField"
             style={styles.input2}
             onChangeText={this.updateUsername.bind(this)}
             value={this.props.username}
             label={s.strings.username}
-            returnKeyType={'next'}
+            returnKeyType="next"
             autoCorrect={false}
             autoFocus={this.state.focusFirst}
             forceFocus={this.state.focusFirst}
@@ -274,7 +286,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     )
   }
 
-  renderDropdownList () {
+  renderDropdownList() {
     return (
       <DropDownList
         style={this.style.dropDownList}
@@ -284,7 +296,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     )
   }
 
-  renderRow (data: Object) {
+  renderRow(data: Object) {
     return (
       <UserListItem
         data={data.item}
@@ -295,7 +307,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     )
   }
 
-  renderButtons (style: Object) {
+  renderButtons(style: Object) {
     return (
       <View style={style.buttonsBox}>
         <View style={style.shimTiny} />
@@ -309,7 +321,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         />
         <View style={style.shimTiny} />
         <Button
-          testID={'loginButton'}
+          testID="loginButton"
           onPress={this.onStartLogin.bind(this)}
           label={s.strings.login_button}
           downStyle={style.loginButton.downStyle}
@@ -321,7 +333,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         />
         <View style={style.shimTiny} />
         <Button
-          testID={'createAccountButton'}
+          testID="createAccountButton"
           onPress={this.onCreateAccount.bind(this)}
           label={s.strings.create_an_account}
           downStyle={style.signupButton.downStyle}
@@ -332,7 +344,8 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       </View>
     )
   }
-  toggleUsernameList () {
+
+  toggleUsernameList() {
     Keyboard.dismiss()
     this.setState({
       focusFirst: false,
@@ -340,7 +353,8 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       usernameList: !this.state.usernameList
     })
   }
-  onfocusOne () {
+
+  onfocusOne() {
     this.setState({
       focusFirst: true,
       focusSecond: false,
@@ -349,7 +363,8 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
         : Offsets.LOGIN_SCREEN_NO_OFFSET
     })
   }
-  onfocusTwo () {
+
+  onfocusTwo() {
     this.setState({
       focusFirst: false,
       focusSecond: true,
@@ -357,14 +372,15 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     })
   }
 
-  onSetNextFocus () {
+  onSetNextFocus() {
     this.setState({
       focusFirst: false,
       focusSecond: true,
       offset: Offsets.PASSWORD_OFFSET_LOGIN_SCREEN
     })
   }
-  selectUser (user: string) {
+
+  selectUser(user: string) {
     const details = this.getUserDetails(user)
     this.updateUsername(user)
     this.setState({
@@ -381,7 +397,8 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     this.props.launchUserLoginWithTouchId({ username: user })
     this.onSetNextFocus()
   }
-  getUserDetails (user: string) {
+
+  getUserDetails(user: string) {
     for (let i = 0; i < this.props.previousUsers.length; i++) {
       const obj = this.props.previousUsers[i]
       if (user === obj.username) {
@@ -390,25 +407,30 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     }
     return {}
   }
-  updateUsername (data: string) {
+
+  updateUsername(data: string) {
     this.props.updateUsername(data)
   }
-  updatePassword (data: string) {
+
+  updatePassword(data: string) {
     this.props.updatePassword(data)
   }
-  onForgotPassword () {
+
+  onForgotPassword() {
     // this.props.onForgotPassword()
     this.setState({
       showRecoveryModalOne: true
     })
   }
+
   closeForgotPasswordModal = () => {
     // this.props.onForgotPassword()
     this.setState({
       showRecoveryModalOne: false
     })
   }
-  onStartLogin () {
+
+  onStartLogin() {
     this.noFocus()
     Keyboard.dismiss()
     this.setState({
@@ -419,7 +441,8 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       password: this.props.password
     })
   }
-  onCreateAccount () {
+
+  onCreateAccount() {
     this.props.gotoCreatePage()
   }
 }

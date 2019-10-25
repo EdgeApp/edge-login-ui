@@ -26,10 +26,10 @@ export class WalletInfo extends Component<Props, State> {
   unsub2: () => mixed
   unsub3: () => mixed
 
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
 
-    const balance = this.props.wallet.balances['ETH']
+    const balance = this.props.wallet.balances.ETH
     const name = this.props.wallet.name || 'Untitled'
     const height = this.props.wallet.blockHeight
 
@@ -52,7 +52,7 @@ export class WalletInfo extends Component<Props, State> {
   /**
    * Fetches an address from the wallet.
    */
-  async updateAddress () {
+  async updateAddress() {
     const address = await this.props.wallet.getReceiveAddress()
     this.setState({ address: address.publicAddress })
   }
@@ -60,7 +60,7 @@ export class WalletInfo extends Component<Props, State> {
   /**
    * Converts the wallet balance to fiat.
    */
-  async updateBalanceFiat () {
+  async updateBalanceFiat() {
     const balanceFiat = await this.props.account.exchangeCache.convertCurrency(
       'ETH',
       'iso:USD',
@@ -115,7 +115,7 @@ export class WalletInfo extends Component<Props, State> {
       .catch(e => this.setState({ sendingText: String(e) }))
   }
 
-  render () {
+  render() {
     const prettyBalance = (Number(this.state.balance) / 1e18).toFixed(6)
     const prettyFiat = this.state.balanceFiat.toFixed(4)
 
@@ -159,11 +159,11 @@ export class WalletInfo extends Component<Props, State> {
   /**
    * Subscribes to changes in wallet properties.
    */
-  componentDidMount () {
+  componentDidMount() {
     const { wallet } = this.props
 
     this.unsub1 = wallet.watch('balances', async balances => {
-      const balance = balances['ETH']
+      const balance = balances.ETH
       this.setState({ balance })
       this.updateBalanceFiat()
     })
@@ -180,7 +180,7 @@ export class WalletInfo extends Component<Props, State> {
   /**
    * Unsubscribes from wallet property changes.
    */
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.unsub1()
     this.unsub2()
     this.unsub3()

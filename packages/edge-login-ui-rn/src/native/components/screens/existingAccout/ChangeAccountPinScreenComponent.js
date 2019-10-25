@@ -30,7 +30,7 @@ export default class ChangeAccountPinScreenComponent extends Component<
   Props,
   State
 > {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       username: '',
@@ -39,6 +39,7 @@ export default class ChangeAccountPinScreenComponent extends Component<
       focusOn: 'pin'
     }
   }
+
   renderHeader = (style: Object) => {
     if (this.props.showHeader) {
       return <HeaderConnector style={style.header} />
@@ -88,7 +89,7 @@ export default class ChangeAccountPinScreenComponent extends Component<
     this.props.changePin(this.props.pin)
   }
 
-  render () {
+  render() {
     const { SetAccountPinScreenStyle } = this.props.styles
     return (
       <SafeAreaView>

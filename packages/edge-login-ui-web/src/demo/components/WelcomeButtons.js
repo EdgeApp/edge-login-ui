@@ -14,7 +14,7 @@ export class WelcomeButtons extends Component<Props> {
     }
   }
 
-  render () {
+  render() {
     return (
       <p id="buttons">
         <button disabled={!this.props.context} onClick={this.openLoginWindow}>

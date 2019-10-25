@@ -7,15 +7,17 @@ import LoginWithPin from '../connectors/LoginWithPin.connector'
 import styles from '../styles/Login.scss'
 
 export default class Login extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
   }
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     if (this.props.edgeObject) {
       return this.props.edgeObject.cancelRequest()
     }
   }
-  render () {
+
+  render() {
     const { edge, password, pin, history } = this.props
     if (!edge && !password && !pin) {
       return (

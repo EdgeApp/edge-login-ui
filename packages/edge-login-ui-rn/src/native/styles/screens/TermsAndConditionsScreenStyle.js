@@ -1,9 +1,9 @@
 // @flow
 
+import * as Styles from '../'
 import * as Constants from '../../../common/constants/'
 import { MultiLineTextCheckBoxScaled } from '../../../common/styles/common/CheckboxStyles'
 import { scale } from '../../../common/util/scaling'
-import * as Styles from '../'
 
 const TermsAndConditionsScreenStyle = {
   screen: { ...Styles.ScreenStyle },

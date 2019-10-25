@@ -1,7 +1,6 @@
 // @flow
 
 import 'normalize.css'
-
 import './styles/globals.scss'
 import './polyfill.js'
 
@@ -30,7 +29,7 @@ export type LoginScreenProps = {
 export class LoginScreen extends Component<LoginScreenProps> {
   store: Store<Object>
 
-  constructor (props: LoginScreenProps) {
+  constructor(props: LoginScreenProps) {
     super(props)
     hackWindow(
       null,
@@ -45,7 +44,7 @@ export class LoginScreen extends Component<LoginScreenProps> {
     this.store = createStore()
   }
 
-  render () {
+  render() {
     return (
       <Provider store={this.store} key="login">
         <Router defaultPage="/login" />
@@ -67,7 +66,7 @@ export type AccountScreenProps = {
 export class AccountScreen extends Component<AccountScreenProps> {
   store: Store<Object>
 
-  constructor (props: AccountScreenProps) {
+  constructor(props: AccountScreenProps) {
     super(props)
     hackWindow(
       props.account,
@@ -82,7 +81,7 @@ export class AccountScreen extends Component<AccountScreenProps> {
     this.store = createStore()
   }
 
-  render () {
+  render() {
     return (
       <Provider store={this.store} key="account">
         <Router defaultPage="/account" />

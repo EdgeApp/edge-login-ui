@@ -6,8 +6,8 @@ import * as actions from '../../../../common/actions'
 import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings'
 import type { Dispatch, State } from '../../../../types/ReduxTypes.js'
-import LinkedComponent from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 import type { OwnProps } from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
+import LinkedComponent from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const isEnabled = state.passwordRecovery.userQuestions.length > 0 || false
@@ -51,7 +51,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-function returnTrunatedUsername (arg) {
+function returnTrunatedUsername(arg) {
   if (arg) {
     return arg.charAt(0) + arg.charAt(1) + '***'
   }

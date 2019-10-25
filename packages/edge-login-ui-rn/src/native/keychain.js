@@ -29,7 +29,7 @@ if (Platform.OS === 'android' && AbcCoreJsUi.fetch) {
   }
 }
 
-function createKeyWithUsername (username, key) {
+function createKeyWithUsername(username, key) {
   return username + '___' + key
 }
 
@@ -38,7 +38,7 @@ const emptyTouchIdUsers = {
   disabledUsers: []
 }
 
-export async function isTouchEnabled (folder: DiskletFolder, username: string) {
+export async function isTouchEnabled(folder: DiskletFolder, username: string) {
   const supported = await supportsTouchId()
   if (supported) {
     const fingerprint = await folder
@@ -58,7 +58,7 @@ export async function isTouchEnabled (folder: DiskletFolder, username: string) {
   return false
 }
 
-export async function isTouchDisabled (folder: DiskletFolder, username: string) {
+export async function isTouchDisabled(folder: DiskletFolder, username: string) {
   const supported = await supportsTouchId()
   if (supported) {
     const fingerprint = await folder
@@ -80,7 +80,7 @@ export async function isTouchDisabled (folder: DiskletFolder, username: string) 
   return true
 }
 
-export async function supportsTouchId () {
+export async function supportsTouchId() {
   if (!AbcCoreJsUi) {
     console.warn('AbcCoreJsUi  is unavailable')
     return false
@@ -89,7 +89,7 @@ export async function supportsTouchId () {
   return !!out
 }
 
-async function addTouchIdUser (folder: DiskletFolder, username: string) {
+async function addTouchIdUser(folder: DiskletFolder, username: string) {
   const fingerprint = await folder
     .file('fingerprint.json')
     .getText()
@@ -107,7 +107,7 @@ async function addTouchIdUser (folder: DiskletFolder, username: string) {
   await folder.file('fingerprint.json').setText(fingerprintJson)
 }
 
-async function removeTouchIdUser (folder: DiskletFolder, username: string) {
+async function removeTouchIdUser(folder: DiskletFolder, username: string) {
   const fingerprint = await folder
     .file('fingerprint.json')
     .getText()
@@ -127,7 +127,7 @@ async function removeTouchIdUser (folder: DiskletFolder, username: string) {
   await folder.file('fingerprint.json').setText(fingerprintJson)
 }
 
-export async function enableTouchId (
+export async function enableTouchId(
   folder: DiskletFolder,
   abcAccount: EdgeAccount
 ) {
@@ -142,7 +142,7 @@ export async function enableTouchId (
   }
 }
 
-export async function disableTouchId (
+export async function disableTouchId(
   folder: DiskletFolder,
   abcAccount: EdgeAccount
 ) {
@@ -157,7 +157,7 @@ export async function disableTouchId (
   }
 }
 
-export async function getSupportedBiometryType () {
+export async function getSupportedBiometryType() {
   try {
     const biometryType = await AbcCoreJsUi.getSupportedBiometryType()
     if (biometryType) {
@@ -170,7 +170,7 @@ export async function getSupportedBiometryType () {
   }
 }
 
-export async function loginWithTouchId (
+export async function loginWithTouchId(
   abcContext: EdgeContext,
   folder: DiskletFolder,
   username: string,

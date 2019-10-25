@@ -17,7 +17,7 @@ type State = {
 }
 
 class LogoImageHeader extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       taps: 0
@@ -39,7 +39,7 @@ class LogoImageHeader extends Component<Props, State> {
     }
   }
 
-  render () {
+  render() {
     let src = this.props.src || Assets.LOGO_BIG
     if (this.props.small) {
       src = Assets.LOGO_SMALL
@@ -50,7 +50,7 @@ class LogoImageHeader extends Component<Props, State> {
           <Image
             source={src}
             style={this.props.style.image}
-            resizeMode={'contain'}
+            resizeMode="contain"
           />
         </View>
       </TouchableWithoutFeedback>

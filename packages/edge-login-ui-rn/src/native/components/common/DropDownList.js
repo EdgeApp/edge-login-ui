@@ -9,7 +9,7 @@ type Props = {
   renderRow(): void
 }
 class DropDownList extends Component<Props> {
-  render () {
+  render() {
     return (
       <FlatList
         style={this.props.style}

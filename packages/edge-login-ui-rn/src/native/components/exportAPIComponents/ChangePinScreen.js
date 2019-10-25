@@ -27,8 +27,9 @@ class ChangePinScreen extends Component<Props> {
   static defaultProps = {
     account: null
   }
+
   store: Store<State, Action>
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     const imports: Imports = {
       accountOptions: {},
@@ -46,7 +47,7 @@ class ChangePinScreen extends Component<Props> {
     )
   }
 
-  render () {
+  render() {
     return (
       <Provider store={this.store}>
         <ChangePinConnector

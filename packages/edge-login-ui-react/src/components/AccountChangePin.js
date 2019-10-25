@@ -27,13 +27,14 @@ export default class AccountChangePin extends Component {
     }
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     // Auto submit PIN when length is at 4
     if (this.props.pin.length >= 4) {
       this.handleSubmit()
     }
   }
-  render () {
+
+  render() {
     return (
       <section className={styles.rootContainer}>
         <div className={styles.container}>

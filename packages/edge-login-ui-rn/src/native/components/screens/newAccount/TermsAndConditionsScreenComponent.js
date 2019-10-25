@@ -25,13 +25,14 @@ export default class TermsAndConditionsScreenComponent extends Component<
   Props,
   State
 > {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       totalChecks: 0
     }
   }
-  renderItems (style: Object) {
+
+  renderItems(style: Object) {
     const terms = this.changeAppName()
     return terms.map(Item => (
       <View style={style.checkboxContainer} key={Item.title}>
@@ -47,14 +48,16 @@ export default class TermsAndConditionsScreenComponent extends Component<
       </View>
     ))
   }
-  renderInstructions (style: Object) {
+
+  renderInstructions(style: Object) {
     return (
       <View style={style.instructionsContainer}>
         <Text style={style.instructionsText}>{s.strings.last_step_review}</Text>
       </View>
     )
   }
-  renderButton (style: Object) {
+
+  renderButton(style: Object) {
     if (this.state.totalChecks === 3) {
       return (
         <View style={style.buttonContainer}>
@@ -73,7 +76,8 @@ export default class TermsAndConditionsScreenComponent extends Component<
     }
     return null
   }
-  changeStatus (event: any) {
+
+  changeStatus(event: any) {
     if (!event) {
       this.setState({
         totalChecks: this.state.totalChecks + 1
@@ -84,7 +88,8 @@ export default class TermsAndConditionsScreenComponent extends Component<
       })
     }
   }
-  render () {
+
+  render() {
     const { TermsAndConditionsScreenStyle } = this.props.styles
     return (
       <SafeAreaView>
@@ -101,6 +106,7 @@ export default class TermsAndConditionsScreenComponent extends Component<
       </SafeAreaView>
     )
   }
+
   onNextPress = () => {
     global.firebase &&
       global.firebase.analytics().logEvent(`Signup_Terms_Agree`)

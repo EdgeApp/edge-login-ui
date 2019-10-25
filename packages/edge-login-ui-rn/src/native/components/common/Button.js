@@ -20,21 +20,23 @@ type State = {
 }
 
 class Button extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       isThinking: false,
       pressed: false
     }
   }
-  componentWillReceiveProps (nextProps: Props) {
+
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isThinking !== this.state.isThinking) {
       this.setState({
         isThinking: nextProps.isThinking
       })
     }
   }
-  render () {
+
+  render() {
     return (
       <TouchableHighlight
         style={[
@@ -55,7 +57,8 @@ class Button extends Component<Props, State> {
       </TouchableHighlight>
     )
   }
-  renderInside () {
+
+  renderInside() {
     if (!this.props.isThinking) {
       return (
         <Text
@@ -74,7 +77,8 @@ class Button extends Component<Props, State> {
       </View>
     )
   }
-  onPress () {
+
+  onPress() {
     this.props.onPress()
     if (this.props.doesThink) {
       this.setState({

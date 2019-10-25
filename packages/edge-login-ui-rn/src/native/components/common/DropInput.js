@@ -8,7 +8,7 @@ type Props = {
 }
 
 class DropInput extends Component<Props> {
-  render () {
+  render() {
     const Style = this.props.style
     return <View style={Style.container} />
   }

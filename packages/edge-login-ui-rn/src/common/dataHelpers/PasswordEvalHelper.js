@@ -5,7 +5,7 @@ class PasswordHelper {
   noLowerCase: boolean
   noUpperCase: boolean
   passed: boolean
-  constructor (arg: Object) {
+  constructor(arg: Object) {
     this.tooShort = arg.tooShort
     this.noLowerCase = arg.noLowerCase
     this.noUpperCase = arg.noUpperCase

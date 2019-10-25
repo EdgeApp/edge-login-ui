@@ -15,11 +15,12 @@ type DispatchProps = {
 type Props = OwnProps & DispatchProps
 
 export default class PasswordRecoveryAppComponent extends Component<Props> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.props.initializePasswordRecovery()
   }
-  render () {
+
+  render() {
     const { ScreenStyle } = this.props.styles
     return (
       <View style={ScreenStyle} accessible>

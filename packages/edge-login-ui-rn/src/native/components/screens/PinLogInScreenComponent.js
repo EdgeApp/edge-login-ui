@@ -45,7 +45,7 @@ type State = {
   usernameList: Array<string>
 }
 export default class PinLogInScreenComponent extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     const getUserNameList = () => {
       const filteredUserList = props.userList.filter(user => {
@@ -67,14 +67,17 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
       usernameList: props.userList ? getUserNameList() : props.usersWithPin
     }
   }
-  componentDidMount () {
+
+  componentDidMount() {
     if (this.props.username && this.props.touch !== 'FaceID') {
       this.props.launchUserLoginWithTouchId({ username: this.props.username })
     }
   }
+
   relaunchTouchId = () => {
     this.props.launchUserLoginWithTouchId({ username: this.props.username })
   }
+
   renderModal = (style: Object) => {
     if (this.props.showModal) {
       return (
@@ -86,7 +89,8 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     }
     return null
   }
-  render () {
+
+  render() {
     const { PinLoginScreenStyle } = this.props.styles
     return (
       <View style={PinLoginScreenStyle.container}>
@@ -99,7 +103,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderOverImage () {
+  renderOverImage() {
     const { PinLoginScreenStyle } = this.props.styles
     if (this.props.loginSuccess) {
       return null
@@ -135,7 +139,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderBottomHalf (style: Object) {
+  renderBottomHalf(style: Object) {
     if (this.state.focusOn === 'pin') {
       return (
         <View style={style.innerView}>
@@ -168,11 +172,12 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
       </View>
     )
   }
-  exitPin () {
+
+  exitPin() {
     this.props.gotoLoginPage()
   }
 
-  renderItems (item: Object) {
+  renderItems(item: Object) {
     const { PinLoginScreenStyle } = this.props.styles
     return (
       <UserListItem
@@ -183,30 +188,35 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
       />
     )
   }
-  deleteUser (arg: string) {
+
+  deleteUser(arg: string) {
     this.setState({
       focusOn: 'pin',
       username: arg
     })
     this.props.launchDeleteModal()
   }
-  selectUser (arg: string) {
+
+  selectUser(arg: string) {
     this.props.launchUserLoginWithTouchId({ username: arg })
     this.props.changeUser(arg)
     this.setState({
       focusOn: 'pin'
     })
   }
-  showDrop () {
+
+  showDrop() {
     this.setState({
       focusOn: 'List'
     })
   }
-  hideDrop () {
+
+  hideDrop() {
     this.setState({
       focusOn: 'pin'
     })
   }
+
   renderTouchImage = () => {
     const { touch, userDetails } = this.props
     const { touchEnabled } = userDetails
@@ -235,6 +245,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     }
     return null
   }
+
   renderTouchImageText = () => {
     const { touch, userDetails } = this.props
     const { touchEnabled } = userDetails

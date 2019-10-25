@@ -6,7 +6,7 @@ import Dropdown from './ComponentSelectDropdown'
 import ActionButtons from './LayoutActionButtons'
 
 export default class AccountPasswordRecovery extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       questionList: [],
@@ -14,9 +14,11 @@ export default class AccountPasswordRecovery extends Component {
       selectedQuestion: null
     }
   }
-  componentWillMount () {
+
+  componentWillMount() {
     this.props.loadQuestions()
   }
+
   handleSubmit = () => {
     this.props.clearPasswordRecovery()
     const callback = (error, token) => {
@@ -36,6 +38,7 @@ export default class AccountPasswordRecovery extends Component {
       callback
     )
   }
+
   renderQuestions1 = () => {
     const filtered = this.props.questions.filter(
       question => this.props.secondQuestion !== question
@@ -52,6 +55,7 @@ export default class AccountPasswordRecovery extends Component {
       ...questions
     ]
   }
+
   renderQuestions2 = () => {
     const filtered = this.props.questions.filter(
       question => this.props.firstQuestion !== question
@@ -68,6 +72,7 @@ export default class AccountPasswordRecovery extends Component {
       ...questions
     ]
   }
+
   openDropdownListQuestion1 = () => {
     this.setState({
       questionList: this.renderQuestions1(),
@@ -75,6 +80,7 @@ export default class AccountPasswordRecovery extends Component {
       selectedQuestion: this.props.firstQuestion
     })
   }
+
   openDropdownListQuestion2 = () => {
     this.setState({
       questionList: this.renderQuestions2(),
@@ -82,6 +88,7 @@ export default class AccountPasswordRecovery extends Component {
       selectedQuestion: this.props.secondQuestion
     })
   }
+
   closeDropdownList = () => {
     this.setState({
       questionList: [],
@@ -89,7 +96,8 @@ export default class AccountPasswordRecovery extends Component {
       selectedQuestion: null
     })
   }
-  render () {
+
+  render() {
     if (this.props.loadingQuestions) {
       return (
         <section className={styles.rootContainer}>

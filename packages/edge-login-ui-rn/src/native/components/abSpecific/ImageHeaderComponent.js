@@ -8,7 +8,7 @@ type Props = {
 }
 
 class ImageHeaderComponent extends Component<Props> {
-  render () {
+  render() {
     return (
       <View style={this.props.style.container}>
         <Image source={this.props.src} style={this.props.style.image} />

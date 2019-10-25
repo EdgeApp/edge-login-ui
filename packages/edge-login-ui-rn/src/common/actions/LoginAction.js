@@ -23,14 +23,14 @@ import s from '../locales/strings.js'
 import { showModal, translateError } from '../util'
 import {
   dispatchAction,
-  dispatchActionWitString,
-  dispatchActionWithData
+  dispatchActionWithData,
+  dispatchActionWitString
 } from './'
 
 /**
  * Make it Thunky
  */
-export function loginWithRecovery (
+export function loginWithRecovery(
   answers: Array<string>,
   otpBackUpKey?: string
 ) {
@@ -89,7 +89,7 @@ export function loginWithRecovery (
   }
 }
 
-export function resetOtpReset () {
+export function resetOtpReset() {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const context = imports.context
@@ -106,7 +106,7 @@ export function resetOtpReset () {
     }
   }
 }
-export function retryWithOtp () {
+export function retryWithOtp() {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     dispatch(dispatchAction(Constants.START_RECOVERY_LOGIN))
     const state = getState()
@@ -133,7 +133,7 @@ export function retryWithOtp () {
     )(dispatch, getState, imports)
   }
 }
-export function userLoginWithTouchId (data: Object) {
+export function userLoginWithTouchId(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports
     const startFunction = () => {
@@ -171,7 +171,7 @@ export function userLoginWithTouchId (data: Object) {
       })
   }
 }
-export function userLoginWithPin (data: Object, backupKey?: string) {
+export function userLoginWithPin(data: Object, backupKey?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports
     const myAccountOptions = {
@@ -228,8 +228,8 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
             e.name === 'PasswordError'
               ? s.strings.invalid_pin
               : e.name === 'UsernameError'
-                ? s.strings.pin_not_enabled
-                : e.message
+              ? s.strings.pin_not_enabled
+              : e.message
           dispatch(
             dispatchActionWithData(Constants.LOGIN_PIN_FAIL, {
               message,
@@ -249,7 +249,7 @@ export function userLoginWithPin (data: Object, backupKey?: string) {
     // the timeout is a hack until we put in interaction manager.
   }
 }
-export function processWait (message: string) {
+export function processWait(message: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const wait = state.login.wait
@@ -269,7 +269,7 @@ export function processWait (message: string) {
   }
 }
 
-export function userLogin (data: Object, backupKey?: string) {
+export function userLogin(data: Object, backupKey?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports
     const myAccountOptions = {
@@ -351,7 +351,7 @@ export function userLogin (data: Object, backupKey?: string) {
   }
 }
 
-export function getEdgeLoginQrCode () {
+export function getEdgeLoginQrCode() {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const myAccountOptions = {
@@ -371,7 +371,7 @@ export function getEdgeLoginQrCode () {
     }
   }
 }
-export function recoveryLoginComplete () {
+export function recoveryLoginComplete() {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const account = state.login.account
@@ -395,9 +395,9 @@ const twofaReminder = async account => {
   const createdAtString =
     itemList && itemList.includes(Constants.OTP_REMINDER_KEY_NAME_CREATED_AT)
       ? await dataStore.getItem(
-        Constants.OTP_REMINDER_STORE_NAME,
-        Constants.OTP_REMINDER_KEY_NAME_CREATED_AT
-      )
+          Constants.OTP_REMINDER_STORE_NAME,
+          Constants.OTP_REMINDER_KEY_NAME_CREATED_AT
+        )
       : null
   const createdAt = createdAtString ? parseInt(createdAtString) : null
   const reminderCreatedAtDate = createdAt
@@ -407,9 +407,9 @@ const twofaReminder = async account => {
     itemList &&
     itemList.includes(Constants.OTP_REMINDER_KEY_NAME_LAST_OTP_CHECKED)
       ? await dataStore.getItem(
-        Constants.OTP_REMINDER_STORE_NAME,
-        Constants.OTP_REMINDER_KEY_NAME_LAST_OTP_CHECKED
-      )
+          Constants.OTP_REMINDER_STORE_NAME,
+          Constants.OTP_REMINDER_KEY_NAME_LAST_OTP_CHECKED
+        )
       : null
   const lastOtpCheck = lastOtpCheckString ? parseInt(lastOtpCheckString) : null
   const reminderLastOtpCheckDate = lastOtpCheck
@@ -418,9 +418,9 @@ const twofaReminder = async account => {
   const dontAsk =
     itemList && itemList.includes(Constants.OTP_REMINDER_KEY_NAME_DONT_ASK)
       ? await dataStore.getItem(
-        Constants.OTP_REMINDER_STORE_NAME,
-        Constants.OTP_REMINDER_KEY_NAME_DONT_ASK
-      )
+          Constants.OTP_REMINDER_STORE_NAME,
+          Constants.OTP_REMINDER_KEY_NAME_DONT_ASK
+        )
       : null
 
   const enableOtp = async account => {

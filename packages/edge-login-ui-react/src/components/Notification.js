@@ -7,7 +7,7 @@ import {
 import styles from '../styles/Notification.scss'
 
 export default class Notification extends Component {
-  render () {
+  render() {
     const { view, message, theme, closeNotification } = this.props
     if (view) {
       setTimeout(() => {

@@ -27,7 +27,7 @@ type State = {
  * Manages the edge context and login state.
  */
 export class Page extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
 
     // Just use the previous state if the page live-reloads:
@@ -41,7 +41,7 @@ export class Page extends Component<Props, State> {
   /**
    * Creates an EdgeUiContext and saves it in state.
    */
-  async makeEdgeContext () {
+  async makeEdgeContext() {
     // This demo needs some adjustments in development mode:
     const assetsPath = /localhost/.test(window.location)
       ? 'http://localhost:11234/'
@@ -67,7 +67,7 @@ export class Page extends Component<Props, State> {
   /**
    * Handles logging in.
    */
-  async onLogin (account: EdgeAccount) {
+  async onLogin(account: EdgeAccount) {
     try {
       // Find the app wallet, or create one if necessary:
       const walletInfo = account.getFirstWalletInfo('wallet:ethereum')
@@ -90,7 +90,7 @@ export class Page extends Component<Props, State> {
     this.setState({ account: void 0, wallet: void 0 })
   }
 
-  render () {
+  render() {
     const { account, context, wallet } = this.state
 
     // Login / logout buttons:

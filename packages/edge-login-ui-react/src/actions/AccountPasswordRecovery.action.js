@@ -21,88 +21,88 @@ export const CLOSE_LOADING_QUESTIONS = 'CLOSE_LOADING_QUESTIONS'
 export const CLEAR_PASSWORD_RECOVERY = 'CLEAR_PASSWORD_RECOVERY'
 export const FINISH_PASSWORD_RECOVERY = 'FINISH_PASSWORD_RECOVERY'
 
-export function setPasswordRecoveryQuestions (data) {
+export function setPasswordRecoveryQuestions(data) {
   return {
     type: PASSWORD_RECOVERY_QUESTIONS,
     data
   }
 }
 
-export function changeFirstPasswordRecoveryQuestionValue (data) {
+export function changeFirstPasswordRecoveryQuestionValue(data) {
   return {
     type: CHANGE_FIRST_PASSWORD_RECOVERY_QUESTION_VALUE,
     data
   }
 }
 
-export function changeFirstPasswordRecoveryAnswerValue (data) {
+export function changeFirstPasswordRecoveryAnswerValue(data) {
   return {
     type: CHANGE_FIRST_PASSWORD_RECOVERY_ANSWER_VALUE,
     data
   }
 }
 
-export function changeSecondPasswordRecoveryQuestionValue (data) {
+export function changeSecondPasswordRecoveryQuestionValue(data) {
   return {
     type: CHANGE_SECOND_PASSWORD_RECOVERY_QUESTION_VALUE,
     data
   }
 }
 
-export function changeSecondPasswordRecoveryAnswerValue (data) {
+export function changeSecondPasswordRecoveryAnswerValue(data) {
   return {
     type: CHANGE_SECOND_PASSWORD_RECOVERY_ANSWER_VALUE,
     data
   }
 }
 
-export function errorFirstQuestion (data) {
+export function errorFirstQuestion(data) {
   return {
     type: ERROR_FIRST_QUESTION_PASSWORD_RECOVERY,
     data
   }
 }
 
-export function errorSecondQuestion (data) {
+export function errorSecondQuestion(data) {
   return {
     type: ERROR_SECOND_QUESTION_PASSWORD_RECOVERY,
     data
   }
 }
 
-export function errorFirstAnswer (data) {
+export function errorFirstAnswer(data) {
   return {
     type: ERROR_FIRST_ANSWER_PASSWORD_RECOVERY,
     data
   }
 }
 
-export function errorSecondAnswer (data) {
+export function errorSecondAnswer(data) {
   return {
     type: ERROR_SECOND_ANSWER_PASSWORD_RECOVERY,
     data
   }
 }
 
-export function openLoadingQuestions () {
+export function openLoadingQuestions() {
   return {
     type: OPEN_LOADING_QUESTIONS
   }
 }
 
-export function closeLoadingQuestions () {
+export function closeLoadingQuestions() {
   return {
     type: CLOSE_LOADING_QUESTIONS
   }
 }
 
-export function clearPasswordRecovery () {
+export function clearPasswordRecovery() {
   return {
     type: CLEAR_PASSWORD_RECOVERY
   }
 }
 
-export function finishPasswordRecovery () {
+export function finishPasswordRecovery() {
   return {
     type: FINISH_PASSWORD_RECOVERY
   }

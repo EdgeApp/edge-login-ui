@@ -44,7 +44,7 @@ class LoginScreen extends Component<Props> {
     accountOptions: null
   }
 
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     checkingForOTP(this.props.context)
     const composeEnhancers =
@@ -69,7 +69,7 @@ class LoginScreen extends Component<Props> {
     this.cleanups = []
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // Completed Edge login:
     this.cleanups = [
       this.props.context.on('login', account => {
@@ -84,15 +84,15 @@ class LoginScreen extends Component<Props> {
     ]
   }
 
-  componentWillMount () {
+  componentWillMount() {
     updateFontStyles(this.props) // Can we move this to the constructor?
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     for (const cleanup of this.cleanups) cleanup()
   }
 
-  render () {
+  render() {
     return (
       <Provider store={this.store}>
         <LoginAppConnector

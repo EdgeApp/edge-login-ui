@@ -7,12 +7,13 @@ import styles from '../styles/LoginWithPin.scss'
 import PinInput from './ComponentPinInput'
 
 export default class LoginWithPin extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       pinFocus: false
     }
   }
+
   handleChangePin = e => {
     const { user } = this.props
     const pin = e.target.value
@@ -33,11 +34,13 @@ export default class LoginWithPin extends Component {
   pinFocus = () => {
     return this.refs.pin.focus()
   }
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     this.setState({ pinFocus: true })
     this.props.handleLoginPin('')
   }
-  render () {
+
+  render() {
     checkPinStyle = (length, pin) => {
       if (length === pin && this.state.pinFocus) {
         return styles.pinGreen

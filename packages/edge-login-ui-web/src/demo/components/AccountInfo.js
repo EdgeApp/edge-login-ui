@@ -8,7 +8,7 @@ type Props = {
   account: EdgeAccount
 }
 
-export function AccountInfo (props: Props) {
+export function AccountInfo(props: Props) {
   const { account } = props
 
   return (

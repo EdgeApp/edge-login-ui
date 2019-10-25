@@ -37,7 +37,7 @@ export default class NewAccountPasswordScreenComponent extends Component<
   Props,
   State
 > {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       isProcessing: false,
@@ -45,7 +45,8 @@ export default class NewAccountPasswordScreenComponent extends Component<
       focusSecond: false
     }
   }
-  render () {
+
+  render() {
     const { NewAccountPasswordScreenStyle } = this.props.styles
     return (
       <SafeAreaView>
@@ -61,13 +62,14 @@ export default class NewAccountPasswordScreenComponent extends Component<
       </SafeAreaView>
     )
   }
-  renderMain (styles: Object) {
+
+  renderMain(styles: Object) {
     if (this.state.focusSecond) {
       return (
         <KeyboardAvoidingView
           style={styles.pageContainer}
           contentContainerStyle={styles.pageContainer}
-          behavior={'position'}
+          behavior="position"
           keyboardVerticalOffset={-150}
         >
           {this.renderInterior(styles)}
@@ -78,7 +80,8 @@ export default class NewAccountPasswordScreenComponent extends Component<
       <View style={styles.pageContainer}>{this.renderInterior(styles)}</View>
     )
   }
-  renderInterior (styles: Object) {
+
+  renderInterior(styles: Object) {
     return (
       <View style={styles.innerView}>
         <PasswordStatusConnector style={styles.status} />
@@ -108,18 +111,21 @@ export default class NewAccountPasswordScreenComponent extends Component<
       </View>
     )
   }
-  renderModal (style: Object) {
+
+  renderModal(style: Object) {
     if (this.props.workflow.showModal) {
       return <SkipModalConnector />
     }
     return null
   }
+
   onSetNextFocus = () => {
     this.setState({
       focusFirst: false,
       focusSecond: true
     })
   }
+
   onNextPress = () => {
     this.setState({
       isProcessing: true

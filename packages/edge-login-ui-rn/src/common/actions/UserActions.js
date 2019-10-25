@@ -4,7 +4,7 @@ import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import { dispatchActionWithData, getPreviousUsers } from './'
 
-export function deleteUserFromDevice (data: string) {
+export function deleteUserFromDevice(data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     setTimeout(() => {

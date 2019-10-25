@@ -20,7 +20,7 @@ type RootState = {
 }
 
 class Root extends Component<RootProps, RootState> {
-  constructor (props) {
+  constructor(props) {
     super(props)
     makeEdgeContext({
       apiKey: '3ad0717b3eb31f745aba7bd9d51e7fd1b2926431',
@@ -38,12 +38,13 @@ class Root extends Component<RootProps, RootState> {
     if (this.state.account) this.state.account.logout()
     this.setState({ account: null })
   }
+
   onClose = () => this.setState({ closed: true })
   onError = () => {}
   onLogin = account => this.setState({ account })
   onOpen = () => this.setState({ closed: false })
 
-  render () {
+  render() {
     if (!this.state.context) {
       return <p>Loading...</p>
     }

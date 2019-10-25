@@ -13,7 +13,7 @@ type Props = {
 }
 
 class HeaderParentButtons extends Component<Props> {
-  render () {
+  render() {
     const { parentButton, styles, appId } = this.props
     const openEdgeSite = () => Linking.openURL(s.strings.edge_site)
     return (
@@ -34,7 +34,7 @@ class HeaderParentButtons extends Component<Props> {
               <Text style={styles.rightButtonText}>powered by</Text>
               <Image
                 source={Assets.LOGO_SMALL}
-                resizeMode={'contain'}
+                resizeMode="contain"
                 style={styles.image}
               />
             </View>

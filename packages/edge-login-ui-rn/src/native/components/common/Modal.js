@@ -43,13 +43,14 @@ type State = {
 class MyModal extends Component<Props, State> {
   // $FlowFixMe
   reset: number
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       showButtons: !this.props.buttonTimerSeconds
     }
   }
-  componentDidMount () {
+
+  componentDidMount() {
     if (this.props.buttonTimerSeconds) {
       setTimeout(() => {
         this.setState({
@@ -63,7 +64,8 @@ class MyModal extends Component<Props, State> {
       }, this.props.modalDismissTimerSeconds * 1000)
     }
   }
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     clearInterval(this.reset)
   }
 
@@ -179,7 +181,7 @@ class MyModal extends Component<Props, State> {
     )
   }
 
-  render () {
+  render() {
     const styles = this.props.styles ? this.props.styles : ModalStyle
     const { headerText, headerSubtext, icon, iconType, image } = this.props
 
@@ -188,12 +190,12 @@ class MyModal extends Component<Props, State> {
       Platform.OS === 'ios'
         ? Dimensions.get('window').height
         : require('react-native-extra-dimensions-android').get(
-          'REAL_WINDOW_HEIGHT'
-        )
+            'REAL_WINDOW_HEIGHT'
+          )
 
     return (
       <Modal
-        animationType={'slide'}
+        animationType="slide"
         deviceHeight={deviceHeight}
         deviceWidth={deviceWidth}
         style={styles.container}

@@ -26,7 +26,8 @@ class PinKeypad extends Component<Props> {
     }
     onChangeText({ username: username, pin: pin ? pin.concat(value) : value })
   }
-  render () {
+
+  render() {
     const { wait, style } = this.props
     return (
       <View style={style.keypadContainer}>

@@ -12,13 +12,13 @@ import type {
   EdgeUiContextOptions
 } from './index.js'
 
-export function sendRoot () {
+export function sendRoot() {
   const frameUrl = new URL(window.location)
   const parentUrl = new URL(document.referrer)
   const origin = parentUrl.origin
 
   const out: BridgeRoot = {
-    async makeContext (opts: EdgeUiContextOptions): Promise<EdgeUiContext> {
+    async makeContext(opts: EdgeUiContextOptions): Promise<EdgeUiContext> {
       if (frameUrl.origin !== parentUrl.origin) opts.hideKeys = false
 
       return makeUiContext(opts)
@@ -27,7 +27,7 @@ export function sendRoot () {
   bridgifyObject(out)
 
   const server = new Bridge({
-    sendMessage (message) {
+    sendMessage(message) {
       window.parent.postMessage(JSON.parse(JSON.stringify(message)), origin)
     }
   })

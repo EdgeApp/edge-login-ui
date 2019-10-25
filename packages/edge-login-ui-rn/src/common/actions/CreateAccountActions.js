@@ -12,7 +12,7 @@ import { isASCII } from '../util'
 import { dispatchAction, dispatchActionWithData, getPreviousUsers } from './'
 import * as WorkflowActions from './WorkflowActions'
 
-export function validatePin (data: Object) {
+export function validatePin(data: Object) {
   const pin = data.pin
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     let error = null
@@ -30,7 +30,7 @@ export function validatePin (data: Object) {
     // dispatch(updatePin(obj))
   }
 }
-export function checkUsernameForAvailabilty (data: string) {
+export function checkUsernameForAvailabilty(data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
@@ -69,7 +69,7 @@ export function checkUsernameForAvailabilty (data: string) {
   }
 }
 
-export function validateUsername (data: string) {
+export function validateUsername(data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     // TODO evaluate client side evaluations.
     let error = data.length > 2 ? null : s.strings.username_3_characters_error // TODO: Localize string
@@ -81,7 +81,7 @@ export function validateUsername (data: string) {
     dispatch(dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj))
   }
 }
-export function validateConfirmPassword (data?: string) {
+export function validateConfirmPassword(data?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const confirmPassword = data !== null ? data : state.create.confirmPassword
@@ -100,7 +100,7 @@ export function validateConfirmPassword (data?: string) {
     )
   }
 }
-export function validatePassword (data: string) {
+export function validatePassword(data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     let error = null
@@ -142,7 +142,7 @@ export function validatePassword (data: string) {
   }
 }
 
-export function createUser (data: Object) {
+export function createUser(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder } = imports
     dispatch(WorkflowActions.nextScreen())
@@ -187,7 +187,7 @@ export function createUser (data: Object) {
     }, 300)
   }
 }
-export function agreeToConditions (account: EdgeAccount) {
+export function agreeToConditions(account: EdgeAccount) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, folder } = imports
     // write to disklet

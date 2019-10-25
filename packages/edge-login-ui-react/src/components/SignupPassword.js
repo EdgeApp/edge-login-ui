@@ -33,7 +33,8 @@ export default class SignupPassword extends Component {
       callback
     )
   }
-  render () {
+
+  render() {
     return (
       <section className={styles.rootContainer}>
         <div className={styles.container}>

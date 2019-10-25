@@ -23,14 +23,14 @@ type State = {
 type Props = OwnProps & StateProps
 
 class AccountInfoComponent extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       collapsed: true
     }
   }
 
-  renderPasswordWarning (style: Object) {
+  renderPasswordWarning(style: Object) {
     if (!this.props.password) {
       return (
         <View style={style.bottomWarning}>
@@ -43,7 +43,8 @@ class AccountInfoComponent extends Component<Props, State> {
     }
     return null
   }
-  renderAccountInfo (style: Object) {
+
+  renderAccountInfo(style: Object) {
     if (!this.props.password) {
       return (
         <View
@@ -112,7 +113,8 @@ class AccountInfoComponent extends Component<Props, State> {
       </View>
     )
   }
-  renderBottom (style: Object) {
+
+  renderBottom(style: Object) {
     if (!this.state.collapsed) {
       return (
         <View style={style.bottom}>
@@ -123,7 +125,8 @@ class AccountInfoComponent extends Component<Props, State> {
     }
     return <View style={style.bottom} />
   }
-  renderTop (style: Object) {
+
+  renderTop(style: Object) {
     const msg = this.state.collapsed
       ? s.strings.show_account_info
       : s.strings.hide_account_info
@@ -142,12 +145,14 @@ class AccountInfoComponent extends Component<Props, State> {
       </View>
     )
   }
+
   onPress = () => {
     this.setState({
       collapsed: !this.state.collapsed
     })
   }
-  render () {
+
+  render() {
     const Style = this.props.style
     return (
       <View

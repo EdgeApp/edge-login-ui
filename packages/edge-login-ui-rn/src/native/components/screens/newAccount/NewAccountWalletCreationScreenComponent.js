@@ -9,7 +9,7 @@ export default class CreatingAccountWaitScreenComponent extends Component<
   {},
   {}
 > {
-  render () {
+  render() {
     return <Text>{s.strings.encrypting}</Text>
   }
 }

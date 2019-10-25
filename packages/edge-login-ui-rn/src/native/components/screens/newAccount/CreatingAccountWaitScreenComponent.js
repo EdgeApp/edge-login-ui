@@ -14,7 +14,7 @@ type Props = {
   nextScreen(): void
 }
 export default class CreatingAccountWaitScreenComponent extends Component<Props> {
-  componentWillReceiveProps (nextProps: Props) {
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.createSuccess) {
       global.firebase &&
         global.firebase.analytics().logEvent(`Signup_Create_User_Success`)
@@ -22,7 +22,7 @@ export default class CreatingAccountWaitScreenComponent extends Component<Props>
     }
   }
 
-  render () {
+  render() {
     const { CreatingAccountWaitScreenStyle } = this.props.styles
     return (
       <SafeAreaView>

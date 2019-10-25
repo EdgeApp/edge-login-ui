@@ -18,20 +18,22 @@ type State = {
   onOff: boolean
 }
 class Checkbox extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       onOff: this.props.value ? this.props.value : false
     }
   }
-  componentWillReceiveProps (nextProps: Props) {
+
+  componentWillReceiveProps(nextProps: Props) {
     if (this.props.disabled) {
       this.setState({
         onOff: nextProps.value
       })
     }
   }
-  renderImage (style: Object) {
+
+  renderImage(style: Object) {
     if (this.state.onOff) {
       return (
         <View style={style.checkbox}>
@@ -45,7 +47,8 @@ class Checkbox extends Component<Props, State> {
       </View>
     )
   }
-  render () {
+
+  render() {
     const style = this.props.style
     return (
       <TouchableWithoutFeedback
@@ -61,7 +64,8 @@ class Checkbox extends Component<Props, State> {
       </TouchableWithoutFeedback>
     )
   }
-  onPress () {
+
+  onPress() {
     const onOff = this.state.onOff
     let newOnOff = false
     if (!onOff) {

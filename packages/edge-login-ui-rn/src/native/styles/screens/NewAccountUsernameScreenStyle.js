@@ -1,8 +1,8 @@
 // @flow
 
+import * as Styles from '../'
 import * as Constants from '../../../common/constants'
 import { scale } from '../../../common/util/scaling.js'
-import * as Styles from '../'
 
 const NewAccountUsernameScreenStyle = {
   screen: { ...Styles.ScreenStyle },

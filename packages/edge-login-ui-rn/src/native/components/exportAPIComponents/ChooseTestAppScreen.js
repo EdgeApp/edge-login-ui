@@ -11,15 +11,17 @@ import { Button } from '../common/Button'
 } */
 
 class ChooseTestAppScreen extends Component {
-  componentWillReceiveProps (props) {}
-  onPasswordPress () {
+  componentWillReceiveProps(props) {}
+  onPasswordPress() {
     this.props.onChangePassword()
   }
-  onPinPress () {
+
+  onPinPress() {
     this.props.onChangePin()
   }
-  onRecoverPress () {}
-  render () {
+
+  onRecoverPress() {}
+  render() {
     // const { ScreenStyle } = this.props.styles
     return (
       <View

@@ -23,15 +23,17 @@ export default class SignupUsername extends Component {
       return this.props.handleSubmit(username, callback)
     }
   }
+
   onKeyEnter = e => {
     if (e.nativeEvent.charCode === 13) {
       return this.handleSubmit()
     }
   }
-  render () {
+
+  render() {
     return (
       <section className={styles.rootContainer}>
-        <ScreenHeader location={'signup'} history={this.props.history} />
+        <ScreenHeader location="signup" history={this.props.history} />
         <div className={styles.container}>
           <p className={styles.headerText}>{t('signup_welcome')}</p>
           <p className={styles.subHeaderText}> {t('signup_username_header')}</p>

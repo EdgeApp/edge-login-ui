@@ -8,59 +8,59 @@ export const ERROR_PASSWORD_VALUE = 'ERROR_PASSWORD_VALUE'
 export const ERROR_PASSWORD_REPEAT_VALUE = 'ERROR_PASSWORD_REPEAT_VALUE'
 export const CLEAR_PASSWORD_VALUE = 'CLEAR_PASSWORD_VALUE'
 
-export function showPassword () {
+export function showPassword() {
   return {
     type: SHOW_PASSWORD
   }
 }
 
-export function hidePassword () {
+export function hidePassword() {
   return {
     type: HIDE_PASSWORD
   }
 }
 
-export function changePasswordValue (data) {
+export function changePasswordValue(data) {
   return {
     type: CHANGE_PASSWORD_VALUE,
     data
   }
 }
 
-export function changePasswordRepeatValue (data) {
+export function changePasswordRepeatValue(data) {
   return {
     type: CHANGE_PASSWORD_REPEAT_VALUE,
     data
   }
 }
 
-export function passwordNotificationShow () {
+export function passwordNotificationShow() {
   return {
     type: SKIP_PASSWORD_NOTIFICATION_SHOW
   }
 }
 
-export function passwordNotificationHide () {
+export function passwordNotificationHide() {
   return {
     type: SKIP_PASSWORD_NOTIFICATION_HIDE
   }
 }
 
-export function errorPasswordValue (data) {
+export function errorPasswordValue(data) {
   return {
     type: ERROR_PASSWORD_VALUE,
     data
   }
 }
 
-export function errorPasswordRepeatValue (data) {
+export function errorPasswordRepeatValue(data) {
   return {
     type: ERROR_PASSWORD_REPEAT_VALUE,
     data
   }
 }
 
-export function clearPasswordError (data) {
+export function clearPasswordError(data) {
   return {
     type: CLEAR_PASSWORD_VALUE,
     data

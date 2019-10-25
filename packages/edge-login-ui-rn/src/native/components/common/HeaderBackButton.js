@@ -12,7 +12,7 @@ type Props = {
   onPress(): void
 }
 class HeaderBackButton extends Component<Props> {
-  render () {
+  render() {
     const withArrow = true
     const icon = isIos ? 'ios-arrow-back-outline' : 'md-arrow-back'
     const styles = this.props.styles

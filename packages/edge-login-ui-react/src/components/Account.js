@@ -7,12 +7,13 @@ import PasswordRecovery from '../connectors/AccountPasswordRecovery.connector'
 import PasswordRecoveryToken from '../connectors/AccountPasswordRecoveryToken.connector'
 
 export default class Account extends Component {
-  componentWillMount () {
+  componentWillMount() {
     if (window.abcui.abcAccount) {
       this.props.userLogin(window.abcui.abcAccount)
     }
   }
-  render () {
+
+  render() {
     switch (this.props.page) {
       case 'home':
         return <Home {...this.props} />

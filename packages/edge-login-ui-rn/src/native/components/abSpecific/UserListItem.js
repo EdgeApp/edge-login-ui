@@ -17,10 +17,12 @@ class UserListItem extends Component<Props> {
   deleteThis = () => {
     this.props.onDelete(this.props.data)
   }
+
   onPress = () => {
     this.props.onClick(this.props.data)
   }
-  render () {
+
+  render() {
     const style = this.props.style
     return (
       <TouchableOpacity onPress={this.onPress}>
@@ -28,7 +30,8 @@ class UserListItem extends Component<Props> {
       </TouchableOpacity>
     )
   }
-  renderInside (style: Object) {
+
+  renderInside(style: Object) {
     if (this.props.onDelete) {
       return (
         <View style={style.container}>

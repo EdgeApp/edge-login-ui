@@ -19,13 +19,15 @@ export default class ModalAccountCacheDelete extends Component {
       callback
     )
   }
+
   passwordKeyPressed = e => {
     if (e.charCode === 13) {
       return this.handleSubmit()
     }
   }
-  componentWillUnmount () {}
-  render () {
+
+  componentWillUnmount() {}
+  render() {
     return (
       <section className={styles.container}>
         <p className={styles.subHeaderText}>

@@ -12,7 +12,7 @@ type Props = {
 }
 
 export default class LoadingScreenComponent extends Component<Props> {
-  render () {
+  render() {
     const { LandingScreenStyle } = this.props.styles
     return (
       <View style={LandingScreenStyle.container}>

@@ -7,16 +7,18 @@ import NavigationButtons from './LayoutNavigationButtons'
 import QRCode from './LoginEdgeQRCode.js'
 
 export default class LoginEdge extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     props.edgeLogin()
   }
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     if (this.props.edgeObject) {
       return this.props.removeEdgePolling(this.props.edgeObject)
     }
   }
-  render () {
+
+  render() {
     return (
       <section className={styles.rootContainer}>
         <div className={styles.container}>

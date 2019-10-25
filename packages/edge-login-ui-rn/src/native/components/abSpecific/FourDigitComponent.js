@@ -23,7 +23,7 @@ type State = {
 }
 
 class FourDigitComponent extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       autoFocus: false,
@@ -33,14 +33,15 @@ class FourDigitComponent extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps (nextProps: Props) {
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isLogginginWithPin) {
       this.setState({
         touchId: true
       })
     }
   }
-  render () {
+
+  render() {
     const Style = this.props.style
     return (
       <View style={Style.container}>
@@ -55,11 +56,13 @@ class FourDigitComponent extends Component<Props, State> {
       </View>
     )
   }
-  renderCircleTest (style: Object) {
+
+  renderCircleTest(style: Object) {
     return style
     // return {...style, borderColor: this.state.circleColor}
   }
-  renderDotContainer (style: Object) {
+
+  renderDotContainer(style: Object) {
     const pinLength = this.props.pin ? this.props.pin.length : 0
     if (this.props.wait > 0) {
       return <Spinner />

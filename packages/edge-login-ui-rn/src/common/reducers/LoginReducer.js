@@ -21,7 +21,7 @@ const initialState = {
   showRecoverSuccessDialog: false,
   wait: 0
 }
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case Constants.CANCEL_RECOVERY_KEY:
       return { ...state, recoveryToken: null }

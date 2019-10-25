@@ -5,7 +5,7 @@ import styles from '../styles/ModalForgotPassword.scss'
 import NavigationButtons from './LayoutNavigationButtons'
 
 export default class ModalForgotPassword extends Component {
-  render () {
+  render() {
     return (
       <section className={styles.container}>
         <p className={styles.headerText}>{t('modal_forgot_password_header')}</p>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {
+  IoIosSync as Sync,
   IoMdKeypad as Keypad,
-  IoMdLock as Lock,
-  IoIosSync as Sync
+  IoMdLock as Lock
 } from 'react-icons/io'
 
 import ModalAccountPasswordCheck from '../connectors/ModalAccountPasswordCheck.connector'
@@ -10,13 +10,13 @@ import t from '../lib/LocaleStrings.js'
 import styles from '../styles/AccountHome.scss'
 
 export default class AccountHome extends Component {
-  componentWillMount () {
+  componentWillMount() {
     if (window.abcui.abcAccount) {
       this.props.userLogin(window.abcui.abcAccount)
     }
   }
 
-  render () {
+  render() {
     if (this.props.account.edgeLogin) {
       return (
         <section className={styles.rootContainer}>

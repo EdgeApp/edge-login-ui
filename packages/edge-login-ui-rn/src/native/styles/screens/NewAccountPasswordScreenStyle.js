@@ -1,7 +1,7 @@
 // @flow
 
-import { scale } from '../../../common/util/scaling.js'
 import * as Styles from '../'
+import { scale } from '../../../common/util/scaling.js'
 
 const NewAccountPasswordScreenStyle = {
   screen: { ...Styles.ScreenStyle },

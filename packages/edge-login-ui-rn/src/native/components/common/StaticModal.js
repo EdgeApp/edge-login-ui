@@ -17,30 +17,31 @@ type Props = {
 class StaticModal extends Component<Props> {
   // $FlowFixMe
   reset: number
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.modalDismissTimerSeconds) {
       this.reset = setTimeout(() => {
         this.props.cancel()
       }, this.props.modalDismissTimerSeconds * 1000)
     }
   }
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     clearTimeout(this.reset)
   }
 
-  render () {
+  render() {
     const deviceWidth = Dimensions.get('window').width
     const deviceHeight =
       Platform.OS === 'ios'
         ? Dimensions.get('window').height
         : require('react-native-extra-dimensions-android').get(
-          'REAL_WINDOW_HEIGHT'
-        )
+            'REAL_WINDOW_HEIGHT'
+          )
 
     const styles = StaticModalStyle
     return (
       <Modal
-        animationType={'slide'}
+        animationType="slide"
         deviceHeight={deviceHeight}
         deviceWidth={deviceWidth}
         style={styles.container}

@@ -11,7 +11,7 @@ type Props = {
 }
 
 class FullScreenModal extends Component<Props> {
-  render () {
+  render() {
     const styles = FullScreenModalStyle
 
     const deviceWidth = Dimensions.get('window').width
@@ -19,12 +19,12 @@ class FullScreenModal extends Component<Props> {
       Platform.OS === 'ios'
         ? Dimensions.get('window').height
         : require('react-native-extra-dimensions-android').get(
-          'REAL_WINDOW_HEIGHT'
-        )
+            'REAL_WINDOW_HEIGHT'
+          )
 
     return (
       <Modal
-        animationType={'slide'}
+        animationType="slide"
         deviceHeight={deviceHeight}
         deviceWidth={deviceWidth}
         style={styles.container}

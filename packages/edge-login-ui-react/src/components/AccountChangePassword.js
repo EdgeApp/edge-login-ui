@@ -16,7 +16,8 @@ export default class AccountChangePassword extends Component {
     }
     return this.props.handleSubmit(password, passwordRepeat, account, callback)
   }
-  render () {
+
+  render() {
     return (
       <section className={styles.rootContainer}>
         <div className={styles.container}>
