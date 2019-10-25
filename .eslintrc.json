@@ -1,24 +1,20 @@
 {
-  "env": {
-    "browser": true,
-    "commonjs": true,
-    "es6": true
-  },
-  "extends": ["standard", "plugin:react/recommended"],
-  "parser": "babel-eslint",
+  "extends": [
+    "plugin:react/recommended",
+    "standard-kit/prettier",
+    "standard-kit/prettier/node",
+    "standard-kit/prettier/jsx",
+    "standard-kit/prettier/flow"
+  ],
   "plugins": [
-    "standard",
-    "promise",
-    "react"
+    "simple-import-sort"
   ],
   "rules": {
-    "camelcase": "error",
-    "no-throw-literal": "error",
     "no-var": "error",
-    "prefer-const": "error",
     "promise/no-return-wrap": "error",
+    "react/display-name": "off",
     "react/prop-types": "off",
-    "react/display-name": "off"
+    "simple-import-sort/sort": "error"
   },
   "settings": {
     "react": {
