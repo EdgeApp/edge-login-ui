@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.6.0 (2019-10-25)
+
+- web: Visually redesign the SDK.
+- rn: Allow the user to trigger an action by tapping the logo 5x.
+
 ## 0.5.44 (2019-10-08)
 
 - rn: Fix layout on change PIN & change password screens.
