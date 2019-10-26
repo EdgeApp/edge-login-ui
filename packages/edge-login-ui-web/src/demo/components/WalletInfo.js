@@ -39,7 +39,7 @@ export class WalletInfo extends Component<Props, State> {
       balanceFiat: 0,
       height,
       name,
-      sendingText: void 0,
+      sendingText: undefined,
       spendAddress: '',
       spendAmount: '0',
       spendFiat: 0
@@ -109,7 +109,7 @@ export class WalletInfo extends Component<Props, State> {
         console.log('Sending:', tx)
         wallet.broadcastTx(tx)
         wallet.saveTx(tx)
-        this.setState({ sendingText: void 0 })
+        this.setState({ sendingText: undefined })
         return tx
       })
       .catch(e => this.setState({ sendingText: String(e) }))

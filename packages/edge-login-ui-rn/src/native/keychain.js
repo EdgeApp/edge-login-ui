@@ -14,10 +14,8 @@ const LOGINKEY_KEY = 'key_loginkey'
 if (Platform.OS === 'android' && AbcCoreJsUi.fetch) {
   global.androidFetch = async (url: string, options: Object) => {
     const headers: Array<string> = []
-    for (const h in options.headers) {
-      if (options.headers.hasOwnProperty(h)) {
-        headers.push(`${h}______${options.headers[h]}`)
-      }
+    for (const h of Object.keys(options.headers)) {
+      headers.push(`${h}______${options.headers[h]}`)
     }
     const result = await AbcCoreJsUi.fetch(
       url,

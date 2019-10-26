@@ -11,7 +11,7 @@ export const signupUser = (username, password, pin, callback) => {
     ctx
       .createAccount(username, password, pin, accountOptions)
       .then(account => {
-        localStorage.setItem(lastUser, username)
+        window.localStorage.setItem(lastUser, username)
         dispatch(userLogin(account))
         dispatch(closeLoading())
         callback(null, account)

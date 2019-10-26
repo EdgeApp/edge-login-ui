@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { sprintf } from 'sprintf-js'
 
 import t from '../lib/LocaleStrings.js'

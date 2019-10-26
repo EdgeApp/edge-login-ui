@@ -18,7 +18,7 @@ export default class PinInput extends Component {
 
   pinFocus = () => this.refs.pin.focus()
   render() {
-    checkPinStyle = (length, pin) => {
+    const checkPinStyle = (length, pin) => {
       if (length === pin && this.state.pinFocus) {
         return styles.pinGreen
       }

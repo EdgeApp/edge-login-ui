@@ -4,6 +4,7 @@ import {
   IoMdKeypad as Keypad,
   IoMdLock as Lock
 } from 'react-icons/io'
+import { sprintf } from 'sprintf-js'
 
 import ModalAccountPasswordCheck from '../connectors/ModalAccountPasswordCheck.connector'
 import t from '../lib/LocaleStrings.js'

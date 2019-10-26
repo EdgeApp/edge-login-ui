@@ -7,10 +7,6 @@ import LoginWithPin from '../connectors/LoginWithPin.connector'
 import styles from '../styles/Login.scss'
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentWillUnmount() {
     if (this.props.edgeObject) {
       return this.props.edgeObject.cancelRequest()

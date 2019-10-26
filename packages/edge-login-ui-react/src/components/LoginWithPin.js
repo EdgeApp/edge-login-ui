@@ -16,7 +16,7 @@ export default class LoginWithPin extends Component {
 
   handleChangePin = e => {
     const { user } = this.props
-    const pin = e.target.value
+    let pin = e.target.value
     // Cut PIN to 4when PIN is greater than 4
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
@@ -41,15 +41,6 @@ export default class LoginWithPin extends Component {
   }
 
   render() {
-    checkPinStyle = (length, pin) => {
-      if (length === pin && this.state.pinFocus) {
-        return styles.pinGreen
-      }
-      if (length > pin) {
-        return styles.pinShade
-      }
-      return styles.pinCircle
-    }
     if (this.props.modalAccountCacheDelete) {
       return <ModalAccountCacheDelete />
     }

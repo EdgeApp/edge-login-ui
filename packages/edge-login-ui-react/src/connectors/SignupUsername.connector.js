@@ -13,9 +13,9 @@ const mapStateToProps = state => {
   }
 }
 
-export const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    gotoLogin: () => props.history.push('/login'),
+    gotoLogin: () => ownProps.history.push('/login'),
     changeUsernameValue: e => dispatch(changeUsernameValue(e.target.value)),
     openSignupPinPage: text => dispatch(changeSignupPage('pin')),
     handleSubmit: (username, callback) =>

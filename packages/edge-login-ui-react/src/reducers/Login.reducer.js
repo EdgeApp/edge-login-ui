@@ -175,13 +175,15 @@ const pin = (state = '', action) => {
 }
 const pinDummy = (state = '', action) => {
   switch (action.type) {
-    case ACTION.LOG_IN_PIN:
+    case ACTION.LOG_IN_PIN: {
       const len = action.data.length
       let retval = ''
       for (let i = 0; i < len; i++) {
         retval += '·'
       }
       return retval
+    }
+
     case ACTION.USER_LOGIN:
       return ''
     default:

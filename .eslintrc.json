@@ -13,8 +13,11 @@
     "no-var": "error",
     "promise/no-return-wrap": "error",
     "react/display-name": "off",
+    "react/jsx-handler-names": "off",
+    "react/no-string-refs": "off",
     "react/prop-types": "off",
-    "simple-import-sort/sort": "error"
+    "simple-import-sort/sort": "error",
+    "standard/no-callback-literal": "off"
   },
   "settings": {
     "react": {

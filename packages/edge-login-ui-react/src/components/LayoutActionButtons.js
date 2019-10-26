@@ -10,7 +10,7 @@ export default ({
   usage,
   loading
 }) => {
-  getRightButtonStyle = () => {
+  const getRightButtonStyle = () => {
     switch (usage) {
       case 'success':
         return styles.rightButtonSuccess

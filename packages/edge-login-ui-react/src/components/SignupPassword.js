@@ -7,14 +7,7 @@ import NavigationButtons from './LayoutNavigationButtons'
 
 export default class SignupPassword extends Component {
   handleSubmit = () => {
-    const {
-      password,
-      passwordRepeat,
-      validation,
-      username,
-      pin,
-      clearError
-    } = this.props
+    const { password, passwordRepeat, validation, username, pin } = this.props
     const callback = (error, account) => {
       if (error) {
         return this.props.handleError(error.message || error)

@@ -21,11 +21,9 @@ const out = { strings }
 selectLocale(DeviceInfo.getDeviceLocale())
 
 function mergeStrings(primary: Object, secondary: Object) {
-  for (const str in secondary) {
-    if (secondary.hasOwnProperty(str)) {
-      if (secondary[str]) {
-        primary[str] = secondary[str]
-      }
+  for (const str of Object.keys(secondary)) {
+    if (secondary[str]) {
+      primary[str] = secondary[str]
     }
   }
 }

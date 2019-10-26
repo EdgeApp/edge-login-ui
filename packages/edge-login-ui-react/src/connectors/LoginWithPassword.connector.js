@@ -34,7 +34,7 @@ export const mapDispatchToProps = (dispatch, props) => {
     openModalForgotPassword: () => dispatch(openForgotPasswordModal()),
     unmountLoginPasswordScreen: () => dispatch(loginPassword('')),
     handleSubmit: data => {
-      const { username, password, edgeObject } = data
+      const { username, password } = data
       const callback = (error, account) => {
         if (error) {
           return dispatch(openNotification(error))

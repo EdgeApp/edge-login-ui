@@ -32,7 +32,7 @@ export class Page extends Component<Props, State> {
 
     // Just use the previous state if the page live-reloads:
     if (restoreCachedState(module, this)) return
-    this.state = { account: void 0, context: void 0, wallet: void 0 }
+    this.state = { account: undefined, context: undefined, wallet: undefined }
 
     // Make the context:
     this.makeEdgeContext()
@@ -87,7 +87,7 @@ export class Page extends Component<Props, State> {
    */
   onLogout = () => {
     if (this.state.account) this.state.account.logout()
-    this.setState({ account: void 0, wallet: void 0 })
+    this.setState({ account: undefined, wallet: undefined })
   }
 
   render() {

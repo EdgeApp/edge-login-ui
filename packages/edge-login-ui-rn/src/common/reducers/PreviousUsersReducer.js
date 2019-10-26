@@ -3,7 +3,7 @@ import * as Constants from '../../common/constants'
 // schema {lastUser:{}, userList: [], usersWithPinList:[], usernameOnlyList:[], filteredUsernameList:[], charactersFiltered}
 export default function(state = null, action) {
   switch (action.type) {
-    case Constants.AUTH_UPDATE_USERNAME:
+    case Constants.AUTH_UPDATE_USERNAME: {
       if (action.data === '' || action.data.length === 0) {
         if (!state) {
           return state
@@ -34,6 +34,7 @@ export default function(state = null, action) {
         filteredUsernameList: tempArray,
         charactersFiltered: num
       }
+    }
 
     case Constants.SET_PREVIOUS_USERS:
       return action.data

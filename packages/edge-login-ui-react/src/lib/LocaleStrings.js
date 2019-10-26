@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 import defaultLang from '../locales/default'
 import en_US from '../locales/en_US'
 
