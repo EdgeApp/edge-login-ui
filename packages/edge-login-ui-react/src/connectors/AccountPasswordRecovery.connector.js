@@ -40,8 +40,6 @@ const mapDispatchToProps = dispatch => {
       dispatch(action.changeSecondPasswordRecoveryQuestionValue(value)),
     changeSecondPasswordRecoveryAnswerValue: value =>
       dispatch(action.changeSecondPasswordRecoveryAnswerValue(value)),
-    checkPasswordRecovery: (payload, callback) =>
-      dispatch(checkPasswordRecovery(payload, callback)),
     clearPasswordRecovery: () => dispatch(action.clearPasswordRecovery()),
     loadQuestions: () => {
       const ctx = window.abcui.abcuiContext

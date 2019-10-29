@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 
+import { closeLoading } from '../actions/Loader.action'
 import {
   loginPassword,
   loginUsername,
