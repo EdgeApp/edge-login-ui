@@ -13,7 +13,7 @@ type Props = {
 }
 
 class ChangePasswordModalComponent extends Component<Props> {
-  render () {
+  render() {
     const Style = this.props.style
     return (
       <View style={Style.container}>
@@ -39,13 +39,14 @@ class ChangePasswordModalComponent extends Component<Props> {
               downTextStyle={Style.skipButton.downTextStyle}
               upStyle={Style.skipButton.upStyle}
               upTextStyle={Style.skipButton.upTextStyle}
-              label={'OK'}
+              label="OK"
             />
           </View>
         </View>
       </View>
     )
   }
+
   onSkipPress = () => {
     this.props.cancelFunc()
   }

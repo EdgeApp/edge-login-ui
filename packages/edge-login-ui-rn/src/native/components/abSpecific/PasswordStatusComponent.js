@@ -17,7 +17,7 @@ type Props = {
 }
 
 export default class PaswordStatusComponent extends Component<Props> {
-  render () {
+  render() {
     const style = this.props.style
     if (this.props.status) {
       return (
@@ -35,10 +35,12 @@ export default class PaswordStatusComponent extends Component<Props> {
       </View>
     )
   }
+
   onChange = () => {
     // do nothing
   }
-  renderStatusList (style: Object) {
+
+  renderStatusList(style: Object) {
     return this.props.status.list.map(Item => (
       <View style={style.checkboxContainer} key={Item.title}>
         <Checkbox

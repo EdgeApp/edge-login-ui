@@ -33,7 +33,7 @@ type State = {
 }
 
 class FormFieldWithDropComponent extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       secure: this.props.secureTextEntry ? this.props.secureTextEntry : false,
@@ -41,11 +41,13 @@ class FormFieldWithDropComponent extends Component<Props, State> {
       isFocused: this.props.isFocused
     }
   }
-  componentWillReceiveProps (nextProps: Props) {
+
+  componentWillReceiveProps(nextProps: Props) {
     this.setState({
       isFocused: nextProps.isFocused
     })
   }
+
   onSubmitEditing = (event: any) => {
     if (this.props.onSubmitEditing) {
       this.props.onSubmitEditing()
@@ -54,13 +56,13 @@ class FormFieldWithDropComponent extends Component<Props, State> {
 
   handleSelectListItem = () => {}
 
-  render () {
+  render() {
     const Style = this.props.style
     return (
       <KeyboardAvoidingView
         style={Style.container}
         contentContainerStyle={Style.container}
-        behavior={'position'}
+        behavior="position"
         keyboardVerticalOffset={40}
       >
         {this.renderInput(Style.materialInput)}
@@ -68,7 +70,8 @@ class FormFieldWithDropComponent extends Component<Props, State> {
       </KeyboardAvoidingView>
     )
   }
-  renderInput (style: Object) {
+
+  renderInput(style: Object) {
     const {
       container,
       baseColor,
@@ -98,12 +101,13 @@ class FormFieldWithDropComponent extends Component<Props, State> {
         onBlur={() => {
           console.log('catch and release ')
         }}
-        autoCapitalize={'none'}
+        autoCapitalize="none"
         onSubmitEditing={this.onSubmitEditing}
       />
     )
   }
-  renderDropList (style: Object) {
+
+  renderDropList(style: Object) {
     if (this.state.isFocused) {
       return (
         <DropDownList

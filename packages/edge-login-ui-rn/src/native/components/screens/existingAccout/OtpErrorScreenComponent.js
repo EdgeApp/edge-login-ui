@@ -34,7 +34,7 @@ type State = {
 }
 
 export default class OtpErrorScreenComponent extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       showDisableModal: false,
@@ -44,7 +44,8 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
       backupKeyEntered: false
     }
   }
-  componentWillReceiveProps (nextProps: Props) {
+
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.loginSuccess) {
       this.closeModals()
     }
@@ -54,10 +55,12 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
       })
     }
   }
-  componentWillUnMount () {
+
+  componentWillUnMount() {
     this.closeModals()
   }
-  closeModals () {
+
+  closeModals() {
     this.setState({
       showDisableModal: false,
       showBackupCodeModal: false,
@@ -65,20 +68,22 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
       backupKeyEntered: false
     })
   }
-  closeStaticModal () {
+
+  closeStaticModal() {
     this.setState({
       showstaticModal: false,
       screen: Constants.OTP_SCREEN_TWO
     })
   }
-  sendCode () {
+
+  sendCode() {
     this.setState({
       backupKeyEntered: true
     })
     this.props.setbackupKey()
   }
 
-  disableOtp () {
+  disableOtp() {
     this.setState({
       showDisableModal: false,
       showstaticModal: true
@@ -86,17 +91,19 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
     this.props.resetOtpToken()
   }
 
-  showBackupModal () {
+  showBackupModal() {
     this.setState({
       showBackupCodeModal: true
     })
   }
-  showDisableModal () {
+
+  showDisableModal() {
     this.setState({
       showDisableModal: true
     })
   }
-  getStaticBody (style: Object) {
+
+  getStaticBody(style: Object) {
     return (
       <Text style={style.staticModalText}>
         {s.strings.otp_dispable_req_sent}
@@ -104,7 +111,7 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderModal (style: Object) {
+  renderModal(style: Object) {
     if (this.state.showBackupCodeModal) {
       const middle = (
         <View style={style.modalMiddle}>
@@ -147,7 +154,7 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
     return null
   }
 
-  renderDisableButton (style: Object) {
+  renderDisableButton(style: Object) {
     if (this.state.screen === Constants.OTP_SCREEN_ONE) {
       return (
         <Button
@@ -163,7 +170,7 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
     return null
   }
 
-  render () {
+  render() {
     const { OtpErrorScreenStyle } = this.props.styles
 
     return (

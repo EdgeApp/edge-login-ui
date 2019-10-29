@@ -22,13 +22,14 @@ type State = {
   isProcessing: boolean
 }
 export default class LandingScreenComponent extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       isProcessing: false
     }
   }
-  componentDidUpdate (prevProps: Props) {
+
+  componentDidUpdate(prevProps: Props) {
     if (this.props !== prevProps) {
       this.setState({
         isProcessing: false
@@ -36,7 +37,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
     }
   }
 
-  render () {
+  render() {
     const { NewAccountUsernameScreenStyle } = this.props.styles
     return (
       <SafeAreaView>
@@ -73,6 +74,7 @@ export default class LandingScreenComponent extends Component<Props, State> {
       </SafeAreaView>
     )
   }
+
   onNextPress = () => {
     if (this.props.usernameErrorMessage || !this.props.username) {
       return

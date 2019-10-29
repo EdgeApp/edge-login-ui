@@ -20,7 +20,7 @@ import {
 
 import type { EdgeUiContext, EdgeUiContextOptions } from './index.js'
 
-export async function makeUiContext (opts: EdgeUiContextOptions) {
+export async function makeUiContext(opts: EdgeUiContextOptions) {
   const {
     apiKey,
     appId,
@@ -49,21 +49,21 @@ export async function makeUiContext (opts: EdgeUiContextOptions) {
     on: onMethod,
     watch: watchMethod,
 
-    get localUsers (): Array<EdgeUserInfo> {
+    get localUsers(): Array<EdgeUserInfo> {
       return localUsers
     },
 
-    get windowVisible (): boolean {
+    get windowVisible(): boolean {
       return windowVisible
     },
 
-    async hideWindow (): Promise<mixed> {
+    async hideWindow(): Promise<mixed> {
       render(<div />, root)
       windowVisible = false
       update(out)
     },
 
-    async showLoginWindow (): Promise<mixed> {
+    async showLoginWindow(): Promise<mixed> {
       render(
         <LoginScreen
           accountOptions={{}}
@@ -80,7 +80,7 @@ export async function makeUiContext (opts: EdgeUiContextOptions) {
       update(out)
     },
 
-    async showAccountSettingsWindow (account: EdgeAccount): Promise<mixed> {
+    async showAccountSettingsWindow(account: EdgeAccount): Promise<mixed> {
       render(
         <AccountScreen
           account={account}
@@ -96,7 +96,7 @@ export async function makeUiContext (opts: EdgeUiContextOptions) {
       update(out)
     },
 
-    close () {
+    close() {
       if (unsubscribeLocalUsers != null) unsubscribeLocalUsers()
       out.hideWindow()
       close(out)

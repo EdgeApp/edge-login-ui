@@ -20,28 +20,31 @@ type State = {
 type Props = OwnProps & DispatchProps
 class TextRowComponent extends Component<Props, State> {
   numberOfLines: number
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       pressed: false
     }
     this.numberOfLines = this.props.numberOfLines || 1
   }
+
   _onPressButton = () => {
     this.props.onPress(this.props.data)
   }
+
   _onShowUnderlay = () => {
     this.setState({
       pressed: true
     })
   }
+
   _onHideUnderlay = () => {
     this.setState({
       pressed: false
     })
   }
 
-  render () {
+  render() {
     const { container, text, textPressed, underlayColor } = this.props.style
     return (
       <TouchableHighlight
@@ -53,7 +56,7 @@ class TextRowComponent extends Component<Props, State> {
       >
         <Text
           style={[text, this.state.pressed && textPressed]}
-          ellipsizeMode={'middle'}
+          ellipsizeMode="middle"
           numberOfLines={this.numberOfLines}
         >
           {this.props.title}

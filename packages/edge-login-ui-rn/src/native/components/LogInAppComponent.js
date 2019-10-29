@@ -51,7 +51,7 @@ type State = {
 type Props = StateProps & OwnProps & DispatchProps
 
 export class LoginAppComponent extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       touch: false
@@ -59,7 +59,8 @@ export class LoginAppComponent extends Component<Props, State> {
     this.props.getPreviousUsers()
     this.checkTouchEnabled()
   }
-  render () {
+
+  render() {
     const { ScreenStyle } = this.props.styles
     return (
       <View accessible style={ScreenStyle}>
@@ -68,7 +69,8 @@ export class LoginAppComponent extends Component<Props, State> {
       </View>
     )
   }
-  renderContent () {
+
+  renderContent() {
     if (!this.props.previousUsers && !this.props.recoveryLogin) {
       return this.getLoadingScreen()
     }
@@ -121,7 +123,7 @@ export class LoginAppComponent extends Component<Props, State> {
     }
   }
 
-  getLoadingScreen () {
+  getLoadingScreen() {
     return (
       <LoadingScreenConnector
         styles={this.props.styles}
@@ -129,7 +131,8 @@ export class LoginAppComponent extends Component<Props, State> {
       />
     )
   }
-  getLandingScreen () {
+
+  getLandingScreen() {
     return (
       <LandingScreenConnector
         styles={this.props.styles}
@@ -142,7 +145,8 @@ export class LoginAppComponent extends Component<Props, State> {
       />
     )
   }
-  getCreateScreen () {
+
+  getCreateScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
         return (
@@ -177,7 +181,8 @@ export class LoginAppComponent extends Component<Props, State> {
         return <NewAccountWelcomeScreenConnector styles={this.props.styles} />
     }
   }
-  getPasswordScreen () {
+
+  getPasswordScreen() {
     return (
       <LoginUsernamePasswordScreenConnector
         styles={this.props.styles}
@@ -191,7 +196,7 @@ export class LoginAppComponent extends Component<Props, State> {
     )
   }
 
-  getPinScreen () {
+  getPinScreen() {
     return (
       <PinLoginScreenConnector
         styles={this.props.styles}
@@ -204,10 +209,12 @@ export class LoginAppComponent extends Component<Props, State> {
       />
     )
   }
-  getOtpScreen () {
+
+  getOtpScreen() {
     return <OtpErrorScreenConnector styles={this.props.styles} />
   }
-  getRecoveryLoginScreen () {
+
+  getRecoveryLoginScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
         return (
@@ -223,6 +230,7 @@ export class LoginAppComponent extends Component<Props, State> {
         return <ForgotPinChangePinConnector styles={this.props.styles} />
     }
   }
+
   checkTouchEnabled = async () => {
     try {
       const touch = await getSupportedBiometryType()

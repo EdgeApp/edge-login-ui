@@ -8,7 +8,7 @@ type Props = {
   children: any
 }
 export default class Gradient extends Component<Props> {
-  render () {
+  render() {
     const UPPER_LEFT = { x: 0, y: 0 }
     const UPPER_RIGHT = { x: 1, y: 0 }
     return (

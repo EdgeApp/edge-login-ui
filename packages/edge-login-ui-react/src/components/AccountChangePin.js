@@ -16,7 +16,7 @@ export default class AccountChangePin extends Component {
   }
 
   handleChangePin = e => {
-    const pin = e.target.value
+    let pin = e.target.value
     // Cut PIN to 4when PIN is greater than 4
     if (pin.length > 4) {
       pin = pin.substr(0, 4)
@@ -27,13 +27,14 @@ export default class AccountChangePin extends Component {
     }
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     // Auto submit PIN when length is at 4
     if (this.props.pin.length >= 4) {
       this.handleSubmit()
     }
   }
-  render () {
+
+  render() {
     return (
       <section className={styles.rootContainer}>
         <div className={styles.container}>

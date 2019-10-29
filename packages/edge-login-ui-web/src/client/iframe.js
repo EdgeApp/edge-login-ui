@@ -9,7 +9,7 @@ const visibleString = 'display: block'
 /**
  * Creates an iframe under the main window.
  */
-export function makeFrame (path: string): HTMLIFrameElement {
+export function makeFrame(path: string): HTMLIFrameElement {
   if (document == null) {
     throw new Error('This code can only run in a web browser')
   }
@@ -31,10 +31,10 @@ export function makeFrame (path: string): HTMLIFrameElement {
   return frame
 }
 
-export function hideFrame (frame: HTMLIFrameElement) {
+export function hideFrame(frame: HTMLIFrameElement) {
   frame.setAttribute('style', styleString + hiddenString)
 }
 
-export function showFrame (frame: HTMLIFrameElement) {
+export function showFrame(frame: HTMLIFrameElement) {
   frame.setAttribute('style', styleString + visibleString)
 }

@@ -68,7 +68,7 @@ type State = {
 }
 
 export default class PasswordRecovery extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       question1: this.props.question1,
@@ -88,7 +88,8 @@ export default class PasswordRecovery extends Component<Props, State> {
       showConfirmationModal: false
     }
   }
-  componentWillReceiveProps (nextProps: Props) {
+
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isEnabled !== this.props.isEnabled) {
       this.setState({
         question1: nextProps.question1,
@@ -96,21 +97,25 @@ export default class PasswordRecovery extends Component<Props, State> {
       })
     }
   }
+
   renderHeader = (styles: Object) => {
     if (this.props.showHeader) {
       return <HeaderConnector style={styles.header} />
     }
     return null
   }
+
   onDisable = () => {
     this.props.deleteRecovery()
     this.setState({
       disableConfirmationModal: true
     })
   }
+
   onDisableModalClose = () => {
     this.props.cancel()
   }
+
   onSubmit = () => {
     // Launch Modal full Screen
     const errorOne = this.state.answer1.length < 4 || false
@@ -133,6 +138,7 @@ export default class PasswordRecovery extends Component<Props, State> {
       showConfirmationModal: true
     })
   }
+
   onConfirmQuestionsAndAnseers = () => {
     console.log('PR: we got thsi .. what ')
     this.setState({
@@ -148,6 +154,7 @@ export default class PasswordRecovery extends Component<Props, State> {
       showConfirmationModal: false
     })
   }
+
   onSelectQuestionOne = () => {
     this.setState({
       showQuestionPicker: true,
@@ -155,6 +162,7 @@ export default class PasswordRecovery extends Component<Props, State> {
       focusSecond: false
     })
   }
+
   onSelectQuestionTwo = () => {
     this.setState({
       showQuestionPicker: true,
@@ -162,16 +170,19 @@ export default class PasswordRecovery extends Component<Props, State> {
       focusSecond: true
     })
   }
+
   setAnswer1 = (arg: string) => {
     this.setState({
       answer1: arg
     })
   }
+
   setAnswer2 = (arg: string) => {
     this.setState({
       answer2: arg
     })
   }
+
   questionSelected = (data: Object) => {
     const question = data.question
     if (this.state.focusFirst) {
@@ -186,6 +197,7 @@ export default class PasswordRecovery extends Component<Props, State> {
       showQuestionPicker: false
     })
   }
+
   renderItems = (item: Object) => {
     const { RecoverPasswordSceneStyles } = this.props.styles
     return (
@@ -198,6 +210,7 @@ export default class PasswordRecovery extends Component<Props, State> {
       />
     )
   }
+
   renderQuestions = (styles: Object) => {
     return (
       <View style={styles.body}>
@@ -209,11 +222,13 @@ export default class PasswordRecovery extends Component<Props, State> {
       </View>
     )
   }
+
   updateEmail = (email: string) => {
     this.setState({
       emailAddress: email
     })
   }
+
   openEmailApp = () => {
     const body =
       s.strings.otp_email_body +
@@ -250,6 +265,7 @@ export default class PasswordRecovery extends Component<Props, State> {
       }, 1000)
     }
   }
+
   renderForm = (styles: Object) => {
     const form1Style = this.state.errorOne ? styles.inputError : styles.input
     const form2Style = this.state.errorTwo ? styles.inputError : styles.input
@@ -283,7 +299,7 @@ export default class PasswordRecovery extends Component<Props, State> {
             style={form1Style}
             autoFocus={this.state.focusFirst}
             autoCorrect={false}
-            autoCapitalize={'none'}
+            autoCapitalize="none"
             onChangeText={this.setAnswer1}
             value={this.state.answer1}
             label={s.strings.your_answer_label}
@@ -305,7 +321,7 @@ export default class PasswordRecovery extends Component<Props, State> {
             style={form2Style}
             autoFocus={this.state.focusSecond}
             autoCorrect={false}
-            autoCapitalize={'none'}
+            autoCapitalize="none"
             onChangeText={this.setAnswer2}
             value={this.state.answer2}
             label={s.strings.your_answer_label}
@@ -317,7 +333,7 @@ export default class PasswordRecovery extends Component<Props, State> {
     )
   }
 
-  renderButtons (styles: Object) {
+  renderButtons(styles: Object) {
     if (this.props.isEnabled) {
       return (
         <View style={styles.buttonContainer}>
@@ -356,7 +372,8 @@ export default class PasswordRecovery extends Component<Props, State> {
       </View>
     )
   }
-  renderDisableModal (styles: Object) {
+
+  renderDisableModal(styles: Object) {
     if (this.state.disableConfirmationModal) {
       const body = (
         <Text style={styles.staticModalText}>
@@ -373,6 +390,7 @@ export default class PasswordRecovery extends Component<Props, State> {
     }
     return null
   }
+
   renderConfirmationScreenModal = (styles: Object) => {
     if (this.state.showConfirmationModal) {
       return (
@@ -390,7 +408,8 @@ export default class PasswordRecovery extends Component<Props, State> {
     }
     return null
   }
-  showEmailPending (styles: Object) {
+
+  showEmailPending(styles: Object) {
     return (
       <View style={styles.modalMiddle}>
         <Text style={styles.staticModalText}>
@@ -401,21 +420,23 @@ export default class PasswordRecovery extends Component<Props, State> {
           onChangeText={this.updateEmail.bind(this)}
           value={this.state.emailAddress}
           label={s.strings.email_address}
-          error={''}
-          returnKeyType={'go'}
+          error=""
+          returnKeyType="go"
           forceFocus
           onSubmitEditing={this.openEmailApp}
         />
       </View>
     )
   }
-  showEmaiFailed (styles: Object) {
+
+  showEmaiFailed(styles: Object) {
     if (this.props.showEmailDialog) {
       return <EmailAppFailedModalConnector action={this.props.cancel} />
     }
     return null
   }
-  showEmailDialog (styles: Object) {
+
+  showEmailDialog(styles: Object) {
     if (this.state.emailAppNotAvailable) {
       return this.showEmaiFailed(styles)
     }
@@ -429,8 +450,8 @@ export default class PasswordRecovery extends Component<Props, State> {
           onChangeText={this.updateEmail.bind(this)}
           value={this.state.emailAddress}
           label={s.strings.email_address}
-          error={''}
-          returnKeyType={'go'}
+          error=""
+          returnKeyType="go"
           forceFocus
           onSubmitEditing={this.openEmailApp}
         />
@@ -448,7 +469,7 @@ export default class PasswordRecovery extends Component<Props, State> {
     return null
   }
 
-  render () {
+  render() {
     const { RecoverPasswordSceneStyles } = this.props.styles
     const middle = this.state.showQuestionPicker
       ? this.renderQuestions(RecoverPasswordSceneStyles)

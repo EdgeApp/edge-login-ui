@@ -20,18 +20,16 @@ const out = { strings }
 
 selectLocale(DeviceInfo.getDeviceLocale())
 
-function mergeStrings (primary: Object, secondary: Object) {
-  for (const str in secondary) {
-    if (secondary.hasOwnProperty(str)) {
-      if (secondary[str]) {
-        primary[str] = secondary[str]
-      }
+function mergeStrings(primary: Object, secondary: Object) {
+  for (const str of Object.keys(secondary)) {
+    if (secondary[str]) {
+      primary[str] = secondary[str]
     }
   }
 }
 
 // Locale formats can be in the form 'en', 'en-US', 'en_US', or 'enUS'
-export function selectLocale (locale: string = 'en'): boolean {
+export function selectLocale(locale: string = 'en'): boolean {
   // Break up local into language and region
   const normalizedLocale = locale
     .replace('-', '')

@@ -1,7 +1,7 @@
 // @flow
 
-import * as Constants from '../../../common/constants'
 import * as Styles from '../'
+import * as Constants from '../../../common/constants'
 
 const LoginWithRecoveryStyles = {
   screen: { ...Styles.ScreenStyle, marginTop: 5 },

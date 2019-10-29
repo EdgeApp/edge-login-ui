@@ -26,8 +26,9 @@ class PasswordRecoveryScreen extends Component<Props> {
   static defaultProps = {
     account: null
   }
+
   store: Store<State, Action>
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     const imports: Imports = {
       accountOptions: {},
@@ -44,9 +45,10 @@ class PasswordRecoveryScreen extends Component<Props> {
       applyMiddleware(thunk.withExtraArgument(imports))
     )
   }
-  componentWillReceiveProps (props: Props) {}
 
-  render () {
+  componentWillReceiveProps(props: Props) {}
+
+  render() {
     return (
       <Provider store={this.store}>
         <PasswordRecoveryConnector

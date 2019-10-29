@@ -15,7 +15,7 @@ export class AccountButtons extends Component<Props> {
     this.props.context.showAccountSettingsWindow(this.props.account)
   }
 
-  render () {
+  render() {
     return (
       <p id="buttons">
         <button onClick={this.openManageWindow}>Manage Settings</button>

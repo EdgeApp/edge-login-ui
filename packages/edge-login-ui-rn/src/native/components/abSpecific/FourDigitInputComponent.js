@@ -37,7 +37,7 @@ class FourDigitInputComponent extends Component<Props, State> {
   keyboardDidShowListener: any
   keyboardDidHideListener: any
 
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       autoFocus: false,
@@ -46,7 +46,8 @@ class FourDigitInputComponent extends Component<Props, State> {
       circleColor: Constants.WHITE
     }
   }
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     this.keyboardDidShowListener.remove()
     this.keyboardDidHideListener.remove()
   }
@@ -57,18 +58,20 @@ class FourDigitInputComponent extends Component<Props, State> {
       this.inputRef.focus()
     }
   }
+
   _keyboardDidShow = () => {
     this.setState({
       circleColor: Constants.ACCENT_ORANGE
     })
   }
+
   _keyboardDidHide = () => {
     this.setState({
       circleColor: Constants.ACCENT_RED
     })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.inputRef && this.inputRef.focus()
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -83,14 +86,16 @@ class FourDigitInputComponent extends Component<Props, State> {
       autoFocus: true
     })
   }
-  componentWillReceiveProps (nextProps: Props) {
+
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isLogginginWithPin) {
       this.setState({
         touchId: true
       })
     }
   }
-  render () {
+
+  render() {
     const Style = this.props.style
     return (
       <TouchableWithoutFeedback onPress={this.refocus}>
@@ -108,6 +113,7 @@ class FourDigitInputComponent extends Component<Props, State> {
       </TouchableWithoutFeedback>
     )
   }
+
   renderTextInput = (style: Object) => {
     if (this.props.wait < 1) {
       return (
@@ -127,11 +133,13 @@ class FourDigitInputComponent extends Component<Props, State> {
     }
     return null
   }
+
   onFocus = () => {
     this.setState({
       isFocused: true
     })
   }
+
   onBlur = () => {
     if (this.props.dontForceFocus) {
       return
@@ -142,6 +150,7 @@ class FourDigitInputComponent extends Component<Props, State> {
       circleColor: Constants.WHITE
     })
   }
+
   refocus = () => {
     this.inputRef && this.inputRef.focus()
     this.setState({
@@ -149,11 +158,13 @@ class FourDigitInputComponent extends Component<Props, State> {
       isFocused: false
     })
   }
-  renderCircleTest (style: Object) {
+
+  renderCircleTest(style: Object) {
     return style
     // return {...style, borderColor: this.state.circleColor}
   }
-  renderDotContainer (style: Object) {
+
+  renderDotContainer(style: Object) {
     const pinLength = this.props.pin ? this.props.pin.length : 0
     if (this.props.wait > 0) {
       return <Spinner />
@@ -190,6 +201,7 @@ class FourDigitInputComponent extends Component<Props, State> {
       </View>
     )
   }
+
   updatePin = (arg: string) => {
     this.props.onChangeText({ username: this.props.username, pin: arg })
   }

@@ -5,7 +5,7 @@ import styles from '../styles/ModalPasswordRecoverySuccess.scss'
 import NavigationButtons from './LayoutNavigationButtons'
 
 export default class ModalPasswordRecoverySuccess extends Component {
-  render () {
+  render() {
     return (
       <section className={styles.container}>
         <p className={styles.headerText}>

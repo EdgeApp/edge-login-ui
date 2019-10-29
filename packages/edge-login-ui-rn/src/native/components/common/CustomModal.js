@@ -9,10 +9,10 @@ type Props = {
 }
 
 class CustomModal extends Component<Props> {
-  render () {
+  render() {
     const Style = this.props.style
     return (
-      <Modal style={Style.modal} animationType={'slide'} transparent visible>
+      <Modal style={Style.modal} animationType="slide" transparent visible>
         <View style={Style.container}>{this.props.children}</View>
       </Modal>
     )

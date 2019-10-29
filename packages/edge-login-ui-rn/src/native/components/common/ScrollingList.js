@@ -10,12 +10,13 @@ type Props = {
 }
 class ScrollingList extends Component<Props> {
   dataSource: any
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     this.dataSource = ds.cloneWithRows(this.props.dataList)
   }
-  render () {
+
+  render() {
     return (
       <View style={this.props.style}>
         <ListView
@@ -25,7 +26,8 @@ class ScrollingList extends Component<Props> {
       </View>
     )
   }
-  renderRow (item: any) {
+
+  renderRow(item: any) {
     return this.props.getListItemsFunction(item)
   }
 }

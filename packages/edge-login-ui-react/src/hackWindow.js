@@ -7,7 +7,7 @@ import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
  * This is horrible, but the fastest way to get things working is to just
  * give the UI what it expects.
  */
-export function hackWindow (
+export function hackWindow(
   account: EdgeAccount | null,
   accountOptions: EdgeAccountOptions | null,
   context: EdgeContext,
@@ -25,7 +25,7 @@ export function hackWindow (
     vendorName,
     vendorImageUrl,
 
-    loginCallback (error, account) {
+    loginCallback(error, account) {
       if (error) return onError(error)
       if (!account) throw new Error('Account not provided')
       if (!onLogin) throw new Error('Not expecting a login')
@@ -35,7 +35,7 @@ export function hackWindow (
       onClose()
     },
 
-    loginWithoutClosingCallback (error, account) {
+    loginWithoutClosingCallback(error, account) {
       if (error) return onError(error)
       if (!account) throw new Error('Account not provided')
       if (!onLogin) throw new Error('Not expecting a login')
@@ -44,7 +44,7 @@ export function hackWindow (
       onLogin(account)
     },
 
-    exitCallback () {
+    exitCallback() {
       onClose()
     }
   }

@@ -19,28 +19,32 @@ type State = {
 
 class TextAndIconButton extends Component<Props, State> {
   numberOfLines: number
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       pressed: false
     }
     this.numberOfLines = this.props.numberOfLines || 1
   }
-  _onPressButton () {
+
+  _onPressButton() {
     this.props.onPress()
   }
-  _onShowUnderlay () {
+
+  _onShowUnderlay() {
     this.setState({
       pressed: true
     })
   }
-  _onHideUnderlay () {
+
+  _onHideUnderlay() {
     this.setState({
       pressed: false
     })
   }
+
   // TODO: allen- test with icon on main app. - not working on sample.
-  renderIcon (iconStyle: Object, iconPressedStyle: Object, iconSize: number) {
+  renderIcon(iconStyle: Object, iconPressedStyle: Object, iconSize: number) {
     try {
       /* return <Text style={[iconStyle, this.state.pressed && iconPressedStyle]}>
         {this.props.icon}
@@ -56,7 +60,8 @@ class TextAndIconButton extends Component<Props, State> {
       console.log('Error')
     }
   }
-  render () {
+
+  render() {
     const {
       container,
       centeredContent,
@@ -83,7 +88,7 @@ class TextAndIconButton extends Component<Props, State> {
             <View style={textContainer}>
               <Text
                 style={[text, this.state.pressed && textPressed]}
-                ellipsizeMode={'middle'}
+                ellipsizeMode="middle"
                 numberOfLines={this.numberOfLines}
               >
                 {this.props.title + ' '}

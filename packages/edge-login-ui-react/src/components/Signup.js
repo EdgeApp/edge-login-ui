@@ -6,7 +6,7 @@ import ReviewDetails from '../connectors/SignupReviewDetails.connector'
 import Username from '../connectors/SignupUsername.connector'
 
 export default class Signup extends Component {
-  render () {
+  render() {
     switch (this.props.page) {
       case 'username':
         return <Username {...this.props} />

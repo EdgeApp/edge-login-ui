@@ -6,7 +6,7 @@ import styles from '../styles/ModalAccountCacheDelete.scss'
 import ActionButtons from './LayoutActionButtons'
 
 export default class ModalAccountCacheDelete extends Component {
-  render () {
+  render() {
     return (
       <section className={styles.container}>
         <p className={styles.headerText}>

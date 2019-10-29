@@ -14,7 +14,7 @@ type Props = {
   nextScreen(): void
 }
 export default class NewAccountReviewScreenComponent extends Component<Props> {
-  render () {
+  render() {
     const { NewAccountReviewScreenStyle } = this.props.styles
     return (
       <SafeAreaView>
@@ -53,6 +53,7 @@ export default class NewAccountReviewScreenComponent extends Component<Props> {
       </SafeAreaView>
     )
   }
+
   onNextPress = () => {
     global.firebase &&
       global.firebase.analytics().logEvent(`Signup_Review_Next`)

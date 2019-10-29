@@ -6,7 +6,7 @@ import t from '../lib/LocaleStrings.js'
 import styles from '../styles/LoginNewAccount.scss'
 
 export default class LoginNewAccount extends Component {
-  render () {
+  render() {
     return (
       <section className={styles.rootContainer}>
         <div className={styles.container}>

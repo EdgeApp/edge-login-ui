@@ -15,6 +15,7 @@ export default class LoginWithPassword extends Component {
       return this.refs.password.focus()
     }
   }
+
   passwordKeyPress = e => {
     if (e.charCode === 13) {
       if (!this.props.loading) {
@@ -22,19 +23,23 @@ export default class LoginWithPassword extends Component {
       }
     }
   }
+
   openCachedUsers = () => {
     if (this.props.cachedUsers.length > 0) {
       return this.props.openCachedUsers()
     }
   }
+
   handleSubmit = () => {
     const { username, password, edgeObject } = this.props
     this.props.handleSubmit({ username, password, edgeObject })
   }
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     this.props.unmountLoginPasswordScreen()
   }
-  render () {
+
+  render() {
     if (this.props.modalAccountCacheDelete) {
       return <ModalAccountCacheDelete />
     }
@@ -43,7 +48,7 @@ export default class LoginWithPassword extends Component {
     }
     return (
       <section className={styles.rootContainer}>
-        <ScreenHeader location={'login'} history={this.props.history} />
+        <ScreenHeader location="login" history={this.props.history} />
         <div className={styles.container}>
           <p className={styles.headerText}>{t('login_with_password_header')}</p>
           <p className={styles.subHeaderText}>

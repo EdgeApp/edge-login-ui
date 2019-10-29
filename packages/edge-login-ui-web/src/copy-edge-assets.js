@@ -3,7 +3,7 @@
 const path = require('path')
 const cpr = require('cpr')
 
-function main (argv) {
+function main(argv) {
   if (argv.length !== 3) {
     return console.error('Usage: copy-edge-assets <dest>')
   }
@@ -11,7 +11,7 @@ function main (argv) {
   const dest = path.resolve(argv[2])
 
   console.log(src + ' -> ' + dest)
-  cpr(src, dest, { overwrite: true }, function (e, files) {
+  cpr(src, dest, { overwrite: true }, function(e, files) {
     if (e) return console.error(e)
   })
 }

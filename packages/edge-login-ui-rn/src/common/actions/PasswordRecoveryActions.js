@@ -4,7 +4,7 @@ import * as actions from '../../common/actions'
 import * as Constants from '../../common/constants'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
-export function recoverPasswordLogin () {
+export function recoverPasswordLogin() {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const context = imports.context
@@ -36,7 +36,7 @@ export function recoverPasswordLogin () {
     }
   }
 }
-export function getRecoveryQuestions () {
+export function getRecoveryQuestions() {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const context = imports.context
@@ -78,7 +78,7 @@ export function getRecoveryQuestions () {
   }
 }
 
-export function initializePasswordRecovery () {
+export function initializePasswordRecovery() {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     const account = imports.accountObject
@@ -131,7 +131,7 @@ export function initializePasswordRecovery () {
   }
 }
 
-export function deleteRecovery () {
+export function deleteRecovery() {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const account = imports.accountObject
     if (!account) {
@@ -148,13 +148,13 @@ export function deleteRecovery () {
   }
 }
 
-export function cancelRecoverySettingsScene () {
+export function cancelRecoverySettingsScene() {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     imports.onComplete()
   }
 }
 
-export function changeRecoveryAnswers (
+export function changeRecoveryAnswers(
   questions: Array<string>,
   answers: Array<string>
 ) {

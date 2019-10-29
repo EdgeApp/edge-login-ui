@@ -43,7 +43,7 @@ type State = {
   showUsernameModal: boolean
 }
 export default class PasswordRecovery extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       question1: this.props.question1,
@@ -62,21 +62,25 @@ export default class PasswordRecovery extends Component<Props, State> {
     }
     this.props.updateUsername('')
   }
+
   renderHeader = (style: Object) => {
     if (this.props.showHeader) {
       return <HeaderConnector style={style.header} />
     }
     return null
   }
+
   onDisable = () => {
     this.props.deleteRecovery()
     this.setState({
       disableConfirmationModal: true
     })
   }
+
   onDisableModalClose = () => {
     this.props.cancel()
   }
+
   onSubmit = () => {
     const errorOne = this.state.answer1.length < 1 || false
     const errorTwo = this.state.answer2.length < 1 || false
@@ -91,16 +95,19 @@ export default class PasswordRecovery extends Component<Props, State> {
     const answers = [this.state.answer1, this.state.answer2]
     this.props.submit(answers)
   }
+
   setAnswer1 = (arg: string) => {
     this.setState({
       answer1: arg
     })
   }
+
   setAnswer2 = (arg: string) => {
     this.setState({
       answer2: arg
     })
   }
+
   renderModal = (styles: Object) => {
     if (this.props.showRecoverSuccessDialog) {
       // render static modal
@@ -137,7 +144,8 @@ export default class PasswordRecovery extends Component<Props, State> {
       />
     )
   }
-  renderError (styles: Object) {
+
+  renderError(styles: Object) {
     if (this.props.loginError) {
       return (
         <View>
@@ -149,7 +157,8 @@ export default class PasswordRecovery extends Component<Props, State> {
     }
     return <View style={styles.shim} />
   }
-  componentWillReceiveProps (nextProps: Props) {
+
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.question1 !== this.props.question1) {
       this.setState({
         question1: nextProps.question1,
@@ -159,7 +168,7 @@ export default class PasswordRecovery extends Component<Props, State> {
     }
   }
 
-  render () {
+  render() {
     const { LoginWithRecoveryStyles } = this.props.styles
     // const middle = this.renderForm(RecoverPasswordSceneStyles)
     const styles = LoginWithRecoveryStyles
@@ -179,7 +188,7 @@ export default class PasswordRecovery extends Component<Props, State> {
                 style={form1Style}
                 autoFocus={this.state.focusFirst}
                 autoCorrect={false}
-                autoCapitalize={'none'}
+                autoCapitalize="none"
                 onChangeText={this.setAnswer1}
                 value={this.state.answer1}
                 label={s.strings.your_answer_label}
@@ -195,7 +204,7 @@ export default class PasswordRecovery extends Component<Props, State> {
                 style={form2Style}
                 autoFocus={this.state.focusSecond}
                 autoCorrect={false}
-                autoCapitalize={'none'}
+                autoCapitalize="none"
                 onChangeText={this.setAnswer2}
                 value={this.state.answer2}
                 label={s.strings.your_answer_label}

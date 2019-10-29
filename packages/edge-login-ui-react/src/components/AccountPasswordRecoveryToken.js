@@ -23,7 +23,8 @@ export default class AccountPasswordRecoveryToken extends Component {
       callback
     )
   }
-  render () {
+
+  render() {
     if (this.props.passwordRecoverySuccess) {
       return <ModalPasswordRecoverySuccess />
     }

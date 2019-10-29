@@ -34,14 +34,16 @@ class FormField extends Component<Props, State> {
     value: '',
     returnKeyType: 'done'
   }
-  constructor (props: Props) {
+
+  constructor(props: Props) {
     super(props)
     this.state = {
       secure: this.props.secureTextEntry ? this.props.secureTextEntry : false,
       autoFocus: this.props.autoFocus
     }
   }
-  render () {
+
+  render() {
     const {
       container,
       baseColor,
@@ -74,6 +76,7 @@ class FormField extends Component<Props, State> {
       />
     )
   }
+
   onSubmitEditing = (event: any) => {
     if (this.props.onSubmitEditing) {
       this.props.onSubmitEditing()

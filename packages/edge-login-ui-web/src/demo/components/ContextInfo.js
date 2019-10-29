@@ -8,7 +8,7 @@ type Props = {
   context: EdgeUiContext
 }
 
-export function ContextInfo (props: Props) {
+export function ContextInfo(props: Props) {
   const { context } = props
 
   return (

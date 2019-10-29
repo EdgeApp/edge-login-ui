@@ -30,7 +30,7 @@ export default class SetAccountPinScreenComponent extends Component<
   Props,
   State
 > {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       username: '',
@@ -40,6 +40,7 @@ export default class SetAccountPinScreenComponent extends Component<
       createErrorMessage: this.props.createErrorMessage
     }
   }
+
   checkError = () => {
     if (this.state.createErrorMessage) {
       Alert.alert(
@@ -52,7 +53,8 @@ export default class SetAccountPinScreenComponent extends Component<
       this.setState({ createErrorMessage: null })
     }
   }
-  render () {
+
+  render() {
     const { SetAccountPinScreenStyle } = this.props.styles
     this.checkError()
     return (
@@ -89,6 +91,7 @@ export default class SetAccountPinScreenComponent extends Component<
       </SafeAreaView>
     )
   }
+
   onNextPress = () => {
     this.setState({
       isProcessing: true,

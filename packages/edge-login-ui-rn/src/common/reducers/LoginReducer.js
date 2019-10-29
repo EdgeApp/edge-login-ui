@@ -21,7 +21,7 @@ const initialState = {
   showRecoverSuccessDialog: false,
   wait: 0
 }
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case Constants.CANCEL_RECOVERY_KEY:
       return { ...state, recoveryToken: null }
@@ -109,9 +109,11 @@ export default function (state = initialState, action) {
       }
     case Constants.SET_RECOVERY_KEY:
       return { ...state, recoveryToken: action.data }
-    case Constants.RESET_APP:
+    case Constants.RESET_APP: {
       const username = state.username
       return { ...initialState, username: username }
+    }
+
     case Constants.LOGIN_RECOVERY_SUCCEESS:
       return {
         ...state,

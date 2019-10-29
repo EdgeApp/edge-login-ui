@@ -8,7 +8,8 @@ export default class LoginCachedUsers extends Component {
     const { cachedUsersWithPinEnabled } = this.props
     this.props.loginUsername({ user, cachedUsersWithPinEnabled })
   }
-  render () {
+
+  render() {
     return (
       <div className={styles.container}>
         {this.props.users.map((user, index) => {

@@ -9,7 +9,7 @@ type Props = {
   disabled?: boolean
 }
 class ImageButton extends Component<Props> {
-  render () {
+  render() {
     return (
       <TouchableWithoutFeedback
         onPress={this.props.onPress}

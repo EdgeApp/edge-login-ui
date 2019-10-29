@@ -13,14 +13,16 @@ type Props = {
 }
 
 class EdgeLoginQrComponent extends Component<Props> {
-  componentDidMount () {
+  componentDidMount() {
     this.props.getQrCode()
   }
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     this.props.cancelEdgeLogin()
     this.props.cancelRequest()
   }
-  renderQR (style: Object) {
+
+  renderQR(style: Object) {
     if (this.props.edgeLoginId) {
       return (
         <View style={{ overflow: 'hidden' }}>
@@ -36,7 +38,8 @@ class EdgeLoginQrComponent extends Component<Props> {
     }
     return null
   }
-  render () {
+
+  render() {
     const style = this.props.style
     return <View style={style.container}>{this.renderQR(style)}</View>
   }

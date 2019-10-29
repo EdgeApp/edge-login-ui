@@ -23,7 +23,7 @@ export default class NewAccountWelcomeScreenComponent extends Component<
   Props,
   State
 > {
-  render () {
+  render() {
     const { NewAccountWelcomeScreenStyle } = this.props.styles
 
     return (

@@ -18,19 +18,20 @@ type State = {
   screen: string
 }
 class OtpHeroComponent extends Component<Props, State> {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       screen: this.props.screen
     }
   }
-  componentWillReceiveProps (nextProps: Props) {
+
+  componentWillReceiveProps(nextProps: Props) {
     this.setState({
       screen: nextProps.screen
     })
   }
 
-  renderOr (style: Object) {
+  renderOr(style: Object) {
     if (this.state.screen === Constants.OTP_SCREEN_TWO) {
       return (
         <View style={style.orOption}>
@@ -50,14 +51,14 @@ class OtpHeroComponent extends Component<Props, State> {
     return <View style={style.shim} />
   }
 
-  renderTitle () {
+  renderTitle() {
     if (this.state.screen === Constants.OTP_SCREEN_ONE) {
       return 'Looks like 2FA is turned on'
     }
     return '2FA disable requested'
   }
 
-  renderBodyCopy () {
+  renderBodyCopy() {
     if (this.state.screen === Constants.OTP_SCREEN_ONE) {
       return 'Scan the QR code using the device that enabled 2FA to give access to this device'
     }
@@ -66,11 +67,12 @@ class OtpHeroComponent extends Component<Props, State> {
       moment(this.props.otpResetDate).format('LLL')
     )
   }
-  renderImage () {
+
+  renderImage() {
     return <Image source={OTP_SMALL} />
   }
 
-  render () {
+  render() {
     const style = this.props.style
     const title = this.renderTitle()
     const bodyCopy = this.renderBodyCopy()

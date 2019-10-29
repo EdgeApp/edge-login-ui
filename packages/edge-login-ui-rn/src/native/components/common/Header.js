@@ -23,7 +23,7 @@ type Props = {
 }
 // Make a component
 class Header extends Component<Props> {
-  render () {
+  render() {
     const Style = this.props.style
     return (
       <LinearGradient
@@ -38,7 +38,8 @@ class Header extends Component<Props> {
       </LinearGradient>
     )
   }
-  renderBack (style: Object) {
+
+  renderBack(style: Object) {
     if (!this.props.showBackButton) {
       return
     }
@@ -57,7 +58,8 @@ class Header extends Component<Props> {
       />
     )
   }
-  renderText (style: Object) {
+
+  renderText(style: Object) {
     return (
       <View style={style.center}>
         {this.props.subTitle !== '' && (
@@ -67,7 +69,8 @@ class Header extends Component<Props> {
       </View>
     )
   }
-  renderSkip (style: Object) {
+
+  renderSkip(style: Object) {
     if (!this.props.showSkipButton) {
       return
     }
@@ -82,9 +85,11 @@ class Header extends Component<Props> {
       />
     )
   }
+
   onSkip = () => {
     this.props.skipScreen()
   }
+
   onBack = () => {
     this.props.goBack()
   }

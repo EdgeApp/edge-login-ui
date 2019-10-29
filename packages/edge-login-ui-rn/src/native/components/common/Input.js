@@ -27,14 +27,15 @@ type State = {
 
 class Input extends Component<Props, State> {
   textInput: TextInput
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       inputText: '',
       autoFocus: this.props.autoFocus
     }
   }
-  componentDidMount () {
+
+  componentDidMount() {
     if (this.props.autoFocus) {
       // set the focus to the thing
       console.log('SHOUDL AUTOFOCUS ')
@@ -42,7 +43,7 @@ class Input extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps (nextProps: Props) {
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.value !== this.state.inputText) {
       this.setState({
         inputText: nextProps.value,
@@ -57,7 +58,7 @@ class Input extends Component<Props, State> {
     }
   }
 
-  render () {
+  render() {
     return (
       <TextInput
         ref={this.addRef}
@@ -76,6 +77,7 @@ class Input extends Component<Props, State> {
       />
     )
   }
+
   addRef = (arg: TextInput) => {
     if (arg) {
       this.textInput = arg
@@ -87,17 +89,20 @@ class Input extends Component<Props, State> {
       this.props.onFinish()
     }
   }
+
   onChange = (text: string) => {
     this.setState({
       inputText: text
     })
     this.props.onChangeText(text)
   }
+
   onFocus = () => {
     if (this.props.onFocus) {
       this.props.onFocus()
     }
   }
+
   onBlur = () => {
     if (this.props.onBlur) {
       this.props.onBlur()

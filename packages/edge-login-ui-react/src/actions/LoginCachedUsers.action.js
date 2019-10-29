@@ -7,53 +7,53 @@ export const OPEN_REMOVE_USER_WARNING = 'OPEN_REMOVE_USER_WARNING'
 export const CLOSE_REMOVE_USER_WARNING = 'CLOSE_REMOVE_USER_WARNING'
 export const SET_CACHED_USERS_WITH_PIN = 'SET_CACHED_USERS_WITH_PIN'
 
-export function setCachedUsers (data) {
+export function setCachedUsers(data) {
   return {
     type: SET_CACHED_USERS,
     data
   }
 }
 
-export function selectUserToLogin (data) {
+export function selectUserToLogin(data) {
   return {
     type: SELECT_USER_LOGIN,
     data
   }
 }
 
-export function removeUserToLogin () {
+export function removeUserToLogin() {
   return {
     type: REMOVE_USER_LOGIN
   }
 }
 
-export function selectUserToDeleteFromUserCache (data) {
+export function selectUserToDeleteFromUserCache(data) {
   return {
     type: USER_TO_DELETE_FROM_CACHE,
     data
   }
 }
 
-export function deleteUserFromUserCache (data) {
+export function deleteUserFromUserCache(data) {
   return {
     type: DELETE_USER_FROM_CACHE,
     data
   }
 }
 
-export function openRemoveUserFromCacheWarning () {
+export function openRemoveUserFromCacheWarning() {
   return {
     type: OPEN_REMOVE_USER_WARNING
   }
 }
 
-export function closeRemoveUserFromCacheWarning () {
+export function closeRemoveUserFromCacheWarning() {
   return {
     type: CLOSE_REMOVE_USER_WARNING
   }
 }
 
-export function setCachedUsersWithPin (data) {
+export function setCachedUsersWithPin(data) {
   return {
     type: SET_CACHED_USERS_WITH_PIN,
     data

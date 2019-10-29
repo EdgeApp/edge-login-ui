@@ -1,8 +1,8 @@
 import * as Constants from '../../common/constants'
 import s from '../../common/locales/strings'
-export default function (state = null, action) {
+export default function(state = null, action) {
   switch (action.type) {
-    case Constants.AUTH_UPDATE_PASSWORD:
+    case Constants.AUTH_UPDATE_PASSWORD: {
       // action.data.passwordStatus
       const status = action.data.passwordStatus
       const array = [
@@ -23,6 +23,7 @@ export default function (state = null, action) {
         secondsToCrack: action.data.passwordCheckString,
         list: array
       }
+    }
 
     default:
       return state

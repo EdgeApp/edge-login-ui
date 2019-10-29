@@ -7,7 +7,8 @@ export default class QRCodeEdge extends Component {
     const qrCodeVal = 'airbitz://edge/' + this.props.edgeId
     return <QRCode value={qrCodeVal} size={160} />
   }
-  render () {
+
+  render() {
     return (
       <a
         target="_blank"

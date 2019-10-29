@@ -1,9 +1,9 @@
 // @flow
 
+import * as Styles from '../'
 import * as Constants from '../../../common/constants/'
 import * as Colors from '../../../common/constants/Colors'
 import { scale } from '../../../common/util/scaling'
-import * as Styles from '../'
 
 const CreatingAccountWaitScreenStyle = {
   screen: { ...Styles.ScreenStyle },

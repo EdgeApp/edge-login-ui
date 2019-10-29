@@ -9,34 +9,34 @@ export const ERROR_ACCOUNT_PASSWORD_CHECK_MODAL =
 export const CLEAR_ACCOUNT_PASSWORD_CHECK_MODAL =
   'CLEAR_ACCOUNT_PASSWORD_CHECK_MODAL'
 
-export function changeAccountPasswordCheckModalPassword (data) {
+export function changeAccountPasswordCheckModalPassword(data) {
   return {
     type: ACCOUNT_PASSWORD_CHECK_MODAL_PASSWORD,
     data
   }
 }
 
-export function openAccountPasswordCheckModal (data) {
+export function openAccountPasswordCheckModal(data) {
   return {
     type: OPEN_ACCOUNT_PASSWORD_CHECK_MODAL,
     data
   }
 }
 
-export function closeAccountPasswordCheckModal () {
+export function closeAccountPasswordCheckModal() {
   return {
     type: CLOSE_ACCOUNT_PASSWORD_CHECK_MODAL
   }
 }
 
-export function errorAccountPasswordCheckModal (data) {
+export function errorAccountPasswordCheckModal(data) {
   return {
     type: ERROR_ACCOUNT_PASSWORD_CHECK_MODAL,
     data
   }
 }
 
-export function clearAccountPasswordCheckModal () {
+export function clearAccountPasswordCheckModal() {
   return {
     type: CLEAR_ACCOUNT_PASSWORD_CHECK_MODAL
   }

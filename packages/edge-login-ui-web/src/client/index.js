@@ -18,7 +18,7 @@ export type { EdgeUiContextOptions, EdgeUiContext }
 /**
  * Sets up the iframe, attaches to it, and returns a context API.
  */
-export function makeEdgeUiContext (
+export function makeEdgeUiContext(
   opts: EdgeUiContextOptions
 ): Promise<EdgeUiContext> {
   const {
@@ -30,7 +30,7 @@ export function makeEdgeUiContext (
   const frame = makeFrame(frameUrl.href)
 
   const bridge = new Bridge({
-    sendMessage (message) {
+    sendMessage(message) {
       frame.contentWindow.postMessage(message, origin)
     }
   })

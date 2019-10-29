@@ -4,7 +4,7 @@ import { Text } from 'react-native'
 import { scale } from '../../../common/util/scaling.js'
 
 export default class FormattedText extends Component {
-  render () {
+  render() {
     const fontSize = this.props.fontSize
       ? scale(this.props.fontSize)
       : scale(14)

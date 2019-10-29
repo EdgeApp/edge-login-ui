@@ -45,7 +45,7 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
   Props,
   State
 > {
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       isProcessing: false,
@@ -90,12 +90,14 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
     }
     this.props.changePassword(this.props.password)
   }
+
   renderHeader = (style: Object) => {
     if (this.props.showHeader) {
       return <HeaderConnector style={style.header} />
     }
     return null
   }
+
   renderInterior = (styles: Object) => {
     return (
       <View style={styles.innerView}>
@@ -135,7 +137,7 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
         <KeyboardAvoidingView
           style={styles.pageContainer}
           contentContainerStyle={styles.pageContainer}
-          behavior={'position'}
+          behavior="position"
           keyboardVerticalOffset={-150}
         >
           {this.renderInterior(styles)}
@@ -154,7 +156,7 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
     return null
   }
 
-  render () {
+  render() {
     const { NewAccountPasswordScreenStyle } = this.props.styles
     return (
       <SafeAreaView>

@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../common/actions/'
 import type { Dispatch, State } from '../../types/ReduxTypes'
-import PasswordRecoveryAppComponent from '../components/PasswordRecoveryAppComponent'
 import type { OwnProps } from '../components/PasswordRecoveryAppComponent'
+import PasswordRecoveryAppComponent from '../components/PasswordRecoveryAppComponent'
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   return {

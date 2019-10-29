@@ -9,7 +9,7 @@ const initialState = {
   showRecoveryEmailDialog: false
 }
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case Constants.PASSWORD_RECOVERY_INITIALIZED:
       return {

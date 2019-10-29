@@ -8,7 +8,7 @@ import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import { dispatchActionWithData } from './'
 
-async function getDiskStuff (context: EdgeContext, folder: DiskletFolder) {
+async function getDiskStuff(context: EdgeContext, folder: DiskletFolder) {
   const userList = await context.listUsernames().then(usernames =>
     Promise.all(
       usernames.map(username => {
@@ -33,7 +33,7 @@ async function getDiskStuff (context: EdgeContext, folder: DiskletFolder) {
   return { lastUser, userList }
 }
 
-export function getPreviousUsers () {
+export function getPreviousUsers() {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder, username } = imports
     getDiskStuff(context, folder).then((data: Object) => {
@@ -42,7 +42,7 @@ export function getPreviousUsers () {
         data.usersWithPinList = []
         data.usernameOnlyList = []
         data.filteredUsernameList = []
-        data.userList.forEach(function (element) {
+        data.userList.forEach(function(element) {
           if (element.username === focusUser) {
             data.lastUser = {
               username: focusUser,

@@ -13,13 +13,15 @@ export default class SingupReviewDetails extends Component {
     }
     return this.props.history.push('/account')
   }
+
   submit = () => {
     if (window.abcui.loginWithoutClosingCallback) {
       window.abcui.loginWithoutClosingCallback(null, this.props.account)
     }
     return this.props.openRecoveryPassword()
   }
-  render () {
+
+  render() {
     if (this.props.accountCreatedModal) {
       return <ModalAccountCreated cancel={this.cancel} submit={this.submit} />
     }

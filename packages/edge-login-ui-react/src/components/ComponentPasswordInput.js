@@ -10,12 +10,14 @@ export default class PasswordInput extends Component {
       this.refs.passwordRepeat.focus()
     }
   }
+
   passwordRepeatKeyPress = e => {
     if (e.charCode === 13) {
       return this.props.handleSubmit()
     }
   }
-  render () {
+
+  render() {
     const {
       password,
       changePasswordValue,

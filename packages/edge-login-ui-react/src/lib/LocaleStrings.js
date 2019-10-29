@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 import defaultLang from '../locales/default'
 import en_US from '../locales/en_US'
 
@@ -5,7 +7,7 @@ const supportedLocales = {
   en_US
 }
 
-const LocaleStrings = function (inputKey, reqLocale) {
+const LocaleStrings = function(inputKey, reqLocale) {
   // if no locale specified, use device
   if (!reqLocale) {
     reqLocale =

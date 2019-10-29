@@ -33,20 +33,21 @@ type State = {
 class Input extends Component<Props, State> {
   textInput: TextField
 
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       inputText: '',
       autoFocus: this.props.autoFocus
     }
   }
-  componentDidMount () {
+
+  componentDidMount() {
     if (this.props.autoFocus) {
       this.textInput.focus()
     }
   }
 
-  componentWillReceiveProps (nextProps: Props) {
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.value !== this.state.inputText) {
       this.setState({
         inputText: nextProps.value,
@@ -61,7 +62,7 @@ class Input extends Component<Props, State> {
     }
   }
 
-  render () {
+  render() {
     const value = this.props.value ? this.props.value : ''
     const error = this.props.error ? this.props.error : ''
     const {
@@ -123,11 +124,13 @@ class Input extends Component<Props, State> {
       this.props.onSubmitEditing()
     }
   }
+
   onFocus = () => {
     if (this.props.onFocus) {
       this.props.onFocus()
     }
   }
+
   onBlur = () => {
     if (this.props.onBlur) {
       this.props.onBlur()

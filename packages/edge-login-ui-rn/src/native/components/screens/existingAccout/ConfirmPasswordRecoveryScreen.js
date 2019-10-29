@@ -18,17 +18,17 @@ type Props = {
 }
 
 export default class ConfirmPasswordRecoveryScreen extends Component<Props> {
-  render () {
+  render() {
     const style = ConfirmPasswordRecoverySceneStyles
     return (
       <SafeAreaView>
         <View style={style.screen}>
           <Header
             style={style.header}
-            showBackButton={true}
+            showBackButton
             showSkipButton={false}
             title={s.strings.confirm_recovery_questions}
-            subTitle={''}
+            subTitle=""
             useCancel={false}
             customLabel={s.strings.back}
             goBack={this.props.cancel}

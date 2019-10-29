@@ -17,8 +17,8 @@ export const mapStateToProps = (state: State) => {
     const { previousUsers } = state
     return previousUsers && previousUsers.userList
       ? previousUsers.userList.find(
-        user => user.username === state.login.username
-      )
+          user => user.username === state.login.username
+        )
       : {}
   }
   return {

@@ -18,7 +18,7 @@ export default class RouterComponent extends Component<
   RouterComponentProps,
   RouterComponentState
 > {
-  constructor (props: RouterComponentProps) {
+  constructor(props: RouterComponentProps) {
     super(props)
     this.state = {
       page:
@@ -27,7 +27,7 @@ export default class RouterComponent extends Component<
     }
   }
 
-  containerize (Component: Function) {
+  containerize(Component: Function) {
     return (
       <Container location={{ pathname: this.state.page }}>
         <Component history={{ push: page => this.setState({ page }) }} />
@@ -35,7 +35,7 @@ export default class RouterComponent extends Component<
     )
   }
 
-  render () {
+  render() {
     switch (this.state.page) {
       case '/login':
         return this.containerize(Login)

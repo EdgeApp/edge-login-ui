@@ -19,7 +19,7 @@ const initialState = {
   accountObject: null,
   showModal: false
 }
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case Constants.CREATE_ACCOUNT_SUCCESS:
       return { ...state, accountObject: action.data, creationSuccess: true }
