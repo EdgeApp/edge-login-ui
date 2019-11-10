@@ -3,5 +3,6 @@
 export {
   isTouchEnabled,
   enableTouchId,
-  disableTouchId
+  disableTouchId,
+  getSupportedBiometryType
 } from '../../../native/keychain'
