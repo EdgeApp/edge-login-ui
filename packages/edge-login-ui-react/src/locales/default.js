@@ -169,7 +169,8 @@ const strings = {
   string_loading: 'Loading...',
   string_pin: 'pin',
   string_password: 'password',
-  string_login_with: 'Login With'
+  string_login_with: 'Login With',
+  string_login_app: 'App'
 }
 
 export default strings

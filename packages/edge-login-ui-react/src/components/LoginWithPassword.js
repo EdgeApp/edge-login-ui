@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { IoIosArrowRoundForward } from 'react-icons/io'
 
 import LoginCachedUsers from '../connectors/LoginCachedUsers.connector'
 import ModalAccountCacheDelete from '../connectors/ModalAccountCacheDelete.connector'
@@ -6,7 +7,6 @@ import ModalForgotPassword from '../connectors/ModalForgotPassword.connector'
 import logo from '../img/edge-logo-blue.svg'
 import t from '../lib/LocaleStrings.js'
 import styles from '../styles/LoginWithPassword.scss'
-import NavigationButtons from './LayoutNavigationButtons'
 import ScreenHeader from './LayoutScreenHeader'
 
 export default class LoginWithPassword extends Component {
@@ -109,17 +109,24 @@ export default class LoginWithPassword extends Component {
               </div>
             )}
           </form>
+          <button className={styles.signInButton} onClick={this.handleSubmit}>
+            <div className={styles.spacer} />
+            <p className={styles.signInText}>{t('login_new_account_signin')}</p>
+            <IoIosArrowRoundForward className={styles.rightButton} />
+          </button>
+
+          <div className={styles.divider}>
+            <p className={styles.text}>or</p>
+          </div>
+
           <button
             className={styles.primaryImage}
             onClick={this.props.openLoginEdgePage}
           >
             {t('string_login_with')}
             <img src={logo} alt="Edge Logo" className={styles.image} />
+            {t('string_login_app')}
           </button>
-          <NavigationButtons
-            loading={this.props.loading}
-            onRightClick={this.handleSubmit}
-          />
         </div>
       </section>
     )
