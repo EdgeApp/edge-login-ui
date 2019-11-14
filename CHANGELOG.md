@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.1 (2019-11-13)
+
+- rn: Export `getSupportedBiometryType`
+
 ## 0.6.0 (2019-10-25)
 
 - web: Visually redesign the SDK.
