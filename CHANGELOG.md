@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.6.2 (2019-11-25)
+
+- web: Improve visual appearance.
+- rn: Fix compatibility with React Native 0.61
+
 ## 0.6.1 (2019-11-13)
 
 - rn: Export `getSupportedBiometryType`
