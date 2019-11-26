@@ -1,7 +1,8 @@
 // @flow
 
 import * as Comstants from '../../../common/constants/'
-const EdgeLoginQrStyle = {
+
+export const EdgeLoginQrStyle = {
   container: {
     position: 'relative',
     width: '100%',
@@ -9,17 +10,11 @@ const EdgeLoginQrStyle = {
     alignItems: 'center',
     justifyContent: 'space-around'
   },
-  qrCodeBorder: {
-    backgroundColor: Comstants.WHITE,
-    borderRadius: 4,
-    padding: 10
-  },
-  qrCodeForeground: {
+  qrCodeBackground: {
     color: Comstants.WHITE
   },
-  qrCodeBackground: {
+  qrCodeForeground: {
     color: Comstants.BLACK
   },
   qrCodeSize: 120
 }
-export { EdgeLoginQrStyle }

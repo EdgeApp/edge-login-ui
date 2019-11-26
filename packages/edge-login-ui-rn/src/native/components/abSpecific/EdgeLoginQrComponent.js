@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import QrCode from 'react-native-qrcode'
+
+import { QrCode } from '../common/QrCode.js'
 
 type Props = {
   style: Object,
@@ -12,7 +13,7 @@ type Props = {
   cancelRequest(): void
 }
 
-class EdgeLoginQrComponent extends Component<Props> {
+export class EdgeLoginQrComponent extends Component<Props> {
   componentDidMount() {
     this.props.getQrCode()
   }
@@ -22,27 +23,21 @@ class EdgeLoginQrComponent extends Component<Props> {
     this.props.cancelRequest()
   }
 
-  renderQR(style: Object) {
-    if (this.props.edgeLoginId) {
-      return (
-        <View style={{ overflow: 'hidden' }}>
-          <QrCode
-            style={style.qrCode}
-            value={this.props.edgeLoginId}
-            bgColor={style.qrCodeBackground.color}
-            fgColor={style.qrCodeForeground.color}
-            size={style.qrCodeSize}
-          />
-        </View>
-      )
-    }
-    return null
-  }
-
   render() {
-    const style = this.props.style
-    return <View style={style.container}>{this.renderQR(style)}</View>
+    const { style, edgeLoginId } = this.props
+    const { qrCodeSize, qrCodeForeground, qrCodeBackground } = style
+
+    return (
+      <View style={style.container}>
+        {edgeLoginId == null ? null : (
+          <QrCode
+            data={edgeLoginId}
+            size={qrCodeSize}
+            backgroundColor={qrCodeBackground.color}
+            foregroundColor={qrCodeForeground.color}
+          />
+        )}
+      </View>
+    )
   }
 }
-
-export { EdgeLoginQrComponent }
