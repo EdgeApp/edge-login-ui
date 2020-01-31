@@ -69,6 +69,8 @@ const strings = {
     'I understand that if I lose this device or uninstall the app, my digital assets can only be recovered with my username and password',
   terms_three:
     'I understand that if I lose my username and password, %s will not be able to recover my account, unless I setup password recovery',
+  terms_four:
+    'I understand that I am responsible for safekeeping of my passwords, private key pairs, PIN, and any other codes to access the software. %s is not responsible if my information is compromised or accessed by a 3rd party where funds are lost.',
   step_one: 'Step 1/3', // title of scene
   step_two: 'Step 2/3', // title of scene
   step_three: 'Step 3/3', // title of scene
@@ -121,7 +123,8 @@ const strings = {
   email_address: 'Email Address',
   recovery_instructions_complete:
     'To complete account recovery setup you MUST save the recovery token. This is required to recover your account in addition to your username and recovery answers. \n\n Please enter your email to be sent the recovery token.',
-  read_understod: 'I have read, understood, and agree to the Terms of Use',
+  read_understod_1: 'I have read, understood, and agree to the ',
+  read_understod_2: 'Terms of Use',
   last_step_review: 'Last step! Let’s finish with a quick review',
   confirm_finish: 'Confirm & Finish',
   welcome_one:
