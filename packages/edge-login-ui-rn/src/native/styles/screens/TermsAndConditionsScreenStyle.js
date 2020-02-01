@@ -33,11 +33,19 @@ const TermsAndConditionsScreenStyle = {
     marginBottom: scale(20),
     fontFamily: Constants.FONTS.fontFamilyRegular
   },
+  agreeTextLink: {
+    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
+    textAlign: 'center',
+    paddingHorizontal: scale(50),
+    marginBottom: scale(20),
+    fontFamily: Constants.FONTS.fontFamilyRegular,
+    color: Constants.SECONDARY
+  },
   midSection: {
     paddingBottom: scale(20)
   },
   buttonContainer: {
-    height: scale(100),
+    height: scale(150),
     alignItems: 'center'
   },
   checkboxContainer: {

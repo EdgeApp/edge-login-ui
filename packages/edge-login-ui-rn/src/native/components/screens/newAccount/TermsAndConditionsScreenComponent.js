@@ -2,7 +2,7 @@
 
 import type { EdgeAccount } from 'edge-core-js'
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Linking, ScrollView, Text, View } from 'react-native'
 import { sprintf } from 'sprintf-js'
 
 import s from '../../../../common/locales/strings'
@@ -58,10 +58,20 @@ export default class TermsAndConditionsScreenComponent extends Component<
   }
 
   renderButton(style: Object) {
-    if (this.state.totalChecks === 3) {
+    if (this.state.totalChecks === 4) {
       return (
         <View style={style.buttonContainer}>
-          <Text style={style.agreeText}>{s.strings.read_understod}</Text>
+          <Text style={style.agreeText}>
+            {s.strings.read_understod_1}
+            <Text
+              style={style.agreeTextLink}
+              onPress={() =>
+                Linking.openURL('https://edge.app/terms-of-service/')
+              }
+            >
+              {s.strings.read_understod_2}
+            </Text>
+          </Text>
           <View style={style.shim} />
           <Button
             onPress={this.onNextPress}
@@ -96,11 +106,13 @@ export default class TermsAndConditionsScreenComponent extends Component<
         <View style={TermsAndConditionsScreenStyle.screen}>
           <HeaderConnector style={TermsAndConditionsScreenStyle.header} />
           <View style={TermsAndConditionsScreenStyle.pageContainer}>
-            {this.renderInstructions(TermsAndConditionsScreenStyle)}
-            <View style={TermsAndConditionsScreenStyle.midSection}>
-              {this.renderItems(TermsAndConditionsScreenStyle)}
-            </View>
-            {this.renderButton(TermsAndConditionsScreenStyle)}
+            <ScrollView>
+              {this.renderInstructions(TermsAndConditionsScreenStyle)}
+              <View style={TermsAndConditionsScreenStyle.midSection}>
+                {this.renderItems(TermsAndConditionsScreenStyle)}
+              </View>
+              {this.renderButton(TermsAndConditionsScreenStyle)}
+            </ScrollView>
           </View>
         </View>
       </SafeAreaView>
@@ -129,6 +141,12 @@ export default class TermsAndConditionsScreenComponent extends Component<
         if (index === 2) {
           return {
             title: sprintf(s.strings.terms_three, appName),
+            value: item.value
+          }
+        }
+        if (index === 3) {
+          return {
+            title: sprintf(s.strings.terms_four, appName),
             value: item.value
           }
         }

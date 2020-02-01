@@ -13,6 +13,10 @@ const initialState = {
     {
       title: sprintf(s.strings.terms_three, s.strings.app_name_default),
       value: false
+    },
+    {
+      title: sprintf(s.strings.terms_four, s.strings.app_name_default),
+      value: false
     }
   ]
 }
