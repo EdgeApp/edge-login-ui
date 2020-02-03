@@ -61,14 +61,14 @@ export default class TermsAndConditionsScreenComponent extends Component<
     if (this.state.totalChecks === 4) {
       return (
         <View style={style.buttonContainer}>
-          <Text style={style.agreeText}>
+          <Text
+            style={style.agreeText}
+            onPress={() =>
+              Linking.openURL('https://edge.app/terms-of-service/')
+            }
+          >
             {s.strings.read_understod_1}
-            <Text
-              style={style.agreeTextLink}
-              onPress={() =>
-                Linking.openURL('https://edge.app/terms-of-service/')
-              }
-            >
+            <Text style={style.agreeTextLink}>
               {s.strings.read_understod_2}
             </Text>
           </Text>
