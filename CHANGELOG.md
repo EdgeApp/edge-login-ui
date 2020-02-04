@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.3 (2020-02-04)
+
+- rn: Update TOS
+
 ## 0.6.2 (2019-11-25)
 
 - web: Improve visual appearance.
