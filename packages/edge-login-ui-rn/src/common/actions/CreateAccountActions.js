@@ -10,6 +10,7 @@ import * as Constants from '../constants'
 import s from '../locales/strings.js'
 import { isASCII } from '../util'
 import { dispatchAction, dispatchActionWithData, getPreviousUsers } from './'
+import { setMostRecentUsers } from './LoginAction'
 import * as WorkflowActions from './WorkflowActions'
 
 export function validatePin(data: Object) {
@@ -167,10 +168,7 @@ export function createUser(data: Object) {
           dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, abcAccount)
         )
         dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
-        await folder
-          .file('lastuser.json')
-          .setText(JSON.stringify({ username: abcAccount.username }))
-          .catch(e => null)
+        await setMostRecentUsers(folder, abcAccount.username)
         await abcAccount.dataStore.setItem(
           Constants.OTP_REMINDER_STORE_NAME,
           Constants.OTP_REMINDER_KEY_NAME_CREATED_AT,

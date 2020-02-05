@@ -1,5 +1,6 @@
 // @flow
 
+import type { DiskletFolder } from 'disklet'
 import {
   createSimpleConfirmModal,
   createThreeButtonModal,
@@ -58,10 +59,7 @@ export function loginWithRecovery(
           console.log(e) // Fail quietly
         })
       }
-      await folder
-        .file('lastuser.json')
-        .setText(JSON.stringify({ username: account.username }))
-        .catch(e => null)
+      await setMostRecentUsers(folder, account.username)
       const isTouchSupported = await supportsTouchId()
       const touchEnabled = await isTouchEnabled(folder, account.username)
       const touchIdInformation = {
@@ -153,10 +151,7 @@ export function userLoginWithTouchId(data: Object) {
           account.watch('loggedIn', loggedIn => {
             if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
           })
-          folder
-            .file('lastuser.json')
-            .setText(JSON.stringify({ username: data.username }))
-            .catch(e => null)
+          await setMostRecentUsers(folder, data.username)
           await twofaReminder(account)
           dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
           const touchIdInformation = {
@@ -201,10 +196,7 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
               console.log(e) // Fail quietly
             })
           }
-          await folder
-            .file('lastuser.json')
-            .setText(JSON.stringify({ username: abcAccount.username }))
-            .catch(e => null)
+          await setMostRecentUsers(folder, data.username)
           const isTouchSupported = await supportsTouchId()
           const touchEnabled = await isTouchEnabled(folder, abcAccount.username)
           const touchIdInformation = {
@@ -294,10 +286,7 @@ export function userLogin(data: Object, backupKey?: string) {
             console.log(e) // Fail quietly
           })
         }
-        await folder
-          .file('lastuser.json')
-          .setText(JSON.stringify({ username: abcAccount.username }))
-          .catch(e => null)
+        await setMostRecentUsers(folder, abcAccount.username)
         const touchEnabled = await isTouchEnabled(folder, abcAccount.username)
         const isTouchSupported = await supportsTouchId()
         const touchIdInformation = {
@@ -567,4 +556,29 @@ const twofaReminder = async account => {
   }
 
   return true
+}
+
+export const setMostRecentUsers = async (
+  folder: DiskletFolder,
+  username: string
+) => {
+  const lastUsers = await folder
+    .file('lastusers.json')
+    .getText()
+    .then(text => JSON.parse(text))
+    .catch(e => null)
+
+  if (lastUsers && lastUsers.length > 0) {
+    const filteredLastUsers = lastUsers.filter(
+      (lastUser: string) => lastUser !== username
+    )
+    return folder
+      .file('lastusers.json')
+      .setText(JSON.stringify([username, ...filteredLastUsers]))
+      .catch(e => null)
+  }
+  return folder
+    .file('lastusers.json')
+    .setText(JSON.stringify([username]))
+    .catch(e => null)
 }
