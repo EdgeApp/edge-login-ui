@@ -50,9 +50,27 @@ async function getDiskStuff(context: EdgeContext, folder: DiskletFolder) {
     .getText()
     .then(text => JSON.parse(text))
     .catch(e => e)
-  const sortedUserList = sortUserList(lastUsers || [], userList)
+
+  if (lastUsers && lastUsers.length > 0) {
+    const sortedUserList =
+      userList.length !== 0 ? sortUserList(lastUsers || [], userList) : []
+    return {
+      lastUser: lastUsers ? lastUsers[0] : [],
+      userList: sortedUserList
+    }
+  }
+  const lastUser = await folder
+    .file('lastuser.json')
+    .getText()
+    .then(text => JSON.parse(text))
+    .then(json => json.username)
+    .catch(e => e)
+  const sortedUserList =
+    userList.length !== 0
+      ? sortUserList(lastUser ? [lastUser] : [], userList)
+      : []
   return {
-    lastUser: lastUsers ? lastUsers[0] : [],
+    lastUser,
     userList: sortedUserList
   }
 }
@@ -62,7 +80,7 @@ export function getPreviousUsers() {
     const { context, folder, username } = imports
     getDiskStuff(context, folder).then((data: Object) => {
       const focusUser = username || data.lastUser
-      if (data.userList.length > 0) {
+      if (data.userList && data.userList.length > 0) {
         data.usersWithPinList = []
         data.usernameOnlyList = []
         data.filteredUsernameList = []
