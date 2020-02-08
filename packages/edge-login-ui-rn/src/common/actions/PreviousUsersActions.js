@@ -1,6 +1,7 @@
 // @flow
 
 import type { DiskletFolder } from 'disklet'
+import { makeReactNativeDisklet } from 'disklet'
 import type { EdgeContext } from 'edge-core-js'
 
 import { isTouchEnabled } from '../../native/keychain'
@@ -9,6 +10,9 @@ import * as Constants from '../constants'
 import { dispatchActionWithData } from './'
 
 function sortUserList(lastUsers: Array<string>, userList: Array<Object>) {
+  if (!userList || userList.length === 0) {
+    return []
+  }
   const limitLastUsers = lastUsers.length > 0 ? lastUsers.slice(0, 3) : []
   const detailedLastUsers = limitLastUsers.map(lastUser => {
     return userList.find(user => user.username === lastUser)
@@ -45,33 +49,26 @@ async function getDiskStuff(context: EdgeContext, folder: DiskletFolder) {
       })
     )
   )
-  const lastUsers = await folder
-    .file('lastusers.json')
-    .getText()
-    .then(text => JSON.parse(text))
-    .catch(e => e)
 
+  const disklet = makeReactNativeDisklet()
+  const lastUsers = await disklet
+    .getText('lastusers.json')
+    .then(text => JSON.parse(text))
+    .catch(_ => [])
   if (lastUsers && lastUsers.length > 0) {
-    const sortedUserList =
-      userList.length !== 0 ? sortUserList(lastUsers || [], userList) : []
     return {
-      lastUser: lastUsers ? lastUsers[0] : [],
-      userList: sortedUserList
+      lastUser: lastUsers[0],
+      userList: sortUserList(lastUsers, userList)
     }
   }
-  const lastUser = await folder
-    .file('lastuser.json')
-    .getText()
+  const lastUser = await disklet
+    .getText('lastuser.json')
     .then(text => JSON.parse(text))
-    .then(json => json.username)
-    .catch(e => e)
-  const sortedUserList =
-    userList.length !== 0
-      ? sortUserList(lastUser ? [lastUser] : [], userList)
-      : []
+    .then(json => (json && json.username ? json.username : ''))
+    .catch(_ => '')
   return {
     lastUser,
-    userList: sortedUserList
+    userList: sortUserList([lastUser], userList)
   }
 }
 

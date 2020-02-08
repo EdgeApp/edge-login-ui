@@ -1,6 +1,6 @@
 // @flow
 
-import type { DiskletFolder } from 'disklet'
+import { makeReactNativeDisklet } from 'disklet'
 import {
   createSimpleConfirmModal,
   createThreeButtonModal,
@@ -59,7 +59,7 @@ export function loginWithRecovery(
           console.log(e) // Fail quietly
         })
       }
-      await setMostRecentUsers(folder, account.username)
+      await setMostRecentUsers(account.username)
       const isTouchSupported = await supportsTouchId()
       const touchEnabled = await isTouchEnabled(folder, account.username)
       const touchIdInformation = {
@@ -151,7 +151,7 @@ export function userLoginWithTouchId(data: Object) {
           account.watch('loggedIn', loggedIn => {
             if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
           })
-          await setMostRecentUsers(folder, data.username)
+          await setMostRecentUsers(data.username)
           await twofaReminder(account)
           dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
           const touchIdInformation = {
@@ -196,7 +196,7 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
               console.log(e) // Fail quietly
             })
           }
-          await setMostRecentUsers(folder, data.username)
+          await setMostRecentUsers(data.username)
           const isTouchSupported = await supportsTouchId()
           const touchEnabled = await isTouchEnabled(folder, abcAccount.username)
           const touchIdInformation = {
@@ -286,7 +286,7 @@ export function userLogin(data: Object, backupKey?: string) {
             console.log(e) // Fail quietly
           })
         }
-        await setMostRecentUsers(folder, abcAccount.username)
+        await setMostRecentUsers(abcAccount.username)
         const touchEnabled = await isTouchEnabled(folder, abcAccount.username)
         const isTouchSupported = await supportsTouchId()
         const touchIdInformation = {
@@ -558,27 +558,20 @@ const twofaReminder = async account => {
   return true
 }
 
-export const setMostRecentUsers = async (
-  folder: DiskletFolder,
-  username: string
-) => {
-  const lastUsers = await folder
-    .file('lastusers.json')
-    .getText()
+export const setMostRecentUsers = async (username: string) => {
+  const disklet = makeReactNativeDisklet()
+  const lastUsers = await disklet
+    .getText('lastusers.json')
     .then(text => JSON.parse(text))
-    .catch(e => null)
-
+    .catch(_ => [])
   if (lastUsers && lastUsers.length > 0) {
     const filteredLastUsers = lastUsers.filter(
       (lastUser: string) => lastUser !== username
     )
-    return folder
-      .file('lastusers.json')
-      .setText(JSON.stringify([username, ...filteredLastUsers]))
-      .catch(e => null)
+    return disklet.setText(
+      'lastusers.json',
+      JSON.stringify([username, ...filteredLastUsers])
+    )
   }
-  return folder
-    .file('lastusers.json')
-    .setText(JSON.stringify([username]))
-    .catch(e => null)
+  return disklet.setText('lastusers.json', JSON.stringify([username]))
 }

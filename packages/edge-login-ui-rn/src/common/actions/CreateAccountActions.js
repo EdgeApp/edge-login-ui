@@ -168,7 +168,7 @@ export function createUser(data: Object) {
           dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, abcAccount)
         )
         dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
-        await setMostRecentUsers(folder, abcAccount.username)
+        await setMostRecentUsers(abcAccount.username)
         await abcAccount.dataStore.setItem(
           Constants.OTP_REMINDER_STORE_NAME,
           Constants.OTP_REMINDER_KEY_NAME_CREATED_AT,
