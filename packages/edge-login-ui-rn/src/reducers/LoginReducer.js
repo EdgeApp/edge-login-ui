@@ -3,7 +3,6 @@
 import { type EdgeAccount, type OtpError } from 'edge-core-js'
 import { type Reducer } from 'redux'
 
-import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
 import { type Action } from '../types/ReduxTypes.js'
 
 const flowHack: any = {}
@@ -57,13 +56,9 @@ export const login: Reducer<LoginState, Action> = function(
     case 'START_RECOVERY_LOGIN':
       return { ...state, otpErrorMessage: null }
     case 'SET_PREVIOUS_USERS': {
-      const data: PreviousUsersState = action.data
-      if (data.lastUser) {
-        return { ...state, username: data.lastUser.username }
-      }
-      if (data.userList.length > 0) {
-        const topUser = data.userList[0]
-        return { ...state, username: topUser.username }
+      const { startupUser } = action.data
+      if (startupUser != null) {
+        return { ...state, username: startupUser.username }
       }
       return state
     }

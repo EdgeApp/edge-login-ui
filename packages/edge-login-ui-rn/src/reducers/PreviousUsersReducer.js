@@ -11,8 +11,8 @@ export type LoginUserInfo = {
 }
 
 export type PreviousUsersState = {
-  +lastUser?: LoginUserInfo,
   +loaded: boolean,
+  +startupUser?: LoginUserInfo,
   +userList: LoginUserInfo[],
   +usernameOnlyList: string[]
 }
@@ -27,11 +27,5 @@ export const previousUsers: Reducer<PreviousUsersState, Action> = function(
   state = initialState,
   action
 ) {
-  switch (action.type) {
-    case 'SET_PREVIOUS_USERS':
-      return { ...action.data, loaded: true }
-
-    default:
-      return state
-  }
+  return action.type === 'SET_PREVIOUS_USERS' ? action.data : state
 }

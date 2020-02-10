@@ -27,6 +27,18 @@ const emptyTouchIdUsers: FingerprintFile = {
   disabledUsers: []
 }
 
+export async function getTouchEnabledUsers(
+  folder: DiskletFolder
+): Promise<string[]> {
+  const fingerprint = await folder
+    .file('fingerprint.json')
+    .getText()
+    .then(asFingerprintFile)
+    .catch(e => emptyTouchIdUsers)
+
+  return fingerprint.enabledUsers
+}
+
 export async function isTouchEnabled(
   folder: DiskletFolder,
   username: string
