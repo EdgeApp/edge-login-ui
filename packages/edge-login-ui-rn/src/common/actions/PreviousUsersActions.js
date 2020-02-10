@@ -22,7 +22,6 @@ export type PreviousUsersState = {
   userList: LoginUserInfo[],
   lastUser?: LoginUserInfo,
 
-  usersWithPinList: string[],
   usernameOnlyList: string[],
   filteredUsernameList: string[]
 }
@@ -101,7 +100,6 @@ export function getPreviousUsers() {
     getDiskStuff(context, folder).then((data: Object) => {
       const focusUser = username || data.lastUser
       if (data.userList && data.userList.length > 0) {
-        data.usersWithPinList = []
         data.usernameOnlyList = []
         data.filteredUsernameList = []
         data.userList.forEach(function(element) {
@@ -111,9 +109,6 @@ export function getPreviousUsers() {
               pinEnabled: element.pinEnabled,
               touchEnabled: element.touchEnabled
             }
-          }
-          if (element.pinEnabled) {
-            data.usersWithPinList.push(element.username)
           }
           data.usernameOnlyList.push(element.username)
           data.filteredUsernameList.push(element.username)

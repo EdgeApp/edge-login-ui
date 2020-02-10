@@ -26,7 +26,6 @@ export const mapStateToProps = (state: State) => {
     userDetails: getUserDetails(),
     userList: state.previousUsers.userList,
     loginSuccess,
-    usersWithPin: state.previousUsers.usersWithPinList,
     workflow: state.workflow,
     showModal: state.workflow.showModal,
     wait,
