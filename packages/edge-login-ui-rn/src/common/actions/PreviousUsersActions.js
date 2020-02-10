@@ -9,14 +9,37 @@ import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import { dispatchActionWithData } from './'
 
-function sortUserList(lastUsers: Array<string>, userList: Array<Object>) {
+export type LoginUserInfo = {
+  username: string,
+  pinEnabled: boolean,
+  touchEnabled: boolean
+}
+
+/**
+ * The payload included in the 'SET_PREVIOUS_USERS' redux action.
+ */
+export type PreviousUsersState = {
+  userList: LoginUserInfo[],
+  lastUser?: LoginUserInfo,
+
+  usersWithPinList: string[],
+  usernameOnlyList: string[],
+  filteredUsernameList: string[]
+}
+
+function sortUserList(
+  lastUsers: string[],
+  userList: LoginUserInfo[]
+): LoginUserInfo[] {
   if (!userList || userList.length === 0) {
     return []
   }
   const limitLastUsers = lastUsers.length > 0 ? lastUsers.slice(0, 3) : []
-  const detailedLastUsers = limitLastUsers.map(lastUser => {
-    return userList.find(user => user.username === lastUser)
-  })
+  const detailedLastUsers: LoginUserInfo[] = []
+  for (const lastUser of limitLastUsers) {
+    const info = userList.find(user => user.username === lastUser)
+    if (info != null) detailedLastUsers.push(info)
+  }
   const filteredUserList = userList.filter(
     user => !limitLastUsers.find(lastUser => user.username === lastUser)
   )
