@@ -1,4 +1,5 @@
 import * as Constants from '../../common/constants'
+import { type PreviousUsersState } from '../actions/PreviousUsersActions.js'
 
 const initialState = {
   username: null,
@@ -27,18 +28,17 @@ export default function(state = initialState, action) {
       return { ...state, recoveryToken: null }
     case Constants.START_RECOVERY_LOGIN:
       return { ...state, otpErrorMessage: null }
-    case Constants.SET_PREVIOUS_USERS:
-      if (action.data.lastUser) {
-        return { ...state, username: action.data.lastUser.username }
+    case Constants.SET_PREVIOUS_USERS: {
+      const data: PreviousUsersState = action.data
+      if (data.lastUser) {
+        return { ...state, username: data.lastUser.username }
       }
-      if (
-        typeof action.data.usersWithPinList !== 'undefined' &&
-        action.data.usersWithPinList.length > 0
-      ) {
-        const topUser = action.data.usersWithPinList[0]
+      if (data.userList.length > 0) {
+        const topUser = data.userList[0]
         return { ...state, username: topUser.username }
       }
       return state
+    }
     case Constants.AUTH_UPDATE_USERNAME:
       return { ...state, username: action.data, errorMessage: null, wait: 0 }
     case Constants.UPDATE_WAIT_TIMER:

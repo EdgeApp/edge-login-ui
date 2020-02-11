@@ -4,16 +4,12 @@ import type { DiskletFolder } from 'disklet'
 import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
+import type { PreviousUsersState } from '../common/actions/PreviousUsersActions.js'
+
 export type Action = { type: string, data?: any }
 
 export type State = {
-  previousUsers: {
-    lastUser: Object,
-    usersWithPinList: Array<string>,
-    usernameOnlyList: Array<string>,
-    filteredUsernameList: Array<string>,
-    userList: Array<Object>
-  },
+  previousUsers: PreviousUsersState,
   workflow: {
     currentKey: string,
     details: Array<Object>,

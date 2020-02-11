@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
 
+import { type LoginUserInfo } from '../../../common/actions/PreviousUsersActions.js'
 import s from '../../../common/locales/strings.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import PinKeypadConnector from '../../../native/connectors/abSpecific/PinKeypadConnector'
@@ -19,10 +20,9 @@ import FourDigitConnector from '../../connectors/abSpecific/FourDigitConnector'
 
 type Props = {
   styles: Object,
-  usersWithPin: Array<string>,
   username: string,
   userDetails: Object,
-  userList: Array<Object>,
+  userList: Array<LoginUserInfo>,
   touch: boolean | string,
   loginSuccess: boolean,
   launchUserLoginWithTouchId(Object): void,
@@ -41,30 +41,16 @@ type State = {
   loggingIn: boolean,
   pin: string,
   username: string,
-  focusOn: string,
-  usernameList: Array<string>
+  focusOn: string
 }
 export default class PinLogInScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    const getUserNameList = () => {
-      const filteredUserList = props.userList.filter(user => {
-        if (user.pinEnabled) {
-          return true
-        }
-        if (user.touchEnabled && props.touch) {
-          return true
-        }
-        return false
-      })
-      return filteredUserList.map(user => user.username)
-    }
     this.state = {
       pin: '',
       loggingIn: false,
-      username: '', // Nobody seems to update this?
-      focusOn: 'pin',
-      usernameList: props.userList ? getUserNameList() : props.usersWithPin
+      username: '', // User we are deleting
+      focusOn: 'pin'
     }
   }
 
@@ -166,7 +152,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
       <View style={style.innerView}>
         <DropDownList
           style={style.listView}
-          data={this.state.usernameList}
+          data={this.getDropdownItems()}
           renderRow={this.renderItems.bind(this)}
         />
       </View>
@@ -175,6 +161,13 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
 
   exitPin() {
     this.props.gotoLoginPage()
+  }
+
+  getDropdownItems(): string[] {
+    const { userList, touch } = this.props
+    return userList
+      .filter(user => user.pinEnabled || (touch && user.touchEnabled))
+      .map(user => user.username)
   }
 
   renderItems(item: Object) {

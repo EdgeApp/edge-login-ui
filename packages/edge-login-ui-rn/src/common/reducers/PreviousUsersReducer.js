@@ -1,6 +1,6 @@
 import * as Constants from '../../common/constants'
 
-// schema {lastUser:{}, userList: [], usersWithPinList:[], usernameOnlyList:[], filteredUsernameList:[], charactersFiltered}
+// schema {lastUser:{}, userList: [], usernameOnlyList:[], filteredUsernameList:[], charactersFiltered}
 export default function(state = null, action) {
   switch (action.type) {
     case Constants.AUTH_UPDATE_USERNAME: {
