@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.6 (2020-02-11)
+
+- rn: Fix previous users related crashes
+
 ## 0.6.5 (2020-02-09)
 
 - rn: Added most recently used function to username list
