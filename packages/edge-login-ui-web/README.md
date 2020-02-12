@@ -103,7 +103,7 @@ The Edge Login UI relies on an iframe for most of its functionality. Although we
 You can obtain the iframe contents using the following terminal command, which is available as part of this library:
 
 ```sh
-copy-edge-assets <dest-directory>
+cd src && node copy-edge-assets <dest-directory>
 ```
 
 The `makeEdgeUiContext` function takes an `assetsPath` parameter, which is a URI that points to the iframe contents.
