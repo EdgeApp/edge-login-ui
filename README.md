@@ -12,9 +12,9 @@ This repo implements a UI layer on top of edge-core-js to provide web and React 
 
 Each environment is implemented as a separate package
 
-https://github.com/Airbitz/edge-login-ui/tree/develop/packages/edge-login-ui-web
+https://github.com/Airbitz/edge-login-ui/tree/master/packages/edge-login-ui-web
 
-https://github.com/Airbitz/edge-login-ui/tree/develop/packages/edge-login-ui-rn
+https://github.com/Airbitz/edge-login-ui/tree/master/packages/edge-login-ui-rn
 
 See the readme in each of the repos above for installation and use in your app
 
