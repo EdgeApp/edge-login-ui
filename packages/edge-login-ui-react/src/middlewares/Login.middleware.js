@@ -77,28 +77,38 @@ export const loginWithPin = (username, pin, callback) => {
 export const edgeLogin = callback => {
   return (dispatch, _, imports) => {
     const t = imports.t
-    const onProcessLogin = username => {
-      dispatch(selectUserToLogin(username))
-      return dispatch(
-        openLoading(sprintf(t('loading_edge_logging_in'), username))
-      )
-    }
-
-    const onLogin = (error, account) => {
-      window.localStorage.setItem(lastUser, account.username)
-      dispatch(userLogin(account))
-      dispatch(closeLoading())
-      return callback(error, account)
-    }
-
     const context = window.abcui.abcuiContext
+    const cleanups: Array<() => void> = []
+
+    cleanups.push(
+      context.on('loginStart', ({ username }) => {
+        dispatch(selectUserToLogin(username))
+        return dispatch(
+          openLoading(sprintf(t('loading_edge_logging_in'), username))
+        )
+      })
+    )
+    cleanups.push(
+      context.on('loginError', ({ error }) => {
+        cleanups.forEach(cleanup => cleanup())
+        callback(error)
+      })
+    )
+    cleanups.push(
+      context.on('login', account => {
+        window.localStorage.setItem(lastUser, account.username)
+        dispatch(userLogin(account))
+        dispatch(closeLoading())
+        cleanups.forEach(cleanup => cleanup())
+        return callback(undefined, account)
+      })
+    )
+
     const accountOptions = window.abcui.accountOptions
     context
       .requestEdgeLogin({
         displayName: context.displayName,
         displayImageUrl: context.displayImageUrl,
-        onLogin,
-        onProcessLogin,
         ...accountOptions
       })
       .then(results => {
