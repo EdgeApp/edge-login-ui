@@ -2,10 +2,14 @@
 
 import 'edge-login-ui-react/lib/styles.css'
 
-import type { EdgeAccount, EdgeContext, EdgeUserInfo } from 'edge-core-js'
-import { makeEdgeContext } from 'edge-core-js'
-import { ethereumCurrencyPluginFactory } from 'edge-currency-ethereum'
-import { coincapPlugin, shapeshiftPlugin } from 'edge-exchange-plugins'
+import {
+  addEdgeCorePlugins,
+  lockEdgeCorePlugins,
+  makeEdgeContext
+} from 'edge-core-js'
+import type { EdgeAccount, EdgeContext, EdgeUserInfo } from 'edge-core-js/types'
+import currencyPlugins from 'edge-currency-accountbased'
+import exchangePlugins from 'edge-exchange-plugins'
 import { AccountScreen, LoginScreen } from 'edge-login-ui-react'
 import React from 'react'
 import { render } from 'react-dom'
@@ -19,6 +23,10 @@ import {
 } from 'yaob'
 
 import type { EdgeUiContext, EdgeUiContextOptions } from './index.js'
+
+addEdgeCorePlugins(exchangePlugins)
+addEdgeCorePlugins(currencyPlugins)
+lockEdgeCorePlugins()
 
 export async function makeUiContext(opts: EdgeUiContextOptions) {
   const {
@@ -34,7 +42,11 @@ export async function makeUiContext(opts: EdgeUiContextOptions) {
     apiKey,
     appId,
     hideKeys,
-    plugins: [ethereumCurrencyPluginFactory, shapeshiftPlugin, coincapPlugin]
+    plugins: {
+      coinbase: true,
+      coincap: true,
+      ethereum: true
+    }
   })
 
   // iframe root:

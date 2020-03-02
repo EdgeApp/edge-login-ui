@@ -1,6 +1,6 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-core-js'
+import type { EdgeAccount } from 'edge-core-js/types'
 import type { EdgeUiContext } from 'edge-login-ui-web'
 import React, { Component } from 'react'
 

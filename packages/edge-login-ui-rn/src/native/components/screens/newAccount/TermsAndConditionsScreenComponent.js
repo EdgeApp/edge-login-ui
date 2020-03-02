@@ -1,6 +1,6 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-core-js'
+import type { EdgeAccount } from 'edge-core-js/types'
 import React, { Component } from 'react'
 import { Linking, ScrollView, Text, View } from 'react-native'
 import { sprintf } from 'sprintf-js'

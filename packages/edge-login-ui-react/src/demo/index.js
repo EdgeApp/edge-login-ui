@@ -2,8 +2,8 @@
 
 import 'edge-login-ui-react/lib/styles.css'
 
-import type { EdgeAccount, EdgeContext } from 'edge-core-js'
 import { makeEdgeContext } from 'edge-core-js'
+import type { EdgeAccount, EdgeContext } from 'edge-core-js/types'
 import { AccountScreen, LoginScreen } from 'edge-login-ui-react'
 import React, { Component } from 'react'
 import { render } from 'react-dom'

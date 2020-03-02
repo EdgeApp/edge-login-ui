@@ -1,7 +1,7 @@
 // @flow
 
 import { makeReactNativeFolder } from 'disklet'
-import type { EdgeAccount, EdgeContext } from 'edge-core-js'
+import type { EdgeAccount, EdgeContext } from 'edge-core-js/types'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'

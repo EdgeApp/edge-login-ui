@@ -1,6 +1,10 @@
 // @flow
 
-import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
+import type {
+  EdgeAccount,
+  EdgeAccountOptions,
+  EdgeContext
+} from 'edge-core-js/types'
 
 /**
  * The web login UI expects to find a bunch of stuff on the `window` object.

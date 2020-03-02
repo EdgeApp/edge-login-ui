@@ -2,7 +2,7 @@
 
 import 'regenerator-runtime/runtime'
 
-import type { EdgeAccount, EdgeUserInfo } from 'edge-core-js'
+import type { EdgeAccount, EdgeUserInfo } from 'edge-core-js/types'
 import type { Subscriber } from 'yaob'
 
 import { sendRoot } from './root-api.js'

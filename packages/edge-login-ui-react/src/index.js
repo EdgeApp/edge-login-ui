@@ -4,7 +4,11 @@ import 'normalize.css'
 import './styles/globals.scss'
 import './polyfill.js'
 
-import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
+import type {
+  EdgeAccount,
+  EdgeAccountOptions,
+  EdgeContext
+} from 'edge-core-js/types'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'

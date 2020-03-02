@@ -1,7 +1,11 @@
 // @flow
 
 import type { DiskletFolder } from 'disklet'
-import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
+import type {
+  EdgeAccount,
+  EdgeAccountOptions,
+  EdgeContext
+} from 'edge-core-js/types'
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
 import type { PreviousUsersState } from '../common/actions/PreviousUsersActions.js'

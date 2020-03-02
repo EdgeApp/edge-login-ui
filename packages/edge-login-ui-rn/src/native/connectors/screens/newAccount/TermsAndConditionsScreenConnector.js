@@ -1,6 +1,6 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-core-js'
+import type { EdgeAccount } from 'edge-core-js/types'
 import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions/'
