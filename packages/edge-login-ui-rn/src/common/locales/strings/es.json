@@ -59,7 +59,7 @@
   "terms_one": "Entiendo que mis fondos son mantenidos seguramente en este dispositivo, no por parte de %s",
   "terms_two": "Entiendo que se pierdo este dispositivo o desinstalo la aplicación, mis activos digitales sólo pueden ser recuperados con mi usuario y contraseña",
   "terms_three": "Entiendo que si pierdo mi nombre de usuario y contraseña, %s no sera capaz de recuperar mi cuenta, a no ser que configure la recuperación de cuenta",
-  "terms_four": "Entiendo que soy responsable de la protección de mis contraseñas, pares de claves privadas, PIN y cualquier otro código para acceder al software. %s no es responsable si mi información se ve comprometida o es accedida por un tercero y se pierden fondos.",
+  "terms_four": "Entiendo que soy responsable de la protección de mis contraseñas, pares de claves privadas, PIN y cualquier otro código para acceder al software. %s no es responsable si mi información se ve comprometida o es accedida por un tercero y se pierden fondos",
   "step_one": "Paso 1/3",
   "step_two": "Paso 2/3",
   "step_three": "Paso 3/3",
