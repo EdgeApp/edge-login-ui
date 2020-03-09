@@ -70,7 +70,7 @@ const strings = {
   terms_three:
     'I understand that if I lose my username and password, %s will not be able to recover my account, unless I setup password recovery',
   terms_four:
-    'I understand that I am responsible for safekeeping of my passwords, private key pairs, PIN, and any other codes to access the software. %s is not responsible if my information is compromised or accessed by a 3rd party where funds are lost.',
+    'I understand that I am responsible for safekeeping of my passwords, private key pairs, PIN, and any other codes to access the software. %s is not responsible if my information is compromised or accessed by a 3rd party where funds are lost',
   step_one: 'Step 1/3', // title of scene
   step_two: 'Step 2/3', // title of scene
   step_three: 'Step 3/3', // title of scene
