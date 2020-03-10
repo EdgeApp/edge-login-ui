@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.7 (2020-03-09)
+
+- rn: Update translations
+
 ## 0.6.6 (2020-02-11)
 
 - rn: Fix previous users related crashes
