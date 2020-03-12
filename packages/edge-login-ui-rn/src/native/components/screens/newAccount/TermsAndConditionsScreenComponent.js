@@ -25,6 +25,7 @@ export default class TermsAndConditionsScreenComponent extends Component<
   Props,
   State
 > {
+  scrollView: any
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -59,6 +60,9 @@ export default class TermsAndConditionsScreenComponent extends Component<
 
   renderButton(style: Object) {
     if (this.state.totalChecks === 4) {
+      setTimeout(() => {
+        this.scrollView.scrollToEnd({ animated: true })
+      }, 50)
       return (
         <View style={style.buttonContainer}>
           <Text
@@ -106,7 +110,7 @@ export default class TermsAndConditionsScreenComponent extends Component<
         <View style={TermsAndConditionsScreenStyle.screen}>
           <HeaderConnector style={TermsAndConditionsScreenStyle.header} />
           <View style={TermsAndConditionsScreenStyle.pageContainer}>
-            <ScrollView>
+            <ScrollView ref={ref => (this.scrollView = ref)}>
               {this.renderInstructions(TermsAndConditionsScreenStyle)}
               <View style={TermsAndConditionsScreenStyle.midSection}>
                 {this.renderItems(TermsAndConditionsScreenStyle)}
