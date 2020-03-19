@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.8 (2020-03-18)
+
+- rn: Add auto scroll to terms and condition screen
+
 ## 0.6.7 (2020-03-09)
 
 - rn: Update translations
