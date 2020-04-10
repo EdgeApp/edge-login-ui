@@ -73,9 +73,9 @@ const OtpErrorScreenStyle = {
     height: 150
   },
   exitButton: {
-    upStyle: { ...Styles.TextOnlyButtonUpStyle, width: null },
-    upTextStyle: Styles.TextOnlyButtonTextUpStyle,
-    downTextStyle: Styles.TextOnlyButtonTextDownStyle,
+    upStyle: Styles.TextOnlyButtonUpStyle,
+    upTextStyle: { ...Styles.TextOnlyButtonTextUpStyle, width: 'auto' },
+    downTextStyle: { ...Styles.TextOnlyButtonTextDownStyle, width: 'auto' },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
   staticModalText: {
