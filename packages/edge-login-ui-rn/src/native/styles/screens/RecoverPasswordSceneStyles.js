@@ -1,8 +1,9 @@
 // @flow
+import { Dimensions } from 'react-native'
 
 import * as Styles from '../'
 import * as Constants from '../../../common/constants'
-import { scale } from '../../../common/util'
+import { isIphoneX, scale } from '../../../common/util'
 
 const RecoverPasswordSceneStyles = {
   screen: { ...Styles.ScreenStyle },
@@ -90,7 +91,8 @@ const RecoverPasswordSceneStyles = {
   },
   questionsList: {
     width: '100%',
-    height: scale(400),
+    height:
+      Dimensions.get('window').height - (isIphoneX ? scale(125) : scale(110)),
     borderColor: Constants.GRAY_3,
     borderWidth: 1
   },
