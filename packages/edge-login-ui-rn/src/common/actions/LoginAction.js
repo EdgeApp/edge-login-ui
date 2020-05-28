@@ -7,9 +7,9 @@ import {
   createYesNoModal
 } from 'edge-components'
 import React from 'react'
+import IonIcon from 'react-native-vector-icons/Ionicons'
 import { sprintf } from 'sprintf-js'
 
-import { ModalIcon as Icon } from '../../native/components/common'
 import {
   enableTouchId,
   isTouchDisabled,
@@ -417,9 +417,8 @@ const twofaReminder = async account => {
     const modal = createSimpleConfirmModal({
       title: s.strings.otp_authentication_header,
       icon: (
-        <Icon
-          name={Constants.CHECK}
-          type={Constants.ION_ICONS}
+        <IonIcon
+          name="ios-checkmark"
           style={styles.otpAuthenticationModalIcon}
         />
       ),
@@ -432,13 +431,7 @@ const twofaReminder = async account => {
   const createOtpCheckModal = async () => {
     const modal = createYesNoModal({
       title: s.strings.otp_reset_modal_header,
-      icon: (
-        <Icon
-          name={Constants.WARNING}
-          type={Constants.ION_ICONS}
-          style={styles.otpResetModalIcon}
-        />
-      ),
+      icon: <IonIcon name="ios-warning" style={styles.otpResetModalIcon} />,
       message: s.strings.otp_reset_modal_message,
       yesButtonText: s.strings.enable,
       noButtonText: s.strings.skip_button
@@ -449,13 +442,7 @@ const twofaReminder = async account => {
   const createOtpCheckModalDontAsk = async () => {
     const modal = createThreeButtonModal({
       title: s.strings.otp_reset_modal_header,
-      icon: (
-        <Icon
-          name={Constants.WARNING}
-          type={Constants.ION_ICONS}
-          style={styles.otpResetModalIcon}
-        />
-      ),
+      icon: <IonIcon name="ios-warning" style={styles.otpResetModalIcon} />,
       message: s.strings.otp_reset_modal_message,
       primaryButton: {
         text: s.strings.enable,

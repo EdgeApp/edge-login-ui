@@ -4,10 +4,10 @@ import React, { Component } from 'react'
 import { Dimensions, Platform, TouchableOpacity, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal'
+import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 
 import * as Constants from '../../../common/constants'
 import { StaticModalStyle } from '../../../common/styles/'
-import { Icon } from './'
 
 type Props = {
   modalDismissTimerSeconds: number,
@@ -56,11 +56,10 @@ class StaticModal extends Component<Props> {
               end={{ x: 1, y: 0 }}
               colors={Constants.GRADIENT_REVERSE}
             >
-              <Icon
+              <SimpleIcon
+                name="check"
                 style={styles.icon}
-                name={Constants.CHECK_CIRCLE}
                 size={styles.iconSize}
-                type={Constants.SIMPLE_ICONS}
               />
             </LinearGradient>
             <View style={styles.bottom}>

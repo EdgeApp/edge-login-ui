@@ -2,10 +2,9 @@
 
 import React, { Component } from 'react'
 import { Text, TouchableWithoutFeedback, View } from 'react-native'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
-import { Icon } from '../common'
 
 export type Props = {
   style: Object,
@@ -135,11 +134,7 @@ class PinKeypad extends Component<Props> {
               disabled={wait}
             >
               <View style={style.keypadColumnBack}>
-                <Icon
-                  style={style.keypadKeysBack}
-                  name={Constants.BACKSPACE}
-                  type={Constants.MATERIAL_ICONS}
-                />
+                <MaterialIcon name="backspace" style={style.keypadKeysBack} />
               </View>
             </TouchableWithoutFeedback>
           </View>
