@@ -39,7 +39,7 @@
     "react-native-mail": "^3.0.5",
     "react-native-material-textfield": "git://github.com/EdgeApp/react-native-material-textfield.git",
     "react-native-modal": "^11.0.1",
-    "react-native-vector-icons": "^4.4.2",
+    "react-native-vector-icons": "^6.1.0",
     "react-redux": "^5.0.7",
     "redux": "~3.5.2",
     "redux-thunk": "~2.1.0",
