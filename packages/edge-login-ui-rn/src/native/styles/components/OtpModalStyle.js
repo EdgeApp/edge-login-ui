@@ -5,7 +5,8 @@ import { scale } from '../../../common/util/scaling.js'
 
 export const OtpModalStyle = {
   otpResetModalIcon: {
-    color: Constants.ACCENT_RED
+    color: Constants.ACCENT_RED,
+    size: scale(25)
   },
   otpAuthenticationModalIcon: {
     color: Constants.ACCENT_MINT,

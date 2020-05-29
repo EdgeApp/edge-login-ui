@@ -18,7 +18,6 @@ import { Button, Icon, IconButton } from './'
 type Props = {
   styles: Object,
   headerText: string,
-  iconSize: number,
   headerSubtext: string,
   icon: string,
   iconType: string,

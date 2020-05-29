@@ -2,9 +2,7 @@
 
 import React from 'react'
 import { Text, View } from 'react-native'
-
-import * as Constants from '../../../common/constants'
-import { Icon } from './'
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
 
 type Props = {
   style: Object,
@@ -15,11 +13,10 @@ const WarningBox = ({ style, message }: Props) => {
   const renderGradient = (styles, icon, iconType) => {
     return (
       <View style={styles.iconWrapBottom}>
-        <Icon
+        <EvilIcons
+          name="exclamation"
           style={styles.iconStyle}
-          name={Constants.EXCLAMATION}
           size={styles.iconSize}
-          type={Constants.EVIL_ICONS}
         />
       </View>
     )
