@@ -1,5 +1,15 @@
 # edge-login-ui
 
+## 0.6.10
+
+- rn: Remove native-base as a dependency.
+- rn: Upgrade to react-native-vector-icons version 6.
+
+## 0.6.9
+
+- rn: Make the password recovery scene question list full height.
+- rn: Fix the OTP scene buttons.
+
 ## 0.6.8 (2020-03-18)
 
 - rn: Add auto scroll to terms and condition screen
