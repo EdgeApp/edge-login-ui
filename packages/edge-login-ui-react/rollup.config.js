@@ -8,6 +8,21 @@ import url from 'rollup-plugin-url'
 
 import packageJson from './package.json'
 
+const babelOpts = {
+  presets: [
+    ['@babel/preset-env', { loose: true }],
+    '@babel/preset-flow',
+    '@babel/preset-react'
+  ],
+  plugins: [
+    '@babel/plugin-proposal-class-properties',
+    [
+      '@babel/plugin-transform-runtime',
+      { corejs: false, helpers: false, regenerator: true }
+    ]
+  ]
+}
+
 const external = [
   'regenerator-runtime/runtime',
   ...Object.keys(packageJson.dependencies).filter(
@@ -33,7 +48,7 @@ export default {
       modules: true,
       plugins: [autoprefixer]
     }),
-    babel(),
+    babel(babelOpts),
     flowEntry()
   ]
 }

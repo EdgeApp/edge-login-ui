@@ -5,6 +5,17 @@ import resolve from 'rollup-plugin-node-resolve'
 
 import packageJson from './package.json'
 
+const babelOpts = {
+  babelrc: false,
+  presets: [['@babel/preset-env', { loose: true }], '@babel/preset-flow'],
+  plugins: [
+    [
+      '@babel/plugin-transform-runtime',
+      { corejs: false, helpers: false, regenerator: true }
+    ]
+  ]
+}
+
 const external = [
   ...Object.keys(packageJson.dependencies),
   ...Object.keys(packageJson.devDependencies),
@@ -19,5 +30,10 @@ export default {
     { file: packageJson.main, format: 'cjs', sourcemap: true },
     { file: packageJson.module, format: 'es', sourcemap: true }
   ],
-  plugins: [json({ preferConst: true }), babel(), flowEntry(), resolve()]
+  plugins: [
+    json({ preferConst: true }),
+    babel(babelOpts),
+    flowEntry(),
+    resolve()
+  ]
 }
