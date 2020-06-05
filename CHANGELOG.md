@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.11
+
+- Fix ion icon size variable name
+
 ## 0.6.10
 
 - rn: Remove native-base as a dependency.
