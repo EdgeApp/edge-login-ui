@@ -14,6 +14,7 @@ import { checkingForOTP } from '../../../common/util/checkingForOTP.js'
 import type { Imports } from '../../../types/ReduxTypes'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
+import { Airship } from '../common/AirshipInstance.js'
 
 type Props = {
   context: EdgeContext,
@@ -95,19 +96,21 @@ class LoginScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <LoginAppConnector
-          context={this.props.context}
-          onLogin={this.props.onLogin}
-          recoveryLogin={this.props.recoveryLogin}
-          styles={Styles}
-          appId={this.props.appId}
-          appName={this.props.appName}
-          backgroundImage={this.props.backgroundImage}
-          primaryLogo={this.props.primaryLogo}
-          primaryLogoCallback={this.props.primaryLogoCallback}
-          parentButton={this.props.parentButton}
-          landingScreenText={this.props.landingScreenText}
-        />
+        <Airship>
+          <LoginAppConnector
+            context={this.props.context}
+            onLogin={this.props.onLogin}
+            recoveryLogin={this.props.recoveryLogin}
+            styles={Styles}
+            appId={this.props.appId}
+            appName={this.props.appName}
+            backgroundImage={this.props.backgroundImage}
+            primaryLogo={this.props.primaryLogo}
+            primaryLogoCallback={this.props.primaryLogoCallback}
+            parentButton={this.props.parentButton}
+            landingScreenText={this.props.landingScreenText}
+          />
+        </Airship>
       </Provider>
     )
   }

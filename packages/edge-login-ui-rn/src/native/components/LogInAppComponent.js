@@ -5,6 +5,7 @@ import { View } from 'react-native'
 
 import * as Constants from '../../common/constants'
 import { ModalManager as ModalManagerLogin } from '../../common/util'
+import { getAlerts } from '../../common/util/fakeAlerts.js'
 import ForgotPasswordChangePasswordConnector from '../connectors/screens/existingAccount/ForgotPasswordChangePasswordConnector'
 import ForgotPinChangePinConnector from '../connectors/screens/existingAccount/ForgotPinChangePinConnector'
 import LoginWithRecoveryQuestionsSceenConnector from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
@@ -21,6 +22,8 @@ import NewAccountPinScreenConnector from '../connectors/screens/newAccount/SetAc
 import TermsAndConditionsScreenConnector from '../connectors/screens/newAccount/TermsAndConditionsScreenConnector'
 import PinLoginScreenConnector from '../connectors/screens/PinLoginScreenConnector'
 import { getSupportedBiometryType } from '../keychain.js'
+import { Airship } from './common/AirshipInstance.js'
+import { AlertModal } from './common/AlertModal.js'
 
 export type StateProps = {
   workflow: Object,
@@ -58,6 +61,22 @@ export class LoginAppComponent extends Component<Props, State> {
     }
     this.props.getPreviousUsers()
     this.checkTouchEnabled()
+  }
+
+  componentDidMount() {
+    this.getAlerts()
+  }
+
+  getAlerts = async () => {
+    const alerts = await getAlerts()
+    if (!alerts) return
+    Airship.show(bridge => (
+      <AlertModal
+        bridge={bridge}
+        text={JSON.stringify(alerts)}
+        buttonText="ok"
+      />
+    ))
   }
 
   render() {

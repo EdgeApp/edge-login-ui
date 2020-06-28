@@ -8772,6 +8772,11 @@ react-modal@^3.9.1:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
+react-native-airship@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-airship/-/react-native-airship-0.1.2.tgz#e4d1b4e260c87a921deb4da1e60ca57b4393f3d7"
+  integrity sha512-Rp4NfEUDw0dMp7Jj8Tzf56Vn5YKXoNgaoBAwKhETmL6tDDYJ+CuQThvjcJLs9H/vtYlHkBCD3luCEmk2k5+DTQ==
+
 react-native-animatable@^1.3.1:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.2.tgz#4783ee1a73dc98815aef234ce6b819f80bfe7d80"
@@ -8825,6 +8830,13 @@ react-native-modal@^11.0.1:
   dependencies:
     prop-types "^15.6.2"
     react-native-animatable "^1.3.1"
+
+react-native-safe-area-view@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-1.1.1.tgz#9833e34c384d0513f4831afcd1e54946f13897b2"
+  integrity sha512-bbLCtF+tqECyPWlgkWbIwx4vDPb0GEufx/ZGcSS4UljMcrpwluachDXoW9DBxhbMCc6k1V0ccqHWN7ntbRdERQ==
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
 
 react-native-vector-icons@^6.1.0:
   version "6.1.0"
