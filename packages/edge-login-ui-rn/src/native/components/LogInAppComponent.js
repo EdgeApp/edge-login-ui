@@ -45,7 +45,8 @@ export type OwnProps = {
 }
 export type DispatchProps = {
   getPreviousUsers(): void,
-  startRecoveryWorkflow(string): void
+  startRecoveryWorkflow(string): void,
+  selectUser(string): void
 }
 type State = {
   touch: string | boolean
@@ -69,14 +70,14 @@ export class LoginAppComponent extends Component<Props, State> {
 
   getAlerts = async () => {
     const alerts = await getAlerts()
-    if (!alerts) return
-    Airship.show(bridge => (
-      <AlertModal
-        bridge={bridge}
-        text={JSON.stringify(alerts)}
-        buttonText="ok"
-      />
-    ))
+    if (alerts)
+      Airship.show(bridge => (
+        <AlertModal
+          bridge={bridge}
+          alerts={alerts}
+          selectUser={this.props.selectUser}
+        />
+      ))
   }
 
   render() {

@@ -31,7 +31,14 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
           backupKey
         )
       )
-    }
+    },
+    selectUser: (data: string) =>
+      dispatch(
+        loginAction.dispatchActionWitString(
+          Constants.AUTH_UPDATE_USERNAME,
+          data
+        )
+      )
   }
 }
 

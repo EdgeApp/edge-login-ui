@@ -4,11 +4,11 @@ export const getAlerts = () =>
       resolve([
         {
           type: 'reset2fa',
-          accountName: 'joeSmith'
+          accountName: 'edgy41'
         },
         {
           type: 'loginRequest',
-          accountName: 'smithJoe'
+          accountName: 'edgy42'
         }
       ])
     }, 500)

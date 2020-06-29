@@ -154,5 +154,10 @@
   "keypad_zero": "0",
   "use_faceId": "Use Face ID",
   "use_touchId": "Use Touch ID",
-  "use_fingerprint": "Use Fingerprint"
+  "use_fingerprint": "Use Fingerprint",
+  "alert_modal_header": "SECURITY ALERTS",
+  "alert_modal_2fa_tile": "2-Factor reset requested for account",
+  "alert_modal_2fa_body": "Please login to approve or deny this alert",
+  "alert_modal_login_tile": "Login request for new device for account",
+  "alert_modal_login_body": "Please login to approve or deny this alert"
 }

@@ -1,9 +1,11 @@
 // @flow
+import { THEME } from '../theme/airbitz.js'
 import { scale } from '../util/scaling.js'
 
 const remMultiplier = 16
 
 export type EdgeTheme = {
+  fontFamily: string,
   primaryButton: string,
   primaryButtonText: string,
   secondaryButtonOutline: string,
@@ -23,6 +25,11 @@ export type EdgeTheme = {
   cancelButton: string,
   accentTextPositive: string,
   accentTextNegative: string,
+  alertModalHeaderIcon: string,
+  alertModalWarningIcon: string,
+  alertModalDangerIcon: string,
+  alertModalRowBorder: string,
+  alertModalCloseIcon: string,
   remMultiplier: number,
   rem: (rem: number) => number
 }
@@ -52,6 +59,7 @@ const pallete = {
 }
 
 export const theme: EdgeTheme = {
+  fontFamily: THEME.FONTS.DEFAULT,
   primaryButton: pallete.edgeMint,
   primaryButtonText: pallete.edgeNavy,
   secondaryButtonOutline: pallete.edgeMint,
@@ -71,6 +79,11 @@ export const theme: EdgeTheme = {
   cancelButton: pallete.white,
   accentTextPositive: pallete.accentGreen,
   accentTextNegative: pallete.accentRed,
+  alertModalHeaderIcon: pallete.accentOrange,
+  alertModalRowBorder: pallete.lightGray,
+  alertModalWarningIcon: pallete.accentOrange,
+  alertModalDangerIcon: pallete.accentRed,
+  alertModalCloseIcon: pallete.gray,
   remMultiplier,
   rem: (rem: number) => Math.round(rem * scale(theme.remMultiplier))
 }

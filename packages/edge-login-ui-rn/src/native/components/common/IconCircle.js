@@ -7,7 +7,8 @@ import { THEME } from '../../../common/theme/airbitz.js'
 import { scale } from '../../../common/util/scaling.js'
 
 type Props = {
-  children: ChildrenArray<Node>
+  children: ChildrenArray<Node>,
+  styles?: StyleSheet
 }
 
 export const iconSize = THEME.rem(3.5)
@@ -17,7 +18,7 @@ export const iconSize = THEME.rem(3.5)
  * offset circle for holding an icon.
  */
 export function IconCircle(props: Props) {
-  return <View style={styles.iconCircle}>{props.children}</View>
+  return <View style={[styles.iconCircle, props.styles]}>{props.children}</View>
 }
 
 const styles = StyleSheet.create({
