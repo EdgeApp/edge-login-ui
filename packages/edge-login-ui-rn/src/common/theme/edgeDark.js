@@ -16,6 +16,7 @@ export type EdgeTheme = {
   headerText: string,
   primaryText: string,
   secondaryText: string,
+  dangerText: string,
   tileBackground: string,
   tileIcon: string,
   tileMore: string,
@@ -30,6 +31,9 @@ export type EdgeTheme = {
   alertModalDangerIcon: string,
   alertModalRowBorder: string,
   alertModalCloseIcon: string,
+  alertPageWarningIcon: string,
+  alertPageDenyButtonBackground: string,
+  alertPageDenyButtonText: string,
   remMultiplier: number,
   rem: (rem: number) => number
 }
@@ -55,7 +59,8 @@ const pallete = {
   gray: '#87939E',
   lightGray: '#D9E3ED',
   lightestGray: '#F4F5F6',
-  blueGray: '#A4C7DF'
+  blueGray: '#A4C7DF',
+  transparent: 'rgba(0, 0, 0, 0)'
 }
 
 export const theme: EdgeTheme = {
@@ -70,6 +75,7 @@ export const theme: EdgeTheme = {
   headerText: pallete.white,
   primaryText: pallete.white,
   secondaryText: pallete.blueGray,
+  dangerText: pallete.accentRed,
   tileBackground: pallete.edgeBlue,
   tileIcon: pallete.edgeMint,
   tileMore: pallete.white,
@@ -84,6 +90,9 @@ export const theme: EdgeTheme = {
   alertModalWarningIcon: pallete.accentOrange,
   alertModalDangerIcon: pallete.accentRed,
   alertModalCloseIcon: pallete.gray,
+  alertPageWarningIcon: pallete.accentOrange,
+  alertPageDenyButtonBackground: pallete.edgeMint,
+  alertPageDenyButtonText: pallete.edgeBlue,
   remMultiplier,
   rem: (rem: number) => Math.round(rem * scale(theme.remMultiplier))
 }

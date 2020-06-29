@@ -191,7 +191,18 @@ const strings = {
   alert_modal_2fa_tile: '2-Factor reset requested for account',
   alert_modal_2fa_body: 'Please login to approve or deny this alert',
   alert_modal_login_tile: 'Login request for new device for account',
-  alert_modal_login_body: 'Please login to approve or deny this alert'
+  alert_modal_login_body: 'Please login to approve or deny this alert',
+  alert_page_header: 'Security Alert',
+  alert_page_body_1:
+    'This device would like to login to your account. If you did not request this login, please deny this request and change your password.',
+  alert_page_device: 'Device',
+  alert_page_last_location: 'Last Location',
+  alert_page_body_2:
+    'Loss of funds may occur if you fail to deny access to this login request.',
+  alert_page_body_3:
+    'Unless denied, access will automatically be granted on the following date',
+  alert_page_deny: 'Not Me, Deny',
+  alert_page_agree: 'It Was Me'
 }
 
 module.exports = strings
