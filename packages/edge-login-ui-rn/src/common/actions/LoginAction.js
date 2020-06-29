@@ -10,6 +10,7 @@ import React from 'react'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import { sprintf } from 'sprintf-js'
 
+import { getAlert } from '../../common/util/fakeAlerts.js'
 import {
   enableTouchId,
   isTouchDisabled,
@@ -205,6 +206,17 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
           }
           await twofaReminder(abcAccount)
           dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
+          const alert = await getAlert(abcAccount.username)
+          if (alert) {
+            return dispatch(
+              dispatchActionWithData(Constants.WORKFLOW_SECURITY_ALERT, {
+                alert,
+                abcAccount,
+                touchIdInformation,
+                callback
+              })
+            )
+          }
           callback(null, abcAccount, touchIdInformation)
         } catch (e) {
           console.log('LOG IN WITH PIN ERROR ', e)
@@ -295,6 +307,17 @@ export function userLogin(data: Object, backupKey?: string) {
         }
         await twofaReminder(abcAccount)
         dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
+        const alert = await getAlert(abcAccount.username)
+        if (alert) {
+          return dispatch(
+            dispatchActionWithData(Constants.WORKFLOW_SECURITY_ALERT, {
+              alert,
+              abcAccount,
+              touchIdInformation,
+              callback
+            })
+          )
+        }
         callback(null, abcAccount, touchIdInformation)
       } catch (e) {
         console.log(e)

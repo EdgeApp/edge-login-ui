@@ -5,6 +5,7 @@ const initialState = {
   currentKey: 'firstLoadWF',
   showModal: false,
   modalView: null,
+  data: {},
   firstLoadWF: {
     scenes: 1,
     details: [{ back: false, skip: false, title: '', subTitle: '' }]
@@ -169,6 +170,13 @@ export default function(state = initialState, action) {
         ...state,
         currentKey: Constants.WORKFLOW_RECOVERY_LOGIN,
         currentSceneIndex: 1
+      }
+    case Constants.WORKFLOW_SECURITY_ALERT:
+      return {
+        ...state,
+        currentKey: Constants.WORKFLOW_SECURITY_ALERT,
+        currentSceneIndex: 0,
+        data: action.data
       }
     case Constants.RESET_APP:
       return initialState

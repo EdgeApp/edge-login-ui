@@ -6,6 +6,7 @@ import { View } from 'react-native'
 import * as Constants from '../../common/constants'
 import { ModalManager as ModalManagerLogin } from '../../common/util'
 import { getAlerts } from '../../common/util/fakeAlerts.js'
+import { AlertComponent } from '../components/screens/existingAccout/AlertComponent.js'
 import ForgotPasswordChangePasswordConnector from '../connectors/screens/existingAccount/ForgotPasswordChangePasswordConnector'
 import ForgotPinChangePinConnector from '../connectors/screens/existingAccount/ForgotPinChangePinConnector'
 import LoginWithRecoveryQuestionsSceenConnector from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
@@ -140,6 +141,8 @@ export class LoginAppComponent extends Component<Props, State> {
         return this.getOtpScreen()
       case Constants.WORKFLOW_RECOVERY_LOGIN:
         return this.getRecoveryLoginScreen()
+      case Constants.WORKFLOW_SECURITY_ALERT:
+        return this.getAlertScreen()
     }
   }
 
@@ -249,6 +252,10 @@ export class LoginAppComponent extends Component<Props, State> {
       case 2:
         return <ForgotPinChangePinConnector styles={this.props.styles} />
     }
+  }
+
+  getAlertScreen() {
+    return <AlertComponent data={this.props.workflow.data} />
   }
 
   checkTouchEnabled = async () => {

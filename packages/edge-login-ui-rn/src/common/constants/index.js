@@ -20,6 +20,7 @@ export const WORKFLOW_CREATE = 'createWF'
 export const WORKFLOW_PASSWORD = 'passwordWF'
 export const WORKFLOW_PASSWORD_FORCED = 'passwordWFForced'
 export const WORKFLOW_PIN = 'pinWF'
+export const WORKFLOW_SECURITY_ALERT = 'securityAlert'
 
 export const WORKFLOW_RECOVERY = 'recoveryWF'
 export const WORKFLOW_RECOVERY_LOGIN = 'recoveryLoginWF'

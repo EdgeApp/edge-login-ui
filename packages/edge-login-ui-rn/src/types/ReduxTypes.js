@@ -14,7 +14,8 @@ export type State = {
     currentKey: string,
     details: Array<Object>,
     currentSceneIndex: number,
-    showModal: boolean
+    showModal: boolean,
+    data: Object
   },
   create: {
     username: string,
