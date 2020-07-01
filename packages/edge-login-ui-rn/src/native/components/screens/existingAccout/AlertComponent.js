@@ -8,6 +8,7 @@ import s from '../../../../common/locales/strings.js'
 import { theme } from '../../../../common/theme/edgeDark.js'
 import Gradient from '../../common/Gradient.js'
 import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
+import { ChangePasswordScreen } from '../../exportAPIComponents/ChangePasswordScreen.js'
 
 const GRADIENT = [theme.background1, theme.background2]
 
@@ -15,8 +16,21 @@ type Props = {
   data: Object
 }
 
-export class AlertComponent extends Component<Props> {
-  onDeny = () => {
+type State = {
+  isDenied: boolean
+}
+
+export class AlertComponent extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      isDenied: false
+    }
+  }
+
+  onDeny = () => this.setState({ isDenied: true })
+
+  afterDenied = () => {
     const { abcAccount, touchIdInformation, callback } = this.props.data
     // Put alert deny logic here
     callback(null, abcAccount, touchIdInformation)
@@ -28,7 +42,7 @@ export class AlertComponent extends Component<Props> {
     callback(null, abcAccount, touchIdInformation)
   }
 
-  render() {
+  renderAlert = () => {
     const { alert } = this.props.data
     return (
       <SafeAreaViewGradient colors={GRADIENT}>
@@ -67,6 +81,22 @@ export class AlertComponent extends Component<Props> {
         </Gradient>
       </SafeAreaViewGradient>
     )
+  }
+
+  render() {
+    const { isDenied } = this.state
+    if (isDenied) {
+      return (
+        <ChangePasswordScreen
+          account={this.props.data.abcAccount}
+          context={this.props.data.context}
+          showHeader={false}
+          onComplete={this.afterDenied}
+          onCancel={this.afterDenied}
+        />
+      )
+    }
+    return this.renderAlert()
   }
 }
 

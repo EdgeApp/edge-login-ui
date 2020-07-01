@@ -211,6 +211,7 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
             return dispatch(
               dispatchActionWithData(Constants.WORKFLOW_SECURITY_ALERT, {
                 alert,
+                context,
                 abcAccount,
                 touchIdInformation,
                 callback
@@ -312,6 +313,7 @@ export function userLogin(data: Object, backupKey?: string) {
           return dispatch(
             dispatchActionWithData(Constants.WORKFLOW_SECURITY_ALERT, {
               alert,
+              context,
               abcAccount,
               touchIdInformation,
               callback
