@@ -71,6 +71,15 @@ class PinLoginScreenComponent extends Component<Props, State> {
     }
   }
 
+  componentDidUpdate() {
+    if (
+      !this.props.userDetails.touchEnabled &&
+      !this.props.userDetails.pinEnabled
+    ) {
+      this.exitPin()
+    }
+  }
+
   relaunchTouchId = () => {
     this.props.launchUserLoginWithTouchId({ username: this.props.username })
   }
