@@ -118,7 +118,8 @@ export function retryWithOtp() {
         getState,
         imports
       )
-      return dispatch(dispatchAction(Constants.RECOVERY_AFTER_OTP_CHECK))
+      dispatch(dispatchAction(Constants.RECOVERY_AFTER_OTP_CHECK))
+      return
     }
     if (previousAttemptType === 'PASSWORD') {
       return userLogin(
@@ -132,6 +133,7 @@ export function retryWithOtp() {
     )(dispatch, getState, imports)
   }
 }
+
 export function userLoginWithTouchId(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports

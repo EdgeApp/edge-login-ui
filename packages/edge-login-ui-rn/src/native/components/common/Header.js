@@ -4,12 +4,20 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
-import * as Colors from '../../../common/constants/Colors'
 import s from '../../../common/locales/strings'
 import T from '../../../native/components/common/FormattedText.js'
 import { Button, HeaderBackButton } from '../common'
 
-type Props = {
+const UPPER_LEFT = { x: 0, y: 0 }
+const UPPER_RIGHT = { x: 1, y: 0 }
+const GRADIENT = ['#0E4B75', '#0D2145']
+
+export type HeaderOwnProps = {
+  colors?: string[],
+  title?: string
+}
+
+type StateProps = {
   style: Object,
   subTitle: string,
   title: string,
@@ -21,6 +29,8 @@ type Props = {
   useCancel(): void,
   skipButton(): void
 }
+type Props = HeaderOwnProps & StateProps
+
 // Make a component
 class Header extends Component<Props> {
   render() {
@@ -28,9 +38,9 @@ class Header extends Component<Props> {
     return (
       <LinearGradient
         style={[Style.container, { paddingTop: 0 }]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        colors={Colors.GRADIENT}
+        start={UPPER_LEFT}
+        end={UPPER_RIGHT}
+        colors={this.props.colors || GRADIENT}
       >
         <View style={Style.left}>{this.renderBack(Style)}</View>
         {this.renderText(Style)}

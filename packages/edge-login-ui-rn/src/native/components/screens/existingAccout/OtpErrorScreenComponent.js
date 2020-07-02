@@ -1,18 +1,27 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { sprintf } from 'sprintf-js'
 
 import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings'
-import EdgeLoginQrConnector from '../../../../native/connectors/componentConnectors/EdgeLoginQrConnector'
+import { theme } from '../../../../common/theme/edgeDark.js'
 import OtpBackupKeyConnector from '../../../../native/connectors/componentConnectors/OtpBackupKeyConnector'
 import DisableOtpModalConnector from '../../../connectors/abSpecific/DisableOtpModalConnector'
 import OtpAuthCodeModalConnector from '../../../connectors/abSpecific/OtpAuthCodeModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorOtp'
-import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'
 import { Button, StaticModal } from '../../common'
-import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { Airship } from '../../common/AirshipInstance.js'
+import Gradient from '../../common/Gradient.js'
+import { OtpAuthenticationCodeModal } from '../../common/OtpAuthenticationCodeModal.js'
+import { QrCodeModal } from '../../common/QrCodeModal.js'
+import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
+
+const GRADIENT = [theme.background1, theme.background2]
+const hardCodedDate = 'July 7, 2020 7:30PM'
+const authorizeDevice = false
 
 type Props = {
   styles: Object,
@@ -170,36 +179,219 @@ export default class OtpErrorScreenComponent extends Component<Props, State> {
     return null
   }
 
-  render() {
-    const { OtpErrorScreenStyle } = this.props.styles
+  openAuthenticationCodeModal = () =>
+    Airship.show(bridge => (
+      <OtpAuthenticationCodeModal
+        bridge={bridge}
+        submit={this.sendCode.bind(this)}
+      />
+    ))
 
+  openQrModal = () => Airship.show(bridge => <QrCodeModal bridge={bridge} />)
+
+  renderOtpScreen = () => {
+    const { OtpErrorScreenStyle } = this.props.styles
     return (
-      <SafeAreaView>
+      <SafeAreaViewGradient colors={GRADIENT}>
         <View style={OtpErrorScreenStyle.screen}>
-          <HeaderConnector style={OtpErrorScreenStyle.header} />
-          <View style={OtpErrorScreenStyle.pageContainer}>
-            <OtpHeroComponent
-              style={OtpErrorScreenStyle.hero}
-              screen={this.state.screen}
-              otpResetDate={this.props.otpResetDate}
-            />
-            <View style={OtpErrorScreenStyle.qrRow}>
-              <EdgeLoginQrConnector />
+          <HeaderConnector
+            style={OtpErrorScreenStyle.header}
+            colors={GRADIENT}
+            title="2FA"
+          />
+          <Gradient style={styles.container} colors={GRADIENT}>
+            <View style={styles.headerContainer}>
+              <FontAwesome
+                name="exclamation-triangle"
+                style={styles.headerIcon}
+              />
+              <Text style={styles.headerText}>{s.strings.otp_page_header}</Text>
             </View>
-            <View style={OtpErrorScreenStyle.shim} />
-            <Button
-              onPress={this.showBackupModal.bind(this)}
-              downStyle={OtpErrorScreenStyle.exitButton.downStyle}
-              downTextStyle={OtpErrorScreenStyle.exitButton.downTextStyle}
-              upStyle={OtpErrorScreenStyle.exitButton.upStyle}
-              upTextStyle={OtpErrorScreenStyle.exitButton.upTextStyle}
-              label={s.strings.type_auth_button}
-            />
-            {this.renderDisableButton(OtpErrorScreenStyle)}
-          </View>
-          {this.renderModal(OtpErrorScreenStyle)}
+            <Text style={styles.body1}>{s.strings.otp_page_body1}</Text>
+            <View style={styles.dividerContainer}>
+              <View style={styles.dividerLine} />
+              <Text style={styles.dividerText}>{s.strings.string_or}</Text>
+              <View style={styles.dividerLine} />
+            </View>
+            <TouchableWithoutFeedback onPress={this.openQrModal}>
+              <View style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>
+                  {s.strings.otp_page_scan_qr}
+                </Text>
+                <FontAwesome name="chevron-right" style={styles.buttonIcon} />
+              </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+              onPress={this.openAuthenticationCodeModal}
+            >
+              <View style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>
+                  {s.strings.otp_page_scan_authetication}
+                </Text>
+                <FontAwesome name="chevron-right" style={styles.buttonIcon} />
+              </View>
+            </TouchableWithoutFeedback>
+            <View style={styles.dividerContainer}>
+              <View style={styles.dividerLine} />
+              <Text style={styles.dividerText}>{s.strings.string_or}</Text>
+              <View style={styles.dividerLine} />
+            </View>
+            <Text style={styles.body2}>
+              {sprintf(s.strings.otp_page_body2, hardCodedDate)}
+            </Text>
+          </Gradient>
         </View>
-      </SafeAreaView>
+      </SafeAreaViewGradient>
     )
   }
+
+  renderAuthorizeScreen = () => {
+    const { OtpErrorScreenStyle } = this.props.styles
+    return (
+      <SafeAreaViewGradient colors={GRADIENT}>
+        <View style={OtpErrorScreenStyle.screen}>
+          <HeaderConnector
+            style={OtpErrorScreenStyle.header}
+            colors={GRADIENT}
+            title="Authorize Device"
+          />
+          <Gradient style={styles.container} colors={GRADIENT}>
+            <View style={styles.headerContainer}>
+              <FontAwesome
+                name="exclamation-triangle"
+                style={styles.headerIcon}
+              />
+              <Text style={styles.headerText}>
+                {s.strings.authorize_page_header}
+              </Text>
+            </View>
+            <Text style={styles.body1}>{s.strings.authorize_page_body}</Text>
+            <View style={styles.dividerContainer}>
+              <View style={styles.dividerLine} />
+              <Text style={styles.dividerText}>{s.strings.string_or}</Text>
+              <View style={styles.dividerLine} />
+            </View>
+            <Text style={styles.body2}>
+              {sprintf(s.strings.otp_page_body2, hardCodedDate)}
+            </Text>
+          </Gradient>
+        </View>
+      </SafeAreaViewGradient>
+    )
+  }
+
+  render() {
+    return authorizeDevice
+      ? this.renderAuthorizeScreen()
+      : this.renderOtpScreen()
+  }
+
+  // render() {
+  //   const { OtpErrorScreenStyle } = this.props.styles
+  //
+  //   return (
+  //     <SafeAreaView>
+  //       <View style={OtpErrorScreenStyle.screen}>
+  //         <HeaderConnector style={OtpErrorScreenStyle.header} />
+  //         <View style={OtpErrorScreenStyle.pageContainer}>
+  //           <OtpHeroComponent
+  //             style={OtpErrorScreenStyle.hero}
+  //             screen={this.state.screen}
+  //             otpResetDate={this.props.otpResetDate}
+  //           />
+  //           <View style={OtpErrorScreenStyle.qrRow}>
+  //             <EdgeLoginQrConnector />
+  //           </View>
+  //           <View style={OtpErrorScreenStyle.shim} />
+  //           <Button
+  //             onPress={this.showBackupModal.bind(this)}
+  //             downStyle={OtpErrorScreenStyle.exitButton.downStyle}
+  //             downTextStyle={OtpErrorScreenStyle.exitButton.downTextStyle}
+  //             upStyle={OtpErrorScreenStyle.exitButton.upStyle}
+  //             upTextStyle={OtpErrorScreenStyle.exitButton.upTextStyle}
+  //             label={s.strings.type_auth_button}
+  //           />
+  //           {this.renderDisableButton(OtpErrorScreenStyle)}
+  //         </View>
+  //         {this.renderModal(OtpErrorScreenStyle)}
+  //       </View>
+  //     </SafeAreaView>
+  //   )
+  // }
 }
+
+const { rem } = theme
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: '100%',
+    padding: rem(1)
+  },
+  headerContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: rem(0.5)
+  },
+  headerIcon: {
+    color: theme.otpPageHeader,
+    fontSize: rem(2.5),
+    marginRight: rem(1)
+  },
+  headerText: {
+    fontFamily: theme.fontFamily,
+    fontSize: rem(1),
+    color: theme.otpPageHeader,
+    flex: 1
+  },
+  body1: {
+    fontFamily: theme.fontFamily,
+    fontSize: rem(1),
+    color: theme.primaryText,
+    marginVertical: rem(0.5)
+  },
+  dividerContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: rem(0.5)
+  },
+  dividerLine: {
+    height: 1,
+    borderColor: theme.otpPageDivdider,
+    borderBottomWidth: 1,
+    flex: 1
+  },
+  dividerText: {
+    fontFamily: theme.fontFamily,
+    fontSize: rem(1),
+    color: theme.otpPageDivdider,
+    marginHorizontal: rem(0.5),
+    paddingBottom: 5 // padding to center the text
+  },
+  buttonContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  buttonIcon: {
+    color: theme.otpPageButtonIcon,
+    height: theme.rem(1),
+    textAlign: 'center'
+  },
+  buttonText: {
+    fontFamily: theme.fontFamily,
+    fontSize: rem(1),
+    color: theme.otpPageButtonText,
+    marginVertical: rem(0.5),
+    flex: 1
+  },
+  body2: {
+    fontFamily: theme.fontFamily,
+    fontSize: rem(1),
+    color: theme.primaryText,
+    marginVertical: rem(0.5)
+  }
+})

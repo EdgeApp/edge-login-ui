@@ -26,14 +26,27 @@ export type EdgeTheme = {
   cancelButton: string,
   accentTextPositive: string,
   accentTextNegative: string,
+
+  // Alert Modal
   alertModalHeaderIcon: string,
   alertModalWarningIcon: string,
   alertModalDangerIcon: string,
   alertModalRowBorder: string,
   alertModalCloseIcon: string,
+
+  // Alert Page
   alertPageWarningIcon: string,
   alertPageDenyButtonBackground: string,
   alertPageDenyButtonText: string,
+
+  // OTP Page
+  otpPageHeader: string,
+  otpPageButtonIcon: string,
+  otpPageButtonText: string,
+  otpPageDivdider: string,
+
+  qrCodeModalBackgroud: string,
+
   remMultiplier: number,
   rem: (rem: number) => number
 }
@@ -85,14 +98,27 @@ export const theme: EdgeTheme = {
   cancelButton: pallete.white,
   accentTextPositive: pallete.accentGreen,
   accentTextNegative: pallete.accentRed,
+
+  // Alert Modal
   alertModalHeaderIcon: pallete.accentOrange,
   alertModalRowBorder: pallete.lightGray,
   alertModalWarningIcon: pallete.accentOrange,
   alertModalDangerIcon: pallete.accentRed,
   alertModalCloseIcon: pallete.gray,
+
+  // Alert Page
   alertPageWarningIcon: pallete.accentOrange,
   alertPageDenyButtonBackground: pallete.edgeMint,
   alertPageDenyButtonText: pallete.edgeBlue,
+
+  // OTP Page
+  otpPageHeader: pallete.accentOrange,
+  otpPageButtonIcon: pallete.white,
+  otpPageButtonText: pallete.edgeMint,
+  otpPageDivdider: pallete.blueGray,
+
+  qrCodeModalBackgroud: pallete.edgeNavy,
+
   remMultiplier,
   rem: (rem: number) => Math.round(rem * scale(theme.remMultiplier))
 }

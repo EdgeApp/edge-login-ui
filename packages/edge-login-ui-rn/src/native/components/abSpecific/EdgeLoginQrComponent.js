@@ -3,15 +3,21 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
+import { EdgeLoginQrStyle } from '../../../native/styles'
 import { QrCode } from '../common/QrCode.js'
 
-type Props = {
-  style: Object,
+type OwnProps = {
+  propStyle?: Object
+}
+
+type StateProps = {
   edgeLoginId: string,
   getQrCode(): void,
   cancelEdgeLogin(): void,
   cancelRequest(): void
 }
+
+type Props = OwnProps & StateProps
 
 export class EdgeLoginQrComponent extends Component<Props> {
   componentDidMount() {
@@ -24,7 +30,8 @@ export class EdgeLoginQrComponent extends Component<Props> {
   }
 
   render() {
-    const { style, edgeLoginId } = this.props
+    const { edgeLoginId } = this.props
+    const style = this.props.propStyle || EdgeLoginQrStyle
     const { qrCodeSize, qrCodeForeground, qrCodeBackground } = style
 
     return (

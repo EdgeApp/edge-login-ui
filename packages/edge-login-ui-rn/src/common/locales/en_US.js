@@ -202,7 +202,20 @@ const strings = {
   alert_page_body_3:
     'Unless denied, access will automatically be granted on the following date',
   alert_page_deny: 'Not Me, Deny',
-  alert_page_agree: 'It Was Me'
+  alert_page_agree: 'It Was Me',
+  otp_page_header: 'Two-factor authentication is turned on for this account',
+  otp_page_body1:
+    'Approve this login from your other devices logged into this account',
+  otp_page_scan_qr: 'Scan QR Code',
+  otp_page_scan_authetication: 'Enter 2FA Authentication Code',
+  otp_page_body2:
+    'Wait until %s when the device will be automatically authorized to log in',
+  qr_modal_header: 'Scan QR Code with Another Device Logged into Your Account',
+  string_or: 'or',
+  authorize_page_header:
+    'This device is not authorized to log in to this account',
+  authorize_page_body:
+    'Approve this login from your other devices logged into this account'
 }
 
 module.exports = strings

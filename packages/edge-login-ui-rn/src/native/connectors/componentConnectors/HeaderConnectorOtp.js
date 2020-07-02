@@ -5,16 +5,16 @@ import { connect } from 'react-redux'
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
-import { Header } from '../../components/common/'
+import { type HeaderOwnProps, Header } from '../../components/common/Header.js'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: State, ownProps: HeaderOwnProps) => {
   const workflow = state.workflow
   const currentWorkflow = workflow[state.workflow.currentKey]
   const currentScene = currentWorkflow.details[state.workflow.currentSceneIndex]
   return {
     showBackButton: currentScene.back,
     showSkipButton: currentScene.skip,
-    title: currentScene.title,
+    title: ownProps.title || currentScene.title,
     subTitle: currentScene.subTitle
   }
 }

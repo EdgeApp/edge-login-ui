@@ -9,6 +9,10 @@ export const getAlerts = () =>
         {
           type: 'loginRequest',
           accountName: 'edgy42'
+        },
+        {
+          type: 'loginRequest',
+          accountName: 'foofoo335'
         }
       ])
     }, 500)
