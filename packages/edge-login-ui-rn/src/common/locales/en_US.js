@@ -46,9 +46,6 @@ const strings = {
   delete_account_header: 'Delete Account',
   delete_username_account:
     'Delete %1$s on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.',
-  disable_otp_header: 'Are you sure you want to disable 2FA',
-  disable_otp_modal_body:
-    '2FA will take 7 days to disable if no action is taken by the account user on authentiacated devices',
   disable_otp_button: 'Disable 2FA',
   send_email_error_header: "Can't send email",
   email_error_modal:
@@ -107,12 +104,8 @@ const strings = {
   your_answer_label: 'Your Answer',
   answer_case_sensitive: 'Answers are case sensitive',
   answers_four_chanracters: 'Answers should be minimum of 4 characters',
-  otp_dispable_req_sent:
-    "2FA disable request has been sent. You'll be able to login with your username and password after 7 days.",
   otp_instructions:
     'Sign into your account using the device you setup 2FA with, and go to Settings > 2 Factor Authentication to find the code.',
-  disable_otp_button_two: 'Disable 2 Factor Authentication',
-  type_auth_button: 'Type in authentication code instead',
   otp_email_body:
     'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ',
   otp_email_subject: 'Edge Recovery Token',

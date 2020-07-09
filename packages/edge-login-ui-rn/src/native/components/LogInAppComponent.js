@@ -7,10 +7,10 @@ import * as Constants from '../../common/constants'
 import { ModalManager as ModalManagerLogin } from '../../common/util'
 import { getAlerts } from '../../common/util/fakeAlerts.js'
 import { AlertComponent } from '../components/screens/existingAccout/AlertComponent.js'
+import OtpErrorScreenComponent from '../components/screens/existingAccout/OtpErrorScreenComponent.js'
 import ForgotPasswordChangePasswordConnector from '../connectors/screens/existingAccount/ForgotPasswordChangePasswordConnector'
 import ForgotPinChangePinConnector from '../connectors/screens/existingAccount/ForgotPinChangePinConnector'
 import LoginWithRecoveryQuestionsSceenConnector from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
-import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'
 import LoadingScreenConnector from '../connectors/screens/LoadingScreenConnector'
 import LoginUsernamePasswordScreenConnector from '../connectors/screens/LogInUsernamePasswordScreenConnector'
@@ -234,7 +234,7 @@ export class LoginAppComponent extends Component<Props, State> {
   }
 
   getOtpScreen() {
-    return <OtpErrorScreenConnector styles={this.props.styles} />
+    return <OtpErrorScreenComponent />
   }
 
   getRecoveryLoginScreen() {
