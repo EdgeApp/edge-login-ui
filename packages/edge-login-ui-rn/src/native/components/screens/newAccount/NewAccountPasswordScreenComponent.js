@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings'
 import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 import SkipModalConnector from '../../../connectors/abSpecific/SkipModalConnector'
@@ -52,7 +51,7 @@ export default class NewAccountPasswordScreenComponent extends Component<
       <SafeAreaView>
         <KeyboardAwareScrollView
           style={NewAccountPasswordScreenStyle.screen}
-          keyboardShouldPersistTaps={Constants.ALWAYS}
+          keyboardShouldPersistTaps="always"
           contentContainerStyle={NewAccountPasswordScreenStyle.mainScrollView}
         >
           <HeaderConnector style={NewAccountPasswordScreenStyle.header} />

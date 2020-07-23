@@ -193,7 +193,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     return (
       <KeyboardAwareScrollView
         style={this.style.container}
-        keyboardShouldPersistTaps={Constants.ALWAYS}
+        keyboardShouldPersistTaps="always"
         contentContainerStyle={this.style.mainScrollView}
       >
         <BackgroundImage

@@ -5,14 +5,6 @@ export * from './Fonts'
 export * from './Theme'
 export * from './IconConstants'
 export * from './OtpConstants'
-export * from './ToLocalizeConstants'
-
-/* export const LEFT_TO_RIGHT = 'leftToRight'
-export const RIGHT_TO_LEFT = 'rightToLeft'
-export const NONE ='none'
-export const FROM ='from'
-export const TO ='to' */
-export const ALWAYS = 'always'
 
 export const WORKFLOW_FIRST_LOAD = 'firstLoadWF'
 export const WORKFLOW_INIT = 'initalizeWF'
@@ -21,9 +13,7 @@ export const WORKFLOW_PASSWORD = 'passwordWF'
 export const WORKFLOW_PASSWORD_FORCED = 'passwordWFForced'
 export const WORKFLOW_PIN = 'pinWF'
 
-export const WORKFLOW_RECOVERY = 'recoveryWF'
 export const WORKFLOW_RECOVERY_LOGIN = 'recoveryLoginWF'
-export const WORKFLOW_FINGERPRINT = 'fingerprintWF'
 export const WORKFLOW_OTP = 'otpWF'
 
 export const WORKFLOW_START = 'workflowStart'
