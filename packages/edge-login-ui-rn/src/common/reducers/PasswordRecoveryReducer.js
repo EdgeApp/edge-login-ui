@@ -1,4 +1,18 @@
-const initialState = {
+// @flow
+
+import { type Reducer } from 'redux'
+
+import { type Action } from '../../types/ReduxTypes'
+
+export type PasswordRecoveryState = {
+  +questionsList: Array<string>,
+  +recoveryErrorMessage: string | null,
+  +recoveryKey: string | null,
+  +showRecoveryEmailDialog: boolean,
+  +userQuestions: Array<string>
+}
+
+const initialState: PasswordRecoveryState = {
   questionsList: [],
   userQuestions: [],
   recoveryKey: null,
@@ -7,7 +21,10 @@ const initialState = {
   showRecoveryEmailDialog: false
 }
 
-export default function(state = initialState, action) {
+export const passwordRecovery: Reducer<
+  PasswordRecoveryState,
+  Action
+> = function(state = initialState, action) {
   switch (action.type) {
     case 'PASSWORD_RECOVERY_INITIALIZED':
       return {

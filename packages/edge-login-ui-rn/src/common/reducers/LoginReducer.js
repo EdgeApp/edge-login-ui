@@ -1,27 +1,62 @@
-import { type PreviousUsersState } from '../actions/PreviousUsersActions.js'
+// @flow
 
-const initialState = {
-  username: null,
+import type { EdgeAccount } from 'edge-core-js'
+import { type Reducer } from 'redux'
+
+import { type Action } from '../../types/ReduxTypes'
+import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
+
+const flowHack: any = {}
+const defaultAccount: EdgeAccount = flowHack
+
+export type LoginState = {
+  +account: EdgeAccount,
+  +cancelEdgeLoginRequest: (() => void) | null,
+  +edgeLoginId: string | null,
+  +errorMessage: string | null,
+  +isLoggingInWithPin: boolean,
+  +loginSuccess: boolean,
+  +otpErrorMessage: string | null,
+  +otpResetDate: Date | null,
+  +otpResetToken: string,
+  +otpUserBackupKey: string,
+  +password: string | null,
+  +pin: string | null,
+  +previousAttemptData: any,
+  +previousAttemptType: string | null,
+  +recoveryToken: string | null,
+  +showRecoverSuccessDialog: boolean,
+  +touchIdInformation: Object | null,
+  +username: string,
+  +wait: number
+}
+
+const initialState: LoginState = {
+  username: '',
   password: null,
   pin: null,
   loginSuccess: false,
   errorMessage: null,
   otpErrorMessage: null,
   isLoggingInWithPin: false,
-  otpResetToken: null,
+  otpResetToken: '',
   otpResetDate: null,
-  otpUserBackupKey: null, // S7UQ66VYNZKAX4EV
+  otpUserBackupKey: '', // S7UQ66VYNZKAX4EV
   recoveryToken: null,
   previousAttemptType: null,
   previousAttemptData: null,
   edgeLoginId: null,
   cancelEdgeLoginRequest: null,
-  account: null,
+  account: defaultAccount,
   touchIdInformation: null,
   showRecoverSuccessDialog: false,
   wait: 0
 }
-export default function(state = initialState, action) {
+
+export const login: Reducer<LoginState, Action> = function(
+  state = initialState,
+  action
+) {
   switch (action.type) {
     case 'CANCEL_RECOVERY_KEY':
       return { ...state, recoveryToken: null }

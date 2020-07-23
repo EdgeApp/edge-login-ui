@@ -1,8 +1,22 @@
+// @flow
+
+import { type Reducer } from 'redux'
+
 import * as Constants from '../../common/constants'
 import s from '../../common/locales/strings.js'
-const initialState = {
-  currentSceneIndex: 0,
+import { type Action } from '../../types/ReduxTypes'
+
+export type WorkflowState = {
+  +currentKey: string,
+  +currentSceneIndex: number,
+  +details: Array<Object>,
+  +showModal: boolean
+}
+
+const initialState: WorkflowState = {
   currentKey: 'firstLoadWF',
+  currentSceneIndex: 0,
+  details: [],
   showModal: false,
   modalView: null,
   firstLoadWF: {
@@ -117,7 +131,10 @@ const initialState = {
     ]
   }
 }
-export default function(state = initialState, action) {
+export const workflow: Reducer<WorkflowState, Action> = function(
+  state = initialState,
+  action
+) {
   let nextIndex
   switch (action.type) {
     case 'SET_PREVIOUS_USERS':

@@ -1,8 +1,14 @@
+// @flow
+
+import { type Reducer } from 'redux'
 import { sprintf } from 'sprintf-js'
 
 import s from '../../common/locales/strings.js'
+import { type Action } from '../../types/ReduxTypes'
 
-const initialState = {
+export type TermsState = {}
+
+const initialState: TermsState = {
   items: [
     {
       title: sprintf(s.strings.terms_one, s.strings.app_name_default),
@@ -20,7 +26,10 @@ const initialState = {
   ]
 }
 
-export default function(state = initialState, action) {
+export const terms: Reducer<TermsState, Action> = function(
+  state = initialState,
+  action
+) {
   switch (action.type) {
     case 'ACCEPT_TERMS_CONDITIONS':
       return state

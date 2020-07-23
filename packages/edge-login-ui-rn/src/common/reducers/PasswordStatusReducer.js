@@ -1,8 +1,22 @@
+// @flow
+
+import { type Reducer } from 'redux'
+
 import s from '../../common/locales/strings'
-export default function(state = null, action) {
+import { type Action } from '../../types/ReduxTypes'
+
+export type PasswordStatusState = {
+  +secondsToCrack: string,
+  +passed: boolean,
+  +list: Array<Object>
+}
+
+export const passwordStatus: Reducer<
+  PasswordStatusState | null,
+  Action
+> = function(state = null, action) {
   switch (action.type) {
     case 'AUTH_UPDATE_PASSWORD': {
-      // action.data.passwordStatus
       const status = action.data.passwordStatus
       const array = [
         { title: s.strings.must_ten_characters, value: !status.tooShort },

@@ -3,7 +3,7 @@
 import type { DiskletFolder } from 'disklet'
 import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
 
-import type { PreviousUsersState } from '../common/actions/PreviousUsersActions.js'
+import { type PreviousUsersState } from '../common/reducers/PreviousUsersReducer.js'
 import { type Action } from './ReduxActions.js'
 
 export type { Action }

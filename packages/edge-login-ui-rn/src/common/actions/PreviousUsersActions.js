@@ -6,21 +6,7 @@ import type { EdgeContext } from 'edge-core-js'
 
 import { isTouchEnabled } from '../../native/keychain'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
-
-export type LoginUserInfo = {
-  username: string,
-  pinEnabled: boolean,
-  touchEnabled: boolean
-}
-
-/**
- * The payload included in the 'SET_PREVIOUS_USERS' redux action.
- */
-export type PreviousUsersState = {
-  lastUser?: LoginUserInfo,
-  userList: LoginUserInfo[],
-  usernameOnlyList: string[]
-}
+import { type LoginUserInfo } from '../reducers/PreviousUsersReducer'
 
 function sortUserList(
   lastUsers: string[],

@@ -9,9 +9,12 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
 import { updateFontStyles } from '../../../common/constants/Fonts'
-import reducers from '../../../common/reducers'
+import {
+  type RootState,
+  rootReducer
+} from '../../../common/reducers/RootReducer'
 import { checkingForOTP } from '../../../common/util/checkingForOTP.js'
-import type { Imports } from '../../../types/ReduxTypes'
+import { type Action, type Imports } from '../../../types/ReduxTypes.js'
 import LoginAppConnector from '../../connectors/LogInAppConnector'
 import * as Styles from '../../styles'
 
@@ -31,11 +34,8 @@ type Props = {
   landingScreenText?: string
 }
 
-type State = {}
-type Action = { type: string }
-
 class LoginScreen extends Component<Props> {
-  store: Store<State, Action>
+  store: Store<RootState, Action>
   cleanups: Array<Function>
 
   static defaultProps = {
@@ -62,8 +62,8 @@ class LoginScreen extends Component<Props> {
       recoveryKey: this.props.recoveryLogin
     }
     this.store = createStore(
-      reducers,
-      {},
+      rootReducer,
+      undefined,
       composeEnhancers(applyMiddleware(thunk.withExtraArgument(imports)))
     )
     this.cleanups = []
