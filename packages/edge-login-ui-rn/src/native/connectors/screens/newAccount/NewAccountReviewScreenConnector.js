@@ -2,7 +2,6 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../../common/actions/'
 import type { Dispatch, State } from '../../../../types/ReduxTypes'
 import LinkedComponent from '../../../components/screens/newAccount/NewAccountReviewScreenComponent'
 
@@ -17,7 +16,7 @@ export const mapStateToProps = (state: State) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    nextScreen: () => dispatch(actions.nextScreen())
+    nextScreen: () => dispatch({ type: 'WORKFLOW_NEXT' })
   }
 }
 

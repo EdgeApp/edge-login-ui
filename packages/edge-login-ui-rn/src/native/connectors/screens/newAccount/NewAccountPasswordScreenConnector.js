@@ -1,4 +1,5 @@
 // @Flow
+
 import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions'
@@ -27,7 +28,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     checkTheConfirmPassword: () => dispatch(actions.validateConfirmPassword()),
     skipPassword: () => dispatch(actions.validateConfirmPassword()),
-    nextScreen: () => dispatch(actions.nextScreen())
+    nextScreen: () => dispatch({ type: 'WORKFLOW_NEXT' })
   }
 }
 

@@ -33,7 +33,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     setWorkflow: () =>
-      dispatch(actions.startWorkflow(Constants.WORKFLOW_PASSWORD)),
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PASSWORD }),
     checkTheConfirmPassword: () => dispatch(actions.validateConfirmPassword()),
     changePassword: (data: string) => dispatch(actions.changePassword(data))
   }

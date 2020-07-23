@@ -18,10 +18,11 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
     nextScreen: () => {
       global.firebase &&
         global.firebase.analytics().logEvent(`Signup_Welcome_Next`)
-      dispatch(actions.nextScreen())
+      dispatch({ type: 'WORKFLOW_NEXT' })
     },
     createUser: (data: Object) => dispatch(actions.createUser(data)),
-    exitScreen: () => dispatch(actions.startWorkflow(Constants.WORKFLOW_INIT))
+    exitScreen: () =>
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_INIT })
   }
 }
 

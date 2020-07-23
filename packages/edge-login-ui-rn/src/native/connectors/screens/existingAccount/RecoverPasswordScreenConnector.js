@@ -3,7 +3,6 @@
 import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions'
-import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings'
 import type { Dispatch, State } from '../../../../types/ReduxTypes.js'
 import type { OwnProps } from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
@@ -45,7 +44,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
     cancel: () => {
       dispatch(actions.deleteRecovery())
       dispatch(actions.cancelRecoverySettingsScene())
-      dispatch(actions.dispatchAction(Constants.DISMISS_EMAIL_MODAL))
+      dispatch({ type: 'DISMISS_EMAIL_MODAL' })
     },
     returnToSettings: () => dispatch(actions.cancelRecoverySettingsScene())
   }

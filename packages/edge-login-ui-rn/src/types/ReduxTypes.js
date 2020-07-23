@@ -2,11 +2,11 @@
 
 import type { DiskletFolder } from 'disklet'
 import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
-import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux'
 
 import type { PreviousUsersState } from '../common/actions/PreviousUsersActions.js'
+import { type Action } from './ReduxActions.js'
 
-export type Action = { type: string, data?: any }
+export type { Action }
 
 export type State = {
   previousUsers: PreviousUsersState,
@@ -63,22 +63,21 @@ export type State = {
   terms: {}
 }
 
-export type Store = ReduxStore<State, Action>
-export type GetState = () => State
 export type Imports = {
-  onCancel: Function,
-  accountOptions: EdgeAccountOptions,
-  accountObject?: EdgeAccount,
-  context: EdgeContext,
-  folder: DiskletFolder,
-  onComplete: Function,
-  callback: Function,
-  username?: string | null,
-  recoveryKey?: string
+  +accountObject?: EdgeAccount,
+  +accountOptions: EdgeAccountOptions,
+  +callback: Function,
+  +context: EdgeContext,
+  +folder: DiskletFolder,
+  +onCancel: Function,
+  +onComplete: Function,
+  +recoveryKey?: string,
+  +username?: string | null
 }
 
-// eslint-disable-next-line no-use-before-define
-export type Dispatch = ReduxDispatch<Action> & ThunkDispatch<Action>
-type ThunkDispatch<A> = (
-  (d: Dispatch, g: GetState, i: Imports) => Promise<void> | void
-) => A
+export type GetState = () => State
+export type Dispatch = <Return>(
+  action:
+    | Action
+    | ((dispatch: Dispatch, getState: GetState, i: Imports) => Return)
+) => Return

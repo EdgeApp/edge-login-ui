@@ -2,7 +2,6 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../common/actions'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { Header } from '../../components/common/'
 
@@ -20,7 +19,7 @@ export const mapStateToProps = (state: State) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    goBack: () => dispatch(actions.goBack())
+    goBack: () => dispatch({ type: 'WORKFLOW_BACK' })
   }
 }
 

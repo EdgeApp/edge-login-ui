@@ -1,8 +1,6 @@
 // @flow
 
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
-import * as Constants from '../constants'
-import { dispatchAction } from './'
 
 export function changePassword(data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
@@ -13,7 +11,7 @@ export function changePassword(data: string) {
     accountObject
       .changePassword(data)
       .then(response => {
-        dispatch(dispatchAction(Constants.LAUNCH_NOTIFICATION_MODAL))
+        dispatch({ type: 'LAUNCH_NOTIFICATION_MODAL' })
       })
       .catch(e => {
         console.log('CHANGE PASSWORD ERROR')
@@ -28,7 +26,7 @@ export function recoveryChangePassword(data: string) {
     account
       .changePassword(data)
       .then(response => {
-        dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
+        dispatch({ type: 'WORKFLOW_NEXT' })
       })
       .catch(e => {
         console.log('CHANGE PASSWORD ERROR')
@@ -47,7 +45,7 @@ export function recoveryChangePIN(data: string) {
     account
       .changePin({ pin: data })
       .then(response => {
-        dispatch(dispatchAction(Constants.LAUNCH_NOTIFICATION_MODAL))
+        dispatch({ type: 'LAUNCH_NOTIFICATION_MODAL' })
       })
       .catch(e => {
         console.log('CHANGE PIN ERROR')
@@ -65,7 +63,7 @@ export function changePIN(data: string) {
     accountObject
       .changePin({ pin: data })
       .then(response => {
-        dispatch(dispatchAction(Constants.LAUNCH_NOTIFICATION_MODAL))
+        dispatch({ type: 'LAUNCH_NOTIFICATION_MODAL' })
       })
       .catch(e => {
         console.log('CHANGE PIN ERROR')

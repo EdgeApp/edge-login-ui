@@ -35,29 +35,18 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
       dispatch(action.userLoginWithTouchId(data)),
     userLogin: (data: Object) => dispatch(action.userLogin(data)),
     gotoCreatePage: () =>
-      dispatch(action.startWorkflow(Constants.WORKFLOW_CREATE)),
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_CREATE }),
     gotoPinLoginPage: () =>
-      dispatch(action.startWorkflow(Constants.WORKFLOW_PIN)),
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PIN }),
     updateUsername: (data: string) =>
-      dispatch(
-        action.dispatchActionWitString(Constants.AUTH_UPDATE_USERNAME, data)
-      ),
-    updatePassword: (data: Object) =>
-      dispatch(
-        action.dispatchActionWithData(
-          Constants.AUTH_UPDATE_LOGIN_PASSWORD,
-          data
-        )
-      ),
+      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data }),
+    updatePassword: (data: string) =>
+      dispatch({ type: 'AUTH_UPDATE_LOGIN_PASSWORD', data: data }),
     deleteUserFromDevice: (data: string) =>
-      dispatch(
-        action.dispatchActionWitString(Constants.DELETE_USER_FROM_DEVICE, data)
-      ),
-    launchDeleteModal: () =>
-      dispatch(action.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL)),
+      dispatch({ type: 'DELETE_USER_FROM_DEVICE', data: data }),
+    launchDeleteModal: () => dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' }),
     recoverPasswordLogin: () => dispatch(action.recoverPasswordLogin()),
-    dismissRecoveryError: () =>
-      dispatch(action.dispatchAction(Constants.DISMISS_REOVERY_ERROR))
+    dismissRecoveryError: () => dispatch({ type: 'DISMISS_REOVERY_ERROR' })
   }
 }
 

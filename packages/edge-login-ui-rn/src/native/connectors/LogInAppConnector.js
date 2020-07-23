@@ -3,7 +3,6 @@
 import { connect } from 'react-redux'
 
 import * as loginAction from '../../common/actions/'
-import * as Constants from '../../common/constants'
 import type { Dispatch, State } from '../../types/ReduxTypes'
 import type { OwnProps } from '../components/LogInAppComponent'
 import { LoginAppComponent } from '../components/LogInAppComponent'
@@ -25,12 +24,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     getPreviousUsers: () => dispatch(loginAction.getPreviousUsers()),
     startRecoveryWorkflow: (backupKey: string) => {
-      dispatch(
-        loginAction.dispatchActionWitString(
-          Constants.SET_RECOVERY_KEY,
-          backupKey
-        )
-      )
+      dispatch({ type: 'SET_RECOVERY_KEY', data: backupKey })
     }
   }
 }

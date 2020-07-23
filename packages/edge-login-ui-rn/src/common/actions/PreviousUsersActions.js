@@ -6,8 +6,6 @@ import type { EdgeContext } from 'edge-core-js'
 
 import { isTouchEnabled } from '../../native/keychain'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
-import * as Constants from '../constants'
-import { dispatchActionWithData } from './'
 
 export type LoginUserInfo = {
   username: string,
@@ -110,7 +108,7 @@ export function getPreviousUsers() {
           data.usernameOnlyList.push(element.username)
         }, this)
       }
-      dispatch(dispatchActionWithData(Constants.SET_PREVIOUS_USERS, data))
+      dispatch({ type: 'SET_PREVIOUS_USERS', data: data })
     })
   }
 }

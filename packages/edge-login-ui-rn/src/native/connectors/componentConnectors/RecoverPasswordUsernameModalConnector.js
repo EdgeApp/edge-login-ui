@@ -2,8 +2,6 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../common/actions'
-import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
 import type { Dispatch, State } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common'
@@ -24,9 +22,7 @@ export const mapStateToProps = (state: State) => {
 export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     onChangeText: (data: string) =>
-      dispatch(
-        actions.dispatchActionWitString(Constants.AUTH_UPDATE_USERNAME, data)
-      ),
+      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data }),
     onSubmitEditing: ownProps.onSubmitEditing
   }
 }

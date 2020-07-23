@@ -1,6 +1,5 @@
 import { sprintf } from 'sprintf-js'
 
-import * as Constants from '../../common/constants'
 import s from '../../common/locales/strings.js'
 
 const initialState = {
@@ -23,7 +22,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case Constants.ACCEPT_TERMS_CONDITIONS:
+    case 'ACCEPT_TERMS_CONDITIONS':
       return state
     default:
       return state

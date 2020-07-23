@@ -28,7 +28,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
 }
 export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
-    cancel: () => dispatch(actions.cancelSkipStep()),
+    cancel: () => dispatch({ type: 'WORKFLOW_CANCEL_MODAL' }),
     action: () => dispatch(actions.deleteUserFromDevice(ownProps.username))
   }
 }

@@ -9,9 +9,8 @@ import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import s from '../locales/strings.js'
 import { isASCII } from '../util'
-import { dispatchAction, dispatchActionWithData, getPreviousUsers } from './'
+import { getPreviousUsers } from './'
 import { setMostRecentUsers } from './LoginAction'
-import * as WorkflowActions from './WorkflowActions'
 
 export function validatePin(data: Object) {
   const pin = data.pin
@@ -27,7 +26,7 @@ export function validatePin(data: Object) {
       pin: pin,
       error: error
     }
-    dispatch(dispatchActionWithData(Constants.CREATE_UPDATE_PIN, obj))
+    dispatch({ type: 'CREATE_UPDATE_PIN', data: obj })
     // dispatch(updatePin(obj))
   }
 }
@@ -47,10 +46,8 @@ export function checkUsernameForAvailabilty(data: string) {
             }
             global.firebase &&
               global.firebase.analytics().logEvent(`Signup_Username_Available`)
-            dispatch(
-              dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
-            )
-            dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
+            dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
+            dispatch({ type: 'WORKFLOW_NEXT' })
             return
           }
           const obj = {
@@ -59,9 +56,7 @@ export function checkUsernameForAvailabilty(data: string) {
           }
           global.firebase &&
             global.firebase.analytics().logEvent(`Signup_Username_Unavailable`)
-          dispatch(
-            dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj)
-          )
+          dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
         })
         .catch(e => {
           console.log(e.message)
@@ -79,7 +74,7 @@ export function validateUsername(data: string) {
       username: data,
       error: error
     }
-    dispatch(dispatchActionWithData(Constants.CREATE_UPDATE_USERNAME, obj))
+    dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
   }
 }
 export function validateConfirmPassword(data?: string) {
@@ -96,9 +91,7 @@ export function validateConfirmPassword(data?: string) {
       password: confirmPassword,
       error
     }
-    dispatch(
-      dispatchActionWithData(Constants.AUTH_UPDATE_CONFIRM_PASSWORD, obj)
-    )
+    dispatch({ type: 'AUTH_UPDATE_CONFIRM_PASSWORD', data: obj })
   }
 }
 export function validatePassword(data: string) {
@@ -139,14 +132,14 @@ export function validatePassword(data: string) {
       passwordCheckString,
       error: error
     }
-    dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PASSWORD, obj))
+    dispatch({ type: 'AUTH_UPDATE_PASSWORD', data: obj })
   }
 }
 
 export function createUser(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder } = imports
-    dispatch(WorkflowActions.nextScreen())
+    dispatch({ type: 'WORKFLOW_NEXT' })
     setTimeout(async () => {
       try {
         const abcAccount = await context.createAccount(
@@ -156,7 +149,7 @@ export function createUser(data: Object) {
           imports.accountOptions
         )
         abcAccount.watch('loggedIn', loggedIn => {
-          if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
+          if (!loggedIn) dispatch({ type: 'RESET_APP' })
         })
         const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
         if (!touchDisabled) {
@@ -164,10 +157,8 @@ export function createUser(data: Object) {
             console.log(e) // Fail quietly
           })
         }
-        dispatch(
-          dispatchActionWithData(Constants.CREATE_ACCOUNT_SUCCESS, abcAccount)
-        )
-        dispatch(dispatchAction(Constants.WORKFLOW_NEXT))
+        dispatch({ type: 'CREATE_ACCOUNT_SUCCESS', data: abcAccount })
+        dispatch({ type: 'WORKFLOW_NEXT' })
         await setMostRecentUsers(abcAccount.username)
         await abcAccount.dataStore.setItem(
           Constants.OTP_REMINDER_STORE_NAME,
@@ -177,10 +168,8 @@ export function createUser(data: Object) {
         dispatch(getPreviousUsers())
       } catch (e) {
         console.log(e)
-        dispatch(
-          dispatchActionWithData(Constants.CREATE_ACCOUNT_FAIL, e.message)
-        )
-        dispatch(WorkflowActions.goBack())
+        dispatch({ type: 'CREATE_ACCOUNT_FAIL', data: e.message })
+        dispatch({ type: 'WORKFLOW_BACK' })
       }
     }, 300)
   }
@@ -201,6 +190,6 @@ export function agreeToConditions(account: EdgeAccount) {
       return response
     }
     callback(null, account)
-    // dispatch(WorkflowActions.nextScreen())
+    // dispatch({ type: 'WORKFLOW_NEXT' })
   }
 }

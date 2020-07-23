@@ -20,8 +20,7 @@ export const mapStateToProps = (state: State) => {
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     getQrCode: () => dispatch(actions.getEdgeLoginQrCode()),
-    cancelRequest: () =>
-      dispatch(actions.dispatchAction(Constants.CANCEL_EDGE_LOGIN_REQUEST))
+    cancelRequest: () => dispatch({ type: 'CANCEL_EDGE_LOGIN_REQUEST' })
   }
 }
 

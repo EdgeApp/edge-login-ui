@@ -23,11 +23,11 @@ export const mapStateToProps = (state: State) => {
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     cancel: () => {
-      dispatch(actions.dispatchAction(Constants.CLOSE_NOTIFICATION_MODAL))
+      dispatch({ type: 'CLOSE_NOTIFICATION_MODAL' })
       dispatch(actions.cancel())
     },
     action: () => {
-      dispatch(actions.dispatchAction(Constants.CLOSE_NOTIFICATION_MODAL))
+      dispatch({ type: 'CLOSE_NOTIFICATION_MODAL' })
       dispatch(actions.cancel())
     }
   }
