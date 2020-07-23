@@ -13,7 +13,7 @@ export const mapStateToProps = (state: State) => {
     pv = true
   }
   const usernameList = state.previousUsers.usernameOnlyList
-  const filteredUsernameList = state.previousUsers.usernameOnlyList
+  const usernameOnlyList = state.previousUsers.usernameOnlyList
   return {
     auth: state.login,
     loginSuccess: state.login.loginSuccess,
@@ -23,7 +23,7 @@ export const mapStateToProps = (state: State) => {
     error: state.login.errorMessage,
     previousUsers: state.previousUsers.userList,
     usernameList,
-    filteredUsernameList,
+    usernameOnlyList,
     hasUsers: pv,
     showModal: state.workflow.showModal
   }

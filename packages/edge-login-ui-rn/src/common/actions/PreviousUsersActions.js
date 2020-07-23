@@ -19,11 +19,9 @@ export type LoginUserInfo = {
  * The payload included in the 'SET_PREVIOUS_USERS' redux action.
  */
 export type PreviousUsersState = {
-  userList: LoginUserInfo[],
   lastUser?: LoginUserInfo,
-
-  usernameOnlyList: string[],
-  filteredUsernameList: string[]
+  userList: LoginUserInfo[],
+  usernameOnlyList: string[]
 }
 
 function sortUserList(
@@ -101,7 +99,6 @@ export function getPreviousUsers() {
       const focusUser = username || data.lastUser
       if (data.userList && data.userList.length > 0) {
         data.usernameOnlyList = []
-        data.filteredUsernameList = []
         data.userList.forEach(function(element) {
           if (element.username === focusUser) {
             data.lastUser = {
@@ -111,7 +108,6 @@ export function getPreviousUsers() {
             }
           }
           data.usernameOnlyList.push(element.username)
-          data.filteredUsernameList.push(element.username)
         }, this)
       }
       dispatch(dispatchActionWithData(Constants.SET_PREVIOUS_USERS, data))
