@@ -61,22 +61,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(LinkedComponent)
-
-/*
-import {connect} from 'react-redux'
-import * as SETTINGS_SELECTORS from '../../modules/UI/Settings/selectors.js'
-import type {Dispatch, State} from '../../modules/ReduxTypes'
-import PasswordRecoveryComponent from '../../modules/UI/scenes/PasswordRecovery/PasswordRecoveryComponent.ui'
-// import * as Constants from '../../constants/indexConstants.js'
-
-export const mapStateToProps = (state: State) => {
-  return {
-    recoveryQuestions: SETTINGS_SELECTORS.getRecoveryQuestionChoices(state)
-  }
-}
-
-export const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setAnswers: (obj: Object) => dispatch()
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordRecoveryComponent) */
