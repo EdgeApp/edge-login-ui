@@ -1,3 +1,9 @@
+/* eslint-disable flowtype/require-valid-file-annotation */
+// Enabling Flow here will expose a huge number of errors!
+// The plan is to slowly move away from using this index file,
+// fixing the Flow errors on a component-by-component basis
+// as we import them directly.
+
 export * from './Button'
 export * from './Header'
 export * from './Input'
