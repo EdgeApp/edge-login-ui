@@ -1,7 +1,7 @@
 // @flow
 
 import { makeReactNativeFolder } from 'disklet'
-import type { EdgeAccount, EdgeContext } from 'edge-core-js'
+import { type EdgeAccount, type EdgeContext } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
@@ -13,8 +13,8 @@ import {
   rootReducer
 } from '../../../common/reducers/RootReducer'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import ChangePasswordAppConnector from '../../connectors/ChangePasswordAppConnector'
 import * as Styles from '../../styles'
+import { ChangePasswordApp } from '../ChangePasswordAppComponent.js'
 
 type Props = {
   account: EdgeAccount,
@@ -24,22 +24,22 @@ type Props = {
   onCancel(): void
 }
 
-class ChangePasswordScreen extends Component<Props> {
-  store: Store<RootState, Action>
+export class ChangePasswordScreen extends Component<Props> {
   static defaultProps = {
-    accountObject: null,
     showHeader: true
   }
+
+  store: Store<RootState, Action>
 
   constructor(props: Props) {
     super(props)
     const imports: Imports = {
-      accountOptions: {},
-      folder: makeReactNativeFolder(),
       accountObject: this.props.account,
+      accountOptions: {},
       context: this.props.context,
-      onComplete: this.props.onComplete,
+      folder: makeReactNativeFolder(),
       onCancel: this.props.onComplete,
+      onComplete: this.props.onComplete,
       callback: () => {}
     }
     this.store = createStore(
@@ -52,13 +52,8 @@ class ChangePasswordScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <ChangePasswordAppConnector
-          styles={Styles}
-          showHeader={this.props.showHeader}
-        />
+        <ChangePasswordApp styles={Styles} showHeader={this.props.showHeader} />
       </Provider>
     )
   }
 }
-
-export { ChangePasswordScreen }
