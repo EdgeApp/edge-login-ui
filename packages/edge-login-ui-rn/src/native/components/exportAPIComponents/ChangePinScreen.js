@@ -1,7 +1,7 @@
 // @flow
 
 import { makeReactNativeFolder } from 'disklet'
-import type { EdgeAccount, EdgeContext } from 'edge-core-js'
+import { type EdgeAccount, type EdgeContext } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
@@ -13,8 +13,8 @@ import {
   rootReducer
 } from '../../../common/reducers/RootReducer'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import ChangePinConnector from '../../connectors/ChangePinConnector'
 import * as Styles from '../../styles'
+import { ChangePinApp } from '../ChangePinAppComponent'
 
 type Props = {
   account: EdgeAccount,
@@ -24,21 +24,18 @@ type Props = {
   onCancel(): void
 }
 
-class ChangePinScreen extends Component<Props> {
-  static defaultProps = {
-    account: null
-  }
-
+export class ChangePinScreen extends Component<Props> {
   store: Store<RootState, Action>
+
   constructor(props: Props) {
     super(props)
     const imports: Imports = {
-      accountOptions: {},
       accountObject: this.props.account,
-      folder: makeReactNativeFolder(),
+      accountOptions: {},
       context: this.props.context,
-      onComplete: this.props.onComplete,
+      folder: makeReactNativeFolder(),
       onCancel: this.props.onComplete,
+      onComplete: this.props.onComplete,
       callback: () => {}
     }
     this.store = createStore(
@@ -51,14 +48,8 @@ class ChangePinScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <ChangePinConnector
-          accountObject={this.props.account}
-          styles={Styles}
-          showHeader={this.props.showHeader}
-        />
+        <ChangePinApp styles={Styles} showHeader={this.props.showHeader} />
       </Provider>
     )
   }
 }
-
-export { ChangePinScreen }
