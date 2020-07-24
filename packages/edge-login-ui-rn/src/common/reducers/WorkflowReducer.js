@@ -1,8 +1,22 @@
+// @flow
+
+import { type Reducer } from 'redux'
+
 import * as Constants from '../../common/constants'
 import s from '../../common/locales/strings.js'
-const initialState = {
-  currentSceneIndex: 0,
+import { type Action } from '../../types/ReduxTypes'
+
+export type WorkflowState = {
+  +currentKey: string,
+  +currentSceneIndex: number,
+  +details: Array<Object>,
+  +showModal: boolean
+}
+
+const initialState: WorkflowState = {
   currentKey: 'firstLoadWF',
+  currentSceneIndex: 0,
+  details: [],
   showModal: false,
   modalView: null,
   firstLoadWF: {
@@ -117,60 +131,63 @@ const initialState = {
     ]
   }
 }
-export default function(state = initialState, action) {
+export const workflow: Reducer<WorkflowState, Action> = function(
+  state = initialState,
+  action
+) {
   let nextIndex
   switch (action.type) {
-    case Constants.SET_PREVIOUS_USERS:
+    case 'SET_PREVIOUS_USERS':
       return { ...state, showModal: false, modalView: null }
-    case Constants.OTP_ERROR:
+    case 'OTP_ERROR':
       return {
         ...state,
         currentKey: Constants.WORKFLOW_OTP,
         currentSceneIndex: 0
       }
-    case Constants.WORKFLOW_START:
+    case 'WORKFLOW_START':
       return { ...state, currentKey: action.data, currentSceneIndex: 0 }
-    case Constants.WORKFLOW_BACK:
+    case 'WORKFLOW_BACK':
       nextIndex = state.currentSceneIndex - 1
       if (nextIndex === -1) {
         nextIndex = 0
       }
       return { ...state, currentSceneIndex: nextIndex }
-    case Constants.WORKFLOW_NEXT:
+    case 'WORKFLOW_NEXT':
       nextIndex = state.currentSceneIndex + 1
       if (nextIndex === state[state.currentKey].scenes) {
         nextIndex = state.currentSceneIndex
       }
       return { ...state, currentSceneIndex: nextIndex, showModal: false }
-    case Constants.WORKFLOW_LAUNCH_MODAL:
+    case 'WORKFLOW_LAUNCH_MODAL':
       return { ...state, showModal: true }
-    case Constants.WORKFLOW_CANCEL_MODAL:
+    case 'WORKFLOW_CANCEL_MODAL':
       return { ...state, showModal: false, modalView: null }
-    case Constants.ON_RECOVERY_LOGIN_IS_ENABLED:
+    case 'ON_RECOVERY_LOGIN_IS_ENABLED':
       return {
         ...state,
         currentKey: Constants.WORKFLOW_RECOVERY_LOGIN,
         currentSceneIndex: 0
       }
-    case Constants.SET_RECOVERY_KEY:
+    case 'SET_RECOVERY_KEY':
       return {
         ...state,
         currentKey: Constants.WORKFLOW_RECOVERY_LOGIN,
         currentSceneIndex: 0
       }
-    case Constants.CANCEL_RECOVERY_KEY:
+    case 'CANCEL_RECOVERY_KEY':
       return {
         ...state,
         currentKey: Constants.WORKFLOW_PASSWORD_FORCED,
         currentSceneIndex: 0
       }
-    case Constants.RECOVERY_AFTER_OTP_CHECK:
+    case 'RECOVERY_AFTER_OTP_CHECK':
       return {
         ...state,
         currentKey: Constants.WORKFLOW_RECOVERY_LOGIN,
         currentSceneIndex: 1
       }
-    case Constants.RESET_APP:
+    case 'RESET_APP':
       return initialState
     default:
       return state

@@ -2,12 +2,11 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../common/actions/'
 import * as Constants from '../../common/constants'
-import type { Dispatch, State } from '../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes'
 import ChangePinAppComponent from '../components/ChangePinAppComponent'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     workflow: state.workflow
   }
@@ -15,7 +14,8 @@ export const mapStateToProps = (state: State) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    setWorkflow: () => dispatch(actions.startWorkflow(Constants.WORKFLOW_PIN))
+    setWorkflow: () =>
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PIN })
   }
 }
 

@@ -2,11 +2,11 @@
 
 import { connect } from 'react-redux'
 
-import type { State } from '../../../types/ReduxTypes'
+import { type RootState } from '../../../types/ReduxTypes'
 import type { OwnProps } from '../../components/abSpecific/'
 import { AccountInfoComponent } from '../../components/abSpecific/'
 
-export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   return {
     style: ownProps.style,
     username: state.create.username,

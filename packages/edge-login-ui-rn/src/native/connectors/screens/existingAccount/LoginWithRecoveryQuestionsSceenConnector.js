@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions'
-import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings.js'
 import LinkedComponent from '../../../components/screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent'
 
@@ -37,14 +36,10 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     submit: answers => dispatch(actions.loginWithRecovery(answers)),
     getQuestions: () => dispatch(actions.getRecoveryQuestions()),
-    onCancel: () =>
-      dispatch(actions.dispatchAction(Constants.CANCEL_RECOVERY_KEY)),
+    onCancel: () => dispatch({ type: 'CANCEL_RECOVERY_KEY' }),
     updateUsername: username =>
-      dispatch(
-        actions.dispatchActionWithData(Constants.AUTH_UPDATE_USERNAME, username)
-      ),
-    changePassword: () =>
-      dispatch(actions.dispatchAction(Constants.WORKFLOW_NEXT))
+      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username }),
+    changePassword: () => dispatch({ type: 'WORKFLOW_NEXT' })
   }
 }
 

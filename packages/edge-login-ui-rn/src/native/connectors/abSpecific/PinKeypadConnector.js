@@ -3,10 +3,10 @@
 import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { PinKeypad } from '../../components/abSpecific/'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   const pinLength = state.login.pin ? state.login.pin.length : 0
   return {
     pin: state.login.pin,

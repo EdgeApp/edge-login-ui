@@ -4,10 +4,10 @@ import type { EdgeAccount } from 'edge-core-js'
 import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions/'
-import type { Dispatch, State } from '../../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
 import LinkedComponent from '../../../components/screens/newAccount/TermsAndConditionsScreenComponent'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     workflow: state.workflow,
     accountObject: state.create.accountObject,

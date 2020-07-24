@@ -25,7 +25,7 @@ type Props = {
   username: string,
   password: string,
   previousUsers: Object,
-  filteredUsernameList: Array<string>,
+  usernameOnlyList: Array<string>,
   error: string,
   loginSuccess: boolean,
   showModal: boolean,
@@ -193,7 +193,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     return (
       <KeyboardAwareScrollView
         style={this.style.container}
-        keyboardShouldPersistTaps={Constants.ALWAYS}
+        keyboardShouldPersistTaps="always"
         contentContainerStyle={this.style.mainScrollView}
       >
         <BackgroundImage
@@ -290,7 +290,7 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     return (
       <DropDownList
         style={this.style.dropDownList}
-        data={this.props.filteredUsernameList}
+        data={this.props.usernameOnlyList}
         renderRow={this.renderRow.bind(this)}
       />
     )

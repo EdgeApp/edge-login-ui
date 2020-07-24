@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import LinkedComponent from '../../components/screens/PinLogInScreenComponent'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   const pinLength = state.login.pin ? state.login.pin.length : 0
   const loginSuccess = state.login.loginSuccess
   const wait = state.login.wait
@@ -36,18 +36,15 @@ export const mapStateToProps = (state: State) => {
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     changeUser: (data: string) =>
-      dispatch(
-        actions.dispatchActionWitString(Constants.AUTH_UPDATE_USERNAME, data)
-      ),
+      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data }),
     userLogin: (data: Object) => dispatch(actions.userLoginWithPin(data)),
     launchUserLoginWithTouchId: (data: Object) =>
       dispatch(actions.userLoginWithTouchId(data)),
     deleteUserFromDevice: (data: string) =>
       dispatch(actions.deleteUserFromDevice(data)),
-    launchDeleteModal: () =>
-      dispatch(actions.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL)),
+    launchDeleteModal: () => dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' }),
     gotoLoginPage: () =>
-      dispatch(actions.startWorkflow(Constants.WORKFLOW_PASSWORD))
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PASSWORD })
   }
 }
 

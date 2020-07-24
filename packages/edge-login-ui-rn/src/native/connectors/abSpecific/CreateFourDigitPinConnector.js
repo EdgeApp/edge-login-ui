@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { FourDigitInputComponent } from '../../components/abSpecific/'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     pin: state.create.pin,
     error: state.create.pinErrorMessage,

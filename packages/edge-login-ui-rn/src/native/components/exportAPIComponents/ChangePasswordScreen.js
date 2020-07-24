@@ -8,8 +8,11 @@ import type { Store } from 'redux'
 import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
-import reducers from '../../../common/reducers'
-import type { Imports } from '../../../types/ReduxTypes.js'
+import {
+  type RootState,
+  rootReducer
+} from '../../../common/reducers/RootReducer'
+import { type Action, type Imports } from '../../../types/ReduxTypes.js'
 import ChangePasswordAppConnector from '../../connectors/ChangePasswordAppConnector'
 import * as Styles from '../../styles'
 
@@ -20,11 +23,9 @@ type Props = {
   onComplete(): void,
   onCancel(): void
 }
-type State = {}
-type Action = { type: string }
 
 class ChangePasswordScreen extends Component<Props> {
-  store: Store<State, Action>
+  store: Store<RootState, Action>
   static defaultProps = {
     accountObject: null,
     showHeader: true
@@ -42,8 +43,8 @@ class ChangePasswordScreen extends Component<Props> {
       callback: () => {}
     }
     this.store = createStore(
-      reducers,
-      {},
+      rootReducer,
+      undefined,
       applyMiddleware(thunk.withExtraArgument(imports))
     )
   }

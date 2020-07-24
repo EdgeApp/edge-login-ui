@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
 type OwnProps = {
   action(): void
 }
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     headerText: s.strings.send_email_error_header,
     middleText: s.strings.email_error_modal,

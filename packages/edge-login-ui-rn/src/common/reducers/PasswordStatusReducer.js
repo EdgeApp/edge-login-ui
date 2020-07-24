@@ -1,9 +1,22 @@
-import * as Constants from '../../common/constants'
+// @flow
+
+import { type Reducer } from 'redux'
+
 import s from '../../common/locales/strings'
-export default function(state = null, action) {
+import { type Action } from '../../types/ReduxTypes'
+
+export type PasswordStatusState = {
+  +secondsToCrack: string,
+  +passed: boolean,
+  +list: Array<Object>
+}
+
+export const passwordStatus: Reducer<
+  PasswordStatusState | null,
+  Action
+> = function(state = null, action) {
   switch (action.type) {
-    case Constants.AUTH_UPDATE_PASSWORD: {
-      // action.data.passwordStatus
+    case 'AUTH_UPDATE_PASSWORD': {
       const status = action.data.passwordStatus
       const array = [
         { title: s.strings.must_ten_characters, value: !status.tooShort },

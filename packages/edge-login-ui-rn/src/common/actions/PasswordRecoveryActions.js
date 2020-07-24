@@ -1,7 +1,5 @@
 // @flow
 
-import * as actions from '../../common/actions'
-import * as Constants from '../../common/constants'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 
 export function recoverPasswordLogin() {
@@ -19,17 +17,10 @@ export function recoverPasswordLogin() {
         recoveryKey,
         userQuestions
       }
-      dispatch(
-        actions.dispatchActionWithData(
-          Constants.ON_RECOVERY_LOGIN_IS_ENABLED,
-          obj
-        )
-      )
+      dispatch({ type: 'ON_RECOVERY_LOGIN_IS_ENABLED', data: obj })
     } catch (e) {
       if (e.message === 'No recovery key stored locally.') {
-        dispatch(
-          actions.dispatchAction(Constants.ON_RECOVERY_LOGIN_NOT_ENABLED)
-        )
+        dispatch({ type: 'ON_RECOVERY_LOGIN_NOT_ENABLED' })
       }
 
       console.log('eerr ', e)
@@ -41,7 +32,7 @@ export function getRecoveryQuestions() {
     const state = getState()
     const context = imports.context
     const username = state.login.username
-    const recoveryKey = state.login.recoveryToken
+    const recoveryKey = state.login.recoveryToken || ''
     try {
       const userQuestions = await context.fetchRecovery2Questions(
         recoveryKey,
@@ -51,28 +42,13 @@ export function getRecoveryQuestions() {
         recoveryKey,
         userQuestions
       }
-      dispatch(
-        actions.dispatchActionWithData(
-          Constants.ON_RECOVERY_LOGIN_IS_ENABLED,
-          obj
-        )
-      )
+      dispatch({ type: 'ON_RECOVERY_LOGIN_IS_ENABLED', data: obj })
     } catch (e) {
       if (e.message === 'No recovery key stored locally.') {
-        dispatch(
-          actions.dispatchActionWithData(
-            Constants.ON_RECOVERY_LOGIN_NOT_ENABLED,
-            e.message
-          )
-        )
+        dispatch({ type: 'ON_RECOVERY_LOGIN_NOT_ENABLED', data: e.message })
         return
       }
-      dispatch(
-        actions.dispatchActionWithData(
-          Constants.ON_RECOVERY_LOGIN_NOT_ENABLED,
-          e.message
-        )
-      )
+      dispatch({ type: 'ON_RECOVERY_LOGIN_NOT_ENABLED', data: e.message })
       console.log(e)
     }
   }
@@ -101,12 +77,7 @@ export function initializePasswordRecovery() {
         account,
         username: account.username
       }
-      dispatch(
-        actions.dispatchActionWithData(
-          Constants.PASSWORD_RECOVERY_INITIALIZED,
-          obj
-        )
-      )
+      dispatch({ type: 'PASSWORD_RECOVERY_INITIALIZED', data: obj })
       return
     } catch (e) {
       console.log(e)
@@ -122,12 +93,7 @@ export function initializePasswordRecovery() {
       account: null,
       username: account.username
     }
-    dispatch(
-      actions.dispatchActionWithData(
-        Constants.PASSWORD_RECOVERY_INITIALIZED,
-        obj
-      )
-    )
+    dispatch({ type: 'PASSWORD_RECOVERY_INITIALIZED', data: obj })
   }
 }
 
@@ -139,7 +105,7 @@ export function deleteRecovery() {
     }
     try {
       await account.deleteRecovery()
-      dispatch(actions.dispatchAction(Constants.ON_DISABLE_RECOVERY))
+      dispatch({ type: 'ON_DISABLE_RECOVERY' })
     } catch (e) {
       console.log(e)
       console.log(e.title)
@@ -165,9 +131,7 @@ export function changeRecoveryAnswers(
     }
     try {
       const recoveryKey = await account.changeRecovery(questions, answers)
-      dispatch(
-        actions.dispatchActionWitString(Constants.ON_RECOVERY_KEY, recoveryKey)
-      )
+      dispatch({ type: 'ON_RECOVERY_KEY', data: recoveryKey })
     } catch (e) {
       console.log(e)
       console.log(e.title)

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../common/actions'
 import s from '../../../common/locales/strings.js'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common'
 
 type OwnProps = {
@@ -13,7 +13,7 @@ type OwnProps = {
   onFinish(): void
 }
 
-export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const label = ownProps.label
     ? ownProps.label
     : s.strings.confirm_password_text
@@ -40,7 +40,7 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
     onSubmitEditing: ownProps.onFinish
   }
 }
-// $FlowFixMe
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

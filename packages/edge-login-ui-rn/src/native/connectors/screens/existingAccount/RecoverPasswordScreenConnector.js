@@ -3,13 +3,12 @@
 import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions'
-import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings'
-import type { Dispatch, State } from '../../../../types/ReduxTypes.js'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import type { OwnProps } from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 import LinkedComponent from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 
-export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const isEnabled = state.passwordRecovery.userQuestions.length > 0 || false
   const question1 =
     state.passwordRecovery.userQuestions.length > 0
@@ -45,7 +44,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
     cancel: () => {
       dispatch(actions.deleteRecovery())
       dispatch(actions.cancelRecoverySettingsScene())
-      dispatch(actions.dispatchAction(Constants.DISMISS_EMAIL_MODAL))
+      dispatch({ type: 'DISMISS_EMAIL_MODAL' })
     },
     returnToSettings: () => dispatch(actions.cancelRecoverySettingsScene())
   }
@@ -61,22 +60,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(LinkedComponent)
-
-/*
-import {connect} from 'react-redux'
-import * as SETTINGS_SELECTORS from '../../modules/UI/Settings/selectors.js'
-import type {Dispatch, State} from '../../modules/ReduxTypes'
-import PasswordRecoveryComponent from '../../modules/UI/scenes/PasswordRecovery/PasswordRecoveryComponent.ui'
-// import * as Constants from '../../constants/indexConstants.js'
-
-export const mapStateToProps = (state: State) => {
-  return {
-    recoveryQuestions: SETTINGS_SELECTORS.getRecoveryQuestionChoices(state)
-  }
-}
-
-export const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setAnswers: (obj: Object) => dispatch()
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordRecoveryComponent) */

@@ -22,11 +22,6 @@ import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import s from '../locales/strings.js'
 import { showModal, translateError } from '../util'
-import {
-  dispatchAction,
-  dispatchActionWithData,
-  dispatchActionWitString
-} from './'
 
 /**
  * Make it Thunky
@@ -37,7 +32,7 @@ export function loginWithRecovery(
 ) {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
-    const backupKey = state.passwordRecovery.recoveryKey
+    const backupKey = state.passwordRecovery.recoveryKey || ''
     const username = state.login.username
     const { context, folder } = imports
     try {
@@ -51,7 +46,7 @@ export function loginWithRecovery(
         }
       )
       account.watch('loggedIn', loggedIn => {
-        if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
+        if (!loggedIn) dispatch({ type: 'RESET_APP' })
       })
       const touchDisabled = await isTouchDisabled(folder, account.username)
       if (!touchDisabled) {
@@ -70,19 +65,17 @@ export function loginWithRecovery(
         account,
         touchIdInformation
       }
-      dispatch(dispatchActionWithData(Constants.LOGIN_RECOVERY_SUCCEESS, obj))
+      dispatch({ type: 'LOGIN_RECOVERY_SUCCEESS', data: obj })
     } catch (e) {
       if (e.name === 'OtpError') {
         e.loginAttempt = 'RECOVERY'
         e.loginAttemptData = answers
-        dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
+        dispatch({ type: 'OTP_ERROR', data: e })
         return
       }
       console.log(e.message)
       const incorrect = 'The answers you provided are incorrect. '
-      dispatch(
-        dispatchActionWitString(Constants.ON_RECOVERY_LOGIN_ERROR, incorrect)
-      )
+      dispatch({ type: 'ON_RECOVERY_LOGIN_ERROR', data: incorrect })
     }
   }
 }
@@ -96,7 +89,7 @@ export function resetOtpReset() {
     try {
       const response = await context.requestOtpReset(username, otpResetToken)
       console.log(response)
-      dispatch(dispatchActionWithData(Constants.OTP_RESET_REQUEST, response))
+      dispatch({ type: 'OTP_RESET_REQUEST', data: response })
       console.log('Make it to the next scent ')
     } catch (e) {
       console.log(e)
@@ -106,7 +99,7 @@ export function resetOtpReset() {
 }
 export function retryWithOtp() {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    dispatch(dispatchAction(Constants.START_RECOVERY_LOGIN))
+    dispatch({ type: 'START_RECOVERY_LOGIN' })
     const state = getState()
     const userBackUpKey = state.login.otpUserBackupKey
     const previousAttemptType = state.login.previousAttemptType
@@ -117,7 +110,7 @@ export function retryWithOtp() {
         getState,
         imports
       )
-      return dispatch(dispatchAction(Constants.RECOVERY_AFTER_OTP_CHECK))
+      return dispatch({ type: 'RECOVERY_AFTER_OTP_CHECK' })
     }
     if (previousAttemptType === 'PASSWORD') {
       return userLogin(
@@ -135,7 +128,7 @@ export function userLoginWithTouchId(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context, folder } = imports
     const startFunction = () => {
-      dispatch(dispatchAction(Constants.AUTH_LOGGING_IN_WITH_PIN))
+      dispatch({ type: 'AUTH_LOGGING_IN_WITH_PIN' })
     }
     loginWithTouchId(
       context,
@@ -149,11 +142,11 @@ export function userLoginWithTouchId(data: Object) {
       .then(async account => {
         if (account) {
           account.watch('loggedIn', loggedIn => {
-            if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
+            if (!loggedIn) dispatch({ type: 'RESET_APP' })
           })
           await setMostRecentUsers(data.username)
           await twofaReminder(account)
-          dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
+          dispatch({ type: 'LOGIN_SUCCEESS' })
           const touchIdInformation = {
             isTouchSupported: true,
             isTouchEnabled: true
@@ -175,7 +168,7 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
     if (backupKey) {
       myAccountOptions.otp = backupKey
     }
-    dispatch(dispatchActionWithData(Constants.AUTH_UPDATE_PIN, data.pin))
+    dispatch({ type: 'AUTH_UPDATE_PIN', data: data.pin })
     if (data.pin.length === 4) {
       setTimeout(async () => {
         try {
@@ -185,7 +178,7 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
             myAccountOptions
           )
           abcAccount.watch('loggedIn', loggedIn => {
-            if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
+            if (!loggedIn) dispatch({ type: 'RESET_APP' })
           })
           const touchDisabled = await isTouchDisabled(
             folder,
@@ -204,13 +197,13 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
             isTouchEnabled: touchEnabled
           }
           await twofaReminder(abcAccount)
-          dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
+          dispatch({ type: 'LOGIN_SUCCEESS' })
           callback(null, abcAccount, touchIdInformation)
         } catch (e) {
           console.log('LOG IN WITH PIN ERROR ', e)
           if (e.name === 'OtpError') {
             e.loginAttempt = 'PIN'
-            dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
+            dispatch({ type: 'OTP_ERROR', data: e })
             return
           }
           if (e.message === 'Unexpected end of data') {
@@ -222,12 +215,13 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
               : e.name === 'UsernameError'
               ? s.strings.pin_not_enabled
               : e.message
-          dispatch(
-            dispatchActionWithData(Constants.LOGIN_PIN_FAIL, {
+          dispatch({
+            type: 'LOGIN_PIN_FAIL',
+            data: {
               message,
               wait: e.wait
-            })
-          )
+            }
+          })
           if (e.wait) {
             setTimeout(() => {
               dispatch(processWait(message))
@@ -248,12 +242,13 @@ export function processWait(message: string) {
     console.log('RL: wait ', wait)
     if (wait > 0) {
       // console.log('RL: got more than 1', wait)
-      dispatch(
-        dispatchActionWithData(Constants.LOGIN_PIN_FAIL, {
+      dispatch({
+        type: 'LOGIN_PIN_FAIL',
+        data: {
           message,
           wait: wait - 1
-        })
-      )
+        }
+      })
       setTimeout(() => {
         dispatch(processWait(message))
       }, 1000)
@@ -278,7 +273,7 @@ export function userLogin(data: Object, backupKey?: string) {
           myAccountOptions
         )
         abcAccount.watch('loggedIn', loggedIn => {
-          if (!loggedIn) dispatch(dispatchAction(Constants.RESET_APP))
+          if (!loggedIn) dispatch({ type: 'RESET_APP' })
         })
         const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
         if (!touchDisabled) {
@@ -294,13 +289,13 @@ export function userLogin(data: Object, backupKey?: string) {
           isTouchEnabled: touchEnabled
         }
         await twofaReminder(abcAccount)
-        dispatch(dispatchAction(Constants.LOGIN_SUCCEESS))
+        dispatch({ type: 'LOGIN_SUCCEESS' })
         callback(null, abcAccount, touchIdInformation)
       } catch (e) {
         console.log(e)
         if (e.name === 'OtpError' && !myAccountOptions.otp) {
           e.loginAttempt = 'PASSWORD'
-          dispatch(dispatchActionWithData(Constants.OTP_ERROR, e))
+          dispatch({ type: 'OTP_ERROR', data: e })
           return
         }
         const rawMessage = e.message
@@ -308,31 +303,22 @@ export function userLogin(data: Object, backupKey?: string) {
           e.message = s.strings.backup_key_incorrect
         }
         if (e.name === 'OtpError' && myAccountOptions.otp) {
-          dispatch(
-            dispatchActionWitString(
-              Constants.OTP_LOGIN_BACKUPKEY_FAIL,
-              s.strings.backup_key_incorrect
-            )
-          )
+          dispatch({
+            type: 'OTP_LOGIN_BACKUPKEY_FAIL',
+            data: s.strings.backup_key_incorrect
+          })
           return
         }
         if (myAccountOptions.otp) {
-          dispatch(
-            dispatchActionWitString(
-              Constants.OTP_LOGIN_BACKUPKEY_FAIL,
-              translateError(e.message)
-            )
-          )
+          dispatch({
+            type: 'OTP_LOGIN_BACKUPKEY_FAIL',
+            data: translateError(e.message)
+          })
           console.log('stop')
           return
         }
         dispatch(
-          dispatch(
-            dispatchActionWithData(
-              Constants.LOGIN_USERNAME_PASSWORD_FAIL,
-              rawMessage
-            )
-          )
+          dispatch({ type: 'LOGIN_USERNAME_PASSWORD_FAIL', data: rawMessage })
         )
         callback(e.message, null)
       }
@@ -352,7 +338,7 @@ export function getEdgeLoginQrCode() {
     try {
       const qr = await context.requestEdgeLogin(myAccountOptions)
       console.log(qr)
-      dispatch(dispatchActionWithData(Constants.START_EDGE_LOGIN_REQUEST, qr))
+      dispatch({ type: 'START_EDGE_LOGIN_REQUEST', data: qr })
     } catch (e) {
       console.log(e.name)
       console.log(e.message)
@@ -366,7 +352,7 @@ export function recoveryLoginComplete() {
     const account = state.login.account
     const touchIdInformation = state.login.touchIdInformation
     const callback = imports.callback
-    dispatch(dispatchAction(Constants.CLOSE_NOTIFICATION_MODAL))
+    dispatch({ type: 'CLOSE_NOTIFICATION_MODAL' })
     callback(null, account, touchIdInformation)
   }
 }

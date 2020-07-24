@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
 type OwnProps = {
@@ -12,7 +12,7 @@ type OwnProps = {
   action(): void
 }
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     headerText: s.strings.password_recovery,
     icon: Constants.LOCKED_ICON,

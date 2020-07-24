@@ -6,25 +6,7 @@ import type { EdgeContext } from 'edge-core-js'
 
 import { isTouchEnabled } from '../../native/keychain'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
-import * as Constants from '../constants'
-import { dispatchActionWithData } from './'
-
-export type LoginUserInfo = {
-  username: string,
-  pinEnabled: boolean,
-  touchEnabled: boolean
-}
-
-/**
- * The payload included in the 'SET_PREVIOUS_USERS' redux action.
- */
-export type PreviousUsersState = {
-  userList: LoginUserInfo[],
-  lastUser?: LoginUserInfo,
-
-  usernameOnlyList: string[],
-  filteredUsernameList: string[]
-}
+import { type LoginUserInfo } from '../reducers/PreviousUsersReducer'
 
 function sortUserList(
   lastUsers: string[],
@@ -101,7 +83,6 @@ export function getPreviousUsers() {
       const focusUser = username || data.lastUser
       if (data.userList && data.userList.length > 0) {
         data.usernameOnlyList = []
-        data.filteredUsernameList = []
         data.userList.forEach(function(element) {
           if (element.username === focusUser) {
             data.lastUser = {
@@ -111,10 +92,9 @@ export function getPreviousUsers() {
             }
           }
           data.usernameOnlyList.push(element.username)
-          data.filteredUsernameList.push(element.username)
         }, this)
       }
-      dispatch(dispatchActionWithData(Constants.SET_PREVIOUS_USERS, data))
+      dispatch({ type: 'SET_PREVIOUS_USERS', data: data })
     })
   }
 }

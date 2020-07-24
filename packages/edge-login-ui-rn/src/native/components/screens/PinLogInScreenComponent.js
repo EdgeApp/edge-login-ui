@@ -3,8 +3,8 @@
 import React, { Component } from 'react'
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
 
-import { type LoginUserInfo } from '../../../common/actions/PreviousUsersActions.js'
 import s from '../../../common/locales/strings.js'
+import { type LoginUserInfo } from '../../../common/reducers/PreviousUsersReducer.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import PinKeypadConnector from '../../../native/connectors/abSpecific/PinKeypadConnector'
 import * as Assets from '../../assets/'

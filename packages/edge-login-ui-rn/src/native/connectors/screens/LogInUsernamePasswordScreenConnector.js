@@ -4,16 +4,16 @@ import { connect } from 'react-redux'
 
 import * as action from '../../../common/actions'
 import * as Constants from '../../../common/constants'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import LinkedComponent from '../../components/screens/LoginUsernamePasswordScreenComponent'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   let pv = false
   if (state.previousUsers.userList.length > 0) {
     pv = true
   }
   const usernameList = state.previousUsers.usernameOnlyList
-  const filteredUsernameList = state.previousUsers.usernameOnlyList
+  const usernameOnlyList = state.previousUsers.usernameOnlyList
   return {
     auth: state.login,
     loginSuccess: state.login.loginSuccess,
@@ -23,7 +23,7 @@ export const mapStateToProps = (state: State) => {
     error: state.login.errorMessage,
     previousUsers: state.previousUsers.userList,
     usernameList,
-    filteredUsernameList,
+    usernameOnlyList,
     hasUsers: pv,
     showModal: state.workflow.showModal
   }
@@ -35,29 +35,18 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
       dispatch(action.userLoginWithTouchId(data)),
     userLogin: (data: Object) => dispatch(action.userLogin(data)),
     gotoCreatePage: () =>
-      dispatch(action.startWorkflow(Constants.WORKFLOW_CREATE)),
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_CREATE }),
     gotoPinLoginPage: () =>
-      dispatch(action.startWorkflow(Constants.WORKFLOW_PIN)),
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PIN }),
     updateUsername: (data: string) =>
-      dispatch(
-        action.dispatchActionWitString(Constants.AUTH_UPDATE_USERNAME, data)
-      ),
-    updatePassword: (data: Object) =>
-      dispatch(
-        action.dispatchActionWithData(
-          Constants.AUTH_UPDATE_LOGIN_PASSWORD,
-          data
-        )
-      ),
+      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data }),
+    updatePassword: (data: string) =>
+      dispatch({ type: 'AUTH_UPDATE_LOGIN_PASSWORD', data: data }),
     deleteUserFromDevice: (data: string) =>
-      dispatch(
-        action.dispatchActionWitString(Constants.DELETE_USER_FROM_DEVICE, data)
-      ),
-    launchDeleteModal: () =>
-      dispatch(action.dispatchAction(Constants.WORKFLOW_LAUNCH_MODAL)),
+      dispatch({ type: 'DELETE_USER_FROM_DEVICE', data: data }),
+    launchDeleteModal: () => dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' }),
     recoverPasswordLogin: () => dispatch(action.recoverPasswordLogin()),
-    dismissRecoveryError: () =>
-      dispatch(action.dispatchAction(Constants.DISMISS_REOVERY_ERROR))
+    dismissRecoveryError: () => dispatch({ type: 'DISMISS_REOVERY_ERROR' })
   }
 }
 

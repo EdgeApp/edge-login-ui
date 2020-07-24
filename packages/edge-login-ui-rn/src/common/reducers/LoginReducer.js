@@ -1,34 +1,68 @@
-import * as Constants from '../../common/constants'
-import { type PreviousUsersState } from '../actions/PreviousUsersActions.js'
+// @flow
 
-const initialState = {
-  username: null,
+import type { EdgeAccount } from 'edge-core-js'
+import { type Reducer } from 'redux'
+
+import { type Action } from '../../types/ReduxTypes'
+import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
+
+const flowHack: any = {}
+const defaultAccount: EdgeAccount = flowHack
+
+export type LoginState = {
+  +account: EdgeAccount,
+  +cancelEdgeLoginRequest: (() => void) | null,
+  +edgeLoginId: string | null,
+  +errorMessage: string | null,
+  +isLoggingInWithPin: boolean,
+  +loginSuccess: boolean,
+  +otpErrorMessage: string | null,
+  +otpResetDate: Date | null,
+  +otpResetToken: string,
+  +otpUserBackupKey: string,
+  +password: string | null,
+  +pin: string | null,
+  +previousAttemptData: any,
+  +previousAttemptType: string | null,
+  +recoveryToken: string | null,
+  +showRecoverSuccessDialog: boolean,
+  +touchIdInformation: Object | null,
+  +username: string,
+  +wait: number
+}
+
+const initialState: LoginState = {
+  username: '',
   password: null,
   pin: null,
   loginSuccess: false,
   errorMessage: null,
   otpErrorMessage: null,
   isLoggingInWithPin: false,
-  otpResetToken: null,
+  otpResetToken: '',
   otpResetDate: null,
-  otpUserBackupKey: null, // S7UQ66VYNZKAX4EV
+  otpUserBackupKey: '', // S7UQ66VYNZKAX4EV
   recoveryToken: null,
   previousAttemptType: null,
   previousAttemptData: null,
   edgeLoginId: null,
   cancelEdgeLoginRequest: null,
-  account: null,
+  account: defaultAccount,
   touchIdInformation: null,
   showRecoverSuccessDialog: false,
   wait: 0
 }
-export default function(state = initialState, action) {
+
+export const login: Reducer<LoginState, Action> = function(
+  state = initialState,
+  action
+) {
   switch (action.type) {
-    case Constants.CANCEL_RECOVERY_KEY:
+    case 'CANCEL_RECOVERY_KEY':
       return { ...state, recoveryToken: null }
-    case Constants.START_RECOVERY_LOGIN:
+    case 'START_RECOVERY_LOGIN':
       return { ...state, otpErrorMessage: null }
-    case Constants.SET_PREVIOUS_USERS: {
+    case 'SET_PREVIOUS_USERS': {
       const data: PreviousUsersState = action.data
       if (data.lastUser) {
         return { ...state, username: data.lastUser.username }
@@ -39,13 +73,13 @@ export default function(state = initialState, action) {
       }
       return state
     }
-    case Constants.AUTH_UPDATE_USERNAME:
+    case 'AUTH_UPDATE_USERNAME':
       return { ...state, username: action.data, errorMessage: null, wait: 0 }
-    case Constants.UPDATE_WAIT_TIMER:
+    case 'UPDATE_WAIT_TIMER':
       return { ...state, wait: action.data.seconds }
-    case Constants.AUTH_UPDATE_PIN:
+    case 'AUTH_UPDATE_PIN':
       return { ...state, pin: action.data, errorMessage: null }
-    case Constants.LOGIN_SUCCEESS:
+    case 'LOGIN_SUCCEESS':
       return {
         ...state,
         loginSuccess: true,
@@ -55,14 +89,14 @@ export default function(state = initialState, action) {
         otpErrorMessage: null,
         wait: 0
       }
-    case Constants.LOGIN_USERNAME_PASSWORD_FAIL:
+    case 'LOGIN_USERNAME_PASSWORD_FAIL':
       return {
         ...state,
         errorMessage: action.data,
         pin: '',
         isLoggingInWithPin: false
       }
-    case Constants.LOGIN_PIN_FAIL:
+    case 'LOGIN_PIN_FAIL':
       return {
         ...state,
         errorMessage: action.data.message,
@@ -70,19 +104,19 @@ export default function(state = initialState, action) {
         pin: '',
         isLoggingInWithPin: false
       }
-    case Constants.OTP_LOGIN_BACKUPKEY_FAIL:
+    case 'OTP_LOGIN_BACKUPKEY_FAIL':
       return {
         ...state,
         otpErrorMessage: action.data,
         errorMessage: null
       }
-    case Constants.AUTH_LOGGING_IN_WITH_PIN:
+    case 'AUTH_LOGGING_IN_WITH_PIN':
       return { ...state, isLoggingInWithPin: true }
-    case Constants.AUTH_UPDATE_OTP_BACKUP_KEY:
+    case 'AUTH_UPDATE_OTP_BACKUP_KEY':
       return { ...state, otpUserBackupKey: action.data }
-    case Constants.AUTH_UPDATE_LOGIN_PASSWORD:
+    case 'AUTH_UPDATE_LOGIN_PASSWORD':
       return { ...state, password: action.data, errorMessage: null }
-    case Constants.OTP_ERROR:
+    case 'OTP_ERROR':
       return {
         ...state,
         otpResetToken: action.data.resetToken,
@@ -90,40 +124,40 @@ export default function(state = initialState, action) {
         previousAttemptType: action.data.loginAttempt,
         previousAttemptData: action.data.loginAttemptData
       }
-    case Constants.OTP_RESET_REQUEST:
+    case 'OTP_RESET_REQUEST':
       return {
         ...state,
         otpResetDate: action.data
       }
-    case Constants.START_EDGE_LOGIN_REQUEST:
+    case 'START_EDGE_LOGIN_REQUEST':
       return {
         ...state,
         edgeLoginId: 'airbitz://edge/' + action.data.id,
         cancelEdgeLoginRequest: action.data.cancelRequest
       }
-    case Constants.CANCEL_EDGE_LOGIN_REQUEST:
+    case 'CANCEL_EDGE_LOGIN_REQUEST':
       return {
         ...state,
         edgeLoginId: null,
         cancelEdgeLoginRequest: null
       }
-    case Constants.SET_RECOVERY_KEY:
+    case 'SET_RECOVERY_KEY':
       return { ...state, recoveryToken: action.data }
-    case Constants.RESET_APP: {
+    case 'RESET_APP': {
       const username = state.username
       return { ...initialState, username: username }
     }
 
-    case Constants.LOGIN_RECOVERY_SUCCEESS:
+    case 'LOGIN_RECOVERY_SUCCEESS':
       return {
         ...state,
         account: action.data.account,
         touchIdInformation: action.data.touchIdInformation,
         showRecoverSuccessDialog: true
       }
-    case Constants.ON_RECOVERY_LOGIN_ERROR:
+    case 'ON_RECOVERY_LOGIN_ERROR':
       return { ...state, errorMessage: action.data }
-    case Constants.PASSWORD_RECOVERY_INITIALIZED:
+    case 'PASSWORD_RECOVERY_INITIALIZED':
       return {
         ...state,
         account: action.data.account,

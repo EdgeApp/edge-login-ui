@@ -1,8 +1,7 @@
 // @flow
 
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
-import * as Constants from '../constants'
-import { dispatchActionWithData, getPreviousUsers } from './'
+import { getPreviousUsers } from './'
 
 export function deleteUserFromDevice(data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
@@ -16,9 +15,7 @@ export function deleteUserFromDevice(data: string) {
         .catch(e => {
           console.log('error createUser')
           console.log(e)
-          dispatch(
-            dispatchActionWithData(Constants.WORKFLOW_CANCEL_MODAL, e.message)
-          )
+          dispatch({ type: 'WORKFLOW_CANCEL_MODAL', data: e.message })
         })
     }, 300)
   }
