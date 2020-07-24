@@ -3,13 +3,13 @@
 import { connect } from 'react-redux'
 
 import s from '../../../common/locales/strings.js'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common'
 
 type OwnProps = {
   onSubmitEditing(): void
 }
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     value: state.login.username,
     label: s.strings.username,

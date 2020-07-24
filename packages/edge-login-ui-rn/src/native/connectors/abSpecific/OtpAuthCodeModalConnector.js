@@ -3,7 +3,7 @@
 import { connect } from 'react-redux'
 
 import s from '../../../common/locales/strings.js'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { OTP_SMALL } from '../../assets/'
 import { MyModal } from '../../components/common/'
 
@@ -14,7 +14,7 @@ type OwnProps = {
   action(): void
 }
 
-export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const { otpUserBackupKey } = state.login
   return {
     headerText: s.strings.otp_auth_code_header,

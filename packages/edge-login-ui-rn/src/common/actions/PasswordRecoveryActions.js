@@ -32,7 +32,7 @@ export function getRecoveryQuestions() {
     const state = getState()
     const context = imports.context
     const username = state.login.username
-    const recoveryKey = state.login.recoveryToken
+    const recoveryKey = state.login.recoveryToken || ''
     try {
       const userQuestions = await context.fetchRecovery2Questions(
         recoveryKey,

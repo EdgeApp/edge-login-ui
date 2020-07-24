@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions/'
 import * as Constants from '../../../../common/constants'
-import type { Dispatch, State } from '../../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
 import LinkedComponent from '../../../components/screens/newAccount/NewAccountWelcomeScreenComponent'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     workflow: state.workflow
   }

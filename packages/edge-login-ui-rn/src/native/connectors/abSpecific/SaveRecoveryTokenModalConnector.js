@@ -1,15 +1,17 @@
+// @flow
+
 import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
-import { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
 type OwnProps = {
   cancel(): void,
   action(): void
 }
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     headerText: s.strings.save_recovery_token,
     icon: Constants.MAIL,

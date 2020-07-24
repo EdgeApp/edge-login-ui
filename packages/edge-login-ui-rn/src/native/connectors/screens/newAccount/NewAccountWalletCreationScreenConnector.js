@@ -2,10 +2,10 @@
 
 import { connect } from 'react-redux'
 
-import type { State } from '../../../../types/ReduxTypes'
+import { type RootState } from '../../../../types/ReduxTypes'
 import LinkedComponent from '../../../components/screens/newAccount/NewAccountWalletCreationScreenComponent'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     auth: state.login,
     workflow: state.workflow

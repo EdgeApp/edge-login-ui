@@ -2,10 +2,10 @@
 
 import { connect } from 'react-redux'
 
-import type { State } from '../../../types/ReduxTypes'
+import { type RootState } from '../../../types/ReduxTypes'
 import PasswordStatusComponent from '../../components/abSpecific/PasswordStatusComponent'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   const secondsToCrack = state.passwordStatus
     ? state.passwordStatus.secondsToCrack
     : ''

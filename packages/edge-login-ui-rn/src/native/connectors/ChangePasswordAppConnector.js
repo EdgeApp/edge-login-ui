@@ -3,11 +3,11 @@
 import { connect } from 'react-redux'
 
 import * as Constants from '../../common/constants'
-import type { Dispatch, State } from '../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes'
 import type { OwnProps } from '../components/ChangePasswordAppComponent'
 import ChangePasswordAppComponent from '../components/ChangePasswordAppComponent'
 
-export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   return {
     workflow: state.workflow,
     showHeader: ownProps.showHeader

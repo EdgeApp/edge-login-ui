@@ -3,11 +3,11 @@
 import { connect } from 'react-redux'
 
 import * as loginAction from '../../common/actions/'
-import type { Dispatch, State } from '../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes'
 import type { OwnProps } from '../components/LogInAppComponent'
 import { LoginAppComponent } from '../components/LogInAppComponent'
 
-export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const previousUsers = state.previousUsers
   const lastUser = state.previousUsers ? state.previousUsers.lastUser : null
   return {

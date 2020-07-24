@@ -3,10 +3,10 @@
 import { connect } from 'react-redux'
 
 import * as loginAction from '../../../../common/actions'
-import type { Dispatch, State } from '../../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
 import LinkedComponent from '../../../components/screens/newAccount/SetAccountPinScreenComponent'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     username: state.create.username,
     password: state.create.password,

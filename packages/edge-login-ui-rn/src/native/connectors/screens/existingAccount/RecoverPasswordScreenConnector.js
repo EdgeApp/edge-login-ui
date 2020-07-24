@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions'
 import s from '../../../../common/locales/strings'
-import type { Dispatch, State } from '../../../../types/ReduxTypes.js'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import type { OwnProps } from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 import LinkedComponent from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
 
-export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const isEnabled = state.passwordRecovery.userQuestions.length > 0 || false
   const question1 =
     state.passwordRecovery.userQuestions.length > 0

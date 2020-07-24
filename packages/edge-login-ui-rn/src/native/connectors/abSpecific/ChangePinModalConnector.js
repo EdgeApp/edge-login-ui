@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 import * as actions from '../../../common/actions/index'
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     headerText: s.strings.pin_changed,
     headerSubtext: s.strings.pin_successfully_changed,

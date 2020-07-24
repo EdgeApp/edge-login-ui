@@ -2,10 +2,10 @@
 
 import { connect } from 'react-redux'
 
-import type { Dispatch, State } from '../../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
 import LinkedComponent from '../../../components/screens/newAccount/NewAccountReviewScreenComponent'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   return {
     workflow: state.workflow,
     username: state.login.username,

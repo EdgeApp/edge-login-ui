@@ -6,13 +6,13 @@ import { sprintf } from 'sprintf-js'
 import * as actions from '../../../common/actions'
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
-import type { Dispatch, State } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { MyModal } from '../../components/common/'
 
 type OwnProps = {
   username: string
 }
-export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const middleText = sprintf(
     s.strings.delete_username_account,
     ownProps.username

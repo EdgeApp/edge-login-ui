@@ -4,15 +4,14 @@ import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
 import s from '../../../common/locales/strings.js'
-import type { State } from '../../../types/ReduxTypes'
+import { type RootState } from '../../../types/ReduxTypes'
 import { FourDigitComponent } from '../../components/abSpecific/'
 
-export const mapStateToProps = (state: State) => {
+export const mapStateToProps = (state: RootState) => {
   const wait = state.login.wait
   const error =
     wait && wait > 0
-      ? state.login.errorMessage +
-        ': ' +
+      ? `${state.login.errorMessage || ''}: ` +
         sprintf(s.strings.account_locked_for, wait)
       : state.login.errorMessage
   return {

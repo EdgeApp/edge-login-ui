@@ -32,7 +32,7 @@ export function loginWithRecovery(
 ) {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
-    const backupKey = state.passwordRecovery.recoveryKey
+    const backupKey = state.passwordRecovery.recoveryKey || ''
     const username = state.login.username
     const { context, folder } = imports
     try {
