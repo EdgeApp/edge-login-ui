@@ -12,8 +12,8 @@ import { recoveryLoginComplete } from '../../../../common/actions/LoginAction.js
 import s from '../../../../common/locales/strings'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import ChangePinModalConnector from '../../../connectors/abSpecific/ChangePinModalConnector'
-import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
+import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button, StaticModal } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
@@ -113,9 +113,7 @@ class ChangeAccountPinScreenComponent extends Component<Props, State> {
               </Text>
             </View>
             <View style={SetAccountPinScreenStyle.row2}>
-              <CreateFourDigitPinConnector
-                style={SetAccountPinScreenStyle.fourPin}
-              />
+              <FourDigitInput style={SetAccountPinScreenStyle.fourPin} />
             </View>
             <View style={SetAccountPinScreenStyle.row3}>
               <Button
