@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import ChangeAccountPinScreenConnector from '../connectors/screens/existingAccount/ChangeAccountPinScreenConnector'
+import { ChangeAccountPinScreen } from '../components/screens/existingAccout/ChangeAccountPinScreenComponent'
 
 export type OwnProps = {
   styles: Object
@@ -23,7 +23,7 @@ export default class ChangePinAppComponent extends Component<Props> {
     const { ScreenStyle } = this.props.styles
     return (
       <View accessible style={ScreenStyle}>
-        <ChangeAccountPinScreenConnector styles={this.props.styles} />
+        <ChangeAccountPinScreen styles={this.props.styles} />
       </View>
     )
   }

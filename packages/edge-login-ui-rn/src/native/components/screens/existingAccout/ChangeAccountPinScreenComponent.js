@@ -2,34 +2,45 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { connect } from 'react-redux'
 
+import {
+  changePIN,
+  recoveryChangePIN
+} from '../../../../common/actions/ChangePasswordPinActions.js'
+import { recoveryLoginComplete } from '../../../../common/actions/LoginAction.js'
 import s from '../../../../common/locales/strings'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import ChangePinModalConnector from '../../../connectors/abSpecific/ChangePinModalConnector'
 import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import { Button, StaticModal } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type Props = {
-  styles: Object,
-  pin: string,
-  showHeader: boolean,
-  showModal: boolean,
-  forgotPasswordModal: boolean,
-  pinError: string,
-  changePin(string): void,
-  login(): void
+type OwnProps = {
+  showHeader?: boolean,
+  styles: Object
 }
+type StateProps = {
+  forgotPasswordModal?: boolean,
+  pin: string,
+  pinError: string,
+  showModal: boolean
+}
+type DispatchProps = {
+  changePin(pin: string): void,
+  login?: () => void
+}
+type Props = OwnProps & StateProps & DispatchProps
+
 type State = {
   isProcessing: boolean,
   pin: string,
   username: string,
   focusOn: string
 }
-export default class ChangeAccountPinScreenComponent extends Component<
-  Props,
-  State
-> {
+
+class ChangeAccountPinScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -127,3 +138,35 @@ export default class ChangeAccountPinScreenComponent extends Component<
     )
   }
 }
+
+export const ChangeAccountPinScreen = connect(
+  (state: RootState): StateProps => ({
+    pin: state.create.pin,
+    pinError: state.create.pinError,
+    workflow: state.workflow,
+    showModal: state.create.showModal
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    changePin(data) {
+      dispatch(changePIN(data))
+    }
+  })
+)(ChangeAccountPinScreenComponent)
+
+export const ForgotPinChangePinScene = connect(
+  (state: RootState): StateProps => ({
+    forgotPasswordModal: true,
+    pin: state.create.pin,
+    pinError: state.create.pinError,
+    showHeader: true,
+    showModal: state.create.showModal
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    changePin(data: string) {
+      dispatch(recoveryChangePIN(data))
+    },
+    login() {
+      dispatch(recoveryLoginComplete())
+    }
+  })
+)(ChangeAccountPinScreenComponent)

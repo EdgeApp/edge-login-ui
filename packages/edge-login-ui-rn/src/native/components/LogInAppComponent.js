@@ -6,7 +6,6 @@ import { View } from 'react-native'
 import * as Constants from '../../common/constants'
 import { ModalManager as ModalManagerLogin } from '../../common/util'
 import ForgotPasswordChangePasswordConnector from '../connectors/screens/existingAccount/ForgotPasswordChangePasswordConnector'
-import ForgotPinChangePinConnector from '../connectors/screens/existingAccount/ForgotPinChangePinConnector'
 import LoginWithRecoveryQuestionsSceenConnector from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
 import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'
@@ -20,6 +19,7 @@ import NewAccountPinScreenConnector from '../connectors/screens/newAccount/SetAc
 import TermsAndConditionsScreenConnector from '../connectors/screens/newAccount/TermsAndConditionsScreenConnector'
 import PinLoginScreenConnector from '../connectors/screens/PinLoginScreenConnector'
 import { getSupportedBiometryType } from '../keychain.js'
+import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent'
 import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent'
 
 export type StateProps = {
@@ -227,7 +227,7 @@ export class LoginAppComponent extends Component<Props, State> {
           <ForgotPasswordChangePasswordConnector styles={this.props.styles} />
         )
       case 2:
-        return <ForgotPinChangePinConnector styles={this.props.styles} />
+        return <ForgotPinChangePinScene styles={this.props.styles} />
     }
   }
 
