@@ -1,10 +1,18 @@
 // @flow
 
+import { type EdgePasswordRules } from 'edge-core-js'
 import React, { Component } from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
+import { connect } from 'react-redux'
 
+import {
+  changePassword,
+  recoveryChangePassword
+} from '../../../../common/actions/ChangePasswordPinActions.js'
+import { validateConfirmPassword } from '../../../../common/actions/CreateAccountActions.js'
 import s from '../../../../common/locales/strings.js'
 import { scale } from '../../../../common/util/index.js'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
 import ChangePasswordModalConnector from '../../../connectors/abSpecific/ChangePasswordModalConnector'
 import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
@@ -13,26 +21,22 @@ import PasswordConnector from '../../../connectors/componentConnectors/PasswordC
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-export type OwnProps = {
-  showHeader: boolean,
+type OwnProps = {
+  showHeader?: boolean,
   styles: Object
 }
 type StateProps = {
-  password: string,
-  passwordStatus: Object,
   confirmPassword: string,
-  createPasswordErrorMessage?: string,
-  workflow: Object,
-  showModal: boolean,
   error?: string,
-  error2?: string
+  error2?: string,
+  password: string,
+  passwordStatus: EdgePasswordRules | null,
+  showModal: boolean
 }
-
 type DispatchProps = {
   checkTheConfirmPassword(): void,
   changePassword(string): void
 }
-
 type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
@@ -41,10 +45,7 @@ type State = {
   isProcessing: boolean
 }
 
-export default class ChangeAccountPasswordScreenComponent extends Component<
-  Props,
-  State
-> {
+class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -169,3 +170,42 @@ export default class ChangeAccountPasswordScreenComponent extends Component<
     )
   }
 }
+
+export const ChangeAccountPasswordScreen = connect(
+  (state: RootState): StateProps => ({
+    confirmPassword: state.create.confirmPassword || '',
+    error: state.create.confirmPasswordErrorMessage || '',
+    error2: state.create.createPasswordErrorMessage || '',
+    password: state.create.password || '',
+    passwordStatus: state.create.passwordStatus,
+    showModal: state.create.showModal
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    checkTheConfirmPassword() {
+      dispatch(validateConfirmPassword())
+    },
+    changePassword(data: string) {
+      dispatch(changePassword(data))
+    }
+  })
+)(ChangeAccountPasswordScreenComponent)
+
+export const ForgotPasswordChangePassword = connect(
+  (state: RootState): StateProps => ({
+    confirmPassword: state.create.confirmPassword || '',
+    error: state.create.confirmPasswordErrorMessage || '',
+    error2: state.create.createPasswordErrorMessage || '',
+    password: state.create.password || '',
+    passwordStatus: state.create.passwordStatus,
+    showHeader: true,
+    showModal: state.create.showModal
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    checkTheConfirmPassword() {
+      dispatch(validateConfirmPassword())
+    },
+    changePassword(data: string) {
+      dispatch(recoveryChangePassword(data))
+    }
+  })
+)(ChangeAccountPasswordScreenComponent)

@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import ChangeAccountPasswordScreenConnector from '../connectors/screens/existingAccount/ChangeAccountPasswordScreenConnector'
+import { ChangeAccountPasswordScreen } from './screens/existingAccout/ChangeAccountPasswordScreenComponent'
 
 export type OwnProps = {
   styles: Object,
@@ -27,7 +27,7 @@ export default class ChangePasswordAppComponent extends Component<Props> {
     const { ScreenStyle } = this.props.styles
     return (
       <View style={ScreenStyle} accessible>
-        <ChangeAccountPasswordScreenConnector
+        <ChangeAccountPasswordScreen
           styles={this.props.styles}
           showHeader={this.props.showHeader}
         />
