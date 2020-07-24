@@ -9,19 +9,9 @@ import { Spinner } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type Props = {
-  styles: Object,
-  createSuccess: boolean,
-  nextScreen(): void
+  styles: Object
 }
-export default class CreatingAccountWaitScreenComponent extends Component<Props> {
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.createSuccess) {
-      global.firebase &&
-        global.firebase.analytics().logEvent(`Signup_Create_User_Success`)
-      this.props.nextScreen()
-    }
-  }
-
+export class CreatingAccountWaitScreen extends Component<Props> {
   render() {
     const { CreatingAccountWaitScreenStyle } = this.props.styles
     return (

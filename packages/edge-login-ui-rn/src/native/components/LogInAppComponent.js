@@ -12,7 +12,6 @@ import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpEr
 import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'
 import LoadingScreenConnector from '../connectors/screens/LoadingScreenConnector'
 import LoginUsernamePasswordScreenConnector from '../connectors/screens/LogInUsernamePasswordScreenConnector'
-import CreatingAccountWaitScreenConnector from '../connectors/screens/newAccount/CreatingAccountWaitScreenConnector'
 import NewAccountPasswordScreenConnector from '../connectors/screens/newAccount/NewAccountPasswordScreenConnector'
 import NewAccountReviewScreenConnector from '../connectors/screens/newAccount/NewAccountReviewScreenConnector'
 import NewAccountUsernameScreenConnector from '../connectors/screens/newAccount/NewAccountUsernameScreenConnector'
@@ -21,6 +20,7 @@ import NewAccountPinScreenConnector from '../connectors/screens/newAccount/SetAc
 import TermsAndConditionsScreenConnector from '../connectors/screens/newAccount/TermsAndConditionsScreenConnector'
 import PinLoginScreenConnector from '../connectors/screens/PinLoginScreenConnector'
 import { getSupportedBiometryType } from '../keychain.js'
+import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent'
 
 export type StateProps = {
   workflow: Object,
@@ -167,7 +167,7 @@ export class LoginAppComponent extends Component<Props, State> {
       case 3:
         return <NewAccountPinScreenConnector styles={this.props.styles} />
       case 4:
-        return <CreatingAccountWaitScreenConnector styles={this.props.styles} />
+        return <CreatingAccountWaitScreen styles={this.props.styles} />
       case 5:
         return <NewAccountReviewScreenConnector styles={this.props.styles} />
       case 6:
