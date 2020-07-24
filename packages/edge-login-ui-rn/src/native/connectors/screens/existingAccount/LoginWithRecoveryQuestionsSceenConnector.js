@@ -1,10 +1,13 @@
+// @flow
+
 import { connect } from 'react-redux'
 
 import * as actions from '../../../../common/actions'
 import s from '../../../../common/locales/strings.js'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import LinkedComponent from '../../../components/screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent'
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: RootState) => {
   const isEnabled = true
   const question1 =
     state.passwordRecovery.userQuestions.length > 0
@@ -17,7 +20,6 @@ export const mapStateToProps = (state, ownProps) => {
   const loginError = state.login.errorMessage || ''
   const username = state.login.username || ''
   return {
-    styles: ownProps.styles,
     showHeader: true,
     questionsList: state.passwordRecovery.questionsList,
     userQuestions: state.passwordRecovery.userQuestions,
@@ -32,12 +34,13 @@ export const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    submit: answers => dispatch(actions.loginWithRecovery(answers)),
+    submit: (answers: Array<string>) =>
+      dispatch(actions.loginWithRecovery(answers)),
     getQuestions: () => dispatch(actions.getRecoveryQuestions()),
     onCancel: () => dispatch({ type: 'CANCEL_RECOVERY_KEY' }),
-    updateUsername: username =>
+    updateUsername: (username: string) =>
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username }),
     changePassword: () => dispatch({ type: 'WORKFLOW_NEXT' })
   }

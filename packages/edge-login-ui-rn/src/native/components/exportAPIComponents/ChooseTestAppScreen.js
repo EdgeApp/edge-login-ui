@@ -1,17 +1,18 @@
+// @flow
+
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
 import * as Styles from '../../styles'
 import { Button } from '../common/Button'
 
-/* type Props = {
+type Props = {
   onChangePassword(): void,
   onChangePin(): void,
   onRecoverPassword(): void
-} */
+}
 
-class ChooseTestAppScreen extends Component {
-  componentWillReceiveProps(props) {}
+class ChooseTestAppScreen extends Component<Props> {
   onPasswordPress() {
     this.props.onChangePassword()
   }

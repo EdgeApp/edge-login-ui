@@ -1,3 +1,5 @@
+// @flow
+
 import * as Constants from '../../../common/constants/'
 import { isIphoneX, scale } from '../../../common/util'
 
