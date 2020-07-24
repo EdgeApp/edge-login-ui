@@ -2,9 +2,17 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 
+import { getPreviousUsers } from '../../common/actions/PreviousUsersActions.js'
 import * as Constants from '../../common/constants'
+import {
+  type LoginUserInfo,
+  type PreviousUsersState
+} from '../../common/reducers/PreviousUsersReducer.js'
+import { type WorkflowState } from '../../common/reducers/WorkflowReducer.js'
 import { ModalManager as ModalManagerLogin } from '../../common/util/ModalManager.js'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import LoginWithRecoveryQuestionsSceenConnector from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
 import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'
@@ -22,27 +30,25 @@ import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAcc
 import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent'
 import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent'
 
-export type StateProps = {
-  workflow: Object,
-  recoveryLogin: string,
-  previousUsers: ?Object,
-  lastUser: Object,
-  lastUserPinEnabled: boolean,
-  lastUserTouchEnabled: boolean,
+type OwnProps = {
   appId?: string,
   appName?: string,
   backgroundImage?: any,
+  landingScreenText?: string,
+  parentButton?: Object,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
-  parentButton?: Object,
-  landingScreenText?: string
-}
-export type OwnProps = {
+  recoveryLogin?: string,
   styles: Object
 }
-export type DispatchProps = {
+type StateProps = {
+  lastUser?: LoginUserInfo,
+  previousUsers: PreviousUsersState,
+  workflow: WorkflowState
+}
+type DispatchProps = {
   getPreviousUsers(): void,
-  startRecoveryWorkflow(string): void
+  startRecoveryWorkflow(backupKey: string): void
 }
 type State = {
   touch: string | boolean
@@ -50,7 +56,7 @@ type State = {
 
 type Props = StateProps & OwnProps & DispatchProps
 
-export class LoginAppComponent extends Component<Props, State> {
+class LoginAppComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -91,10 +97,10 @@ export class LoginAppComponent extends Component<Props, State> {
         }
         if (this.props.lastUser) {
           // we have previous users, a last user, and that user has pin or touch enabled.
-          if (this.props.lastUserPinEnabled) {
+          if (this.props.lastUser.pinEnabled) {
             return this.getPinScreen()
           }
-          if (this.props.lastUserTouchEnabled && this.state.touch) {
+          if (this.props.lastUser.touchEnabled && this.state.touch) {
             return this.getPinScreen()
           }
         }
@@ -243,3 +249,19 @@ export class LoginAppComponent extends Component<Props, State> {
     }
   }
 }
+
+export const LoginApp = connect(
+  (state: RootState): StateProps => ({
+    lastUser: state.previousUsers.lastUser,
+    previousUsers: state.previousUsers,
+    workflow: state.workflow
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    getPreviousUsers() {
+      dispatch(getPreviousUsers())
+    },
+    startRecoveryWorkflow(backupKey) {
+      dispatch({ type: 'SET_RECOVERY_KEY', data: backupKey })
+    }
+  })
+)(LoginAppComponent)
