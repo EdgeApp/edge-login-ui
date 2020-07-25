@@ -1,8 +1,8 @@
 // @flow
 
 import * as Styles from '../'
+import * as Constants from '../../../common/constants'
 import { scale } from '../../../common/util/scaling.js'
-import * as Constants from '../../constants/'
 
 const HeaderContainerStyle = {
   container: {

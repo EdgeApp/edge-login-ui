@@ -7,7 +7,7 @@ import Modal from 'react-native-modal'
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 
 import * as Constants from '../../../common/constants'
-import { StaticModalStyle } from '../../../common/styles/'
+import { StaticModalStyle } from '../../styles/'
 
 type Props = {
   modalDismissTimerSeconds: number,

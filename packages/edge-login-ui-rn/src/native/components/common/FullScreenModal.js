@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Dimensions, Platform, View } from 'react-native'
 import Modal from 'react-native-modal'
 
-import { FullScreenModalStyle } from '../../../common/styles/'
+import { FullScreenModalStyle } from '../../styles/'
 
 type Props = {
   children: any

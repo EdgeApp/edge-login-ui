@@ -1,6 +1,6 @@
 // @flow
 
-import { scale } from '../../util/scaling'
+import { scale } from '../../../common/util/scaling'
 
 const HeaderParentButtons = {
   container: {
