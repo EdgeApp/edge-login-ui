@@ -25,9 +25,14 @@ import {
   IconButton,
   StaticModal
 } from '../../components/common'
-import * as Offsets from '../../constants'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { UserListItem } from '../abSpecific/UserListItem.js'
+
+const Offsets = {
+  USERNAME_OFFSET_LOGIN_SCREEN: -50,
+  PASSWORD_OFFSET_LOGIN_SCREEN: -80,
+  LOGIN_SCREEN_NO_OFFSET: -200
+}
 
 type OwnProps = {
   styles: Object,
