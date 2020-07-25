@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 
 import * as Constants from '../../common/constants'
-import { ModalManager as ModalManagerLogin } from '../../common/util'
+import { ModalManager as ModalManagerLogin } from '../../common/util/ModalManager.js'
 import LoginWithRecoveryQuestionsSceenConnector from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
 import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'

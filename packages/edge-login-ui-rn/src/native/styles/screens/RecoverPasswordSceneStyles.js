@@ -3,7 +3,8 @@ import { Dimensions } from 'react-native'
 
 import * as Styles from '../'
 import * as Constants from '../../../common/constants'
-import { isIphoneX, scale } from '../../../common/util'
+import { isIphoneX } from '../../../common/util/isIphoneX.js'
+import { scale } from '../../../common/util/scaling.js'
 
 const RecoverPasswordSceneStyles = {
   screen: { ...Styles.ScreenStyle },

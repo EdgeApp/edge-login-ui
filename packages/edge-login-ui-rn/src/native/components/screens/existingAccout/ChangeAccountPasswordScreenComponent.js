@@ -11,7 +11,7 @@ import {
 } from '../../../../common/actions/ChangePasswordPinActions.js'
 import { validateConfirmPassword } from '../../../../common/actions/CreateAccountActions.js'
 import s from '../../../../common/locales/strings.js'
-import { scale } from '../../../../common/util/index.js'
+import { scale } from '../../../../common/util/scaling.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
 import ChangePasswordModalConnector from '../../../connectors/abSpecific/ChangePasswordModalConnector'
 import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'

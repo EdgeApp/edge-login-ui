@@ -2,7 +2,7 @@
 
 import * as Styles from '../'
 import * as Colors from '../../constants/Colors'
-import { scale, scaleH } from '../../util'
+import { scale, scaleH } from '../../util/scaling.js'
 
 const ModalStyles = {
   modal: {},
