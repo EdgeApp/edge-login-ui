@@ -13,7 +13,6 @@ import {
 import { type WorkflowState } from '../../common/reducers/WorkflowReducer.js'
 import { ModalManager as ModalManagerLogin } from '../../common/util/ModalManager.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'
 import LoadingScreenConnector from '../connectors/screens/LoadingScreenConnector'
 import NewAccountPasswordScreenConnector from '../connectors/screens/newAccount/NewAccountPasswordScreenConnector'
@@ -27,6 +26,7 @@ import { getSupportedBiometryType } from '../keychain.js'
 import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
 import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent.js'
 import { LoginWithRecoveryQuestionsScreen } from './screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent.js'
+import { OtpErrorScreen } from './screens/existingAccout/OtpErrorScreenComponent.js'
 import { LoginUsernamePasswordScreen } from './screens/LoginUsernamePasswordScreenComponent.js'
 import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent.js'
 
@@ -217,7 +217,7 @@ class LoginAppComponent extends Component<Props, State> {
   }
 
   getOtpScreen() {
-    return <OtpErrorScreenConnector styles={this.props.styles} />
+    return <OtpErrorScreen styles={this.props.styles} />
   }
 
   getRecoveryLoginScreen() {
