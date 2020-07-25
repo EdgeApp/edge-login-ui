@@ -8,6 +8,7 @@ import { scale } from '../../../common/util/scaling'
 const CreatingAccountWaitScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   header: Styles.HeaderContainerScaledStyle,
+  container: {},
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'

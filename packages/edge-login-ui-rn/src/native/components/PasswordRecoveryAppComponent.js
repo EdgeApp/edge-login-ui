@@ -6,10 +6,10 @@ import { connect } from 'react-redux'
 
 import { initializePasswordRecovery } from '../../common/actions/PasswordRecoveryActions.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import * as Styles from '../styles/index.js'
 import { RecoverPasswordScreen } from './screens/existingAccout/RecoverPasswordScreenComponent.js'
 
 type OwnProps = {
-  styles: Object,
   showHeader: boolean
 }
 type DispatchProps = {
@@ -24,13 +24,10 @@ class PasswordRecoveryAppComponent extends Component<Props> {
   }
 
   render() {
-    const { ScreenStyle } = this.props.styles
+    const { ScreenStyle } = Styles
     return (
       <View style={ScreenStyle} accessible>
-        <RecoverPasswordScreen
-          styles={this.props.styles}
-          showHeader={this.props.showHeader}
-        />
+        <RecoverPasswordScreen showHeader={this.props.showHeader} />
       </View>
     )
   }

@@ -11,11 +11,11 @@ import s from '../../../../common/locales/strings'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import * as Styles from '../../../styles/index.js'
 import { Button, Checkbox } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type OwnProps = {
-  styles: Object,
   appName: string
 }
 type StateProps = {
@@ -111,7 +111,7 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { TermsAndConditionsScreenStyle } = this.props.styles
+    const { TermsAndConditionsScreenStyle } = Styles
     return (
       <SafeAreaView>
         <View style={TermsAndConditionsScreenStyle.screen}>

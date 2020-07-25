@@ -14,13 +14,12 @@ import SkipModalConnector from '../../../connectors/abSpecific/SkipModalConnecto
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
+import * as Styles from '../../../styles/index.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type OwnProps = {
-  styles: Object
-}
+type OwnProps = {}
 type StateProps = {
   confirmPassword: string,
   error: string,
@@ -52,7 +51,7 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { NewAccountPasswordScreenStyle } = this.props.styles
+    const { NewAccountPasswordScreenStyle } = Styles
     return (
       <SafeAreaView>
         <KeyboardAwareScrollView

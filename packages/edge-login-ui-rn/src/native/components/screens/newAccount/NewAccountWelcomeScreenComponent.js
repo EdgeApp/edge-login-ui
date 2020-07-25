@@ -10,12 +10,12 @@ import s from '../../../../common/locales/strings'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import * as Assets from '../../../assets'
 import T from '../../../components/common/FormattedText.js'
+import * as Styles from '../../../styles/index.js'
 import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
 import { Button, HeaderBackButton } from '../../common'
 import SafeAreaView from '../../common/SafeAreaView.js'
 
 type OwnProps = {
-  styles: Object,
   appName: string
 }
 type StateProps = {}
@@ -29,7 +29,7 @@ type State = {}
 
 class NewAccountWelcomeScreenComponent extends Component<Props, State> {
   render() {
-    const { NewAccountWelcomeScreenStyle } = this.props.styles
+    const { NewAccountWelcomeScreenStyle } = Styles
 
     return (
       <SafeAreaView>

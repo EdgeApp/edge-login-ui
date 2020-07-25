@@ -4,16 +4,16 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 
 import * as Assets from '../../assets/'
+import * as Styles from '../../styles/index.js'
 import { BackgroundImage, Spinner } from '../common'
 
 type Props = {
-  styles: Object,
   backgroundImage?: any
 }
 
 export class LoadingScreen extends Component<Props> {
   render() {
-    const { LandingScreenStyle } = this.props.styles
+    const { LandingScreenStyle } = Styles
     return (
       <View style={LandingScreenStyle.container}>
         <BackgroundImage
@@ -26,7 +26,7 @@ export class LoadingScreen extends Component<Props> {
   }
 
   renderSpinner = () => {
-    const { CenteredSpinnerStyle } = this.props.styles
+    const { CenteredSpinnerStyle } = Styles
     return <Spinner style={CenteredSpinnerStyle} />
   }
 }

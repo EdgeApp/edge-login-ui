@@ -25,6 +25,7 @@ import {
   IconButton,
   StaticModal
 } from '../../components/common'
+import * as Styles from '../../styles/index.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { UserListItem } from '../abSpecific/UserListItem.js'
 
@@ -35,7 +36,6 @@ const Offsets = {
 }
 
 type OwnProps = {
-  styles: Object,
   appId?: string,
   backgroundImage?: any,
   primaryLogo?: any,
@@ -83,7 +83,7 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props)
-    const { LoginPasswordScreenStyle } = this.props.styles
+    const { LoginPasswordScreenStyle } = Styles
     this.style = LoginPasswordScreenStyle
     this.keyboardDidHideListener = null
     setTimeout(this.setListener, 2000, this.noFocus)
@@ -228,7 +228,7 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
       <View style={this.style.featureBoxContainer}>
         <HeaderParentButtons
           parentButton={this.props.parentButton}
-          styles={this.props.styles.HeaderParentButtons}
+          styles={Styles.HeaderParentButtons}
           appId={this.props.appId}
         />
         <TouchableWithoutFeedback onPress={this.noFocus}>

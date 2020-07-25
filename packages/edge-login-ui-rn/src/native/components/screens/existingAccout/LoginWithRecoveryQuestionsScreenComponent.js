@@ -11,11 +11,11 @@ import SetRecoveryUsernameModalConnector from '../../../../native/connectors/abS
 import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
+import * as Styles from '../../../styles/index.js'
 import { Button, FormField, StaticModal } from '../../common/'
 import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
 
 type OwnProps = {
-  styles: Object,
   showHeader: boolean
 }
 type StateProps = {
@@ -169,7 +169,7 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
   }
 
   render() {
-    const { LoginWithRecoveryStyles } = this.props.styles
+    const { LoginWithRecoveryStyles } = Styles
     // const middle = this.renderForm(RecoverPasswordSceneStyles)
     const styles = LoginWithRecoveryStyles
     const form1Style = this.state.errorOne ? styles.inputError : styles.input

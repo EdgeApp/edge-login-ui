@@ -10,12 +10,12 @@ import s from '../../../../common/locales/strings'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import UsernameConnector from '../../../connectors/componentConnectors/UsernameConnector'
+import * as Styles from '../../../styles/index.js'
 import { Button } from '../../common'
 import T from '../../common/FormattedText.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type OwnProps = {
-  styles: Object,
   appName: string
 }
 type StateProps = {
@@ -48,7 +48,7 @@ class NewAccountUsernameScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { NewAccountUsernameScreenStyle } = this.props.styles
+    const { NewAccountUsernameScreenStyle } = Styles
     return (
       <SafeAreaView>
         <View style={NewAccountUsernameScreenStyle.screen}>

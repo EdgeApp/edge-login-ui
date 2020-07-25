@@ -5,16 +5,15 @@ import { Text, View } from 'react-native'
 
 import s from '../../../../common/locales/strings'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector.js'
+import * as Styles from '../../../styles/index.js'
 import { Spinner } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type Props = {
-  styles: Object
-}
+type Props = {}
 
 export class CreatingAccountWaitScreen extends Component<Props> {
   render() {
-    const { CreatingAccountWaitScreenStyle } = this.props.styles
+    const { CreatingAccountWaitScreenStyle } = Styles
     return (
       <SafeAreaView>
         <View style={CreatingAccountWaitScreenStyle.container}>

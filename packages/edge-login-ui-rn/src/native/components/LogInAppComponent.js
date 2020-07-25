@@ -14,6 +14,7 @@ import { type WorkflowState } from '../../common/reducers/WorkflowReducer.js'
 import { ModalManager as ModalManagerLogin } from '../../common/util/ModalManager.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { getSupportedBiometryType } from '../keychain.js'
+import * as Styles from '../styles/index.js'
 import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
 import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent.js'
 import { LoginWithRecoveryQuestionsScreen } from './screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent.js'
@@ -38,8 +39,7 @@ type OwnProps = {
   parentButton?: Object,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
-  recoveryLogin?: string,
-  styles: Object
+  recoveryLogin?: string
 }
 type StateProps = {
   lastUser?: LoginUserInfo,
@@ -67,7 +67,7 @@ class LoginAppComponent extends Component<Props, State> {
   }
 
   render() {
-    const { ScreenStyle } = this.props.styles
+    const { ScreenStyle } = Styles
     return (
       <View accessible style={ScreenStyle}>
         <ModalManagerLogin />
@@ -130,18 +130,12 @@ class LoginAppComponent extends Component<Props, State> {
   }
 
   getLoadingScreen() {
-    return (
-      <LoadingScreen
-        styles={this.props.styles}
-        backgroundImage={this.props.backgroundImage}
-      />
-    )
+    return <LoadingScreen backgroundImage={this.props.backgroundImage} />
   }
 
   getLandingScreen() {
     return (
       <LandingScreen
-        styles={this.props.styles}
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
@@ -155,43 +149,27 @@ class LoginAppComponent extends Component<Props, State> {
   getCreateScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return (
-          <NewAccountWelcomeScreen
-            styles={this.props.styles}
-            appName={this.props.appName}
-          />
-        ) // NewAccountWelcomeScreenConnector
+        return <NewAccountWelcomeScreen appName={this.props.appName} /> // NewAccountWelcomeScreenConnector
       case 1:
-        return (
-          <NewAccountUsernameScreen
-            styles={this.props.styles}
-            appName={this.props.appName}
-          />
-        )
+        return <NewAccountUsernameScreen appName={this.props.appName} />
       case 2:
-        return <NewAccountPasswordScreen styles={this.props.styles} />
+        return <NewAccountPasswordScreen />
       case 3:
-        return <SetAccountPinScreen styles={this.props.styles} />
+        return <SetAccountPinScreen />
       case 4:
-        return <CreatingAccountWaitScreen styles={this.props.styles} />
+        return <CreatingAccountWaitScreen />
       case 5:
-        return <NewAccountReviewScreen styles={this.props.styles} />
+        return <NewAccountReviewScreen />
       case 6:
-        return (
-          <TermsAndConditionsScreen
-            styles={this.props.styles}
-            appName={this.props.appName}
-          />
-        )
+        return <TermsAndConditionsScreen appName={this.props.appName} />
       default:
-        return <NewAccountWelcomeScreen styles={this.props.styles} />
+        return <NewAccountWelcomeScreen />
     }
   }
 
   getPasswordScreen() {
     return (
       <LoginUsernamePasswordScreen
-        styles={this.props.styles}
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
@@ -205,7 +183,6 @@ class LoginAppComponent extends Component<Props, State> {
   getPinScreen() {
     return (
       <PinLoginScreen
-        styles={this.props.styles}
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
@@ -217,17 +194,17 @@ class LoginAppComponent extends Component<Props, State> {
   }
 
   getOtpScreen() {
-    return <OtpErrorScreen styles={this.props.styles} />
+    return <OtpErrorScreen />
   }
 
   getRecoveryLoginScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <LoginWithRecoveryQuestionsScreen styles={this.props.styles} />
+        return <LoginWithRecoveryQuestionsScreen />
       case 1:
-        return <ForgotPasswordChangePassword styles={this.props.styles} />
+        return <ForgotPasswordChangePassword />
       case 2:
-        return <ForgotPinChangePinScene styles={this.props.styles} />
+        return <ForgotPinChangePinScene />
     }
   }
 

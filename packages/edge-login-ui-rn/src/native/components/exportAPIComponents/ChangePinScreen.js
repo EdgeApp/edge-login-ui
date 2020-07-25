@@ -13,7 +13,6 @@ import {
   rootReducer
 } from '../../../common/reducers/RootReducer'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import * as Styles from '../../styles'
 import { ChangePinApp } from '../ChangePinAppComponent'
 
 type Props = {
@@ -48,7 +47,7 @@ export class ChangePinScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <ChangePinApp styles={Styles} showHeader={this.props.showHeader} />
+        <ChangePinApp showHeader={this.props.showHeader} />
       </Provider>
     )
   }

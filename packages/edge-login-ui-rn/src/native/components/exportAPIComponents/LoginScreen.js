@@ -20,7 +20,6 @@ import {
 import { checkingForOTP } from '../../../common/util/checkingForOTP.js'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
 import { LoginApp } from '../../components/LogInAppComponent'
-import * as Styles from '../../styles'
 
 type Props = {
   accountOptions: EdgeAccountOptions,
@@ -102,7 +101,6 @@ export class LoginScreen extends Component<Props> {
           primaryLogo={this.props.primaryLogo}
           primaryLogoCallback={this.props.primaryLogoCallback}
           recoveryLogin={this.props.recoveryLogin}
-          styles={Styles}
         />
       </Provider>
     )

@@ -13,7 +13,6 @@ import {
   rootReducer
 } from '../../../common/reducers/RootReducer'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import * as Styles from '../../styles'
 import { ChangePasswordApp } from '../ChangePasswordAppComponent.js'
 
 type Props = {
@@ -52,7 +51,7 @@ export class ChangePasswordScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <ChangePasswordApp styles={Styles} showHeader={this.props.showHeader} />
+        <ChangePasswordApp showHeader={this.props.showHeader} />
       </Provider>
     )
   }

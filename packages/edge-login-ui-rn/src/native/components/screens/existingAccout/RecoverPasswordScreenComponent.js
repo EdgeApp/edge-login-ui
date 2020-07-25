@@ -17,6 +17,7 @@ import { FullScreenModal } from '../../../components/common/FullScreenModal.js'
 import EmailAppFailedModalConnector from '../../../connectors/abSpecific/EmailAppFailedModalConnector'
 import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
+import * as Styles from '../../../styles/index.js'
 import {
   Button,
   DropDownList,
@@ -28,7 +29,6 @@ import {
 import ConfirmPasswordRecoveryScreen from './ConfirmPasswordRecoveryScreen'
 
 type OwnProps = {
-  styles: Object,
   showHeader: boolean
 }
 type StateProps = {
@@ -202,7 +202,7 @@ class RecoverPasswordScreenComponent extends Component<Props, State> {
   }
 
   renderItems = (item: Object) => {
-    const { RecoverPasswordSceneStyles } = this.props.styles
+    const { RecoverPasswordSceneStyles } = Styles
     return (
       <TextRowComponent
         style={RecoverPasswordSceneStyles.listItem}
@@ -473,7 +473,7 @@ class RecoverPasswordScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { RecoverPasswordSceneStyles } = this.props.styles
+    const { RecoverPasswordSceneStyles } = Styles
     const middle = this.state.showQuestionPicker
       ? this.renderQuestions(RecoverPasswordSceneStyles)
       : this.renderForm(RecoverPasswordSceneStyles)

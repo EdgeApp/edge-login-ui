@@ -8,13 +8,12 @@ import { createUser } from '../../../../common/actions/CreateAccountActions.js'
 import s from '../../../../common/locales/strings'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import * as Styles from '../../../styles/index.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type OwnProps = {
-  styles: Object
-}
+type OwnProps = {}
 type StateProps = {
   createErrorMessage: string | null,
   password: string,
@@ -61,7 +60,7 @@ class SetAccountPinScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { SetAccountPinScreenStyle } = this.props.styles
+    const { SetAccountPinScreenStyle } = Styles
     this.checkError()
     return (
       <SafeAreaView>

@@ -13,13 +13,13 @@ import s from '../../../../common/locales/strings'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import ChangePinModalConnector from '../../../connectors/abSpecific/ChangePinModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
+import * as Styles from '../../../styles/index.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button, StaticModal } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type OwnProps = {
-  showHeader?: boolean,
-  styles: Object
+  showHeader?: boolean
 }
 type StateProps = {
   forgotPasswordModal?: boolean,
@@ -101,7 +101,7 @@ class ChangeAccountPinScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { SetAccountPinScreenStyle } = this.props.styles
+    const { SetAccountPinScreenStyle } = Styles
     return (
       <SafeAreaView>
         <View style={SetAccountPinScreenStyle.screen}>

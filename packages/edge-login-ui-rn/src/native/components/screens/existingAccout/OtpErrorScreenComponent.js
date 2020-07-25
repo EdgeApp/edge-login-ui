@@ -14,14 +14,13 @@ import OtpBackupKeyConnector from '../../../../native/connectors/componentConnec
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import DisableOtpModalConnector from '../../../connectors/abSpecific/DisableOtpModalConnector'
 import OtpAuthCodeModalConnector from '../../../connectors/abSpecific/OtpAuthCodeModalConnector'
+import * as Styles from '../../../styles/index.js'
 import { EdgeLoginQr } from '../../abSpecific/EdgeLoginQrComponent.js'
 import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'
 import { Button, Header, StaticModal } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type OwnProps = {
-  styles: Object
-}
+type OwnProps = {}
 type StateProps = {
   backupKeyError?: string,
   loginSuccess: boolean,
@@ -182,7 +181,7 @@ class OtpErrorScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { OtpErrorScreenStyle } = this.props.styles
+    const { OtpErrorScreenStyle } = Styles
 
     return (
       <SafeAreaView>

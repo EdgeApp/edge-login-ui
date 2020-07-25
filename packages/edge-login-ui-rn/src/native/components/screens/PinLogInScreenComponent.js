@@ -20,11 +20,11 @@ import {
   HeaderParentButtons,
   ImageButton
 } from '../../components/common'
+import * as Styles from '../../styles/index.js'
 import { FourDigit } from '../abSpecific/FourDigitComponent.js'
 import { PinKeypad } from '../abSpecific/PinKeypad.js'
 
 type OwnProps = {
-  styles: Object,
   appId?: string,
   backgroundImage?: any,
   parentButton?: Object,
@@ -89,7 +89,7 @@ class PinLogInScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { PinLoginScreenStyle } = this.props.styles
+    const { PinLoginScreenStyle } = Styles
     return (
       <View style={PinLoginScreenStyle.container}>
         <BackgroundImage
@@ -102,7 +102,7 @@ class PinLogInScreenComponent extends Component<Props, State> {
   }
 
   renderOverImage() {
-    const { PinLoginScreenStyle } = this.props.styles
+    const { PinLoginScreenStyle } = Styles
     if (this.props.loginSuccess) {
       return null
     }
@@ -113,7 +113,7 @@ class PinLogInScreenComponent extends Component<Props, State> {
             text: s.strings.exit_pin,
             callback: this.exitPin.bind(this)
           }}
-          styles={this.props.styles.HeaderParentButtons}
+          styles={Styles.HeaderParentButtons}
           appId={this.props.appId}
         />
         <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
@@ -183,7 +183,7 @@ class PinLogInScreenComponent extends Component<Props, State> {
   }
 
   renderItems(item: Object) {
-    const { PinLoginScreenStyle } = this.props.styles
+    const { PinLoginScreenStyle } = Styles
     return (
       <UserListItem
         data={item.item}

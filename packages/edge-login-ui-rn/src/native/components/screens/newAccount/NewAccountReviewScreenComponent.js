@@ -7,13 +7,12 @@ import { connect } from 'react-redux'
 import s from '../../../../common/locales/strings'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import * as Styles from '../../../styles/index.js'
 import { AccountInfo } from '../../abSpecific/AccountInfoComponent.js'
 import { Button, WarningBox } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type OwnProps = {
-  styles: Object
-}
+type OwnProps = {}
 type StateProps = {}
 type DispatchProps = {
   nextScreen(): void
@@ -22,7 +21,7 @@ type Props = OwnProps & StateProps & DispatchProps
 
 class NewAccountReviewScreenComponent extends Component<Props> {
   render() {
-    const { NewAccountReviewScreenStyle } = this.props.styles
+    const { NewAccountReviewScreenStyle } = Styles
     return (
       <SafeAreaView>
         <View style={NewAccountReviewScreenStyle.screen}>

@@ -8,11 +8,11 @@ import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import * as Assets from '../../assets/'
+import * as Styles from '../../styles/index.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { BackgroundImage, Button, HeaderParentButtons } from '../common'
 
 type OwnProps = {
-  styles: Object,
   appId?: string,
   backgroundImage?: any,
   primaryLogo?: any,
@@ -27,7 +27,7 @@ type Props = OwnProps & DispatchProps
 
 class LandingScreenComponent extends Component<Props> {
   render() {
-    const { LandingScreenStyle } = this.props.styles
+    const { LandingScreenStyle } = Styles
     return (
       <View style={LandingScreenStyle.container}>
         <BackgroundImage
@@ -40,12 +40,12 @@ class LandingScreenComponent extends Component<Props> {
   }
 
   renderOverImage() {
-    const { LandingScreenStyle } = this.props.styles
+    const { LandingScreenStyle } = Styles
     return (
       <View style={LandingScreenStyle.inner}>
         <HeaderParentButtons
           parentButton={this.props.parentButton}
-          styles={this.props.styles.HeaderParentButtons}
+          styles={Styles.HeaderParentButtons}
           appId={this.props.appId}
         />
         <View style={LandingScreenStyle.featureBox}>
