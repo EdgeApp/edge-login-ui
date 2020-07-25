@@ -18,7 +18,8 @@ import {
   StaticModal
 } from '../../components/common'
 import * as Offsets from '../../constants'
-import { LogoImageHeader, UserListItem } from '../abSpecific'
+import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
+import { UserListItem } from '../abSpecific/UserListItem.js'
 
 type Props = {
   styles: Object,

@@ -5,7 +5,7 @@ import { sprintf } from 'sprintf-js'
 
 import s from '../../../common/locales/strings.js'
 import { type RootState } from '../../../types/ReduxTypes'
-import { FourDigitComponent } from '../../components/abSpecific/'
+import { FourDigitComponent } from '../../components/abSpecific/FourDigitComponent.js'
 
 export const mapStateToProps = (state: RootState) => {
   const wait = state.login.wait

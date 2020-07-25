@@ -6,7 +6,7 @@ import { getEdgeLoginQrCode } from '../../../common/actions/LoginAction.js'
 import * as Constants from '../../../common/constants'
 import { EdgeLoginQrStyle } from '../../../native/styles'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
-import { EdgeLoginQrComponent } from '../../components/abSpecific'
+import { EdgeLoginQrComponent } from '../../components/abSpecific/EdgeLoginQrComponent.js'
 
 export const mapStateToProps = (state: RootState) => {
   return {

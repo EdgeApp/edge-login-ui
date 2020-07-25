@@ -3,8 +3,8 @@
 import { connect } from 'react-redux'
 
 import { type RootState } from '../../../types/ReduxTypes'
-import type { OwnProps } from '../../components/abSpecific/'
-import { AccountInfoComponent } from '../../components/abSpecific/'
+import type { OwnProps } from '../../components/abSpecific/AccountInfoComponent.js'
+import { AccountInfoComponent } from '../../components/abSpecific/AccountInfoComponent.js'
 
 export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   return {

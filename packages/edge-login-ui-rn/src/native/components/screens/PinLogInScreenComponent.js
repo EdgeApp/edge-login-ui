@@ -8,7 +8,8 @@ import { type LoginUserInfo } from '../../../common/reducers/PreviousUsersReduce
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import PinKeypadConnector from '../../../native/connectors/abSpecific/PinKeypadConnector'
 import * as Assets from '../../assets/'
-import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
+import { LogoImageHeader } from '../../components/abSpecific/LogoImageHeader.js'
+import { UserListItem } from '../../components/abSpecific/UserListItem.js'
 import {
   BackgroundImage,
   Button,

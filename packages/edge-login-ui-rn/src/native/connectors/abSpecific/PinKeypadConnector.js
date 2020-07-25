@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { userLoginWithPin } from '../../../common/actions/LoginAction.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
-import { PinKeypad } from '../../components/abSpecific/'
+import { PinKeypad } from '../../components/abSpecific/PinKeypad.js'
 
 export const mapStateToProps = (state: RootState) => {
   const pinLength = state.login.pin ? state.login.pin.length : 0

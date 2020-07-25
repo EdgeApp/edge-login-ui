@@ -6,7 +6,7 @@ import { Text, View } from 'react-native'
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
 import * as Assets from '../../assets/'
-import { LogoImageHeader } from '../abSpecific'
+import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { BackgroundImage, Button, HeaderParentButtons } from '../common'
 
 type Props = {
