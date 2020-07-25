@@ -159,6 +159,8 @@ export function createUser(data: Object) {
         }
         dispatch({ type: 'CREATE_ACCOUNT_SUCCESS', data: abcAccount })
         dispatch({ type: 'WORKFLOW_NEXT' })
+        global.firebase &&
+          global.firebase.analytics().logEvent('Signup_Create_User_Success')
         await setMostRecentUsers(abcAccount.username)
         await abcAccount.dataStore.setItem(
           Constants.OTP_REMINDER_STORE_NAME,

@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import { Alert, Text, View } from 'react-native'
 
 import s from '../../../../common/locales/strings'
-import CreateFourDigitPinConnector from '../../../connectors/abSpecific/CreateFourDigitPinConnector.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
@@ -68,9 +68,7 @@ export default class SetAccountPinScreenComponent extends Component<
               </Text>
             </View>
             <View style={SetAccountPinScreenStyle.row2}>
-              <CreateFourDigitPinConnector
-                style={SetAccountPinScreenStyle.fourPin}
-              />
+              <FourDigitInput style={SetAccountPinScreenStyle.fourPin} />
             </View>
             <View style={SetAccountPinScreenStyle.row3}>
               <Button

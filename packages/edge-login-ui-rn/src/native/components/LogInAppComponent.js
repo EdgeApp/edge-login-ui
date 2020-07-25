@@ -5,14 +5,11 @@ import { View } from 'react-native'
 
 import * as Constants from '../../common/constants'
 import { ModalManager as ModalManagerLogin } from '../../common/util'
-import ForgotPasswordChangePasswordConnector from '../connectors/screens/existingAccount/ForgotPasswordChangePasswordConnector'
-import ForgotPinChangePinConnector from '../connectors/screens/existingAccount/ForgotPinChangePinConnector'
 import LoginWithRecoveryQuestionsSceenConnector from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
 import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'
 import LoadingScreenConnector from '../connectors/screens/LoadingScreenConnector'
 import LoginUsernamePasswordScreenConnector from '../connectors/screens/LogInUsernamePasswordScreenConnector'
-import CreatingAccountWaitScreenConnector from '../connectors/screens/newAccount/CreatingAccountWaitScreenConnector'
 import NewAccountPasswordScreenConnector from '../connectors/screens/newAccount/NewAccountPasswordScreenConnector'
 import NewAccountReviewScreenConnector from '../connectors/screens/newAccount/NewAccountReviewScreenConnector'
 import NewAccountUsernameScreenConnector from '../connectors/screens/newAccount/NewAccountUsernameScreenConnector'
@@ -21,6 +18,9 @@ import NewAccountPinScreenConnector from '../connectors/screens/newAccount/SetAc
 import TermsAndConditionsScreenConnector from '../connectors/screens/newAccount/TermsAndConditionsScreenConnector'
 import PinLoginScreenConnector from '../connectors/screens/PinLoginScreenConnector'
 import { getSupportedBiometryType } from '../keychain.js'
+import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAccountPasswordScreenComponent'
+import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent'
+import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent'
 
 export type StateProps = {
   workflow: Object,
@@ -167,7 +167,7 @@ export class LoginAppComponent extends Component<Props, State> {
       case 3:
         return <NewAccountPinScreenConnector styles={this.props.styles} />
       case 4:
-        return <CreatingAccountWaitScreenConnector styles={this.props.styles} />
+        return <CreatingAccountWaitScreen styles={this.props.styles} />
       case 5:
         return <NewAccountReviewScreenConnector styles={this.props.styles} />
       case 6:
@@ -223,11 +223,9 @@ export class LoginAppComponent extends Component<Props, State> {
           />
         )
       case 1:
-        return (
-          <ForgotPasswordChangePasswordConnector styles={this.props.styles} />
-        )
+        return <ForgotPasswordChangePassword styles={this.props.styles} />
       case 2:
-        return <ForgotPinChangePinConnector styles={this.props.styles} />
+        return <ForgotPinChangePinScene styles={this.props.styles} />
     }
   }
 

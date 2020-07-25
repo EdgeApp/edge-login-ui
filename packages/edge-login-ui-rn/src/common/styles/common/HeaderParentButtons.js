@@ -1,3 +1,5 @@
+// @flow
+
 import { scale } from '../../util/scaling'
 
 const HeaderParentButtons = {

@@ -1,9 +1,12 @@
+// @flow
+
+import { type EdgeContext } from 'edge-core-js'
 import { Alert } from 'react-native'
 import { sprintf } from 'sprintf-js'
 
 import s from '../locales/strings.js'
 
-const checkingForOTP = context => {
+export function checkingForOTP(context: EdgeContext): void {
   const accountsPendingReset = []
   let arrayString = ''
   context
@@ -26,8 +29,5 @@ const checkingForOTP = context => {
     })
     .catch(e => {
       console.log('CH: error', e)
-      return {}
     })
 }
-
-export { checkingForOTP }

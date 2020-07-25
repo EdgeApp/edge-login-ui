@@ -4,7 +4,7 @@ import React from 'react'
 import { ActivityIndicator, View } from 'react-native'
 
 type Props = {
-  style: Object,
+  style?: any,
   size?: number | 'small' | 'large'
 }
 const Spinner = (props: Props) => {

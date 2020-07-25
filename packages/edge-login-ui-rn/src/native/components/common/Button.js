@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react'
 import { Text, TouchableHighlight, View } from 'react-native'
 
@@ -9,8 +11,8 @@ type Props = {
   upStyle: Object,
   downTextStyle: Object,
   upTextStyle: Object,
-  isThinking: boolean,
-  doesThink: boolean,
+  isThinking?: boolean,
+  doesThink?: boolean,
   onPress(): void // if doesThink is used, then isThinking is also required
 }
 

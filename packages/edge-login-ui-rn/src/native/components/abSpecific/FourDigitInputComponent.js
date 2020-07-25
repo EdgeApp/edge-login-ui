@@ -8,27 +8,30 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
+import { connect } from 'react-redux'
 
+import { validatePin } from '../../../common/actions/CreateAccountActions.js'
 import * as Constants from '../../../common/constants'
+import type { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { Spinner } from '../common'
 
-type Props = {
-  style: Object,
+type OwnProps = {
+  style: Object
+}
+type StateProps = {
+  error: string,
   pin: string,
   username: string,
-  autoLogIn: boolean,
-  error: string,
-  wait: number,
-  isLogginginWithPin: boolean,
-  dontForceFocus?: boolean,
-  onChangeText(Object): void,
-  updateWaitTime(number): void
+  wait: number
 }
+type DispatchProps = {
+  onChangeText(data: Object): void
+}
+type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
   autoFocus: boolean,
   isFocused: boolean,
-  touchId: boolean,
   circleColor: string
 }
 
@@ -42,7 +45,6 @@ class FourDigitInputComponent extends Component<Props, State> {
     this.state = {
       autoFocus: false,
       isFocused: false,
-      touchId: false,
       circleColor: Constants.WHITE
     }
   }
@@ -87,14 +89,6 @@ class FourDigitInputComponent extends Component<Props, State> {
     })
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.isLogginginWithPin) {
-      this.setState({
-        touchId: true
-      })
-    }
-  }
-
   render() {
     const Style = this.props.style
     return (
@@ -125,7 +119,6 @@ class FourDigitInputComponent extends Component<Props, State> {
           keyboardType="numeric"
           value={this.props.pin}
           onFocus={this.onFocus}
-          onBlur={this.onBlur}
           autoFocus={this.state.autoFocus}
           keyboardShouldPersistTaps
         />
@@ -137,17 +130,6 @@ class FourDigitInputComponent extends Component<Props, State> {
   onFocus = () => {
     this.setState({
       isFocused: true
-    })
-  }
-
-  onBlur = () => {
-    if (this.props.dontForceFocus) {
-      return
-    }
-    this.inputRef && this.inputRef.focus()
-    this.setState({
-      isFocused: false,
-      circleColor: Constants.WHITE
     })
   }
 
@@ -167,9 +149,6 @@ class FourDigitInputComponent extends Component<Props, State> {
   renderDotContainer(style: Object) {
     const pinLength = this.props.pin ? this.props.pin.length : 0
     if (this.props.wait > 0) {
-      return <Spinner />
-    }
-    if ((pinLength === 4 || this.state.touchId) && this.props.autoLogIn) {
       return <Spinner />
     }
     return (
@@ -207,4 +186,16 @@ class FourDigitInputComponent extends Component<Props, State> {
   }
 }
 
-export { FourDigitInputComponent }
+export const FourDigitInput = connect(
+  (state: RootState): StateProps => ({
+    error: state.create.pinErrorMessage || '',
+    pin: state.create.pin,
+    username: state.login.username,
+    wait: 0
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    onChangeText(data: Object) {
+      dispatch(validatePin(data))
+    }
+  })
+)(FourDigitInputComponent)
