@@ -10,11 +10,11 @@ import {
 } from '../../../../common/actions/LoginAction.js'
 import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings'
-import EdgeLoginQrConnector from '../../../../native/connectors/componentConnectors/EdgeLoginQrConnector'
 import OtpBackupKeyConnector from '../../../../native/connectors/componentConnectors/OtpBackupKeyConnector'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import DisableOtpModalConnector from '../../../connectors/abSpecific/DisableOtpModalConnector'
 import OtpAuthCodeModalConnector from '../../../connectors/abSpecific/OtpAuthCodeModalConnector'
+import { EdgeLoginQr } from '../../abSpecific/EdgeLoginQrComponent.js'
 import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'
 import { Button, Header, StaticModal } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
@@ -202,7 +202,7 @@ class OtpErrorScreenComponent extends Component<Props, State> {
               otpResetDate={this.props.otpResetDate}
             />
             <View style={OtpErrorScreenStyle.qrRow}>
-              <EdgeLoginQrConnector />
+              <EdgeLoginQr />
             </View>
             <View style={OtpErrorScreenStyle.shim} />
             <Button
