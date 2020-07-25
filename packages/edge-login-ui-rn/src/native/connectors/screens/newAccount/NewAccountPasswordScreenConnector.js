@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../../common/actions'
+import { validateConfirmPassword } from '../../../../common/actions/CreateAccountActions.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
 import LinkedComponent from '../../../components/screens/newAccount/NewAccountPasswordScreenComponent'
 
@@ -26,8 +26,8 @@ export const mapStateToProps = (state: RootState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    checkTheConfirmPassword: () => dispatch(actions.validateConfirmPassword()),
-    skipPassword: () => dispatch(actions.validateConfirmPassword()),
+    checkTheConfirmPassword: () => dispatch(validateConfirmPassword()),
+    skipPassword: () => dispatch(validateConfirmPassword()),
     nextScreen: () => dispatch({ type: 'WORKFLOW_NEXT' })
   }
 }

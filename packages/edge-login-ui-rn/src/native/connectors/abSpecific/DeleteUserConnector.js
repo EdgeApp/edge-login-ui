@@ -3,7 +3,7 @@
 import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
-import * as actions from '../../../common/actions'
+import { deleteUserFromDevice } from '../../../common/actions/UserActions.js'
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
@@ -29,7 +29,7 @@ export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
 export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     cancel: () => dispatch({ type: 'WORKFLOW_CANCEL_MODAL' }),
-    action: () => dispatch(actions.deleteUserFromDevice(ownProps.username))
+    action: () => dispatch(deleteUserFromDevice(ownProps.username))
   }
 }
 export default connect(

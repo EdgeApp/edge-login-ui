@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../common/actions/'
+import { initializePasswordRecovery } from '../../common/actions/PasswordRecoveryActions.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes'
 import type { OwnProps } from '../components/PasswordRecoveryAppComponent'
 import PasswordRecoveryAppComponent from '../components/PasswordRecoveryAppComponent'
@@ -16,8 +16,7 @@ export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    initializePasswordRecovery: () =>
-      dispatch(actions.initializePasswordRecovery())
+    initializePasswordRecovery: () => dispatch(initializePasswordRecovery())
   }
 }
 

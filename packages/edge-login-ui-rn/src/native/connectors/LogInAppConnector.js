@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import * as loginAction from '../../common/actions/'
+import { getPreviousUsers } from '../../common/actions/PreviousUsersActions.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes'
 import type { OwnProps } from '../components/LogInAppComponent'
 import { LoginAppComponent } from '../components/LogInAppComponent'
@@ -22,7 +22,7 @@ export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    getPreviousUsers: () => dispatch(loginAction.getPreviousUsers()),
+    getPreviousUsers: () => dispatch(getPreviousUsers()),
     startRecoveryWorkflow: (backupKey: string) => {
       dispatch({ type: 'SET_RECOVERY_KEY', data: backupKey })
     }

@@ -2,7 +2,11 @@
 
 import { connect } from 'react-redux'
 
-import * as action from '../../../common/actions'
+import {
+  userLogin,
+  userLoginWithTouchId
+} from '../../../common/actions/LoginAction.js'
+import { recoverPasswordLogin } from '../../../common/actions/PasswordRecoveryActions.js'
 import * as Constants from '../../../common/constants'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import LinkedComponent from '../../components/screens/LoginUsernamePasswordScreenComponent'
@@ -32,8 +36,8 @@ export const mapStateToProps = (state: RootState) => {
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     launchUserLoginWithTouchId: (data: Object) =>
-      dispatch(action.userLoginWithTouchId(data)),
-    userLogin: (data: Object) => dispatch(action.userLogin(data)),
+      dispatch(userLoginWithTouchId(data)),
+    userLogin: (data: Object) => dispatch(userLogin(data)),
     gotoCreatePage: () =>
       dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_CREATE }),
     gotoPinLoginPage: () =>
@@ -45,7 +49,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
     deleteUserFromDevice: (data: string) =>
       dispatch({ type: 'DELETE_USER_FROM_DEVICE', data: data }),
     launchDeleteModal: () => dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' }),
-    recoverPasswordLogin: () => dispatch(action.recoverPasswordLogin()),
+    recoverPasswordLogin: () => dispatch(recoverPasswordLogin()),
     dismissRecoveryError: () => dispatch({ type: 'DISMISS_REOVERY_ERROR' })
   }
 }

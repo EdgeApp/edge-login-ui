@@ -2,7 +2,11 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../../common/actions'
+import {
+  cancelRecoverySettingsScene,
+  changeRecoveryAnswers,
+  deleteRecovery
+} from '../../../../common/actions/PasswordRecoveryActions.js'
 import s from '../../../../common/locales/strings'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import type { OwnProps } from '../../../components/screens/existingAccout/RecoverPasswordScreenComponent.js'
@@ -39,14 +43,14 @@ export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     submit: (questions: Array<string>, answers: Array<string>) =>
-      dispatch(actions.changeRecoveryAnswers(questions, answers)),
-    deleteRecovery: () => dispatch(actions.deleteRecovery()),
+      dispatch(changeRecoveryAnswers(questions, answers)),
+    deleteRecovery: () => dispatch(deleteRecovery()),
     cancel: () => {
-      dispatch(actions.deleteRecovery())
-      dispatch(actions.cancelRecoverySettingsScene())
+      dispatch(deleteRecovery())
+      dispatch(cancelRecoverySettingsScene())
       dispatch({ type: 'DISMISS_EMAIL_MODAL' })
     },
-    returnToSettings: () => dispatch(actions.cancelRecoverySettingsScene())
+    returnToSettings: () => dispatch(cancelRecoverySettingsScene())
   }
 }
 

@@ -2,7 +2,11 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../common/actions'
+import {
+  userLoginWithPin,
+  userLoginWithTouchId
+} from '../../../common/actions/LoginAction.js'
+import { deleteUserFromDevice } from '../../../common/actions/UserActions.js'
 import * as Constants from '../../../common/constants'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import LinkedComponent from '../../components/screens/PinLogInScreenComponent'
@@ -37,11 +41,11 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     changeUser: (data: string) =>
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data }),
-    userLogin: (data: Object) => dispatch(actions.userLoginWithPin(data)),
+    userLogin: (data: Object) => dispatch(userLoginWithPin(data)),
     launchUserLoginWithTouchId: (data: Object) =>
-      dispatch(actions.userLoginWithTouchId(data)),
+      dispatch(userLoginWithTouchId(data)),
     deleteUserFromDevice: (data: string) =>
-      dispatch(actions.deleteUserFromDevice(data)),
+      dispatch(deleteUserFromDevice(data)),
     launchDeleteModal: () => dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' }),
     gotoLoginPage: () =>
       dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PASSWORD })

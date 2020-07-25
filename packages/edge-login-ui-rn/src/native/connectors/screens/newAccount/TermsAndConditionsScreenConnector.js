@@ -3,7 +3,7 @@
 import type { EdgeAccount } from 'edge-core-js'
 import { connect } from 'react-redux'
 
-import * as actions from '../../../../common/actions/'
+import { agreeToConditions } from '../../../../common/actions/CreateAccountActions.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
 import LinkedComponent from '../../../components/screens/newAccount/TermsAndConditionsScreenComponent'
 
@@ -17,8 +17,7 @@ export const mapStateToProps = (state: RootState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    agreeToCondition: (data: EdgeAccount) =>
-      dispatch(actions.agreeToConditions(data))
+    agreeToCondition: (data: EdgeAccount) => dispatch(agreeToConditions(data))
   }
 }
 

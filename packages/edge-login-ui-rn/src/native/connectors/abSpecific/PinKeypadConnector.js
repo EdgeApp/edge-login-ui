@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../common/actions'
+import { userLoginWithPin } from '../../../common/actions/LoginAction.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { PinKeypad } from '../../components/abSpecific/'
 
@@ -16,7 +16,7 @@ export const mapStateToProps = (state: RootState) => {
 }
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onChangeText: (data: Object) => dispatch(actions.userLoginWithPin(data))
+    onChangeText: (data: Object) => dispatch(userLoginWithPin(data))
   }
 }
 

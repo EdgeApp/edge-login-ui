@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import * as loginAction from '../../../common/actions'
+import { validateUsername } from '../../../common/actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common/'
@@ -22,8 +22,7 @@ export const mapStateToProps = (state: RootState) => {
 }
 export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
-    onChangeText: (data: string) =>
-      dispatch(loginAction.validateUsername(data)),
+    onChangeText: (data: string) => dispatch(validateUsername(data)),
     onSubmitEditing: ownProps.onFinish
   }
 }

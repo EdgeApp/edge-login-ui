@@ -2,7 +2,10 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../../common/actions'
+import {
+  resetOtpReset,
+  retryWithOtp
+} from '../../../../common/actions/LoginAction.js'
 import * as Constants from '../../../../common/constants'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import LinkedComponent from '../../../components/screens/existingAccout/OtpErrorScreenComponent'
@@ -23,8 +26,8 @@ export const mapStateToProps = (state: RootState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    setbackupKey: () => dispatch(actions.retryWithOtp()),
-    resetOtpToken: () => dispatch(actions.resetOtpReset())
+    setbackupKey: () => dispatch(retryWithOtp()),
+    resetOtpToken: () => dispatch(resetOtpReset())
   }
 }
 

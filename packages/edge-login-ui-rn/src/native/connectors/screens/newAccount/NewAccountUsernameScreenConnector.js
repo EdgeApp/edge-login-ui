@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import * as loginAction from '../../../../common/actions'
+import { checkUsernameForAvailabilty } from '../../../../common/actions/CreateAccountActions.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
 import LinkedComponent from '../../../components/screens/newAccount/NewAccountUsernameScreenComponent'
 
@@ -17,7 +17,7 @@ export const mapStateToProps = (state: RootState) => {
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     checkUsernameForAvailabilty: (data: string) =>
-      dispatch(loginAction.checkUsernameForAvailabilty(data))
+      dispatch(checkUsernameForAvailabilty(data))
   }
 }
 

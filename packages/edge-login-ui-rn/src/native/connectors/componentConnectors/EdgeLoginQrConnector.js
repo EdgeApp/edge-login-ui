@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../common/actions'
+import { getEdgeLoginQrCode } from '../../../common/actions/LoginAction.js'
 import * as Constants from '../../../common/constants'
 import { EdgeLoginQrStyle } from '../../../native/styles'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
@@ -19,7 +19,7 @@ export const mapStateToProps = (state: RootState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    getQrCode: () => dispatch(actions.getEdgeLoginQrCode()),
+    getQrCode: () => dispatch(getEdgeLoginQrCode()),
     cancelRequest: () => dispatch({ type: 'CANCEL_EDGE_LOGIN_REQUEST' })
   }
 }

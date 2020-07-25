@@ -2,7 +2,8 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../../common/actions'
+import { loginWithRecovery } from '../../../../common/actions/LoginAction.js'
+import { getRecoveryQuestions } from '../../../../common/actions/PasswordRecoveryActions.js'
 import s from '../../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import LinkedComponent from '../../../components/screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent'
@@ -36,9 +37,8 @@ export const mapStateToProps = (state: RootState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    submit: (answers: Array<string>) =>
-      dispatch(actions.loginWithRecovery(answers)),
-    getQuestions: () => dispatch(actions.getRecoveryQuestions()),
+    submit: (answers: Array<string>) => dispatch(loginWithRecovery(answers)),
+    getQuestions: () => dispatch(getRecoveryQuestions()),
     onCancel: () => dispatch({ type: 'CANCEL_RECOVERY_KEY' }),
     updateUsername: (username: string) =>
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username }),
