@@ -228,7 +228,6 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
       <View style={this.style.featureBoxContainer}>
         <HeaderParentButtons
           parentButton={this.props.parentButton}
-          styles={Styles.HeaderParentButtons}
           appId={this.props.appId}
         />
         <TouchableWithoutFeedback onPress={this.noFocus}>

@@ -45,7 +45,6 @@ class LandingScreenComponent extends Component<Props> {
       <View style={LandingScreenStyle.inner}>
         <HeaderParentButtons
           parentButton={this.props.parentButton}
-          styles={Styles.HeaderParentButtons}
           appId={this.props.appId}
         />
         <View style={LandingScreenStyle.featureBox}>

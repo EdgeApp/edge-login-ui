@@ -113,7 +113,6 @@ class PinLogInScreenComponent extends Component<Props, State> {
             text: s.strings.exit_pin,
             callback: this.exitPin.bind(this)
           }}
-          styles={Styles.HeaderParentButtons}
           appId={this.props.appId}
         />
         <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
