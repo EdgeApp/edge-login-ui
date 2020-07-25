@@ -11,7 +11,7 @@ type Props = {
   backgroundImage?: any
 }
 
-export default class LoadingScreenComponent extends Component<Props> {
+export class LoadingScreen extends Component<Props> {
   render() {
     const { LandingScreenStyle } = this.props.styles
     return (

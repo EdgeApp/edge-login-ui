@@ -13,8 +13,6 @@ import {
 import { type WorkflowState } from '../../common/reducers/WorkflowReducer.js'
 import { ModalManager as ModalManagerLogin } from '../../common/util/ModalManager.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'
-import LoadingScreenConnector from '../connectors/screens/LoadingScreenConnector'
 import NewAccountPasswordScreenConnector from '../connectors/screens/newAccount/NewAccountPasswordScreenConnector'
 import NewAccountReviewScreenConnector from '../connectors/screens/newAccount/NewAccountReviewScreenConnector'
 import NewAccountUsernameScreenConnector from '../connectors/screens/newAccount/NewAccountUsernameScreenConnector'
@@ -26,6 +24,8 @@ import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAcc
 import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent.js'
 import { LoginWithRecoveryQuestionsScreen } from './screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent.js'
 import { OtpErrorScreen } from './screens/existingAccout/OtpErrorScreenComponent.js'
+import { LandingScreen } from './screens/LandingScreenComponent.js'
+import { LoadingScreen } from './screens/LoadingScreenComponent.js'
 import { LoginUsernamePasswordScreen } from './screens/LoginUsernamePasswordScreenComponent.js'
 import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent.js'
 import { PinLoginScreen } from './screens/PinLogInScreenComponent.js'
@@ -131,7 +131,7 @@ class LoginAppComponent extends Component<Props, State> {
 
   getLoadingScreen() {
     return (
-      <LoadingScreenConnector
+      <LoadingScreen
         styles={this.props.styles}
         backgroundImage={this.props.backgroundImage}
       />
@@ -140,7 +140,7 @@ class LoginAppComponent extends Component<Props, State> {
 
   getLandingScreen() {
     return (
-      <LandingScreenConnector
+      <LandingScreen
         styles={this.props.styles}
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
