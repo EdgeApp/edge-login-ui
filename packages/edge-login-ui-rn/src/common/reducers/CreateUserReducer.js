@@ -5,8 +5,11 @@ import { type Reducer } from 'redux'
 
 import { type Action } from '../../types/ReduxTypes'
 
+const flowHack: any = {}
+const defaultAccount: EdgeAccount = flowHack
+
 export type CreateState = {
-  +accountObject: EdgeAccount | null,
+  +accountObject: EdgeAccount,
   +confirmPassword: string | null,
   +confirmPasswordErrorMessage: string | null,
   +createErrorMessage: string | null,
@@ -39,7 +42,7 @@ const initialState: CreateState = {
   createErrorMessage: null,
   loginPasswordErrorMessage: null,
   loginPinErrorMessage: null,
-  accountObject: null,
+  accountObject: defaultAccount,
   showModal: false
 }
 

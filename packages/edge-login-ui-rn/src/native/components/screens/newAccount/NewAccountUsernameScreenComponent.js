@@ -2,26 +2,36 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
+import { checkUsernameForAvailabilty } from '../../../../common/actions/CreateAccountActions.js'
 import s from '../../../../common/locales/strings'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import UsernameConnector from '../../../connectors/componentConnectors/UsernameConnector'
 import { Button } from '../../common'
 import T from '../../common/FormattedText.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type Props = {
+type OwnProps = {
   styles: Object,
-  username: string,
-  checkUsernameForAvailabilty(string): void,
-  appName: string,
-  usernameErrorMessage?: string
+  appName: string
 }
+type StateProps = {
+  username: string,
+  usernameErrorMessage: string | null
+}
+type DispatchProps = {
+  checkUsernameForAvailabilty(string): void
+}
+type Props = OwnProps & StateProps & DispatchProps
+
 type State = {
   isProcessing: boolean
 }
-export default class LandingScreenComponent extends Component<Props, State> {
+
+class NewAccountUsernameScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -85,3 +95,15 @@ export default class LandingScreenComponent extends Component<Props, State> {
     this.props.checkUsernameForAvailabilty(this.props.username)
   }
 }
+
+export const NewAccountUsernameScreen = connect(
+  (state: RootState): StateProps => ({
+    username: state.create.username || '',
+    usernameErrorMessage: state.create.usernameErrorMessage
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    checkUsernameForAvailabilty(data: string) {
+      dispatch(checkUsernameForAvailabilty(data))
+    }
+  })
+)(NewAccountUsernameScreenComponent)

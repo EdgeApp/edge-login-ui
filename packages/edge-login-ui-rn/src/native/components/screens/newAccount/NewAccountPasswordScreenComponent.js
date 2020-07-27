@@ -1,10 +1,15 @@
 // @flow
 
+import { type EdgePasswordRules } from 'edge-core-js'
 import React, { Component } from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { connect } from 'react-redux'
 
+import { validateConfirmPassword } from '../../../../common/actions/CreateAccountActions.js'
 import s from '../../../../common/locales/strings'
+import { type WorkflowState } from '../../../../common/reducers/WorkflowReducer.js'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 import SkipModalConnector from '../../../connectors/abSpecific/SkipModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
@@ -13,18 +18,22 @@ import PasswordConnector from '../../../connectors/componentConnectors/PasswordC
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type Props = {
-  styles: Object,
-  confirmPasswordErrorMessage: string,
-  passwordStatus: Object,
-  password: string,
+type OwnProps = {
+  styles: Object
+}
+type StateProps = {
   confirmPassword: string,
-  workflow: Object,
   error: string,
   error2: string,
+  password: string,
+  passwordStatus: EdgePasswordRules | null,
+  workflow: WorkflowState
+}
+type DispatchProps = {
   checkTheConfirmPassword(): void,
   nextScreen(): void
 }
+type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
   isProcessing: boolean,
@@ -32,10 +41,7 @@ type State = {
   focusSecond: boolean
 }
 
-export default class NewAccountPasswordScreenComponent extends Component<
-  Props,
-  State
-> {
+class NewAccountPasswordScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -161,3 +167,22 @@ export default class NewAccountPasswordScreenComponent extends Component<
     this.props.nextScreen()
   }
 }
+
+export const NewAccountPasswordScreen = connect(
+  (state: RootState): StateProps => ({
+    confirmPassword: state.create.confirmPassword || '',
+    error: state.create.confirmPasswordErrorMessage || '',
+    error2: state.create.createPasswordErrorMessage || '',
+    password: state.create.password || '',
+    passwordStatus: state.create.passwordStatus,
+    workflow: state.workflow
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    checkTheConfirmPassword() {
+      dispatch(validateConfirmPassword())
+    },
+    nextScreen() {
+      dispatch({ type: 'WORKFLOW_NEXT' })
+    }
+  })
+)(NewAccountPasswordScreenComponent)

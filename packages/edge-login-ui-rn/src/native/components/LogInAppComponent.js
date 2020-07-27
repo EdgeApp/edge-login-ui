@@ -13,12 +13,6 @@ import {
 import { type WorkflowState } from '../../common/reducers/WorkflowReducer.js'
 import { ModalManager as ModalManagerLogin } from '../../common/util/ModalManager.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import NewAccountPasswordScreenConnector from '../connectors/screens/newAccount/NewAccountPasswordScreenConnector'
-import NewAccountReviewScreenConnector from '../connectors/screens/newAccount/NewAccountReviewScreenConnector'
-import NewAccountUsernameScreenConnector from '../connectors/screens/newAccount/NewAccountUsernameScreenConnector'
-import NewAccountWelcomeScreenConnector from '../connectors/screens/newAccount/NewAccountWelcomeScreenConnector'
-import NewAccountPinScreenConnector from '../connectors/screens/newAccount/SetAccountPinScreenConnector'
-import TermsAndConditionsScreenConnector from '../connectors/screens/newAccount/TermsAndConditionsScreenConnector'
 import { getSupportedBiometryType } from '../keychain.js'
 import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
 import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent.js'
@@ -28,6 +22,12 @@ import { LandingScreen } from './screens/LandingScreenComponent.js'
 import { LoadingScreen } from './screens/LoadingScreenComponent.js'
 import { LoginUsernamePasswordScreen } from './screens/LoginUsernamePasswordScreenComponent.js'
 import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent.js'
+import { NewAccountPasswordScreen } from './screens/newAccount/NewAccountPasswordScreenComponent.js'
+import { NewAccountReviewScreen } from './screens/newAccount/NewAccountReviewScreenComponent.js'
+import { NewAccountUsernameScreen } from './screens/newAccount/NewAccountUsernameScreenComponent.js'
+import { NewAccountWelcomeScreen } from './screens/newAccount/NewAccountWelcomeScreenComponent.js'
+import { SetAccountPinScreen } from './screens/newAccount/SetAccountPinScreenComponent.js'
+import { TermsAndConditionsScreen } from './screens/newAccount/TermsAndConditionsScreenComponent.js'
 import { PinLoginScreen } from './screens/PinLogInScreenComponent.js'
 
 type OwnProps = {
@@ -156,35 +156,35 @@ class LoginAppComponent extends Component<Props, State> {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
         return (
-          <NewAccountWelcomeScreenConnector
+          <NewAccountWelcomeScreen
             styles={this.props.styles}
             appName={this.props.appName}
           />
         ) // NewAccountWelcomeScreenConnector
       case 1:
         return (
-          <NewAccountUsernameScreenConnector
+          <NewAccountUsernameScreen
             styles={this.props.styles}
             appName={this.props.appName}
           />
         )
       case 2:
-        return <NewAccountPasswordScreenConnector styles={this.props.styles} />
+        return <NewAccountPasswordScreen styles={this.props.styles} />
       case 3:
-        return <NewAccountPinScreenConnector styles={this.props.styles} />
+        return <SetAccountPinScreen styles={this.props.styles} />
       case 4:
         return <CreatingAccountWaitScreen styles={this.props.styles} />
       case 5:
-        return <NewAccountReviewScreenConnector styles={this.props.styles} />
+        return <NewAccountReviewScreen styles={this.props.styles} />
       case 6:
         return (
-          <TermsAndConditionsScreenConnector
+          <TermsAndConditionsScreen
             styles={this.props.styles}
             appName={this.props.appName}
           />
         )
       default:
-        return <NewAccountWelcomeScreenConnector styles={this.props.styles} />
+        return <NewAccountWelcomeScreen styles={this.props.styles} />
     }
   }
 
