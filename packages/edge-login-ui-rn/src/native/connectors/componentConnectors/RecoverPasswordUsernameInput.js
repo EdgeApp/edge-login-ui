@@ -9,7 +9,7 @@ import { FormField } from '../../components/common'
 type OwnProps = {
   onSubmitEditing(): void
 }
-export const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
   return {
     value: state.login.username,
     label: s.strings.username,
@@ -19,7 +19,7 @@ export const mapStateToProps = (state: RootState) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     onChangeText: (data: string) =>
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data }),
@@ -27,7 +27,7 @@ export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   }
 }
 
-export default connect(
+export const RecoverPasswordUsernameInput = connect(
   mapStateToProps,
   mapDispatchToProps
 )(FormField)
