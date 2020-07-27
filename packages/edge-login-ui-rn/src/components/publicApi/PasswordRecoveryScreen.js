@@ -11,6 +11,7 @@ import thunk from 'redux-thunk'
 import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
 import { type Action, type Imports } from '../../types/ReduxTypes.js'
 import { PasswordRecoveryApp } from '../navigation/PasswordRecoveryAppComponent.js'
+import { ThemeProvider } from '../services/ThemeContext.js'
 
 type Props = {
   account: EdgeAccount,
@@ -46,7 +47,9 @@ export class PasswordRecoveryScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <PasswordRecoveryApp showHeader={this.props.showHeader} />
+        <ThemeProvider>
+          <PasswordRecoveryApp showHeader={this.props.showHeader} />
+        </ThemeProvider>
       </Provider>
     )
   }

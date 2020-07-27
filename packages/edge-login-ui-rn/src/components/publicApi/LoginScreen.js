@@ -17,6 +17,7 @@ import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
 import { type Action, type Imports } from '../../types/ReduxTypes.js'
 import { checkingForOTP } from '../../util/checkingForOTP.js'
 import { LoginApp } from '../navigation/LogInAppComponent.js'
+import { changeFont, ThemeProvider } from '../services/ThemeContext.js'
 
 type Props = {
   accountOptions: EdgeAccountOptions,
@@ -24,7 +25,7 @@ type Props = {
   appName?: string,
   backgroundImage?: any,
   context: EdgeContext,
-  fontDescription: any,
+  fontDescription?: { regularFontFamily: string },
   landingScreenText?: string,
   onLogin(error: ?Error, account: ?EdgeAccount, touchIdInfo: ?Object): void,
   parentButton?: Object,
@@ -41,6 +42,12 @@ export class LoginScreen extends Component<Props> {
   constructor(props: Props) {
     super(props)
     checkingForOTP(this.props.context)
+
+    const { fontDescription = {} } = this.props
+    const { regularFontFamily } = fontDescription
+    changeFont(regularFontFamily)
+    updateFontStyles(regularFontFamily)
+
     const composeEnhancers =
       typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'core-ui' })
@@ -78,10 +85,6 @@ export class LoginScreen extends Component<Props> {
     ]
   }
 
-  componentWillMount() {
-    updateFontStyles(this.props) // Can we move this to the constructor?
-  }
-
   componentWillUnmount() {
     for (const cleanup of this.cleanups) cleanup()
   }
@@ -89,16 +92,18 @@ export class LoginScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <LoginApp
-          appId={this.props.appId}
-          appName={this.props.appName}
-          backgroundImage={this.props.backgroundImage}
-          landingScreenText={this.props.landingScreenText}
-          parentButton={this.props.parentButton}
-          primaryLogo={this.props.primaryLogo}
-          primaryLogoCallback={this.props.primaryLogoCallback}
-          recoveryLogin={this.props.recoveryLogin}
-        />
+        <ThemeProvider>
+          <LoginApp
+            appId={this.props.appId}
+            appName={this.props.appName}
+            backgroundImage={this.props.backgroundImage}
+            landingScreenText={this.props.landingScreenText}
+            parentButton={this.props.parentButton}
+            primaryLogo={this.props.primaryLogo}
+            primaryLogoCallback={this.props.primaryLogoCallback}
+            recoveryLogin={this.props.recoveryLogin}
+          />
+        </ThemeProvider>
       </Provider>
     )
   }

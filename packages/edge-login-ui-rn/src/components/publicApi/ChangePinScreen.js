@@ -11,6 +11,7 @@ import thunk from 'redux-thunk'
 import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
 import { type Action, type Imports } from '../../types/ReduxTypes.js'
 import { ChangePinApp } from '../navigation/ChangePinAppComponent.js'
+import { ThemeProvider } from '../services/ThemeContext.js'
 
 type Props = {
   account: EdgeAccount,
@@ -44,7 +45,9 @@ export class ChangePinScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <ChangePinApp showHeader={this.props.showHeader} />
+        <ThemeProvider>
+          <ChangePinApp showHeader={this.props.showHeader} />
+        </ThemeProvider>
       </Provider>
     )
   }
