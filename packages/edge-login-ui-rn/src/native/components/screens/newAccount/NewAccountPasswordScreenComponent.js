@@ -10,11 +10,11 @@ import { validateConfirmPassword } from '../../../../common/actions/CreateAccoun
 import s from '../../../../common/locales/strings'
 import { type WorkflowState } from '../../../../common/reducers/WorkflowReducer.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
-import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 import SkipModalConnector from '../../../connectors/abSpecific/SkipModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
+import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
@@ -89,7 +89,7 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
   renderInterior(styles: Object) {
     return (
       <View style={styles.innerView}>
-        <PasswordStatusConnector style={styles.status} />
+        <PasswordStatus style={styles.status} />
         <PasswordConnector
           label={s.strings.password}
           style={styles.inputBox}

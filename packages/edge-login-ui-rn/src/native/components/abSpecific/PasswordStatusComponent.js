@@ -2,27 +2,32 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { connect } from 'react-redux'
 
 import s from '../../../common/locales/strings.js'
-import {
-  PASSWORD_REQ_CHECKED,
-  PASSWORD_REQ_UNCHECKED
-} from '../../../native/assets'
+import { type PasswordStatusState } from '../../../common/reducers/PasswordStatusReducer.js'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { PASSWORD_REQ_CHECKED, PASSWORD_REQ_UNCHECKED } from '../../assets'
 import { Checkbox } from '../common/Checkbox'
 
-type Props = {
-  style: Object,
-  secondsToCrack?: string,
-  status: Object
+type OwnProps = {
+  style: Object
 }
+type StateProps = {
+  secondsToCrack?: string,
+  status: PasswordStatusState | null
+}
+type Props = OwnProps & StateProps
 
-export default class PaswordStatusComponent extends Component<Props> {
+class PasswordStatusComponent extends Component<Props> {
   render() {
     const style = this.props.style
     if (this.props.status) {
       return (
         <View style={style.container}>
-          <View style={style.boxes}>{this.renderStatusList(style)}</View>
+          <View style={style.boxes}>
+            {this.renderStatusList(style, this.props.status)}
+          </View>
           <View style={style.textContainer}>
             <Text style={style.text}>{this.props.secondsToCrack}</Text>
           </View>
@@ -40,8 +45,8 @@ export default class PaswordStatusComponent extends Component<Props> {
     // do nothing
   }
 
-  renderStatusList(style: Object) {
-    return this.props.status.list.map(Item => (
+  renderStatusList(style: Object, status: PasswordStatusState) {
+    return status.list.map(Item => (
       <View style={style.checkboxContainer} key={Item.title}>
         <Checkbox
           style={style.checkboxes}
@@ -57,3 +62,13 @@ export default class PaswordStatusComponent extends Component<Props> {
     ))
   }
 }
+
+export const PasswordStatus = connect(
+  (state: RootState): StateProps => ({
+    status: state.passwordStatus,
+    secondsToCrack: state.passwordStatus
+      ? state.passwordStatus.secondsToCrack
+      : ''
+  }),
+  (dispatch: Dispatch) => ({})
+)(PasswordStatusComponent)

@@ -9,7 +9,6 @@ import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
 import { type LoginUserInfo } from '../../../common/reducers/PreviousUsersReducer.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
-import PinKeypadConnector from '../../../native/connectors/abSpecific/PinKeypadConnector'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import * as Assets from '../../assets/'
 import { LogoImageHeader } from '../../components/abSpecific/LogoImageHeader.js'
@@ -21,7 +20,8 @@ import {
   HeaderParentButtons,
   ImageButton
 } from '../../components/common'
-import FourDigitConnector from '../../connectors/abSpecific/FourDigitConnector'
+import { FourDigit } from '../abSpecific/FourDigitComponent.js'
+import { PinKeypad } from '../abSpecific/PinKeypad.js'
 
 type OwnProps = {
   styles: Object,
@@ -131,7 +131,7 @@ class PinLogInScreenComponent extends Component<Props, State> {
         </TouchableWithoutFeedback>
         <View style={PinLoginScreenStyle.spacer_full} />
         {this.props.userDetails.pinEnabled && (
-          <PinKeypadConnector style={PinLoginScreenStyle.keypad} />
+          <PinKeypad style={PinLoginScreenStyle.keypad} />
         )}
       </View>
     )
@@ -150,7 +150,7 @@ class PinLogInScreenComponent extends Component<Props, State> {
             upTextStyle={style.usernameButton.upTextStyle}
           />
           {this.props.userDetails.pinEnabled && (
-            <FourDigitConnector style={style.fourPin} />
+            <FourDigit style={style.fourPin} />
           )}
           {!this.props.userDetails.pinEnabled && <View style={style.spacer} />}
           {this.renderTouchImage()}

@@ -2,18 +2,25 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { connect } from 'react-redux'
+import { sprintf } from 'sprintf-js'
 
-import * as Constants from '../../../common/constants'
+import * as Constants from '../../../common/constants/'
+import s from '../../../common/locales/strings.js'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { Spinner } from '../common'
 
-type Props = {
-  style: Object,
+type OwnProps = {
+  style: Object
+}
+type StateProps = {
   pin: string,
   autoLogIn: boolean,
-  error: string,
+  error: string | null,
   wait: number,
   isLogginginWithPin: boolean
 }
+type Props = OwnProps & StateProps
 
 type State = {
   autoFocus: boolean,
@@ -101,4 +108,17 @@ class FourDigitComponent extends Component<Props, State> {
   }
 }
 
-export { FourDigitComponent }
+export const FourDigit = connect(
+  (state: RootState): StateProps => ({
+    pin: state.login.pin || '',
+    error:
+      state.login.wait && state.login.wait > 0
+        ? `${state.login.errorMessage || ''}: ` +
+          sprintf(s.strings.account_locked_for, state.login.wait)
+        : state.login.errorMessage,
+    autoLogIn: true,
+    isLogginginWithPin: state.login.isLoggingInWithPin,
+    wait: state.login.wait
+  }),
+  (dispatch: Dispatch) => ({})
+)(FourDigitComponent)

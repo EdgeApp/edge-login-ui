@@ -6,8 +6,8 @@ import { connect } from 'react-redux'
 
 import s from '../../../../common/locales/strings'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
-import AccountInfoContainer from '../../../connectors/abSpecific/AccountInfoConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import { AccountInfo } from '../../abSpecific/AccountInfoComponent.js'
 import { Button, WarningBox } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
@@ -40,7 +40,7 @@ class NewAccountReviewScreenComponent extends Component<Props> {
               />
             </View>
             <View style={NewAccountReviewScreenStyle.detailsContainer}>
-              <AccountInfoContainer
+              <AccountInfo
                 style={NewAccountReviewScreenStyle.accountDetailsBox}
               />
               <View style={NewAccountReviewScreenStyle.shim} />

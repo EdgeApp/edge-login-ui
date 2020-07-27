@@ -3,18 +3,26 @@
 import React, { Component } from 'react'
 import { Text, TouchableWithoutFeedback, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import { connect } from 'react-redux'
 
+import { userLoginWithPin } from '../../../common/actions/LoginAction.js'
 import s from '../../../common/locales/strings.js'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 
-export type Props = {
-  style: Object,
+type OwnProps = {
+  style: Object
+}
+type StateProps = {
   pin: string,
   username: string,
-  wait: boolean,
+  wait: boolean
+}
+type DispatchProps = {
   onChangeText(Object): void
 }
+type Props = OwnProps & StateProps & DispatchProps
 
-class PinKeypad extends Component<Props> {
+class PinKeypadComponent extends Component<Props> {
   changePin = (value: string) => {
     const { username, pin, onChangeText } = this.props
     if (value === 'back') {
@@ -144,4 +152,16 @@ class PinKeypad extends Component<Props> {
   }
 }
 
-export { PinKeypad }
+export const PinKeypad = connect(
+  (state: RootState): StateProps => {
+    const pinLength = state.login.pin ? state.login.pin.length : 0
+    return {
+      pin: state.login.pin || '',
+      username: state.login.username,
+      wait: state.login.wait > 0 || pinLength === 4
+    }
+  },
+  (dispatch: Dispatch): DispatchProps => ({
+    onChangeText: (data: Object) => dispatch(userLoginWithPin(data))
+  })
+)(PinKeypadComponent)

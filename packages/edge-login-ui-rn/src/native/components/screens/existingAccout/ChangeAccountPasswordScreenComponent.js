@@ -14,10 +14,10 @@ import s from '../../../../common/locales/strings.js'
 import { scale } from '../../../../common/util/scaling.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
 import ChangePasswordModalConnector from '../../../connectors/abSpecific/ChangePasswordModalConnector'
-import PasswordStatusConnector from '../../../connectors/abSpecific/PasswordStatusConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
+import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
@@ -102,7 +102,7 @@ class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
   renderInterior = (styles: Object) => {
     return (
       <View style={styles.innerView}>
-        <PasswordStatusConnector style={styles.status} />
+        <PasswordStatus style={styles.status} />
         <PasswordConnector
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}

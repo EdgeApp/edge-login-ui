@@ -2,25 +2,26 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants/'
 import s from '../../../common/locales/strings.js'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { TextAndIconButton } from '../common'
 
-export type StateProps = {
-  username?: string,
-  password?: string,
-  pin: string,
-  passwordMessage?: string
-}
-export type OwnProps = {
+type OwnProps = {
   style: Object
 }
+type StateProps = {
+  username?: string,
+  password?: string,
+  pin: string
+}
+type Props = OwnProps & StateProps
+
 type State = {
   collapsed: boolean
 }
-
-type Props = OwnProps & StateProps
 
 class AccountInfoComponent extends Component<Props, State> {
   constructor(props: Props) {
@@ -172,4 +173,11 @@ class AccountInfoComponent extends Component<Props, State> {
   }
 }
 
-export { AccountInfoComponent }
+export const AccountInfo = connect(
+  (state: RootState): StateProps => ({
+    username: state.create.username || '',
+    password: state.create.password || '',
+    pin: state.create.pin
+  }),
+  (dispatch: Dispatch) => ({})
+)(AccountInfoComponent)
