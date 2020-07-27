@@ -16,7 +16,6 @@ import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'
 import LoadingScreenConnector from '../connectors/screens/LoadingScreenConnector'
-import LoginUsernamePasswordScreenConnector from '../connectors/screens/LogInUsernamePasswordScreenConnector'
 import NewAccountPasswordScreenConnector from '../connectors/screens/newAccount/NewAccountPasswordScreenConnector'
 import NewAccountReviewScreenConnector from '../connectors/screens/newAccount/NewAccountReviewScreenConnector'
 import NewAccountUsernameScreenConnector from '../connectors/screens/newAccount/NewAccountUsernameScreenConnector'
@@ -28,6 +27,7 @@ import { getSupportedBiometryType } from '../keychain.js'
 import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
 import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent.js'
 import { LoginWithRecoveryQuestionsScreen } from './screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent.js'
+import { LoginUsernamePasswordScreen } from './screens/LoginUsernamePasswordScreenComponent.js'
 import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent.js'
 
 type OwnProps = {
@@ -190,7 +190,7 @@ class LoginAppComponent extends Component<Props, State> {
 
   getPasswordScreen() {
     return (
-      <LoginUsernamePasswordScreenConnector
+      <LoginUsernamePasswordScreen
         styles={this.props.styles}
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}

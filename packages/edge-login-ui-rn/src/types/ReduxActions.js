@@ -17,7 +17,7 @@ type NoDataActionName =
   | 'CLEAR_CREATE_ERROR_MESSAGE'
   | 'CLOSE_NOTIFICATION_MODAL'
   | 'DISMISS_EMAIL_MODAL'
-  | 'DISMISS_REOVERY_ERROR'
+  | 'DISMISS_REOVERY_ERROR' // Apparently unused
   | 'LAUNCH_NOTIFICATION_MODAL'
   | 'LOGIN_SUCCEESS'
   | 'ON_DISABLE_RECOVERY'
@@ -65,7 +65,6 @@ export type Action =
       type: 'CREATE_UPDATE_USERNAME',
       data: { username: string, error: string | null }
     }
-  | { type: 'DELETE_USER_FROM_DEVICE', data: string } // Apparently unused
   | {
       type: 'LOGIN_PIN_FAIL',
       data: {
