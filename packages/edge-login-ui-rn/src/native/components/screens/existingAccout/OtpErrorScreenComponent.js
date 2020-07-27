@@ -113,7 +113,7 @@ class OtpErrorScreenComponent extends Component<Props, State> {
     })
   }
 
-  getStaticBody(style: Object) {
+  getStaticBody(style: typeof OtpErrorScreenStyle) {
     return (
       <Text style={style.staticModalText}>
         {s.strings.otp_dispable_req_sent}
@@ -121,7 +121,7 @@ class OtpErrorScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderModal(style: Object) {
+  renderModal(style: typeof OtpErrorScreenStyle) {
     if (this.state.showBackupCodeModal) {
       const middle = (
         <View style={style.modalMiddle}>
@@ -164,7 +164,7 @@ class OtpErrorScreenComponent extends Component<Props, State> {
     return null
   }
 
-  renderDisableButton(style: Object) {
+  renderDisableButton(style: typeof OtpErrorScreenStyle) {
     if (this.state.screen === Constants.OTP_SCREEN_ONE) {
       return (
         <Button
@@ -181,8 +181,6 @@ class OtpErrorScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { OtpErrorScreenStyle } = Styles
-
     return (
       <SafeAreaView>
         <View style={OtpErrorScreenStyle.screen}>
@@ -218,6 +216,100 @@ class OtpErrorScreenComponent extends Component<Props, State> {
         </View>
       </SafeAreaView>
     )
+  }
+}
+
+const OtpErrorScreenStyle = {
+  screen: { ...Styles.ScreenStyle },
+  header: {
+    ...Styles.HeaderContainerScaledStyle
+  },
+  pageContainer: {
+    ...Styles.PageContainerWithHeaderStyle,
+    alignItems: 'center'
+  },
+  hero: {
+    container: {
+      position: 'relative',
+      width: '100%'
+    },
+    colorField: {
+      position: 'relative',
+      width: '100%',
+      height: 100,
+      backgroundColor: Constants.GRAY_3,
+      flexDirection: 'row',
+      paddingTop: 20
+    },
+    leftField: {
+      flex: 2,
+      paddingRight: 10,
+      paddingTop: 2,
+      alignItems: 'flex-end'
+    },
+    rightField: {
+      flex: 8
+    },
+    heroTitleText: {
+      color: Constants.PRIMARY,
+      fontSize: 17
+    },
+    heroText: {
+      color: Constants.GRAY_1,
+      fontSize: 14,
+      marginTop: 7
+    },
+    orOption: {
+      position: 'relative',
+      height: 100,
+      width: '100%',
+      backgroundColor: Constants.WHITE
+    },
+    orRow: {
+      height: 48,
+      alignItems: 'center',
+      justifyContent: 'space-around'
+    },
+    instructionsRow: {
+      height: 52
+    },
+    instructionsText: {
+      width: '90%',
+      textAlign: 'center',
+      marginLeft: '5%',
+      marginRight: '5%',
+      color: Constants.GRAY_1
+    },
+    shim: { ...Styles.Shim, height: 20 }
+  },
+  shim: { ...Styles.Shim, height: 20 },
+  qrRow: {
+    position: 'relative',
+    width: '100%',
+    height: 150
+  },
+  exitButton: {
+    upStyle: Styles.TextOnlyButtonUpStyle,
+    upTextStyle: { ...Styles.TextOnlyButtonTextUpStyle, width: 'auto' },
+    downTextStyle: { ...Styles.TextOnlyButtonTextDownStyle, width: 'auto' },
+    downStyle: Styles.TextOnlyButtonDownStyle
+  },
+  staticModalText: {
+    color: Constants.GRAY_1,
+    width: '100%',
+    fontSize: 15,
+    textAlign: 'center'
+  },
+  modalMiddle: {
+    position: 'relative',
+    width: '100%'
+  },
+  modalInput: {
+    ...Styles.MaterialInputOnWhite,
+    container: {
+      ...Styles.MaterialInputOnWhite.container,
+      width: '100%'
+    }
   }
 }
 

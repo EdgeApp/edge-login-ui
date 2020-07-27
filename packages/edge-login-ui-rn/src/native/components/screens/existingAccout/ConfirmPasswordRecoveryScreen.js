@@ -2,8 +2,9 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+import * as Constants from '../../../../common/constants/'
 import s from '../../../../common/locales/strings'
-import { ConfirmPasswordRecoverySceneStyles } from '../../../styles/index'
+import * as Styles from '../../../styles/index.js'
 import { Button, Header } from '../../common/'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
@@ -61,5 +62,46 @@ export default class ConfirmPasswordRecoveryScreen extends Component<Props> {
         </View>
       </SafeAreaView>
     )
+  }
+}
+
+const ConfirmPasswordRecoverySceneStyles = {
+  screen: { ...Styles.ScreenStyle, alignItems: 'center' },
+  header: {
+    ...Styles.HeaderContainerScaledStyle,
+    backgroundColor: Constants.PRIMARY
+  },
+  submitButton: {
+    upStyle: Styles.PrimaryWidthButtonUpStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextStyle,
+    downStyle: Styles.PrimaryWidthButtonDownStyle
+  },
+  disableButton: {
+    upStyle: Styles.DefaultWidthButtonUpStyle,
+    upTextStyle: Styles.DefaultButtonUpTextStyle,
+    downTextStyle: Styles.DefaultButtonDownTextStyle,
+    downStyle: Styles.DefaultWidthButtonDownStyle
+  },
+  buttonContainer: {
+    width: '90%',
+    alignItems: 'center'
+    // height: THEME.BUTTONS.HEIGHT
+  },
+  questionText: {
+    color: Constants.GRAY_2,
+    width: '90%',
+    fontSize: 15,
+    paddingBottom: 10
+  },
+  answerText: {
+    color: Constants.GRAY_1,
+    width: '90%',
+    fontSize: 15,
+    textAlign: 'left',
+    paddingBottom: 10
+  },
+  shim: {
+    height: 20
   }
 }

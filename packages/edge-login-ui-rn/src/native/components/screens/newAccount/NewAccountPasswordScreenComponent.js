@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import { validateConfirmPassword } from '../../../../common/actions/CreateAccountActions.js'
 import s from '../../../../common/locales/strings'
 import { type WorkflowState } from '../../../../common/reducers/WorkflowReducer.js'
+import { scale } from '../../../../common/util/scaling.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import SkipModalConnector from '../../../connectors/abSpecific/SkipModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
@@ -51,7 +52,6 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { NewAccountPasswordScreenStyle } = Styles
     return (
       <SafeAreaView>
         <KeyboardAwareScrollView
@@ -67,7 +67,7 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderMain(styles: Object) {
+  renderMain(styles: typeof NewAccountPasswordScreenStyle) {
     if (this.state.focusSecond) {
       return (
         <KeyboardAvoidingView
@@ -85,7 +85,7 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderInterior(styles: Object) {
+  renderInterior(styles: typeof NewAccountPasswordScreenStyle) {
     return (
       <View style={styles.innerView}>
         <PasswordStatus style={styles.status} />
@@ -116,7 +116,7 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderModal(style: Object) {
+  renderModal(style: typeof NewAccountPasswordScreenStyle) {
     if (this.props.workflow.showModal) {
       return <SkipModalConnector />
     }
@@ -165,6 +165,44 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
       global.firebase.analytics().logEvent(`Signup_Password_Valid`)
     this.props.nextScreen()
   }
+}
+
+const NewAccountPasswordScreenStyle = {
+  screen: { ...Styles.ScreenStyle },
+  header: Styles.HeaderContainerScaledStyle,
+  mainScrollView: {
+    position: 'relative',
+    width: '100%',
+    height: '100%'
+  },
+  scrollViewContentContainer: {
+    alignItems: 'center'
+  },
+  pageContainer: {
+    ...Styles.PageContainerWithHeaderStyle,
+    alignItems: 'center',
+    flex: 1
+  },
+  innerView: { ...Styles.InnerView, alignItems: 'center' },
+  status: {
+    ...Styles.PasswordStatusScaledStyle,
+    checkboxContainer: {
+      ...Styles.PasswordStatusScaledStyle.checkboxContainer,
+      height: scale(16)
+    }
+  },
+  nextButton: {
+    upStyle: Styles.PrimaryButtonUpScaledStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downStyle: Styles.PrimaryButtonDownScaledStyle
+  },
+  inputBox: {
+    ...Styles.MaterialInputOnWhiteScaled,
+    marginTop: scale(15)
+  },
+  passwordShim: { ...Styles.Shim, height: 1, marginTop: scale(35) },
+  modal: Styles.SkipModalStyle
 }
 
 export const NewAccountPasswordScreen = connect(

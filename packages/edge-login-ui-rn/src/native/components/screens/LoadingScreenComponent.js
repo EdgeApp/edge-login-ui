@@ -13,7 +13,6 @@ type Props = {
 
 export class LoadingScreen extends Component<Props> {
   render() {
-    const { LandingScreenStyle } = Styles
     return (
       <View style={LandingScreenStyle.container}>
         <BackgroundImage
@@ -28,5 +27,13 @@ export class LoadingScreen extends Component<Props> {
   renderSpinner = () => {
     const { CenteredSpinnerStyle } = Styles
     return <Spinner style={CenteredSpinnerStyle} />
+  }
+}
+
+const LandingScreenStyle = {
+  container: Styles.ScreenStyle,
+  backgroundImage: {
+    ...Styles.BackgroundScreenImageStyle,
+    alignItems: 'center'
   }
 }
