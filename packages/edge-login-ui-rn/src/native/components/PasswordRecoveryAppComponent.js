@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import { initializePasswordRecovery } from '../../common/actions/PasswordRecoveryActions.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import RecoverPasswordScreenConnector from '../connectors/screens/existingAccount/RecoverPasswordScreenConnector'
+import { RecoverPasswordScreen } from './screens/existingAccout/RecoverPasswordScreenComponent.js'
 
 type OwnProps = {
   styles: Object,
@@ -27,7 +27,7 @@ class PasswordRecoveryAppComponent extends Component<Props> {
     const { ScreenStyle } = this.props.styles
     return (
       <View style={ScreenStyle} accessible>
-        <RecoverPasswordScreenConnector
+        <RecoverPasswordScreen
           styles={this.props.styles}
           showHeader={this.props.showHeader}
         />

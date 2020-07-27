@@ -3,9 +3,16 @@
 import React, { Component } from 'react'
 import { Platform, Text, View } from 'react-native'
 import Mailer from 'react-native-mail'
+import { connect } from 'react-redux'
 
+import {
+  cancelRecoverySettingsScene,
+  changeRecoveryAnswers,
+  deleteRecovery
+} from '../../../../common/actions/PasswordRecoveryActions.js'
 import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import { FullScreenModal } from '../../../components/common/FullScreenModal.js'
 import EmailAppFailedModalConnector from '../../../connectors/abSpecific/EmailAppFailedModalConnector'
 import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
@@ -20,33 +27,29 @@ import {
 } from '../../common/'
 import ConfirmPasswordRecoveryScreen from './ConfirmPasswordRecoveryScreen'
 
-export type OwnProps = {
+type OwnProps = {
   styles: Object,
   showHeader: boolean
 }
-
 type StateProps = {
+  backupKey: string,
+  disableButton: string,
+  doneButton: string,
+  isEnabled: boolean,
   question1: string,
   question2: string,
-  recoveryQuestions: Array<String>,
-  backupKey: string,
-  showEmailDialog: boolean,
-  isEnabled: boolean,
-  submitButton: string,
-  doneButton: string,
+  questionsList: Array<string>,
   saveButton: string,
-  disableButton: string,
-  username: string,
-  questionsList: Array<string>
+  showEmailDialog: boolean,
+  submitButton: string,
+  username: string
 }
 type DispatchProps = {
-  setAnswers(): void,
   cancel(): void,
+  deleteRecovery(): void,
   returnToSettings(): void,
-  submit(Array<string>, Array<string>): void,
-  deleteRecovery(): void
+  submit(questions: Array<string>, answers: Array<string>): void
 }
-
 type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
@@ -67,7 +70,7 @@ type State = {
   showConfirmationModal: boolean
 }
 
-export default class PasswordRecovery extends Component<Props, State> {
+class RecoverPasswordScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -485,3 +488,48 @@ export default class PasswordRecovery extends Component<Props, State> {
     )
   }
 }
+
+function returnTrunatedUsername(arg) {
+  if (arg) {
+    return arg.charAt(0) + arg.charAt(1) + '***'
+  }
+  return arg
+}
+
+export const RecoverPasswordScreen = connect(
+  (state: RootState): StateProps => ({
+    backupKey: state.passwordRecovery.recoveryKey || '',
+    disableButton: s.strings.disable_password_recovery,
+    doneButton: s.strings.done,
+    isEnabled: state.passwordRecovery.userQuestions.length > 0,
+    question1:
+      state.passwordRecovery.userQuestions.length > 0
+        ? state.passwordRecovery.userQuestions[0]
+        : 'Choose recovery question',
+    question2:
+      state.passwordRecovery.userQuestions.length > 1
+        ? state.passwordRecovery.userQuestions[1]
+        : s.strings.choose_recovery_question,
+    questionsList: state.passwordRecovery.questionsList,
+    saveButton: s.strings.save,
+    showEmailDialog: state.passwordRecovery.showRecoveryEmailDialog,
+    submitButton: s.strings.submit,
+    username: returnTrunatedUsername(state.login.username)
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    cancel() {
+      dispatch(deleteRecovery())
+      dispatch(cancelRecoverySettingsScene())
+      dispatch({ type: 'DISMISS_EMAIL_MODAL' })
+    },
+    deleteRecovery() {
+      dispatch(deleteRecovery())
+    },
+    returnToSettings() {
+      dispatch(cancelRecoverySettingsScene())
+    },
+    submit(questions: Array<string>, answers: Array<string>) {
+      dispatch(changeRecoveryAnswers(questions, answers))
+    }
+  })
+)(RecoverPasswordScreenComponent)
