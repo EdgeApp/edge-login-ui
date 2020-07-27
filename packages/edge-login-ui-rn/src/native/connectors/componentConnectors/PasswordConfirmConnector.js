@@ -13,7 +13,7 @@ type OwnProps = {
   onFinish(): void
 }
 
-export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
+const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const label = ownProps.label
     ? ownProps.label
     : s.strings.confirm_password_text
@@ -33,7 +33,7 @@ export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     onChangeText: (data: string) => dispatch(validateConfirmPassword(data)),
     onSubmitEditing: ownProps.onFinish

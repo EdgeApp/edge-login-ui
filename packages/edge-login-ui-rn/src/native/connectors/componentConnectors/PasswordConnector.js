@@ -13,7 +13,7 @@ type OwnProps = {
   onFinish(): void
 }
 
-export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
+const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const value = state.create.password ? state.create.password : ''
   // $FlowFixMe This doesn't exist in state:
   const error = state.create.createPasswordErrorMessage
@@ -31,7 +31,7 @@ export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   }
 }
 
-export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     onChangeText: (data: string) => dispatch(validatePassword(data)),
     onSubmitEditing: ownProps.onFinish

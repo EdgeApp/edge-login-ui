@@ -10,7 +10,7 @@ import { FormField } from '../../components/common/'
 type OwnProps = {
   onFinish(): void
 }
-export const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
   return {
     value: state.create.username,
     error: state.create.usernameErrorMessage,
@@ -20,7 +20,7 @@ export const mapStateToProps = (state: RootState) => {
     autoFocus: true // ownProps.autoFocus,
   }
 }
-export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     onChangeText: (data: string) => dispatch(validateUsername(data)),
     onSubmitEditing: ownProps.onFinish
