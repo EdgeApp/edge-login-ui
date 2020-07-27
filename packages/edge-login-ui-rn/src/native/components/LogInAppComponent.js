@@ -13,7 +13,6 @@ import {
 import { type WorkflowState } from '../../common/reducers/WorkflowReducer.js'
 import { ModalManager as ModalManagerLogin } from '../../common/util/ModalManager.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import LoginWithRecoveryQuestionsSceenConnector from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
 import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
 import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'
 import LoadingScreenConnector from '../connectors/screens/LoadingScreenConnector'
@@ -26,9 +25,10 @@ import NewAccountPinScreenConnector from '../connectors/screens/newAccount/SetAc
 import TermsAndConditionsScreenConnector from '../connectors/screens/newAccount/TermsAndConditionsScreenConnector'
 import PinLoginScreenConnector from '../connectors/screens/PinLoginScreenConnector'
 import { getSupportedBiometryType } from '../keychain.js'
-import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAccountPasswordScreenComponent'
-import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent'
-import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent'
+import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
+import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent.js'
+import { LoginWithRecoveryQuestionsScreen } from './screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent.js'
+import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent.js'
 
 type OwnProps = {
   appId?: string,
@@ -223,11 +223,7 @@ class LoginAppComponent extends Component<Props, State> {
   getRecoveryLoginScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return (
-          <LoginWithRecoveryQuestionsSceenConnector
-            styles={this.props.styles}
-          />
-        )
+        return <LoginWithRecoveryQuestionsScreen styles={this.props.styles} />
       case 1:
         return <ForgotPasswordChangePassword styles={this.props.styles} />
       case 2:
