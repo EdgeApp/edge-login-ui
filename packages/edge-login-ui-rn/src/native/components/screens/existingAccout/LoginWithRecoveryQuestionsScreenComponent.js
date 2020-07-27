@@ -8,13 +8,13 @@ import { loginWithRecovery } from '../../../../common/actions/LoginAction.js'
 import { getRecoveryQuestions } from '../../../../common/actions/PasswordRecoveryActions.js'
 import * as Constants from '../../../../common/constants/'
 import s from '../../../../common/locales/strings'
-import SetRecoveryUsernameModalConnector from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
 import { RecoverPasswordUsernameInput } from '../../../connectors/componentConnectors/RecoverPasswordUsernameInput.js'
 import * as Styles from '../../../styles/index.js'
 import { Button, FormField, StaticModal } from '../../common/'
 import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
+import { SetRecoveryUsernameModal } from '../../modals/SetRecoveryUsernameModal.js'
 
 type OwnProps = {
   showHeader: boolean
@@ -138,7 +138,7 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
       </View>
     )
     return (
-      <SetRecoveryUsernameModalConnector
+      <SetRecoveryUsernameModal
         modalMiddleComponent={middle}
         cancel={this.props.onCancel}
         action={this.props.getQuestions}

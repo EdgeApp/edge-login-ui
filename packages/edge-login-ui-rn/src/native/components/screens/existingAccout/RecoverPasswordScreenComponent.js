@@ -16,8 +16,6 @@ import { isIphoneX } from '../../../../common/util/isIphoneX.js'
 import { scale } from '../../../../common/util/scaling.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import { FullScreenModal } from '../../../components/common/FullScreenModal.js'
-import EmailAppFailedModalConnector from '../../../connectors/abSpecific/EmailAppFailedModalConnector'
-import SaveRecoveryTokenModalConnector from '../../../connectors/abSpecific/SaveRecoveryTokenModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import * as Styles from '../../../styles/index.js'
 import {
@@ -28,6 +26,8 @@ import {
   TextAndIconButton,
   TextRowComponent
 } from '../../common/'
+import { EmailAppFailedModal } from '../../modals/EmailAppFailedModal.js'
+import { SaveRecoveryTokenModal } from '../../modals/SaveRecoveryTokenModal.js'
 import ConfirmPasswordRecoveryScreen from './ConfirmPasswordRecoveryScreen'
 
 type OwnProps = {
@@ -437,7 +437,7 @@ class RecoverPasswordScreenComponent extends Component<Props, State> {
 
   showEmaiFailed(styles: typeof RecoverPasswordSceneStyles) {
     if (this.props.showEmailDialog) {
-      return <EmailAppFailedModalConnector action={this.props.cancel} />
+      return <EmailAppFailedModal action={this.props.cancel} />
     }
     return null
   }
@@ -465,7 +465,7 @@ class RecoverPasswordScreenComponent extends Component<Props, State> {
     )
     if (this.props.showEmailDialog) {
       return (
-        <SaveRecoveryTokenModalConnector
+        <SaveRecoveryTokenModal
           modalMiddleComponent={middle}
           cancel={this.props.cancel}
           action={this.openEmailApp}

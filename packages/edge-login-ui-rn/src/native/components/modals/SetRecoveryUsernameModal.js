@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
-import { MyModal } from '../../components/common/'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { MyModal } from '../common/index.js'
 
 type OwnProps = {
   cancel(): void,
   action(): void
 }
 
-export const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
   return {
     headerText: s.strings.password_recovery,
     icon: Constants.LOCKED_ICON,
@@ -22,13 +22,13 @@ export const mapStateToProps = (state: RootState) => {
     singleButton: true
   }
 }
-export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     cancel: ownProps.cancel,
     action: ownProps.action
   }
 }
-export default connect(
+export const SetRecoveryUsernameModal = connect(
   mapStateToProps,
   mapDispatchToProps
 )(MyModal)

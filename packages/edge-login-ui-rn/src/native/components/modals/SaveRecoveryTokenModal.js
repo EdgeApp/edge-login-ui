@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
-import { MyModal } from '../../components/common/'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { MyModal } from '../common/index.js'
 
 type OwnProps = {
   cancel(): void,
   action(): void
 }
-export const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
   return {
     headerText: s.strings.save_recovery_token,
     icon: Constants.MAIL,
@@ -21,13 +21,13 @@ export const mapStateToProps = (state: RootState) => {
     hideCancelX: true
   }
 }
-export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     cancel: ownProps.cancel,
     action: ownProps.action
   }
 }
-export default connect(
+export const SaveRecoveryTokenModal = connect(
   mapStateToProps,
   mapDispatchToProps
 )(MyModal)

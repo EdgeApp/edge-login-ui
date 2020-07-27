@@ -5,14 +5,14 @@ import { connect } from 'react-redux'
 import { cancel } from '../../../common/actions/WorkflowActions.js'
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
-import { MyModal } from '../../components/common/'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { MyModal } from '../common/index.js'
 
-export const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
   return {
-    headerText: s.strings.pin_changed,
-    headerSubtext: s.strings.pin_successfully_changed,
-    middleText: '',
+    headerText: s.strings.password_changed,
+    headerSubtext: s.strings.pwd_change_success,
+    middleText: s.strings.pwd_change_modal,
     icon: Constants.EXCLAMATION,
     iconType: Constants.SIMPLE_ICONS,
     actionLabel: s.strings.ok,
@@ -20,7 +20,7 @@ export const mapStateToProps = (state: RootState) => {
     singleButton: true
   }
 }
-export const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     cancel: () => {
       dispatch({ type: 'CLOSE_NOTIFICATION_MODAL' })
@@ -33,7 +33,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect(
+export const ChangePasswordModal = connect(
   mapStateToProps,
   mapDispatchToProps
 )(MyModal)

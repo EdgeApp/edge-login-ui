@@ -13,7 +13,6 @@ import { validateConfirmPassword } from '../../../../common/actions/CreateAccoun
 import s from '../../../../common/locales/strings.js'
 import { scale } from '../../../../common/util/scaling.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
-import ChangePasswordModalConnector from '../../../connectors/abSpecific/ChangePasswordModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
@@ -21,6 +20,7 @@ import * as Styles from '../../../styles/index.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { ChangePasswordModal } from '../../modals/ChangePasswordModal.js'
 
 type OwnProps = {
   showHeader?: boolean
@@ -152,7 +152,7 @@ class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
 
   renderModal = (style: typeof NewAccountPasswordScreenStyle) => {
     if (this.props.showModal) {
-      return <ChangePasswordModalConnector style={style.modal.skip} />
+      return <ChangePasswordModal style={style.modal.skip} />
     }
     return null
   }

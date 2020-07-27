@@ -13,12 +13,12 @@ import * as Constants from '../../../../common/constants/'
 import s from '../../../../common/locales/strings'
 import { scale } from '../../../../common/util/scaling.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
-import ChangePinModalConnector from '../../../connectors/abSpecific/ChangePinModalConnector'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import * as Styles from '../../../styles/index.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button, StaticModal } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { ChangePinModal } from '../../modals/ChangePinModal.js'
 
 type OwnProps = {
   showHeader?: boolean
@@ -82,7 +82,7 @@ class ChangeAccountPinScreenComponent extends Component<Props, State> {
           />
         )
       }
-      return <ChangePinModalConnector style={style.modal.skip} />
+      return <ChangePinModal style={style.modal.skip} />
     }
     return null
   }

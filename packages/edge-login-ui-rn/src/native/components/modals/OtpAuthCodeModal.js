@@ -3,9 +3,9 @@
 import { connect } from 'react-redux'
 
 import s from '../../../common/locales/strings.js'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { OTP_SMALL } from '../../assets/'
-import { MyModal } from '../../components/common/'
+import { MyModal } from '../common/index.js'
 
 type OwnProps = {
   middle: any,
@@ -14,7 +14,7 @@ type OwnProps = {
   action(): void
 }
 
-export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
+const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
   const { otpUserBackupKey } = state.login
   return {
     headerText: s.strings.otp_auth_code_header,
@@ -27,14 +27,14 @@ export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
     singleCancelButton: !otpUserBackupKey || otpUserBackupKey.length < 16
   }
 }
-export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
     cancel: () => ownProps.cancel(),
     action: () => ownProps.action()
   }
 }
 
-export default connect(
+export const OtpAuthCodeModal = connect(
   mapStateToProps,
   mapDispatchToProps
 )(MyModal)

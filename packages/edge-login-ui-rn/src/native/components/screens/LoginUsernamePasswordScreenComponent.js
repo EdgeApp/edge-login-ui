@@ -14,7 +14,6 @@ import * as Constants from '../../../common/constants/'
 import s from '../../../common/locales/strings.js'
 import { type LoginUserInfo } from '../../../common/reducers/PreviousUsersReducer.js'
 import { scale } from '../../../common/util/scaling.js'
-import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import * as Assets from '../../assets/'
 import {
@@ -29,6 +28,7 @@ import {
 import * as Styles from '../../styles/index.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { UserListItem } from '../abSpecific/UserListItem.js'
+import { DeleteUserModal } from '../modals/DeleteUserModal.js'
 
 const Offsets = {
   USERNAME_OFFSET_LOGIN_SCREEN: -50,
@@ -103,7 +103,7 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
   renderModal = (style: typeof LoginPasswordScreenStyle) => {
     if (this.props.showModal) {
       return (
-        <DeleteUserConnector
+        <DeleteUserModal
           style={style.modal.skip}
           username={this.state.username}
         />

@@ -12,13 +12,13 @@ import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings'
 import OtpBackupKeyConnector from '../../../../native/connectors/componentConnectors/OtpBackupKeyConnector'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
-import DisableOtpModalConnector from '../../../connectors/abSpecific/DisableOtpModalConnector'
-import OtpAuthCodeModalConnector from '../../../connectors/abSpecific/OtpAuthCodeModalConnector'
 import * as Styles from '../../../styles/index.js'
 import { EdgeLoginQr } from '../../abSpecific/EdgeLoginQrComponent.js'
 import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'
 import { Button, Header, StaticModal } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { DisableOtpModal } from '../../modals/DisableOtpModal.js'
+import { OtpAuthCodeModal } from '../../modals/OtpAuthCodeModal.js'
 
 type OwnProps = {}
 type StateProps = {
@@ -136,7 +136,7 @@ class OtpErrorScreenComponent extends Component<Props, State> {
         </View>
       )
       return (
-        <OtpAuthCodeModalConnector
+        <OtpAuthCodeModal
           cancel={this.closeModals.bind(this)}
           action={this.sendCode.bind(this)}
           middle={middle}
@@ -146,7 +146,7 @@ class OtpErrorScreenComponent extends Component<Props, State> {
     }
     if (this.state.showDisableModal) {
       return (
-        <DisableOtpModalConnector
+        <DisableOtpModal
           cancel={this.closeModals.bind(this)}
           action={this.disableOtp.bind(this)}
         />

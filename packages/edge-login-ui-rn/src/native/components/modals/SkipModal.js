@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
-import { MyModal } from '../../components/common/'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { MyModal } from '../common/index.js'
 
-export const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState) => {
   return {
     headerText: s.strings.skip_modal_header,
     middleText: s.strings.skip_modal_body,
@@ -17,14 +17,14 @@ export const mapStateToProps = (state: RootState) => {
     cancelLabel: s.strings.cancel
   }
 }
-export const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     cancel: () => dispatch({ type: 'WORKFLOW_CANCEL_MODAL' }),
     action: () => dispatch({ type: 'WORKFLOW_NEXT' })
   }
 }
 
-export default connect(
+export const SkipModal = connect(
   mapStateToProps,
   mapDispatchToProps
 )(MyModal)
