@@ -21,7 +21,6 @@ import NewAccountUsernameScreenConnector from '../connectors/screens/newAccount/
 import NewAccountWelcomeScreenConnector from '../connectors/screens/newAccount/NewAccountWelcomeScreenConnector'
 import NewAccountPinScreenConnector from '../connectors/screens/newAccount/SetAccountPinScreenConnector'
 import TermsAndConditionsScreenConnector from '../connectors/screens/newAccount/TermsAndConditionsScreenConnector'
-import PinLoginScreenConnector from '../connectors/screens/PinLoginScreenConnector'
 import { getSupportedBiometryType } from '../keychain.js'
 import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
 import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent.js'
@@ -29,6 +28,7 @@ import { LoginWithRecoveryQuestionsScreen } from './screens/existingAccout/Login
 import { OtpErrorScreen } from './screens/existingAccout/OtpErrorScreenComponent.js'
 import { LoginUsernamePasswordScreen } from './screens/LoginUsernamePasswordScreenComponent.js'
 import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent.js'
+import { PinLoginScreen } from './screens/PinLogInScreenComponent.js'
 
 type OwnProps = {
   appId?: string,
@@ -204,7 +204,7 @@ class LoginAppComponent extends Component<Props, State> {
 
   getPinScreen() {
     return (
-      <PinLoginScreenConnector
+      <PinLoginScreen
         styles={this.props.styles}
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
