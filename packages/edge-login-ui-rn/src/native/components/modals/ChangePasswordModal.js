@@ -2,9 +2,9 @@
 
 import { connect } from 'react-redux'
 
-import { cancel } from '../../../common/actions/WorkflowActions.js'
-import * as Constants from '../../../common/constants'
+import { cancel } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
+import * as Constants from '../../../constants/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { MyModal } from '../common/index.js'
 

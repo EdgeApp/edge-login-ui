@@ -1,5 +1,5 @@
 // @flow
-import s from '../locales/strings.js'
+import s from '../common/locales/strings.js'
 
 function translateError(arg: string) {
   switch (arg) {

@@ -1,7 +1,7 @@
 // @flow
 
-import * as Constants from '../../../common/constants'
-import { scale } from '../../../common/util/scaling.js'
+import * as Constants from '../../../constants/index.js'
+import { scale } from '../../../util/scaling.js'
 
 export const OtpModalStyle = {
   otpResetModalIcon: {

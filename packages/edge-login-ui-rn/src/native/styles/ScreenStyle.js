@@ -1,6 +1,6 @@
 // @flow
 
-import * as Colors from '../../common/constants/Colors'
+import * as Colors from '../../constants/Colors.js'
 
 const ScreenStyle = {
   flex: 1,

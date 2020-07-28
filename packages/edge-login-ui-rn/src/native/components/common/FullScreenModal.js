@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Dimensions, Platform, View } from 'react-native'
 import Modal from 'react-native-modal'
 
-import * as Constants from '../../../common/constants/index.js'
+import * as Constants from '../../../constants/index.js'
 
 type Props = {
   children: any

@@ -4,15 +4,15 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 
-import { getPreviousUsers } from '../../../common/actions/PreviousUsersActions.js'
-import * as Constants from '../../../common/constants'
+import { getPreviousUsers } from '../../../actions/PreviousUsersActions.js'
+import * as Constants from '../../../constants/index.js'
 import {
   type LoginUserInfo,
   type PreviousUsersState
-} from '../../../common/reducers/PreviousUsersReducer.js'
-import { type WorkflowState } from '../../../common/reducers/WorkflowReducer.js'
-import { ModalManager as ModalManagerLogin } from '../../../common/util/ModalManager.js'
+} from '../../../reducers/PreviousUsersReducer.js'
+import { type WorkflowState } from '../../../reducers/WorkflowReducer.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { ModalManager as ModalManagerLogin } from '../../../util/ModalManager.js'
 import { getSupportedBiometryType } from '../../keychain.js'
 import * as Styles from '../../styles/index.js'
 import { ForgotPasswordChangePassword } from '../screens/existingAccout/ChangeAccountPasswordScreenComponent.js'

@@ -4,7 +4,7 @@ import { type EdgeContext } from 'edge-core-js'
 import { Alert } from 'react-native'
 import { sprintf } from 'sprintf-js'
 
-import s from '../locales/strings.js'
+import s from '../common/locales/strings.js'
 
 export function checkingForOTP(context: EdgeContext): void {
   const accountsPendingReset = []

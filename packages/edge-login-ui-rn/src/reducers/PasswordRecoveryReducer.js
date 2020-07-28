@@ -2,7 +2,7 @@
 
 import { type Reducer } from 'redux'
 
-import { type Action } from '../../types/ReduxTypes'
+import { type Action } from '../types/ReduxTypes.js'
 
 export type PasswordRecoveryState = {
   +questionsList: Array<string>,

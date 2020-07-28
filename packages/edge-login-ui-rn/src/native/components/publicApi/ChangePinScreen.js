@@ -8,10 +8,7 @@ import type { Store } from 'redux'
 import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
-import {
-  type RootState,
-  rootReducer
-} from '../../../common/reducers/RootReducer.js'
+import { type RootState, rootReducer } from '../../../reducers/RootReducer.js'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
 import { ChangePinApp } from '../navigation/ChangePinAppComponent.js'
 

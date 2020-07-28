@@ -3,7 +3,7 @@
 import type { DiskletFolder } from 'disklet'
 import type { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
 
-import { type RootState } from '../common/reducers/RootReducer.js'
+import { type RootState } from '../reducers/RootReducer.js'
 import { type Action } from './ReduxActions.js'
 
 export type { Action, RootState }

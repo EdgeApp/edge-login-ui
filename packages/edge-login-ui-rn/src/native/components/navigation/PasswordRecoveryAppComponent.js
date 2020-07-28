@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 
-import { initializePasswordRecovery } from '../../../common/actions/PasswordRecoveryActions.js'
+import { initializePasswordRecovery } from '../../../actions/PasswordRecoveryActions.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import * as Styles from '../../styles/index.js'
 import { RecoverPasswordScreen } from '../screens/existingAccout/RecoverPasswordScreenComponent.js'

@@ -8,13 +8,13 @@ import { connect } from 'react-redux'
 import {
   userLogin,
   userLoginWithTouchId
-} from '../../../common/actions/LoginAction.js'
-import { recoverPasswordLogin } from '../../../common/actions/PasswordRecoveryActions.js'
-import * as Constants from '../../../common/constants/'
+} from '../../../actions/LoginAction.js'
+import { recoverPasswordLogin } from '../../../actions/PasswordRecoveryActions.js'
 import s from '../../../common/locales/strings.js'
-import { type LoginUserInfo } from '../../../common/reducers/PreviousUsersReducer.js'
-import { scale } from '../../../common/util/scaling.js'
+import * as Constants from '../../../constants/index.js'
+import { type LoginUserInfo } from '../../../reducers/PreviousUsersReducer.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { scale } from '../../../util/scaling.js'
 import * as Assets from '../../assets/'
 import {
   BackgroundImage,

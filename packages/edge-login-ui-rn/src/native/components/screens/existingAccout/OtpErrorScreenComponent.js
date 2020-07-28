@@ -4,14 +4,11 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 
-import {
-  resetOtpReset,
-  retryWithOtp
-} from '../../../../common/actions/LoginAction.js'
-import * as Constants from '../../../../common/constants'
-import s from '../../../../common/locales/strings'
-import OtpBackupKeyConnector from '../../../../native/connectors/componentConnectors/OtpBackupKeyConnector'
+import { resetOtpReset, retryWithOtp } from '../../../../actions/LoginAction.js'
+import s from '../../../../common/locales/strings.js'
+import * as Constants from '../../../../constants/index.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
+import OtpBackupKeyConnector from '../../../connectors/componentConnectors/OtpBackupKeyConnector.js'
 import * as Styles from '../../../styles/index.js'
 import { EdgeLoginQr } from '../../abSpecific/EdgeLoginQrComponent.js'
 import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'

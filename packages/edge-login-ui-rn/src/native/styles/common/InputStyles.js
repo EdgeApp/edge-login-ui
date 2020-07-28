@@ -1,7 +1,7 @@
 // @flow
 
-import * as Colors from '../../../common/constants/Colors'
-import { scale } from '../../../common/util/scaling.js'
+import * as Colors from '../../../constants/Colors.js'
+import { scale } from '../../../util/scaling.js'
 
 const InputStyles = {
   container: {

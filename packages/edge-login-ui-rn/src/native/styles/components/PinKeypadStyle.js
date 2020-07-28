@@ -1,8 +1,8 @@
 // @flow
 
-import * as Constants from '../../../common/constants/'
-import { isIphoneX } from '../../../common/util/isIphoneX.js'
-import { scale } from '../../../common/util/scaling.js'
+import * as Constants from '../../../constants/index.js'
+import { isIphoneX } from '../../../util/isIphoneX.js'
+import { scale } from '../../../util/scaling.js'
 
 const PinKeypadStyle = {
   keypadContainer: {

@@ -1,6 +1,6 @@
 // @flow
 
-import * as Comstants from '../../../common/constants/'
+import * as Comstants from '../../../constants/index.js'
 
 export const EdgeLoginQrStyle = {
   container: {

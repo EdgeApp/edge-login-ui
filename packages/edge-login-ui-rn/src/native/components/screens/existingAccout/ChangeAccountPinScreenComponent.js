@@ -7,12 +7,12 @@ import { connect } from 'react-redux'
 import {
   changePIN,
   recoveryChangePIN
-} from '../../../../common/actions/ChangePasswordPinActions.js'
-import { recoveryLoginComplete } from '../../../../common/actions/LoginAction.js'
-import * as Constants from '../../../../common/constants/'
-import s from '../../../../common/locales/strings'
-import { scale } from '../../../../common/util/scaling.js'
+} from '../../../../actions/ChangePasswordPinActions.js'
+import { recoveryLoginComplete } from '../../../../actions/LoginAction.js'
+import s from '../../../../common/locales/strings.js'
+import * as Constants from '../../../../constants/index.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
+import { scale } from '../../../../util/scaling.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import * as Styles from '../../../styles/index.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'

@@ -3,9 +3,9 @@
 import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
-import { deleteUserFromDevice } from '../../../common/actions/UserActions.js'
-import * as Constants from '../../../common/constants'
+import { deleteUserFromDevice } from '../../../actions/UserActions.js'
 import s from '../../../common/locales/strings.js'
+import * as Constants from '../../../constants/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { MyModal } from '../common/index.js'
 

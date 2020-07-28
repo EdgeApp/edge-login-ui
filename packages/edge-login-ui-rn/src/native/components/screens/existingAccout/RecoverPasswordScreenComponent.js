@@ -9,12 +9,12 @@ import {
   cancelRecoverySettingsScene,
   changeRecoveryAnswers,
   deleteRecovery
-} from '../../../../common/actions/PasswordRecoveryActions.js'
-import * as Constants from '../../../../common/constants'
-import s from '../../../../common/locales/strings'
-import { isIphoneX } from '../../../../common/util/isIphoneX.js'
-import { scale } from '../../../../common/util/scaling.js'
+} from '../../../../actions/PasswordRecoveryActions.js'
+import s from '../../../../common/locales/strings.js'
+import * as Constants from '../../../../constants/index.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
+import { isIphoneX } from '../../../../util/isIphoneX.js'
+import { scale } from '../../../../util/scaling.js'
 import { FullScreenModal } from '../../../components/common/FullScreenModal.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import * as Styles from '../../../styles/index.js'

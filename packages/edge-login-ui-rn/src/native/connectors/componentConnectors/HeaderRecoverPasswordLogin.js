@@ -2,8 +2,8 @@
 
 import { connect } from 'react-redux'
 
-import * as Constants from '../../../common/constants'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
+import * as Constants from '../../../constants/index.js'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { Header } from '../../components/common/'
 
 const mapStateToProps = (state: RootState) => {

@@ -1,6 +1,6 @@
 // @flow
 
-import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
+import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 
 export function recoverPasswordLogin() {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {

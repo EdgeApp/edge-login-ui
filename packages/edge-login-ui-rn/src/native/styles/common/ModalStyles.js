@@ -1,8 +1,8 @@
 // @flow
 
 import * as Styles from '../'
-import * as Colors from '../../../common/constants/Colors.js'
-import { scale, scaleH } from '../../../common/util/scaling.js'
+import * as Colors from '../../../constants/Colors.js'
+import { scale, scaleH } from '../../../util/scaling.js'
 
 const ModalStyles = {
   modal: {},

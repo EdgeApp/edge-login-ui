@@ -1,6 +1,6 @@
 // @flow
 
-import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
+import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 import { getPreviousUsers } from './PreviousUsersActions.js'
 
 export function deleteUserFromDevice(data: string) {

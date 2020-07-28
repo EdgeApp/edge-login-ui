@@ -6,8 +6,8 @@ import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal'
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 
-import * as Constants from '../../../common/constants/index.js'
-import { scale } from '../../../common/util/scaling.js'
+import * as Constants from '../../../constants/index.js'
+import { scale } from '../../../util/scaling.js'
 import * as Styles from '../../styles/index.js'
 
 type Props = {

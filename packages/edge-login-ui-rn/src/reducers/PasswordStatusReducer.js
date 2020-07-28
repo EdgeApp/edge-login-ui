@@ -2,8 +2,8 @@
 
 import { type Reducer } from 'redux'
 
-import s from '../../common/locales/strings'
-import { type Action } from '../../types/ReduxTypes'
+import s from '../common/locales/strings.js'
+import { type Action } from '../types/ReduxTypes.js'
 
 export type PasswordStatusState = {
   +secondsToCrack: string,

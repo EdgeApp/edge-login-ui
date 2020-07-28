@@ -2,9 +2,9 @@
 
 import { type Reducer } from 'redux'
 
-import * as Constants from '../../common/constants'
-import s from '../../common/locales/strings.js'
-import { type Action } from '../../types/ReduxTypes'
+import s from '../common/locales/strings.js'
+import * as Constants from '../constants/index.js'
+import { type Action } from '../types/ReduxTypes.js'
 
 export type WorkflowState = {
   +currentKey: string,

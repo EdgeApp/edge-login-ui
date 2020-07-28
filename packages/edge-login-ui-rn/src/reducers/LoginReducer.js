@@ -3,8 +3,8 @@
 import type { EdgeAccount } from 'edge-core-js'
 import { type Reducer } from 'redux'
 
-import { type Action } from '../../types/ReduxTypes'
 import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
+import { type Action } from '../types/ReduxTypes.js'
 
 const flowHack: any = {}
 const defaultAccount: EdgeAccount = flowHack

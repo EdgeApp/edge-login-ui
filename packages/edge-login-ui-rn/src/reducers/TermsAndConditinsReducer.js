@@ -3,8 +3,8 @@
 import { type Reducer } from 'redux'
 import { sprintf } from 'sprintf-js'
 
-import s from '../../common/locales/strings.js'
-import { type Action } from '../../types/ReduxTypes'
+import s from '../common/locales/strings.js'
+import { type Action } from '../types/ReduxTypes.js'
 
 export type TermsState = {}
 

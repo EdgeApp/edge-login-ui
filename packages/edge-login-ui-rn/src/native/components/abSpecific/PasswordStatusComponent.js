@@ -5,7 +5,7 @@ import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 
 import s from '../../../common/locales/strings.js'
-import { type PasswordStatusState } from '../../../common/reducers/PasswordStatusReducer.js'
+import { type PasswordStatusState } from '../../../reducers/PasswordStatusReducer.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { PASSWORD_REQ_CHECKED, PASSWORD_REQ_UNCHECKED } from '../../assets'
 import { Checkbox } from '../common/Checkbox'

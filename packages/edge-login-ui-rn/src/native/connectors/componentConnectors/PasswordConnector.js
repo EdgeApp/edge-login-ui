@@ -2,9 +2,9 @@
 
 import { connect } from 'react-redux'
 
-import { validatePassword } from '../../../common/actions/CreateAccountActions.js'
+import { validatePassword } from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { FormField } from '../../components/common'
 
 type OwnProps = {

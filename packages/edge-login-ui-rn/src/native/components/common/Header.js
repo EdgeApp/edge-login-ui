@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
-import * as Colors from '../../../common/constants/Colors'
-import s from '../../../common/locales/strings'
-import T from '../../../native/components/common/FormattedText.js'
+import s from '../../../common/locales/strings.js'
+import * as Colors from '../../../constants/Colors.js'
+import T from '../../components/common/FormattedText.js'
 import { Button, HeaderBackButton } from '../common'
 
 type Props = {

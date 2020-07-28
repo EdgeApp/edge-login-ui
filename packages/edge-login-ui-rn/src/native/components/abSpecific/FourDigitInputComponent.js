@@ -10,9 +10,9 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
-import { validatePin } from '../../../common/actions/CreateAccountActions.js'
-import * as Constants from '../../../common/constants'
-import type { Dispatch, RootState } from '../../../types/ReduxTypes'
+import { validatePin } from '../../../actions/CreateAccountActions.js'
+import * as Constants from '../../../constants/index.js'
+import type { Dispatch, RootState } from '../../../types/ReduxTypes.js'
 import { Spinner } from '../common'
 
 type OwnProps = {

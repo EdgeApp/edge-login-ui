@@ -11,8 +11,8 @@ import {
 } from 'react-native'
 import Modal from 'react-native-modal'
 
-import * as Constants from '../../../common/constants/index.js'
-import { scale } from '../../../common/util/scaling.js'
+import * as Constants from '../../../constants/index.js'
+import { scale } from '../../../util/scaling.js'
 import * as Styles from '../../styles/index.js'
 import { Button, Icon, IconButton } from './'
 

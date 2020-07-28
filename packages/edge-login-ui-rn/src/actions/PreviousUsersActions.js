@@ -4,9 +4,9 @@ import type { DiskletFolder } from 'disklet'
 import { makeReactNativeDisklet } from 'disklet'
 import type { EdgeContext } from 'edge-core-js'
 
-import { isTouchEnabled } from '../../native/keychain'
-import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
-import { type LoginUserInfo } from '../reducers/PreviousUsersReducer'
+import { isTouchEnabled } from '../native/keychain.js'
+import { type LoginUserInfo } from '../reducers/PreviousUsersReducer.js'
+import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 
 function sortUserList(
   lastUsers: string[],

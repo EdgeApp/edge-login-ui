@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { Text } from 'react-native'
 
-import { scale } from '../../../common/util/scaling.js'
+import { scale } from '../../../util/scaling.js'
 
 type Props = {
   fontSize?: number,

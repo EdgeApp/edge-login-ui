@@ -10,17 +10,17 @@ import React from 'react'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import { sprintf } from 'sprintf-js'
 
+import s from '../common/locales/strings.js'
+import * as Constants from '../constants/index.js'
 import {
   enableTouchId,
   isTouchDisabled,
   isTouchEnabled,
   loginWithTouchId,
   supportsTouchId
-} from '../../native/keychain.js'
-import { OtpModalStyle as styles } from '../../native/styles'
-import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
-import * as Constants from '../constants'
-import s from '../locales/strings.js'
+} from '../native/keychain.js'
+import { OtpModalStyle as styles } from '../native/styles/index.js'
+import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 import { translateError } from '../util/ErrorMessageUtil.js'
 import { showModal } from '../util/ModalManager.js'
 

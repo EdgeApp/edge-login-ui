@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Image, Linking, Text, TouchableOpacity, View } from 'react-native'
 
 import s from '../../../common/locales/strings.js'
-import { scale } from '../../../common/util/scaling.js'
+import { scale } from '../../../util/scaling.js'
 import * as Assets from '../../assets/'
 
 type Props = {

@@ -3,8 +3,8 @@
 import React, { Component } from 'react'
 import { Image, Text, View } from 'react-native'
 
-import s from '../../../common/locales/strings'
-import { LOGO_DOT } from '../../../native/assets/'
+import s from '../../../common/locales/strings.js'
+import { LOGO_DOT } from '../../assets/'
 import { Button } from '../common'
 
 type Props = {

@@ -1,5 +1,5 @@
 // @flow
-import { scale } from '../../../common/util/scaling.js'
+import { scale } from '../../../util/scaling.js'
 
 export const LogoHeaderScaledStyle = {
   container: {

@@ -4,8 +4,8 @@ import moment from 'moment'
 import React, { Component } from 'react'
 import { Image, Text, View } from 'react-native'
 
-import * as Constants from '../../../common/constants/'
 import s from '../../../common/locales/strings.js'
+import * as Constants from '../../../constants/index.js'
 import { OTP_SMALL } from '../../assets/'
 
 type Props = {

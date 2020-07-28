@@ -8,11 +8,11 @@ import { connect } from 'react-redux'
 import {
   changePassword,
   recoveryChangePassword
-} from '../../../../common/actions/ChangePasswordPinActions.js'
-import { validateConfirmPassword } from '../../../../common/actions/CreateAccountActions.js'
+} from '../../../../actions/ChangePasswordPinActions.js'
+import { validateConfirmPassword } from '../../../../actions/CreateAccountActions.js'
 import s from '../../../../common/locales/strings.js'
-import { scale } from '../../../../common/util/scaling.js'
-import { type Dispatch, type RootState } from '../../../../types/ReduxTypes'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
+import { scale } from '../../../../util/scaling.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'

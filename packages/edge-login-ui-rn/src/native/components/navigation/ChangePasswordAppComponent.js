@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 
-import { WORKFLOW_PASSWORD } from '../../../common/constants'
+import { WORKFLOW_PASSWORD } from '../../../constants/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import * as Styles from '../../styles/index.js'
 import { ChangeAccountPasswordScreen } from '../screens/existingAccout/ChangeAccountPasswordScreenComponent.js'

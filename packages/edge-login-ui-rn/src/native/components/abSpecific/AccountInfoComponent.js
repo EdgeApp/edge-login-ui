@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 
-import * as Constants from '../../../common/constants/'
 import s from '../../../common/locales/strings.js'
+import * as Constants from '../../../constants/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { TextAndIconButton } from '../common'
 

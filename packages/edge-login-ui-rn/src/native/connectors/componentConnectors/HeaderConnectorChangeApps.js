@@ -2,8 +2,8 @@
 
 import { connect } from 'react-redux'
 
-import { cancel } from '../../../common/actions/WorkflowActions.js'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
+import { cancel } from '../../../actions/WorkflowActions.js'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { Header } from '../../components/common/'
 
 const mapStateToProps = (state: RootState) => {

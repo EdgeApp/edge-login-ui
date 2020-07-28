@@ -2,8 +2,8 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
-import * as Constants from '../../../../common/constants/'
-import s from '../../../../common/locales/strings'
+import s from '../../../../common/locales/strings.js'
+import * as Constants from '../../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { Button, Header } from '../../common/'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'

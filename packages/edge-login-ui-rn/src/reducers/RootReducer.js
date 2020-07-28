@@ -2,9 +2,9 @@
 
 import { type Reducer, combineReducers } from 'redux'
 
-import { type Action } from '../../types/ReduxTypes'
-import { type CreateState, create } from './CreateUserReducer'
-import { type LoginState, login } from './LoginReducer'
+import { type Action } from '../types/ReduxTypes.js'
+import { type CreateState, create } from './CreateUserReducer.js'
+import { type LoginState, login } from './LoginReducer.js'
 import {
   type PasswordRecoveryState,
   passwordRecovery

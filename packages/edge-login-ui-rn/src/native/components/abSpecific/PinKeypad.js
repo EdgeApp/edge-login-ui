@@ -5,7 +5,7 @@ import { Text, TouchableWithoutFeedback, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { connect } from 'react-redux'
 
-import { userLoginWithPin } from '../../../common/actions/LoginAction.js'
+import { userLoginWithPin } from '../../../actions/LoginAction.js'
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 

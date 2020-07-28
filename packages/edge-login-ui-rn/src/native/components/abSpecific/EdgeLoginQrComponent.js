@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 
-import { getEdgeLoginQrCode } from '../../../common/actions/LoginAction.js'
-import { EdgeLoginQrStyle } from '../../../native/styles'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
+import { getEdgeLoginQrCode } from '../../../actions/LoginAction.js'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { EdgeLoginQrStyle } from '../../styles/index.js'
 import { QrCode } from '../common/QrCode.js'
 
 type StateProps = {
