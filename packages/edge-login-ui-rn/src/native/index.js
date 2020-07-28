@@ -1,10 +1,10 @@
 // @flow
 
-export * from './components/exportAPIComponents/ChangePasswordScreen'
-export * from './components/exportAPIComponents/ChangePinScreen'
-export * from './components/exportAPIComponents/ChooseTestAppScreen'
-export * from './components/exportAPIComponents/LoginScreen'
-export * from './components/exportAPIComponents/PasswordRecoveryScreen'
+export * from './components/publicApi/ChangePasswordScreen.js'
+export * from './components/publicApi/ChangePinScreen.js'
+export * from './components/publicApi/ChooseTestAppScreen.js'
+export * from './components/publicApi/LoginScreen.js'
+export * from './components/publicApi/PasswordRecoveryScreen.js'
 
 export {
   isTouchEnabled,

@@ -12,11 +12,11 @@ import type { Store } from 'redux'
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
-import { updateFontStyles } from '../../../common/constants/Fonts'
+import { updateFontStyles } from '../../../common/constants/Fonts.js'
 import {
   type RootState,
   rootReducer
-} from '../../../common/reducers/RootReducer'
+} from '../../../common/reducers/RootReducer.js'
 import { checkingForOTP } from '../../../common/util/checkingForOTP.js'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
 import { LoginApp } from '../navigation/LogInAppComponent.js'

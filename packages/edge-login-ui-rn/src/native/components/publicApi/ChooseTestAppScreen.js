@@ -3,8 +3,8 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import * as Styles from '../../styles'
-import { Button } from '../common/Button'
+import * as Styles from '../../styles/index.js'
+import { Button } from '../common/Button.js'
 
 type Props = {
   onChangePassword(): void,

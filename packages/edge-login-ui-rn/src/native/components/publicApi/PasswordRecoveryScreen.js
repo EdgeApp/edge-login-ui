@@ -11,9 +11,9 @@ import thunk from 'redux-thunk'
 import {
   type RootState,
   rootReducer
-} from '../../../common/reducers/RootReducer'
+} from '../../../common/reducers/RootReducer.js'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import { ChangePasswordApp } from '../navigation/ChangePasswordAppComponent.js'
+import { PasswordRecoveryApp } from '../navigation/PasswordRecoveryAppComponent.js'
 
 type Props = {
   account: EdgeAccount,
@@ -23,22 +23,18 @@ type Props = {
   onCancel(): void
 }
 
-export class ChangePasswordScreen extends Component<Props> {
-  static defaultProps = {
-    showHeader: true
-  }
-
+export class PasswordRecoveryScreen extends Component<Props> {
   store: Store<RootState, Action>
 
   constructor(props: Props) {
     super(props)
     const imports: Imports = {
-      accountObject: this.props.account,
       accountOptions: {},
+      accountObject: this.props.account,
       context: this.props.context,
       folder: makeReactNativeFolder(),
-      onCancel: this.props.onComplete,
       onComplete: this.props.onComplete,
+      onCancel: this.props.onComplete,
       callback: () => {}
     }
     this.store = createStore(
@@ -48,10 +44,12 @@ export class ChangePasswordScreen extends Component<Props> {
     )
   }
 
+  componentWillReceiveProps(props: Props) {}
+
   render() {
     return (
       <Provider store={this.store}>
-        <ChangePasswordApp showHeader={this.props.showHeader} />
+        <PasswordRecoveryApp showHeader={this.props.showHeader} />
       </Provider>
     )
   }
