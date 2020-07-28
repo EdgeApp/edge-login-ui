@@ -19,7 +19,7 @@ import {
 } from '../../../common/reducers/RootReducer'
 import { checkingForOTP } from '../../../common/util/checkingForOTP.js'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import { LoginApp } from '../../components/LogInAppComponent'
+import { LoginApp } from '../navigation/LogInAppComponent.js'
 
 type Props = {
   accountOptions: EdgeAccountOptions,

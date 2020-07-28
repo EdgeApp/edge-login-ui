@@ -13,7 +13,7 @@ import {
   rootReducer
 } from '../../../common/reducers/RootReducer'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import { ChangePinApp } from '../ChangePinAppComponent'
+import { ChangePinApp } from '../navigation/ChangePinAppComponent.js'
 
 type Props = {
   account: EdgeAccount,

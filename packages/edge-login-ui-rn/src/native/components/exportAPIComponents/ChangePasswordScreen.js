@@ -13,7 +13,7 @@ import {
   rootReducer
 } from '../../../common/reducers/RootReducer'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import { ChangePasswordApp } from '../ChangePasswordAppComponent.js'
+import { ChangePasswordApp } from '../navigation/ChangePasswordAppComponent.js'
 
 type Props = {
   account: EdgeAccount,

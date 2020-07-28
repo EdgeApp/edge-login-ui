@@ -4,10 +4,10 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 
-import { WORKFLOW_PIN } from '../../common/constants'
-import { type Dispatch, type RootState } from '../../types/ReduxTypes'
-import { ChangeAccountPinScreen } from '../components/screens/existingAccout/ChangeAccountPinScreenComponent'
-import * as Styles from '../styles/index.js'
+import { WORKFLOW_PIN } from '../../../common/constants'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import * as Styles from '../../styles/index.js'
+import { ChangeAccountPinScreen } from '../screens/existingAccout/ChangeAccountPinScreenComponent.js'
 
 type OwnProps = {
   showHeader: boolean
