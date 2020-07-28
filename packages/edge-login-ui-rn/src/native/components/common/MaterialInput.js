@@ -30,7 +30,7 @@ type State = {
   inputText: string,
   autoFocus: boolean
 }
-class Input extends Component<Props, State> {
+export class MaterialInput extends Component<Props, State> {
   textInput: TextField
 
   constructor(props: Props) {
@@ -137,5 +137,3 @@ class Input extends Component<Props, State> {
     }
   }
 }
-
-export { Input }

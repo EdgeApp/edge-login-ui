@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 
-import { Input } from '../materialWrappers/indexMaterial'
+import { MaterialInput } from './MaterialInput.js'
 
 type Props = {
   style: Object,
@@ -53,7 +53,7 @@ class FormField extends Component<Props, State> {
       titleTextStyle
     } = this.props.style
     return (
-      <Input
+      <MaterialInput
         label={this.props.label}
         value={this.props.value}
         onChangeText={this.props.onChangeText}
