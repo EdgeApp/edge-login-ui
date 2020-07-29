@@ -6,7 +6,7 @@ import passwordCheck from 'zxcvbn'
 
 import s from '../common/locales/strings.js'
 import * as Constants from '../constants/index.js'
-import { enableTouchId, isTouchDisabled } from '../native/keychain.js'
+import { enableTouchId, isTouchDisabled } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 import { isASCII } from '../util/ASCIIUtil.js'
 import { setMostRecentUsers } from './LoginAction.js'

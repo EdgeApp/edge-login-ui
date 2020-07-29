@@ -4,7 +4,7 @@ import type { DiskletFolder } from 'disklet'
 import { makeReactNativeDisklet } from 'disklet'
 import type { EdgeContext } from 'edge-core-js'
 
-import { isTouchEnabled } from '../native/keychain.js'
+import { isTouchEnabled } from '../keychain.js'
 import { type LoginUserInfo } from '../reducers/PreviousUsersReducer.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 

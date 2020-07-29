@@ -18,8 +18,8 @@ import {
   isTouchEnabled,
   loginWithTouchId,
   supportsTouchId
-} from '../native/keychain.js'
-import { OtpModalStyle as styles } from '../native/styles/index.js'
+} from '../keychain.js'
+import { OtpModalStyle as styles } from '../styles/index.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 import { translateError } from '../util/ErrorMessageUtil.js'
 import { showModal } from '../util/ModalManager.js'
