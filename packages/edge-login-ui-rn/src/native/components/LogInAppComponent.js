@@ -2,47 +2,53 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 
+import { getPreviousUsers } from '../../common/actions/PreviousUsersActions.js'
 import * as Constants from '../../common/constants'
-import { ModalManager as ModalManagerLogin } from '../../common/util'
-import LoginWithRecoveryQuestionsSceenConnector from '../connectors/screens/existingAccount/LoginWithRecoveryQuestionsSceenConnector'
-import OtpErrorScreenConnector from '../connectors/screens/existingAccount/OtpErrorScreenConnector'
-import LandingScreenConnector from '../connectors/screens/LandingScreenConnector'
-import LoadingScreenConnector from '../connectors/screens/LoadingScreenConnector'
-import LoginUsernamePasswordScreenConnector from '../connectors/screens/LogInUsernamePasswordScreenConnector'
-import NewAccountPasswordScreenConnector from '../connectors/screens/newAccount/NewAccountPasswordScreenConnector'
-import NewAccountReviewScreenConnector from '../connectors/screens/newAccount/NewAccountReviewScreenConnector'
-import NewAccountUsernameScreenConnector from '../connectors/screens/newAccount/NewAccountUsernameScreenConnector'
-import NewAccountWelcomeScreenConnector from '../connectors/screens/newAccount/NewAccountWelcomeScreenConnector'
-import NewAccountPinScreenConnector from '../connectors/screens/newAccount/SetAccountPinScreenConnector'
-import TermsAndConditionsScreenConnector from '../connectors/screens/newAccount/TermsAndConditionsScreenConnector'
-import PinLoginScreenConnector from '../connectors/screens/PinLoginScreenConnector'
+import {
+  type LoginUserInfo,
+  type PreviousUsersState
+} from '../../common/reducers/PreviousUsersReducer.js'
+import { type WorkflowState } from '../../common/reducers/WorkflowReducer.js'
+import { ModalManager as ModalManagerLogin } from '../../common/util/ModalManager.js'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { getSupportedBiometryType } from '../keychain.js'
-import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAccountPasswordScreenComponent'
-import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent'
-import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent'
+import { ForgotPasswordChangePassword } from './screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
+import { ForgotPinChangePinScene } from './screens/existingAccout/ChangeAccountPinScreenComponent.js'
+import { LoginWithRecoveryQuestionsScreen } from './screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent.js'
+import { OtpErrorScreen } from './screens/existingAccout/OtpErrorScreenComponent.js'
+import { LandingScreen } from './screens/LandingScreenComponent.js'
+import { LoadingScreen } from './screens/LoadingScreenComponent.js'
+import { LoginUsernamePasswordScreen } from './screens/LoginUsernamePasswordScreenComponent.js'
+import { CreatingAccountWaitScreen } from './screens/newAccount/CreatingAccountWaitScreenComponent.js'
+import { NewAccountPasswordScreen } from './screens/newAccount/NewAccountPasswordScreenComponent.js'
+import { NewAccountReviewScreen } from './screens/newAccount/NewAccountReviewScreenComponent.js'
+import { NewAccountUsernameScreen } from './screens/newAccount/NewAccountUsernameScreenComponent.js'
+import { NewAccountWelcomeScreen } from './screens/newAccount/NewAccountWelcomeScreenComponent.js'
+import { SetAccountPinScreen } from './screens/newAccount/SetAccountPinScreenComponent.js'
+import { TermsAndConditionsScreen } from './screens/newAccount/TermsAndConditionsScreenComponent.js'
+import { PinLoginScreen } from './screens/PinLogInScreenComponent.js'
 
-export type StateProps = {
-  workflow: Object,
-  recoveryLogin: string,
-  previousUsers: ?Object,
-  lastUser: Object,
-  lastUserPinEnabled: boolean,
-  lastUserTouchEnabled: boolean,
+type OwnProps = {
   appId?: string,
   appName?: string,
   backgroundImage?: any,
+  landingScreenText?: string,
+  parentButton?: Object,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
-  parentButton?: Object,
-  landingScreenText?: string
-}
-export type OwnProps = {
+  recoveryLogin?: string,
   styles: Object
 }
-export type DispatchProps = {
+type StateProps = {
+  lastUser?: LoginUserInfo,
+  previousUsers: PreviousUsersState,
+  workflow: WorkflowState
+}
+type DispatchProps = {
   getPreviousUsers(): void,
-  startRecoveryWorkflow(string): void
+  startRecoveryWorkflow(backupKey: string): void
 }
 type State = {
   touch: string | boolean
@@ -50,7 +56,7 @@ type State = {
 
 type Props = StateProps & OwnProps & DispatchProps
 
-export class LoginAppComponent extends Component<Props, State> {
+class LoginAppComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -91,10 +97,10 @@ export class LoginAppComponent extends Component<Props, State> {
         }
         if (this.props.lastUser) {
           // we have previous users, a last user, and that user has pin or touch enabled.
-          if (this.props.lastUserPinEnabled) {
+          if (this.props.lastUser.pinEnabled) {
             return this.getPinScreen()
           }
-          if (this.props.lastUserTouchEnabled && this.state.touch) {
+          if (this.props.lastUser.touchEnabled && this.state.touch) {
             return this.getPinScreen()
           }
         }
@@ -125,7 +131,7 @@ export class LoginAppComponent extends Component<Props, State> {
 
   getLoadingScreen() {
     return (
-      <LoadingScreenConnector
+      <LoadingScreen
         styles={this.props.styles}
         backgroundImage={this.props.backgroundImage}
       />
@@ -134,7 +140,7 @@ export class LoginAppComponent extends Component<Props, State> {
 
   getLandingScreen() {
     return (
-      <LandingScreenConnector
+      <LandingScreen
         styles={this.props.styles}
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
@@ -150,41 +156,41 @@ export class LoginAppComponent extends Component<Props, State> {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
         return (
-          <NewAccountWelcomeScreenConnector
+          <NewAccountWelcomeScreen
             styles={this.props.styles}
             appName={this.props.appName}
           />
         ) // NewAccountWelcomeScreenConnector
       case 1:
         return (
-          <NewAccountUsernameScreenConnector
+          <NewAccountUsernameScreen
             styles={this.props.styles}
             appName={this.props.appName}
           />
         )
       case 2:
-        return <NewAccountPasswordScreenConnector styles={this.props.styles} />
+        return <NewAccountPasswordScreen styles={this.props.styles} />
       case 3:
-        return <NewAccountPinScreenConnector styles={this.props.styles} />
+        return <SetAccountPinScreen styles={this.props.styles} />
       case 4:
         return <CreatingAccountWaitScreen styles={this.props.styles} />
       case 5:
-        return <NewAccountReviewScreenConnector styles={this.props.styles} />
+        return <NewAccountReviewScreen styles={this.props.styles} />
       case 6:
         return (
-          <TermsAndConditionsScreenConnector
+          <TermsAndConditionsScreen
             styles={this.props.styles}
             appName={this.props.appName}
           />
         )
       default:
-        return <NewAccountWelcomeScreenConnector styles={this.props.styles} />
+        return <NewAccountWelcomeScreen styles={this.props.styles} />
     }
   }
 
   getPasswordScreen() {
     return (
-      <LoginUsernamePasswordScreenConnector
+      <LoginUsernamePasswordScreen
         styles={this.props.styles}
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
@@ -198,7 +204,7 @@ export class LoginAppComponent extends Component<Props, State> {
 
   getPinScreen() {
     return (
-      <PinLoginScreenConnector
+      <PinLoginScreen
         styles={this.props.styles}
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
@@ -211,17 +217,13 @@ export class LoginAppComponent extends Component<Props, State> {
   }
 
   getOtpScreen() {
-    return <OtpErrorScreenConnector styles={this.props.styles} />
+    return <OtpErrorScreen styles={this.props.styles} />
   }
 
   getRecoveryLoginScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return (
-          <LoginWithRecoveryQuestionsSceenConnector
-            styles={this.props.styles}
-          />
-        )
+        return <LoginWithRecoveryQuestionsScreen styles={this.props.styles} />
       case 1:
         return <ForgotPasswordChangePassword styles={this.props.styles} />
       case 2:
@@ -243,3 +245,19 @@ export class LoginAppComponent extends Component<Props, State> {
     }
   }
 }
+
+export const LoginApp = connect(
+  (state: RootState): StateProps => ({
+    lastUser: state.previousUsers.lastUser,
+    previousUsers: state.previousUsers,
+    workflow: state.workflow
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    getPreviousUsers() {
+      dispatch(getPreviousUsers())
+    },
+    startRecoveryWorkflow(backupKey) {
+      dispatch({ type: 'SET_RECOVERY_KEY', data: backupKey })
+    }
+  })
+)(LoginAppComponent)

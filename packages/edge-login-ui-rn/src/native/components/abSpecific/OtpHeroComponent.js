@@ -11,7 +11,7 @@ import { OTP_SMALL } from '../../assets/'
 type Props = {
   screen: string,
   style: Object,
-  otpResetDate: string
+  otpResetDate: Date | null
 }
 
 type State = {
@@ -59,12 +59,16 @@ class OtpHeroComponent extends Component<Props, State> {
   }
 
   renderBodyCopy() {
-    if (this.state.screen === Constants.OTP_SCREEN_ONE) {
+    const { otpResetDate } = this.props
+    if (
+      this.state.screen === Constants.OTP_SCREEN_ONE ||
+      otpResetDate == null
+    ) {
       return 'Scan the QR code using the device that enabled 2FA to give access to this device'
     }
     return (
       "If you don't take any action, 2FA will be \ndisabled on " +
-      moment(this.props.otpResetDate).format('LLL')
+      moment(otpResetDate).format('LLL')
     )
   }
 

@@ -21,7 +21,8 @@ import { OtpModalStyle as styles } from '../../native/styles'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import s from '../locales/strings.js'
-import { showModal, translateError } from '../util'
+import { translateError } from '../util/ErrorMessageUtil.js'
+import { showModal } from '../util/ModalManager.js'
 
 /**
  * Make it Thunky

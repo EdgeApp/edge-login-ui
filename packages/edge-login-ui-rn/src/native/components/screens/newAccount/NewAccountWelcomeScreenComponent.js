@@ -2,27 +2,32 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
+import * as Constants from '../../../../common/constants'
 import s from '../../../../common/locales/strings'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import * as Assets from '../../../assets'
 import T from '../../../components/common/FormattedText.js'
 import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
 import { Button, HeaderBackButton } from '../../common'
 import SafeAreaView from '../../common/SafeAreaView.js'
 
-type Props = {
+type OwnProps = {
   styles: Object,
-  nextScreen(): void,
-  exitScreen(): void,
   appName: string
 }
+type StateProps = {}
+type DispatchProps = {
+  exitScreen(): void,
+  nextScreen(): void
+}
+type Props = OwnProps & StateProps & DispatchProps
 
 type State = {}
-export default class NewAccountWelcomeScreenComponent extends Component<
-  Props,
-  State
-> {
+
+class NewAccountWelcomeScreenComponent extends Component<Props, State> {
   render() {
     const { NewAccountWelcomeScreenStyle } = this.props.styles
 
@@ -72,10 +77,18 @@ export default class NewAccountWelcomeScreenComponent extends Component<
       </SafeAreaView>
     )
   }
-  /* onNextPress () {
-    this.props.nextScreen()
-  }* /
-  /* onExitPress = () =>  {
-    this.props.exitScreen()
-  } */
 }
+
+export const NewAccountWelcomeScreen = connect(
+  (state: RootState): StateProps => ({}),
+  (dispatch: Dispatch): DispatchProps => ({
+    exitScreen() {
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_INIT })
+    },
+    nextScreen() {
+      global.firebase &&
+        global.firebase.analytics().logEvent(`Signup_Welcome_Next`)
+      dispatch({ type: 'WORKFLOW_NEXT' })
+    }
+  })
+)(NewAccountWelcomeScreenComponent)

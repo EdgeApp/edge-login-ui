@@ -8,9 +8,9 @@ import { enableTouchId, isTouchDisabled } from '../../native/keychain.js'
 import type { Dispatch, GetState, Imports } from '../../types/ReduxTypes'
 import * as Constants from '../constants'
 import s from '../locales/strings.js'
-import { isASCII } from '../util'
-import { getPreviousUsers } from './'
-import { setMostRecentUsers } from './LoginAction'
+import { isASCII } from '../util/ASCIIUtil.js'
+import { setMostRecentUsers } from './LoginAction.js'
+import { getPreviousUsers } from './PreviousUsersActions.js'
 
 export function validatePin(data: Object) {
   const pin = data.pin

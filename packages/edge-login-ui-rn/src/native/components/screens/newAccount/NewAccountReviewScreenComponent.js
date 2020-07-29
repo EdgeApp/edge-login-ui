@@ -2,18 +2,25 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { connect } from 'react-redux'
 
 import s from '../../../../common/locales/strings'
-import AccountInfoContainer from '../../../connectors/abSpecific/AccountInfoConnector'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import { AccountInfo } from '../../abSpecific/AccountInfoComponent.js'
 import { Button, WarningBox } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type Props = {
-  styles: Object,
+type OwnProps = {
+  styles: Object
+}
+type StateProps = {}
+type DispatchProps = {
   nextScreen(): void
 }
-export default class NewAccountReviewScreenComponent extends Component<Props> {
+type Props = OwnProps & StateProps & DispatchProps
+
+class NewAccountReviewScreenComponent extends Component<Props> {
   render() {
     const { NewAccountReviewScreenStyle } = this.props.styles
     return (
@@ -33,7 +40,7 @@ export default class NewAccountReviewScreenComponent extends Component<Props> {
               />
             </View>
             <View style={NewAccountReviewScreenStyle.detailsContainer}>
-              <AccountInfoContainer
+              <AccountInfo
                 style={NewAccountReviewScreenStyle.accountDetailsBox}
               />
               <View style={NewAccountReviewScreenStyle.shim} />
@@ -60,3 +67,12 @@ export default class NewAccountReviewScreenComponent extends Component<Props> {
     this.props.nextScreen()
   }
 }
+
+export const NewAccountReviewScreen = connect(
+  (state: RootState): StateProps => ({}),
+  (dispatch: Dispatch): DispatchProps => ({
+    nextScreen() {
+      dispatch({ type: 'WORKFLOW_NEXT' })
+    }
+  })
+)(NewAccountReviewScreenComponent)

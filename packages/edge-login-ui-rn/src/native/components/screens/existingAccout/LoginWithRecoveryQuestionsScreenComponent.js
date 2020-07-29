@@ -2,30 +2,37 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { connect } from 'react-redux'
 
+import { loginWithRecovery } from '../../../../common/actions/LoginAction.js'
+import { getRecoveryQuestions } from '../../../../common/actions/PasswordRecoveryActions.js'
 import s from '../../../../common/locales/strings'
 import SetRecoveryUsernameModalConnector from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
 import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
 import { Button, FormField, StaticModal } from '../../common/'
 import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
 
-type Props = {
+type OwnProps = {
   styles: Object,
+  showHeader: boolean
+}
+type StateProps = {
+  loginError: string,
   question1: string,
   question2: string,
-  showHeader: boolean,
-  submitButton: string,
   showRecoverSuccessDialog: boolean,
-  loginError: string,
-  updateUsername(string): void,
-  deleteRecovery(): void,
-  onCancel(): void,
-  cancel(): void,
-  submit(Array<string>): void,
-  getQuestions(): void,
-  changePassword(): void
+  submitButton: string
 }
+type DispatchProps = {
+  changePassword(): void,
+  getQuestions(): void,
+  onCancel(): void,
+  submit(Array<string>): void,
+  updateUsername(string): void
+}
+type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
   question1: string,
@@ -42,7 +49,11 @@ type State = {
   disableConfirmationModal: boolean,
   showUsernameModal: boolean
 }
-export default class PasswordRecovery extends Component<Props, State> {
+
+class LoginWithRecoveryQuestionsScreenComponent extends Component<
+  Props,
+  State
+> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -68,17 +79,6 @@ export default class PasswordRecovery extends Component<Props, State> {
       return <HeaderConnector style={style.header} />
     }
     return null
-  }
-
-  onDisable = () => {
-    this.props.deleteRecovery()
-    this.setState({
-      disableConfirmationModal: true
-    })
-  }
-
-  onDisableModalClose = () => {
-    this.props.cancel()
   }
 
   onSubmit = () => {
@@ -229,3 +229,37 @@ export default class PasswordRecovery extends Component<Props, State> {
     )
   }
 }
+
+export const LoginWithRecoveryQuestionsScreen = connect(
+  (state: RootState): StateProps => ({
+    loginError: state.login.errorMessage || '',
+    question1:
+      state.passwordRecovery.userQuestions.length > 0
+        ? state.passwordRecovery.userQuestions[0]
+        : s.strings.choose_recovery_question,
+    question2:
+      state.passwordRecovery.userQuestions.length > 1
+        ? state.passwordRecovery.userQuestions[1]
+        : s.strings.choose_recovery_question,
+    showHeader: true,
+    showRecoverSuccessDialog: state.login.showRecoverSuccessDialog,
+    submitButton: s.strings.submit
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    changePassword() {
+      dispatch({ type: 'WORKFLOW_NEXT' })
+    },
+    getQuestions() {
+      dispatch(getRecoveryQuestions())
+    },
+    onCancel() {
+      dispatch({ type: 'CANCEL_RECOVERY_KEY' })
+    },
+    submit(answers: Array<string>) {
+      dispatch(loginWithRecovery(answers))
+    },
+    updateUsername(username: string) {
+      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username })
+    }
+  })
+)(LoginWithRecoveryQuestionsScreenComponent)

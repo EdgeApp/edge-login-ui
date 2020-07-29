@@ -2,22 +2,22 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 
+import { WORKFLOW_PASSWORD } from '../../common/constants'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes'
 import { ChangeAccountPasswordScreen } from './screens/existingAccout/ChangeAccountPasswordScreenComponent'
 
-export type OwnProps = {
+type OwnProps = {
   styles: Object,
   showHeader: boolean
 }
-export type StateProps = {
-  workflow: Object
-}
-export type DispatchProps = {
+type DispatchProps = {
   setWorkflow(): void
 }
-type Props = OwnProps & DispatchProps & StateProps
+type Props = OwnProps & DispatchProps
 
-export default class ChangePasswordAppComponent extends Component<Props> {
+class ChangePasswordAppComponent extends Component<Props> {
   constructor(props: Props) {
     super(props)
     this.props.setWorkflow()
@@ -35,3 +35,12 @@ export default class ChangePasswordAppComponent extends Component<Props> {
     )
   }
 }
+
+export const ChangePasswordApp = connect(
+  (state: RootState) => ({}),
+  (dispatch: Dispatch): DispatchProps => ({
+    setWorkflow() {
+      dispatch({ type: 'WORKFLOW_START', data: WORKFLOW_PASSWORD })
+    }
+  })
+)(ChangePasswordAppComponent)

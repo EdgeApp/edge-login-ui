@@ -1,6 +1,7 @@
 // @flow
 
 import { makeReactNativeFolder } from 'disklet'
+import { type EdgeAccount, type EdgeContext } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
@@ -12,23 +13,20 @@ import {
   rootReducer
 } from '../../../common/reducers/RootReducer'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import PasswordRecoveryConnector from '../../connectors/PasswordRecoveryConnector'
 import * as Styles from '../../styles'
+import { PasswordRecoveryApp } from '../PasswordRecoveryAppComponent.js'
 
 type Props = {
-  account: any,
-  context: any,
+  account: EdgeAccount,
+  context: EdgeContext,
   showHeader: boolean,
   onComplete(): void,
   onCancel(): void
 }
 
-class PasswordRecoveryScreen extends Component<Props> {
-  static defaultProps = {
-    account: null
-  }
-
+export class PasswordRecoveryScreen extends Component<Props> {
   store: Store<RootState, Action>
+
   constructor(props: Props) {
     super(props)
     const imports: Imports = {
@@ -52,9 +50,7 @@ class PasswordRecoveryScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <PasswordRecoveryConnector
-          accountObject={this.props.account}
-          context={this.props.context}
+        <PasswordRecoveryApp
           styles={Styles}
           showHeader={this.props.showHeader}
         />
@@ -62,5 +58,3 @@ class PasswordRecoveryScreen extends Component<Props> {
     )
   }
 }
-
-export { PasswordRecoveryScreen }

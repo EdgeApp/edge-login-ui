@@ -2,7 +2,7 @@
 
 import * as Styles from '../'
 import * as Constants from '../../../common/constants/'
-import { scale, scaleH } from '../../../common/util'
+import { scale, scaleH } from '../../../common/util/scaling.js'
 
 const PinLoginScreenStyle = {
   container: Styles.ScreenStyle,

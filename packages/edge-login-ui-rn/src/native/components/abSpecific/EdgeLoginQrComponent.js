@@ -2,18 +2,24 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 
+import { getEdgeLoginQrCode } from '../../../common/actions/LoginAction.js'
+import { EdgeLoginQrStyle } from '../../../native/styles'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { QrCode } from '../common/QrCode.js'
 
-type Props = {
-  style: Object,
+type StateProps = {
   edgeLoginId: string,
-  getQrCode(): void,
-  cancelEdgeLogin(): void,
-  cancelRequest(): void
+  cancelEdgeLogin(): void
 }
+type DispatchProps = {
+  cancelRequest(): void,
+  getQrCode(): void
+}
+type Props = StateProps & DispatchProps
 
-export class EdgeLoginQrComponent extends Component<Props> {
+class EdgeLoginQrComponent extends Component<Props> {
   componentDidMount() {
     this.props.getQrCode()
   }
@@ -24,7 +30,8 @@ export class EdgeLoginQrComponent extends Component<Props> {
   }
 
   render() {
-    const { style, edgeLoginId } = this.props
+    const style = EdgeLoginQrStyle
+    const { edgeLoginId } = this.props
     const { qrCodeSize, qrCodeForeground, qrCodeBackground } = style
 
     return (
@@ -41,3 +48,18 @@ export class EdgeLoginQrComponent extends Component<Props> {
     )
   }
 }
+
+export const EdgeLoginQr = connect(
+  (state: RootState) => ({
+    edgeLoginId: state.login.edgeLoginId,
+    cancelEdgeLogin: state.login.cancelEdgeLoginRequest
+  }),
+  (dispatch: Dispatch) => ({
+    cancelRequest() {
+      dispatch({ type: 'CANCEL_EDGE_LOGIN_REQUEST' })
+    },
+    getQrCode() {
+      dispatch(getEdgeLoginQrCode())
+    }
+  })
+)(EdgeLoginQrComponent)

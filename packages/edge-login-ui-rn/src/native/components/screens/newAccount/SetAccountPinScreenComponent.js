@@ -2,22 +2,30 @@
 
 import React, { Component } from 'react'
 import { Alert, Text, View } from 'react-native'
+import { connect } from 'react-redux'
 
+import { createUser } from '../../../../common/actions/CreateAccountActions.js'
 import s from '../../../../common/locales/strings'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type Props = {
-  styles: Object,
+type OwnProps = {
+  styles: Object
+}
+type StateProps = {
+  createErrorMessage: string | null,
   password: string,
-  username: string,
   pin: string,
   pinError: string | null,
-  createErrorMessage: string | null,
-  createUser(Object): void
+  username: string
 }
+type DispatchProps = {
+  createUser(data: Object): void
+}
+type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
   username: string,
@@ -26,10 +34,8 @@ type State = {
   isProcessing: boolean,
   focusOn: string
 }
-export default class SetAccountPinScreenComponent extends Component<
-  Props,
-  State
-> {
+
+class SetAccountPinScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -114,3 +120,19 @@ export default class SetAccountPinScreenComponent extends Component<
     })
   }
 }
+
+export const SetAccountPinScreen = connect(
+  (state: RootState): StateProps => ({
+    createErrorMessage: state.create.createErrorMessage,
+    password: state.create.password || '',
+    pin: state.create.pin,
+    pinError: state.create.pinError,
+    username: state.create.username || ''
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    createUser(data: Object) {
+      dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
+      dispatch(createUser(data))
+    }
+  })
+)(SetAccountPinScreenComponent)

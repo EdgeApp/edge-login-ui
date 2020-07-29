@@ -2,16 +2,17 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { connect } from 'react-redux'
 
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import * as Assets from '../../assets/'
-import { LogoImageHeader } from '../abSpecific'
+import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { BackgroundImage, Button, HeaderParentButtons } from '../common'
 
-type Props = {
+type OwnProps = {
   styles: Object,
-  startFlow(string): void,
   appId?: string,
   backgroundImage?: any,
   primaryLogo?: any,
@@ -19,9 +20,12 @@ type Props = {
   parentButton?: Object,
   landingScreenText?: string
 }
+type DispatchProps = {
+  startFlow(string): void
+}
+type Props = OwnProps & DispatchProps
 
-type State = {}
-export default class LandingScreenComponent extends Component<Props, State> {
+class LandingScreenComponent extends Component<Props> {
   render() {
     const { LandingScreenStyle } = this.props.styles
     return (
@@ -92,3 +96,12 @@ export default class LandingScreenComponent extends Component<Props, State> {
     this.props.startFlow(Constants.WORKFLOW_PASSWORD)
   }
 }
+
+export const LandingScreen = connect(
+  (state: RootState) => ({}),
+  (dispatch: Dispatch): DispatchProps => ({
+    startFlow(data: string) {
+      dispatch({ type: 'WORKFLOW_START', data: data })
+    }
+  })
+)(LandingScreenComponent)

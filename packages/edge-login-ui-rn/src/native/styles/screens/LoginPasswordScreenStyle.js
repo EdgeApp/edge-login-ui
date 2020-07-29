@@ -2,7 +2,7 @@
 
 import * as Styles from '../'
 import * as Constants from '../../../common/constants/'
-import { scale } from '../../../common/util'
+import { scale } from '../../../common/util/scaling.js'
 
 const LoginPasswordScreenStyle = {
   container: Styles.ScreenStyle,

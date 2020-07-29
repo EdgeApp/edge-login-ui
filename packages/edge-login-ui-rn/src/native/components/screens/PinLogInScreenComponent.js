@@ -2,13 +2,17 @@
 
 import React, { Component } from 'react'
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { connect } from 'react-redux'
 
+import { userLoginWithTouchId } from '../../../common/actions/LoginAction.js'
+import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
 import { type LoginUserInfo } from '../../../common/reducers/PreviousUsersReducer.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
-import PinKeypadConnector from '../../../native/connectors/abSpecific/PinKeypadConnector'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import * as Assets from '../../assets/'
-import { LogoImageHeader, UserListItem } from '../../components/abSpecific'
+import { LogoImageHeader } from '../../components/abSpecific/LogoImageHeader.js'
+import { UserListItem } from '../../components/abSpecific/UserListItem.js'
 import {
   BackgroundImage,
   Button,
@@ -16,34 +20,42 @@ import {
   HeaderParentButtons,
   ImageButton
 } from '../../components/common'
-import FourDigitConnector from '../../connectors/abSpecific/FourDigitConnector'
+import { FourDigit } from '../abSpecific/FourDigitComponent.js'
+import { PinKeypad } from '../abSpecific/PinKeypad.js'
 
-type Props = {
+type OwnProps = {
   styles: Object,
-  username: string,
-  userDetails: Object,
-  userList: Array<LoginUserInfo>,
-  touch: boolean | string,
-  loginSuccess: boolean,
-  launchUserLoginWithTouchId(Object): void,
-  changeUser(string): void,
-  launchDeleteModal(): void,
-  gotoLoginPage(): void,
-  isTouchIdDisabled: boolean,
   appId?: string,
   backgroundImage?: any,
+  parentButton?: Object,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
-  parentButton?: Object,
-  showModal: boolean
+  touch: boolean | string
 }
+type StateProps = {
+  isTouchIdDisabled: boolean,
+  loginSuccess: boolean,
+  showModal: boolean,
+  userDetails: Object,
+  userList: Array<LoginUserInfo>,
+  username: string
+}
+type DispatchProps = {
+  changeUser(string): void,
+  gotoLoginPage(): void,
+  launchDeleteModal(): void,
+  launchUserLoginWithTouchId(Object): void
+}
+type Props = OwnProps & StateProps & DispatchProps
+
 type State = {
   loggingIn: boolean,
   pin: string,
   username: string,
   focusOn: string
 }
-export default class PinLogInScreenComponent extends Component<Props, State> {
+
+class PinLogInScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -119,7 +131,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
         </TouchableWithoutFeedback>
         <View style={PinLoginScreenStyle.spacer_full} />
         {this.props.userDetails.pinEnabled && (
-          <PinKeypadConnector style={PinLoginScreenStyle.keypad} />
+          <PinKeypad style={PinLoginScreenStyle.keypad} />
         )}
       </View>
     )
@@ -138,7 +150,7 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
             upTextStyle={style.usernameButton.upTextStyle}
           />
           {this.props.userDetails.pinEnabled && (
-            <FourDigitConnector style={style.fourPin} />
+            <FourDigit style={style.fourPin} />
           )}
           {!this.props.userDetails.pinEnabled && <View style={style.spacer} />}
           {this.renderTouchImage()}
@@ -254,3 +266,38 @@ export default class PinLogInScreenComponent extends Component<Props, State> {
     return ''
   }
 }
+
+export const PinLoginScreen = connect(
+  (state: RootState): StateProps => ({
+    isTouchIdDisabled:
+      state.login.loginSuccess ||
+      !!state.login.wait ||
+      state.login.isLoggingInWithPin ||
+      (state.login.pin ? state.login.pin.length : 0) === 4,
+    loginSuccess: state.login.loginSuccess,
+    showModal: state.workflow.showModal,
+    userDetails: state.previousUsers.userList.find(
+      user => user.username === state.login.username
+    ) || {
+      username: state.login.username,
+      isPinEnabled: false,
+      isTouchIdEnabled: false
+    },
+    userList: state.previousUsers.userList,
+    username: state.login.username
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    changeUser: (data: string) => {
+      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data })
+    },
+    gotoLoginPage: () => {
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PASSWORD })
+    },
+    launchDeleteModal: () => {
+      dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' })
+    },
+    launchUserLoginWithTouchId: (data: Object) => {
+      dispatch(userLoginWithTouchId(data))
+    }
+  })
+)(PinLogInScreenComponent)

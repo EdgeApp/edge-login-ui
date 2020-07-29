@@ -11,6 +11,7 @@ import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 type Props = {
   styles: Object
 }
+
 export class CreatingAccountWaitScreen extends Component<Props> {
   render() {
     const { CreatingAccountWaitScreenStyle } = this.props.styles

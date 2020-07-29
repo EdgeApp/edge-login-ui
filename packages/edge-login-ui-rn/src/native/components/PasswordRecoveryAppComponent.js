@@ -2,10 +2,13 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 
-import RecoverPasswordScreenConnector from '../connectors/screens/existingAccount/RecoverPasswordScreenConnector'
+import { initializePasswordRecovery } from '../../common/actions/PasswordRecoveryActions.js'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { RecoverPasswordScreen } from './screens/existingAccout/RecoverPasswordScreenComponent.js'
 
-export type OwnProps = {
+type OwnProps = {
   styles: Object,
   showHeader: boolean
 }
@@ -14,7 +17,7 @@ type DispatchProps = {
 }
 type Props = OwnProps & DispatchProps
 
-export default class PasswordRecoveryAppComponent extends Component<Props> {
+class PasswordRecoveryAppComponent extends Component<Props> {
   constructor(props: Props) {
     super(props)
     this.props.initializePasswordRecovery()
@@ -24,7 +27,7 @@ export default class PasswordRecoveryAppComponent extends Component<Props> {
     const { ScreenStyle } = this.props.styles
     return (
       <View style={ScreenStyle} accessible>
-        <RecoverPasswordScreenConnector
+        <RecoverPasswordScreen
           styles={this.props.styles}
           showHeader={this.props.showHeader}
         />
@@ -32,3 +35,12 @@ export default class PasswordRecoveryAppComponent extends Component<Props> {
     )
   }
 }
+
+export const PasswordRecoveryApp = connect(
+  (state: RootState) => ({}),
+  (dispatch: Dispatch) => ({
+    initializePasswordRecovery() {
+      dispatch(initializePasswordRecovery())
+    }
+  })
+)(PasswordRecoveryAppComponent)

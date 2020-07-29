@@ -1,7 +1,7 @@
 // @flow
 
 import * as Constants from '../../../common/constants'
-import { scale } from '../../../common/util'
+import { scale } from '../../../common/util/scaling.js'
 
 const ListItemTextOnly = {
   container: {

@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../common/actions'
+import { validateConfirmPassword } from '../../../common/actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { FormField } from '../../components/common'
@@ -35,8 +35,7 @@ export const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
   return {
-    onChangeText: (data: string) =>
-      dispatch(actions.validateConfirmPassword(data)),
+    onChangeText: (data: string) => dispatch(validateConfirmPassword(data)),
     onSubmitEditing: ownProps.onFinish
   }
 }

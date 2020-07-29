@@ -3,10 +3,18 @@
 import React, { Component } from 'react'
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { connect } from 'react-redux'
 
-import * as Constants from '../../../common/constants'
+import {
+  userLogin,
+  userLoginWithTouchId
+} from '../../../common/actions/LoginAction.js'
+import { recoverPasswordLogin } from '../../../common/actions/PasswordRecoveryActions.js'
+import * as Constants from '../../../common/constants/'
 import s from '../../../common/locales/strings.js'
+import { type LoginUserInfo } from '../../../common/reducers/PreviousUsersReducer.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
+import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import * as Assets from '../../assets/'
 import {
   BackgroundImage,
@@ -18,33 +26,39 @@ import {
   StaticModal
 } from '../../components/common'
 import * as Offsets from '../../constants'
-import { LogoImageHeader, UserListItem } from '../abSpecific'
+import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
+import { UserListItem } from '../abSpecific/UserListItem.js'
 
-type Props = {
+type OwnProps = {
   styles: Object,
-  username: string,
-  password: string,
-  previousUsers: Object,
-  usernameOnlyList: Array<string>,
-  error: string,
-  loginSuccess: boolean,
-  showModal: boolean,
-  hasUsers: boolean,
-  gotoCreatePage(): void,
-  updateUsername(string): void,
-  updatePassword(string): void,
-  userLogin(Object): void,
-  launchUserLoginWithTouchId(Object): void,
-  gotoPinLoginPage(): void,
-  launchDeleteModal(): void,
-  recoverPasswordLogin(): void,
-  touch: string | boolean,
   appId?: string,
   backgroundImage?: any,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
-  parentButton?: Object
+  parentButton?: Object,
+  touch: string | boolean
 }
+type StateProps = {
+  error: string,
+  hasUsers: boolean,
+  loginSuccess: boolean,
+  password: string,
+  previousUsers: LoginUserInfo[],
+  showModal: boolean,
+  username: string,
+  usernameOnlyList: Array<string>
+}
+type DispatchProps = {
+  gotoCreatePage(): void,
+  gotoPinLoginPage(): void,
+  launchDeleteModal(): void,
+  launchUserLoginWithTouchId(Object): void,
+  recoverPasswordLogin(): void,
+  updatePassword(string): void,
+  updateUsername(string): void,
+  userLogin(Object): void
+}
+type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
   username: string,
@@ -58,10 +72,7 @@ type State = {
   usernameList: boolean
 }
 
-export default class LoginUsernamePasswordScreenComponent extends Component<
-  Props,
-  State
-> {
+class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
   keyboardDidHideListener: ?Function
   style: Object
 
@@ -133,8 +144,6 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
   }
 
   onDelete = (user: string) => {
-    //
-    // this.props.deleteUserFromDevice(user) TODO
     this.setState({
       username: user
     })
@@ -160,11 +169,6 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
       focusSecond: false,
       offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN
     })
-    if (this.props.previousUsers.lastUser) {
-      this.props.launchUserLoginWithTouchId({
-        username: this.props.previousUsers.lastUser.username
-      })
-    }
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -446,3 +450,42 @@ export default class LoginUsernamePasswordScreenComponent extends Component<
     this.props.gotoCreatePage()
   }
 }
+
+export const LoginUsernamePasswordScreen = connect(
+  (state: RootState): StateProps => ({
+    error: state.login.errorMessage || '',
+    hasUsers: state.previousUsers.userList.length > 0,
+    loginSuccess: state.login.loginSuccess,
+    password: state.login.password || '',
+    previousUsers: state.previousUsers.userList,
+    showModal: state.workflow.showModal,
+    username: state.login.username,
+    usernameOnlyList: state.previousUsers.usernameOnlyList
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    gotoCreatePage() {
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_CREATE })
+    },
+    gotoPinLoginPage() {
+      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PIN })
+    },
+    launchDeleteModal() {
+      dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' })
+    },
+    launchUserLoginWithTouchId(data: Object) {
+      dispatch(userLoginWithTouchId(data))
+    },
+    recoverPasswordLogin() {
+      dispatch(recoverPasswordLogin())
+    },
+    updatePassword(data: string) {
+      dispatch({ type: 'AUTH_UPDATE_LOGIN_PASSWORD', data: data })
+    },
+    updateUsername(data: string) {
+      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data })
+    },
+    userLogin(data: Object) {
+      dispatch(userLogin(data))
+    }
+  })
+)(LoginUsernamePasswordScreenComponent)

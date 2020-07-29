@@ -1,7 +1,11 @@
 // @flow
 
 import { makeReactNativeFolder } from 'disklet'
-import type { EdgeAccount, EdgeContext } from 'edge-core-js'
+import {
+  type EdgeAccount,
+  type EdgeAccountOptions,
+  type EdgeContext
+} from 'edge-core-js'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import type { Store } from 'redux'
@@ -15,34 +19,28 @@ import {
 } from '../../../common/reducers/RootReducer'
 import { checkingForOTP } from '../../../common/util/checkingForOTP.js'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import LoginAppConnector from '../../connectors/LogInAppConnector'
+import { LoginApp } from '../../components/LogInAppComponent'
 import * as Styles from '../../styles'
 
 type Props = {
-  context: EdgeContext,
-  username: ?string,
-  recoveryLogin?: string,
-  accountOptions: any,
-  fontDescription: any,
-  onLogin(error: ?Error, account: ?EdgeAccount, touchIdInfo: ?Object): void,
+  accountOptions: EdgeAccountOptions,
   appId?: string,
   appName?: string,
   backgroundImage?: any,
+  context: EdgeContext,
+  fontDescription: any,
+  landingScreenText?: string,
+  onLogin(error: ?Error, account: ?EdgeAccount, touchIdInfo: ?Object): void,
+  parentButton?: Object,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
-  parentButton?: Object,
-  landingScreenText?: string
+  recoveryLogin?: string,
+  username?: string
 }
 
-class LoginScreen extends Component<Props> {
+export class LoginScreen extends Component<Props> {
   store: Store<RootState, Action>
   cleanups: Array<Function>
-
-  static defaultProps = {
-    username: null,
-    recoveryLogin: null,
-    accountOptions: null
-  }
 
   constructor(props: Props) {
     super(props)
@@ -52,14 +50,14 @@ class LoginScreen extends Component<Props> {
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'core-ui' })
         : compose
     const imports: Imports = {
-      context: this.props.context,
+      accountOptions: this.props.accountOptions,
       callback: this.props.onLogin,
+      context: this.props.context,
+      folder: makeReactNativeFolder(),
       onCancel: () => {},
       onComplete: () => {},
-      folder: makeReactNativeFolder(),
-      accountOptions: this.props.accountOptions,
-      username: this.props.username,
-      recoveryKey: this.props.recoveryLogin
+      recoveryKey: this.props.recoveryLogin,
+      username: this.props.username
     }
     this.store = createStore(
       rootReducer,
@@ -95,22 +93,18 @@ class LoginScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <LoginAppConnector
-          context={this.props.context}
-          onLogin={this.props.onLogin}
-          recoveryLogin={this.props.recoveryLogin}
-          styles={Styles}
+        <LoginApp
           appId={this.props.appId}
           appName={this.props.appName}
           backgroundImage={this.props.backgroundImage}
+          landingScreenText={this.props.landingScreenText}
+          parentButton={this.props.parentButton}
           primaryLogo={this.props.primaryLogo}
           primaryLogoCallback={this.props.primaryLogoCallback}
-          parentButton={this.props.parentButton}
-          landingScreenText={this.props.landingScreenText}
+          recoveryLogin={this.props.recoveryLogin}
+          styles={Styles}
         />
       </Provider>
     )
   }
 }
-
-export { LoginScreen }

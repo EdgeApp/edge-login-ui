@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import * as actions from '../../../common/actions/index'
+import { cancel } from '../../../common/actions/WorkflowActions.js'
 import * as Constants from '../../../common/constants'
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
@@ -24,11 +24,11 @@ export const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     cancel: () => {
       dispatch({ type: 'CLOSE_NOTIFICATION_MODAL' })
-      dispatch(actions.cancel())
+      dispatch(cancel())
     },
     action: () => {
       dispatch({ type: 'CLOSE_NOTIFICATION_MODAL' })
-      dispatch(actions.cancel())
+      dispatch(cancel())
     }
   }
 }

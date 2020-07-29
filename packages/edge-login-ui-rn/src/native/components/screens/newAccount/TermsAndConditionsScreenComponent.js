@@ -3,28 +3,35 @@
 import type { EdgeAccount } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Linking, ScrollView, Text, View } from 'react-native'
+import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
+import { agreeToConditions } from '../../../../common/actions/CreateAccountActions.js'
 import s from '../../../../common/locales/strings'
+import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import { Button, Checkbox } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type Props = {
+type OwnProps = {
   styles: Object,
-  accountObject: EdgeAccount,
-  terms: Object,
-  agreeToCondition(EdgeAccount): void,
   appName: string
 }
+type StateProps = {
+  accountObject: EdgeAccount,
+  terms: Object
+}
+type DispatchProps = {
+  agreeToCondition(account: EdgeAccount): void
+}
+type Props = OwnProps & StateProps & DispatchProps
+
 type State = {
   totalChecks: number
 }
-export default class TermsAndConditionsScreenComponent extends Component<
-  Props,
-  State
-> {
+
+class TermsAndConditionsScreenComponent extends Component<Props, State> {
   scrollView: any
   constructor(props: Props) {
     super(props)
@@ -159,3 +166,15 @@ export default class TermsAndConditionsScreenComponent extends Component<
     return terms.items
   }
 }
+
+export const TermsAndConditionsScreen = connect(
+  (state: RootState): StateProps => ({
+    accountObject: state.create.accountObject,
+    terms: state.terms
+  }),
+  (dispatch: Dispatch): DispatchProps => ({
+    agreeToCondition(data: EdgeAccount) {
+      dispatch(agreeToConditions(data))
+    }
+  })
+)(TermsAndConditionsScreenComponent)
