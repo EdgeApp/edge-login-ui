@@ -11,8 +11,9 @@ import {
 } from 'react-native'
 import Modal from 'react-native-modal'
 
-import * as Constants from '../../../common/constants'
-import { ModalStyle } from '../../styles/'
+import * as Constants from '../../../common/constants/index.js'
+import { scale } from '../../../common/util/scaling.js'
+import * as Styles from '../../styles/index.js'
 import { Button, Icon, IconButton } from './'
 
 type Props = {
@@ -39,7 +40,8 @@ type Props = {
 type State = {
   showButtons: boolean
 }
-class MyModal extends Component<Props, State> {
+
+export class MyModal extends Component<Props, State> {
   // $FlowFixMe
   reset: number
   constructor(props: Props) {
@@ -222,4 +224,157 @@ class MyModal extends Component<Props, State> {
   }
 }
 
-export { MyModal }
+const OFFSET_HACK = scale(-19)
+
+const screenDimensions = {
+  height: Dimensions.get('window').height,
+  width: Dimensions.get('window').width
+}
+const ModalStyle = {
+  container: {
+    position: 'absolute',
+    bottom: OFFSET_HACK,
+    left: OFFSET_HACK,
+    right: OFFSET_HACK,
+    top: OFFSET_HACK,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Constants.MODAL_BOX
+  },
+  modalBox: {
+    top: screenDimensions.height / 8,
+    left: screenDimensions.width / 16,
+    width: (screenDimensions.width * 7) / 8,
+    borderRadius: scale(3),
+    borderWidth: 2,
+    borderColor: Constants.GRAY_2,
+    alignItems: 'stretch',
+    position: 'absolute',
+    // height: (screenDimensions.height) / 3,
+    backgroundColor: Constants.WHITE,
+    padding: 10,
+    paddingTop: 5,
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+  },
+  exitRow: {
+    alignItems: 'flex-end',
+    position: 'relative',
+    minHeight: 20
+  },
+  modalHeaderIconWrapBottom: {
+    position: 'absolute',
+    left: screenDimensions.width / 2 - 27,
+    top: screenDimensions.height / 8 - 28,
+    borderRadius: 27,
+    borderWidth: 2,
+    borderColor: Constants.PRIMARY,
+    backgroundColor: Constants.WHITE,
+    height: 54,
+    width: 54,
+    zIndex: 50,
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  closeIconButton: {
+    ...Styles.IconButtonStyle,
+    iconSize: 18,
+    icon: { ...Styles.IconButtonStyle.icon, color: Constants.GRAY_2 },
+    iconPressed: { ...Styles.IconButtonStyle.icon, color: Constants.GRAY_1 }
+  },
+  iconSize: 32,
+  iconStyle: {
+    color: Constants.PRIMARY,
+    backgroundColor: Constants.TRANSPARENT,
+    overflow: 'hidden'
+  },
+  modalBody: {
+    position: 'relative',
+    justifyContent: 'space-between'
+  },
+  modalTopTextWrap: {
+    padding: 10,
+    paddingBottom: 4
+  },
+  modalTopText: {
+    textAlign: 'center',
+    color: Constants.PRIMARY,
+    fontSize: scale(16)
+  },
+  modalTopSubtext: {
+    fontSize: scale(14),
+    color: Constants.GRAY_1,
+    textAlign: 'center',
+    paddingTop: 4
+  },
+  modalMiddleText: {
+    fontSize: scale(Constants.FONTS.defaultFontSize),
+    color: Constants.GRAY_1,
+    textAlign: 'center',
+    paddingTop: 4
+  },
+  modalMiddle: {
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    paddingTop: scale(4)
+  },
+  buttonsWrap: {
+    position: 'relative',
+    marginTop: scale(10),
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    alignSelf: 'flex-end'
+  },
+  activityWrap: {
+    position: 'relative',
+    marginTop: scale(20),
+    flex: 1,
+    height: Constants.BUTTON_HEIGHT,
+    width: '100%',
+    flexDirection: 'column',
+    aligItems: 'center',
+    justifyContent: 'space-around'
+  },
+  twoButtonConfig: {
+    cancelButtonWrap: {
+      position: 'relative',
+      alignSelf: 'flex-start',
+      width: '49%',
+      height: scale(Constants.BUTTON_HEIGHT)
+    },
+    actionButtonWrap: {
+      position: 'relative',
+      alignSelf: 'flex-end',
+      width: '49%',
+      height: scale(Constants.BUTTON_HEIGHT),
+      marginLeft: '2%'
+    },
+    actionButton: {
+      up: {
+        ...Styles.PrimaryButtonUpStyle,
+        width: Constants.BUTTON_100_PERCENT
+      },
+      upText: Styles.PrimaryButtonUpTextStyle,
+      down: {
+        ...Styles.PrimaryButtonDownStyle,
+        width: Constants.BUTTON_100_PERCENT
+      },
+      downText: Styles.PrimaryButtonDownTextStyle
+    },
+    cancelButton: {
+      up: {
+        ...Styles.SecondaryButtonUpStyle,
+        width: Constants.BUTTON_100_PERCENT
+      },
+      upText: Styles.SecondaryButtonUpTextStyle,
+      down: {
+        ...Styles.SecondaryButtonDownStyle,
+        width: Constants.BUTTON_100_PERCENT
+      },
+      downText: Styles.SecondaryButtonDownTextStyle
+    }
+  }
+}

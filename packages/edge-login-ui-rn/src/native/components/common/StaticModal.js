@@ -6,15 +6,17 @@ import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal'
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 
-import * as Constants from '../../../common/constants'
-import { StaticModalStyle } from '../../styles/'
+import * as Constants from '../../../common/constants/index.js'
+import { scale } from '../../../common/util/scaling.js'
+import * as Styles from '../../styles/index.js'
 
 type Props = {
   modalDismissTimerSeconds: number,
   body: any,
   cancel(): void
 }
-class StaticModal extends Component<Props> {
+
+export class StaticModal extends Component<Props> {
   // $FlowFixMe
   reset: number
   componentDidMount() {
@@ -72,4 +74,61 @@ class StaticModal extends Component<Props> {
   }
 }
 
-export { StaticModal }
+const OFFSET_HACK = scale(-19)
+
+const screenDimensions = {
+  height: Dimensions.get('window').height,
+  width: Dimensions.get('window').width
+}
+
+const StaticModalStyle = {
+  container: {
+    position: 'absolute',
+    bottom: OFFSET_HACK,
+    left: OFFSET_HACK,
+    right: OFFSET_HACK,
+    top: OFFSET_HACK,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Constants.MODAL_BOX
+  },
+  touchOut: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    backgroundColor: Constants.TRANSPARENT
+  },
+  modalBox: {
+    top: screenDimensions.height / 4,
+    left: screenDimensions.width / 8,
+    width: (screenDimensions.width * 3) / 4,
+    alignItems: 'stretch',
+    position: 'absolute',
+    // height: (screenDimensions.height) / 3,
+    backgroundColor: Constants.WHITE,
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+  },
+  header: {
+    position: 'relative',
+    height: Constants.STATIC_MODAL_HEADER_HEIGHT,
+    width: '100%',
+    backgroundColor: Constants.TRANSPARENT,
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  bottom: {
+    position: 'relative',
+    width: '100%',
+    backgroundColor: Constants.WHITE
+  },
+  bodyRow: {
+    width: '100%',
+    padding: scale(15)
+  },
+  shim: Styles.Shim.height,
+  icon: {
+    color: Constants.WHITE
+  },
+  iconSize: 36
+}

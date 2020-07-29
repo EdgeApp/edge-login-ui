@@ -4,13 +4,13 @@ import React, { Component } from 'react'
 import { Dimensions, Platform, View } from 'react-native'
 import Modal from 'react-native-modal'
 
-import { FullScreenModalStyle } from '../../styles/'
+import * as Constants from '../../../common/constants/index.js'
 
 type Props = {
   children: any
 }
 
-class FullScreenModal extends Component<Props> {
+export class FullScreenModal extends Component<Props> {
   render() {
     const styles = FullScreenModalStyle
 
@@ -37,4 +37,18 @@ class FullScreenModal extends Component<Props> {
   }
 }
 
-export { FullScreenModal }
+const FullScreenModalStyle = {
+  container: {
+    margin: 0,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Constants.MODAL_BOX
+  },
+  modalBox: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: Constants.WHITE
+  }
+}
