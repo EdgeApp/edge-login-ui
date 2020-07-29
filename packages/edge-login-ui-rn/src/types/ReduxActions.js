@@ -7,7 +7,7 @@ import {
   type OtpError
 } from 'edge-core-js'
 
-import { type PreviousUsersState } from '../common/reducers/PreviousUsersReducer.js'
+import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
 
 // Actions with no payload:
 type NoDataActionName =
