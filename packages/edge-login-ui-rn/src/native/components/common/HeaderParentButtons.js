@@ -4,17 +4,17 @@ import React, { Component } from 'react'
 import { Image, Linking, Text, TouchableOpacity, View } from 'react-native'
 
 import s from '../../../common/locales/strings.js'
+import { scale } from '../../../common/util/scaling.js'
 import * as Assets from '../../assets/'
 
 type Props = {
   appId?: string,
-  parentButton?: Object,
-  styles: Object
+  parentButton?: Object
 }
 
-class HeaderParentButtons extends Component<Props> {
+export class HeaderParentButtons extends Component<Props> {
   render() {
-    const { parentButton, styles, appId } = this.props
+    const { parentButton, appId } = this.props
     const openEdgeSite = () => Linking.openURL(s.strings.edge_site)
     return (
       <View style={styles.container}>
@@ -45,4 +45,37 @@ class HeaderParentButtons extends Component<Props> {
   }
 }
 
-export { HeaderParentButtons }
+const styles = {
+  container: {
+    top: scale(30),
+    marginLeft: scale(15),
+    marginRight: scale(15),
+    flexDirection: 'row'
+  },
+  leftButtonContainer: {
+    justifyContent: 'center',
+    alignContents: 'center',
+    height: scale(32)
+  },
+  leftButtonText: {
+    color: '#FFF',
+    fontSize: 16
+  },
+  rightButtonContainer: {
+    justifyContent: 'flex-end',
+    alignContents: 'flex-end',
+    height: scale(32)
+  },
+  rightButtonText: {
+    color: '#FFF',
+    fontSize: 10,
+    textAlign: 'right'
+  },
+  spacer: {
+    flex: 1
+  },
+  image: {
+    width: scale(74),
+    height: scale(20)
+  }
+}

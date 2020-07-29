@@ -5,16 +5,17 @@ import { Alert, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 
 import { createUser } from '../../../../common/actions/CreateAccountActions.js'
+import * as Constants from '../../../../common/constants/'
 import s from '../../../../common/locales/strings'
+import { scale } from '../../../../common/util/scaling.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import * as Styles from '../../../styles/index.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
-type OwnProps = {
-  styles: Object
-}
+type OwnProps = {}
 type StateProps = {
   createErrorMessage: string | null,
   password: string,
@@ -61,7 +62,6 @@ class SetAccountPinScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { SetAccountPinScreenStyle } = this.props.styles
     this.checkError()
     return (
       <SafeAreaView>
@@ -118,6 +118,56 @@ class SetAccountPinScreenComponent extends Component<Props, State> {
       password: this.props.password,
       pin: this.props.pin
     })
+  }
+}
+
+const SetAccountPinScreenStyle = {
+  screen: { ...Styles.ScreenStyle },
+  header: {
+    ...Styles.HeaderContainerScaledStyle,
+    backgroundColor: Constants.PRIMARY
+  },
+  pageContainer: Styles.PageContainerWithHeaderStyle,
+  row1: {
+    ...Styles.ScreenRow,
+    flex: -1,
+    paddingTop: 24,
+    paddingBottom: 12,
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  row2: {
+    ...Styles.ScreenRow,
+    paddingVertical: 12,
+    flex: -1,
+    alignItems: 'center'
+  },
+  row3: {
+    ...Styles.ScreenRow,
+    paddingVertical: 12,
+    flex: -1,
+    alignItems: 'center'
+  },
+  instructions: {
+    position: 'relative',
+    width: '80%',
+    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
+    fontFamily: Constants.FONTS.fontFamilyRegular,
+    color: Constants.GRAY_2,
+    textAlign: 'center'
+  },
+  fourPin: {
+    ...Styles.FourDotInputDarkScaledStyle,
+    container: {
+      ...Styles.FourDotInputDarkScaledStyle.container,
+      height: scale(120)
+    }
+  },
+  nextButton: {
+    upStyle: Styles.PrimaryButtonUpScaledStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downStyle: Styles.PrimaryButtonDownScaledStyle
   }
 }
 

@@ -7,9 +7,9 @@ import { connect } from 'react-redux'
 import { WORKFLOW_PIN } from '../../common/constants'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes'
 import { ChangeAccountPinScreen } from '../components/screens/existingAccout/ChangeAccountPinScreenComponent'
+import * as Styles from '../styles/index.js'
 
 type OwnProps = {
-  styles: Object,
   showHeader: boolean
 }
 type DispatchProps = {
@@ -24,13 +24,10 @@ class ChangePinAppComponent extends Component<Props> {
   }
 
   render() {
-    const { ScreenStyle } = this.props.styles
+    const { ScreenStyle } = Styles
     return (
       <View accessible style={ScreenStyle}>
-        <ChangeAccountPinScreen
-          styles={this.props.styles}
-          showHeader={this.props.showHeader}
-        />
+        <ChangeAccountPinScreen showHeader={this.props.showHeader} />
       </View>
     )
   }

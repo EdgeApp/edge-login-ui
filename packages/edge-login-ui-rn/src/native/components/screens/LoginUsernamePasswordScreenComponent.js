@@ -13,6 +13,7 @@ import { recoverPasswordLogin } from '../../../common/actions/PasswordRecoveryAc
 import * as Constants from '../../../common/constants/'
 import s from '../../../common/locales/strings.js'
 import { type LoginUserInfo } from '../../../common/reducers/PreviousUsersReducer.js'
+import { scale } from '../../../common/util/scaling.js'
 import DeleteUserConnector from '../../../native/connectors/abSpecific/DeleteUserConnector'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import * as Assets from '../../assets/'
@@ -25,12 +26,17 @@ import {
   IconButton,
   StaticModal
 } from '../../components/common'
-import * as Offsets from '../../constants'
+import * as Styles from '../../styles/index.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { UserListItem } from '../abSpecific/UserListItem.js'
 
+const Offsets = {
+  USERNAME_OFFSET_LOGIN_SCREEN: -50,
+  PASSWORD_OFFSET_LOGIN_SCREEN: -80,
+  LOGIN_SCREEN_NO_OFFSET: -200
+}
+
 type OwnProps = {
-  styles: Object,
   appId?: string,
   backgroundImage?: any,
   primaryLogo?: any,
@@ -78,7 +84,6 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props)
-    const { LoginPasswordScreenStyle } = this.props.styles
     this.style = LoginPasswordScreenStyle
     this.keyboardDidHideListener = null
     setTimeout(this.setListener, 2000, this.noFocus)
@@ -95,7 +100,7 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
     }
   }
 
-  renderModal = (style: Object) => {
+  renderModal = (style: typeof LoginPasswordScreenStyle) => {
     if (this.props.showModal) {
       return (
         <DeleteUserConnector
@@ -223,7 +228,6 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
       <View style={this.style.featureBoxContainer}>
         <HeaderParentButtons
           parentButton={this.props.parentButton}
-          styles={this.props.styles.HeaderParentButtons}
           appId={this.props.appId}
         />
         <TouchableWithoutFeedback onPress={this.noFocus}>
@@ -257,7 +261,7 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderUsername(styles: Object) {
+  renderUsername(styles: typeof LoginPasswordScreenStyle) {
     return (
       <View>
         <View style={styles.usernameWrapper}>
@@ -311,7 +315,7 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderButtons(style: Object) {
+  renderButtons(style: typeof LoginPasswordScreenStyle) {
     return (
       <View style={style.buttonsBox}>
         <View style={style.shimTiny} />
@@ -448,6 +452,120 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
 
   onCreateAccount() {
     this.props.gotoCreatePage()
+  }
+}
+
+const LoginPasswordScreenStyle = {
+  container: Styles.ScreenStyle,
+  mainScrollView: {
+    position: 'relative',
+    width: '100%',
+    height: '100%'
+  },
+  backgroundImage: {
+    ...Styles.BackgroundScreenImageStyle,
+    alignItems: 'center',
+    width: '100%',
+    height: '100%'
+  },
+  featureBoxContainer: {
+    width: '100%'
+  },
+  featureBox: {
+    position: 'relative',
+    top: scale(55),
+    width: '100%',
+    alignItems: 'center'
+  },
+  innerView: {
+    ...Styles.InnerView,
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  logoHeader: {
+    ...Styles.LogoHeaderScaledStyle,
+    container: { ...Styles.LogoHeaderScaledStyle.container }
+  },
+  shimTiny: { ...Styles.Shim, height: scale(10) },
+  shimSmall: { ...Styles.Shim, height: scale(25) },
+  shim: Styles.Shim,
+  buttonsBox: {
+    width: '100%',
+    alignItems: 'center'
+  },
+  modalMiddle: {
+    width: '100%',
+    height: scale(100)
+  },
+  input2: Styles.MaterialInput,
+  inputModal: {
+    ...Styles.MaterialInputOnWhite,
+    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
+  },
+  inputWithDrop: Styles.MaterialInputWithDrop,
+  forgotButton: {
+    upStyle: Styles.TextOnlyButtonUpStyle,
+    upTextStyle: {
+      ...Styles.TextOnlyButtonTextUpStyle,
+      fontSize: scale(14),
+      color: Constants.WHITE
+    },
+    downTextStyle: {
+      ...Styles.TextOnlyButtonTextDownStyle,
+      fontSize: scale(14),
+      color: Constants.WHITE
+    },
+    downStyle: Styles.TextOnlyButtonDownStyle
+  },
+  loginButton: {
+    upStyle: Styles.TertiaryButtonUpStyle,
+    upTextStyle: Styles.TertiaryButtonTextUpStyle,
+    downTextStyle: Styles.TertiaryButtonTextDownStyle,
+    downStyle: Styles.TertiaryButtonDownStyle
+  },
+  signupButton: {
+    upStyle: Styles.TextOnlyButtonUpStyle,
+    upTextStyle: {
+      ...Styles.TextOnlyButtonTextUpStyle,
+      fontSize: scale(14),
+      color: Constants.WHITE
+    },
+    downTextStyle: {
+      ...Styles.TextOnlyButtonTextDownStyle,
+      fontSize: scale(14),
+      color: Constants.WHITE
+    },
+    downStyle: Styles.TextOnlyButtonDownStyle
+  },
+  staticModalText: {
+    color: Constants.GRAY_1,
+    width: '100%',
+    fontSize: scale(15),
+    textAlign: 'center'
+  },
+  modal: Styles.SkipModalStyle,
+  iconButton: {
+    container: {
+      position: 'absolute',
+      right: 0,
+      bottom: (scale(260) - scale(250)) * 1.6
+    },
+    icon: {
+      color: Constants.WHITE
+    },
+    iconPressed: {
+      color: Constants.SECONDARY
+    },
+    iconSize: scale(Constants.FONTS.defaultFontSize + 8),
+    underlayColor: Constants.TRANSPARENT
+  },
+  usernameWrapper: {
+    width: '100%',
+    flexDirection: 'row'
+  },
+  dropDownList: {
+    maxHeight: scale(200),
+    backgroundColor: '#FFFFFF'
   }
 }
 

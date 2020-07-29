@@ -12,7 +12,7 @@ import {
 import Modal from 'react-native-modal'
 
 import * as Constants from '../../../common/constants'
-import { ModalStyle } from '../../../common/styles/'
+import { ModalStyle } from '../../styles/'
 import { Button, Icon, IconButton } from './'
 
 type Props = {

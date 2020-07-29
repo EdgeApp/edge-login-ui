@@ -17,13 +17,13 @@ import ChangePasswordModalConnector from '../../../connectors/abSpecific/ChangeP
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
+import * as Styles from '../../../styles/index.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type OwnProps = {
-  showHeader?: boolean,
-  styles: Object
+  showHeader?: boolean
 }
 type StateProps = {
   confirmPassword: string,
@@ -92,14 +92,14 @@ class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
     this.props.changePassword(this.props.password)
   }
 
-  renderHeader = (style: Object) => {
+  renderHeader = (style: typeof NewAccountPasswordScreenStyle) => {
     if (this.props.showHeader) {
       return <HeaderConnector style={style.header} />
     }
     return null
   }
 
-  renderInterior = (styles: Object) => {
+  renderInterior = (styles: typeof NewAccountPasswordScreenStyle) => {
     return (
       <View style={styles.innerView}>
         <PasswordStatus style={styles.status} />
@@ -132,7 +132,7 @@ class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderMain = (styles: Object) => {
+  renderMain = (styles: typeof NewAccountPasswordScreenStyle) => {
     if (this.state.focusSecond) {
       return (
         <KeyboardAvoidingView
@@ -150,7 +150,7 @@ class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderModal = (style: Object) => {
+  renderModal = (style: typeof NewAccountPasswordScreenStyle) => {
     if (this.props.showModal) {
       return <ChangePasswordModalConnector style={style.modal.skip} />
     }
@@ -158,7 +158,6 @@ class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { NewAccountPasswordScreenStyle } = this.props.styles
     return (
       <SafeAreaView>
         <View style={NewAccountPasswordScreenStyle.screen}>
@@ -169,6 +168,35 @@ class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
       </SafeAreaView>
     )
   }
+}
+
+const NewAccountPasswordScreenStyle = {
+  screen: { ...Styles.ScreenStyle },
+  header: Styles.HeaderContainerScaledStyle,
+  pageContainer: {
+    ...Styles.PageContainerWithHeaderStyle,
+    alignItems: 'center',
+    flex: 1
+  },
+  innerView: { ...Styles.InnerView, alignItems: 'center' },
+  status: {
+    ...Styles.PasswordStatusScaledStyle,
+    checkboxContainer: {
+      ...Styles.PasswordStatusScaledStyle.checkboxContainer,
+      height: scale(16)
+    }
+  },
+  nextButton: {
+    upStyle: Styles.PrimaryButtonUpScaledStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downStyle: Styles.PrimaryButtonDownScaledStyle
+  },
+  inputBox: {
+    ...Styles.MaterialInputOnWhiteScaled,
+    marginTop: scale(15)
+  },
+  modal: Styles.SkipModalStyle
 }
 
 export const ChangeAccountPasswordScreen = connect(

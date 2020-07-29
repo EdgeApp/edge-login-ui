@@ -1,8 +1,8 @@
 // @flow
 
 import { BasicCheckBoxWithLabelScaled } from '../'
-import * as Constants from '../../constants/'
-import { scale } from '../../util/scaling'
+import * as Constants from '../../../common/constants'
+import { scale } from '../../../common/util/scaling'
 
 const PasswordStatusStyle = {
   container: {

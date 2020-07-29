@@ -7,15 +7,17 @@ import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
 import { agreeToConditions } from '../../../../common/actions/CreateAccountActions.js'
+import * as Constants from '../../../../common/constants/'
 import s from '../../../../common/locales/strings'
+import { scale } from '../../../../common/util/scaling.js'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
+import * as Styles from '../../../styles/index.js'
 import { Button, Checkbox } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type OwnProps = {
-  styles: Object,
   appName: string
 }
 type StateProps = {
@@ -40,7 +42,7 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
     }
   }
 
-  renderItems(style: Object) {
+  renderItems(style: typeof TermsAndConditionsScreenStyle) {
     const terms = this.changeAppName()
     return terms.map(Item => (
       <View style={style.checkboxContainer} key={Item.title}>
@@ -57,7 +59,7 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
     ))
   }
 
-  renderInstructions(style: Object) {
+  renderInstructions(style: typeof TermsAndConditionsScreenStyle) {
     return (
       <View style={style.instructionsContainer}>
         <Text style={style.instructionsText}>{s.strings.last_step_review}</Text>
@@ -65,7 +67,7 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
     )
   }
 
-  renderButton(style: Object) {
+  renderButton(style: typeof TermsAndConditionsScreenStyle) {
     if (this.state.totalChecks === 4) {
       setTimeout(() => {
         this.scrollView.scrollToEnd({ animated: true })
@@ -111,7 +113,6 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
   }
 
   render() {
-    const { TermsAndConditionsScreenStyle } = this.props.styles
     return (
       <SafeAreaView>
         <View style={TermsAndConditionsScreenStyle.screen}>
@@ -165,6 +166,76 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
     }
     return terms.items
   }
+}
+
+const TermsAndConditionsScreenStyle = {
+  screen: { ...Styles.ScreenStyle },
+  header: Styles.HeaderContainerScaledStyle,
+  pageContainer: {
+    ...Styles.PageContainerWithHeaderStyle,
+    alignItems: 'center'
+  },
+  instructionsContainer: {
+    height: scale(100),
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  instructionsText: {
+    fontSize: scale(Styles.CreateAccountFont.headerFontSize),
+    fontFamily: Constants.FONTS.fontFamilyRegular,
+    paddingHorizontal: scale(30),
+    textAlign: 'center'
+  },
+  instructionsSubShim: {
+    height: scale(20)
+  },
+  agreeText: {
+    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
+    textAlign: 'center',
+    paddingHorizontal: scale(50),
+    marginBottom: scale(20),
+    fontFamily: Constants.FONTS.fontFamilyRegular
+  },
+  agreeTextLink: {
+    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
+    textAlign: 'center',
+    paddingHorizontal: scale(50),
+    marginBottom: scale(20),
+    fontFamily: Constants.FONTS.fontFamilyRegular,
+    color: Constants.SECONDARY
+  },
+  midSection: {
+    paddingBottom: scale(20)
+  },
+  buttonContainer: {
+    height: scale(150),
+    alignItems: 'center'
+  },
+  checkboxContainer: {
+    width: '80%',
+    marginBottom: scale(20)
+  },
+  shim: { ...Styles.Shim, height: scale(10) },
+  checkboxes: Styles.MultiLineTextCheckBoxScaled,
+  nextButton: {
+    upStyle: { ...Styles.PrimaryButtonUpScaledStyle, width: scale(240) },
+    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+    downStyle: { ...Styles.PrimaryButtonDownScaledStyle, width: scale(240) }
+  },
+  termsButton: {
+    upStyle: Styles.TextOnlyButtonUpScaledStyle,
+    upTextStyle: {
+      ...Styles.TextOnlyButtonTextUpScaledStyle,
+      fontSize: scale(Constants.FONTS.defaultFontSize)
+    },
+    downTextStyle: {
+      ...Styles.TextOnlyButtonTextDownScaledStyle,
+      fontSize: scale(Constants.FONTS.defaultFontSize)
+    },
+    downStyle: Styles.TextOnlyButtonDownScaledStyle
+  },
+  inputShim: { ...Styles.Shim, height: scale(20) }
 }
 
 export const TermsAndConditionsScreen = connect(

@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { TextField } from 'react-native-material-textfield'
 
-import { InputStyles } from '../../../common/styles/common/InputStyles.js'
+import { InputStyles } from '../../styles/common/InputStyles.js'
 
 type Props = {
   label: string,

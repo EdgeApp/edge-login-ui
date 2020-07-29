@@ -6,10 +6,10 @@ import { connect } from 'react-redux'
 
 import { WORKFLOW_PASSWORD } from '../../common/constants'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes'
+import * as Styles from '../styles/index.js'
 import { ChangeAccountPasswordScreen } from './screens/existingAccout/ChangeAccountPasswordScreenComponent'
 
 type OwnProps = {
-  styles: Object,
   showHeader: boolean
 }
 type DispatchProps = {
@@ -24,13 +24,10 @@ class ChangePasswordAppComponent extends Component<Props> {
   }
 
   render() {
-    const { ScreenStyle } = this.props.styles
+    const { ScreenStyle } = Styles
     return (
       <View style={ScreenStyle} accessible>
-        <ChangeAccountPasswordScreen
-          styles={this.props.styles}
-          showHeader={this.props.showHeader}
-        />
+        <ChangeAccountPasswordScreen showHeader={this.props.showHeader} />
       </View>
     )
   }

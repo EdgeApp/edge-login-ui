@@ -6,16 +6,17 @@ import { connect } from 'react-redux'
 
 import { loginWithRecovery } from '../../../../common/actions/LoginAction.js'
 import { getRecoveryQuestions } from '../../../../common/actions/PasswordRecoveryActions.js'
+import * as Constants from '../../../../common/constants/'
 import s from '../../../../common/locales/strings'
 import SetRecoveryUsernameModalConnector from '../../../../native/connectors/abSpecific/SetRecoveryUsernameModalConnector'
 import RecoverPasswordUsernameModalConnector from '../../../../native/connectors/componentConnectors/RecoverPasswordUsernameModalConnector'
 import { type Dispatch, type RootState } from '../../../../types/ReduxTypes.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
+import * as Styles from '../../../styles/index.js'
 import { Button, FormField, StaticModal } from '../../common/'
 import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
 
 type OwnProps = {
-  styles: Object,
   showHeader: boolean
 }
 type StateProps = {
@@ -74,7 +75,7 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
     this.props.updateUsername('')
   }
 
-  renderHeader = (style: Object) => {
+  renderHeader = (style: typeof LoginWithRecoveryStyles) => {
     if (this.props.showHeader) {
       return <HeaderConnector style={style.header} />
     }
@@ -108,7 +109,7 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
     })
   }
 
-  renderModal = (styles: Object) => {
+  renderModal = (styles: typeof LoginWithRecoveryStyles) => {
     if (this.props.showRecoverSuccessDialog) {
       // render static modal
       const body = (
@@ -145,7 +146,7 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
     )
   }
 
-  renderError(styles: Object) {
+  renderError(styles: typeof LoginWithRecoveryStyles) {
     if (this.props.loginError) {
       return (
         <View>
@@ -169,7 +170,6 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
   }
 
   render() {
-    const { LoginWithRecoveryStyles } = this.props.styles
     // const middle = this.renderForm(RecoverPasswordSceneStyles)
     const styles = LoginWithRecoveryStyles
     const form1Style = this.state.errorOne ? styles.inputError : styles.input
@@ -228,6 +228,133 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
       </SafeAreaViewGradient>
     )
   }
+}
+
+const LoginWithRecoveryStyles = {
+  screen: { ...Styles.ScreenStyle, marginTop: 5 },
+  header: {
+    ...Styles.HeaderContainerScaledStyle,
+    backgroundColor: Constants.PRIMARY
+  },
+  /* gradient: {
+    height: THEME.HEADER
+  }, */
+  body: {
+    padding: 18
+  },
+  questionRow: {
+    height: 50,
+    width: '100%',
+    borderBottomWidth: 1,
+    borderColor: Constants.GRAY_2
+  },
+  questionText: {
+    color: Constants.GRAY_2,
+    fontSize: 18
+  },
+  modalMiddle: {
+    width: '100%',
+    height: 120
+  },
+  inputModal: {
+    ...Styles.MaterialInputOnWhite,
+    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
+  },
+  answerRow: {
+    width: '100%',
+    height: 100
+  },
+  buttonContainer: {
+    width: '100%',
+    alignItems: 'center'
+    // height: THEME.BUTTONS.HEIGHT
+  },
+  input: {
+    ...Styles.MaterialInputOnWhite,
+    errorColor: Constants.GRAY_2,
+    baseColor: Constants.GRAY_2,
+    textColor: Constants.GRAY_2,
+    titleTextStyle: {
+      color: Constants.GRAY_2
+    },
+    affixTextStyle: {
+      color: Constants.GRAY_2
+    },
+    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
+  },
+  inputUsername: {
+    ...Styles.MaterialInputOnWhite,
+    errorColor: Constants.ACCENT_RED,
+    baseColor: Constants.GRAY_2,
+    textColor: Constants.GRAY_2,
+    titleTextStyle: {
+      color: Constants.GRAY_2
+    },
+    affixTextStyle: {
+      color: Constants.GRAY_2
+    },
+    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
+  },
+  inputError: {
+    ...Styles.MaterialInputOnWhite,
+    errorColor: Constants.ACCENT_RED,
+    baseColor: Constants.ACCENT_RED,
+    textColor: Constants.ACCENT_RED,
+    titleTextStyle: {
+      color: Constants.ACCENT_RED
+    },
+    affixTextStyle: {
+      color: Constants.ACCENT_RED
+    },
+    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
+  },
+  shim: {
+    height: 20
+  },
+  textIconButton: Styles.TextAndIconButtonAlignEdgesStyle,
+  textIconButtonErrorError: {
+    ...Styles.TextAndIconButtonAlignEdgesStyle,
+    text: {
+      ...Styles.TextAndIconButtonAlignEdgesStyle.text,
+      color: Constants.ACCENT_RED
+    },
+    icon: {
+      ...Styles.TextAndIconButtonAlignEdgesStyle.icon,
+      color: Constants.ACCENT_RED
+    }
+  },
+  submitButton: {
+    upStyle: Styles.PrimaryButtonUpStyle,
+    upTextStyle: Styles.PrimaryButtonUpTextStyle,
+    downTextStyle: Styles.PrimaryButtonUpTextStyle,
+    downStyle: Styles.PrimaryButtonDownStyle
+  },
+  disableButton: {
+    upStyle: Styles.TertiaryButtonUpStyle,
+    upTextStyle: Styles.TertiaryButtonTextUpStyle,
+    downTextStyle: Styles.TertiaryButtonTextDownStyle,
+    downStyle: Styles.TertiaryButtonDownStyle
+  },
+  questionsList: {
+    width: '100%',
+    height: 400,
+    borderColor: Constants.GRAY_3,
+    borderWidth: 1
+  },
+  staticModalText: {
+    color: Constants.GRAY_1,
+    width: '100%',
+    fontSize: 15,
+    textAlign: 'center'
+  },
+  errorText: {
+    color: Constants.ACCENT_RED,
+    width: '90%',
+    fontSize: 14,
+    textAlign: 'center',
+    paddingBottom: 5
+  },
+  listItem: Styles.ListItemTextOnly
 }
 
 export const LoginWithRecoveryQuestionsScreen = connect(

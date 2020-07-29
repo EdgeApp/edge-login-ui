@@ -13,7 +13,6 @@ import {
   rootReducer
 } from '../../../common/reducers/RootReducer'
 import { type Action, type Imports } from '../../../types/ReduxTypes.js'
-import * as Styles from '../../styles'
 import { PasswordRecoveryApp } from '../PasswordRecoveryAppComponent.js'
 
 type Props = {
@@ -50,10 +49,7 @@ export class PasswordRecoveryScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <PasswordRecoveryApp
-          styles={Styles}
-          showHeader={this.props.showHeader}
-        />
+        <PasswordRecoveryApp showHeader={this.props.showHeader} />
       </Provider>
     )
   }

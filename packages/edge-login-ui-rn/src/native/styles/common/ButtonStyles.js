@@ -1,7 +1,7 @@
 // @flow
 
-import * as Constants from '../../constants/'
-import { scale } from '../../util/scaling.js'
+import * as Constants from '../../../common/constants'
+import { scale } from '../../../common/util/scaling.js'
 
 const PrimaryButtonUpStyle = {
   position: 'relative',

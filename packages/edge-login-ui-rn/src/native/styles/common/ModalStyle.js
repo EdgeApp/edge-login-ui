@@ -3,8 +3,8 @@
 import { Dimensions } from 'react-native'
 
 import * as Styles from '../'
-import * as Constants from '../../constants/'
-import { scale } from '../../util/scaling.js'
+import * as Constants from '../../../common/constants'
+import { scale } from '../../../common/util/scaling.js'
 
 const OFFSET_HACK = scale(-19)
 
