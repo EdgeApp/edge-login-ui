@@ -17,7 +17,12 @@ export type EdgeUiContextOptions = {
   assetsPath?: string,
   hideKeys?: boolean,
   vendorImageUrl?: string,
-  vendorName?: string
+  vendorName?: string,
+
+  // This is a temporary solution, which will be replaced at the next
+  // edge-core-js version upgrade. At that point, this will change to:
+  // plugins: { ethereum: { etherscanApiKey: string[] } }
+  etherscanApiKey?: string
 }
 
 export type EdgeUiContextEvents = {
