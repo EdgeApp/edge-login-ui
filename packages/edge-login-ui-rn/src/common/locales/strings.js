@@ -15,7 +15,7 @@ import zh from './strings/zh.json'
 
 const allLocales = { en, ru, es, it, pt, ja, fr, ko, vi, zh }
 
-const strings: { [stringCode: string]: string } = {}
+const strings: typeof en = { ...en }
 const out = { strings }
 
 selectLocale(DeviceInfo.getDeviceLocale())
