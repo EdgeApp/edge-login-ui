@@ -10,19 +10,18 @@ import * as Colors from '../../constants/Colors.js'
 import { Button, HeaderBackButton } from '../common'
 
 type Props = {
+  customLabel?: string,
+  goBack(): void,
+  showBackButton: boolean,
+  showSkipButton?: boolean,
+  skipScreen?: () => void,
   style: Object,
   subTitle: string,
   title: string,
-  showBackButton: boolean,
-  showSkipButton?: boolean,
-  customLabel?: string,
-  skipScreen(): void,
-  goBack(): void,
-  useCancel(): void,
-  skipButton(): void
+  useCancel?: boolean
 }
-// Make a component
-class Header extends Component<Props> {
+
+export class Header extends Component<Props> {
   render() {
     const Style = this.props.style
     return (
@@ -87,12 +86,10 @@ class Header extends Component<Props> {
   }
 
   onSkip = () => {
-    this.props.skipScreen()
+    if (this.props.skipScreen != null) this.props.skipScreen()
   }
 
   onBack = () => {
     this.props.goBack()
   }
 }
-
-export { Header }
