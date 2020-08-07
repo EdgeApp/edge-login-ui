@@ -17,6 +17,7 @@ import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
 import { type Action, type Imports } from '../../types/ReduxTypes.js'
 import { checkingForOTP } from '../../util/checkingForOTP.js'
 import { LoginApp } from '../navigation/LogInAppComponent.js'
+import { Airship } from '../services/AirshipInstance.js'
 import { changeFont, ThemeProvider } from '../services/ThemeContext.js'
 
 type Props = {
@@ -93,16 +94,18 @@ export class LoginScreen extends Component<Props> {
     return (
       <Provider store={this.store}>
         <ThemeProvider>
-          <LoginApp
-            appId={this.props.appId}
-            appName={this.props.appName}
-            backgroundImage={this.props.backgroundImage}
-            landingScreenText={this.props.landingScreenText}
-            parentButton={this.props.parentButton}
-            primaryLogo={this.props.primaryLogo}
-            primaryLogoCallback={this.props.primaryLogoCallback}
-            recoveryLogin={this.props.recoveryLogin}
-          />
+          <Airship avoidAndroidKeyboard statusBarTranslucent>
+            <LoginApp
+              appId={this.props.appId}
+              appName={this.props.appName}
+              backgroundImage={this.props.backgroundImage}
+              landingScreenText={this.props.landingScreenText}
+              parentButton={this.props.parentButton}
+              primaryLogo={this.props.primaryLogo}
+              primaryLogoCallback={this.props.primaryLogoCallback}
+              recoveryLogin={this.props.recoveryLogin}
+            />
+          </Airship>
         </ThemeProvider>
       </Provider>
     )

@@ -11,6 +11,7 @@ import thunk from 'redux-thunk'
 import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
 import { type Action, type Imports } from '../../types/ReduxTypes.js'
 import { ChangePinApp } from '../navigation/ChangePinAppComponent.js'
+import { Airship } from '../services/AirshipInstance.js'
 import { ThemeProvider } from '../services/ThemeContext.js'
 
 type Props = {
@@ -46,7 +47,9 @@ export class ChangePinScreen extends Component<Props> {
     return (
       <Provider store={this.store}>
         <ThemeProvider>
-          <ChangePinApp showHeader={this.props.showHeader} />
+          <Airship avoidAndroidKeyboard statusBarTranslucent>
+            <ChangePinApp showHeader={this.props.showHeader} />
+          </Airship>
         </ThemeProvider>
       </Provider>
     )

@@ -11,6 +11,7 @@ import thunk from 'redux-thunk'
 import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
 import { type Action, type Imports } from '../../types/ReduxTypes.js'
 import { PasswordRecoveryApp } from '../navigation/PasswordRecoveryAppComponent.js'
+import { Airship } from '../services/AirshipInstance.js'
 import { ThemeProvider } from '../services/ThemeContext.js'
 
 type Props = {
@@ -48,7 +49,9 @@ export class PasswordRecoveryScreen extends Component<Props> {
     return (
       <Provider store={this.store}>
         <ThemeProvider>
-          <PasswordRecoveryApp showHeader={this.props.showHeader} />
+          <Airship avoidAndroidKeyboard statusBarTranslucent>
+            <PasswordRecoveryApp showHeader={this.props.showHeader} />
+          </Airship>
         </ThemeProvider>
       </Provider>
     )
