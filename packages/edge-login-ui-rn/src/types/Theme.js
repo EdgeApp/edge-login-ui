@@ -9,5 +9,22 @@ export type Theme = {|
 
   // Background colors:
   backgroundGradientLeft: string,
-  backgroundGradientRight: string
+  backgroundGradientRight: string,
+
+  // Modal:
+  modal: string,
+  modalShadow: string,
+  modalBlurType: 'light' | 'dark',
+
+  // Text colors:
+  primaryText: string,
+
+  // Button colors:
+  primaryButtonOutline: string,
+  primaryButton: string,
+  primaryButtonText: string,
+
+  secondaryButtonOutline: string,
+  secondaryButton: string,
+  secondaryButtonText: string
 |}

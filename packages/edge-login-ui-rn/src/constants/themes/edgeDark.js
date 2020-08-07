@@ -39,5 +39,22 @@ export const edgeDark: Theme = {
 
   // background
   backgroundGradientLeft: palette.darkBlue,
-  backgroundGradientRight: palette.edgeNavy
+  backgroundGradientRight: palette.edgeNavy,
+
+  // modal
+  modal: palette.royalBlue,
+  modalShadow: palette.blackOp50,
+  modalBlurType: 'light',
+
+  // text
+  primaryText: palette.white,
+
+  // buttons
+  primaryButtonOutline: palette.transparent,
+  primaryButton: palette.edgeMint,
+  primaryButtonText: palette.edgeBlue,
+
+  secondaryButtonOutline: palette.edgeMint,
+  secondaryButton: palette.transparent,
+  secondaryButtonText: palette.edgeMint
 }
