@@ -77,7 +77,7 @@ class LoginAppComponent extends Component<Props, State> {
   }
 
   renderContent() {
-    if (!this.props.previousUsers && !this.props.recoveryLogin) {
+    if (!this.props.previousUsers.loaded && !this.props.recoveryLogin) {
       return this.getLoadingScreen()
     }
     switch (this.props.workflow.currentKey) {
