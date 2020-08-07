@@ -27,7 +27,7 @@
     "prepare": "echo nothing to do"
   },
   "dependencies": {
-    "edge-components": "^0.0.26",
+    "edge-components": "^0.0.28",
     "material-ui": "^0.20.0",
     "moment": "^2.19.3",
     "qrcode-generator": "^1.4.4",
@@ -48,7 +48,7 @@
   "devDependencies": {
     "@react-native-community/art": "^1.0.2",
     "edge-core-js": "^0.13.5",
-    "flow-bin": "^0.75.0"
+    "flow-bin": "^0.84.0"
   },
   "peerDependencies": {
     "@react-native-community/art": "*",

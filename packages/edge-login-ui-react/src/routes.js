@@ -43,6 +43,8 @@ export default class RouterComponent extends Component<
         return this.containerize(Signup)
       case '/account':
         return this.containerize(Account)
+      default:
+        return null
     }
   }
 }

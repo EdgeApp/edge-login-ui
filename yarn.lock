@@ -3897,10 +3897,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-edge-components@^0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/edge-components/-/edge-components-0.0.26.tgz#0c92374779e727bd6813fcfd96340193cd9dcbae"
-  integrity sha512-bBBwU2prluPAFM0IQv0v4gh2LC4qxUxHfo5PY+Pg5zOEf0UE3qi7ISCZ85lSG1IDJJ5gVLPLxIL4dYpuFKW8yw==
+edge-components@^0.0.28:
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/edge-components/-/edge-components-0.0.28.tgz#fc4d4dc3354d7c8c316f9bf852951eda75543d5b"
+  integrity sha512-MlT722QmkFq+ABxEL0hJF/Fo9cnzoV7QAqEuVSL32j9kuvKHqFy3Dtv4wLeCWIjnAy8fPWlNBOy0GGuuocgtzQ==
   dependencies:
     react-native-linear-gradient "^2.4.0"
 
@@ -4752,10 +4752,10 @@ flatted@^2.0.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.1.tgz#69e57caa8f0eacbc281d2e2cb458d46fdb449e08"
   integrity sha512-a1hQMktqW9Nmqr5aktAux3JMNqaucxGcjtjWnZLHX7yyPCmlSV3M54nGYbqT8K+0GhF3NBgmJCc3ma+WOgX8Jg==
 
-flow-bin@^0.75.0:
-  version "0.75.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.75.0.tgz#b96d1ee99d3b446a3226be66b4013224ce9df260"
-  integrity sha1-uW0e6Z07RGoyJr5mtAEyJM6d8mA=
+flow-bin@^0.84.0:
+  version "0.84.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.84.0.tgz#4cb2364c750fb37a7840524fa62456b53f64cdcb"
+  integrity sha512-ocji8eEYp+YfICsm+F6cIHUcD7v5sb0/ADEXm6gyUKdjQzmSckMrPUdZtyfP973t3YGHKliUMxMvIBHyR5LbXQ==
 
 flush-write-stream@^1.0.0:
   version "1.1.1"
