@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux'
 
-import { Header } from '../../components/common/'
+import { Header } from '../../components/common/Header.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 
 const mapStateToProps = (state: RootState) => {

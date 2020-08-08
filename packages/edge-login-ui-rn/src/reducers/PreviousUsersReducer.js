@@ -12,13 +12,15 @@ export type LoginUserInfo = {
 
 export type PreviousUsersState = {
   +lastUser?: LoginUserInfo,
+  +loaded: boolean,
   +userList: LoginUserInfo[],
   +usernameOnlyList: string[]
 }
 
 const initialState: PreviousUsersState = {
   userList: [],
-  usernameOnlyList: []
+  usernameOnlyList: [],
+  loaded: false
 }
 
 export const previousUsers: Reducer<PreviousUsersState, Action> = function(
@@ -27,7 +29,7 @@ export const previousUsers: Reducer<PreviousUsersState, Action> = function(
 ) {
   switch (action.type) {
     case 'SET_PREVIOUS_USERS':
-      return action.data
+      return { ...action.data, loaded: true }
 
     default:
       return state
