@@ -1,6 +1,15 @@
 # edge-login-ui
 
-## 0.6.11
+## 0.6.13 (2020-08-10)
+
+- rn: Prevent the welcome screen from flickering at startup, due to a bug in the last release.
+
+## 0.6.12 (2020-08-04)
+
+- web: Add a temporary `etherscanApiKey` field to `makeEdgeUiContext`,
+- rn: Enforce Flow typing & other cleanups throughout the codebase. This shouldn't have any user-visible changes.
+
+## 0.6.11 (2020-06-05)
 
 - Fix ion icon size variable name
 
