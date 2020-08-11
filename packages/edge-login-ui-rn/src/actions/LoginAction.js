@@ -1,16 +1,12 @@
 // @flow
 
 import { makeReactNativeDisklet } from 'disklet'
-import {
-  createSimpleConfirmModal,
-  createThreeButtonModal,
-  createYesNoModal
-} from 'edge-components'
 import React from 'react'
-import IonIcon from 'react-native-vector-icons/Ionicons'
 import { sprintf } from 'sprintf-js'
 
 import s from '../common/locales/strings.js'
+import { ButtonsModal } from '../components/modals/ButtonsModal.js'
+import { Airship } from '../components/services/AirshipInstance.js'
 import * as Constants from '../constants/index.js'
 import {
   enableTouchId,
@@ -19,10 +15,8 @@ import {
   loginWithTouchId,
   supportsTouchId
 } from '../keychain.js'
-import { OtpModalStyle as styles } from '../styles/index.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 import { translateError } from '../util/ErrorMessageUtil.js'
-import { showModal } from '../util/ModalManager.js'
 
 /**
  * Make it Thunky
@@ -401,50 +395,47 @@ const twofaReminder = async account => {
 
   const enableOtp = async account => {
     await account.enableOtp()
-    const modal = createSimpleConfirmModal({
-      title: s.strings.otp_authentication_header,
-      icon: (
-        <IonIcon
-          name="ios-checkmark"
-          style={styles.otpAuthenticationModalIcon}
-        />
-      ),
-      message: sprintf(s.strings.otp_authentication_message, account.otpKey),
-      buttonText: s.strings.ok
-    })
-    return showModal(modal)
+    return Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        title={s.strings.otp_authentication_header}
+        message={sprintf(s.strings.otp_authentication_message, account.otpKey)}
+        buttons={{ ok: { label: s.strings.ok } }}
+      />
+    ))
   }
 
   const createOtpCheckModal = async () => {
-    const modal = createYesNoModal({
-      title: s.strings.otp_reset_modal_header,
-      icon: <IonIcon name="ios-warning" style={styles.otpResetModalIcon} />,
-      message: s.strings.otp_reset_modal_message,
-      yesButtonText: s.strings.enable,
-      noButtonText: s.strings.skip_button
-    })
-    return showModal(modal)
+    const result = await Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        title={s.strings.otp_reset_modal_header}
+        message={s.strings.otp_reset_modal_message}
+        buttons={{
+          yes: { label: s.strings.enable },
+          no: { label: s.strings.skip_button, type: 'secondary' }
+        }}
+      />
+    ))
+    return result === 'yes'
   }
 
   const createOtpCheckModalDontAsk = async () => {
-    const modal = createThreeButtonModal({
-      title: s.strings.otp_reset_modal_header,
-      icon: <IonIcon name="ios-warning" style={styles.otpResetModalIcon} />,
-      message: s.strings.otp_reset_modal_message,
-      primaryButton: {
-        text: s.strings.enable,
-        returnValue: 'enable'
-      },
-      secondaryButton: {
-        text: s.strings.cancel,
-        returnValue: 'cancel'
-      },
-      tertiaryButton: {
-        text: s.strings.otp_reset_modal_dont_ask,
-        returnValue: 'dontAsk'
-      }
-    })
-    return showModal(modal)
+    return Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        header={s.strings.otp_reset_modal_header}
+        message={s.strings.otp_reset_modal_message}
+        buttons={{
+          enable: { label: s.strings.enable, type: 'primary' },
+          cancel: { label: s.strings.skip_button, type: 'secondary' },
+          dontAsk: {
+            label: s.strings.otp_reset_modal_dont_ask,
+            type: 'secondary'
+          }
+        }}
+      />
+    ))
   }
 
   if (otpKey) {

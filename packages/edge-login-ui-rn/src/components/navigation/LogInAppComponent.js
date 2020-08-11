@@ -14,7 +14,6 @@ import {
 import { type WorkflowState } from '../../reducers/WorkflowReducer.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import { ModalManager as ModalManagerLogin } from '../../util/ModalManager.js'
 import { ForgotPasswordChangePassword } from '../screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
 import { ForgotPinChangePinScene } from '../screens/existingAccout/ChangeAccountPinScreenComponent.js'
 import { LoginWithRecoveryQuestionsScreen } from '../screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent.js'
@@ -70,7 +69,6 @@ class LoginAppComponent extends Component<Props, State> {
     const { ScreenStyle } = Styles
     return (
       <View accessible style={ScreenStyle}>
-        <ModalManagerLogin />
         {this.renderContent()}
       </View>
     )
