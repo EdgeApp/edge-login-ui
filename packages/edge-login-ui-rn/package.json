@@ -27,10 +27,10 @@
     "prepare": "echo nothing to do"
   },
   "dependencies": {
-    "edge-components": "^0.0.28",
     "material-ui": "^0.20.0",
     "moment": "^2.19.3",
     "qrcode-generator": "^1.4.4",
+    "react-native-airship": "^0.2.1",
     "react-native-device-info": "^0.11.0",
     "react-native-extra-dimensions-android": "^1.2.5",
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
@@ -38,6 +38,7 @@
     "react-native-mail": "^3.0.5",
     "react-native-material-textfield": "git://github.com/EdgeApp/react-native-material-textfield.git",
     "react-native-modal": "^11.0.1",
+    "react-native-patina": "^0.1.2",
     "react-native-vector-icons": "^6.1.0",
     "react-redux": "^5.0.7",
     "redux": "~3.5.2",

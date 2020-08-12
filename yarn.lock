@@ -3897,13 +3897,6 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-edge-components@^0.0.28:
-  version "0.0.28"
-  resolved "https://registry.yarnpkg.com/edge-components/-/edge-components-0.0.28.tgz#fc4d4dc3354d7c8c316f9bf852951eda75543d5b"
-  integrity sha512-MlT722QmkFq+ABxEL0hJF/Fo9cnzoV7QAqEuVSL32j9kuvKHqFy3Dtv4wLeCWIjnAy8fPWlNBOy0GGuuocgtzQ==
-  dependencies:
-    react-native-linear-gradient "^2.4.0"
-
 edge-core-js@^0.13.5:
   version "0.13.8"
   resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.13.8.tgz#cd6d50d8c6377cd3fb8b0124ff8f95e209765a89"
@@ -8772,6 +8765,13 @@ react-modal@^3.9.1:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
+react-native-airship@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-airship/-/react-native-airship-0.2.1.tgz#b1cd8add45bf2a0d9428f92fcb345322c25ecaa4"
+  integrity sha512-o2JLjxo8q0nBpFXTsqG5Ps1uc1otBc791iflpnBoRn+/XwgYao36dllC2Si/5Ec4z6SDgbUaMsmOIS7FlczEpQ==
+  dependencies:
+    react-native-safe-area-view "^0.14.9"
+
 react-native-animatable@^1.3.1:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.2.tgz#4783ee1a73dc98815aef234ce6b819f80bfe7d80"
@@ -8802,7 +8802,7 @@ react-native-keyboard-aware-scroll-view@^0.9.1:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
 
-react-native-linear-gradient@^2.0.0, react-native-linear-gradient@^2.4.0:
+react-native-linear-gradient@^2.0.0:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
   integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
@@ -8825,6 +8825,18 @@ react-native-modal@^11.0.1:
   dependencies:
     prop-types "^15.6.2"
     react-native-animatable "^1.3.1"
+
+react-native-patina@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-patina/-/react-native-patina-0.1.2.tgz#0a3c4f6c521eab8435e0b2b47748926562ae8bfe"
+  integrity sha512-nqnUzmrqINt0GAfNJTp62F1SrKND7ix/FNV5qLde1gqAAuqmiyIBoe7x1FlplA7mgs75l7mVERN7X+pmNDGF1A==
+
+react-native-safe-area-view@^0.14.9:
+  version "0.14.9"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.14.9.tgz#90ee8383037010d9a5055a97cf97e4c1da1f0c3d"
+  integrity sha512-WII/ulhpVyL/qbYb7vydq7dJAfZRBcEhg4/UWt6F6nAKpLa3gAceMOxBxI914ppwSP/TdUsandFy6lkJQE0z4A==
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
 
 react-native-vector-icons@^6.1.0:
   version "6.1.0"

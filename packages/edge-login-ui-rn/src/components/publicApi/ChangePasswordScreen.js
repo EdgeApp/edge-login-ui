@@ -11,6 +11,8 @@ import thunk from 'redux-thunk'
 import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
 import { type Action, type Imports } from '../../types/ReduxTypes.js'
 import { ChangePasswordApp } from '../navigation/ChangePasswordAppComponent.js'
+import { Airship } from '../services/AirshipInstance.js'
+import { ThemeProvider } from '../services/ThemeContext.js'
 
 type Props = {
   account: EdgeAccount,
@@ -48,7 +50,11 @@ export class ChangePasswordScreen extends Component<Props> {
   render() {
     return (
       <Provider store={this.store}>
-        <ChangePasswordApp showHeader={this.props.showHeader} />
+        <ThemeProvider>
+          <Airship avoidAndroidKeyboard statusBarTranslucent>
+            <ChangePasswordApp showHeader={this.props.showHeader} />
+          </Airship>
+        </ThemeProvider>
       </Provider>
     )
   }
