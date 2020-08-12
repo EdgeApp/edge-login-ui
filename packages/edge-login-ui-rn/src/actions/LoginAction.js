@@ -63,9 +63,14 @@ export function loginWithRecovery(
       dispatch({ type: 'LOGIN_RECOVERY_SUCCEESS', data: obj })
     } catch (e) {
       if (e.name === 'OtpError') {
-        e.loginAttempt = 'RECOVERY'
-        e.loginAttemptData = answers
-        dispatch({ type: 'OTP_ERROR', data: e })
+        dispatch({
+          type: 'OTP_ERROR',
+          data: {
+            error: e,
+            loginAttempt: 'RECOVERY',
+            loginAttemptData: answers
+          }
+        })
         return
       }
       console.log(e.message)
@@ -80,7 +85,13 @@ export function resetOtpReset() {
     const state = getState()
     const context = imports.context
     const username = state.login.username
-    const otpResetToken = state.login.otpResetToken
+    if (
+      state.login.otpError == null ||
+      state.login.otpError.resetToken == null
+    ) {
+      throw new Error('No reset token')
+    }
+    const otpResetToken = state.login.otpError.resetToken
     try {
       const response = await context.requestOtpReset(username, otpResetToken)
       console.log(response)
@@ -197,8 +208,13 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
         } catch (e) {
           console.log('LOG IN WITH PIN ERROR ', e)
           if (e.name === 'OtpError') {
-            e.loginAttempt = 'PIN'
-            dispatch({ type: 'OTP_ERROR', data: e })
+            dispatch({
+              type: 'OTP_ERROR',
+              data: {
+                error: e,
+                loginAttempt: 'PIN'
+              }
+            })
             return
           }
           if (e.message === 'Unexpected end of data') {
@@ -289,8 +305,13 @@ export function userLogin(data: Object, backupKey?: string) {
       } catch (e) {
         console.log(e)
         if (e.name === 'OtpError' && !myAccountOptions.otp) {
-          e.loginAttempt = 'PASSWORD'
-          dispatch({ type: 'OTP_ERROR', data: e })
+          dispatch({
+            type: 'OTP_ERROR',
+            data: {
+              error: e,
+              loginAttempt: 'PASSWORD'
+            }
+          })
           return
         }
         const rawMessage = e.message

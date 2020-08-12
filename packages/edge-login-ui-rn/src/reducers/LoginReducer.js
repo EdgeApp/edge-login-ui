@@ -1,6 +1,6 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-core-js'
+import { type EdgeAccount, type OtpError } from 'edge-core-js'
 import { type Reducer } from 'redux'
 
 import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
@@ -17,8 +17,7 @@ export type LoginState = {
   +isLoggingInWithPin: boolean,
   +loginSuccess: boolean,
   +otpErrorMessage: string | null,
-  +otpResetDate: Date | null,
-  +otpResetToken: string,
+  +otpError: OtpError | null,
   +otpUserBackupKey: string,
   +password: string | null,
   +pin: string | null,
@@ -39,8 +38,7 @@ const initialState: LoginState = {
   errorMessage: null,
   otpErrorMessage: null,
   isLoggingInWithPin: false,
-  otpResetToken: '',
-  otpResetDate: null,
+  otpError: null,
   otpUserBackupKey: '', // S7UQ66VYNZKAX4EV
   recoveryToken: null,
   previousAttemptType: null,
@@ -118,8 +116,7 @@ export const login: Reducer<LoginState, Action> = function(
     case 'OTP_ERROR':
       return {
         ...state,
-        otpResetToken: action.data.resetToken,
-        otpResetDate: action.data.resetDate,
+        otpError: action.data.error,
         previousAttemptType: action.data.loginAttempt,
         previousAttemptData: action.data.loginAttemptData
       }

@@ -23,7 +23,7 @@ type OwnProps = {}
 type StateProps = {
   backupKeyError?: string,
   loginSuccess: boolean,
-  otpResetDate: Date | null,
+  otpResetDate?: Date,
   screen: string
 }
 type DispatchProps = {
@@ -304,7 +304,10 @@ const OtpErrorScreenStyle = {
 
 export const OtpErrorScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => {
-    const otpResetDate = state.login.otpResetDate
+    let otpResetDate
+    if (state.login.otpError != null) {
+      otpResetDate = state.login.otpError.resetDate
+    }
     const screen = otpResetDate
       ? Constants.OTP_SCREEN_TWO
       : Constants.OTP_SCREEN_ONE
