@@ -5,7 +5,7 @@ import { Image, Text, View } from 'react-native'
 
 import { LOGO_DOT } from '../../assets/'
 import s from '../../common/locales/strings.js'
-import { Button } from '../common'
+import { Button } from '../common/Button.js'
 
 type Props = {
   style: any,

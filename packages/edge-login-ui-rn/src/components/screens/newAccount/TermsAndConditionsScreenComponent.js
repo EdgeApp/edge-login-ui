@@ -14,7 +14,8 @@ import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
-import { Button, Checkbox } from '../../common'
+import { Button } from '../../common/Button.js'
+import { Checkbox } from '../../common/Checkbox.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type OwnProps = {

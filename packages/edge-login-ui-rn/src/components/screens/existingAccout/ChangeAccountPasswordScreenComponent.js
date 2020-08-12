@@ -18,7 +18,7 @@ import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
-import { Button } from '../../common'
+import { Button } from '../../common/Button.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { ChangePasswordModal } from '../../modals/ChangePasswordModal.js'
 

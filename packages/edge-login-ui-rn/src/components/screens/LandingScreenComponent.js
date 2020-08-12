@@ -11,7 +11,9 @@ import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { scale } from '../../util/scaling.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
-import { BackgroundImage, Button, HeaderParentButtons } from '../common'
+import { BackgroundImage } from '../common/BackgroundImage.js'
+import { Button } from '../common/Button.js'
+import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 
 type OwnProps = {
   appId?: string,

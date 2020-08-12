@@ -9,8 +9,8 @@ import * as Colors from '../../../constants/Colors.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { scale } from '../../../util/scaling.js'
-import { Spinner } from '../../common'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { Spinner } from '../../common/Spinner.js'
 
 type Props = {}
 

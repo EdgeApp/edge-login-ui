@@ -13,7 +13,8 @@ import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
-import { Button, HeaderBackButton } from '../../common'
+import { Button } from '../../common/Button.js'
+import { HeaderBackButton } from '../../common/HeaderBackButton.js'
 import SafeAreaView from '../../common/SafeAreaView.js'
 
 type OwnProps = {

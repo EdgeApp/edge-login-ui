@@ -9,13 +9,9 @@ import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
 import { LogoImageHeader } from '../../components/abSpecific/LogoImageHeader.js'
 import { UserListItem } from '../../components/abSpecific/UserListItem.js'
-import {
-  BackgroundImage,
-  Button,
-  DropDownList,
-  HeaderParentButtons,
-  ImageButton
-} from '../../components/common'
+import { Button } from '../../components/common/Button.js'
+import { ImageButton } from '../../components/common/ImageButton.js'
+import { DropDownList } from '../../components/common/index.js'
 import * as Constants from '../../constants/index.js'
 import { type LoginUserInfo } from '../../reducers/PreviousUsersReducer.js'
 import * as Styles from '../../styles/index.js'
@@ -23,6 +19,8 @@ import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { scale, scaleH } from '../../util/scaling.js'
 import { FourDigit } from '../abSpecific/FourDigitComponent.js'
 import { PinKeypad } from '../abSpecific/PinKeypad.js'
+import { BackgroundImage } from '../common/BackgroundImage.js'
+import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { DeleteUserModal } from '../modals/DeleteUserModal.js'
 
 type OwnProps = {

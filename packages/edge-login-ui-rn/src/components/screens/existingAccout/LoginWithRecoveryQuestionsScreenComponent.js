@@ -12,8 +12,10 @@ import { RecoverPasswordUsernameInput } from '../../../connectors/componentConne
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
-import { Button, FormField, StaticModal } from '../../common/'
+import { Button } from '../../common/Button.js'
+import { FormField } from '../../common/index.js'
 import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
+import { StaticModal } from '../../common/StaticModal.js'
 import { SetRecoveryUsernameModal } from '../../modals/SetRecoveryUsernameModal.js'
 
 type OwnProps = {

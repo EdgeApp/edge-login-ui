@@ -8,9 +8,9 @@ type Props = {
   label: string,
   checkedImage: string,
   uncheckedImage: string,
-  value: boolean,
-  disabled: boolean,
-  isSelected: boolean,
+  value?: boolean,
+  disabled?: boolean,
+  isSelected?: boolean,
   onChange(boolean): void
 }
 

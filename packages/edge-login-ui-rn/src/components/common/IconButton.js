@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { TouchableHighlight, View } from 'react-native'
 
-import { Icon } from './'
+import { Icon } from './Icon.js'
 
 type Props = {
   icon: string,

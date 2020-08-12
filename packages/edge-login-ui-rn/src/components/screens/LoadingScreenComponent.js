@@ -5,7 +5,8 @@ import { View } from 'react-native'
 
 import * as Assets from '../../assets/'
 import * as Styles from '../../styles/index.js'
-import { BackgroundImage, Spinner } from '../common'
+import { BackgroundImage } from '../common/BackgroundImage.js'
+import { Spinner } from '../common/Spinner.js'
 
 type Props = {
   backgroundImage?: any

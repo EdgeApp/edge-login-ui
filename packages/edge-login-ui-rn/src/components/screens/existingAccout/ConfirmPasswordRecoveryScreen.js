@@ -5,7 +5,7 @@ import { Text, View } from 'react-native'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
-import { Button } from '../../common/'
+import { Button } from '../../common/Button.js'
 import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 

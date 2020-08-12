@@ -14,7 +14,9 @@ import Modal from 'react-native-modal'
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { scale } from '../../util/scaling.js'
-import { Button, Icon, IconButton } from './'
+import { IconButton } from '../common/IconButton.js'
+import { Button } from './Button.js'
+import { Icon } from './Icon.js'
 
 type Props = {
   styles: Object,

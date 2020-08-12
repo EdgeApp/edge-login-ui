@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 import { validatePin } from '../../actions/CreateAccountActions.js'
 import * as Constants from '../../constants/index.js'
 import type { Dispatch, RootState } from '../../types/ReduxTypes.js'
-import { Spinner } from '../common'
+import { Spinner } from '../common/Spinner.js'
 
 type OwnProps = {
   style: Object
