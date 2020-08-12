@@ -2829,6 +2829,11 @@ clean-stack@^2.0.0:
   resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
   integrity sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==
 
+cleaners@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/cleaners/-/cleaners-0.2.1.tgz#535849cfabc91e3ae1fc872b43d450446cd1a1a1"
+  integrity sha512-DSz39+aAcvfqwruSz7H7xY9kE3tRbMTiq2GQtZHpNWox2npyoQGdMUYR7pYgApJNSDY5Q9GNRo+JyncxI5USIA==
+
 cli-cursor@^2.0.0, cli-cursor@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-2.1.0.tgz#b35dac376479facc3e94747d41d0d0f5238ffcb5"
@@ -3760,6 +3765,13 @@ disklet@^0.3.1:
   dependencies:
     rfc4648 "^0.9.1"
 
+disklet@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/disklet/-/disklet-0.4.5.tgz#f62546a94f939cca4dd20d9c3d5c5e43c9529441"
+  integrity sha512-ivPnHcgFOR5kXcAhR2pMrwtNfNAtoWW0SZ0laSFCr4vboU28PERUKLtUeCC0PWh/X3ykZ+3UFE5doALSOuthnQ==
+  dependencies:
+    rfc4648 "^1.3.0"
+
 doctrine@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.5.0.tgz#379dce730f6166f76cefa4e6707a159b02c5a6fa"
@@ -3924,6 +3936,32 @@ edge-core-js@^0.13.5:
     utf8 "^3.0.0"
     ws "^5.1.1"
     yaob "^0.3.1"
+
+edge-core-js@^0.17.9:
+  version "0.17.9"
+  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.17.9.tgz#a7ff5fd795789b131ca34b8204a18c147671308f"
+  integrity sha512-CYrQuec+WtvyN/GR5uiN47e8EllH9n05k3xCc3USx0Ug9L1BeGWR+XmXbqwQNbTx8t3ZDN5Ue2QU8zKf2JELOQ==
+  dependencies:
+    aes-js "^3.1.0"
+    base-x "^1.0.4"
+    biggystring "^3.0.2"
+    cleaners "^0.2.1"
+    currency-codes "^1.1.2"
+    disklet "^0.4.5"
+    elliptic "^6.4.0"
+    esm "^3.2.4"
+    ethereumjs-tx "^1.3.7"
+    ethereumjs-util "^5.2.0"
+    hash.js "^1.0.3"
+    hmac-drbg "^1.0.1"
+    json-csv "^1.5.0"
+    node-fetch "^2.0.0"
+    redux "^3.6.0"
+    redux-keto "^0.3.3"
+    redux-pixies "^0.3.6"
+    rfc4648 "^1.1.0"
+    scrypt-js "^2.0.3"
+    yaob "^0.3.6"
 
 edge-currency-ethereum@^0.10.3:
   version "0.10.3"
@@ -4275,6 +4313,11 @@ eslint@>=6.2.2:
     table "^5.2.3"
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
+
+esm@^3.2.4:
+  version "3.2.25"
+  resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
+  integrity sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==
 
 espree@^6.1.2:
   version "6.1.2"
@@ -9055,6 +9098,11 @@ redux-keto@^0.3.2:
   resolved "https://registry.yarnpkg.com/redux-keto/-/redux-keto-0.3.2.tgz#15c18d61fec5e76e3d0d3f02767a996fee4ff622"
   integrity sha512-ZSCnq/8bHW/LmXLKn0v770av4lQG2S56LMpeW8ebQHY3LwHuVyilSd0XewCwYl37ZIN11t7AxHWFj+Fso9l7NA==
 
+redux-keto@^0.3.3:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/redux-keto/-/redux-keto-0.3.4.tgz#1bf78a36736dc181dd419b10e57116dea17fa3a5"
+  integrity sha512-16q/QujMkv+zdsVRExJuGbl6grXZLoRakBbQR5E9DmEAPIeJoXtjmc6L3bCMUVjBfF+0XFQyJDZwjhS2guh+ng==
+
 redux-logger@~2.7.4:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-2.7.4.tgz#891e5d29e7f111d08b5781a237b9965b5858c7f8"
@@ -9338,6 +9386,11 @@ rfc4648@^1.1.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/rfc4648/-/rfc4648-1.2.1.tgz#3d05ae826df5a305ce6f45a19a7756ddf4e551d0"
   integrity sha512-WtA5N+n7sYVszB4K4ETLoIhREBH4Q/DHpoB/xK8pFPPAmd9TZGLWvj+UTnT3Le1r9va2uj9KZ/79nC7IfeT7vA==
+
+rfc4648@^1.3.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/rfc4648/-/rfc4648-1.4.0.tgz#c75b2856ad2e2d588b6ddb985d556f1f7f2a2abd"
+  integrity sha512-3qIzGhHlMHA6PoT6+cdPKZ+ZqtxkIvg8DZGKA5z6PQ33/uuhoJ+Ws/D/J9rXW6gXodgH8QYlz2UCl+sdUDmNIg==
 
 rgb-regex@^1.0.1:
   version "1.0.1"
@@ -11115,6 +11168,13 @@ yaob@^0.3.1:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/yaob/-/yaob-0.3.4.tgz#b47433264622bebb14821b5835480d250c22c0d6"
   integrity sha512-oSMZPHAJcsqZgqsYgg3tmTnTWlTkSeq1BBaln4kiIkBbu4NQOQZDHqoBZ5kZXRkyBxMXKgchBFaWUze0KyLDBQ==
+  dependencies:
+    rfc4648 "^1.1.0"
+
+yaob@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/yaob/-/yaob-0.3.6.tgz#84f9970d2e3629e041a791d1dea41f8a5387e91f"
+  integrity sha512-MGfSGsmQsRgWM62vPn+7NjSeU70EH78aZg5uXhLGAw94C7nMDxKJaamozTTGuiF4cwp8bsoM4cOhiDogk23INg==
   dependencies:
     rfc4648 "^1.1.0"
 

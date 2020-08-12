@@ -93,7 +93,13 @@ export type Action =
       }
     }
   | { type: 'ON_RECOVERY_LOGIN_NOT_ENABLED', data?: string /* error */ }
-  | { type: 'OTP_ERROR', data: OtpError }
+  | {
+      type: 'OTP_ERROR',
+      data: OtpError & {
+        loginAttempt: 'PASSWORD' | 'PIN' | 'RECOVERY',
+        loginAttemptData?: string[]
+      }
+    }
   | { type: 'OTP_LOGIN_BACKUPKEY_FAIL', data: string }
   | { type: 'OTP_RESET_REQUEST', data: Date }
   | {
