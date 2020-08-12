@@ -426,7 +426,7 @@ export const PinLoginScreen = connect(
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data })
     },
     gotoLoginPage: () => {
-      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PASSWORD })
+      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
     launchDeleteModal: () => {
       dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' })

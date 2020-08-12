@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 
-import { WORKFLOW_PIN } from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { ChangeAccountPinScreen } from '../screens/existingAccout/ChangeAccountPinScreenComponent.js'
@@ -37,7 +36,7 @@ export const ChangePinApp = connect(
   (state: RootState) => ({}),
   (dispatch: Dispatch): DispatchProps => ({
     setWorkflow() {
-      dispatch({ type: 'WORKFLOW_START', data: WORKFLOW_PIN })
+      dispatch({ type: 'WORKFLOW_START', data: 'pinWF' })
     }
   })
 )(ChangePinAppComponent)

@@ -327,7 +327,7 @@ export const OtpErrorScreen = connect(
   },
   (dispatch: Dispatch): DispatchProps => ({
     goBack() {
-      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PASSWORD })
+      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
     resetOtpToken() {
       dispatch(resetOtpReset())

@@ -3,13 +3,12 @@
 import { connect } from 'react-redux'
 
 import { Header } from '../../components/common/Header.js'
-import * as Constants from '../../constants/index.js'
+import { workflows } from '../../constants/workflows.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 
 const mapStateToProps = (state: RootState) => {
-  const workflow = state.workflow
-  const currentWorkflow = workflow[state.workflow.currentKey]
-  const currentScene = currentWorkflow.details[state.workflow.currentSceneIndex]
+  const { currentKey, currentSceneIndex } = state.workflow
+  const currentScene = workflows[currentKey][currentSceneIndex]
   return {
     showBackButton: currentScene.back,
     showSkipButton: currentScene.skip,
@@ -21,8 +20,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    goBack: () =>
-      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PASSWORD })
+    goBack: () => dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
   }
 }
 

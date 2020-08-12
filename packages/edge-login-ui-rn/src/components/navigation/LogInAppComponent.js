@@ -5,7 +5,6 @@ import { View } from 'react-native'
 import { connect } from 'react-redux'
 
 import { getPreviousUsers } from '../../actions/PreviousUsersActions.js'
-import * as Constants from '../../constants/index.js'
 import { getSupportedBiometryType } from '../../keychain.js'
 import {
   type LoginUserInfo,
@@ -79,7 +78,7 @@ class LoginAppComponent extends Component<Props, State> {
       return this.getLoadingScreen()
     }
     switch (this.props.workflow.currentKey) {
-      case Constants.WORKFLOW_FIRST_LOAD:
+      case 'firstLoadWF':
         if (
           (!this.props.previousUsers ||
             this.props.previousUsers.userList.length === 0) &&
@@ -105,24 +104,24 @@ class LoginAppComponent extends Component<Props, State> {
         // we have previous users, but no pin enabled previous user.
         return this.getPasswordScreen()
 
-      case Constants.WORKFLOW_INIT:
+      case 'initalizeWF':
         return this.getLandingScreen()
-      case Constants.WORKFLOW_PASSWORD:
+      case 'passwordWF':
         if (this.props.recoveryLogin) {
           this.props.startRecoveryWorkflow(this.props.recoveryLogin)
           return
           // return this.getRecoveryLoginScreen()
         }
         return this.getPasswordScreen()
-      case Constants.WORKFLOW_PASSWORD_FORCED:
+      case 'passwordWFForced':
         return this.getPasswordScreen()
-      case Constants.WORKFLOW_PIN:
+      case 'pinWF':
         return this.getPinScreen()
-      case Constants.WORKFLOW_CREATE:
+      case 'createWF':
         return this.getCreateScreen()
-      case Constants.WORKFLOW_OTP:
+      case 'otpWF':
         return this.getOtpScreen()
-      case Constants.WORKFLOW_RECOVERY_LOGIN:
+      case 'recoveryLoginWF':
         return this.getRecoveryLoginScreen()
     }
   }

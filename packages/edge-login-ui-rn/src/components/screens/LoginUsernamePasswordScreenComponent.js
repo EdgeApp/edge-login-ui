@@ -567,10 +567,10 @@ export const LoginUsernamePasswordScreen = connect(
   }),
   (dispatch: Dispatch): DispatchProps => ({
     gotoCreatePage() {
-      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_CREATE })
+      dispatch({ type: 'WORKFLOW_START', data: 'createWF' })
     },
     gotoPinLoginPage() {
-      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PIN })
+      dispatch({ type: 'WORKFLOW_START', data: 'pinWF' })
     },
     launchDeleteModal() {
       dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' })

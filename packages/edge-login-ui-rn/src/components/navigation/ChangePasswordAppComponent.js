@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 
-import { WORKFLOW_PASSWORD } from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { ChangeAccountPasswordScreen } from '../screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
@@ -37,7 +36,7 @@ export const ChangePasswordApp = connect(
   (state: RootState) => ({}),
   (dispatch: Dispatch): DispatchProps => ({
     setWorkflow() {
-      dispatch({ type: 'WORKFLOW_START', data: WORKFLOW_PASSWORD })
+      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     }
   })
 )(ChangePasswordAppComponent)

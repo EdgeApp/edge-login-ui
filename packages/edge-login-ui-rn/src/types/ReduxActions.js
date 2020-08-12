@@ -7,6 +7,7 @@ import {
   type OtpError
 } from 'edge-core-js'
 
+import { type WorkflowName } from '../constants/workflows.js'
 import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
 
 // Actions with no payload:
@@ -115,4 +116,4 @@ export type Action =
   | { type: 'SET_RECOVERY_KEY', data: string }
   | { type: 'START_EDGE_LOGIN_REQUEST', data: EdgePendingEdgeLogin }
   | { type: 'UPDATE_WAIT_TIMER', data: { seconds: number } } // Apparently unused
-  | { type: 'WORKFLOW_START', data: string }
+  | { type: 'WORKFLOW_START', data: WorkflowName }

@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 
 import { cancel } from '../../actions/WorkflowActions.js'
 import { Header } from '../../components/common/Header.js'
+import { workflows } from '../../constants/workflows.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 
 const mapStateToProps = (state: RootState) => {
-  const workflow = state.workflow
-  const currentWorkflow = workflow[state.workflow.currentKey]
-  const currentScene = currentWorkflow.details[state.workflow.currentSceneIndex]
+  const { currentKey, currentSceneIndex } = state.workflow
+  const currentScene = workflows[currentKey][currentSceneIndex]
   return {
     showBackButton: currentScene.back,
     showSkipButton: currentScene.skip,
