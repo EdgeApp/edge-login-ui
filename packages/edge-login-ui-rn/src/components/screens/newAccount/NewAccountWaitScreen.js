@@ -19,7 +19,7 @@ export class NewAccountWaitScreen extends Component<Props> {
     return (
       <SafeAreaView>
         <View style={CreatingAccountWaitScreenStyle.container}>
-          <HeaderConnector style={CreatingAccountWaitScreenStyle.header} />
+          <HeaderConnector />
           <View style={CreatingAccountWaitScreenStyle.pageContainer}>
             <View style={CreatingAccountWaitScreenStyle.topPad} />
             <View style={CreatingAccountWaitScreenStyle.iconContianer}>
@@ -52,7 +52,6 @@ export class NewAccountWaitScreen extends Component<Props> {
 
 const CreatingAccountWaitScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerScaledStyle,
   container: {},
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,

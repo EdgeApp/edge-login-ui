@@ -74,9 +74,9 @@ class RecoveryLoginScreenComponent extends Component<Props, State> {
     this.props.updateUsername('')
   }
 
-  renderHeader = (style: typeof LoginWithRecoveryStyles) => {
+  renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector style={style.header} />
+      return <HeaderConnector />
     }
     return null
   }
@@ -177,7 +177,7 @@ class RecoveryLoginScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaViewGradient>
         <View style={styles.screen}>
-          {this.renderHeader(styles)}
+          {this.renderHeader()}
           <View style={styles.body}>
             <View style={styles.questionRow}>
               <Text style={styles.questionText}>{this.props.question1}</Text>
@@ -231,10 +231,6 @@ class RecoveryLoginScreenComponent extends Component<Props, State> {
 
 const LoginWithRecoveryStyles = {
   screen: { ...Styles.ScreenStyle, marginTop: 5 },
-  header: {
-    ...Styles.HeaderContainerScaledStyle,
-    backgroundColor: Constants.PRIMARY
-  },
   /* gradient: {
     height: THEME.HEADER
   }, */

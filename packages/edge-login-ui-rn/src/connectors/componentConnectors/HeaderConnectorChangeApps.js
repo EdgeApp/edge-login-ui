@@ -7,7 +7,6 @@ import { workflows } from '../../constants/workflows.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 
 type OwnProps = {
-  style: Object,
   customLabel?: string,
   skipScreen?: () => void
 }

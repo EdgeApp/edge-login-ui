@@ -117,7 +117,7 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={TermsAndConditionsScreenStyle.screen}>
-          <HeaderConnector style={TermsAndConditionsScreenStyle.header} />
+          <HeaderConnector />
           <View style={TermsAndConditionsScreenStyle.pageContainer}>
             <ScrollView ref={ref => (this.scrollView = ref)}>
               {this.renderInstructions(TermsAndConditionsScreenStyle)}
@@ -171,7 +171,6 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
 
 const TermsAndConditionsScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerScaledStyle,
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'

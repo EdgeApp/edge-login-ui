@@ -92,9 +92,9 @@ class ChangePasswordScreenComponent extends Component<Props, State> {
     this.props.changePassword(this.props.password)
   }
 
-  renderHeader = (style: typeof NewAccountPasswordScreenStyle) => {
+  renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector style={style.header} />
+      return <HeaderConnector />
     }
     return null
   }
@@ -161,7 +161,7 @@ class ChangePasswordScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={NewAccountPasswordScreenStyle.screen}>
-          {this.renderHeader(NewAccountPasswordScreenStyle)}
+          {this.renderHeader()}
           {this.renderMain(NewAccountPasswordScreenStyle)}
           {this.renderModal(NewAccountPasswordScreenStyle)}
         </View>
@@ -172,7 +172,6 @@ class ChangePasswordScreenComponent extends Component<Props, State> {
 
 const NewAccountPasswordScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerScaledStyle,
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center',

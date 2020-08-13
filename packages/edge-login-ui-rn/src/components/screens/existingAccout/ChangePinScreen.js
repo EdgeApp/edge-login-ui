@@ -54,9 +54,9 @@ class ChangePinScreenComponent extends Component<Props, State> {
     }
   }
 
-  renderHeader = (style: typeof SetAccountPinScreenStyle) => {
+  renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector style={style.header} />
+      return <HeaderConnector />
     }
     return null
   }
@@ -107,7 +107,7 @@ class ChangePinScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={SetAccountPinScreenStyle.screen}>
-          {this.renderHeader(SetAccountPinScreenStyle)}
+          {this.renderHeader()}
           <View style={SetAccountPinScreenStyle.pageContainer}>
             <View style={SetAccountPinScreenStyle.row1}>
               <Text style={SetAccountPinScreenStyle.instructions}>
@@ -141,10 +141,6 @@ class ChangePinScreenComponent extends Component<Props, State> {
 
 const SetAccountPinScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: {
-    ...Styles.HeaderContainerScaledStyle,
-    backgroundColor: Constants.PRIMARY
-  },
   pageContainer: Styles.PageContainerWithHeaderStyle,
   row1: {
     ...Styles.ScreenRow,

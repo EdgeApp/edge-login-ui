@@ -100,9 +100,9 @@ class ChangeRecoveryScreenComponent extends Component<Props, State> {
     }
   }
 
-  renderHeader = (styles: typeof RecoverPasswordSceneStyles) => {
+  renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector style={styles.header} />
+      return <HeaderConnector />
     }
     return null
   }
@@ -478,7 +478,7 @@ class ChangeRecoveryScreenComponent extends Component<Props, State> {
       : this.renderForm(RecoverPasswordSceneStyles)
     return (
       <View style={RecoverPasswordSceneStyles.screen}>
-        {this.renderHeader(RecoverPasswordSceneStyles)}
+        {this.renderHeader()}
         {middle}
         {this.renderDisableModal(RecoverPasswordSceneStyles)}
         {this.showEmailDialog(RecoverPasswordSceneStyles)}
@@ -487,12 +487,9 @@ class ChangeRecoveryScreenComponent extends Component<Props, State> {
     )
   }
 }
+
 const RecoverPasswordSceneStyles = {
   screen: { ...Styles.ScreenStyle },
-  header: {
-    ...Styles.HeaderContainerScaledStyle,
-    backgroundColor: Constants.PRIMARY
-  },
   body: {
     padding: scale(18)
   },

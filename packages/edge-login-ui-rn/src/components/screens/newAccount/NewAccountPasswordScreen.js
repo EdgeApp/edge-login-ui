@@ -59,7 +59,7 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
           keyboardShouldPersistTaps="always"
           contentContainerStyle={NewAccountPasswordScreenStyle.mainScrollView}
         >
-          <HeaderConnector style={NewAccountPasswordScreenStyle.header} />
+          <HeaderConnector />
           {this.renderMain(NewAccountPasswordScreenStyle)}
           {this.renderModal(NewAccountPasswordScreenStyle)}
         </KeyboardAwareScrollView>
@@ -169,7 +169,6 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
 
 const NewAccountPasswordScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerScaledStyle,
   mainScrollView: {
     position: 'relative',
     width: '100%',

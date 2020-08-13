@@ -53,7 +53,7 @@ class NewAccountUsernameScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={NewAccountUsernameScreenStyle.screen}>
-          <HeaderConnector style={NewAccountUsernameScreenStyle.header} />
+          <HeaderConnector />
           <View style={NewAccountUsernameScreenStyle.pageContainer}>
             <View style={NewAccountUsernameScreenStyle.instructions}>
               <T style={NewAccountUsernameScreenStyle.instructionsText}>
@@ -99,7 +99,6 @@ class NewAccountUsernameScreenComponent extends Component<Props, State> {
 
 const NewAccountUsernameScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerScaledStyle,
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'

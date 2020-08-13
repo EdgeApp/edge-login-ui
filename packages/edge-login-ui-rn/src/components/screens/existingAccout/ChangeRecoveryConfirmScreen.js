@@ -25,7 +25,6 @@ export class ChangeRecoveryConfirmScreen extends Component<Props> {
       <SafeAreaView>
         <View style={style.screen}>
           <Header
-            style={style.header}
             showBackButton
             showSkipButton={false}
             title={s.strings.confirm_recovery_questions}
@@ -68,10 +67,6 @@ export class ChangeRecoveryConfirmScreen extends Component<Props> {
 
 const ConfirmPasswordRecoverySceneStyles = {
   screen: { ...Styles.ScreenStyle, alignItems: 'center' },
-  header: {
-    ...Styles.HeaderContainerScaledStyle,
-    backgroundColor: Constants.PRIMARY
-  },
   submitButton: {
     upStyle: Styles.PrimaryWidthButtonUpStyle,
     upTextStyle: Styles.PrimaryButtonUpTextStyle,

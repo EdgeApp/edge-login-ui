@@ -26,7 +26,7 @@ class NewAccountReviewScreenComponent extends Component<Props> {
     return (
       <SafeAreaView>
         <View style={NewAccountReviewScreenStyle.screen}>
-          <HeaderConnector style={NewAccountReviewScreenStyle.header} />
+          <HeaderConnector />
           <View style={NewAccountReviewScreenStyle.pageContainer}>
             <View style={NewAccountReviewScreenStyle.instructionsContainer}>
               <Text style={NewAccountReviewScreenStyle.instructionsText}>
@@ -70,7 +70,6 @@ class NewAccountReviewScreenComponent extends Component<Props> {
 
 const NewAccountReviewScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerScaledStyle,
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'

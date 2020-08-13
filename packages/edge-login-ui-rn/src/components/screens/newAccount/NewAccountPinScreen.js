@@ -66,7 +66,7 @@ class NewAccountPinScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={SetAccountPinScreenStyle.screen}>
-          <HeaderConnector style={SetAccountPinScreenStyle.header} />
+          <HeaderConnector />
           <View style={SetAccountPinScreenStyle.pageContainer}>
             <View style={SetAccountPinScreenStyle.row1}>
               <Text style={SetAccountPinScreenStyle.instructions}>
@@ -123,10 +123,6 @@ class NewAccountPinScreenComponent extends Component<Props, State> {
 
 const SetAccountPinScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: {
-    ...Styles.HeaderContainerScaledStyle,
-    backgroundColor: Constants.PRIMARY
-  },
   pageContainer: Styles.PageContainerWithHeaderStyle,
   row1: {
     ...Styles.ScreenRow,

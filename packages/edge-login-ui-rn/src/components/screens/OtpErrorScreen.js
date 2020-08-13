@@ -187,7 +187,6 @@ class OtpErrorScreenComponent extends Component<Props, State> {
             goBack={this.props.goBack}
             showBackButton
             showSkipButton={false}
-            style={OtpErrorScreenStyle.header}
             subTitle=""
             title={s.strings.otp_header}
           />
@@ -220,9 +219,6 @@ class OtpErrorScreenComponent extends Component<Props, State> {
 
 const OtpErrorScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: {
-    ...Styles.HeaderContainerScaledStyle
-  },
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'
