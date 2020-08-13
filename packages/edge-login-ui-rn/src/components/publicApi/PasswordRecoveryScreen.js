@@ -3,15 +3,10 @@
 import { makeReactNativeFolder } from 'disklet'
 import { type EdgeAccount, type EdgeContext } from 'edge-core-js'
 import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import type { Store } from 'redux'
-import { applyMiddleware, createStore } from 'redux'
-import thunk from 'redux-thunk'
 
-import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
-import { type Action, type Imports } from '../../types/ReduxTypes.js'
 import { PasswordRecoveryApp } from '../navigation/PasswordRecoveryAppComponent.js'
 import { Airship } from '../services/AirshipInstance.js'
+import { ReduxStore } from '../services/ReduxStore.js'
 import { ThemeProvider } from '../services/ThemeContext.js'
 
 type Props = {
@@ -23,37 +18,25 @@ type Props = {
 }
 
 export class PasswordRecoveryScreen extends Component<Props> {
-  store: Store<RootState, Action>
-
-  constructor(props: Props) {
-    super(props)
-    const imports: Imports = {
-      accountOptions: {},
-      accountObject: this.props.account,
-      context: this.props.context,
-      folder: makeReactNativeFolder(),
-      onComplete: this.props.onComplete,
-      onCancel: this.props.onComplete,
-      callback: () => {}
-    }
-    this.store = createStore(
-      rootReducer,
-      undefined,
-      applyMiddleware(thunk.withExtraArgument(imports))
-    )
-  }
-
-  componentWillReceiveProps(props: Props) {}
-
   render() {
     return (
-      <Provider store={this.store}>
+      <ReduxStore
+        imports={{
+          accountObject: this.props.account,
+          accountOptions: {},
+          callback: () => {},
+          context: this.props.context,
+          folder: makeReactNativeFolder(),
+          onCancel: this.props.onComplete,
+          onComplete: this.props.onComplete
+        }}
+      >
         <ThemeProvider>
           <Airship avoidAndroidKeyboard statusBarTranslucent>
             <PasswordRecoveryApp showHeader={this.props.showHeader} />
           </Airship>
         </ThemeProvider>
-      </Provider>
+      </ReduxStore>
     )
   }
 }
