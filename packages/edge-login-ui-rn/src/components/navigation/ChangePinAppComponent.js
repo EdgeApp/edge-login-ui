@@ -36,7 +36,7 @@ export const ChangePinApp = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
     setWorkflow() {
-      dispatch({ type: 'WORKFLOW_START', data: 'pinWF' })
+      dispatch({ type: 'WORKFLOW_START', data: 'changePinWF' })
     }
   })
 )(ChangePinAppComponent)

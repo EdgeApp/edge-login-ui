@@ -36,7 +36,7 @@ export const ChangePasswordApp = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
     setWorkflow() {
-      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
+      dispatch({ type: 'WORKFLOW_START', data: 'changePasswordWF' })
     }
   })
 )(ChangePasswordAppComponent)

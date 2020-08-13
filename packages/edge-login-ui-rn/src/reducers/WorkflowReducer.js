@@ -12,7 +12,7 @@ export type WorkflowState = {
 }
 
 const initialState: WorkflowState = {
-  currentKey: 'firstLoadWF',
+  currentKey: 'loadingWF',
   currentSceneIndex: 0,
   showModal: false
 }

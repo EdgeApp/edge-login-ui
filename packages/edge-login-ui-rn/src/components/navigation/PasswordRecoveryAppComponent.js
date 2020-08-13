@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import { initializePasswordRecovery } from '../../actions/PasswordRecoveryActions.js'
+import { initializeChangeRecovery } from '../../actions/PasswordRecoveryActions.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { PublicChangeRecoveryScreen } from '../screens/existingAccout/ChangeRecoveryScreen.js'
@@ -13,14 +13,14 @@ type OwnProps = {
   showHeader: boolean
 }
 type DispatchProps = {
-  initializePasswordRecovery(): void
+  initializeChangeRecovery(): void
 }
 type Props = OwnProps & DispatchProps
 
 class PasswordRecoveryAppComponent extends Component<Props> {
   constructor(props: Props) {
     super(props)
-    this.props.initializePasswordRecovery()
+    this.props.initializeChangeRecovery()
   }
 
   render() {
@@ -36,8 +36,8 @@ class PasswordRecoveryAppComponent extends Component<Props> {
 export const PasswordRecoveryApp = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
-    initializePasswordRecovery() {
-      dispatch(initializePasswordRecovery())
+    initializeChangeRecovery() {
+      dispatch(initializeChangeRecovery())
     }
   })
 )(PasswordRecoveryAppComponent)

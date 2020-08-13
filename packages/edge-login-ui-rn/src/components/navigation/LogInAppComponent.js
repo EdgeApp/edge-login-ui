@@ -78,7 +78,7 @@ class LoginAppComponent extends Component<Props, State> {
       return this.getLoadingScreen()
     }
     switch (this.props.workflow.currentKey) {
-      case 'firstLoadWF':
+      case 'loadingWF':
         if (
           (!this.props.previousUsers ||
             this.props.previousUsers.userList.length === 0) &&
@@ -104,7 +104,7 @@ class LoginAppComponent extends Component<Props, State> {
         // we have previous users, but no pin enabled previous user.
         return this.getPasswordScreen()
 
-      case 'initalizeWF':
+      case 'landingWF':
         return this.getLandingScreen()
       case 'passwordWF':
         if (this.props.recoveryLogin) {

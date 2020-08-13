@@ -151,7 +151,7 @@ export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
     exitScreen() {
-      dispatch({ type: 'WORKFLOW_START', data: 'initalizeWF' })
+      dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
     },
     nextScreen() {
       global.firebase &&
