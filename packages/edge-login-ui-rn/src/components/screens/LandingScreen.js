@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
-import * as Assets from '../../assets/'
+import * as Assets from '../../assets/index.js'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'

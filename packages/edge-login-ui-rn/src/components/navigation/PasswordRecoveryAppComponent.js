@@ -6,7 +6,7 @@ import { View } from 'react-native'
 import { initializePasswordRecovery } from '../../actions/PasswordRecoveryActions.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import { RecoverPasswordScreen } from '../screens/existingAccout/RecoverPasswordScreenComponent.js'
+import { PublicChangeRecoveryScreen } from '../screens/existingAccout/ChangeRecoveryScreen.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
@@ -27,7 +27,7 @@ class PasswordRecoveryAppComponent extends Component<Props> {
     const { ScreenStyle } = Styles
     return (
       <View style={ScreenStyle} accessible>
-        <RecoverPasswordScreen showHeader={this.props.showHeader} />
+        <PublicChangeRecoveryScreen showHeader={this.props.showHeader} />
       </View>
     )
   }

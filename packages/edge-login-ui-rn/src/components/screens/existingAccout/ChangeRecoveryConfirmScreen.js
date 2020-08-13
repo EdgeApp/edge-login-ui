@@ -18,7 +18,7 @@ type Props = {
   cancel(): void
 }
 
-export default class ConfirmPasswordRecoveryScreen extends Component<Props> {
+export class ChangeRecoveryConfirmScreen extends Component<Props> {
   render() {
     const style = ConfirmPasswordRecoverySceneStyles
     return (

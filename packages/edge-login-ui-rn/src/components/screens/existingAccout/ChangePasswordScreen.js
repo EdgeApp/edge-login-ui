@@ -45,7 +45,7 @@ type State = {
   isProcessing: boolean
 }
 
-class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
+class ChangePasswordScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -199,7 +199,7 @@ const NewAccountPasswordScreenStyle = {
   modal: Styles.SkipModalStyle
 }
 
-export const ChangeAccountPasswordScreen = connect<
+export const PublicChangePasswordScreen = connect<
   StateProps,
   DispatchProps,
   OwnProps
@@ -220,9 +220,9 @@ export const ChangeAccountPasswordScreen = connect<
       dispatch(changePassword(data))
     }
   })
-)(ChangeAccountPasswordScreenComponent)
+)(ChangePasswordScreenComponent)
 
-export const ForgotPasswordChangePassword = connect<
+export const RecoveryChangePasswordScreen = connect<
   StateProps,
   DispatchProps,
   OwnProps
@@ -244,4 +244,4 @@ export const ForgotPasswordChangePassword = connect<
       dispatch(recoveryChangePassword(data))
     }
   })
-)(ChangeAccountPasswordScreenComponent)
+)(ChangePasswordScreenComponent)

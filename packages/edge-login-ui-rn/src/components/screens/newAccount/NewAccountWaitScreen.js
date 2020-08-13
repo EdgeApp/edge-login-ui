@@ -14,7 +14,7 @@ import { Spinner } from '../../common/Spinner.js'
 
 type Props = {}
 
-export class CreatingAccountWaitScreen extends Component<Props> {
+export class NewAccountWaitScreen extends Component<Props> {
   render() {
     return (
       <SafeAreaView>

@@ -4,22 +4,22 @@ import React, { Component } from 'react'
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
 
 import { userLoginWithTouchId } from '../../actions/LoginAction.js'
-import * as Assets from '../../assets/'
+import * as Assets from '../../assets/index.js'
 import s from '../../common/locales/strings.js'
-import { LogoImageHeader } from '../../components/abSpecific/LogoImageHeader.js'
-import { UserListItem } from '../../components/abSpecific/UserListItem.js'
-import { Button } from '../../components/common/Button.js'
-import { ImageButton } from '../../components/common/ImageButton.js'
-import { DropDownList } from '../../components/common/index.js'
 import * as Constants from '../../constants/index.js'
 import { type LoginUserInfo } from '../../reducers/PreviousUsersReducer.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { scale, scaleH } from '../../util/scaling.js'
 import { FourDigit } from '../abSpecific/FourDigitComponent.js'
+import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { PinKeypad } from '../abSpecific/PinKeypad.js'
+import { UserListItem } from '../abSpecific/UserListItem.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
+import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
+import { ImageButton } from '../common/ImageButton.js'
+import { DropDownList } from '../common/index.js'
 import { DeleteUserModal } from '../modals/DeleteUserModal.js'
 import { connect } from '../services/ReduxStore.js'
 
@@ -54,7 +54,7 @@ type State = {
   focusOn: string
 }
 
-class PinLogInScreenComponent extends Component<Props, State> {
+class PinLoginScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -435,4 +435,4 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch(userLoginWithTouchId(data))
     }
   })
-)(PinLogInScreenComponent)
+)(PinLoginScreenComponent)

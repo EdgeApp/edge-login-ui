@@ -10,7 +10,6 @@ import {
   deleteRecovery
 } from '../../../actions/PasswordRecoveryActions.js'
 import s from '../../../common/locales/strings.js'
-import { FullScreenModal } from '../../../components/common/FullScreenModal.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
@@ -18,6 +17,7 @@ import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { isIphoneX } from '../../../util/isIphoneX.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
+import { FullScreenModal } from '../../common/FullScreenModal.js'
 import { DropDownList, FormField } from '../../common/index.js'
 import { TextRowComponent } from '../../common/ListItems/TextRowComponent.js'
 import { StaticModal } from '../../common/StaticModal.js'
@@ -25,7 +25,7 @@ import { TextAndIconButton } from '../../common/TextAndIconButton.js'
 import { EmailAppFailedModal } from '../../modals/EmailAppFailedModal.js'
 import { SaveRecoveryTokenModal } from '../../modals/SaveRecoveryTokenModal.js'
 import { connect } from '../../services/ReduxStore.js'
-import ConfirmPasswordRecoveryScreen from './ConfirmPasswordRecoveryScreen'
+import { ChangeRecoveryConfirmScreen } from './ChangeRecoveryConfirmScreen.js'
 
 type OwnProps = {
   showHeader: boolean
@@ -69,7 +69,7 @@ type State = {
   showConfirmationModal: boolean
 }
 
-class RecoverPasswordScreenComponent extends Component<Props, State> {
+class ChangeRecoveryScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -398,7 +398,7 @@ class RecoverPasswordScreenComponent extends Component<Props, State> {
     if (this.state.showConfirmationModal) {
       return (
         <FullScreenModal>
-          <ConfirmPasswordRecoveryScreen
+          <ChangeRecoveryConfirmScreen
             cancel={this.onCancelConfirmation}
             confirm={this.onConfirmQuestionsAndAnseers}
             question1={this.state.question1}
@@ -599,7 +599,7 @@ function returnTrunatedUsername(arg) {
   return arg
 }
 
-export const RecoverPasswordScreen = connect<
+export const PublicChangeRecoveryScreen = connect<
   StateProps,
   DispatchProps,
   OwnProps
@@ -639,4 +639,4 @@ export const RecoverPasswordScreen = connect<
       dispatch(changeRecoveryAnswers(questions, answers))
     }
   })
-)(RecoverPasswordScreenComponent)
+)(ChangeRecoveryScreenComponent)

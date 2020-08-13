@@ -1,15 +1,11 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Alert, Text, View } from 'react-native'
 
-import {
-  changePIN,
-  recoveryChangePIN
-} from '../../../actions/ChangePasswordPinActions.js'
-import { recoveryLoginComplete } from '../../../actions/LoginAction.js'
+import { createUser } from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
+import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
@@ -17,97 +13,60 @@ import { scale } from '../../../util/scaling.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common/Button.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-import { StaticModal } from '../../common/StaticModal.js'
-import { ChangePinModal } from '../../modals/ChangePinModal.js'
 import { connect } from '../../services/ReduxStore.js'
 
-type OwnProps = {
-  showHeader?: boolean
-}
+type OwnProps = {}
 type StateProps = {
-  forgotPasswordModal?: boolean,
+  createErrorMessage: string | null,
+  password: string,
   pin: string,
-  pinError: string,
-  showModal: boolean
+  pinError: string | null,
+  username: string
 }
 type DispatchProps = {
-  changePin(pin: string): void,
-  login(): void
+  createUser(data: Object): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
-  isProcessing: boolean,
-  pin: string,
   username: string,
+  pin: string,
+  createErrorMessage: string | null,
+  isProcessing: boolean,
   focusOn: string
 }
 
-class ChangeAccountPinScreenComponent extends Component<Props, State> {
+class NewAccountPinScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
       username: '',
       pin: '',
       isProcessing: false,
-      focusOn: 'pin'
+      focusOn: 'pin',
+      createErrorMessage: this.props.createErrorMessage
     }
   }
 
-  renderHeader = (style: typeof SetAccountPinScreenStyle) => {
-    if (this.props.showHeader) {
-      return <HeaderConnector style={style.header} />
+  checkError = () => {
+    if (this.state.createErrorMessage) {
+      Alert.alert(
+        s.strings.create_account_error_title,
+        s.strings.create_account_error_message +
+          '\n' +
+          this.state.createErrorMessage,
+        [{ text: s.strings.ok }]
+      )
+      this.setState({ createErrorMessage: null })
     }
-    return null
-  }
-
-  renderModal = (style: typeof SetAccountPinScreenStyle) => {
-    if (this.props.showModal) {
-      if (this.props.forgotPasswordModal) {
-        const body = (
-          <View>
-            <Text style={style.staticModalText}>
-              {s.strings.pswd_and_pin_changed}
-            </Text>
-            <View style={style.shim} />
-            <Text style={style.staticModalText}>
-              {s.strings.change_pwd_body}
-            </Text>
-          </View>
-        )
-        return (
-          <StaticModal
-            cancel={this.props.login}
-            body={body}
-            modalDismissTimerSeconds={8}
-          />
-        )
-      }
-      return <ChangePinModal style={style.modal.skip} />
-    }
-    return null
-  }
-
-  onNextPress = () => {
-    this.setState({
-      isProcessing: true
-    })
-    // validation.
-    // is there no error message ,
-    if (this.props.pin.length !== 4 || this.props.pinError) {
-      this.setState({
-        isProcessing: false
-      })
-      return
-    }
-    this.props.changePin(this.props.pin)
   }
 
   render() {
+    this.checkError()
     return (
       <SafeAreaView>
         <View style={SetAccountPinScreenStyle.screen}>
-          {this.renderHeader(SetAccountPinScreenStyle)}
+          <HeaderConnector style={SetAccountPinScreenStyle.header} />
           <View style={SetAccountPinScreenStyle.pageContainer}>
             <View style={SetAccountPinScreenStyle.row1}>
               <Text style={SetAccountPinScreenStyle.instructions}>
@@ -126,16 +85,39 @@ class ChangeAccountPinScreenComponent extends Component<Props, State> {
                 }
                 upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
                 upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
-                label={s.strings.done}
+                label={s.strings.next_label}
                 isThinking={this.state.isProcessing}
                 doesThink
               />
             </View>
           </View>
-          {this.renderModal(SetAccountPinScreenStyle)}
         </View>
       </SafeAreaView>
     )
+  }
+
+  onNextPress = () => {
+    this.setState({
+      isProcessing: true,
+      createErrorMessage: null
+    })
+    // validation.
+    // is there no error message ,
+    if (this.props.pin.length !== 4 || this.props.pinError) {
+      this.setState({
+        isProcessing: false
+      })
+      global.firebase &&
+        global.firebase.analytics().logEvent(`Signup_PIN_Invalid`)
+      return
+    }
+    global.firebase &&
+      global.firebase.analytics().logEvent(`Signup_Create_User`)
+    this.props.createUser({
+      username: this.props.username,
+      password: this.props.password,
+      pin: this.props.pin
+    })
   }
 }
 
@@ -186,58 +168,21 @@ const SetAccountPinScreenStyle = {
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
     downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
     downStyle: Styles.PrimaryButtonDownScaledStyle
-  },
-  staticModalText: {
-    color: Constants.GRAY_1,
-    width: '100%',
-    fontSize: scale(15),
-    textAlign: 'center'
-  },
-  modal: Styles.SkipModalStyle,
-  shim: {
-    height: scale(5)
   }
 }
 
-export const ChangeAccountPinScreen = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps
->(
+export const NewAccountPinScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
+    createErrorMessage: state.create.createErrorMessage,
+    password: state.create.password || '',
     pin: state.create.pin,
     pinError: state.create.pinError,
-    workflow: state.workflow,
-    showModal: state.create.showModal
+    username: state.create.username || ''
   }),
   (dispatch: Dispatch) => ({
-    changePin(data) {
-      dispatch(changePIN(data))
-    },
-    login() {
-      // Not used in the settings screen version
+    createUser(data: Object) {
+      dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
+      dispatch(createUser(data))
     }
   })
-)(ChangeAccountPinScreenComponent)
-
-export const ForgotPinChangePinScene = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps
->(
-  (state: RootState) => ({
-    forgotPasswordModal: true,
-    pin: state.create.pin,
-    pinError: state.create.pinError,
-    showHeader: true,
-    showModal: state.create.showModal
-  }),
-  (dispatch: Dispatch) => ({
-    changePin(data: string) {
-      dispatch(recoveryChangePIN(data))
-    },
-    login() {
-      dispatch(recoveryLoginComplete())
-    }
-  })
-)(ChangeAccountPinScreenComponent)
+)(NewAccountPinScreenComponent)

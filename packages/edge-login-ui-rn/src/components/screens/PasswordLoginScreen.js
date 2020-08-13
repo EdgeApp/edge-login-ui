@@ -7,9 +7,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { userLogin, userLoginWithTouchId } from '../../actions/LoginAction.js'
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
-import { Button } from '../../components/common/Button.js'
-import { DropDownList, FormField } from '../../components/common/index.js'
-import { StaticModal } from '../../components/common/StaticModal.js'
 import * as Constants from '../../constants/index.js'
 import { type LoginUserInfo } from '../../reducers/PreviousUsersReducer.js'
 import * as Styles from '../../styles/index.js'
@@ -18,8 +15,11 @@ import { scale } from '../../util/scaling.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { UserListItem } from '../abSpecific/UserListItem.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
+import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { IconButton } from '../common/IconButton.js'
+import { DropDownList, FormField } from '../common/index.js'
+import { StaticModal } from '../common/StaticModal.js'
 import { DeleteUserModal } from '../modals/DeleteUserModal.js'
 import { connect } from '../services/ReduxStore.js'
 
@@ -70,7 +70,7 @@ type State = {
   usernameList: boolean
 }
 
-class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
+class PasswordLoginScreenComponent extends Component<Props, State> {
   keyboardDidHideListener: ?Function
   style: Object
 
@@ -554,11 +554,7 @@ const LoginPasswordScreenStyle = {
   }
 }
 
-export const LoginUsernamePasswordScreen = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps
->(
+export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     error: state.login.errorMessage || '',
     hasUsers: state.previousUsers.userList.length > 0,
@@ -592,4 +588,4 @@ export const LoginUsernamePasswordScreen = connect<
       dispatch(userLogin(data))
     }
   })
-)(LoginUsernamePasswordScreenComponent)
+)(PasswordLoginScreenComponent)

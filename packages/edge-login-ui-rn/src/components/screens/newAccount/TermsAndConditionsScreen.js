@@ -6,7 +6,7 @@ import { Linking, ScrollView, Text, View } from 'react-native'
 import { sprintf } from 'sprintf-js'
 
 import { agreeToConditions } from '../../../actions/CreateAccountActions.js'
-import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
+import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/index.js'
 import s from '../../../common/locales/strings.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import * as Constants from '../../../constants/index.js'

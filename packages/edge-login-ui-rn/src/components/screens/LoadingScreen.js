@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import * as Assets from '../../assets/'
+import * as Assets from '../../assets/index.js'
 import * as Styles from '../../styles/index.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
 import { Spinner } from '../common/Spinner.js'

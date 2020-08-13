@@ -12,21 +12,21 @@ import {
 import { type WorkflowState } from '../../reducers/WorkflowReducer.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import { ForgotPasswordChangePassword } from '../screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
-import { ForgotPinChangePinScene } from '../screens/existingAccout/ChangeAccountPinScreenComponent.js'
-import { LoginWithRecoveryQuestionsScreen } from '../screens/existingAccout/LoginWithRecoveryQuestionsScreenComponent.js'
-import { OtpErrorScreen } from '../screens/existingAccout/OtpErrorScreenComponent.js'
-import { LandingScreen } from '../screens/LandingScreenComponent.js'
-import { LoadingScreen } from '../screens/LoadingScreenComponent.js'
-import { LoginUsernamePasswordScreen } from '../screens/LoginUsernamePasswordScreenComponent.js'
-import { CreatingAccountWaitScreen } from '../screens/newAccount/CreatingAccountWaitScreenComponent.js'
-import { NewAccountPasswordScreen } from '../screens/newAccount/NewAccountPasswordScreenComponent.js'
-import { NewAccountReviewScreen } from '../screens/newAccount/NewAccountReviewScreenComponent.js'
-import { NewAccountUsernameScreen } from '../screens/newAccount/NewAccountUsernameScreenComponent.js'
-import { NewAccountWelcomeScreen } from '../screens/newAccount/NewAccountWelcomeScreenComponent.js'
-import { SetAccountPinScreen } from '../screens/newAccount/SetAccountPinScreenComponent.js'
-import { TermsAndConditionsScreen } from '../screens/newAccount/TermsAndConditionsScreenComponent.js'
-import { PinLoginScreen } from '../screens/PinLogInScreenComponent.js'
+import { RecoveryChangePasswordScreen } from '../screens/existingAccout/ChangePasswordScreen.js'
+import { RecoveryChangePinScreen } from '../screens/existingAccout/ChangePinScreen.js'
+import { LandingScreen } from '../screens/LandingScreen.js'
+import { LoadingScreen } from '../screens/LoadingScreen.js'
+import { NewAccountPasswordScreen } from '../screens/newAccount/NewAccountPasswordScreen.js'
+import { NewAccountPinScreen } from '../screens/newAccount/NewAccountPinScreen.js'
+import { NewAccountReviewScreen } from '../screens/newAccount/NewAccountReviewScreen.js'
+import { NewAccountUsernameScreen } from '../screens/newAccount/NewAccountUsernameScreen.js'
+import { NewAccountWaitScreen } from '../screens/newAccount/NewAccountWaitScreen.js'
+import { NewAccountWelcomeScreen } from '../screens/newAccount/NewAccountWelcomeScreen.js'
+import { TermsAndConditionsScreen } from '../screens/newAccount/TermsAndConditionsScreen.js'
+import { OtpErrorScreen } from '../screens/OtpErrorScreen.js'
+import { PasswordLoginScreen } from '../screens/PasswordLoginScreen.js'
+import { PinLoginScreen } from '../screens/PinLoginScreen.js'
+import { RecoveryLoginScreen } from '../screens/RecoveryLoginScreen.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
@@ -152,9 +152,9 @@ class LoginAppComponent extends Component<Props, State> {
       case 2:
         return <NewAccountPasswordScreen />
       case 3:
-        return <SetAccountPinScreen />
+        return <NewAccountPinScreen />
       case 4:
-        return <CreatingAccountWaitScreen />
+        return <NewAccountWaitScreen />
       case 5:
         return <NewAccountReviewScreen />
       case 6:
@@ -166,7 +166,7 @@ class LoginAppComponent extends Component<Props, State> {
 
   getPasswordScreen() {
     return (
-      <LoginUsernamePasswordScreen
+      <PasswordLoginScreen
         appId={this.props.appId}
         backgroundImage={this.props.backgroundImage}
         primaryLogo={this.props.primaryLogo}
@@ -197,11 +197,11 @@ class LoginAppComponent extends Component<Props, State> {
   getRecoveryLoginScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <LoginWithRecoveryQuestionsScreen />
+        return <RecoveryLoginScreen />
       case 1:
-        return <ForgotPasswordChangePassword />
+        return <RecoveryChangePasswordScreen />
       case 2:
-        return <ForgotPinChangePinScene />
+        return <RecoveryChangePinScreen />
     }
   }
 

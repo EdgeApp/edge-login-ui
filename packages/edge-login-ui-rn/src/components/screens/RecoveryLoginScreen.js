@@ -3,20 +3,20 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
-import { loginWithRecovery } from '../../../actions/LoginAction.js'
-import { getRecoveryQuestions } from '../../../actions/PasswordRecoveryActions.js'
-import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
-import { RecoverPasswordUsernameInput } from '../../../connectors/componentConnectors/RecoverPasswordUsernameInput.js'
-import * as Constants from '../../../constants/index.js'
-import * as Styles from '../../../styles/index.js'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
-import { Button } from '../../common/Button.js'
-import { FormField } from '../../common/index.js'
-import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
-import { StaticModal } from '../../common/StaticModal.js'
-import { SetRecoveryUsernameModal } from '../../modals/SetRecoveryUsernameModal.js'
-import { connect } from '../../services/ReduxStore.js'
+import { loginWithRecovery } from '../../actions/LoginAction.js'
+import { getRecoveryQuestions } from '../../actions/PasswordRecoveryActions.js'
+import s from '../../common/locales/strings.js'
+import HeaderConnector from '../../connectors/componentConnectors/HeaderConnectorRecoveryLogin.js'
+import { RecoverPasswordUsernameInput } from '../../connectors/componentConnectors/RecoverPasswordUsernameInput.js'
+import * as Constants from '../../constants/index.js'
+import * as Styles from '../../styles/index.js'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { Button } from '../common/Button.js'
+import { FormField } from '../common/index.js'
+import SafeAreaViewGradient from '../common/SafeAreaViewGradient.js'
+import { StaticModal } from '../common/StaticModal.js'
+import { SetRecoveryUsernameModal } from '../modals/SetRecoveryUsernameModal.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   showHeader?: boolean
@@ -53,10 +53,7 @@ type State = {
   showUsernameModal: boolean
 }
 
-class LoginWithRecoveryQuestionsScreenComponent extends Component<
-  Props,
-  State
-> {
+class RecoveryLoginScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -359,11 +356,7 @@ const LoginWithRecoveryStyles = {
   listItem: Styles.ListItemTextOnly
 }
 
-export const LoginWithRecoveryQuestionsScreen = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps
->(
+export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     loginError: state.login.errorMessage || '',
     question1:
@@ -395,4 +388,4 @@ export const LoginWithRecoveryQuestionsScreen = connect<
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username })
     }
   })
-)(LoginWithRecoveryQuestionsScreenComponent)
+)(RecoveryLoginScreenComponent)

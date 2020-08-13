@@ -5,7 +5,7 @@ import { View } from 'react-native'
 
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import { ChangeAccountPasswordScreen } from '../screens/existingAccout/ChangeAccountPasswordScreenComponent.js'
+import { PublicChangePasswordScreen } from '../screens/existingAccout/ChangePasswordScreen.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
@@ -26,7 +26,7 @@ class ChangePasswordAppComponent extends Component<Props> {
     const { ScreenStyle } = Styles
     return (
       <View style={ScreenStyle} accessible>
-        <ChangeAccountPasswordScreen showHeader={this.props.showHeader} />
+        <PublicChangePasswordScreen showHeader={this.props.showHeader} />
       </View>
     )
   }
