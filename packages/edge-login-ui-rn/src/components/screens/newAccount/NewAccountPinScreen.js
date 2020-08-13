@@ -5,13 +5,13 @@ import { Alert, Text, View } from 'react-native'
 
 import { createUser } from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common/Button.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { connect } from '../../services/ReduxStore.js'
 
@@ -24,7 +24,8 @@ type StateProps = {
   username: string
 }
 type DispatchProps = {
-  createUser(data: Object): void
+  createUser(data: Object): void,
+  goBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -66,7 +67,7 @@ class NewAccountPinScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={SetAccountPinScreenStyle.screen}>
-          <HeaderConnector />
+          <Header onBack={this.props.goBack} />
           <View style={SetAccountPinScreenStyle.pageContainer}>
             <View style={SetAccountPinScreenStyle.row1}>
               <Text style={SetAccountPinScreenStyle.instructions}>
@@ -179,6 +180,9 @@ export const NewAccountPinScreen = connect<StateProps, DispatchProps, OwnProps>(
     createUser(data: Object) {
       dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
       dispatch(createUser(data))
+    },
+    goBack() {
+      dispatch({ type: 'WORKFLOW_BACK' })
     }
   })
 )(NewAccountPinScreenComponent)

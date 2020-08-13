@@ -8,14 +8,15 @@ import {
   recoveryChangePIN
 } from '../../../actions/ChangePasswordPinActions.js'
 import { recoveryLoginComplete } from '../../../actions/LoginAction.js'
+import { cancel } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common/Button.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { StaticModal } from '../../common/StaticModal.js'
 import { ChangePinModal } from '../../modals/ChangePinModal.js'
@@ -32,7 +33,9 @@ type StateProps = {
 }
 type DispatchProps = {
   changePin(pin: string): void,
-  login(): void
+  login(): void,
+  onBack?: () => void,
+  onSkip?: () => void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -56,7 +59,7 @@ class ChangePinScreenComponent extends Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector />
+      return <Header onBack={this.props.onBack} onSkip={this.props.onSkip} />
     }
     return null
   }
@@ -210,6 +213,9 @@ export const PublicChangePinScreen = connect<
     changePin(data) {
       dispatch(changePIN(data))
     },
+    goBack() {
+      dispatch(cancel())
+    },
     login() {
       // Not used in the settings screen version
     }
@@ -231,6 +237,9 @@ export const RecoveryChangePinScreen = connect<
   (dispatch: Dispatch) => ({
     changePin(data: string) {
       dispatch(recoveryChangePIN(data))
+    },
+    onSkip() {
+      dispatch(recoveryLoginComplete())
     },
     login() {
       dispatch(recoveryLoginComplete())

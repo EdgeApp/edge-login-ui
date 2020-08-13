@@ -7,7 +7,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { validateConfirmPassword } from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
 import { type WorkflowState } from '../../../reducers/WorkflowReducer.js'
@@ -16,6 +15,7 @@ import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common/Button.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { SkipModal } from '../../modals/SkipModal.js'
 import { connect } from '../../services/ReduxStore.js'
@@ -31,6 +31,7 @@ type StateProps = {
 }
 type DispatchProps = {
   checkTheConfirmPassword(): void,
+  goBack(): void,
   nextScreen(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
@@ -59,7 +60,7 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
           keyboardShouldPersistTaps="always"
           contentContainerStyle={NewAccountPasswordScreenStyle.mainScrollView}
         >
-          <HeaderConnector />
+          <Header onBack={this.props.goBack} />
           {this.renderMain(NewAccountPasswordScreenStyle)}
           {this.renderModal(NewAccountPasswordScreenStyle)}
         </KeyboardAwareScrollView>
@@ -220,6 +221,9 @@ export const NewAccountPasswordScreen = connect<
   (dispatch: Dispatch) => ({
     checkTheConfirmPassword() {
       dispatch(validateConfirmPassword())
+    },
+    goBack() {
+      dispatch({ type: 'WORKFLOW_BACK' })
     },
     nextScreen() {
       dispatch({ type: 'WORKFLOW_NEXT' })

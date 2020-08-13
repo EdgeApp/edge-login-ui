@@ -9,8 +9,8 @@ import {
   recoveryChangePassword
 } from '../../../actions/ChangePasswordPinActions.js'
 import { validateConfirmPassword } from '../../../actions/CreateAccountActions.js'
+import { cancel } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
 import * as Styles from '../../../styles/index.js'
@@ -18,6 +18,7 @@ import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common/Button.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { ChangePasswordModal } from '../../modals/ChangePasswordModal.js'
 import { connect } from '../../services/ReduxStore.js'
@@ -35,7 +36,9 @@ type StateProps = {
 }
 type DispatchProps = {
   checkTheConfirmPassword(): void,
-  changePassword(string): void
+  changePassword(string): void,
+  onBack?: () => void,
+  onSkip?: () => void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -94,7 +97,7 @@ class ChangePasswordScreenComponent extends Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector />
+      return <Header onBack={this.props.onBack} onSkip={this.props.onSkip} />
     }
     return null
   }
@@ -217,6 +220,9 @@ export const PublicChangePasswordScreen = connect<
     },
     changePassword(data: string) {
       dispatch(changePassword(data))
+    },
+    onBack() {
+      dispatch(cancel())
     }
   })
 )(ChangePasswordScreenComponent)
@@ -241,6 +247,9 @@ export const RecoveryChangePasswordScreen = connect<
     },
     changePassword(data: string) {
       dispatch(recoveryChangePassword(data))
+    },
+    onSkip() {
+      dispatch(dispatch({ type: 'WORKFLOW_NEXT' }))
     }
   })
 )(ChangePasswordScreenComponent)

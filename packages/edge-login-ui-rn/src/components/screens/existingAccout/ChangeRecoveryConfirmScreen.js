@@ -6,7 +6,7 @@ import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { Button } from '../../common/Button.js'
-import { Header } from '../../common/Header.js'
+import { HeaderComponent } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type Props = {
@@ -24,14 +24,10 @@ export class ChangeRecoveryConfirmScreen extends Component<Props> {
     return (
       <SafeAreaView>
         <View style={style.screen}>
-          <Header
-            showBackButton
-            showSkipButton={false}
+          <HeaderComponent
+            onBack={this.props.cancel}
             title={s.strings.confirm_recovery_questions}
             subTitle=""
-            useCancel={false}
-            customLabel={s.strings.back}
-            goBack={this.props.cancel}
           />
           <View style={style.shim} />
           <Text style={style.questionText}>{this.props.question1}</Text>

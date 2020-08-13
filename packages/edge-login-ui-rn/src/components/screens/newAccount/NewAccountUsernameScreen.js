@@ -6,7 +6,6 @@ import { sprintf } from 'sprintf-js'
 
 import { checkUsernameForAvailabilty } from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import UsernameConnector from '../../../connectors/componentConnectors/UsernameConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
@@ -14,6 +13,7 @@ import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
 import T from '../../common/FormattedText.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { connect } from '../../services/ReduxStore.js'
 
@@ -25,7 +25,8 @@ type StateProps = {
   usernameErrorMessage: string | null
 }
 type DispatchProps = {
-  checkUsernameForAvailabilty(string): void
+  checkUsernameForAvailabilty(string): void,
+  goBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -53,7 +54,7 @@ class NewAccountUsernameScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={NewAccountUsernameScreenStyle.screen}>
-          <HeaderConnector />
+          <Header onBack={this.props.goBack} />
           <View style={NewAccountUsernameScreenStyle.pageContainer}>
             <View style={NewAccountUsernameScreenStyle.instructions}>
               <T style={NewAccountUsernameScreenStyle.instructionsText}>
@@ -136,6 +137,9 @@ export const NewAccountUsernameScreen = connect<
     usernameErrorMessage: state.create.usernameErrorMessage
   }),
   (dispatch: Dispatch) => ({
+    goBack() {
+      dispatch({ type: 'WORKFLOW_BACK' })
+    },
     checkUsernameForAvailabilty(data: string) {
       dispatch(checkUsernameForAvailabilty(data))
     }

@@ -9,8 +9,8 @@ import {
   changeRecoveryAnswers,
   deleteRecovery
 } from '../../../actions/PasswordRecoveryActions.js'
+import { cancel } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
@@ -18,6 +18,7 @@ import { isIphoneX } from '../../../util/isIphoneX.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
 import { FullScreenModal } from '../../common/FullScreenModal.js'
+import { Header } from '../../common/Header.js'
 import { DropDownList, FormField } from '../../common/index.js'
 import { TextRowComponent } from '../../common/ListItems/TextRowComponent.js'
 import { StaticModal } from '../../common/StaticModal.js'
@@ -46,6 +47,7 @@ type StateProps = {
 type DispatchProps = {
   cancel(): void,
   deleteRecovery(): void,
+  goBack(): void,
   returnToSettings(): void,
   submit(questions: Array<string>, answers: Array<string>): void
 }
@@ -102,7 +104,7 @@ class ChangeRecoveryScreenComponent extends Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector />
+      return <Header onBack={this.props.goBack} />
     }
     return null
   }
@@ -628,6 +630,9 @@ export const PublicChangeRecoveryScreen = connect<
     },
     deleteRecovery() {
       dispatch(deleteRecovery())
+    },
+    goBack() {
+      dispatch(cancel())
     },
     returnToSettings() {
       dispatch(cancelRecoverySettingsScene())

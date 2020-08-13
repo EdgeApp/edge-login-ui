@@ -8,13 +8,13 @@ import { sprintf } from 'sprintf-js'
 import { agreeToConditions } from '../../../actions/CreateAccountActions.js'
 import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/index.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
 import { Checkbox } from '../../common/Checkbox.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { connect } from '../../services/ReduxStore.js'
 
@@ -26,7 +26,8 @@ type StateProps = {
   terms: Object
 }
 type DispatchProps = {
-  agreeToCondition(account: EdgeAccount): void
+  agreeToCondition(account: EdgeAccount): void,
+  goBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -117,7 +118,7 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={TermsAndConditionsScreenStyle.screen}>
-          <HeaderConnector />
+          <Header onBack={this.props.goBack} />
           <View style={TermsAndConditionsScreenStyle.pageContainer}>
             <ScrollView ref={ref => (this.scrollView = ref)}>
               {this.renderInstructions(TermsAndConditionsScreenStyle)}
@@ -250,6 +251,9 @@ export const TermsAndConditionsScreen = connect<
   (dispatch: Dispatch) => ({
     agreeToCondition(data: EdgeAccount) {
       dispatch(agreeToConditions(data))
+    },
+    goBack() {
+      dispatch({ type: 'WORKFLOW_BACK' })
     }
   })
 )(TermsAndConditionsScreenComponent)

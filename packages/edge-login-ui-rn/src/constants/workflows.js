@@ -3,8 +3,6 @@
 import s from '../common/locales/strings.js'
 
 export type Scene = {
-  back: boolean,
-  skip: boolean,
   title: string,
   subTitle: string
 }
@@ -31,8 +29,6 @@ export const workflows: Workflows = {
   changePasswordWF: [
     {
       // PublicChangePasswordScreen
-      back: true,
-      skip: false,
       title: s.strings.change_password,
       subTitle: ''
     }
@@ -40,8 +36,6 @@ export const workflows: Workflows = {
   changePinWF: [
     {
       // PublicChangePinScreen
-      back: true,
-      skip: false,
       title: s.strings.change_pin,
       subTitle: ''
     }
@@ -49,15 +43,12 @@ export const workflows: Workflows = {
   changeRecoveryWF: [
     {
       // PublicChangeRecoveryScreen
-      back: true,
-      skip: false,
       title: s.strings.recovery,
       subTitle: ''
     }
     // This next scene uses `FullScreenModal` instead of workflow:
     // {
     //   // ChangeRecoveryConfirmScreen
-    //   back: true,
     //   title: s.strings.confirm_recovery_questions,
     //   subTitle: ''
     // }
@@ -68,51 +59,37 @@ export const workflows: Workflows = {
   // ----------------------------------------------------------------
   createWF: [
     {
-      // NewAccountWelcomeScreen
-      back: false,
-      skip: false,
+      // NewAccountWelcomeScreen (no header)
       title: '',
       subTitle: ''
     },
     {
       // NewAccountUsernameScreen
-      back: true,
-      skip: false,
       title: s.strings.choose_title_username,
       subTitle: s.strings.step_one
     },
     {
       // NewAccountPasswordScreen
-      back: true,
-      skip: false,
       title: s.strings.choose_title_password,
       subTitle: s.strings.step_two
     },
     {
       // NewAccountPinScreen
-      back: true,
-      skip: false,
       title: s.strings.set_four_digit_pin,
       subTitle: s.strings.step_three
     },
     {
-      // NewAccountWaitScreen
-      back: false,
-      skip: false,
+      // NewAccountWaitScreen (no back button)
       title: s.strings.create_your_account,
       subTitle: ''
     },
     {
-      // NewAccountReviewScreen
-      back: false,
-      skip: false,
+      // NewAccountReviewScreen (no back button)
       title: s.strings.write_it_down,
       subTitle: s.strings.account_confirmation
     },
     {
       // TermsAndConditionsScreen
-      back: true,
-      skip: false,
       title: s.strings.quick_review,
       subTitle: s.strings.account_confirmation
     }
@@ -123,18 +100,14 @@ export const workflows: Workflows = {
   // ----------------------------------------------------------------
   landingWF: [
     {
-      // LandingScreen
-      back: false,
-      skip: false,
+      // LandingScreen (no header)
       title: '',
       subTitle: ''
     }
   ],
   loadingWF: [
     {
-      // LoadingScreen
-      back: false,
-      skip: false,
+      // LoadingScreen (no header)
       title: '',
       subTitle: ''
     }
@@ -142,8 +115,6 @@ export const workflows: Workflows = {
   otpWF: [
     {
       // OtpErrorScreen
-      back: true,
-      skip: false,
       title: s.strings.otp_header,
       subTitle: ''
     }
@@ -155,8 +126,6 @@ export const workflows: Workflows = {
   passwordWF: [
     {
       // PasswordLoginScreen
-      back: true,
-      skip: false,
       title: s.strings.change_password,
       subTitle: ''
     }
@@ -164,8 +133,6 @@ export const workflows: Workflows = {
   pinWF: [
     {
       // PinLoginScreen
-      back: true,
-      skip: false,
       title: s.strings.change_pin,
       subTitle: ''
     }
@@ -173,22 +140,16 @@ export const workflows: Workflows = {
   recoveryLoginWF: [
     {
       // RecoveryLoginScreen
-      back: true,
-      skip: false,
       title: s.strings.recovery_questions_header,
       subTitle: ''
     },
     {
       // RecoveryChangePasswordScreen
-      back: true,
-      skip: false,
       title: s.strings.change_password,
       subTitle: ''
     },
     {
       // RecoveryChangePinScreen
-      back: true,
-      skip: false,
       title: s.strings.change_pin,
       subTitle: ''
     }

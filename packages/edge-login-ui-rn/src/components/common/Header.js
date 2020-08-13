@@ -6,25 +6,32 @@ import LinearGradient from 'react-native-linear-gradient'
 
 import s from '../../common/locales/strings.js'
 import T from '../../components/common/FormattedText.js'
+import { connect } from '../../components/services/ReduxStore.js'
 import * as Colors from '../../constants/Colors.js'
 import * as Constants from '../../constants/index.js'
+import { workflows } from '../../constants/workflows.js'
 import * as Styles from '../../styles/index.js'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { scale } from '../../util/scaling.js'
 import { Button } from '../common/Button.js'
 import { HeaderBackButton } from '../common/HeaderBackButton.js'
 
-type Props = {
-  customLabel?: string,
-  goBack(): void,
-  showBackButton: boolean,
-  showSkipButton?: boolean,
-  skipScreen?: () => void,
-  subTitle: string,
-  title: string,
-  useCancel?: boolean
+type OwnProps = {
+  onBack?: () => void,
+  onSkip?: () => void
 }
+type StateProps = {
+  subTitle: string,
+  title: string
+}
+type Props = OwnProps & StateProps
 
-export class Header extends Component<Props> {
+/**
+ * The raw Header for a scene.
+ * This is exported because ChangeRecoveryConfirmScreen isn't a real screen,
+ * and pulls this in specially.
+ */
+export class HeaderComponent extends Component<Props> {
   render() {
     const Style = HeaderContainerScaledStyle
     return (
@@ -42,21 +49,13 @@ export class Header extends Component<Props> {
   }
 
   renderBack(style: typeof HeaderContainerScaledStyle) {
-    if (!this.props.showBackButton) {
-      return
-    }
-    let label = s.strings.back
-    if (this.props.useCancel) {
-      label = s.strings.cancel_caps
-    }
-    if (this.props.customLabel) {
-      label = this.props.customLabel
-    }
+    if (this.props.onBack == null) return null
+
     return (
       <HeaderBackButton
-        onPress={this.onBack}
+        onPress={this.props.onBack}
         styles={style.headerBackButtonStyle}
-        label={label}
+        label={s.strings.back}
       />
     )
   }
@@ -73,12 +72,11 @@ export class Header extends Component<Props> {
   }
 
   renderSkip(style: Object) {
-    if (!this.props.showSkipButton) {
-      return
-    }
+    if (this.props.onSkip == null) return null
+
     return (
       <Button
-        onPress={this.onSkip}
+        onPress={this.props.onSkip}
         downStyle={style.textButton.downStyle}
         downTextStyle={style.textButton.downTextStyle}
         upStyle={style.textButton.upStyle}
@@ -86,14 +84,6 @@ export class Header extends Component<Props> {
         label={s.strings.skip}
       />
     )
-  }
-
-  onSkip = () => {
-    if (this.props.skipScreen != null) this.props.skipScreen()
-  }
-
-  onBack = () => {
-    this.props.goBack()
   }
 }
 
@@ -176,3 +166,15 @@ const HeaderContainerScaledStyle = {
     }
   }
 }
+
+export const Header = connect<StateProps, {}, OwnProps>(
+  (state: RootState) => {
+    const { currentKey, currentSceneIndex } = state.workflow
+    const currentScene = workflows[currentKey][currentSceneIndex]
+    return {
+      subTitle: currentScene.subTitle,
+      title: currentScene.title
+    }
+  },
+  (dispatch: Dispatch) => ({})
+)(HeaderComponent)

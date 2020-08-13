@@ -6,12 +6,12 @@ import { Text, View } from 'react-native'
 import { loginWithRecovery } from '../../actions/LoginAction.js'
 import { getRecoveryQuestions } from '../../actions/PasswordRecoveryActions.js'
 import s from '../../common/locales/strings.js'
-import HeaderConnector from '../../connectors/componentConnectors/HeaderConnectorRecoveryLogin.js'
 import { RecoverPasswordUsernameInput } from '../../connectors/componentConnectors/RecoverPasswordUsernameInput.js'
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { Button } from '../common/Button.js'
+import { Header } from '../common/Header.js'
 import { FormField } from '../common/index.js'
 import SafeAreaViewGradient from '../common/SafeAreaViewGradient.js'
 import { StaticModal } from '../common/StaticModal.js'
@@ -31,6 +31,7 @@ type StateProps = {
 type DispatchProps = {
   changePassword(): void,
   getQuestions(): void,
+  goBack(): void,
   onCancel(): void,
   submit(Array<string>): void,
   updateUsername(string): void
@@ -76,7 +77,7 @@ class RecoveryLoginScreenComponent extends Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector />
+      return <Header onBack={this.props.goBack} />
     }
     return null
   }
@@ -373,6 +374,9 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     },
     getQuestions() {
       dispatch(getRecoveryQuestions())
+    },
+    goBack() {
+      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
     onCancel() {
       dispatch({ type: 'CANCEL_RECOVERY_KEY' })

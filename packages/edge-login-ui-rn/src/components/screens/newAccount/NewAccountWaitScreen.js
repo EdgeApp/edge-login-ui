@@ -4,11 +4,11 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector.js'
 import * as Colors from '../../../constants/Colors.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { scale } from '../../../util/scaling.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { Spinner } from '../../common/Spinner.js'
 
@@ -19,7 +19,7 @@ export class NewAccountWaitScreen extends Component<Props> {
     return (
       <SafeAreaView>
         <View style={CreatingAccountWaitScreenStyle.container}>
-          <HeaderConnector />
+          <Header />
           <View style={CreatingAccountWaitScreenStyle.pageContainer}>
             <View style={CreatingAccountWaitScreenStyle.topPad} />
             <View style={CreatingAccountWaitScreenStyle.iconContianer}>

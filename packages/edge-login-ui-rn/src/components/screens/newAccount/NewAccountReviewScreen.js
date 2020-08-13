@@ -4,13 +4,13 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { AccountInfo } from '../../abSpecific/AccountInfoComponent.js'
 import { Button } from '../../common/Button.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { WarningBox } from '../../common/WarningBox.js'
 import { connect } from '../../services/ReduxStore.js'
@@ -26,7 +26,7 @@ class NewAccountReviewScreenComponent extends Component<Props> {
     return (
       <SafeAreaView>
         <View style={NewAccountReviewScreenStyle.screen}>
-          <HeaderConnector />
+          <Header />
           <View style={NewAccountReviewScreenStyle.pageContainer}>
             <View style={NewAccountReviewScreenStyle.instructionsContainer}>
               <Text style={NewAccountReviewScreenStyle.instructionsText}>

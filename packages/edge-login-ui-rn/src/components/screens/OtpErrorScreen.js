@@ -183,13 +183,7 @@ class OtpErrorScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={OtpErrorScreenStyle.screen}>
-          <Header
-            goBack={this.props.goBack}
-            showBackButton
-            showSkipButton={false}
-            subTitle=""
-            title={s.strings.otp_header}
-          />
+          <Header onBack={this.props.goBack} />
           <View style={OtpErrorScreenStyle.pageContainer}>
             <OtpHeroComponent
               style={OtpErrorScreenStyle.hero}
