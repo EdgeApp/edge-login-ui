@@ -2,12 +2,12 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { connect } from 'react-redux'
 
 import { initializePasswordRecovery } from '../../actions/PasswordRecoveryActions.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { RecoverPasswordScreen } from '../screens/existingAccout/RecoverPasswordScreenComponent.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   showHeader: boolean
@@ -33,7 +33,7 @@ class PasswordRecoveryAppComponent extends Component<Props> {
   }
 }
 
-export const PasswordRecoveryApp = connect(
+export const PasswordRecoveryApp = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
     initializePasswordRecovery() {

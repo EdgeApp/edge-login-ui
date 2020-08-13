@@ -4,7 +4,6 @@ import { type EdgePasswordRules } from 'edge-core-js'
 import React, { Component } from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { connect } from 'react-redux'
 
 import { validateConfirmPassword } from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
@@ -19,6 +18,7 @@ import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common/Button.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { SkipModal } from '../../modals/SkipModal.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {}
 type StateProps = {
@@ -205,8 +205,12 @@ const NewAccountPasswordScreenStyle = {
   modal: Styles.SkipModalStyle
 }
 
-export const NewAccountPasswordScreen = connect(
-  (state: RootState): StateProps => ({
+export const NewAccountPasswordScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     confirmPassword: state.create.confirmPassword || '',
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
@@ -214,7 +218,7 @@ export const NewAccountPasswordScreen = connect(
     passwordStatus: state.create.passwordStatus,
     workflow: state.workflow
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     checkTheConfirmPassword() {
       dispatch(validateConfirmPassword())
     },

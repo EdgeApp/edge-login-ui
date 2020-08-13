@@ -1,12 +1,16 @@
 // @flow
 
 import * as React from 'react'
-import { Provider } from 'react-redux'
+import { connect as rawConnect, Provider } from 'react-redux'
 import { type Store, applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
 import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
-import { type Action, type Imports } from '../../types/ReduxTypes.js'
+import {
+  type Action,
+  type Dispatch,
+  type Imports
+} from '../../types/ReduxTypes.js'
 
 type Props = {
   children?: React.Node,
@@ -39,4 +43,20 @@ export class ReduxStore extends React.Component<Props> {
     const { children } = this.props
     return <Provider store={this.store}>{children}</Provider>
   }
+}
+
+type Connector<ExtraProps, OwnProps> = (
+  component: React.ComponentType<ExtraProps & OwnProps>
+) => React.ComponentType<OwnProps>
+
+/**
+ * The react-redux connect function, locked to our own Redux types
+ * and fixed to take the same type parameters as the TypeScript version.
+ */
+export function connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps: (state: RootState, ownProps: OwnProps) => StateProps,
+  mapDispatchToProps: (dispatch: Dispatch, ownProps: OwnProps) => DispatchProps
+): Connector<StateProps & DispatchProps, OwnProps> {
+  // $FlowFixMe
+  return rawConnect(mapStateToProps, mapDispatchToProps)
 }

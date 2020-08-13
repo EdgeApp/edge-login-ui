@@ -3,7 +3,6 @@
 import type { EdgeAccount } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Linking, ScrollView, Text, View } from 'react-native'
-import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
 import { agreeToConditions } from '../../../actions/CreateAccountActions.js'
@@ -17,6 +16,7 @@ import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
 import { Checkbox } from '../../common/Checkbox.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
   appName: string
@@ -239,12 +239,16 @@ const TermsAndConditionsScreenStyle = {
   inputShim: { ...Styles.Shim, height: scale(20) }
 }
 
-export const TermsAndConditionsScreen = connect(
-  (state: RootState): StateProps => ({
+export const TermsAndConditionsScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     accountObject: state.create.accountObject,
     terms: state.terms
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     agreeToCondition(data: EdgeAccount) {
       dispatch(agreeToConditions(data))
     }

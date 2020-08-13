@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { Alert, Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import { createUser } from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
@@ -14,6 +13,7 @@ import { scale } from '../../../util/scaling.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common/Button.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {}
 type StateProps = {
@@ -171,15 +171,15 @@ const SetAccountPinScreenStyle = {
   }
 }
 
-export const SetAccountPinScreen = connect(
-  (state: RootState): StateProps => ({
+export const SetAccountPinScreen = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({
     createErrorMessage: state.create.createErrorMessage,
     password: state.create.password || '',
     pin: state.create.pin,
     pinError: state.create.pinError,
     username: state.create.username || ''
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     createUser(data: Object) {
       dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
       dispatch(createUser(data))

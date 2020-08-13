@@ -1,9 +1,8 @@
 // @flow
 
-import { connect } from 'react-redux'
-
 import s from '../../common/locales/strings.js'
 import { FormField } from '../../components/common/index.js'
+import { connect } from '../../components/services/ReduxStore.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 
 type OwnProps = {
@@ -22,16 +21,17 @@ const mapStateToProps = (state: RootState) => {
     autoCapitalize: 'characters'
   }
 }
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({
+  onChangeText: (data: string) =>
+    dispatch({ type: 'AUTH_UPDATE_OTP_BACKUP_KEY', data: data }),
+  onSubmitEditing: ownProps.onSubmitEditing
+})
 
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
-  return {
-    onChangeText: (data: string) =>
-      dispatch({ type: 'AUTH_UPDATE_OTP_BACKUP_KEY', data: data }),
-    onSubmitEditing: ownProps.onSubmitEditing
-  }
-}
-
-export default connect(
+export default connect<
+  $Call<typeof mapStateToProps, RootState>,
+  $Call<typeof mapDispatchToProps, Dispatch, OwnProps>,
+  OwnProps
+>(
   mapStateToProps,
   mapDispatchToProps
 )(FormField)

@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import { resetOtpReset, retryWithOtp } from '../../../actions/LoginAction.js'
 import s from '../../../common/locales/strings.js'
@@ -18,6 +17,7 @@ import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { StaticModal } from '../../common/StaticModal.js'
 import { DisableOtpModal } from '../../modals/DisableOtpModal.js'
 import { OtpAuthCodeModal } from '../../modals/OtpAuthCodeModal.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {}
 type StateProps = {
@@ -312,8 +312,8 @@ const OtpErrorScreenStyle = {
   }
 }
 
-export const OtpErrorScreen = connect(
-  (state: RootState): StateProps => {
+export const OtpErrorScreen = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => {
     const otpResetDate = state.login.otpResetDate
     const screen = otpResetDate
       ? Constants.OTP_SCREEN_TWO
@@ -325,7 +325,7 @@ export const OtpErrorScreen = connect(
       screen
     }
   },
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     goBack() {
       dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },

@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import s from '../../../common/locales/strings.js'
 import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
@@ -14,13 +13,13 @@ import { AccountInfo } from '../../abSpecific/AccountInfoComponent.js'
 import { Button } from '../../common/Button.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { WarningBox } from '../../common/WarningBox.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {}
-type StateProps = {}
 type DispatchProps = {
   nextScreen(): void
 }
-type Props = OwnProps & StateProps & DispatchProps
+type Props = OwnProps & DispatchProps
 
 class NewAccountReviewScreenComponent extends Component<Props> {
   render() {
@@ -247,9 +246,9 @@ const NewAccountReviewScreenStyle = {
   }
 }
 
-export const NewAccountReviewScreen = connect(
-  (state: RootState): StateProps => ({}),
-  (dispatch: Dispatch): DispatchProps => ({
+export const NewAccountReviewScreen = connect<{}, DispatchProps, OwnProps>(
+  (state: RootState) => ({}),
+  (dispatch: Dispatch) => ({
     nextScreen() {
       dispatch({ type: 'WORKFLOW_NEXT' })
     }

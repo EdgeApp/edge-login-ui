@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import { loginWithRecovery } from '../../../actions/LoginAction.js'
 import { getRecoveryQuestions } from '../../../actions/PasswordRecoveryActions.js'
@@ -17,9 +16,10 @@ import { FormField } from '../../common/index.js'
 import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
 import { StaticModal } from '../../common/StaticModal.js'
 import { SetRecoveryUsernameModal } from '../../modals/SetRecoveryUsernameModal.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
-  showHeader: boolean
+  showHeader?: boolean
 }
 type StateProps = {
   loginError: string,
@@ -359,8 +359,12 @@ const LoginWithRecoveryStyles = {
   listItem: Styles.ListItemTextOnly
 }
 
-export const LoginWithRecoveryQuestionsScreen = connect(
-  (state: RootState): StateProps => ({
+export const LoginWithRecoveryQuestionsScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     loginError: state.login.errorMessage || '',
     question1:
       state.passwordRecovery.userQuestions.length > 0
@@ -374,7 +378,7 @@ export const LoginWithRecoveryQuestionsScreen = connect(
     showRecoverSuccessDialog: state.login.showRecoverSuccessDialog,
     submitButton: s.strings.submit
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     changePassword() {
       dispatch({ type: 'WORKFLOW_NEXT' })
     },

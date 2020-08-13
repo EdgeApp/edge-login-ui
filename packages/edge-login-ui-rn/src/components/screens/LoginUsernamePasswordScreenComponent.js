@@ -3,7 +3,6 @@
 import React, { Component } from 'react'
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { connect } from 'react-redux'
 
 import { userLogin, userLoginWithTouchId } from '../../actions/LoginAction.js'
 import * as Assets from '../../assets/'
@@ -22,6 +21,7 @@ import { BackgroundImage } from '../common/BackgroundImage.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { IconButton } from '../common/IconButton.js'
 import { DeleteUserModal } from '../modals/DeleteUserModal.js'
+import { connect } from '../services/ReduxStore.js'
 
 const Offsets = {
   USERNAME_OFFSET_LOGIN_SCREEN: -50,
@@ -554,8 +554,12 @@ const LoginPasswordScreenStyle = {
   }
 }
 
-export const LoginUsernamePasswordScreen = connect(
-  (state: RootState): StateProps => ({
+export const LoginUsernamePasswordScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     error: state.login.errorMessage || '',
     hasUsers: state.previousUsers.userList.length > 0,
     loginSuccess: state.login.loginSuccess,
@@ -565,7 +569,7 @@ export const LoginUsernamePasswordScreen = connect(
     username: state.login.username,
     usernameOnlyList: state.previousUsers.usernameOnlyList
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     gotoCreatePage() {
       dispatch({ type: 'WORKFLOW_START', data: 'createWF' })
     },

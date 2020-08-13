@@ -3,7 +3,6 @@
 import React, { Component } from 'react'
 import { Dimensions, Platform, Text, View } from 'react-native'
 import Mailer from 'react-native-mail'
-import { connect } from 'react-redux'
 
 import {
   cancelRecoverySettingsScene,
@@ -25,6 +24,7 @@ import { StaticModal } from '../../common/StaticModal.js'
 import { TextAndIconButton } from '../../common/TextAndIconButton.js'
 import { EmailAppFailedModal } from '../../modals/EmailAppFailedModal.js'
 import { SaveRecoveryTokenModal } from '../../modals/SaveRecoveryTokenModal.js'
+import { connect } from '../../services/ReduxStore.js'
 import ConfirmPasswordRecoveryScreen from './ConfirmPasswordRecoveryScreen'
 
 type OwnProps = {
@@ -599,8 +599,12 @@ function returnTrunatedUsername(arg) {
   return arg
 }
 
-export const RecoverPasswordScreen = connect(
-  (state: RootState): StateProps => ({
+export const RecoverPasswordScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     backupKey: state.passwordRecovery.recoveryKey || '',
     disableButton: s.strings.disable_password_recovery,
     doneButton: s.strings.done,
@@ -619,7 +623,7 @@ export const RecoverPasswordScreen = connect(
     submitButton: s.strings.submit,
     username: returnTrunatedUsername(state.login.username)
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     cancel() {
       dispatch(deleteRecovery())
       dispatch(cancelRecoverySettingsScene())

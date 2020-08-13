@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import {
   changePIN,
@@ -20,6 +19,7 @@ import { Button } from '../../common/Button.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { StaticModal } from '../../common/StaticModal.js'
 import { ChangePinModal } from '../../modals/ChangePinModal.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
   showHeader?: boolean
@@ -199,14 +199,18 @@ const SetAccountPinScreenStyle = {
   }
 }
 
-export const ChangeAccountPinScreen = connect(
-  (state: RootState): StateProps => ({
+export const ChangeAccountPinScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     pin: state.create.pin,
     pinError: state.create.pinError,
     workflow: state.workflow,
     showModal: state.create.showModal
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     changePin(data) {
       dispatch(changePIN(data))
     },
@@ -216,15 +220,19 @@ export const ChangeAccountPinScreen = connect(
   })
 )(ChangeAccountPinScreenComponent)
 
-export const ForgotPinChangePinScene = connect(
-  (state: RootState): StateProps => ({
+export const ForgotPinChangePinScene = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     forgotPasswordModal: true,
     pin: state.create.pin,
     pinError: state.create.pinError,
     showHeader: true,
     showModal: state.create.showModal
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     changePin(data: string) {
       dispatch(recoveryChangePIN(data))
     },

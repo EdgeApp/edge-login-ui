@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { connect } from 'react-redux'
 
 import { getPreviousUsers } from '../../actions/PreviousUsersActions.js'
 import { getSupportedBiometryType } from '../../keychain.js'
@@ -28,6 +27,7 @@ import { NewAccountWelcomeScreen } from '../screens/newAccount/NewAccountWelcome
 import { SetAccountPinScreen } from '../screens/newAccount/SetAccountPinScreenComponent.js'
 import { TermsAndConditionsScreen } from '../screens/newAccount/TermsAndConditionsScreenComponent.js'
 import { PinLoginScreen } from '../screens/PinLogInScreenComponent.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   appId?: string,
@@ -146,9 +146,9 @@ class LoginAppComponent extends Component<Props, State> {
   getCreateScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <NewAccountWelcomeScreen appName={this.props.appName} /> // NewAccountWelcomeScreenConnector
+        return <NewAccountWelcomeScreen appName={this.props.appName || ''} />
       case 1:
-        return <NewAccountUsernameScreen appName={this.props.appName} />
+        return <NewAccountUsernameScreen appName={this.props.appName || ''} />
       case 2:
         return <NewAccountPasswordScreen />
       case 3:
@@ -158,9 +158,9 @@ class LoginAppComponent extends Component<Props, State> {
       case 5:
         return <NewAccountReviewScreen />
       case 6:
-        return <TermsAndConditionsScreen appName={this.props.appName} />
+        return <TermsAndConditionsScreen appName={this.props.appName || ''} />
       default:
-        return <NewAccountWelcomeScreen />
+        return <NewAccountWelcomeScreen appName={this.props.appName || ''} />
     }
   }
 
@@ -220,13 +220,13 @@ class LoginAppComponent extends Component<Props, State> {
   }
 }
 
-export const LoginApp = connect(
-  (state: RootState): StateProps => ({
+export const LoginApp = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({
     lastUser: state.previousUsers.lastUser,
     previousUsers: state.previousUsers,
     workflow: state.workflow
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     getPreviousUsers() {
       dispatch(getPreviousUsers())
     },

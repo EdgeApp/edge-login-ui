@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
@@ -14,6 +13,7 @@ import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
 import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   appId?: string,
@@ -161,7 +161,7 @@ const LandingScreenStyle = {
   }
 }
 
-export const LandingScreen = connect(
+export const LandingScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch): DispatchProps => ({
     startCreate() {

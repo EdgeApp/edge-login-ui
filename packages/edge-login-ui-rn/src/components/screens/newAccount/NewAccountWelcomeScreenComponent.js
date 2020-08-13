@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
 import * as Assets from '../../../assets'
@@ -16,16 +15,16 @@ import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
 import { Button } from '../../common/Button.js'
 import { HeaderBackButton } from '../../common/HeaderBackButton.js'
 import SafeAreaView from '../../common/SafeAreaView.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
   appName: string
 }
-type StateProps = {}
 type DispatchProps = {
   exitScreen(): void,
   nextScreen(): void
 }
-type Props = OwnProps & StateProps & DispatchProps
+type Props = OwnProps & DispatchProps
 
 type State = {}
 
@@ -148,9 +147,9 @@ const NewAccountWelcomeScreenStyle = {
   }
 }
 
-export const NewAccountWelcomeScreen = connect(
-  (state: RootState): StateProps => ({}),
-  (dispatch: Dispatch): DispatchProps => ({
+export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
+  (state: RootState) => ({}),
+  (dispatch: Dispatch) => ({
     exitScreen() {
       dispatch({ type: 'WORKFLOW_START', data: 'initalizeWF' })
     },

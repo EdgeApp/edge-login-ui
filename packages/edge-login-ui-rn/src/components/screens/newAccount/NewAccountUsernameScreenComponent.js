@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
 import { checkUsernameForAvailabilty } from '../../../actions/CreateAccountActions.js'
@@ -16,6 +15,7 @@ import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
 import T from '../../common/FormattedText.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
   appName: string
@@ -127,12 +127,16 @@ const NewAccountUsernameScreenStyle = {
   inputBox: Styles.MaterialInputOnWhite
 }
 
-export const NewAccountUsernameScreen = connect(
-  (state: RootState): StateProps => ({
+export const NewAccountUsernameScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     username: state.create.username || '',
     usernameErrorMessage: state.create.usernameErrorMessage
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     checkUsernameForAvailabilty(data: string) {
       dispatch(checkUsernameForAvailabilty(data))
     }

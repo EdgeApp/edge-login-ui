@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import { userLoginWithTouchId } from '../../actions/LoginAction.js'
 import * as Assets from '../../assets/'
@@ -22,6 +21,7 @@ import { PinKeypad } from '../abSpecific/PinKeypad.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { DeleteUserModal } from '../modals/DeleteUserModal.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   appId?: string,
@@ -402,8 +402,8 @@ const PinLoginScreenStyle = {
   keypad: Styles.PinKeypadStyle
 }
 
-export const PinLoginScreen = connect(
-  (state: RootState): StateProps => ({
+export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({
     isTouchIdDisabled:
       state.login.loginSuccess ||
       !!state.login.wait ||
@@ -421,7 +421,7 @@ export const PinLoginScreen = connect(
     userList: state.previousUsers.userList,
     username: state.login.username
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     changeUser: (data: string) => {
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data })
     },
