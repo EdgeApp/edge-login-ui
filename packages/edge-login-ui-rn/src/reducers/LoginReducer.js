@@ -83,7 +83,6 @@ export const login: Reducer<LoginState, Action> = function(
       return {
         ...state,
         loginSuccess: true,
-        loginPasswordErrorMessage: null,
         isLoggingInWithPin: false,
         errorMessage: null,
         otpErrorMessage: null,
