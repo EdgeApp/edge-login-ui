@@ -28,13 +28,13 @@ type OwnProps = {
   backgroundImage?: any,
   parentButton?: Object,
   primaryLogo?: any,
-  primaryLogoCallback?: () => void,
-  touch: boolean | string
+  primaryLogoCallback?: () => void
 }
 type StateProps = {
   isTouchIdDisabled: boolean,
   loginSuccess: boolean,
   showModal: boolean,
+  touch: $PropertyType<RootState, 'touch'>,
   userDetails: Object,
   userList: Array<LoginUserInfo>,
   username: string
@@ -411,6 +411,7 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       (state.login.pin ? state.login.pin.length : 0) === 4,
     loginSuccess: state.login.loginSuccess,
     showModal: state.workflow.showModal,
+    touch: state.touch,
     userDetails: state.previousUsers.userList.find(
       user => user.username === state.login.username
     ) || {

@@ -9,6 +9,7 @@ import {
 
 import { type WorkflowName } from '../constants/workflows.js'
 import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
+import { type RootState } from '../reducers/RootReducer.js'
 
 // Actions with no payload:
 type NoDataActionName =
@@ -114,6 +115,7 @@ export type Action =
     }
   | { type: 'SET_PREVIOUS_USERS', data: PreviousUsersState }
   | { type: 'SET_RECOVERY_KEY', data: string }
+  | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
   | { type: 'START_EDGE_LOGIN_REQUEST', data: EdgePendingEdgeLogin }
   | { type: 'UPDATE_WAIT_TIMER', data: { seconds: number } } // Apparently unused
   | { type: 'WORKFLOW_START', data: WorkflowName }

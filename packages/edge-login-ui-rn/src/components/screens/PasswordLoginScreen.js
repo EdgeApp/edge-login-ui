@@ -34,8 +34,7 @@ type OwnProps = {
   backgroundImage?: any,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
-  parentButton?: Object,
-  touch: string | boolean
+  parentButton?: Object
 }
 type StateProps = {
   error: string,
@@ -44,6 +43,7 @@ type StateProps = {
   password: string,
   previousUsers: LoginUserInfo[],
   showModal: boolean,
+  touch: $PropertyType<RootState, 'touch'>,
   username: string,
   usernameOnlyList: Array<string>
 }
@@ -562,6 +562,7 @@ export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     password: state.login.password || '',
     previousUsers: state.previousUsers.userList,
     showModal: state.workflow.showModal,
+    touch: state.touch,
     username: state.login.username,
     usernameOnlyList: state.previousUsers.usernameOnlyList
   }),

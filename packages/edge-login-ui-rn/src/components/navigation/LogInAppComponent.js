@@ -3,8 +3,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import { getPreviousUsers } from '../../actions/PreviousUsersActions.js'
-import { getSupportedBiometryType } from '../../keychain.js'
+import { initializeLogin } from '../../actions/LoginInitActions.js'
 import {
   type LoginUserInfo,
   type PreviousUsersState
@@ -42,26 +41,19 @@ type OwnProps = {
 type StateProps = {
   lastUser?: LoginUserInfo,
   previousUsers: PreviousUsersState,
+  touch: $PropertyType<RootState, 'touch'>,
   workflow: WorkflowState
 }
 type DispatchProps = {
-  getPreviousUsers(): void,
+  initializeLogin(): void,
   startRecoveryWorkflow(backupKey: string): void
 }
-type State = {
-  touch: string | boolean
-}
-
 type Props = StateProps & OwnProps & DispatchProps
 
-class LoginAppComponent extends Component<Props, State> {
+class LoginAppComponent extends Component<Props> {
   constructor(props: Props) {
     super(props)
-    this.state = {
-      touch: false
-    }
-    this.props.getPreviousUsers()
-    this.checkTouchEnabled()
+    this.props.initializeLogin()
   }
 
   render() {
@@ -97,7 +89,7 @@ class LoginAppComponent extends Component<Props, State> {
           if (this.props.lastUser.pinEnabled) {
             return this.getPinScreen()
           }
-          if (this.props.lastUser.touchEnabled && this.state.touch) {
+          if (this.props.lastUser.touchEnabled && this.props.touch) {
             return this.getPinScreen()
           }
         }
@@ -172,7 +164,6 @@ class LoginAppComponent extends Component<Props, State> {
         primaryLogo={this.props.primaryLogo}
         primaryLogoCallback={this.props.primaryLogoCallback}
         parentButton={this.props.parentButton}
-        touch={this.state.touch}
       />
     )
   }
@@ -185,7 +176,6 @@ class LoginAppComponent extends Component<Props, State> {
         primaryLogo={this.props.primaryLogo}
         primaryLogoCallback={this.props.primaryLogoCallback}
         parentButton={this.props.parentButton}
-        touch={this.state.touch}
       />
     )
   }
@@ -204,31 +194,18 @@ class LoginAppComponent extends Component<Props, State> {
         return <RecoveryChangePinScreen />
     }
   }
-
-  checkTouchEnabled = async () => {
-    try {
-      const touch = await getSupportedBiometryType()
-      if (touch === 'FaceID') return this.setState({ touch: touch })
-      if (touch === 'TouchID') return this.setState({ touch: touch })
-      if (touch === 'Fingerprint') return this.setState({ touch: 'TouchID' })
-      if (touch) return this.setState({ touch: 'TouchID' })
-      return this.setState({ touch: false })
-    } catch (error) {
-      console.log(error)
-      return this.setState({ touch: false })
-    }
-  }
 }
 
 export const LoginApp = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     lastUser: state.previousUsers.lastUser,
     previousUsers: state.previousUsers,
+    touch: state.touch,
     workflow: state.workflow
   }),
   (dispatch: Dispatch) => ({
-    getPreviousUsers() {
-      dispatch(getPreviousUsers())
+    initializeLogin() {
+      dispatch(initializeLogin())
     },
     startRecoveryWorkflow(backupKey) {
       dispatch({ type: 'SET_RECOVERY_KEY', data: backupKey })

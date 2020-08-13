@@ -24,7 +24,10 @@ export type RootState = {
   passwordStatus: PasswordStatusState | null,
   previousUsers: PreviousUsersState,
   terms: TermsState,
-  workflow: WorkflowState
+  workflow: WorkflowState,
+
+  // Local reducers:
+  touch: 'FaceID' | 'TouchID' | false
 }
 
 export const rootReducer: Reducer<RootState, Action> = combineReducers({
@@ -34,5 +37,9 @@ export const rootReducer: Reducer<RootState, Action> = combineReducers({
   passwordStatus,
   previousUsers,
   terms,
-  workflow
+  workflow,
+
+  touch(state = false, action: Action) {
+    return action.type === 'SET_TOUCH' ? action.data : state
+  }
 })
