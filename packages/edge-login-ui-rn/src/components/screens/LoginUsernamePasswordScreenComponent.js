@@ -6,7 +6,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { connect } from 'react-redux'
 
 import { userLogin, userLoginWithTouchId } from '../../actions/LoginAction.js'
-import { recoverPasswordLogin } from '../../actions/PasswordRecoveryActions.js'
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
 import { Button } from '../../components/common/Button.js'
@@ -53,7 +52,6 @@ type DispatchProps = {
   gotoPinLoginPage(): void,
   launchDeleteModal(): void,
   launchUserLoginWithTouchId(Object): void,
-  recoverPasswordLogin(): void,
   updatePassword(string): void,
   updateUsername(string): void,
   userLogin(Object): void
@@ -118,13 +116,6 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
       )
     }
     return null
-  }
-
-  recoverPasswordLogin = () => {
-    this.setState({
-      showRecoveryModalOne: false
-    })
-    this.props.recoverPasswordLogin()
   }
 
   cancelForgotPassword = () => {
@@ -586,9 +577,6 @@ export const LoginUsernamePasswordScreen = connect(
     },
     launchUserLoginWithTouchId(data: Object) {
       dispatch(userLoginWithTouchId(data))
-    },
-    recoverPasswordLogin() {
-      dispatch(recoverPasswordLogin())
     },
     updatePassword(data: string) {
       dispatch({ type: 'AUTH_UPDATE_LOGIN_PASSWORD', data: data })
