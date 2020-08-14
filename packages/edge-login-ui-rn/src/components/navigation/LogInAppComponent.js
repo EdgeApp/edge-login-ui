@@ -6,8 +6,8 @@ import { View } from 'react-native'
 import { type WorkflowState } from '../../reducers/WorkflowReducer.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import { RecoveryChangePasswordScreen } from '../screens/existingAccout/ChangePasswordScreen.js'
-import { RecoveryChangePinScreen } from '../screens/existingAccout/ChangePinScreen.js'
+import { ResecurePasswordScreen } from '../screens/existingAccout/ChangePasswordScreen.js'
+import { ResecurePinScreen } from '../screens/existingAccout/ChangePinScreen.js'
 import { LandingScreen } from '../screens/LandingScreen.js'
 import { LoadingScreen } from '../screens/LoadingScreen.js'
 import { NewAccountPasswordScreen } from '../screens/newAccount/NewAccountPasswordScreen.js'
@@ -63,6 +63,8 @@ class LoginAppComponent extends Component<Props> {
         return this.getOtpScreen()
       case 'recoveryLoginWF':
         return this.getRecoveryLoginScreen()
+      case 'resecureWF':
+        return this.getResecureScreen()
     }
   }
 
@@ -133,13 +135,15 @@ class LoginAppComponent extends Component<Props> {
   }
 
   getRecoveryLoginScreen() {
+    return <RecoveryLoginScreen />
+  }
+
+  getResecureScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <RecoveryLoginScreen />
+        return <ResecurePasswordScreen />
       case 1:
-        return <RecoveryChangePasswordScreen />
-      case 2:
-        return <RecoveryChangePinScreen />
+        return <ResecurePinScreen />
     }
   }
 }

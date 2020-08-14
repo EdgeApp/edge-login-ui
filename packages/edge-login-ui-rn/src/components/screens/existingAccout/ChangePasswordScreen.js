@@ -227,7 +227,7 @@ export const PublicChangePasswordScreen = connect<
   })
 )(ChangePasswordScreenComponent)
 
-export const RecoveryChangePasswordScreen = connect<
+export const ResecurePasswordScreen = connect<
   StateProps,
   DispatchProps,
   OwnProps

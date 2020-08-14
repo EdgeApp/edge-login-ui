@@ -17,7 +17,8 @@ export type Workflows = {
   otpWF: Scene[],
   passwordWF: Scene[],
   pinWF: Scene[],
-  recoveryLoginWF: Scene[]
+  recoveryLoginWF: Scene[],
+  resecureWF: Scene[]
 }
 
 export type WorkflowName = $Keys<Workflows>
@@ -142,14 +143,20 @@ export const workflows: Workflows = {
       // RecoveryLoginScreen
       title: s.strings.recovery_questions_header,
       subTitle: ''
-    },
+    }
+  ],
+
+  // ----------------------------------------------------------------
+  // Security checkup
+  // ----------------------------------------------------------------
+  resecureWF: [
     {
-      // RecoveryChangePasswordScreen
+      // ResecurePasswordScreen
       title: s.strings.change_password,
       subTitle: ''
     },
     {
-      // RecoveryChangePinScreen
+      // ResecurePinScreen
       title: s.strings.change_pin,
       subTitle: ''
     }

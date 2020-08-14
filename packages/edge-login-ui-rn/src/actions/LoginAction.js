@@ -116,7 +116,7 @@ export function retryWithOtp() {
         getState,
         imports
       )
-      return dispatch({ type: 'RECOVERY_AFTER_OTP_CHECK' })
+      return dispatch({ type: 'WORKFLOW_START', data: 'resecureWF' })
     }
     if (previousAttemptType === 'PASSWORD') {
       return userLogin(

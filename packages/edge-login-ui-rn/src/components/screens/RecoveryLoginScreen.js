@@ -370,7 +370,7 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
   }),
   (dispatch: Dispatch) => ({
     changePassword() {
-      dispatch({ type: 'WORKFLOW_NEXT' })
+      dispatch({ type: 'WORKFLOW_START', data: 'resecureWF' })
     },
     getQuestions() {
       dispatch(getRecoveryQuestions())

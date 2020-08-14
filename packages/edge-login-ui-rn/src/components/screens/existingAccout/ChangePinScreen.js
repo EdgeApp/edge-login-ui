@@ -222,11 +222,7 @@ export const PublicChangePinScreen = connect<
   })
 )(ChangePinScreenComponent)
 
-export const RecoveryChangePinScreen = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps
->(
+export const ResecurePinScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     forgotPasswordModal: true,
     pin: state.create.pin,
