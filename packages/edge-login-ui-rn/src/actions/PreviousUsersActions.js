@@ -98,3 +98,21 @@ export function getPreviousUsers() {
     })
   }
 }
+
+export const setMostRecentUsers = async (username: string) => {
+  const disklet = makeReactNativeDisklet()
+  const lastUsers = await disklet
+    .getText('lastusers.json')
+    .then(text => JSON.parse(text))
+    .catch(_ => [])
+  if (lastUsers && lastUsers.length > 0) {
+    const filteredLastUsers = lastUsers.filter(
+      (lastUser: string) => lastUser !== username
+    )
+    return disklet.setText(
+      'lastusers.json',
+      JSON.stringify([username, ...filteredLastUsers])
+    )
+  }
+  return disklet.setText('lastusers.json', JSON.stringify([username]))
+}

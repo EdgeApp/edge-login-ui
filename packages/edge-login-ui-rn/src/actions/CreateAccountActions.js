@@ -9,8 +9,7 @@ import * as Constants from '../constants/index.js'
 import { enableTouchId, isTouchDisabled } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 import { isASCII } from '../util/ASCIIUtil.js'
-import { setMostRecentUsers } from './LoginAction.js'
-import { getPreviousUsers } from './PreviousUsersActions.js'
+import { getPreviousUsers, setMostRecentUsers } from './PreviousUsersActions.js'
 
 export function validatePin(data: Object) {
   const pin = data.pin
