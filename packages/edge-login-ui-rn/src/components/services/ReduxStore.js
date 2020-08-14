@@ -9,11 +9,15 @@ import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
 import {
   type Action,
   type Dispatch,
+  type GetState,
   type Imports
 } from '../../types/ReduxTypes.js'
 
 type Props = {
   children?: React.Node,
+  initialAction:
+    | Action
+    | ((dispatch: Dispatch, getState: GetState, i: Imports) => mixed),
   imports: Imports
 }
 
@@ -37,6 +41,15 @@ export class ReduxStore extends React.Component<Props> {
       undefined,
       composeEnhancers(applyMiddleware(thunk.withExtraArgument(imports)))
     )
+    // $FlowFixMe Flow doesn't know about thunks at this point.
+    this.store.dispatch(this.props.initialAction)
+  }
+
+  componentDidUpdate(prev: Props) {
+    const { recoveryKey } = this.props.imports
+    if (recoveryKey && recoveryKey !== prev.imports.recoveryKey) {
+      this.store.dispatch({ type: 'SET_RECOVERY_KEY', data: recoveryKey })
+    }
   }
 
   render() {

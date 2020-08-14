@@ -77,9 +77,9 @@ async function getDiskStuff(context: EdgeContext, folder: DiskletFolder) {
 }
 
 export function getPreviousUsers() {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder, username } = imports
-    getDiskStuff(context, folder).then((data: Object) => {
+    await getDiskStuff(context, folder).then((data: Object) => {
       const focusUser = username || data.lastUser
       if (data.userList && data.userList.length > 0) {
         data.usernameOnlyList = []

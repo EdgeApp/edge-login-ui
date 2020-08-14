@@ -18,7 +18,6 @@ export type Workflows = {
   landingWF: Scene[],
   otpWF: Scene[],
   passwordWF: Scene[],
-  passwordWFForced: Scene[],
   pinWF: Scene[],
   recoveryLoginWF: Scene[]
 }
@@ -133,7 +132,7 @@ export const workflows: Workflows = {
   ],
   loadingWF: [
     {
-      // Picks a screen based on the user list
+      // LoadingScreen
       back: false,
       skip: false,
       title: '',
@@ -155,16 +154,7 @@ export const workflows: Workflows = {
   // ----------------------------------------------------------------
   passwordWF: [
     {
-      // PasswordLoginScreen with logic to kick over to recoveryLoginWF
-      back: true,
-      skip: false,
-      title: s.strings.change_password,
-      subTitle: ''
-    }
-  ],
-  passwordWFForced: [
-    {
-      // PasswordLoginScreen without logic to kick over to recoveryLoginWF
+      // PasswordLoginScreen
       back: true,
       skip: false,
       title: s.strings.change_password,

@@ -54,7 +54,7 @@ export const workflow: Reducer<WorkflowState, Action> = function(
     case 'SET_RECOVERY_KEY':
       return { ...state, currentKey: 'recoveryLoginWF', currentSceneIndex: 0 }
     case 'CANCEL_RECOVERY_KEY':
-      return { ...state, currentKey: 'passwordWFForced', currentSceneIndex: 0 }
+      return { ...state, currentKey: 'passwordWF', currentSceneIndex: 0 }
     case 'RECOVERY_AFTER_OTP_CHECK':
       return { ...state, currentKey: 'recoveryLoginWF', currentSceneIndex: 1 }
     case 'RESET_APP':

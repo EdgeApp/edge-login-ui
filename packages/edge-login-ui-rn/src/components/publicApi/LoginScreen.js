@@ -8,8 +8,8 @@ import {
 } from 'edge-core-js'
 import React, { Component } from 'react'
 
+import { initializeLogin } from '../../actions/LoginInitActions.js'
 import { updateFontStyles } from '../../constants/Fonts.js'
-import { checkingForOTP } from '../../util/checkingForOTP.js'
 import { LoginApp } from '../navigation/LogInAppComponent.js'
 import { Airship } from '../services/AirshipInstance.js'
 import { ReduxStore } from '../services/ReduxStore.js'
@@ -36,7 +36,6 @@ export class LoginScreen extends Component<Props> {
 
   constructor(props: Props) {
     super(props)
-    checkingForOTP(this.props.context)
 
     const { fontDescription = {} } = this.props
     const { regularFontFamily } = fontDescription
@@ -78,6 +77,7 @@ export class LoginScreen extends Component<Props> {
           recoveryKey: this.props.recoveryLogin,
           username: this.props.username
         }}
+        initialAction={initializeLogin()}
       >
         <ThemeProvider>
           <Airship avoidAndroidKeyboard statusBarTranslucent>
@@ -89,7 +89,6 @@ export class LoginScreen extends Component<Props> {
               parentButton={this.props.parentButton}
               primaryLogo={this.props.primaryLogo}
               primaryLogoCallback={this.props.primaryLogoCallback}
-              recoveryLogin={this.props.recoveryLogin}
             />
           </Airship>
         </ThemeProvider>

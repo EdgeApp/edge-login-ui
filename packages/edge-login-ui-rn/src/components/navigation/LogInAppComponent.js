@@ -3,11 +3,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import { initializeLogin } from '../../actions/LoginInitActions.js'
-import {
-  type LoginUserInfo,
-  type PreviousUsersState
-} from '../../reducers/PreviousUsersReducer.js'
 import { type WorkflowState } from '../../reducers/WorkflowReducer.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
@@ -35,27 +30,14 @@ type OwnProps = {
   landingScreenText?: string,
   parentButton?: Object,
   primaryLogo?: any,
-  primaryLogoCallback?: () => void,
-  recoveryLogin?: string
+  primaryLogoCallback?: () => void
 }
 type StateProps = {
-  lastUser?: LoginUserInfo,
-  previousUsers: PreviousUsersState,
-  touch: $PropertyType<RootState, 'touch'>,
   workflow: WorkflowState
 }
-type DispatchProps = {
-  initializeLogin(): void,
-  startRecoveryWorkflow(backupKey: string): void
-}
-type Props = StateProps & OwnProps & DispatchProps
+type Props = OwnProps & StateProps
 
 class LoginAppComponent extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
-    this.props.initializeLogin()
-  }
-
   render() {
     const { ScreenStyle } = Styles
     return (
@@ -66,46 +48,12 @@ class LoginAppComponent extends Component<Props> {
   }
 
   renderContent() {
-    if (!this.props.previousUsers.loaded && !this.props.recoveryLogin) {
-      return this.getLoadingScreen()
-    }
     switch (this.props.workflow.currentKey) {
       case 'loadingWF':
-        if (
-          (!this.props.previousUsers ||
-            this.props.previousUsers.userList.length === 0) &&
-          !this.props.recoveryLogin
-        ) {
-          // we have previous user data but there are no users ever logged in.
-          return this.getLandingScreen()
-        }
-        if (this.props.recoveryLogin) {
-          this.props.startRecoveryWorkflow(this.props.recoveryLogin)
-          return null
-          // change that key
-        }
-        if (this.props.lastUser) {
-          // we have previous users, a last user, and that user has pin or touch enabled.
-          if (this.props.lastUser.pinEnabled) {
-            return this.getPinScreen()
-          }
-          if (this.props.lastUser.touchEnabled && this.props.touch) {
-            return this.getPinScreen()
-          }
-        }
-        // we have previous users, but no pin enabled previous user.
-        return this.getPasswordScreen()
-
+        return this.getLoadingScreen()
       case 'landingWF':
         return this.getLandingScreen()
       case 'passwordWF':
-        if (this.props.recoveryLogin) {
-          this.props.startRecoveryWorkflow(this.props.recoveryLogin)
-          return
-          // return this.getRecoveryLoginScreen()
-        }
-        return this.getPasswordScreen()
-      case 'passwordWFForced':
         return this.getPasswordScreen()
       case 'pinWF':
         return this.getPinScreen()
@@ -196,19 +144,9 @@ class LoginAppComponent extends Component<Props> {
   }
 }
 
-export const LoginApp = connect<StateProps, DispatchProps, OwnProps>(
+export const LoginApp = connect<StateProps, {}, OwnProps>(
   (state: RootState) => ({
-    lastUser: state.previousUsers.lastUser,
-    previousUsers: state.previousUsers,
-    touch: state.touch,
     workflow: state.workflow
   }),
-  (dispatch: Dispatch) => ({
-    initializeLogin() {
-      dispatch(initializeLogin())
-    },
-    startRecoveryWorkflow(backupKey) {
-      dispatch({ type: 'SET_RECOVERY_KEY', data: backupKey })
-    }
-  })
+  (dispatch: Dispatch) => ({})
 )(LoginAppComponent)

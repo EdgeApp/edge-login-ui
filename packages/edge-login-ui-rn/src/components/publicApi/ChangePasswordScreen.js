@@ -3,8 +3,10 @@
 import { makeReactNativeFolder } from 'disklet'
 import { type EdgeAccount, type EdgeContext } from 'edge-core-js'
 import React, { Component } from 'react'
+import { View } from 'react-native'
 
-import { ChangePasswordApp } from '../navigation/ChangePasswordAppComponent.js'
+import * as Styles from '../../styles/index.js'
+import { PublicChangePasswordScreen } from '../screens/existingAccout/ChangePasswordScreen.js'
 import { Airship } from '../services/AirshipInstance.js'
 import { ReduxStore } from '../services/ReduxStore.js'
 import { ThemeProvider } from '../services/ThemeContext.js'
@@ -34,10 +36,13 @@ export class ChangePasswordScreen extends Component<Props> {
           onCancel: this.props.onComplete,
           onComplete: this.props.onComplete
         }}
+        initialAction={{ type: 'WORKFLOW_START', data: 'changePasswordWF' }}
       >
         <ThemeProvider>
           <Airship avoidAndroidKeyboard statusBarTranslucent>
-            <ChangePasswordApp showHeader={this.props.showHeader} />
+            <View style={Styles.ScreenStyle} accessible>
+              <PublicChangePasswordScreen showHeader={this.props.showHeader} />
+            </View>
           </Airship>
         </ThemeProvider>
       </ReduxStore>
