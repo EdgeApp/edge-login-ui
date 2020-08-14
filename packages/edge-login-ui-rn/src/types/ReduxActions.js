@@ -3,7 +3,6 @@
 import {
   type EdgeAccount,
   type EdgePasswordRules,
-  type EdgePendingEdgeLogin,
   type OtpError
 } from 'edge-core-js'
 
@@ -15,7 +14,6 @@ import { type LoginAttempt } from '../util/loginAttempt.js'
 // Actions with no payload:
 type NoDataActionName =
   | 'AUTH_LOGGING_IN_WITH_PIN'
-  | 'CANCEL_EDGE_LOGIN_REQUEST'
   | 'CANCEL_RECOVERY_KEY'
   | 'CLEAR_CREATE_ERROR_MESSAGE'
   | 'CLOSE_NOTIFICATION_MODAL'
@@ -103,7 +101,6 @@ export type Action =
   | { type: 'SET_PREVIOUS_USERS', data: PreviousUsersState }
   | { type: 'SET_RECOVERY_KEY', data: string }
   | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
-  | { type: 'START_EDGE_LOGIN_REQUEST', data: EdgePendingEdgeLogin }
   | { type: 'START_RESECURE', data: EdgeAccount }
   | { type: 'UPDATE_WAIT_TIMER', data: { seconds: number } } // Apparently unused
   | { type: 'WORKFLOW_START', data: WorkflowName }

@@ -25,7 +25,7 @@ const strings = {
     'DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!',
   backup_key_label: 'Backup Key',
   ok: 'OK',
-  or: 'OR',
+  or: 'or',
   exit: 'Exit',
   exit_pin: 'Exit PIN', // nothing should be all-caps
   next_label: 'Next',
@@ -111,7 +111,6 @@ const strings = {
   otp_instructions:
     'Sign into your account using the device you setup 2FA with, and go to Settings > 2 Factor Authentication to find the code.',
   disable_otp_button_two: 'Disable 2 Factor Authentication',
-  type_auth_button: 'Type in authentication code instead',
   otp_email_body:
     'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ',
   otp_email_subject: 'Edge Recovery Token',
@@ -188,7 +187,21 @@ const strings = {
   alert_modal_voucher: 'Login request for new device for account ',
   alert_modal_action: '\nPlease log in to approve or deny this alert',
 
-  otp_backup_code_modal_title: 'Enter Backup Code'
+  otp_screen_header_2fa:
+    'Two-factor authentication is turned on for this account',
+  otp_screen_header_ip:
+    'This device is not authorized to log in to this account',
+  otp_screen_approve:
+    'Approve this log in from your other devices logged into this account',
+  otp_screen_wait:
+    'Wait until %s when the device will be automatically authorized to log in',
+  otp_screen_retrying: 'Retrying login...',
+
+  otp_backup_code_modal_title: 'Enter Backup Code',
+
+  qr_modal_title: 'Scan QR Code',
+  qr_modal_message:
+    'Scan this QR code with another device logged into your account:'
 }
 
 module.exports = strings

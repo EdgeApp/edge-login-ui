@@ -10,8 +10,6 @@ const defaultAccount: EdgeAccount = flowHack
 
 export type LoginState = {
   +account: EdgeAccount,
-  +cancelEdgeLoginRequest: (() => void) | null,
-  +edgeLoginId: string | null,
   +errorMessage: string | null,
   +isLoggingInWithPin: boolean,
   +loginSuccess: boolean,
@@ -27,8 +25,6 @@ export type LoginState = {
 
 const initialState: LoginState = {
   account: defaultAccount,
-  cancelEdgeLoginRequest: null,
-  edgeLoginId: null,
   errorMessage: null,
   isLoggingInWithPin: false,
   loginSuccess: false,
@@ -99,18 +95,6 @@ export function login(
       return {
         ...state,
         otpResetDate: action.data
-      }
-    case 'START_EDGE_LOGIN_REQUEST':
-      return {
-        ...state,
-        edgeLoginId: 'airbitz://edge/' + action.data.id,
-        cancelEdgeLoginRequest: action.data.cancelRequest
-      }
-    case 'CANCEL_EDGE_LOGIN_REQUEST':
-      return {
-        ...state,
-        edgeLoginId: null,
-        cancelEdgeLoginRequest: null
       }
     case 'SET_RECOVERY_KEY':
       return { ...state, recoveryToken: action.data }

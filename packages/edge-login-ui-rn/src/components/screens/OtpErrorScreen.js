@@ -1,34 +1,55 @@
 // @flow
 
-import React, { Component } from 'react'
-import { View } from 'react-native'
+import { type OtpError } from 'edge-core-js'
+import * as React from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
+import { cacheStyles } from 'react-native-patina'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { sprintf } from 'sprintf-js'
 
+import { login } from '../../actions/LoginAction.js'
+import { hasReadyVoucher } from '../../actions/LoginOtpActions.js'
 import s from '../../common/locales/strings.js'
-import * as Constants from '../../constants/index.js'
-import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { type LoginAttempt } from '../../util/loginAttempt.js'
-import { EdgeLoginQr } from '../abSpecific/EdgeLoginQrComponent.js'
-import { OtpHeroComponent } from '../abSpecific/OtpHeroComponent'
-import { Button } from '../common/Button.js'
 import { Header } from '../common/Header.js'
-import SafeAreaView from '../common/SafeAreaViewGradient.js'
 import { OtpBackupCodeModal } from '../modals/OtpBackupCodeModal.js'
 import { OtpResetModal } from '../modals/OtpResetModal.js'
-import { Airship } from '../services/AirshipInstance.js'
+import { QrCodeModal } from '../modals/QrCodeModal.js'
+import { Airship, showError, showToast } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
+import {
+  type Theme,
+  type ThemeProps,
+  withTheme
+} from '../services/ThemeContext.js'
+import { ThemedScene } from '../themed/ThemedScene.js'
 
 type OwnProps = {}
 type StateProps = {
+  otpError: OtpError,
   otpAttempt: LoginAttempt,
   otpResetDate?: Date
 }
 type DispatchProps = {
-  goBack(): void
+  goBack(): void,
+  hasReadyVoucher(otpError: OtpError): Promise<boolean>,
+  login(otpAttempt: LoginAttempt): Promise<void>,
+  saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void
 }
-type Props = OwnProps & StateProps & DispatchProps
+type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
-class OtpErrorScreenComponent extends Component<Props> {
+class OtpErrorScreenComponent extends React.Component<Props> {
+  timeout: $Call<typeof setTimeout, () => void, number> | void
+
+  componentDidMount() {
+    this.timeout = setTimeout(this.pollLoop, 5000)
+  }
+
+  componentWillUnmount() {
+    if (this.timeout != null) clearTimeout(this.timeout)
+  }
+
   handleBackupModal = () => {
     const { otpAttempt } = this.props
     Airship.show(bridge => (
@@ -40,140 +61,210 @@ class OtpErrorScreenComponent extends Component<Props> {
     Airship.show(bridge => <OtpResetModal bridge={bridge} />)
   }
 
-  renderDisableButton(style: typeof OtpErrorScreenStyle) {
-    if (this.props.otpResetDate == null) {
-      return (
-        <Button
-          onPress={this.handleResetModal}
-          downStyle={style.exitButton.downStyle}
-          downTextStyle={style.exitButton.downTextStyle}
-          upStyle={style.exitButton.upStyle}
-          upTextStyle={style.exitButton.upTextStyle}
-          label={s.strings.disable_otp_button_two}
-        />
-      )
-    }
-    return null
+  handleQrModal = () => {
+    Airship.show(bridge => <QrCodeModal bridge={bridge} />)
+  }
+
+  pollLoop = () => {
+    const {
+      otpAttempt,
+      otpError,
+      hasReadyVoucher,
+      login,
+      saveOtpError
+    } = this.props
+
+    hasReadyVoucher(otpError)
+      .then(result => {
+        if (result) {
+          showToast(s.strings.otp_screen_retrying)
+          return login(otpAttempt)
+        }
+      })
+      .catch(error => {
+        if (error != null && error.name === 'OtpError') {
+          saveOtpError(otpAttempt, error)
+        } else {
+          showError(error)
+        }
+      })
+      .then(() => {
+        this.timeout = setTimeout(this.pollLoop, 5000)
+      })
   }
 
   render() {
-    return (
-      <SafeAreaView>
-        <View style={OtpErrorScreenStyle.screen}>
-          <Header onBack={this.props.goBack} />
-          <View style={OtpErrorScreenStyle.pageContainer}>
-            <OtpHeroComponent
-              style={OtpErrorScreenStyle.hero}
-              otpResetDate={this.props.otpResetDate}
-            />
-            <View style={OtpErrorScreenStyle.qrRow}>
-              <EdgeLoginQr />
-            </View>
-            <View style={OtpErrorScreenStyle.shim} />
-            <Button
-              onPress={this.handleBackupModal}
-              downStyle={OtpErrorScreenStyle.exitButton.downStyle}
-              downTextStyle={OtpErrorScreenStyle.exitButton.downTextStyle}
-              upStyle={OtpErrorScreenStyle.exitButton.upStyle}
-              upTextStyle={OtpErrorScreenStyle.exitButton.upTextStyle}
-              label={s.strings.type_auth_button}
-            />
-            {this.renderDisableButton(OtpErrorScreenStyle)}
-          </View>
+    const { otpError, otpResetDate, theme } = this.props
+    const styles = getStyles(theme)
+
+    let date = otpResetDate
+    if (otpError.voucherActivates != null) date = otpError.voucherActivates
+
+    const isIp = otpError.reason === 'ip'
+
+    function divider() {
+      return (
+        <View style={styles.dividerContainer}>
+          <View style={styles.dividerLine} />
+          <Text style={styles.dividerText}>{s.strings.or}</Text>
+          <View style={styles.dividerLine} />
         </View>
-      </SafeAreaView>
+      )
+    }
+
+    return (
+      <ThemedScene>
+        <Header onBack={this.props.goBack} />
+        <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <FontAwesome
+              name="exclamation-triangle"
+              style={styles.headerIcon}
+            />
+            <Text style={styles.headerText}>
+              {isIp
+                ? s.strings.otp_screen_header_ip
+                : s.strings.otp_screen_header_2fa}
+            </Text>
+          </View>
+          <Text style={styles.body1}>{s.strings.otp_screen_approve}</Text>
+          {divider()}
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={this.handleQrModal}
+          >
+            <Text style={styles.buttonText}>{s.strings.qr_modal_title}</Text>
+            <FontAwesome name="chevron-right" style={styles.buttonIcon} />
+          </TouchableOpacity>
+          {isIp ? null : (
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={this.handleBackupModal}
+            >
+              <Text style={styles.buttonText}>
+                {s.strings.otp_backup_code_modal_title}
+              </Text>
+              <FontAwesome name="chevron-right" style={styles.buttonIcon} />
+            </TouchableOpacity>
+          )}
+          {divider()}
+          {date == null ? (
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={this.handleResetModal}
+            >
+              <Text style={styles.buttonText}>
+                {s.strings.disable_otp_button_two}
+              </Text>
+              <FontAwesome name="chevron-right" style={styles.buttonIcon} />
+            </TouchableOpacity>
+          ) : (
+            <Text style={styles.body2}>
+              {sprintf(s.strings.otp_screen_wait, date.toLocaleString())}
+            </Text>
+          )}
+        </View>
+      </ThemedScene>
     )
   }
 }
 
-const OtpErrorScreenStyle = {
-  screen: { ...Styles.ScreenStyle },
-  pageContainer: {
-    ...Styles.PageContainerWithHeaderStyle,
+const getStyles = cacheStyles((theme: Theme) => ({
+  container: {
+    flex: 1,
+    padding: theme.rem(1)
+  },
+  headerContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: theme.rem(0.5)
+  },
+  headerIcon: {
+    color: theme.primaryText,
+    fontSize: theme.rem(2.5),
+    marginRight: theme.rem(1)
+  },
+  headerText: {
+    fontFamily: theme.fontFamily,
+    fontSize: theme.rem(1),
+    color: theme.primaryText,
+    flex: 1
+  },
+  body1: {
+    fontFamily: theme.fontFamily,
+    fontSize: theme.rem(1),
+    color: theme.primaryText,
+    marginVertical: theme.rem(0.5)
+  },
+  dividerContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: theme.rem(0.5)
+  },
+  dividerLine: {
+    height: 1,
+    borderColor: theme.secondaryText,
+    borderBottomWidth: 1,
+    flex: 1
+  },
+  dividerText: {
+    fontFamily: theme.fontFamily,
+    fontSize: theme.rem(1),
+    color: theme.secondaryText,
+    marginHorizontal: theme.rem(0.5),
+    paddingBottom: 5 // padding to center the text
+  },
+  buttonContainer: {
+    width: '100%',
+    flexDirection: 'row',
     alignItems: 'center'
   },
-  hero: {
-    container: {
-      position: 'relative',
-      width: '100%'
-    },
-    colorField: {
-      position: 'relative',
-      width: '100%',
-      height: 100,
-      backgroundColor: Constants.GRAY_3,
-      flexDirection: 'row',
-      paddingTop: 20
-    },
-    leftField: {
-      flex: 2,
-      paddingRight: 10,
-      paddingTop: 2,
-      alignItems: 'flex-end'
-    },
-    rightField: {
-      flex: 8
-    },
-    heroTitleText: {
-      color: Constants.PRIMARY,
-      fontSize: 17
-    },
-    heroText: {
-      color: Constants.GRAY_1,
-      fontSize: 14,
-      marginTop: 7
-    },
-    orOption: {
-      position: 'relative',
-      height: 100,
-      width: '100%',
-      backgroundColor: Constants.WHITE
-    },
-    orRow: {
-      height: 48,
-      alignItems: 'center',
-      justifyContent: 'space-around'
-    },
-    instructionsRow: {
-      height: 52
-    },
-    instructionsText: {
-      width: '90%',
-      textAlign: 'center',
-      marginLeft: '5%',
-      marginRight: '5%',
-      color: Constants.GRAY_1
-    },
-    shim: { ...Styles.Shim, height: 20 }
+  buttonIcon: {
+    color: theme.primaryButton,
+    height: theme.rem(1),
+    textAlign: 'center'
   },
-  shim: { ...Styles.Shim, height: 20 },
-  qrRow: {
-    position: 'relative',
-    width: '100%',
-    height: 150
+  buttonText: {
+    fontFamily: theme.fontFamily,
+    fontSize: theme.rem(1),
+    color: theme.primaryButton,
+    marginVertical: theme.rem(0.5),
+    flex: 1
   },
-  exitButton: {
-    upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: { ...Styles.TextOnlyButtonTextUpStyle, width: 'auto' },
-    downTextStyle: { ...Styles.TextOnlyButtonTextDownStyle, width: 'auto' },
-    downStyle: Styles.TextOnlyButtonDownStyle
+  body2: {
+    fontFamily: theme.fontFamily,
+    fontSize: theme.rem(1),
+    color: theme.primaryText,
+    marginVertical: theme.rem(0.5)
   }
-}
+}))
 
-export const OtpErrorScreen = connect<StateProps, DispatchProps, OwnProps>(
-  (state: RootState) => {
-    const { otpAttempt, otpError } = state.login
-    if (otpAttempt == null || otpError == null) {
-      throw new Error('Missing OtpError for OTP error screen')
-    }
-    return {
-      otpAttempt,
-      otpResetDate: otpError.resetDate
-    }
-  },
-  (dispatch: Dispatch) => ({
-    goBack() {
-      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
-    }
-  })
-)(OtpErrorScreenComponent)
+export const OtpErrorScreen = withTheme(
+  connect<StateProps, DispatchProps, OwnProps & ThemeProps>(
+    (state: RootState) => {
+      const { otpAttempt, otpError, otpResetDate } = state.login
+      if (otpAttempt == null || otpError == null) {
+        throw new Error('Missing OtpError for OTP error screen')
+      }
+      return { otpAttempt, otpError, otpResetDate }
+    },
+    (dispatch: Dispatch) => ({
+      goBack() {
+        dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
+      },
+      hasReadyVoucher(error: OtpError) {
+        return dispatch(hasReadyVoucher(error))
+      },
+      login(attempt: LoginAttempt): Promise<void> {
+        return dispatch(login(attempt))
+      },
+      saveOtpError(attempt, error) {
+        dispatch({ type: 'OTP_ERROR', data: { attempt, error } })
+      }
+    })
+  )(OtpErrorScreenComponent)
+)

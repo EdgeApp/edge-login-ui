@@ -1,5 +1,7 @@
 // @flow
 
+import { type EdgePendingEdgeLogin } from 'edge-core-js'
+
 import s from '../common/locales/strings.js'
 import { loginWithTouchId } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
@@ -193,23 +195,17 @@ export function userLogin(data: Object) {
   }
 }
 
-export function getEdgeLoginQrCode() {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const context = imports.context
-    const myAccountOptions = {
-      ...imports.accountOptions,
-      displayImageUrl:
-        'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
-      displayName: 'Edge Wallet'
-    }
-    try {
-      const qr = await context.requestEdgeLogin(myAccountOptions)
-      console.log(qr)
-      dispatch({ type: 'START_EDGE_LOGIN_REQUEST', data: qr })
-    } catch (e) {
-      console.log(e.name)
-      console.log(e.message)
-      console.log(e)
-    }
-  }
+export const requestEdgeLogin = () => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+): Promise<EdgePendingEdgeLogin> => {
+  const { accountOptions, context } = imports
+  return context.requestEdgeLogin({
+    ...accountOptions,
+    // These are no longer used in recent core versions:
+    displayImageUrl:
+      'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
+    displayName: 'Edge Wallet'
+  })
 }
