@@ -50,6 +50,10 @@ export const edgeDark: Theme = {
   primaryText: palette.white,
   secondaryText: palette.blueGray,
   dangerText: palette.accentRed,
+  linkText: palette.edgeMint,
+
+  // tile
+  tileBackground: palette.edgeBlue,
 
   // buttons
   primaryButtonOutline: palette.transparent,

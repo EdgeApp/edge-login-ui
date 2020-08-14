@@ -20,6 +20,10 @@ export type Theme = {|
   primaryText: string,
   secondaryText: string,
   dangerText: string,
+  linkText: string,
+
+  // Tile:
+  tileBackground: string,
 
   // Button colors:
   primaryButtonOutline: string,

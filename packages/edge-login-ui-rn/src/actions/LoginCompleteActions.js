@@ -31,6 +31,13 @@ export const completeLogin = (account: EdgeAccount) => async (
 ) => {
   await setMostRecentUsers(account.username)
 
+  // Problem logins:
+  const { otpResetDate, pendingVouchers = [] } = account
+  if (otpResetDate != null || pendingVouchers.length > 0) {
+    dispatch({ type: 'START_SECURITY_ALERT', data: account })
+    return
+  }
+
   // Recovery logins:
   if (account.recoveryLogin) {
     await Airship.show(bridge => (

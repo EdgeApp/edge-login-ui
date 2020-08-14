@@ -113,6 +113,8 @@ export function login(
       }
     case 'START_RESECURE':
       return { ...state, account: action.data }
+    case 'START_SECURITY_ALERT':
+      return { ...state, account: action.data }
     default:
       return state
   }

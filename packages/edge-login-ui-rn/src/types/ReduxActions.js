@@ -102,5 +102,6 @@ export type Action =
   | { type: 'SET_RECOVERY_KEY', data: string }
   | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
   | { type: 'START_RESECURE', data: EdgeAccount }
+  | { type: 'START_SECURITY_ALERT', data: EdgeAccount }
   | { type: 'UPDATE_WAIT_TIMER', data: { seconds: number } } // Apparently unused
   | { type: 'WORKFLOW_START', data: WorkflowName }
