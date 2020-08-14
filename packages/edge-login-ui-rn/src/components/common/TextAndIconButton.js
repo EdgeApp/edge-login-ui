@@ -9,7 +9,6 @@ type Props = {
   style: any,
   onPress: Function,
   title: string,
-  iconType: string,
   numberOfLines?: number
 }
 

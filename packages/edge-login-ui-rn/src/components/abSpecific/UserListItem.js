@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 
 import * as Constants from '../../constants/index.js'
-import { IconButton } from '../common'
+import { IconButton } from '../common/IconButton.js'
 
 type Props = {
   data: string,

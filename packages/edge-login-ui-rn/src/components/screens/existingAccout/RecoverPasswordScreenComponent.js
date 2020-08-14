@@ -18,14 +18,11 @@ import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { isIphoneX } from '../../../util/isIphoneX.js'
 import { scale } from '../../../util/scaling.js'
-import {
-  Button,
-  DropDownList,
-  FormField,
-  StaticModal,
-  TextAndIconButton,
-  TextRowComponent
-} from '../../common/'
+import { Button } from '../../common/Button.js'
+import { DropDownList, FormField } from '../../common/index.js'
+import { TextRowComponent } from '../../common/ListItems/TextRowComponent.js'
+import { StaticModal } from '../../common/StaticModal.js'
+import { TextAndIconButton } from '../../common/TextAndIconButton.js'
 import { EmailAppFailedModal } from '../../modals/EmailAppFailedModal.js'
 import { SaveRecoveryTokenModal } from '../../modals/SaveRecoveryTokenModal.js'
 import ConfirmPasswordRecoveryScreen from './ConfirmPasswordRecoveryScreen'

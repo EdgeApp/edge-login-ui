@@ -9,15 +9,9 @@ import { userLogin, userLoginWithTouchId } from '../../actions/LoginAction.js'
 import { recoverPasswordLogin } from '../../actions/PasswordRecoveryActions.js'
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
-import {
-  BackgroundImage,
-  Button,
-  DropDownList,
-  FormField,
-  HeaderParentButtons,
-  IconButton,
-  StaticModal
-} from '../../components/common'
+import { Button } from '../../components/common/Button.js'
+import { DropDownList, FormField } from '../../components/common/index.js'
+import { StaticModal } from '../../components/common/StaticModal.js'
 import * as Constants from '../../constants/index.js'
 import { type LoginUserInfo } from '../../reducers/PreviousUsersReducer.js'
 import * as Styles from '../../styles/index.js'
@@ -25,6 +19,9 @@ import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { scale } from '../../util/scaling.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { UserListItem } from '../abSpecific/UserListItem.js'
+import { BackgroundImage } from '../common/BackgroundImage.js'
+import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
+import { IconButton } from '../common/IconButton.js'
 import { DeleteUserModal } from '../modals/DeleteUserModal.js'
 
 const Offsets = {

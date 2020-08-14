@@ -16,8 +16,9 @@ import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
-import { Button, StaticModal } from '../../common'
+import { Button } from '../../common/Button.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { StaticModal } from '../../common/StaticModal.js'
 import { ChangePinModal } from '../../modals/ChangePinModal.js'
 
 type OwnProps = {
@@ -31,7 +32,7 @@ type StateProps = {
 }
 type DispatchProps = {
   changePin(pin: string): void,
-  login?: () => void
+  login(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -208,6 +209,9 @@ export const ChangeAccountPinScreen = connect(
   (dispatch: Dispatch): DispatchProps => ({
     changePin(data) {
       dispatch(changePIN(data))
+    },
+    login() {
+      // Not used in the settings screen version
     }
   })
 )(ChangeAccountPinScreenComponent)

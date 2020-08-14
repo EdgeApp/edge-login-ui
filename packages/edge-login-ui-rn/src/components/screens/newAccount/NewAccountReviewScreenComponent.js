@@ -11,8 +11,9 @@ import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { AccountInfo } from '../../abSpecific/AccountInfoComponent.js'
-import { Button, WarningBox } from '../../common'
+import { Button } from '../../common/Button.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { WarningBox } from '../../common/WarningBox.js'
 
 type OwnProps = {}
 type StateProps = {}

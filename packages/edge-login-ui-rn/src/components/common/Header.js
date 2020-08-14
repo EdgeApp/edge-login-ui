@@ -7,7 +7,8 @@ import LinearGradient from 'react-native-linear-gradient'
 import s from '../../common/locales/strings.js'
 import T from '../../components/common/FormattedText.js'
 import * as Colors from '../../constants/Colors.js'
-import { Button, HeaderBackButton } from '../common'
+import { Button } from '../common/Button.js'
+import { HeaderBackButton } from '../common/HeaderBackButton.js'
 
 type Props = {
   customLabel?: string,

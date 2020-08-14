@@ -3,7 +3,7 @@
 import { connect } from 'react-redux'
 
 import s from '../../common/locales/strings.js'
-import { FormField } from '../../components/common'
+import { FormField } from '../../components/common/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 
 type OwnProps = {

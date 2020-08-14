@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { Text, TouchableHighlight, View } from 'react-native'
 
-import { Spinner } from './Spinner'
+import { Spinner } from './Spinner.js'
 
 type Props = {
   label: string,
