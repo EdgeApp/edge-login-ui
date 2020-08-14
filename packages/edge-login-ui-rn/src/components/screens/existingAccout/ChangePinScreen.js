@@ -7,7 +7,7 @@ import {
   changePIN,
   recoveryChangePIN
 } from '../../../actions/ChangePasswordPinActions.js'
-import { recoveryLoginComplete } from '../../../actions/LoginAction.js'
+import { completeResecure } from '../../../actions/LoginCompleteActions.js'
 import { cancel } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
@@ -235,10 +235,10 @@ export const ResecurePinScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch(recoveryChangePIN(data))
     },
     onSkip() {
-      dispatch(recoveryLoginComplete())
+      dispatch(completeResecure())
     },
     login() {
-      dispatch(recoveryLoginComplete())
+      dispatch(completeResecure())
     }
   })
 )(ChangePinScreenComponent)

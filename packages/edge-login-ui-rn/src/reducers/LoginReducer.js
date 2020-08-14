@@ -24,8 +24,6 @@ export type LoginState = {
   +previousAttemptData: any,
   +previousAttemptType: string | null,
   +recoveryToken: string | null,
-  +showRecoverSuccessDialog: boolean,
-  +touchIdInformation: Object | null,
   +username: string,
   +wait: number
 }
@@ -46,8 +44,6 @@ const initialState: LoginState = {
   edgeLoginId: null,
   cancelEdgeLoginRequest: null,
   account: defaultAccount,
-  touchIdInformation: null,
-  showRecoverSuccessDialog: false,
   wait: 0
 }
 
@@ -144,13 +140,6 @@ export const login: Reducer<LoginState, Action> = function(
       return { ...initialState, username: username }
     }
 
-    case 'LOGIN_RECOVERY_SUCCEESS':
-      return {
-        ...state,
-        account: action.data.account,
-        touchIdInformation: action.data.touchIdInformation,
-        showRecoverSuccessDialog: true
-      }
     case 'ON_RECOVERY_LOGIN_ERROR':
       return { ...state, errorMessage: action.data }
     case 'PASSWORD_RECOVERY_INITIALIZED':
@@ -159,6 +148,8 @@ export const login: Reducer<LoginState, Action> = function(
         account: action.data.account,
         username: action.data.username
       }
+    case 'START_RESECURE':
+      return { ...state, account: action.data }
     default:
       return state
   }

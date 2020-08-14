@@ -1,17 +1,10 @@
 // @flow
 
 import s from '../common/locales/strings.js'
-import {
-  enableTouchId,
-  isTouchDisabled,
-  isTouchEnabled,
-  loginWithTouchId,
-  supportsTouchId
-} from '../keychain.js'
+import { loginWithTouchId } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 import { translateError } from '../util/ErrorMessageUtil.js'
-import { twofaReminder } from './LoginCompleteActions.js'
-import { setMostRecentUsers } from './PreviousUsersActions.js'
+import { completeLogin } from './LoginCompleteActions.js'
 
 /**
  * Make it Thunky
@@ -24,7 +17,7 @@ export function loginWithRecovery(
     const state = getState()
     const backupKey = state.passwordRecovery.recoveryKey || ''
     const username = state.login.username
-    const { context, folder } = imports
+    const { context } = imports
     try {
       const account = await context.loginWithRecovery2(
         backupKey,
@@ -35,27 +28,7 @@ export function loginWithRecovery(
           otp: otpBackUpKey
         }
       )
-      account.watch('loggedIn', loggedIn => {
-        if (!loggedIn) dispatch({ type: 'RESET_APP' })
-      })
-      const touchDisabled = await isTouchDisabled(folder, account.username)
-      if (!touchDisabled) {
-        await enableTouchId(folder, account).catch(e => {
-          console.log(e) // Fail quietly
-        })
-      }
-      await setMostRecentUsers(account.username)
-      const isTouchSupported = await supportsTouchId()
-      const touchEnabled = await isTouchEnabled(folder, account.username)
-      const touchIdInformation = {
-        isTouchSupported,
-        isTouchEnabled: touchEnabled
-      }
-      const obj = {
-        account,
-        touchIdInformation
-      }
-      dispatch({ type: 'LOGIN_RECOVERY_SUCCEESS', data: obj })
+      dispatch(completeLogin(account))
     } catch (e) {
       if (e.name === 'OtpError') {
         dispatch({
@@ -102,32 +75,30 @@ export function retryWithOtp() {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     dispatch({ type: 'START_RECOVERY_LOGIN' })
     const state = getState()
-    const userBackUpKey = state.login.otpUserBackupKey
-    const previousAttemptType = state.login.previousAttemptType
-    const previousAttemptData = state.login.previousAttemptData
-    if (previousAttemptType === 'RECOVERY') {
-      loginWithRecovery(previousAttemptData, userBackUpKey)(
-        dispatch,
-        getState,
-        imports
-      )
-      return dispatch({ type: 'WORKFLOW_START', data: 'resecureWF' })
+    const {
+      otpUserBackupKey,
+      password,
+      pin,
+      previousAttemptData,
+      previousAttemptType,
+      username
+    } = state.login
+
+    switch (previousAttemptType) {
+      case 'RECOVERY':
+        dispatch(loginWithRecovery(previousAttemptData, otpUserBackupKey))
+        return
+      case 'PASSWORD':
+        dispatch(userLogin({ username, password }, otpUserBackupKey))
+        return
+      case 'PIN':
+        dispatch(userLoginWithPin({ username, pin }, otpUserBackupKey))
     }
-    if (previousAttemptType === 'PASSWORD') {
-      return userLogin(
-        { username: state.login.username, password: state.login.password },
-        userBackUpKey
-      )(dispatch, getState, imports)
-    }
-    return userLoginWithPin(
-      { username: state.login.username, pin: state.login.pin },
-      userBackUpKey
-    )(dispatch, getState, imports)
   }
 }
 export function userLoginWithTouchId(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { callback, context, folder } = imports
+    const { context, folder } = imports
     const startFunction = () => {
       dispatch({ type: 'AUTH_LOGGING_IN_WITH_PIN' })
     }
@@ -142,17 +113,7 @@ export function userLoginWithTouchId(data: Object) {
     )
       .then(async account => {
         if (account) {
-          account.watch('loggedIn', loggedIn => {
-            if (!loggedIn) dispatch({ type: 'RESET_APP' })
-          })
-          await setMostRecentUsers(data.username)
-          await twofaReminder(account)
-          dispatch({ type: 'LOGIN_SUCCEESS' })
-          const touchIdInformation = {
-            isTouchSupported: true,
-            isTouchEnabled: true
-          }
-          callback(null, account, touchIdInformation)
+          dispatch(completeLogin(account))
         }
       })
       .catch(e => {
@@ -162,7 +123,7 @@ export function userLoginWithTouchId(data: Object) {
 }
 export function userLoginWithPin(data: Object, backupKey?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { callback, context, folder } = imports
+    const { callback, context } = imports
     const myAccountOptions = {
       ...imports.accountOptions
     }
@@ -178,28 +139,7 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
             data.pin,
             myAccountOptions
           )
-          abcAccount.watch('loggedIn', loggedIn => {
-            if (!loggedIn) dispatch({ type: 'RESET_APP' })
-          })
-          const touchDisabled = await isTouchDisabled(
-            folder,
-            abcAccount.username
-          )
-          if (!touchDisabled) {
-            await enableTouchId(folder, abcAccount).catch(e => {
-              console.log(e) // Fail quietly
-            })
-          }
-          await setMostRecentUsers(data.username)
-          const isTouchSupported = await supportsTouchId()
-          const touchEnabled = await isTouchEnabled(folder, abcAccount.username)
-          const touchIdInformation = {
-            isTouchSupported,
-            isTouchEnabled: touchEnabled
-          }
-          await twofaReminder(abcAccount)
-          dispatch({ type: 'LOGIN_SUCCEESS' })
-          callback(null, abcAccount, touchIdInformation)
+          dispatch(completeLogin(abcAccount))
         } catch (e) {
           console.log('LOG IN WITH PIN ERROR ', e)
           if (e.name === 'OtpError') {
@@ -264,7 +204,7 @@ export function processWait(message: string) {
 
 export function userLogin(data: Object, backupKey?: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { callback, context, folder } = imports
+    const { callback, context } = imports
     const myAccountOptions = {
       ...imports.accountOptions
     }
@@ -278,25 +218,7 @@ export function userLogin(data: Object, backupKey?: string) {
           data.password,
           myAccountOptions
         )
-        abcAccount.watch('loggedIn', loggedIn => {
-          if (!loggedIn) dispatch({ type: 'RESET_APP' })
-        })
-        const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
-        if (!touchDisabled) {
-          await enableTouchId(folder, abcAccount).catch(e => {
-            console.log(e) // Fail quietly
-          })
-        }
-        await setMostRecentUsers(abcAccount.username)
-        const touchEnabled = await isTouchEnabled(folder, abcAccount.username)
-        const isTouchSupported = await supportsTouchId()
-        const touchIdInformation = {
-          isTouchSupported,
-          isTouchEnabled: touchEnabled
-        }
-        await twofaReminder(abcAccount)
-        dispatch({ type: 'LOGIN_SUCCEESS' })
-        callback(null, abcAccount, touchIdInformation)
+        dispatch(completeLogin(abcAccount))
       } catch (e) {
         console.log(e)
         if (e.name === 'OtpError' && !myAccountOptions.otp) {
@@ -355,15 +277,5 @@ export function getEdgeLoginQrCode() {
       console.log(e.message)
       console.log(e)
     }
-  }
-}
-export function recoveryLoginComplete() {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const state = getState()
-    const account = state.login.account
-    const touchIdInformation = state.login.touchIdInformation
-    const callback = imports.callback
-    dispatch({ type: 'CLOSE_NOTIFICATION_MODAL' })
-    callback(null, account, touchIdInformation)
   }
 }

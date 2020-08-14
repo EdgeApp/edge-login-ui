@@ -73,16 +73,6 @@ export type Action =
         wait: number
       }
     }
-  | {
-      type: 'LOGIN_RECOVERY_SUCCEESS',
-      data: {
-        account: EdgeAccount,
-        touchIdInformation: {
-          isTouchSupported: boolean,
-          isTouchEnabled: boolean
-        }
-      }
-    }
   | { type: 'LOGIN_USERNAME_PASSWORD_FAIL', data: string /* error */ }
   | { type: 'ON_RECOVERY_KEY', data: string }
   | { type: 'ON_RECOVERY_LOGIN_ERROR', data: string }
@@ -117,5 +107,6 @@ export type Action =
   | { type: 'SET_RECOVERY_KEY', data: string }
   | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
   | { type: 'START_EDGE_LOGIN_REQUEST', data: EdgePendingEdgeLogin }
+  | { type: 'START_RESECURE', data: EdgeAccount }
   | { type: 'UPDATE_WAIT_TIMER', data: { seconds: number } } // Apparently unused
   | { type: 'WORKFLOW_START', data: WorkflowName }

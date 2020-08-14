@@ -14,7 +14,6 @@ import { Button } from '../common/Button.js'
 import { Header } from '../common/Header.js'
 import { FormField } from '../common/index.js'
 import SafeAreaViewGradient from '../common/SafeAreaViewGradient.js'
-import { StaticModal } from '../common/StaticModal.js'
 import { SetRecoveryUsernameModal } from '../modals/SetRecoveryUsernameModal.js'
 import { connect } from '../services/ReduxStore.js'
 
@@ -25,11 +24,9 @@ type StateProps = {
   loginError: string,
   question1: string,
   question2: string,
-  showRecoverSuccessDialog: boolean,
   submitButton: string
 }
 type DispatchProps = {
-  changePassword(): void,
   getQuestions(): void,
   goBack(): void,
   onCancel(): void,
@@ -110,21 +107,6 @@ class RecoveryLoginScreenComponent extends Component<Props, State> {
   }
 
   renderModal = (styles: typeof LoginWithRecoveryStyles) => {
-    if (this.props.showRecoverSuccessDialog) {
-      // render static modal
-      const body = (
-        <Text style={styles.staticModalText}>
-          {s.strings.recovery_successful}
-        </Text>
-      )
-      return (
-        <StaticModal
-          cancel={this.props.changePassword}
-          body={body}
-          modalDismissTimerSeconds={8}
-        />
-      )
-    }
     if (!this.state.showUsernameModal) return null
     const middle = (
       <View style={styles.modalMiddle}>
@@ -365,13 +347,9 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
         ? state.passwordRecovery.userQuestions[1]
         : s.strings.choose_recovery_question,
     showHeader: true,
-    showRecoverSuccessDialog: state.login.showRecoverSuccessDialog,
     submitButton: s.strings.submit
   }),
   (dispatch: Dispatch) => ({
-    changePassword() {
-      dispatch({ type: 'WORKFLOW_START', data: 'resecureWF' })
-    },
     getQuestions() {
       dispatch(getRecoveryQuestions())
     },

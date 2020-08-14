@@ -8,8 +8,92 @@ import s from '../common/locales/strings.js'
 import { ButtonsModal } from '../components/modals/ButtonsModal.js'
 import { Airship } from '../components/services/AirshipInstance.js'
 import * as Constants from '../constants/index.js'
+import {
+  enableTouchId,
+  isTouchDisabled,
+  isTouchEnabled,
+  supportsTouchId
+} from '../keychain.js'
+import {
+  type Dispatch,
+  type GetState,
+  type Imports
+} from '../types/ReduxTypes.js'
+import { setMostRecentUsers } from './PreviousUsersActions.js'
 
-export async function twofaReminder(account: EdgeAccount) {
+/**
+ * The user has just logged in, so figure out what do to next.
+ */
+export const completeLogin = (account: EdgeAccount) => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  await setMostRecentUsers(account.username)
+
+  // Recovery logins:
+  if (account.recoveryLogin) {
+    await Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        message={s.strings.recovery_successful}
+        buttons={{ ok: { label: s.strings.ok } }}
+      />
+    ))
+    dispatch({ type: 'START_RESECURE', data: account })
+    return
+  }
+
+  // Normal logins:
+  await twofaReminder(account)
+  dispatch(submitLogin(account))
+}
+
+/**
+ * The resecure workflow calls this when it is done.
+ */
+export function completeResecure() {
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
+    const state = getState()
+    const { account } = state.login
+    dispatch({ type: 'CLOSE_NOTIFICATION_MODAL' })
+    dispatch(submitLogin(account))
+  }
+}
+
+/**
+ * Everything is done, and we can pass the account to the outside world.
+ */
+export const submitLogin = (account: EdgeAccount) => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  const { callback, folder } = imports
+
+  account.watch('loggedIn', loggedIn => {
+    if (!loggedIn) dispatch({ type: 'RESET_APP' })
+  })
+
+  const touchDisabled = await isTouchDisabled(folder, account.username)
+  if (!touchDisabled) {
+    await enableTouchId(folder, account).catch(e => {
+      console.log(e) // Fail quietly
+    })
+  }
+
+  const isTouchSupported = await supportsTouchId()
+  const touchEnabled = await isTouchEnabled(folder, account.username)
+  const touchIdInformation = {
+    isTouchSupported,
+    isTouchEnabled: touchEnabled
+  }
+
+  dispatch({ type: 'LOGIN_SUCCEESS' })
+  callback(null, account, touchIdInformation)
+}
+
+async function twofaReminder(account: EdgeAccount) {
   const { otpKey, dataStore } = account
   const pluginList = await dataStore.listStoreIds()
   const storeName = pluginList.includes(Constants.OTP_REMINDER_STORE_NAME)
