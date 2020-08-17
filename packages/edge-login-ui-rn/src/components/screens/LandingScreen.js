@@ -2,9 +2,8 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
-import * as Assets from '../../assets/'
+import * as Assets from '../../assets/index.js'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
@@ -14,6 +13,7 @@ import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
 import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   appId?: string,
@@ -24,7 +24,8 @@ type OwnProps = {
   landingScreenText?: string
 }
 type DispatchProps = {
-  startFlow(string): void
+  startCreate(): void,
+  startPassword(): void
 }
 type Props = OwnProps & DispatchProps
 
@@ -63,7 +64,7 @@ class LandingScreenComponent extends Component<Props> {
           </View>
           <View style={LandingScreenStyle.featureBoxButtons}>
             <Button
-              onPress={this.onStartCreate.bind(this)}
+              onPress={this.props.startCreate}
               label={s.strings.landing_create_account_button}
               downStyle={LandingScreenStyle.createButton.downStyle}
               downTextStyle={LandingScreenStyle.createButton.downTextStyle}
@@ -73,7 +74,7 @@ class LandingScreenComponent extends Component<Props> {
             <View style={LandingScreenStyle.shim} />
             <Button
               testID="alreadyHaveAccountButton"
-              onPress={this.onStartLogin.bind(this)}
+              onPress={this.props.startPassword}
               label={s.strings.landing_already_have_account}
               downStyle={LandingScreenStyle.loginButton.downStyle}
               downTextStyle={LandingScreenStyle.loginButton.downTextStyle}
@@ -84,16 +85,6 @@ class LandingScreenComponent extends Component<Props> {
         </View>
       </View>
     )
-  }
-
-  onStartCreate() {
-    global.firebase &&
-      global.firebase.analytics().logEvent('Signup_Create_Account')
-    this.props.startFlow(Constants.WORKFLOW_CREATE)
-  }
-
-  onStartLogin() {
-    this.props.startFlow(Constants.WORKFLOW_PASSWORD)
   }
 }
 
@@ -170,11 +161,16 @@ const LandingScreenStyle = {
   }
 }
 
-export const LandingScreen = connect(
+export const LandingScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch): DispatchProps => ({
-    startFlow(data: string) {
-      dispatch({ type: 'WORKFLOW_START', data: data })
+    startCreate() {
+      global.firebase &&
+        global.firebase.analytics().logEvent('Signup_Create_Account')
+      dispatch({ type: 'WORKFLOW_START', data: 'createWF' })
+    },
+    startPassword() {
+      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     }
   })
 )(LandingScreenComponent)

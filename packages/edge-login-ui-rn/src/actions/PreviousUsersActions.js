@@ -77,9 +77,9 @@ async function getDiskStuff(context: EdgeContext, folder: DiskletFolder) {
 }
 
 export function getPreviousUsers() {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
+  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder, username } = imports
-    getDiskStuff(context, folder).then((data: Object) => {
+    await getDiskStuff(context, folder).then((data: Object) => {
       const focusUser = username || data.lastUser
       if (data.userList && data.userList.length > 0) {
         data.usernameOnlyList = []
@@ -97,4 +97,22 @@ export function getPreviousUsers() {
       dispatch({ type: 'SET_PREVIOUS_USERS', data: data })
     })
   }
+}
+
+export const setMostRecentUsers = async (username: string) => {
+  const disklet = makeReactNativeDisklet()
+  const lastUsers = await disklet
+    .getText('lastusers.json')
+    .then(text => JSON.parse(text))
+    .catch(_ => [])
+  if (lastUsers && lastUsers.length > 0) {
+    const filteredLastUsers = lastUsers.filter(
+      (lastUser: string) => lastUser !== username
+    )
+    return disklet.setText(
+      'lastusers.json',
+      JSON.stringify([username, ...filteredLastUsers])
+    )
+  }
+  return disklet.setText('lastusers.json', JSON.stringify([username]))
 }

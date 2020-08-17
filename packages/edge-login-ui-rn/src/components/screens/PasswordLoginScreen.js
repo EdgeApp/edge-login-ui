@@ -3,15 +3,10 @@
 import React, { Component } from 'react'
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { connect } from 'react-redux'
 
 import { userLogin, userLoginWithTouchId } from '../../actions/LoginAction.js'
-import { recoverPasswordLogin } from '../../actions/PasswordRecoveryActions.js'
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
-import { Button } from '../../components/common/Button.js'
-import { DropDownList, FormField } from '../../components/common/index.js'
-import { StaticModal } from '../../components/common/StaticModal.js'
 import * as Constants from '../../constants/index.js'
 import { type LoginUserInfo } from '../../reducers/PreviousUsersReducer.js'
 import * as Styles from '../../styles/index.js'
@@ -20,9 +15,13 @@ import { scale } from '../../util/scaling.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { UserListItem } from '../abSpecific/UserListItem.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
+import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { IconButton } from '../common/IconButton.js'
+import { DropDownList, FormField } from '../common/index.js'
+import { StaticModal } from '../common/StaticModal.js'
 import { DeleteUserModal } from '../modals/DeleteUserModal.js'
+import { connect } from '../services/ReduxStore.js'
 
 const Offsets = {
   USERNAME_OFFSET_LOGIN_SCREEN: -50,
@@ -35,8 +34,7 @@ type OwnProps = {
   backgroundImage?: any,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
-  parentButton?: Object,
-  touch: string | boolean
+  parentButton?: Object
 }
 type StateProps = {
   error: string,
@@ -45,6 +43,7 @@ type StateProps = {
   password: string,
   previousUsers: LoginUserInfo[],
   showModal: boolean,
+  touch: $PropertyType<RootState, 'touch'>,
   username: string,
   usernameOnlyList: Array<string>
 }
@@ -53,7 +52,6 @@ type DispatchProps = {
   gotoPinLoginPage(): void,
   launchDeleteModal(): void,
   launchUserLoginWithTouchId(Object): void,
-  recoverPasswordLogin(): void,
   updatePassword(string): void,
   updateUsername(string): void,
   userLogin(Object): void
@@ -72,7 +70,7 @@ type State = {
   usernameList: boolean
 }
 
-class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
+class PasswordLoginScreenComponent extends Component<Props, State> {
   keyboardDidHideListener: ?Function
   style: Object
 
@@ -118,13 +116,6 @@ class LoginUsernamePasswordScreenComponent extends Component<Props, State> {
       )
     }
     return null
-  }
-
-  recoverPasswordLogin = () => {
-    this.setState({
-      showRecoveryModalOne: false
-    })
-    this.props.recoverPasswordLogin()
   }
 
   cancelForgotPassword = () => {
@@ -563,32 +554,30 @@ const LoginPasswordScreenStyle = {
   }
 }
 
-export const LoginUsernamePasswordScreen = connect(
-  (state: RootState): StateProps => ({
+export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({
     error: state.login.errorMessage || '',
     hasUsers: state.previousUsers.userList.length > 0,
     loginSuccess: state.login.loginSuccess,
     password: state.login.password || '',
     previousUsers: state.previousUsers.userList,
     showModal: state.workflow.showModal,
+    touch: state.touch,
     username: state.login.username,
     usernameOnlyList: state.previousUsers.usernameOnlyList
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     gotoCreatePage() {
-      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_CREATE })
+      dispatch({ type: 'WORKFLOW_START', data: 'createWF' })
     },
     gotoPinLoginPage() {
-      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PIN })
+      dispatch({ type: 'WORKFLOW_START', data: 'pinWF' })
     },
     launchDeleteModal() {
       dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' })
     },
     launchUserLoginWithTouchId(data: Object) {
       dispatch(userLoginWithTouchId(data))
-    },
-    recoverPasswordLogin() {
-      dispatch(recoverPasswordLogin())
     },
     updatePassword(data: string) {
       dispatch({ type: 'AUTH_UPDATE_LOGIN_PASSWORD', data: data })
@@ -600,4 +589,4 @@ export const LoginUsernamePasswordScreen = connect(
       dispatch(userLogin(data))
     }
   })
-)(LoginUsernamePasswordScreenComponent)
+)(PasswordLoginScreenComponent)

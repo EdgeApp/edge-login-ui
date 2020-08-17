@@ -3,29 +3,30 @@
 import React, { Component } from 'react'
 import { Dimensions, Platform, Text, View } from 'react-native'
 import Mailer from 'react-native-mail'
-import { connect } from 'react-redux'
 
 import {
   cancelRecoverySettingsScene,
   changeRecoveryAnswers,
   deleteRecovery
 } from '../../../actions/PasswordRecoveryActions.js'
+import { cancel } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
-import { FullScreenModal } from '../../../components/common/FullScreenModal.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { isIphoneX } from '../../../util/isIphoneX.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
+import { FullScreenModal } from '../../common/FullScreenModal.js'
+import { Header } from '../../common/Header.js'
 import { DropDownList, FormField } from '../../common/index.js'
 import { TextRowComponent } from '../../common/ListItems/TextRowComponent.js'
 import { StaticModal } from '../../common/StaticModal.js'
 import { TextAndIconButton } from '../../common/TextAndIconButton.js'
 import { EmailAppFailedModal } from '../../modals/EmailAppFailedModal.js'
 import { SaveRecoveryTokenModal } from '../../modals/SaveRecoveryTokenModal.js'
-import ConfirmPasswordRecoveryScreen from './ConfirmPasswordRecoveryScreen'
+import { connect } from '../../services/ReduxStore.js'
+import { ChangeRecoveryConfirmScreen } from './ChangeRecoveryConfirmScreen.js'
 
 type OwnProps = {
   showHeader: boolean
@@ -46,6 +47,7 @@ type StateProps = {
 type DispatchProps = {
   cancel(): void,
   deleteRecovery(): void,
+  goBack(): void,
   returnToSettings(): void,
   submit(questions: Array<string>, answers: Array<string>): void
 }
@@ -69,7 +71,7 @@ type State = {
   showConfirmationModal: boolean
 }
 
-class RecoverPasswordScreenComponent extends Component<Props, State> {
+class ChangeRecoveryScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -100,9 +102,9 @@ class RecoverPasswordScreenComponent extends Component<Props, State> {
     }
   }
 
-  renderHeader = (styles: typeof RecoverPasswordSceneStyles) => {
+  renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector style={styles.header} />
+      return <Header onBack={this.props.goBack} />
     }
     return null
   }
@@ -398,7 +400,7 @@ class RecoverPasswordScreenComponent extends Component<Props, State> {
     if (this.state.showConfirmationModal) {
       return (
         <FullScreenModal>
-          <ConfirmPasswordRecoveryScreen
+          <ChangeRecoveryConfirmScreen
             cancel={this.onCancelConfirmation}
             confirm={this.onConfirmQuestionsAndAnseers}
             question1={this.state.question1}
@@ -478,7 +480,7 @@ class RecoverPasswordScreenComponent extends Component<Props, State> {
       : this.renderForm(RecoverPasswordSceneStyles)
     return (
       <View style={RecoverPasswordSceneStyles.screen}>
-        {this.renderHeader(RecoverPasswordSceneStyles)}
+        {this.renderHeader()}
         {middle}
         {this.renderDisableModal(RecoverPasswordSceneStyles)}
         {this.showEmailDialog(RecoverPasswordSceneStyles)}
@@ -487,12 +489,9 @@ class RecoverPasswordScreenComponent extends Component<Props, State> {
     )
   }
 }
+
 const RecoverPasswordSceneStyles = {
   screen: { ...Styles.ScreenStyle },
-  header: {
-    ...Styles.HeaderContainerScaledStyle,
-    backgroundColor: Constants.PRIMARY
-  },
   body: {
     padding: scale(18)
   },
@@ -599,8 +598,12 @@ function returnTrunatedUsername(arg) {
   return arg
 }
 
-export const RecoverPasswordScreen = connect(
-  (state: RootState): StateProps => ({
+export const PublicChangeRecoveryScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     backupKey: state.passwordRecovery.recoveryKey || '',
     disableButton: s.strings.disable_password_recovery,
     doneButton: s.strings.done,
@@ -619,7 +622,7 @@ export const RecoverPasswordScreen = connect(
     submitButton: s.strings.submit,
     username: returnTrunatedUsername(state.login.username)
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     cancel() {
       dispatch(deleteRecovery())
       dispatch(cancelRecoverySettingsScene())
@@ -628,6 +631,9 @@ export const RecoverPasswordScreen = connect(
     deleteRecovery() {
       dispatch(deleteRecovery())
     },
+    goBack() {
+      dispatch(cancel())
+    },
     returnToSettings() {
       dispatch(cancelRecoverySettingsScene())
     },
@@ -635,4 +641,4 @@ export const RecoverPasswordScreen = connect(
       dispatch(changeRecoveryAnswers(questions, answers))
     }
   })
-)(RecoverPasswordScreenComponent)
+)(ChangeRecoveryScreenComponent)

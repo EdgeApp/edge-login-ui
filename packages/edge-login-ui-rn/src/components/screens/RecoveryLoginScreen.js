@@ -2,35 +2,33 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
-import { loginWithRecovery } from '../../../actions/LoginAction.js'
-import { getRecoveryQuestions } from '../../../actions/PasswordRecoveryActions.js'
-import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderRecoverPasswordLogin.js'
-import { RecoverPasswordUsernameInput } from '../../../connectors/componentConnectors/RecoverPasswordUsernameInput.js'
-import * as Constants from '../../../constants/index.js'
-import * as Styles from '../../../styles/index.js'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
-import { Button } from '../../common/Button.js'
-import { FormField } from '../../common/index.js'
-import SafeAreaViewGradient from '../../common/SafeAreaViewGradient.js'
-import { StaticModal } from '../../common/StaticModal.js'
-import { SetRecoveryUsernameModal } from '../../modals/SetRecoveryUsernameModal.js'
+import { loginWithRecovery } from '../../actions/LoginAction.js'
+import { getRecoveryQuestions } from '../../actions/PasswordRecoveryActions.js'
+import s from '../../common/locales/strings.js'
+import { RecoverPasswordUsernameInput } from '../../connectors/componentConnectors/RecoverPasswordUsernameInput.js'
+import * as Constants from '../../constants/index.js'
+import * as Styles from '../../styles/index.js'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { Button } from '../common/Button.js'
+import { Header } from '../common/Header.js'
+import { FormField } from '../common/index.js'
+import SafeAreaViewGradient from '../common/SafeAreaViewGradient.js'
+import { SetRecoveryUsernameModal } from '../modals/SetRecoveryUsernameModal.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
-  showHeader: boolean
+  showHeader?: boolean
 }
 type StateProps = {
   loginError: string,
   question1: string,
   question2: string,
-  showRecoverSuccessDialog: boolean,
   submitButton: string
 }
 type DispatchProps = {
-  changePassword(): void,
   getQuestions(): void,
+  goBack(): void,
   onCancel(): void,
   submit(Array<string>): void,
   updateUsername(string): void
@@ -53,10 +51,7 @@ type State = {
   showUsernameModal: boolean
 }
 
-class LoginWithRecoveryQuestionsScreenComponent extends Component<
-  Props,
-  State
-> {
+class RecoveryLoginScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -77,9 +72,9 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
     this.props.updateUsername('')
   }
 
-  renderHeader = (style: typeof LoginWithRecoveryStyles) => {
+  renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector style={style.header} />
+      return <Header onBack={this.props.goBack} />
     }
     return null
   }
@@ -112,21 +107,6 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
   }
 
   renderModal = (styles: typeof LoginWithRecoveryStyles) => {
-    if (this.props.showRecoverSuccessDialog) {
-      // render static modal
-      const body = (
-        <Text style={styles.staticModalText}>
-          {s.strings.recovery_successful}
-        </Text>
-      )
-      return (
-        <StaticModal
-          cancel={this.props.changePassword}
-          body={body}
-          modalDismissTimerSeconds={8}
-        />
-      )
-    }
     if (!this.state.showUsernameModal) return null
     const middle = (
       <View style={styles.modalMiddle}>
@@ -180,7 +160,7 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
     return (
       <SafeAreaViewGradient>
         <View style={styles.screen}>
-          {this.renderHeader(styles)}
+          {this.renderHeader()}
           <View style={styles.body}>
             <View style={styles.questionRow}>
               <Text style={styles.questionText}>{this.props.question1}</Text>
@@ -234,10 +214,6 @@ class LoginWithRecoveryQuestionsScreenComponent extends Component<
 
 const LoginWithRecoveryStyles = {
   screen: { ...Styles.ScreenStyle, marginTop: 5 },
-  header: {
-    ...Styles.HeaderContainerScaledStyle,
-    backgroundColor: Constants.PRIMARY
-  },
   /* gradient: {
     height: THEME.HEADER
   }, */
@@ -359,8 +335,8 @@ const LoginWithRecoveryStyles = {
   listItem: Styles.ListItemTextOnly
 }
 
-export const LoginWithRecoveryQuestionsScreen = connect(
-  (state: RootState): StateProps => ({
+export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({
     loginError: state.login.errorMessage || '',
     question1:
       state.passwordRecovery.userQuestions.length > 0
@@ -371,15 +347,14 @@ export const LoginWithRecoveryQuestionsScreen = connect(
         ? state.passwordRecovery.userQuestions[1]
         : s.strings.choose_recovery_question,
     showHeader: true,
-    showRecoverSuccessDialog: state.login.showRecoverSuccessDialog,
     submitButton: s.strings.submit
   }),
-  (dispatch: Dispatch): DispatchProps => ({
-    changePassword() {
-      dispatch({ type: 'WORKFLOW_NEXT' })
-    },
+  (dispatch: Dispatch) => ({
     getQuestions() {
       dispatch(getRecoveryQuestions())
+    },
+    goBack() {
+      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
     onCancel() {
       dispatch({ type: 'CANCEL_RECOVERY_KEY' })
@@ -391,4 +366,4 @@ export const LoginWithRecoveryQuestionsScreen = connect(
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username })
     }
   })
-)(LoginWithRecoveryQuestionsScreenComponent)
+)(RecoveryLoginScreenComponent)

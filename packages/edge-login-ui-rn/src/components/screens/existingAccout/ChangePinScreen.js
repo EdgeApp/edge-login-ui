@@ -2,24 +2,25 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import {
   changePIN,
   recoveryChangePIN
 } from '../../../actions/ChangePasswordPinActions.js'
-import { recoveryLoginComplete } from '../../../actions/LoginAction.js'
+import { completeResecure } from '../../../actions/LoginCompleteActions.js'
+import { cancel } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common/Button.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { StaticModal } from '../../common/StaticModal.js'
 import { ChangePinModal } from '../../modals/ChangePinModal.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
   showHeader?: boolean
@@ -32,7 +33,9 @@ type StateProps = {
 }
 type DispatchProps = {
   changePin(pin: string): void,
-  login(): void
+  login(): void,
+  onBack?: () => void,
+  onSkip?: () => void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -43,7 +46,7 @@ type State = {
   focusOn: string
 }
 
-class ChangeAccountPinScreenComponent extends Component<Props, State> {
+class ChangePinScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -54,9 +57,9 @@ class ChangeAccountPinScreenComponent extends Component<Props, State> {
     }
   }
 
-  renderHeader = (style: typeof SetAccountPinScreenStyle) => {
+  renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector style={style.header} />
+      return <Header onBack={this.props.onBack} onSkip={this.props.onSkip} />
     }
     return null
   }
@@ -107,7 +110,7 @@ class ChangeAccountPinScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={SetAccountPinScreenStyle.screen}>
-          {this.renderHeader(SetAccountPinScreenStyle)}
+          {this.renderHeader()}
           <View style={SetAccountPinScreenStyle.pageContainer}>
             <View style={SetAccountPinScreenStyle.row1}>
               <Text style={SetAccountPinScreenStyle.instructions}>
@@ -141,10 +144,6 @@ class ChangeAccountPinScreenComponent extends Component<Props, State> {
 
 const SetAccountPinScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: {
-    ...Styles.HeaderContainerScaledStyle,
-    backgroundColor: Constants.PRIMARY
-  },
   pageContainer: Styles.PageContainerWithHeaderStyle,
   row1: {
     ...Styles.ScreenRow,
@@ -199,37 +198,47 @@ const SetAccountPinScreenStyle = {
   }
 }
 
-export const ChangeAccountPinScreen = connect(
-  (state: RootState): StateProps => ({
+export const PublicChangePinScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     pin: state.create.pin,
     pinError: state.create.pinError,
     workflow: state.workflow,
     showModal: state.create.showModal
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     changePin(data) {
       dispatch(changePIN(data))
+    },
+    goBack() {
+      dispatch(cancel())
     },
     login() {
       // Not used in the settings screen version
     }
   })
-)(ChangeAccountPinScreenComponent)
+)(ChangePinScreenComponent)
 
-export const ForgotPinChangePinScene = connect(
-  (state: RootState): StateProps => ({
+export const ResecurePinScreen = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({
     forgotPasswordModal: true,
     pin: state.create.pin,
     pinError: state.create.pinError,
     showHeader: true,
     showModal: state.create.showModal
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     changePin(data: string) {
       dispatch(recoveryChangePIN(data))
     },
+    onSkip() {
+      dispatch(completeResecure())
+    },
     login() {
-      dispatch(recoveryLoginComplete())
+      dispatch(completeResecure())
     }
   })
-)(ChangeAccountPinScreenComponent)
+)(ChangePinScreenComponent)

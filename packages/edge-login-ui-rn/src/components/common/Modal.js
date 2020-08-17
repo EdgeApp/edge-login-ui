@@ -19,22 +19,22 @@ import { Button } from './Button.js'
 import { Icon } from './Icon.js'
 
 type Props = {
-  styles: Object,
+  styles?: Object,
   headerText: string,
   headerSubtext: string,
   icon: string,
   iconType: string,
-  image: string,
+  image?: string,
   actionLabel: string,
   cancelLabel: string,
-  singleButton: boolean,
-  singleCancelButton: boolean,
+  singleButton?: boolean,
+  singleCancelButton?: boolean,
   buttonTimerSeconds?: number,
   modalDismissTimerSeconds?: number,
-  hideCancelX: boolean,
+  hideCancelX?: boolean,
   middleText: string,
   modalMiddleComponent?: any,
-  thinking: boolean,
+  thinking?: boolean,
   action(): void,
   cancel(): void
 }
@@ -149,7 +149,7 @@ export class MyModal extends Component<Props, State> {
     styles: Object,
     icon: string,
     iconType: string,
-    image: string
+    image?: string
   ) => {
     if (image) {
       return (

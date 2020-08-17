@@ -2,18 +2,18 @@
 
 import React, { Component } from 'react'
 import { Alert, Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import { createUser } from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common/Button.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {}
 type StateProps = {
@@ -24,7 +24,8 @@ type StateProps = {
   username: string
 }
 type DispatchProps = {
-  createUser(data: Object): void
+  createUser(data: Object): void,
+  goBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -36,7 +37,7 @@ type State = {
   focusOn: string
 }
 
-class SetAccountPinScreenComponent extends Component<Props, State> {
+class NewAccountPinScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -66,7 +67,7 @@ class SetAccountPinScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={SetAccountPinScreenStyle.screen}>
-          <HeaderConnector style={SetAccountPinScreenStyle.header} />
+          <Header onBack={this.props.goBack} />
           <View style={SetAccountPinScreenStyle.pageContainer}>
             <View style={SetAccountPinScreenStyle.row1}>
               <Text style={SetAccountPinScreenStyle.instructions}>
@@ -123,10 +124,6 @@ class SetAccountPinScreenComponent extends Component<Props, State> {
 
 const SetAccountPinScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: {
-    ...Styles.HeaderContainerScaledStyle,
-    backgroundColor: Constants.PRIMARY
-  },
   pageContainer: Styles.PageContainerWithHeaderStyle,
   row1: {
     ...Styles.ScreenRow,
@@ -171,18 +168,21 @@ const SetAccountPinScreenStyle = {
   }
 }
 
-export const SetAccountPinScreen = connect(
-  (state: RootState): StateProps => ({
+export const NewAccountPinScreen = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({
     createErrorMessage: state.create.createErrorMessage,
     password: state.create.password || '',
     pin: state.create.pin,
     pinError: state.create.pinError,
     username: state.create.username || ''
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     createUser(data: Object) {
       dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
       dispatch(createUser(data))
+    },
+    goBack() {
+      dispatch({ type: 'WORKFLOW_BACK' })
     }
   })
-)(SetAccountPinScreenComponent)
+)(NewAccountPinScreenComponent)

@@ -8,12 +8,12 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
-import { connect } from 'react-redux'
 
 import { validatePin } from '../../actions/CreateAccountActions.js'
 import * as Constants from '../../constants/index.js'
 import type { Dispatch, RootState } from '../../types/ReduxTypes.js'
 import { Spinner } from '../common/Spinner.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   style: Object
@@ -186,14 +186,14 @@ class FourDigitInputComponent extends Component<Props, State> {
   }
 }
 
-export const FourDigitInput = connect(
-  (state: RootState): StateProps => ({
+export const FourDigitInput = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({
     error: state.create.pinErrorMessage || '',
     pin: state.create.pin,
     username: state.login.username,
     wait: 0
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     onChangeText(data: Object) {
       dispatch(validatePin(data))
     }

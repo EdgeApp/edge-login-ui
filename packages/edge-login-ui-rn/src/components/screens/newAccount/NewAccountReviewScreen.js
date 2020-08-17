@@ -2,32 +2,31 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { AccountInfo } from '../../abSpecific/AccountInfoComponent.js'
 import { Button } from '../../common/Button.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { WarningBox } from '../../common/WarningBox.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {}
-type StateProps = {}
 type DispatchProps = {
   nextScreen(): void
 }
-type Props = OwnProps & StateProps & DispatchProps
+type Props = OwnProps & DispatchProps
 
 class NewAccountReviewScreenComponent extends Component<Props> {
   render() {
     return (
       <SafeAreaView>
         <View style={NewAccountReviewScreenStyle.screen}>
-          <HeaderConnector style={NewAccountReviewScreenStyle.header} />
+          <Header />
           <View style={NewAccountReviewScreenStyle.pageContainer}>
             <View style={NewAccountReviewScreenStyle.instructionsContainer}>
               <Text style={NewAccountReviewScreenStyle.instructionsText}>
@@ -71,7 +70,6 @@ class NewAccountReviewScreenComponent extends Component<Props> {
 
 const NewAccountReviewScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerScaledStyle,
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'
@@ -247,9 +245,9 @@ const NewAccountReviewScreenStyle = {
   }
 }
 
-export const NewAccountReviewScreen = connect(
-  (state: RootState): StateProps => ({}),
-  (dispatch: Dispatch): DispatchProps => ({
+export const NewAccountReviewScreen = connect<{}, DispatchProps, OwnProps>(
+  (state: RootState) => ({}),
+  (dispatch: Dispatch) => ({
     nextScreen() {
       dispatch({ type: 'WORKFLOW_NEXT' })
     }

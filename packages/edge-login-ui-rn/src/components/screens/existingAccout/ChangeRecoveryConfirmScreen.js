@@ -6,7 +6,7 @@ import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { Button } from '../../common/Button.js'
-import { Header } from '../../common/Header.js'
+import { HeaderComponent } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 
 type Props = {
@@ -18,21 +18,16 @@ type Props = {
   cancel(): void
 }
 
-export default class ConfirmPasswordRecoveryScreen extends Component<Props> {
+export class ChangeRecoveryConfirmScreen extends Component<Props> {
   render() {
     const style = ConfirmPasswordRecoverySceneStyles
     return (
       <SafeAreaView>
         <View style={style.screen}>
-          <Header
-            style={style.header}
-            showBackButton
-            showSkipButton={false}
+          <HeaderComponent
+            onBack={this.props.cancel}
             title={s.strings.confirm_recovery_questions}
             subTitle=""
-            useCancel={false}
-            customLabel={s.strings.back}
-            goBack={this.props.cancel}
           />
           <View style={style.shim} />
           <Text style={style.questionText}>{this.props.question1}</Text>
@@ -68,10 +63,6 @@ export default class ConfirmPasswordRecoveryScreen extends Component<Props> {
 
 const ConfirmPasswordRecoverySceneStyles = {
   screen: { ...Styles.ScreenStyle, alignItems: 'center' },
-  header: {
-    ...Styles.HeaderContainerScaledStyle,
-    backgroundColor: Constants.PRIMARY
-  },
   submitButton: {
     upStyle: Styles.PrimaryWidthButtonUpStyle,
     upTextStyle: Styles.PrimaryButtonUpTextStyle,

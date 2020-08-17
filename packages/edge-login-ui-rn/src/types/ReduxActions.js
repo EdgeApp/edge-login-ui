@@ -7,7 +7,9 @@ import {
   type OtpError
 } from 'edge-core-js'
 
+import { type WorkflowName } from '../constants/workflows.js'
 import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
+import { type RootState } from '../reducers/RootReducer.js'
 
 // Actions with no payload:
 type NoDataActionName =
@@ -21,7 +23,6 @@ type NoDataActionName =
   | 'LAUNCH_NOTIFICATION_MODAL'
   | 'LOGIN_SUCCEESS'
   | 'ON_DISABLE_RECOVERY'
-  | 'RECOVERY_AFTER_OTP_CHECK'
   | 'RESET_APP'
   | 'START_RECOVERY_LOGIN'
   | 'WORKFLOW_BACK'
@@ -72,16 +73,6 @@ export type Action =
         wait: number
       }
     }
-  | {
-      type: 'LOGIN_RECOVERY_SUCCEESS',
-      data: {
-        account: EdgeAccount,
-        touchIdInformation: {
-          isTouchSupported: boolean,
-          isTouchEnabled: boolean
-        }
-      }
-    }
   | { type: 'LOGIN_USERNAME_PASSWORD_FAIL', data: string /* error */ }
   | { type: 'ON_RECOVERY_KEY', data: string }
   | { type: 'ON_RECOVERY_LOGIN_ERROR', data: string }
@@ -95,7 +86,8 @@ export type Action =
   | { type: 'ON_RECOVERY_LOGIN_NOT_ENABLED', data?: string /* error */ }
   | {
       type: 'OTP_ERROR',
-      data: OtpError & {
+      data: {
+        error: OtpError,
         loginAttempt: 'PASSWORD' | 'PIN' | 'RECOVERY',
         loginAttemptData?: string[]
       }
@@ -113,6 +105,8 @@ export type Action =
     }
   | { type: 'SET_PREVIOUS_USERS', data: PreviousUsersState }
   | { type: 'SET_RECOVERY_KEY', data: string }
+  | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
   | { type: 'START_EDGE_LOGIN_REQUEST', data: EdgePendingEdgeLogin }
+  | { type: 'START_RESECURE', data: EdgeAccount }
   | { type: 'UPDATE_WAIT_TIMER', data: { seconds: number } } // Apparently unused
-  | { type: 'WORKFLOW_START', data: string }
+  | { type: 'WORKFLOW_START', data: WorkflowName }

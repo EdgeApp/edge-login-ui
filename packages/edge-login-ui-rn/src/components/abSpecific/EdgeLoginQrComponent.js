@@ -2,16 +2,16 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { connect } from 'react-redux'
 
 import { getEdgeLoginQrCode } from '../../actions/LoginAction.js'
 import { EdgeLoginQrStyle } from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { QrCode } from '../common/QrCode.js'
+import { connect } from '../services/ReduxStore.js'
 
 type StateProps = {
   edgeLoginId: string,
-  cancelEdgeLogin(): void
+  cancelEdgeLogin: (() => void) | null
 }
 type DispatchProps = {
   cancelRequest(): void,
@@ -25,7 +25,7 @@ class EdgeLoginQrComponent extends Component<Props> {
   }
 
   componentWillUnmount() {
-    this.props.cancelEdgeLogin()
+    if (this.props.cancelEdgeLogin != null) this.props.cancelEdgeLogin()
     this.props.cancelRequest()
   }
 
@@ -49,9 +49,9 @@ class EdgeLoginQrComponent extends Component<Props> {
   }
 }
 
-export const EdgeLoginQr = connect(
+export const EdgeLoginQr = connect<StateProps, DispatchProps, {}>(
   (state: RootState) => ({
-    edgeLoginId: state.login.edgeLoginId,
+    edgeLoginId: state.login.edgeLoginId || '',
     cancelEdgeLogin: state.login.cancelEdgeLoginRequest
   }),
   (dispatch: Dispatch) => ({

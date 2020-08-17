@@ -2,13 +2,13 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { Spinner } from '../common/Spinner.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   style: Object
@@ -108,8 +108,8 @@ class FourDigitComponent extends Component<Props, State> {
   }
 }
 
-export const FourDigit = connect(
-  (state: RootState): StateProps => ({
+export const FourDigit = connect<StateProps, {}, OwnProps>(
+  (state: RootState) => ({
     pin: state.login.pin || '',
     error:
       state.login.wait && state.login.wait > 0

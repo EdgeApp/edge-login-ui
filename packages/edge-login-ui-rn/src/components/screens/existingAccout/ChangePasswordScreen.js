@@ -3,15 +3,14 @@
 import { type EdgePasswordRules } from 'edge-core-js'
 import React, { Component } from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import {
   changePassword,
   recoveryChangePassword
 } from '../../../actions/ChangePasswordPinActions.js'
 import { validateConfirmPassword } from '../../../actions/CreateAccountActions.js'
+import { cancel } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnectorChangeApps'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
 import * as Styles from '../../../styles/index.js'
@@ -19,8 +18,10 @@ import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common/Button.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { ChangePasswordModal } from '../../modals/ChangePasswordModal.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
   showHeader?: boolean
@@ -35,7 +36,9 @@ type StateProps = {
 }
 type DispatchProps = {
   checkTheConfirmPassword(): void,
-  changePassword(string): void
+  changePassword(string): void,
+  onBack?: () => void,
+  onSkip?: () => void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -45,7 +48,7 @@ type State = {
   isProcessing: boolean
 }
 
-class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
+class ChangePasswordScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -92,9 +95,9 @@ class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
     this.props.changePassword(this.props.password)
   }
 
-  renderHeader = (style: typeof NewAccountPasswordScreenStyle) => {
+  renderHeader = () => {
     if (this.props.showHeader) {
-      return <HeaderConnector style={style.header} />
+      return <Header onBack={this.props.onBack} onSkip={this.props.onSkip} />
     }
     return null
   }
@@ -161,7 +164,7 @@ class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={NewAccountPasswordScreenStyle.screen}>
-          {this.renderHeader(NewAccountPasswordScreenStyle)}
+          {this.renderHeader()}
           {this.renderMain(NewAccountPasswordScreenStyle)}
           {this.renderModal(NewAccountPasswordScreenStyle)}
         </View>
@@ -172,7 +175,6 @@ class ChangeAccountPasswordScreenComponent extends Component<Props, State> {
 
 const NewAccountPasswordScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerScaledStyle,
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center',
@@ -199,8 +201,12 @@ const NewAccountPasswordScreenStyle = {
   modal: Styles.SkipModalStyle
 }
 
-export const ChangeAccountPasswordScreen = connect(
-  (state: RootState): StateProps => ({
+export const PublicChangePasswordScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     confirmPassword: state.create.confirmPassword || '',
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
@@ -208,18 +214,25 @@ export const ChangeAccountPasswordScreen = connect(
     passwordStatus: state.create.passwordStatus,
     showModal: state.create.showModal
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     checkTheConfirmPassword() {
       dispatch(validateConfirmPassword())
     },
     changePassword(data: string) {
       dispatch(changePassword(data))
+    },
+    onBack() {
+      dispatch(cancel())
     }
   })
-)(ChangeAccountPasswordScreenComponent)
+)(ChangePasswordScreenComponent)
 
-export const ForgotPasswordChangePassword = connect(
-  (state: RootState): StateProps => ({
+export const ResecurePasswordScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     confirmPassword: state.create.confirmPassword || '',
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
@@ -228,12 +241,15 @@ export const ForgotPasswordChangePassword = connect(
     showHeader: true,
     showModal: state.create.showModal
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     checkTheConfirmPassword() {
       dispatch(validateConfirmPassword())
     },
     changePassword(data: string) {
       dispatch(recoveryChangePassword(data))
+    },
+    onSkip() {
+      dispatch(dispatch({ type: 'WORKFLOW_NEXT' }))
     }
   })
-)(ChangeAccountPasswordScreenComponent)
+)(ChangePasswordScreenComponent)

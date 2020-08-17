@@ -11,7 +11,7 @@ import * as Constants from '../../constants/index.js'
 type Props = {
   screen: string,
   style: Object,
-  otpResetDate: Date | null
+  otpResetDate?: Date
 }
 
 type State = {

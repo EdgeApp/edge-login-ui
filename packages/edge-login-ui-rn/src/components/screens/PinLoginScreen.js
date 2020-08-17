@@ -2,39 +2,39 @@
 
 import React, { Component } from 'react'
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import { userLoginWithTouchId } from '../../actions/LoginAction.js'
-import * as Assets from '../../assets/'
+import * as Assets from '../../assets/index.js'
 import s from '../../common/locales/strings.js'
-import { LogoImageHeader } from '../../components/abSpecific/LogoImageHeader.js'
-import { UserListItem } from '../../components/abSpecific/UserListItem.js'
-import { Button } from '../../components/common/Button.js'
-import { ImageButton } from '../../components/common/ImageButton.js'
-import { DropDownList } from '../../components/common/index.js'
 import * as Constants from '../../constants/index.js'
 import { type LoginUserInfo } from '../../reducers/PreviousUsersReducer.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { scale, scaleH } from '../../util/scaling.js'
 import { FourDigit } from '../abSpecific/FourDigitComponent.js'
+import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { PinKeypad } from '../abSpecific/PinKeypad.js'
+import { UserListItem } from '../abSpecific/UserListItem.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
+import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
+import { ImageButton } from '../common/ImageButton.js'
+import { DropDownList } from '../common/index.js'
 import { DeleteUserModal } from '../modals/DeleteUserModal.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   appId?: string,
   backgroundImage?: any,
   parentButton?: Object,
   primaryLogo?: any,
-  primaryLogoCallback?: () => void,
-  touch: boolean | string
+  primaryLogoCallback?: () => void
 }
 type StateProps = {
   isTouchIdDisabled: boolean,
   loginSuccess: boolean,
   showModal: boolean,
+  touch: $PropertyType<RootState, 'touch'>,
   userDetails: Object,
   userList: Array<LoginUserInfo>,
   username: string
@@ -54,7 +54,7 @@ type State = {
   focusOn: string
 }
 
-class PinLogInScreenComponent extends Component<Props, State> {
+class PinLoginScreenComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -68,6 +68,15 @@ class PinLogInScreenComponent extends Component<Props, State> {
   componentDidMount() {
     if (this.props.username && this.props.touch !== 'FaceID') {
       this.props.launchUserLoginWithTouchId({ username: this.props.username })
+    }
+  }
+
+  componentDidUpdate() {
+    if (
+      !this.props.userDetails.touchEnabled &&
+      !this.props.userDetails.pinEnabled
+    ) {
+      this.exitPin()
     }
   }
 
@@ -402,8 +411,8 @@ const PinLoginScreenStyle = {
   keypad: Styles.PinKeypadStyle
 }
 
-export const PinLoginScreen = connect(
-  (state: RootState): StateProps => ({
+export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({
     isTouchIdDisabled:
       state.login.loginSuccess ||
       !!state.login.wait ||
@@ -411,6 +420,7 @@ export const PinLoginScreen = connect(
       (state.login.pin ? state.login.pin.length : 0) === 4,
     loginSuccess: state.login.loginSuccess,
     showModal: state.workflow.showModal,
+    touch: state.touch,
     userDetails: state.previousUsers.userList.find(
       user => user.username === state.login.username
     ) || {
@@ -421,12 +431,12 @@ export const PinLoginScreen = connect(
     userList: state.previousUsers.userList,
     username: state.login.username
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     changeUser: (data: string) => {
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data })
     },
     gotoLoginPage: () => {
-      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PASSWORD })
+      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
     launchDeleteModal: () => {
       dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' })
@@ -435,4 +445,4 @@ export const PinLoginScreen = connect(
       dispatch(userLoginWithTouchId(data))
     }
   })
-)(PinLogInScreenComponent)
+)(PinLoginScreenComponent)

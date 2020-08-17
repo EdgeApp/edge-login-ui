@@ -3,11 +3,11 @@
 import React, { Component } from 'react'
 import { Text, TouchableWithoutFeedback, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import { connect } from 'react-redux'
 
 import { userLoginWithPin } from '../../actions/LoginAction.js'
 import s from '../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   style: Object
@@ -152,8 +152,8 @@ class PinKeypadComponent extends Component<Props> {
   }
 }
 
-export const PinKeypad = connect(
-  (state: RootState): StateProps => {
+export const PinKeypad = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => {
     const pinLength = state.login.pin ? state.login.pin.length : 0
     return {
       pin: state.login.pin || '',
@@ -161,7 +161,7 @@ export const PinKeypad = connect(
       wait: state.login.wait > 0 || pinLength === 4
     }
   },
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     onChangeText: (data: Object) => dispatch(userLoginWithPin(data))
   })
 )(PinKeypadComponent)

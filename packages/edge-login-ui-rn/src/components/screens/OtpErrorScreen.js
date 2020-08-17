@@ -2,28 +2,28 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
-import { resetOtpReset, retryWithOtp } from '../../../actions/LoginAction.js'
-import s from '../../../common/locales/strings.js'
-import OtpBackupKeyConnector from '../../../connectors/componentConnectors/OtpBackupKeyConnector.js'
-import * as Constants from '../../../constants/index.js'
-import * as Styles from '../../../styles/index.js'
-import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
-import { EdgeLoginQr } from '../../abSpecific/EdgeLoginQrComponent.js'
-import { OtpHeroComponent } from '../../abSpecific/OtpHeroComponent'
-import { Button } from '../../common/Button.js'
-import { Header } from '../../common/Header.js'
-import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-import { StaticModal } from '../../common/StaticModal.js'
-import { DisableOtpModal } from '../../modals/DisableOtpModal.js'
-import { OtpAuthCodeModal } from '../../modals/OtpAuthCodeModal.js'
+import { resetOtpReset, retryWithOtp } from '../../actions/LoginAction.js'
+import s from '../../common/locales/strings.js'
+import OtpBackupKeyConnector from '../../connectors/componentConnectors/OtpBackupKeyConnector.js'
+import * as Constants from '../../constants/index.js'
+import * as Styles from '../../styles/index.js'
+import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { EdgeLoginQr } from '../abSpecific/EdgeLoginQrComponent.js'
+import { OtpHeroComponent } from '../abSpecific/OtpHeroComponent'
+import { Button } from '../common/Button.js'
+import { Header } from '../common/Header.js'
+import SafeAreaView from '../common/SafeAreaViewGradient.js'
+import { StaticModal } from '../common/StaticModal.js'
+import { DisableOtpModal } from '../modals/DisableOtpModal.js'
+import { OtpAuthCodeModal } from '../modals/OtpAuthCodeModal.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {}
 type StateProps = {
   backupKeyError?: string,
   loginSuccess: boolean,
-  otpResetDate: Date | null,
+  otpResetDate?: Date,
   screen: string
 }
 type DispatchProps = {
@@ -183,14 +183,7 @@ class OtpErrorScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={OtpErrorScreenStyle.screen}>
-          <Header
-            goBack={this.props.goBack}
-            showBackButton
-            showSkipButton={false}
-            style={OtpErrorScreenStyle.header}
-            subTitle=""
-            title={s.strings.otp_header}
-          />
+          <Header onBack={this.props.goBack} />
           <View style={OtpErrorScreenStyle.pageContainer}>
             <OtpHeroComponent
               style={OtpErrorScreenStyle.hero}
@@ -220,9 +213,6 @@ class OtpErrorScreenComponent extends Component<Props, State> {
 
 const OtpErrorScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: {
-    ...Styles.HeaderContainerScaledStyle
-  },
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'
@@ -312,9 +302,12 @@ const OtpErrorScreenStyle = {
   }
 }
 
-export const OtpErrorScreen = connect(
-  (state: RootState): StateProps => {
-    const otpResetDate = state.login.otpResetDate
+export const OtpErrorScreen = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => {
+    let otpResetDate
+    if (state.login.otpError != null) {
+      otpResetDate = state.login.otpError.resetDate
+    }
     const screen = otpResetDate
       ? Constants.OTP_SCREEN_TWO
       : Constants.OTP_SCREEN_ONE
@@ -325,9 +318,9 @@ export const OtpErrorScreen = connect(
       screen
     }
   },
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     goBack() {
-      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_PASSWORD })
+      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
     resetOtpToken() {
       dispatch(resetOtpReset())

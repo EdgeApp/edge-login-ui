@@ -1,6 +1,6 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-core-js'
+import { type EdgeAccount, type OtpError } from 'edge-core-js'
 import { type Reducer } from 'redux'
 
 import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
@@ -17,16 +17,13 @@ export type LoginState = {
   +isLoggingInWithPin: boolean,
   +loginSuccess: boolean,
   +otpErrorMessage: string | null,
-  +otpResetDate: Date | null,
-  +otpResetToken: string,
+  +otpError: OtpError | null,
   +otpUserBackupKey: string,
   +password: string | null,
   +pin: string | null,
   +previousAttemptData: any,
   +previousAttemptType: string | null,
   +recoveryToken: string | null,
-  +showRecoverSuccessDialog: boolean,
-  +touchIdInformation: Object | null,
   +username: string,
   +wait: number
 }
@@ -39,8 +36,7 @@ const initialState: LoginState = {
   errorMessage: null,
   otpErrorMessage: null,
   isLoggingInWithPin: false,
-  otpResetToken: '',
-  otpResetDate: null,
+  otpError: null,
   otpUserBackupKey: '', // S7UQ66VYNZKAX4EV
   recoveryToken: null,
   previousAttemptType: null,
@@ -48,8 +44,6 @@ const initialState: LoginState = {
   edgeLoginId: null,
   cancelEdgeLoginRequest: null,
   account: defaultAccount,
-  touchIdInformation: null,
-  showRecoverSuccessDialog: false,
   wait: 0
 }
 
@@ -83,7 +77,6 @@ export const login: Reducer<LoginState, Action> = function(
       return {
         ...state,
         loginSuccess: true,
-        loginPasswordErrorMessage: null,
         isLoggingInWithPin: false,
         errorMessage: null,
         otpErrorMessage: null,
@@ -119,8 +112,7 @@ export const login: Reducer<LoginState, Action> = function(
     case 'OTP_ERROR':
       return {
         ...state,
-        otpResetToken: action.data.resetToken,
-        otpResetDate: action.data.resetDate,
+        otpError: action.data.error,
         previousAttemptType: action.data.loginAttempt,
         previousAttemptData: action.data.loginAttemptData
       }
@@ -148,13 +140,6 @@ export const login: Reducer<LoginState, Action> = function(
       return { ...initialState, username: username }
     }
 
-    case 'LOGIN_RECOVERY_SUCCEESS':
-      return {
-        ...state,
-        account: action.data.account,
-        touchIdInformation: action.data.touchIdInformation,
-        showRecoverSuccessDialog: true
-      }
     case 'ON_RECOVERY_LOGIN_ERROR':
       return { ...state, errorMessage: action.data }
     case 'PASSWORD_RECOVERY_INITIALIZED':
@@ -163,6 +148,8 @@ export const login: Reducer<LoginState, Action> = function(
         account: action.data.account,
         username: action.data.username
       }
+    case 'START_RESECURE':
+      return { ...state, account: action.data }
     default:
       return state
   }

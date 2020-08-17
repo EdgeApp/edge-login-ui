@@ -7,17 +7,12 @@ import {
   type EdgeContext
 } from 'edge-core-js'
 import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import type { Store } from 'redux'
-import { applyMiddleware, compose, createStore } from 'redux'
-import thunk from 'redux-thunk'
 
+import { initializeLogin } from '../../actions/LoginInitActions.js'
 import { updateFontStyles } from '../../constants/Fonts.js'
-import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
-import { type Action, type Imports } from '../../types/ReduxTypes.js'
-import { checkingForOTP } from '../../util/checkingForOTP.js'
 import { LoginApp } from '../navigation/LogInAppComponent.js'
 import { Airship } from '../services/AirshipInstance.js'
+import { ReduxStore } from '../services/ReduxStore.js'
 import { changeFont, ThemeProvider } from '../services/ThemeContext.js'
 
 type Props = {
@@ -37,37 +32,16 @@ type Props = {
 }
 
 export class LoginScreen extends Component<Props> {
-  store: Store<RootState, Action>
-  cleanups: Array<Function>
+  cleanups: Array<() => mixed>
 
   constructor(props: Props) {
     super(props)
-    checkingForOTP(this.props.context)
 
     const { fontDescription = {} } = this.props
     const { regularFontFamily } = fontDescription
     changeFont(regularFontFamily)
     updateFontStyles(regularFontFamily)
 
-    const composeEnhancers =
-      typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'core-ui' })
-        : compose
-    const imports: Imports = {
-      accountOptions: this.props.accountOptions,
-      callback: this.props.onLogin,
-      context: this.props.context,
-      folder: makeReactNativeFolder(),
-      onCancel: () => {},
-      onComplete: () => {},
-      recoveryKey: this.props.recoveryLogin,
-      username: this.props.username
-    }
-    this.store = createStore(
-      rootReducer,
-      undefined,
-      composeEnhancers(applyMiddleware(thunk.withExtraArgument(imports)))
-    )
     this.cleanups = []
   }
 
@@ -92,7 +66,19 @@ export class LoginScreen extends Component<Props> {
 
   render() {
     return (
-      <Provider store={this.store}>
+      <ReduxStore
+        imports={{
+          accountOptions: this.props.accountOptions,
+          callback: this.props.onLogin,
+          context: this.props.context,
+          folder: makeReactNativeFolder(),
+          onCancel: () => {},
+          onComplete: () => {},
+          recoveryKey: this.props.recoveryLogin,
+          username: this.props.username
+        }}
+        initialAction={initializeLogin()}
+      >
         <ThemeProvider>
           <Airship avoidAndroidKeyboard statusBarTranslucent>
             <LoginApp
@@ -103,11 +89,10 @@ export class LoginScreen extends Component<Props> {
               parentButton={this.props.parentButton}
               primaryLogo={this.props.primaryLogo}
               primaryLogoCallback={this.props.primaryLogoCallback}
-              recoveryLogin={this.props.recoveryLogin}
             />
           </Airship>
         </ThemeProvider>
-      </Provider>
+      </ReduxStore>
     )
   }
 }

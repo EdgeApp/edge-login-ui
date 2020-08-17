@@ -3,20 +3,20 @@
 import type { EdgeAccount } from 'edge-core-js'
 import React, { Component } from 'react'
 import { Linking, ScrollView, Text, View } from 'react-native'
-import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
 import { agreeToConditions } from '../../../actions/CreateAccountActions.js'
-import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/'
+import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/index.js'
 import s from '../../../common/locales/strings.js'
-import HeaderConnector from '../../../connectors/componentConnectors/HeaderConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
 import { Checkbox } from '../../common/Checkbox.js'
+import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
   appName: string
@@ -26,7 +26,8 @@ type StateProps = {
   terms: Object
 }
 type DispatchProps = {
-  agreeToCondition(account: EdgeAccount): void
+  agreeToCondition(account: EdgeAccount): void,
+  goBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -117,7 +118,7 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={TermsAndConditionsScreenStyle.screen}>
-          <HeaderConnector style={TermsAndConditionsScreenStyle.header} />
+          <Header onBack={this.props.goBack} />
           <View style={TermsAndConditionsScreenStyle.pageContainer}>
             <ScrollView ref={ref => (this.scrollView = ref)}>
               {this.renderInstructions(TermsAndConditionsScreenStyle)}
@@ -171,7 +172,6 @@ class TermsAndConditionsScreenComponent extends Component<Props, State> {
 
 const TermsAndConditionsScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  header: Styles.HeaderContainerScaledStyle,
   pageContainer: {
     ...Styles.PageContainerWithHeaderStyle,
     alignItems: 'center'
@@ -239,14 +239,21 @@ const TermsAndConditionsScreenStyle = {
   inputShim: { ...Styles.Shim, height: scale(20) }
 }
 
-export const TermsAndConditionsScreen = connect(
-  (state: RootState): StateProps => ({
+export const TermsAndConditionsScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
     accountObject: state.create.accountObject,
     terms: state.terms
   }),
-  (dispatch: Dispatch): DispatchProps => ({
+  (dispatch: Dispatch) => ({
     agreeToCondition(data: EdgeAccount) {
       dispatch(agreeToConditions(data))
+    },
+    goBack() {
+      dispatch({ type: 'WORKFLOW_BACK' })
     }
   })
 )(TermsAndConditionsScreenComponent)

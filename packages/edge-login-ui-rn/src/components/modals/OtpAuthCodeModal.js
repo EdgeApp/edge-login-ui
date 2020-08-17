@@ -1,11 +1,10 @@
 // @flow
 
-import { connect } from 'react-redux'
-
 import { OTP_SMALL } from '../../assets/'
 import s from '../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { MyModal } from '../common/index.js'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   middle: any,
@@ -27,14 +26,13 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
     singleCancelButton: !otpUserBackupKey || otpUserBackupKey.length < 16
   }
 }
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => {
-  return {
-    cancel: () => ownProps.cancel(),
-    action: () => ownProps.action()
-  }
-}
+const mapDispatchToProps = (dispatch: Dispatch) => ({})
 
-export const OtpAuthCodeModal = connect(
+export const OtpAuthCodeModal = connect<
+  $Call<typeof mapStateToProps, RootState, OwnProps>,
+  $Call<typeof mapDispatchToProps, Dispatch>,
+  OwnProps
+>(
   mapStateToProps,
   mapDispatchToProps
 )(MyModal)

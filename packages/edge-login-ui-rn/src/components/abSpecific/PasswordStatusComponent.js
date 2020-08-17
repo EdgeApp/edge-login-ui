@@ -2,13 +2,13 @@
 
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
 
 import { PASSWORD_REQ_CHECKED, PASSWORD_REQ_UNCHECKED } from '../../assets'
 import s from '../../common/locales/strings.js'
 import { type PasswordStatusState } from '../../reducers/PasswordStatusReducer.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { Checkbox } from '../common/Checkbox'
+import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   style: Object
@@ -63,8 +63,8 @@ class PasswordStatusComponent extends Component<Props> {
   }
 }
 
-export const PasswordStatus = connect(
-  (state: RootState): StateProps => ({
+export const PasswordStatus = connect<StateProps, {}, OwnProps>(
+  (state: RootState) => ({
     status: state.passwordStatus,
     secondsToCrack: state.passwordStatus
       ? state.passwordStatus.secondsToCrack

@@ -2,30 +2,29 @@
 
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { connect } from 'react-redux'
 import { sprintf } from 'sprintf-js'
 
-import * as Assets from '../../../assets'
+import * as Assets from '../../../assets/index.js'
 import s from '../../../common/locales/strings.js'
-import T from '../../../components/common/FormattedText.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
 import { Button } from '../../common/Button.js'
+import T from '../../common/FormattedText.js'
 import { HeaderBackButton } from '../../common/HeaderBackButton.js'
 import SafeAreaView from '../../common/SafeAreaView.js'
+import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
   appName: string
 }
-type StateProps = {}
 type DispatchProps = {
   exitScreen(): void,
   nextScreen(): void
 }
-type Props = OwnProps & StateProps & DispatchProps
+type Props = OwnProps & DispatchProps
 
 type State = {}
 
@@ -148,11 +147,11 @@ const NewAccountWelcomeScreenStyle = {
   }
 }
 
-export const NewAccountWelcomeScreen = connect(
-  (state: RootState): StateProps => ({}),
-  (dispatch: Dispatch): DispatchProps => ({
+export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
+  (state: RootState) => ({}),
+  (dispatch: Dispatch) => ({
     exitScreen() {
-      dispatch({ type: 'WORKFLOW_START', data: Constants.WORKFLOW_INIT })
+      dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
     },
     nextScreen() {
       global.firebase &&

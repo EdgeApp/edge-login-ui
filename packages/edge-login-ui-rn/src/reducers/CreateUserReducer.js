@@ -40,7 +40,6 @@ const initialState: CreateState = {
   pinErrorMessage: null,
   usernameErrorMessage: null,
   createErrorMessage: null,
-  loginPasswordErrorMessage: null,
   loginPinErrorMessage: null,
   accountObject: defaultAccount,
   showModal: false
