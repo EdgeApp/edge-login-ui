@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.6.14 (2020-08-17)
+
+- rn: Use react-native-airship to power more modals.
+- rn: Fix the header "skip" buttons on the password recovery workflow.
+- rn: Many internal cleanups & refactorings.
+
 ## 0.6.13 (2020-08-10)
 
 - rn: Prevent the welcome screen from flickering at startup, due to a bug in the last release.
