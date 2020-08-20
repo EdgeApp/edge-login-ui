@@ -25,12 +25,12 @@ class LogoImageHeader extends Component<Props, State> {
   }
 
   _onPress = () => {
-    if (this.props.callback) {
+    const { callback } = this.props
+    if (callback != null) {
       const taps = this.state.taps + 1
       this.setState({ taps })
       if (taps > 4) {
-        // $FlowFixMe
-        this.props.callback()
+        callback()
         this.setState({ taps: 0 })
       }
       if (taps === 1) {

@@ -44,8 +44,7 @@ type State = {
 }
 
 export class MyModal extends Component<Props, State> {
-  // $FlowFixMe
-  reset: number
+  reset: $Call<typeof setTimeout, () => void>
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -69,7 +68,7 @@ export class MyModal extends Component<Props, State> {
   }
 
   componentWillUnmount() {
-    clearInterval(this.reset)
+    clearTimeout(this.reset)
   }
 
   renderMiddle = (styles: Object) => {

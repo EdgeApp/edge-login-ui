@@ -17,8 +17,7 @@ type Props = {
 }
 
 export class StaticModal extends Component<Props> {
-  // $FlowFixMe
-  reset: number
+  reset: $Call<typeof setTimeout, () => void>
   componentDidMount() {
     if (this.props.modalDismissTimerSeconds) {
       this.reset = setTimeout(() => {
