@@ -3937,10 +3937,10 @@ edge-core-js@^0.13.5:
     ws "^5.1.1"
     yaob "^0.3.1"
 
-edge-core-js@^0.17.9:
-  version "0.17.9"
-  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.17.9.tgz#a7ff5fd795789b131ca34b8204a18c147671308f"
-  integrity sha512-CYrQuec+WtvyN/GR5uiN47e8EllH9n05k3xCc3USx0Ug9L1BeGWR+XmXbqwQNbTx8t3ZDN5Ue2QU8zKf2JELOQ==
+edge-core-js@^0.17.12:
+  version "0.17.12"
+  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.17.12.tgz#7c90c9aa74819d207c4fd91d86697d2cfe3e0675"
+  integrity sha512-6sJRfKiDz75PMJ3PMPjIBavFwyf/O7h5QQUCCQtGPW6TEbsTdIY72mb2IsgtqoTtY/bj9IqA1FAV18VKRYUTDA==
   dependencies:
     aes-js "^3.1.0"
     base-x "^1.0.4"
@@ -3952,14 +3952,14 @@ edge-core-js@^0.17.9:
     esm "^3.2.4"
     ethereumjs-tx "^1.3.7"
     ethereumjs-util "^5.2.0"
-    hash.js "^1.0.3"
+    hash.js "^1.1.7"
     hmac-drbg "^1.0.1"
     json-csv "^1.5.0"
     node-fetch "^2.0.0"
     redux "^3.6.0"
-    redux-keto "^0.3.3"
+    redux-keto "^0.3.4"
     redux-pixies "^0.3.6"
-    rfc4648 "^1.1.0"
+    rfc4648 "^1.4.0"
     scrypt-js "^2.0.3"
     yaob "^0.3.6"
 
@@ -5272,7 +5272,7 @@ hash-base@^3.0.0:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-hash.js@^1.0.0, hash.js@^1.0.3:
+hash.js@^1.0.0, hash.js@^1.0.3, hash.js@^1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.7.tgz#0babca538e8d4ee4a0f8988d68866537a003cf42"
   integrity sha512-taOaskGt4z4SOANNseOviYDvjEJinIkRgmp7LbKP2YTTmVxWBl87s/uzK9r+44BclBSp2X7K1hqeNfz9JbBeXA==
@@ -9098,7 +9098,7 @@ redux-keto@^0.3.2:
   resolved "https://registry.yarnpkg.com/redux-keto/-/redux-keto-0.3.2.tgz#15c18d61fec5e76e3d0d3f02767a996fee4ff622"
   integrity sha512-ZSCnq/8bHW/LmXLKn0v770av4lQG2S56LMpeW8ebQHY3LwHuVyilSd0XewCwYl37ZIN11t7AxHWFj+Fso9l7NA==
 
-redux-keto@^0.3.3:
+redux-keto@^0.3.4:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/redux-keto/-/redux-keto-0.3.4.tgz#1bf78a36736dc181dd419b10e57116dea17fa3a5"
   integrity sha512-16q/QujMkv+zdsVRExJuGbl6grXZLoRakBbQR5E9DmEAPIeJoXtjmc6L3bCMUVjBfF+0XFQyJDZwjhS2guh+ng==
@@ -9387,7 +9387,7 @@ rfc4648@^1.1.0:
   resolved "https://registry.yarnpkg.com/rfc4648/-/rfc4648-1.2.1.tgz#3d05ae826df5a305ce6f45a19a7756ddf4e551d0"
   integrity sha512-WtA5N+n7sYVszB4K4ETLoIhREBH4Q/DHpoB/xK8pFPPAmd9TZGLWvj+UTnT3Le1r9va2uj9KZ/79nC7IfeT7vA==
 
-rfc4648@^1.3.0:
+rfc4648@^1.3.0, rfc4648@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/rfc4648/-/rfc4648-1.4.0.tgz#c75b2856ad2e2d588b6ddb985d556f1f7f2a2abd"
   integrity sha512-3qIzGhHlMHA6PoT6+cdPKZ+ZqtxkIvg8DZGKA5z6PQ33/uuhoJ+Ws/D/J9rXW6gXodgH8QYlz2UCl+sdUDmNIg==
