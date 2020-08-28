@@ -1,7 +1,8 @@
 // @flow
 
-import type { DiskletFolder } from 'disklet'
-import type { EdgeAccount, EdgeContext } from 'edge-core-js'
+import { asArray, asJSON, asObject, asOptional, asString } from 'cleaners'
+import { type DiskletFolder } from 'disklet'
+import { type EdgeAccount, type EdgeContext } from 'edge-core-js'
 import { NativeModules, Platform } from 'react-native'
 const { AbcCoreJsUi } = NativeModules
 
@@ -13,54 +14,54 @@ function createKeyWithUsername(username, key) {
   return username + '___' + key
 }
 
-const emptyTouchIdUsers = {
+const asFingerprintFile = asJSON(
+  asObject({
+    enabledUsers: asOptional(asArray(asString), []),
+    disabledUsers: asOptional(asArray(asString), [])
+  })
+)
+type FingerprintFile = $Call<typeof asFingerprintFile>
+
+const emptyTouchIdUsers: FingerprintFile = {
   enabledUsers: [],
   disabledUsers: []
 }
 
-export async function isTouchEnabled(folder: DiskletFolder, username: string) {
+export async function isTouchEnabled(
+  folder: DiskletFolder,
+  username: string
+): Promise<boolean> {
   const supported = await supportsTouchId()
-  if (supported) {
-    const fingerprint = await folder
-      .file('fingerprint.json')
-      .getText()
-      .then(text => JSON.parse(text))
-      .catch(e => emptyTouchIdUsers)
+  if (!supported) return false
 
-    // Check if user is in array
-    if (
-      fingerprint.enabledUsers &&
-      fingerprint.enabledUsers.indexOf(username) !== -1
-    ) {
-      return true
-    }
-  }
-  return false
+  const fingerprint = await folder
+    .file('fingerprint.json')
+    .getText()
+    .then(asFingerprintFile)
+    .catch(e => emptyTouchIdUsers)
+
+  // Check if user is in array
+  return fingerprint.enabledUsers.indexOf(username) !== -1
 }
 
-export async function isTouchDisabled(folder: DiskletFolder, username: string) {
+export async function isTouchDisabled(
+  folder: DiskletFolder,
+  username: string
+): Promise<boolean> {
   const supported = await supportsTouchId()
-  if (supported) {
-    const fingerprint = await folder
-      .file('fingerprint.json')
-      .getText()
-      .then(text => JSON.parse(text))
-      .catch(e => emptyTouchIdUsers)
+  if (!supported) return true
 
-    // Check if user is in array
-    if (
-      fingerprint.disabledUsers &&
-      fingerprint.disabledUsers.indexOf(username) !== -1
-    ) {
-      return true
-    } else {
-      return false
-    }
-  }
-  return true
+  const fingerprint = await folder
+    .file('fingerprint.json')
+    .getText()
+    .then(asFingerprintFile)
+    .catch(e => emptyTouchIdUsers)
+
+  // Check if user is in array
+  return fingerprint.disabledUsers.indexOf(username) !== -1
 }
 
-export async function supportsTouchId() {
+export async function supportsTouchId(): Promise<boolean> {
   if (!AbcCoreJsUi) {
     console.warn('AbcCoreJsUi  is unavailable')
     return false
@@ -73,7 +74,7 @@ async function addTouchIdUser(folder: DiskletFolder, username: string) {
   const fingerprint = await folder
     .file('fingerprint.json')
     .getText()
-    .then(text => JSON.parse(text))
+    .then(asFingerprintFile)
     .catch(e => emptyTouchIdUsers)
 
   if (fingerprint.enabledUsers.indexOf(username) === -1) {
@@ -91,7 +92,7 @@ async function removeTouchIdUser(folder: DiskletFolder, username: string) {
   const fingerprint = await folder
     .file('fingerprint.json')
     .getText()
-    .then(text => JSON.parse(text))
+    .then(asFingerprintFile)
     .catch(e => emptyTouchIdUsers)
 
   if (fingerprint.disabledUsers.indexOf(username) === -1) {
@@ -161,58 +162,58 @@ export async function loginWithTouchId(
 ): Promise<?EdgeAccount> {
   const supported = await supportsTouchId()
 
-  if (supported) {
-    const disabled = await isTouchDisabled(folder, username)
-    if (disabled) {
-      return null
-    }
-    const enabled = await isTouchEnabled(folder, username)
-    if (!enabled) {
-      return null
-    }
-    const loginKeyKey = createKeyWithUsername(username, LOGINKEY_KEY)
+  if (!supported) {
+    // throw new Error('TouchIdNotSupportedError')
+    console.log('TouchIdNotSupportedError')
+    return null
+  }
 
-    if (Platform.OS === 'ios') {
-      const loginKey = await AbcCoreJsUi.getKeychainString(loginKeyKey)
-      if (loginKey && loginKey.length > 10) {
-        console.log('loginKey valid. Launching TouchID modal...')
+  const disabled = await isTouchDisabled(folder, username)
+  if (disabled) {
+    return null
+  }
+  const enabled = await isTouchEnabled(folder, username)
+  if (!enabled) {
+    return null
+  }
+  const loginKeyKey = createKeyWithUsername(username, LOGINKEY_KEY)
 
-        const success = await AbcCoreJsUi.authenticateTouchID(
-          promptString,
-          fallbackString
-        )
-        if (success) {
-          console.log('TouchID authenticated. Calling loginWithKey')
-          callback()
-          const abcAccount = abcContext.loginWithKey(username, loginKey, opts)
-          console.log('abcAccount logged in: ' + username)
-          return abcAccount
-        } else {
-          console.log('Failed to authenticate TouchID')
-          return null
-        }
-      } else {
-        console.log('No valid loginKey for TouchID')
-        return null
-      }
-    } else if (Platform.OS === 'android') {
-      try {
-        const loginKey = await AbcCoreJsUi.getKeychainStringWithFingerprint(
-          loginKeyKey,
-          promptString
-        )
+  if (Platform.OS === 'ios') {
+    const loginKey = await AbcCoreJsUi.getKeychainString(loginKeyKey)
+    if (loginKey && loginKey.length > 10) {
+      console.log('loginKey valid. Launching TouchID modal...')
+
+      const success = await AbcCoreJsUi.authenticateTouchID(
+        promptString,
+        fallbackString
+      )
+      if (success) {
+        console.log('TouchID authenticated. Calling loginWithKey')
         callback()
         const abcAccount = abcContext.loginWithKey(username, loginKey, opts)
         console.log('abcAccount logged in: ' + username)
         return abcAccount
-      } catch (e) {
-        console.log(e)
+      } else {
+        console.log('Failed to authenticate TouchID')
         return null
       }
+    } else {
+      console.log('No valid loginKey for TouchID')
+      return null
     }
-  } else {
-    console.log('TouchIdNotSupportedError')
-    return null
-    // throw new Error('TouchIdNotSupportedError')
+  } else if (Platform.OS === 'android') {
+    try {
+      const loginKey = await AbcCoreJsUi.getKeychainStringWithFingerprint(
+        loginKeyKey,
+        promptString
+      )
+      callback()
+      const abcAccount = abcContext.loginWithKey(username, loginKey, opts)
+      console.log('abcAccount logged in: ' + username)
+      return abcAccount
+    } catch (e) {
+      console.log(e)
+      return null
+    }
   }
 }
