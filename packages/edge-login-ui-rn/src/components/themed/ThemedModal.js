@@ -7,8 +7,8 @@ import { type AirshipBridge, AirshipModal } from 'react-native-airship'
 import { packEdges, unpackEdges } from '../../util/edges.js'
 import { useTheme } from '../services/ThemeContext.js'
 
-type Props = {
-  bridge: AirshipBridge<any>,
+type Props<T> = {
+  bridge: AirshipBridge<T>,
   children?: React.Node,
   onCancel: () => void,
 
@@ -18,7 +18,7 @@ type Props = {
   paddingRem?: number[] | number
 }
 
-export function ThemedModal(props: Props) {
+export function ThemedModal<T>(props: Props<T>) {
   const { bridge, children = null, onCancel } = props
   const paddingRem = unpackEdges(props.paddingRem ?? 1)
   const theme = useTheme()

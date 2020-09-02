@@ -90,6 +90,7 @@ export const submitLogin = (account: EdgeAccount) => async (
   }
 
   dispatch({ type: 'LOGIN_SUCCEESS' })
+  Airship.clear()
   callback(null, account, touchIdInformation)
 }
 
