@@ -1,7 +1,5 @@
 // @flow
 
-import './util/androidFetch.js'
-
 export * from './components/publicApi/ChangePasswordScreen.js'
 export * from './components/publicApi/ChangePinScreen.js'
 export * from './components/publicApi/ChooseTestAppScreen.js'
