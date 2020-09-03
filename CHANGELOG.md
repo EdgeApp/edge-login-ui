@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.6.15 (2020-09-03)
+
+- rn: Do not enable touch for users without locally-stored data.
+- rn: Fix the modal title size.
+- rn: Upgrade to react-native-patina v0.1.3
+
 ## 0.6.14 (2020-08-17)
 
 - rn: Use react-native-airship to power more modals.
