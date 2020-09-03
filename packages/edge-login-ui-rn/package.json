@@ -27,6 +27,7 @@
     "prepare": "echo nothing to do"
   },
   "dependencies": {
+    "cleaners": "^0.3.1",
     "material-ui": "^0.20.0",
     "moment": "^2.19.3",
     "qrcode-generator": "^1.4.4",

@@ -26,18 +26,18 @@ export const initializeLogin = () => async (
 
   // Loading is done, so send the user to the initial route:
   const { previousUsers, touch } = state
-  const firstUser = previousUsers.lastUser
+  const { startupUser } = previousUsers
 
   if (imports.recoveryKey) {
     dispatch({
       type: 'SET_RECOVERY_KEY',
       data: imports.recoveryKey
     })
-  } else if (firstUser == null) {
+  } else if (startupUser == null) {
     dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
   } else if (
-    firstUser.pinEnabled ||
-    (firstUser.touchEnabled && touch !== 'none')
+    startupUser.pinEnabled ||
+    (startupUser.touchEnabled && touch !== 'none')
   ) {
     dispatch({ type: 'WORKFLOW_START', data: 'pinWF' })
   } else {

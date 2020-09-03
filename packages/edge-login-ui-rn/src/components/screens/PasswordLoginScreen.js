@@ -23,12 +23,6 @@ import { StaticModal } from '../common/StaticModal.js'
 import { DeleteUserModal } from '../modals/DeleteUserModal.js'
 import { connect } from '../services/ReduxStore.js'
 
-const Offsets = {
-  USERNAME_OFFSET_LOGIN_SCREEN: -50,
-  PASSWORD_OFFSET_LOGIN_SCREEN: -80,
-  LOGIN_SCREEN_NO_OFFSET: -200
-}
-
 type OwnProps = {
   appId?: string,
   backgroundImage?: any,
@@ -38,7 +32,6 @@ type OwnProps = {
 }
 type StateProps = {
   error: string,
-  hasUsers: boolean,
   loginSuccess: boolean,
   password: string,
   previousUsers: LoginUserInfo[],
@@ -64,7 +57,6 @@ type State = {
   loggingIn: boolean,
   focusFirst: boolean,
   focusSecond: boolean,
-  offset: number,
   showRecoveryModalOne: boolean,
   showRecoveryModalTwo: boolean,
   usernameList: boolean
@@ -85,7 +77,6 @@ class PasswordLoginScreenComponent extends Component<Props, State> {
       loggingIn: false,
       focusFirst: true,
       focusSecond: false,
-      offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN,
       showRecoveryModalOne: false,
       showRecoveryModalTwo: false,
       usernameList: false
@@ -128,8 +119,7 @@ class PasswordLoginScreenComponent extends Component<Props, State> {
     Keyboard.dismiss()
     this.setState({
       focusFirst: false,
-      focusSecond: false,
-      offset: Offsets.LOGIN_SCREEN_NO_OFFSET
+      focusSecond: false
     })
   }
 
@@ -156,8 +146,7 @@ class PasswordLoginScreenComponent extends Component<Props, State> {
       password: '',
       loggingIn: false,
       focusFirst: true,
-      focusSecond: false,
-      offset: Offsets.USERNAME_OFFSET_LOGIN_SCREEN
+      focusSecond: false
     })
   }
 
@@ -350,26 +339,21 @@ class PasswordLoginScreenComponent extends Component<Props, State> {
   onfocusOne() {
     this.setState({
       focusFirst: true,
-      focusSecond: false,
-      offset: this.props.hasUsers
-        ? Offsets.USERNAME_OFFSET_LOGIN_SCREEN
-        : Offsets.LOGIN_SCREEN_NO_OFFSET
+      focusSecond: false
     })
   }
 
   onfocusTwo() {
     this.setState({
       focusFirst: false,
-      focusSecond: true,
-      offset: Offsets.PASSWORD_OFFSET_LOGIN_SCREEN
+      focusSecond: true
     })
   }
 
   onSetNextFocus() {
     this.setState({
       focusFirst: false,
-      focusSecond: true,
-      offset: Offsets.PASSWORD_OFFSET_LOGIN_SCREEN
+      focusSecond: true
     })
   }
 
@@ -557,7 +541,6 @@ const LoginPasswordScreenStyle = {
 export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     error: state.login.errorMessage || '',
-    hasUsers: state.previousUsers.userList.length > 0,
     loginSuccess: state.login.loginSuccess,
     password: state.login.password || '',
     previousUsers: state.previousUsers.userList,
