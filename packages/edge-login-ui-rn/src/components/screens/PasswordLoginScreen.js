@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { userLogin, userLoginWithTouchId } from '../../actions/LoginAction.js'
+import { userLogin } from '../../actions/LoginAction.js'
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
@@ -44,7 +44,6 @@ type DispatchProps = {
   gotoCreatePage(): void,
   gotoPinLoginPage(): void,
   launchDeleteModal(): void,
-  launchUserLoginWithTouchId(Object): void,
   updatePassword(string): void,
   updateUsername(string): void,
   userLogin(Object): void
@@ -357,32 +356,23 @@ class PasswordLoginScreenComponent extends Component<Props, State> {
     })
   }
 
-  selectUser(user: string) {
-    const details = this.getUserDetails(user)
-    this.updateUsername(user)
+  selectUser(username: string) {
+    this.updateUsername(username)
     this.setState({
       usernameList: false
     })
-    if (details.pinEnabled) {
-      this.props.gotoPinLoginPage()
-      return
-    }
-    if (details.touchEnabled && this.props.touch) {
-      this.props.gotoPinLoginPage()
-      return
-    }
-    this.props.launchUserLoginWithTouchId({ username: user })
-    this.onSetNextFocus()
-  }
 
-  getUserDetails(user: string) {
-    for (let i = 0; i < this.props.previousUsers.length; i++) {
-      const obj = this.props.previousUsers[i]
-      if (user === obj.username) {
-        return obj
-      }
+    const details: LoginUserInfo | void = this.props.previousUsers.find(
+      info => info.username === username
+    )
+    if (
+      details != null &&
+      (details.pinEnabled || (details.touchEnabled && this.props.touch))
+    ) {
+      this.props.gotoPinLoginPage()
+      return
     }
-    return {}
+    this.onSetNextFocus()
   }
 
   updateUsername(data: string) {
@@ -558,9 +548,6 @@ export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     },
     launchDeleteModal() {
       dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' })
-    },
-    launchUserLoginWithTouchId(data: Object) {
-      dispatch(userLoginWithTouchId(data))
     },
     updatePassword(data: string) {
       dispatch({ type: 'AUTH_UPDATE_LOGIN_PASSWORD', data: data })
