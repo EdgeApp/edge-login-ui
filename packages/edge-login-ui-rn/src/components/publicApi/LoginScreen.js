@@ -49,6 +49,7 @@ export class LoginScreen extends Component<Props> {
     // Completed Edge login:
     this.cleanups = [
       this.props.context.on('login', account => {
+        Airship.clear()
         this.props.onLogin(null, account)
       }),
       this.props.context.on('loginStart', ({ username }) => {
