@@ -54,7 +54,6 @@ const strings = {
   email_error_modal:
     "Please set up an email client that is default to your device's OS in order to send a token to yourself",
   password_recovery: 'Password Recovery',
-  otp_auth_code_header: 'Enter Authentication Code',
   save_recovery_token: 'Save Recovery Token',
   skip_modal_header: 'Are you sure you want to skip?',
   skip_modal_body:
@@ -141,7 +140,6 @@ const strings = {
   hang_tight: 'Hang tight while we create',
   secure_account: 'and secure your account',
   encrypting_wallet: 'Encrypting wallet...',
-  not_enough_characters_in_field: 'Not enough characters in field',
   confirm_recovery_questions: 'Confirm Recovery',
   login_with_password: 'Login with password',
   landing_tagline:
@@ -186,7 +184,9 @@ const strings = {
   keypad_zero: '0',
   use_faceId: 'Use Face ID',
   use_touchId: 'Use Touch ID',
-  use_fingerprint: 'Use Fingerprint'
+  use_fingerprint: 'Use Fingerprint',
+
+  otp_backup_code_modal_title: 'Enter Backup Code'
 }
 
 module.exports = strings

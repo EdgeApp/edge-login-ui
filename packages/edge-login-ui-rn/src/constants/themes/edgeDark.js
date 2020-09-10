@@ -49,6 +49,7 @@ export const edgeDark: Theme = {
   // text
   primaryText: palette.white,
   secondaryText: palette.blueGray,
+  dangerText: palette.accentRed,
 
   // buttons
   primaryButtonOutline: palette.transparent,

@@ -1,113 +1,43 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
-import { retryWithOtp } from '../../actions/LoginAction.js'
 import s from '../../common/locales/strings.js'
-import OtpBackupKeyConnector from '../../connectors/componentConnectors/OtpBackupKeyConnector.js'
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { type LoginAttempt } from '../../util/loginAttempt.js'
 import { EdgeLoginQr } from '../abSpecific/EdgeLoginQrComponent.js'
 import { OtpHeroComponent } from '../abSpecific/OtpHeroComponent'
 import { Button } from '../common/Button.js'
 import { Header } from '../common/Header.js'
 import SafeAreaView from '../common/SafeAreaViewGradient.js'
-import { OtpAuthCodeModal } from '../modals/OtpAuthCodeModal.js'
+import { OtpBackupCodeModal } from '../modals/OtpBackupCodeModal.js'
 import { OtpResetModal } from '../modals/OtpResetModal.js'
 import { Airship } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {}
 type StateProps = {
-  backupKeyError?: string,
-  loginSuccess: boolean,
+  otpAttempt: LoginAttempt,
   otpResetDate?: Date
 }
 type DispatchProps = {
-  goBack(): void,
-  setbackupKey(): void
+  goBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
-type State = {
-  showBackupCodeModal: boolean,
-  backupKeyEntered: boolean
-}
-
-class OtpErrorScreenComponent extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      showBackupCodeModal: false,
-      backupKeyEntered: false
-    }
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.loginSuccess) {
-      this.closeModals()
-    }
-    if (nextProps.backupKeyError) {
-      this.setState({
-        backupKeyEntered: false
-      })
-    }
-  }
-
-  componentWillUnMount() {
-    this.closeModals()
+class OtpErrorScreenComponent extends Component<Props> {
+  handleBackupModal = () => {
+    const { otpAttempt } = this.props
+    Airship.show(bridge => (
+      <OtpBackupCodeModal bridge={bridge} otpAttempt={otpAttempt} />
+    ))
   }
 
   handleResetModal = () => {
     Airship.show(bridge => <OtpResetModal bridge={bridge} />)
-  }
-
-  closeModals() {
-    this.setState({
-      showBackupCodeModal: false,
-      backupKeyEntered: false
-    })
-  }
-
-  sendCode() {
-    this.setState({
-      backupKeyEntered: true
-    })
-    this.props.setbackupKey()
-  }
-
-  showBackupModal() {
-    this.setState({
-      showBackupCodeModal: true
-    })
-  }
-
-  renderModal(style: typeof OtpErrorScreenStyle) {
-    if (this.state.showBackupCodeModal) {
-      const middle = (
-        <View style={style.modalMiddle}>
-          <Text style={style.staticModalText}>
-            {s.strings.otp_instructions}
-          </Text>
-          <OtpBackupKeyConnector
-            style={style.modalInput}
-            onSubmitEditing={this.sendCode.bind(this)}
-          />
-          <View style={style.shim} />
-        </View>
-      )
-      return (
-        <OtpAuthCodeModal
-          cancel={this.closeModals.bind(this)}
-          action={this.sendCode.bind(this)}
-          middle={middle}
-          thinking={this.state.backupKeyEntered}
-        />
-      )
-    }
-    return null
   }
 
   renderDisableButton(style: typeof OtpErrorScreenStyle) {
@@ -141,7 +71,7 @@ class OtpErrorScreenComponent extends Component<Props, State> {
             </View>
             <View style={OtpErrorScreenStyle.shim} />
             <Button
-              onPress={this.showBackupModal.bind(this)}
+              onPress={this.handleBackupModal}
               downStyle={OtpErrorScreenStyle.exitButton.downStyle}
               downTextStyle={OtpErrorScreenStyle.exitButton.downTextStyle}
               upStyle={OtpErrorScreenStyle.exitButton.upStyle}
@@ -150,7 +80,6 @@ class OtpErrorScreenComponent extends Component<Props, State> {
             />
             {this.renderDisableButton(OtpErrorScreenStyle)}
           </View>
-          {this.renderModal(OtpErrorScreenStyle)}
         </View>
       </SafeAreaView>
     )
@@ -228,44 +157,23 @@ const OtpErrorScreenStyle = {
     upTextStyle: { ...Styles.TextOnlyButtonTextUpStyle, width: 'auto' },
     downTextStyle: { ...Styles.TextOnlyButtonTextDownStyle, width: 'auto' },
     downStyle: Styles.TextOnlyButtonDownStyle
-  },
-  staticModalText: {
-    color: Constants.GRAY_1,
-    width: '100%',
-    fontSize: 15,
-    textAlign: 'center'
-  },
-  modalMiddle: {
-    position: 'relative',
-    width: '100%'
-  },
-  modalInput: {
-    ...Styles.MaterialInputOnWhite,
-    container: {
-      ...Styles.MaterialInputOnWhite.container,
-      width: '100%'
-    }
   }
 }
 
 export const OtpErrorScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => {
-    let otpResetDate
-    if (state.login.otpError != null) {
-      otpResetDate = state.login.otpError.resetDate
+    const { otpAttempt, otpError } = state.login
+    if (otpAttempt == null || otpError == null) {
+      throw new Error('Missing OtpError for OTP error screen')
     }
     return {
-      backupKeyError: state.login.otpErrorMessage || '',
-      loginSuccess: state.login.loginSuccess,
-      otpResetDate
+      otpAttempt,
+      otpResetDate: otpError.resetDate
     }
   },
   (dispatch: Dispatch) => ({
     goBack() {
       dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
-    },
-    setbackupKey() {
-      dispatch(retryWithOtp())
     }
   })
 )(OtpErrorScreenComponent)

@@ -8,16 +8,16 @@ export const requestOtpReset = () => async (
   imports: Imports
 ): Promise<void> => {
   const state = getState()
-  const { username, otpError } = state.login
+  const { otpAttempt, otpError } = state.login
   const { context } = imports
-  if (otpError == null) {
-    throw new Error('Missing OtpError')
+  if (otpAttempt == null || otpError == null) {
+    throw new Error('No OTP retry data')
   }
   const { resetToken } = otpError
   if (resetToken == null) {
-    throw new Error('Missing OTP reset token')
+    throw new Error('No OTP reset token')
   }
 
-  const date = await context.requestOtpReset(username, resetToken)
+  const date = await context.requestOtpReset(otpAttempt.username, resetToken)
   dispatch({ type: 'OTP_RESET_REQUEST', data: date })
 }

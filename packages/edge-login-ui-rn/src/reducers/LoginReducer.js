@@ -1,9 +1,9 @@
 // @flow
 
 import { type EdgeAccount, type OtpError } from 'edge-core-js'
-import { type Reducer } from 'redux'
 
 import { type Action } from '../types/ReduxTypes.js'
+import { type LoginAttempt } from '../util/loginAttempt.js'
 
 const flowHack: any = {}
 const defaultAccount: EdgeAccount = flowHack
@@ -15,47 +15,39 @@ export type LoginState = {
   +errorMessage: string | null,
   +isLoggingInWithPin: boolean,
   +loginSuccess: boolean,
-  +otpErrorMessage: string | null,
+  +otpAttempt: LoginAttempt | null,
   +otpError: OtpError | null,
   +otpResetDate?: Date,
-  +otpUserBackupKey: string,
   +password: string | null,
   +pin: string | null,
-  +previousAttemptData: any,
-  +previousAttemptType: string | null,
   +recoveryToken: string | null,
   +username: string,
   +wait: number
 }
 
 const initialState: LoginState = {
-  username: '',
+  account: defaultAccount,
+  cancelEdgeLoginRequest: null,
+  edgeLoginId: null,
+  errorMessage: null,
+  isLoggingInWithPin: false,
+  loginSuccess: false,
+  otpAttempt: null,
+  otpError: null,
   password: null,
   pin: null,
-  loginSuccess: false,
-  errorMessage: null,
-  otpErrorMessage: null,
-  isLoggingInWithPin: false,
-  otpError: null,
-  otpUserBackupKey: '', // S7UQ66VYNZKAX4EV
   recoveryToken: null,
-  previousAttemptType: null,
-  previousAttemptData: null,
-  edgeLoginId: null,
-  cancelEdgeLoginRequest: null,
-  account: defaultAccount,
+  username: '',
   wait: 0
 }
 
-export const login: Reducer<LoginState, Action> = function(
-  state = initialState,
-  action
-) {
+export function login(
+  state: LoginState = initialState,
+  action: Action
+): LoginState {
   switch (action.type) {
     case 'CANCEL_RECOVERY_KEY':
       return { ...state, recoveryToken: null }
-    case 'START_RECOVERY_LOGIN':
-      return { ...state, otpErrorMessage: null }
     case 'SET_PREVIOUS_USERS': {
       const { startupUser } = action.data
       if (startupUser != null) {
@@ -75,7 +67,6 @@ export const login: Reducer<LoginState, Action> = function(
         loginSuccess: true,
         isLoggingInWithPin: false,
         errorMessage: null,
-        otpErrorMessage: null,
         wait: 0
       }
     case 'LOGIN_USERNAME_PASSWORD_FAIL':
@@ -93,25 +84,16 @@ export const login: Reducer<LoginState, Action> = function(
         pin: '',
         isLoggingInWithPin: false
       }
-    case 'OTP_LOGIN_BACKUPKEY_FAIL':
-      return {
-        ...state,
-        otpErrorMessage: action.data,
-        errorMessage: null
-      }
     case 'AUTH_LOGGING_IN_WITH_PIN':
       return { ...state, isLoggingInWithPin: true }
-    case 'AUTH_UPDATE_OTP_BACKUP_KEY':
-      return { ...state, otpUserBackupKey: action.data }
     case 'AUTH_UPDATE_LOGIN_PASSWORD':
       return { ...state, password: action.data, errorMessage: null }
     case 'OTP_ERROR':
       return {
         ...state,
+        otpAttempt: action.data.attempt,
         otpError: action.data.error,
-        otpResetDate: action.data.error.resetDate,
-        previousAttemptType: action.data.loginAttempt,
-        previousAttemptData: action.data.loginAttemptData
+        otpResetDate: action.data.error.resetDate
       }
     case 'OTP_RESET_REQUEST':
       return {
