@@ -5,7 +5,7 @@ import { scale } from '../../util/scaling.js'
 
 const palette = {
   white: '#FFFFFF',
-  black: '000000',
+  black: '#000000',
   royalBlue: '#003B65',
   darkBlue: '#0C446A',
   edgeNavy: '#0D2145',
@@ -58,5 +58,14 @@ export const edgeDark: Theme = {
 
   secondaryButtonOutline: palette.edgeMint,
   secondaryButton: palette.transparent,
-  secondaryButtonText: palette.edgeMint
+  secondaryButtonText: palette.edgeMint,
+
+  // Security alert modal:
+  securityAlertModalBackground: palette.white,
+  securityAlertModalHeaderCircle: palette.accentOrange,
+  securityAlertModalHeaderIcon: palette.white,
+  securityAlertModalDangerIcon: palette.accentRed,
+  securityAlertModalWarningIcon: palette.accentOrange,
+  securityAlertModalRowBorder: palette.lightGray,
+  securityAlertModalText: palette.black
 }

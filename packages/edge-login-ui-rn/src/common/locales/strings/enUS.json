@@ -121,8 +121,6 @@
   "pin_not_enabled": "PIN is not enabled for this account",
   "invalid_pin": "Invalid PIN",
   "account_locked_for": "Account locked for \n%1$s more seconds",
-  "otp_modal_reset_headline": "2FA Reset Requested",
-  "otp_modal_reset_body": "URGENT: 2FA reset has been requested by another device for the following accounts:\n %1$s\n\nIf you did not request a 2FA reset, please go to Settings -> 2 Factor and click Keep 2FA. Then change your password.",
   "password_error": "Password doesn't meet requirements",
   "confirm_password_error": "Does not match password",
   "username_3_characters_error": "Minimum 3 characters",
@@ -153,5 +151,9 @@
   "use_faceId": "Use Face ID",
   "use_touchId": "Use Touch ID",
   "use_fingerprint": "Use Fingerprint",
+  "alert_modal_title": "Security Alerts",
+  "alert_modal_reset": "2-Factor reset requested for account ",
+  "alert_modal_voucher": "Login request for new device for account ",
+  "alert_modal_action": "\nPlease log in to approve or deny this alert",
   "otp_backup_code_modal_title": "Enter Backup Code"
 }

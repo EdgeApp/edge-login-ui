@@ -28,5 +28,14 @@ export type Theme = {|
 
   secondaryButtonOutline: string,
   secondaryButton: string,
-  secondaryButtonText: string
+  secondaryButtonText: string,
+
+  // Security alert modal:
+  securityAlertModalBackground: string,
+  securityAlertModalHeaderCircle: string,
+  securityAlertModalHeaderIcon: string,
+  securityAlertModalDangerIcon: string,
+  securityAlertModalWarningIcon: string,
+  securityAlertModalRowBorder: string,
+  securityAlertModalText: string
 |}
