@@ -1,6 +1,5 @@
 // @flow
 
-import moment from 'moment'
 import React, { Component } from 'react'
 import { Image, Text, View } from 'react-native'
 
@@ -68,7 +67,7 @@ class OtpHeroComponent extends Component<Props, State> {
     }
     return (
       "If you don't take any action, 2FA will be \ndisabled on " +
-      moment(otpResetDate).format('LLL')
+      new Date(otpResetDate).toLocaleString()
     )
   }
 
