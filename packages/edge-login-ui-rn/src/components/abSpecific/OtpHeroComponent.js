@@ -5,33 +5,15 @@ import { Image, Text, View } from 'react-native'
 
 import { OTP_SMALL } from '../../assets/'
 import s from '../../common/locales/strings.js'
-import * as Constants from '../../constants/index.js'
 
 type Props = {
-  screen: string,
   style: Object,
   otpResetDate?: Date
 }
 
-type State = {
-  screen: string
-}
-class OtpHeroComponent extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      screen: this.props.screen
-    }
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    this.setState({
-      screen: nextProps.screen
-    })
-  }
-
+class OtpHeroComponent extends Component<Props> {
   renderOr(style: Object) {
-    if (this.state.screen === Constants.OTP_SCREEN_TWO) {
+    if (this.props.otpResetDate != null) {
       return (
         <View style={style.orOption}>
           <View style={style.orRow}>
@@ -51,7 +33,7 @@ class OtpHeroComponent extends Component<Props, State> {
   }
 
   renderTitle() {
-    if (this.state.screen === Constants.OTP_SCREEN_ONE) {
+    if (this.props.otpResetDate == null) {
       return 'Looks like 2FA is turned on'
     }
     return '2FA disable requested'
@@ -59,10 +41,7 @@ class OtpHeroComponent extends Component<Props, State> {
 
   renderBodyCopy() {
     const { otpResetDate } = this.props
-    if (
-      this.state.screen === Constants.OTP_SCREEN_ONE ||
-      otpResetDate == null
-    ) {
+    if (otpResetDate == null) {
       return 'Scan the QR code using the device that enabled 2FA to give access to this device'
     }
     return (

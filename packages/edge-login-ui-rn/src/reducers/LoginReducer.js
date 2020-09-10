@@ -17,6 +17,7 @@ export type LoginState = {
   +loginSuccess: boolean,
   +otpErrorMessage: string | null,
   +otpError: OtpError | null,
+  +otpResetDate?: Date,
   +otpUserBackupKey: string,
   +password: string | null,
   +pin: string | null,
@@ -108,6 +109,7 @@ export const login: Reducer<LoginState, Action> = function(
       return {
         ...state,
         otpError: action.data.error,
+        otpResetDate: action.data.error.resetDate,
         previousAttemptType: action.data.loginAttempt,
         previousAttemptData: action.data.loginAttemptData
       }

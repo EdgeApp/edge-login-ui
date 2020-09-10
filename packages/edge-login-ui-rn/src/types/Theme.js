@@ -18,6 +18,7 @@ export type Theme = {|
 
   // Text colors:
   primaryText: string,
+  secondaryText: string,
 
   // Button colors:
   primaryButtonOutline: string,

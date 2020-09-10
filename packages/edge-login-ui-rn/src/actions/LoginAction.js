@@ -48,29 +48,6 @@ export function loginWithRecovery(
   }
 }
 
-export function resetOtpReset() {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const state = getState()
-    const context = imports.context
-    const username = state.login.username
-    if (
-      state.login.otpError == null ||
-      state.login.otpError.resetToken == null
-    ) {
-      throw new Error('No reset token')
-    }
-    const otpResetToken = state.login.otpError.resetToken
-    try {
-      const response = await context.requestOtpReset(username, otpResetToken)
-      console.log(response)
-      dispatch({ type: 'OTP_RESET_REQUEST', data: response })
-      console.log('Make it to the next scent ')
-    } catch (e) {
-      console.log(e)
-      console.log('stop')
-    }
-  }
-}
 export function retryWithOtp() {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     dispatch({ type: 'START_RECOVERY_LOGIN' })
