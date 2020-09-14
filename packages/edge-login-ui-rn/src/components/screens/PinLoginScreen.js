@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { sprintf } from 'sprintf-js'
 
 import {
   userLoginWithPin,
@@ -34,6 +35,8 @@ type OwnProps = {
   primaryLogoCallback?: () => void
 }
 type StateProps = {
+  errorMessage: string,
+  isLoggingInWithPin: boolean,
   isTouchIdDisabled: boolean,
   loginSuccess: boolean,
   pin: string,
@@ -161,6 +164,8 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
   }
 
   renderBottomHalf(style: typeof PinLoginScreenStyle) {
+    const { errorMessage, isLoggingInWithPin, pin, wait } = this.props
+
     if (this.state.focusOn === 'pin') {
       return (
         <View style={style.innerView}>
@@ -172,7 +177,20 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
             upStyle={style.usernameButton.upStyle}
             upTextStyle={style.usernameButton.upTextStyle}
           />
-          {this.props.userDetails.pinEnabled && <FourDigit />}
+          {this.props.userDetails.pinEnabled && (
+            <FourDigit
+              error={
+                wait > 0
+                  ? `${errorMessage}: ${sprintf(
+                      s.strings.account_locked_for,
+                      wait
+                    )}`
+                  : errorMessage
+              }
+              pin={pin}
+              spinner={wait > 0 || pin.length === 4 || isLoggingInWithPin}
+            />
+          )}
           {!this.props.userDetails.pinEnabled && <View style={style.spacer} />}
           {this.renderTouchImage()}
           <Text style={style.touchImageText}>
@@ -424,6 +442,8 @@ const PinLoginScreenStyle = {
 
 export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
+    errorMessage: state.login.errorMessage || '',
+    isLoggingInWithPin: state.login.isLoggingInWithPin,
     isTouchIdDisabled:
       state.login.loginSuccess ||
       !!state.login.wait ||
