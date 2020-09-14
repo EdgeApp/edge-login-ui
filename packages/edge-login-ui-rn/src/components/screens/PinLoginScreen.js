@@ -152,9 +152,7 @@ class PinLoginScreenComponent extends Component<Props, State> {
             upStyle={style.usernameButton.upStyle}
             upTextStyle={style.usernameButton.upTextStyle}
           />
-          {this.props.userDetails.pinEnabled && (
-            <FourDigit style={style.fourPin} />
-          )}
+          {this.props.userDetails.pinEnabled && <FourDigit />}
           {!this.props.userDetails.pinEnabled && <View style={style.spacer} />}
           {this.renderTouchImage()}
           <Text style={style.touchImageText}>
@@ -361,10 +359,6 @@ const PinLoginScreenStyle = {
       // backgroundColor: Constants.WHITE,
       marginBottom: scale(20)
     }
-  },
-  fourPin: {
-    marginTop: scale(20),
-    ...Styles.FourDotInputStyle
   },
   usernameButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,

@@ -75,7 +75,7 @@ class NewAccountPinScreenComponent extends Component<Props, State> {
               </Text>
             </View>
             <View style={SetAccountPinScreenStyle.row2}>
-              <FourDigitInput style={SetAccountPinScreenStyle.fourPin} />
+              <FourDigitInput />
             </View>
             <View style={SetAccountPinScreenStyle.row3}>
               <Button
@@ -152,13 +152,6 @@ const SetAccountPinScreenStyle = {
     fontFamily: Constants.FONTS.fontFamilyRegular,
     color: Constants.GRAY_2,
     textAlign: 'center'
-  },
-  fourPin: {
-    ...Styles.FourDotInputDarkScaledStyle,
-    container: {
-      ...Styles.FourDotInputDarkScaledStyle.container,
-      height: scale(120)
-    }
   },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpScaledStyle,
