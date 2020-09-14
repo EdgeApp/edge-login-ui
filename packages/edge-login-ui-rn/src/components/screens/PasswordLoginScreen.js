@@ -3,8 +3,10 @@
 import React, { Component } from 'react'
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { sprintf } from 'sprintf-js'
 
 import { userLogin } from '../../actions/LoginAction.js'
+import { deleteUserFromDevice } from '../../actions/UserActions.js'
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
@@ -20,7 +22,8 @@ import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { IconButton } from '../common/IconButton.js'
 import { DropDownList, FormField } from '../common/index.js'
 import { StaticModal } from '../common/StaticModal.js'
-import { DeleteUserModal } from '../modals/DeleteUserModal.js'
+import { ButtonsModal } from '../modals/ButtonsModal.js'
+import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
@@ -35,15 +38,14 @@ type StateProps = {
   loginSuccess: boolean,
   password: string,
   previousUsers: LoginUserInfo[],
-  showModal: boolean,
   touch: $PropertyType<RootState, 'touch'>,
   username: string,
   usernameOnlyList: Array<string>
 }
 type DispatchProps = {
+  deleteUserFromDevice(username: string): Promise<void>,
   gotoCreatePage(): void,
   gotoPinLoginPage(): void,
-  launchDeleteModal(): void,
   updatePassword(string): void,
   updateUsername(string): void,
   userLogin(Object): void
@@ -51,46 +53,29 @@ type DispatchProps = {
 type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
-  username: string,
-  password: string,
   loggingIn: boolean,
   focusFirst: boolean,
   focusSecond: boolean,
   showRecoveryModalOne: boolean,
-  showRecoveryModalTwo: boolean,
   usernameList: boolean
 }
 
 class PasswordLoginScreenComponent extends Component<Props, State> {
-  keyboardDidHideListener: ?Function
   style: Object
 
   constructor(props: Props) {
     super(props)
     this.style = LoginPasswordScreenStyle
-    this.keyboardDidHideListener = null
-    setTimeout(this.setListener, 2000, this.noFocus)
     this.state = {
-      username: '',
-      password: '',
       loggingIn: false,
       focusFirst: true,
       focusSecond: false,
       showRecoveryModalOne: false,
-      showRecoveryModalTwo: false,
       usernameList: false
     }
   }
 
   renderModal = (style: typeof LoginPasswordScreenStyle) => {
-    if (this.props.showModal) {
-      return (
-        <DeleteUserModal
-          style={style.modal.skip}
-          username={this.state.username}
-        />
-      )
-    }
     if (this.state.showRecoveryModalOne) {
       const body = (
         <Text style={style.staticModalText}>
@@ -122,31 +107,25 @@ class PasswordLoginScreenComponent extends Component<Props, State> {
     })
   }
 
-  onDelete = (user: string) => {
-    this.setState({
-      username: user
-    })
-    this.props.launchDeleteModal()
-  }
+  handleDelete = (username: string) => {
+    const { deleteUserFromDevice } = this.props
 
-  setListener(callback: Function) {
-    /* this.keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      callback) */
-  }
-
-  componentWillUnmount() {
-    // this.keyboardDidHideListener.remove()
-  }
-
-  componentDidMount() {
-    this.setState({
-      username: '',
-      password: '',
-      loggingIn: false,
-      focusFirst: true,
-      focusSecond: false
-    })
+    Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        title={s.strings.delete_account}
+        message={sprintf(s.strings.delete_username_account, username)}
+        buttons={{
+          ok: { label: s.strings.delete },
+          cancel: { label: s.strings.cancel, type: 'secondary' }
+        }}
+      />
+    ))
+      .then(button => {
+        if (button !== 'ok') return
+        return deleteUserFromDevice(username)
+      })
+      .catch(showError)
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -283,7 +262,7 @@ class PasswordLoginScreenComponent extends Component<Props, State> {
         data={data.item}
         style={this.style.inputWithDrop.listItem}
         onClick={this.selectUser.bind(this)}
-        onDelete={this.onDelete.bind(this)}
+        onDelete={this.handleDelete}
       />
     )
   }
@@ -534,20 +513,19 @@ export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     loginSuccess: state.login.loginSuccess,
     password: state.login.password || '',
     previousUsers: state.previousUsers.userList,
-    showModal: state.workflow.showModal,
     touch: state.touch,
     username: state.login.username,
     usernameOnlyList: state.previousUsers.usernameOnlyList
   }),
   (dispatch: Dispatch) => ({
+    deleteUserFromDevice(username) {
+      return dispatch(deleteUserFromDevice(username))
+    },
     gotoCreatePage() {
       dispatch({ type: 'WORKFLOW_START', data: 'createWF' })
     },
     gotoPinLoginPage() {
       dispatch({ type: 'WORKFLOW_START', data: 'pinWF' })
-    },
-    launchDeleteModal() {
-      dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' })
     },
     updatePassword(data: string) {
       dispatch({ type: 'AUTH_UPDATE_LOGIN_PASSWORD', data: data })

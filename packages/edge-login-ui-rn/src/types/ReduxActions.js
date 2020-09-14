@@ -24,8 +24,6 @@ type NoDataActionName =
   | 'ON_DISABLE_RECOVERY'
   | 'RESET_APP'
   | 'WORKFLOW_BACK'
-  | 'WORKFLOW_CANCEL_MODAL'
-  | 'WORKFLOW_LAUNCH_MODAL'
   | 'WORKFLOW_NEXT'
 
 export type Action =

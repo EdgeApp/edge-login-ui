@@ -8,6 +8,7 @@ import {
   userLoginWithPin,
   userLoginWithTouchId
 } from '../../actions/LoginAction.js'
+import { deleteUserFromDevice } from '../../actions/UserActions.js'
 import * as Assets from '../../assets/index.js'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
@@ -24,7 +25,8 @@ import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { ImageButton } from '../common/ImageButton.js'
 import { DropDownList } from '../common/index.js'
-import { DeleteUserModal } from '../modals/DeleteUserModal.js'
+import { ButtonsModal } from '../modals/ButtonsModal.js'
+import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
@@ -40,7 +42,6 @@ type StateProps = {
   isTouchIdDisabled: boolean,
   loginSuccess: boolean,
   pin: string,
-  showModal: boolean,
   touch: $PropertyType<RootState, 'touch'>,
   userDetails: Object,
   userList: Array<LoginUserInfo>,
@@ -49,8 +50,8 @@ type StateProps = {
 }
 type DispatchProps = {
   changeUser(string): void,
+  deleteUserFromDevice(username: string): Promise<void>,
   gotoLoginPage(): void,
-  launchDeleteModal(): void,
   launchUserLoginWithTouchId(Object): void,
   loginWithPin(username: string, pin: string): void,
   onChangeText(pin: string): void
@@ -58,19 +59,13 @@ type DispatchProps = {
 type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
-  loggingIn: boolean,
-  pin: string,
-  username: string,
-  focusOn: string
+  focusOn: 'pin' | 'List'
 }
 
 class PinLoginScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      pin: '',
-      loggingIn: false,
-      username: '', // User we are deleting
       focusOn: 'pin'
     }
   }
@@ -90,6 +85,28 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     }
   }
 
+  handleDelete = (username: string) => {
+    const { deleteUserFromDevice } = this.props
+    this.setState({ focusOn: 'pin' })
+
+    Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        title={s.strings.delete_account}
+        message={sprintf(s.strings.delete_username_account, username)}
+        buttons={{
+          ok: { label: s.strings.delete },
+          cancel: { label: s.strings.cancel, type: 'secondary' }
+        }}
+      />
+    ))
+      .then(button => {
+        if (button !== 'ok') return
+        return deleteUserFromDevice(username)
+      })
+      .catch(showError)
+  }
+
   relaunchTouchId = () => {
     this.props.launchUserLoginWithTouchId({ username: this.props.username })
   }
@@ -99,18 +116,6 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     const newPin = value === 'back' ? pin.slice(0, -1) : pin.concat(value)
     onChangeText(newPin)
     if (newPin.length === 4) loginWithPin(username, newPin)
-  }
-
-  renderModal = (style: typeof PinLoginScreenStyle) => {
-    if (this.props.showModal) {
-      return (
-        <DeleteUserModal
-          style={style.modal.skip}
-          username={this.state.username}
-        />
-      )
-    }
-    return null
   }
 
   render() {
@@ -149,7 +154,6 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
             <View style={PinLoginScreenStyle.featureBoxBody}>
               {this.renderBottomHalf(PinLoginScreenStyle)}
             </View>
-            {this.renderModal(PinLoginScreenStyle)}
           </View>
         </TouchableWithoutFeedback>
         <View style={PinLoginScreenStyle.spacer_full} />
@@ -227,17 +231,9 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
         data={item.item}
         style={PinLoginScreenStyle.listItem}
         onClick={this.selectUser.bind(this)}
-        onDelete={this.deleteUser.bind(this)}
+        onDelete={this.handleDelete}
       />
     )
-  }
-
-  deleteUser(arg: string) {
-    this.setState({
-      focusOn: 'pin',
-      username: arg
-    })
-    this.props.launchDeleteModal()
   }
 
   selectUser(arg: string) {
@@ -451,7 +447,6 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       (state.login.pin ? state.login.pin.length : 0) === 4,
     loginSuccess: state.login.loginSuccess,
     pin: state.login.pin || '',
-    showModal: state.workflow.showModal,
     touch: state.touch,
     userDetails: state.previousUsers.userList.find(
       user => user.username === state.login.username
@@ -468,11 +463,11 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     changeUser: (data: string) => {
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data })
     },
+    deleteUserFromDevice(username) {
+      return dispatch(deleteUserFromDevice(username))
+    },
     gotoLoginPage: () => {
       dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
-    },
-    launchDeleteModal: () => {
-      dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' })
     },
     launchUserLoginWithTouchId: (data: Object) => {
       dispatch(userLoginWithTouchId(data))

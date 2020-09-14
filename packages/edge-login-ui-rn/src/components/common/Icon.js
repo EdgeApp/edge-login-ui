@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react'
-import FAIcon from 'react-native-vector-icons/FontAwesome'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
@@ -17,8 +16,6 @@ type Props = {
 
 const Icon = ({ style, name, size, type }: Props) => {
   switch (type) {
-    case Constants.FONT_AWESOME:
-      return <FAIcon style={style} name={name} size={size} />
     case Constants.ION_ICONS:
       return <IonIcon style={style} name={name} size={size} />
     case Constants.MATERIAL_ICONS:
