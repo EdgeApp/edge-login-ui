@@ -36,7 +36,6 @@ export type Action =
         error: string | null
       }
     }
-  | { type: 'AUTH_UPDATE_LOGIN_PASSWORD', data: string }
   | {
       type: 'AUTH_UPDATE_PASSWORD',
       data: {
@@ -68,7 +67,6 @@ export type Action =
         wait: number
       }
     }
-  | { type: 'LOGIN_USERNAME_PASSWORD_FAIL', data: string /* error */ }
   | { type: 'ON_RECOVERY_KEY', data: string }
   | {
       type: 'ON_RECOVERY_LOGIN_IS_ENABLED',

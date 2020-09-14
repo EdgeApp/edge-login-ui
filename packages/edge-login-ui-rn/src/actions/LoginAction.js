@@ -121,41 +121,6 @@ export function processWait(message: string) {
   }
 }
 
-export function userLogin(data: Object) {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { callback, context } = imports
-    // dispatch(openLoading()) Legacy dealt with state for showing a spinner
-    // the timeout is a hack until we put in interaction manager.
-    setTimeout(async () => {
-      try {
-        const abcAccount = await context.loginWithPassword(
-          data.username,
-          data.password,
-          imports.accountOptions
-        )
-        dispatch(completeLogin(abcAccount))
-      } catch (e) {
-        console.log(e)
-        if (e.name === 'OtpError') {
-          const { username, password } = data
-          dispatch({
-            type: 'OTP_ERROR',
-            data: {
-              attempt: { type: 'password', username, password },
-              error: e
-            }
-          })
-          return
-        }
-        dispatch(
-          dispatch({ type: 'LOGIN_USERNAME_PASSWORD_FAIL', data: e.message })
-        )
-        callback(e.message, null)
-      }
-    }, 300)
-  }
-}
-
 export const requestEdgeLogin = () => async (
   dispatch: Dispatch,
   getState: GetState,
