@@ -6,12 +6,13 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import { userLoginWithPin } from '../../actions/LoginAction.js'
 import s from '../../common/locales/strings.js'
+import * as Constants from '../../constants/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { isIphoneX } from '../../util/isIphoneX.js'
+import { scale } from '../../util/scaling.js'
 import { connect } from '../services/ReduxStore.js'
 
-type OwnProps = {
-  style: Object
-}
+type OwnProps = {}
 type StateProps = {
   pin: string,
   username: string,
@@ -35,7 +36,9 @@ class PinKeypadComponent extends Component<Props> {
   }
 
   render() {
-    const { wait, style } = this.props
+    const { wait } = this.props
+    const style = PinKeypadStyle
+
     return (
       <View style={style.keypadContainer}>
         <View style={style.keypadInner}>
@@ -149,6 +152,55 @@ class PinKeypadComponent extends Component<Props> {
         </View>
       </View>
     )
+  }
+}
+
+const PinKeypadStyle = {
+  keypadContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  keypadInner: {
+    flex: 1,
+    maxWidth: 500,
+    height: scale(180),
+    maxHeight: 300,
+    marginBottom: isIphoneX ? scale(28) : 0
+  },
+  keypadRow: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  keypadColumn: {
+    flex: 1,
+    borderColor: Constants.ACCENT_MINT,
+    borderWidth: 1,
+    margin: scale(2),
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  keypadColumnBack: {
+    flex: 1,
+    margin: scale(2),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  keypadColumnBlank: {
+    flex: 1,
+    margin: scale(2)
+  },
+  keypadKeys: {
+    textAlign: 'center',
+    fontSize: scale(14),
+    color: Constants.ACCENT_MINT
+  },
+  keypadKeysBack: {
+    textAlign: 'center',
+    fontSize: scale(30),
+    color: Constants.ACCENT_MINT
   }
 }
 

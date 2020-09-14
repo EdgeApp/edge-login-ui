@@ -135,9 +135,7 @@ class PinLoginScreenComponent extends Component<Props, State> {
           </View>
         </TouchableWithoutFeedback>
         <View style={PinLoginScreenStyle.spacer_full} />
-        {this.props.userDetails.pinEnabled && (
-          <PinKeypad style={PinLoginScreenStyle.keypad} />
-        )}
+        {this.props.userDetails.pinEnabled && <PinKeypad />}
       </View>
     )
   }
@@ -407,8 +405,7 @@ const PinLoginScreenStyle = {
   touchImageText: {
     marginTop: scale(8),
     color: Constants.ACCENT_MINT
-  },
-  keypad: Styles.PinKeypadStyle
+  }
 }
 
 export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
