@@ -103,8 +103,6 @@ export function login(
       return { ...initialState, username: username }
     }
 
-    case 'ON_RECOVERY_LOGIN_ERROR':
-      return { ...state, errorMessage: action.data }
     case 'PASSWORD_RECOVERY_INITIALIZED':
       return {
         ...state,

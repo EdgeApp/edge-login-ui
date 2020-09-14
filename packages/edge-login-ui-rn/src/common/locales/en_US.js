@@ -118,6 +118,7 @@ const strings = {
   email_address: 'Email Address',
   recovery_instructions_complete:
     'To complete account recovery setup you MUST save the recovery token. This is required to recover your account in addition to your username and recovery answers. \n\n Please enter your email to be sent the recovery token.',
+  recovery_error: 'The answers you provided are incorrect.',
   read_understod_1: 'I have read, understood, and agree to the ',
   read_understod_2: 'Terms of Use',
   last_step_review: 'Last step! Let’s finish with a quick review',

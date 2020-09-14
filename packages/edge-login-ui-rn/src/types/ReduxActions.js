@@ -70,7 +70,6 @@ export type Action =
     }
   | { type: 'LOGIN_USERNAME_PASSWORD_FAIL', data: string /* error */ }
   | { type: 'ON_RECOVERY_KEY', data: string }
-  | { type: 'ON_RECOVERY_LOGIN_ERROR', data: string }
   | {
       type: 'ON_RECOVERY_LOGIN_IS_ENABLED',
       data: {

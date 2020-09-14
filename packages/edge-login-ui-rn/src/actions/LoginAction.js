@@ -27,41 +27,6 @@ export const login = (attempt: LoginAttempt, otpKey?: string) => async (
   dispatch(completeLogin(account))
 }
 
-/**
- * Make it Thunky
- */
-export function loginWithRecovery(answers: string[]) {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const state = getState()
-    const recoveryKey = state.passwordRecovery.recoveryKey || ''
-    const username = state.login.username
-    const { context } = imports
-    try {
-      const account = await context.loginWithRecovery2(
-        recoveryKey,
-        username,
-        answers,
-        imports.accountOptions
-      )
-      dispatch(completeLogin(account))
-    } catch (e) {
-      if (e.name === 'OtpError') {
-        dispatch({
-          type: 'OTP_ERROR',
-          data: {
-            attempt: { type: 'recovery', recoveryKey, username, answers },
-            error: e
-          }
-        })
-        return
-      }
-      console.log(e.message)
-      const incorrect = 'The answers you provided are incorrect. '
-      dispatch({ type: 'ON_RECOVERY_LOGIN_ERROR', data: incorrect })
-    }
-  }
-}
-
 export function userLoginWithTouchId(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder } = imports
