@@ -25,7 +25,7 @@ const strings = {
     'DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!',
   backup_key_label: 'Backup Key',
   ok: 'OK',
-  or: 'OR',
+  or: 'or',
   exit: 'Exit',
   exit_pin: 'Exit PIN', // nothing should be all-caps
   next_label: 'Next',
@@ -54,7 +54,6 @@ const strings = {
   email_error_modal:
     "Please set up an email client that is default to your device's OS in order to send a token to yourself",
   password_recovery: 'Password Recovery',
-  otp_auth_code_header: 'Enter Authentication Code',
   save_recovery_token: 'Save Recovery Token',
   skip_modal_header: 'Are you sure you want to skip?',
   skip_modal_body:
@@ -112,7 +111,6 @@ const strings = {
   otp_instructions:
     'Sign into your account using the device you setup 2FA with, and go to Settings > 2 Factor Authentication to find the code.',
   disable_otp_button_two: 'Disable 2 Factor Authentication',
-  type_auth_button: 'Type in authentication code instead',
   otp_email_body:
     'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ',
   otp_email_subject: 'Edge Recovery Token',
@@ -141,7 +139,6 @@ const strings = {
   hang_tight: 'Hang tight while we create',
   secure_account: 'and secure your account',
   encrypting_wallet: 'Encrypting wallet...',
-  not_enough_characters_in_field: 'Not enough characters in field',
   confirm_recovery_questions: 'Confirm Recovery',
   login_with_password: 'Login with password',
   landing_tagline:
@@ -151,9 +148,6 @@ const strings = {
   pin_not_enabled: 'PIN is not enabled for this account',
   invalid_pin: 'Invalid PIN',
   account_locked_for: 'Account locked for \n%1$s more seconds',
-  otp_modal_reset_headline: '2FA Reset Requested',
-  otp_modal_reset_body:
-    'URGENT: 2FA reset has been requested by another device for the following accounts:\n %1$s\n\nIf you did not request a 2FA reset, please go to Settings -> 2 Factor and click Keep 2FA. Then change your password.',
   password_error: "Password doesn't meet requirements",
   confirm_password_error: 'Does not match password',
   username_3_characters_error: 'Minimum 3 characters',
@@ -186,7 +180,43 @@ const strings = {
   keypad_zero: '0',
   use_faceId: 'Use Face ID',
   use_touchId: 'Use Touch ID',
-  use_fingerprint: 'Use Fingerprint'
+  use_fingerprint: 'Use Fingerprint',
+
+  alert_modal_title: 'Security Alerts',
+  alert_modal_reset: '2-Factor reset requested for account ',
+  alert_modal_voucher: 'Login request for new device for account ',
+  alert_modal_action: '\nPlease log in to approve or deny this alert',
+
+  alert_screen_title: 'Security Center',
+  alert_screen_message: 'A new device would like to log in to your account.',
+  alert_screen_message_many:
+    'Several new devices would like to log in to your account.',
+  alert_screen_warning:
+    'If you did not request this login, your password may have been stolen and you could lose funds. Please deny the request and change your password.',
+  alert_screen_reset_message:
+    'Someone is trying to remove 2-factor security from your account.',
+  alert_screen_reset_date: 'Unless denied, access will be granted on: ',
+  alert_screen_ip: 'Location: ',
+  alert_screen_device: 'Device: ',
+  alert_screen_date: 'Requested on: ',
+  alert_screen_approve: 'It was me, grant access',
+  alert_screen_deny: 'Not me, deny all',
+
+  otp_screen_header_2fa:
+    'Two-factor authentication is turned on for this account',
+  otp_screen_header_ip:
+    'This device is not authorized to log in to this account',
+  otp_screen_approve:
+    'Approve this log in from your other devices logged into this account',
+  otp_screen_wait:
+    'Wait until %s when the device will be automatically authorized to log in',
+  otp_screen_retrying: 'Retrying login...',
+
+  otp_backup_code_modal_title: 'Enter Backup Code',
+
+  qr_modal_title: 'Scan QR Code',
+  qr_modal_message:
+    'Scan this QR code with another device logged into your account:'
 }
 
 module.exports = strings

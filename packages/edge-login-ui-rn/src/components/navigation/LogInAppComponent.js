@@ -8,6 +8,7 @@ import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { ResecurePasswordScreen } from '../screens/existingAccout/ChangePasswordScreen.js'
 import { ResecurePinScreen } from '../screens/existingAccout/ChangePinScreen.js'
+import { SecurityAlertsScreen } from '../screens/existingAccout/SecurityAlertsScreen.js'
 import { LandingScreen } from '../screens/LandingScreen.js'
 import { LoadingScreen } from '../screens/LoadingScreen.js'
 import { NewAccountPasswordScreen } from '../screens/newAccount/NewAccountPasswordScreen.js'
@@ -65,6 +66,8 @@ class LoginAppComponent extends Component<Props> {
         return this.getRecoveryLoginScreen()
       case 'resecureWF':
         return this.getResecureScreen()
+      case 'securityAlertWF':
+        return this.getSecurityAlertScreen()
     }
   }
 
@@ -145,6 +148,10 @@ class LoginAppComponent extends Component<Props> {
       case 1:
         return <ResecurePinScreen />
     }
+  }
+
+  getSecurityAlertScreen() {
+    return <SecurityAlertsScreen />
   }
 }
 

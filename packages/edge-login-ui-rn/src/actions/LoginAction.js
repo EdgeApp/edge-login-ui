@@ -1,32 +1,47 @@
 // @flow
 
+import { type EdgePendingEdgeLogin } from 'edge-core-js'
+
 import s from '../common/locales/strings.js'
 import { loginWithTouchId } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
-import { translateError } from '../util/ErrorMessageUtil.js'
+import { type LoginAttempt, attemptLogin } from '../util/loginAttempt.js'
 import { completeLogin } from './LoginCompleteActions.js'
+
+/**
+ * Logs the user in, using password, PIN, or recovery.
+ * There is no error handling in here, since components do that best.
+ */
+export const login = (attempt: LoginAttempt, otpKey?: string) => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+): Promise<void> => {
+  const { accountOptions, context } = imports
+
+  const account = await attemptLogin(context, attempt, {
+    ...accountOptions,
+    otp: otpKey, // Legacy property name
+    otpKey
+  })
+  dispatch(completeLogin(account))
+}
 
 /**
  * Make it Thunky
  */
-export function loginWithRecovery(
-  answers: Array<string>,
-  otpBackUpKey?: string
-) {
+export function loginWithRecovery(answers: Array<string>) {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
-    const backupKey = state.passwordRecovery.recoveryKey || ''
+    const recoveryKey = state.passwordRecovery.recoveryKey || ''
     const username = state.login.username
     const { context } = imports
     try {
       const account = await context.loginWithRecovery2(
-        backupKey,
+        recoveryKey,
         username,
         answers,
-        {
-          ...imports.accountOptions,
-          otp: otpBackUpKey
-        }
+        imports.accountOptions
       )
       dispatch(completeLogin(account))
     } catch (e) {
@@ -34,9 +49,8 @@ export function loginWithRecovery(
         dispatch({
           type: 'OTP_ERROR',
           data: {
-            error: e,
-            loginAttempt: 'RECOVERY',
-            loginAttemptData: answers
+            attempt: { type: 'recovery', recoveryKey, username, answers },
+            error: e
           }
         })
         return
@@ -48,54 +62,6 @@ export function loginWithRecovery(
   }
 }
 
-export function resetOtpReset() {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const state = getState()
-    const context = imports.context
-    const username = state.login.username
-    if (
-      state.login.otpError == null ||
-      state.login.otpError.resetToken == null
-    ) {
-      throw new Error('No reset token')
-    }
-    const otpResetToken = state.login.otpError.resetToken
-    try {
-      const response = await context.requestOtpReset(username, otpResetToken)
-      console.log(response)
-      dispatch({ type: 'OTP_RESET_REQUEST', data: response })
-      console.log('Make it to the next scent ')
-    } catch (e) {
-      console.log(e)
-      console.log('stop')
-    }
-  }
-}
-export function retryWithOtp() {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    dispatch({ type: 'START_RECOVERY_LOGIN' })
-    const state = getState()
-    const {
-      otpUserBackupKey,
-      password,
-      pin,
-      previousAttemptData,
-      previousAttemptType,
-      username
-    } = state.login
-
-    switch (previousAttemptType) {
-      case 'RECOVERY':
-        dispatch(loginWithRecovery(previousAttemptData, otpUserBackupKey))
-        return
-      case 'PASSWORD':
-        dispatch(userLogin({ username, password }, otpUserBackupKey))
-        return
-      case 'PIN':
-        dispatch(userLoginWithPin({ username, pin }, otpUserBackupKey))
-    }
-  }
-}
 export function userLoginWithTouchId(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder } = imports
@@ -121,15 +87,9 @@ export function userLoginWithTouchId(data: Object) {
       })
   }
 }
-export function userLoginWithPin(data: Object, backupKey?: string) {
+export function userLoginWithPin(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context } = imports
-    const myAccountOptions = {
-      ...imports.accountOptions
-    }
-    if (backupKey) {
-      myAccountOptions.otp = backupKey
-    }
     dispatch({ type: 'AUTH_UPDATE_PIN', data: data.pin })
     if (data.pin.length === 4) {
       setTimeout(async () => {
@@ -137,23 +97,21 @@ export function userLoginWithPin(data: Object, backupKey?: string) {
           const abcAccount = await context.loginWithPIN(
             data.username,
             data.pin,
-            myAccountOptions
+            imports.accountOptions
           )
           dispatch(completeLogin(abcAccount))
         } catch (e) {
           console.log('LOG IN WITH PIN ERROR ', e)
           if (e.name === 'OtpError') {
+            const { username, pin } = data
             dispatch({
               type: 'OTP_ERROR',
               data: {
-                error: e,
-                loginAttempt: 'PIN'
+                attempt: { type: 'pin', username, pin },
+                error: e
               }
             })
             return
-          }
-          if (e.message === 'Unexpected end of data') {
-            e.message = s.strings.backup_key_incorrect
           }
           const message =
             e.name === 'PasswordError'
@@ -202,13 +160,9 @@ export function processWait(message: string) {
   }
 }
 
-export function userLogin(data: Object, backupKey?: string) {
+export function userLogin(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context } = imports
-    const myAccountOptions = {
-      ...imports.accountOptions
-    }
-    if (backupKey) myAccountOptions.otp = backupKey
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     setTimeout(async () => {
@@ -216,42 +170,24 @@ export function userLogin(data: Object, backupKey?: string) {
         const abcAccount = await context.loginWithPassword(
           data.username,
           data.password,
-          myAccountOptions
+          imports.accountOptions
         )
         dispatch(completeLogin(abcAccount))
       } catch (e) {
         console.log(e)
-        if (e.name === 'OtpError' && !myAccountOptions.otp) {
+        if (e.name === 'OtpError') {
+          const { username, password } = data
           dispatch({
             type: 'OTP_ERROR',
             data: {
-              error: e,
-              loginAttempt: 'PASSWORD'
+              attempt: { type: 'password', username, password },
+              error: e
             }
           })
           return
         }
-        const rawMessage = e.message
-        if (e.message === 'Unexpected end of data') {
-          e.message = s.strings.backup_key_incorrect
-        }
-        if (e.name === 'OtpError' && myAccountOptions.otp) {
-          dispatch({
-            type: 'OTP_LOGIN_BACKUPKEY_FAIL',
-            data: s.strings.backup_key_incorrect
-          })
-          return
-        }
-        if (myAccountOptions.otp) {
-          dispatch({
-            type: 'OTP_LOGIN_BACKUPKEY_FAIL',
-            data: translateError(e.message)
-          })
-          console.log('stop')
-          return
-        }
         dispatch(
-          dispatch({ type: 'LOGIN_USERNAME_PASSWORD_FAIL', data: rawMessage })
+          dispatch({ type: 'LOGIN_USERNAME_PASSWORD_FAIL', data: e.message })
         )
         callback(e.message, null)
       }
@@ -259,23 +195,17 @@ export function userLogin(data: Object, backupKey?: string) {
   }
 }
 
-export function getEdgeLoginQrCode() {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const context = imports.context
-    const myAccountOptions = {
-      ...imports.accountOptions,
-      displayImageUrl:
-        'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
-      displayName: 'Edge Wallet'
-    }
-    try {
-      const qr = await context.requestEdgeLogin(myAccountOptions)
-      console.log(qr)
-      dispatch({ type: 'START_EDGE_LOGIN_REQUEST', data: qr })
-    } catch (e) {
-      console.log(e.name)
-      console.log(e.message)
-      console.log(e)
-    }
-  }
+export const requestEdgeLogin = () => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+): Promise<EdgePendingEdgeLogin> => {
+  const { accountOptions, context } = imports
+  return context.requestEdgeLogin({
+    ...accountOptions,
+    // These are no longer used in recent core versions:
+    displayImageUrl:
+      'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
+    displayName: 'Edge Wallet'
+  })
 }

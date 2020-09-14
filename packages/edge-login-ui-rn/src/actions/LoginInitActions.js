@@ -1,12 +1,16 @@
 // @flow
 
+import { type EdgeLoginMessages } from 'edge-core-js'
+import * as React from 'react'
+
+import { SecurityAlertsModal } from '../components/modals/SecurityAlertsModal.js'
+import { Airship } from '../components/services/AirshipInstance.js'
 import { getSupportedBiometryType } from '../keychain.js'
 import {
   type Dispatch,
   type GetState,
   type Imports
 } from '../types/ReduxTypes.js'
-import { checkingForOTP } from '../util/checkingForOTP.js'
 import { getPreviousUsers } from './PreviousUsersActions.js'
 
 /**
@@ -19,7 +23,7 @@ export const initializeLogin = () => async (
 ) => {
   const touchPromise = dispatch(getTouchMode())
   const usersPromise = dispatch(getPreviousUsers())
-  checkingForOTP(imports.context)
+  dispatch(checkSecurityMessages()).catch(error => console.log(error))
 
   await Promise.all([touchPromise, usersPromise])
   const state = getState()
@@ -42,6 +46,41 @@ export const initializeLogin = () => async (
     dispatch({ type: 'WORKFLOW_START', data: 'pinWF' })
   } else {
     dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
+  }
+}
+
+const checkSecurityMessages = () => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  const { context } = imports
+  const messages = await context.fetchLoginMessages()
+
+  const relevantMessages: EdgeLoginMessages = {}
+  for (const username of Object.keys(messages)) {
+    const message = messages[username]
+
+    // Skip users who haven't fully logged in:
+    const info = context.localUsers.find(info => info.username === username)
+    if (info == null || !info.keyLoginEnabled) continue
+
+    const { otpResetPending, pendingVouchers = [] } = message
+    if (otpResetPending || pendingVouchers.length > 0) {
+      relevantMessages[username] = message
+    }
+  }
+
+  if (Object.keys(relevantMessages).length > 0) {
+    Airship.show(bridge => (
+      <SecurityAlertsModal
+        bridge={bridge}
+        messages={relevantMessages}
+        selectUser={username =>
+          dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username })
+        }
+      />
+    ))
   }
 }
 

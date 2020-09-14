@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { Text, TouchableOpacity } from 'react-native'
+import { ActivityIndicator, Text, TouchableOpacity } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
 import { unpackEdges } from '../../util/edges.js'
@@ -14,6 +14,9 @@ type Props = {
   // If this is set, the component will insert a text node before the other children:
   label?: string,
 
+  // If this is set, show a spinner:
+  spinner?: boolean,
+
   // The gap around the button. Takes 0-4 numbers (top, right, bottom, left),
   // using the same logic as the web `margin` property. Defaults to 0.
   marginRem?: number[] | number,
@@ -24,7 +27,7 @@ type Props = {
 }
 
 export function PrimaryButton(props: Props) {
-  const { children, label, onPress } = props
+  const { children, label, onPress, spinner } = props
   const theme = useTheme()
   const styles = getStyles(theme)
 
@@ -34,13 +37,19 @@ export function PrimaryButton(props: Props) {
       onPress={onPress}
     >
       {label != null ? <Text style={styles.primaryText}>{label}</Text> : null}
+      {spinner != null ? (
+        <ActivityIndicator
+          color={theme.primaryButtonText}
+          style={styles.spinner}
+        />
+      ) : null}
       {children}
     </TouchableOpacity>
   )
 }
 
 export function SecondaryButton(props: Props) {
-  const { children, label, onPress } = props
+  const { children, label, onPress, spinner } = props
   const theme = useTheme()
   const styles = getStyles(theme)
 
@@ -49,7 +58,13 @@ export function SecondaryButton(props: Props) {
       style={[styles.secondaryButton, spacingStyles(props, theme)]}
       onPress={onPress}
     >
-      {label != null ? <Text style={styles.secondaryText}>{label}</Text> : null}
+      {label != null ? <Text style={styles.secondaryText}>{label}</Text> : null}{' '}
+      {spinner != null ? (
+        <ActivityIndicator
+          color={theme.secondaryButtonText}
+          style={styles.spinner}
+        />
+      ) : null}
       {children}
     </TouchableOpacity>
   )
@@ -105,6 +120,8 @@ const getStyles = cacheStyles((theme: Theme) => {
     secondaryText: {
       ...commonText,
       color: theme.secondaryButtonText
-    }
+    },
+
+    spinner: { height: theme.rem(2) }
   }
 })
