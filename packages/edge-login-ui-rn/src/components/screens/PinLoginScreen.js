@@ -4,10 +4,7 @@ import * as React from 'react'
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { sprintf } from 'sprintf-js'
 
-import {
-  userLoginWithPin,
-  userLoginWithTouchId
-} from '../../actions/LoginAction.js'
+import { loginWithPin, loginWithTouch } from '../../actions/LoginAction.js'
 import { deleteUserFromDevice } from '../../actions/UserActions.js'
 import * as Assets from '../../assets/index.js'
 import s from '../../common/locales/strings.js'
@@ -52,7 +49,7 @@ type DispatchProps = {
   changeUser(string): void,
   deleteUserFromDevice(username: string): Promise<void>,
   gotoLoginPage(): void,
-  launchUserLoginWithTouchId(Object): void,
+  loginWithTouch(username: string): void,
   loginWithPin(username: string, pin: string): void,
   onChangeText(pin: string): void
 }
@@ -72,7 +69,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
 
   componentDidMount() {
     if (this.props.username && this.props.touch !== 'FaceID') {
-      this.props.launchUserLoginWithTouchId({ username: this.props.username })
+      this.props.loginWithTouch(this.props.username)
     }
   }
 
@@ -108,7 +105,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
   }
 
   relaunchTouchId = () => {
-    this.props.launchUserLoginWithTouchId({ username: this.props.username })
+    this.props.loginWithTouch(this.props.username)
   }
 
   handlePress = (value: string) => {
@@ -236,9 +233,9 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  selectUser(arg: string) {
-    this.props.launchUserLoginWithTouchId({ username: arg })
-    this.props.changeUser(arg)
+  selectUser(username: string) {
+    this.props.loginWithTouch(username)
+    this.props.changeUser(username)
     this.setState({
       focusOn: 'pin'
     })
@@ -469,11 +466,11 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     gotoLoginPage: () => {
       dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
-    launchUserLoginWithTouchId: (data: Object) => {
-      dispatch(userLoginWithTouchId(data))
+    loginWithTouch(username) {
+      dispatch(loginWithTouch(username))
     },
     loginWithPin(username, pin) {
-      dispatch(userLoginWithPin({ username, pin }))
+      dispatch(loginWithPin(username, pin))
     },
     onChangeText(pin: string) {
       dispatch({ type: 'AUTH_UPDATE_PIN', data: pin })

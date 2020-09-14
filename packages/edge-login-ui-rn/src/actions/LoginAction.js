@@ -27,7 +27,7 @@ export const login = (attempt: LoginAttempt, otpKey?: string) => async (
   dispatch(completeLogin(account))
 }
 
-export function userLoginWithTouchId(data: Object) {
+export function loginWithTouch(username: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder } = imports
     const startFunction = () => {
@@ -36,8 +36,8 @@ export function userLoginWithTouchId(data: Object) {
     loginWithTouchId(
       context,
       folder,
-      data.username,
-      'Touch to login user: `' + data.username + '`',
+      username,
+      `Touch to login user: "${username}"`,
       s.strings.login_with_password,
       imports.accountOptions,
       startFunction
@@ -52,21 +52,20 @@ export function userLoginWithTouchId(data: Object) {
       })
   }
 }
-export function userLoginWithPin(data: Object) {
+export function loginWithPin(username: string, pin: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context } = imports
     setTimeout(async () => {
       try {
         const abcAccount = await context.loginWithPIN(
-          data.username,
-          data.pin,
+          username,
+          pin,
           imports.accountOptions
         )
         dispatch(completeLogin(abcAccount))
       } catch (e) {
         console.log('LOG IN WITH PIN ERROR ', e)
         if (e.name === 'OtpError') {
-          const { username, pin } = data
           dispatch({
             type: 'OTP_ERROR',
             data: {
