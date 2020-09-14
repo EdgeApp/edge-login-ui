@@ -1,5 +1,12 @@
 # edge-login-ui
 
+## 0.6.16 (2020-09-14)
+
+- rn: Upgrade to the latest react-native-airship.
+- rn: Remove unused TouchId logic from the password login screen.
+- rn: Re-theme and add voucher support to the OTP reset alert, OTP error screen, and related modals.
+- rn: Route to a security alert screen after logging into an account with pending issues.
+
 ## 0.6.15 (2020-09-03)
 
 - rn: Do not enable touch for users without locally-stored data.
