@@ -1,9 +1,12 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
 
-import { userLoginWithTouchId } from '../../actions/LoginAction.js'
+import {
+  userLoginWithPin,
+  userLoginWithTouchId
+} from '../../actions/LoginAction.js'
 import * as Assets from '../../assets/index.js'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
@@ -33,17 +36,21 @@ type OwnProps = {
 type StateProps = {
   isTouchIdDisabled: boolean,
   loginSuccess: boolean,
+  pin: string,
   showModal: boolean,
   touch: $PropertyType<RootState, 'touch'>,
   userDetails: Object,
   userList: Array<LoginUserInfo>,
-  username: string
+  username: string,
+  wait: number
 }
 type DispatchProps = {
   changeUser(string): void,
   gotoLoginPage(): void,
   launchDeleteModal(): void,
-  launchUserLoginWithTouchId(Object): void
+  launchUserLoginWithTouchId(Object): void,
+  loginWithPin(username: string, pin: string): void,
+  onChangeText(pin: string): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -54,7 +61,7 @@ type State = {
   focusOn: string
 }
 
-class PinLoginScreenComponent extends Component<Props, State> {
+class PinLoginScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -84,6 +91,13 @@ class PinLoginScreenComponent extends Component<Props, State> {
     this.props.launchUserLoginWithTouchId({ username: this.props.username })
   }
 
+  handlePress = (value: string) => {
+    const { loginWithPin, onChangeText, pin, username } = this.props
+    const newPin = value === 'back' ? pin.slice(0, -1) : pin.concat(value)
+    onChangeText(newPin)
+    if (newPin.length === 4) loginWithPin(username, newPin)
+  }
+
   renderModal = (style: typeof PinLoginScreenStyle) => {
     if (this.props.showModal) {
       return (
@@ -109,6 +123,7 @@ class PinLoginScreenComponent extends Component<Props, State> {
   }
 
   renderOverImage() {
+    const { pin, wait } = this.props
     if (this.props.loginSuccess) {
       return null
     }
@@ -135,7 +150,12 @@ class PinLoginScreenComponent extends Component<Props, State> {
           </View>
         </TouchableWithoutFeedback>
         <View style={PinLoginScreenStyle.spacer_full} />
-        {this.props.userDetails.pinEnabled && <PinKeypad />}
+        {this.props.userDetails.pinEnabled && (
+          <PinKeypad
+            disabled={wait > 0 || pin.length === 4}
+            onPress={this.handlePress}
+          />
+        )}
       </View>
     )
   }
@@ -410,6 +430,7 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       state.login.isLoggingInWithPin ||
       (state.login.pin ? state.login.pin.length : 0) === 4,
     loginSuccess: state.login.loginSuccess,
+    pin: state.login.pin || '',
     showModal: state.workflow.showModal,
     touch: state.touch,
     userDetails: state.previousUsers.userList.find(
@@ -420,7 +441,8 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       isTouchIdEnabled: false
     },
     userList: state.previousUsers.userList,
-    username: state.login.username
+    username: state.login.username,
+    wait: state.login.wait
   }),
   (dispatch: Dispatch) => ({
     changeUser: (data: string) => {
@@ -434,6 +456,12 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     },
     launchUserLoginWithTouchId: (data: Object) => {
       dispatch(userLoginWithTouchId(data))
+    },
+    loginWithPin(username, pin) {
+      dispatch(userLoginWithPin({ username, pin }))
+    },
+    onChangeText(pin: string) {
+      dispatch({ type: 'AUTH_UPDATE_PIN', data: pin })
     }
   })
 )(PinLoginScreenComponent)

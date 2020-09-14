@@ -90,52 +90,48 @@ export function userLoginWithTouchId(data: Object) {
 export function userLoginWithPin(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context } = imports
-    dispatch({ type: 'AUTH_UPDATE_PIN', data: data.pin })
-    if (data.pin.length === 4) {
-      setTimeout(async () => {
-        try {
-          const abcAccount = await context.loginWithPIN(
-            data.username,
-            data.pin,
-            imports.accountOptions
-          )
-          dispatch(completeLogin(abcAccount))
-        } catch (e) {
-          console.log('LOG IN WITH PIN ERROR ', e)
-          if (e.name === 'OtpError') {
-            const { username, pin } = data
-            dispatch({
-              type: 'OTP_ERROR',
-              data: {
-                attempt: { type: 'pin', username, pin },
-                error: e
-              }
-            })
-            return
-          }
-          const message =
-            e.name === 'PasswordError'
-              ? s.strings.invalid_pin
-              : e.name === 'UsernameError'
-              ? s.strings.pin_not_enabled
-              : e.message
+    setTimeout(async () => {
+      try {
+        const abcAccount = await context.loginWithPIN(
+          data.username,
+          data.pin,
+          imports.accountOptions
+        )
+        dispatch(completeLogin(abcAccount))
+      } catch (e) {
+        console.log('LOG IN WITH PIN ERROR ', e)
+        if (e.name === 'OtpError') {
+          const { username, pin } = data
           dispatch({
-            type: 'LOGIN_PIN_FAIL',
+            type: 'OTP_ERROR',
             data: {
-              message,
-              wait: e.wait
+              attempt: { type: 'pin', username, pin },
+              error: e
             }
           })
-          if (e.wait) {
-            setTimeout(() => {
-              dispatch(processWait(message))
-            }, 1000)
-          }
-          callback(e.message, null)
+          return
         }
-      }, 300)
-    }
-    // dispatch(openLoading()) Legacy dealt with state for showing a spinner
+        const message =
+          e.name === 'PasswordError'
+            ? s.strings.invalid_pin
+            : e.name === 'UsernameError'
+            ? s.strings.pin_not_enabled
+            : e.message
+        dispatch({
+          type: 'LOGIN_PIN_FAIL',
+          data: {
+            message,
+            wait: e.wait
+          }
+        })
+        if (e.wait) {
+          setTimeout(() => {
+            dispatch(processWait(message))
+          }, 1000)
+        }
+        callback(e.message, null)
+      }
+    }, 300)
     // the timeout is a hack until we put in interaction manager.
   }
 }

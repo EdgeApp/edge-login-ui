@@ -1,42 +1,24 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, TouchableWithoutFeedback, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import { userLoginWithPin } from '../../actions/LoginAction.js'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
-import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { isIphoneX } from '../../util/isIphoneX.js'
 import { scale } from '../../util/scaling.js'
-import { connect } from '../services/ReduxStore.js'
 
-type OwnProps = {}
-type StateProps = {
-  pin: string,
-  username: string,
-  wait: boolean
+type Key = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'back'
+
+type Props = {
+  disabled?: boolean,
+  onPress: (key: Key) => void
 }
-type DispatchProps = {
-  onChangeText(Object): void
-}
-type Props = OwnProps & StateProps & DispatchProps
 
-class PinKeypadComponent extends Component<Props> {
-  changePin = (value: string) => {
-    const { username, pin, onChangeText } = this.props
-    if (value === 'back') {
-      return onChangeText({
-        username: username,
-        pin: pin && pin !== '' ? pin.substr(0, pin.length - 1) : ''
-      })
-    }
-    onChangeText({ username: username, pin: pin ? pin.concat(value) : value })
-  }
-
+export class PinKeypad extends React.PureComponent<Props> {
   render() {
-    const { wait } = this.props
+    const { disabled, onPress } = this.props
     const style = PinKeypadStyle
 
     return (
@@ -45,8 +27,8 @@ class PinKeypadComponent extends Component<Props> {
           <View style={style.keypadRow}>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('1')}
-              disabled={wait}
+              onPress={() => onPress('1')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_one}</Text>
@@ -54,8 +36,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('2')}
-              disabled={wait}
+              onPress={() => onPress('2')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_two}</Text>
@@ -63,8 +45,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('3')}
-              disabled={wait}
+              onPress={() => onPress('3')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_three}</Text>
@@ -74,8 +56,8 @@ class PinKeypadComponent extends Component<Props> {
           <View style={style.keypadRow}>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('4')}
-              disabled={wait}
+              onPress={() => onPress('4')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_four}</Text>
@@ -83,8 +65,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('5')}
-              disabled={wait}
+              onPress={() => onPress('5')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_five}</Text>
@@ -92,8 +74,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('6')}
-              disabled={wait}
+              onPress={() => onPress('6')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_six}</Text>
@@ -103,8 +85,8 @@ class PinKeypadComponent extends Component<Props> {
           <View style={style.keypadRow}>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('7')}
-              disabled={wait}
+              onPress={() => onPress('7')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_seven}</Text>
@@ -112,8 +94,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('8')}
-              disabled={wait}
+              onPress={() => onPress('8')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_eight}</Text>
@@ -121,8 +103,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('9')}
-              disabled={wait}
+              onPress={() => onPress('9')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_nine}</Text>
@@ -133,16 +115,16 @@ class PinKeypadComponent extends Component<Props> {
             <View style={style.keypadColumnBlank} />
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('0')}
-              disabled={wait}
+              onPress={() => onPress('0')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_zero}</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
-              onPress={() => this.changePin('back')}
-              disabled={wait}
+              onPress={() => onPress('back')}
+              disabled={disabled}
             >
               <View style={style.keypadColumnBack}>
                 <MaterialIcon name="backspace" style={style.keypadKeysBack} />
@@ -203,17 +185,3 @@ const PinKeypadStyle = {
     color: Constants.ACCENT_MINT
   }
 }
-
-export const PinKeypad = connect<StateProps, DispatchProps, OwnProps>(
-  (state: RootState) => {
-    const pinLength = state.login.pin ? state.login.pin.length : 0
-    return {
-      pin: state.login.pin || '',
-      username: state.login.username,
-      wait: state.login.wait > 0 || pinLength === 4
-    }
-  },
-  (dispatch: Dispatch) => ({
-    onChangeText: (data: Object) => dispatch(userLoginWithPin(data))
-  })
-)(PinKeypadComponent)
