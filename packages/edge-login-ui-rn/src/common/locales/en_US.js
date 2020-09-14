@@ -55,9 +55,6 @@ const strings = {
     "Please set up an email client that is default to your device's OS in order to send a token to yourself",
   password_recovery: 'Password Recovery',
   save_recovery_token: 'Save Recovery Token',
-  skip_modal_header: 'Are you sure you want to skip?',
-  skip_modal_body:
-    'Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled.',
   must_ten_characters: 'Must have at least 10 characters',
   must_one_lowercase: 'Must have at least 1 lowercase letter',
   must_one_uppercase: 'Must have at least 1 uppercase letter',
