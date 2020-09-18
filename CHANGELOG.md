@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.17 (2020-09-18)
+
+- rn: Fix a race condition that could lead to an infinite login loop.
+
 ## 0.6.16 (2020-09-14)
 
 - rn: Upgrade to the latest react-native-airship.
