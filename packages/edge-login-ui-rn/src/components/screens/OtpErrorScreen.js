@@ -12,6 +12,7 @@ import { hasReadyVoucher } from '../../actions/LoginOtpActions.js'
 import s from '../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { type LoginAttempt } from '../../util/loginAttempt.js'
+import { makePeriodicTask } from '../../util/periodicTask.js'
 import { Header } from '../common/Header.js'
 import { OtpBackupCodeModal } from '../modals/OtpBackupCodeModal.js'
 import { OtpResetModal } from '../modals/OtpResetModal.js'
@@ -40,14 +41,36 @@ type DispatchProps = {
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
 class OtpErrorScreenComponent extends React.Component<Props> {
-  timeout: $Call<typeof setTimeout, () => void, number> | void
+  checkVoucher = makePeriodicTask(async () => {
+    const {
+      hasReadyVoucher,
+      login,
+      otpAttempt,
+      otpError,
+      saveOtpError
+    } = this.props
+
+    try {
+      const result = await hasReadyVoucher(otpError)
+      if (result) {
+        showToast(s.strings.otp_screen_retrying)
+        return login(otpAttempt)
+      }
+    } catch (error) {
+      if (error != null && error.name === 'OtpError') {
+        saveOtpError(otpAttempt, error)
+      } else {
+        showError(error)
+      }
+    }
+  }, 5000)
 
   componentDidMount() {
-    this.timeout = setTimeout(this.pollLoop, 5000)
+    this.checkVoucher.start()
   }
 
   componentWillUnmount() {
-    if (this.timeout != null) clearTimeout(this.timeout)
+    this.checkVoucher.stop()
   }
 
   handleBackupModal = () => {
@@ -63,34 +86,6 @@ class OtpErrorScreenComponent extends React.Component<Props> {
 
   handleQrModal = () => {
     Airship.show(bridge => <QrCodeModal bridge={bridge} />)
-  }
-
-  pollLoop = () => {
-    const {
-      otpAttempt,
-      otpError,
-      hasReadyVoucher,
-      login,
-      saveOtpError
-    } = this.props
-
-    hasReadyVoucher(otpError)
-      .then(result => {
-        if (result) {
-          showToast(s.strings.otp_screen_retrying)
-          return login(otpAttempt)
-        }
-      })
-      .catch(error => {
-        if (error != null && error.name === 'OtpError') {
-          saveOtpError(otpAttempt, error)
-        } else {
-          showError(error)
-        }
-      })
-      .then(() => {
-        this.timeout = setTimeout(this.pollLoop, 5000)
-      })
   }
 
   render() {
