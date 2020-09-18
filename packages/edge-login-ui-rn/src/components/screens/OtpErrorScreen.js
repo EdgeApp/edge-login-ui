@@ -54,7 +54,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
       const result = await hasReadyVoucher(otpError)
       if (result) {
         showToast(s.strings.otp_screen_retrying)
-        return login(otpAttempt)
+        await login(otpAttempt)
       }
     } catch (error) {
       if (error != null && error.name === 'OtpError') {
