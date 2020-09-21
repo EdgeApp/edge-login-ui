@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { Platform, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import s from '../../common/locales/strings.js'
@@ -90,7 +90,7 @@ export class HeaderComponent extends Component<Props> {
 const HeaderContainerScaledStyle = {
   container: {
     position: 'relative',
-    height: scale(Constants.HEADER_HEIGHT),
+    height: scale(Platform.OS === 'ios' ? 42 : 54),
     width: '100%',
     backgroundColor: Constants.TRANSPARENT,
     flexDirection: 'row',

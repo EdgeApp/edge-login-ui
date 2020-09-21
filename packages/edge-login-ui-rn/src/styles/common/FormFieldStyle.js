@@ -3,11 +3,16 @@
 import * as Constants from '../../constants/index.js'
 import { scale } from '../../util/scaling.js'
 
-const MaterialInput = {
+// Login Screen
+const LOGIN_LABEL_WIDTH = '70%'
+const LOGIN_LABEL_HEIGHT = 60
+const DROP_LABEL_HEIGHT = 40
+
+export const MaterialInput = {
   container: {
     position: 'relative',
-    width: Constants.LOGIN_LABEL_WIDTH,
-    minHeight: scale(Constants.LOGIN_LABEL_HEIGHT)
+    width: LOGIN_LABEL_WIDTH,
+    minHeight: scale(LOGIN_LABEL_HEIGHT)
   },
   baseColor: Constants.WHITE,
   tintColor: Constants.ACCENT_MINT,
@@ -21,11 +26,11 @@ const MaterialInput = {
   }
 }
 
-const MaterialInputWithDrop = {
+export const MaterialInputWithDrop = {
   container: {
     position: 'relative',
-    width: Constants.LOGIN_LABEL_WIDTH,
-    minHeight: scale(Constants.LOGIN_LABEL_HEIGHT)
+    width: LOGIN_LABEL_WIDTH,
+    minHeight: scale(LOGIN_LABEL_HEIGHT)
   },
   materialInput: {
     ...MaterialInput,
@@ -44,7 +49,7 @@ const MaterialInputWithDrop = {
   },
   listItem: {
     container: {
-      height: scale(Constants.DROP_LABEL_HEIGHT),
+      height: scale(DROP_LABEL_HEIGHT),
       width: '100%',
       backgroundColor: Constants.WHITE,
       borderBottomColor: Constants.GRAY_4,
@@ -85,11 +90,11 @@ const MaterialInputWithDrop = {
   }
 }
 
-const MaterialInputOnWhite = {
+export const MaterialInputOnWhite = {
   container: {
     position: 'relative',
-    width: Constants.LOGIN_LABEL_WIDTH,
-    height: Constants.LOGIN_LABEL_HEIGHT
+    width: LOGIN_LABEL_WIDTH,
+    height: LOGIN_LABEL_HEIGHT
   },
   baseColor: Constants.PRIMARY,
   tintColor: Constants.SECONDARY,
@@ -105,11 +110,11 @@ const MaterialInputOnWhite = {
   }
 }
 
-const MaterialInputOnWhiteScaled = {
+export const MaterialInputOnWhiteScaled = {
   container: {
     position: 'relative',
-    width: Constants.LOGIN_LABEL_WIDTH,
-    height: scale(Constants.LOGIN_LABEL_HEIGHT),
+    width: LOGIN_LABEL_WIDTH,
+    height: scale(LOGIN_LABEL_HEIGHT),
     marginTop: scale(15)
   },
   baseColor: Constants.PRIMARY,
@@ -125,8 +130,3 @@ const MaterialInputOnWhiteScaled = {
     fontFamily: Constants.FONTS.fontFamilyRegular
   }
 }
-
-export { MaterialInputOnWhite }
-export { MaterialInputOnWhiteScaled }
-export { MaterialInput }
-export { MaterialInputWithDrop }

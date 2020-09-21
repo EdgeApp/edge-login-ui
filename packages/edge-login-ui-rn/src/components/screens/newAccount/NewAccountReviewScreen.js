@@ -182,7 +182,7 @@ const NewAccountReviewScreenStyle = {
       alignItems: 'center',
       justifyContent: 'space-around',
       backgroundColor: Constants.GRAY_4,
-      height: scale(Constants.BUTTON_HEIGHT)
+      height: scale(Styles.BUTTON_HEIGHT)
     },
     shim: {
       ...Styles.Shim,

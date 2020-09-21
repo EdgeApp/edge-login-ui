@@ -110,7 +110,7 @@ const StaticModalStyle = {
   },
   header: {
     position: 'relative',
-    height: Constants.STATIC_MODAL_HEADER_HEIGHT,
+    height: 62,
     width: '100%',
     backgroundColor: Constants.TRANSPARENT,
     alignItems: 'center',

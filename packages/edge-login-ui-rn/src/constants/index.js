@@ -2,7 +2,6 @@
 
 export * from './Colors'
 export * from './Fonts'
-export * from './Theme'
 export * from './IconConstants'
 
 export const OTP_REMINDER_MILLISECONDS = 7 * 24 * 60 * 60 * 1000
