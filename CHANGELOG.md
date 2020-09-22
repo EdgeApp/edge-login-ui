@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.18 (2020-09-22)
+
+- rn: Fix a crash when rendering the SecondaryButton. This would occur when the 2fa reminder modal popped up.
+
 ## 0.6.17 (2020-09-18)
 
 - rn: Fix a race condition that could lead to an infinite login loop.
