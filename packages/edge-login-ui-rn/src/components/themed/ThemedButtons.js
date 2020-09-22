@@ -58,7 +58,7 @@ export function SecondaryButton(props: Props) {
       style={[styles.secondaryButton, spacingStyles(props, theme)]}
       onPress={onPress}
     >
-      {label != null ? <Text style={styles.secondaryText}>{label}</Text> : null}{' '}
+      {label != null ? <Text style={styles.secondaryText}>{label}</Text> : null}
       {spinner != null ? (
         <ActivityIndicator
           color={theme.secondaryButtonText}
