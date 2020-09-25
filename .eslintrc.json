@@ -10,6 +10,8 @@
     "simple-import-sort"
   ],
   "rules": {
+    "flowtype/array-style-complex-type": ["error", "verbose"],
+    "flowtype/array-style-simple-type": ["error", "shorthand"],
     "no-var": "error",
     "promise/no-return-wrap": "error",
     "react/display-name": "off",
