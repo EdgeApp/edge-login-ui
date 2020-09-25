@@ -103,10 +103,7 @@ export function cancelRecoverySettingsScene() {
   }
 }
 
-export function changeRecoveryAnswers(
-  questions: Array<string>,
-  answers: Array<string>
-) {
+export function changeRecoveryAnswers(questions: string[], answers: string[]) {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const account = imports.accountObject
     if (!account) {

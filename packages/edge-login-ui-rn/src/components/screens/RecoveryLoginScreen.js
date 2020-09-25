@@ -30,7 +30,7 @@ type DispatchProps = {
   getQuestions(): void,
   goBack(): void,
   onCancel(): void,
-  submit(Array<string>): void,
+  submit(string[]): void,
   updateUsername(string): void
 }
 type Props = OwnProps & StateProps & DispatchProps
@@ -359,7 +359,7 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     onCancel() {
       dispatch({ type: 'CANCEL_RECOVERY_KEY' })
     },
-    submit(answers: Array<string>) {
+    submit(answers: string[]) {
       dispatch(loginWithRecovery(answers))
     },
     updateUsername(username: string) {

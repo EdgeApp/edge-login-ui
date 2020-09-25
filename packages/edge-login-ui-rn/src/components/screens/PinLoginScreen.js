@@ -44,7 +44,7 @@ type StateProps = {
   pin: string,
   touch: $PropertyType<RootState, 'touch'>,
   userDetails: Object,
-  userList: Array<LoginUserInfo>,
+  userList: LoginUserInfo[],
   username: string,
   wait: number
 }

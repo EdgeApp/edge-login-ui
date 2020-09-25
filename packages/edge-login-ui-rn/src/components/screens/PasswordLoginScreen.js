@@ -40,7 +40,7 @@ type StateProps = {
   previousUsers: LoginUserInfo[],
   touch: $PropertyType<RootState, 'touch'>,
   username: string,
-  usernameOnlyList: Array<string>
+  usernameOnlyList: string[]
 }
 type DispatchProps = {
   deleteUserFromDevice(username: string): Promise<void>,

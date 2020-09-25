@@ -8,7 +8,7 @@ import { type Action } from '../types/ReduxTypes.js'
 export type PasswordStatusState = {
   +secondsToCrack: string,
   +passed: boolean,
-  +list: Array<Object>
+  +list: Object[]
 }
 
 export const passwordStatus: Reducer<

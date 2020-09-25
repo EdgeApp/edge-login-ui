@@ -30,7 +30,7 @@ export const login = (attempt: LoginAttempt, otpKey?: string) => async (
 /**
  * Make it Thunky
  */
-export function loginWithRecovery(answers: Array<string>) {
+export function loginWithRecovery(answers: string[]) {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const recoveryKey = state.passwordRecovery.recoveryKey || ''

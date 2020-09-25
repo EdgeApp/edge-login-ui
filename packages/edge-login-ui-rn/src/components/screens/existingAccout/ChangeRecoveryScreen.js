@@ -38,7 +38,7 @@ type StateProps = {
   isEnabled: boolean,
   question1: string,
   question2: string,
-  questionsList: Array<string>,
+  questionsList: string[],
   saveButton: string,
   showEmailDialog: boolean,
   submitButton: string,
@@ -49,7 +49,7 @@ type DispatchProps = {
   deleteRecovery(): void,
   goBack(): void,
   returnToSettings(): void,
-  submit(questions: Array<string>, answers: Array<string>): void
+  submit(questions: string[], answers: string[]): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -637,7 +637,7 @@ export const PublicChangeRecoveryScreen = connect<
     returnToSettings() {
       dispatch(cancelRecoverySettingsScene())
     },
-    submit(questions: Array<string>, answers: Array<string>) {
+    submit(questions: string[], answers: string[]) {
       dispatch(changeRecoveryAnswers(questions, answers))
     }
   })

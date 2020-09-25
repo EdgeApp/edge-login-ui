@@ -5,11 +5,11 @@ import { type Reducer } from 'redux'
 import { type Action } from '../types/ReduxTypes.js'
 
 export type PasswordRecoveryState = {
-  +questionsList: Array<string>,
+  +questionsList: string[],
   +recoveryErrorMessage: string | null,
   +recoveryKey: string | null,
   +showRecoveryEmailDialog: boolean,
-  +userQuestions: Array<string>
+  +userQuestions: string[]
 }
 
 const initialState: PasswordRecoveryState = {
