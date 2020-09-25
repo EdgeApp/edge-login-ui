@@ -2,7 +2,7 @@
 
 import { makeReactNativeFolder } from 'disklet'
 import { type EdgeAccount, type EdgeContext } from 'edge-core-js'
-import React, { Component } from 'react'
+import * as React from 'react'
 import { View } from 'react-native'
 
 import { initializeChangeRecovery } from '../../actions/PasswordRecoveryActions.js'
@@ -20,7 +20,7 @@ type Props = {
   onCancel(): void
 }
 
-export class PasswordRecoveryScreen extends Component<Props> {
+export class PasswordRecoveryScreen extends React.Component<Props> {
   render() {
     return (
       <ReduxStore

@@ -2,7 +2,7 @@
 
 import { makeReactNativeFolder } from 'disklet'
 import { type EdgeAccount, type EdgeContext } from 'edge-core-js'
-import React, { Component } from 'react'
+import * as React from 'react'
 import { View } from 'react-native'
 
 import * as Styles from '../../styles/index.js'
@@ -19,7 +19,7 @@ type Props = {
   onCancel(): void
 }
 
-export class ChangePinScreen extends Component<Props> {
+export class ChangePinScreen extends React.Component<Props> {
   render() {
     return (
       <ReduxStore

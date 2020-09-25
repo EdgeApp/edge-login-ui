@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { FlatList } from 'react-native'
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   data: any,
   renderRow(): void
 }
-class DropDownList extends Component<Props> {
+class DropDownList extends React.Component<Props> {
   render() {
     return (
       <FlatList

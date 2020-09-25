@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Image, Text, View } from 'react-native'
 
 import { LOGO_DOT } from '../../assets/'
@@ -12,7 +12,7 @@ type Props = {
   cancelFunc(): void
 }
 
-class ChangePasswordModalComponent extends Component<Props> {
+class ChangePasswordModalComponent extends React.Component<Props> {
   render() {
     const Style = this.props.style
     return (

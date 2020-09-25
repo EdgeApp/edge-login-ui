@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Dimensions, Platform, Text, View } from 'react-native'
 import Mailer from 'react-native-mail'
 
@@ -71,7 +71,7 @@ type State = {
   showConfirmationModal: boolean
 }
 
-class ChangeRecoveryScreenComponent extends Component<Props, State> {
+class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {

@@ -1,7 +1,7 @@
 // @flow
 
 import { type OtpError } from 'edge-core-js'
-import React, { Component } from 'react'
+import * as React from 'react'
 import { type AirshipBridge } from 'react-native-airship'
 
 import { login } from '../../actions/LoginAction.js'
@@ -36,7 +36,7 @@ type State = {
   spinning: boolean
 }
 
-class OtpBackupCodeModalComponent extends Component<Props, State> {
+class OtpBackupCodeModalComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = { otpKey: '', spinning: false }

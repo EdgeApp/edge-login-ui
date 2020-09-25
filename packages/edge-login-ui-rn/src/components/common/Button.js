@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, TouchableHighlight, View } from 'react-native'
 
 import { Spinner } from './Spinner.js'
@@ -21,7 +21,7 @@ type State = {
   pressed: boolean
 }
 
-class Button extends Component<Props, State> {
+class Button extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {

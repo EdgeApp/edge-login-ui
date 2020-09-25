@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text } from 'react-native'
 
 import { scale } from '../../util/scaling.js'
@@ -11,7 +11,7 @@ type Props = {
   children: any
 }
 
-export default class FormattedText extends Component<Props> {
+export default class FormattedText extends React.Component<Props> {
   render() {
     const fontSize = this.props.fontSize
       ? scale(this.props.fontSize)

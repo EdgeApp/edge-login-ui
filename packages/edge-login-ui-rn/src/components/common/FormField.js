@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 
 import { MaterialInput } from './MaterialInput.js'
 
@@ -29,7 +29,7 @@ type State = {
   autoFocus: boolean
 }
 
-class FormField extends Component<Props, State> {
+class FormField extends React.Component<Props, State> {
   static defaultProps = {
     value: '',
     returnKeyType: 'done'

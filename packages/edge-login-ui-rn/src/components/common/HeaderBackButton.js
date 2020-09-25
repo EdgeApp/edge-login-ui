@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Platform, Text, TouchableOpacity } from 'react-native'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 
@@ -11,7 +11,7 @@ type Props = {
   label: string,
   onPress(): void
 }
-class HeaderBackButton extends Component<Props> {
+class HeaderBackButton extends React.Component<Props> {
   render() {
     const withArrow = true
     const icon = isIos ? 'ios-arrow-back' : 'md-arrow-back'

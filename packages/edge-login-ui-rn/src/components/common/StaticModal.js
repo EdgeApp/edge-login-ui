@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Dimensions, Platform, TouchableOpacity, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal'
@@ -16,7 +16,7 @@ type Props = {
   cancel(): void
 }
 
-export class StaticModal extends Component<Props> {
+export class StaticModal extends React.Component<Props> {
   reset: $Call<typeof setTimeout, () => void>
   componentDidMount() {
     if (this.props.modalDismissTimerSeconds) {

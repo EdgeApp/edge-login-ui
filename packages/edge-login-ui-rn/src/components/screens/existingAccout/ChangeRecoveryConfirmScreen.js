@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, View } from 'react-native'
 
 import s from '../../../common/locales/strings.js'
@@ -18,7 +18,7 @@ type Props = {
   cancel(): void
 }
 
-export class ChangeRecoveryConfirmScreen extends Component<Props> {
+export class ChangeRecoveryConfirmScreen extends React.Component<Props> {
   render() {
     const style = ConfirmPasswordRecoverySceneStyles
     return (

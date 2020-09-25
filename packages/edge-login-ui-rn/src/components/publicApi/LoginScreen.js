@@ -6,7 +6,7 @@ import {
   type EdgeAccountOptions,
   type EdgeContext
 } from 'edge-core-js'
-import React, { Component } from 'react'
+import * as React from 'react'
 
 import { initializeLogin } from '../../actions/LoginInitActions.js'
 import { updateFontStyles } from '../../constants/Fonts.js'
@@ -31,7 +31,7 @@ type Props = {
   username?: string
 }
 
-export class LoginScreen extends Component<Props> {
+export class LoginScreen extends React.Component<Props> {
   cleanups: Array<() => mixed>
 
   constructor(props: Props) {

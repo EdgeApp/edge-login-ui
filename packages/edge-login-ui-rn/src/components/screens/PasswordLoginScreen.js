@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { sprintf } from 'sprintf-js'
@@ -60,7 +60,7 @@ type State = {
   usernameList: boolean
 }
 
-class PasswordLoginScreenComponent extends Component<Props, State> {
+class PasswordLoginScreenComponent extends React.Component<Props, State> {
   style: Object
 
   constructor(props: Props) {

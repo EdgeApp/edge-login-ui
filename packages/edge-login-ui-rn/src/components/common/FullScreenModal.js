@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Dimensions, Platform, View } from 'react-native'
 import Modal from 'react-native-modal'
 
@@ -10,7 +10,7 @@ type Props = {
   children: any
 }
 
-export class FullScreenModal extends Component<Props> {
+export class FullScreenModal extends React.Component<Props> {
   render() {
     const styles = FullScreenModalStyle
 

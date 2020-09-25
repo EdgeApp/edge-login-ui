@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { View } from 'react-native'
 
 import * as Styles from '../../styles/index.js'
@@ -14,7 +14,7 @@ type Props = {
   onRecoverPassword(): void
 }
 
-export class ChooseTestAppScreen extends Component<Props> {
+export class ChooseTestAppScreen extends React.Component<Props> {
   onPasswordPress() {
     this.props.onChangePassword()
   }

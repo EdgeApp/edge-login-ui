@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, View } from 'react-native'
 
 import s from '../../../common/locales/strings.js'
@@ -21,7 +21,7 @@ type DispatchProps = {
 }
 type Props = OwnProps & DispatchProps
 
-class NewAccountReviewScreenComponent extends Component<Props> {
+class NewAccountReviewScreenComponent extends React.Component<Props> {
   render() {
     return (
       <SafeAreaView>

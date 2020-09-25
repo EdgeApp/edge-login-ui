@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { View } from 'react-native'
 import { sprintf } from 'sprintf-js'
 
@@ -28,7 +28,7 @@ type Props = OwnProps & DispatchProps
 
 type State = {}
 
-class NewAccountWelcomeScreenComponent extends Component<Props, State> {
+class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
   render() {
     return (
       <SafeAreaView>

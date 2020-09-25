@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { View } from 'react-native'
 
 import * as Assets from '../../assets/index.js'
@@ -12,7 +12,7 @@ type Props = {
   backgroundImage?: any
 }
 
-export class LoadingScreen extends Component<Props> {
+export class LoadingScreen extends React.Component<Props> {
   render() {
     return (
       <View style={LandingScreenStyle.container}>

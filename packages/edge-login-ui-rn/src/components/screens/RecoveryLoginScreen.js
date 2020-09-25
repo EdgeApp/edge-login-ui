@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, View } from 'react-native'
 
 import { loginWithRecovery } from '../../actions/LoginAction.js'
@@ -51,7 +51,7 @@ type State = {
   showUsernameModal: boolean
 }
 
-class RecoveryLoginScreenComponent extends Component<Props, State> {
+class RecoveryLoginScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {

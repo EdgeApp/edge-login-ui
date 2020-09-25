@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, View } from 'react-native'
 
 import s from '../../../common/locales/strings.js'
@@ -14,7 +14,7 @@ import { Spinner } from '../../common/Spinner.js'
 
 type Props = {}
 
-export class NewAccountWaitScreen extends Component<Props> {
+export class NewAccountWaitScreen extends React.Component<Props> {
   render() {
     return (
       <SafeAreaView>

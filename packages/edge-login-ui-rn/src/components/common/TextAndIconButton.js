@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, TouchableHighlight, View } from 'react-native'
 import FAIcon from 'react-native-vector-icons/MaterialIcons'
 
@@ -16,7 +16,7 @@ type State = {
   pressed: boolean
 }
 
-class TextAndIconButton extends Component<Props, State> {
+class TextAndIconButton extends React.Component<Props, State> {
   numberOfLines: number
   constructor(props: Props) {
     super(props)

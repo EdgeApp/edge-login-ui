@@ -1,7 +1,7 @@
 // @flow
 
 import type { EdgeAccount } from 'edge-core-js'
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Linking, ScrollView, Text, View } from 'react-native'
 import { sprintf } from 'sprintf-js'
 
@@ -35,7 +35,7 @@ type State = {
   totalChecks: number
 }
 
-class TermsAndConditionsScreenComponent extends Component<Props, State> {
+class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
   scrollView: any
   constructor(props: Props) {
     super(props)

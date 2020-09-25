@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, TouchableHighlight } from 'react-native'
 
 export type OwnProps = {
@@ -18,7 +18,7 @@ type State = {
 }
 
 type Props = OwnProps & DispatchProps
-class TextRowComponent extends Component<Props, State> {
+class TextRowComponent extends React.Component<Props, State> {
   numberOfLines: number
   constructor(props: Props) {
     super(props)
