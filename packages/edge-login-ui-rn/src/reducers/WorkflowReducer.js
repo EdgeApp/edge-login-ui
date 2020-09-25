@@ -7,14 +7,12 @@ import { type Action } from '../types/ReduxTypes.js'
 
 export type WorkflowState = {
   +currentKey: WorkflowName,
-  +currentSceneIndex: number,
-  +showModal: boolean
+  +currentSceneIndex: number
 }
 
 const initialState: WorkflowState = {
   currentKey: 'loadingWF',
-  currentSceneIndex: 0,
-  showModal: false
+  currentSceneIndex: 0
 }
 
 export const workflow: Reducer<WorkflowState, Action> = function(
@@ -37,16 +35,12 @@ export const workflow: Reducer<WorkflowState, Action> = function(
       if (currentSceneIndex + 1 < workflows[state.currentKey].length) {
         ++currentSceneIndex
       }
-      return { ...state, currentSceneIndex, showModal: false }
+      return { ...state, currentSceneIndex }
     }
-    case 'WORKFLOW_LAUNCH_MODAL':
-      return { ...state, showModal: true }
-    case 'WORKFLOW_CANCEL_MODAL':
-      return { ...state, showModal: false }
 
     // Specific actions with implicit scene changes:
     case 'SET_PREVIOUS_USERS':
-      return { ...state, showModal: false }
+      return { ...state }
     case 'OTP_ERROR':
       return { ...state, currentKey: 'otpWF', currentSceneIndex: 0 }
     case 'ON_RECOVERY_LOGIN_IS_ENABLED':

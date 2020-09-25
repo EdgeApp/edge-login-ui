@@ -1,49 +1,34 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, TouchableWithoutFeedback, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import { userLoginWithPin } from '../../actions/LoginAction.js'
 import s from '../../common/locales/strings.js'
-import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import { connect } from '../services/ReduxStore.js'
+import * as Constants from '../../constants/index.js'
+import { isIphoneX } from '../../util/isIphoneX.js'
+import { scale } from '../../util/scaling.js'
 
-type OwnProps = {
-  style: Object
-}
-type StateProps = {
-  pin: string,
-  username: string,
-  wait: boolean
-}
-type DispatchProps = {
-  onChangeText(Object): void
-}
-type Props = OwnProps & StateProps & DispatchProps
+type Key = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'back'
 
-class PinKeypadComponent extends Component<Props> {
-  changePin = (value: string) => {
-    const { username, pin, onChangeText } = this.props
-    if (value === 'back') {
-      return onChangeText({
-        username: username,
-        pin: pin && pin !== '' ? pin.substr(0, pin.length - 1) : ''
-      })
-    }
-    onChangeText({ username: username, pin: pin ? pin.concat(value) : value })
-  }
+type Props = {
+  disabled?: boolean,
+  onPress: (key: Key) => void
+}
 
+export class PinKeypad extends React.PureComponent<Props> {
   render() {
-    const { wait, style } = this.props
+    const { disabled, onPress } = this.props
+    const style = PinKeypadStyle
+
     return (
       <View style={style.keypadContainer}>
         <View style={style.keypadInner}>
           <View style={style.keypadRow}>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('1')}
-              disabled={wait}
+              onPress={() => onPress('1')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_one}</Text>
@@ -51,8 +36,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('2')}
-              disabled={wait}
+              onPress={() => onPress('2')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_two}</Text>
@@ -60,8 +45,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('3')}
-              disabled={wait}
+              onPress={() => onPress('3')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_three}</Text>
@@ -71,8 +56,8 @@ class PinKeypadComponent extends Component<Props> {
           <View style={style.keypadRow}>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('4')}
-              disabled={wait}
+              onPress={() => onPress('4')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_four}</Text>
@@ -80,8 +65,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('5')}
-              disabled={wait}
+              onPress={() => onPress('5')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_five}</Text>
@@ -89,8 +74,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('6')}
-              disabled={wait}
+              onPress={() => onPress('6')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_six}</Text>
@@ -100,8 +85,8 @@ class PinKeypadComponent extends Component<Props> {
           <View style={style.keypadRow}>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('7')}
-              disabled={wait}
+              onPress={() => onPress('7')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_seven}</Text>
@@ -109,8 +94,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('8')}
-              disabled={wait}
+              onPress={() => onPress('8')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_eight}</Text>
@@ -118,8 +103,8 @@ class PinKeypadComponent extends Component<Props> {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('9')}
-              disabled={wait}
+              onPress={() => onPress('9')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_nine}</Text>
@@ -130,16 +115,16 @@ class PinKeypadComponent extends Component<Props> {
             <View style={style.keypadColumnBlank} />
             <TouchableWithoutFeedback
               style={style.keypadColumn}
-              onPress={() => this.changePin('0')}
-              disabled={wait}
+              onPress={() => onPress('0')}
+              disabled={disabled}
             >
               <View style={style.keypadColumn}>
                 <Text style={style.keypadKeys}>{s.strings.keypad_zero}</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
-              onPress={() => this.changePin('back')}
-              disabled={wait}
+              onPress={() => onPress('back')}
+              disabled={disabled}
             >
               <View style={style.keypadColumnBack}>
                 <MaterialIcon name="backspace" style={style.keypadKeysBack} />
@@ -152,16 +137,51 @@ class PinKeypadComponent extends Component<Props> {
   }
 }
 
-export const PinKeypad = connect<StateProps, DispatchProps, OwnProps>(
-  (state: RootState) => {
-    const pinLength = state.login.pin ? state.login.pin.length : 0
-    return {
-      pin: state.login.pin || '',
-      username: state.login.username,
-      wait: state.login.wait > 0 || pinLength === 4
-    }
+const PinKeypadStyle = {
+  keypadContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  (dispatch: Dispatch) => ({
-    onChangeText: (data: Object) => dispatch(userLoginWithPin(data))
-  })
-)(PinKeypadComponent)
+  keypadInner: {
+    flex: 1,
+    maxWidth: 500,
+    height: scale(180),
+    maxHeight: 300,
+    marginBottom: isIphoneX ? scale(28) : 0
+  },
+  keypadRow: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  keypadColumn: {
+    flex: 1,
+    borderColor: Constants.ACCENT_MINT,
+    borderWidth: 1,
+    margin: scale(2),
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  keypadColumnBack: {
+    flex: 1,
+    margin: scale(2),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  keypadColumnBlank: {
+    flex: 1,
+    margin: scale(2)
+  },
+  keypadKeys: {
+    textAlign: 'center',
+    fontSize: scale(14),
+    color: Constants.ACCENT_MINT
+  },
+  keypadKeysBack: {
+    textAlign: 'center',
+    fontSize: scale(30),
+    color: Constants.ACCENT_MINT
+  }
+}

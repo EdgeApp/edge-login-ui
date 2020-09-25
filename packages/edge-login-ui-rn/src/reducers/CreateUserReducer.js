@@ -31,7 +31,6 @@ const initialState: CreateState = {
   confirmPassword: null,
   pin: '',
   pinError: '',
-  loginPin: null,
   loginSuccess: false,
   creationSuccess: false,
   passwordStatus: null,
@@ -75,8 +74,6 @@ export const create: Reducer<CreateState, Action> = function(
         passwordStatus: action.data.passwordStatus,
         createPasswordErrorMessage: action.data.error
       }
-    case 'AUTH_UPDATE_PIN':
-      return { ...state, loginPin: action.data }
     case 'LAUNCH_NOTIFICATION_MODAL':
       return { ...state, showModal: true }
     case 'CLOSE_NOTIFICATION_MODAL':

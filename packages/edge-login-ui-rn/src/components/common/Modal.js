@@ -44,8 +44,7 @@ type State = {
 }
 
 export class MyModal extends Component<Props, State> {
-  // $FlowFixMe
-  reset: number
+  reset: $Call<typeof setTimeout, () => void>
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -69,7 +68,7 @@ export class MyModal extends Component<Props, State> {
   }
 
   componentWillUnmount() {
-    clearInterval(this.reset)
+    clearTimeout(this.reset)
   }
 
   renderMiddle = (styles: Object) => {
@@ -334,7 +333,7 @@ const ModalStyle = {
     position: 'relative',
     marginTop: scale(20),
     flex: 1,
-    height: Constants.BUTTON_HEIGHT,
+    height: Styles.BUTTON_HEIGHT,
     width: '100%',
     flexDirection: 'column',
     aligItems: 'center',
@@ -345,36 +344,36 @@ const ModalStyle = {
       position: 'relative',
       alignSelf: 'flex-start',
       width: '49%',
-      height: scale(Constants.BUTTON_HEIGHT)
+      height: scale(Styles.BUTTON_HEIGHT)
     },
     actionButtonWrap: {
       position: 'relative',
       alignSelf: 'flex-end',
       width: '49%',
-      height: scale(Constants.BUTTON_HEIGHT),
+      height: scale(Styles.BUTTON_HEIGHT),
       marginLeft: '2%'
     },
     actionButton: {
       up: {
         ...Styles.PrimaryButtonUpStyle,
-        width: Constants.BUTTON_100_PERCENT
+        width: '100%'
       },
       upText: Styles.PrimaryButtonUpTextStyle,
       down: {
         ...Styles.PrimaryButtonDownStyle,
-        width: Constants.BUTTON_100_PERCENT
+        width: '100%'
       },
       downText: Styles.PrimaryButtonDownTextStyle
     },
     cancelButton: {
       up: {
         ...Styles.SecondaryButtonUpStyle,
-        width: Constants.BUTTON_100_PERCENT
+        width: '100%'
       },
       upText: Styles.SecondaryButtonUpTextStyle,
       down: {
         ...Styles.SecondaryButtonDownStyle,
-        width: Constants.BUTTON_100_PERCENT
+        width: '100%'
       },
       downText: Styles.SecondaryButtonDownTextStyle
     }

@@ -17,7 +17,6 @@ import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common/Button.js'
 import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-import { SkipModal } from '../../modals/SkipModal.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {}
@@ -62,7 +61,6 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
         >
           <Header onBack={this.props.goBack} />
           {this.renderMain(NewAccountPasswordScreenStyle)}
-          {this.renderModal(NewAccountPasswordScreenStyle)}
         </KeyboardAwareScrollView>
       </SafeAreaView>
     )
@@ -115,13 +113,6 @@ class NewAccountPasswordScreenComponent extends Component<Props, State> {
         />
       </View>
     )
-  }
-
-  renderModal(style: typeof NewAccountPasswordScreenStyle) {
-    if (this.props.workflow.showModal) {
-      return <SkipModal />
-    }
-    return null
   }
 
   onSetNextFocus = () => {

@@ -10,14 +10,14 @@ import {
 } from 'react-native'
 
 import { validatePin } from '../../actions/CreateAccountActions.js'
+import * as Colors from '../../constants/Colors.js'
 import * as Constants from '../../constants/index.js'
 import type { Dispatch, RootState } from '../../types/ReduxTypes.js'
+import { scale } from '../../util/scaling.js'
 import { Spinner } from '../common/Spinner.js'
 import { connect } from '../services/ReduxStore.js'
 
-type OwnProps = {
-  style: Object
-}
+type OwnProps = {}
 type StateProps = {
   error: string,
   pin: string,
@@ -90,16 +90,15 @@ class FourDigitInputComponent extends Component<Props, State> {
   }
 
   render() {
-    const Style = this.props.style
     return (
       <TouchableWithoutFeedback onPress={this.refocus}>
-        <View style={Style.container}>
-          <View style={Style.interactiveContainer}>
-            {this.renderDotContainer(Style)}
-            {this.renderTextInput(Style)}
+        <View style={styles.container}>
+          <View style={styles.interactiveContainer}>
+            {this.renderDotContainer()}
+            {this.renderTextInput()}
           </View>
-          <View style={Style.errorContainer}>
-            <Text style={Style.errorText} numberOfLines={2}>
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText} numberOfLines={2}>
               {this.props.error}
             </Text>
           </View>
@@ -108,12 +107,12 @@ class FourDigitInputComponent extends Component<Props, State> {
     )
   }
 
-  renderTextInput = (style: Object) => {
+  renderTextInput = () => {
     if (this.props.wait < 1) {
       return (
         <TextInput
           ref={this.loadedInput}
-          style={style.input}
+          style={styles.input}
           onChangeText={this.updatePin}
           maxLength={4}
           keyboardType="numeric"
@@ -141,48 +140,79 @@ class FourDigitInputComponent extends Component<Props, State> {
     })
   }
 
-  renderCircleTest(style: Object) {
-    return style
-    // return {...style, borderColor: this.state.circleColor}
-  }
-
-  renderDotContainer(style: Object) {
+  renderDotContainer() {
     const pinLength = this.props.pin ? this.props.pin.length : 0
     if (this.props.wait > 0) {
       return <Spinner />
     }
     return (
-      <View style={style.dotContainer}>
-        <View
-          style={[
-            this.renderCircleTest(style.circle),
-            pinLength > 0 && style.circleSected
-          ]}
-        />
-        <View
-          style={[
-            this.renderCircleTest(style.circle),
-            pinLength > 1 && style.circleSected
-          ]}
-        />
-        <View
-          style={[
-            this.renderCircleTest(style.circle),
-            pinLength > 2 && style.circleSected
-          ]}
-        />
-        <View
-          style={[
-            this.renderCircleTest(style.circle),
-            pinLength > 3 && style.circleSected
-          ]}
-        />
+      <View style={styles.dotContainer}>
+        <View style={[styles.circle, pinLength > 0 && styles.circleSected]} />
+        <View style={[styles.circle, pinLength > 1 && styles.circleSected]} />
+        <View style={[styles.circle, pinLength > 2 && styles.circleSected]} />
+        <View style={[styles.circle, pinLength > 3 && styles.circleSected]} />
       </View>
     )
   }
 
   updatePin = (arg: string) => {
     this.props.onChangeText({ username: this.props.username, pin: arg })
+  }
+}
+
+const styles = {
+  // for new account PIN
+  container: {
+    paddingTop: scale(36),
+    width: scale(200),
+    height: scale(120)
+  },
+  interactiveContainer: {
+    height: scale(40),
+    width: '100%',
+    alignItems: 'center'
+  },
+  errorContainer: {
+    width: '100%',
+    height: scale(40),
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  dotContainer: {
+    height: '100%',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  errorText: {
+    width: '100%',
+    textAlign: 'center',
+    color: Colors.ACCENT_RED,
+    fontSize: scale(14),
+    paddingTop: scale(15)
+  },
+  input: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    opacity: 0
+  },
+  circle: {
+    borderWidth: scale(2),
+    borderColor: Colors.PRIMARY,
+    borderRadius: scale(15),
+    height: scale(30),
+    width: scale(30)
+  },
+  circleSected: {
+    backgroundColor: Colors.SECONDARY,
+    borderWidth: scale(2),
+    borderColor: Colors.PRIMARY,
+    borderRadius: scale(15),
+    height: scale(30),
+    width: scale(30)
   }
 }
 

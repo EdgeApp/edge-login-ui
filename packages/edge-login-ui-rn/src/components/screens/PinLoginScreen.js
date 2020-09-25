@@ -1,9 +1,14 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { sprintf } from 'sprintf-js'
 
-import { userLoginWithTouchId } from '../../actions/LoginAction.js'
+import {
+  userLoginWithPin,
+  userLoginWithTouchId
+} from '../../actions/LoginAction.js'
+import { deleteUserFromDevice } from '../../actions/UserActions.js'
 import * as Assets from '../../assets/index.js'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
@@ -20,7 +25,8 @@ import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { ImageButton } from '../common/ImageButton.js'
 import { DropDownList } from '../common/index.js'
-import { DeleteUserModal } from '../modals/DeleteUserModal.js'
+import { ButtonsModal } from '../modals/ButtonsModal.js'
+import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
@@ -31,36 +37,35 @@ type OwnProps = {
   primaryLogoCallback?: () => void
 }
 type StateProps = {
+  errorMessage: string,
+  isLoggingInWithPin: boolean,
   isTouchIdDisabled: boolean,
   loginSuccess: boolean,
-  showModal: boolean,
+  pin: string,
   touch: $PropertyType<RootState, 'touch'>,
   userDetails: Object,
   userList: Array<LoginUserInfo>,
-  username: string
+  username: string,
+  wait: number
 }
 type DispatchProps = {
   changeUser(string): void,
+  deleteUserFromDevice(username: string): Promise<void>,
   gotoLoginPage(): void,
-  launchDeleteModal(): void,
-  launchUserLoginWithTouchId(Object): void
+  launchUserLoginWithTouchId(Object): void,
+  loginWithPin(username: string, pin: string): void,
+  onChangeText(pin: string): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
-  loggingIn: boolean,
-  pin: string,
-  username: string,
-  focusOn: string
+  focusOn: 'pin' | 'List'
 }
 
-class PinLoginScreenComponent extends Component<Props, State> {
+class PinLoginScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      pin: '',
-      loggingIn: false,
-      username: '', // User we are deleting
       focusOn: 'pin'
     }
   }
@@ -80,20 +85,37 @@ class PinLoginScreenComponent extends Component<Props, State> {
     }
   }
 
+  handleDelete = (username: string) => {
+    const { deleteUserFromDevice } = this.props
+    this.setState({ focusOn: 'pin' })
+
+    Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        title={s.strings.delete_account}
+        message={sprintf(s.strings.delete_username_account, username)}
+        buttons={{
+          ok: { label: s.strings.delete },
+          cancel: { label: s.strings.cancel, type: 'secondary' }
+        }}
+      />
+    ))
+      .then(button => {
+        if (button !== 'ok') return
+        return deleteUserFromDevice(username)
+      })
+      .catch(showError)
+  }
+
   relaunchTouchId = () => {
     this.props.launchUserLoginWithTouchId({ username: this.props.username })
   }
 
-  renderModal = (style: typeof PinLoginScreenStyle) => {
-    if (this.props.showModal) {
-      return (
-        <DeleteUserModal
-          style={style.modal.skip}
-          username={this.state.username}
-        />
-      )
-    }
-    return null
+  handlePress = (value: string) => {
+    const { loginWithPin, onChangeText, pin, username } = this.props
+    const newPin = value === 'back' ? pin.slice(0, -1) : pin.concat(value)
+    onChangeText(newPin)
+    if (newPin.length === 4) loginWithPin(username, newPin)
   }
 
   render() {
@@ -109,6 +131,7 @@ class PinLoginScreenComponent extends Component<Props, State> {
   }
 
   renderOverImage() {
+    const { pin, wait } = this.props
     if (this.props.loginSuccess) {
       return null
     }
@@ -131,18 +154,22 @@ class PinLoginScreenComponent extends Component<Props, State> {
             <View style={PinLoginScreenStyle.featureBoxBody}>
               {this.renderBottomHalf(PinLoginScreenStyle)}
             </View>
-            {this.renderModal(PinLoginScreenStyle)}
           </View>
         </TouchableWithoutFeedback>
         <View style={PinLoginScreenStyle.spacer_full} />
         {this.props.userDetails.pinEnabled && (
-          <PinKeypad style={PinLoginScreenStyle.keypad} />
+          <PinKeypad
+            disabled={wait > 0 || pin.length === 4}
+            onPress={this.handlePress}
+          />
         )}
       </View>
     )
   }
 
   renderBottomHalf(style: typeof PinLoginScreenStyle) {
+    const { errorMessage, isLoggingInWithPin, pin, wait } = this.props
+
     if (this.state.focusOn === 'pin') {
       return (
         <View style={style.innerView}>
@@ -155,7 +182,18 @@ class PinLoginScreenComponent extends Component<Props, State> {
             upTextStyle={style.usernameButton.upTextStyle}
           />
           {this.props.userDetails.pinEnabled && (
-            <FourDigit style={style.fourPin} />
+            <FourDigit
+              error={
+                wait > 0
+                  ? `${errorMessage}: ${sprintf(
+                      s.strings.account_locked_for,
+                      wait
+                    )}`
+                  : errorMessage
+              }
+              pin={pin}
+              spinner={wait > 0 || pin.length === 4 || isLoggingInWithPin}
+            />
           )}
           {!this.props.userDetails.pinEnabled && <View style={style.spacer} />}
           {this.renderTouchImage()}
@@ -193,17 +231,9 @@ class PinLoginScreenComponent extends Component<Props, State> {
         data={item.item}
         style={PinLoginScreenStyle.listItem}
         onClick={this.selectUser.bind(this)}
-        onDelete={this.deleteUser.bind(this)}
+        onDelete={this.handleDelete}
       />
     )
-  }
-
-  deleteUser(arg: string) {
-    this.setState({
-      focusOn: 'pin',
-      username: arg
-    })
-    this.props.launchDeleteModal()
   }
 
   selectUser(arg: string) {
@@ -364,10 +394,6 @@ const PinLoginScreenStyle = {
       marginBottom: scale(20)
     }
   },
-  fourPin: {
-    marginTop: scale(20),
-    ...Styles.FourDotInputStyle
-  },
   usernameButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: {
@@ -407,19 +433,20 @@ const PinLoginScreenStyle = {
   touchImageText: {
     marginTop: scale(8),
     color: Constants.ACCENT_MINT
-  },
-  keypad: Styles.PinKeypadStyle
+  }
 }
 
 export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
+    errorMessage: state.login.errorMessage || '',
+    isLoggingInWithPin: state.login.isLoggingInWithPin,
     isTouchIdDisabled:
       state.login.loginSuccess ||
       !!state.login.wait ||
       state.login.isLoggingInWithPin ||
       (state.login.pin ? state.login.pin.length : 0) === 4,
     loginSuccess: state.login.loginSuccess,
-    showModal: state.workflow.showModal,
+    pin: state.login.pin || '',
     touch: state.touch,
     userDetails: state.previousUsers.userList.find(
       user => user.username === state.login.username
@@ -429,20 +456,27 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       isTouchIdEnabled: false
     },
     userList: state.previousUsers.userList,
-    username: state.login.username
+    username: state.login.username,
+    wait: state.login.wait
   }),
   (dispatch: Dispatch) => ({
     changeUser: (data: string) => {
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data })
     },
+    deleteUserFromDevice(username) {
+      return dispatch(deleteUserFromDevice(username))
+    },
     gotoLoginPage: () => {
       dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
-    launchDeleteModal: () => {
-      dispatch({ type: 'WORKFLOW_LAUNCH_MODAL' })
-    },
     launchUserLoginWithTouchId: (data: Object) => {
       dispatch(userLoginWithTouchId(data))
+    },
+    loginWithPin(username, pin) {
+      dispatch(userLoginWithPin({ username, pin }))
+    },
+    onChangeText(pin: string) {
+      dispatch({ type: 'AUTH_UPDATE_PIN', data: pin })
     }
   })
 )(PinLoginScreenComponent)

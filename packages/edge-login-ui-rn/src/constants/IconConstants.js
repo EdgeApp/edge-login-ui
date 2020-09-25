@@ -1,8 +1,5 @@
 // @flow
 
-export const FONT_AWESOME = 'fontAwesome'
-export const TRASH_O = 'trash-o'
-
 export const ION_ICONS = 'ionIcons'
 export const MAIL = 'ios-mail'
 export const LOCKED_ICON = 'ios-lock'

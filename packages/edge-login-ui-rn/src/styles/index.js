@@ -1,7 +1,6 @@
 // @flow
 
 export { LogoHeaderScaledStyle } from './components/LogoHeaderStyle'
-export { PinKeypadStyle } from './components/PinKeypadStyle'
 export * from './common/ButtonStyles'
 export * from './common/CenteredSpinnerStyle'
 export * from './common/CheckboxStyles'
@@ -11,7 +10,6 @@ export * from './common/InputStyles'
 export * from './common/ListItemStyles'
 export * from './common/LogoImageStyles'
 export * from './common/ModalStyles'
-export * from './components/FourDotInputStyle'
 export * from './components/OtpModalStyle'
 export * from './components/PasswordStatusStyle'
 export * from './ScreenStyle'

@@ -17,8 +17,7 @@ type Props = {
 }
 
 export class StaticModal extends Component<Props> {
-  // $FlowFixMe
-  reset: number
+  reset: $Call<typeof setTimeout, () => void>
   componentDidMount() {
     if (this.props.modalDismissTimerSeconds) {
       this.reset = setTimeout(() => {
@@ -111,7 +110,7 @@ const StaticModalStyle = {
   },
   header: {
     position: 'relative',
-    height: Constants.STATIC_MODAL_HEADER_HEIGHT,
+    height: 62,
     width: '100%',
     backgroundColor: Constants.TRANSPARENT,
     alignItems: 'center',
