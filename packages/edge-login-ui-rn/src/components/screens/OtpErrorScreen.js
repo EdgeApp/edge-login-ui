@@ -89,23 +89,10 @@ class OtpErrorScreenComponent extends React.Component<Props> {
   }
 
   render() {
-    const { otpError, otpResetDate, theme } = this.props
+    const { otpError, theme } = this.props
     const styles = getStyles(theme)
 
-    let date = otpResetDate
-    if (otpError.voucherActivates != null) date = otpError.voucherActivates
-
     const isIp = otpError.reason === 'ip'
-
-    function divider() {
-      return (
-        <View style={styles.dividerContainer}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>{s.strings.or}</Text>
-          <View style={styles.dividerLine} />
-        </View>
-      )
-    }
 
     return (
       <ThemedScene>
@@ -123,7 +110,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
             </Text>
           </View>
           <Text style={styles.body1}>{s.strings.otp_screen_approve}</Text>
-          {divider()}
+          {this.renderDivider(styles)}
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={this.handleQrModal}
@@ -142,24 +129,58 @@ class OtpErrorScreenComponent extends React.Component<Props> {
               <FontAwesome name="chevron-right" style={styles.buttonIcon} />
             </TouchableOpacity>
           )}
-          {divider()}
-          {date == null ? (
-            <TouchableOpacity
-              style={styles.buttonContainer}
-              onPress={this.handleResetModal}
-            >
-              <Text style={styles.buttonText}>
-                {s.strings.disable_otp_button_two}
-              </Text>
-              <FontAwesome name="chevron-right" style={styles.buttonIcon} />
-            </TouchableOpacity>
-          ) : (
-            <Text style={styles.body2}>
-              {sprintf(s.strings.otp_screen_wait, date.toLocaleString())}
-            </Text>
-          )}
+          {this.renderResetArea(styles)}
         </View>
       </ThemedScene>
+    )
+  }
+
+  renderResetArea(styles: $Call<typeof getStyles, Theme>): React.Node {
+    const { otpError, otpResetDate } = this.props
+
+    // If we have an automatic login date, show that:
+    let date = otpResetDate
+    if (otpError.voucherActivates != null) date = otpError.voucherActivates
+    if (date != null) {
+      return (
+        <>
+          {this.renderDivider(styles)}
+          <Text style={styles.body2}>
+            {sprintf(s.strings.otp_screen_wait, date.toLocaleString())}
+          </Text>
+        </>
+      )
+    }
+
+    // Otherwise, show the reset button if we have a token:
+    if (otpError.resetToken != null) {
+      return (
+        <>
+          {this.renderDivider(styles)}
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={this.handleResetModal}
+          >
+            <Text style={styles.buttonText}>
+              {s.strings.disable_otp_button_two}
+            </Text>
+            <FontAwesome name="chevron-right" style={styles.buttonIcon} />
+          </TouchableOpacity>
+        </>
+      )
+    }
+
+    // Otherwise, there is nothing to show here:
+    return null
+  }
+
+  renderDivider(styles: $Call<typeof getStyles, Theme>): React.Node {
+    return (
+      <View style={styles.dividerContainer}>
+        <View style={styles.dividerLine} />
+        <Text style={styles.dividerText}>{s.strings.or}</Text>
+        <View style={styles.dividerLine} />
+      </View>
     )
   }
 }
