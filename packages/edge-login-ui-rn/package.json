@@ -40,7 +40,7 @@
     "react-native-modal": "^11.0.1",
     "react-native-patina": "^0.1.3",
     "react-native-vector-icons": "^6.1.0",
-    "react-redux": "^5.0.7",
+    "react-redux": "^6.0.1",
     "redux": "~3.5.2",
     "redux-thunk": "~2.1.0",
     "sprintf-js": "^1.0.3",
