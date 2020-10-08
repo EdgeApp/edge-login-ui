@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.6.19 (2020-10-08)
+
+- rn: Upgrade to react-redux v6.0.1.
+- rn: Theme the delete user modal.
+
 ## 0.6.18 (2020-09-22)
 
 - rn: Fix a crash when rendering the SecondaryButton. This would occur when the 2fa reminder modal popped up.
