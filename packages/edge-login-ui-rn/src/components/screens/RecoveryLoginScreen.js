@@ -141,7 +141,8 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
     return <View style={styles.shim} />
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (nextProps.question1 !== this.props.question1) {
       this.setState({
         question1: nextProps.question1,

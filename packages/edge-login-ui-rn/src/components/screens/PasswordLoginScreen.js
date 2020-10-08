@@ -128,7 +128,8 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
       .catch(showError)
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (
       (nextProps.error && this.state.loggingIn) ||
       (this.state.loggingIn && nextProps.loginSuccess)

@@ -93,7 +93,8 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isEnabled !== this.props.isEnabled) {
       this.setState({
         question1: nextProps.question1,

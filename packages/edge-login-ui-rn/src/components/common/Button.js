@@ -30,7 +30,8 @@ class Button extends React.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isThinking !== this.state.isThinking) {
       this.setState({
         isThinking: nextProps.isThinking

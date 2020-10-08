@@ -25,7 +25,8 @@ class Checkbox extends React.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (this.props.disabled) {
       this.setState({
         onOff: nextProps.value

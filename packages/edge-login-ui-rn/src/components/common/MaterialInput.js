@@ -47,7 +47,8 @@ export class MaterialInput extends React.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (nextProps.value !== this.state.inputText) {
       this.setState({
         inputText: nextProps.value,
