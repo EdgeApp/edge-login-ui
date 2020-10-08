@@ -48,7 +48,7 @@ export class SecurityAlertsScreenComponent extends React.Component<
   Props,
   State
 > {
-  cleanups: (() => mixed)[] | void
+  cleanups: Array<() => mixed> | void
 
   constructor(props: Props) {
     super(props)

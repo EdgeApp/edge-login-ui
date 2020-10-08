@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, View } from 'react-native'
 
 import { PASSWORD_REQ_CHECKED, PASSWORD_REQ_UNCHECKED } from '../../assets'
@@ -19,7 +19,7 @@ type StateProps = {
 }
 type Props = OwnProps & StateProps
 
-class PasswordStatusComponent extends Component<Props> {
+class PasswordStatusComponent extends React.Component<Props> {
   render() {
     const style = this.props.style
     if (this.props.status) {

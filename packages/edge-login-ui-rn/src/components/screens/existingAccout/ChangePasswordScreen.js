@@ -1,7 +1,7 @@
 // @flow
 
 import { type EdgePasswordRules } from 'edge-core-js'
-import React, { Component } from 'react'
+import * as React from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
 
 import {
@@ -48,7 +48,7 @@ type State = {
   isProcessing: boolean
 }
 
-class ChangePasswordScreenComponent extends Component<Props, State> {
+class ChangePasswordScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {

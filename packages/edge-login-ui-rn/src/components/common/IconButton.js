@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { TouchableHighlight, View } from 'react-native'
 
 import { Icon } from './Icon.js'
@@ -15,7 +15,7 @@ type State = {
   pressed: boolean
 }
 
-class IconButton extends Component<Props, State> {
+class IconButton extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {

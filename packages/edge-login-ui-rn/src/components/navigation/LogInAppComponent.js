@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { View } from 'react-native'
 
 import { type WorkflowState } from '../../reducers/WorkflowReducer.js'
@@ -38,7 +38,7 @@ type StateProps = {
 }
 type Props = OwnProps & StateProps
 
-class LoginAppComponent extends Component<Props> {
+class LoginAppComponent extends React.Component<Props> {
   render() {
     const { ScreenStyle } = Styles
     return (

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Alert, Text, View } from 'react-native'
 
 import { createUser } from '../../../actions/CreateAccountActions.js'
@@ -37,7 +37,7 @@ type State = {
   focusOn: string
 }
 
-class NewAccountPinScreenComponent extends Component<Props, State> {
+class NewAccountPinScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {

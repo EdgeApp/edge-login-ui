@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import {
   Keyboard,
   Text,
@@ -35,7 +35,7 @@ type State = {
   circleColor: string
 }
 
-class FourDigitInputComponent extends Component<Props, State> {
+class FourDigitInputComponent extends React.Component<Props, State> {
   inputRef: TextInput | null
   keyboardDidShowListener: any
   keyboardDidHideListener: any

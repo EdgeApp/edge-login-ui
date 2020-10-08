@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, View } from 'react-native'
 
 import * as Assets from '../../assets/index.js'
@@ -29,7 +29,7 @@ type DispatchProps = {
 }
 type Props = OwnProps & DispatchProps
 
-class LandingScreenComponent extends Component<Props> {
+class LandingScreenComponent extends React.Component<Props> {
   render() {
     return (
       <View style={LandingScreenStyle.container}>

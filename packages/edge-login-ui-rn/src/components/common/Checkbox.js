@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Image, Text, TouchableWithoutFeedback, View } from 'react-native'
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 type State = {
   onOff: boolean
 }
-class Checkbox extends Component<Props, State> {
+class Checkbox extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -25,7 +25,8 @@ class Checkbox extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (this.props.disabled) {
       this.setState({
         onOff: nextProps.value

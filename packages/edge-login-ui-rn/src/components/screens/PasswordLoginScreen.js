@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { sprintf } from 'sprintf-js'
@@ -40,7 +40,7 @@ type StateProps = {
   previousUsers: LoginUserInfo[],
   touch: $PropertyType<RootState, 'touch'>,
   username: string,
-  usernameOnlyList: Array<string>
+  usernameOnlyList: string[]
 }
 type DispatchProps = {
   deleteUserFromDevice(username: string): Promise<void>,
@@ -60,7 +60,7 @@ type State = {
   usernameList: boolean
 }
 
-class PasswordLoginScreenComponent extends Component<Props, State> {
+class PasswordLoginScreenComponent extends React.Component<Props, State> {
   style: Object
 
   constructor(props: Props) {
@@ -128,7 +128,8 @@ class PasswordLoginScreenComponent extends Component<Props, State> {
       .catch(showError)
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (
       (nextProps.error && this.state.loggingIn) ||
       (this.state.loggingIn && nextProps.loginSuccess)

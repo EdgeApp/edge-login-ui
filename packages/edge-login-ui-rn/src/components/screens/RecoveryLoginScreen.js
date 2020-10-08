@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, View } from 'react-native'
 
 import { loginWithRecovery } from '../../actions/LoginAction.js'
@@ -30,7 +30,7 @@ type DispatchProps = {
   getQuestions(): void,
   goBack(): void,
   onCancel(): void,
-  submit(Array<string>): void,
+  submit(string[]): void,
   updateUsername(string): void
 }
 type Props = OwnProps & StateProps & DispatchProps
@@ -51,7 +51,7 @@ type State = {
   showUsernameModal: boolean
 }
 
-class RecoveryLoginScreenComponent extends Component<Props, State> {
+class RecoveryLoginScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -141,7 +141,8 @@ class RecoveryLoginScreenComponent extends Component<Props, State> {
     return <View style={styles.shim} />
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (nextProps.question1 !== this.props.question1) {
       this.setState({
         question1: nextProps.question1,
@@ -359,7 +360,7 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     onCancel() {
       dispatch({ type: 'CANCEL_RECOVERY_KEY' })
     },
-    submit(answers: Array<string>) {
+    submit(answers: string[]) {
       dispatch(loginWithRecovery(answers))
     },
     updateUsername(username: string) {

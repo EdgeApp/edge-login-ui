@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Image, View } from 'react-native'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   src: any // require(image)
 }
 
-class ImageHeaderComponent extends Component<Props> {
+class ImageHeaderComponent extends React.Component<Props> {
   render() {
     return (
       <View style={this.props.style.container}>

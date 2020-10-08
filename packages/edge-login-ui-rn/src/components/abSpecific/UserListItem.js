@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 
 import * as Constants from '../../constants/index.js'
@@ -13,7 +13,7 @@ type Props = {
   onDelete(string): void
 }
 
-class UserListItem extends Component<Props> {
+class UserListItem extends React.Component<Props> {
   deleteThis = () => {
     this.props.onDelete(this.props.data)
   }

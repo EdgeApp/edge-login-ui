@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Dimensions, Platform, Text, View } from 'react-native'
 import Mailer from 'react-native-mail'
 
@@ -38,7 +38,7 @@ type StateProps = {
   isEnabled: boolean,
   question1: string,
   question2: string,
-  questionsList: Array<string>,
+  questionsList: string[],
   saveButton: string,
   showEmailDialog: boolean,
   submitButton: string,
@@ -49,7 +49,7 @@ type DispatchProps = {
   deleteRecovery(): void,
   goBack(): void,
   returnToSettings(): void,
-  submit(questions: Array<string>, answers: Array<string>): void
+  submit(questions: string[], answers: string[]): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -71,7 +71,7 @@ type State = {
   showConfirmationModal: boolean
 }
 
-class ChangeRecoveryScreenComponent extends Component<Props, State> {
+class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -93,7 +93,8 @@ class ChangeRecoveryScreenComponent extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isEnabled !== this.props.isEnabled) {
       this.setState({
         question1: nextProps.question1,
@@ -637,7 +638,7 @@ export const PublicChangeRecoveryScreen = connect<
     returnToSettings() {
       dispatch(cancelRecoverySettingsScene())
     },
-    submit(questions: Array<string>, answers: Array<string>) {
+    submit(questions: string[], answers: string[]) {
       dispatch(changeRecoveryAnswers(questions, answers))
     }
   })

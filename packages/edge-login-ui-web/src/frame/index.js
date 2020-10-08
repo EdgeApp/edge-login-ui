@@ -33,7 +33,7 @@ export type EdgeUiContext = {
   +on: Subscriber<EdgeUiContextEvents>,
   +watch: Subscriber<EdgeUiContext>,
 
-  +localUsers: Array<EdgeUserInfo>,
+  +localUsers: EdgeUserInfo[],
 
   +windowVisible: boolean,
   hideWindow(): Promise<mixed>,

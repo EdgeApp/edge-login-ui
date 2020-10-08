@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import {
   ActivityIndicator,
   Dimensions,
@@ -43,7 +43,7 @@ type State = {
   showButtons: boolean
 }
 
-export class MyModal extends Component<Props, State> {
+export class MyModal extends React.Component<Props, State> {
   reset: $Call<typeof setTimeout, () => void>
   constructor(props: Props) {
     super(props)

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { View } from 'react-native'
 import { sprintf } from 'sprintf-js'
 
@@ -34,7 +34,7 @@ type State = {
   isProcessing: boolean
 }
 
-class NewAccountUsernameScreenComponent extends Component<Props, State> {
+class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, View } from 'react-native'
 
 import {
@@ -46,7 +46,7 @@ type State = {
   focusOn: string
 }
 
-class ChangePinScreenComponent extends Component<Props, State> {
+class ChangePinScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {

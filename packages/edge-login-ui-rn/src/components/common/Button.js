@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, TouchableHighlight, View } from 'react-native'
 
 import { Spinner } from './Spinner.js'
@@ -21,7 +21,7 @@ type State = {
   pressed: boolean
 }
 
-class Button extends Component<Props, State> {
+class Button extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -30,7 +30,8 @@ class Button extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isThinking !== this.state.isThinking) {
       this.setState({
         isThinking: nextProps.isThinking

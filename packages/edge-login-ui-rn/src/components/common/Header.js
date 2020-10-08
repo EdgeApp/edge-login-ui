@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Platform, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
@@ -31,7 +31,7 @@ type Props = OwnProps & StateProps
  * This is exported because ChangeRecoveryConfirmScreen isn't a real screen,
  * and pulls this in specially.
  */
-export class HeaderComponent extends Component<Props> {
+export class HeaderComponent extends React.Component<Props> {
   render() {
     const Style = HeaderContainerScaledStyle
     return (

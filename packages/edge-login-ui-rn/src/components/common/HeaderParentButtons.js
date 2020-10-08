@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Image, Linking, Text, TouchableOpacity, View } from 'react-native'
 
 import * as Assets from '../../assets/'
@@ -12,7 +12,7 @@ type Props = {
   parentButton?: Object
 }
 
-export class HeaderParentButtons extends Component<Props> {
+export class HeaderParentButtons extends React.Component<Props> {
   render() {
     const { parentButton, appId } = this.props
     const openEdgeSite = () => Linking.openURL(s.strings.edge_site)

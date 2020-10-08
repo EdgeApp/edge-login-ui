@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { ActivityIndicator } from 'react-native'
 import { type AirshipBridge } from 'react-native-airship'
 
@@ -30,7 +30,7 @@ type State = {
   spinning: boolean
 }
 
-class OtpResetModalComponent extends Component<Props, State> {
+class OtpResetModalComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = { spinning: false }

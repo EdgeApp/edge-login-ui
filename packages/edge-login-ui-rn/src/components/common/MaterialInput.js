@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { TextField } from 'react-native-material-textfield'
 
 import { InputStyles } from '../../styles/common/InputStyles.js'
@@ -30,7 +30,7 @@ type State = {
   inputText: string,
   autoFocus: boolean
 }
-export class MaterialInput extends Component<Props, State> {
+export class MaterialInput extends React.Component<Props, State> {
   textInput: TextField
 
   constructor(props: Props) {
@@ -47,7 +47,8 @@ export class MaterialInput extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (nextProps.value !== this.state.inputText) {
       this.setState({
         inputText: nextProps.value,

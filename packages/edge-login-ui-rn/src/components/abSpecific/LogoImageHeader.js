@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Image, TouchableWithoutFeedback, View } from 'react-native'
 
 import * as Assets from '../../assets/'
@@ -16,7 +16,7 @@ type State = {
   taps: number
 }
 
-class LogoImageHeader extends Component<Props, State> {
+class LogoImageHeader extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {

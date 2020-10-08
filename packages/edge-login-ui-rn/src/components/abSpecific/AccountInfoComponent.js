@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Text, View } from 'react-native'
 
 import s from '../../common/locales/strings.js'
@@ -23,7 +23,7 @@ type State = {
   collapsed: boolean
 }
 
-class AccountInfoComponent extends Component<Props, State> {
+class AccountInfoComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
