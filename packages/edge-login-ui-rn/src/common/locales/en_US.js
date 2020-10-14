@@ -46,9 +46,9 @@ const strings = {
   delete_account_header: 'Delete Account',
   delete_username_account:
     'Delete %1$s on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.',
-  disable_otp_header: 'Are you sure you want to disable 2FA',
+  disable_otp_header: 'Are you sure you want to disable 2FA?',
   disable_otp_modal_body:
-    '2FA will take 7 days to disable if no action is taken by the account user on authentiacated devices',
+    '2FA will take 7 days to disable if no action is taken by the account user on authenticated devices.',
   disable_otp_button: 'Disable 2FA',
   send_email_error_header: "Can't send email",
   email_error_modal:
