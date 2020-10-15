@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.6.20 (2020-10-15)
+
+- rn: Don't show the reset button without a reset token.
+- rn: Use more modern React methods & import styles.
+
 ## 0.6.19 (2020-10-08)
 
 - rn: Upgrade to react-redux v6.0.1.
