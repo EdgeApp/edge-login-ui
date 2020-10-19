@@ -290,18 +290,6 @@ const LoginWithRecoveryStyles = {
   shim: {
     height: 20
   },
-  textIconButton: Styles.TextAndIconButtonAlignEdgesStyle,
-  textIconButtonErrorError: {
-    ...Styles.TextAndIconButtonAlignEdgesStyle,
-    text: {
-      ...Styles.TextAndIconButtonAlignEdgesStyle.text,
-      color: Constants.ACCENT_RED
-    },
-    icon: {
-      ...Styles.TextAndIconButtonAlignEdgesStyle.icon,
-      color: Constants.ACCENT_RED
-    }
-  },
   submitButton: {
     upStyle: Styles.PrimaryButtonUpStyle,
     upTextStyle: Styles.PrimaryButtonUpTextStyle,

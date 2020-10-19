@@ -267,9 +267,7 @@ const TextAndIconButtonAlignEdgesStyle = {
     width: '100%',
     height: '100%',
     justifyContent: 'space-around',
-    alignItems: 'center',
-    borderColor: Constants.GRAY_1,
-    borderBottomWidth: 2
+    alignItems: 'center'
   },
   centeredContent: {
     width: '100%'
