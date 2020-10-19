@@ -10,6 +10,7 @@ import {
   View
 } from 'react-native'
 import Modal from 'react-native-modal'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
@@ -176,8 +177,13 @@ export class MyModal extends React.Component<Props, State> {
     return (
       <IconButton
         style={styles.closeIconButton}
-        icon={Constants.CLOSE_ICON}
-        iconType={Constants.MATERIAL_ICONS}
+        icon={
+          <MaterialIcon
+            name="close"
+            style={styles.closeIconButton.icon}
+            size={styles.closeIconButton.iconSize}
+          />
+        }
         onPress={this.props.cancel}
       />
     )

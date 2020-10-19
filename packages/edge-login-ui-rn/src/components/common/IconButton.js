@@ -1,16 +1,14 @@
 // @flow
 
 import * as React from 'react'
-import { TouchableHighlight, View } from 'react-native'
-
-import { Icon } from './Icon.js'
+import { TouchableOpacity, View } from 'react-native'
 
 type Props = {
-  icon: string,
+  icon: React.Node,
   style: any,
-  onPress: Function,
-  iconType: string
+  onPress: Function
 }
+
 type State = {
   pressed: boolean
 }
@@ -39,39 +37,14 @@ class IconButton extends React.Component<Props, State> {
     })
   }
 
-  renderIcon(icon: Object, iconPressed: Object, iconSize: number) {
-    let style = icon
-    if (this.state.pressed) {
-      style = iconPressed
-    }
-    return (
-      <Icon
-        style={style}
-        name={this.props.icon}
-        size={iconSize}
-        type={this.props.iconType}
-      />
-    )
-  }
-
   render() {
-    const {
-      container,
-      icon,
-      iconPressed,
-      iconSize,
-      underlayColor
-    } = this.props.style
     return (
-      <TouchableHighlight
-        style={container}
+      <TouchableOpacity
+        style={this.props.style.container}
         onPress={this._onPressButton}
-        onShowUnderlay={this._onShowUnderlay}
-        onHideUnderlay={this._onHideUnderlay}
-        underlayColor={underlayColor}
       >
-        <View>{this.renderIcon(icon, iconPressed, iconSize)}</View>
-      </TouchableHighlight>
+        <View>{this.props.icon}</View>
+      </TouchableOpacity>
     )
   }
 }
