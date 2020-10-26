@@ -39,6 +39,7 @@ type State = {
   needsResecure: boolean,
   otpResetDate: string | void,
   pendingVouchers: EdgePendingVoucher[],
+  showSkip: boolean,
   spinDeny: boolean,
   spinReset: boolean,
   spinVoucher: { [voucherId: string]: boolean }
@@ -57,6 +58,7 @@ export class SecurityAlertsScreenComponent extends React.Component<
       needsResecure: props.account.recoveryLogin,
       otpResetDate,
       pendingVouchers,
+      showSkip: false,
       spinDeny: false,
       spinReset: false,
       spinVoucher: {}
@@ -81,7 +83,7 @@ export class SecurityAlertsScreenComponent extends React.Component<
 
   render() {
     const { theme } = this.props
-    const { otpResetDate, pendingVouchers, spinDeny } = this.state
+    const { otpResetDate, pendingVouchers, showSkip, spinDeny } = this.state
     const styles = getStyles(theme)
 
     const count = pendingVouchers.length + (otpResetDate != null ? 1 : 0)
@@ -108,6 +110,11 @@ export class SecurityAlertsScreenComponent extends React.Component<
           </Text>
           {this.renderVouchers()}
           {this.renderReset()}
+          {showSkip ? (
+            <TouchableOpacity onPress={this.handleSkip}>
+              <Text style={styles.cardLink}>{s.strings.skip_button}</Text>
+            </TouchableOpacity>
+          ) : null}
         </ScrollView>
         {spinDeny ? (
           <PrimaryButton marginRem={1} spinner />
@@ -194,10 +201,15 @@ export class SecurityAlertsScreenComponent extends React.Component<
     const { account } = this.props
     this.setState({ spinReset: true })
 
-    account.disableOtp().catch(error => {
-      showError(error)
-      this.setState({ spinReset: false })
-    })
+    account
+      .disableOtp()
+      .catch(error => showError(error))
+      .then(() =>
+        this.setState({
+          showSkip: true,
+          spinReset: false
+        })
+      )
   }
 
   handleApproveVoucher = (voucherId: string) => {
@@ -207,12 +219,14 @@ export class SecurityAlertsScreenComponent extends React.Component<
     }))
 
     const { approveVoucher = nopVoucher } = account
-    approveVoucher(voucherId).catch(error => {
-      showError(error)
-      this.setState(state => ({
-        spinVoucher: { ...state.spinVoucher, [voucherId]: false }
-      }))
-    })
+    approveVoucher(voucherId)
+      .catch(error => showError(error))
+      .then(() =>
+        this.setState(state => ({
+          showSkip: true,
+          spinVoucher: { ...state.spinVoucher, [voucherId]: false }
+        }))
+      )
   }
 
   handleDeny = () => {
@@ -228,19 +242,28 @@ export class SecurityAlertsScreenComponent extends React.Component<
       promises.push(account.cancelOtpReset())
     }
 
-    Promise.all(promises).catch(error => {
-      showError(error)
-      this.setState({ spinDeny: false })
-    })
+    Promise.all(promises)
+      .catch(error => showError(error))
+      .then(() =>
+        this.setState({
+          showSkip: true,
+          spinDeny: false
+        })
+      )
+  }
+
+  handleSkip = () => {
+    const { account, submitLogin } = this.props
+    submitLogin(account)
   }
 
   checkEmpty = () => {
-    const { account } = this.props
+    const { account, startResecure, submitLogin } = this.props
     const { needsResecure, otpResetDate, pendingVouchers } = this.state
 
     if (otpResetDate == null && pendingVouchers.length <= 0) {
-      if (needsResecure) this.props.startResecure(account)
-      else this.props.submitLogin(account)
+      if (needsResecure) startResecure(account)
+      else submitLogin(account)
     }
   }
 }
