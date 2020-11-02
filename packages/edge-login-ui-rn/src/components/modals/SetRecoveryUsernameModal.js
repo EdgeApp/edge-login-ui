@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import IonIcon from 'react-native-vector-icons/Ionicons'
+import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 
 import s from '../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
@@ -16,9 +16,9 @@ type OwnProps = {
 const mapStateToProps = (state: RootState) => ({
   headerText: s.strings.password_recovery,
   icon: (
-    <IonIcon
+    <AntDesignIcon
       style={ModalStyle.iconStyle}
-      name="ios-lock"
+      name="lock"
       size={ModalStyle.iconSize}
     />
   ),
