@@ -10,20 +10,19 @@ import {
   View
 } from 'react-native'
 import Modal from 'react-native-modal'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { scale } from '../../util/scaling.js'
 import { IconButton } from '../common/IconButton.js'
 import { Button } from './Button.js'
-import { Icon } from './Icon.js'
 
 type Props = {
   styles?: Object,
   headerText: string,
   headerSubtext: string,
-  icon: string,
-  iconType: string,
+  icon: React.Node,
   image?: string,
   actionLabel: string,
   cancelLabel: string,
@@ -144,12 +143,7 @@ export class MyModal extends React.Component<Props, State> {
     )
   }
 
-  renderGradient = (
-    styles: Object,
-    icon: string,
-    iconType: string,
-    image?: string
-  ) => {
+  renderGradient = (styles: Object, icon: React.Node, image?: string) => {
     if (image) {
       return (
         <View style={styles.modalHeaderIconWrapBottom}>
@@ -158,14 +152,7 @@ export class MyModal extends React.Component<Props, State> {
       )
     }
     return (
-      <View style={styles.modalHeaderIconWrapBottom}>
-        <Icon
-          style={styles.iconStyle}
-          name={icon}
-          size={styles.iconSize}
-          type={iconType}
-        />
-      </View>
+      <View style={styles.modalHeaderIconWrapBottom}>{this.props.icon}</View>
     )
   }
 
@@ -176,8 +163,13 @@ export class MyModal extends React.Component<Props, State> {
     return (
       <IconButton
         style={styles.closeIconButton}
-        icon={Constants.CLOSE_ICON}
-        iconType={Constants.MATERIAL_ICONS}
+        icon={
+          <MaterialIcon
+            name="close"
+            style={styles.closeIconButton.icon}
+            size={styles.closeIconButton.iconSize}
+          />
+        }
         onPress={this.props.cancel}
       />
     )
@@ -185,7 +177,7 @@ export class MyModal extends React.Component<Props, State> {
 
   render() {
     const styles = this.props.styles ? this.props.styles : ModalStyle
-    const { headerText, headerSubtext, icon, iconType, image } = this.props
+    const { headerText, headerSubtext, icon, image } = this.props
 
     const deviceWidth = Dimensions.get('window').width
     const deviceHeight =
@@ -219,7 +211,7 @@ export class MyModal extends React.Component<Props, State> {
             </View>
           </View>
         </View>
-        {this.renderGradient(styles, icon, iconType, image)}
+        {this.renderGradient(styles, icon, image)}
       </Modal>
     )
   }
@@ -231,7 +223,8 @@ const screenDimensions = {
   height: Dimensions.get('window').height,
   width: Dimensions.get('window').width
 }
-const ModalStyle = {
+
+export const ModalStyle = {
   container: {
     position: 'absolute',
     bottom: OFFSET_HACK,

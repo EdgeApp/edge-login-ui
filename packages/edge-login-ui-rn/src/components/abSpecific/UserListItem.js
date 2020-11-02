@@ -2,8 +2,8 @@
 
 import * as React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import * as Constants from '../../constants/index.js'
 import { IconButton } from '../common/IconButton.js'
 
 type Props = {
@@ -40,8 +40,13 @@ class UserListItem extends React.Component<Props> {
           </View>
           <IconButton
             style={style.iconButton}
-            icon={Constants.CLOSE_ICON}
-            iconType={Constants.MATERIAL_ICONS}
+            icon={
+              <MaterialIcon
+                style={style.iconButton.icon}
+                name="close"
+                size={style.iconButton.iconSize}
+              />
+            }
             onPress={this.deleteThis}
           />
         </View>

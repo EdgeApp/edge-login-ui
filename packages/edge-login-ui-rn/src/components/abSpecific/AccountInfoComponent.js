@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { Text, View } from 'react-native'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
@@ -131,15 +132,25 @@ class AccountInfoComponent extends React.Component<Props, State> {
     const msg = this.state.collapsed
       ? s.strings.show_account_info
       : s.strings.hide_account_info
-    const icon = this.state.collapsed
-      ? Constants.KEYBOARD_ARROW_DOWN
-      : Constants.KEYBOARD_ARROW_UP
+    const icon = this.state.collapsed ? (
+      <MaterialIcon
+        style={style.textIconButton.icon}
+        name="keyboard-arrow-down"
+        size={style.textIconButton.iconSize}
+      />
+    ) : (
+      <MaterialIcon
+        style={style.textIconButton.icon}
+        name="keyboard-arrow-up"
+        size={style.textIconButton.iconSize}
+      />
+    )
+
     return (
       <View style={style.top}>
         <TextAndIconButton
           style={style.textIconButton}
           icon={icon}
-          iconType={Constants.MATERIAL_ICONS}
           onPress={this.onPress}
           title={msg}
         />

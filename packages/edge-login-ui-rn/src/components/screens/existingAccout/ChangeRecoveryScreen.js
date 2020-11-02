@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { Dimensions, Platform, Text, View } from 'react-native'
 import Mailer from 'react-native-mail'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {
   cancelRecoverySettingsScene,
@@ -291,8 +292,13 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         <View style={styles.questionRow}>
           <TextAndIconButton
             onPress={this.onSelectQuestionOne}
-            icon={Constants.KEYBOARD_ARROW_DOWN}
-            iconStyle={Constants.MATERIAL_ICONS}
+            icon={
+              <MaterialIcon
+                style={questionOneStyle.icon}
+                name="keyboard-arrow-down"
+                size={questionOneStyle.iconSize}
+              />
+            }
             style={questionOneStyle}
             numberOfLines={2}
             title={this.state.question1}
@@ -313,8 +319,13 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         <View style={styles.questionRow}>
           <TextAndIconButton
             onPress={this.onSelectQuestionTwo}
-            icon={Constants.KEYBOARD_ARROW_DOWN}
-            iconStyle={Constants.MATERIAL_ICONS}
+            icon={
+              <MaterialIcon
+                style={questionTwoStyle.icon}
+                name="keyboard-arrow-down"
+                size={questionTwoStyle.iconSize}
+              />
+            }
             style={questionTwoStyle}
             numberOfLines={2}
             title={this.state.question2}
@@ -498,7 +509,9 @@ const RecoverPasswordSceneStyles = {
   },
   questionRow: {
     height: scale(60),
-    width: '100%'
+    width: '100%',
+    borderColor: Constants.GRAY_2,
+    borderBottomWidth: scale(2)
   },
   answerRow: {
     width: '100%',

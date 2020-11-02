@@ -1,8 +1,8 @@
 // @flow
-
 import * as React from 'react'
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { sprintf } from 'sprintf-js'
 
 import { userLogin } from '../../actions/LoginAction.js'
@@ -215,6 +215,19 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   }
 
   renderUsername(styles: typeof LoginPasswordScreenStyle) {
+    const icon = this.state.usernameList ? (
+      <MaterialIcon
+        style={styles.iconButton.icon}
+        name="expand-less"
+        size={styles.iconButton.iconSize}
+      />
+    ) : (
+      <MaterialIcon
+        style={styles.iconButton.icon}
+        name="expand-more"
+        size={styles.iconButton.iconSize}
+      />
+    )
     return (
       <View>
         <View style={styles.usernameWrapper}>
@@ -233,12 +246,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
           />
           <IconButton
             style={this.style.iconButton}
-            icon={
-              this.state.usernameList
-                ? Constants.EXPAND_LESS
-                : Constants.EXPAND_MORE
-            }
-            iconType={Constants.MATERIAL_ICONS}
+            icon={icon}
             onPress={this.toggleUsernameList.bind(this)}
           />
         </View>

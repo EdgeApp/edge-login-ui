@@ -1,11 +1,10 @@
 // @flow
 
 import * as React from 'react'
-import { Text, TouchableHighlight, View } from 'react-native'
-import FAIcon from 'react-native-vector-icons/MaterialIcons'
+import { Text, TouchableOpacity, View } from 'react-native'
 
 type Props = {
-  icon: string,
+  icon: React.Node,
   style: any,
   onPress: Function,
   title: string,
@@ -20,44 +19,7 @@ class TextAndIconButton extends React.Component<Props, State> {
   numberOfLines: number
   constructor(props: Props) {
     super(props)
-    this.state = {
-      pressed: false
-    }
     this.numberOfLines = this.props.numberOfLines || 1
-  }
-
-  _onPressButton() {
-    this.props.onPress()
-  }
-
-  _onShowUnderlay() {
-    this.setState({
-      pressed: true
-    })
-  }
-
-  _onHideUnderlay() {
-    this.setState({
-      pressed: false
-    })
-  }
-
-  // TODO: allen- test with icon on main app. - not working on sample.
-  renderIcon(iconStyle: Object, iconPressedStyle: Object, iconSize: number) {
-    try {
-      /* return <Text style={[iconStyle, this.state.pressed && iconPressedStyle]}>
-        {this.props.icon}
-      </Text> */
-      return (
-        <FAIcon
-          style={[iconStyle, this.state.pressed && iconPressedStyle]}
-          name={this.props.icon}
-          size={iconSize}
-        />
-      )
-    } catch (e) {
-      console.log('Error')
-    }
   }
 
   render() {
@@ -67,38 +29,25 @@ class TextAndIconButton extends React.Component<Props, State> {
       inner,
       textContainer,
       iconContainer,
-      text,
-      textPressed,
-      icon,
-      iconPressed,
-      iconSize,
-      underlayColor
+      text
     } = this.props.style
     return (
-      <TouchableHighlight
-        style={container}
-        onPress={this._onPressButton.bind(this)}
-        onShowUnderlay={this._onShowUnderlay.bind(this)}
-        onHideUnderlay={this._onHideUnderlay.bind(this)}
-        underlayColor={underlayColor}
-      >
+      <TouchableOpacity style={container} onPress={this.props.onPress}>
         <View style={centeredContent}>
           <View style={inner}>
             <View style={textContainer}>
               <Text
-                style={[text, this.state.pressed && textPressed]}
+                style={text}
                 ellipsizeMode="middle"
                 numberOfLines={this.numberOfLines}
               >
                 {this.props.title + ' '}
               </Text>
             </View>
-            <View style={iconContainer}>
-              {this.renderIcon(icon, iconPressed, iconSize)}
-            </View>
+            <View style={iconContainer}>{this.props.icon}</View>
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 }
