@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.6.21 (2020-11-02)
+
+- rn: Add a skip button to the security alert screen.
+- rn: Fix layout issues on iPhone 12 devices.
+- rn: Clean various icon-related components.
+
 ## 0.6.20 (2020-10-15)
 
 - rn: Don't show the reset button without a reset token.
