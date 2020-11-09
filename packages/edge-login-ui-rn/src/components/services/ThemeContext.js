@@ -10,9 +10,9 @@ export type { Theme }
 /**
  * Utility type for declaring `withTheme` components.
  */
-export type ThemeProps = {
+export type ThemeProps = {|
   theme: Theme
-}
+|}
 
 // Provide the theme context methods:
 export const {
