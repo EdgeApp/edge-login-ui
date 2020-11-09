@@ -6,7 +6,6 @@ import { Text, View } from 'react-native'
 import { loginWithRecovery } from '../../actions/LoginAction.js'
 import { getRecoveryQuestions } from '../../actions/PasswordRecoveryActions.js'
 import s from '../../common/locales/strings.js'
-import { RecoverPasswordUsernameInput } from '../../connectors/componentConnectors/RecoverPasswordUsernameInput.js'
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
@@ -14,8 +13,9 @@ import { Button } from '../common/Button.js'
 import { Header } from '../common/Header.js'
 import { FormField } from '../common/index.js'
 import SafeAreaViewGradient from '../common/SafeAreaViewGradient.js'
-import { SetRecoveryUsernameModal } from '../modals/SetRecoveryUsernameModal.js'
+import { Airship } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
+import { ThemedInputModal } from '../themed/ThemedInputModal.js'
 
 type OwnProps = {
   showHeader?: boolean
@@ -27,7 +27,7 @@ type StateProps = {
   submitButton: string
 }
 type DispatchProps = {
-  getQuestions(): void,
+  getQuestions(username: string): Promise<string | void>,
   goBack(): void,
   onCancel(): void,
   submit(string[]): void,
@@ -47,8 +47,7 @@ type State = {
   errorTwo: boolean,
   errorQuestionOne: boolean,
   errorQuestionTwo: boolean,
-  disableConfirmationModal: boolean,
-  showUsernameModal: boolean
+  disableConfirmationModal: boolean
 }
 
 class RecoveryLoginScreenComponent extends React.Component<Props, State> {
@@ -66,10 +65,32 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
       errorTwo: false,
       errorQuestionOne: false,
       errorQuestionTwo: false,
-      disableConfirmationModal: false,
-      showUsernameModal: true
+      disableConfirmationModal: false
     }
     this.props.updateUsername('')
+  }
+
+  componentDidMount() {
+    this.getLoginPasswordRecoveryUsernameModal()
+  }
+
+  getLoginPasswordRecoveryUsernameModal = async () => {
+    if (this.props.question1 === s.strings.choose_recovery_question) {
+      const result = await Airship.show(bridge => (
+        <ThemedInputModal
+          bridge={bridge}
+          buttonLabel={s.strings.next_label}
+          inputLabel={s.strings.username}
+          message={s.strings.recover_by_username}
+          onSubmit={this.props.getQuestions}
+          title={s.strings.password_recovery}
+        />
+      ))
+
+      if (!result) {
+        this.props.goBack()
+      }
+    }
   }
 
   renderHeader = () => {
@@ -106,28 +127,6 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  renderModal = (styles: typeof LoginWithRecoveryStyles) => {
-    if (!this.state.showUsernameModal) return null
-    const middle = (
-      <View style={styles.modalMiddle}>
-        <Text style={styles.staticModalText}>
-          {s.strings.recover_by_username}
-        </Text>
-        <RecoverPasswordUsernameInput
-          style={styles.inputModal}
-          onSubmitEditing={this.props.getQuestions}
-        />
-      </View>
-    )
-    return (
-      <SetRecoveryUsernameModal
-        modalMiddleComponent={middle}
-        cancel={this.props.onCancel}
-        action={this.props.getQuestions}
-      />
-    )
-  }
-
   renderError(styles: typeof LoginWithRecoveryStyles) {
     if (this.props.loginError) {
       return (
@@ -146,14 +145,12 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
     if (nextProps.question1 !== this.props.question1) {
       this.setState({
         question1: nextProps.question1,
-        question2: nextProps.question2,
-        showUsernameModal: false
+        question2: nextProps.question2
       })
     }
   }
 
   render() {
-    // const middle = this.renderForm(RecoverPasswordSceneStyles)
     const styles = LoginWithRecoveryStyles
     const form1Style = this.state.errorOne ? styles.inputError : styles.input
     const form2Style = this.state.errorTwo ? styles.inputError : styles.input
@@ -206,7 +203,6 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
               />
             </View>
           </View>
-          {this.renderModal(styles)}
         </View>
       </SafeAreaViewGradient>
     )
@@ -339,8 +335,8 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     submitButton: s.strings.submit
   }),
   (dispatch: Dispatch) => ({
-    getQuestions() {
-      dispatch(getRecoveryQuestions())
+    getQuestions(username: string) {
+      return dispatch(getRecoveryQuestions(username))
     },
     goBack() {
       dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })

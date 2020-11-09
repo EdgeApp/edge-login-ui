@@ -46,12 +46,6 @@ export const passwordRecovery: Reducer<
         recoveryKey: action.data.recoveryKey,
         userQuestions: action.data.userQuestions
       }
-    case 'ON_RECOVERY_LOGIN_NOT_ENABLED':
-      return {
-        ...state,
-        recoveryLoginEnabledError: true,
-        recoveryErrorMessage: action.data
-      }
     case 'DISMISS_REOVERY_ERROR':
       return {
         ...state,

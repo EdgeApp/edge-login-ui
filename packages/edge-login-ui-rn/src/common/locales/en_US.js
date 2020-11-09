@@ -54,6 +54,7 @@ const strings = {
   email_error_modal:
     "Please set up an email client that is default to your device's OS in order to send a token to yourself",
   password_recovery: 'Password Recovery',
+  password_recovery_error: 'Invalid recovery link or username does not exist',
   save_recovery_token: 'Save Recovery Token',
   must_ten_characters: 'Must have at least 10 characters',
   must_one_lowercase: 'Must have at least 1 lowercase letter',

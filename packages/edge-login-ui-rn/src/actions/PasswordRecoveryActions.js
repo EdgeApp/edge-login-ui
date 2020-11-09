@@ -1,15 +1,16 @@
 // @flow
 
+import s from '../common/locales/strings.js'
+import { showError } from '../components/services/AirshipInstance.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 
 /**
  * Prepares what is needed for the recovery login scene.
  */
-export function getRecoveryQuestions() {
+export function getRecoveryQuestions(username: string) {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const context = imports.context
-    const username = state.login.username
     const recoveryKey = state.login.recoveryToken || ''
     try {
       const userQuestions = await context.fetchRecovery2Questions(
@@ -21,13 +22,9 @@ export function getRecoveryQuestions() {
         userQuestions
       }
       dispatch({ type: 'ON_RECOVERY_LOGIN_IS_ENABLED', data: obj })
+      return 'done' // have to return a string even though it is not needed for this to function
     } catch (e) {
-      if (e.message === 'No recovery key stored locally.') {
-        dispatch({ type: 'ON_RECOVERY_LOGIN_NOT_ENABLED', data: e.message })
-        return
-      }
-      dispatch({ type: 'ON_RECOVERY_LOGIN_NOT_ENABLED', data: e.message })
-      console.log(e)
+      showError(s.strings.password_recovery_error)
     }
   }
 }

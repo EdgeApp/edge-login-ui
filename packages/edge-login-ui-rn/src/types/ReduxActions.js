@@ -78,7 +78,6 @@ export type Action =
         userQuestions: string[]
       }
     }
-  | { type: 'ON_RECOVERY_LOGIN_NOT_ENABLED', data?: string /* error */ }
   | {
       type: 'OTP_ERROR',
       data: {
