@@ -17,15 +17,14 @@ import { Airship } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 import { ThemedInputModal } from '../themed/ThemedInputModal.js'
 
-type OwnProps = {
-  showHeader?: boolean
-}
+type OwnProps = {}
+
 type StateProps = {
   loginError: string,
   question1: string,
-  question2: string,
-  submitButton: string
+  question2: string
 }
+
 type DispatchProps = {
   getQuestions(username: string): Promise<string | void>,
   goBack(): void,
@@ -33,22 +32,19 @@ type DispatchProps = {
   submit(string[]): void,
   updateUsername(string): void
 }
-type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
   question1: string,
   question2: string,
   answer1: string,
   answer2: string,
-  showQuestionPicker: boolean,
   focusFirst: boolean,
   focusSecond: boolean,
   errorOne: boolean,
-  errorTwo: boolean,
-  errorQuestionOne: boolean,
-  errorQuestionTwo: boolean,
-  disableConfirmationModal: boolean
+  errorTwo: boolean
 }
+
+type Props = OwnProps & StateProps & DispatchProps
 
 class RecoveryLoginScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -58,14 +54,10 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
       question2: this.props.question2,
       answer1: '',
       answer2: '',
-      showQuestionPicker: false,
       focusFirst: false,
       focusSecond: false,
       errorOne: false,
-      errorTwo: false,
-      errorQuestionOne: false,
-      errorQuestionTwo: false,
-      disableConfirmationModal: false
+      errorTwo: false
     }
     this.props.updateUsername('')
   }
@@ -91,13 +83,6 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
         this.props.goBack()
       }
     }
-  }
-
-  renderHeader = () => {
-    if (this.props.showHeader) {
-      return <Header onBack={this.props.goBack} />
-    }
-    return null
   }
 
   onSubmit = () => {
@@ -158,7 +143,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
     return (
       <SafeAreaViewGradient>
         <View style={styles.screen}>
-          {this.renderHeader()}
+          <Header onBack={this.props.goBack} />
           <View style={styles.body}>
             <View style={styles.questionRow}>
               <Text style={styles.questionText}>{this.props.question1}</Text>
@@ -199,7 +184,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
                 downTextStyle={styles.submitButton.downTextStyle}
                 upStyle={styles.submitButton.upStyle}
                 upTextStyle={styles.submitButton.upTextStyle}
-                label={this.props.submitButton}
+                label={s.strings.submit}
               />
             </View>
           </View>
@@ -330,9 +315,7 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     question2:
       state.passwordRecovery.userQuestions.length > 1
         ? state.passwordRecovery.userQuestions[1]
-        : s.strings.choose_recovery_question,
-    showHeader: true,
-    submitButton: s.strings.submit
+        : s.strings.choose_recovery_question
   }),
   (dispatch: Dispatch) => ({
     getQuestions(username: string) {
