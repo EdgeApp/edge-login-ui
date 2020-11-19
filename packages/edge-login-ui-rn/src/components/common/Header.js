@@ -105,9 +105,9 @@ const HeaderContainerScaledStyle = {
       position: 'relative',
       top: scale(1),
       paddingLeft: scale(10),
-      paddingRight: scale(6),
+      paddingRight: scale(2),
       color: Constants.WHITE,
-      fontSize: scale(20)
+      fontSize: scale(22)
     },
     sideText: {
       color: Constants.WHITE,
