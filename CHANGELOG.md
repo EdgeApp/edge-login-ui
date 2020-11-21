@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.22 (2020-11-20)
+
+- rn: Use a different icon for the back button.
+
 ## 0.6.21 (2020-11-02)
 
 - rn: Add a skip button to the security alert screen.
