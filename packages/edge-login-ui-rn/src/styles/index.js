@@ -2,7 +2,6 @@
 
 export { LogoHeaderScaledStyle } from './components/LogoHeaderStyle'
 export * from './common/ButtonStyles'
-export * from './common/CenteredSpinnerStyle'
 export * from './common/CheckboxStyles'
 export * from './common/Fonts'
 export * from './common/FormFieldStyle'

@@ -1,11 +1,10 @@
 // @flow
 
 import * as React from 'react'
-import { Text, View } from 'react-native'
+import { ActivityIndicator, Text, View } from 'react-native'
 
 import * as Colors from '../../constants/Colors.js'
 import { scale } from '../../util/scaling.js'
-import { Spinner } from '../common/Spinner.js'
 
 type Props = {
   error: string | null,
@@ -19,7 +18,11 @@ export class FourDigit extends React.PureComponent<Props> {
     return (
       <View style={styles.container}>
         <View style={styles.interactiveContainer}>
-          {spinner ? <Spinner /> : this.renderDotContainer()}
+          {spinner ? (
+            <ActivityIndicator color={Colors.ACCENT_MINT} size="large" />
+          ) : (
+            this.renderDotContainer()
+          )}
         </View>
         <View style={styles.errorContainer}>
           <Text style={styles.errorText} numberOfLines={2}>

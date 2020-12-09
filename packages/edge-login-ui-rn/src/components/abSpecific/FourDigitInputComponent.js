@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import {
+  ActivityIndicator,
   Keyboard,
   Text,
   TextInput,
@@ -14,7 +15,6 @@ import * as Colors from '../../constants/Colors.js'
 import * as Constants from '../../constants/index.js'
 import type { Dispatch, RootState } from '../../types/ReduxTypes.js'
 import { scale } from '../../util/scaling.js'
-import { Spinner } from '../common/Spinner.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {}
@@ -143,7 +143,7 @@ class FourDigitInputComponent extends React.Component<Props, State> {
   renderDotContainer() {
     const pinLength = this.props.pin ? this.props.pin.length : 0
     if (this.props.wait > 0) {
-      return <Spinner />
+      return <ActivityIndicator color={Colors.ACCENT_MINT} size="large" />
     }
     return (
       <View style={styles.dotContainer}>

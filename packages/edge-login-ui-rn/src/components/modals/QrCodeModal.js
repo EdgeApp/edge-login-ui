@@ -65,7 +65,7 @@ class QrCodeModalComponent extends React.Component<Props, State> {
         <ModalMessage>{s.strings.qr_modal_message}</ModalMessage>
         <View style={styles.qrContainer}>
           {pendingLogin == null ? (
-            <ActivityIndicator />
+            <ActivityIndicator color={theme.primaryText} />
           ) : (
             <QrCode
               data={'edge://edge/' + pendingLogin.id}

@@ -1,9 +1,9 @@
 // @flow
 
 import * as React from 'react'
-import { Text, TouchableHighlight, View } from 'react-native'
+import { ActivityIndicator, Text, TouchableHighlight, View } from 'react-native'
 
-import { Spinner } from './Spinner.js'
+import * as Colors from '../../constants/Colors.js'
 
 type Props = {
   label: string,
@@ -76,7 +76,7 @@ class Button extends React.Component<Props, State> {
     }
     return (
       <View>
-        <Spinner size="small" />
+        <ActivityIndicator color={Colors.ACCENT_MINT} size="small" />
       </View>
     )
   }

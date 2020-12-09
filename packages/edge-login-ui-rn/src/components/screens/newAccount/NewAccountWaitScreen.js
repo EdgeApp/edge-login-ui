@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { Text, View } from 'react-native'
+import { ActivityIndicator, Text, View } from 'react-native'
 
 import s from '../../../common/locales/strings.js'
 import * as Colors from '../../../constants/Colors.js'
@@ -10,7 +10,6 @@ import * as Styles from '../../../styles/index.js'
 import { scale } from '../../../util/scaling.js'
 import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-import { Spinner } from '../../common/Spinner.js'
 
 type Props = {}
 
@@ -23,7 +22,7 @@ export class NewAccountWaitScreen extends React.Component<Props> {
           <View style={CreatingAccountWaitScreenStyle.pageContainer}>
             <View style={CreatingAccountWaitScreenStyle.topPad} />
             <View style={CreatingAccountWaitScreenStyle.iconContianer}>
-              <Spinner />
+              <ActivityIndicator color={Colors.ACCENT_MINT} size="large" />
             </View>
             <View style={CreatingAccountWaitScreenStyle.headlineConainer}>
               <Text style={CreatingAccountWaitScreenStyle.headlineText}>
