@@ -1,12 +1,12 @@
 // @flow
 
 import * as React from 'react'
-import { View } from 'react-native'
+import { ActivityIndicator, View } from 'react-native'
 
 import * as Assets from '../../assets/index.js'
+import * as Colors from '../../constants/Colors.js'
 import * as Styles from '../../styles/index.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
-import { Spinner } from '../common/Spinner.js'
 
 type Props = {
   backgroundImage?: any
@@ -26,8 +26,11 @@ export class LoadingScreen extends React.Component<Props> {
   }
 
   renderSpinner = () => {
-    const { CenteredSpinnerStyle } = Styles
-    return <Spinner style={CenteredSpinnerStyle} />
+    return (
+      <View style={LandingScreenStyle.spinner}>
+        <ActivityIndicator color={Colors.ACCENT_MINT} size="large" />
+      </View>
+    )
   }
 }
 
@@ -35,6 +38,11 @@ const LandingScreenStyle = {
   container: Styles.ScreenStyle,
   backgroundImage: {
     ...Styles.BackgroundScreenImageStyle,
+    alignItems: 'center'
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center'
   }
 }

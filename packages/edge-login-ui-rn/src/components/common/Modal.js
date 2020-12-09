@@ -1,14 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import {
-  ActivityIndicator,
-  Dimensions,
-  Image,
-  Platform,
-  Text,
-  View
-} from 'react-native'
+import { Dimensions, Image, Platform, Text, View } from 'react-native'
 import Modal from 'react-native-modal'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
@@ -33,7 +26,6 @@ type Props = {
   hideCancelX?: boolean,
   middleText: string,
   modalMiddleComponent?: any,
-  thinking?: boolean,
   action(): void,
   cancel(): void
 }
@@ -81,13 +73,6 @@ export class MyModal extends React.Component<Props, State> {
   renderBottom = (styles: Object) => {
     if (!this.state.showButtons) {
       return <View style={styles.buttonsWrap} />
-    }
-    if (this.props.thinking) {
-      return (
-        <View style={styles.activityWrap}>
-          <ActivityIndicator />
-        </View>
-      )
     }
     if (this.props.singleButton) {
       return (
