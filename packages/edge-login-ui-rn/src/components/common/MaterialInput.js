@@ -16,11 +16,11 @@ type Props = {
   errorColor: string,
   titleTextStyle: Object,
   secureTextEntry: boolean,
-  autoCapitalize?: string,
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters',
   autoCorrect: boolean,
   autoFocus: boolean,
   forceFocus: boolean,
-  returnKeyType: string,
+  returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
   onFocus(): void,
   onBlur(): void,
   onChangeText(string): void,
@@ -107,7 +107,7 @@ export class MaterialInput extends React.Component<Props, State> {
     )
   }
 
-  addRef = (arg: TextField) => {
+  addRef = (arg: TextField | null) => {
     if (arg) {
       this.textInput = arg
     }
