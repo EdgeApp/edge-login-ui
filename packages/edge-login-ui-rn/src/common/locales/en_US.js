@@ -79,6 +79,7 @@ const strings = {
   recovery: 'Recovery',
   account_confirmation: 'Account Confirmation', // title should be regular capitalization, not all uppercase
   otp_header: 'Two Factor Authentication',
+  otp_header_ip: 'Authorize Device',
   recovery_questions_header: 'Recovery Questions',
   account_info_warning:
     'You did not set your password. We strongly encourage you to create a password and backup your account as soon as possible. You can set a password in the Settings screen in the app.',

@@ -13,7 +13,7 @@ import s from '../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { type LoginAttempt } from '../../util/loginAttempt.js'
 import { makePeriodicTask } from '../../util/periodicTask.js'
-import { Header } from '../common/Header.js'
+import { HeaderComponent } from '../common/Header.js'
 import { OtpBackupCodeModal } from '../modals/OtpBackupCodeModal.js'
 import { OtpResetModal } from '../modals/OtpResetModal.js'
 import { QrCodeModal } from '../modals/QrCodeModal.js'
@@ -96,7 +96,11 @@ class OtpErrorScreenComponent extends React.Component<Props> {
 
     return (
       <ThemedScene>
-        <Header onBack={this.props.goBack} />
+        <HeaderComponent
+          onBack={this.props.goBack}
+          subTitle=""
+          title={isIp ? s.strings.otp_header_ip : s.strings.otp_header}
+        />
         <View style={styles.container}>
           <View style={styles.headerContainer}>
             <FontAwesome
