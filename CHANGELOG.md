@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.6.23 (2020-12-09)
+
+- rn: Add colors to all spinner components.
+- rn: Fix Flow types around react-native-material-textfield.
+
 ## 0.6.22 (2020-11-20)
 
 - rn: Use a different icon for the back button.
