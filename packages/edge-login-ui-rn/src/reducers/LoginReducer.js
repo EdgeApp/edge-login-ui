@@ -16,7 +16,6 @@ export type LoginState = {
   +otpAttempt: LoginAttempt | null,
   +otpError: OtpError | null,
   +otpResetDate?: Date,
-  +password: string | null,
   +pin: string | null,
   +recoveryToken: string | null,
   +username: string,
@@ -30,7 +29,6 @@ const initialState: LoginState = {
   loginSuccess: false,
   otpAttempt: null,
   otpError: null,
-  password: null,
   pin: null,
   recoveryToken: null,
   username: '',
@@ -65,13 +63,6 @@ export function login(
         errorMessage: null,
         wait: 0
       }
-    case 'LOGIN_USERNAME_PASSWORD_FAIL':
-      return {
-        ...state,
-        errorMessage: action.data,
-        pin: '',
-        isLoggingInWithPin: false
-      }
     case 'LOGIN_PIN_FAIL':
       return {
         ...state,
@@ -82,8 +73,6 @@ export function login(
       }
     case 'AUTH_LOGGING_IN_WITH_PIN':
       return { ...state, isLoggingInWithPin: true }
-    case 'AUTH_UPDATE_LOGIN_PASSWORD':
-      return { ...state, password: action.data, errorMessage: null }
     case 'OTP_ERROR':
       return {
         ...state,
@@ -103,8 +92,6 @@ export function login(
       return { ...initialState, username: username }
     }
 
-    case 'ON_RECOVERY_LOGIN_ERROR':
-      return { ...state, errorMessage: action.data }
     case 'PASSWORD_RECOVERY_INITIALIZED':
       return {
         ...state,

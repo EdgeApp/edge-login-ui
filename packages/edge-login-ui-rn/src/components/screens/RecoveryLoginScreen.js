@@ -1,15 +1,17 @@
 // @flow
 
+import { type OtpError } from 'edge-core-js'
 import * as React from 'react'
 import { Text, View } from 'react-native'
 
-import { loginWithRecovery } from '../../actions/LoginAction.js'
+import { login } from '../../actions/LoginAction.js'
 import { getRecoveryQuestions } from '../../actions/PasswordRecoveryActions.js'
 import s from '../../common/locales/strings.js'
 import { RecoverPasswordUsernameInput } from '../../connectors/componentConnectors/RecoverPasswordUsernameInput.js'
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { type LoginAttempt } from '../../util/loginAttempt.js'
 import { Button } from '../common/Button.js'
 import { Header } from '../common/Header.js'
 import { FormField } from '../common/index.js'
@@ -21,33 +23,30 @@ type OwnProps = {
   showHeader?: boolean
 }
 type StateProps = {
-  loginError: string,
   question1: string,
   question2: string,
-  submitButton: string
+  recoveryKey: string,
+  submitButton: string,
+  username: string
 }
 type DispatchProps = {
   getQuestions(): void,
   goBack(): void,
+  login(attempt: LoginAttempt): Promise<void>,
   onCancel(): void,
-  submit(string[]): void,
+  saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void,
   updateUsername(string): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
-  question1: string,
-  question2: string,
   answer1: string,
   answer2: string,
-  showQuestionPicker: boolean,
-  focusFirst: boolean,
-  focusSecond: boolean,
   errorOne: boolean,
   errorTwo: boolean,
-  errorQuestionOne: boolean,
-  errorQuestionTwo: boolean,
-  disableConfirmationModal: boolean,
+  errorMessage: string,
+  question1: string,
+  question2: string,
   showUsernameModal: boolean
 }
 
@@ -55,18 +54,13 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      question1: this.props.question1,
-      question2: this.props.question2,
       answer1: '',
       answer2: '',
-      showQuestionPicker: false,
-      focusFirst: false,
-      focusSecond: false,
       errorOne: false,
       errorTwo: false,
-      errorQuestionOne: false,
-      errorQuestionTwo: false,
-      disableConfirmationModal: false,
+      errorMessage: '',
+      question1: this.props.question1,
+      question2: this.props.question2,
       showUsernameModal: true
     }
     this.props.updateUsername('')
@@ -80,18 +74,33 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
   }
 
   onSubmit = () => {
-    const errorOne = this.state.answer1.length < 1 || false
-    const errorTwo = this.state.answer2.length < 1 || false
+    const { login, recoveryKey, saveOtpError, username } = this.props
 
-    this.setState({
-      errorOne,
-      errorTwo
-    })
-    if (errorOne || errorTwo) {
-      return
+    const errorOne = this.state.answer1.length < 1
+    const errorTwo = this.state.answer2.length < 1
+    this.setState({ errorOne, errorTwo })
+    if (errorOne || errorTwo) return
+
+    const attempt = {
+      type: 'recovery',
+      recoveryKey,
+      username,
+      answers: [this.state.answer1, this.state.answer2]
     }
-    const answers = [this.state.answer1, this.state.answer2]
-    this.props.submit(answers)
+    login(attempt).catch(error => {
+      if (error != null && error.name === 'OtpError') {
+        saveOtpError(attempt, error)
+      } else {
+        console.log(error)
+        const errorMessage =
+          error != null
+            ? error.name === 'PasswordError'
+              ? s.strings.recovery_error
+              : error.message
+            : 'Unknown error'
+        this.setState({ errorMessage })
+      }
+    })
   }
 
   setAnswer1 = (arg: string) => {
@@ -129,11 +138,11 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
   }
 
   renderError(styles: typeof LoginWithRecoveryStyles) {
-    if (this.props.loginError) {
+    if (this.state.errorMessage) {
       return (
         <View>
           <View style={styles.shim} />
-          <Text style={styles.errorText}>{this.props.loginError}</Text>
+          <Text style={styles.errorText}>{this.state.errorMessage}</Text>
           <View style={styles.shim} />
         </View>
       )
@@ -169,7 +178,6 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
             <View style={styles.answerRow}>
               <FormField
                 style={form1Style}
-                autoFocus={this.state.focusFirst}
                 autoCorrect={false}
                 autoCapitalize="none"
                 onChangeText={this.setAnswer1}
@@ -185,7 +193,6 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
             <View style={styles.answerRow}>
               <FormField
                 style={form2Style}
-                autoFocus={this.state.focusSecond}
                 autoCorrect={false}
                 autoCapitalize="none"
                 onChangeText={this.setAnswer2}
@@ -326,7 +333,6 @@ const LoginWithRecoveryStyles = {
 
 export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
-    loginError: state.login.errorMessage || '',
     question1:
       state.passwordRecovery.userQuestions.length > 0
         ? state.passwordRecovery.userQuestions[0]
@@ -335,8 +341,10 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       state.passwordRecovery.userQuestions.length > 1
         ? state.passwordRecovery.userQuestions[1]
         : s.strings.choose_recovery_question,
+    recoveryKey: state.passwordRecovery.recoveryKey || '',
     showHeader: true,
-    submitButton: s.strings.submit
+    submitButton: s.strings.submit,
+    username: state.login.username
   }),
   (dispatch: Dispatch) => ({
     getQuestions() {
@@ -345,11 +353,14 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     goBack() {
       dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
+    login(attempt) {
+      return dispatch(login(attempt))
+    },
     onCancel() {
       dispatch({ type: 'CANCEL_RECOVERY_KEY' })
     },
-    submit(answers: string[]) {
-      dispatch(loginWithRecovery(answers))
+    saveOtpError(attempt, error) {
+      dispatch({ type: 'OTP_ERROR', data: { attempt, error } })
     },
     updateUsername(username: string) {
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username })

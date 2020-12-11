@@ -1,11 +1,13 @@
 // @flow
+
+import { type OtpError } from 'edge-core-js'
 import * as React from 'react'
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { sprintf } from 'sprintf-js'
 
-import { userLogin } from '../../actions/LoginAction.js'
+import { login } from '../../actions/LoginAction.js'
 import { deleteUserFromDevice } from '../../actions/UserActions.js'
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
@@ -13,6 +15,7 @@ import * as Constants from '../../constants/index.js'
 import { type LoginUserInfo } from '../../reducers/PreviousUsersReducer.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { type LoginAttempt } from '../../util/loginAttempt.js'
 import { scale } from '../../util/scaling.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { UserListItem } from '../abSpecific/UserListItem.js'
@@ -34,9 +37,7 @@ type OwnProps = {
   parentButton?: Object
 }
 type StateProps = {
-  error: string,
   loginSuccess: boolean,
-  password: string,
   previousUsers: LoginUserInfo[],
   touch: $PropertyType<RootState, 'touch'>,
   username: string,
@@ -46,16 +47,18 @@ type DispatchProps = {
   deleteUserFromDevice(username: string): Promise<void>,
   gotoCreatePage(): void,
   gotoPinLoginPage(): void,
-  updatePassword(string): void,
-  updateUsername(string): void,
-  userLogin(Object): void
+  login(attempt: LoginAttempt): Promise<void>,
+  saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void,
+  updateUsername(string): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
 type State = {
-  loggingIn: boolean,
+  errorMessage: string,
   focusFirst: boolean,
   focusSecond: boolean,
+  loggingIn: boolean,
+  password: string,
   showRecoveryModalOne: boolean,
   usernameList: boolean
 }
@@ -67,12 +70,42 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     super(props)
     this.style = LoginPasswordScreenStyle
     this.state = {
-      loggingIn: false,
+      errorMessage: '',
       focusFirst: true,
       focusSecond: false,
+      loggingIn: false,
+      password: '',
       showRecoveryModalOne: false,
       usernameList: false
     }
+  }
+
+  handlePasswordChange = (password: string) => {
+    this.setState({ errorMessage: '', password })
+  }
+
+  handleSubmit = () => {
+    const { login, saveOtpError, username } = this.props
+    const { password } = this.state
+
+    this.noFocus()
+    Keyboard.dismiss()
+    this.setState({
+      loggingIn: true
+    })
+
+    const attempt = { type: 'password', username, password }
+    login(attempt)
+      .catch(error => {
+        if (error != null && error.name === 'OtpError') {
+          saveOtpError(attempt, error)
+        } else {
+          console.log(error)
+          const errorMessage = error != null ? error.message : ''
+          this.setState({ errorMessage })
+        }
+      })
+      .then(() => this.setState({ loggingIn: false }))
   }
 
   renderModal = (style: typeof LoginPasswordScreenStyle) => {
@@ -126,18 +159,6 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
         return deleteUserFromDevice(username)
       })
       .catch(showError)
-  }
-
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    if (
-      (nextProps.error && this.state.loggingIn) ||
-      (this.state.loggingIn && nextProps.loginSuccess)
-    ) {
-      this.setState({
-        loggingIn: false
-      })
-    }
   }
 
   shouldComponentUpdate(nextProps: Props) {
@@ -195,16 +216,16 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
             <FormField
               testID="passwordFormField"
               style={this.style.input2}
-              onChangeText={this.updatePassword.bind(this)}
-              value={this.props.password}
+              onChangeText={this.handlePasswordChange}
+              value={this.state.password}
               label={s.strings.password}
-              error={this.props.error}
+              error={this.state.errorMessage}
               autoCorrect={false}
               secureTextEntry
               returnKeyType="go"
               forceFocus={this.state.focusSecond}
               onFocus={this.onfocusTwo.bind(this)}
-              onSubmitEditing={this.onStartLogin.bind(this)}
+              onSubmitEditing={this.handleSubmit}
             />
             {this.renderButtons(this.style)}
             {this.renderModal(this.style)}
@@ -291,7 +312,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
         <View style={style.shimTiny} />
         <Button
           testID="loginButton"
-          onPress={this.onStartLogin.bind(this)}
+          onPress={this.handleSubmit}
           label={s.strings.login_button}
           downStyle={style.loginButton.downStyle}
           downTextStyle={style.loginButton.downTextStyle}
@@ -364,11 +385,8 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   }
 
   updateUsername(data: string) {
+    this.setState({ errorMessage: '' })
     this.props.updateUsername(data)
-  }
-
-  updatePassword(data: string) {
-    this.props.updatePassword(data)
   }
 
   onForgotPassword() {
@@ -382,18 +400,6 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     // this.props.onForgotPassword()
     this.setState({
       showRecoveryModalOne: false
-    })
-  }
-
-  onStartLogin() {
-    this.noFocus()
-    Keyboard.dismiss()
-    this.setState({
-      loggingIn: true
-    })
-    this.props.userLogin({
-      username: this.props.username,
-      password: this.props.password
     })
   }
 
@@ -518,9 +524,7 @@ const LoginPasswordScreenStyle = {
 
 export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
-    error: state.login.errorMessage || '',
     loginSuccess: state.login.loginSuccess,
-    password: state.login.password || '',
     previousUsers: state.previousUsers.userList,
     touch: state.touch,
     username: state.login.username,
@@ -536,14 +540,14 @@ export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     gotoPinLoginPage() {
       dispatch({ type: 'WORKFLOW_START', data: 'pinWF' })
     },
-    updatePassword(data: string) {
-      dispatch({ type: 'AUTH_UPDATE_LOGIN_PASSWORD', data: data })
+    login(attempt) {
+      return dispatch(login(attempt))
+    },
+    saveOtpError(attempt, error) {
+      dispatch({ type: 'OTP_ERROR', data: { attempt, error } })
     },
     updateUsername(data: string) {
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data })
-    },
-    userLogin(data: Object) {
-      dispatch(userLogin(data))
     }
   })
 )(PasswordLoginScreenComponent)

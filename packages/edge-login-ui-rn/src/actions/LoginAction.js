@@ -27,42 +27,7 @@ export const login = (attempt: LoginAttempt, otpKey?: string) => async (
   dispatch(completeLogin(account))
 }
 
-/**
- * Make it Thunky
- */
-export function loginWithRecovery(answers: string[]) {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const state = getState()
-    const recoveryKey = state.passwordRecovery.recoveryKey || ''
-    const username = state.login.username
-    const { context } = imports
-    try {
-      const account = await context.loginWithRecovery2(
-        recoveryKey,
-        username,
-        answers,
-        imports.accountOptions
-      )
-      dispatch(completeLogin(account))
-    } catch (e) {
-      if (e.name === 'OtpError') {
-        dispatch({
-          type: 'OTP_ERROR',
-          data: {
-            attempt: { type: 'recovery', recoveryKey, username, answers },
-            error: e
-          }
-        })
-        return
-      }
-      console.log(e.message)
-      const incorrect = 'The answers you provided are incorrect. '
-      dispatch({ type: 'ON_RECOVERY_LOGIN_ERROR', data: incorrect })
-    }
-  }
-}
-
-export function userLoginWithTouchId(data: Object) {
+export function loginWithTouch(username: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context, folder } = imports
     const startFunction = () => {
@@ -71,8 +36,8 @@ export function userLoginWithTouchId(data: Object) {
     loginWithTouchId(
       context,
       folder,
-      data.username,
-      'Touch to login user: `' + data.username + '`',
+      username,
+      `Touch to login user: "${username}"`,
       s.strings.login_with_password,
       imports.accountOptions,
       startFunction
@@ -87,21 +52,20 @@ export function userLoginWithTouchId(data: Object) {
       })
   }
 }
-export function userLoginWithPin(data: Object) {
+export function loginWithPin(username: string, pin: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { callback, context } = imports
     setTimeout(async () => {
       try {
         const abcAccount = await context.loginWithPIN(
-          data.username,
-          data.pin,
+          username,
+          pin,
           imports.accountOptions
         )
         dispatch(completeLogin(abcAccount))
       } catch (e) {
         console.log('LOG IN WITH PIN ERROR ', e)
         if (e.name === 'OtpError') {
-          const { username, pin } = data
           dispatch({
             type: 'OTP_ERROR',
             data: {
@@ -153,41 +117,6 @@ export function processWait(message: string) {
         dispatch(processWait(message))
       }, 1000)
     }
-  }
-}
-
-export function userLogin(data: Object) {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { callback, context } = imports
-    // dispatch(openLoading()) Legacy dealt with state for showing a spinner
-    // the timeout is a hack until we put in interaction manager.
-    setTimeout(async () => {
-      try {
-        const abcAccount = await context.loginWithPassword(
-          data.username,
-          data.password,
-          imports.accountOptions
-        )
-        dispatch(completeLogin(abcAccount))
-      } catch (e) {
-        console.log(e)
-        if (e.name === 'OtpError') {
-          const { username, password } = data
-          dispatch({
-            type: 'OTP_ERROR',
-            data: {
-              attempt: { type: 'password', username, password },
-              error: e
-            }
-          })
-          return
-        }
-        dispatch(
-          dispatch({ type: 'LOGIN_USERNAME_PASSWORD_FAIL', data: e.message })
-        )
-        callback(e.message, null)
-      }
-    }, 300)
   }
 }
 

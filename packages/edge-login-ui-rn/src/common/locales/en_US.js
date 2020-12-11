@@ -46,9 +46,9 @@ const strings = {
   delete_account_header: 'Delete Account',
   delete_username_account:
     'Delete %1$s on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.',
-  disable_otp_header: 'Are you sure you want to disable 2FA',
+  disable_otp_header: 'Are you sure you want to disable 2FA?',
   disable_otp_modal_body:
-    '2FA will take 7 days to disable if no action is taken by the account user on authentiacated devices',
+    '2FA will take 7 days to disable if no action is taken by the account user on authenticated devices.',
   disable_otp_button: 'Disable 2FA',
   send_email_error_header: "Can't send email",
   email_error_modal:
@@ -79,6 +79,7 @@ const strings = {
   recovery: 'Recovery',
   account_confirmation: 'Account Confirmation', // title should be regular capitalization, not all uppercase
   otp_header: 'Two Factor Authentication',
+  otp_header_ip: 'Authorize Device',
   recovery_questions_header: 'Recovery Questions',
   account_info_warning:
     'You did not set your password. We strongly encourage you to create a password and backup your account as soon as possible. You can set a password in the Settings screen in the app.',
@@ -118,6 +119,7 @@ const strings = {
   email_address: 'Email Address',
   recovery_instructions_complete:
     'To complete account recovery setup you MUST save the recovery token. This is required to recover your account in addition to your username and recovery answers. \n\n Please enter your email to be sent the recovery token.',
+  recovery_error: 'The answers you provided are incorrect.',
   read_understod_1: 'I have read, understood, and agree to the ',
   read_understod_2: 'Terms of Use',
   last_step_review: 'Last step! Let’s finish with a quick review',
