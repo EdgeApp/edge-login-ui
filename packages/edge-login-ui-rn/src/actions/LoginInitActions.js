@@ -11,6 +11,7 @@ import {
   type GetState,
   type Imports
 } from '../types/ReduxTypes.js'
+import { launchPasswordRecovery } from './LoginAction.js'
 import { getPreviousUsers } from './PreviousUsersActions.js'
 
 /**
@@ -33,10 +34,8 @@ export const initializeLogin = () => async (
   const { startupUser } = previousUsers
 
   if (imports.recoveryKey) {
-    dispatch({
-      type: 'SET_RECOVERY_KEY',
-      data: imports.recoveryKey
-    })
+    dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
+    dispatch(launchPasswordRecovery(imports.recoveryKey))
   } else if (startupUser == null) {
     dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
   } else if (

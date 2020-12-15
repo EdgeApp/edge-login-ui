@@ -5,9 +5,7 @@ import * as React from 'react'
 import { Text, View } from 'react-native'
 
 import { login } from '../../actions/LoginAction.js'
-import { getRecoveryQuestions } from '../../actions/PasswordRecoveryActions.js'
 import s from '../../common/locales/strings.js'
-import { RecoverPasswordUsernameInput } from '../../connectors/componentConnectors/RecoverPasswordUsernameInput.js'
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
@@ -16,7 +14,6 @@ import { Button } from '../common/Button.js'
 import { Header } from '../common/Header.js'
 import { FormField } from '../common/index.js'
 import SafeAreaViewGradient from '../common/SafeAreaViewGradient.js'
-import { SetRecoveryUsernameModal } from '../modals/SetRecoveryUsernameModal.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
@@ -26,16 +23,12 @@ type StateProps = {
   question1: string,
   question2: string,
   recoveryKey: string,
-  submitButton: string,
   username: string
 }
 type DispatchProps = {
-  getQuestions(): void,
   goBack(): void,
   login(attempt: LoginAttempt): Promise<void>,
-  onCancel(): void,
-  saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void,
-  updateUsername(string): void
+  saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -44,10 +37,7 @@ type State = {
   answer2: string,
   errorOne: boolean,
   errorTwo: boolean,
-  errorMessage: string,
-  question1: string,
-  question2: string,
-  showUsernameModal: boolean
+  errorMessage: string
 }
 
 class RecoveryLoginScreenComponent extends React.Component<Props, State> {
@@ -58,12 +48,8 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
       answer2: '',
       errorOne: false,
       errorTwo: false,
-      errorMessage: '',
-      question1: this.props.question1,
-      question2: this.props.question2,
-      showUsernameModal: true
+      errorMessage: ''
     }
-    this.props.updateUsername('')
   }
 
   renderHeader = () => {
@@ -115,28 +101,6 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  renderModal = (styles: typeof LoginWithRecoveryStyles) => {
-    if (!this.state.showUsernameModal) return null
-    const middle = (
-      <View style={styles.modalMiddle}>
-        <Text style={styles.staticModalText}>
-          {s.strings.recover_by_username}
-        </Text>
-        <RecoverPasswordUsernameInput
-          style={styles.inputModal}
-          onSubmitEditing={this.props.getQuestions}
-        />
-      </View>
-    )
-    return (
-      <SetRecoveryUsernameModal
-        modalMiddleComponent={middle}
-        cancel={this.props.onCancel}
-        action={this.props.getQuestions}
-      />
-    )
-  }
-
   renderError(styles: typeof LoginWithRecoveryStyles) {
     if (this.state.errorMessage) {
       return (
@@ -148,17 +112,6 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
       )
     }
     return <View style={styles.shim} />
-  }
-
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.question1 !== this.props.question1) {
-      this.setState({
-        question1: nextProps.question1,
-        question2: nextProps.question2,
-        showUsernameModal: false
-      })
-    }
   }
 
   render() {
@@ -209,11 +162,10 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
                 downTextStyle={styles.submitButton.downTextStyle}
                 upStyle={styles.submitButton.upStyle}
                 upTextStyle={styles.submitButton.upTextStyle}
-                label={this.props.submitButton}
+                label={s.strings.submit}
               />
             </View>
           </View>
-          {this.renderModal(styles)}
         </View>
       </SafeAreaViewGradient>
     )
@@ -221,10 +173,10 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
 }
 
 const LoginWithRecoveryStyles = {
-  screen: { ...Styles.ScreenStyle, marginTop: 5 },
-  /* gradient: {
-    height: THEME.HEADER
-  }, */
+  screen: {
+    ...Styles.ScreenStyle,
+    marginTop: 5
+  },
   body: {
     padding: 18
   },
@@ -238,14 +190,6 @@ const LoginWithRecoveryStyles = {
     color: Constants.GRAY_2,
     fontSize: 18
   },
-  modalMiddle: {
-    width: '100%',
-    height: 120
-  },
-  inputModal: {
-    ...Styles.MaterialInputOnWhite,
-    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
-  },
   answerRow: {
     width: '100%',
     height: 100
@@ -258,19 +202,6 @@ const LoginWithRecoveryStyles = {
   input: {
     ...Styles.MaterialInputOnWhite,
     errorColor: Constants.GRAY_2,
-    baseColor: Constants.GRAY_2,
-    textColor: Constants.GRAY_2,
-    titleTextStyle: {
-      color: Constants.GRAY_2
-    },
-    affixTextStyle: {
-      color: Constants.GRAY_2
-    },
-    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
-  },
-  inputUsername: {
-    ...Styles.MaterialInputOnWhite,
-    errorColor: Constants.ACCENT_RED,
     baseColor: Constants.GRAY_2,
     textColor: Constants.GRAY_2,
     titleTextStyle: {
@@ -303,32 +234,13 @@ const LoginWithRecoveryStyles = {
     downTextStyle: Styles.PrimaryButtonUpTextStyle,
     downStyle: Styles.PrimaryButtonDownStyle
   },
-  disableButton: {
-    upStyle: Styles.TertiaryButtonUpStyle,
-    upTextStyle: Styles.TertiaryButtonTextUpStyle,
-    downTextStyle: Styles.TertiaryButtonTextDownStyle,
-    downStyle: Styles.TertiaryButtonDownStyle
-  },
-  questionsList: {
-    width: '100%',
-    height: 400,
-    borderColor: Constants.GRAY_3,
-    borderWidth: 1
-  },
-  staticModalText: {
-    color: Constants.GRAY_1,
-    width: '100%',
-    fontSize: 15,
-    textAlign: 'center'
-  },
   errorText: {
     color: Constants.ACCENT_RED,
     width: '90%',
     fontSize: 14,
     textAlign: 'center',
     paddingBottom: 5
-  },
-  listItem: Styles.ListItemTextOnly
+  }
 }
 
 export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
@@ -343,27 +255,17 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
         : s.strings.choose_recovery_question,
     recoveryKey: state.passwordRecovery.recoveryKey || '',
     showHeader: true,
-    submitButton: s.strings.submit,
     username: state.login.username
   }),
   (dispatch: Dispatch) => ({
-    getQuestions() {
-      dispatch(getRecoveryQuestions())
-    },
     goBack() {
       dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
     login(attempt) {
       return dispatch(login(attempt))
     },
-    onCancel() {
-      dispatch({ type: 'CANCEL_RECOVERY_KEY' })
-    },
     saveOtpError(attempt, error) {
       dispatch({ type: 'OTP_ERROR', data: { attempt, error } })
-    },
-    updateUsername(username: string) {
-      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username })
     }
   })
 )(RecoveryLoginScreenComponent)

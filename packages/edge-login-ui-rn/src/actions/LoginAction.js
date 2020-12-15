@@ -1,8 +1,11 @@
 // @flow
 
 import { type EdgePendingEdgeLogin } from 'edge-core-js'
+import * as React from 'react'
 
 import s from '../common/locales/strings.js'
+import { TextInputModal } from '../components/modals/TextInputModal.js'
+import { Airship } from '../components/services/AirshipInstance.js'
 import { loginWithTouchId } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 import { type LoginAttempt, attemptLogin } from '../util/loginAttempt.js'
@@ -133,4 +136,46 @@ export const requestEdgeLogin = () => async (
       'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
     displayName: 'Edge Wallet'
   })
+}
+
+/**
+ * Ask the user for the username that goes with a recovery key,
+ * then launches the questions scene.
+ */
+export const launchPasswordRecovery = (recoveryKey: string) => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  const { context } = imports
+
+  async function handleSubmit(username: string): Promise<string | void> {
+    try {
+      const questions = await context.fetchRecovery2Questions(
+        recoveryKey,
+        username
+      )
+      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username })
+      dispatch({
+        type: 'ON_RECOVERY_LOGIN_IS_ENABLED',
+        data: { recoveryKey, userQuestions: questions }
+      })
+    } catch (error) {
+      if (error == null) throw new Error('Unknown error')
+      if (error.name === 'UsernameError') {
+        return s.strings.recovery_by_username_error
+      }
+      throw error
+    }
+  }
+
+  Airship.show(bridge => (
+    <TextInputModal
+      bridge={bridge}
+      onSubmit={handleSubmit}
+      title={s.strings.password_recovery}
+      message={s.strings.recover_by_username}
+      inputLabel={s.strings.username}
+    />
+  ))
 }

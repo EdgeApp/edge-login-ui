@@ -101,6 +101,7 @@ const strings = {
     'Recovery successful! Please change your password and PIN.',
   recover_by_username:
     'Please enter the username of the account you want to recover.',
+  recovery_by_username_error: 'Wrong username for this link',
   your_answer_label: 'Your Answer',
   answer_case_sensitive: 'Answers are case sensitive',
   answers_four_chanracters: 'Answers should be minimum of 4 characters',

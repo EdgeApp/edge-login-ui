@@ -3,36 +3,6 @@
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 
 /**
- * Prepares what is needed for the recovery login scene.
- */
-export function getRecoveryQuestions() {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const state = getState()
-    const context = imports.context
-    const username = state.login.username
-    const recoveryKey = state.login.recoveryToken || ''
-    try {
-      const userQuestions = await context.fetchRecovery2Questions(
-        recoveryKey,
-        username
-      )
-      const obj = {
-        recoveryKey,
-        userQuestions
-      }
-      dispatch({ type: 'ON_RECOVERY_LOGIN_IS_ENABLED', data: obj })
-    } catch (e) {
-      if (e.message === 'No recovery key stored locally.') {
-        dispatch({ type: 'ON_RECOVERY_LOGIN_NOT_ENABLED', data: e.message })
-        return
-      }
-      dispatch({ type: 'ON_RECOVERY_LOGIN_NOT_ENABLED', data: e.message })
-      console.log(e)
-    }
-  }
-}
-
-/**
  * Prepares what is needed for the change recovery scene.
  */
 export function initializeChangeRecovery() {

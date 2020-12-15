@@ -45,14 +45,10 @@ export const workflow: Reducer<WorkflowState, Action> = function(
       return { ...state, currentKey: 'otpWF', currentSceneIndex: 0 }
     case 'ON_RECOVERY_LOGIN_IS_ENABLED':
       return { ...state, currentKey: 'recoveryLoginWF', currentSceneIndex: 0 }
-    case 'SET_RECOVERY_KEY':
-      return { ...state, currentKey: 'recoveryLoginWF', currentSceneIndex: 0 }
     case 'START_RESECURE':
       return { ...state, currentKey: 'resecureWF', currentSceneIndex: 0 }
     case 'START_SECURITY_ALERT':
       return { ...state, currentKey: 'securityAlertWF', currentSceneIndex: 0 }
-    case 'CANCEL_RECOVERY_KEY':
-      return { ...state, currentKey: 'passwordWF', currentSceneIndex: 0 }
     case 'RESET_APP':
       return initialState
     default:
