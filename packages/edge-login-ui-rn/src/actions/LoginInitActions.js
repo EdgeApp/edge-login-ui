@@ -33,9 +33,10 @@ export const initializeLogin = () => async (
   const { previousUsers, touch } = state
   const { startupUser } = previousUsers
 
-  if (imports.recoveryKey) {
+  const { recoveryKey } = imports
+  if (recoveryKey) {
     dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
-    dispatch(launchPasswordRecovery(imports.recoveryKey))
+    dispatch(launchPasswordRecovery(recoveryKey))
   } else if (startupUser == null) {
     dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
   } else if (

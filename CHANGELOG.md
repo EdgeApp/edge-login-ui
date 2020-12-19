@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.6.24 (2020-12-18)
+
+- rn: Fix & theme the password recovery input modal.
+- rn: Show the correct header for IP validation errors.
+- rn: Fix typos on the 2fa reset modal.
+
 ## 0.6.23 (2020-12-09)
 
 - rn: Add colors to all spinner components.
