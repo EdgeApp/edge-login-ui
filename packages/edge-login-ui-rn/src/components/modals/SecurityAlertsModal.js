@@ -94,6 +94,7 @@ class SecurityAlertsModalComponent extends React.Component<Props> {
 
     return (
       <TouchableOpacity
+        key={(isReset ? 'reset:' : 'voucher:') + username}
         style={isFirst ? styles.row : styles.rowBorder}
         onPress={() => {
           this.props.selectUser(username)

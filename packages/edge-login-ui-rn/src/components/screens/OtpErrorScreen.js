@@ -14,9 +14,9 @@ import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { type LoginAttempt } from '../../util/loginAttempt.js'
 import { makePeriodicTask } from '../../util/periodicTask.js'
 import { HeaderComponent } from '../common/Header.js'
-import { OtpBackupCodeModal } from '../modals/OtpBackupCodeModal.js'
 import { OtpResetModal } from '../modals/OtpResetModal.js'
 import { QrCodeModal } from '../modals/QrCodeModal.js'
+import { TextInputModal } from '../modals/TextInputModal.js'
 import { Airship, showError, showToast } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 import {
@@ -35,7 +35,7 @@ type StateProps = {
 type DispatchProps = {
   goBack(): void,
   hasReadyVoucher(otpError: OtpError): Promise<boolean>,
-  login(otpAttempt: LoginAttempt): Promise<void>,
+  login(otpAttempt: LoginAttempt, otpKey?: string): Promise<void>,
   saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void
 }
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
@@ -74,9 +74,36 @@ class OtpErrorScreenComponent extends React.Component<Props> {
   }
 
   handleBackupModal = () => {
-    const { otpAttempt } = this.props
+    const { login, otpAttempt, saveOtpError } = this.props
+
+    async function handleSubmit(otpKey: string): Promise<string | void> {
+      try {
+        await login(otpAttempt, otpKey)
+      } catch (error) {
+        // Translate known errors:
+        if (error != null && error.name === 'OtpError') {
+          saveOtpError(otpAttempt, error)
+          return s.strings.backup_key_incorrect
+        }
+        if (error != null && error.message === 'Unexpected end of data') {
+          return s.strings.backup_key_incorrect
+        }
+        // Pass along unknown errors:
+        throw error
+      }
+    }
+
     Airship.show(bridge => (
-      <OtpBackupCodeModal bridge={bridge} otpAttempt={otpAttempt} />
+      <TextInputModal
+        bridge={bridge}
+        onSubmit={handleSubmit}
+        title={s.strings.otp_backup_code_modal_title}
+        message={s.strings.otp_instructions}
+        inputLabel={s.strings.backup_key_label}
+        submitLabel={s.strings.submit}
+        autoCapitalize="characters"
+        returnKeyType="done"
+      />
     ))
   }
 
@@ -279,8 +306,8 @@ export const OtpErrorScreen = withTheme(
       hasReadyVoucher(error: OtpError) {
         return dispatch(hasReadyVoucher(error))
       },
-      login(attempt: LoginAttempt): Promise<void> {
-        return dispatch(login(attempt))
+      login(attempt: LoginAttempt, otpKey?: string): Promise<void> {
+        return dispatch(login(attempt, otpKey))
       },
       saveOtpError(attempt, error) {
         dispatch({ type: 'OTP_ERROR', data: { attempt, error } })

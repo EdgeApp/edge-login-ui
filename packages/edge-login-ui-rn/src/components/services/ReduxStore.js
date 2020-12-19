@@ -5,6 +5,7 @@ import { connect as rawConnect, Provider } from 'react-redux'
 import { type Store, applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
+import { launchPasswordRecovery } from '../../actions/LoginAction.js'
 import { type RootState, rootReducer } from '../../reducers/RootReducer.js'
 import {
   type Action,
@@ -48,7 +49,8 @@ export class ReduxStore extends React.Component<Props> {
   componentDidUpdate(prev: Props) {
     const { recoveryKey } = this.props.imports
     if (recoveryKey && recoveryKey !== prev.imports.recoveryKey) {
-      this.store.dispatch({ type: 'SET_RECOVERY_KEY', data: recoveryKey })
+      // $FlowFixMe Flow doesn't know about thunks at this point.
+      this.store.dispatch(launchPasswordRecovery(recoveryKey))
     }
   }
 

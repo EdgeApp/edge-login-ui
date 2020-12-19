@@ -14,7 +14,6 @@ import { type LoginAttempt } from '../util/loginAttempt.js'
 // Actions with no payload:
 type NoDataActionName =
   | 'AUTH_LOGGING_IN_WITH_PIN'
-  | 'CANCEL_RECOVERY_KEY'
   | 'CLEAR_CREATE_ERROR_MESSAGE'
   | 'CLOSE_NOTIFICATION_MODAL'
   | 'DISMISS_EMAIL_MODAL'
@@ -75,7 +74,6 @@ export type Action =
         userQuestions: string[]
       }
     }
-  | { type: 'ON_RECOVERY_LOGIN_NOT_ENABLED', data?: string /* error */ }
   | {
       type: 'OTP_ERROR',
       data: {
@@ -94,7 +92,6 @@ export type Action =
       }
     }
   | { type: 'SET_PREVIOUS_USERS', data: PreviousUsersState }
-  | { type: 'SET_RECOVERY_KEY', data: string }
   | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
   | { type: 'START_RESECURE', data: EdgeAccount }
   | { type: 'START_SECURITY_ALERT', data: EdgeAccount }

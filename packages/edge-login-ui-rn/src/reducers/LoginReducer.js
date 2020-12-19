@@ -17,7 +17,6 @@ export type LoginState = {
   +otpError: OtpError | null,
   +otpResetDate?: Date,
   +pin: string | null,
-  +recoveryToken: string | null,
   +username: string,
   +wait: number
 }
@@ -30,7 +29,6 @@ const initialState: LoginState = {
   otpAttempt: null,
   otpError: null,
   pin: null,
-  recoveryToken: null,
   username: '',
   wait: 0
 }
@@ -40,8 +38,6 @@ export function login(
   action: Action
 ): LoginState {
   switch (action.type) {
-    case 'CANCEL_RECOVERY_KEY':
-      return { ...state, recoveryToken: null }
     case 'SET_PREVIOUS_USERS': {
       const { startupUser } = action.data
       if (startupUser != null) {
@@ -85,8 +81,6 @@ export function login(
         ...state,
         otpResetDate: action.data
       }
-    case 'SET_RECOVERY_KEY':
-      return { ...state, recoveryToken: action.data }
     case 'RESET_APP': {
       const username = state.username
       return { ...initialState, username: username }
