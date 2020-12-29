@@ -5,7 +5,7 @@ import * as React from 'react'
 
 import s from '../common/locales/strings.js'
 import { TextInputModal } from '../components/modals/TextInputModal.js'
-import { Airship } from '../components/services/AirshipInstance.js'
+import { Airship, showError } from '../components/services/AirshipInstance.js'
 import { loginWithTouchId } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 import { type LoginAttempt, attemptLogin } from '../util/loginAttempt.js'
@@ -163,7 +163,8 @@ export const launchPasswordRecovery = (recoveryKey: string) => async (
     } catch (error) {
       if (error == null) throw new Error('Unknown error')
       if (error.name === 'UsernameError') {
-        return s.strings.recovery_by_username_error
+        showError(s.strings.recovery_by_username_error)
+        return ''
       }
       throw error
     }

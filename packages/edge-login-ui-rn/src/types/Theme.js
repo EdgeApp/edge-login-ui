@@ -6,6 +6,7 @@ export type Theme = {|
 
   pressedOpacity: number,
   fontFamily: string,
+  fontWeightBold: string,
 
   // Background colors:
   backgroundGradientLeft: string,
@@ -33,6 +34,11 @@ export type Theme = {|
   secondaryButtonOutline: string,
   secondaryButton: string,
   secondaryButtonText: string,
+
+  // Dropdown colors:
+  dropdownWarning: string,
+  dropdownError: string,
+  dropdownText: string,
 
   // Security alert modal:
   securityAlertModalBackground: string,
