@@ -20,9 +20,9 @@ type Props = {|
   bridge: AirshipBridge<string | void>,
 
   // The modal will show a spinner as long as this promise is pending.
-  // If the promise returns a string, we will use that as the error text
-  // and leave the modal showing. Otherwise, the modal will resolve itself.
-  onSubmit?: (text: string) => Promise<string | void>,
+  // Returning true will dismiss the modal, but returning false or a string
+  // will leave the modal up. The string will be shown as an error message.
+  onSubmit?: (text: string) => Promise<boolean | string>,
 
   // Text to show in the modal:
   title?: string,
@@ -61,7 +61,9 @@ export class TextInputModal extends React.Component<Props, State> {
     if (!this.state.spinning) bridge.resolve(undefined)
   }
 
-  handleChangeText = (text: string) => this.setState({ text })
+  handleChangeText = (text: string) => {
+    this.setState({ errorMessage: undefined, text })
+  }
 
   handleSubmit = () => {
     const { bridge, onSubmit } = this.props
@@ -70,10 +72,12 @@ export class TextInputModal extends React.Component<Props, State> {
       this.setState({ spinning: true })
       onSubmit(this.state.text).then(
         result => {
-          if (result != null) {
-            this.setState({ spinning: false, errorMessage: result })
-          } else {
+          if (result === true) {
             bridge.resolve(this.state.text)
+          } else if (result === false) {
+            this.setState({ spinning: false })
+          } else {
+            this.setState({ errorMessage: result, spinning: false })
           }
         },
         error => {
