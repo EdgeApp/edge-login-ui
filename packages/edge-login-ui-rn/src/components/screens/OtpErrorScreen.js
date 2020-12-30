@@ -78,8 +78,12 @@ class OtpErrorScreenComponent extends React.Component<Props> {
 
     async function handleSubmit(otpKey: string): Promise<string | void> {
       try {
+        this.checkVoucher.stop()
         await login(otpAttempt, otpKey)
       } catch (error) {
+        // Restart the background checking if the login failed:
+        this.checkVoucher.start()
+
         // Translate known errors:
         if (error != null && error.name === 'OtpError') {
           saveOtpError(otpAttempt, error)
@@ -88,6 +92,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
         if (error != null && error.message === 'Unexpected end of data') {
           return s.strings.backup_key_incorrect
         }
+
         // Pass along unknown errors:
         throw error
       }
