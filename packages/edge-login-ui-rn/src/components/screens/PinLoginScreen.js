@@ -144,7 +144,6 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
         <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
           <View style={PinLoginScreenStyle.featureBox}>
             <LogoImageHeader
-              style={PinLoginScreenStyle.logoHeader}
               src={this.props.primaryLogo}
               callback={this.props.primaryLogoCallback}
             />
@@ -325,7 +324,6 @@ const PinLoginScreenStyle = {
     height: scale(240),
     width: '100%'
   },
-  logoHeader: Styles.LogoHeaderScaledStyle,
   thumbprintButton: {
     container: {
       position: 'absolute',

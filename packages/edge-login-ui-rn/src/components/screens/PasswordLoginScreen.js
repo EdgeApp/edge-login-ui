@@ -64,7 +64,8 @@ type State = {
 }
 
 class PasswordLoginScreenComponent extends React.Component<Props, State> {
-  style: Object
+  // eslint-disable-next-line no-use-before-define
+  style: typeof LoginPasswordScreenStyle
 
   constructor(props: Props) {
     super(props)
@@ -207,7 +208,6 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
         <TouchableWithoutFeedback onPress={this.noFocus}>
           <View style={this.style.featureBox}>
             <LogoImageHeader
-              style={this.style.logoHeader}
               src={this.props.primaryLogo}
               callback={this.props.primaryLogoCallback}
             />
@@ -435,13 +435,7 @@ const LoginPasswordScreenStyle = {
     alignItems: 'center',
     justifyContent: 'space-around'
   },
-  logoHeader: {
-    ...Styles.LogoHeaderScaledStyle,
-    container: { ...Styles.LogoHeaderScaledStyle.container }
-  },
   shimTiny: { ...Styles.Shim, height: scale(10) },
-  shimSmall: { ...Styles.Shim, height: scale(25) },
-  shim: Styles.Shim,
   buttonsBox: {
     width: '100%',
     alignItems: 'center'

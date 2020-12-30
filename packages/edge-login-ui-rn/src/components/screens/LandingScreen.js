@@ -51,7 +51,6 @@ class LandingScreenComponent extends React.Component<Props> {
         />
         <View style={LandingScreenStyle.featureBox}>
           <LogoImageHeader
-            style={LandingScreenStyle.logoHeader}
             src={this.props.primaryLogo}
             callback={this.props.primaryLogoCallback}
           />
@@ -106,7 +105,6 @@ const LandingScreenStyle = {
     width: '100%',
     height: scale(286)
   },
-  logoHeader: Styles.LogoHeaderScaledStyle,
   featureBoxContent: {
     // height: scale(186), 306- 125 - remaining space.
     width: '100%',
