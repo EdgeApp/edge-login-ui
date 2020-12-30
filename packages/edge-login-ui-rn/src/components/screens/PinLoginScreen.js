@@ -424,7 +424,6 @@ const PinLoginScreenStyle = {
     },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
-  modal: Styles.SkipModalStyle,
   spacer: {
     marginTop: scale(35)
   },

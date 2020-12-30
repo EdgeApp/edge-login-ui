@@ -64,7 +64,6 @@ export function completeResecure() {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
     const { account } = state.login
-    dispatch({ type: 'CLOSE_NOTIFICATION_MODAL' })
     dispatch(submitLogin(account))
   }
 }

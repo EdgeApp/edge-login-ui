@@ -18,22 +18,19 @@ import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common/Button.js'
 import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-import { StaticModal } from '../../common/StaticModal.js'
-import { ChangePinModal } from '../../modals/ChangePinModal.js'
+import { ButtonsModal } from '../../modals/ButtonsModal.js'
+import { Airship, showError } from '../../services/AirshipInstance.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
   showHeader?: boolean
 }
 type StateProps = {
-  forgotPasswordModal?: boolean,
   pin: string,
-  pinError: string,
-  showModal: boolean
+  pinError: string
 }
 type DispatchProps = {
   changePin(pin: string): void,
-  login(): void,
   onBack?: () => void,
   onSkip?: () => void
 }
@@ -60,33 +57,6 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
   renderHeader = () => {
     if (this.props.showHeader) {
       return <Header onBack={this.props.onBack} onSkip={this.props.onSkip} />
-    }
-    return null
-  }
-
-  renderModal = (style: typeof SetAccountPinScreenStyle) => {
-    if (this.props.showModal) {
-      if (this.props.forgotPasswordModal) {
-        const body = (
-          <View>
-            <Text style={style.staticModalText}>
-              {s.strings.pswd_and_pin_changed}
-            </Text>
-            <View style={style.shim} />
-            <Text style={style.staticModalText}>
-              {s.strings.change_pwd_body}
-            </Text>
-          </View>
-        )
-        return (
-          <StaticModal
-            cancel={this.props.login}
-            body={body}
-            modalDismissTimerSeconds={8}
-          />
-        )
-      }
-      return <ChangePinModal style={style.modal.skip} />
     }
     return null
   }
@@ -136,7 +106,6 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
               />
             </View>
           </View>
-          {this.renderModal(SetAccountPinScreenStyle)}
         </View>
       </SafeAreaView>
     )
@@ -179,16 +148,6 @@ const SetAccountPinScreenStyle = {
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
     downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
     downStyle: Styles.PrimaryButtonDownScaledStyle
-  },
-  staticModalText: {
-    color: Constants.GRAY_1,
-    width: '100%',
-    fontSize: scale(15),
-    textAlign: 'center'
-  },
-  modal: Styles.SkipModalStyle,
-  shim: {
-    height: scale(5)
   }
 }
 
@@ -199,39 +158,53 @@ export const PublicChangePinScreen = connect<
 >(
   (state: RootState) => ({
     pin: state.create.pin,
-    pinError: state.create.pinError,
-    workflow: state.workflow,
-    showModal: state.create.showModal
+    pinError: state.create.pinError
   }),
   (dispatch: Dispatch) => ({
     changePin(data) {
       dispatch(changePIN(data))
+        .then(() =>
+          Airship.show(bridge => (
+            <ButtonsModal
+              bridge={bridge}
+              title={s.strings.pin_changed}
+              message={s.strings.pin_successfully_changed}
+              buttons={{ ok: { label: s.strings.ok } }}
+            />
+          ))
+        )
+        .then(() => dispatch(cancel()))
+        .catch(showError)
     },
     goBack() {
       dispatch(cancel())
-    },
-    login() {
-      // Not used in the settings screen version
     }
   })
 )(ChangePinScreenComponent)
 
 export const ResecurePinScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
-    forgotPasswordModal: true,
     pin: state.create.pin,
     pinError: state.create.pinError,
-    showHeader: true,
-    showModal: state.create.showModal
+    showHeader: true
   }),
   (dispatch: Dispatch) => ({
     changePin(data: string) {
       dispatch(recoveryChangePIN(data))
+        .then(() =>
+          Airship.show(bridge => (
+            <ButtonsModal
+              bridge={bridge}
+              title={s.strings.pswd_and_pin_changed}
+              message={s.strings.change_pwd_body}
+              buttons={{ ok: { label: s.strings.ok } }}
+            />
+          ))
+        )
+        .then(() => dispatch(completeResecure()))
+        .catch(showError)
     },
     onSkip() {
-      dispatch(completeResecure())
-    },
-    login() {
       dispatch(completeResecure())
     }
   })
