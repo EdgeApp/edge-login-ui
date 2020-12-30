@@ -207,7 +207,6 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   renderItems = (item: Object) => {
     return (
       <TextRowComponent
-        style={RecoverPasswordSceneStyles.listItem}
         data={item.item}
         title={item.item.question}
         onPress={this.questionSelected}
@@ -596,12 +595,6 @@ const RecoverPasswordSceneStyles = {
     width: '100%',
     fontSize: scale(13),
     textAlign: 'center'
-  },
-  listItem: Styles.ListItemTextOnly,
-  emailModal: Styles.SkipModalStyle,
-  errorText: {
-    color: Constants.ACCENT_RED,
-    fontSize: scale(14)
   }
 }
 
