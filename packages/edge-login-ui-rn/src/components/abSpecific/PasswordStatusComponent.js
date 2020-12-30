@@ -5,14 +5,15 @@ import { Text, View } from 'react-native'
 
 import { PASSWORD_REQ_CHECKED, PASSWORD_REQ_UNCHECKED } from '../../assets'
 import s from '../../common/locales/strings.js'
+import * as Constants from '../../constants/index.js'
 import { type PasswordStatusState } from '../../reducers/PasswordStatusReducer.js'
+import { BasicCheckBoxWithLabelScaled } from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { scale } from '../../util/scaling.js'
 import { Checkbox } from '../common/Checkbox'
 import { connect } from '../services/ReduxStore.js'
 
-type OwnProps = {
-  style: Object
-}
+type OwnProps = {}
 type StateProps = {
   secondsToCrack?: string,
   status: PasswordStatusState | null
@@ -21,7 +22,6 @@ type Props = OwnProps & StateProps
 
 class PasswordStatusComponent extends React.Component<Props> {
   render() {
-    const style = this.props.style
     if (this.props.status) {
       return (
         <View style={style.container}>
@@ -60,6 +60,59 @@ class PasswordStatusComponent extends React.Component<Props> {
         />
       </View>
     ))
+  }
+}
+
+const style = {
+  container: {
+    height: scale(80 + 48),
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: Constants.GRAY_4
+  },
+  containerWhite: {
+    height: scale(80 + 48),
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: Constants.WHITE
+  },
+  instructions: {
+    fontSize: scale(17),
+    textAlign: 'center',
+    width: '80%',
+    fontFamily: Constants.FONTS.fontFamilyRegular
+  },
+  boxes: {
+    flexDirection: 'column',
+    top: scale(5)
+  },
+  checkboxContainer: {
+    height: scale(16),
+    marginTop: scale(4)
+  },
+  textContainer: {
+    position: 'relative',
+    width: '100%',
+    flexDirection: 'column',
+    marginTop: scale(5),
+    height: scale(48),
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  shim: {
+    height: scale(5),
+    width: scale(30)
+  },
+  checkboxes: BasicCheckBoxWithLabelScaled,
+  text: {
+    textAlign: 'center',
+    fontFamily: Constants.FONTS.fontFamilyRegular,
+    width: '90%',
+    marginTop: scale(6),
+    marginBottom: scale(6),
+    fontSize: scale(12)
   }
 }
 

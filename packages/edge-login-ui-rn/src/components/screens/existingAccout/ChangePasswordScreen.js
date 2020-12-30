@@ -105,7 +105,7 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
   renderInterior = (styles: typeof NewAccountPasswordScreenStyle) => {
     return (
       <View style={styles.innerView}>
-        <PasswordStatus style={styles.status} />
+        <PasswordStatus />
         <PasswordConnector
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}
@@ -181,13 +181,6 @@ const NewAccountPasswordScreenStyle = {
     flex: 1
   },
   innerView: { ...Styles.InnerView, alignItems: 'center' },
-  status: {
-    ...Styles.PasswordStatusScaledStyle,
-    checkboxContainer: {
-      ...Styles.PasswordStatusScaledStyle.checkboxContainer,
-      height: scale(16)
-    }
-  },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpScaledStyle,
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
