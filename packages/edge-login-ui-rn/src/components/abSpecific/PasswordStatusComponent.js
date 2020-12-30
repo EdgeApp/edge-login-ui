@@ -7,7 +7,6 @@ import { PASSWORD_REQ_CHECKED, PASSWORD_REQ_UNCHECKED } from '../../assets'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
 import { type PasswordStatusState } from '../../reducers/PasswordStatusReducer.js'
-import { BasicCheckBoxWithLabelScaled } from '../../styles/index.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { scale } from '../../util/scaling.js'
 import { Checkbox } from '../common/Checkbox'
@@ -105,7 +104,25 @@ const style = {
     height: scale(5),
     width: scale(30)
   },
-  checkboxes: BasicCheckBoxWithLabelScaled,
+  checkboxes: {
+    container: {
+      position: 'relative',
+      width: '100%',
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      flexDirection: 'row'
+    },
+    text: {
+      fontSize: scale(13),
+      color: Constants.GRAY_2,
+      fontFamily: Constants.FONTS.fontFamilyRegular
+    },
+    checkbox: {
+      padding: scale(2),
+      marginRight: scale(5)
+    }
+  },
   text: {
     textAlign: 'center',
     fontFamily: Constants.FONTS.fontFamilyRegular,

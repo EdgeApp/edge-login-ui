@@ -217,7 +217,25 @@ const TermsAndConditionsScreenStyle = {
     marginBottom: scale(20)
   },
   shim: { ...Styles.Shim, height: scale(10) },
-  checkboxes: Styles.MultiLineTextCheckBoxScaled,
+  checkboxes: {
+    container: {
+      position: 'relative',
+      width: '100%',
+      justifyContent: 'flex-start',
+      flexDirection: 'row'
+    },
+    text: {
+      fontSize: scale(Constants.FONTS.defaultFontSize + 2),
+      color: Constants.GRAY_2,
+      fontFamily: Constants.FONTS.fontFamilyRegular
+    },
+    checkbox: {
+      position: 'relative',
+      height: '100%',
+      padding: scale(10),
+      justifyContent: 'flex-start'
+    }
+  },
   nextButton: {
     upStyle: { ...Styles.PrimaryButtonUpScaledStyle, width: scale(240) },
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
