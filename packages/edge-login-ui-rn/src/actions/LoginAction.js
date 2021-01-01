@@ -83,6 +83,8 @@ export function loginWithPin(username: string, pin: string) {
             ? s.strings.invalid_pin
             : e.name === 'UsernameError'
             ? s.strings.pin_not_enabled
+            : e.name === 'NetworkError'
+            ? `${e.message} ${s.strings.pin_network_error_full_password}`
             : e.message
         dispatch({
           type: 'LOGIN_PIN_FAIL',
