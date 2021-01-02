@@ -147,6 +147,8 @@ const strings = {
   landing_already_have_account: 'Already have an account? Sign in',
   pin_not_enabled: 'PIN is not enabled for this account',
   invalid_pin: 'Invalid PIN',
+  pin_network_error_full_password:
+    'You may still log into your account with username and password.',
   account_locked_for: 'Account locked for \n%1$s more seconds',
   password_error: "Password doesn't meet requirements",
   confirm_password_error: 'Does not match password',
