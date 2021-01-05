@@ -174,5 +174,7 @@
   "otp_screen_retrying": "Retrying login...",
   "otp_backup_code_modal_title": "Enter Backup Code",
   "qr_modal_title": "Scan QR Code",
-  "qr_modal_message": "Scan this QR code with another device logged into your account:"
+  "qr_modal_message": "Scan this QR code with another device logged into your account:",
+  "alert_dropdown_alert": "Alert! ",
+  "alert_dropdown_warning": "Warning! "
 }

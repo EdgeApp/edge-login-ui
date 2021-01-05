@@ -35,6 +35,7 @@ export const edgeDark: Theme = {
   },
 
   fontFamily: 'System',
+  fontWeightBold: 'bold',
   pressedOpacity: 0.25,
 
   // background
@@ -63,6 +64,11 @@ export const edgeDark: Theme = {
   secondaryButtonOutline: palette.edgeMint,
   secondaryButton: palette.transparent,
   secondaryButtonText: palette.edgeMint,
+
+  // Dropdown colors:
+  dropdownWarning: palette.accentOrange,
+  dropdownError: palette.accentRed,
+  dropdownText: palette.white,
 
   // Security alert modal:
   securityAlertModalBackground: palette.white,
