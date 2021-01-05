@@ -2,6 +2,7 @@
 
 import { type EdgeAccount } from 'edge-core-js'
 import * as React from 'react'
+import { Keyboard } from 'react-native'
 import { sprintf } from 'sprintf-js'
 
 import s from '../common/locales/strings.js'
@@ -154,6 +155,7 @@ async function twofaReminder(account: EdgeAccount) {
   }
 
   const createOtpCheckModal = async () => {
+    Keyboard.dismiss()
     const result = await Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}
@@ -169,6 +171,7 @@ async function twofaReminder(account: EdgeAccount) {
   }
 
   const createOtpCheckModalDontAsk = async () => {
+    Keyboard.dismiss()
     return Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}

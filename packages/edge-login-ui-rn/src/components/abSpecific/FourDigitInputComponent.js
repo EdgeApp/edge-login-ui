@@ -3,7 +3,6 @@
 import * as React from 'react'
 import {
   ActivityIndicator,
-  Keyboard,
   Text,
   TextInput,
   TouchableWithoutFeedback,
@@ -12,7 +11,6 @@ import {
 
 import { validatePin } from '../../actions/CreateAccountActions.js'
 import * as Colors from '../../constants/Colors.js'
-import * as Constants from '../../constants/index.js'
 import type { Dispatch, RootState } from '../../types/ReduxTypes.js'
 import { scale } from '../../util/scaling.js'
 import { connect } from '../services/ReduxStore.js'
@@ -29,64 +27,11 @@ type DispatchProps = {
 }
 type Props = OwnProps & StateProps & DispatchProps
 
-type State = {
-  autoFocus: boolean,
-  isFocused: boolean,
-  circleColor: string
-}
-
-class FourDigitInputComponent extends React.Component<Props, State> {
+class FourDigitInputComponent extends React.Component<Props> {
   inputRef: TextInput | null
-  keyboardDidShowListener: any
-  keyboardDidHideListener: any
 
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      autoFocus: false,
-      isFocused: false,
-      circleColor: Constants.WHITE
-    }
-  }
-
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove()
-    this.keyboardDidHideListener.remove()
-  }
-
-  loadedInput = (ref: TextInput) => {
+  loadedInput = (ref: TextInput | null) => {
     this.inputRef = ref
-    if (ref) {
-      this.inputRef.focus()
-    }
-  }
-
-  _keyboardDidShow = () => {
-    this.setState({
-      circleColor: Constants.ACCENT_ORANGE
-    })
-  }
-
-  _keyboardDidHide = () => {
-    this.setState({
-      circleColor: Constants.ACCENT_RED
-    })
-  }
-
-  componentDidMount() {
-    this.inputRef && this.inputRef.focus()
-    this.keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      this._keyboardDidShow
-    )
-    this.keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      this._keyboardDidHide
-    )
-    this.inputRef && this.inputRef.focus()
-    this.setState({
-      autoFocus: true
-    })
   }
 
   render() {
@@ -117,8 +62,7 @@ class FourDigitInputComponent extends React.Component<Props, State> {
           maxLength={4}
           keyboardType="numeric"
           value={this.props.pin}
-          onFocus={this.onFocus}
-          autoFocus={this.state.autoFocus}
+          autoFocus
           keyboardShouldPersistTaps
         />
       )
@@ -126,18 +70,8 @@ class FourDigitInputComponent extends React.Component<Props, State> {
     return null
   }
 
-  onFocus = () => {
-    this.setState({
-      isFocused: true
-    })
-  }
-
   refocus = () => {
-    this.inputRef && this.inputRef.focus()
-    this.setState({
-      autoFocus: true,
-      isFocused: false
-    })
+    if (this.inputRef != null) this.inputRef.focus()
   }
 
   renderDotContainer() {

@@ -1,7 +1,13 @@
 // @flow
 
 import * as React from 'react'
-import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
+import {
+  Keyboard,
+  Platform,
+  Text,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native'
 import { sprintf } from 'sprintf-js'
 
 import { loginWithPin, loginWithTouch } from '../../actions/LoginAction.js'
@@ -86,6 +92,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     const { deleteUserFromDevice } = this.props
     this.setState({ focusOn: 'pin' })
 
+    Keyboard.dismiss()
     Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}

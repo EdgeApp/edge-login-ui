@@ -144,6 +144,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   handleDelete = (username: string) => {
     const { deleteUserFromDevice } = this.props
 
+    Keyboard.dismiss()
     Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}
@@ -390,6 +391,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   }
 
   onForgotPassword() {
+    Keyboard.dismiss()
     // this.props.onForgotPassword()
     this.setState({
       showRecoveryModalOne: true

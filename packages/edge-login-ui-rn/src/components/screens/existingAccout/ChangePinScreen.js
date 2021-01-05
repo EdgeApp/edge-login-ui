@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { Text, View } from 'react-native'
+import { Keyboard, Text, View } from 'react-native'
 
 import {
   changePIN,
@@ -103,6 +103,7 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
       })
       return
     }
+    Keyboard.dismiss()
     this.props.changePin(this.props.pin)
   }
 

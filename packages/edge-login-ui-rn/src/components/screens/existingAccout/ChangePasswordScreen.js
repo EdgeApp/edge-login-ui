@@ -2,7 +2,7 @@
 
 import { type EdgePasswordRules } from 'edge-core-js'
 import * as React from 'react'
-import { KeyboardAvoidingView, View } from 'react-native'
+import { Keyboard, KeyboardAvoidingView, View } from 'react-native'
 
 import {
   changePassword,
@@ -92,6 +92,7 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
       this.props.checkTheConfirmPassword()
       return
     }
+    Keyboard.dismiss()
     this.props.changePassword(this.props.password)
   }
 
