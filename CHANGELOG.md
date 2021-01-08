@@ -1,5 +1,12 @@
 # edge-login-ui
 
+## 0.6.25 (2021-01-08)
+
+- rn: Fix a bug that could show the user redundant login approval requests.
+- rn: Add helper text to pin login network errors.
+- rn: Improve the password recovery error text.
+- rn: Replace several old-style modals with themed modals.
+
 ## 0.6.24 (2020-12-18)
 
 - rn: Fix & theme the password recovery input modal.
