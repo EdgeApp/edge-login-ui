@@ -41,10 +41,7 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
             />
           </View>
           <View style={NewAccountWelcomeScreenStyle.row2}>
-            <ImageHeaderComponent
-              style={NewAccountWelcomeScreenStyle.logoHeader}
-              src={Assets.WELCOME}
-            />
+            <ImageHeaderComponent src={Assets.WELCOME} />
           </View>
           <View style={NewAccountWelcomeScreenStyle.row3}>
             <T style={NewAccountWelcomeScreenStyle.instructionsText}>
@@ -95,7 +92,6 @@ const NewAccountWelcomeScreenStyle = {
     flex: 3,
     alignItems: 'center'
   },
-  logoHeader: Styles.LogoHeaderScaledStyle,
   instructionsText: {
     fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
     fontFamily: Constants.FONTS.fontFamilyRegular,

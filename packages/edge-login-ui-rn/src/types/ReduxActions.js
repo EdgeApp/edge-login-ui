@@ -15,10 +15,7 @@ import { type LoginAttempt } from '../util/loginAttempt.js'
 type NoDataActionName =
   | 'AUTH_LOGGING_IN_WITH_PIN'
   | 'CLEAR_CREATE_ERROR_MESSAGE'
-  | 'CLOSE_NOTIFICATION_MODAL'
   | 'DISMISS_EMAIL_MODAL'
-  | 'DISMISS_REOVERY_ERROR' // Apparently unused
-  | 'LAUNCH_NOTIFICATION_MODAL'
   | 'LOGIN_SUCCEESS'
   | 'ON_DISABLE_RECOVERY'
   | 'RESET_APP'

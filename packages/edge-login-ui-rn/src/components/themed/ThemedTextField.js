@@ -9,25 +9,16 @@ import { type ThemeProps, withTheme } from '../services/ThemeContext.js'
 type Props = {|
   ...TextFieldProps,
   ...ThemeProps,
-  autoFocus?: boolean,
   marginRem?: number | number[]
 |}
 
 class ThemedTextFieldComponent extends React.PureComponent<Props> {
-  textField: TextField | null = null
-
-  componentDidMount() {
-    const { autoFocus = false } = this.props
-    if (autoFocus && this.textField != null) this.textField.focus()
-  }
-
   render() {
-    const { theme, autoFocus, marginRem = 0.5, ...rest } = this.props
+    const { theme, marginRem = 0.5, ...rest } = this.props
     const margin = unpackEdges(marginRem)
 
     return (
       <TextField
-        ref={component => (this.textField = component)}
         containerStyle={{
           marginBottom: theme.rem(margin.bottom),
           marginLeft: theme.rem(margin.left),

@@ -3,8 +3,10 @@
 import * as React from 'react'
 import { Text, TouchableHighlight } from 'react-native'
 
+import * as Constants from '../../../constants/index.js'
+import { scale } from '../../../util/scaling.js'
+
 export type OwnProps = {
-  style: Object,
   numberOfLines: number,
   title: string,
   data: any
@@ -45,7 +47,7 @@ class TextRowComponent extends React.Component<Props, State> {
   }
 
   render() {
-    const { container, text, textPressed, underlayColor } = this.props.style
+    const { container, text, textPressed, underlayColor } = styles
     return (
       <TouchableHighlight
         style={container}
@@ -64,6 +66,22 @@ class TextRowComponent extends React.Component<Props, State> {
       </TouchableHighlight>
     )
   }
+}
+
+const styles = {
+  container: {
+    width: '100%',
+    padding: scale(10)
+  },
+  text: {
+    fontSize: scale(14),
+    color: Constants.GRAY_1
+  },
+  textPressed: {
+    fontSize: scale(14),
+    color: Constants.BLACK
+  },
+  underlayColor: Constants.GRAY_3
 }
 
 export { TextRowComponent }

@@ -4,11 +4,11 @@ import * as React from 'react'
 import { Image, TouchableWithoutFeedback, View } from 'react-native'
 
 import * as Assets from '../../assets/'
+import { scale } from '../../util/scaling.js'
 
 type Props = {
   small?: boolean,
   src?: string,
-  style: Object,
   callback?: () => void
 }
 
@@ -46,15 +46,27 @@ class LogoImageHeader extends React.Component<Props, State> {
     }
     return (
       <TouchableWithoutFeedback onPress={this._onPress}>
-        <View style={this.props.style.container}>
-          <Image
-            source={src}
-            style={this.props.style.image}
-            resizeMode="contain"
-          />
+        <View style={styles.container}>
+          <Image source={src} style={styles.image} resizeMode="contain" />
         </View>
       </TouchableWithoutFeedback>
     )
+  }
+}
+
+const styles = {
+  container: {
+    position: 'relative',
+    width: '100%',
+    paddingBottom: scale(24),
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  image: {
+    position: 'relative',
+    height: scale(44),
+    overflow: 'visible',
+    resizeMode: 'contain'
   }
 }
 

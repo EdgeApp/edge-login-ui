@@ -2,7 +2,7 @@
 
 import { type OtpError } from 'edge-core-js'
 import * as React from 'react'
-import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { sprintf } from 'sprintf-js'
@@ -24,7 +24,6 @@ import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { IconButton } from '../common/IconButton.js'
 import { DropDownList, FormField } from '../common/index.js'
-import { StaticModal } from '../common/StaticModal.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
 import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
@@ -59,12 +58,12 @@ type State = {
   focusSecond: boolean,
   loggingIn: boolean,
   password: string,
-  showRecoveryModalOne: boolean,
   usernameList: boolean
 }
 
 class PasswordLoginScreenComponent extends React.Component<Props, State> {
-  style: Object
+  // eslint-disable-next-line no-use-before-define
+  style: typeof LoginPasswordScreenStyle
 
   constructor(props: Props) {
     super(props)
@@ -75,7 +74,6 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
       focusSecond: false,
       loggingIn: false,
       password: '',
-      showRecoveryModalOne: false,
       usernameList: false
     }
   }
@@ -108,30 +106,6 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
       .then(() => this.setState({ loggingIn: false }))
   }
 
-  renderModal = (style: typeof LoginPasswordScreenStyle) => {
-    if (this.state.showRecoveryModalOne) {
-      const body = (
-        <Text style={style.staticModalText}>
-          {s.strings.initiate_password_recovery}
-        </Text>
-      )
-      return (
-        <StaticModal
-          cancel={this.closeForgotPasswordModal}
-          body={body}
-          modalDismissTimerSeconds={8}
-        />
-      )
-    }
-    return null
-  }
-
-  cancelForgotPassword = () => {
-    this.setState({
-      showRecoveryModalOne: false
-    })
-  }
-
   noFocus = () => {
     Keyboard.dismiss()
     this.setState({
@@ -143,6 +117,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   handleDelete = (username: string) => {
     const { deleteUserFromDevice } = this.props
 
+    Keyboard.dismiss()
     Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}
@@ -159,17 +134,6 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
         return deleteUserFromDevice(username)
       })
       .catch(showError)
-  }
-
-  shouldComponentUpdate(nextProps: Props) {
-    if (
-      nextProps.username !== this.props.username &&
-      this.state.showRecoveryModalOne
-    ) {
-      return false
-    }
-    // return a boolean value
-    return true
   }
 
   render() {
@@ -207,7 +171,6 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
         <TouchableWithoutFeedback onPress={this.noFocus}>
           <View style={this.style.featureBox}>
             <LogoImageHeader
-              style={this.style.logoHeader}
               src={this.props.primaryLogo}
               callback={this.props.primaryLogoCallback}
             />
@@ -228,7 +191,6 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
               onSubmitEditing={this.handleSubmit}
             />
             {this.renderButtons(this.style)}
-            {this.renderModal(this.style)}
           </View>
         </TouchableWithoutFeedback>
       </View>
@@ -390,17 +352,14 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   }
 
   onForgotPassword() {
-    // this.props.onForgotPassword()
-    this.setState({
-      showRecoveryModalOne: true
-    })
-  }
-
-  closeForgotPasswordModal = () => {
-    // this.props.onForgotPassword()
-    this.setState({
-      showRecoveryModalOne: false
-    })
+    Keyboard.dismiss()
+    Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        message={s.strings.initiate_password_recovery}
+        buttons={{ ok: { label: s.strings.ok } }}
+      />
+    ))
   }
 
   onCreateAccount() {
@@ -430,31 +389,12 @@ const LoginPasswordScreenStyle = {
     width: '100%',
     alignItems: 'center'
   },
-  innerView: {
-    ...Styles.InnerView,
-    alignItems: 'center',
-    justifyContent: 'space-around'
-  },
-  logoHeader: {
-    ...Styles.LogoHeaderScaledStyle,
-    container: { ...Styles.LogoHeaderScaledStyle.container }
-  },
   shimTiny: { ...Styles.Shim, height: scale(10) },
-  shimSmall: { ...Styles.Shim, height: scale(25) },
-  shim: Styles.Shim,
   buttonsBox: {
     width: '100%',
     alignItems: 'center'
   },
-  modalMiddle: {
-    width: '100%',
-    height: scale(100)
-  },
   input2: Styles.MaterialInput,
-  inputModal: {
-    ...Styles.MaterialInputOnWhite,
-    container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
-  },
   inputWithDrop: Styles.MaterialInputWithDrop,
   forgotButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
@@ -490,13 +430,6 @@ const LoginPasswordScreenStyle = {
     },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
-  staticModalText: {
-    color: Constants.GRAY_1,
-    width: '100%',
-    fontSize: scale(15),
-    textAlign: 'center'
-  },
-  modal: Styles.SkipModalStyle,
   iconButton: {
     container: {
       position: 'absolute',

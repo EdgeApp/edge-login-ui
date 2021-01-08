@@ -76,10 +76,11 @@ class OtpErrorScreenComponent extends React.Component<Props> {
   handleBackupModal = () => {
     const { login, otpAttempt, saveOtpError } = this.props
 
-    async function handleSubmit(otpKey: string): Promise<string | void> {
+    async function handleSubmit(otpKey: string): Promise<boolean | string> {
       try {
         this.checkVoucher.stop()
         await login(otpAttempt, otpKey)
+        return true
       } catch (error) {
         // Restart the background checking if the login failed:
         this.checkVoucher.start()
@@ -92,9 +93,8 @@ class OtpErrorScreenComponent extends React.Component<Props> {
         if (error != null && error.message === 'Unexpected end of data') {
           return s.strings.backup_key_incorrect
         }
-
-        // Pass along unknown errors:
-        throw error
+        showError(error)
+        return false
       }
     }
 

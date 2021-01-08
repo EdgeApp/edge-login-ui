@@ -151,7 +151,7 @@ export const launchPasswordRecovery = (recoveryKey: string) => async (
 ) => {
   const { context } = imports
 
-  async function handleSubmit(username: string): Promise<string | void> {
+  async function handleSubmit(username: string): Promise<boolean | string> {
     try {
       const questions = await context.fetchRecovery2Questions(
         recoveryKey,
@@ -162,13 +162,14 @@ export const launchPasswordRecovery = (recoveryKey: string) => async (
         type: 'ON_RECOVERY_LOGIN_IS_ENABLED',
         data: { recoveryKey, userQuestions: questions }
       })
+      return true
     } catch (error) {
-      if (error == null) throw new Error('Unknown error')
-      if (error.name === 'UsernameError') {
-        showError(s.strings.recovery_by_username_error)
-        return ''
-      }
-      throw error
+      showError(
+        error != null && error.name === 'UsernameError'
+          ? s.strings.recovery_by_username_error
+          : error
+      )
+      return false
     }
   }
 

@@ -6,7 +6,6 @@ import { type Action } from '../types/ReduxTypes.js'
 
 export type PasswordRecoveryState = {
   +questionsList: string[],
-  +recoveryErrorMessage: string | null,
   +recoveryKey: string | null,
   +showRecoveryEmailDialog: boolean,
   +userQuestions: string[]
@@ -16,7 +15,6 @@ const initialState: PasswordRecoveryState = {
   questionsList: [],
   userQuestions: [],
   recoveryKey: null,
-  recoveryErrorMessage: null,
   showRecoveryEmailDialog: false
 }
 
@@ -44,11 +42,6 @@ export const passwordRecovery: Reducer<
         ...state,
         recoveryKey: action.data.recoveryKey,
         userQuestions: action.data.userQuestions
-      }
-    case 'DISMISS_REOVERY_ERROR':
-      return {
-        ...state,
-        recoveryErrorMessage: null
       }
     case 'DISMISS_EMAIL_MODAL':
       return { ...state, showRecoveryEmailDialog: false }

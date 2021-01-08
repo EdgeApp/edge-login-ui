@@ -20,7 +20,6 @@ export type CreateState = {
   +pin: string,
   +pinError: string,
   +pinErrorMessage: string | null,
-  +showModal: boolean,
   +username: string | null,
   +usernameErrorMessage: string | null
 }
@@ -31,7 +30,6 @@ const initialState: CreateState = {
   confirmPassword: null,
   pin: '',
   pinError: '',
-  loginSuccess: false,
   creationSuccess: false,
   passwordStatus: null,
   createPasswordErrorMessage: null,
@@ -39,9 +37,7 @@ const initialState: CreateState = {
   pinErrorMessage: null,
   usernameErrorMessage: null,
   createErrorMessage: null,
-  loginPinErrorMessage: null,
-  accountObject: defaultAccount,
-  showModal: false
+  accountObject: defaultAccount
 }
 
 export const create: Reducer<CreateState, Action> = function(
@@ -74,10 +70,6 @@ export const create: Reducer<CreateState, Action> = function(
         passwordStatus: action.data.passwordStatus,
         createPasswordErrorMessage: action.data.error
       }
-    case 'LAUNCH_NOTIFICATION_MODAL':
-      return { ...state, showModal: true }
-    case 'CLOSE_NOTIFICATION_MODAL':
-      return { ...state, showModal: false }
     case 'AUTH_UPDATE_CONFIRM_PASSWORD':
       return {
         ...state,

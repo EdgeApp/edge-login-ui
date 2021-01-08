@@ -2,7 +2,7 @@
 
 import { type EdgePasswordRules } from 'edge-core-js'
 import * as React from 'react'
-import { KeyboardAvoidingView, View } from 'react-native'
+import { Keyboard, KeyboardAvoidingView, View } from 'react-native'
 
 import {
   changePassword,
@@ -20,7 +20,8 @@ import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common/Button.js'
 import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-import { ChangePasswordModal } from '../../modals/ChangePasswordModal.js'
+import { ButtonsModal } from '../../modals/ButtonsModal.js'
+import { Airship, showError } from '../../services/AirshipInstance.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
@@ -31,8 +32,7 @@ type StateProps = {
   error?: string,
   error2?: string,
   password: string,
-  passwordStatus: EdgePasswordRules | null,
-  showModal: boolean
+  passwordStatus: EdgePasswordRules | null
 }
 type DispatchProps = {
   checkTheConfirmPassword(): void,
@@ -92,6 +92,7 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
       this.props.checkTheConfirmPassword()
       return
     }
+    Keyboard.dismiss()
     this.props.changePassword(this.props.password)
   }
 
@@ -105,7 +106,7 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
   renderInterior = (styles: typeof NewAccountPasswordScreenStyle) => {
     return (
       <View style={styles.innerView}>
-        <PasswordStatus style={styles.status} />
+        <PasswordStatus />
         <PasswordConnector
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}
@@ -153,20 +154,12 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  renderModal = (style: typeof NewAccountPasswordScreenStyle) => {
-    if (this.props.showModal) {
-      return <ChangePasswordModal style={style.modal.skip} />
-    }
-    return null
-  }
-
   render() {
     return (
       <SafeAreaView>
         <View style={NewAccountPasswordScreenStyle.screen}>
           {this.renderHeader()}
           {this.renderMain(NewAccountPasswordScreenStyle)}
-          {this.renderModal(NewAccountPasswordScreenStyle)}
         </View>
       </SafeAreaView>
     )
@@ -181,13 +174,6 @@ const NewAccountPasswordScreenStyle = {
     flex: 1
   },
   innerView: { ...Styles.InnerView, alignItems: 'center' },
-  status: {
-    ...Styles.PasswordStatusScaledStyle,
-    checkboxContainer: {
-      ...Styles.PasswordStatusScaledStyle.checkboxContainer,
-      height: scale(16)
-    }
-  },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpScaledStyle,
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
@@ -197,8 +183,7 @@ const NewAccountPasswordScreenStyle = {
   inputBox: {
     ...Styles.MaterialInputOnWhiteScaled,
     marginTop: scale(15)
-  },
-  modal: Styles.SkipModalStyle
+  }
 }
 
 export const PublicChangePasswordScreen = connect<
@@ -211,8 +196,7 @@ export const PublicChangePasswordScreen = connect<
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
     password: state.create.password || '',
-    passwordStatus: state.create.passwordStatus,
-    showModal: state.create.showModal
+    passwordStatus: state.create.passwordStatus
   }),
   (dispatch: Dispatch) => ({
     checkTheConfirmPassword() {
@@ -220,6 +204,18 @@ export const PublicChangePasswordScreen = connect<
     },
     changePassword(data: string) {
       dispatch(changePassword(data))
+        .then(() =>
+          Airship.show(bridge => (
+            <ButtonsModal
+              bridge={bridge}
+              title={s.strings.password_changed}
+              message={s.strings.pwd_change_modal}
+              buttons={{ ok: { label: s.strings.ok } }}
+            />
+          ))
+        )
+        .then(() => dispatch(cancel()))
+        .catch(showError)
     },
     onBack() {
       dispatch(cancel())
@@ -238,8 +234,7 @@ export const ResecurePasswordScreen = connect<
     error2: state.create.createPasswordErrorMessage || '',
     password: state.create.password || '',
     passwordStatus: state.create.passwordStatus,
-    showHeader: true,
-    showModal: state.create.showModal
+    showHeader: true
   }),
   (dispatch: Dispatch) => ({
     checkTheConfirmPassword() {
@@ -247,6 +242,8 @@ export const ResecurePasswordScreen = connect<
     },
     changePassword(data: string) {
       dispatch(recoveryChangePassword(data))
+        .then(() => dispatch({ type: 'WORKFLOW_NEXT' }))
+        .catch(showError)
     },
     onSkip() {
       dispatch(dispatch({ type: 'WORKFLOW_NEXT' }))

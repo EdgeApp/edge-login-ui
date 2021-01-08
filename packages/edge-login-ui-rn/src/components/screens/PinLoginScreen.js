@@ -1,7 +1,13 @@
 // @flow
 
 import * as React from 'react'
-import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native'
+import {
+  Keyboard,
+  Platform,
+  Text,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native'
 import { sprintf } from 'sprintf-js'
 
 import { loginWithPin, loginWithTouch } from '../../actions/LoginAction.js'
@@ -86,6 +92,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     const { deleteUserFromDevice } = this.props
     this.setState({ focusOn: 'pin' })
 
+    Keyboard.dismiss()
     Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}
@@ -144,7 +151,6 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
         <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
           <View style={PinLoginScreenStyle.featureBox}>
             <LogoImageHeader
-              style={PinLoginScreenStyle.logoHeader}
               src={this.props.primaryLogo}
               callback={this.props.primaryLogoCallback}
             />
@@ -325,7 +331,6 @@ const PinLoginScreenStyle = {
     height: scale(240),
     width: '100%'
   },
-  logoHeader: Styles.LogoHeaderScaledStyle,
   thumbprintButton: {
     container: {
       position: 'absolute',
@@ -419,7 +424,6 @@ const PinLoginScreenStyle = {
     },
     downStyle: Styles.TextOnlyButtonDownStyle
   },
-  modal: Styles.SkipModalStyle,
   spacer: {
     marginTop: scale(35)
   },

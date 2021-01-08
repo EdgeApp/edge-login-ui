@@ -9,7 +9,6 @@ import { validateConfirmPassword } from '../../../actions/CreateAccountActions.j
 import s from '../../../common/locales/strings.js'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
-import { type WorkflowState } from '../../../reducers/WorkflowReducer.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
@@ -25,8 +24,7 @@ type StateProps = {
   error: string,
   error2: string,
   password: string,
-  passwordStatus: EdgePasswordRules | null,
-  workflow: WorkflowState
+  passwordStatus: EdgePasswordRules | null
 }
 type DispatchProps = {
   checkTheConfirmPassword(): void,
@@ -87,7 +85,7 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
   renderInterior(styles: typeof NewAccountPasswordScreenStyle) {
     return (
       <View style={styles.innerView}>
-        <PasswordStatus style={styles.status} />
+        <PasswordStatus />
         <PasswordConnector
           label={s.strings.password}
           style={styles.inputBox}
@@ -175,13 +173,6 @@ const NewAccountPasswordScreenStyle = {
     flex: 1
   },
   innerView: { ...Styles.InnerView, alignItems: 'center' },
-  status: {
-    ...Styles.PasswordStatusScaledStyle,
-    checkboxContainer: {
-      ...Styles.PasswordStatusScaledStyle.checkboxContainer,
-      height: scale(16)
-    }
-  },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpScaledStyle,
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
@@ -192,8 +183,7 @@ const NewAccountPasswordScreenStyle = {
     ...Styles.MaterialInputOnWhiteScaled,
     marginTop: scale(15)
   },
-  passwordShim: { ...Styles.Shim, height: 1, marginTop: scale(35) },
-  modal: Styles.SkipModalStyle
+  passwordShim: { ...Styles.Shim, height: 1, marginTop: scale(35) }
 }
 
 export const NewAccountPasswordScreen = connect<
@@ -206,8 +196,7 @@ export const NewAccountPasswordScreen = connect<
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
     password: state.create.password || '',
-    passwordStatus: state.create.passwordStatus,
-    workflow: state.workflow
+    passwordStatus: state.create.passwordStatus
   }),
   (dispatch: Dispatch) => ({
     checkTheConfirmPassword() {
