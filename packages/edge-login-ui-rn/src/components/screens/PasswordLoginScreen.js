@@ -2,8 +2,14 @@
 
 import { type OtpError } from 'edge-core-js'
 import * as React from 'react'
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
+import {
+  Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { sprintf } from 'sprintf-js'
 
@@ -25,6 +31,7 @@ import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { IconButton } from '../common/IconButton.js'
 import { DropDownList, FormField } from '../common/index.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
+import { QrCodeModal } from '../modals/QrCodeModal.js'
 import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 
@@ -134,6 +141,10 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
         return deleteUserFromDevice(username)
       })
       .catch(showError)
+  }
+
+  handleQrModal = () => {
+    Airship.show(bridge => <QrCodeModal bridge={bridge} />)
   }
 
   render() {
@@ -293,6 +304,13 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
           upStyle={style.signupButton.upStyle}
           upTextStyle={style.signupButton.upTextStyle}
         />
+        <TouchableOpacity onPress={this.handleQrModal}>
+          <AntDesignIcon
+            name="qrcode"
+            color={Constants.WHITE}
+            size={scale(28)}
+          />
+        </TouchableOpacity>
       </View>
     )
   }
