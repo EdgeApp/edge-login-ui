@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.6.26 (2021-01-11)
+
+- rn: Expose the QR modal from the password login screen
+- rn: Update translations
+
 ## 0.6.25 (2021-01-08)
 
 - rn: Fix a bug that could show the user redundant login approval requests.
