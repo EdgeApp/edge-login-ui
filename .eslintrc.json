@@ -1,24 +1,16 @@
 {
   "extends": [
-    "plugin:react/recommended",
     "standard-kit/prettier",
-    "standard-kit/prettier/node",
     "standard-kit/prettier/jsx",
-    "standard-kit/prettier/flow"
+    "standard-kit/prettier/flow",
+    "standard-kit/prettier/node",
+    "standard-kit/prettier/react"
   ],
   "plugins": [
     "simple-import-sort"
   ],
   "rules": {
-    "flowtype/array-style-complex-type": ["error", "verbose"],
-    "flowtype/array-style-simple-type": ["error", "shorthand"],
-    "no-var": "error",
-    "promise/no-return-wrap": "error",
-    "react/display-name": "off",
-    "react/no-string-refs": "off",
-    "react/prop-types": "off",
-    "simple-import-sort/sort": "error",
-    "standard/no-callback-literal": "off"
+    "simple-import-sort/imports": "error"
   },
   "settings": {
     "react": {
