@@ -46,7 +46,7 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
               <View style={NewAccountReviewScreenStyle.shim} />
             </View>
             <Button
-              onPress={this.onNextPress}
+              onPress={this.handleNext}
               downStyle={NewAccountReviewScreenStyle.nextButton.downStyle}
               downTextStyle={
                 NewAccountReviewScreenStyle.nextButton.downTextStyle
@@ -61,7 +61,7 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
     )
   }
 
-  onNextPress = () => {
+  handleNext = () => {
     global.firebase &&
       global.firebase.analytics().logEvent(`Signup_Review_Next`)
     this.props.onDone()

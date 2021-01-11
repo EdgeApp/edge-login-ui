@@ -90,17 +90,17 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
           label={s.strings.password}
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}
-          onFinish={this.onSetNextFocus}
+          onFinish={this.handleFocusSwitch}
         />
         <PasswordConfirmConnector
           label={s.strings.confirm_password}
           style={styles.inputBox}
           autoFocus={this.state.focusSecond}
-          onFinish={this.onNextPress}
+          onFinish={this.handleNext}
         />
         <View style={styles.passwordShim} />
         <Button
-          onPress={this.onNextPress}
+          onPress={this.handleNext}
           downStyle={styles.nextButton.downStyle}
           downTextStyle={styles.nextButton.downTextStyle}
           upStyle={styles.nextButton.upStyle}
@@ -113,14 +113,14 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  onSetNextFocus = () => {
+  handleFocusSwitch = () => {
     this.setState({
       focusFirst: false,
       focusSecond: true
     })
   }
 
-  onNextPress = () => {
+  handleNext = () => {
     this.setState({
       isProcessing: true
     })

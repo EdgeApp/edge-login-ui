@@ -14,8 +14,8 @@ type Props = {
   answer1: string,
   question2: string,
   answer2: string,
-  confirm(): void,
-  cancel(): void
+  onConfirm(): void,
+  onCancel(): void
 }
 
 export class ChangeRecoveryConfirmScreen extends React.Component<Props> {
@@ -25,7 +25,7 @@ export class ChangeRecoveryConfirmScreen extends React.Component<Props> {
       <SafeAreaView>
         <View style={style.screen}>
           <HeaderComponent
-            onBack={this.props.cancel}
+            onBack={this.props.onCancel}
             title={s.strings.confirm_recovery_questions}
             subTitle=""
           />
@@ -38,7 +38,7 @@ export class ChangeRecoveryConfirmScreen extends React.Component<Props> {
           <View style={style.shim} />
           <View style={style.buttonContainer}>
             <Button
-              onPress={this.props.confirm}
+              onPress={this.props.onConfirm}
               downStyle={style.submitButton.downStyle}
               downTextStyle={style.submitButton.downTextStyle}
               upStyle={style.submitButton.upStyle}
@@ -47,7 +47,7 @@ export class ChangeRecoveryConfirmScreen extends React.Component<Props> {
             />
             <View style={style.shim} />
             <Button
-              onPress={this.props.cancel}
+              onPress={this.props.onCancel}
               downStyle={style.disableButton.downStyle}
               downTextStyle={style.disableButton.downTextStyle}
               upStyle={style.disableButton.upStyle}

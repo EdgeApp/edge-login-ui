@@ -89,6 +89,7 @@ export class MyModal extends React.Component<Props, State> {
             upTextStyle={styles.twoButtonConfig.actionButton.upText}
             downStyle={styles.twoButtonConfig.actionButton.down}
             downTextStyle={styles.twoButtonConfig.actionButton.downText}
+            // eslint-disable-next-line react/jsx-handler-names
             onPress={this.props.action}
           />
         </View>
@@ -103,6 +104,7 @@ export class MyModal extends React.Component<Props, State> {
             upTextStyle={styles.twoButtonConfig.cancelButton.upText}
             downStyle={styles.twoButtonConfig.cancelButton.down}
             downTextStyle={styles.twoButtonConfig.cancelButton.downText}
+            // eslint-disable-next-line react/jsx-handler-names
             onPress={this.props.cancel}
           />
         </View>
@@ -117,6 +119,7 @@ export class MyModal extends React.Component<Props, State> {
             upTextStyle={styles.twoButtonConfig.cancelButton.upText}
             downStyle={styles.twoButtonConfig.cancelButton.down}
             downTextStyle={styles.twoButtonConfig.cancelButton.downText}
+            // eslint-disable-next-line react/jsx-handler-names
             onPress={this.props.cancel}
           />
         </View>
@@ -127,6 +130,7 @@ export class MyModal extends React.Component<Props, State> {
             upTextStyle={styles.twoButtonConfig.actionButton.upText}
             downStyle={styles.twoButtonConfig.actionButton.down}
             downTextStyle={styles.twoButtonConfig.actionButton.downText}
+            // eslint-disable-next-line react/jsx-handler-names
             onPress={this.props.action}
           />
         </View>
@@ -154,6 +158,7 @@ export class MyModal extends React.Component<Props, State> {
     return (
       <TouchableOpacity
         style={styles.closeIconButton.container}
+        // eslint-disable-next-line react/jsx-handler-names
         onPress={this.props.cancel}
       >
         <MaterialIcon

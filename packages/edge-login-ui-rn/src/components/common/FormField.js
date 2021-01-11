@@ -72,12 +72,12 @@ class FormField extends React.Component<Props, State> {
         onBlur={this.props.onBlur}
         autoCapitalize={this.props.autoCapitalize}
         autoCorrect={this.props.autoCorrect}
-        onSubmitEditing={this.onSubmitEditing}
+        onSubmitEditing={this.handleSubmitEditing}
       />
     )
   }
 
-  onSubmitEditing = (event: any) => {
+  handleSubmitEditing = (event: any) => {
     if (this.props.onSubmitEditing) {
       this.props.onSubmitEditing()
     }

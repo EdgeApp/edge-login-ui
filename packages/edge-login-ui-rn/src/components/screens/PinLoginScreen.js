@@ -108,7 +108,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
       .catch(showError)
   }
 
-  relaunchTouchId = () => {
+  handleTouchId = () => {
     this.props.loginWithTouch(this.props.username)
   }
 
@@ -263,7 +263,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
         <ImageButton
           style={{}}
           source={Assets.FACE_ID}
-          onPress={this.relaunchTouchId}
+          onPress={this.handleTouchId}
           disabled={this.props.isTouchIdDisabled}
         />
       )
@@ -273,7 +273,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
         <ImageButton
           style={{}}
           source={Assets.TOUCH_ID}
-          onPress={this.relaunchTouchId}
+          onPress={this.handleTouchId}
           disabled={this.props.isTouchIdDisabled}
         />
       )

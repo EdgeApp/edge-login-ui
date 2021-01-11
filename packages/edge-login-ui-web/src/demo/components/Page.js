@@ -85,7 +85,7 @@ export class Page extends Component<Props, State> {
   /**
    * Logout button was clicked.
    */
-  onLogout = () => {
+  handleLogout = () => {
     if (this.state.account) this.state.account.logout()
     this.setState({ account: undefined, wallet: undefined })
   }
@@ -101,7 +101,7 @@ export class Page extends Component<Props, State> {
         <AccountButtons
           account={account}
           context={context}
-          onLogout={this.onLogout}
+          onLogout={this.handleLogout}
         />
       )
 

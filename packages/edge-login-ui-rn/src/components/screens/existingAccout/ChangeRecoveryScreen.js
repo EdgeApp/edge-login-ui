@@ -110,7 +110,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     return null
   }
 
-  onDisable = () => {
+  handleDisable = () => {
     this.props.deleteRecovery()
     this.setState({
       disableConfirmationModal: true
@@ -121,7 +121,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     this.props.cancel()
   }
 
-  onSubmit = () => {
+  handleSubmit = () => {
     // Launch Modal full Screen
     const errorOne = this.state.answer1.length < 4 || false
     const errorTwo = this.state.answer2.length < 4 || false
@@ -144,7 +144,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  onConfirmQuestionsAndAnseers = () => {
+  handleConfirmQuestionsAndAnswers = () => {
     console.log('PR: we got thsi .. what ')
     this.setState({
       showConfirmationModal: false
@@ -154,13 +154,13 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     this.props.submit(questions, answers)
   }
 
-  onCancelConfirmation = () => {
+  handleCancelConfirmation = () => {
     this.setState({
       showConfirmationModal: false
     })
   }
 
-  onSelectQuestionOne = () => {
+  handleQuestion1 = () => {
     this.setState({
       showQuestionPicker: true,
       focusFirst: true,
@@ -168,7 +168,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  onSelectQuestionTwo = () => {
+  handleQuestion2 = () => {
     this.setState({
       showQuestionPicker: true,
       focusFirst: false,
@@ -176,19 +176,19 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  setAnswer1 = (arg: string) => {
+  handleAnswer1 = (arg: string) => {
     this.setState({
       answer1: arg
     })
   }
 
-  setAnswer2 = (arg: string) => {
+  handleAnswer2 = (arg: string) => {
     this.setState({
       answer2: arg
     })
   }
 
-  questionSelected = (data: Object) => {
+  handleQuestionSelected = (data: Object) => {
     const question = data.question
     if (this.state.focusFirst) {
       this.setState({
@@ -208,7 +208,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
       <TextRowComponent
         data={item.item}
         title={item.item.question}
-        onPress={this.questionSelected}
+        onPress={this.handleQuestionSelected}
         numberOfLines={3}
       />
     )
@@ -232,7 +232,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  openEmailApp = () => {
+  handleEmailApp = () => {
     const body =
       s.strings.otp_email_body +
       this.props.username +
@@ -289,7 +289,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
       <View style={styles.body}>
         <View style={styles.questionRow}>
           <TextAndIconButton
-            onPress={this.onSelectQuestionOne}
+            onPress={this.handleQuestion1}
             icon={
               <MaterialIcon
                 style={questionOneStyle.icon}
@@ -308,7 +308,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
             autoFocus={this.state.focusFirst}
             autoCorrect={false}
             autoCapitalize="none"
-            onChangeText={this.setAnswer1}
+            onChangeText={this.handleAnswer1}
             value={this.state.answer1}
             label={s.strings.your_answer_label}
             error={errorMessageOne}
@@ -316,7 +316,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         </View>
         <View style={styles.questionRow}>
           <TextAndIconButton
-            onPress={this.onSelectQuestionTwo}
+            onPress={this.handleQuestion2}
             icon={
               <MaterialIcon
                 style={questionTwoStyle.icon}
@@ -335,7 +335,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
             autoFocus={this.state.focusSecond}
             autoCorrect={false}
             autoCapitalize="none"
-            onChangeText={this.setAnswer2}
+            onChangeText={this.handleAnswer2}
             value={this.state.answer2}
             label={s.strings.your_answer_label}
             error={errorMessageTwo}
@@ -352,7 +352,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         <View style={styles.buttonContainer}>
           <View style={styles.shim} />
           <Button
-            onPress={this.onSubmit}
+            onPress={this.handleSubmit}
             downStyle={styles.submitButton.downStyle}
             downTextStyle={styles.submitButton.downTextStyle}
             upStyle={styles.submitButton.upStyle}
@@ -361,7 +361,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
           />
           <View style={styles.shim} />
           <Button
-            onPress={this.onDisable}
+            onPress={this.handleDisable}
             downStyle={styles.disableButton.downStyle}
             downTextStyle={styles.disableButton.downTextStyle}
             upStyle={styles.disableButton.upStyle}
@@ -375,7 +375,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
       <View style={styles.buttonContainer}>
         <View style={styles.shim} />
         <Button
-          onPress={this.onSubmit}
+          onPress={this.handleSubmit}
           downStyle={styles.submitButton.downStyle}
           downTextStyle={styles.submitButton.downTextStyle}
           upStyle={styles.submitButton.upStyle}
@@ -411,8 +411,8 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
       return (
         <FullScreenModal>
           <ChangeRecoveryConfirmScreen
-            cancel={this.onCancelConfirmation}
-            confirm={this.onConfirmQuestionsAndAnseers}
+            onCancel={this.handleCancelConfirmation}
+            onConfirm={this.handleConfirmQuestionsAndAnswers}
             question1={this.state.question1}
             answer1={this.state.answer1}
             question2={this.state.question2}
@@ -438,7 +438,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
           error=""
           returnKeyType="go"
           forceFocus
-          onSubmitEditing={this.openEmailApp}
+          onSubmitEditing={this.handleEmailApp}
         />
       </View>
     )
@@ -468,7 +468,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
           error=""
           returnKeyType="go"
           forceFocus
-          onSubmitEditing={this.openEmailApp}
+          onSubmitEditing={this.handleEmailApp}
         />
       </View>
     )
@@ -477,7 +477,8 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         <SaveRecoveryTokenModal
           modalMiddleComponent={middle}
           cancel={this.props.cancel}
-          action={this.openEmailApp}
+          // eslint-disable-next-line react/jsx-handler-names
+          action={this.handleEmailApp}
         />
       )
     }

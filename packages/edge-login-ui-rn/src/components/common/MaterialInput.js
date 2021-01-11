@@ -85,7 +85,7 @@ export class MaterialInput extends React.Component<Props, State> {
         ref={this.addRef}
         label={this.props.label}
         value={value}
-        onChangeText={this.onChange}
+        onChangeText={this.handleChange}
         error={error}
         containerStyle={containerStyle}
         baseColor={baseColor}
@@ -96,10 +96,10 @@ export class MaterialInput extends React.Component<Props, State> {
         secureTextEntry={secureTextEntry}
         autoCapitalize={this.props.autoCapitalize}
         returnKeyType={returnKeyType}
-        onBlur={this.onBlur}
-        onFocus={this.onFocus}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
         autoCorrect={autoCorrectConfigured}
-        onSubmitEditing={this.onSubmitEditing}
+        onSubmitEditing={this.handleSubmitEditing}
         fontSize={InputStyles.fontSize}
         titleFontSize={InputStyles.titleFontSize}
         labelFontSize={InputStyles.labelFontSize}
@@ -113,26 +113,26 @@ export class MaterialInput extends React.Component<Props, State> {
     }
   }
 
-  onChange = (text: string) => {
+  handleChange = (text: string) => {
     this.setState({
       inputText: text
     })
     this.props.onChangeText(text)
   }
 
-  onSubmitEditing = (event: any) => {
+  handleSubmitEditing = (event: any) => {
     if (this.props.onSubmitEditing) {
       this.props.onSubmitEditing()
     }
   }
 
-  onFocus = () => {
+  handleFocus = () => {
     if (this.props.onFocus) {
       this.props.onFocus()
     }
   }
 
-  onBlur = () => {
+  handleBlur = () => {
     if (this.props.onBlur) {
       this.props.onBlur()
     }

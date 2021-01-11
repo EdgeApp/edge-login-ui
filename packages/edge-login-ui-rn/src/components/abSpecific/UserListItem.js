@@ -12,18 +12,18 @@ type Props = {
 }
 
 class UserListItem extends React.Component<Props> {
-  deleteThis = () => {
+  handleDelete = () => {
     this.props.onDelete(this.props.data)
   }
 
-  onPress = () => {
+  handlePress = () => {
     this.props.onClick(this.props.data)
   }
 
   render() {
     const style = this.props.style
     return (
-      <TouchableOpacity onPress={this.onPress}>
+      <TouchableOpacity onPress={this.handlePress}>
         {this.renderInside(style)}
       </TouchableOpacity>
     )
@@ -38,7 +38,7 @@ class UserListItem extends React.Component<Props> {
           </View>
           <TouchableOpacity
             style={style.iconButton.container}
-            onPress={this.deleteThis}
+            onPress={this.handleDelete}
           >
             <MaterialIcon
               style={style.iconButton.icon}

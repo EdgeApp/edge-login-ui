@@ -88,7 +88,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     const { login, saveOtpError, username } = this.props
     const { password } = this.state
 
-    this.noFocus()
+    this.handleBlur()
     Keyboard.dismiss()
     this.setState({
       loggingIn: true
@@ -108,7 +108,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
       .then(() => this.setState({ loggingIn: false }))
   }
 
-  noFocus = () => {
+  handleBlur = () => {
     Keyboard.dismiss()
     this.setState({
       focusFirst: false,
@@ -153,7 +153,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
           branding={this.props.branding}
           style={this.style.backgroundImage}
           content={this.renderOverImage()}
-          callback={this.noFocus}
+          onPress={this.handleBlur}
         />
       </KeyboardAwareScrollView>
     )
@@ -171,7 +171,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     return (
       <View style={this.style.featureBoxContainer}>
         <HeaderParentButtons branding={this.props.branding} />
-        <TouchableWithoutFeedback onPress={this.noFocus}>
+        <TouchableWithoutFeedback onPress={this.handleBlur}>
           <View style={this.style.featureBox}>
             <LogoImageHeader branding={this.props.branding} />
             {this.renderUsername(this.style)}

@@ -13,13 +13,18 @@ type Props = {
 }
 
 export class HeaderParentButtons extends React.Component<Props> {
+  handlePress = () => {
+    const { parentButton } = this.props.branding
+    if (parentButton != null) parentButton.callback()
+  }
+
   render() {
     const { parentButton, appId } = this.props.branding
     const openEdgeSite = () => Linking.openURL(s.strings.edge_site)
     return (
       <View style={styles.container}>
         {parentButton && parentButton.text && (
-          <TouchableOpacity onPress={parentButton.callback}>
+          <TouchableOpacity onPress={this.handlePress}>
             <View style={styles.leftButtonContainer}>
               <Text style={parentButton.style || styles.leftButtonText}>
                 {parentButton.text}

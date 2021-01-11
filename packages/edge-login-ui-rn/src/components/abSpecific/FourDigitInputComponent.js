@@ -36,7 +36,7 @@ class FourDigitInputComponent extends React.Component<Props> {
 
   render() {
     return (
-      <TouchableWithoutFeedback onPress={this.refocus}>
+      <TouchableWithoutFeedback onPress={this.handleRefocus}>
         <View style={styles.container}>
           <View style={styles.interactiveContainer}>
             {this.renderDotContainer()}
@@ -58,7 +58,7 @@ class FourDigitInputComponent extends React.Component<Props> {
         <TextInput
           ref={this.loadedInput}
           style={styles.input}
-          onChangeText={this.updatePin}
+          onChangeText={this.handleUpdate}
           maxLength={4}
           keyboardType="numeric"
           value={this.props.pin}
@@ -70,7 +70,7 @@ class FourDigitInputComponent extends React.Component<Props> {
     return null
   }
 
-  refocus = () => {
+  handleRefocus = () => {
     if (this.inputRef != null) this.inputRef.focus()
   }
 
@@ -89,7 +89,7 @@ class FourDigitInputComponent extends React.Component<Props> {
     )
   }
 
-  updatePin = (arg: string) => {
+  handleUpdate = (arg: string) => {
     this.props.onChangeText({ username: this.props.username, pin: arg })
   }
 }

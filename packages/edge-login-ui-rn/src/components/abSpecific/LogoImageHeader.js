@@ -23,7 +23,7 @@ export class LogoImageHeader extends React.Component<Props, State> {
     }
   }
 
-  _onPress = () => {
+  handlePress = () => {
     const callback = this.props.branding.primaryLogoCallback
     if (callback != null) {
       const taps = this.state.taps + 1
@@ -41,7 +41,7 @@ export class LogoImageHeader extends React.Component<Props, State> {
   render() {
     const src = this.props.branding.primaryLogo || Assets.LOGO_BIG
     return (
-      <TouchableWithoutFeedback onPress={this._onPress}>
+      <TouchableWithoutFeedback onPress={this.handlePress}>
         <View style={styles.container}>
           <Image source={src} style={styles.image} resizeMode="contain" />
         </View>

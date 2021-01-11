@@ -11,14 +11,14 @@ type Props = {
 }
 
 export class AccountButtons extends Component<Props> {
-  openManageWindow = () => {
+  handleManageWindow = () => {
     this.props.context.showAccountSettingsWindow(this.props.account)
   }
 
   render() {
     return (
       <p id="buttons">
-        <button onClick={this.openManageWindow}>Manage Settings</button>
+        <button onClick={this.handleManageWindow}>Manage Settings</button>
         <button className="secondary" onClick={this.props.onLogout}>
           Logout
         </button>
