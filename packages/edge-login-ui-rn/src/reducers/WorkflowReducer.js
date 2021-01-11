@@ -15,7 +15,7 @@ const initialState: WorkflowState = {
   currentSceneIndex: 0
 }
 
-export const workflow: Reducer<WorkflowState, Action> = function(
+export const workflow: Reducer<WorkflowState, Action> = function (
   state = initialState,
   action
 ) {

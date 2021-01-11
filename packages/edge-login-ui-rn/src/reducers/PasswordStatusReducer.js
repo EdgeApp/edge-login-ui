@@ -14,7 +14,7 @@ export type PasswordStatusState = {
 export const passwordStatus: Reducer<
   PasswordStatusState | null,
   Action
-> = function(state = null, action) {
+> = function (state = null, action) {
   switch (action.type) {
     case 'AUTH_UPDATE_PASSWORD': {
       const status = action.data.passwordStatus

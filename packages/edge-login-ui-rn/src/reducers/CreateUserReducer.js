@@ -33,7 +33,7 @@ const initialState: CreateState = {
   createErrorMessage: null
 }
 
-export const create: Reducer<CreateState, Action> = function(
+export const create: Reducer<CreateState, Action> = function (
   state = initialState,
   action
 ) {

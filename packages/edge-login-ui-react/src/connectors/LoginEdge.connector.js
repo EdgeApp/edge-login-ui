@@ -35,7 +35,4 @@ export const mapDispatchToProps = (dispatch, props) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginEdge)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginEdge)

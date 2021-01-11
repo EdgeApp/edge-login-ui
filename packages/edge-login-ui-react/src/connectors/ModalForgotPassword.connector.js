@@ -15,7 +15,4 @@ export const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ModalForgotPassword)
+export default connect(mapStateToProps, mapDispatchToProps)(ModalForgotPassword)

@@ -7,7 +7,7 @@ const supportedLocales = {
   en_US
 }
 
-const LocaleStrings = function(inputKey, reqLocale) {
+const LocaleStrings = function (inputKey, reqLocale) {
   // if no locale specified, use device
   if (!reqLocale) {
     reqLocale =

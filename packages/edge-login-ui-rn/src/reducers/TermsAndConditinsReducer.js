@@ -26,7 +26,7 @@ const initialState: TermsState = {
   ]
 }
 
-export const terms: Reducer<TermsState, Action> = function(
+export const terms: Reducer<TermsState, Action> = function (
   state = initialState,
   action
 ) {

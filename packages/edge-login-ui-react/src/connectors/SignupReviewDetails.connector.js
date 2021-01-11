@@ -33,7 +33,4 @@ export const mapDispatchToProps = (dispatch, props) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignupReviewDetails)
+export default connect(mapStateToProps, mapDispatchToProps)(SignupReviewDetails)

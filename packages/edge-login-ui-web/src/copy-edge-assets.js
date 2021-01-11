@@ -11,7 +11,7 @@ function main(argv) {
   const dest = path.resolve(argv[2])
 
   console.log(src + ' -> ' + dest)
-  cpr(src, dest, { overwrite: true }, function(e, files) {
+  cpr(src, dest, { overwrite: true }, function (e, files) {
     if (e) return console.error(e)
   })
 }

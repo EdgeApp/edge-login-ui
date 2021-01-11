@@ -24,7 +24,4 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignupUsername)
+export default connect(mapStateToProps, mapDispatchToProps)(SignupUsername)
