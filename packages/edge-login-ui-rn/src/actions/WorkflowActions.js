@@ -6,9 +6,10 @@ import {
   type Imports
 } from '../types/ReduxTypes.js'
 
-export function cancel() {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const onCancel = imports.onCancel
-    onCancel()
-  }
+export const onComplete = () => (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  imports.onComplete()
 }

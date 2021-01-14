@@ -9,7 +9,7 @@ import {
   recoveryChangePassword
 } from '../../../actions/ChangePasswordPinActions.js'
 import { validateConfirmPassword } from '../../../actions/CreateAccountActions.js'
-import { cancel } from '../../../actions/WorkflowActions.js'
+import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
@@ -214,11 +214,11 @@ export const PublicChangePasswordScreen = connect<
             />
           ))
         )
-        .then(() => dispatch(cancel()))
+        .then(() => dispatch(onComplete()))
         .catch(showError)
     },
     onBack() {
-      dispatch(cancel())
+      dispatch(onComplete())
     }
   })
 )(ChangePasswordScreenComponent)

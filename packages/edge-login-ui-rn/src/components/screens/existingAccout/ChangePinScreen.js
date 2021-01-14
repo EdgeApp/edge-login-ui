@@ -8,7 +8,7 @@ import {
   recoveryChangePIN
 } from '../../../actions/ChangePasswordPinActions.js'
 import { completeResecure } from '../../../actions/LoginCompleteActions.js'
-import { cancel } from '../../../actions/WorkflowActions.js'
+import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
@@ -173,11 +173,11 @@ export const PublicChangePinScreen = connect<
             />
           ))
         )
-        .then(() => dispatch(cancel()))
+        .then(() => dispatch(onComplete()))
         .catch(showError)
     },
     goBack() {
-      dispatch(cancel())
+      dispatch(onComplete())
     }
   })
 )(ChangePinScreenComponent)

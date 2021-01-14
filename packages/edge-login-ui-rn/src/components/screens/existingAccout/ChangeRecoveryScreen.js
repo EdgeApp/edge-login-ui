@@ -6,11 +6,10 @@ import Mailer from 'react-native-mail'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {
-  cancelRecoverySettingsScene,
   changeRecoveryAnswers,
   deleteRecovery
 } from '../../../actions/PasswordRecoveryActions.js'
-import { cancel } from '../../../actions/WorkflowActions.js'
+import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
@@ -632,17 +631,17 @@ export const PublicChangeRecoveryScreen = connect<
   (dispatch: Dispatch) => ({
     cancel() {
       dispatch(deleteRecovery())
-      dispatch(cancelRecoverySettingsScene())
+      dispatch(onComplete())
       dispatch({ type: 'DISMISS_EMAIL_MODAL' })
     },
     deleteRecovery() {
       dispatch(deleteRecovery())
     },
     goBack() {
-      dispatch(cancel())
+      dispatch(onComplete())
     },
     returnToSettings() {
-      dispatch(cancelRecoverySettingsScene())
+      dispatch(onComplete())
     },
     submit(questions: string[], answers: string[]) {
       dispatch(changeRecoveryAnswers(questions, answers))

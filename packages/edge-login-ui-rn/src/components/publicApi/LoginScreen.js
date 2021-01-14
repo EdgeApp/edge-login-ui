@@ -73,7 +73,6 @@ export class LoginScreen extends React.Component<Props> {
           callback: this.props.onLogin,
           context: this.props.context,
           folder: makeReactNativeFolder(),
-          onCancel: () => {},
           onComplete: () => {},
           recoveryKey: this.props.recoveryLogin,
           username: this.props.username

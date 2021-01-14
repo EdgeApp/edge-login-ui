@@ -16,8 +16,7 @@ type Props = {
   account: EdgeAccount,
   context: EdgeContext,
   showHeader: boolean,
-  onComplete(): void,
-  onCancel(): void
+  onComplete(): void
 }
 
 export class PasswordRecoveryScreen extends React.Component<Props> {
@@ -30,7 +29,6 @@ export class PasswordRecoveryScreen extends React.Component<Props> {
           callback: () => {},
           context: this.props.context,
           folder: makeReactNativeFolder(),
-          onCancel: this.props.onComplete,
           onComplete: this.props.onComplete
         }}
         initialAction={initializeChangeRecovery()}

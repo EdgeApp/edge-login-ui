@@ -15,8 +15,7 @@ type Props = {
   account: EdgeAccount,
   context: EdgeContext,
   showHeader: boolean,
-  onComplete(): void,
-  onCancel(): void
+  onComplete(): void
 }
 
 export class ChangePinScreen extends React.Component<Props> {
@@ -29,7 +28,6 @@ export class ChangePinScreen extends React.Component<Props> {
           callback: () => {},
           context: this.props.context,
           folder: makeReactNativeFolder(),
-          onCancel: this.props.onComplete,
           onComplete: this.props.onComplete
         }}
         initialAction={{ type: 'WORKFLOW_START', data: 'changePinWF' }}

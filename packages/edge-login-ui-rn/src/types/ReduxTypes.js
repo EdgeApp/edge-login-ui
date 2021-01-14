@@ -8,17 +8,16 @@ import { type Action } from './ReduxActions.js'
 
 export type { Action, RootState }
 
-export type Imports = {
+export type Imports = {|
   +accountObject?: EdgeAccount,
   +accountOptions: EdgeAccountOptions,
   +callback: Function,
   +context: EdgeContext,
   +folder: DiskletFolder,
-  +onCancel: Function,
-  +onComplete: Function,
+  +onComplete: () => void,
   +recoveryKey?: string,
   +username?: string | null
-}
+|}
 
 export type GetState = () => RootState
 export type Dispatch = <Return>(

@@ -67,12 +67,6 @@ export function deleteRecovery() {
   }
 }
 
-export function cancelRecoverySettingsScene() {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    imports.onComplete()
-  }
-}
-
 export function changeRecoveryAnswers(questions: string[], answers: string[]) {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const account = imports.accountObject
