@@ -76,7 +76,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
   handleBackupModal = () => {
     const { login, otpAttempt, saveOtpError } = this.props
 
-    async function handleSubmit(otpKey: string): Promise<boolean | string> {
+    const handleSubmit = async (otpKey: string): Promise<boolean | string> => {
       try {
         this.checkVoucher.stop()
         await login(otpAttempt, otpKey)
