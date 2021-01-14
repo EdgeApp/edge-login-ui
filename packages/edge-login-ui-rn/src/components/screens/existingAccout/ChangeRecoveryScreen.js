@@ -446,26 +446,6 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     return null
   }
 
-  showEmailPending(styles: typeof RecoverPasswordSceneStyles) {
-    return (
-      <View style={styles.modalMiddle}>
-        <Text style={styles.staticModalText}>
-          {s.strings.recovery_what_account}
-        </Text>
-        <FormField
-          style={styles.inputModal}
-          onChangeText={this.handleUpdateEmail}
-          value={this.state.emailAddress}
-          label={s.strings.email_address}
-          error=""
-          returnKeyType="go"
-          forceFocus
-          onSubmitEditing={this.handleEmailApp}
-        />
-      </View>
-    )
-  }
-
   showEmaiFailed(styles: typeof RecoverPasswordSceneStyles) {
     if (this.props.showEmailDialog) {
       return <EmailAppFailedModal action={this.props.cancel} />
