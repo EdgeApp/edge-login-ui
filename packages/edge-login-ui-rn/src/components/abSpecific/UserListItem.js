@@ -4,8 +4,6 @@ import * as React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-import { IconButton } from '../common/IconButton.js'
-
 type Props = {
   data: string,
   style: Object,
@@ -38,17 +36,16 @@ class UserListItem extends React.Component<Props> {
           <View style={style.textComtainer}>
             <Text style={style.text}>{this.props.data}</Text>
           </View>
-          <IconButton
-            style={style.iconButton}
-            icon={
-              <MaterialIcon
-                style={style.iconButton.icon}
-                name="close"
-                size={style.iconButton.iconSize}
-              />
-            }
+          <TouchableOpacity
+            style={style.iconButton.container}
             onPress={this.deleteThis}
-          />
+          >
+            <MaterialIcon
+              style={style.iconButton.icon}
+              name="close"
+              size={style.iconButton.iconSize}
+            />
+          </TouchableOpacity>
         </View>
       )
     }

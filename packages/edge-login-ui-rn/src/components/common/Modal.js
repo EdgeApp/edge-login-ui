@@ -1,14 +1,20 @@
 // @flow
 
 import * as React from 'react'
-import { Dimensions, Image, Platform, Text, View } from 'react-native'
+import {
+  Dimensions,
+  Image,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import Modal from 'react-native-modal'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { scale } from '../../util/scaling.js'
-import { IconButton } from '../common/IconButton.js'
 import { Button } from './Button.js'
 
 type Props = {
@@ -146,17 +152,16 @@ export class MyModal extends React.Component<Props, State> {
       return null
     }
     return (
-      <IconButton
-        style={styles.closeIconButton}
-        icon={
-          <MaterialIcon
-            name="close"
-            style={styles.closeIconButton.icon}
-            size={styles.closeIconButton.iconSize}
-          />
-        }
+      <TouchableOpacity
+        style={styles.closeIconButton.container}
         onPress={this.props.cancel}
-      />
+      >
+        <MaterialIcon
+          name="close"
+          style={styles.closeIconButton.icon}
+          size={styles.closeIconButton.iconSize}
+        />
+      </TouchableOpacity>
     )
   }
 

@@ -28,7 +28,6 @@ import { UserListItem } from '../abSpecific/UserListItem.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
 import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
-import { IconButton } from '../common/IconButton.js'
 import { DropDownList, FormField } from '../common/index.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
 import { QrCodeModal } from '../modals/QrCodeModal.js'
@@ -199,19 +198,6 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   }
 
   renderUsername(styles: typeof LoginPasswordScreenStyle) {
-    const icon = this.state.usernameList ? (
-      <MaterialIcon
-        style={styles.iconButton.icon}
-        name="expand-less"
-        size={styles.iconButton.iconSize}
-      />
-    ) : (
-      <MaterialIcon
-        style={styles.iconButton.icon}
-        name="expand-more"
-        size={styles.iconButton.iconSize}
-      />
-    )
     return (
       <View>
         <View style={styles.usernameWrapper}>
@@ -228,11 +214,24 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
             onFocus={this.onfocusOne.bind(this)}
             onSubmitEditing={this.onSetNextFocus.bind(this)}
           />
-          <IconButton
-            style={this.style.iconButton}
-            icon={icon}
+          <TouchableOpacity
+            style={this.style.iconButton.container}
             onPress={this.toggleUsernameList.bind(this)}
-          />
+          >
+            {this.state.usernameList ? (
+              <MaterialIcon
+                name="expand-less"
+                size={styles.iconButton.iconSize}
+                style={styles.iconButton.icon}
+              />
+            ) : (
+              <MaterialIcon
+                name="expand-more"
+                size={styles.iconButton.iconSize}
+                style={styles.iconButton.icon}
+              />
+            )}
+          </TouchableOpacity>
         </View>
         {this.state.usernameList && this.renderDropdownList()}
       </View>
