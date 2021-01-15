@@ -175,22 +175,11 @@ export function createUser(data: Object) {
     }, 300)
   }
 }
-export function agreeToConditions(account: EdgeAccount) {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { callback, folder } = imports
-    // write to disklet
-    // eslint-disable-next-line no-unused-expressions
-    async response => {
-      await folder
-        .file('acceptTermsAndConditions.json')
-        .setText(JSON.stringify({ accepted: true }))
-        .catch(e => {
-          console.log('error')
-          console.log(e)
-        })
-      return response
-    }
-    callback(null, account)
-    // dispatch({ type: 'WORKFLOW_NEXT' })
-  }
+
+export const agreeToConditions = (account: EdgeAccount) => (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  imports.callback(null, account)
 }
