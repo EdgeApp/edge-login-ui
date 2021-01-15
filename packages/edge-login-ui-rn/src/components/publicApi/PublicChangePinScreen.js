@@ -1,6 +1,5 @@
 // @flow
 
-import { makeReactNativeFolder } from 'disklet'
 import { type EdgeAccount, type EdgeContext } from 'edge-core-js'
 import * as React from 'react'
 
@@ -22,7 +21,6 @@ export function ChangePinScreen(props: Props): React.Node {
       imports={{
         accountOptions: {},
         context,
-        folder: makeReactNativeFolder(),
         onComplete
       }}
       initialAction={{

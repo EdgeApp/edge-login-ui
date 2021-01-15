@@ -1,6 +1,5 @@
 // @flow
 
-import type { DiskletFolder } from 'disklet'
 import {
   type EdgeAccount,
   type EdgeAccountOptions,
@@ -26,7 +25,6 @@ export type OnLogin = (
 export type Imports = {|
   +accountOptions: EdgeAccountOptions,
   +context: EdgeContext,
-  +folder: DiskletFolder,
   +onComplete: () => void,
   +onLogin?: OnLogin,
   +recoveryKey?: string,

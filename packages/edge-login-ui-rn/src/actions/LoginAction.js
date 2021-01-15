@@ -35,9 +35,8 @@ export const loginWithTouch = (username: string) => async (
   getState: GetState,
   imports: Imports
 ) => {
-  const { context, folder, accountOptions } = imports
+  const { context, accountOptions } = imports
   const loginKey = await getLoginKey(
-    folder,
     username,
     `Touch to login user: "${username}"`,
     s.strings.login_with_password

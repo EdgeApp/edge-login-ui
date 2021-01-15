@@ -79,21 +79,21 @@ export const submitLogin = (account: EdgeAccount) => async (
   getState: GetState,
   imports: Imports
 ) => {
-  const { onLogin, folder } = imports
+  const { onLogin } = imports
 
   account.watch('loggedIn', loggedIn => {
     if (!loggedIn) dispatch({ type: 'RESET_APP' })
   })
 
-  const touchDisabled = await isTouchDisabled(folder, account.username)
+  const touchDisabled = await isTouchDisabled(null, account.username)
   if (!touchDisabled) {
-    await enableTouchId(folder, account).catch(e => {
+    await enableTouchId(null, account).catch(e => {
       console.log(e) // Fail quietly
     })
   }
 
   const isTouchSupported = await supportsTouchId()
-  const touchEnabled = await isTouchEnabled(folder, account.username)
+  const touchEnabled = await isTouchEnabled(null, account.username)
   const touchIdInformation = {
     isTouchSupported,
     isTouchEnabled: touchEnabled

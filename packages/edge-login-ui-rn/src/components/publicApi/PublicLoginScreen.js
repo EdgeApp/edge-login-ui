@@ -1,6 +1,5 @@
 // @flow
 
-import { makeReactNativeFolder } from 'disklet'
 import { type EdgeAccountOptions, type EdgeContext } from 'edge-core-js'
 import * as React from 'react'
 
@@ -83,7 +82,6 @@ export class LoginScreen extends React.Component<Props> {
         imports={{
           accountOptions: this.props.accountOptions,
           context: this.props.context,
-          folder: makeReactNativeFolder(),
           onComplete: () => {},
           onLogin: this.props.onLogin,
           recoveryKey: this.props.recoveryLogin,
