@@ -7,7 +7,6 @@ import Modal from 'react-native-modal'
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 
 import * as Constants from '../../constants/index.js'
-import * as Styles from '../../styles/index.js'
 import { scale } from '../../util/scaling.js'
 
 type Props = {
@@ -125,7 +124,7 @@ const StaticModalStyle = {
     width: '100%',
     padding: scale(15)
   },
-  shim: Styles.Shim.height,
+  shim: 50,
   icon: {
     color: Constants.WHITE
   },

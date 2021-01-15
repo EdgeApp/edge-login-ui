@@ -78,17 +78,17 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
 const NewAccountWelcomeScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   row1: {
-    ...Styles.ScreenRow,
+    width: '100%',
     flex: 1,
     justifyContent: 'flex-start',
     flexDirection: 'row'
   },
-  row2: { ...Styles.ScreenRow, flex: 4 },
-  row3: { ...Styles.ScreenRow, flex: 3 },
-  row4: { ...Styles.ScreenRow, flex: 3 },
-  row5: { ...Styles.ScreenRow, flex: 1 },
+  row2: { width: '100%', flex: 4 },
+  row3: { width: '100%', flex: 3 },
+  row4: { width: '100%', flex: 3 },
+  row5: { width: '100%', flex: 1 },
   row6: {
-    ...Styles.ScreenRow,
+    width: '100%',
     flex: 3,
     alignItems: 'center'
   },

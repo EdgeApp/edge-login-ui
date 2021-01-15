@@ -71,7 +71,8 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
 const NewAccountReviewScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: {
-    ...Styles.PageContainerWithHeaderStyle,
+    flex: 1,
+    width: '100%',
     alignItems: 'center'
   },
   instructionsContainer: {
@@ -87,7 +88,7 @@ const NewAccountReviewScreenStyle = {
     textAlign: 'center'
   },
   shim: {
-    ...Styles.Shim,
+    width: '100%',
     height: scale(10)
   },
   warningBoxContainer: {
@@ -185,7 +186,7 @@ const NewAccountReviewScreenStyle = {
       height: scale(Styles.BUTTON_HEIGHT)
     },
     shim: {
-      ...Styles.Shim,
+      width: '100%',
       height: scale(5),
       backgroundColor: Constants.TRANSPARENT
     },

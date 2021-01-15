@@ -101,7 +101,8 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
 const NewAccountUsernameScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: {
-    ...Styles.PageContainerWithHeaderStyle,
+    flex: 1,
+    width: '100%',
     alignItems: 'center'
   },
   nextButton: {

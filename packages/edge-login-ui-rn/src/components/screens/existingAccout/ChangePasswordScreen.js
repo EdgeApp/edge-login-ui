@@ -169,11 +169,15 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
 const NewAccountPasswordScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: {
-    ...Styles.PageContainerWithHeaderStyle,
+    width: '100%',
     alignItems: 'center',
     flex: 1
   },
-  innerView: { ...Styles.InnerView, alignItems: 'center' },
+  innerView: {
+    height: '100%',
+    width: '100%',
+    alignItems: 'center'
+  },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpScaledStyle,
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,

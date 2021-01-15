@@ -114,9 +114,9 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
 
 const SetAccountPinScreenStyle = {
   screen: { ...Styles.ScreenStyle },
-  pageContainer: Styles.PageContainerWithHeaderStyle,
+  pageContainer: { flex: 1, width: '100%' },
   row1: {
-    ...Styles.ScreenRow,
+    width: '100%',
     flex: -1,
     paddingTop: 24,
     paddingBottom: 12,
@@ -124,13 +124,13 @@ const SetAccountPinScreenStyle = {
     justifyContent: 'space-around'
   },
   row2: {
-    ...Styles.ScreenRow,
+    width: '100%',
     paddingVertical: 12,
     flex: -1,
     alignItems: 'center'
   },
   row3: {
-    ...Styles.ScreenRow,
+    width: '100%',
     paddingVertical: 12,
     flex: -1,
     alignItems: 'center'

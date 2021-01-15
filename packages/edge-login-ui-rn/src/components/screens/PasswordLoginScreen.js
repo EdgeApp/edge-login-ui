@@ -393,7 +393,7 @@ const LoginPasswordScreenStyle = {
     height: '100%'
   },
   backgroundImage: {
-    ...Styles.BackgroundScreenImageStyle,
+    flex: 1,
     alignItems: 'center',
     width: '100%',
     height: '100%'
@@ -407,7 +407,10 @@ const LoginPasswordScreenStyle = {
     width: '100%',
     alignItems: 'center'
   },
-  shimTiny: { ...Styles.Shim, height: scale(10) },
+  shimTiny: {
+    width: '100%',
+    height: scale(10)
+  },
   buttonsBox: {
     width: '100%',
     alignItems: 'center'

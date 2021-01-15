@@ -168,11 +168,15 @@ const NewAccountPasswordScreenStyle = {
     alignItems: 'center'
   },
   pageContainer: {
-    ...Styles.PageContainerWithHeaderStyle,
+    width: '100%',
     alignItems: 'center',
     flex: 1
   },
-  innerView: { ...Styles.InnerView, alignItems: 'center' },
+  innerView: {
+    height: '100%',
+    width: '100%',
+    alignItems: 'center'
+  },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpScaledStyle,
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
@@ -183,7 +187,7 @@ const NewAccountPasswordScreenStyle = {
     ...Styles.MaterialInputOnWhiteScaled,
     marginTop: scale(15)
   },
-  passwordShim: { ...Styles.Shim, height: 1, marginTop: scale(35) }
+  passwordShim: { width: '100%', height: 1, marginTop: scale(35) }
 }
 
 export const NewAccountPasswordScreen = connect<

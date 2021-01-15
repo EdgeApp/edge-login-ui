@@ -307,11 +307,14 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
 const PinLoginScreenStyle = {
   container: Styles.ScreenStyle,
   backgroundImage: {
-    ...Styles.BackgroundScreenImageStyle,
+    flex: 1,
+    width: null,
+    height: null,
     alignItems: 'center'
   },
   innerView: {
-    ...Styles.InnerView,
+    height: '100%',
+    width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
