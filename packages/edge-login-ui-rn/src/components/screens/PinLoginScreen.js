@@ -470,7 +470,7 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch({ type: 'START_PASSWORD_LOGIN' })
     },
     loginWithTouch(username) {
-      dispatch(loginWithTouch(username))
+      dispatch(loginWithTouch(username)).catch(showError)
     },
     loginWithPin(username, pin) {
       dispatch(loginWithPin(username, pin))

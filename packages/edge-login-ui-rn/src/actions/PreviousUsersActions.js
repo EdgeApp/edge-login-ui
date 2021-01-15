@@ -3,7 +3,7 @@
 import { asArray, asJSON, asObject, asString } from 'cleaners'
 import { type Disklet, makeReactNativeDisklet } from 'disklet'
 
-import { getTouchEnabledUsers, supportsTouchId } from '../keychain.js'
+import { loadFingerprintFile, supportsTouchId } from '../keychain.js'
 import {
   type LoginUserInfo,
   type PreviousUsersState
@@ -23,7 +23,7 @@ export const getPreviousUsers = () => async (
 
   // Load disk information:
   const lastUsernames: string[] = await getRecentUsers(disklet)
-  const touchEnabledUsers: string[] = await getTouchEnabledUsers(folder)
+  const fingerprintFile = await loadFingerprintFile(folder)
   const touchSupported: boolean = await supportsTouchId()
 
   // Figure out which users have biometric logins:
@@ -33,7 +33,7 @@ export const getPreviousUsers = () => async (
     const touchEnabled =
       keyLoginEnabled &&
       touchSupported &&
-      touchEnabledUsers.indexOf(username) >= 0
+      fingerprintFile.enabledUsers.includes(username)
     coreUsers.push({ username, pinEnabled: pinLoginEnabled, touchEnabled })
   }
 
