@@ -22,20 +22,14 @@ const asFingerprintFile = asJSON(
 )
 type FingerprintFile = $Call<typeof asFingerprintFile>
 
-export async function isTouchEnabled(
-  ignored: mixed,
-  username: string
-): Promise<boolean> {
+export async function isTouchEnabled(username: string): Promise<boolean> {
   const file = await loadFingerprintFile()
   const supported = await supportsTouchId()
 
   return supported && file.enabledUsers.includes(username)
 }
 
-export async function isTouchDisabled(
-  ignored: mixed,
-  username: string
-): Promise<boolean> {
+export async function isTouchDisabled(username: string): Promise<boolean> {
   const file = await loadFingerprintFile()
   const supported = await supportsTouchId()
 
@@ -51,10 +45,7 @@ export async function supportsTouchId(): Promise<boolean> {
   return !!out
 }
 
-export async function enableTouchId(
-  ignored: mixed,
-  account: EdgeAccount
-): Promise<void> {
+export async function enableTouchId(account: EdgeAccount): Promise<void> {
   const file = await loadFingerprintFile()
   const supported = await supportsTouchId()
   if (!supported) throw new Error('TouchIdNotSupportedError')
@@ -73,10 +64,7 @@ export async function enableTouchId(
   saveFingerprintFile(file)
 }
 
-export async function disableTouchId(
-  ignored: mixed,
-  account: EdgeAccount
-): Promise<void> {
+export async function disableTouchId(account: EdgeAccount): Promise<void> {
   const file = await loadFingerprintFile()
   const supported = await supportsTouchId()
   if (!supported) return // throw new Error('TouchIdNotSupportedError')
