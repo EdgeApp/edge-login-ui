@@ -9,6 +9,7 @@ import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/index.js'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
+import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
@@ -18,7 +19,7 @@ import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
-  appName: string
+  branding: Branding
 }
 type StateProps = {
   terms: Object
@@ -138,7 +139,8 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
   }
 
   changeAppName = () => {
-    const { terms, appName } = this.props
+    const { terms, branding } = this.props
+    const { appName } = branding
     if (appName) {
       return terms.items.map((item, index) => {
         if (index === 0) {

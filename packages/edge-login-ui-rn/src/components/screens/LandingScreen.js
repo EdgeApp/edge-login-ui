@@ -3,10 +3,10 @@
 import * as React from 'react'
 import { Text, View } from 'react-native'
 
-import * as Assets from '../../assets/index.js'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
+import { type Branding } from '../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { scale } from '../../util/scaling.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
@@ -16,10 +16,7 @@ import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
-  appId?: string,
-  backgroundImage?: any,
-  primaryLogo?: any,
-  primaryLogoCallback?: () => void,
+  branding: Branding,
   parentButton?: Object,
   landingScreenText?: string
 }
@@ -34,7 +31,7 @@ class LandingScreenComponent extends React.Component<Props> {
     return (
       <View style={LandingScreenStyle.container}>
         <BackgroundImage
-          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
+          branding={this.props.branding}
           style={LandingScreenStyle.backgroundImage}
           content={this.renderOverImage()}
         />
@@ -45,15 +42,9 @@ class LandingScreenComponent extends React.Component<Props> {
   renderOverImage() {
     return (
       <View style={LandingScreenStyle.inner}>
-        <HeaderParentButtons
-          parentButton={this.props.parentButton}
-          appId={this.props.appId}
-        />
+        <HeaderParentButtons branding={this.props.branding} />
         <View style={LandingScreenStyle.featureBox}>
-          <LogoImageHeader
-            src={this.props.primaryLogo}
-            callback={this.props.primaryLogoCallback}
-          />
+          <LogoImageHeader branding={this.props.branding} />
           <View style={LandingScreenStyle.featureBoxContent}>
             <View style={LandingScreenStyle.featureBoxDescription}>
               <Text style={LandingScreenStyle.tagText}>

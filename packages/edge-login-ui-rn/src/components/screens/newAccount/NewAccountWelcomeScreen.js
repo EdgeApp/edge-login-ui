@@ -8,6 +8,7 @@ import * as Assets from '../../../assets/index.js'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
+import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
@@ -18,7 +19,7 @@ import SafeAreaView from '../../common/SafeAreaView.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
-  appName: string
+  branding: Branding
 }
 type DispatchProps = {
   onBack(): void,
@@ -47,7 +48,7 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
             <T style={NewAccountWelcomeScreenStyle.instructionsText}>
               {sprintf(
                 s.strings.welcome_one,
-                this.props.appName || s.strings.app_name_default
+                this.props.branding.appName || s.strings.app_name_default
               )}
             </T>
           </View>

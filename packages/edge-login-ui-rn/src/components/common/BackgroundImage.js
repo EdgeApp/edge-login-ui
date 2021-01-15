@@ -7,20 +7,26 @@ import {
   TouchableWithoutFeedback
 } from 'react-native'
 
+import { LOGIN_BACKGROUND } from '../../assets/index.js'
+import { type Branding } from '../../types/Branding.js'
+
 type Props = {
+  branding: Branding,
   style: Object,
-  src: string,
   content: any,
   enableTouch?: boolean,
   callback?: Function | null
 }
-const BackgroundImage = ({
+
+export const BackgroundImage = ({
+  branding,
   style,
-  src,
   content,
   enableTouch = true,
   callback
 }: Props) => {
+  const src = branding.backgroundImage || LOGIN_BACKGROUND
+
   const onPress = () => {
     if (callback) {
       return () => {
@@ -45,5 +51,3 @@ const BackgroundImage = ({
     </ImageBackground>
   )
 }
-
-export { BackgroundImage }

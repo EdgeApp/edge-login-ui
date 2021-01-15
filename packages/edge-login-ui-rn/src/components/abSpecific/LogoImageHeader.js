@@ -4,19 +4,18 @@ import * as React from 'react'
 import { Image, TouchableWithoutFeedback, View } from 'react-native'
 
 import * as Assets from '../../assets/'
+import { type Branding } from '../../types/Branding.js'
 import { scale } from '../../util/scaling.js'
 
 type Props = {
-  small?: boolean,
-  src?: string,
-  callback?: () => void
+  branding: Branding
 }
 
 type State = {
   taps: number
 }
 
-class LogoImageHeader extends React.Component<Props, State> {
+export class LogoImageHeader extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -25,7 +24,7 @@ class LogoImageHeader extends React.Component<Props, State> {
   }
 
   _onPress = () => {
-    const { callback } = this.props
+    const callback = this.props.branding.primaryLogoCallback
     if (callback != null) {
       const taps = this.state.taps + 1
       this.setState({ taps })
@@ -40,10 +39,7 @@ class LogoImageHeader extends React.Component<Props, State> {
   }
 
   render() {
-    let src = this.props.src || Assets.LOGO_BIG
-    if (this.props.small) {
-      src = Assets.LOGO_SMALL
-    }
+    const src = this.props.branding.primaryLogo || Assets.LOGO_BIG
     return (
       <TouchableWithoutFeedback onPress={this._onPress}>
         <View style={styles.container}>
@@ -69,5 +65,3 @@ const styles = {
     resizeMode: 'contain'
   }
 }
-
-export { LogoImageHeader }

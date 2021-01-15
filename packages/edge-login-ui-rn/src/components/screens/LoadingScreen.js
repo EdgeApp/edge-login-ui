@@ -3,13 +3,13 @@
 import * as React from 'react'
 import { ActivityIndicator, View } from 'react-native'
 
-import * as Assets from '../../assets/index.js'
 import * as Colors from '../../constants/Colors.js'
 import * as Styles from '../../styles/index.js'
+import { type Branding } from '../../types/Branding.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
 
 type Props = {
-  backgroundImage?: any
+  branding: Branding
 }
 
 export class LoadingScreen extends React.Component<Props> {
@@ -17,7 +17,7 @@ export class LoadingScreen extends React.Component<Props> {
     return (
       <View style={LandingScreenStyle.container}>
         <BackgroundImage
-          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
+          branding={this.props.branding}
           style={LandingScreenStyle.backgroundImage}
           content={this.renderSpinner()}
         />

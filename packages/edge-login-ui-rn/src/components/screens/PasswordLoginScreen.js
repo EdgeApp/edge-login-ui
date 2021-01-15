@@ -15,11 +15,11 @@ import { sprintf } from 'sprintf-js'
 
 import { login } from '../../actions/LoginAction.js'
 import { deleteUserFromDevice } from '../../actions/UserActions.js'
-import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
 import { type LoginUserInfo } from '../../reducers/PreviousUsersReducer.js'
 import * as Styles from '../../styles/index.js'
+import { type Branding } from '../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { type LoginAttempt } from '../../util/loginAttempt.js'
 import { scale } from '../../util/scaling.js'
@@ -36,11 +36,7 @@ import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
-  appId?: string,
-  backgroundImage?: any,
-  primaryLogo?: any,
-  primaryLogoCallback?: () => void,
-  parentButton?: Object
+  branding: Branding
 }
 type StateProps = {
   loginSuccess: boolean,
@@ -155,7 +151,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
         contentContainerStyle={this.style.mainScrollView}
       >
         <BackgroundImage
-          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
+          branding={this.props.branding}
           style={this.style.backgroundImage}
           content={this.renderOverImage()}
           callback={this.noFocus}
@@ -175,16 +171,10 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     }
     return (
       <View style={this.style.featureBoxContainer}>
-        <HeaderParentButtons
-          parentButton={this.props.parentButton}
-          appId={this.props.appId}
-        />
+        <HeaderParentButtons branding={this.props.branding} />
         <TouchableWithoutFeedback onPress={this.noFocus}>
           <View style={this.style.featureBox}>
-            <LogoImageHeader
-              src={this.props.primaryLogo}
-              callback={this.props.primaryLogoCallback}
-            />
+            <LogoImageHeader branding={this.props.branding} />
             {this.renderUsername(this.style)}
             <View style={this.style.shimTiny} />
             <FormField

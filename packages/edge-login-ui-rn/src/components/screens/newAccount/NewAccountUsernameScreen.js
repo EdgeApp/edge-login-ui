@@ -9,6 +9,7 @@ import s from '../../../common/locales/strings.js'
 import UsernameConnector from '../../../connectors/componentConnectors/UsernameConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
+import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
@@ -18,7 +19,7 @@ import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
-  appName: string
+  branding: Branding
 }
 type StateProps = {
   username: string,
@@ -60,7 +61,7 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
               <T style={NewAccountUsernameScreenStyle.instructionsText}>
                 {sprintf(
                   s.strings.username_desc,
-                  this.props.appName || s.strings.app_name_default
+                  this.props.branding.appName || s.strings.app_name_default
                 )}
               </T>
             </View>

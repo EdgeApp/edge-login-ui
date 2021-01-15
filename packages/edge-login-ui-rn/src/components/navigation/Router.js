@@ -5,6 +5,7 @@ import { View } from 'react-native'
 
 import { type WorkflowState } from '../../reducers/WorkflowReducer.js'
 import * as Styles from '../../styles/index.js'
+import { type Branding } from '../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { ResecurePasswordScreen } from '../screens/existingAccout/ChangePasswordScreen.js'
 import { ResecurePinScreen } from '../screens/existingAccout/ChangePinScreen.js'
@@ -25,13 +26,7 @@ import { RecoveryLoginScreen } from '../screens/RecoveryLoginScreen.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
-  appId?: string,
-  appName?: string,
-  backgroundImage?: any,
-  landingScreenText?: string,
-  parentButton?: Object,
-  primaryLogo?: any,
-  primaryLogoCallback?: () => void
+  branding: Branding
 }
 type StateProps = {
   workflow: WorkflowState
@@ -72,28 +67,19 @@ class RouterComponent extends React.Component<Props> {
   }
 
   getLoadingScreen() {
-    return <LoadingScreen backgroundImage={this.props.backgroundImage} />
+    return <LoadingScreen branding={this.props.branding} />
   }
 
   getLandingScreen() {
-    return (
-      <LandingScreen
-        appId={this.props.appId}
-        backgroundImage={this.props.backgroundImage}
-        primaryLogo={this.props.primaryLogo}
-        primaryLogoCallback={this.props.primaryLogoCallback}
-        parentButton={this.props.parentButton}
-        landingScreenText={this.props.landingScreenText}
-      />
-    )
+    return <LandingScreen branding={this.props.branding} />
   }
 
   getCreateScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <NewAccountWelcomeScreen appName={this.props.appName || ''} />
+        return <NewAccountWelcomeScreen branding={this.props.branding} />
       case 1:
-        return <NewAccountUsernameScreen appName={this.props.appName || ''} />
+        return <NewAccountUsernameScreen branding={this.props.branding} />
       case 2:
         return <NewAccountPasswordScreen />
       case 3:
@@ -103,34 +89,18 @@ class RouterComponent extends React.Component<Props> {
       case 5:
         return <NewAccountReviewScreen />
       case 6:
-        return <TermsAndConditionsScreen appName={this.props.appName || ''} />
+        return <TermsAndConditionsScreen branding={this.props.branding} />
       default:
-        return <NewAccountWelcomeScreen appName={this.props.appName || ''} />
+        return <NewAccountWelcomeScreen branding={this.props.branding} />
     }
   }
 
   getPasswordScreen() {
-    return (
-      <PasswordLoginScreen
-        appId={this.props.appId}
-        backgroundImage={this.props.backgroundImage}
-        primaryLogo={this.props.primaryLogo}
-        primaryLogoCallback={this.props.primaryLogoCallback}
-        parentButton={this.props.parentButton}
-      />
-    )
+    return <PasswordLoginScreen branding={this.props.branding} />
   }
 
   getPinScreen() {
-    return (
-      <PinLoginScreen
-        appId={this.props.appId}
-        backgroundImage={this.props.backgroundImage}
-        primaryLogo={this.props.primaryLogo}
-        primaryLogoCallback={this.props.primaryLogoCallback}
-        parentButton={this.props.parentButton}
-      />
-    )
+    return <PinLoginScreen branding={this.props.branding} />
   }
 
   getOtpScreen() {

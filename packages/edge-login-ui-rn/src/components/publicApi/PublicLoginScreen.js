@@ -82,13 +82,15 @@ export class LoginScreen extends React.Component<Props> {
         <ThemeProvider>
           <Airship avoidAndroidKeyboard statusBarTranslucent>
             <Router
-              appId={this.props.appId}
-              appName={this.props.appName}
-              backgroundImage={this.props.backgroundImage}
-              landingScreenText={this.props.landingScreenText}
-              parentButton={this.props.parentButton}
-              primaryLogo={this.props.primaryLogo}
-              primaryLogoCallback={this.props.primaryLogoCallback}
+              branding={{
+                appId: this.props.appId,
+                appName: this.props.appName,
+                backgroundImage: this.props.backgroundImage,
+                landingScreenText: this.props.landingScreenText,
+                parentButton: this.props.parentButton,
+                primaryLogo: this.props.primaryLogo,
+                primaryLogoCallback: this.props.primaryLogoCallback
+              }}
             />
           </Airship>
         </ThemeProvider>

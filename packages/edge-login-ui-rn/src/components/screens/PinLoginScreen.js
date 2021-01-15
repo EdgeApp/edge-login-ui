@@ -17,6 +17,7 @@ import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
 import { type LoginUserInfo } from '../../reducers/PreviousUsersReducer.js'
 import * as Styles from '../../styles/index.js'
+import { type Branding } from '../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { scale, scaleH } from '../../util/scaling.js'
 import { FourDigit } from '../abSpecific/FourDigitComponent.js'
@@ -33,11 +34,7 @@ import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
-  appId?: string,
-  backgroundImage?: any,
-  parentButton?: Object,
-  primaryLogo?: any,
-  primaryLogoCallback?: () => void
+  branding: Branding
 }
 type StateProps = {
   errorMessage: string,
@@ -126,7 +123,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     return (
       <View style={PinLoginScreenStyle.container}>
         <BackgroundImage
-          src={this.props.backgroundImage || Assets.LOGIN_BACKGROUND}
+          branding={this.props.branding}
           style={PinLoginScreenStyle.backgroundImage}
           content={this.renderOverImage()}
         />
@@ -142,18 +139,17 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     return (
       <View style={PinLoginScreenStyle.featureBoxContainer}>
         <HeaderParentButtons
-          parentButton={{
-            text: s.strings.exit_pin,
-            callback: this.exitPin.bind(this)
+          branding={{
+            ...this.props.branding,
+            parentButton: {
+              text: s.strings.exit_pin,
+              callback: this.exitPin.bind(this)
+            }
           }}
-          appId={this.props.appId}
         />
         <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
           <View style={PinLoginScreenStyle.featureBox}>
-            <LogoImageHeader
-              src={this.props.primaryLogo}
-              callback={this.props.primaryLogoCallback}
-            />
+            <LogoImageHeader branding={this.props.branding} />
             <View style={PinLoginScreenStyle.featureBoxBody}>
               {this.renderBottomHalf(PinLoginScreenStyle)}
             </View>
