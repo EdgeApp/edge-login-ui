@@ -28,8 +28,8 @@ type StateProps = {
 }
 type DispatchProps = {
   checkTheConfirmPassword(): void,
-  goBack(): void,
-  nextScreen(): void
+  onBack(): void,
+  onDone(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -57,7 +57,7 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
           keyboardShouldPersistTaps="always"
           contentContainerStyle={NewAccountPasswordScreenStyle.mainScrollView}
         >
-          <Header onBack={this.props.goBack} />
+          <Header onBack={this.props.onBack} />
           {this.renderMain(NewAccountPasswordScreenStyle)}
         </KeyboardAwareScrollView>
       </SafeAreaView>
@@ -153,7 +153,7 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
     }
     global.firebase &&
       global.firebase.analytics().logEvent(`Signup_Password_Valid`)
-    this.props.nextScreen()
+    this.props.onDone()
   }
 }
 
@@ -202,10 +202,10 @@ export const NewAccountPasswordScreen = connect<
     checkTheConfirmPassword() {
       dispatch(validateConfirmPassword())
     },
-    goBack() {
+    onBack() {
       dispatch({ type: 'WORKFLOW_BACK' })
     },
-    nextScreen() {
+    onDone() {
       dispatch({ type: 'WORKFLOW_NEXT' })
     }
   })

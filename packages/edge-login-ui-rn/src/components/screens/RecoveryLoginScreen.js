@@ -26,7 +26,7 @@ type StateProps = {
   username: string
 }
 type DispatchProps = {
-  goBack(): void,
+  onBack(): void,
   login(attempt: LoginAttempt): Promise<void>,
   saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void
 }
@@ -54,7 +54,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <Header onBack={this.props.goBack} />
+      return <Header onBack={this.props.onBack} />
     }
     return null
   }
@@ -258,7 +258,7 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     username: state.login.username
   }),
   (dispatch: Dispatch) => ({
-    goBack() {
+    onBack() {
       dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
     },
     login(attempt) {

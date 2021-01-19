@@ -17,7 +17,7 @@ import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {}
 type DispatchProps = {
-  nextScreen(): void
+  onDone(): void
 }
 type Props = OwnProps & DispatchProps
 
@@ -64,7 +64,7 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
   onNextPress = () => {
     global.firebase &&
       global.firebase.analytics().logEvent(`Signup_Review_Next`)
-    this.props.nextScreen()
+    this.props.onDone()
   }
 }
 
@@ -248,7 +248,7 @@ const NewAccountReviewScreenStyle = {
 export const NewAccountReviewScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
-    nextScreen() {
+    onDone() {
       dispatch({ type: 'WORKFLOW_NEXT' })
     }
   })

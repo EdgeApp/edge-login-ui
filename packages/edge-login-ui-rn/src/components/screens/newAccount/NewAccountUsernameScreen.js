@@ -26,7 +26,7 @@ type StateProps = {
 }
 type DispatchProps = {
   checkUsernameForAvailabilty(string): void,
-  goBack(): void
+  onBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -54,7 +54,7 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={NewAccountUsernameScreenStyle.screen}>
-          <Header onBack={this.props.goBack} />
+          <Header onBack={this.props.onBack} />
           <View style={NewAccountUsernameScreenStyle.pageContainer}>
             <View style={NewAccountUsernameScreenStyle.instructions}>
               <T style={NewAccountUsernameScreenStyle.instructionsText}>
@@ -137,7 +137,7 @@ export const NewAccountUsernameScreen = connect<
     usernameErrorMessage: state.create.usernameErrorMessage
   }),
   (dispatch: Dispatch) => ({
-    goBack() {
+    onBack() {
       dispatch({ type: 'WORKFLOW_BACK' })
     },
     checkUsernameForAvailabilty(data: string) {

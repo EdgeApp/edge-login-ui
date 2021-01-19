@@ -47,8 +47,8 @@ type StateProps = {
 type DispatchProps = {
   cancel(): void,
   deleteRecovery(): void,
-  goBack(): void,
-  returnToSettings(): void,
+  onBack(): void,
+  onDone(): void,
   submit(questions: string[], answers: string[]): void
 }
 type Props = OwnProps & StateProps & DispatchProps
@@ -105,7 +105,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <Header onBack={this.props.goBack} />
+      return <Header onBack={this.props.onBack} />
     }
     return null
   }
@@ -258,13 +258,13 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
           })
         }
         if (event === 'sent') {
-          this.props.returnToSettings()
+          this.props.onDone()
         }
       }
     )
     if (Platform.OS === 'android') {
       setTimeout(() => {
-        this.props.returnToSettings()
+        this.props.onDone()
       }, 1000)
     }
   }
@@ -637,10 +637,10 @@ export const PublicChangeRecoveryScreen = connect<
     deleteRecovery() {
       dispatch(deleteRecovery())
     },
-    goBack() {
+    onBack() {
       dispatch(onComplete())
     },
-    returnToSettings() {
+    onDone() {
       dispatch(onComplete())
     },
     submit(questions: string[], answers: string[]) {

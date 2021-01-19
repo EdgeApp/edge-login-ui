@@ -33,7 +33,7 @@ type StateProps = {
   otpResetDate?: Date
 }
 type DispatchProps = {
-  goBack(): void,
+  onBack(): void,
   hasReadyVoucher(otpError: OtpError): Promise<boolean>,
   login(otpAttempt: LoginAttempt, otpKey?: string): Promise<void>,
   saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void
@@ -129,7 +129,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
     return (
       <ThemedScene>
         <HeaderComponent
-          onBack={this.props.goBack}
+          onBack={this.props.onBack}
           subTitle=""
           title={isIp ? s.strings.otp_header_ip : s.strings.otp_header}
         />
@@ -305,7 +305,7 @@ export const OtpErrorScreen = withTheme(
       return { otpAttempt, otpError, otpResetDate }
     },
     (dispatch: Dispatch) => ({
-      goBack() {
+      onBack() {
         dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
       },
       hasReadyVoucher(error: OtpError) {

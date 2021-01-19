@@ -176,7 +176,7 @@ export const PublicChangePinScreen = connect<
         .then(() => dispatch(onComplete()))
         .catch(showError)
     },
-    goBack() {
+    onBack() {
       dispatch(onComplete())
     }
   })

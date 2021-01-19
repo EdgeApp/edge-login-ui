@@ -21,8 +21,8 @@ type OwnProps = {
   appName: string
 }
 type DispatchProps = {
-  exitScreen(): void,
-  nextScreen(): void
+  onBack(): void,
+  onDone(): void
 }
 type Props = OwnProps & DispatchProps
 
@@ -35,7 +35,7 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
         <View style={NewAccountWelcomeScreenStyle.screen}>
           <View style={NewAccountWelcomeScreenStyle.row1}>
             <HeaderBackButton
-              onPress={this.props.exitScreen}
+              onPress={this.props.onBack}
               styles={NewAccountWelcomeScreenStyle.exitBackButtonStyle}
               label={s.strings.exit}
             />
@@ -59,7 +59,7 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
           </View>
           <View style={NewAccountWelcomeScreenStyle.row6}>
             <Button
-              onPress={this.props.nextScreen}
+              onPress={this.props.onDone}
               downStyle={NewAccountWelcomeScreenStyle.nextButton.downStyle}
               downTextStyle={
                 NewAccountWelcomeScreenStyle.nextButton.downTextStyle
@@ -145,10 +145,10 @@ const NewAccountWelcomeScreenStyle = {
 export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
-    exitScreen() {
+    onBack() {
       dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
     },
-    nextScreen() {
+    onDone() {
       global.firebase &&
         global.firebase.analytics().logEvent(`Signup_Welcome_Next`)
       dispatch({ type: 'WORKFLOW_NEXT' })

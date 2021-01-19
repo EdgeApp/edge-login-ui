@@ -27,7 +27,7 @@ type StateProps = {
 }
 type DispatchProps = {
   agreeToCondition(account: EdgeAccount): void,
-  goBack(): void
+  onBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -118,7 +118,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={TermsAndConditionsScreenStyle.screen}>
-          <Header onBack={this.props.goBack} />
+          <Header onBack={this.props.onBack} />
           <View style={TermsAndConditionsScreenStyle.pageContainer}>
             <ScrollView ref={ref => (this.scrollView = ref)}>
               {this.renderInstructions(TermsAndConditionsScreenStyle)}
@@ -270,7 +270,7 @@ export const TermsAndConditionsScreen = connect<
     agreeToCondition(data: EdgeAccount) {
       dispatch(agreeToConditions(data))
     },
-    goBack() {
+    onBack() {
       dispatch({ type: 'WORKFLOW_BACK' })
     }
   })

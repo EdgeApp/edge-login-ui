@@ -12,7 +12,7 @@ import {
 import { cacheStyles } from 'react-native-patina'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
-import { submitLogin } from '../../../actions/LoginCompleteActions.js'
+import { completeResecure } from '../../../actions/LoginCompleteActions.js'
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { showError } from '../../services/AirshipInstance.js'
@@ -31,7 +31,7 @@ type StateProps = {
 }
 type DispatchProps = {
   startResecure(account: EdgeAccount): void,
-  submitLogin(account: EdgeAccount): void
+  onDone(): void
 }
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
@@ -253,17 +253,17 @@ export class SecurityAlertsScreenComponent extends React.Component<
   }
 
   handleSkip = () => {
-    const { account, submitLogin } = this.props
-    submitLogin(account)
+    const { onDone } = this.props
+    onDone()
   }
 
   checkEmpty = () => {
-    const { account, startResecure, submitLogin } = this.props
+    const { account, startResecure, onDone } = this.props
     const { needsResecure, otpResetDate, pendingVouchers } = this.state
 
     if (otpResetDate == null && pendingVouchers.length <= 0) {
       if (needsResecure) startResecure(account)
-      else submitLogin(account)
+      else onDone()
     }
   }
 }
@@ -341,8 +341,8 @@ export const SecurityAlertsScreen = withTheme(
       startResecure(account) {
         dispatch({ type: 'START_RESECURE', data: account })
       },
-      submitLogin(account) {
-        dispatch(submitLogin(account))
+      onDone() {
+        dispatch(completeResecure())
       }
     })
   )(SecurityAlertsScreenComponent)
