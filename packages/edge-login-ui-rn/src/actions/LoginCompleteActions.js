@@ -101,7 +101,7 @@ export const submitLogin = (account: EdgeAccount) => async (
 
   dispatch({ type: 'LOGIN_SUCCEESS' })
   Airship.clear()
-  if (onLogin != null) onLogin(null, account, touchIdInformation)
+  if (onLogin != null) onLogin(account, touchIdInformation)
 }
 
 async function twofaReminder(account: EdgeAccount) {

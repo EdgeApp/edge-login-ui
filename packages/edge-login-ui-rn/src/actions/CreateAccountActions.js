@@ -182,6 +182,7 @@ export const agreeToConditions = () => (
 ) => {
   const { account } = getState()
   const { onLogin } = imports
+  if (account == null) return
 
-  if (onLogin != null) onLogin(null, account)
+  if (onLogin != null) onLogin(account)
 }

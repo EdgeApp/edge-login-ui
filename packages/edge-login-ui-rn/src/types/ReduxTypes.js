@@ -16,11 +16,7 @@ export type TouchIdInfo = {|
   isTouchEnabled: boolean
 |}
 
-export type OnLogin = (
-  error: string | Error | null,
-  account?: EdgeAccount | null,
-  touchIdInfo?: TouchIdInfo | null
-) => void
+export type OnLogin = (account: EdgeAccount, touchIdInfo?: TouchIdInfo) => void
 
 export type Imports = {|
   +accountOptions: EdgeAccountOptions,
