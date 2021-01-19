@@ -157,10 +157,9 @@ export const launchPasswordRecovery = (recoveryKey: string) => async (
         recoveryKey,
         username
       )
-      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username })
       dispatch({
-        type: 'ON_RECOVERY_LOGIN_IS_ENABLED',
-        data: { recoveryKey, userQuestions: questions }
+        type: 'START_RECOVERY_LOGIN',
+        data: { recoveryKey, userQuestions: questions, username }
       })
       return true
     } catch (error) {

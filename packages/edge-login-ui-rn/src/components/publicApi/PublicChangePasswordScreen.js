@@ -27,14 +27,16 @@ export class ChangePasswordScreen extends React.Component<Props> {
     return (
       <ReduxStore
         imports={{
-          accountObject: this.props.account,
           accountOptions: {},
           callback: () => {},
           context: this.props.context,
           folder: makeReactNativeFolder(),
           onComplete: this.props.onComplete
         }}
-        initialAction={{ type: 'WORKFLOW_START', data: 'changePasswordWF' }}
+        initialAction={{
+          type: 'START_CHANGE_PASSWORD',
+          data: this.props.account
+        }}
       >
         <ThemeProvider>
           <Airship avoidAndroidKeyboard statusBarTranslucent>

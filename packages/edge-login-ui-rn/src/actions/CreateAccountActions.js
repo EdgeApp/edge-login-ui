@@ -1,6 +1,5 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-core-js'
 import { sprintf } from 'sprintf-js'
 import passwordCheck from 'zxcvbn'
 
@@ -176,10 +175,11 @@ export function createUser(data: Object) {
   }
 }
 
-export const agreeToConditions = (account: EdgeAccount) => (
+export const agreeToConditions = () => (
   dispatch: Dispatch,
   getState: GetState,
   imports: Imports
 ) => {
+  const { account } = getState()
   imports.callback(null, account)
 }

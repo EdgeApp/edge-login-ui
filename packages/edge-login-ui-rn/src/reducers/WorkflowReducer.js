@@ -43,12 +43,21 @@ export const workflow: Reducer<WorkflowState, Action> = function(
       return { ...state }
     case 'OTP_ERROR':
       return { ...state, currentKey: 'otpWF', currentSceneIndex: 0 }
-    case 'ON_RECOVERY_LOGIN_IS_ENABLED':
+
+    // Actions for launching screens:
+    case 'START_CHANGE_PASSWORD':
+      return { ...state, currentKey: 'changePasswordWF', currentSceneIndex: 0 }
+    case 'START_CHANGE_PIN':
+      return { ...state, currentKey: 'changePinWF', currentSceneIndex: 0 }
+    case 'START_CHANGE_RECOVERY':
+      return { ...state, currentKey: 'changeRecoveryWF', currentSceneIndex: 0 }
+    case 'START_RECOVERY_LOGIN':
       return { ...state, currentKey: 'recoveryLoginWF', currentSceneIndex: 0 }
     case 'START_RESECURE':
       return { ...state, currentKey: 'resecureWF', currentSceneIndex: 0 }
     case 'START_SECURITY_ALERT':
       return { ...state, currentKey: 'securityAlertWF', currentSceneIndex: 0 }
+
     case 'RESET_APP':
       return initialState
     default:

@@ -23,14 +23,16 @@ export class ChangePinScreen extends React.Component<Props> {
     return (
       <ReduxStore
         imports={{
-          accountObject: this.props.account,
           accountOptions: {},
           callback: () => {},
           context: this.props.context,
           folder: makeReactNativeFolder(),
           onComplete: this.props.onComplete
         }}
-        initialAction={{ type: 'WORKFLOW_START', data: 'changePinWF' }}
+        initialAction={{
+          type: 'START_CHANGE_PIN',
+          data: this.props.account
+        }}
       >
         <ThemeProvider>
           <Airship avoidAndroidKeyboard statusBarTranslucent>

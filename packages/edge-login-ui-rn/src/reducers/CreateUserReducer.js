@@ -1,20 +1,15 @@
 // @flow
 
-import { type EdgeAccount, type EdgePasswordRules } from 'edge-core-js'
+import { type EdgePasswordRules } from 'edge-core-js'
 import { type Reducer } from 'redux'
 
 import { type Action } from '../types/ReduxTypes.js'
 
-const flowHack: any = {}
-const defaultAccount: EdgeAccount = flowHack
-
-export type CreateState = {
-  +accountObject: EdgeAccount,
+export type CreateState = {|
   +confirmPassword: string | null,
   +confirmPasswordErrorMessage: string | null,
   +createErrorMessage: string | null,
   +createPasswordErrorMessage: string | null,
-  +creationSuccess: boolean,
   +password: string | null,
   +passwordStatus: EdgePasswordRules | null,
   +pin: string,
@@ -22,7 +17,7 @@ export type CreateState = {
   +pinErrorMessage: string | null,
   +username: string | null,
   +usernameErrorMessage: string | null
-}
+|}
 
 const initialState: CreateState = {
   username: null,
@@ -30,14 +25,12 @@ const initialState: CreateState = {
   confirmPassword: null,
   pin: '',
   pinError: '',
-  creationSuccess: false,
   passwordStatus: null,
   createPasswordErrorMessage: null,
   confirmPasswordErrorMessage: null,
   pinErrorMessage: null,
   usernameErrorMessage: null,
-  createErrorMessage: null,
-  accountObject: defaultAccount
+  createErrorMessage: null
 }
 
 export const create: Reducer<CreateState, Action> = function(
@@ -45,8 +38,6 @@ export const create: Reducer<CreateState, Action> = function(
   action
 ) {
   switch (action.type) {
-    case 'CREATE_ACCOUNT_SUCCESS':
-      return { ...state, accountObject: action.data, creationSuccess: true }
     case 'CREATE_ACCOUNT_FAIL':
       return { ...state, createErrorMessage: action.data }
     case 'CLEAR_CREATE_ERROR_MESSAGE':

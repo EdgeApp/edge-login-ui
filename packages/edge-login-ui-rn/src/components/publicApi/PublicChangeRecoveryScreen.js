@@ -24,14 +24,13 @@ export class PasswordRecoveryScreen extends React.Component<Props> {
     return (
       <ReduxStore
         imports={{
-          accountObject: this.props.account,
           accountOptions: {},
           callback: () => {},
           context: this.props.context,
           folder: makeReactNativeFolder(),
           onComplete: this.props.onComplete
         }}
-        initialAction={initializeChangeRecovery()}
+        initialAction={initializeChangeRecovery(this.props.account)}
       >
         <ThemeProvider>
           <Airship avoidAndroidKeyboard statusBarTranslucent>

@@ -1,12 +1,9 @@
 // @flow
 
+import { type EdgeAccount } from 'edge-core-js'
 import * as React from 'react'
 import { Keyboard, Text, View } from 'react-native'
 
-import {
-  changePIN,
-  recoveryChangePIN
-} from '../../../actions/ChangePasswordPinActions.js'
 import { completeResecure } from '../../../actions/LoginCompleteActions.js'
 import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
@@ -14,6 +11,7 @@ import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
+import { getAccount } from '../../../util/selectors.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common/Button.js'
 import { Header } from '../../common/Header.js'
@@ -26,11 +24,12 @@ type OwnProps = {
   showHeader?: boolean
 }
 type StateProps = {
+  account: EdgeAccount,
   pin: string,
   pinError: string
 }
 type DispatchProps = {
-  changePin(pin: string): void,
+  onDone: () => void,
   onBack?: () => void,
   onSkip?: () => void
 }
@@ -61,20 +60,19 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
     return null
   }
 
-  onNextPress = () => {
-    this.setState({
-      isProcessing: true
-    })
-    // validation.
-    // is there no error message ,
-    if (this.props.pin.length !== 4 || this.props.pinError) {
-      this.setState({
-        isProcessing: false
-      })
-      return
-    }
+  handleSubmit = () => {
+    const { account, pin, pinError, onDone } = this.props
+    if (pin.length !== 4 || pinError) return
+
     Keyboard.dismiss()
-    this.props.changePin(this.props.pin)
+    this.setState({ isProcessing: true })
+    account
+      .changePin({ pin })
+      .then(onDone)
+      .catch(error => {
+        this.setState({ isProcessing: false })
+        showError(error)
+      })
   }
 
   render() {
@@ -93,7 +91,7 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
             </View>
             <View style={SetAccountPinScreenStyle.row3}>
               <Button
-                onPress={this.onNextPress}
+                onPress={this.handleSubmit}
                 downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
                 downTextStyle={
                   SetAccountPinScreenStyle.nextButton.downTextStyle
@@ -157,22 +155,20 @@ export const PublicChangePinScreen = connect<
   OwnProps
 >(
   (state: RootState) => ({
+    account: getAccount(state),
     pin: state.create.pin,
     pinError: state.create.pinError
   }),
   (dispatch: Dispatch) => ({
-    changePin(data) {
-      dispatch(changePIN(data))
-        .then(() =>
-          Airship.show(bridge => (
-            <ButtonsModal
-              bridge={bridge}
-              title={s.strings.pin_changed}
-              message={s.strings.pin_successfully_changed}
-              buttons={{ ok: { label: s.strings.ok } }}
-            />
-          ))
-        )
+    onDone() {
+      Airship.show(bridge => (
+        <ButtonsModal
+          bridge={bridge}
+          title={s.strings.pin_changed}
+          message={s.strings.pin_successfully_changed}
+          buttons={{ ok: { label: s.strings.ok } }}
+        />
+      ))
         .then(() => dispatch(onComplete()))
         .catch(showError)
     },
@@ -184,23 +180,21 @@ export const PublicChangePinScreen = connect<
 
 export const ResecurePinScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
+    account: getAccount(state),
     pin: state.create.pin,
     pinError: state.create.pinError,
     showHeader: true
   }),
   (dispatch: Dispatch) => ({
-    changePin(data: string) {
-      dispatch(recoveryChangePIN(data))
-        .then(() =>
-          Airship.show(bridge => (
-            <ButtonsModal
-              bridge={bridge}
-              title={s.strings.pswd_and_pin_changed}
-              message={s.strings.change_pwd_body}
-              buttons={{ ok: { label: s.strings.ok } }}
-            />
-          ))
-        )
+    onDone() {
+      Airship.show(bridge => (
+        <ButtonsModal
+          bridge={bridge}
+          title={s.strings.pswd_and_pin_changed}
+          message={s.strings.change_pwd_body}
+          buttons={{ ok: { label: s.strings.ok } }}
+        />
+      ))
         .then(() => dispatch(completeResecure()))
         .catch(showError)
     },

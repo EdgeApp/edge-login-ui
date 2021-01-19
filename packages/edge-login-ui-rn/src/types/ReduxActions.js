@@ -65,13 +65,6 @@ export type Action =
     }
   | { type: 'ON_RECOVERY_KEY', data: string }
   | {
-      type: 'ON_RECOVERY_LOGIN_IS_ENABLED',
-      data: {
-        recoveryKey: string,
-        userQuestions: string[]
-      }
-    }
-  | {
       type: 'OTP_ERROR',
       data: {
         attempt: LoginAttempt,
@@ -79,17 +72,26 @@ export type Action =
       }
     }
   | { type: 'OTP_RESET_REQUEST', data: Date }
+  | { type: 'SET_PREVIOUS_USERS', data: PreviousUsersState }
+  | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
+  | { type: 'START_CHANGE_PASSWORD', data: EdgeAccount }
+  | { type: 'START_CHANGE_PIN', data: EdgeAccount }
   | {
-      type: 'PASSWORD_RECOVERY_INITIALIZED',
+      type: 'START_CHANGE_RECOVERY',
       data: {
         questionsList: string[],
         userQuestions: string[],
-        account: EdgeAccount,
-        username: string
+        account: EdgeAccount
       }
     }
-  | { type: 'SET_PREVIOUS_USERS', data: PreviousUsersState }
-  | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
+  | {
+      type: 'START_RECOVERY_LOGIN',
+      data: {
+        username: string,
+        recoveryKey: string,
+        userQuestions: string[]
+      }
+    }
   | { type: 'START_RESECURE', data: EdgeAccount }
   | { type: 'START_SECURITY_ALERT', data: EdgeAccount }
   | { type: 'UPDATE_WAIT_TIMER', data: { seconds: number } } // Apparently unused

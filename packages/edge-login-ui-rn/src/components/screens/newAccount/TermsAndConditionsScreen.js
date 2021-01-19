@@ -1,6 +1,5 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-core-js'
 import * as React from 'react'
 import { Linking, ScrollView, Text, View } from 'react-native'
 import { sprintf } from 'sprintf-js'
@@ -22,11 +21,10 @@ type OwnProps = {
   appName: string
 }
 type StateProps = {
-  accountObject: EdgeAccount,
   terms: Object
 }
 type DispatchProps = {
-  agreeToCondition(account: EdgeAccount): void,
+  agreeToCondition(): void,
   onBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
@@ -136,7 +134,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
   onNextPress = () => {
     global.firebase &&
       global.firebase.analytics().logEvent(`Signup_Terms_Agree`)
-    this.props.agreeToCondition(this.props.accountObject)
+    this.props.agreeToCondition()
   }
 
   changeAppName = () => {
@@ -263,12 +261,11 @@ export const TermsAndConditionsScreen = connect<
   OwnProps
 >(
   (state: RootState) => ({
-    accountObject: state.create.accountObject,
     terms: state.terms
   }),
   (dispatch: Dispatch) => ({
-    agreeToCondition(data: EdgeAccount) {
-      dispatch(agreeToConditions(data))
+    agreeToCondition() {
+      dispatch(agreeToConditions())
     },
     onBack() {
       dispatch({ type: 'WORKFLOW_BACK' })

@@ -15,6 +15,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { completeResecure } from '../../../actions/LoginCompleteActions.js'
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { getAccount } from '../../../util/selectors.js'
 import { showError } from '../../services/AirshipInstance.js'
 import { connect } from '../../services/ReduxStore.js'
 import {
@@ -335,7 +336,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
 export const SecurityAlertsScreen = withTheme(
   connect<StateProps, DispatchProps, OwnProps & ThemeProps>(
     (state: RootState) => ({
-      account: state.login.account
+      account: getAccount(state)
     }),
     (dispatch: Dispatch) => ({
       startResecure(account) {

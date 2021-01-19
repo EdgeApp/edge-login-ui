@@ -62,8 +62,9 @@ export const completeLogin = (account: EdgeAccount) => async (
  */
 export function completeResecure() {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const state = getState()
-    const { account } = state.login
+    const { account } = getState()
+    if (account == null) return
+
     dispatch(submitLogin(account))
   }
 }
