@@ -227,8 +227,7 @@ export const ResecurePasswordScreen = connect<
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
     password: state.create.password || '',
-    passwordStatus: state.create.passwordStatus,
-    showHeader: true
+    passwordStatus: state.create.passwordStatus
   }),
   (dispatch: Dispatch) => ({
     checkTheConfirmPassword() {

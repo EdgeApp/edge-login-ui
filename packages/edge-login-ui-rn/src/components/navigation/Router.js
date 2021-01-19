@@ -7,8 +7,15 @@ import { type WorkflowState } from '../../reducers/WorkflowReducer.js'
 import * as Styles from '../../styles/index.js'
 import { type Branding } from '../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
-import { ResecurePasswordScreen } from '../screens/existingAccout/ChangePasswordScreen.js'
-import { ResecurePinScreen } from '../screens/existingAccout/ChangePinScreen.js'
+import {
+  PublicChangePasswordScreen,
+  ResecurePasswordScreen
+} from '../screens/existingAccout/ChangePasswordScreen.js'
+import {
+  PublicChangePinScreen,
+  ResecurePinScreen
+} from '../screens/existingAccout/ChangePinScreen.js'
+import { PublicChangeRecoveryScreen } from '../screens/existingAccout/ChangeRecoveryScreen.js'
 import { SecurityAlertsScreen } from '../screens/existingAccout/SecurityAlertsScreen.js'
 import { LandingScreen } from '../screens/LandingScreen.js'
 import { LoadingScreen } from '../screens/LoadingScreen.js'
@@ -23,10 +30,13 @@ import { OtpErrorScreen } from '../screens/OtpErrorScreen.js'
 import { PasswordLoginScreen } from '../screens/PasswordLoginScreen.js'
 import { PinLoginScreen } from '../screens/PinLoginScreen.js'
 import { RecoveryLoginScreen } from '../screens/RecoveryLoginScreen.js'
+import { Airship } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
+import { ThemeProvider } from '../services/ThemeContext.js'
 
 type OwnProps = {
-  branding: Branding
+  branding: Branding,
+  showHeader: boolean
 }
 type StateProps = {
   workflow: WorkflowState
@@ -37,41 +47,43 @@ class RouterComponent extends React.Component<Props> {
   render() {
     const { ScreenStyle } = Styles
     return (
-      <View accessible style={ScreenStyle}>
-        {this.renderContent()}
-      </View>
+      <ThemeProvider>
+        <Airship avoidAndroidKeyboard statusBarTranslucent>
+          <View accessible style={ScreenStyle}>
+            {this.renderContent()}
+          </View>
+        </Airship>
+      </ThemeProvider>
     )
   }
 
   renderContent() {
     switch (this.props.workflow.currentKey) {
-      case 'loadingWF':
-        return this.getLoadingScreen()
-      case 'landingWF':
-        return this.getLandingScreen()
-      case 'passwordWF':
-        return this.getPasswordScreen()
-      case 'pinWF':
-        return this.getPinScreen()
+      case 'changePasswordWF':
+        return <PublicChangePasswordScreen showHeader={this.props.showHeader} />
+      case 'changePinWF':
+        return <PublicChangePinScreen showHeader={this.props.showHeader} />
+      case 'changeRecoveryWF':
+        return <PublicChangeRecoveryScreen showHeader={this.props.showHeader} />
       case 'createWF':
         return this.getCreateScreen()
+      case 'landingWF':
+        return <LandingScreen branding={this.props.branding} />
+      case 'loadingWF':
+        return <LoadingScreen branding={this.props.branding} />
       case 'otpWF':
-        return this.getOtpScreen()
+        return <OtpErrorScreen />
+      case 'passwordWF':
+        return <PasswordLoginScreen branding={this.props.branding} />
+      case 'pinWF':
+        return <PinLoginScreen branding={this.props.branding} />
       case 'recoveryLoginWF':
-        return this.getRecoveryLoginScreen()
+        return <RecoveryLoginScreen />
       case 'resecureWF':
         return this.getResecureScreen()
       case 'securityAlertWF':
-        return this.getSecurityAlertScreen()
+        return <SecurityAlertsScreen />
     }
-  }
-
-  getLoadingScreen() {
-    return <LoadingScreen branding={this.props.branding} />
-  }
-
-  getLandingScreen() {
-    return <LandingScreen branding={this.props.branding} />
   }
 
   getCreateScreen() {
@@ -95,33 +107,13 @@ class RouterComponent extends React.Component<Props> {
     }
   }
 
-  getPasswordScreen() {
-    return <PasswordLoginScreen branding={this.props.branding} />
-  }
-
-  getPinScreen() {
-    return <PinLoginScreen branding={this.props.branding} />
-  }
-
-  getOtpScreen() {
-    return <OtpErrorScreen />
-  }
-
-  getRecoveryLoginScreen() {
-    return <RecoveryLoginScreen />
-  }
-
   getResecureScreen() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <ResecurePasswordScreen />
+        return <ResecurePasswordScreen showHeader={this.props.showHeader} />
       case 1:
-        return <ResecurePinScreen />
+        return <ResecurePinScreen showHeader={this.props.showHeader} />
     }
-  }
-
-  getSecurityAlertScreen() {
-    return <SecurityAlertsScreen />
   }
 }
 

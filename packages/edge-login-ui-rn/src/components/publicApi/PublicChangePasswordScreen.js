@@ -3,49 +3,35 @@
 import { makeReactNativeFolder } from 'disklet'
 import { type EdgeAccount, type EdgeContext } from 'edge-core-js'
 import * as React from 'react'
-import { View } from 'react-native'
 
-import * as Styles from '../../styles/index.js'
-import { PublicChangePasswordScreen } from '../screens/existingAccout/ChangePasswordScreen.js'
-import { Airship } from '../services/AirshipInstance.js'
+import { Router } from '../navigation/Router.js'
 import { ReduxStore } from '../services/ReduxStore.js'
-import { ThemeProvider } from '../services/ThemeContext.js'
 
 type Props = {
   account: EdgeAccount,
   context: EdgeContext,
-  showHeader: boolean,
+  showHeader?: boolean,
   onComplete(): void
 }
 
-export class ChangePasswordScreen extends React.Component<Props> {
-  static defaultProps = {
-    showHeader: true
-  }
+export function ChangePasswordScreen(props: Props): React.Node {
+  const { account, context, onComplete, showHeader = true } = props
 
-  render() {
-    return (
-      <ReduxStore
-        imports={{
-          accountOptions: {},
-          callback: () => {},
-          context: this.props.context,
-          folder: makeReactNativeFolder(),
-          onComplete: this.props.onComplete
-        }}
-        initialAction={{
-          type: 'START_CHANGE_PASSWORD',
-          data: this.props.account
-        }}
-      >
-        <ThemeProvider>
-          <Airship avoidAndroidKeyboard statusBarTranslucent>
-            <View style={Styles.ScreenStyle} accessible>
-              <PublicChangePasswordScreen showHeader={this.props.showHeader} />
-            </View>
-          </Airship>
-        </ThemeProvider>
-      </ReduxStore>
-    )
-  }
+  return (
+    <ReduxStore
+      imports={{
+        accountOptions: {},
+        callback: () => {},
+        context,
+        folder: makeReactNativeFolder(),
+        onComplete
+      }}
+      initialAction={{
+        type: 'START_CHANGE_PASSWORD',
+        data: account
+      }}
+    >
+      <Router branding={{}} showHeader={showHeader} />
+    </ReduxStore>
+  )
 }

@@ -182,8 +182,7 @@ export const ResecurePinScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     account: getAccount(state),
     pin: state.create.pin,
-    pinError: state.create.pinError,
-    showHeader: true
+    pinError: state.create.pinError
   }),
   (dispatch: Dispatch) => ({
     onDone() {

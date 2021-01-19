@@ -13,7 +13,7 @@ import { updateFontStyles } from '../../constants/Fonts.js'
 import { Router } from '../navigation/Router.js'
 import { Airship } from '../services/AirshipInstance.js'
 import { ReduxStore } from '../services/ReduxStore.js'
-import { changeFont, ThemeProvider } from '../services/ThemeContext.js'
+import { changeFont } from '../services/ThemeContext.js'
 
 type Props = {
   accountOptions: EdgeAccountOptions,
@@ -79,21 +79,18 @@ export class LoginScreen extends React.Component<Props> {
         }}
         initialAction={initializeLogin()}
       >
-        <ThemeProvider>
-          <Airship avoidAndroidKeyboard statusBarTranslucent>
-            <Router
-              branding={{
-                appId: this.props.appId,
-                appName: this.props.appName,
-                backgroundImage: this.props.backgroundImage,
-                landingScreenText: this.props.landingScreenText,
-                parentButton: this.props.parentButton,
-                primaryLogo: this.props.primaryLogo,
-                primaryLogoCallback: this.props.primaryLogoCallback
-              }}
-            />
-          </Airship>
-        </ThemeProvider>
+        <Router
+          branding={{
+            appId: this.props.appId,
+            appName: this.props.appName,
+            backgroundImage: this.props.backgroundImage,
+            landingScreenText: this.props.landingScreenText,
+            parentButton: this.props.parentButton,
+            primaryLogo: this.props.primaryLogo,
+            primaryLogoCallback: this.props.primaryLogoCallback
+          }}
+          showHeader
+        />
       </ReduxStore>
     )
   }
