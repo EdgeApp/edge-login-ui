@@ -181,5 +181,7 @@ export const agreeToConditions = () => (
   imports: Imports
 ) => {
   const { account } = getState()
-  imports.callback(null, account)
+  const { onLogin } = imports
+
+  if (onLogin != null) onLogin(null, account)
 }

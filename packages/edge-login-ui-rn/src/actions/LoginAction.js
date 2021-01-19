@@ -57,7 +57,7 @@ export function loginWithTouch(username: string) {
 }
 export function loginWithPin(username: string, pin: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { callback, context } = imports
+    const { onLogin, context } = imports
     setTimeout(async () => {
       try {
         const abcAccount = await context.loginWithPIN(
@@ -98,7 +98,8 @@ export function loginWithPin(username: string, pin: string) {
             dispatch(processWait(message))
           }, 1000)
         }
-        callback(e.message, null)
+
+        if (onLogin != null) onLogin(e.message, null)
       }
     }, 300)
     // the timeout is a hack until we put in interaction manager.

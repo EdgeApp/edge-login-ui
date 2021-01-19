@@ -21,7 +21,6 @@ export function ChangePasswordScreen(props: Props): React.Node {
     <ReduxStore
       imports={{
         accountOptions: {},
-        callback: () => {},
         context,
         folder: makeReactNativeFolder(),
         onComplete

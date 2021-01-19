@@ -77,7 +77,7 @@ export const submitLogin = (account: EdgeAccount) => async (
   getState: GetState,
   imports: Imports
 ) => {
-  const { callback, folder } = imports
+  const { onLogin, folder } = imports
 
   account.watch('loggedIn', loggedIn => {
     if (!loggedIn) dispatch({ type: 'RESET_APP' })
@@ -99,7 +99,7 @@ export const submitLogin = (account: EdgeAccount) => async (
 
   dispatch({ type: 'LOGIN_SUCCEESS' })
   Airship.clear()
-  callback(null, account, touchIdInformation)
+  if (onLogin != null) onLogin(null, account, touchIdInformation)
 }
 
 async function twofaReminder(account: EdgeAccount) {

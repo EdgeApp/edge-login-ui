@@ -1,15 +1,12 @@
 // @flow
 
 import { makeReactNativeFolder } from 'disklet'
-import {
-  type EdgeAccount,
-  type EdgeAccountOptions,
-  type EdgeContext
-} from 'edge-core-js'
+import { type EdgeAccountOptions, type EdgeContext } from 'edge-core-js'
 import * as React from 'react'
 
 import { initializeLogin } from '../../actions/LoginInitActions.js'
 import { updateFontStyles } from '../../constants/Fonts.js'
+import { type OnLogin } from '../../types/ReduxTypes.js'
 import { Router } from '../navigation/Router.js'
 import { Airship } from '../services/AirshipInstance.js'
 import { ReduxStore } from '../services/ReduxStore.js'
@@ -23,7 +20,7 @@ type Props = {
   context: EdgeContext,
   fontDescription?: { regularFontFamily: string },
   landingScreenText?: string,
-  onLogin(error: ?Error, account: ?EdgeAccount, touchIdInfo: ?Object): void,
+  onLogin: OnLogin,
   parentButton?: Object,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
@@ -70,10 +67,10 @@ export class LoginScreen extends React.Component<Props> {
       <ReduxStore
         imports={{
           accountOptions: this.props.accountOptions,
-          callback: this.props.onLogin,
           context: this.props.context,
           folder: makeReactNativeFolder(),
           onComplete: () => {},
+          onLogin: this.props.onLogin,
           recoveryKey: this.props.recoveryLogin,
           username: this.props.username
         }}
