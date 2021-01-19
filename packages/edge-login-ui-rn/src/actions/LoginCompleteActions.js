@@ -65,7 +65,8 @@ export function completeResecure() {
     const { account } = getState()
     if (account == null) return
 
-    dispatch(submitLogin(account))
+    if (imports.onLogin != null) dispatch(submitLogin(account))
+    else imports.onComplete()
   }
 }
 

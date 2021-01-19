@@ -7,6 +7,7 @@ export * from './components/publicApi/PublicChangePinScreen.js'
 export * from './components/publicApi/ChooseTestAppScreen.js'
 export * from './components/publicApi/PublicLoginScreen.js'
 export * from './components/publicApi/PublicChangeRecoveryScreen.js'
+export * from './components/publicApi/PublicSecurityAlertsScreen.js'
 
 export {
   isTouchEnabled,
