@@ -165,10 +165,10 @@ export const LandingScreen = connect<{}, DispatchProps, OwnProps>(
     startCreate() {
       global.firebase &&
         global.firebase.analytics().logEvent('Signup_Create_Account')
-      dispatch({ type: 'WORKFLOW_START', data: 'createWF' })
+      dispatch({ type: 'START_CREATE_ACCOUNT' })
     },
     startPassword() {
-      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
+      dispatch({ type: 'START_PASSWORD_LOGIN' })
     }
   })
 )(LandingScreenComponent)

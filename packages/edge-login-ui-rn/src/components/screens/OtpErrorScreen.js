@@ -306,7 +306,7 @@ export const OtpErrorScreen = withTheme(
     },
     (dispatch: Dispatch) => ({
       onBack() {
-        dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
+        dispatch({ type: 'START_PASSWORD_LOGIN' })
       },
       hasReadyVoucher(error: OtpError) {
         return dispatch(hasReadyVoucher(error))

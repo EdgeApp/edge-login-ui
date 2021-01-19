@@ -468,7 +468,7 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       return dispatch(deleteUserFromDevice(username))
     },
     gotoLoginPage: () => {
-      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
+      dispatch({ type: 'START_PASSWORD_LOGIN' })
     },
     loginWithTouch(username) {
       dispatch(loginWithTouch(username))

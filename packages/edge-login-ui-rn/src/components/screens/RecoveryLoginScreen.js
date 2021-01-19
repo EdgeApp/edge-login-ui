@@ -259,7 +259,7 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
   }),
   (dispatch: Dispatch) => ({
     onBack() {
-      dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
+      dispatch({ type: 'START_PASSWORD_LOGIN' })
     },
     login(attempt) {
       return dispatch(login(attempt))

@@ -35,17 +35,17 @@ export const initializeLogin = () => async (
 
   const { recoveryKey } = imports
   if (recoveryKey) {
-    dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
+    dispatch({ type: 'START_LANDING' })
     dispatch(launchPasswordRecovery(recoveryKey))
   } else if (startupUser == null) {
-    dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
+    dispatch({ type: 'START_LANDING' })
   } else if (
     startupUser.pinEnabled ||
     (startupUser.touchEnabled && touch !== 'none')
   ) {
-    dispatch({ type: 'WORKFLOW_START', data: 'pinWF' })
+    dispatch({ type: 'START_PIN_LOGIN' })
   } else {
-    dispatch({ type: 'WORKFLOW_START', data: 'passwordWF' })
+    dispatch({ type: 'START_PASSWORD_LOGIN' })
   }
 }
 

@@ -486,10 +486,10 @@ export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       return dispatch(deleteUserFromDevice(username))
     },
     gotoCreatePage() {
-      dispatch({ type: 'WORKFLOW_START', data: 'createWF' })
+      dispatch({ type: 'START_CREATE_ACCOUNT' })
     },
     gotoPinLoginPage() {
-      dispatch({ type: 'WORKFLOW_START', data: 'pinWF' })
+      dispatch({ type: 'START_PIN_LOGIN' })
     },
     login(attempt) {
       return dispatch(login(attempt))

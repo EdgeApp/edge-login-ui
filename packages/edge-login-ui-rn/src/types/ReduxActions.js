@@ -6,7 +6,6 @@ import {
   type OtpError
 } from 'edge-core-js'
 
-import { type WorkflowName } from '../constants/workflows.js'
 import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
 import { type RootState } from '../reducers/RootReducer.js'
 import { type LoginAttempt } from '../util/loginAttempt.js'
@@ -19,6 +18,10 @@ type NoDataActionName =
   | 'LOGIN_SUCCEESS'
   | 'ON_DISABLE_RECOVERY'
   | 'RESET_APP'
+  | 'START_CREATE_ACCOUNT'
+  | 'START_LANDING'
+  | 'START_PASSWORD_LOGIN'
+  | 'START_PIN_LOGIN'
   | 'WORKFLOW_BACK'
   | 'WORKFLOW_NEXT'
 
@@ -95,4 +98,3 @@ export type Action =
   | { type: 'START_RESECURE', data: EdgeAccount }
   | { type: 'START_SECURITY_ALERT', data: EdgeAccount }
   | { type: 'UPDATE_WAIT_TIMER', data: { seconds: number } } // Apparently unused
-  | { type: 'WORKFLOW_START', data: WorkflowName }
