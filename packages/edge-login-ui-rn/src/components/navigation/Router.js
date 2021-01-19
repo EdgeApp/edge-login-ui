@@ -38,7 +38,7 @@ type StateProps = {
 }
 type Props = OwnProps & StateProps
 
-class LoginAppComponent extends React.Component<Props> {
+class RouterComponent extends React.Component<Props> {
   render() {
     const { ScreenStyle } = Styles
     return (
@@ -155,9 +155,9 @@ class LoginAppComponent extends React.Component<Props> {
   }
 }
 
-export const LoginApp = connect<StateProps, {}, OwnProps>(
+export const Router = connect<StateProps, {}, OwnProps>(
   (state: RootState) => ({
     workflow: state.workflow
   }),
   (dispatch: Dispatch) => ({})
-)(LoginAppComponent)
+)(RouterComponent)

@@ -10,7 +10,7 @@ import * as React from 'react'
 
 import { initializeLogin } from '../../actions/LoginInitActions.js'
 import { updateFontStyles } from '../../constants/Fonts.js'
-import { LoginApp } from '../navigation/LogInAppComponent.js'
+import { Router } from '../navigation/Router.js'
 import { Airship } from '../services/AirshipInstance.js'
 import { ReduxStore } from '../services/ReduxStore.js'
 import { changeFont, ThemeProvider } from '../services/ThemeContext.js'
@@ -81,7 +81,7 @@ export class LoginScreen extends React.Component<Props> {
       >
         <ThemeProvider>
           <Airship avoidAndroidKeyboard statusBarTranslucent>
-            <LoginApp
+            <Router
               appId={this.props.appId}
               appName={this.props.appName}
               backgroundImage={this.props.backgroundImage}
