@@ -53,7 +53,8 @@ const CreatingAccountWaitScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   container: {},
   pageContainer: {
-    ...Styles.PageContainerWithHeaderStyle,
+    flex: 1,
+    width: '100%',
     alignItems: 'center'
   },
   topPad: {

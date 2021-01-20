@@ -2,7 +2,7 @@
 
 import { type EdgePasswordRules } from 'edge-core-js'
 import * as React from 'react'
-import { Keyboard, KeyboardAvoidingView, View } from 'react-native'
+import { Keyboard, KeyboardAvoidingView, ScrollView, View } from 'react-native'
 
 import {
   changePassword,
@@ -13,6 +13,7 @@ import { cancel } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
+import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
@@ -159,7 +160,10 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
       <SafeAreaView>
         <View style={NewAccountPasswordScreenStyle.screen}>
           {this.renderHeader()}
-          {this.renderMain(NewAccountPasswordScreenStyle)}
+          <ScrollView keyboardShouldPersistTaps="always">
+            {this.renderMain(NewAccountPasswordScreenStyle)}
+            <View style={{ backgroundColor: Constants.WHITE, height: 360 }} />
+          </ScrollView>
         </View>
       </SafeAreaView>
     )
@@ -169,11 +173,15 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
 const NewAccountPasswordScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: {
-    ...Styles.PageContainerWithHeaderStyle,
+    width: '100%',
     alignItems: 'center',
     flex: 1
   },
-  innerView: { ...Styles.InnerView, alignItems: 'center' },
+  innerView: {
+    height: '100%',
+    width: '100%',
+    alignItems: 'center'
+  },
   nextButton: {
     upStyle: Styles.PrimaryButtonUpScaledStyle,
     upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,

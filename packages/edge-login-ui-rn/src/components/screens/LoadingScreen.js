@@ -37,7 +37,9 @@ export class LoadingScreen extends React.Component<Props> {
 const LandingScreenStyle = {
   container: Styles.ScreenStyle,
   backgroundImage: {
-    ...Styles.BackgroundScreenImageStyle,
+    flex: 1,
+    width: null,
+    height: null,
     alignItems: 'center'
   },
   spinner: {

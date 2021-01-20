@@ -173,7 +173,8 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
 const TermsAndConditionsScreenStyle = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: {
-    ...Styles.PageContainerWithHeaderStyle,
+    flex: 1,
+    width: '100%',
     alignItems: 'center'
   },
   instructionsContainer: {
@@ -216,7 +217,7 @@ const TermsAndConditionsScreenStyle = {
     width: '80%',
     marginBottom: scale(20)
   },
-  shim: { ...Styles.Shim, height: scale(10) },
+  shim: { width: '100%', height: scale(10) },
   checkboxes: {
     container: {
       position: 'relative',
@@ -254,7 +255,7 @@ const TermsAndConditionsScreenStyle = {
     },
     downStyle: Styles.TextOnlyButtonDownScaledStyle
   },
-  inputShim: { ...Styles.Shim, height: scale(20) }
+  inputShim: { width: '100%', height: scale(20) }
 }
 
 export const TermsAndConditionsScreen = connect<
