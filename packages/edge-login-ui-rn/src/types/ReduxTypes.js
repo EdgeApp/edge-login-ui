@@ -30,6 +30,7 @@ export type Imports = {|
   +onComplete: () => void,
   +onLogin?: OnLogin,
   +recoveryKey?: string,
+  +skipSecurityAlerts?: boolean,
   +username?: string | null
 |}
 

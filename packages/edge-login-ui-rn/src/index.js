@@ -15,3 +15,8 @@ export {
   disableTouchId,
   getSupportedBiometryType
 } from './keychain.js'
+
+export {
+  hasSecurityAlerts,
+  watchSecurityAlerts
+} from './util/hasSecurityAlerts.js'

@@ -13,18 +13,33 @@ import { ReduxStore } from '../services/ReduxStore.js'
 import { changeFont } from '../services/ThemeContext.js'
 
 type Props = {
-  accountOptions: EdgeAccountOptions,
+  context: EdgeContext,
+
+  // Branding stuff:
   appId?: string,
   appName?: string,
   backgroundImage?: any,
-  context: EdgeContext,
   fontDescription?: { regularFontFamily: string },
   landingScreenText?: string,
-  onLogin: OnLogin,
   parentButton?: Object,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
+
+  // Options passed to the core login methods:
+  accountOptions: EdgeAccountOptions,
+
+  // Called when the login completes:
+  onLogin: OnLogin,
+
+  // The recoveryKey from the user's email, to trigger recovery login:
   recoveryLogin?: string,
+
+  // Do not show the security alerts screen during login,
+  // since the app plans to show the `SecurityAlertsScreen` itself
+  // based on `hasSecurityAlerts` and `watchSecurityAlerts`:
+  skipSecurityAlerts?: boolean,
+
+  // The username to select, if present on the device:
   username?: string
 }
 
@@ -72,6 +87,7 @@ export class LoginScreen extends React.Component<Props> {
           onComplete: () => {},
           onLogin: this.props.onLogin,
           recoveryKey: this.props.recoveryLogin,
+          skipSecurityAlerts: this.props.skipSecurityAlerts,
           username: this.props.username
         }}
         initialAction={initializeLogin()}

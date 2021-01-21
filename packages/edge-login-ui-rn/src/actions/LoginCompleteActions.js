@@ -20,6 +20,7 @@ import {
   type GetState,
   type Imports
 } from '../types/ReduxTypes.js'
+import { hasSecurityAlerts } from '../util/hasSecurityAlerts.js'
 import { setMostRecentUsers } from './PreviousUsersActions.js'
 
 /**
@@ -33,8 +34,8 @@ export const completeLogin = (account: EdgeAccount) => async (
   await setMostRecentUsers(account.username)
 
   // Problem logins:
-  const { otpResetDate, pendingVouchers = [] } = account
-  if (otpResetDate != null || pendingVouchers.length > 0) {
+  const { skipSecurityAlerts = false } = imports
+  if (!skipSecurityAlerts && hasSecurityAlerts(account)) {
     dispatch({ type: 'START_SECURITY_ALERT', data: account })
     return
   }
