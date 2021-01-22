@@ -1,61 +1,43 @@
 // @flow
 
+import { type EdgeAccount } from 'edge-core-js'
+
+import { showError } from '../components/services/AirshipInstance.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 
 /**
  * Prepares what is needed for the change recovery scene.
  */
-export function initializeChangeRecovery() {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    dispatch({ type: 'WORKFLOW_START', data: 'changeRecoveryWF' })
+export const initializeChangeRecovery = (account: EdgeAccount) => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  const { context } = imports
 
-    const context = imports.context
-    const account = imports.accountObject
-    if (!account) {
-      return
-    }
-    const questionsList = await context.listRecoveryQuestionChoices()
-    try {
-      const recoveryKey = await context.getRecovery2Key(account.username)
-      if (recoveryKey) {
-        console.log('Recovery Key ')
-      }
-      const userQuestions = await context.fetchRecovery2Questions(
-        recoveryKey,
-        account.username
-      )
-      const obj = {
-        questionsList,
-        userQuestions,
-        account,
-        username: account.username
-      }
-      dispatch({ type: 'PASSWORD_RECOVERY_INITIALIZED', data: obj })
-      return
-    } catch (e) {
-      console.log(e)
-      console.log(e.title)
-      console.log(e.message)
-    }
-
-    // const userQuestions = await context.fetchRecovery2Questions(recoveryKey, account.username)
-
-    const obj = {
-      questionsList,
-      userQuestions: [],
-      account: null,
-      username: account.username
-    }
-    dispatch({ type: 'PASSWORD_RECOVERY_INITIALIZED', data: obj })
+  const questionsList = await context.listRecoveryQuestionChoices()
+  let userQuestions = []
+  try {
+    const recoveryKey = await context.getRecovery2Key(account.username)
+    userQuestions = await context.fetchRecovery2Questions(
+      recoveryKey,
+      account.username
+    )
+  } catch (error) {
+    showError(error)
   }
+
+  dispatch({
+    type: 'START_CHANGE_RECOVERY',
+    data: { questionsList, userQuestions, account }
+  })
 }
 
 export function deleteRecovery() {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const account = imports.accountObject
-    if (!account) {
-      return
-    }
+    const { account } = getState()
+    if (account == null) return
+
     try {
       await account.deleteRecovery()
       dispatch({ type: 'ON_DISABLE_RECOVERY' })
@@ -67,18 +49,11 @@ export function deleteRecovery() {
   }
 }
 
-export function cancelRecoverySettingsScene() {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    imports.onComplete()
-  }
-}
-
 export function changeRecoveryAnswers(questions: string[], answers: string[]) {
   return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const account = imports.accountObject
-    if (!account) {
-      return
-    }
+    const { account } = getState()
+    if (account == null) return
+
     try {
       const recoveryKey = await account.changeRecovery(questions, answers)
       dispatch({ type: 'ON_RECOVERY_KEY', data: recoveryKey })

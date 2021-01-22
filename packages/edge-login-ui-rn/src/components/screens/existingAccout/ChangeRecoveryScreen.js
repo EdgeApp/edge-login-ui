@@ -6,11 +6,10 @@ import Mailer from 'react-native-mail'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {
-  cancelRecoverySettingsScene,
   changeRecoveryAnswers,
   deleteRecovery
 } from '../../../actions/PasswordRecoveryActions.js'
-import { cancel } from '../../../actions/WorkflowActions.js'
+import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
@@ -48,8 +47,8 @@ type StateProps = {
 type DispatchProps = {
   cancel(): void,
   deleteRecovery(): void,
-  goBack(): void,
-  returnToSettings(): void,
+  onBack(): void,
+  onDone(): void,
   submit(questions: string[], answers: string[]): void
 }
 type Props = OwnProps & StateProps & DispatchProps
@@ -106,7 +105,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <Header onBack={this.props.goBack} />
+      return <Header onBack={this.props.onBack} />
     }
     return null
   }
@@ -259,13 +258,13 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
           })
         }
         if (event === 'sent') {
-          this.props.returnToSettings()
+          this.props.onDone()
         }
       }
     )
     if (Platform.OS === 'android') {
       setTimeout(() => {
-        this.props.returnToSettings()
+        this.props.onDone()
       }, 1000)
     }
   }
@@ -632,17 +631,17 @@ export const PublicChangeRecoveryScreen = connect<
   (dispatch: Dispatch) => ({
     cancel() {
       dispatch(deleteRecovery())
-      dispatch(cancelRecoverySettingsScene())
+      dispatch(onComplete())
       dispatch({ type: 'DISMISS_EMAIL_MODAL' })
     },
     deleteRecovery() {
       dispatch(deleteRecovery())
     },
-    goBack() {
-      dispatch(cancel())
+    onBack() {
+      dispatch(onComplete())
     },
-    returnToSettings() {
-      dispatch(cancelRecoverySettingsScene())
+    onDone() {
+      dispatch(onComplete())
     },
     submit(questions: string[], answers: string[]) {
       dispatch(changeRecoveryAnswers(questions, answers))

@@ -5,16 +5,16 @@ import { Image, Linking, Text, TouchableOpacity, View } from 'react-native'
 
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings.js'
+import { type Branding } from '../../types/Branding.js'
 import { scale } from '../../util/scaling.js'
 
 type Props = {
-  appId?: string,
-  parentButton?: Object
+  branding: Branding
 }
 
 export class HeaderParentButtons extends React.Component<Props> {
   render() {
-    const { parentButton, appId } = this.props
+    const { parentButton, appId } = this.props.branding
     const openEdgeSite = () => Linking.openURL(s.strings.edge_site)
     return (
       <View style={styles.container}>

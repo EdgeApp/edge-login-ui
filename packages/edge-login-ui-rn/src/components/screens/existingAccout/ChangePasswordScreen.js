@@ -1,15 +1,11 @@
 // @flow
 
-import { type EdgePasswordRules } from 'edge-core-js'
+import { type EdgeAccount, type EdgePasswordRules } from 'edge-core-js'
 import * as React from 'react'
 import { Keyboard, KeyboardAvoidingView, ScrollView, View } from 'react-native'
 
-import {
-  changePassword,
-  recoveryChangePassword
-} from '../../../actions/ChangePasswordPinActions.js'
 import { validateConfirmPassword } from '../../../actions/CreateAccountActions.js'
-import { cancel } from '../../../actions/WorkflowActions.js'
+import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
 import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
 import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
@@ -17,6 +13,7 @@ import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
+import { getAccount } from '../../../util/selectors.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common/Button.js'
 import { Header } from '../../common/Header.js'
@@ -29,6 +26,7 @@ type OwnProps = {
   showHeader?: boolean
 }
 type StateProps = {
+  account: EdgeAccount,
   confirmPassword: string,
   error?: string,
   error2?: string,
@@ -37,7 +35,7 @@ type StateProps = {
 }
 type DispatchProps = {
   checkTheConfirmPassword(): void,
-  changePassword(string): void,
+  onDone: () => void,
   onBack?: () => void,
   onSkip?: () => void
 }
@@ -66,35 +64,32 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  onNextPress = () => {
-    this.setState({
-      isProcessing: true
-    })
-    if (!this.props.passwordStatus) {
-      // TODO Skip component
-      this.setState({
-        isProcessing: false
-      })
-      return
-    }
-    if (this.props.error !== '' || this.props.error2 !== '') {
-      this.setState({
-        isProcessing: false
-      })
+  handleSubmit = () => {
+    const { account, password, onDone } = this.props
+    if (
+      !this.props.passwordStatus ||
+      this.props.error !== '' ||
+      this.props.error2 !== ''
+    ) {
       return
     }
     if (
       this.props.password &&
       this.props.password !== this.props.confirmPassword
     ) {
-      this.setState({
-        isProcessing: false
-      })
       this.props.checkTheConfirmPassword()
       return
     }
+
     Keyboard.dismiss()
-    this.props.changePassword(this.props.password)
+    this.setState({ isProcessing: true })
+    account
+      .changePassword(password)
+      .then(onDone)
+      .catch(error => {
+        this.setState({ isProcessing: false })
+        showError(error)
+      })
   }
 
   renderHeader = () => {
@@ -120,11 +115,11 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
           label={s.strings.re_enter_new_password}
           isSelected={this.state.focusSecond}
           autoFocus={this.state.focusSecond}
-          onFinish={this.onNextPress}
+          onFinish={this.handleSubmit}
         />
         <View style={{ height: scale(40) }} />
         <Button
-          onPress={this.onNextPress}
+          onPress={this.handleSubmit}
           downStyle={styles.nextButton.downStyle}
           downTextStyle={styles.nextButton.downTextStyle}
           upStyle={styles.nextButton.upStyle}
@@ -200,6 +195,7 @@ export const PublicChangePasswordScreen = connect<
   OwnProps
 >(
   (state: RootState) => ({
+    account: getAccount(state),
     confirmPassword: state.create.confirmPassword || '',
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
@@ -210,23 +206,20 @@ export const PublicChangePasswordScreen = connect<
     checkTheConfirmPassword() {
       dispatch(validateConfirmPassword())
     },
-    changePassword(data: string) {
-      dispatch(changePassword(data))
-        .then(() =>
-          Airship.show(bridge => (
-            <ButtonsModal
-              bridge={bridge}
-              title={s.strings.password_changed}
-              message={s.strings.pwd_change_modal}
-              buttons={{ ok: { label: s.strings.ok } }}
-            />
-          ))
-        )
-        .then(() => dispatch(cancel()))
+    onDone() {
+      Airship.show(bridge => (
+        <ButtonsModal
+          bridge={bridge}
+          title={s.strings.password_changed}
+          message={s.strings.pwd_change_modal}
+          buttons={{ ok: { label: s.strings.ok } }}
+        />
+      ))
+        .then(() => dispatch(onComplete()))
         .catch(showError)
     },
     onBack() {
-      dispatch(cancel())
+      dispatch(onComplete())
     }
   })
 )(ChangePasswordScreenComponent)
@@ -237,21 +230,19 @@ export const ResecurePasswordScreen = connect<
   OwnProps
 >(
   (state: RootState) => ({
+    account: getAccount(state),
     confirmPassword: state.create.confirmPassword || '',
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
     password: state.create.password || '',
-    passwordStatus: state.create.passwordStatus,
-    showHeader: true
+    passwordStatus: state.create.passwordStatus
   }),
   (dispatch: Dispatch) => ({
     checkTheConfirmPassword() {
       dispatch(validateConfirmPassword())
     },
-    changePassword(data: string) {
-      dispatch(recoveryChangePassword(data))
-        .then(() => dispatch({ type: 'WORKFLOW_NEXT' }))
-        .catch(showError)
+    onDone() {
+      dispatch({ type: 'WORKFLOW_NEXT' })
     },
     onSkip() {
       dispatch(dispatch({ type: 'WORKFLOW_NEXT' }))

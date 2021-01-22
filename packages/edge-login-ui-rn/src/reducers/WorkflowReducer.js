@@ -21,8 +21,6 @@ export const workflow: Reducer<WorkflowState, Action> = function(
 ) {
   switch (action.type) {
     // Generic workflow actions:
-    case 'WORKFLOW_START':
-      return { ...state, currentKey: action.data, currentSceneIndex: 0 }
     case 'WORKFLOW_BACK': {
       let { currentSceneIndex } = state
       if (currentSceneIndex > 0) {
@@ -38,17 +36,30 @@ export const workflow: Reducer<WorkflowState, Action> = function(
       return { ...state, currentSceneIndex }
     }
 
-    // Specific actions with implicit scene changes:
-    case 'SET_PREVIOUS_USERS':
-      return { ...state }
+    // Actions for launching screens:
     case 'OTP_ERROR':
       return { ...state, currentKey: 'otpWF', currentSceneIndex: 0 }
-    case 'ON_RECOVERY_LOGIN_IS_ENABLED':
+    case 'START_CHANGE_PASSWORD':
+      return { ...state, currentKey: 'changePasswordWF', currentSceneIndex: 0 }
+    case 'START_CHANGE_PIN':
+      return { ...state, currentKey: 'changePinWF', currentSceneIndex: 0 }
+    case 'START_CHANGE_RECOVERY':
+      return { ...state, currentKey: 'changeRecoveryWF', currentSceneIndex: 0 }
+    case 'START_CREATE_ACCOUNT':
+      return { ...state, currentKey: 'createWF', currentSceneIndex: 0 }
+    case 'START_LANDING':
+      return { ...state, currentKey: 'landingWF', currentSceneIndex: 0 }
+    case 'START_PASSWORD_LOGIN':
+      return { ...state, currentKey: 'passwordWF', currentSceneIndex: 0 }
+    case 'START_PIN_LOGIN':
+      return { ...state, currentKey: 'pinWF', currentSceneIndex: 0 }
+    case 'START_RECOVERY_LOGIN':
       return { ...state, currentKey: 'recoveryLoginWF', currentSceneIndex: 0 }
     case 'START_RESECURE':
       return { ...state, currentKey: 'resecureWF', currentSceneIndex: 0 }
     case 'START_SECURITY_ALERT':
       return { ...state, currentKey: 'securityAlertWF', currentSceneIndex: 0 }
+
     case 'RESET_APP':
       return initialState
     default:

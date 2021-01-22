@@ -6,7 +6,6 @@ import {
   type OtpError
 } from 'edge-core-js'
 
-import { type WorkflowName } from '../constants/workflows.js'
 import { type PreviousUsersState } from '../reducers/PreviousUsersReducer.js'
 import { type RootState } from '../reducers/RootReducer.js'
 import { type LoginAttempt } from '../util/loginAttempt.js'
@@ -19,6 +18,10 @@ type NoDataActionName =
   | 'LOGIN_SUCCEESS'
   | 'ON_DISABLE_RECOVERY'
   | 'RESET_APP'
+  | 'START_CREATE_ACCOUNT'
+  | 'START_LANDING'
+  | 'START_PASSWORD_LOGIN'
+  | 'START_PIN_LOGIN'
   | 'WORKFLOW_BACK'
   | 'WORKFLOW_NEXT'
 
@@ -65,13 +68,6 @@ export type Action =
     }
   | { type: 'ON_RECOVERY_KEY', data: string }
   | {
-      type: 'ON_RECOVERY_LOGIN_IS_ENABLED',
-      data: {
-        recoveryKey: string,
-        userQuestions: string[]
-      }
-    }
-  | {
       type: 'OTP_ERROR',
       data: {
         attempt: LoginAttempt,
@@ -79,18 +75,26 @@ export type Action =
       }
     }
   | { type: 'OTP_RESET_REQUEST', data: Date }
+  | { type: 'SET_PREVIOUS_USERS', data: PreviousUsersState }
+  | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
+  | { type: 'START_CHANGE_PASSWORD', data: EdgeAccount }
+  | { type: 'START_CHANGE_PIN', data: EdgeAccount }
   | {
-      type: 'PASSWORD_RECOVERY_INITIALIZED',
+      type: 'START_CHANGE_RECOVERY',
       data: {
         questionsList: string[],
         userQuestions: string[],
-        account: EdgeAccount,
-        username: string
+        account: EdgeAccount
       }
     }
-  | { type: 'SET_PREVIOUS_USERS', data: PreviousUsersState }
-  | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
+  | {
+      type: 'START_RECOVERY_LOGIN',
+      data: {
+        username: string,
+        recoveryKey: string,
+        userQuestions: string[]
+      }
+    }
   | { type: 'START_RESECURE', data: EdgeAccount }
   | { type: 'START_SECURITY_ALERT', data: EdgeAccount }
   | { type: 'UPDATE_WAIT_TIMER', data: { seconds: number } } // Apparently unused
-  | { type: 'WORKFLOW_START', data: WorkflowName }

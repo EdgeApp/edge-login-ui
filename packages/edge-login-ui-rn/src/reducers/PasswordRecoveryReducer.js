@@ -23,7 +23,7 @@ export const passwordRecovery: Reducer<
   Action
 > = function(state = initialState, action) {
   switch (action.type) {
-    case 'PASSWORD_RECOVERY_INITIALIZED':
+    case 'START_CHANGE_RECOVERY':
       return {
         ...state,
         questionsList: action.data.questionsList,
@@ -37,7 +37,7 @@ export const passwordRecovery: Reducer<
         recoveryKey: action.data,
         showRecoveryEmailDialog: true
       }
-    case 'ON_RECOVERY_LOGIN_IS_ENABLED':
+    case 'START_RECOVERY_LOGIN':
       return {
         ...state,
         recoveryKey: action.data.recoveryKey,

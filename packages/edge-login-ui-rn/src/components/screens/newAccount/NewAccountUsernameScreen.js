@@ -9,6 +9,7 @@ import s from '../../../common/locales/strings.js'
 import UsernameConnector from '../../../connectors/componentConnectors/UsernameConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
+import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
@@ -18,7 +19,7 @@ import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
-  appName: string
+  branding: Branding
 }
 type StateProps = {
   username: string,
@@ -26,7 +27,7 @@ type StateProps = {
 }
 type DispatchProps = {
   checkUsernameForAvailabilty(string): void,
-  goBack(): void
+  onBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -54,13 +55,13 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={NewAccountUsernameScreenStyle.screen}>
-          <Header onBack={this.props.goBack} />
+          <Header onBack={this.props.onBack} />
           <View style={NewAccountUsernameScreenStyle.pageContainer}>
             <View style={NewAccountUsernameScreenStyle.instructions}>
               <T style={NewAccountUsernameScreenStyle.instructionsText}>
                 {sprintf(
                   s.strings.username_desc,
-                  this.props.appName || s.strings.app_name_default
+                  this.props.branding.appName || s.strings.app_name_default
                 )}
               </T>
             </View>
@@ -138,7 +139,7 @@ export const NewAccountUsernameScreen = connect<
     usernameErrorMessage: state.create.usernameErrorMessage
   }),
   (dispatch: Dispatch) => ({
-    goBack() {
+    onBack() {
       dispatch({ type: 'WORKFLOW_BACK' })
     },
     checkUsernameForAvailabilty(data: string) {

@@ -1,5 +1,6 @@
 // @flow
 
+import { type EdgeAccount } from 'edge-core-js'
 import { type Reducer, combineReducers } from 'redux'
 
 import { type Action } from '../types/ReduxTypes.js'
@@ -27,7 +28,8 @@ export type RootState = {
   workflow: WorkflowState,
 
   // Local reducers:
-  touch: 'FaceID' | 'TouchID' | false
+  +account: EdgeAccount | null,
+  +touch: 'FaceID' | 'TouchID' | false
 }
 
 export const rootReducer: Reducer<RootState, Action> = combineReducers({
@@ -38,6 +40,24 @@ export const rootReducer: Reducer<RootState, Action> = combineReducers({
   previousUsers,
   terms,
   workflow,
+
+  account(
+    state: EdgeAccount | null = null,
+    action: Action
+  ): EdgeAccount | null {
+    switch (action.type) {
+      case 'CREATE_ACCOUNT_SUCCESS':
+        return action.data
+      case 'START_CHANGE_PASSWORD':
+      case 'START_CHANGE_PIN':
+      case 'START_RESECURE':
+      case 'START_SECURITY_ALERT':
+        return action.data
+      case 'START_CHANGE_RECOVERY':
+        return action.data.account
+    }
+    return state
+  },
 
   touch(state = false, action: Action) {
     return action.type === 'SET_TOUCH' ? action.data : state

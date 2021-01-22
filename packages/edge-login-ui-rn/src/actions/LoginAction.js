@@ -57,7 +57,7 @@ export function loginWithTouch(username: string) {
 }
 export function loginWithPin(username: string, pin: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { callback, context } = imports
+    const { onLogin, context } = imports
     setTimeout(async () => {
       try {
         const abcAccount = await context.loginWithPIN(
@@ -98,7 +98,8 @@ export function loginWithPin(username: string, pin: string) {
             dispatch(processWait(message))
           }, 1000)
         }
-        callback(e.message, null)
+
+        if (onLogin != null) onLogin(e.message, null)
       }
     }, 300)
     // the timeout is a hack until we put in interaction manager.
@@ -157,10 +158,9 @@ export const launchPasswordRecovery = (recoveryKey: string) => async (
         recoveryKey,
         username
       )
-      dispatch({ type: 'AUTH_UPDATE_USERNAME', data: username })
       dispatch({
-        type: 'ON_RECOVERY_LOGIN_IS_ENABLED',
-        data: { recoveryKey, userQuestions: questions }
+        type: 'START_RECOVERY_LOGIN',
+        data: { recoveryKey, userQuestions: questions, username }
       })
       return true
     } catch (error) {

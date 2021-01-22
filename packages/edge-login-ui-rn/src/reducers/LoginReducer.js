@@ -1,15 +1,11 @@
 // @flow
 
-import { type EdgeAccount, type OtpError } from 'edge-core-js'
+import { type OtpError } from 'edge-core-js'
 
 import { type Action } from '../types/ReduxTypes.js'
 import { type LoginAttempt } from '../util/loginAttempt.js'
 
-const flowHack: any = {}
-const defaultAccount: EdgeAccount = flowHack
-
-export type LoginState = {
-  +account: EdgeAccount,
+export type LoginState = {|
   +errorMessage: string | null,
   +isLoggingInWithPin: boolean,
   +loginSuccess: boolean,
@@ -19,10 +15,9 @@ export type LoginState = {
   +pin: string | null,
   +username: string,
   +wait: number
-}
+|}
 
 const initialState: LoginState = {
-  account: defaultAccount,
   errorMessage: null,
   isLoggingInWithPin: false,
   loginSuccess: false,
@@ -86,16 +81,17 @@ export function login(
       return { ...initialState, username: username }
     }
 
-    case 'PASSWORD_RECOVERY_INITIALIZED':
+    // Actions for launching screens:
+    case 'START_RECOVERY_LOGIN':
       return {
         ...state,
-        account: action.data.account,
-        username: action.data.username
+        username: action.data.username,
+        errorMessage: null,
+        wait: 0
       }
-    case 'START_RESECURE':
-      return { ...state, account: action.data }
-    case 'START_SECURITY_ALERT':
-      return { ...state, account: action.data }
+    case 'START_CHANGE_RECOVERY':
+      return { ...state, username: action.data.account.username }
+
     default:
       return state
   }

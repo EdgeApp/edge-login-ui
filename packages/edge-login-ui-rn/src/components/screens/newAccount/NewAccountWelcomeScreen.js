@@ -8,6 +8,7 @@ import * as Assets from '../../../assets/index.js'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
+import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
@@ -18,11 +19,11 @@ import SafeAreaView from '../../common/SafeAreaView.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
-  appName: string
+  branding: Branding
 }
 type DispatchProps = {
-  exitScreen(): void,
-  nextScreen(): void
+  onBack(): void,
+  onDone(): void
 }
 type Props = OwnProps & DispatchProps
 
@@ -35,7 +36,7 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
         <View style={NewAccountWelcomeScreenStyle.screen}>
           <View style={NewAccountWelcomeScreenStyle.row1}>
             <HeaderBackButton
-              onPress={this.props.exitScreen}
+              onPress={this.props.onBack}
               styles={NewAccountWelcomeScreenStyle.exitBackButtonStyle}
               label={s.strings.exit}
             />
@@ -47,7 +48,7 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
             <T style={NewAccountWelcomeScreenStyle.instructionsText}>
               {sprintf(
                 s.strings.welcome_one,
-                this.props.appName || s.strings.app_name_default
+                this.props.branding.appName || s.strings.app_name_default
               )}
             </T>
           </View>
@@ -59,7 +60,7 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
           </View>
           <View style={NewAccountWelcomeScreenStyle.row6}>
             <Button
-              onPress={this.props.nextScreen}
+              onPress={this.props.onDone}
               downStyle={NewAccountWelcomeScreenStyle.nextButton.downStyle}
               downTextStyle={
                 NewAccountWelcomeScreenStyle.nextButton.downTextStyle
@@ -145,10 +146,10 @@ const NewAccountWelcomeScreenStyle = {
 export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
-    exitScreen() {
-      dispatch({ type: 'WORKFLOW_START', data: 'landingWF' })
+    onBack() {
+      dispatch({ type: 'START_LANDING' })
     },
-    nextScreen() {
+    onDone() {
       global.firebase &&
         global.firebase.analytics().logEvent(`Signup_Welcome_Next`)
       dispatch({ type: 'WORKFLOW_NEXT' })

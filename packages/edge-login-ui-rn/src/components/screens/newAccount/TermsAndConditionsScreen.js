@@ -1,6 +1,5 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-core-js'
 import * as React from 'react'
 import { Linking, ScrollView, Text, View } from 'react-native'
 import { sprintf } from 'sprintf-js'
@@ -10,6 +9,7 @@ import { REVIEW_CHECKED, REVIEW_UNCHECKED } from '../../../assets/index.js'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
+import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
@@ -19,15 +19,14 @@ import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {
-  appName: string
+  branding: Branding
 }
 type StateProps = {
-  accountObject: EdgeAccount,
   terms: Object
 }
 type DispatchProps = {
-  agreeToCondition(account: EdgeAccount): void,
-  goBack(): void
+  agreeToCondition(): void,
+  onBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -118,7 +117,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={TermsAndConditionsScreenStyle.screen}>
-          <Header onBack={this.props.goBack} />
+          <Header onBack={this.props.onBack} />
           <View style={TermsAndConditionsScreenStyle.pageContainer}>
             <ScrollView ref={ref => (this.scrollView = ref)}>
               {this.renderInstructions(TermsAndConditionsScreenStyle)}
@@ -136,11 +135,12 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
   onNextPress = () => {
     global.firebase &&
       global.firebase.analytics().logEvent(`Signup_Terms_Agree`)
-    this.props.agreeToCondition(this.props.accountObject)
+    this.props.agreeToCondition()
   }
 
   changeAppName = () => {
-    const { terms, appName } = this.props
+    const { terms, branding } = this.props
+    const { appName } = branding
     if (appName) {
       return terms.items.map((item, index) => {
         if (index === 0) {
@@ -264,14 +264,13 @@ export const TermsAndConditionsScreen = connect<
   OwnProps
 >(
   (state: RootState) => ({
-    accountObject: state.create.accountObject,
     terms: state.terms
   }),
   (dispatch: Dispatch) => ({
-    agreeToCondition(data: EdgeAccount) {
-      dispatch(agreeToConditions(data))
+    agreeToCondition() {
+      dispatch(agreeToConditions())
     },
-    goBack() {
+    onBack() {
       dispatch({ type: 'WORKFLOW_BACK' })
     }
   })

@@ -25,7 +25,7 @@ type StateProps = {
 }
 type DispatchProps = {
   createUser(data: Object): void,
-  goBack(): void
+  onBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -67,7 +67,7 @@ class NewAccountPinScreenComponent extends React.Component<Props, State> {
     return (
       <SafeAreaView>
         <View style={SetAccountPinScreenStyle.screen}>
-          <Header onBack={this.props.goBack} />
+          <Header onBack={this.props.onBack} />
           <View style={SetAccountPinScreenStyle.pageContainer}>
             <View style={SetAccountPinScreenStyle.row1}>
               <Text style={SetAccountPinScreenStyle.instructions}>
@@ -174,7 +174,7 @@ export const NewAccountPinScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
       dispatch(createUser(data))
     },
-    goBack() {
+    onBack() {
       dispatch({ type: 'WORKFLOW_BACK' })
     }
   })

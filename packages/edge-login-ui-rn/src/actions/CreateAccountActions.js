@@ -1,6 +1,5 @@
 // @flow
 
-import type { EdgeAccount } from 'edge-core-js'
 import { sprintf } from 'sprintf-js'
 import passwordCheck from 'zxcvbn'
 
@@ -175,22 +174,14 @@ export function createUser(data: Object) {
     }, 300)
   }
 }
-export function agreeToConditions(account: EdgeAccount) {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { callback, folder } = imports
-    // write to disklet
-    // eslint-disable-next-line no-unused-expressions
-    async response => {
-      await folder
-        .file('acceptTermsAndConditions.json')
-        .setText(JSON.stringify({ accepted: true }))
-        .catch(e => {
-          console.log('error')
-          console.log(e)
-        })
-      return response
-    }
-    callback(null, account)
-    // dispatch({ type: 'WORKFLOW_NEXT' })
-  }
+
+export const agreeToConditions = () => (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  const { account } = getState()
+  const { onLogin } = imports
+
+  if (onLogin != null) onLogin(null, account)
 }

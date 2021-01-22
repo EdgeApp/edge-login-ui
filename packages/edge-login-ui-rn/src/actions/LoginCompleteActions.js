@@ -20,6 +20,7 @@ import {
   type GetState,
   type Imports
 } from '../types/ReduxTypes.js'
+import { hasSecurityAlerts } from '../util/hasSecurityAlerts.js'
 import { setMostRecentUsers } from './PreviousUsersActions.js'
 
 /**
@@ -33,8 +34,8 @@ export const completeLogin = (account: EdgeAccount) => async (
   await setMostRecentUsers(account.username)
 
   // Problem logins:
-  const { otpResetDate, pendingVouchers = [] } = account
-  if (otpResetDate != null || pendingVouchers.length > 0) {
+  const { skipSecurityAlerts = false } = imports
+  if (!skipSecurityAlerts && hasSecurityAlerts(account)) {
     dispatch({ type: 'START_SECURITY_ALERT', data: account })
     return
   }
@@ -62,9 +63,11 @@ export const completeLogin = (account: EdgeAccount) => async (
  */
 export function completeResecure() {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const state = getState()
-    const { account } = state.login
-    dispatch(submitLogin(account))
+    const { account } = getState()
+    if (account == null) return
+
+    if (imports.onLogin != null) dispatch(submitLogin(account))
+    else imports.onComplete()
   }
 }
 
@@ -76,7 +79,7 @@ export const submitLogin = (account: EdgeAccount) => async (
   getState: GetState,
   imports: Imports
 ) => {
-  const { callback, folder } = imports
+  const { onLogin, folder } = imports
 
   account.watch('loggedIn', loggedIn => {
     if (!loggedIn) dispatch({ type: 'RESET_APP' })
@@ -98,7 +101,7 @@ export const submitLogin = (account: EdgeAccount) => async (
 
   dispatch({ type: 'LOGIN_SUCCEESS' })
   Airship.clear()
-  callback(null, account, touchIdInformation)
+  if (onLogin != null) onLogin(null, account, touchIdInformation)
 }
 
 async function twofaReminder(account: EdgeAccount) {

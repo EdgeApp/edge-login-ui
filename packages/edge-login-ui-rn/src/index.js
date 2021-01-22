@@ -2,11 +2,12 @@
 
 import './util/androidFetch.js'
 
-export * from './components/publicApi/ChangePasswordScreen.js'
-export * from './components/publicApi/ChangePinScreen.js'
+export * from './components/publicApi/PublicChangePasswordScreen.js'
+export * from './components/publicApi/PublicChangePinScreen.js'
 export * from './components/publicApi/ChooseTestAppScreen.js'
-export * from './components/publicApi/LoginScreen.js'
-export * from './components/publicApi/PasswordRecoveryScreen.js'
+export * from './components/publicApi/PublicLoginScreen.js'
+export * from './components/publicApi/PublicChangeRecoveryScreen.js'
+export * from './components/publicApi/PublicSecurityAlertsScreen.js'
 
 export {
   isTouchEnabled,
@@ -14,3 +15,8 @@ export {
   disableTouchId,
   getSupportedBiometryType
 } from './keychain.js'
+
+export {
+  hasSecurityAlerts,
+  watchSecurityAlerts
+} from './util/hasSecurityAlerts.js'
