@@ -6,7 +6,7 @@ import * as React from 'react'
 import s from '../common/locales/strings.js'
 import { TextInputModal } from '../components/modals/TextInputModal.js'
 import { Airship, showError } from '../components/services/AirshipInstance.js'
-import { loginWithTouchId } from '../keychain.js'
+import { getLoginKey } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 import { type LoginAttempt, attemptLogin } from '../util/loginAttempt.js'
 import { completeLogin } from './LoginCompleteActions.js'
@@ -30,31 +30,24 @@ export const login = (attempt: LoginAttempt, otpKey?: string) => async (
   dispatch(completeLogin(account))
 }
 
-export function loginWithTouch(username: string) {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { context, folder } = imports
-    const startFunction = () => {
-      dispatch({ type: 'AUTH_LOGGING_IN_WITH_PIN' })
-    }
-    loginWithTouchId(
-      context,
-      folder,
-      username,
-      `Touch to login user: "${username}"`,
-      s.strings.login_with_password,
-      imports.accountOptions,
-      startFunction
-    )
-      .then(async account => {
-        if (account) {
-          dispatch(completeLogin(account))
-        }
-      })
-      .catch(e => {
-        console.log(e)
-      })
-  }
+export const loginWithTouch = (username: string) => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  const { context, accountOptions } = imports
+  const loginKey = await getLoginKey(
+    username,
+    `Touch to login user: "${username}"`,
+    s.strings.login_with_password
+  )
+  if (loginKey == null) return
+
+  dispatch({ type: 'AUTH_LOGGING_IN_WITH_PIN' })
+  const account = await context.loginWithKey(username, loginKey, accountOptions)
+  dispatch(completeLogin(account))
 }
+
 export function loginWithPin(username: string, pin: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { onLogin, context } = imports

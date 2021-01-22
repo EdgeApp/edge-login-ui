@@ -1,14 +1,16 @@
 // @flow
 
 import { asArray, asJSON, asObject, asString } from 'cleaners'
-import { type Disklet, makeReactNativeDisklet } from 'disklet'
+import { makeReactNativeDisklet } from 'disklet'
 
-import { getTouchEnabledUsers, supportsTouchId } from '../keychain.js'
+import { loadFingerprintFile, supportsTouchId } from '../keychain.js'
 import {
   type LoginUserInfo,
   type PreviousUsersState
 } from '../reducers/PreviousUsersReducer.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
+
+const disklet = makeReactNativeDisklet()
 
 /**
  * Load the user list from core & disk into redux.
@@ -18,12 +20,11 @@ export const getPreviousUsers = () => async (
   getState: GetState,
   imports: Imports
 ): Promise<void> => {
-  const { context, folder } = imports
-  const disklet = makeReactNativeDisklet()
+  const { context } = imports
 
   // Load disk information:
-  const lastUsernames: string[] = await getRecentUsers(disklet)
-  const touchEnabledUsers: string[] = await getTouchEnabledUsers(folder)
+  const lastUsernames: string[] = await getRecentUsers()
+  const fingerprintFile = await loadFingerprintFile()
   const touchSupported: boolean = await supportsTouchId()
 
   // Figure out which users have biometric logins:
@@ -33,7 +34,7 @@ export const getPreviousUsers = () => async (
     const touchEnabled =
       keyLoginEnabled &&
       touchSupported &&
-      touchEnabledUsers.indexOf(username) >= 0
+      fingerprintFile.enabledUsers.includes(username)
     coreUsers.push({ username, pinEnabled: pinLoginEnabled, touchEnabled })
   }
 
@@ -66,8 +67,7 @@ export const getPreviousUsers = () => async (
 }
 
 export const setMostRecentUsers = async (username: string) => {
-  const disklet = makeReactNativeDisklet()
-  const lastUsers = await getRecentUsers(disklet)
+  const lastUsers = await getRecentUsers()
 
   const filteredLastUsers = lastUsers.filter(
     (lastUser: string) => lastUser !== username
@@ -78,7 +78,7 @@ export const setMostRecentUsers = async (username: string) => {
   )
 }
 
-async function getRecentUsers(disklet: Disklet): Promise<string[]> {
+async function getRecentUsers(): Promise<string[]> {
   // Load the last users array:
   try {
     const lastUsernames: string[] = await disklet

@@ -136,7 +136,7 @@ export function validatePassword(data: string) {
 
 export function createUser(data: Object) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { context, folder } = imports
+    const { context } = imports
     dispatch({ type: 'WORKFLOW_NEXT' })
     setTimeout(async () => {
       try {
@@ -149,9 +149,9 @@ export function createUser(data: Object) {
         abcAccount.watch('loggedIn', loggedIn => {
           if (!loggedIn) dispatch({ type: 'RESET_APP' })
         })
-        const touchDisabled = await isTouchDisabled(folder, abcAccount.username)
+        const touchDisabled = await isTouchDisabled(null, abcAccount.username)
         if (!touchDisabled) {
-          await enableTouchId(folder, abcAccount).catch(e => {
+          await enableTouchId(null, abcAccount).catch(e => {
             console.log(e) // Fail quietly
           })
         }
