@@ -1,5 +1,14 @@
 # edge-login-ui
 
+## 0.6.27 (2021-01-22)
+
+- rn: Fix the OTP backup code modal crash.
+- rn: Add a scroll view to the change password screen.
+- rn: Expose the security alerts screen as a standalone component.
+  - Add `hasSecurityAlerts` and `watchSecurityAlerts` helpers to determine when to show this screen.
+  - Add a `skipSecurityAlerts` prop to the `LoginScreen` component, so the GUI can manage the alerts instead of the login UI.
+- rn: Eliminate all legacy Disklet usage.
+
 ## 0.6.26 (2021-01-11)
 
 - rn: Expose the QR modal from the password login screen
