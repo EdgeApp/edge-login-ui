@@ -1,10 +1,11 @@
 // @flow
 
 export type PeriodicTask = {
-  // True once start is called, false after stop is called:
-  +started: boolean,
   start(): void,
-  stop(): void
+  stop(): void,
+
+  // True once start is called, false after stop is called:
+  +started: boolean
 }
 
 /**
@@ -12,28 +13,30 @@ export type PeriodicTask = {
  */
 export function makePeriodicTask(
   task: () => Promise<void> | void,
-  ms: number
+  msGap: number,
+  opts: {
+    onError?: (error: mixed) => void
+  } = {}
 ): PeriodicTask {
+  const { onError = (e: mixed) => {} } = opts
+
+  // A started task will keep bouncing between running & waiting.
+  // The `running` flag will be true in the running state,
+  // and `timeout` will have a value in the waiting state.
   let running = false
   let timeout: $Call<typeof setTimeout, () => void, number> | void
 
-  function done(): void {
-    running = false
+  function run(): void {
+    timeout = undefined
     if (!out.started) return
-    timeout = setTimeout(run, ms)
+    running = true
+    new Promise(resolve => resolve(task())).catch(onError).then(wait, wait)
   }
 
-  function run(): void {
+  function wait(): void {
+    running = false
     if (!out.started) return
-    if (running) return
-    running = true
-    try {
-      const result = task()
-      if (result == null) done()
-      else result.then(done).catch(done)
-    } catch (error) {
-      done()
-    }
+    timeout = setTimeout(run, msGap)
   }
 
   const out = {
@@ -41,12 +44,15 @@ export function makePeriodicTask(
 
     start(): void {
       out.started = true
-      run()
+      if (!running && timeout == null) run()
     },
 
     stop(): void {
       out.started = false
-      if (timeout != null) clearTimeout(timeout)
+      if (timeout != null) {
+        clearTimeout(timeout)
+        timeout = undefined
+      }
     }
   }
   return out
