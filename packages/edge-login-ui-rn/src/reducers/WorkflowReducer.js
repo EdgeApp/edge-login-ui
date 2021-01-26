@@ -49,6 +49,8 @@ export const workflow: Reducer<WorkflowState, Action> = function(
       return { ...state, currentKey: 'createWF', currentSceneIndex: 0 }
     case 'START_LANDING':
       return { ...state, currentKey: 'landingWF', currentSceneIndex: 0 }
+    case 'START_OTP_REPAIR':
+      return { ...state, currentKey: 'otpRepairWF', currentSceneIndex: 0 }
     case 'START_PASSWORD_LOGIN':
       return { ...state, currentKey: 'passwordWF', currentSceneIndex: 0 }
     case 'START_PIN_LOGIN':

@@ -15,6 +15,7 @@ export type Workflows = {
   landingWF: Scene[],
   loadingWF: Scene[],
   otpWF: Scene[],
+  otpRepairWF: Scene[],
   passwordWF: Scene[],
   pinWF: Scene[],
   recoveryLoginWF: Scene[],
@@ -117,6 +118,13 @@ export const workflows: Workflows = {
   otpWF: [
     {
       // OtpErrorScreen
+      title: s.strings.otp_header,
+      subTitle: ''
+    }
+  ],
+  otpRepairWF: [
+    {
+      // OtpRepairScreen
       title: s.strings.otp_header,
       subTitle: ''
     }

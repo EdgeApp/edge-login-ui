@@ -74,6 +74,13 @@ export type Action =
         error: OtpError
       }
     }
+  | {
+      type: 'START_OTP_REPAIR',
+      data: {
+        account: EdgeAccount,
+        error: OtpError
+      }
+    }
   | { type: 'OTP_RESET_REQUEST', data: Date }
   | { type: 'SET_PREVIOUS_USERS', data: PreviousUsersState }
   | { type: 'SET_TOUCH', data: $PropertyType<RootState, 'touch'> }
