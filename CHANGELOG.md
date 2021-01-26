@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.28 (2021-01-26)
+
+- rn: Only fetch recovery questions if they exist
+
 ## 0.6.27 (2021-01-22)
 
 - rn: Fix the OTP backup code modal crash.
