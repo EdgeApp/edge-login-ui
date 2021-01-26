@@ -21,6 +21,7 @@
   "pwd_change_modal": "¡NO OLVIDES TU CONTRASEÑA O PREGUNTAS DE RECUPERACIÓN!¡NO PUEDEN SER RECUPERADAS!",
   "backup_key_label": "Respaldar clave",
   "ok": "OK",
+  "or": "o",
   "exit": "Salir",
   "exit_pin": "Salir de PIN",
   "next_label": "Siguiente",
@@ -40,6 +41,8 @@
   "pin_successfully_changed": "PIN cambiado con éxito",
   "delete_account_header": "Borrar cuenta",
   "delete_username_account": "¿Borrar %1$s en este dispositivo? Se desactivará el acceso por PIN. Si la autenticación de doble factor (2FA) está activada en esta cuenta, este dispositivo no podrá acceder sin un reseteo de 2FA, que lleva 7 días.",
+  "disable_otp_header": "¿ Estás seguro de que quieres desactivar 2FA?",
+  "disable_otp_modal_body": "La autenticación de doble factor tardará 7 días en desactivarse si el usuario de la cuenta no realiza ninguna acción en los dispositivos autenticados.",
   "disable_otp_button": "Desactivar 2FA",
   "send_email_error_header": "No se puede enviar el email",
   "email_error_modal": "Por favor configura un cliente de correo por defecto en el sistema operativo de tu móvil para poder enviarte un token de acceso a ti mismo",
@@ -143,5 +146,8 @@
   "keypad_zero": "0",
   "use_faceId": "Usar Face ID",
   "use_touchId": "Usar Touch ID",
-  "use_fingerprint": "Usar huella dactilar"
+  "use_fingerprint": "Usar huella dactilar",
+  "qr_modal_title": "Escanear código QR",
+  "alert_dropdown_alert": "¡Alerta! ",
+  "alert_dropdown_warning": "¡Advertencia! "
 }
