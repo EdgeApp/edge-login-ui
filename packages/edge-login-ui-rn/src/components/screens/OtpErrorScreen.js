@@ -2,8 +2,6 @@
 
 import { type OtpError } from 'edge-core-js'
 import * as React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { cacheStyles } from 'react-native-patina'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { sprintf } from 'sprintf-js'
 
@@ -18,12 +16,11 @@ import { QrCodeModal } from '../modals/QrCodeModal.js'
 import { TextInputModal } from '../modals/TextInputModal.js'
 import { Airship, showError, showToast } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
-import {
-  type Theme,
-  type ThemeProps,
-  withTheme
-} from '../services/ThemeContext.js'
+import { DividerRow } from '../themed/DividerRow.js'
+import { IconHeaderRow } from '../themed/IconHeaderRow.js'
+import { LinkRow } from '../themed/LinkRow.js'
 import { ThemedScene } from '../themed/ThemedScene.js'
+import { MessageText } from '../themed/ThemedText.js'
 
 type OwnProps = {}
 type StateProps = {
@@ -37,7 +34,7 @@ type DispatchProps = {
   login(otpAttempt: LoginAttempt, otpKey?: string): Promise<void>,
   saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void
 }
-type Props = OwnProps & StateProps & DispatchProps & ThemeProps
+type Props = OwnProps & StateProps & DispatchProps
 
 class OtpErrorScreenComponent extends React.Component<Props> {
   checkVoucher = makePeriodicTask(async () => {
@@ -120,9 +117,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
   }
 
   render() {
-    const { otpError, theme } = this.props
-    const styles = getStyles(theme)
-
+    const { otpError } = this.props
     const isIp = otpError.reason === 'ip'
 
     return (
@@ -132,40 +127,35 @@ class OtpErrorScreenComponent extends React.Component<Props> {
         subTitle=""
         title={isIp ? s.strings.otp_header_ip : s.strings.otp_header}
       >
-        <View style={styles.headerContainer}>
-          <FontAwesome name="exclamation-triangle" style={styles.headerIcon} />
-          <Text style={styles.headerText}>
+        <IconHeaderRow
+          renderIcon={theme => (
+            <FontAwesome name="exclamation-triangle" size={theme.rem(2.5)} />
+          )}
+        >
+          <MessageText>
             {isIp
               ? s.strings.otp_screen_header_ip
               : s.strings.otp_screen_header_2fa}
-          </Text>
-        </View>
-        <Text style={styles.body1}>{s.strings.otp_screen_approve}</Text>
-        {this.renderDivider(styles)}
-        <TouchableOpacity
-          style={styles.buttonContainer}
+          </MessageText>
+        </IconHeaderRow>
+        <MessageText>{s.strings.otp_screen_approve}</MessageText>
+        <DividerRow />
+        <LinkRow
+          label={s.strings.qr_modal_title}
           onPress={this.handleQrModal}
-        >
-          <Text style={styles.buttonText}>{s.strings.qr_modal_title}</Text>
-          <FontAwesome name="chevron-right" style={styles.buttonIcon} />
-        </TouchableOpacity>
+        />
         {isIp ? null : (
-          <TouchableOpacity
-            style={styles.buttonContainer}
+          <LinkRow
+            label={s.strings.otp_backup_code_modal_title}
             onPress={this.handleBackupModal}
-          >
-            <Text style={styles.buttonText}>
-              {s.strings.otp_backup_code_modal_title}
-            </Text>
-            <FontAwesome name="chevron-right" style={styles.buttonIcon} />
-          </TouchableOpacity>
+          />
         )}
-        {this.renderResetArea(styles)}
+        {this.renderResetArea()}
       </ThemedScene>
     )
   }
 
-  renderResetArea(styles: $Call<typeof getStyles, Theme>): React.Node {
+  renderResetArea(): React.Node {
     const { otpError, otpResetDate } = this.props
 
     // If we have an automatic login date, show that:
@@ -174,10 +164,10 @@ class OtpErrorScreenComponent extends React.Component<Props> {
     if (date != null) {
       return (
         <>
-          {this.renderDivider(styles)}
-          <Text style={styles.body2}>
+          <DividerRow />
+          <MessageText>
             {sprintf(s.strings.otp_screen_wait, date.toLocaleString())}
-          </Text>
+          </MessageText>
         </>
       )
     }
@@ -186,16 +176,11 @@ class OtpErrorScreenComponent extends React.Component<Props> {
     if (otpError.resetToken != null) {
       return (
         <>
-          {this.renderDivider(styles)}
-          <TouchableOpacity
-            style={styles.buttonContainer}
+          <DividerRow />
+          <LinkRow
+            label={s.strings.disable_otp_button_two}
             onPress={this.handleResetModal}
-          >
-            <Text style={styles.buttonText}>
-              {s.strings.disable_otp_button_two}
-            </Text>
-            <FontAwesome name="chevron-right" style={styles.buttonIcon} />
-          </TouchableOpacity>
+          />
         </>
       )
     }
@@ -203,110 +188,28 @@ class OtpErrorScreenComponent extends React.Component<Props> {
     // Otherwise, there is nothing to show here:
     return null
   }
-
-  renderDivider(styles: $Call<typeof getStyles, Theme>): React.Node {
-    return (
-      <View style={styles.dividerContainer}>
-        <View style={styles.dividerLine} />
-        <Text style={styles.dividerText}>{s.strings.or}</Text>
-        <View style={styles.dividerLine} />
-      </View>
-    )
-  }
 }
 
-const getStyles = cacheStyles((theme: Theme) => ({
-  headerContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: theme.rem(0.5)
+export const OtpErrorScreen = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => {
+    const { otpAttempt, otpError, otpResetDate } = state.login
+    if (otpAttempt == null || otpError == null) {
+      throw new Error('Missing OtpError for OTP error screen')
+    }
+    return { otpAttempt, otpError, otpResetDate }
   },
-  headerIcon: {
-    color: theme.primaryText,
-    fontSize: theme.rem(2.5),
-    marginRight: theme.rem(1)
-  },
-  headerText: {
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1),
-    color: theme.primaryText,
-    flex: 1
-  },
-  body1: {
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1),
-    color: theme.primaryText,
-    marginVertical: theme.rem(0.5)
-  },
-  dividerContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: theme.rem(0.5)
-  },
-  dividerLine: {
-    height: 1,
-    borderColor: theme.secondaryText,
-    borderBottomWidth: 1,
-    flex: 1
-  },
-  dividerText: {
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1),
-    color: theme.secondaryText,
-    marginHorizontal: theme.rem(0.5),
-    paddingBottom: 5 // padding to center the text
-  },
-  buttonContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  buttonIcon: {
-    color: theme.primaryButton,
-    height: theme.rem(1),
-    textAlign: 'center'
-  },
-  buttonText: {
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1),
-    color: theme.primaryButton,
-    marginVertical: theme.rem(0.5),
-    flex: 1
-  },
-  body2: {
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1),
-    color: theme.primaryText,
-    marginVertical: theme.rem(0.5)
-  }
-}))
-
-export const OtpErrorScreen = withTheme(
-  connect<StateProps, DispatchProps, OwnProps & ThemeProps>(
-    (state: RootState) => {
-      const { otpAttempt, otpError, otpResetDate } = state.login
-      if (otpAttempt == null || otpError == null) {
-        throw new Error('Missing OtpError for OTP error screen')
-      }
-      return { otpAttempt, otpError, otpResetDate }
+  (dispatch: Dispatch) => ({
+    onBack() {
+      dispatch({ type: 'START_PASSWORD_LOGIN' })
     },
-    (dispatch: Dispatch) => ({
-      onBack() {
-        dispatch({ type: 'START_PASSWORD_LOGIN' })
-      },
-      hasReadyVoucher(error: OtpError) {
-        return dispatch(hasReadyVoucher(error))
-      },
-      login(attempt: LoginAttempt, otpKey?: string): Promise<void> {
-        return dispatch(login(attempt, otpKey))
-      },
-      saveOtpError(attempt, error) {
-        dispatch({ type: 'OTP_ERROR', data: { attempt, error } })
-      }
-    })
-  )(OtpErrorScreenComponent)
-)
+    hasReadyVoucher(error: OtpError) {
+      return dispatch(hasReadyVoucher(error))
+    },
+    login(attempt: LoginAttempt, otpKey?: string): Promise<void> {
+      return dispatch(login(attempt, otpKey))
+    },
+    saveOtpError(attempt, error) {
+      dispatch({ type: 'OTP_ERROR', data: { attempt, error } })
+    }
+  })
+)(OtpErrorScreenComponent)
