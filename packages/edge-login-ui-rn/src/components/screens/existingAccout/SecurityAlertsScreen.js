@@ -25,6 +25,7 @@ import {
 } from '../../services/ThemeContext.js'
 import { PrimaryButton } from '../../themed/ThemedButtons.js'
 import { ThemedScene } from '../../themed/ThemedScene.js'
+import { MessageText, Warning } from '../../themed/ThemedText.js'
 
 type OwnProps = {}
 type StateProps = {
@@ -99,16 +100,14 @@ export class SecurityAlertsScreenComponent extends React.Component<
               color={theme.primaryText}
             />
           </View>
-          <Text style={styles.messageText}>
+          <MessageText>
             {count > 1
               ? s.strings.alert_screen_message_many
               : s.strings.alert_screen_message}
-          </Text>
-          <Text style={styles.messageText}>
-            <Text style={styles.warningColor}>
-              {s.strings.alert_screen_warning}
-            </Text>
-          </Text>
+          </MessageText>
+          <MessageText>
+            <Warning>{s.strings.alert_screen_warning}</Warning>
+          </MessageText>
           {this.renderVouchers()}
           {this.renderReset()}
           {showSkip ? (
@@ -139,13 +138,11 @@ export class SecurityAlertsScreenComponent extends React.Component<
 
     return (
       <View style={styles.tile}>
-        <Text style={styles.tileText}>
-          {s.strings.alert_screen_reset_message}
-        </Text>
-        <Text style={styles.tileText}>
+        <MessageText>{s.strings.alert_screen_reset_message}</MessageText>
+        <MessageText>
           {s.strings.alert_screen_reset_date}
           {otpResetDate.toLocaleString()}
-        </Text>
+        </MessageText>
         {spinReset ? (
           <ActivityIndicator
             color={theme.primaryButton}
@@ -169,17 +166,17 @@ export class SecurityAlertsScreenComponent extends React.Component<
 
     return pendingVouchers.map(voucher => (
       <View style={styles.tile} key={voucher.voucherId}>
-        <Text style={styles.tileText}>
+        <MessageText>
           {voucher.deviceDescription != null
             ? s.strings.alert_screen_device + voucher.deviceDescription + '\n'
             : null}
           {s.strings.alert_screen_ip + voucher.ipDescription + '\n'}
           {s.strings.alert_screen_date + voucher.created.toLocaleString()}
-        </Text>
-        <Text style={styles.tileText}>
+        </MessageText>
+        <MessageText>
           {s.strings.alert_screen_reset_date}
           {voucher.activates.toLocaleString()}
-        </Text>
+        </MessageText>
         {spinVoucher[voucher.voucherId] ? (
           <ActivityIndicator
             color={theme.primaryButton}
@@ -295,25 +292,11 @@ const getStyles = cacheStyles((theme: Theme) => ({
     justifyContent: 'center',
     overflow: 'hidden'
   },
-  messageText: {
-    color: theme.primaryText,
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1),
-    margin: theme.rem(0.5),
-    textAlign: 'left'
-  },
   tile: {
     backgroundColor: theme.tileBackground,
     borderRadius: theme.rem(0.5),
     margin: theme.rem(0.5),
     padding: theme.rem(0.5)
-  },
-  tileText: {
-    color: theme.primaryText,
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1),
-    margin: theme.rem(0.5),
-    textAlign: 'left'
   },
   cardLink: {
     color: theme.linkText,

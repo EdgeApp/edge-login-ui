@@ -7,13 +7,10 @@ import { type AirshipBridge } from 'react-native-airship'
 import s from '../../common/locales/strings.js'
 import { ThemedTextField } from '../../components/themed/ThemedTextField.js'
 import { showError } from '../services/AirshipInstance.js'
-import {
-  ModalCloseArrow,
-  ModalMessage,
-  ModalTitle
-} from '../themed/ModalParts.js'
+import { ModalCloseArrow } from '../themed/ModalParts.js'
 import { PrimaryButton } from '../themed/ThemedButtons.js'
 import { ThemedModal } from '../themed/ThemedModal.js'
+import { MessageText, TitleText } from '../themed/ThemedText.js'
 
 type Props = {|
   // Resolves to the entered string, or void if cancelled.
@@ -105,8 +102,8 @@ export class TextInputModal extends React.Component<Props, State> {
 
     return (
       <ThemedModal bridge={bridge} onCancel={this.handleCancel}>
-        {title != null ? <ModalTitle>{title}</ModalTitle> : null}
-        {message != null ? <ModalMessage>{message}</ModalMessage> : null}
+        {title != null ? <TitleText>{title}</TitleText> : null}
+        {message != null ? <MessageText>{message}</MessageText> : null}
         <ThemedTextField
           // Text input props:
           autoCapitalize={autoCapitalize}

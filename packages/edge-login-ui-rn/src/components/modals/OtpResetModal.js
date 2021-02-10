@@ -10,13 +10,10 @@ import type { Dispatch, RootState } from '../../types/ReduxTypes.js'
 import { showError, showToast } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 import { type ThemeProps, withTheme } from '../services/ThemeContext.js'
-import {
-  ModalCloseArrow,
-  ModalMessage,
-  ModalTitle
-} from '../themed/ModalParts.js'
+import { ModalCloseArrow } from '../themed/ModalParts.js'
 import { PrimaryButton } from '../themed/ThemedButtons.js'
 import { ThemedModal } from '../themed/ThemedModal.js'
+import { MessageText, TitleText } from '../themed/ThemedText.js'
 
 type OwnProps = {
   bridge: AirshipBridge<void>
@@ -63,8 +60,8 @@ class OtpResetModalComponent extends React.Component<Props, State> {
 
     return (
       <ThemedModal bridge={bridge} onCancel={this.handleCancel} paddingRem={1}>
-        <ModalTitle>{s.strings.disable_otp_header}</ModalTitle>
-        <ModalMessage>{s.strings.disable_otp_modal_body}</ModalMessage>
+        <TitleText>{s.strings.disable_otp_header}</TitleText>
+        <MessageText>{s.strings.disable_otp_modal_body}</MessageText>
         {spinning ? (
           <PrimaryButton marginRem={0.5}>
             <ActivityIndicator

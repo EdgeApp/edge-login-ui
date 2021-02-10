@@ -21,6 +21,7 @@ export type Theme = {|
   primaryText: string,
   secondaryText: string,
   dangerText: string,
+  warningText: string,
   linkText: string,
 
   // Tile:

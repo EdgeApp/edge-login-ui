@@ -17,12 +17,9 @@ import {
   type ThemeProps,
   withTheme
 } from '../services/ThemeContext.js'
-import {
-  ModalCloseArrow,
-  ModalMessage,
-  ModalTitle
-} from '../themed/ModalParts.js'
+import { ModalCloseArrow } from '../themed/ModalParts.js'
 import { ThemedModal } from '../themed/ThemedModal.js'
+import { MessageText, TitleText } from '../themed/ThemedText.js'
 
 type OwnProps = {
   bridge: AirshipBridge<void>
@@ -61,8 +58,8 @@ class QrCodeModalComponent extends React.Component<Props, State> {
 
     return (
       <ThemedModal bridge={bridge} onCancel={() => bridge.resolve()}>
-        <ModalTitle>{s.strings.qr_modal_title}</ModalTitle>
-        <ModalMessage>{s.strings.qr_modal_message}</ModalMessage>
+        <TitleText>{s.strings.qr_modal_title}</TitleText>
+        <MessageText>{s.strings.qr_modal_message}</MessageText>
         <View style={styles.qrContainer}>
           {pendingLogin == null ? (
             <ActivityIndicator color={theme.primaryText} />
