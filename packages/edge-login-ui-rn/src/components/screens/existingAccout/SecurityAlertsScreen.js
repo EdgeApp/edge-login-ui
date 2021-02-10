@@ -274,8 +274,7 @@ const iconRem = 2
 
 const getStyles = cacheStyles((theme: Theme) => ({
   container: {
-    flex: 1,
-    padding: theme.rem(0.5)
+    flex: 1
   },
   iconCircle: {
     alignSelf: 'center',

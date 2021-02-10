@@ -13,7 +13,6 @@ import s from '../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { type LoginAttempt } from '../../util/loginAttempt.js'
 import { makePeriodicTask } from '../../util/periodicTask.js'
-import { HeaderComponent } from '../common/Header.js'
 import { OtpResetModal } from '../modals/OtpResetModal.js'
 import { QrCodeModal } from '../modals/QrCodeModal.js'
 import { TextInputModal } from '../modals/TextInputModal.js'
@@ -127,46 +126,41 @@ class OtpErrorScreenComponent extends React.Component<Props> {
     const isIp = otpError.reason === 'ip'
 
     return (
-      <ThemedScene>
-        <HeaderComponent
-          onBack={this.props.onBack}
-          subTitle=""
-          title={isIp ? s.strings.otp_header_ip : s.strings.otp_header}
-        />
-        <View style={styles.container}>
-          <View style={styles.headerContainer}>
-            <FontAwesome
-              name="exclamation-triangle"
-              style={styles.headerIcon}
-            />
-            <Text style={styles.headerText}>
-              {isIp
-                ? s.strings.otp_screen_header_ip
-                : s.strings.otp_screen_header_2fa}
-            </Text>
-          </View>
-          <Text style={styles.body1}>{s.strings.otp_screen_approve}</Text>
-          {this.renderDivider(styles)}
+      <ThemedScene
+        showHeader
+        onBack={this.props.onBack}
+        subTitle=""
+        title={isIp ? s.strings.otp_header_ip : s.strings.otp_header}
+      >
+        <View style={styles.headerContainer}>
+          <FontAwesome name="exclamation-triangle" style={styles.headerIcon} />
+          <Text style={styles.headerText}>
+            {isIp
+              ? s.strings.otp_screen_header_ip
+              : s.strings.otp_screen_header_2fa}
+          </Text>
+        </View>
+        <Text style={styles.body1}>{s.strings.otp_screen_approve}</Text>
+        {this.renderDivider(styles)}
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={this.handleQrModal}
+        >
+          <Text style={styles.buttonText}>{s.strings.qr_modal_title}</Text>
+          <FontAwesome name="chevron-right" style={styles.buttonIcon} />
+        </TouchableOpacity>
+        {isIp ? null : (
           <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={this.handleQrModal}
+            onPress={this.handleBackupModal}
           >
-            <Text style={styles.buttonText}>{s.strings.qr_modal_title}</Text>
+            <Text style={styles.buttonText}>
+              {s.strings.otp_backup_code_modal_title}
+            </Text>
             <FontAwesome name="chevron-right" style={styles.buttonIcon} />
           </TouchableOpacity>
-          {isIp ? null : (
-            <TouchableOpacity
-              style={styles.buttonContainer}
-              onPress={this.handleBackupModal}
-            >
-              <Text style={styles.buttonText}>
-                {s.strings.otp_backup_code_modal_title}
-              </Text>
-              <FontAwesome name="chevron-right" style={styles.buttonIcon} />
-            </TouchableOpacity>
-          )}
-          {this.renderResetArea(styles)}
-        </View>
+        )}
+        {this.renderResetArea(styles)}
       </ThemedScene>
     )
   }
@@ -222,10 +216,6 @@ class OtpErrorScreenComponent extends React.Component<Props> {
 }
 
 const getStyles = cacheStyles((theme: Theme) => ({
-  container: {
-    flex: 1,
-    padding: theme.rem(1)
-  },
   headerContainer: {
     width: '100%',
     flexDirection: 'row',
