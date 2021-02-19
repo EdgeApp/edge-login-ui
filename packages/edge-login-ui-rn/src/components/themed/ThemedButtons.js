@@ -4,7 +4,12 @@ import * as React from 'react'
 import { ActivityIndicator, Text, TouchableOpacity } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
-import { unpackEdges } from '../../util/edges.js'
+import {
+  fixSides,
+  mapSides,
+  sidesToMargin,
+  sidesToPadding
+} from '../../util/sides.js'
 import { type Theme, useTheme } from '../services/ThemeContext.js'
 
 type Props = {
@@ -27,13 +32,17 @@ type Props = {
 }
 
 export function PrimaryButton(props: Props) {
-  const { children, label, onPress, spinner } = props
+  const { children, label, marginRem, onPress, paddingRem, spinner } = props
   const theme = useTheme()
   const styles = getStyles(theme)
 
+  const spacingStyles = {
+    ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
+    ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
+  }
   return (
     <TouchableOpacity
-      style={[styles.primaryButton, spacingStyles(props, theme)]}
+      style={[styles.primaryButton, spacingStyles]}
       onPress={onPress}
     >
       {label != null ? <Text style={styles.primaryText}>{label}</Text> : null}
@@ -49,13 +58,17 @@ export function PrimaryButton(props: Props) {
 }
 
 export function SecondaryButton(props: Props) {
-  const { children, label, onPress, spinner } = props
+  const { children, label, marginRem, onPress, paddingRem, spinner } = props
   const theme = useTheme()
   const styles = getStyles(theme)
 
+  const spacingStyles = {
+    ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
+    ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
+  }
   return (
     <TouchableOpacity
-      style={[styles.secondaryButton, spacingStyles(props, theme)]}
+      style={[styles.secondaryButton, spacingStyles]}
       onPress={onPress}
     >
       {label != null ? <Text style={styles.secondaryText}>{label}</Text> : null}
@@ -68,22 +81,6 @@ export function SecondaryButton(props: Props) {
       {children}
     </TouchableOpacity>
   )
-}
-
-function spacingStyles(props: Props, theme: Theme) {
-  const marginRem = unpackEdges(props.marginRem)
-  const paddingRem = unpackEdges(props.paddingRem ?? 0.5)
-
-  return {
-    marginBottom: theme.rem(marginRem.bottom),
-    marginLeft: theme.rem(marginRem.left),
-    marginRight: theme.rem(marginRem.right),
-    marginTop: theme.rem(marginRem.top),
-    paddingBottom: theme.rem(paddingRem.bottom),
-    paddingLeft: theme.rem(paddingRem.left),
-    paddingRight: theme.rem(paddingRem.right),
-    paddingTop: theme.rem(paddingRem.top)
-  }
 }
 
 const getStyles = cacheStyles((theme: Theme) => {

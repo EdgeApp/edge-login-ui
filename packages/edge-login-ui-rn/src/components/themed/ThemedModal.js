@@ -4,7 +4,7 @@ import * as React from 'react'
 import { type ViewStyle, StyleSheet } from 'react-native'
 import { type AirshipBridge, AirshipModal } from 'react-native-airship'
 
-import { packEdges, unpackEdges } from '../../util/edges.js'
+import { fixSides } from '../../util/sides.js'
 import { useTheme } from '../services/ThemeContext.js'
 
 type Props<T> = {
@@ -19,8 +19,7 @@ type Props<T> = {
 }
 
 export function ThemedModal<T>(props: Props<T>) {
-  const { bridge, children = null, onCancel } = props
-  const paddingRem = unpackEdges(props.paddingRem ?? 1)
+  const { bridge, children = null, onCancel, paddingRem } = props
   const theme = useTheme()
 
   // Since we can't add native dependencies without a major version bump,
@@ -42,7 +41,7 @@ export function ThemedModal<T>(props: Props<T>) {
       onCancel={onCancel}
       backgroundColor={theme.modal}
       borderRadius={theme.rem(1)}
-      padding={packEdges(paddingRem).map(theme.rem)}
+      padding={fixSides(paddingRem, 1).map(theme.rem)}
       underlay={underlay}
     >
       {children}

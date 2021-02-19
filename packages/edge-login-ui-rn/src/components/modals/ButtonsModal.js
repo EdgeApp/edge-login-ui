@@ -3,9 +3,9 @@
 import * as React from 'react'
 import { type AirshipBridge } from 'react-native-airship'
 
-import { ModalMessage, ModalTitle } from '../themed/ModalParts.js'
 import { PrimaryButton, SecondaryButton } from '../themed/ThemedButtons.js'
 import { ThemedModal } from '../themed/ThemedModal.js'
+import { MessageText, TitleText } from '../themed/ThemedText.js'
 
 type ButtonInfo = {
   label: string,
@@ -26,8 +26,8 @@ export function ButtonsModal<Buttons: { [key: string]: ButtonInfo }>(props: {
       onCancel={() => bridge.resolve(undefined)}
       paddingRem={1}
     >
-      {title != null ? <ModalTitle>{title}</ModalTitle> : null}
-      {message != null ? <ModalMessage>{message}</ModalMessage> : null}
+      {title != null ? <TitleText>{title}</TitleText> : null}
+      {message != null ? <MessageText>{message}</MessageText> : null}
       {Object.keys(buttons).map(key => {
         const { label, type = 'primary' } = buttons[key]
 
