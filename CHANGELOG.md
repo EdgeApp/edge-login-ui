@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.6.29 (2021-02-19)
+
+- rn: Add a new 2fa repair screen component.
+
 ## 0.6.28 (2021-01-26)
 
 - rn: Only fetch recovery questions if they exist
