@@ -79,6 +79,7 @@ const strings = {
   account_confirmation: 'Account Confirmation', // title should be regular capitalization, not all uppercase
   otp_header: 'Two Factor Authentication',
   otp_header_ip: 'Authorize Device',
+  otp_header_repair: 'Two Factor Repair',
   recovery_questions_header: 'Recovery Questions',
   account_info_warning:
     'You did not set your password. We strongly encourage you to create a password and backup your account as soon as possible. You can set a password in the Settings screen in the app.',
@@ -213,6 +214,10 @@ const strings = {
   otp_screen_wait:
     'Wait until %s when the device will be automatically authorized to log in',
   otp_screen_retrying: 'Retrying login...',
+
+  otp_repair_header:
+    'This device is not currrently able to sync with the Edge servers',
+  otp_repair_options: 'To fix this issue:',
 
   otp_backup_code_modal_title: 'Enter Backup Code',
 

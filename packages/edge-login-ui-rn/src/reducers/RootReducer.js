@@ -54,6 +54,7 @@ export const rootReducer: Reducer<RootState, Action> = combineReducers({
       case 'START_SECURITY_ALERT':
         return action.data
       case 'START_CHANGE_RECOVERY':
+      case 'START_OTP_REPAIR':
         return action.data.account
     }
     return state

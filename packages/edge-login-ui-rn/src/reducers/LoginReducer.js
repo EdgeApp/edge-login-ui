@@ -71,6 +71,12 @@ export function login(
         otpError: action.data.error,
         otpResetDate: action.data.error.resetDate
       }
+    case 'START_OTP_REPAIR':
+      return {
+        ...state,
+        otpError: action.data.error,
+        otpResetDate: action.data.error.resetDate
+      }
     case 'OTP_RESET_REQUEST':
       return {
         ...state,

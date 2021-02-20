@@ -16,6 +16,7 @@ import {
   ResecurePinScreen
 } from '../screens/existingAccout/ChangePinScreen.js'
 import { PublicChangeRecoveryScreen } from '../screens/existingAccout/ChangeRecoveryScreen.js'
+import { OtpRepairScreen } from '../screens/existingAccout/OtpRepairScreen.js'
 import { SecurityAlertsScreen } from '../screens/existingAccout/SecurityAlertsScreen.js'
 import { LandingScreen } from '../screens/LandingScreen.js'
 import { LoadingScreen } from '../screens/LoadingScreen.js'
@@ -73,6 +74,8 @@ class RouterComponent extends React.Component<Props> {
         return <LoadingScreen branding={this.props.branding} />
       case 'otpWF':
         return <OtpErrorScreen />
+      case 'otpRepairWF':
+        return <OtpRepairScreen />
       case 'passwordWF':
         return <PasswordLoginScreen branding={this.props.branding} />
       case 'pinWF':
