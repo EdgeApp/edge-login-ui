@@ -1,6 +1,5 @@
 // @flow
 
-const LOGIN_BACKGROUND = require('./login_bg.jpg')
 const LOGO_DOT = require('./logoHolderDot.png')
 const LOGO_BIG = require('./edgeLogo/Edge_logo_L.png')
 const LOGO_SMALL = require('./edgeLogo/Edge_logo_S.png')
@@ -19,7 +18,6 @@ const OTP_DISABLE = require('./icons/otp/OTP-disable.png')
 const FACE_ID = require('./touch/face-id.png')
 const TOUCH_ID = require('./touch/touch-id.png')
 
-export { LOGIN_BACKGROUND }
 export { LOGO_BIG }
 export { LOGO_DOT }
 export { LOGO_SMALL }
