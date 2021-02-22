@@ -1,8 +1,9 @@
 // @flow
 
-import DeviceInfo from 'react-native-device-info'
+import { getLocales } from 'react-native-localize'
 
 import en from './en_US.js'
+import de from './strings/de.json'
 import es from './strings/es.json'
 import fr from './strings/fr.json'
 import it from './strings/it.json'
@@ -13,14 +14,19 @@ import ru from './strings/ru.json'
 import vi from './strings/vi.json'
 import zh from './strings/zh.json'
 
-const allLocales = { en, ru, es, it, pt, ja, fr, ko, vi, zh }
+const allLocales = { en, de, ru, es, it, pt, ja, fr, ko, vi, zh }
 
 const strings: typeof en = { ...en }
 const out = { strings }
 
-selectLocale(DeviceInfo.getDeviceLocale())
+// Set the language at boot:
+const [firstLocale = { languageTag: 'en_US' }] = getLocales()
+selectLocale(firstLocale.languageTag)
 
-function mergeStrings(primary: Object, secondary: Object) {
+function mergeStrings(
+  primary: { [key: string]: string },
+  secondary: { [key: string]: string }
+) {
   for (const str of Object.keys(secondary)) {
     if (secondary[str]) {
       primary[str] = secondary[str]
@@ -38,9 +44,6 @@ export function selectLocale(locale: string = 'en'): boolean {
 
   let found = false
   const lang = normalizedLocale.slice(0, 2)
-
-  // Set default of US English
-  mergeStrings(out.strings, en)
 
   if (locale === 'en') return true
 
