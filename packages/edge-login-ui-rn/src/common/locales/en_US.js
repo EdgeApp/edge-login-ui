@@ -25,6 +25,7 @@ const strings = {
   backup_key_label: 'Backup Key',
   ok: 'OK',
   or: 'or',
+  to_fix: 'to fix',
   exit: 'Exit',
   exit_pin: 'Exit PIN', // nothing should be all-caps
   next_label: 'Next',
@@ -206,18 +207,19 @@ const strings = {
   alert_screen_deny: 'Not me, deny all',
 
   otp_screen_header_2fa:
-    'Two-factor authentication is turned on for this account',
+    'This device cannot log in because it does not have the right 2-factor code',
   otp_screen_header_ip:
-    'This device is not authorized to log in to this account',
-  otp_screen_approve:
-    'Approve this log in from your other devices logged into this account',
+    'This device cannot log in due to an unrecognized IP address',
+  otp_screen_approve: 'Approve this request from another logged-in device',
+  otp_screen_qr: 'Scan QR code with another logged-in device',
   otp_screen_wait:
-    'Wait until %s when the device will be automatically authorized to log in',
+    'Wait until %s when this device will be automatically authorized to log in',
   otp_screen_retrying: 'Retrying login...',
 
-  otp_repair_header:
-    'This device is not currrently able to sync with the Edge servers',
-  otp_repair_options: 'To fix this issue:',
+  otp_repair_header_2fa:
+    'This device cannot sync with the Edge servers because it does not have the right 2-factor code',
+  otp_repair_header_ip:
+    'This device cannot sync with the Edge servers due to an unrecognized IP address',
 
   otp_backup_code_modal_title: 'Enter Backup Code',
 

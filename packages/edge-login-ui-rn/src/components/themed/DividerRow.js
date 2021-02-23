@@ -12,20 +12,20 @@ import {
 } from '../services/ThemeContext'
 
 type Props = {
-  message?: string
+  label?: string
 }
 
 /**
  * Renders a horizontal line with text in the middle.
  */
 function DividerRowComponent(props: Props & ThemeProps) {
-  const { message = s.strings.or, theme } = props
+  const { label = s.strings.or, theme } = props
   const styles = getStyles(theme)
 
   return (
     <View style={styles.container}>
       <View style={styles.line} />
-      <Text style={styles.text}>{message}</Text>
+      <Text style={styles.text}>{label}</Text>
       <View style={styles.line} />
     </View>
   )
