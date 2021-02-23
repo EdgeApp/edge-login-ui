@@ -39,8 +39,8 @@ export const edgeDark: Theme = {
   pressedOpacity: 0.25,
 
   // background
-  backgroundGradientLeft: palette.darkBlue,
-  backgroundGradientRight: palette.edgeNavy,
+  backgroundGradientLeft: palette.edgeNavy,
+  backgroundGradientRight: palette.darkBlue,
 
   // modal
   modal: palette.royalBlue,

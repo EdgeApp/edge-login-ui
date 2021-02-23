@@ -6,9 +6,10 @@ import {
   Keyboard,
   TouchableWithoutFeedback
 } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
 
-import { LOGIN_BACKGROUND } from '../../assets/index.js'
 import { type Branding } from '../../types/Branding.js'
+import { useTheme } from '../services/ThemeContext.js'
 
 type Props = {
   branding: Branding,
@@ -25,7 +26,31 @@ export const BackgroundImage = ({
   enableTouch = true,
   callback
 }: Props) => {
-  const src = branding.backgroundImage || LOGIN_BACKGROUND
+  const src = branding.backgroundImage
+  const theme = useTheme()
+
+  const imageBackground = () => {
+    return (
+      <ImageBackground source={src} style={style}>
+        {content}
+      </ImageBackground>
+    )
+  }
+
+  const gradientBackground = () => {
+    return (
+      <LinearGradient
+        style={style}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={[theme.backgroundGradientLeft, theme.backgroundGradientRight]}
+      >
+        {content}
+      </LinearGradient>
+    )
+  }
+
+  const componentBackground = src ? imageBackground() : gradientBackground()
 
   const onPress = () => {
     if (callback) {
@@ -36,18 +61,14 @@ export const BackgroundImage = ({
     }
     return Keyboard.dismiss()
   }
+
   if (enableTouch) {
     return (
       <TouchableWithoutFeedback onPress={onPress}>
-        <ImageBackground source={src} style={style}>
-          {content}
-        </ImageBackground>
+        {componentBackground}
       </TouchableWithoutFeedback>
     )
   }
-  return (
-    <ImageBackground source={src} style={style}>
-      {content}
-    </ImageBackground>
-  )
+
+  return componentBackground
 }
