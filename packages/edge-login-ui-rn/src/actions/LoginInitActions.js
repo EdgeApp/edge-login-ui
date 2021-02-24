@@ -2,7 +2,16 @@
 
 import { type EdgeLoginMessages } from 'edge-core-js'
 import * as React from 'react'
+import { Platform } from 'react-native'
+import {
+  checkNotifications,
+  openSettings,
+  requestNotifications,
+  RESULTS
+} from 'react-native-permissions'
 
+import s from '../common/locales/strings.js'
+import { ButtonsModal } from '../components/modals/ButtonsModal.js'
 import { SecurityAlertsModal } from '../components/modals/SecurityAlertsModal.js'
 import { Airship } from '../components/services/AirshipInstance.js'
 import { getSupportedBiometryType } from '../keychain.js'
@@ -25,6 +34,7 @@ export const initializeLogin = () => async (
   const touchPromise = dispatch(getTouchMode())
   const usersPromise = dispatch(getPreviousUsers())
   dispatch(checkSecurityMessages()).catch(error => console.log(error))
+  dispatch(checkAndRequestNotifications()).catch(error => console.log(error))
 
   await Promise.all([touchPromise, usersPromise])
   const state = getState()
@@ -81,6 +91,46 @@ const checkSecurityMessages = () => async (
         }
       />
     ))
+  }
+}
+
+const checkAndRequestNotifications = () => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  const notificationPermision = await checkNotifications().catch(error =>
+    console.log(error)
+  )
+  const notificationStatus = notificationPermision.status
+  const isIos = Platform.OS === 'ios'
+
+  if (notificationStatus === RESULTS.BLOCKED || notificationStatus === RESULTS.DENIED) {
+    Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        message={
+          isIos
+            ? s.strings.notifications_permissions_ios
+            : s.strings.notifications_permissions_android
+        }
+        buttons={{
+          continue: { label: s.strings.continue, type: 'primary' },
+          cancel: { label: s.strings.cancel, type: 'secondary' }
+        }}
+      />
+    )).then(result => {
+      if (result === 'continue') {
+        if (notificationStatus === RESULTS.DENIED) {
+          requestNotifications(
+            isIos ? ['alert', 'badge', 'sound'] : undefined
+          ).catch(error => console.log(error))
+        }
+        if (notificationStatus === RESULTS.BLOCKED) {
+          openSettings().catch(error => console.log(error))
+        }
+      }
+    })
   }
 }
 

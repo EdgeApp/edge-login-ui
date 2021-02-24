@@ -9053,6 +9053,11 @@ react-native-patina@^0.1.3:
   resolved "https://registry.yarnpkg.com/react-native-patina/-/react-native-patina-0.1.3.tgz#1704aa63f08dcd09534b2b01a29ee7e1fb046a49"
   integrity sha512-R1vWHseI9pNLGYxQCLbqCJmjjOVJoChoLz8uH2o19SYFdb+VnhfBGZSlDks3RKFHgUkFcvQg/biMCr+mNfBoQA==
 
+react-native-permissions@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.0.1.tgz#7273f7d07701974ef50bf77bb052881846a3bb91"
+  integrity sha512-loCoNEeBeLsrvITZmrkuCUEMFiuwhKuFvkWbC5Imco4bj2hUW7BVI29i8QyxkC53ydRfSR9OtbR3KQIyghWiNQ==
+
 react-native-share@^5.1.4:
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-5.1.4.tgz#0b9d51f6ca724728cb0c5b3ed3a883ee54d7a11b"
