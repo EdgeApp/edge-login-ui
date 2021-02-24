@@ -2,7 +2,7 @@
 
 import { type EdgeLoginMessages } from 'edge-core-js'
 import * as React from 'react'
-import { Platform } from 'react-native'
+import { NativeModules, Platform } from 'react-native'
 import {
   checkNotifications,
   openSettings,
@@ -22,6 +22,8 @@ import {
 } from '../types/ReduxTypes.js'
 import { launchPasswordRecovery } from './LoginAction.js'
 import { getPreviousUsers } from './PreviousUsersActions.js'
+
+const { AbcCoreJsUi } = NativeModules
 
 /**
  * Fires off all the things we need to do to get the login scene up & running.
@@ -104,8 +106,15 @@ const checkAndRequestNotifications = () => async (
   )
   const notificationStatus = notificationPermision.status
   const isIos = Platform.OS === 'ios'
+  const statusAppRefresh = isIos
+    ? await AbcCoreJsUi.backgroundAppRefreshStatus().catch(error => console.log(error))
+    : undefined
 
-  if (notificationStatus === RESULTS.BLOCKED || notificationStatus === RESULTS.DENIED) {
+  if (
+    notificationStatus === RESULTS.BLOCKED ||
+    notificationStatus === RESULTS.DENIED ||
+    statusAppRefresh === RESULTS.DENIED
+  ) {
     Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}
@@ -120,15 +129,14 @@ const checkAndRequestNotifications = () => async (
         }}
       />
     )).then(result => {
-      if (result === 'continue') {
-        if (notificationStatus === RESULTS.DENIED) {
-          requestNotifications(
-            isIos ? ['alert', 'badge', 'sound'] : undefined
-          ).catch(error => console.log(error))
-        }
-        if (notificationStatus === RESULTS.BLOCKED) {
-          openSettings().catch(error => console.log(error))
-        }
+      if (result !== 'continue') return
+      if (notificationStatus === RESULTS.DENIED) {
+        requestNotifications(
+          isIos ? ['alert', 'badge', 'sound'] : undefined
+        ).catch(error => console.log(error))
+      }
+      if (notificationStatus === RESULTS.BLOCKED || statusAppRefresh === RESULTS.DENIED) {
+        openSettings().catch(error => console.log(error))
       }
     })
   }

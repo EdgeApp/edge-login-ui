@@ -82,4 +82,17 @@ RCT_REMAP_METHOD(getSupportedBiometryType, getSupportedBiometryType:(RCTPromiseR
     resolve(value);
 }
 
+RCT_REMAP_METHOD(backgroundAppRefreshStatus, backgroundAppRefreshStatus:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+    if ([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusAvailable) {
+      resolve(@"available");
+    }else if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusDenied)
+    {
+      resolve(@"denied");
+    }else if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusRestricted)
+    {
+      resolve(@"restricted");
+    }
+}
 @end
