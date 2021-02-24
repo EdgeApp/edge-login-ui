@@ -18,6 +18,9 @@
   "lint-staged": {
     "*.{js,jsx}": "eslint"
   },
+  "resolutions": {
+    "scrypt.js": "0.3.0"
+  },
   "devDependencies": {
     "babel-eslint": ">=10.0.0",
     "css-module-flow": "^1.0.0",
@@ -35,8 +38,5 @@
     "lerna": "^3.16.4",
     "lint-staged": ">=9.0.0",
     "prettier": ">=1.0.0"
-  },
-  "resolutions": {
-    "scrypt.js": "0.3.0"
   }
 }
