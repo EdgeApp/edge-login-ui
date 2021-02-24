@@ -30,17 +30,17 @@ class TextRowComponent extends React.Component<Props, State> {
     this.numberOfLines = this.props.numberOfLines || 1
   }
 
-  _onPressButton = () => {
+  handlePressButton = () => {
     this.props.onPress(this.props.data)
   }
 
-  _onShowUnderlay = () => {
+  handleShowUnderlay = () => {
     this.setState({
       pressed: true
     })
   }
 
-  _onHideUnderlay = () => {
+  handleHideUnderlay = () => {
     this.setState({
       pressed: false
     })
@@ -51,9 +51,9 @@ class TextRowComponent extends React.Component<Props, State> {
     return (
       <TouchableHighlight
         style={container}
-        onPress={this._onPressButton}
-        onShowUnderlay={this._onShowUnderlay}
-        onHideUnderlay={this._onHideUnderlay}
+        onPress={this.handlePressButton}
+        onShowUnderlay={this.handleShowUnderlay}
+        onHideUnderlay={this.handleHideUnderlay}
         underlayColor={underlayColor}
       >
         <Text

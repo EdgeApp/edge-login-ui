@@ -16,7 +16,7 @@ type Props = {
   style: Object,
   content: any,
   enableTouch?: boolean,
-  callback?: Function | null
+  onPress?: () => void
 }
 
 export const BackgroundImage = ({
@@ -24,7 +24,7 @@ export const BackgroundImage = ({
   style,
   content,
   enableTouch = true,
-  callback
+  onPress = () => Keyboard.dismiss()
 }: Props) => {
   const src = branding.backgroundImage
   const theme = useTheme()
@@ -51,16 +51,6 @@ export const BackgroundImage = ({
   }
 
   const componentBackground = src ? imageBackground() : gradientBackground()
-
-  const onPress = () => {
-    if (callback) {
-      return () => {
-        callback()
-        Keyboard.dismiss()
-      }
-    }
-    return Keyboard.dismiss()
-  }
 
   if (enableTouch) {
     return (

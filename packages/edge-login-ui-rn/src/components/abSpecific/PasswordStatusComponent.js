@@ -40,7 +40,7 @@ class PasswordStatusComponent extends React.Component<Props> {
     )
   }
 
-  onChange = () => {
+  handleChange = () => {
     // do nothing
   }
 
@@ -52,7 +52,7 @@ class PasswordStatusComponent extends React.Component<Props> {
           label={Item.title}
           value={Item.value}
           isSelected={false}
-          onChange={this.onChange}
+          onChange={this.handleChange}
           checkedImage={PASSWORD_REQ_CHECKED}
           uncheckedImage={PASSWORD_REQ_UNCHECKED}
           disabled

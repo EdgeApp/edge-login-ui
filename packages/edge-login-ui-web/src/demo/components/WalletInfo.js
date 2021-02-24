@@ -72,14 +72,14 @@ export class WalletInfo extends Component<Props, State> {
   /**
    * Spend address box was edited.
    */
-  onSpendAddressChanged = (event: Object) => {
+  handleSpendAddressChanged = (event: Object) => {
     this.setState({ spendAddress: event.currentTarget.value })
   }
 
   /**
    * Spend amount box was edited.
    */
-  onSpendAmountChanged = async (event: Object) => {
+  handleSpendAmountChanged = async (event: Object) => {
     const spendAmount = event.currentTarget.value
     const spendFiat = await this.props.account.exchangeCache.convertCurrency(
       'ETH',
@@ -92,7 +92,7 @@ export class WalletInfo extends Component<Props, State> {
   /**
    * Spend button was clicked.
    */
-  onSpend = () => {
+  handleSpend = () => {
     this.setState({ sendingText: 'Sending...' })
     const { wallet } = this.props
     return wallet
@@ -136,7 +136,7 @@ export class WalletInfo extends Component<Props, State> {
             id="amount"
             type="text"
             value={this.state.spendAmount}
-            onChange={this.onSpendAmountChanged}
+            onChange={this.handleSpendAmountChanged}
           />
           &nbsp; ${this.state.spendFiat.toFixed(2)}
         </p>
@@ -146,10 +146,10 @@ export class WalletInfo extends Component<Props, State> {
             id="address"
             type="text"
             value={this.state.spendAddress}
-            onChange={this.onSpendAddressChanged}
+            onChange={this.handleSpendAddressChanged}
           />
         </p>
-        <button onClick={this.onSpend}>
+        <button onClick={this.handleSpend}>
           {this.state.sendingText || 'Send'}
         </button>
       </div>

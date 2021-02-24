@@ -88,7 +88,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
           </Text>
           <View style={style.shim} />
           <Button
-            onPress={this.onNextPress}
+            onPress={this.handleNextPress}
             downStyle={style.nextButton.downStyle}
             downTextStyle={style.nextButton.downTextStyle}
             upStyle={style.nextButton.upStyle}
@@ -132,7 +132,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  onNextPress = () => {
+  handleNextPress = () => {
     global.firebase &&
       global.firebase.analytics().logEvent(`Signup_Terms_Agree`)
     this.props.agreeToCondition()

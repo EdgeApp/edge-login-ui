@@ -48,7 +48,11 @@ export class StaticModal extends React.Component<Props> {
         transparent
         visible
       >
-        <TouchableOpacity style={styles.touchOut} onPress={this.props.cancel}>
+        <TouchableOpacity
+          style={styles.touchOut}
+          // eslint-disable-next-line react/jsx-handler-names
+          onPress={this.props.cancel}
+        >
           <View style={styles.modalBox}>
             <LinearGradient
               style={styles.header}

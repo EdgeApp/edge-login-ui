@@ -151,14 +151,14 @@ class AccountInfoComponent extends React.Component<Props, State> {
         <TextAndIconButton
           style={style.textIconButton}
           icon={icon}
-          onPress={this.onPress}
+          onPress={this.handlePress}
           title={msg}
         />
       </View>
     )
   }
 
-  onPress = () => {
+  handlePress = () => {
     this.setState({
       collapsed: !this.state.collapsed
     })

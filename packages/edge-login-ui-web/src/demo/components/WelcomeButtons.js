@@ -8,7 +8,7 @@ type Props = {
 }
 
 export class WelcomeButtons extends Component<Props> {
-  openLoginWindow = () => {
+  handleLoginWindow = () => {
     if (this.props.context) {
       this.props.context.showLoginWindow()
     }
@@ -17,7 +17,7 @@ export class WelcomeButtons extends Component<Props> {
   render() {
     return (
       <p id="buttons">
-        <button disabled={!this.props.context} onClick={this.openLoginWindow}>
+        <button disabled={!this.props.context} onClick={this.handleLoginWindow}>
           Login With Edge
         </button>
       </p>

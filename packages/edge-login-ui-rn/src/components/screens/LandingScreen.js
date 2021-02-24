@@ -21,8 +21,8 @@ type OwnProps = {
   landingScreenText?: string
 }
 type DispatchProps = {
-  startCreate(): void,
-  startPassword(): void
+  handleCreate(): void,
+  handlePassword(): void
 }
 type Props = OwnProps & DispatchProps
 
@@ -54,7 +54,7 @@ class LandingScreenComponent extends React.Component<Props> {
           </View>
           <View style={LandingScreenStyle.featureBoxButtons}>
             <Button
-              onPress={this.props.startCreate}
+              onPress={this.props.handleCreate}
               label={s.strings.landing_create_account_button}
               downStyle={LandingScreenStyle.createButton.downStyle}
               downTextStyle={LandingScreenStyle.createButton.downTextStyle}
@@ -64,7 +64,7 @@ class LandingScreenComponent extends React.Component<Props> {
             <View style={LandingScreenStyle.shim} />
             <Button
               testID="alreadyHaveAccountButton"
-              onPress={this.props.startPassword}
+              onPress={this.props.handlePassword}
               label={s.strings.landing_already_have_account}
               downStyle={LandingScreenStyle.loginButton.downStyle}
               downTextStyle={LandingScreenStyle.loginButton.downTextStyle}
@@ -155,12 +155,12 @@ const LandingScreenStyle = {
 export const LandingScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch): DispatchProps => ({
-    startCreate() {
+    handleCreate() {
       global.firebase &&
         global.firebase.analytics().logEvent('Signup_Create_Account')
       dispatch({ type: 'START_CREATE_ACCOUNT' })
     },
-    startPassword() {
+    handlePassword() {
       dispatch({ type: 'START_PASSWORD_LOGIN' })
     }
   })

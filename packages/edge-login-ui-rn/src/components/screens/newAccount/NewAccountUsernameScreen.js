@@ -67,11 +67,11 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
             </View>
             <UsernameConnector
               style={NewAccountUsernameScreenStyle.inputBox}
-              onFinish={this.onNextPress}
+              onFinish={this.handleNext}
             />
             <View style={NewAccountUsernameScreenStyle.shim} />
             <Button
-              onPress={this.onNextPress.bind(this)}
+              onPress={this.handleNext}
               downStyle={NewAccountUsernameScreenStyle.nextButton.downStyle}
               downTextStyle={
                 NewAccountUsernameScreenStyle.nextButton.downTextStyle
@@ -88,7 +88,7 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  onNextPress = () => {
+  handleNext = () => {
     if (this.props.usernameErrorMessage || !this.props.username) {
       return
     }

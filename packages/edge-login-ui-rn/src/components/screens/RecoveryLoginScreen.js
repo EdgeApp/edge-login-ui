@@ -59,7 +59,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
     return null
   }
 
-  onSubmit = () => {
+  handleSubmit = () => {
     const { login, recoveryKey, saveOtpError, username } = this.props
 
     const errorOne = this.state.answer1.length < 1
@@ -89,13 +89,13 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  setAnswer1 = (arg: string) => {
+  handleAnswer1 = (arg: string) => {
     this.setState({
       answer1: arg
     })
   }
 
-  setAnswer2 = (arg: string) => {
+  handleAnswer2 = (arg: string) => {
     this.setState({
       answer2: arg
     })
@@ -133,7 +133,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
                 style={form1Style}
                 autoCorrect={false}
                 autoCapitalize="none"
-                onChangeText={this.setAnswer1}
+                onChangeText={this.handleAnswer1}
                 value={this.state.answer1}
                 label={s.strings.your_answer_label}
                 error={s.strings.answer_case_sensitive}
@@ -148,7 +148,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
                 style={form2Style}
                 autoCorrect={false}
                 autoCapitalize="none"
-                onChangeText={this.setAnswer2}
+                onChangeText={this.handleAnswer2}
                 value={this.state.answer2}
                 label={s.strings.your_answer_label}
                 error={s.strings.answer_case_sensitive}
@@ -157,7 +157,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
             <View style={styles.buttonContainer}>
               {this.renderError(styles)}
               <Button
-                onPress={this.onSubmit}
+                onPress={this.handleSubmit}
                 downStyle={styles.submitButton.downStyle}
                 downTextStyle={styles.submitButton.downTextStyle}
                 upStyle={styles.submitButton.upStyle}

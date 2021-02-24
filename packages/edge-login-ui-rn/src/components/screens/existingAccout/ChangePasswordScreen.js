@@ -57,7 +57,7 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
     }
   }
 
-  onSetNextFocus = () => {
+  handleFocusSwitch = () => {
     this.setState({
       focusFirst: false,
       focusSecond: true
@@ -107,7 +107,7 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}
           label={s.strings.new_password}
-          onFinish={this.onSetNextFocus}
+          onFinish={this.handleFocusSwitch}
         />
         <View style={{ height: scale(20) }} />
         <PasswordConfirmConnector

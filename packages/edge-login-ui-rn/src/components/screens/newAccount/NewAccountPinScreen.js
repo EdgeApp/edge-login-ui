@@ -79,7 +79,7 @@ class NewAccountPinScreenComponent extends React.Component<Props, State> {
             </View>
             <View style={SetAccountPinScreenStyle.row3}>
               <Button
-                onPress={this.onNextPress}
+                onPress={this.handleNext}
                 downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
                 downTextStyle={
                   SetAccountPinScreenStyle.nextButton.downTextStyle
@@ -97,7 +97,7 @@ class NewAccountPinScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  onNextPress = () => {
+  handleNext = () => {
     this.setState({
       isProcessing: true,
       createErrorMessage: null
