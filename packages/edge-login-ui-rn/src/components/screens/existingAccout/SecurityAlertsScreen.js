@@ -2,14 +2,9 @@
 
 import { type EdgeAccount, type EdgePendingVoucher } from 'edge-core-js'
 import * as React from 'react'
-import {
-  ActivityIndicator,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native'
+import { ActivityIndicator, ScrollView, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
+import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import { completeResecure } from '../../../actions/LoginCompleteActions.js'
@@ -23,6 +18,8 @@ import {
   type ThemeProps,
   withTheme
 } from '../../services/ThemeContext.js'
+import { IconHeaderRow } from '../../themed/IconHeaderRow.js'
+import { LinkRow } from '../../themed/LinkRow.js'
 import { PrimaryButton } from '../../themed/ThemedButtons.js'
 import { ThemedScene } from '../../themed/ThemedScene.js'
 import { MessageText, Warning } from '../../themed/ThemedText.js'
@@ -84,36 +81,35 @@ export class SecurityAlertsScreenComponent extends React.Component<
   }
 
   render() {
-    const { theme } = this.props
     const { otpResetDate, pendingVouchers, showSkip, spinDeny } = this.state
-    const styles = getStyles(theme)
 
     const count = pendingVouchers.length + (otpResetDate != null ? 1 : 0)
 
     return (
       <ThemedScene>
-        <ScrollView style={styles.container}>
-          <View style={styles.iconCircle}>
-            <FontAwesome
-              name="exclamation-triangle"
-              size={theme.rem(1)}
-              color={theme.primaryText}
-            />
-          </View>
-          <MessageText>
-            {count > 1
-              ? s.strings.alert_screen_message_many
-              : s.strings.alert_screen_message}
-          </MessageText>
+        <ScrollView style={{ flex: 1 }}>
+          <IconHeaderRow
+            renderIcon={theme => (
+              <FontAwesome name="exclamation-triangle" size={theme.rem(2.5)} />
+            )}
+          >
+            <MessageText>
+              {count > 1
+                ? s.strings.alert_screen_message_many
+                : s.strings.alert_screen_message}
+            </MessageText>
+          </IconHeaderRow>
           <MessageText>
             <Warning>{s.strings.alert_screen_warning}</Warning>
           </MessageText>
           {this.renderVouchers()}
           {this.renderReset()}
           {showSkip ? (
-            <TouchableOpacity onPress={this.handleSkip}>
-              <Text style={styles.cardLink}>{s.strings.skip_button}</Text>
-            </TouchableOpacity>
+            <LinkRow
+              label={s.strings.skip_button}
+              onPress={this.handleSkip}
+              renderIcon={() => null}
+            />
           ) : null}
         </ScrollView>
         {spinDeny ? (
@@ -149,11 +145,13 @@ export class SecurityAlertsScreenComponent extends React.Component<
             style={styles.cardSpinner}
           />
         ) : (
-          <TouchableOpacity onPress={this.handleApproveReset}>
-            <Text style={styles.cardLink}>
-              {s.strings.alert_screen_approve}
-            </Text>
-          </TouchableOpacity>
+          <LinkRow
+            label={s.strings.alert_screen_approve}
+            onPress={this.handleApproveReset}
+            renderIcon={theme => (
+              <AntDesignIcon name="check" size={theme.rem(1)} />
+            )}
+          />
         )}
       </View>
     )
@@ -183,13 +181,13 @@ export class SecurityAlertsScreenComponent extends React.Component<
             style={styles.cardSpinner}
           />
         ) : (
-          <TouchableOpacity
+          <LinkRow
+            label={s.strings.alert_screen_approve}
             onPress={() => this.handleApproveVoucher(voucher.voucherId)}
-          >
-            <Text style={styles.cardLink}>
-              {s.strings.alert_screen_approve}
-            </Text>
-          </TouchableOpacity>
+            renderIcon={theme => (
+              <AntDesignIcon name="check" size={theme.rem(1)} />
+            )}
+          />
         )}
       </View>
     ))
@@ -270,48 +268,17 @@ function nopVoucher(voucherId: string): Promise<void> {
   return Promise.resolve()
 }
 
-const iconRem = 2
-
 const getStyles = cacheStyles((theme: Theme) => ({
-  container: {
-    flex: 1
-  },
-  iconCircle: {
-    alignSelf: 'center',
-    margin: theme.rem(0.5),
-    height: theme.rem(iconRem),
-    width: theme.rem(iconRem),
-
-    // Visuals:
-    backgroundColor: theme.securityAlertModalHeaderCircle,
-    borderRadius: theme.rem(iconRem / 2),
-
-    // Children:
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden'
-  },
   tile: {
     backgroundColor: theme.tileBackground,
     borderRadius: theme.rem(0.5),
     margin: theme.rem(0.5),
     padding: theme.rem(0.5)
   },
-  cardLink: {
-    color: theme.linkText,
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1),
-    lineHeight: theme.rem(1.5),
-    margin: theme.rem(0.5),
-    textAlign: 'right'
-  },
   cardSpinner: {
     alignSelf: 'flex-end',
     height: theme.rem(1.5),
     margin: theme.rem(0.5)
-  },
-  warningColor: {
-    color: theme.dangerText
   }
 }))
 
