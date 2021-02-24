@@ -147,7 +147,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
             }
           }}
         />
-        <TouchableWithoutFeedback onPress={this.hideDrop.bind(this)}>
+        <TouchableWithoutFeedback onPress={this.handleHideDrop}>
           <View style={PinLoginScreenStyle.featureBox}>
             <LogoImageHeader branding={this.props.branding} />
             <View style={PinLoginScreenStyle.featureBoxBody}>
@@ -173,7 +173,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
       return (
         <View style={style.innerView}>
           <Button
-            onPress={this.showDrop.bind(this)}
+            onPress={this.handleShowDrop}
             label={this.props.username}
             downStyle={style.usernameButton.downStyle}
             downTextStyle={style.usernameButton.downTextStyle}
@@ -207,7 +207,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
         <DropDownList
           style={style.listView}
           data={this.getDropdownItems()}
-          renderRow={this.renderItems.bind(this)}
+          renderRow={this.renderItems}
         />
       </View>
     )
@@ -224,18 +224,18 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
       .map(user => user.username)
   }
 
-  renderItems(item: Object) {
+  renderItems = (item: Object) => {
     return (
       <UserListItem
         data={item.item}
         style={PinLoginScreenStyle.listItem}
-        onClick={this.selectUser.bind(this)}
+        onClick={this.handleSelectUser}
         onDelete={this.handleDelete}
       />
     )
   }
 
-  selectUser(username: string) {
+  handleSelectUser = (username: string) => {
     this.props.loginWithTouch(username)
     this.props.changeUser(username)
     this.setState({
@@ -243,13 +243,13 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  showDrop() {
+  handleShowDrop = () => {
     this.setState({
       focusOn: 'List'
     })
   }
 
-  hideDrop() {
+  handleHideDrop = () => {
     this.setState({
       focusOn: 'pin'
     })

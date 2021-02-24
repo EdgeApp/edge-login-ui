@@ -45,6 +45,7 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps: Props) {
     if (this.props !== prevProps) {
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         isProcessing: false
       })

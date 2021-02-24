@@ -10,7 +10,6 @@ type Props = {
   uncheckedImage: string,
   value?: boolean,
   disabled?: boolean,
-  isSelected?: boolean,
   onChange(boolean): void
 }
 
@@ -53,7 +52,7 @@ class Checkbox extends React.Component<Props, State> {
     const style = this.props.style
     return (
       <TouchableWithoutFeedback
-        onPress={this.onPress.bind(this)}
+        onPress={this.handlePress}
         disabled={this.props.disabled}
       >
         <View style={style.container}>
@@ -66,7 +65,7 @@ class Checkbox extends React.Component<Props, State> {
     )
   }
 
-  onPress() {
+  handlePress = () => {
     const onOff = this.state.onOff
     let newOnOff = false
     if (!onOff) {

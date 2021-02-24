@@ -19,6 +19,7 @@ type Props = {
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters',
   autoCorrect: boolean,
   autoFocus: boolean,
+  // eslint-disable-next-line react/no-unused-prop-types
   forceFocus: boolean,
   returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
   onFocus(): void,

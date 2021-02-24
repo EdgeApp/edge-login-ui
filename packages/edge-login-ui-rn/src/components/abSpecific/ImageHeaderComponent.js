@@ -6,7 +6,6 @@ import { Image, View } from 'react-native'
 import { scale } from '../../util/scaling.js'
 
 type Props = {
-  small?: boolean,
   src: any // require(image)
 }
 

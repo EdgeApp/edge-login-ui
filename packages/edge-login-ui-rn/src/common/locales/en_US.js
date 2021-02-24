@@ -18,7 +18,6 @@ const strings = {
   save: 'Save',
   disable: 'Disable',
   disable_password_recovery: 'Disable Password Recovery',
-  show_password: 'Show Password',
   password_changed: 'Password Changed',
   pwd_change_modal:
     'DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!',

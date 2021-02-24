@@ -9,7 +9,6 @@ import { fixSides, mapSides, sidesToPadding } from '../../util/sides.js'
 import { type Theme, useTheme } from '../services/ThemeContext.js'
 
 type Props = {
-  children?: React.Node,
   onPress?: () => void,
 
   // If this is set, the component will insert a text node before the other children:

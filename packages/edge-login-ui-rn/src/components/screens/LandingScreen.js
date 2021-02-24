@@ -17,7 +17,6 @@ import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
   branding: Branding,
-  parentButton?: Object,
   landingScreenText?: string
 }
 type DispatchProps = {
