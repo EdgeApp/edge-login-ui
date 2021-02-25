@@ -7,7 +7,7 @@ import { initializeLogin } from '../../actions/LoginInitActions.js'
 import { updateFontStyles } from '../../constants/Fonts.js'
 import { type OnLogin } from '../../types/ReduxTypes.js'
 import { Router } from '../navigation/Router.js'
-import { Airship } from '../services/AirshipInstance.js'
+import { Airship, showError } from '../services/AirshipInstance.js'
 import { ReduxStore } from '../services/ReduxStore.js'
 import { changeFont } from '../services/ThemeContext.js'
 
@@ -61,14 +61,12 @@ export class LoginScreen extends React.Component<Props> {
     this.cleanups = [
       this.props.context.on('login', account => {
         Airship.clear()
-        this.props.onLogin(null, account)
+        this.props.onLogin(account)
       }),
       this.props.context.on('loginStart', ({ username }) => {
         // Show spinner for Edge login starting
       }),
-      this.props.context.on('loginError', ({ error }) => {
-        this.props.onLogin(error)
-      })
+      this.props.context.on('loginError', ({ error }) => showError(error))
     ]
   }
 

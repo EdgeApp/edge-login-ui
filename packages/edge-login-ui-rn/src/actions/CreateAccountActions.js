@@ -149,9 +149,9 @@ export function createUser(data: Object) {
         abcAccount.watch('loggedIn', loggedIn => {
           if (!loggedIn) dispatch({ type: 'RESET_APP' })
         })
-        const touchDisabled = await isTouchDisabled(null, abcAccount.username)
+        const touchDisabled = await isTouchDisabled(abcAccount.username)
         if (!touchDisabled) {
-          await enableTouchId(null, abcAccount).catch(e => {
+          await enableTouchId(abcAccount).catch(e => {
             console.log(e) // Fail quietly
           })
         }
@@ -182,6 +182,7 @@ export const agreeToConditions = () => (
 ) => {
   const { account } = getState()
   const { onLogin } = imports
+  if (account == null) return
 
-  if (onLogin != null) onLogin(null, account)
+  if (onLogin != null) onLogin(account)
 }
