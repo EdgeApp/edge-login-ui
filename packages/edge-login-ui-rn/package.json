@@ -29,7 +29,7 @@
   "dependencies": {
     "cleaners": "^0.3.1",
     "qrcode-generator": "^1.4.4",
-    "react-native-airship": "^0.2.2",
+    "react-native-airship": "^0.2.3",
     "react-native-extra-dimensions-android": "^1.2.5",
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
     "react-native-linear-gradient": "^2.0.0",

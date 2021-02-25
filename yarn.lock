@@ -5272,11 +5272,6 @@ hmac-drbg@^1.0.0, hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^2.3.1:
-  version "2.5.5"
-  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
-  integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
-
 hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
@@ -8719,12 +8714,11 @@ react-modal@^3.9.1:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
-react-native-airship@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-airship/-/react-native-airship-0.2.2.tgz#fed7301f31894f969e099d8be136d513c933e369"
-  integrity sha512-XUkNTF5lkJqQW9is4lXpblg9oBCoOY5go7ENsDmwZNONdA1Kn4+g6cXVHCv1orr6RpD7MNoag2zvxyPf4sfJLw==
+react-native-airship@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-airship/-/react-native-airship-0.2.3.tgz#d027f4eeef7293d1cb171c751ee20997f36acbe6"
+  integrity sha512-ysJHiZtSYialYli5Jf1X5n5myT7W5hpdaU/zit0XFW7XBgTXcXp/rKEt6oDQD5UCG5lXxYn5kxt8HxoPwsgQoA==
   dependencies:
-    react-native-safe-area-view "^0.14.9"
     yavent "^0.1.1"
 
 react-native-animatable@^1.3.1:
@@ -8785,13 +8779,6 @@ react-native-patina@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/react-native-patina/-/react-native-patina-0.1.3.tgz#1704aa63f08dcd09534b2b01a29ee7e1fb046a49"
   integrity sha512-R1vWHseI9pNLGYxQCLbqCJmjjOVJoChoLz8uH2o19SYFdb+VnhfBGZSlDks3RKFHgUkFcvQg/biMCr+mNfBoQA==
-
-react-native-safe-area-view@^0.14.9:
-  version "0.14.9"
-  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.14.9.tgz#90ee8383037010d9a5055a97cf97e4c1da1f0c3d"
-  integrity sha512-WII/ulhpVyL/qbYb7vydq7dJAfZRBcEhg4/UWt6F6nAKpLa3gAceMOxBxI914ppwSP/TdUsandFy6lkJQE0z4A==
-  dependencies:
-    hoist-non-react-statics "^2.3.1"
 
 react-native-vector-icons@^6.1.0:
   version "6.1.0"
