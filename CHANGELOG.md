@@ -1,5 +1,22 @@
 # edge-login-ui
 
+## 0.7.0 (2021-02-24)
+
+- Breaking changes:
+  - rn: Add a native react-native-localize dependency.
+  - rn: Remove the unused `folder` parameter from various touch-related functions:
+    - `isTouchEnabled`
+    - `isTouchDisabled`
+    - `enableTouchId`
+    - `disableTouchId`
+  - rn: Remove the `error` parameter from the `onLogin` callback.
+  - rn: Remove the `ChooseTestAppScreen` component.
+  - rn: Upgrade other native dependencies.
+- Other changes:
+  - rn: Add German translation.
+  - rn: Flip the background gradient direction.
+  - rn: Improve thex security alerts screen appearance
+
 ## 0.6.29 (2021-02-19)
 
 - rn: Add a new 2fa repair screen component.
