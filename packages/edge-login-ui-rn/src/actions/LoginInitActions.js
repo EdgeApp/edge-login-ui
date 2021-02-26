@@ -37,10 +37,15 @@ export const initializeLogin = () => async (
   getState: GetState,
   imports: Imports
 ) => {
+  const { customPermissionsFunction } = imports
   const touchPromise = dispatch(getTouchMode())
   const usersPromise = dispatch(getPreviousUsers())
   dispatch(checkSecurityMessages()).catch(error => console.log(error))
-  dispatch(checkAndRequestNotifications()).catch(error => console.log(error))
+  customPermissionsFunction
+    ? customPermissionsFunction()
+    : dispatch(checkAndRequestNotifications()).catch(error =>
+        console.log(error)
+      )
 
   await Promise.all([touchPromise, usersPromise])
   const state = getState()
