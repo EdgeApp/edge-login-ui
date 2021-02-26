@@ -17,7 +17,7 @@ import { DividerRow } from '../../themed/DividerRow.js'
 import { IconHeaderRow } from '../../themed/IconHeaderRow.js'
 import { LinkRow } from '../../themed/LinkRow.js'
 import { ThemedScene } from '../../themed/ThemedScene.js'
-import { MessageText } from '../../themed/ThemedText.js'
+import { MessageText, Warning } from '../../themed/ThemedText.js'
 
 type OwnProps = {}
 type StateProps = {
@@ -37,11 +37,10 @@ class OtpRepairScreenComponent extends React.Component<Props> {
 
     const handleSubmit = async (otpKey: string): Promise<boolean | string> => {
       try {
-        const typeHack: any = account
-        if (typeHack.repairOtp == null) {
+        if (account.repairOtp == null) {
           throw new Error('Wrong edge-core-js version')
         }
-        await typeHack.repairOtp(otpKey)
+        await account.repairOtp(otpKey)
         onBack()
         return true
       } catch (error) {
@@ -81,8 +80,12 @@ class OtpRepairScreenComponent extends React.Component<Props> {
   }
 
   render() {
-    const { otpError } = this.props
+    const { otpError, otpResetDate } = this.props
     const isIp = otpError.reason === 'ip'
+
+    // Find the automatic login date:
+    let date = otpResetDate
+    if (otpError.voucherActivates != null) date = otpError.voucherActivates
 
     return (
       <ThemedScene
@@ -93,48 +96,52 @@ class OtpRepairScreenComponent extends React.Component<Props> {
       >
         <IconHeaderRow
           renderIcon={theme => (
-            <FontAwesome name="exclamation-triangle" size={theme.rem(2.5)} />
+            <Warning>
+              <FontAwesome name="exclamation-triangle" size={theme.rem(2.5)} />
+            </Warning>
           )}
         >
-          <MessageText>{s.strings.otp_repair_header}</MessageText>
+          <MessageText>
+            <Warning>
+              {isIp
+                ? s.strings.otp_repair_header_ip
+                : s.strings.otp_repair_header_2fa}
+            </Warning>
+          </MessageText>
         </IconHeaderRow>
-        <MessageText>{s.strings.otp_repair_options}</MessageText>
+
+        <DividerRow label={s.strings.to_fix} />
         <MessageText>{s.strings.otp_screen_approve}</MessageText>
         <DividerRow />
-        <LinkRow
-          label={s.strings.qr_modal_title}
-          onPress={this.handleQrModal}
-        />
+        <LinkRow label={s.strings.otp_screen_qr} onPress={this.handleQrModal} />
         {isIp ? null : (
-          <LinkRow
-            label={s.strings.otp_backup_code_modal_title}
-            onPress={this.handleBackupModal}
-          />
+          <>
+            <DividerRow />
+            <LinkRow
+              label={s.strings.otp_backup_code_modal_title}
+              onPress={this.handleBackupModal}
+            />
+          </>
         )}
-        {this.renderResetArea()}
+        {date == null ? null : (
+          <>
+            <DividerRow />
+            <MessageText>
+              {sprintf(s.strings.otp_screen_wait, date.toLocaleString())}
+            </MessageText>
+          </>
+        )}
+        {otpError.resetToken == null || date != null ? null : (
+          <>
+            <DividerRow />
+            <LinkRow
+              label={s.strings.disable_otp_button_two}
+              onPress={this.handleResetModal}
+            />
+          </>
+        )}
       </ThemedScene>
     )
-  }
-
-  renderResetArea(): React.Node {
-    const { otpError, otpResetDate } = this.props
-
-    // If we have an automatic login date, show that:
-    let date = otpResetDate
-    if (otpError.voucherActivates != null) date = otpError.voucherActivates
-    if (date != null) {
-      return (
-        <>
-          <DividerRow />
-          <MessageText>
-            {sprintf(s.strings.otp_screen_wait, date.toLocaleString())}
-          </MessageText>
-        </>
-      )
-    }
-
-    // Otherwise, there is nothing to show here:
-    return null
   }
 }
 
