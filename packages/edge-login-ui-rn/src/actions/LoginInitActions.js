@@ -1,5 +1,6 @@
 // @flow
 
+import { makeReactNativeDisklet } from 'disklet'
 import { type EdgeLoginMessages } from 'edge-core-js'
 import * as React from 'react'
 import { NativeModules, Platform } from 'react-native'
@@ -24,6 +25,9 @@ import { launchPasswordRecovery } from './LoginAction.js'
 import { getPreviousUsers } from './PreviousUsersActions.js'
 
 const { AbcCoreJsUi } = NativeModules
+
+const disklet = makeReactNativeDisklet()
+const permissionsUserFile = 'notificationsPermisions.json'
 
 /**
  * Fires off all the things we need to do to get the login scene up & running.
@@ -107,13 +111,22 @@ const checkAndRequestNotifications = () => async (
   const notificationStatus = notificationPermision.status
   const isIos = Platform.OS === 'ios'
   const statusAppRefresh = isIos
-    ? await AbcCoreJsUi.backgroundAppRefreshStatus().catch(error => console.log(error))
+    ? await AbcCoreJsUi.backgroundAppRefreshStatus().catch(error =>
+        console.log(error)
+      )
     : undefined
+  const userPermisionStatus = await disklet
+    .getText(permissionsUserFile)
+    .catch(error => console.log(error))
+  const isNotificationBlocked = userPermisionStatus
+    ? JSON.parse(userPermisionStatus).isNotificationBlocked
+    : false
 
   if (
-    notificationStatus === RESULTS.BLOCKED ||
-    notificationStatus === RESULTS.DENIED ||
-    statusAppRefresh === RESULTS.DENIED
+    (notificationStatus === RESULTS.BLOCKED ||
+      notificationStatus === RESULTS.DENIED ||
+      statusAppRefresh === RESULTS.DENIED) &&
+    !isNotificationBlocked
   ) {
     Airship.show(bridge => (
       <ButtonsModal
@@ -129,14 +142,24 @@ const checkAndRequestNotifications = () => async (
         }}
       />
     )).then(result => {
-      if (result !== 'continue') return
-      if (notificationStatus === RESULTS.DENIED) {
-        requestNotifications(
-          isIos ? ['alert', 'badge', 'sound'] : undefined
-        ).catch(error => console.log(error))
+      if (result === 'cancel') {
+        return disklet.setText(
+          permissionsUserFile,
+          JSON.stringify({ isNotificationBlocked: true })
+        )
       }
-      if (notificationStatus === RESULTS.BLOCKED || statusAppRefresh === RESULTS.DENIED) {
-        openSettings().catch(error => console.log(error))
+      if (result === 'continue') {
+        if (notificationStatus === RESULTS.DENIED) {
+          requestNotifications(
+            isIos ? ['alert', 'badge', 'sound'] : undefined
+          ).catch(error => console.log(error))
+        }
+        if (
+          notificationStatus === RESULTS.BLOCKED ||
+          statusAppRefresh === RESULTS.DENIED
+        ) {
+          openSettings().catch(error => console.log(error))
+        }
       }
     })
   }
