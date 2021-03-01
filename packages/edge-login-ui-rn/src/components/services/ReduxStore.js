@@ -13,6 +13,7 @@ import {
   type GetState,
   type Imports
 } from '../../types/ReduxTypes.js'
+import { showError } from './AirshipInstance.js'
 
 type Props = {
   children?: React.Node,
@@ -42,8 +43,11 @@ export class ReduxStore extends React.Component<Props> {
       undefined,
       composeEnhancers(applyMiddleware(thunk.withExtraArgument(imports)))
     )
-    // $FlowFixMe Flow doesn't know about thunks at this point.
-    this.store.dispatch(this.props.initialAction)
+
+    new Promise(resolve => {
+      // $FlowFixMe Flow doesn't know about thunks at this point.
+      resolve(this.store.dispatch(this.props.initialAction))
+    }).catch(showError)
   }
 
   componentDidUpdate(prev: Props) {
