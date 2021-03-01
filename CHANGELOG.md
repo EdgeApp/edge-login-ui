@@ -1,5 +1,12 @@
 # edge-login-ui
 
+## 0.7.1 (2021-03-03)
+
+- rn: Catch & display errors while launching screens.
+- rn: Make the OTP error & OTP repair screens less confusing based on user feedback.
+- rn: Upgrade edge-core-js & use its latest type definitions internally.
+- all: Upgrade linting tools.
+
 ## 0.7.0 (2021-02-24)
 
 - Breaking changes:
