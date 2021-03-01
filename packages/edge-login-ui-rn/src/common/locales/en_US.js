@@ -126,6 +126,8 @@ const strings = {
   read_understod_2: 'Terms of Use',
   last_step_review: 'Last step! Let’s finish with a quick review',
   confirm_finish: 'Confirm & Finish',
+  confirm_email: 'Confirm & Email',
+  confirm_share: 'Confirm & Share',
   welcome_one:
     "Let's get started by creating your account login. You’ll choose a username and password, which we’ll use to encrypt your account. Not even %s has access to your information, so you have full and complete control over your digital assets.",
   start_username: 'Let’s get started with choosing a username',

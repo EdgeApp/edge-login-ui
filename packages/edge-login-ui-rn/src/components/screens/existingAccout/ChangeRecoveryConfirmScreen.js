@@ -14,7 +14,8 @@ type Props = {
   answer1: string,
   question2: string,
   answer2: string,
-  onConfirm(): void,
+  onEmail(): void,
+  onShare(): void,
   onCancel(): void
 }
 
@@ -38,12 +39,21 @@ export class ChangeRecoveryConfirmScreen extends React.Component<Props> {
           <View style={style.shim} />
           <View style={style.buttonContainer}>
             <Button
-              onPress={this.props.onConfirm}
+              onPress={this.props.onEmail}
               downStyle={style.submitButton.downStyle}
               downTextStyle={style.submitButton.downTextStyle}
               upStyle={style.submitButton.upStyle}
               upTextStyle={style.submitButton.upTextStyle}
-              label={s.strings.confirm_finish}
+              label={s.strings.confirm_email}
+            />
+            <View style={style.shim} />
+            <Button
+              onPress={this.props.onShare}
+              downStyle={style.submitButton.downStyle}
+              downTextStyle={style.submitButton.downTextStyle}
+              upStyle={style.submitButton.upStyle}
+              upTextStyle={style.submitButton.upTextStyle}
+              label={s.strings.confirm_share}
             />
             <View style={style.shim} />
             <Button
