@@ -11,8 +11,7 @@ import {
   RESULTS
 } from 'react-native-permissions'
 
-import s from '../common/locales/strings.js'
-import { ButtonsModal } from '../components/modals/ButtonsModal.js'
+import { PermissionsAlertModal } from '../components/modals/PermissionsAlertModal.js'
 import { SecurityAlertsModal } from '../components/modals/SecurityAlertsModal.js'
 import { Airship } from '../components/services/AirshipInstance.js'
 import { getSupportedBiometryType } from '../keychain.js'
@@ -133,40 +132,28 @@ const checkAndRequestNotifications = () => async (
       statusAppRefresh === RESULTS.DENIED) &&
     !isNotificationBlocked
   ) {
-    Airship.show(bridge => (
-      <ButtonsModal
-        bridge={bridge}
-        message={
-          isIos
-            ? s.strings.notifications_permissions_ios
-            : s.strings.notifications_permissions_android
+    Airship.show(bridge => <PermissionsAlertModal bridge={bridge} />).then(
+      result => {
+        if (result === 'cancel') {
+          return disklet.setText(
+            permissionsUserFile,
+            JSON.stringify({ isNotificationBlocked: true })
+          )
         }
-        buttons={{
-          continue: { label: s.strings.continue, type: 'primary' },
-          cancel: { label: s.strings.cancel, type: 'secondary' }
-        }}
-      />
-    )).then(result => {
-      if (result === 'cancel') {
-        return disklet.setText(
-          permissionsUserFile,
-          JSON.stringify({ isNotificationBlocked: true })
-        )
-      }
-      if (result === 'continue') {
-        if (notificationStatus === RESULTS.DENIED) {
+        if (result === 'enable' && notificationStatus === RESULTS.DENIED) {
           requestNotifications(
             isIos ? ['alert', 'badge', 'sound'] : undefined
           ).catch(error => console.log(error))
         }
         if (
-          notificationStatus === RESULTS.BLOCKED ||
-          statusAppRefresh === RESULTS.DENIED
+          result === 'enable' &&
+          (notificationStatus === RESULTS.BLOCKED ||
+            statusAppRefresh === RESULTS.DENIED)
         ) {
           openSettings().catch(error => console.log(error))
         }
       }
-    })
+    )
   }
 }
 

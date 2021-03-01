@@ -83,6 +83,62 @@ export function SecondaryButton(props: Props) {
   )
 }
 
+export function AlertModalPrimaryButton(props: Props) {
+  const { children, label, marginRem, onPress, paddingRem, spinner } = props
+  const theme = useTheme()
+  const styles = getStyles(theme)
+
+  const spacingStyles = {
+    ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
+    ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
+  }
+  return (
+    <TouchableOpacity
+      style={[styles.alertModalPrimaryButton, spacingStyles]}
+      onPress={onPress}
+    >
+      {label != null ? (
+        <Text style={styles.alertModalPrimaryText}>{label}</Text>
+      ) : null}
+      {spinner != null ? (
+        <ActivityIndicator
+          color={theme.alertModalPrimaryButtonText}
+          style={styles.spinner}
+        />
+      ) : null}
+      {children}
+    </TouchableOpacity>
+  )
+}
+
+export function AlertModalTertiaryButton(props: Props) {
+  const { children, label, marginRem, onPress, paddingRem, spinner } = props
+  const theme = useTheme()
+  const styles = getStyles(theme)
+
+  const spacingStyles = {
+    ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
+    ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
+  }
+  return (
+    <TouchableOpacity
+      style={[styles.alertModalTertiaryButton, spacingStyles]}
+      onPress={onPress}
+    >
+      {label != null ? (
+        <Text style={styles.alertModalTertiaryText}>{label}</Text>
+      ) : null}
+      {spinner != null ? (
+        <ActivityIndicator
+          color={theme.alertModalTertiaryButtonText}
+          style={styles.spinner}
+        />
+      ) : null}
+      {children}
+    </TouchableOpacity>
+  )
+}
+
 const getStyles = cacheStyles((theme: Theme) => {
   const commonButton = {
     alignItems: 'center',
@@ -117,6 +173,26 @@ const getStyles = cacheStyles((theme: Theme) => {
     secondaryText: {
       ...commonText,
       color: theme.secondaryButtonText
+    },
+
+    alertModalPrimaryButton: {
+      ...commonButton,
+      backgroundColor: theme.alertModalPrimaryButton,
+      borderColor: theme.alertModalPrimaryButtonOutline
+    },
+    alertModalPrimaryText: {
+      ...commonText,
+      color: theme.alertModalPrimaryButtonText
+    },
+
+    alertModalTertiaryButton: {
+      ...commonButton,
+      backgroundColor: theme.alertModalTertiaryButton,
+      borderColor: theme.alertModalTertiaryButtonOutline
+    },
+    alertModalTertiaryText: {
+      ...commonText,
+      color: theme.alertModalTertiaryButtonText
     },
 
     spinner: { height: theme.rem(2) }

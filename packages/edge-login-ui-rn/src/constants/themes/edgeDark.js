@@ -66,6 +66,14 @@ export const edgeDark: Theme = {
   secondaryButton: palette.transparent,
   secondaryButtonText: palette.edgeMint,
 
+  alertModalPrimaryButtonOutline: palette.edgeBlue,
+  alertModalPrimaryButton: palette.edgeBlue,
+  alertModalPrimaryButtonText: palette.white,
+
+  alertModalTertiaryButtonOutline: palette.transparent,
+  alertModalTertiaryButton: palette.transparent,
+  alertModalTertiaryButtonText: palette.edgeBlue,
+
   // Dropdown colors:
   dropdownWarning: palette.accentOrange,
   dropdownError: palette.accentRed,
