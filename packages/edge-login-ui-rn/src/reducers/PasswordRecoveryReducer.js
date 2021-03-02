@@ -1,11 +1,12 @@
 // @flow
 
+import { type EdgeRecoveryQuestionChoice } from 'edge-core-js'
 import { type Reducer } from 'redux'
 
 import { type Action } from '../types/ReduxTypes.js'
 
 export type PasswordRecoveryState = {
-  +questionsList: string[],
+  +questionsList: EdgeRecoveryQuestionChoice[],
   +recoveryKey: string | null,
   +showRecoveryEmailDialog: boolean,
   +userQuestions: string[]

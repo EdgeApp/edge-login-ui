@@ -3,6 +3,7 @@
 import {
   type EdgeAccount,
   type EdgePasswordRules,
+  type EdgeRecoveryQuestionChoice,
   type OtpError
 } from 'edge-core-js'
 
@@ -89,7 +90,7 @@ export type Action =
   | {
       type: 'START_CHANGE_RECOVERY',
       data: {
-        questionsList: string[],
+        questionsList: EdgeRecoveryQuestionChoice[],
         userQuestions: string[],
         account: EdgeAccount
       }

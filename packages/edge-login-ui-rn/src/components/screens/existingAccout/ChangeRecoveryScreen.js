@@ -1,5 +1,6 @@
 // @flow
 
+import { type EdgeRecoveryQuestionChoice } from 'edge-core-js'
 import * as React from 'react'
 import { Dimensions, Platform, Text, View } from 'react-native'
 import Mailer from 'react-native-mail'
@@ -38,7 +39,7 @@ type StateProps = {
   isEnabled: boolean,
   question1: string,
   question2: string,
-  questionsList: string[],
+  questionsList: EdgeRecoveryQuestionChoice[],
   saveButton: string,
   showEmailDialog: boolean,
   submitButton: string,
@@ -145,7 +146,6 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   }
 
   handleConfirmQuestionsAndAnswers = () => {
-    console.log('PR: we got thsi .. what ')
     this.setState({
       showConfirmationModal: false
     })
@@ -188,7 +188,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  handleQuestionSelected = (data: Object) => {
+  handleQuestionSelected = (data: EdgeRecoveryQuestionChoice) => {
     const question = data.question
     if (this.state.focusFirst) {
       this.setState({
@@ -203,7 +203,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  renderItems = (item: Object) => {
+  renderItems = (item: { item: EdgeRecoveryQuestionChoice }) => {
     return (
       <TextRowComponent
         data={item.item}
@@ -220,7 +220,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         <DropDownList
           style={styles.questionsList}
           data={this.props.questionsList}
-          renderRow={this.renderItems.bind(this)}
+          renderRow={this.renderItems}
         />
       </View>
     )
