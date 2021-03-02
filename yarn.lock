@@ -3926,10 +3926,10 @@ edge-core-js@^0.13.5:
     ws "^5.1.1"
     yaob "^0.3.1"
 
-edge-core-js@^0.17.24:
-  version "0.17.24"
-  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.17.24.tgz#a39f61688759fe79e61a0a6fb25f9089c0f10446"
-  integrity sha512-Nqr3PFuCtWFduAcSfIPBU6+p3CTXruVQh481ALOu176Og0Lv3hx9p5nyyY9k0hnRQ9DQZTjPOdQyOuUwJZTwKA==
+edge-core-js@^0.17.26:
+  version "0.17.26"
+  resolved "https://registry.yarnpkg.com/edge-core-js/-/edge-core-js-0.17.26.tgz#882a2e8d2e2bcadb858a64e3e12a5cfd48e4352f"
+  integrity sha512-GucwagWf2ILw92jW0KoxZo4FNjlmUq7GONXAzpRI45QdBJDe7A3lp21xh7mhvZ9BbHelqKMAUYDiC9swD4gvcg==
   dependencies:
     aes-js "^3.1.0"
     base-x "^1.0.4"
