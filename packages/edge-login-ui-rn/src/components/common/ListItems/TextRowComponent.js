@@ -1,5 +1,6 @@
 // @flow
 
+import { type EdgeRecoveryQuestionChoice } from 'edge-core-js'
 import * as React from 'react'
 import { Text, TouchableHighlight } from 'react-native'
 
@@ -9,10 +10,10 @@ import { scale } from '../../../util/scaling.js'
 export type OwnProps = {
   numberOfLines: number,
   title: string,
-  data: any
+  data: EdgeRecoveryQuestionChoice
 }
 export type DispatchProps = {
-  onPress(any): void
+  onPress(choice: EdgeRecoveryQuestionChoice): void
 }
 
 type State = {
