@@ -22,7 +22,7 @@ const initialState: PasswordRecoveryState = {
 export const passwordRecovery: Reducer<
   PasswordRecoveryState,
   Action
-> = function(state = initialState, action) {
+> = function (state = initialState, action) {
   switch (action.type) {
     case 'START_CHANGE_RECOVERY':
       return {

@@ -187,7 +187,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
               secureTextEntry
               returnKeyType="go"
               forceFocus={this.state.focusSecond}
-              onFocus={this.onfocusTwo.bind(this)}
+              onFocus={this.handleFocus2}
               onSubmitEditing={this.handleSubmit}
             />
             {this.renderButtons(this.style)}
@@ -204,19 +204,19 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
           <FormField
             testID="usernameFormField"
             style={styles.input2}
-            onChangeText={this.updateUsername.bind(this)}
+            onChangeText={this.handleChangeUsername}
             value={this.props.username}
             label={s.strings.username}
             returnKeyType="next"
             autoCorrect={false}
             autoFocus={this.state.focusFirst}
             forceFocus={this.state.focusFirst}
-            onFocus={this.onfocusOne.bind(this)}
-            onSubmitEditing={this.onSetNextFocus.bind(this)}
+            onFocus={this.handleFocus1}
+            onSubmitEditing={this.handleSetNextFocus}
           />
           <TouchableOpacity
             style={this.style.iconButton.container}
-            onPress={this.toggleUsernameList.bind(this)}
+            onPress={this.handleToggleUsernameList}
           >
             {this.state.usernameList ? (
               <MaterialIcon
@@ -243,17 +243,17 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
       <DropDownList
         style={this.style.dropDownList}
         data={this.props.usernameOnlyList}
-        renderRow={this.renderRow.bind(this)}
+        renderRow={this.renderRow}
       />
     )
   }
 
-  renderRow(data: Object) {
+  renderRow = (data: Object) => {
     return (
       <UserListItem
         data={data.item}
         style={this.style.inputWithDrop.listItem}
-        onClick={this.selectUser.bind(this)}
+        onClick={this.handleSelectUser}
         onDelete={this.handleDelete}
       />
     )
@@ -264,7 +264,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
       <View style={style.buttonsBox}>
         <View style={style.shimTiny} />
         <Button
-          onPress={this.onForgotPassword.bind(this)}
+          onPress={this.handleForgotPassword}
           label={s.strings.forgot_password}
           downStyle={style.forgotButton.downStyle}
           downTextStyle={style.forgotButton.downTextStyle}
@@ -286,7 +286,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
         <View style={style.shimTiny} />
         <Button
           testID="createAccountButton"
-          onPress={this.onCreateAccount.bind(this)}
+          onPress={this.handleCreateAccount}
           label={s.strings.create_an_account}
           downStyle={style.signupButton.downStyle}
           downTextStyle={style.signupButton.downTextStyle}
@@ -304,7 +304,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  toggleUsernameList() {
+  handleToggleUsernameList = () => {
     Keyboard.dismiss()
     this.setState({
       focusFirst: false,
@@ -313,29 +313,29 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  onfocusOne() {
+  handleFocus1 = () => {
     this.setState({
       focusFirst: true,
       focusSecond: false
     })
   }
 
-  onfocusTwo() {
+  handleFocus2 = () => {
     this.setState({
       focusFirst: false,
       focusSecond: true
     })
   }
 
-  onSetNextFocus() {
+  handleSetNextFocus = () => {
     this.setState({
       focusFirst: false,
       focusSecond: true
     })
   }
 
-  selectUser(username: string) {
-    this.updateUsername(username)
+  handleSelectUser = (username: string) => {
+    this.handleChangeUsername(username)
     this.setState({
       usernameList: false
     })
@@ -350,15 +350,15 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
       this.props.gotoPinLoginPage()
       return
     }
-    this.onSetNextFocus()
+    this.handleSetNextFocus()
   }
 
-  updateUsername(data: string) {
+  handleChangeUsername = (data: string) => {
     this.setState({ errorMessage: '' })
     this.props.updateUsername(data)
   }
 
-  onForgotPassword() {
+  handleForgotPassword = () => {
     Keyboard.dismiss()
     Airship.show(bridge => (
       <ButtonsModal
@@ -369,7 +369,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     ))
   }
 
-  onCreateAccount() {
+  handleCreateAccount = () => {
     this.props.gotoCreatePage()
   }
 }

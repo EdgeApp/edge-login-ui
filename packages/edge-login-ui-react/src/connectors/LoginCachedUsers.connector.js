@@ -36,7 +36,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginCachedUsers)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginCachedUsers)

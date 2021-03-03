@@ -50,7 +50,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
         <Checkbox
           style={style.checkboxes}
           label={Item.title}
-          onChange={this.changeStatus.bind(this)}
+          onChange={this.handleStatusChange}
           defaultValue={false}
           checkedImage={REVIEW_CHECKED}
           uncheckedImage={REVIEW_UNCHECKED}
@@ -101,7 +101,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
     return null
   }
 
-  changeStatus(event: any) {
+  handleStatusChange = (event: any) => {
     if (!event) {
       this.setState({
         totalChecks: this.state.totalChecks + 1
@@ -164,6 +164,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
             value: item.value
           }
         }
+        return null
       })
     }
     return terms.items

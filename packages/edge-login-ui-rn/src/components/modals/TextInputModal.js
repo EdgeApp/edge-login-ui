@@ -119,8 +119,10 @@ export class TextInputModal extends React.Component<Props, State> {
           onSubmitEditing={this.handleSubmit}
           value={text}
         />
-        {// Hack around the Android keyboard glitch:
-        Platform.OS === 'android' ? <View style={{ flex: 1 }} /> : null}
+        {
+          // Hack around the Android keyboard glitch:
+          Platform.OS === 'android' ? <View style={{ flex: 1 }} /> : null
+        }
         {spinning ? (
           <PrimaryButton marginRem={0.5} spinner />
         ) : (

@@ -23,7 +23,7 @@ const initialState: PreviousUsersState = {
   loaded: false
 }
 
-export const previousUsers: Reducer<PreviousUsersState, Action> = function(
+export const previousUsers: Reducer<PreviousUsersState, Action> = function (
   state = initialState,
   action
 ) {

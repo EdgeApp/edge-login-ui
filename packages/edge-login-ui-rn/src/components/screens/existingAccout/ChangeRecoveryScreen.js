@@ -42,7 +42,6 @@ type StateProps = {
   questionsList: EdgeRecoveryQuestionChoice[],
   saveButton: string,
   showEmailDialog: boolean,
-  submitButton: string,
   username: string
 }
 type DispatchProps = {
@@ -118,7 +117,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  onDisableModalClose = () => {
+  handleDisableModalClose = () => {
     this.props.cancel()
   }
 
@@ -226,7 +225,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  updateEmail = (email: string) => {
+  handleUpdateEmail = (email: string) => {
     this.setState({
       emailAddress: email
     })
@@ -395,7 +394,8 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
       )
       return (
         <StaticModal
-          cancel={this.onDisableModalClose.bind(this)}
+          // eslint-disable-next-line react/jsx-handler-names
+          cancel={this.handleDisableModalClose}
           body={body}
           modalDismissTimerSeconds={8}
         />
@@ -432,7 +432,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         </Text>
         <FormField
           style={styles.inputModal}
-          onChangeText={this.updateEmail.bind(this)}
+          onChangeText={this.handleUpdateEmail}
           value={this.state.emailAddress}
           label={s.strings.email_address}
           error=""
@@ -462,7 +462,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         </Text>
         <FormField
           style={styles.inputModal}
-          onChangeText={this.updateEmail.bind(this)}
+          onChangeText={this.handleUpdateEmail}
           value={this.state.emailAddress}
           label={s.strings.email_address}
           error=""

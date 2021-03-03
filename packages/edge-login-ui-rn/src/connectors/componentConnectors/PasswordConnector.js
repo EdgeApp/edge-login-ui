@@ -1,7 +1,6 @@
 // @flow
 
 import { validatePassword } from '../../actions/CreateAccountActions.js'
-import s from '../../common/locales/strings.js'
 import { FormField } from '../../components/common/index.js'
 import { connect } from '../../components/services/ReduxStore.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
@@ -21,8 +20,6 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
     value,
     error,
     secureTextEntry: true,
-    showSecureCheckbox: true,
-    showSecureCheckboxLabel: s.strings.show_password,
     label: ownProps.label,
     returnKeyType: 'next',
     autoFocus: ownProps.autoFocus

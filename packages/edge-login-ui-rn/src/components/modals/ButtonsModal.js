@@ -50,6 +50,8 @@ export function ButtonsModal<Buttons: { [key: string]: ButtonInfo }>(props: {
                 marginRem={0.5}
               />
             )
+          default:
+            return null
         }
       })}
     </ThemedModal>

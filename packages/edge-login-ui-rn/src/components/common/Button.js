@@ -47,7 +47,7 @@ class Button extends React.Component<Props, State> {
           this.state.pressed ? this.props.downStyle : {}
         ]}
         underlayColor={this.props.downStyle.backgroundColor}
-        onPress={this.onPress.bind(this)}
+        onPress={this.handlePress}
         disabled={this.props.isThinking}
         onHideUnderlay={() => {
           this.setState({ pressed: false })
@@ -81,7 +81,7 @@ class Button extends React.Component<Props, State> {
     )
   }
 
-  onPress() {
+  handlePress = () => {
     this.props.onPress()
     if (this.props.doesThink) {
       this.setState({

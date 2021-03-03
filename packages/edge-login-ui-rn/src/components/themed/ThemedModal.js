@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { type ViewStyle, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { type AirshipBridge, AirshipModal } from 'react-native-airship'
 
 import { fixSides } from '../../util/sides.js'
@@ -13,8 +13,6 @@ type Props<T> = {
   onCancel: () => void,
 
   // Control over the content area:
-  flexDirection?: $PropertyType<ViewStyle, 'flexDirection'>,
-  justifyContent?: $PropertyType<ViewStyle, 'justifyContent'>,
   paddingRem?: number[] | number
 }
 

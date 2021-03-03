@@ -23,7 +23,6 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
     error,
     secureTextEntry: true,
     showSecureCheckbox: true,
-    showSecureCheckboxLabel: s.strings.show_password,
     label: label,
     returnKeyType: 'go',
     autoFocus: ownProps.autoFocus
