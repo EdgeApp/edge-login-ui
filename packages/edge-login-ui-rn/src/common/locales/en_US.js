@@ -227,6 +227,7 @@ const strings = {
   qr_modal_title: 'Scan QR Code',
   qr_modal_message:
     'Scan this QR code with another device logged into your account:',
+  qr_modal_started: 'Logging into account %s',
 
   // Alert component:
   alert_dropdown_alert: 'Alert! ',
