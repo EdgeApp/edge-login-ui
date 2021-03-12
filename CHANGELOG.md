@@ -1,5 +1,12 @@
 # edge-login-ui
 
+## 0.8.0 (2021-03-12)
+
+- Breaking changes:
+  - rn: Add react-native-share as a native dependency.
+- Other changes:
+  - Add a "share" option for the password recovery token.
+
 ## 0.7.1 (2021-03-03)
 
 - rn: Catch & display errors while launching screens.
