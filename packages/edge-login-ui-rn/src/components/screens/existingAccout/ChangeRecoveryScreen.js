@@ -4,6 +4,7 @@ import { type EdgeRecoveryQuestionChoice } from 'edge-core-js'
 import * as React from 'react'
 import { Dimensions, Platform, Text, View } from 'react-native'
 import Mailer from 'react-native-mail'
+import Share from 'react-native-share'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {
@@ -268,6 +269,26 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     }
   }
 
+  handleShare = () => {
+    const body =
+      s.strings.otp_email_body +
+      '\n' +
+      this.props.username +
+      '\n iOS: edge://recovery?token=' +
+      this.props.backupKey +
+      '\n Android: https://recovery.edgesecure.co/recovery?token=' +
+      this.props.backupKey
+
+    Share.open({ title: s.strings.otp_email_subject, message: body })
+      .then(result => {
+        this.handleConfirmQuestionsAndAnswers()
+        this.props.onDone()
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   renderForm = (styles: typeof RecoverPasswordSceneStyles) => {
     const form1Style = this.state.errorOne ? styles.inputError : styles.input
     const form2Style = this.state.errorTwo ? styles.inputError : styles.input
@@ -412,7 +433,8 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         <FullScreenModal>
           <ChangeRecoveryConfirmScreen
             onCancel={this.handleCancelConfirmation}
-            onConfirm={this.handleConfirmQuestionsAndAnswers}
+            onEmail={this.handleConfirmQuestionsAndAnswers}
+            onShare={this.handleShare}
             question1={this.state.question1}
             answer1={this.state.answer1}
             question2={this.state.question2}
@@ -422,26 +444,6 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
       )
     }
     return null
-  }
-
-  showEmailPending(styles: typeof RecoverPasswordSceneStyles) {
-    return (
-      <View style={styles.modalMiddle}>
-        <Text style={styles.staticModalText}>
-          {s.strings.recovery_what_account}
-        </Text>
-        <FormField
-          style={styles.inputModal}
-          onChangeText={this.handleUpdateEmail}
-          value={this.state.emailAddress}
-          label={s.strings.email_address}
-          error=""
-          returnKeyType="go"
-          forceFocus
-          onSubmitEditing={this.handleEmailApp}
-        />
-      </View>
-    )
   }
 
   showEmaiFailed(styles: typeof RecoverPasswordSceneStyles) {
