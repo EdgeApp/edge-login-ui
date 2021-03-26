@@ -1,6 +1,5 @@
 // @flow
 
-import { type EdgePendingEdgeLogin } from 'edge-core-js'
 import * as React from 'react'
 
 import s from '../common/locales/strings.js'
@@ -115,21 +114,6 @@ export function processWait(message: string) {
       }, 1000)
     }
   }
-}
-
-export const requestEdgeLogin = () => async (
-  dispatch: Dispatch,
-  getState: GetState,
-  imports: Imports
-): Promise<EdgePendingEdgeLogin> => {
-  const { accountOptions, context } = imports
-  return context.requestEdgeLogin({
-    ...accountOptions,
-    // These are no longer used in recent core versions:
-    displayImageUrl:
-      'https://github.com/Airbitz/edge-brand-guide/blob/master/Logo/Mark/Edge-Final-Logo_Mark-Green.png',
-    displayName: 'Edge Wallet'
-  })
 }
 
 /**
