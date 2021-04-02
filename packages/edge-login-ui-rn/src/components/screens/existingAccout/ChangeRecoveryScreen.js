@@ -1,56 +1,45 @@
 // @flow
 
-import { type EdgeRecoveryQuestionChoice } from 'edge-core-js'
+import { type EdgeAccount, type EdgeRecoveryQuestionChoice } from 'edge-core-js'
 import * as React from 'react'
-import { Dimensions, Platform, Text, View } from 'react-native'
-import Mailer from 'react-native-mail'
-import Share from 'react-native-share'
+import { Dimensions, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {
-  changeRecoveryAnswers,
-  deleteRecovery
+  sendRecoveryEmail,
+  shareRecovery
 } from '../../../actions/PasswordRecoveryActions.js'
 import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
-import * as Constants from '../../../constants/index.js'
+import * as Colors from '../../../constants/Colors.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { isIphoneX } from '../../../util/isIphoneX.js'
 import { scale } from '../../../util/scaling.js'
+import { getAccount } from '../../../util/selectors.js'
 import { Button } from '../../common/Button.js'
-import { FullScreenModal } from '../../common/FullScreenModal.js'
 import { Header } from '../../common/Header.js'
 import { DropDownList, FormField } from '../../common/index.js'
 import { TextRowComponent } from '../../common/ListItems/TextRowComponent.js'
-import { StaticModal } from '../../common/StaticModal.js'
 import { TextAndIconButton } from '../../common/TextAndIconButton.js'
-import { EmailAppFailedModal } from '../../modals/EmailAppFailedModal.js'
-import { SaveRecoveryTokenModal } from '../../modals/SaveRecoveryTokenModal.js'
+import { ButtonsModal } from '../../modals/ButtonsModal.js'
+import { TextInputModal } from '../../modals/TextInputModal.js'
+import { Airship, showError } from '../../services/AirshipInstance.js'
 import { connect } from '../../services/ReduxStore.js'
-import { ChangeRecoveryConfirmScreen } from './ChangeRecoveryConfirmScreen.js'
+import { MessageText, Strong } from '../../themed/ThemedText.js'
 
 type OwnProps = {
   showHeader: boolean
 }
 type StateProps = {
-  backupKey: string,
-  disableButton: string,
-  doneButton: string,
+  account: EdgeAccount,
   isEnabled: boolean,
-  question1: string,
-  question2: string,
   questionsList: EdgeRecoveryQuestionChoice[],
-  saveButton: string,
-  showEmailDialog: boolean,
-  username: string
+  userQuestions: string[]
 }
 type DispatchProps = {
-  cancel(): void,
-  deleteRecovery(): void,
   onBack(): void,
-  onDone(): void,
-  submit(questions: string[], answers: string[]): void
+  onDone(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -65,19 +54,19 @@ type State = {
   errorOne: boolean,
   errorTwo: boolean,
   errorQuestionOne: boolean,
-  errorQuestionTwo: boolean,
-  disableConfirmationModal: boolean,
-  emailAddress: string,
-  emailAppNotAvailable: boolean,
-  showConfirmationModal: boolean
+  errorQuestionTwo: boolean
 }
 
 class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
+    const [
+      question1 = s.strings.choose_recovery_question,
+      question2 = s.strings.choose_recovery_question
+    ] = props.userQuestions
     this.state = {
-      question1: this.props.question1,
-      question2: this.props.question2,
+      question1,
+      question2,
       answer1: '',
       answer2: '',
       showQuestionPicker: false,
@@ -86,21 +75,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
       errorOne: false,
       errorTwo: false,
       errorQuestionOne: false,
-      errorQuestionTwo: false,
-      disableConfirmationModal: false,
-      emailAddress: '',
-      emailAppNotAvailable: false,
-      showConfirmationModal: false
-    }
-  }
-
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.isEnabled !== this.props.isEnabled) {
-      this.setState({
-        question1: nextProps.question1,
-        question2: nextProps.question2
-      })
+      errorQuestionTwo: false
     }
   }
 
@@ -112,14 +87,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   }
 
   handleDisable = () => {
-    this.props.deleteRecovery()
-    this.setState({
-      disableConfirmationModal: true
-    })
-  }
-
-  handleDisableModalClose = () => {
-    this.props.cancel()
+    this.disableRecovery().catch(showError)
   }
 
   handleSubmit = () => {
@@ -140,24 +108,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     if (errorOne || errorTwo || errorQuestionOne || errorQuestionTwo) {
       return
     }
-    this.setState({
-      showConfirmationModal: true
-    })
-  }
-
-  handleConfirmQuestionsAndAnswers = () => {
-    this.setState({
-      showConfirmationModal: false
-    })
-    const questions = [this.state.question1, this.state.question2]
-    const answers = [this.state.answer1, this.state.answer2]
-    this.props.submit(questions, answers)
-  }
-
-  handleCancelConfirmation = () => {
-    this.setState({
-      showConfirmationModal: false
-    })
+    this.enableRecovery().catch(showError)
   }
 
   handleQuestion1 = () => {
@@ -203,6 +154,99 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     })
   }
 
+  async enableRecovery(): Promise<void> {
+    const { account, onDone } = this.props
+
+    // Ask which way to send the key:
+    await Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        title={s.strings.confirm_recovery_questions}
+        buttons={{
+          email: {
+            label: s.strings.confirm_email,
+            onPress: async () => {
+              const emailAddress = await Airship.show(bridge => (
+                <TextInputModal
+                  bridge={bridge}
+                  title={s.strings.save_recovery_token}
+                  message={s.strings.recovery_instructions_complete}
+                  inputLabel={s.strings.email_address}
+                  submitLabel={s.strings.next_label}
+                  keyboardType="email-address"
+                  returnKeyType="go"
+                />
+              ))
+              if (emailAddress == null) return false
+              const recoveryKey = await account.changeRecovery(
+                [this.state.question1, this.state.question2],
+                [this.state.answer1, this.state.answer2]
+              )
+              try {
+                await sendRecoveryEmail(
+                  emailAddress,
+                  account.username,
+                  recoveryKey
+                )
+              } catch (error) {
+                await Airship.show(bridge => (
+                  <ButtonsModal
+                    bridge={bridge}
+                    title={s.strings.send_email_error_header}
+                    message={s.strings.email_error_modal}
+                    buttons={{ ok: { label: s.strings.ok } }}
+                  />
+                ))
+                return false
+              }
+              onDone()
+              return true
+            }
+          },
+          share: {
+            label: s.strings.confirm_share,
+            onPress: async () => {
+              const recoveryKey = await account.changeRecovery(
+                [this.state.question1, this.state.question2],
+                [this.state.answer1, this.state.answer2]
+              )
+              await shareRecovery(account.username, recoveryKey)
+              onDone()
+              return true
+            }
+          },
+          cancel: { label: s.strings.cancel, type: 'secondary' }
+        }}
+      >
+        <MessageText>{this.state.question1}</MessageText>
+        <MessageText>
+          <Strong>{this.state.answer1}</Strong>
+        </MessageText>
+        <MessageText>{this.state.question2}</MessageText>
+        <MessageText>
+          <Strong>{this.state.answer2}</Strong>
+        </MessageText>
+      </ButtonsModal>
+    ))
+  }
+
+  async disableRecovery(): Promise<void> {
+    const { account, onDone } = this.props
+    await account.deleteRecovery()
+    this.setState({
+      question1: s.strings.choose_recovery_question,
+      question2: s.strings.choose_recovery_question
+    })
+    await Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        message={s.strings.recovery_disabled}
+        buttons={{ ok: { label: s.strings.ok } }}
+      />
+    ))
+    onDone()
+  }
+
   renderItems = (item: { item: EdgeRecoveryQuestionChoice }) => {
     return (
       <TextRowComponent
@@ -224,69 +268,6 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         />
       </View>
     )
-  }
-
-  handleUpdateEmail = (email: string) => {
-    this.setState({
-      emailAddress: email
-    })
-  }
-
-  handleEmailApp = () => {
-    const body =
-      s.strings.otp_email_body +
-      this.props.username +
-      '<br><br>' +
-      'iOS <br>edge://recovery?token=' +
-      this.props.backupKey +
-      '<br><br>' +
-      'Android https://recovery.edgesecure.co/recovery?token=' +
-      this.props.backupKey
-
-    Mailer.mail(
-      {
-        subject: s.strings.otp_email_subject,
-        recipients: [this.state.emailAddress],
-        body: body,
-        isHTML: true
-      },
-      (error, event) => {
-        if (error) {
-          console.log(error)
-          this.setState({
-            emailAppNotAvailable: true
-          })
-        }
-        if (event === 'sent') {
-          this.props.onDone()
-        }
-      }
-    )
-    if (Platform.OS === 'android') {
-      setTimeout(() => {
-        this.props.onDone()
-      }, 1000)
-    }
-  }
-
-  handleShare = () => {
-    const body =
-      s.strings.otp_email_body +
-      '\n' +
-      this.props.username +
-      '\n iOS: edge://recovery?token=' +
-      this.props.backupKey +
-      '\n Android: https://recovery.edgesecure.co/recovery?token=' +
-      this.props.backupKey
-
-    Share.open({ title: s.strings.otp_email_subject, message: body })
-      .then(result => {
-        this.handleConfirmQuestionsAndAnswers()
-        this.props.onDone()
-      })
-      .catch(error => {
-        console.log(error)
-      })
   }
 
   renderForm = (styles: typeof RecoverPasswordSceneStyles) => {
@@ -377,7 +358,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
             downTextStyle={styles.submitButton.downTextStyle}
             upStyle={styles.submitButton.upStyle}
             upTextStyle={styles.submitButton.upTextStyle}
-            label={this.props.saveButton}
+            label={s.strings.save}
           />
           <View style={styles.shim} />
           <Button
@@ -386,7 +367,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
             downTextStyle={styles.disableButton.downTextStyle}
             upStyle={styles.disableButton.upStyle}
             upTextStyle={styles.disableButton.upTextStyle}
-            label={this.props.disableButton}
+            label={s.strings.disable_password_recovery}
           />
         </View>
       )
@@ -400,91 +381,10 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
           downTextStyle={styles.submitButton.downTextStyle}
           upStyle={styles.submitButton.upStyle}
           upTextStyle={styles.submitButton.upTextStyle}
-          label={this.props.doneButton}
+          label={s.strings.done}
         />
       </View>
     )
-  }
-
-  renderDisableModal(styles: typeof RecoverPasswordSceneStyles) {
-    if (this.state.disableConfirmationModal) {
-      const body = (
-        <Text style={styles.staticModalText}>
-          {s.strings.recovery_disabled}
-        </Text>
-      )
-      return (
-        <StaticModal
-          // eslint-disable-next-line react/jsx-handler-names
-          cancel={this.handleDisableModalClose}
-          body={body}
-          modalDismissTimerSeconds={8}
-        />
-      )
-    }
-    return null
-  }
-
-  renderConfirmationScreenModal = (
-    styles: typeof RecoverPasswordSceneStyles
-  ) => {
-    if (this.state.showConfirmationModal) {
-      return (
-        <FullScreenModal>
-          <ChangeRecoveryConfirmScreen
-            onCancel={this.handleCancelConfirmation}
-            onEmail={this.handleConfirmQuestionsAndAnswers}
-            onShare={this.handleShare}
-            question1={this.state.question1}
-            answer1={this.state.answer1}
-            question2={this.state.question2}
-            answer2={this.state.answer2}
-          />
-        </FullScreenModal>
-      )
-    }
-    return null
-  }
-
-  showEmaiFailed(styles: typeof RecoverPasswordSceneStyles) {
-    if (this.props.showEmailDialog) {
-      return <EmailAppFailedModal action={this.props.cancel} />
-    }
-    return null
-  }
-
-  showEmailDialog(styles: typeof RecoverPasswordSceneStyles) {
-    if (this.state.emailAppNotAvailable) {
-      return this.showEmaiFailed(styles)
-    }
-    const middle = (
-      <View style={styles.modalMiddle}>
-        <Text style={styles.staticModalText}>
-          {s.strings.recovery_instructions_complete}
-        </Text>
-        <FormField
-          style={styles.inputModal}
-          onChangeText={this.handleUpdateEmail}
-          value={this.state.emailAddress}
-          label={s.strings.email_address}
-          error=""
-          returnKeyType="go"
-          forceFocus
-          onSubmitEditing={this.handleEmailApp}
-        />
-      </View>
-    )
-    if (this.props.showEmailDialog) {
-      return (
-        <SaveRecoveryTokenModal
-          modalMiddleComponent={middle}
-          cancel={this.props.cancel}
-          // eslint-disable-next-line react/jsx-handler-names
-          action={this.handleEmailApp}
-        />
-      )
-    }
-    return null
   }
 
   render() {
@@ -495,9 +395,6 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
       <View style={RecoverPasswordSceneStyles.screen}>
         {this.renderHeader()}
         {middle}
-        {this.renderDisableModal(RecoverPasswordSceneStyles)}
-        {this.showEmailDialog(RecoverPasswordSceneStyles)}
-        {this.renderConfirmationScreenModal(RecoverPasswordSceneStyles)}
       </View>
     )
   }
@@ -511,7 +408,7 @@ const RecoverPasswordSceneStyles = {
   questionRow: {
     height: scale(60),
     width: '100%',
-    borderColor: Constants.GRAY_2,
+    borderColor: Colors.GRAY_2,
     borderBottomWidth: scale(2)
   },
   answerRow: {
@@ -522,39 +419,29 @@ const RecoverPasswordSceneStyles = {
     width: '100%',
     alignItems: 'center'
   },
-  modalMiddle: {
-    width: '100%'
-  },
   input: {
     ...Styles.MaterialInputOnWhite,
-    errorColor: Constants.GRAY_2,
-    baseColor: Constants.GRAY_2,
-    textColor: Constants.GRAY_2,
+    errorColor: Colors.GRAY_2,
+    baseColor: Colors.GRAY_2,
+    textColor: Colors.GRAY_2,
     titleTextStyle: {
-      color: Constants.GRAY_2
+      color: Colors.GRAY_2
     },
     affixTextStyle: {
-      color: Constants.GRAY_2
+      color: Colors.GRAY_2
     },
     container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
   },
-  inputModal: {
-    ...Styles.MaterialInputOnWhite,
-    container: {
-      position: 'relative',
-      width: '100%'
-    }
-  },
   inputError: {
     ...Styles.MaterialInputOnWhite,
-    errorColor: Constants.ACCENT_RED,
-    baseColor: Constants.ACCENT_RED,
-    textColor: Constants.ACCENT_RED,
+    errorColor: Colors.ACCENT_RED,
+    baseColor: Colors.ACCENT_RED,
+    textColor: Colors.ACCENT_RED,
     titleTextStyle: {
-      color: Constants.ACCENT_RED
+      color: Colors.ACCENT_RED
     },
     affixTextStyle: {
-      color: Constants.ACCENT_RED
+      color: Colors.ACCENT_RED
     },
     container: { ...Styles.MaterialInputOnWhite.container, width: '100%' }
   },
@@ -566,11 +453,11 @@ const RecoverPasswordSceneStyles = {
     ...Styles.TextAndIconButtonAlignEdgesStyle,
     text: {
       ...Styles.TextAndIconButtonAlignEdgesStyle.text,
-      color: Constants.ACCENT_RED
+      color: Colors.ACCENT_RED
     },
     icon: {
       ...Styles.TextAndIconButtonAlignEdgesStyle.icon,
-      color: Constants.ACCENT_RED
+      color: Colors.ACCENT_RED
     }
   },
   submitButton: {
@@ -589,22 +476,9 @@ const RecoverPasswordSceneStyles = {
     width: '100%',
     height:
       Dimensions.get('window').height - (isIphoneX ? scale(125) : scale(110)),
-    borderColor: Constants.GRAY_3,
+    borderColor: Colors.GRAY_3,
     borderWidth: 1
-  },
-  staticModalText: {
-    color: Constants.GRAY_1,
-    width: '100%',
-    fontSize: scale(13),
-    textAlign: 'center'
   }
-}
-
-function returnTrunatedUsername(arg) {
-  if (arg) {
-    return arg.charAt(0) + arg.charAt(1) + '***'
-  }
-  return arg
 }
 
 export const PublicChangeRecoveryScreen = connect<
@@ -613,41 +487,17 @@ export const PublicChangeRecoveryScreen = connect<
   OwnProps
 >(
   (state: RootState) => ({
-    backupKey: state.passwordRecovery.recoveryKey || '',
-    disableButton: s.strings.disable_password_recovery,
-    doneButton: s.strings.done,
+    account: getAccount(state),
     isEnabled: state.passwordRecovery.userQuestions.length > 0,
-    question1:
-      state.passwordRecovery.userQuestions.length > 0
-        ? state.passwordRecovery.userQuestions[0]
-        : 'Choose recovery question',
-    question2:
-      state.passwordRecovery.userQuestions.length > 1
-        ? state.passwordRecovery.userQuestions[1]
-        : s.strings.choose_recovery_question,
     questionsList: state.passwordRecovery.questionsList,
-    saveButton: s.strings.save,
-    showEmailDialog: state.passwordRecovery.showRecoveryEmailDialog,
-    submitButton: s.strings.submit,
-    username: returnTrunatedUsername(state.login.username)
+    userQuestions: state.passwordRecovery.userQuestions
   }),
   (dispatch: Dispatch) => ({
-    cancel() {
-      dispatch(deleteRecovery())
-      dispatch(onComplete())
-      dispatch({ type: 'DISMISS_EMAIL_MODAL' })
-    },
-    deleteRecovery() {
-      dispatch(deleteRecovery())
-    },
     onBack() {
       dispatch(onComplete())
     },
     onDone() {
       dispatch(onComplete())
-    },
-    submit(questions: string[], answers: string[]) {
-      dispatch(changeRecoveryAnswers(questions, answers))
     }
   })
 )(ChangeRecoveryScreenComponent)

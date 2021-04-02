@@ -1,7 +1,10 @@
 // @flow
 
 import { type EdgeAccount, type EdgeRecoveryQuestionChoice } from 'edge-core-js'
+import Mailer from 'react-native-mail'
+import Share from 'react-native-share'
 
+import s from '../common/locales/strings.js'
 import { showError } from '../components/services/AirshipInstance.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 
@@ -37,34 +40,53 @@ export const initializeChangeRecovery = (account: EdgeAccount) => async (
   })
 }
 
-export function deleteRecovery() {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { account } = getState()
-    if (account == null) return
-
-    try {
-      await account.deleteRecovery()
-      dispatch({ type: 'ON_DISABLE_RECOVERY' })
-    } catch (e) {
-      console.log(e)
-      console.log(e.title)
-      console.log(e.message)
-    }
-  }
+function truncateUsername(username: string): string {
+  return username.slice(0, 2) + '***'
 }
 
-export function changeRecoveryAnswers(questions: string[], answers: string[]) {
-  return async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const { account } = getState()
-    if (account == null) return
+export function sendRecoveryEmail(
+  emailAddress: string,
+  username: string,
+  recoveryKey: string
+): Promise<void> {
+  const body =
+    s.strings.otp_email_body +
+    truncateUsername(username) +
+    '<br><br>' +
+    'iOS <br>edge://recovery?token=' +
+    recoveryKey +
+    '<br><br>' +
+    'Android https://recovery.edgesecure.co/recovery?token=' +
+    recoveryKey
 
-    try {
-      const recoveryKey = await account.changeRecovery(questions, answers)
-      dispatch({ type: 'ON_RECOVERY_KEY', data: recoveryKey })
-    } catch (e) {
-      console.log(e)
-      console.log(e.title)
-      console.log(e.message)
-    }
-  }
+  return new Promise((resolve, reject) =>
+    Mailer.mail(
+      {
+        subject: s.strings.otp_email_subject,
+        recipients: [emailAddress],
+        body: body,
+        isHTML: true
+      },
+      (error, event) => {
+        if (error) reject(error)
+        if (event === 'sent') resolve()
+      }
+    )
+  )
+}
+
+export async function shareRecovery(
+  username: string,
+  recoveryKey: string
+): Promise<void> {
+  const body =
+    s.strings.otp_email_body +
+    '\n' +
+    truncateUsername(username) +
+    '\n iOS: edge://recovery?token=' +
+    recoveryKey +
+    '\n Android: https://recovery.edgesecure.co/recovery?token=' +
+    recoveryKey
+
+  await Share.open({ title: s.strings.otp_email_subject, message: body })
 }

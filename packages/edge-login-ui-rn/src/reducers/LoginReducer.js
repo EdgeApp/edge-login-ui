@@ -95,8 +95,6 @@ export function login(
         errorMessage: null,
         wait: 0
       }
-    case 'START_CHANGE_RECOVERY':
-      return { ...state, username: action.data.account.username }
 
     default:
       return state
