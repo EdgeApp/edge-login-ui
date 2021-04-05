@@ -92,12 +92,13 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
 
   handleSubmit = () => {
     // Launch Modal full Screen
-    const errorOne = this.state.answer1.length < 4 || false
-    const errorTwo = this.state.answer2.length < 4 || false
+    const errorOne = this.state.answer1.length < 4
+    const errorTwo = this.state.answer2.length < 4
     const errorQuestionOne =
-      this.state.question1 === s.strings.choose_recovery_question || false
+      this.state.question1 === s.strings.choose_recovery_question
     const errorQuestionTwo =
-      this.state.question2 === s.strings.choose_recovery_question || false
+      this.state.question2 === s.strings.choose_recovery_question ||
+      this.state.question1 === this.state.question2
 
     this.setState({
       errorOne,
