@@ -8,7 +8,7 @@ import { sprintf } from 'sprintf-js'
 import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
-import { OtpResetModal } from '../../modals/OtpResetModal.js'
+import { showResetModal } from '../../modals/OtpResetModal.js'
 import { QrCodeModal } from '../../modals/QrCodeModal.js'
 import { TextInputModal } from '../../modals/TextInputModal.js'
 import { Airship, showError } from '../../services/AirshipInstance.js'
@@ -27,6 +27,7 @@ type StateProps = {
 }
 type DispatchProps = {
   onBack(): void,
+  requestOtpReset(): Promise<void>,
   saveOtpError(account: EdgeAccount, otpError: OtpError): void
 }
 type Props = OwnProps & StateProps & DispatchProps
@@ -69,10 +70,6 @@ class OtpRepairScreenComponent extends React.Component<Props> {
         returnKeyType="done"
       />
     ))
-  }
-
-  handleResetModal = () => {
-    Airship.show(bridge => <OtpResetModal bridge={bridge} />)
   }
 
   handleQrModal = () => {
@@ -136,7 +133,7 @@ class OtpRepairScreenComponent extends React.Component<Props> {
             <DividerRow />
             <LinkRow
               label={s.strings.disable_otp_button_two}
-              onPress={this.handleResetModal}
+              onPress={() => showResetModal(this.props.requestOtpReset)}
             />
           </>
         )}
@@ -157,6 +154,9 @@ export const OtpRepairScreen = connect<StateProps, DispatchProps, OwnProps>(
   (dispatch: Dispatch) => ({
     onBack() {
       dispatch(onComplete())
+    },
+    requestOtpReset() {
+      return dispatch(this.requestOtpReset())
     },
     saveOtpError(account, error) {
       dispatch({ type: 'START_OTP_REPAIR', data: { account, error } })

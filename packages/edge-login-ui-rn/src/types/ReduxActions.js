@@ -15,9 +15,7 @@ import { type LoginAttempt } from '../util/loginAttempt.js'
 type NoDataActionName =
   | 'AUTH_LOGGING_IN_WITH_PIN'
   | 'CLEAR_CREATE_ERROR_MESSAGE'
-  | 'DISMISS_EMAIL_MODAL'
   | 'LOGIN_SUCCEESS'
-  | 'ON_DISABLE_RECOVERY'
   | 'RESET_APP'
   | 'START_CREATE_ACCOUNT'
   | 'START_LANDING'
@@ -67,7 +65,6 @@ export type Action =
         wait: number
       }
     }
-  | { type: 'ON_RECOVERY_KEY', data: string }
   | {
       type: 'OTP_ERROR',
       data: {

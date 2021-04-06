@@ -65,24 +65,23 @@ export class TextInputModal extends React.Component<Props, State> {
   handleSubmit = () => {
     const { bridge, onSubmit } = this.props
 
-    if (onSubmit != null) {
-      this.setState({ spinning: true })
-      onSubmit(this.state.text).then(
-        result => {
-          if (result === true) {
-            bridge.resolve(this.state.text)
-          } else if (result === false) {
-            this.setState({ spinning: false })
-          } else {
-            this.setState({ errorMessage: result, spinning: false })
-          }
-        },
-        error => {
+    if (onSubmit == null) return bridge.resolve(this.state.text)
+    this.setState({ spinning: true })
+    onSubmit(this.state.text).then(
+      result => {
+        if (result === true) {
+          bridge.resolve(this.state.text)
+        } else if (result === false) {
           this.setState({ spinning: false })
-          showError(error)
+        } else {
+          this.setState({ errorMessage: result, spinning: false })
         }
-      )
-    }
+      },
+      error => {
+        this.setState({ spinning: false })
+        showError(error)
+      }
+    )
   }
 
   render() {

@@ -5,18 +5,15 @@ import { type Reducer } from 'redux'
 
 import { type Action } from '../types/ReduxTypes.js'
 
-export type PasswordRecoveryState = {
-  +questionsList: EdgeRecoveryQuestionChoice[],
-  +recoveryKey: string | null,
-  +showRecoveryEmailDialog: boolean,
-  +userQuestions: string[]
-}
+export type PasswordRecoveryState = {|
+  +questionsList: EdgeRecoveryQuestionChoice[], // For changing settings
+  +recoveryKey?: string, // For login
+  +userQuestions: string[] // For login & changing settings
+|}
 
 const initialState: PasswordRecoveryState = {
   questionsList: [],
-  userQuestions: [],
-  recoveryKey: null,
-  showRecoveryEmailDialog: false
+  userQuestions: []
 }
 
 export const passwordRecovery: Reducer<
@@ -30,22 +27,12 @@ export const passwordRecovery: Reducer<
         questionsList: action.data.questionsList,
         userQuestions: action.data.userQuestions
       }
-    case 'ON_DISABLE_RECOVERY':
-      return { ...state, recoveryKey: null, userQuestions: [] }
-    case 'ON_RECOVERY_KEY':
-      return {
-        ...state,
-        recoveryKey: action.data,
-        showRecoveryEmailDialog: true
-      }
     case 'START_RECOVERY_LOGIN':
       return {
         ...state,
         recoveryKey: action.data.recoveryKey,
         userQuestions: action.data.userQuestions
       }
-    case 'DISMISS_EMAIL_MODAL':
-      return { ...state, showRecoveryEmailDialog: false }
     default:
       return state
   }

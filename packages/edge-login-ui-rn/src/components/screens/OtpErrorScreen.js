@@ -6,12 +6,15 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { sprintf } from 'sprintf-js'
 
 import { login } from '../../actions/LoginAction.js'
-import { hasReadyVoucher } from '../../actions/LoginOtpActions.js'
+import {
+  hasReadyVoucher,
+  requestOtpReset
+} from '../../actions/LoginOtpActions.js'
 import s from '../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { type LoginAttempt } from '../../util/loginAttempt.js'
 import { makePeriodicTask } from '../../util/periodicTask.js'
-import { OtpResetModal } from '../modals/OtpResetModal.js'
+import { showResetModal } from '../modals/OtpResetModal.js'
 import { QrCodeModal } from '../modals/QrCodeModal.js'
 import { TextInputModal } from '../modals/TextInputModal.js'
 import { Airship, showError, showToast } from '../services/AirshipInstance.js'
@@ -32,6 +35,7 @@ type DispatchProps = {
   onBack(): void,
   hasReadyVoucher(otpError: OtpError): Promise<boolean>,
   login(otpAttempt: LoginAttempt, otpKey?: string): Promise<void>,
+  requestOtpReset(): Promise<void>,
   saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void
 }
 type Props = OwnProps & StateProps & DispatchProps
@@ -108,10 +112,6 @@ class OtpErrorScreenComponent extends React.Component<Props> {
     ))
   }
 
-  handleResetModal = () => {
-    Airship.show(bridge => <OtpResetModal bridge={bridge} />)
-  }
-
   handleQrModal = () => {
     Airship.show(bridge => <QrCodeModal bridge={bridge} />)
   }
@@ -172,7 +172,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
             <DividerRow />
             <LinkRow
               label={s.strings.disable_otp_button_two}
-              onPress={this.handleResetModal}
+              onPress={() => showResetModal(this.props.requestOtpReset)}
             />
           </>
         )}
@@ -198,6 +198,9 @@ export const OtpErrorScreen = connect<StateProps, DispatchProps, OwnProps>(
     },
     login(attempt: LoginAttempt, otpKey?: string): Promise<void> {
       return dispatch(login(attempt, otpKey))
+    },
+    requestOtpReset() {
+      return dispatch(requestOtpReset())
     },
     saveOtpError(attempt, error) {
       dispatch({ type: 'OTP_ERROR', data: { attempt, error } })
