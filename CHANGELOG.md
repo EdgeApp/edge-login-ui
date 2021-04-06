@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.8.2 (2021-04-06)
+
+- rn: Port all password recovery modals to the new theming system.
+- rn: Fix a bug that would leave the recovery token blank when sharing recovery links.
+
 ## 0.8.1 (2021-03-25)
 
 - rn: Show a spinner on the barcode modal.
