@@ -283,7 +283,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     const questionOneStyle = this.state.errorQuestionOne
       ? styles.textIconButtonErrorError
       : styles.textIconButton
-    const questionTwoStyle = this.state.errorQuestionOne
+    const questionTwoStyle = this.state.errorQuestionTwo
       ? styles.textIconButtonErrorError
       : styles.textIconButton
 
