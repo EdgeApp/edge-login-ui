@@ -392,9 +392,9 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
     }
   }
 
-  // Function should only be used in iOS and not available on android. Resolve with a restricted if ever, meaning not available on this device
+  // Function should only be used in iOS and not available on android. Resolve with a unavailable if ever, meaning not available on this device
   @ReactMethod
   public void backgroundAppRefreshStatus(Promise promise) {
-    promise.resolve("restricted");
+    promise.resolve("unavailable");
   }
 }

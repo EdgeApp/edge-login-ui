@@ -129,7 +129,7 @@ const checkAndRequestNotifications = () => async (
   if (
     (notificationStatus === RESULTS.BLOCKED ||
       notificationStatus === RESULTS.DENIED ||
-      statusAppRefresh === RESULTS.DENIED) &&
+      statusAppRefresh === RESULTS.BLOCKED) &&
     !isNotificationBlocked
   ) {
     Airship.show(bridge => <PermissionsAlertModal bridge={bridge} />).then(
@@ -148,7 +148,7 @@ const checkAndRequestNotifications = () => async (
         if (
           result === 'enable' &&
           (notificationStatus === RESULTS.BLOCKED ||
-            statusAppRefresh === RESULTS.DENIED)
+            statusAppRefresh === RESULTS.BLOCKED)
         ) {
           openSettings().catch(error => console.log(error))
         }
