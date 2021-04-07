@@ -12,6 +12,15 @@ import {
 } from '../../util/sides.js'
 import { type Theme, useTheme } from '../services/ThemeContext.js'
 
+export const BUTTON_TYPE = {
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary'
+}
+
+export type AlertModalButtonType = {
+  type: typeof BUTTON_TYPE.PRIMARY | typeof BUTTON_TYPE.SECONDARY
+}
+
 type Props = {
   children?: React.Node,
   onPress?: () => void,
@@ -83,56 +92,36 @@ export function SecondaryButton(props: Props) {
   )
 }
 
-export function AlertModalPrimaryButton(props: Props) {
-  const { children, label, marginRem, onPress, paddingRem, spinner } = props
+export function AlertModalButton(props: Props & AlertModalButtonType) {
+  const {
+    children,
+    label,
+    marginRem,
+    onPress,
+    paddingRem,
+    spinner,
+    type
+  } = props
   const theme = useTheme()
   const styles = getStyles(theme)
+  const buttonStyle =
+    type === 'secondary'
+      ? styles.alertModalSecondaryButton
+      : styles.alertModalPrimaryButton
+  const textStyle =
+    type === 'secondary'
+      ? styles.alertModalSecondaryText
+      : styles.alertModalPrimaryText
 
   const spacingStyles = {
     ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
     ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
   }
   return (
-    <TouchableOpacity
-      style={[styles.alertModalPrimaryButton, spacingStyles]}
-      onPress={onPress}
-    >
-      {label != null ? (
-        <Text style={styles.alertModalPrimaryText}>{label}</Text>
-      ) : null}
+    <TouchableOpacity style={[buttonStyle, spacingStyles]} onPress={onPress}>
+      {label != null ? <Text style={textStyle}>{label}</Text> : null}
       {spinner != null ? (
-        <ActivityIndicator
-          color={theme.alertModalPrimaryButtonText}
-          style={styles.spinner}
-        />
-      ) : null}
-      {children}
-    </TouchableOpacity>
-  )
-}
-
-export function AlertModalTertiaryButton(props: Props) {
-  const { children, label, marginRem, onPress, paddingRem, spinner } = props
-  const theme = useTheme()
-  const styles = getStyles(theme)
-
-  const spacingStyles = {
-    ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
-    ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
-  }
-  return (
-    <TouchableOpacity
-      style={[styles.alertModalTertiaryButton, spacingStyles]}
-      onPress={onPress}
-    >
-      {label != null ? (
-        <Text style={styles.alertModalTertiaryText}>{label}</Text>
-      ) : null}
-      {spinner != null ? (
-        <ActivityIndicator
-          color={theme.alertModalTertiaryButtonText}
-          style={styles.spinner}
-        />
+        <ActivityIndicator color={textStyle} style={styles.spinner} />
       ) : null}
       {children}
     </TouchableOpacity>
@@ -185,12 +174,12 @@ const getStyles = cacheStyles((theme: Theme) => {
       color: theme.alertModalPrimaryButtonText
     },
 
-    alertModalTertiaryButton: {
+    alertModalSecondaryButton: {
       ...commonButton,
       backgroundColor: theme.alertModalTertiaryButton,
       borderColor: theme.alertModalTertiaryButtonOutline
     },
-    alertModalTertiaryText: {
+    alertModalSecondaryText: {
       ...commonText,
       color: theme.alertModalTertiaryButtonText
     },

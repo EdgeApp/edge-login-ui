@@ -13,10 +13,7 @@ import {
   withTheme
 } from '../services/ThemeContext.js'
 import { ModalCloseArrow } from '../themed/ModalParts.js'
-import {
-  AlertModalPrimaryButton,
-  AlertModalTertiaryButton
-} from '../themed/ThemedButtons.js'
+import { AlertModalButton, BUTTON_TYPE } from '../themed/ThemedButtons.js'
 
 type OwnProps = {
   bridge: AirshipBridge<'enable' | 'cancel' | typeof undefined>
@@ -63,12 +60,14 @@ class PermissionsAlertModalComponent extends React.PureComponent<Props> {
           />
         </View>
         <Text style={styles.rowText}>{message}</Text>
-        <AlertModalPrimaryButton
+        <AlertModalButton
+          type={BUTTON_TYPE.PRIMARY}
           label={s.strings.enable}
           onPress={() => bridge.resolve('enable')}
           marginRem={0.5}
         />
-        <AlertModalTertiaryButton
+        <AlertModalButton
+          type={BUTTON_TYPE.SECONDARY}
           label={s.strings.cancel}
           onPress={() => bridge.resolve('cancel')}
           marginRem={0.5}
