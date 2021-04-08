@@ -38,7 +38,10 @@ type Props = {
   skipSecurityAlerts?: boolean,
 
   // The username to select, if present on the device:
-  username?: string
+  username?: string,
+
+  // Call that overwrites the internal checkAndRequestNotifications function. Executed on Login initialization:
+  customPermissionsFunction?: () => void
 }
 
 export class LoginScreen extends React.Component<Props> {
@@ -61,7 +64,8 @@ export class LoginScreen extends React.Component<Props> {
           onLogin: this.props.onLogin,
           recoveryKey: this.props.recoveryLogin,
           skipSecurityAlerts: this.props.skipSecurityAlerts,
-          username: this.props.username
+          username: this.props.username,
+          customPermissionsFunction: this.props.customPermissionsFunction
         }}
         initialAction={initializeLogin()}
       >

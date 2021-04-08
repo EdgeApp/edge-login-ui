@@ -82,4 +82,17 @@ RCT_REMAP_METHOD(getSupportedBiometryType, getSupportedBiometryType:(RCTPromiseR
     resolve(value);
 }
 
+RCT_REMAP_METHOD(backgroundAppRefreshStatus, backgroundAppRefreshStatus:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+    if ([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusAvailable) {
+      resolve(@"granted"); // Background updates are available for the app.
+    }else if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusDenied)
+    {
+      resolve(@"blocked"); // The user explicitly disabled background behavior for this app.
+    }else if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusRestricted)
+    {
+      resolve(@"unavailable"); // Background updates are unavailable and the user cannot enable them again. For example, this status can occur when parental controls are in effect for the current user.
+    }
+}
 @end

@@ -25,7 +25,8 @@ export type Imports = {|
   +onLogin?: OnLogin,
   +recoveryKey?: string,
   +skipSecurityAlerts?: boolean,
-  +username?: string | null
+  +username?: string | null,
+  +customPermissionsFunction?: () => void
 |}
 
 export type GetState = () => RootState

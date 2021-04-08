@@ -36,6 +36,14 @@ export type Theme = {|
   secondaryButton: string,
   secondaryButtonText: string,
 
+  alertModalPrimaryButtonOutline: string,
+  alertModalPrimaryButton: string,
+  alertModalPrimaryButtonText: string,
+
+  alertModalTertiaryButtonOutline: string,
+  alertModalTertiaryButton: string,
+  alertModalTertiaryButtonText: string,
+
   // Dropdown colors:
   dropdownWarning: string,
   dropdownError: string,

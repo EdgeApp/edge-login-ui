@@ -391,4 +391,10 @@ public class AbcCoreJsUiModule extends ReactContextBaseJavaModule {
       promise.reject(e);
     }
   }
+
+  // Function should only be used in iOS and not available on android. Resolve with a unavailable if ever, meaning not available on this device
+  @ReactMethod
+  public void backgroundAppRefreshStatus(Promise promise) {
+    promise.resolve("unavailable");
+  }
 }

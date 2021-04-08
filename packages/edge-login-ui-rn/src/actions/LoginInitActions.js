@@ -1,8 +1,17 @@
 // @flow
 
+import { makeReactNativeDisklet } from 'disklet'
 import { type EdgeLoginMessages } from 'edge-core-js'
 import * as React from 'react'
+import { NativeModules, Platform } from 'react-native'
+import {
+  checkNotifications,
+  openSettings,
+  requestNotifications,
+  RESULTS
+} from 'react-native-permissions'
 
+import { PermissionsAlertModal } from '../components/modals/PermissionsAlertModal.js'
 import { SecurityAlertsModal } from '../components/modals/SecurityAlertsModal.js'
 import { Airship } from '../components/services/AirshipInstance.js'
 import { getSupportedBiometryType } from '../keychain.js'
@@ -14,6 +23,11 @@ import {
 import { launchPasswordRecovery } from './LoginAction.js'
 import { getPreviousUsers } from './PreviousUsersActions.js'
 
+const { AbcCoreJsUi } = NativeModules
+
+const disklet = makeReactNativeDisklet()
+const permissionsUserFile = 'notificationsPermisions.json'
+
 /**
  * Fires off all the things we need to do to get the login scene up & running.
  */
@@ -22,9 +36,15 @@ export const initializeLogin = () => async (
   getState: GetState,
   imports: Imports
 ) => {
+  const { customPermissionsFunction } = imports
   const touchPromise = dispatch(getTouchMode())
   const usersPromise = dispatch(getPreviousUsers())
   dispatch(checkSecurityMessages()).catch(error => console.log(error))
+  customPermissionsFunction
+    ? customPermissionsFunction()
+    : dispatch(checkAndRequestNotifications()).catch(error =>
+        console.log(error)
+      )
 
   await Promise.all([touchPromise, usersPromise])
   const state = getState()
@@ -81,6 +101,59 @@ const checkSecurityMessages = () => async (
         }
       />
     ))
+  }
+}
+
+const checkAndRequestNotifications = () => async (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  const notificationPermision = await checkNotifications().catch(error =>
+    console.log(error)
+  )
+  const notificationStatus = notificationPermision.status
+  const isIos = Platform.OS === 'ios'
+  const statusAppRefresh = isIos
+    ? await AbcCoreJsUi.backgroundAppRefreshStatus().catch(error =>
+        console.log(error)
+      )
+    : undefined
+  const userPermisionStatus = await disklet
+    .getText(permissionsUserFile)
+    .catch(error => console.log(error))
+  const isNotificationBlocked = userPermisionStatus
+    ? JSON.parse(userPermisionStatus).isNotificationBlocked
+    : false
+
+  if (
+    (notificationStatus === RESULTS.BLOCKED ||
+      notificationStatus === RESULTS.DENIED ||
+      statusAppRefresh === RESULTS.BLOCKED) &&
+    !isNotificationBlocked
+  ) {
+    Airship.show(bridge => <PermissionsAlertModal bridge={bridge} />).then(
+      result => {
+        if (result === 'cancel') {
+          return disklet.setText(
+            permissionsUserFile,
+            JSON.stringify({ isNotificationBlocked: true })
+          )
+        }
+        if (result === 'enable' && notificationStatus === RESULTS.DENIED) {
+          requestNotifications(
+            isIos ? ['alert', 'badge', 'sound'] : undefined
+          ).catch(error => console.log(error))
+        }
+        if (
+          result === 'enable' &&
+          (notificationStatus === RESULTS.BLOCKED ||
+            statusAppRefresh === RESULTS.BLOCKED)
+        ) {
+          openSettings().catch(error => console.log(error))
+        }
+      }
+    )
   }
 }
 

@@ -12,6 +12,15 @@ import {
 } from '../../util/sides.js'
 import { type Theme, useTheme } from '../services/ThemeContext.js'
 
+export const BUTTON_TYPE = {
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary'
+}
+
+export type AlertModalButtonType = {
+  type: typeof BUTTON_TYPE.PRIMARY | typeof BUTTON_TYPE.SECONDARY
+}
+
 type Props = {
   children?: React.Node,
   onPress?: () => void,
@@ -83,6 +92,42 @@ export function SecondaryButton(props: Props) {
   )
 }
 
+export function AlertModalButton(props: Props & AlertModalButtonType) {
+  const {
+    children,
+    label,
+    marginRem,
+    onPress,
+    paddingRem,
+    spinner,
+    type
+  } = props
+  const theme = useTheme()
+  const styles = getStyles(theme)
+  const buttonStyle =
+    type === 'secondary'
+      ? styles.alertModalSecondaryButton
+      : styles.alertModalPrimaryButton
+  const textStyle =
+    type === 'secondary'
+      ? styles.alertModalSecondaryText
+      : styles.alertModalPrimaryText
+
+  const spacingStyles = {
+    ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
+    ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
+  }
+  return (
+    <TouchableOpacity style={[buttonStyle, spacingStyles]} onPress={onPress}>
+      {label != null ? <Text style={textStyle}>{label}</Text> : null}
+      {spinner != null ? (
+        <ActivityIndicator color={textStyle} style={styles.spinner} />
+      ) : null}
+      {children}
+    </TouchableOpacity>
+  )
+}
+
 const getStyles = cacheStyles((theme: Theme) => {
   const commonButton = {
     alignItems: 'center',
@@ -117,6 +162,26 @@ const getStyles = cacheStyles((theme: Theme) => {
     secondaryText: {
       ...commonText,
       color: theme.secondaryButtonText
+    },
+
+    alertModalPrimaryButton: {
+      ...commonButton,
+      backgroundColor: theme.alertModalPrimaryButton,
+      borderColor: theme.alertModalPrimaryButtonOutline
+    },
+    alertModalPrimaryText: {
+      ...commonText,
+      color: theme.alertModalPrimaryButtonText
+    },
+
+    alertModalSecondaryButton: {
+      ...commonButton,
+      backgroundColor: theme.alertModalTertiaryButton,
+      borderColor: theme.alertModalTertiaryButtonOutline
+    },
+    alertModalSecondaryText: {
+      ...commonText,
+      color: theme.alertModalTertiaryButtonText
     },
 
     spinner: { height: theme.rem(2) }
