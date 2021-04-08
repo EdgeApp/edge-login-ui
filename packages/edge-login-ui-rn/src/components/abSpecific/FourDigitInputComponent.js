@@ -15,6 +15,8 @@ import type { Dispatch, RootState } from '../../types/ReduxTypes.js'
 import { scale } from '../../util/scaling.js'
 import { connect } from '../services/ReduxStore.js'
 
+const MAX_PIN_LENGTH = 4
+
 type OwnProps = {}
 type StateProps = {
   error: string,
@@ -59,8 +61,8 @@ class FourDigitInputComponent extends React.Component<Props> {
           ref={this.loadedInput}
           style={styles.input}
           onChangeText={this.handleUpdate}
-          maxLength={4}
-          keyboardType="numeric"
+          maxLength={MAX_PIN_LENGTH}
+          keyboardType="number-pad"
           value={this.props.pin}
           autoFocus
           keyboardShouldPersistTaps
@@ -89,8 +91,11 @@ class FourDigitInputComponent extends React.Component<Props> {
     )
   }
 
-  handleUpdate = (arg: string) => {
-    this.props.onChangeText({ username: this.props.username, pin: arg })
+  handleUpdate = (pin: string) => {
+    // Change pin only when input are numbers
+    if (/^\d+$/.test(pin) || pin.length === 0) {
+      this.props.onChangeText({ username: this.props.username, pin })
+    }
   }
 }
 
