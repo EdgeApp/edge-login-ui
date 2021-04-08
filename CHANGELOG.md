@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.8.3 (2021-04-07)
+
+- rn: Prompt for notification permissions to support security features
+- rn: Restrict PIN input to numbers only
+- rn: Show error when recovery questions match
+
 ## 0.8.2 (2021-04-06)
 
 - rn: Port all password recovery modals to the new theming system.
