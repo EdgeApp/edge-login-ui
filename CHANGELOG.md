@@ -1,8 +1,13 @@
 # edge-login-ui
 
+## 0.9.0 (2021-04-12)
+
+- rn: Update modal colors
+
 ## 0.8.3 (2021-04-07)
 
-- rn: Prompt for notification permissions to support security features
+- *Breaking change: This release contains a breaking change that was not indicated in the minor version update*:
+  - rn: Prompt for notification permissions to support security features
 - rn: Restrict PIN input to numbers only
 - rn: Show error when recovery questions match
 
