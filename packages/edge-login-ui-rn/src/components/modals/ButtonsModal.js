@@ -13,7 +13,7 @@ import { PrimaryButton, SecondaryButton } from '../themed/ThemedButtons.js'
 import { ThemedModal } from '../themed/ThemedModal.js'
 import { MessageText, TitleText } from '../themed/ThemedText.js'
 
-type ButtonInfo = {
+export type ButtonInfo = {
   label: string,
   type?: PromiseButtonType,
 
