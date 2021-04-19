@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.1 (2021-04-19)
+
+- rn: Disable the password recovery email on Android. This works around a tricky crash in the React Native rendering code.
+
 ## 0.9.0 (2021-04-12)
 
 - rn: Update modal colors
