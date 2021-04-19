@@ -19,6 +19,7 @@ const MAX_PIN_LENGTH = 4
 
 type OwnProps = {}
 type StateProps = {
+  testID?: string,
   error: string,
   pin: string,
   username: string,
@@ -58,6 +59,7 @@ class FourDigitInputComponent extends React.Component<Props> {
     if (this.props.wait < 1) {
       return (
         <TextInput
+          testID={this.props.testID}
           ref={this.loadedInput}
           style={styles.input}
           onChangeText={this.handleUpdate}

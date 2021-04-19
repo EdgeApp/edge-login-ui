@@ -41,11 +41,13 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
             </View>
             <View style={NewAccountReviewScreenStyle.detailsContainer}>
               <AccountInfo
+                testID="accountInfoText"
                 style={NewAccountReviewScreenStyle.accountDetailsBox}
               />
               <View style={NewAccountReviewScreenStyle.shim} />
             </View>
             <Button
+              testID="nextButton"
               onPress={this.handleNext}
               downStyle={NewAccountReviewScreenStyle.nextButton.downStyle}
               downTextStyle={

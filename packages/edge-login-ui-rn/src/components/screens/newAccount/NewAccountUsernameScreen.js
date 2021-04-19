@@ -67,11 +67,13 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
               </T>
             </View>
             <UsernameConnector
+              testID='usernameInput'
               style={NewAccountUsernameScreenStyle.inputBox}
               onFinish={this.handleNext}
             />
             <View style={NewAccountUsernameScreenStyle.shim} />
             <Button
+              testID='nextButton'
               onPress={this.handleNext}
               downStyle={NewAccountUsernameScreenStyle.nextButton.downStyle}
               downTextStyle={

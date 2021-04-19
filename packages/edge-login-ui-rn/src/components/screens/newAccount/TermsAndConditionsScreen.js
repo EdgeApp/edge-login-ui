@@ -48,6 +48,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
     return terms.map(Item => (
       <View style={style.checkboxContainer} key={Item.title}>
         <Checkbox
+          testID="termsCB"
           style={style.checkboxes}
           label={Item.title}
           onChange={this.handleStatusChange}
@@ -88,6 +89,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
           </Text>
           <View style={style.shim} />
           <Button
+            testID="confirmAndFinishButton"
             onPress={this.handleNextPress}
             downStyle={style.nextButton.downStyle}
             downTextStyle={style.nextButton.downTextStyle}

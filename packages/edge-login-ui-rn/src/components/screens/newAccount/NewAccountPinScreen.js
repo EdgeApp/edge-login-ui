@@ -75,10 +75,11 @@ class NewAccountPinScreenComponent extends React.Component<Props, State> {
               </Text>
             </View>
             <View style={SetAccountPinScreenStyle.row2}>
-              <FourDigitInput />
+              <FourDigitInput testID="pinInput" />
             </View>
             <View style={SetAccountPinScreenStyle.row3}>
               <Button
+                testID="nextButton"
                 onPress={this.handleNext}
                 downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
                 downTextStyle={

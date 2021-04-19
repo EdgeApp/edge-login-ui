@@ -6,6 +6,7 @@ import { TextField } from 'react-native-material-textfield'
 import { InputStyles } from '../../styles/common/InputStyles.js'
 
 type Props = {
+  testID?: string,
   label: string,
   value: string,
   error?: string,
@@ -83,6 +84,7 @@ export class MaterialInput extends React.Component<Props, State> {
         : this.props.autoCorrect
     return (
       <TextField
+        testID={this.props.testID}
         ref={this.addRef}
         label={this.props.label}
         value={value}

@@ -87,12 +87,14 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
       <View style={styles.innerView}>
         <PasswordStatus />
         <PasswordConnector
+          testID='passwordInput'
           label={s.strings.password}
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}
           onFinish={this.handleFocusSwitch}
         />
         <PasswordConfirmConnector
+          testID='confirmPasswordInput'
           label={s.strings.confirm_password}
           style={styles.inputBox}
           autoFocus={this.state.focusSecond}
@@ -100,6 +102,7 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
         />
         <View style={styles.passwordShim} />
         <Button
+          testID='nextButton'
           onPress={this.handleNext}
           downStyle={styles.nextButton.downStyle}
           downTextStyle={styles.nextButton.downTextStyle}
