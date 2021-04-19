@@ -2,7 +2,7 @@
 
 import { type EdgeAccount, type EdgeRecoveryQuestionChoice } from 'edge-core-js'
 import * as React from 'react'
-import { Dimensions, View } from 'react-native'
+import { Dimensions, Platform, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {
@@ -22,7 +22,7 @@ import { Header } from '../../common/Header.js'
 import { DropDownList, FormField } from '../../common/index.js'
 import { TextRowComponent } from '../../common/ListItems/TextRowComponent.js'
 import { TextAndIconButton } from '../../common/TextAndIconButton.js'
-import { ButtonsModal } from '../../modals/ButtonsModal.js'
+import { type ButtonInfo, ButtonsModal } from '../../modals/ButtonsModal.js'
 import { TextInputModal } from '../../modals/TextInputModal.js'
 import { Airship, showError } from '../../services/AirshipInstance.js'
 import { connect } from '../../services/ReduxStore.js'
@@ -156,68 +156,25 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   }
 
   async enableRecovery(): Promise<void> {
-    const { account, onDone } = this.props
+    const buttons: { [key: string]: ButtonInfo } = {
+      email: {
+        label: s.strings.confirm_email,
+        onPress: this.handleEnableEmail
+      },
+      share: {
+        label: s.strings.confirm_share,
+        onPress: this.handleEnableShare
+      },
+      cancel: { label: s.strings.cancel, type: 'secondary' }
+    }
+    if (Platform.OS === 'android') delete buttons.email
 
     // Ask which way to send the key:
     await Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}
         title={s.strings.confirm_recovery_questions}
-        buttons={{
-          email: {
-            label: s.strings.confirm_email,
-            onPress: async () => {
-              const emailAddress = await Airship.show(bridge => (
-                <TextInputModal
-                  bridge={bridge}
-                  title={s.strings.save_recovery_token}
-                  message={s.strings.recovery_instructions_complete}
-                  inputLabel={s.strings.email_address}
-                  submitLabel={s.strings.next_label}
-                  keyboardType="email-address"
-                  returnKeyType="go"
-                />
-              ))
-              if (emailAddress == null) return false
-              const recoveryKey = await account.changeRecovery(
-                [this.state.question1, this.state.question2],
-                [this.state.answer1, this.state.answer2]
-              )
-              try {
-                await sendRecoveryEmail(
-                  emailAddress,
-                  account.username,
-                  recoveryKey
-                )
-              } catch (error) {
-                await Airship.show(bridge => (
-                  <ButtonsModal
-                    bridge={bridge}
-                    title={s.strings.send_email_error_header}
-                    message={s.strings.email_error_modal}
-                    buttons={{ ok: { label: s.strings.ok } }}
-                  />
-                ))
-                return false
-              }
-              onDone()
-              return true
-            }
-          },
-          share: {
-            label: s.strings.confirm_share,
-            onPress: async () => {
-              const recoveryKey = await account.changeRecovery(
-                [this.state.question1, this.state.question2],
-                [this.state.answer1, this.state.answer2]
-              )
-              await shareRecovery(account.username, recoveryKey)
-              onDone()
-              return true
-            }
-          },
-          cancel: { label: s.strings.cancel, type: 'secondary' }
-        }}
+        buttons={buttons}
       >
         <MessageText>{this.state.question1}</MessageText>
         <MessageText>
@@ -229,6 +186,54 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         </MessageText>
       </ButtonsModal>
     ))
+  }
+
+  handleEnableEmail = async (): Promise<boolean> => {
+    const { account, onDone } = this.props
+
+    const emailAddress = await Airship.show(bridge => (
+      <TextInputModal
+        bridge={bridge}
+        title={s.strings.save_recovery_token}
+        message={s.strings.recovery_instructions_complete}
+        inputLabel={s.strings.email_address}
+        submitLabel={s.strings.next_label}
+        keyboardType="email-address"
+        returnKeyType="go"
+      />
+    ))
+    if (emailAddress == null) return false
+    const recoveryKey = await account.changeRecovery(
+      [this.state.question1, this.state.question2],
+      [this.state.answer1, this.state.answer2]
+    )
+    try {
+      await sendRecoveryEmail(emailAddress, account.username, recoveryKey)
+    } catch (error) {
+      await Airship.show(bridge => (
+        <ButtonsModal
+          bridge={bridge}
+          title={s.strings.send_email_error_header}
+          message={s.strings.email_error_modal}
+          buttons={{ ok: { label: s.strings.ok } }}
+        />
+      ))
+      return false
+    }
+    onDone()
+    return true
+  }
+
+  handleEnableShare = async (): Promise<boolean> => {
+    const { account, onDone } = this.props
+
+    const recoveryKey = await account.changeRecovery(
+      [this.state.question1, this.state.question2],
+      [this.state.answer1, this.state.answer2]
+    )
+    await shareRecovery(account.username, recoveryKey)
+    onDone()
+    return true
   }
 
   async disableRecovery(): Promise<void> {
