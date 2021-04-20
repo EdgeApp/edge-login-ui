@@ -5,6 +5,7 @@ import * as React from 'react'
 import { MaterialInput } from './MaterialInput.js'
 
 type Props = {
+  testID?: string,
   style: Object,
   label: string,
   value: string,
@@ -51,6 +52,7 @@ class FormField extends React.Component<Props, State> {
     } = this.props.style
     return (
       <MaterialInput
+        testID={this.props.testID}
         label={this.props.label}
         value={this.props.value}
         onChangeText={this.props.onChangeText}

@@ -11,7 +11,8 @@ import { TextAndIconButton } from '../common/TextAndIconButton.js'
 import { connect } from '../services/ReduxStore.js'
 
 type OwnProps = {
-  style: Object
+  style: Object,
+  testID?: string
 }
 type StateProps = {
   username?: string,
@@ -149,6 +150,7 @@ class AccountInfoComponent extends React.Component<Props, State> {
     return (
       <View style={style.top}>
         <TextAndIconButton
+          testID={this.props.testID}
           style={style.textIconButton}
           icon={icon}
           onPress={this.handlePress}

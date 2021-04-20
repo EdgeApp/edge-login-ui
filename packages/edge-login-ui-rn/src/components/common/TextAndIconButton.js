@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 
 type Props = {
+  testID?: string,
   icon: React.Node,
   style: any,
   onPress: Function,
@@ -32,7 +33,8 @@ class TextAndIconButton extends React.Component<Props, State> {
       text
     } = this.props.style
     return (
-      <TouchableOpacity style={container} onPress={this.props.onPress}>
+      <TouchableOpacity testID={this.props.testID} style={container} onPress={this.props.onPress}>
+
         <View style={centeredContent}>
           <View style={inner}>
             <View style={textContainer}>

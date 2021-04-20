@@ -53,6 +53,7 @@ class LandingScreenComponent extends React.Component<Props> {
           </View>
           <View style={LandingScreenStyle.featureBoxButtons}>
             <Button
+              testID="createAccountButton"
               onPress={this.props.handleCreate}
               label={s.strings.landing_create_account_button}
               downStyle={LandingScreenStyle.createButton.downStyle}

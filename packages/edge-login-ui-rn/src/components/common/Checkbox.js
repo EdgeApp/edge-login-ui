@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Image, Text, TouchableWithoutFeedback, View } from 'react-native'
 
 type Props = {
+  testID?: string,
   style: any,
   label: string,
   checkedImage: string,
@@ -52,6 +53,7 @@ class Checkbox extends React.Component<Props, State> {
     const style = this.props.style
     return (
       <TouchableWithoutFeedback
+        testID={this.props.testID}
         onPress={this.handlePress}
         disabled={this.props.disabled}
       >
