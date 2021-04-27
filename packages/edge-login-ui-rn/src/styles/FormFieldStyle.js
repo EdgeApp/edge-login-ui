@@ -1,7 +1,7 @@
 // @flow
 
-import * as Constants from '../../constants/index.js'
-import { scale } from '../../util/scaling.js'
+import * as Constants from '../constants/index.js'
+import { scale } from '../util/scaling.js'
 
 // Login Screen
 const LOGIN_LABEL_WIDTH = '70%'
