@@ -1,7 +1,7 @@
 // @flow
 
 import { type EdgeAccount } from 'edge-core-js'
-import { type Reducer, combineReducers } from 'redux'
+import { combineReducers } from 'redux'
 
 import { type Action } from '../types/ReduxTypes.js'
 import { type CreateState, create } from './CreateUserReducer.js'
@@ -30,7 +30,10 @@ export type RootState = {
   +touch: 'FaceID' | 'TouchID' | false
 }
 
-export const rootReducer: Reducer<RootState, Action> = combineReducers({
+export const rootReducer: (
+  state: RootState | void,
+  action: Action
+) => RootState = combineReducers({
   create,
   login,
   passwordRecovery,

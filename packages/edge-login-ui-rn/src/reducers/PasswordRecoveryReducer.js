@@ -1,7 +1,6 @@
 // @flow
 
 import { type EdgeRecoveryQuestionChoice } from 'edge-core-js'
-import { type Reducer } from 'redux'
 
 import { type Action } from '../types/ReduxTypes.js'
 
@@ -16,10 +15,10 @@ const initialState: PasswordRecoveryState = {
   userQuestions: []
 }
 
-export const passwordRecovery: Reducer<
-  PasswordRecoveryState,
-  Action
-> = function (state = initialState, action) {
+export function passwordRecovery(
+  state: PasswordRecoveryState = initialState,
+  action: Action
+): PasswordRecoveryState {
   switch (action.type) {
     case 'START_CHANGE_RECOVERY':
       return {

@@ -1,7 +1,6 @@
 // @flow
 
 import { type EdgePasswordRules } from 'edge-core-js'
-import { type Reducer } from 'redux'
 
 import { type Action } from '../types/ReduxTypes.js'
 
@@ -33,10 +32,10 @@ const initialState: CreateState = {
   createErrorMessage: null
 }
 
-export const create: Reducer<CreateState, Action> = function (
-  state = initialState,
-  action
-) {
+export function create(
+  state: CreateState = initialState,
+  action: Action
+): CreateState {
   switch (action.type) {
     case 'CREATE_ACCOUNT_FAIL':
       return { ...state, createErrorMessage: action.data }

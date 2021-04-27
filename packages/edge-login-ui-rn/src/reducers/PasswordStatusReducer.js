@@ -1,7 +1,5 @@
 // @flow
 
-import { type Reducer } from 'redux'
-
 import s from '../common/locales/strings.js'
 import { type Action } from '../types/ReduxTypes.js'
 
@@ -11,10 +9,10 @@ export type PasswordStatusState = {
   +list: Object[]
 }
 
-export const passwordStatus: Reducer<
-  PasswordStatusState | null,
-  Action
-> = function (state = null, action) {
+export function passwordStatus(
+  state: PasswordStatusState | null = null,
+  action: Action
+): PasswordStatusState | null {
   switch (action.type) {
     case 'AUTH_UPDATE_PASSWORD': {
       const status = action.data.passwordStatus
