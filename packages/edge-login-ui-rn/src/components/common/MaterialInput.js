@@ -123,7 +123,7 @@ export class MaterialInput extends React.Component<Props, State> {
     this.props.onChangeText(text)
   }
 
-  handleSubmitEditing = (event: any) => {
+  handleSubmitEditing = (): void => {
     if (this.props.onSubmitEditing) {
       this.props.onSubmitEditing()
     }

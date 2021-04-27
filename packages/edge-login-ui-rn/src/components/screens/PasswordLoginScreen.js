@@ -91,7 +91,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
       loggingIn: true
     })
 
-    const attempt = { type: 'password', username, password }
+    const attempt: LoginAttempt = { type: 'password', username, password }
     login(attempt)
       .catch(error => {
         if (error != null && error.name === 'OtpError') {
@@ -246,7 +246,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  renderRow = (data: Object) => {
+  renderRow = (data: { item: string }) => {
     return (
       <UserListItem
         data={data.item}

@@ -11,6 +11,12 @@ import { logEvent } from '../util/analytics.js'
 import { isASCII } from '../util/ASCIIUtil.js'
 import { getPreviousUsers, setMostRecentUsers } from './PreviousUsersActions.js'
 
+export type CreateUserData = {
+  username: string,
+  password: string,
+  pin: string
+}
+
 export function validatePin(pin: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     let error = null
@@ -127,7 +133,7 @@ export function validatePassword(data: string) {
   }
 }
 
-export function createUser(data: Object) {
+export function createUser(data: CreateUserData) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context } = imports
     dispatch({ type: 'WORKFLOW_NEXT' })

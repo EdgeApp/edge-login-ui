@@ -67,7 +67,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
     this.setState({ errorOne, errorTwo })
     if (errorOne || errorTwo) return
 
-    const attempt = {
+    const attempt: LoginAttempt = {
       type: 'recovery',
       recoveryKey,
       username,

@@ -191,7 +191,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   handleEnableEmail = async (): Promise<boolean> => {
     const { account, onDone } = this.props
 
-    const emailAddress = await Airship.show(bridge => (
+    const emailAddress: string | void = await Airship.show(bridge => (
       <TextInputModal
         bridge={bridge}
         title={s.strings.save_recovery_token}

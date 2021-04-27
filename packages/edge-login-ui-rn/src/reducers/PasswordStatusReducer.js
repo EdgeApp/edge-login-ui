@@ -6,7 +6,7 @@ import { type Action } from '../types/ReduxTypes.js'
 export type PasswordStatusState = {
   +secondsToCrack: string,
   +passed: boolean,
-  +list: Object[]
+  +list: Array<{ title: string, value: boolean }>
 }
 
 export function passwordStatus(

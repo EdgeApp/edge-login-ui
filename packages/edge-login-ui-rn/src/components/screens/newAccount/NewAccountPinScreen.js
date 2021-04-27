@@ -3,7 +3,10 @@
 import * as React from 'react'
 import { Alert, Text, View } from 'react-native'
 
-import { createUser } from '../../../actions/CreateAccountActions.js'
+import {
+  type CreateUserData,
+  createUser
+} from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
@@ -25,7 +28,7 @@ type StateProps = {
   username: string
 }
 type DispatchProps = {
-  createUser(data: Object): void,
+  createUser(data: CreateUserData): void,
   onBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps
@@ -166,7 +169,7 @@ export const NewAccountPinScreen = connect<StateProps, DispatchProps, OwnProps>(
     username: state.create.username || ''
   }),
   (dispatch: Dispatch) => ({
-    createUser(data: Object) {
+    createUser(data: CreateUserData) {
       dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
       dispatch(createUser(data))
     },

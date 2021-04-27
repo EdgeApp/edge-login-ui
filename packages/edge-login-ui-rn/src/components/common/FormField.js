@@ -70,7 +70,7 @@ export class FormField extends React.Component<Props> {
     )
   }
 
-  handleSubmitEditing = (event: any) => {
+  handleSubmitEditing = (): void => {
     if (this.props.onSubmitEditing) {
       this.props.onSubmitEditing()
     }
