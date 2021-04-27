@@ -15,7 +15,6 @@ import {
   passwordStatus
 } from './PasswordStatusReducer'
 import { type PreviousUsersState, previousUsers } from './PreviousUsersReducer'
-import { type TermsState, terms } from './TermsAndConditinsReducer'
 import { type WorkflowState, workflow } from './WorkflowReducer'
 
 export type RootState = {
@@ -24,7 +23,6 @@ export type RootState = {
   passwordRecovery: PasswordRecoveryState,
   passwordStatus: PasswordStatusState | null,
   previousUsers: PreviousUsersState,
-  terms: TermsState,
   workflow: WorkflowState,
 
   // Local reducers:
@@ -38,7 +36,6 @@ export const rootReducer: Reducer<RootState, Action> = combineReducers({
   passwordRecovery,
   passwordStatus,
   previousUsers,
-  terms,
   workflow,
 
   account(
