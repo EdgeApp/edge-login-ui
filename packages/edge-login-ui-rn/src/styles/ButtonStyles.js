@@ -9,7 +9,7 @@ const BUTTON_WIDTH_1 = '70%'
 const BUTTON_BORDER_STROKE = 1
 const BUTTON_BORDER_RADIUS = 3
 
-const PrimaryButtonUpStyle = {
+export const PrimaryButtonUpStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_UP,
   width: BUTTON_WIDTH_1,
@@ -19,11 +19,11 @@ const PrimaryButtonUpStyle = {
   borderRadius: scale(BUTTON_BORDER_RADIUS)
 }
 
-const PrimaryWidthButtonUpStyle = {
+export const PrimaryWidthButtonUpStyle = {
   ...PrimaryButtonUpStyle,
   width: '100%'
 }
-const PrimaryButtonUpTextStyle = {
+export const PrimaryButtonUpTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
@@ -31,7 +31,7 @@ const PrimaryButtonUpTextStyle = {
   width: '100%',
   textAlign: 'center'
 }
-const PrimaryButtonDownTextStyle = {
+export const PrimaryButtonDownTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
@@ -39,7 +39,7 @@ const PrimaryButtonDownTextStyle = {
   width: '100%',
   textAlign: 'center'
 }
-const PrimaryButtonDownStyle = {
+export const PrimaryButtonDownStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_DOWN,
   width: BUTTON_WIDTH_1,
@@ -48,11 +48,11 @@ const PrimaryButtonDownStyle = {
   justifyContent: 'space-around',
   borderRadius: scale(BUTTON_BORDER_RADIUS)
 }
-const PrimaryWidthButtonDownStyle = {
+export const PrimaryWidthButtonDownStyle = {
   ...PrimaryButtonDownStyle,
   width: '100%'
 }
-const SecondaryButtonUpStyle = {
+export const SecondaryButtonUpStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_SECONDARY_UP,
   width: BUTTON_WIDTH_1,
@@ -62,7 +62,7 @@ const SecondaryButtonUpStyle = {
   borderRadius: scale(BUTTON_BORDER_RADIUS)
 }
 
-const SecondaryButtonDownStyle = {
+export const SecondaryButtonDownStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_SECONDARY_DOWN,
   width: BUTTON_WIDTH_1,
@@ -71,7 +71,7 @@ const SecondaryButtonDownStyle = {
   justifyContent: 'space-around',
   borderRadius: scale(BUTTON_BORDER_RADIUS)
 }
-const SecondaryButtonUpTextStyle = {
+export const SecondaryButtonUpTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
   fontFamily: Constants.FONTS.fontFamilyRegular,
@@ -79,7 +79,7 @@ const SecondaryButtonUpTextStyle = {
   width: '100%',
   textAlign: 'center'
 }
-const SecondaryButtonDownTextStyle = {
+export const SecondaryButtonDownTextStyle = {
   position: 'relative',
   color: Constants.WHITE,
   fontFamily: Constants.FONTS.fontFamilyRegular,
@@ -88,7 +88,7 @@ const SecondaryButtonDownTextStyle = {
   textAlign: 'center'
 }
 
-const TertiaryButtonUpStyle = {
+export const TertiaryButtonUpStyle = {
   backgroundColor: Constants.TRANSPARENT,
   width: BUTTON_WIDTH_1,
   height: scale(BUTTON_HEIGHT),
@@ -99,7 +99,7 @@ const TertiaryButtonUpStyle = {
   borderWidth: BUTTON_BORDER_STROKE
 }
 
-const TertiaryButtonTextUpStyle = {
+export const TertiaryButtonTextUpStyle = {
   color: Constants.ACCENT_MINT,
   fontSize: scale(22),
   fontFamily: Constants.FONTS.fontFamilyRegular,
@@ -107,7 +107,7 @@ const TertiaryButtonTextUpStyle = {
   textAlign: 'center'
 }
 
-const TertiaryButtonDownStyle = {
+export const TertiaryButtonDownStyle = {
   backgroundColor: Constants.ACCENT_MINT,
   width: BUTTON_WIDTH_1,
   height: scale(BUTTON_HEIGHT),
@@ -118,7 +118,7 @@ const TertiaryButtonDownStyle = {
   borderWidth: BUTTON_BORDER_STROKE
 }
 
-const TertiaryButtonTextDownStyle = {
+export const TertiaryButtonTextDownStyle = {
   color: Constants.PRIMARY,
   fontSize: scale(22),
   fontFamily: Constants.FONTS.fontFamilyRegular,
@@ -126,7 +126,7 @@ const TertiaryButtonTextDownStyle = {
   textAlign: 'center'
 }
 
-const DefaultButtonUpStyle = {
+export const DefaultButtonUpStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_DEFAULT_UP,
   width: BUTTON_WIDTH_1,
@@ -138,12 +138,12 @@ const DefaultButtonUpStyle = {
   borderRadius: scale(BUTTON_BORDER_RADIUS)
 }
 
-const DefaultWidthButtonUpStyle = {
+export const DefaultWidthButtonUpStyle = {
   ...DefaultButtonUpStyle,
   width: '100%'
 }
 
-const DefaultButtonUpTextStyle = {
+export const DefaultButtonUpTextStyle = {
   position: 'relative',
   color: Constants.BUTTON_DEFAULT_UP_TEXT,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
@@ -151,7 +151,7 @@ const DefaultButtonUpTextStyle = {
   width: '100%',
   textAlign: 'center'
 }
-const DefaultButtonDownTextStyle = {
+export const DefaultButtonDownTextStyle = {
   position: 'relative',
   color: Constants.BUTTON_DEFAULT_DOWN_TEXT,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
@@ -160,7 +160,7 @@ const DefaultButtonDownTextStyle = {
   textAlign: 'center'
 }
 
-const DefaultButtonDownStyle = {
+export const DefaultButtonDownStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_DEFAULT_UP,
   width: BUTTON_WIDTH_1,
@@ -172,17 +172,17 @@ const DefaultButtonDownStyle = {
   borderRadius: scale(BUTTON_BORDER_RADIUS)
 }
 
-const DefaultWidthButtonDownStyle = {
+export const DefaultWidthButtonDownStyle = {
   ...DefaultButtonDownStyle,
   width: '100%'
 }
 
-const TextOnlyButtonUpStyle = {
+export const TextOnlyButtonUpStyle = {
   backgroundColor: Constants.TRANSPARENT,
   padding: scale(10)
 }
 
-const TextOnlyButtonTextUpStyle = {
+export const TextOnlyButtonTextUpStyle = {
   color: Constants.SECONDARY,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
@@ -190,12 +190,12 @@ const TextOnlyButtonTextUpStyle = {
   textAlign: 'center'
 }
 
-const TextOnlyButtonDownStyle = {
+export const TextOnlyButtonDownStyle = {
   backgroundColor: Constants.TRANSPARENT,
   padding: scale(10)
 }
 
-const TextOnlyButtonTextDownStyle = {
+export const TextOnlyButtonTextDownStyle = {
   color: Constants.PRIMARY,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
@@ -203,7 +203,7 @@ const TextOnlyButtonTextDownStyle = {
   textAlign: 'center'
 }
 
-const IconButtonStyle = {
+export const IconButtonStyle = {
   container: {
     width: 40,
     height: scale(40),
@@ -220,7 +220,7 @@ const IconButtonStyle = {
   underlayColor: Constants.TRANSPARENT
 }
 
-const TextAndIconButtonStyle = {
+export const TextAndIconButtonStyle = {
   container: {
     width: '100%',
     height: '100%',
@@ -262,7 +262,7 @@ const TextAndIconButtonStyle = {
   iconSize: scale(25),
   underlayColor: Constants.TRANSPARENT
 }
-const TextAndIconButtonAlignEdgesStyle = {
+export const TextAndIconButtonAlignEdgesStyle = {
   container: {
     width: '100%',
     height: '100%',
@@ -307,7 +307,7 @@ const TextAndIconButtonAlignEdgesStyle = {
   underlayColor: Constants.TRANSPARENT
 }
 
-const PrimaryButtonUpScaledStyle = {
+export const PrimaryButtonUpScaledStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_UP,
   width: BUTTON_WIDTH_1,
@@ -316,11 +316,11 @@ const PrimaryButtonUpScaledStyle = {
   justifyContent: 'space-around',
   borderRadius: scale(BUTTON_BORDER_RADIUS)
 }
-const PrimaryWidthButtonUpScaledStyle = {
+export const PrimaryWidthButtonUpScaledStyle = {
   ...PrimaryButtonUpStyle,
   width: '100%'
 }
-const PrimaryButtonUpTextScaledStyle = {
+export const PrimaryButtonUpTextScaledStyle = {
   position: 'relative',
   color: Constants.WHITE,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
@@ -328,7 +328,7 @@ const PrimaryButtonUpTextScaledStyle = {
   width: '100%',
   textAlign: 'center'
 }
-const PrimaryButtonDownTextScaledStyle = {
+export const PrimaryButtonDownTextScaledStyle = {
   position: 'relative',
   color: Constants.WHITE,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
@@ -336,7 +336,7 @@ const PrimaryButtonDownTextScaledStyle = {
   width: '100%',
   textAlign: 'center'
 }
-const PrimaryButtonDownScaledStyle = {
+export const PrimaryButtonDownScaledStyle = {
   position: 'relative',
   backgroundColor: Constants.BUTTON_PRIMARY_DOWN,
   width: BUTTON_WIDTH_1,
@@ -345,17 +345,17 @@ const PrimaryButtonDownScaledStyle = {
   justifyContent: 'space-around',
   borderRadius: scale(BUTTON_BORDER_RADIUS)
 }
-const PrimaryWidthButtonDownScaledStyle = {
+export const PrimaryWidthButtonDownScaledStyle = {
   ...PrimaryButtonDownStyle,
   width: '100%'
 }
 
-const TextOnlyButtonUpScaledStyle = {
+export const TextOnlyButtonUpScaledStyle = {
   backgroundColor: Constants.TRANSPARENT,
   padding: scale(10)
 }
 
-const TextOnlyButtonTextUpScaledStyle = {
+export const TextOnlyButtonTextUpScaledStyle = {
   color: Constants.SECONDARY,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
@@ -363,12 +363,12 @@ const TextOnlyButtonTextUpScaledStyle = {
   textAlign: 'center'
 }
 
-const TextOnlyButtonDownScaledStyle = {
+export const TextOnlyButtonDownScaledStyle = {
   backgroundColor: Constants.TRANSPARENT,
   padding: scale(10)
 }
 
-const TextOnlyButtonTextDownScaledStyle = {
+export const TextOnlyButtonTextDownScaledStyle = {
   color: Constants.PRIMARY,
   fontSize: scale(Constants.FONTS.defaultButtonTextSize),
   fontFamily: Constants.FONTS.fontFamilyRegular,
@@ -376,7 +376,7 @@ const TextOnlyButtonTextDownScaledStyle = {
   textAlign: 'center'
 }
 
-const TextAndIconButtonScaledStyle = {
+export const TextAndIconButtonScaledStyle = {
   container: {
     width: '100%',
     height: '100%',
@@ -418,43 +418,3 @@ const TextAndIconButtonScaledStyle = {
   iconSize: scale(25),
   underlayColor: Constants.TRANSPARENT
 }
-
-export { TextAndIconButtonAlignEdgesStyle }
-export { TextAndIconButtonStyle }
-export { IconButtonStyle }
-export { PrimaryButtonUpStyle }
-export { PrimaryWidthButtonUpStyle }
-export { PrimaryButtonUpTextStyle }
-export { PrimaryButtonDownTextStyle }
-export { PrimaryButtonDownStyle }
-export { PrimaryWidthButtonDownStyle }
-export { SecondaryButtonUpStyle }
-export { SecondaryButtonUpTextStyle }
-export { SecondaryButtonDownStyle }
-export { SecondaryButtonDownTextStyle }
-export { TertiaryButtonUpStyle }
-export { TertiaryButtonTextUpStyle }
-export { TertiaryButtonDownStyle }
-export { TertiaryButtonTextDownStyle }
-export { DefaultButtonUpStyle }
-export { DefaultWidthButtonUpStyle }
-export { DefaultButtonUpTextStyle }
-export { DefaultButtonDownStyle }
-export { DefaultWidthButtonDownStyle }
-export { DefaultButtonDownTextStyle }
-export { TextOnlyButtonUpStyle }
-export { TextOnlyButtonTextUpStyle }
-export { TextOnlyButtonDownStyle }
-export { TextOnlyButtonTextDownStyle }
-
-export { PrimaryButtonUpScaledStyle }
-export { PrimaryWidthButtonUpScaledStyle }
-export { PrimaryButtonUpTextScaledStyle }
-export { PrimaryButtonDownTextScaledStyle }
-export { PrimaryButtonDownScaledStyle }
-export { PrimaryWidthButtonDownScaledStyle }
-export { TextOnlyButtonUpScaledStyle }
-export { TextOnlyButtonTextUpScaledStyle }
-export { TextOnlyButtonDownScaledStyle }
-export { TextOnlyButtonTextDownScaledStyle }
-export { TextAndIconButtonScaledStyle }

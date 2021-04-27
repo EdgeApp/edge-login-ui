@@ -17,7 +17,7 @@ type Props = {
 type State = {
   onOff: boolean
 }
-class Checkbox extends React.Component<Props, State> {
+export class Checkbox extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -80,5 +80,3 @@ class Checkbox extends React.Component<Props, State> {
     this.props.onChange(this.state.onOff)
   }
 }
-
-export { Checkbox }

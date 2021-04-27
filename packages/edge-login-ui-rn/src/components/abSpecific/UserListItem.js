@@ -20,7 +20,7 @@ type Props = {
   onDelete(string): void
 }
 
-class UserListItem extends React.Component<Props> {
+export class UserListItem extends React.Component<Props> {
   handleDelete = () => {
     this.props.onDelete(this.props.data)
   }
@@ -65,5 +65,3 @@ class UserListItem extends React.Component<Props> {
     )
   }
 }
-
-export { UserListItem }

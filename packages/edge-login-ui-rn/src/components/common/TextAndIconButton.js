@@ -23,7 +23,7 @@ type State = {
   pressed: boolean
 }
 
-class TextAndIconButton extends React.Component<Props, State> {
+export class TextAndIconButton extends React.Component<Props, State> {
   numberOfLines: number
   constructor(props: Props) {
     super(props)
@@ -63,5 +63,3 @@ class TextAndIconButton extends React.Component<Props, State> {
     )
   }
 }
-
-export { TextAndIconButton }

@@ -600,5 +600,4 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-const EdgeTextFieldOutlined = EdgeTextFieldOutlinedComponent
-export { EdgeTextFieldOutlined }
+export const EdgeTextFieldOutlined = EdgeTextFieldOutlinedComponent

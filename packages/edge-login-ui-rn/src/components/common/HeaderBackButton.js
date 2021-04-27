@@ -12,7 +12,7 @@ type Props = {
   label: string,
   onPress(): void
 }
-class HeaderBackButton extends React.Component<Props> {
+export class HeaderBackButton extends React.Component<Props> {
   render() {
     const withArrow = true
     const styles = this.props.styles
@@ -30,5 +30,3 @@ class HeaderBackButton extends React.Component<Props> {
     )
   }
 }
-
-export { HeaderBackButton }
