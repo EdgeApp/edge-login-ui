@@ -61,7 +61,7 @@ export const initializeLogin = () => async (
     dispatch({ type: 'START_LANDING' })
   } else if (
     startupUser.pinEnabled ||
-    (startupUser.touchEnabled && touch !== 'none')
+    (startupUser.touchEnabled && touch !== false)
   ) {
     dispatch({ type: 'START_PIN_LOGIN' })
   } else {
