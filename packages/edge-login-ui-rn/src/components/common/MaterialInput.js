@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { TextField } from 'react-native-material-textfield'
 
-import { InputStyles } from '../../styles/common/InputStyles.js'
+import { scale } from '../../util/scaling.js'
 
 type Props = {
   testID?: string,
@@ -103,9 +103,9 @@ export class MaterialInput extends React.Component<Props, State> {
         onFocus={this.handleFocus}
         autoCorrect={autoCorrectConfigured}
         onSubmitEditing={this.handleSubmitEditing}
-        fontSize={InputStyles.fontSize}
-        titleFontSize={InputStyles.titleFontSize}
-        labelFontSize={InputStyles.labelFontSize}
+        fontSize={scale(15)}
+        titleFontSize={scale(12)}
+        labelFontSize={scale(12)}
       />
     )
   }
