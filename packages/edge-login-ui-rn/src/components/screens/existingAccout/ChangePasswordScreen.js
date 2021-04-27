@@ -127,7 +127,6 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
           error={this.props.confirmPasswordErrorMessage}
           returnKeyType="go"
           secureTextEntry
-          showSecureCheckbox
           value={this.props.confirmPassword}
           isSelected={this.state.focusSecond}
           label={s.strings.re_enter_new_password}

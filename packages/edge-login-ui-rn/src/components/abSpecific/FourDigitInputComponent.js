@@ -68,7 +68,6 @@ class FourDigitInputComponent extends React.Component<Props> {
           keyboardType="number-pad"
           value={this.props.pin}
           autoFocus
-          keyboardShouldPersistTaps
         />
       )
     }

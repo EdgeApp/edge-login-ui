@@ -50,7 +50,6 @@ class PermissionsAlertModalComponent extends React.PureComponent<Props> {
         padding={theme.rem(0.5)}
         borderRadius={theme.rem(1)}
         underlay={underlay}
-        iconCircle
       >
         <View style={styles.iconCircle}>
           <FontAwesome

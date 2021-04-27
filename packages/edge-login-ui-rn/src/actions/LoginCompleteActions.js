@@ -177,7 +177,7 @@ async function twofaReminder(account: EdgeAccount) {
     return Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}
-        header={s.strings.otp_reset_modal_header}
+        title={s.strings.otp_reset_modal_header}
         message={s.strings.otp_reset_modal_message}
         buttons={{
           enable: { label: s.strings.enable, type: 'primary' },

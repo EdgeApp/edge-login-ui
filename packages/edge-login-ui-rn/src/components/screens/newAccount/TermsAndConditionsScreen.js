@@ -58,7 +58,6 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
           style={styles.checkboxes}
           label={title}
           onChange={this.handleStatusChange}
-          defaultValue={false}
           checkedImage={REVIEW_CHECKED}
           uncheckedImage={REVIEW_UNCHECKED}
           key={title}

@@ -46,7 +46,6 @@ class SecurityAlertsModalComponent extends React.Component<Props> {
       <AirshipModal
         bridge={bridge}
         onCancel={() => bridge.resolve()}
-        iconCircle
         padding={theme.rem(0.5)}
         underlay={underlay}
         borderRadius={0}
