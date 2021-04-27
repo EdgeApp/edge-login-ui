@@ -53,18 +53,18 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
     return (
       <SafeAreaView>
         <KeyboardAwareScrollView
-          style={NewAccountPasswordScreenStyle.screen}
+          style={styles.screen}
           keyboardShouldPersistTaps="always"
-          contentContainerStyle={NewAccountPasswordScreenStyle.mainScrollView}
+          contentContainerStyle={styles.mainScrollView}
         >
           <Header onBack={this.props.onBack} />
-          {this.renderMain(NewAccountPasswordScreenStyle)}
+          {this.renderMain()}
         </KeyboardAwareScrollView>
       </SafeAreaView>
     )
   }
 
-  renderMain(styles: typeof NewAccountPasswordScreenStyle) {
+  renderMain() {
     if (this.state.focusSecond) {
       return (
         <KeyboardAvoidingView
@@ -73,16 +73,14 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
           behavior="position"
           keyboardVerticalOffset={-150}
         >
-          {this.renderInterior(styles)}
+          {this.renderInterior()}
         </KeyboardAvoidingView>
       )
     }
-    return (
-      <View style={styles.pageContainer}>{this.renderInterior(styles)}</View>
-    )
+    return <View style={styles.pageContainer}>{this.renderInterior()}</View>
   }
 
-  renderInterior(styles: typeof NewAccountPasswordScreenStyle) {
+  renderInterior() {
     return (
       <View style={styles.innerView}>
         <PasswordStatus />
@@ -160,7 +158,7 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const NewAccountPasswordScreenStyle = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   mainScrollView: {
     position: 'relative',

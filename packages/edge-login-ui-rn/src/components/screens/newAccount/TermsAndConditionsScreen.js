@@ -43,13 +43,13 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
     }
   }
 
-  renderItems(style: typeof TermsAndConditionsScreenStyle) {
+  renderItems() {
     const terms = this.changeAppName()
     return terms.map(Item => (
-      <View style={style.checkboxContainer} key={Item.title}>
+      <View style={styles.checkboxContainer} key={Item.title}>
         <Checkbox
           testID="termsCB"
-          style={style.checkboxes}
+          style={styles.checkboxes}
           label={Item.title}
           onChange={this.handleStatusChange}
           defaultValue={false}
@@ -61,40 +61,42 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
     ))
   }
 
-  renderInstructions(style: typeof TermsAndConditionsScreenStyle) {
+  renderInstructions() {
     return (
-      <View style={style.instructionsContainer}>
-        <Text style={style.instructionsText}>{s.strings.last_step_review}</Text>
+      <View style={styles.instructionsContainer}>
+        <Text style={styles.instructionsText}>
+          {s.strings.last_step_review}
+        </Text>
       </View>
     )
   }
 
-  renderButton(style: typeof TermsAndConditionsScreenStyle) {
+  renderButton() {
     if (this.state.totalChecks === 4) {
       setTimeout(() => {
         this.scrollView.scrollToEnd({ animated: true })
       }, 50)
       return (
-        <View style={style.buttonContainer}>
+        <View style={styles.buttonContainer}>
           <Text
-            style={style.agreeText}
+            style={styles.agreeText}
             onPress={() =>
               Linking.openURL('https://edge.app/terms-of-service/')
             }
           >
             {s.strings.read_understod_1}
-            <Text style={style.agreeTextLink}>
+            <Text style={styles.agreeTextLink}>
               {s.strings.read_understod_2}
             </Text>
           </Text>
-          <View style={style.shim} />
+          <View style={styles.shim} />
           <Button
             testID="confirmAndFinishButton"
             onPress={this.handleNextPress}
-            downStyle={style.nextButton.downStyle}
-            downTextStyle={style.nextButton.downTextStyle}
-            upStyle={style.nextButton.upStyle}
-            upTextStyle={style.nextButton.upTextStyle}
+            downStyle={styles.nextButton.downStyle}
+            downTextStyle={styles.nextButton.downTextStyle}
+            upStyle={styles.nextButton.upStyle}
+            upTextStyle={styles.nextButton.upTextStyle}
             label={s.strings.confirm_finish}
           />
         </View>
@@ -118,15 +120,13 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
   render() {
     return (
       <SafeAreaView>
-        <View style={TermsAndConditionsScreenStyle.screen}>
+        <View style={styles.screen}>
           <Header onBack={this.props.onBack} />
-          <View style={TermsAndConditionsScreenStyle.pageContainer}>
+          <View style={styles.pageContainer}>
             <ScrollView ref={ref => (this.scrollView = ref)}>
-              {this.renderInstructions(TermsAndConditionsScreenStyle)}
-              <View style={TermsAndConditionsScreenStyle.midSection}>
-                {this.renderItems(TermsAndConditionsScreenStyle)}
-              </View>
-              {this.renderButton(TermsAndConditionsScreenStyle)}
+              {this.renderInstructions()}
+              <View style={styles.midSection}>{this.renderItems()}</View>
+              {this.renderButton()}
             </ScrollView>
           </View>
         </View>
@@ -173,7 +173,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const TermsAndConditionsScreenStyle = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: {
     flex: 1,

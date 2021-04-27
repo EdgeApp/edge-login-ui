@@ -21,15 +21,15 @@ class UserListItem extends React.Component<Props> {
   }
 
   render() {
-    const style = this.props.style
     return (
       <TouchableOpacity onPress={this.handlePress}>
-        {this.renderInside(style)}
+        {this.renderInside()}
       </TouchableOpacity>
     )
   }
 
-  renderInside(style: Object) {
+  renderInside() {
+    const { style } = this.props
     if (this.props.onDelete) {
       return (
         <View style={style.container}>

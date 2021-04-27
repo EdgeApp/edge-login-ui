@@ -34,7 +34,8 @@ class Checkbox extends React.Component<Props, State> {
     }
   }
 
-  renderImage(style: Object) {
+  renderImage() {
+    const { style } = this.props
     if (this.state.onOff) {
       return (
         <View style={style.checkbox}>
@@ -50,7 +51,7 @@ class Checkbox extends React.Component<Props, State> {
   }
 
   render() {
-    const style = this.props.style
+    const { style } = this.props
     return (
       <TouchableWithoutFeedback
         testID={this.props.testID}
@@ -58,7 +59,7 @@ class Checkbox extends React.Component<Props, State> {
         disabled={this.props.disabled}
       >
         <View style={style.container}>
-          {this.renderImage(style)}
+          {this.renderImage()}
           <View style={style.labelContainer}>
             <Text style={style.text}>{this.props.label} </Text>
           </View>

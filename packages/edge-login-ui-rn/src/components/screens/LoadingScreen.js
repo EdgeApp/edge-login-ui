@@ -15,10 +15,10 @@ type Props = {
 export class LoadingScreen extends React.Component<Props> {
   render() {
     return (
-      <View style={LandingScreenStyle.container}>
+      <View style={styles.container}>
         <BackgroundImage
           branding={this.props.branding}
-          style={LandingScreenStyle.backgroundImage}
+          style={styles.backgroundImage}
           content={this.renderSpinner()}
         />
       </View>
@@ -27,14 +27,14 @@ export class LoadingScreen extends React.Component<Props> {
 
   renderSpinner = () => {
     return (
-      <View style={LandingScreenStyle.spinner}>
+      <View style={styles.spinner}>
         <ActivityIndicator color={Colors.ACCENT_MINT} size="large" />
       </View>
     )
   }
 }
 
-const LandingScreenStyle = {
+const styles = {
   container: Styles.ScreenStyle,
   backgroundImage: {
     flex: 1,

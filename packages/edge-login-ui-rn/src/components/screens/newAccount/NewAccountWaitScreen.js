@@ -17,30 +17,22 @@ export class NewAccountWaitScreen extends React.Component<Props> {
   render() {
     return (
       <SafeAreaView>
-        <View style={CreatingAccountWaitScreenStyle.container}>
+        <View style={styles.container}>
           <Header />
-          <View style={CreatingAccountWaitScreenStyle.pageContainer}>
-            <View style={CreatingAccountWaitScreenStyle.topPad} />
-            <View style={CreatingAccountWaitScreenStyle.iconContianer}>
+          <View style={styles.pageContainer}>
+            <View style={styles.topPad} />
+            <View style={styles.iconContianer}>
               <ActivityIndicator color={Colors.ACCENT_MINT} size="large" />
             </View>
-            <View style={CreatingAccountWaitScreenStyle.headlineConainer}>
-              <Text style={CreatingAccountWaitScreenStyle.headlineText}>
-                {s.strings.good_job}
-              </Text>
+            <View style={styles.headlineConainer}>
+              <Text style={styles.headlineText}>{s.strings.good_job}</Text>
             </View>
-            <View style={CreatingAccountWaitScreenStyle.bodyCopyContainer}>
-              <Text style={CreatingAccountWaitScreenStyle.bodyText}>
-                {s.strings.hang_tight}
-              </Text>
-              <Text style={CreatingAccountWaitScreenStyle.bodyText}>
-                {s.strings.secure_account}
-              </Text>
+            <View style={styles.bodyCopyContainer}>
+              <Text style={styles.bodyText}>{s.strings.hang_tight}</Text>
+              <Text style={styles.bodyText}>{s.strings.secure_account}</Text>
             </View>
-            <View style={CreatingAccountWaitScreenStyle.encriptingContainer}>
-              <Text style={CreatingAccountWaitScreenStyle.bodyText}>
-                {s.strings.encrypting_wallet}
-              </Text>
+            <View style={styles.encriptingContainer}>
+              <Text style={styles.bodyText}>{s.strings.encrypting_wallet}</Text>
             </View>
           </View>
         </View>
@@ -49,7 +41,7 @@ export class NewAccountWaitScreen extends React.Component<Props> {
   }
 }
 
-const CreatingAccountWaitScreenStyle = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   container: {},
   pageContainer: {

@@ -78,26 +78,22 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
   render() {
     return (
       <SafeAreaView>
-        <View style={SetAccountPinScreenStyle.screen}>
+        <View style={styles.screen}>
           {this.renderHeader()}
-          <View style={SetAccountPinScreenStyle.pageContainer}>
-            <View style={SetAccountPinScreenStyle.row1}>
-              <Text style={SetAccountPinScreenStyle.instructions}>
-                {s.strings.pin_desc}
-              </Text>
+          <View style={styles.pageContainer}>
+            <View style={styles.row1}>
+              <Text style={styles.instructions}>{s.strings.pin_desc}</Text>
             </View>
-            <View style={SetAccountPinScreenStyle.row2}>
+            <View style={styles.row2}>
               <FourDigitInput />
             </View>
-            <View style={SetAccountPinScreenStyle.row3}>
+            <View style={styles.row3}>
               <Button
                 onPress={this.handleSubmit}
-                downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
-                downTextStyle={
-                  SetAccountPinScreenStyle.nextButton.downTextStyle
-                }
-                upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
-                upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
+                downStyle={styles.nextButton.downStyle}
+                downTextStyle={styles.nextButton.downTextStyle}
+                upStyle={styles.nextButton.upStyle}
+                upTextStyle={styles.nextButton.upTextStyle}
                 label={s.strings.done}
                 isThinking={this.state.isProcessing}
                 doesThink
@@ -110,7 +106,7 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const SetAccountPinScreenStyle = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: { flex: 1, width: '100%' },
   row1: {

@@ -25,36 +25,34 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
   render() {
     return (
       <SafeAreaView>
-        <View style={NewAccountReviewScreenStyle.screen}>
+        <View style={styles.screen}>
           <Header />
-          <View style={NewAccountReviewScreenStyle.pageContainer}>
-            <View style={NewAccountReviewScreenStyle.instructionsContainer}>
-              <Text style={NewAccountReviewScreenStyle.instructionsText}>
+          <View style={styles.pageContainer}>
+            <View style={styles.instructionsContainer}>
+              <Text style={styles.instructionsText}>
                 {s.strings.almost_done}
               </Text>
             </View>
-            <View style={NewAccountReviewScreenStyle.warningBoxContainer}>
+            <View style={styles.warningBoxContainer}>
               <WarningBox
-                style={NewAccountReviewScreenStyle.warningBox}
+                style={styles.warningBox}
                 message={s.strings.warning_message}
               />
             </View>
-            <View style={NewAccountReviewScreenStyle.detailsContainer}>
+            <View style={styles.detailsContainer}>
               <AccountInfo
                 testID="accountInfoText"
-                style={NewAccountReviewScreenStyle.accountDetailsBox}
+                style={styles.accountDetailsBox}
               />
-              <View style={NewAccountReviewScreenStyle.shim} />
+              <View style={styles.shim} />
             </View>
             <Button
               testID="nextButton"
               onPress={this.handleNext}
-              downStyle={NewAccountReviewScreenStyle.nextButton.downStyle}
-              downTextStyle={
-                NewAccountReviewScreenStyle.nextButton.downTextStyle
-              }
-              upStyle={NewAccountReviewScreenStyle.nextButton.upStyle}
-              upTextStyle={NewAccountReviewScreenStyle.nextButton.upTextStyle}
+              downStyle={styles.nextButton.downStyle}
+              downTextStyle={styles.nextButton.downTextStyle}
+              upStyle={styles.nextButton.upStyle}
+              upTextStyle={styles.nextButton.upTextStyle}
               label={s.strings.next_label}
             />
           </View>
@@ -70,7 +68,7 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
   }
 }
 
-const NewAccountReviewScreenStyle = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: {
     flex: 1,

@@ -264,7 +264,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  renderQuestions = (styles: typeof RecoverPasswordSceneStyles) => {
+  renderQuestions = () => {
     return (
       <View style={styles.body}>
         <DropDownList
@@ -276,7 +276,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  renderForm = (styles: typeof RecoverPasswordSceneStyles) => {
+  renderForm = () => {
     const form1Style = this.state.errorOne ? styles.inputError : styles.input
     const form2Style = this.state.errorTwo ? styles.inputError : styles.input
     const errorMessageOne = this.state.errorOne
@@ -348,12 +348,12 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
             error={errorMessageTwo}
           />
         </View>
-        {this.renderButtons(styles)}
+        {this.renderButtons()}
       </View>
     )
   }
 
-  renderButtons(styles: typeof RecoverPasswordSceneStyles) {
+  renderButtons() {
     if (this.props.isEnabled) {
       return (
         <View style={styles.buttonContainer}>
@@ -395,10 +395,10 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
 
   render() {
     const middle = this.state.showQuestionPicker
-      ? this.renderQuestions(RecoverPasswordSceneStyles)
-      : this.renderForm(RecoverPasswordSceneStyles)
+      ? this.renderQuestions()
+      : this.renderForm()
     return (
-      <View style={RecoverPasswordSceneStyles.screen}>
+      <View style={styles.screen}>
         {this.renderHeader()}
         {middle}
       </View>
@@ -406,7 +406,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const RecoverPasswordSceneStyles = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   body: {
     padding: scale(18)
