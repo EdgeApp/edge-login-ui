@@ -40,10 +40,7 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
               />
             </View>
             <View style={styles.detailsContainer}>
-              <AccountInfo
-                testID="accountInfoText"
-                style={styles.accountDetailsBox}
-              />
+              <AccountInfo testID="accountInfoText" />
               <View style={styles.shim} />
             </View>
             <Button
@@ -155,88 +152,6 @@ const styles = {
     height: scale(220),
     width: '80%',
     marginTop: scale(20)
-  },
-  accountDetailsBox: {
-    container: {
-      flex: 1,
-      width: '100%',
-      flexDirection: 'column'
-    },
-    textIconButton: {
-      ...Styles.TextAndIconButtonScaledStyle,
-      text: {
-        ...Styles.TextAndIconButtonScaledStyle.text,
-        fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
-        color: Constants.SECONDARY
-      },
-      textPressed: {
-        ...Styles.TextAndIconButtonScaledStyle.text,
-        fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
-        color: Constants.SECONDARY
-      },
-      icon: {
-        ...Styles.TextAndIconButtonScaledStyle.icon,
-        color: Constants.SECONDARY
-      }
-    },
-    top: {
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      backgroundColor: Constants.GRAY_4,
-      height: scale(Styles.BUTTON_HEIGHT)
-    },
-    shim: {
-      width: '100%',
-      height: scale(5),
-      backgroundColor: Constants.TRANSPARENT
-    },
-    bottom: {
-      width: '100%',
-      flexDirection: 'column'
-    },
-    bottomInfo: {
-      width: '100%',
-      minHeight: scale(60),
-      borderLeftWidth: 1,
-      borderRightWidth: 1,
-      borderBottomWidth: 1,
-      borderColor: Constants.GRAY_4
-    },
-    bRow: {
-      width: '100%',
-      flexDirection: 'row',
-      paddingRight: scale(25),
-      paddingVertical: scale(4)
-    },
-    bInfoLeft: {
-      flex: 2
-    },
-    bInfoCenter: {
-      flex: 3.5,
-      flexWrap: 'nowrap'
-    },
-    bInforRight: {
-      flex: 5
-    },
-    bottomWarning: {
-      width: '100%',
-      borderLeftWidth: 1,
-      borderRightWidth: 1,
-      borderBottomWidth: 1,
-      borderColor: Constants.GRAY_4
-    },
-    accountText: {
-      fontSize: scale(13),
-      color: Constants.GRAY_1
-    },
-    bottomWarningText: {
-      fontSize: scale(Constants.FONTS.defaultFontSize),
-      fontFamily: Constants.FONTS.fontFamilyRegular,
-      color: Constants.ACCENT_RED,
-      paddingLeft: scale(15),
-      paddingRight: scale(15),
-      paddingBottom: scale(15)
-    }
   },
   nextButton: {
     downTextStyle: Styles.PrimaryButtonDownTextScaledStyle,
