@@ -7,6 +7,7 @@ import s from '../common/locales/strings.js'
 import * as Constants from '../constants/index.js'
 import { enableTouchId, isTouchDisabled } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
+import { logEvent } from '../util/analytics.js'
 import { isASCII } from '../util/ASCIIUtil.js'
 import { getPreviousUsers, setMostRecentUsers } from './PreviousUsersActions.js'
 
@@ -42,8 +43,7 @@ export function checkUsernameForAvailabilty(data: string) {
               username: data,
               error: null
             }
-            global.firebase &&
-              global.firebase.analytics().logEvent(`Signup_Username_Available`)
+            logEvent(`Signup_Username_Available`)
             dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
             dispatch({ type: 'WORKFLOW_NEXT' })
             return
@@ -52,8 +52,7 @@ export function checkUsernameForAvailabilty(data: string) {
             username: data,
             error: s.strings.username_exists_error
           }
-          global.firebase &&
-            global.firebase.analytics().logEvent(`Signup_Username_Unavailable`)
+          logEvent(`Signup_Username_Unavailable`)
           dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
         })
         .catch(e => {
@@ -157,8 +156,7 @@ export function createUser(data: Object) {
         }
         dispatch({ type: 'CREATE_ACCOUNT_SUCCESS', data: abcAccount })
         dispatch({ type: 'WORKFLOW_NEXT' })
-        global.firebase &&
-          global.firebase.analytics().logEvent('Signup_Create_User_Success')
+        logEvent('Signup_Create_User_Success')
         await setMostRecentUsers(abcAccount.username)
         await abcAccount.dataStore.setItem(
           Constants.OTP_REMINDER_STORE_NAME,

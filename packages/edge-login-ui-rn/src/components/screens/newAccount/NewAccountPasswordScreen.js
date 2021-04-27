@@ -12,6 +12,7 @@ import {
 import s from '../../../common/locales/strings.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { logEvent } from '../../../util/analytics.js'
 import { scale } from '../../../util/scaling.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common/Button.js'
@@ -156,8 +157,7 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
       this.setState({
         isProcessing: false
       })
-      global.firebase &&
-        global.firebase.analytics().logEvent(`Signup_Password_Invalid`)
+      logEvent(`Signup_Password_Invalid`)
       return
     }
     if (
@@ -168,12 +168,10 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
         isProcessing: false
       })
       this.props.validateConfirmPassword(this.props.confirmPassword)
-      global.firebase &&
-        global.firebase.analytics().logEvent(`Signup_Password_Invalid`)
+      logEvent(`Signup_Password_Invalid`)
       return
     }
-    global.firebase &&
-      global.firebase.analytics().logEvent(`Signup_Password_Valid`)
+    logEvent(`Signup_Password_Valid`)
     this.props.onDone()
   }
 }

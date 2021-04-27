@@ -11,6 +11,7 @@ import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { logEvent } from '../../../util/analytics.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
 import { Checkbox } from '../../common/Checkbox.js'
@@ -140,8 +141,7 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
   }
 
   handleNextPress = () => {
-    global.firebase &&
-      global.firebase.analytics().logEvent(`Signup_Terms_Agree`)
+    logEvent(`Signup_Terms_Agree`)
     this.props.agreeToCondition()
   }
 }

@@ -10,6 +10,7 @@ import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { logEvent } from '../../../util/analytics.js'
 import { scale } from '../../../util/scaling.js'
 import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
 import { Button } from '../../common/Button.js'
@@ -148,8 +149,7 @@ export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
       dispatch({ type: 'START_LANDING' })
     },
     onDone() {
-      global.firebase &&
-        global.firebase.analytics().logEvent(`Signup_Welcome_Next`)
+      logEvent(`Signup_Welcome_Next`)
       dispatch({ type: 'WORKFLOW_NEXT' })
     }
   })

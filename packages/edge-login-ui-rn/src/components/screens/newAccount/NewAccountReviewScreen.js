@@ -8,6 +8,7 @@ import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { logEvent } from '../../../util/analytics.js'
 import { scale } from '../../../util/scaling.js'
 import { AccountInfo } from '../../abSpecific/AccountInfoComponent.js'
 import { Button } from '../../common/Button.js'
@@ -71,8 +72,7 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
   }
 
   handleNext = () => {
-    global.firebase &&
-      global.firebase.analytics().logEvent(`Signup_Review_Next`)
+    logEvent(`Signup_Review_Next`)
     this.props.onDone()
   }
 }

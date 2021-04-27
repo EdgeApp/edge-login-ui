@@ -8,6 +8,7 @@ import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { logEvent } from '../../../util/analytics.js'
 import { scale } from '../../../util/scaling.js'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
 import { Button } from '../../common/Button.js'
@@ -105,12 +106,10 @@ class NewAccountPinScreenComponent extends React.Component<Props, State> {
       this.setState({
         isProcessing: false
       })
-      global.firebase &&
-        global.firebase.analytics().logEvent(`Signup_PIN_Invalid`)
+      logEvent(`Signup_PIN_Invalid`)
       return
     }
-    global.firebase &&
-      global.firebase.analytics().logEvent(`Signup_Create_User`)
+    logEvent(`Signup_Create_User`)
     this.props.createUser({
       username: this.props.username,
       password: this.props.password,
