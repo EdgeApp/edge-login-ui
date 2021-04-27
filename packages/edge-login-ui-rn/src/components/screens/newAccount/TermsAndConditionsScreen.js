@@ -238,7 +238,8 @@ const styles = {
       height: '100%',
       padding: scale(10),
       justifyContent: 'flex-start'
-    }
+    },
+    labelContainer: {}
   },
   nextButton: {
     upStyle: { ...Styles.PrimaryButtonUpScaledStyle, width: scale(240) },

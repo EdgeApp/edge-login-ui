@@ -260,7 +260,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     if (touchEnabled && touch === 'FaceID') {
       return (
         <ImageButton
-          style={{}}
+          style={{ container: {}, image: {} }}
           source={Assets.FACE_ID}
           onPress={this.handleTouchId}
           disabled={this.props.isTouchIdDisabled}
@@ -270,7 +270,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     if (touchEnabled && touch === 'TouchID') {
       return (
         <ImageButton
-          style={{}}
+          style={{ container: {}, image: {} }}
           source={Assets.TOUCH_ID}
           onPress={this.handleTouchId}
           disabled={this.props.isTouchIdDisabled}
@@ -372,11 +372,7 @@ const styles = {
       icon: {
         color: Constants.WHITE
       },
-      iconPressed: {
-        color: Constants.WHITE
-      },
-      iconSize: scale(Constants.FONTS.defaultFontSize),
-      underlayColor: Constants.TRANSPARENT
+      iconSize: scale(Constants.FONTS.defaultFontSize)
     },
     text: {
       paddingLeft: scale(20),

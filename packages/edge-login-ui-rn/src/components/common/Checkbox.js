@@ -5,7 +5,7 @@ import { Image, Text, TouchableWithoutFeedback, View } from 'react-native'
 
 type Props = {
   testID?: string,
-  style: any,
+  style: { checkbox: any, container: any, labelContainer: any, text: any },
   label: string,
   checkedImage: string,
   uncheckedImage: string,

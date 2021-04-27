@@ -8,10 +8,10 @@ import * as Colors from '../../constants/Colors.js'
 type Props = {
   testID?: string,
   label: string,
-  downStyle: Object,
-  upStyle: Object,
-  downTextStyle: Object,
-  upTextStyle: Object,
+  downStyle: any,
+  upStyle: any,
+  downTextStyle: any,
+  upTextStyle: any,
   isThinking?: boolean,
   doesThink?: boolean,
   onPress(): void // if doesThink is used, then isThinking is also required

@@ -2,7 +2,7 @@
 
 export type ParentButton = {|
   callback: () => void,
-  style?: Object,
+  style?: any,
   text: string
 |}
 

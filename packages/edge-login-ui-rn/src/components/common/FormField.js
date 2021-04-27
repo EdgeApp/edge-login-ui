@@ -6,7 +6,14 @@ import { MaterialInput } from './MaterialInput.js'
 
 type Props = {
   testID?: string,
-  style: Object,
+  style: {
+    container: any,
+    baseColor: string,
+    tintColor: string,
+    textColor: string,
+    errorColor: string,
+    titleTextStyle: any
+  },
   label: string,
   value: string,
   autoCorrect: boolean,

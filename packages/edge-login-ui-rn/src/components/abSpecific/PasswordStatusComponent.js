@@ -121,7 +121,8 @@ const styles = {
     checkbox: {
       padding: scale(2),
       marginRight: scale(5)
-    }
+    },
+    labelContainer: {}
   },
   text: {
     textAlign: 'center',

@@ -446,11 +446,7 @@ const styles = {
       icon: {
         color: Constants.PRIMARY
       },
-      iconPressed: {
-        color: Constants.SECONDARY
-      },
-      iconSize: scale(Constants.FONTS.defaultFontSize),
-      underlayColor: Constants.TRANSPARENT
+      iconSize: scale(Constants.FONTS.defaultFontSize)
     },
     text: {
       color: Constants.PRIMARY,

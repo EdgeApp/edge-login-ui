@@ -6,7 +6,16 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 type Props = {
   data: string,
-  style: Object,
+  style: {
+    container: any,
+    text: any,
+    textComtainer: any,
+    iconButton: {
+      container: any,
+      icon: any,
+      iconSize: number
+    }
+  },
   onClick(string): void,
   onDelete(string): void
 }

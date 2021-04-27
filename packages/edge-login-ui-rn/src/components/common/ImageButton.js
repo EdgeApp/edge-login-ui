@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Image, TouchableWithoutFeedback, View } from 'react-native'
 
 type Props = {
-  style: Object,
+  style: { container: any, image: any },
   source: string,
   onPress(): void,
   disabled?: boolean
