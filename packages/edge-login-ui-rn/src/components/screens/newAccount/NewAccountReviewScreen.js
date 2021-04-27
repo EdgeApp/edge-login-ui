@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { Text, View } from 'react-native'
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
 
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
@@ -12,7 +13,6 @@ import { AccountInfo } from '../../abSpecific/AccountInfoComponent.js'
 import { Button } from '../../common/Button.js'
 import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-import { WarningBox } from '../../common/WarningBox.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {}
@@ -34,10 +34,22 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
               </Text>
             </View>
             <View style={styles.warningBoxContainer}>
-              <WarningBox
-                style={styles.warningBox}
-                message={s.strings.warning_message}
-              />
+              <View style={styles.warningBox.container}>
+                <View style={styles.warningBox.bottom}>
+                  <Text style={styles.warningBox.text}>
+                    {s.strings.warning_message}
+                  </Text>
+                </View>
+                <View style={styles.warningBox.top}>
+                  <View style={styles.warningBox.iconWrapBottom}>
+                    <EvilIcons
+                      name="exclamation"
+                      style={styles.warningBox.iconStyle}
+                      size={styles.warningBox.iconSize}
+                    />
+                  </View>
+                </View>
+              </View>
             </View>
             <View style={styles.detailsContainer}>
               <AccountInfo testID="accountInfoText" />
