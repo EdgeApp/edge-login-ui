@@ -33,8 +33,11 @@ class TextAndIconButton extends React.Component<Props, State> {
       text
     } = this.props.style
     return (
-      <TouchableOpacity testID={this.props.testID} style={container} onPress={this.props.onPress}>
-
+      <TouchableOpacity
+        testID={this.props.testID}
+        style={container}
+        onPress={this.props.onPress}
+      >
         <View style={centeredContent}>
           <View style={inner}>
             <View style={textContainer}>

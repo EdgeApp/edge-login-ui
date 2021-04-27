@@ -36,7 +36,7 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
         <View style={NewAccountWelcomeScreenStyle.screen}>
           <View style={NewAccountWelcomeScreenStyle.row1}>
             <HeaderBackButton
-              testID='exitButton'
+              testID="exitButton"
               onPress={this.props.onBack}
               styles={NewAccountWelcomeScreenStyle.exitBackButtonStyle}
               label={s.strings.exit}
@@ -61,7 +61,7 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
           </View>
           <View style={NewAccountWelcomeScreenStyle.row6}>
             <Button
-              testID='getStartedButton'
+              testID="getStartedButton"
               onPress={this.props.onDone}
               downStyle={NewAccountWelcomeScreenStyle.nextButton.downStyle}
               downTextStyle={
