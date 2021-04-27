@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import {
+  FlatList,
   Keyboard,
   Platform,
   Text,
@@ -28,7 +29,6 @@ import { BackgroundImage } from '../common/BackgroundImage.js'
 import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { ImageButton } from '../common/ImageButton.js'
-import { DropDownList } from '../common/index.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
 import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
@@ -202,10 +202,11 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     }
     return (
       <View style={styles.innerView}>
-        <DropDownList
+        <FlatList
           style={styles.listView}
           data={this.getDropdownItems()}
-          renderRow={this.renderItems}
+          renderItem={this.renderItems}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     )

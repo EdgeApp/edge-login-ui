@@ -3,6 +3,7 @@
 import { type OtpError } from 'edge-core-js'
 import * as React from 'react'
 import {
+  FlatList,
   Keyboard,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -28,7 +29,7 @@ import { UserListItem } from '../abSpecific/UserListItem.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
 import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
-import { DropDownList, FormField } from '../common/index.js'
+import { FormField } from '../common/index.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
 import { QrCodeModal } from '../modals/QrCodeModal.js'
 import { Airship, showError } from '../services/AirshipInstance.js'
@@ -236,10 +237,11 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
 
   renderDropdownList() {
     return (
-      <DropDownList
+      <FlatList
         style={styles.dropDownList}
         data={this.props.usernameOnlyList}
-        renderRow={this.renderRow}
+        renderItem={this.renderRow}
+        keyExtractor={(item, index) => index.toString()}
       />
     )
   }

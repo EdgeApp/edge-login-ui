@@ -2,7 +2,7 @@
 
 import { type EdgeAccount, type EdgeRecoveryQuestionChoice } from 'edge-core-js'
 import * as React from 'react'
-import { Dimensions, Platform, View } from 'react-native'
+import { Dimensions, FlatList, Platform, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {
@@ -19,7 +19,7 @@ import { scale } from '../../../util/scaling.js'
 import { getAccount } from '../../../util/selectors.js'
 import { Button } from '../../common/Button.js'
 import { Header } from '../../common/Header.js'
-import { DropDownList, FormField } from '../../common/index.js'
+import { FormField } from '../../common/index.js'
 import { TextRowComponent } from '../../common/ListItems/TextRowComponent.js'
 import { TextAndIconButton } from '../../common/TextAndIconButton.js'
 import { type ButtonInfo, ButtonsModal } from '../../modals/ButtonsModal.js'
@@ -267,10 +267,11 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   renderQuestions = () => {
     return (
       <View style={styles.body}>
-        <DropDownList
+        <FlatList
           style={styles.questionsList}
           data={this.props.questionsList}
-          renderRow={this.renderItems}
+          renderItem={this.renderItems}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     )
