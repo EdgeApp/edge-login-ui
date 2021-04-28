@@ -28,10 +28,10 @@ type Props = OwnProps & DispatchProps
 class LandingScreenComponent extends React.Component<Props> {
   render() {
     return (
-      <View style={LandingScreenStyle.container}>
+      <View style={styles.container}>
         <BackgroundImage
           branding={this.props.branding}
-          style={LandingScreenStyle.backgroundImage}
+          style={styles.backgroundImage}
           content={this.renderOverImage()}
         />
       </View>
@@ -40,36 +40,36 @@ class LandingScreenComponent extends React.Component<Props> {
 
   renderOverImage() {
     return (
-      <View style={LandingScreenStyle.inner}>
+      <View style={styles.inner}>
         <HeaderParentButtons branding={this.props.branding} />
-        <View style={LandingScreenStyle.featureBox}>
+        <View style={styles.featureBox}>
           <LogoImageHeader branding={this.props.branding} />
-          <View style={LandingScreenStyle.featureBoxContent}>
-            <View style={LandingScreenStyle.featureBoxDescription}>
-              <Text style={LandingScreenStyle.tagText}>
+          <View style={styles.featureBoxContent}>
+            <View style={styles.featureBoxDescription}>
+              <Text style={styles.tagText}>
                 {this.props.landingScreenText || s.strings.landing_tagline}
               </Text>
             </View>
           </View>
-          <View style={LandingScreenStyle.featureBoxButtons}>
+          <View style={styles.featureBoxButtons}>
             <Button
               testID="createAccountButton"
               onPress={this.props.handleCreate}
               label={s.strings.landing_create_account_button}
-              downStyle={LandingScreenStyle.createButton.downStyle}
-              downTextStyle={LandingScreenStyle.createButton.downTextStyle}
-              upStyle={LandingScreenStyle.createButton.upStyle}
-              upTextStyle={LandingScreenStyle.createButton.upTextStyle}
+              downStyle={styles.createButton.downStyle}
+              downTextStyle={styles.createButton.downTextStyle}
+              upStyle={styles.createButton.upStyle}
+              upTextStyle={styles.createButton.upTextStyle}
             />
-            <View style={LandingScreenStyle.shim} />
+            <View style={styles.shim} />
             <Button
               testID="alreadyHaveAccountButton"
               onPress={this.props.handlePassword}
               label={s.strings.landing_already_have_account}
-              downStyle={LandingScreenStyle.loginButton.downStyle}
-              downTextStyle={LandingScreenStyle.loginButton.downTextStyle}
-              upStyle={LandingScreenStyle.loginButton.upStyle}
-              upTextStyle={LandingScreenStyle.loginButton.upTextStyle}
+              downStyle={styles.loginButton.downStyle}
+              downTextStyle={styles.loginButton.downTextStyle}
+              upStyle={styles.loginButton.upStyle}
+              upTextStyle={styles.loginButton.upTextStyle}
             />
           </View>
         </View>
@@ -78,7 +78,7 @@ class LandingScreenComponent extends React.Component<Props> {
   }
 }
 
-const LandingScreenStyle = {
+const styles = {
   container: Styles.ScreenStyle,
   backgroundImage: {
     flex: 1,

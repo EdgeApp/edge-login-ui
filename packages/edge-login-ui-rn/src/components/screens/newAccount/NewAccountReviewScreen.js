@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { Text, View } from 'react-native'
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
 
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
@@ -12,7 +13,6 @@ import { AccountInfo } from '../../abSpecific/AccountInfoComponent.js'
 import { Button } from '../../common/Button.js'
 import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
-import { WarningBox } from '../../common/WarningBox.js'
 import { connect } from '../../services/ReduxStore.js'
 
 type OwnProps = {}
@@ -25,36 +25,43 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
   render() {
     return (
       <SafeAreaView>
-        <View style={NewAccountReviewScreenStyle.screen}>
+        <View style={styles.screen}>
           <Header />
-          <View style={NewAccountReviewScreenStyle.pageContainer}>
-            <View style={NewAccountReviewScreenStyle.instructionsContainer}>
-              <Text style={NewAccountReviewScreenStyle.instructionsText}>
+          <View style={styles.pageContainer}>
+            <View style={styles.instructionsContainer}>
+              <Text style={styles.instructionsText}>
                 {s.strings.almost_done}
               </Text>
             </View>
-            <View style={NewAccountReviewScreenStyle.warningBoxContainer}>
-              <WarningBox
-                style={NewAccountReviewScreenStyle.warningBox}
-                message={s.strings.warning_message}
-              />
+            <View style={styles.warningBoxContainer}>
+              <View style={styles.warningBox.container}>
+                <View style={styles.warningBox.bottom}>
+                  <Text style={styles.warningBox.text}>
+                    {s.strings.warning_message}
+                  </Text>
+                </View>
+                <View style={styles.warningBox.top}>
+                  <View style={styles.warningBox.iconWrapBottom}>
+                    <EvilIcons
+                      name="exclamation"
+                      style={styles.warningBox.iconStyle}
+                      size={styles.warningBox.iconSize}
+                    />
+                  </View>
+                </View>
+              </View>
             </View>
-            <View style={NewAccountReviewScreenStyle.detailsContainer}>
-              <AccountInfo
-                testID="accountInfoText"
-                style={NewAccountReviewScreenStyle.accountDetailsBox}
-              />
-              <View style={NewAccountReviewScreenStyle.shim} />
+            <View style={styles.detailsContainer}>
+              <AccountInfo testID="accountInfoText" />
+              <View style={styles.shim} />
             </View>
             <Button
               testID="nextButton"
               onPress={this.handleNext}
-              downStyle={NewAccountReviewScreenStyle.nextButton.downStyle}
-              downTextStyle={
-                NewAccountReviewScreenStyle.nextButton.downTextStyle
-              }
-              upStyle={NewAccountReviewScreenStyle.nextButton.upStyle}
-              upTextStyle={NewAccountReviewScreenStyle.nextButton.upTextStyle}
+              downStyle={styles.nextButton.downStyle}
+              downTextStyle={styles.nextButton.downTextStyle}
+              upStyle={styles.nextButton.upStyle}
+              upTextStyle={styles.nextButton.upTextStyle}
               label={s.strings.next_label}
             />
           </View>
@@ -70,7 +77,7 @@ class NewAccountReviewScreenComponent extends React.Component<Props> {
   }
 }
 
-const NewAccountReviewScreenStyle = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: {
     flex: 1,
@@ -157,88 +164,6 @@ const NewAccountReviewScreenStyle = {
     height: scale(220),
     width: '80%',
     marginTop: scale(20)
-  },
-  accountDetailsBox: {
-    container: {
-      flex: 1,
-      width: '100%',
-      flexDirection: 'column'
-    },
-    textIconButton: {
-      ...Styles.TextAndIconButtonScaledStyle,
-      text: {
-        ...Styles.TextAndIconButtonScaledStyle.text,
-        fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
-        color: Constants.SECONDARY
-      },
-      textPressed: {
-        ...Styles.TextAndIconButtonScaledStyle.text,
-        fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
-        color: Constants.SECONDARY
-      },
-      icon: {
-        ...Styles.TextAndIconButtonScaledStyle.icon,
-        color: Constants.SECONDARY
-      }
-    },
-    top: {
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      backgroundColor: Constants.GRAY_4,
-      height: scale(Styles.BUTTON_HEIGHT)
-    },
-    shim: {
-      width: '100%',
-      height: scale(5),
-      backgroundColor: Constants.TRANSPARENT
-    },
-    bottom: {
-      width: '100%',
-      flexDirection: 'column'
-    },
-    bottomInfo: {
-      width: '100%',
-      minHeight: scale(60),
-      borderLeftWidth: 1,
-      borderRightWidth: 1,
-      borderBottomWidth: 1,
-      borderColor: Constants.GRAY_4
-    },
-    bRow: {
-      width: '100%',
-      flexDirection: 'row',
-      paddingRight: scale(25),
-      paddingVertical: scale(4)
-    },
-    bInfoLeft: {
-      flex: 2
-    },
-    bInfoCenter: {
-      flex: 3.5,
-      flexWrap: 'nowrap'
-    },
-    bInforRight: {
-      flex: 5
-    },
-    bottomWarning: {
-      width: '100%',
-      borderLeftWidth: 1,
-      borderRightWidth: 1,
-      borderBottomWidth: 1,
-      borderColor: Constants.GRAY_4
-    },
-    accountText: {
-      fontSize: scale(13),
-      color: Constants.GRAY_1
-    },
-    bottomWarningText: {
-      fontSize: scale(Constants.FONTS.defaultFontSize),
-      fontFamily: Constants.FONTS.fontFamilyRegular,
-      color: Constants.ACCENT_RED,
-      paddingLeft: scale(15),
-      paddingRight: scale(15),
-      paddingBottom: scale(15)
-    }
   },
   nextButton: {
     downTextStyle: Styles.PrimaryButtonDownTextScaledStyle,

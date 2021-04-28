@@ -8,7 +8,7 @@ const isIos = Platform.OS === 'ios'
 
 type Props = {
   testID?: string,
-  styles: Object,
+  styles: { backButton: any, backIconStyle: any, sideText: any },
   label: string,
   onPress(): void
 }

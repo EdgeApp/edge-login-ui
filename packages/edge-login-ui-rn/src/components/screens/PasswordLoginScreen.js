@@ -3,6 +3,7 @@
 import { type OtpError } from 'edge-core-js'
 import * as React from 'react'
 import {
+  FlatList,
   Keyboard,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -28,7 +29,7 @@ import { UserListItem } from '../abSpecific/UserListItem.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
 import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
-import { DropDownList, FormField } from '../common/index.js'
+import { FormField } from '../common/index.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
 import { QrCodeModal } from '../modals/QrCodeModal.js'
 import { Airship, showError } from '../services/AirshipInstance.js'
@@ -64,12 +65,8 @@ type State = {
 }
 
 class PasswordLoginScreenComponent extends React.Component<Props, State> {
-  // eslint-disable-next-line no-use-before-define
-  style: typeof LoginPasswordScreenStyle
-
   constructor(props: Props) {
     super(props)
-    this.style = LoginPasswordScreenStyle
     this.state = {
       errorMessage: '',
       focusFirst: true,
@@ -145,13 +142,13 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   render() {
     return (
       <KeyboardAwareScrollView
-        style={this.style.container}
+        style={styles.container}
         keyboardShouldPersistTaps="always"
-        contentContainerStyle={this.style.mainScrollView}
+        contentContainerStyle={styles.mainScrollView}
       >
         <BackgroundImage
           branding={this.props.branding}
-          style={this.style.backgroundImage}
+          style={styles.backgroundImage}
           content={this.renderOverImage()}
           onPress={this.handleBlur}
         />
@@ -169,16 +166,16 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
       return null
     }
     return (
-      <View style={this.style.featureBoxContainer}>
+      <View style={styles.featureBoxContainer}>
         <HeaderParentButtons branding={this.props.branding} />
         <TouchableWithoutFeedback onPress={this.handleBlur}>
-          <View style={this.style.featureBox}>
+          <View style={styles.featureBox}>
             <LogoImageHeader branding={this.props.branding} />
-            {this.renderUsername(this.style)}
-            <View style={this.style.shimTiny} />
+            {this.renderUsername()}
+            <View style={styles.shimTiny} />
             <FormField
               testID="passwordFormField"
-              style={this.style.input2}
+              style={styles.input2}
               onChangeText={this.handlePasswordChange}
               value={this.state.password}
               label={s.strings.password}
@@ -190,14 +187,14 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
               onFocus={this.handleFocus2}
               onSubmitEditing={this.handleSubmit}
             />
-            {this.renderButtons(this.style)}
+            {this.renderButtons()}
           </View>
         </TouchableWithoutFeedback>
       </View>
     )
   }
 
-  renderUsername(styles: typeof LoginPasswordScreenStyle) {
+  renderUsername() {
     return (
       <View>
         <View style={styles.usernameWrapper}>
@@ -215,7 +212,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
             onSubmitEditing={this.handleSetNextFocus}
           />
           <TouchableOpacity
-            style={this.style.iconButton.container}
+            style={styles.iconButton.container}
             onPress={this.handleToggleUsernameList}
           >
             {this.state.usernameList ? (
@@ -240,10 +237,11 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
 
   renderDropdownList() {
     return (
-      <DropDownList
-        style={this.style.dropDownList}
+      <FlatList
+        style={styles.dropDownList}
         data={this.props.usernameOnlyList}
-        renderRow={this.renderRow}
+        renderItem={this.renderRow}
+        keyExtractor={(item, index) => index.toString()}
       />
     )
   }
@@ -252,46 +250,46 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     return (
       <UserListItem
         data={data.item}
-        style={this.style.inputWithDrop.listItem}
+        style={styles.listItem}
         onClick={this.handleSelectUser}
         onDelete={this.handleDelete}
       />
     )
   }
 
-  renderButtons(style: typeof LoginPasswordScreenStyle) {
+  renderButtons() {
     return (
-      <View style={style.buttonsBox}>
-        <View style={style.shimTiny} />
+      <View style={styles.buttonsBox}>
+        <View style={styles.shimTiny} />
         <Button
           onPress={this.handleForgotPassword}
           label={s.strings.forgot_password}
-          downStyle={style.forgotButton.downStyle}
-          downTextStyle={style.forgotButton.downTextStyle}
-          upStyle={style.forgotButton.upStyle}
-          upTextStyle={style.forgotButton.upTextStyle}
+          downStyle={styles.forgotButton.downStyle}
+          downTextStyle={styles.forgotButton.downTextStyle}
+          upStyle={styles.forgotButton.upStyle}
+          upTextStyle={styles.forgotButton.upTextStyle}
         />
-        <View style={style.shimTiny} />
+        <View style={styles.shimTiny} />
         <Button
           testID="loginButton"
           onPress={this.handleSubmit}
           label={s.strings.login_button}
-          downStyle={style.loginButton.downStyle}
-          downTextStyle={style.loginButton.downTextStyle}
-          upStyle={style.loginButton.upStyle}
-          upTextStyle={style.loginButton.upTextStyle}
+          downStyle={styles.loginButton.downStyle}
+          downTextStyle={styles.loginButton.downTextStyle}
+          upStyle={styles.loginButton.upStyle}
+          upTextStyle={styles.loginButton.upTextStyle}
           isThinking={this.state.loggingIn}
           doesThink
         />
-        <View style={style.shimTiny} />
+        <View style={styles.shimTiny} />
         <Button
           testID="createAccountButton"
           onPress={this.handleCreateAccount}
           label={s.strings.create_an_account}
-          downStyle={style.signupButton.downStyle}
-          downTextStyle={style.signupButton.downTextStyle}
-          upStyle={style.signupButton.upStyle}
-          upTextStyle={style.signupButton.upTextStyle}
+          downStyle={styles.signupButton.downStyle}
+          downTextStyle={styles.signupButton.downTextStyle}
+          upStyle={styles.signupButton.upStyle}
+          upTextStyle={styles.signupButton.upTextStyle}
         />
         <TouchableOpacity onPress={this.handleQrModal}>
           <AntDesignIcon
@@ -374,7 +372,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const LoginPasswordScreenStyle = {
+const styles = {
   container: Styles.ScreenStyle,
   mainScrollView: {
     position: 'relative',
@@ -404,8 +402,60 @@ const LoginPasswordScreenStyle = {
     width: '100%',
     alignItems: 'center'
   },
-  input2: Styles.MaterialInput,
-  inputWithDrop: Styles.MaterialInputWithDrop,
+  input2: {
+    container: {
+      position: 'relative',
+      width: '70%',
+      minHeight: scale(60)
+    },
+    baseColor: Constants.WHITE,
+    tintColor: Constants.ACCENT_MINT,
+    errorColor: Constants.ACCENT_RED,
+    textColor: Constants.WHITE,
+    affixTextStyle: {
+      color: Constants.WHITE
+    },
+    titleTextStyle: {
+      color: Constants.WHITE
+    }
+  },
+  listItem: {
+    container: {
+      height: scale(40),
+      width: '100%',
+      backgroundColor: Constants.WHITE,
+      borderBottomColor: Constants.GRAY_4,
+      borderBottomWidth: 1,
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    textComtainer: {
+      flex: 9,
+      height: '100%',
+      flexDirection: 'column',
+      justifyContent: 'space-around'
+    },
+    iconButton: {
+      container: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        height: '100%'
+      },
+      icon: {
+        color: Constants.PRIMARY
+      },
+      iconSize: scale(Constants.FONTS.defaultFontSize)
+    },
+    text: {
+      color: Constants.PRIMARY,
+      backgroundColor: Constants.TRANSPARENT,
+      fontFamily: Constants.FONTS.fontFamilyRegular,
+      marginLeft: scale(8),
+      fontSize: scale(Constants.FONTS.defaultFontSize)
+    }
+  },
   forgotButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: {

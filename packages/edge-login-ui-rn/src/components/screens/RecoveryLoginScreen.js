@@ -101,7 +101,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
     })
   }
 
-  renderError(styles: typeof LoginWithRecoveryStyles) {
+  renderError() {
     if (this.state.errorMessage) {
       return (
         <View>
@@ -116,7 +116,6 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
 
   render() {
     // const middle = this.renderForm(RecoverPasswordSceneStyles)
-    const styles = LoginWithRecoveryStyles
     const form1Style = this.state.errorOne ? styles.inputError : styles.input
     const form2Style = this.state.errorTwo ? styles.inputError : styles.input
 
@@ -155,7 +154,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
               />
             </View>
             <View style={styles.buttonContainer}>
-              {this.renderError(styles)}
+              {this.renderError()}
               <Button
                 onPress={this.handleSubmit}
                 downStyle={styles.submitButton.downStyle}
@@ -172,7 +171,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const LoginWithRecoveryStyles = {
+const styles = {
   screen: {
     ...Styles.ScreenStyle,
     marginTop: 5

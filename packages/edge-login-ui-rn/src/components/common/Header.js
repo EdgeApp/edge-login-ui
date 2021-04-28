@@ -33,61 +33,60 @@ type Props = OwnProps & StateProps
  */
 export class HeaderComponent extends React.Component<Props> {
   render() {
-    const Style = HeaderContainerScaledStyle
     return (
       <LinearGradient
-        style={[Style.container, { paddingTop: 0 }]}
+        style={[styles.container, { paddingTop: 0 }]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={Colors.GRADIENT}
       >
-        <View style={Style.left}>{this.renderBack(Style)}</View>
-        {this.renderText(Style)}
-        <View style={Style.right}>{this.renderSkip(Style)}</View>
+        <View style={styles.left}>{this.renderBack()}</View>
+        {this.renderText()}
+        <View style={styles.right}>{this.renderSkip()}</View>
       </LinearGradient>
     )
   }
 
-  renderBack(style: typeof HeaderContainerScaledStyle) {
+  renderBack() {
     if (this.props.onBack == null) return null
 
     return (
       <HeaderBackButton
         onPress={this.props.onBack}
-        styles={style.headerBackButtonStyle}
+        styles={styles.headerBackButtonStyle}
         label={s.strings.back}
       />
     )
   }
 
-  renderText(style: Object) {
+  renderText() {
     return (
-      <View style={style.center}>
+      <View style={styles.center}>
         {this.props.subTitle !== '' && (
-          <T style={style.subHeadText}>{this.props.subTitle}</T>
+          <T style={styles.subHeadText}>{this.props.subTitle}</T>
         )}
-        <T style={style.headlineText}>{this.props.title}</T>
+        <T style={styles.headlineText}>{this.props.title}</T>
       </View>
     )
   }
 
-  renderSkip(style: Object) {
+  renderSkip() {
     if (this.props.onSkip == null) return null
 
     return (
       <Button
         onPress={this.props.onSkip}
-        downStyle={style.textButton.downStyle}
-        downTextStyle={style.textButton.downTextStyle}
-        upStyle={style.textButton.upStyle}
-        upTextStyle={style.textButton.upTextStyle}
+        downStyle={styles.textButton.downStyle}
+        downTextStyle={styles.textButton.downTextStyle}
+        upStyle={styles.textButton.upStyle}
+        upTextStyle={styles.textButton.upTextStyle}
         label={s.strings.skip}
       />
     )
   }
 }
 
-const HeaderContainerScaledStyle = {
+const styles = {
   container: {
     position: 'relative',
     height: scale(Platform.OS === 'ios' ? 42 : 54),

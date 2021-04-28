@@ -112,6 +112,10 @@ export function AlertModalButton(props: Props & AlertModalButtonType) {
     type === 'secondary'
       ? styles.alertModalSecondaryText
       : styles.alertModalPrimaryText
+  const spinnerColor =
+    type === 'secondary'
+      ? theme.alertModalTertiaryButtonText
+      : theme.alertModalPrimaryButtonText
 
   const spacingStyles = {
     ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
@@ -121,7 +125,7 @@ export function AlertModalButton(props: Props & AlertModalButtonType) {
     <TouchableOpacity style={[buttonStyle, spacingStyles]} onPress={onPress}>
       {label != null ? <Text style={textStyle}>{label}</Text> : null}
       {spinner != null ? (
-        <ActivityIndicator color={textStyle} style={styles.spinner} />
+        <ActivityIndicator color={spinnerColor} style={styles.spinner} />
       ) : null}
       {children}
     </TouchableOpacity>

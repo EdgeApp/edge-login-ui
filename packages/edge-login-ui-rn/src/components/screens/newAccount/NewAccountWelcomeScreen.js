@@ -33,42 +33,38 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
   render() {
     return (
       <SafeAreaView>
-        <View style={NewAccountWelcomeScreenStyle.screen}>
-          <View style={NewAccountWelcomeScreenStyle.row1}>
+        <View style={styles.screen}>
+          <View style={styles.row1}>
             <HeaderBackButton
               testID="exitButton"
               onPress={this.props.onBack}
-              styles={NewAccountWelcomeScreenStyle.exitBackButtonStyle}
+              styles={styles.exitBackButtonStyle}
               label={s.strings.exit}
             />
           </View>
-          <View style={NewAccountWelcomeScreenStyle.row2}>
+          <View style={styles.row2}>
             <ImageHeaderComponent src={Assets.WELCOME} />
           </View>
-          <View style={NewAccountWelcomeScreenStyle.row3}>
-            <T style={NewAccountWelcomeScreenStyle.instructionsText}>
+          <View style={styles.row3}>
+            <T style={styles.instructionsText}>
               {sprintf(
                 s.strings.welcome_one,
                 this.props.branding.appName || s.strings.app_name_default
               )}
             </T>
           </View>
-          <View style={NewAccountWelcomeScreenStyle.row4} />
-          <View style={NewAccountWelcomeScreenStyle.row5}>
-            <T style={NewAccountWelcomeScreenStyle.callToAction}>
-              {s.strings.start_username}
-            </T>
+          <View style={styles.row4} />
+          <View style={styles.row5}>
+            <T style={styles.callToAction}>{s.strings.start_username}</T>
           </View>
-          <View style={NewAccountWelcomeScreenStyle.row6}>
+          <View style={styles.row6}>
             <Button
               testID="getStartedButton"
               onPress={this.props.onDone}
-              downStyle={NewAccountWelcomeScreenStyle.nextButton.downStyle}
-              downTextStyle={
-                NewAccountWelcomeScreenStyle.nextButton.downTextStyle
-              }
-              upStyle={NewAccountWelcomeScreenStyle.nextButton.upStyle}
-              upTextStyle={NewAccountWelcomeScreenStyle.nextButton.upTextStyle}
+              downStyle={styles.nextButton.downStyle}
+              downTextStyle={styles.nextButton.downTextStyle}
+              upStyle={styles.nextButton.upStyle}
+              upTextStyle={styles.nextButton.upTextStyle}
               label={s.strings.get_started}
             />
           </View>
@@ -78,7 +74,7 @@ class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const NewAccountWelcomeScreenStyle = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   row1: {
     width: '100%',

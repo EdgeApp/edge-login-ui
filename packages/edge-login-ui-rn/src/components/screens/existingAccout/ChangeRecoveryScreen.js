@@ -2,7 +2,7 @@
 
 import { type EdgeAccount, type EdgeRecoveryQuestionChoice } from 'edge-core-js'
 import * as React from 'react'
-import { Dimensions, Platform, View } from 'react-native'
+import { Dimensions, FlatList, Platform, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {
@@ -19,7 +19,7 @@ import { scale } from '../../../util/scaling.js'
 import { getAccount } from '../../../util/selectors.js'
 import { Button } from '../../common/Button.js'
 import { Header } from '../../common/Header.js'
-import { DropDownList, FormField } from '../../common/index.js'
+import { FormField } from '../../common/index.js'
 import { TextRowComponent } from '../../common/ListItems/TextRowComponent.js'
 import { TextAndIconButton } from '../../common/TextAndIconButton.js'
 import { type ButtonInfo, ButtonsModal } from '../../modals/ButtonsModal.js'
@@ -264,19 +264,20 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  renderQuestions = (styles: typeof RecoverPasswordSceneStyles) => {
+  renderQuestions = () => {
     return (
       <View style={styles.body}>
-        <DropDownList
+        <FlatList
           style={styles.questionsList}
           data={this.props.questionsList}
-          renderRow={this.renderItems}
+          renderItem={this.renderItems}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     )
   }
 
-  renderForm = (styles: typeof RecoverPasswordSceneStyles) => {
+  renderForm = () => {
     const form1Style = this.state.errorOne ? styles.inputError : styles.input
     const form2Style = this.state.errorTwo ? styles.inputError : styles.input
     const errorMessageOne = this.state.errorOne
@@ -348,12 +349,12 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
             error={errorMessageTwo}
           />
         </View>
-        {this.renderButtons(styles)}
+        {this.renderButtons()}
       </View>
     )
   }
 
-  renderButtons(styles: typeof RecoverPasswordSceneStyles) {
+  renderButtons() {
     if (this.props.isEnabled) {
       return (
         <View style={styles.buttonContainer}>
@@ -395,10 +396,10 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
 
   render() {
     const middle = this.state.showQuestionPicker
-      ? this.renderQuestions(RecoverPasswordSceneStyles)
-      : this.renderForm(RecoverPasswordSceneStyles)
+      ? this.renderQuestions()
+      : this.renderForm()
     return (
-      <View style={RecoverPasswordSceneStyles.screen}>
+      <View style={styles.screen}>
         {this.renderHeader()}
         {middle}
       </View>
@@ -406,7 +407,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const RecoverPasswordSceneStyles = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   body: {
     padding: scale(18)

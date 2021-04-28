@@ -55,11 +55,11 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
   render() {
     return (
       <SafeAreaView>
-        <View style={NewAccountUsernameScreenStyle.screen}>
+        <View style={styles.screen}>
           <Header onBack={this.props.onBack} />
-          <View style={NewAccountUsernameScreenStyle.pageContainer}>
-            <View style={NewAccountUsernameScreenStyle.instructions}>
-              <T style={NewAccountUsernameScreenStyle.instructionsText}>
+          <View style={styles.pageContainer}>
+            <View style={styles.instructions}>
+              <T style={styles.instructionsText}>
                 {sprintf(
                   s.strings.username_desc,
                   this.props.branding.appName || s.strings.app_name_default
@@ -68,19 +68,17 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
             </View>
             <UsernameConnector
               testID="usernameInput"
-              style={NewAccountUsernameScreenStyle.inputBox}
+              style={styles.inputBox}
               onFinish={this.handleNext}
             />
-            <View style={NewAccountUsernameScreenStyle.shim} />
+            <View style={styles.shim} />
             <Button
               testID="nextButton"
               onPress={this.handleNext}
-              downStyle={NewAccountUsernameScreenStyle.nextButton.downStyle}
-              downTextStyle={
-                NewAccountUsernameScreenStyle.nextButton.downTextStyle
-              }
-              upStyle={NewAccountUsernameScreenStyle.nextButton.upStyle}
-              upTextStyle={NewAccountUsernameScreenStyle.nextButton.upTextStyle}
+              downStyle={styles.nextButton.downStyle}
+              downTextStyle={styles.nextButton.downTextStyle}
+              upStyle={styles.nextButton.upStyle}
+              upTextStyle={styles.nextButton.upTextStyle}
               label={s.strings.next_label}
               isThinking={this.state.isProcessing}
               doesThink
@@ -102,7 +100,7 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const NewAccountUsernameScreenStyle = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: {
     flex: 1,

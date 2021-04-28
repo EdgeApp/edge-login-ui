@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import {
+  FlatList,
   Keyboard,
   Platform,
   Text,
@@ -28,7 +29,6 @@ import { BackgroundImage } from '../common/BackgroundImage.js'
 import { Button } from '../common/Button.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { ImageButton } from '../common/ImageButton.js'
-import { DropDownList } from '../common/index.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
 import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
@@ -121,10 +121,10 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
 
   render() {
     return (
-      <View style={PinLoginScreenStyle.container}>
+      <View style={styles.container}>
         <BackgroundImage
           branding={this.props.branding}
-          style={PinLoginScreenStyle.backgroundImage}
+          style={styles.backgroundImage}
           content={this.renderOverImage()}
         />
       </View>
@@ -137,7 +137,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
       return null
     }
     return (
-      <View style={PinLoginScreenStyle.featureBoxContainer}>
+      <View style={styles.featureBoxContainer}>
         <HeaderParentButtons
           branding={{
             ...this.props.branding,
@@ -148,14 +148,12 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
           }}
         />
         <TouchableWithoutFeedback onPress={this.handleHideDrop}>
-          <View style={PinLoginScreenStyle.featureBox}>
+          <View style={styles.featureBox}>
             <LogoImageHeader branding={this.props.branding} />
-            <View style={PinLoginScreenStyle.featureBoxBody}>
-              {this.renderBottomHalf(PinLoginScreenStyle)}
-            </View>
+            <View style={styles.featureBoxBody}>{this.renderBottomHalf()}</View>
           </View>
         </TouchableWithoutFeedback>
-        <View style={PinLoginScreenStyle.spacer_full} />
+        <View style={styles.spacer_full} />
         {this.props.userDetails.pinEnabled && (
           <PinKeypad
             disabled={wait > 0 || pin.length === 4}
@@ -166,19 +164,19 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  renderBottomHalf(style: typeof PinLoginScreenStyle) {
+  renderBottomHalf() {
     const { errorMessage, isLoggingInWithPin, pin, wait } = this.props
 
     if (this.state.focusOn === 'pin') {
       return (
-        <View style={style.innerView}>
+        <View style={styles.innerView}>
           <Button
             onPress={this.handleShowDrop}
             label={this.props.username}
-            downStyle={style.usernameButton.downStyle}
-            downTextStyle={style.usernameButton.downTextStyle}
-            upStyle={style.usernameButton.upStyle}
-            upTextStyle={style.usernameButton.upTextStyle}
+            downStyle={styles.usernameButton.downStyle}
+            downTextStyle={styles.usernameButton.downTextStyle}
+            upStyle={styles.usernameButton.upStyle}
+            upTextStyle={styles.usernameButton.upTextStyle}
           />
           {this.props.userDetails.pinEnabled && (
             <FourDigit
@@ -194,20 +192,21 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
               spinner={wait > 0 || pin.length === 4 || isLoggingInWithPin}
             />
           )}
-          {!this.props.userDetails.pinEnabled && <View style={style.spacer} />}
+          {!this.props.userDetails.pinEnabled && <View style={styles.spacer} />}
           {this.renderTouchImage()}
-          <Text style={style.touchImageText}>
+          <Text style={styles.touchImageText}>
             {this.renderTouchImageText()}
           </Text>
         </View>
       )
     }
     return (
-      <View style={style.innerView}>
-        <DropDownList
-          style={style.listView}
+      <View style={styles.innerView}>
+        <FlatList
+          style={styles.listView}
           data={this.getDropdownItems()}
-          renderRow={this.renderItems}
+          renderItem={this.renderItems}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     )
@@ -228,7 +227,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     return (
       <UserListItem
         data={item.item}
-        style={PinLoginScreenStyle.listItem}
+        style={styles.listItem}
         onClick={this.handleSelectUser}
         onDelete={this.handleDelete}
       />
@@ -261,7 +260,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     if (touchEnabled && touch === 'FaceID') {
       return (
         <ImageButton
-          style={{}}
+          style={{ container: {}, image: {} }}
           source={Assets.FACE_ID}
           onPress={this.handleTouchId}
           disabled={this.props.isTouchIdDisabled}
@@ -271,7 +270,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
     if (touchEnabled && touch === 'TouchID') {
       return (
         <ImageButton
-          style={{}}
+          style={{ container: {}, image: {} }}
           source={Assets.TOUCH_ID}
           onPress={this.handleTouchId}
           disabled={this.props.isTouchIdDisabled}
@@ -300,7 +299,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const PinLoginScreenStyle = {
+const styles = {
   container: Styles.ScreenStyle,
   backgroundImage: {
     flex: 1,
@@ -373,11 +372,7 @@ const PinLoginScreenStyle = {
       icon: {
         color: Constants.WHITE
       },
-      iconPressed: {
-        color: Constants.WHITE
-      },
-      iconSize: scale(Constants.FONTS.defaultFontSize),
-      underlayColor: Constants.TRANSPARENT
+      iconSize: scale(Constants.FONTS.defaultFontSize)
     },
     text: {
       paddingLeft: scale(20),

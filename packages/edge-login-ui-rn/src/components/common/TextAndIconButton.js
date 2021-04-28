@@ -6,7 +6,14 @@ import { Text, TouchableOpacity, View } from 'react-native'
 type Props = {
   testID?: string,
   icon: React.Node,
-  style: any,
+  style: {
+    container: any,
+    centeredContent: any,
+    inner: any,
+    textContainer: any,
+    iconContainer: any,
+    text: any
+  },
   onPress: Function,
   title: string,
   numberOfLines?: number

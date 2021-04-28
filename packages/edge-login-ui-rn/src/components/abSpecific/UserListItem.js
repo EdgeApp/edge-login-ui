@@ -6,7 +6,16 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 type Props = {
   data: string,
-  style: Object,
+  style: {
+    container: any,
+    text: any,
+    textComtainer: any,
+    iconButton: {
+      container: any,
+      icon: any,
+      iconSize: number
+    }
+  },
   onClick(string): void,
   onDelete(string): void
 }
@@ -21,15 +30,15 @@ class UserListItem extends React.Component<Props> {
   }
 
   render() {
-    const style = this.props.style
     return (
       <TouchableOpacity onPress={this.handlePress}>
-        {this.renderInside(style)}
+        {this.renderInside()}
       </TouchableOpacity>
     )
   }
 
-  renderInside(style: Object) {
+  renderInside() {
+    const { style } = this.props
     if (this.props.onDelete) {
       return (
         <View style={style.container}>

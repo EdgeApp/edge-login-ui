@@ -66,27 +66,23 @@ class NewAccountPinScreenComponent extends React.Component<Props, State> {
     this.checkError()
     return (
       <SafeAreaView>
-        <View style={SetAccountPinScreenStyle.screen}>
+        <View style={styles.screen}>
           <Header onBack={this.props.onBack} />
-          <View style={SetAccountPinScreenStyle.pageContainer}>
-            <View style={SetAccountPinScreenStyle.row1}>
-              <Text style={SetAccountPinScreenStyle.instructions}>
-                {s.strings.pin_desc}
-              </Text>
+          <View style={styles.pageContainer}>
+            <View style={styles.row1}>
+              <Text style={styles.instructions}>{s.strings.pin_desc}</Text>
             </View>
-            <View style={SetAccountPinScreenStyle.row2}>
+            <View style={styles.row2}>
               <FourDigitInput testID="pinInput" />
             </View>
-            <View style={SetAccountPinScreenStyle.row3}>
+            <View style={styles.row3}>
               <Button
                 testID="nextButton"
                 onPress={this.handleNext}
-                downStyle={SetAccountPinScreenStyle.nextButton.downStyle}
-                downTextStyle={
-                  SetAccountPinScreenStyle.nextButton.downTextStyle
-                }
-                upStyle={SetAccountPinScreenStyle.nextButton.upStyle}
-                upTextStyle={SetAccountPinScreenStyle.nextButton.upTextStyle}
+                downStyle={styles.nextButton.downStyle}
+                downTextStyle={styles.nextButton.downTextStyle}
+                upStyle={styles.nextButton.upStyle}
+                upTextStyle={styles.nextButton.upTextStyle}
                 label={s.strings.next_label}
                 isThinking={this.state.isProcessing}
                 doesThink
@@ -123,7 +119,7 @@ class NewAccountPinScreenComponent extends React.Component<Props, State> {
   }
 }
 
-const SetAccountPinScreenStyle = {
+const styles = {
   screen: { ...Styles.ScreenStyle },
   pageContainer: { flex: 1, width: '100%' },
   row1: {

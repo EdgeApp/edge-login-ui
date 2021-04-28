@@ -13,7 +13,7 @@ import { useTheme } from '../services/ThemeContext.js'
 
 type Props = {
   branding: Branding,
-  style: Object,
+  style: any,
   content: any,
   enableTouch?: boolean,
   onPress?: () => void

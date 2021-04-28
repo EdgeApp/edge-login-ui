@@ -19,115 +19,114 @@ type Props = {
 export class PinKeypad extends React.PureComponent<Props> {
   render() {
     const { disabled, onPress } = this.props
-    const style = PinKeypadStyle
 
     return (
-      <View style={style.keypadContainer}>
-        <View style={style.keypadInner}>
-          <View style={style.keypadRow}>
+      <View style={styles.keypadContainer}>
+        <View style={styles.keypadInner}>
+          <View style={styles.keypadRow}>
             <TouchableWithoutFeedback
-              style={style.keypadColumn}
+              style={styles.keypadColumn}
               onPress={() => onPress('1')}
               disabled={disabled}
             >
-              <View style={style.keypadColumn}>
-                <Text style={style.keypadKeys}>{s.strings.keypad_one}</Text>
+              <View style={styles.keypadColumn}>
+                <Text style={styles.keypadKeys}>{s.strings.keypad_one}</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
-              style={style.keypadColumn}
+              style={styles.keypadColumn}
               onPress={() => onPress('2')}
               disabled={disabled}
             >
-              <View style={style.keypadColumn}>
-                <Text style={style.keypadKeys}>{s.strings.keypad_two}</Text>
+              <View style={styles.keypadColumn}>
+                <Text style={styles.keypadKeys}>{s.strings.keypad_two}</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
-              style={style.keypadColumn}
+              style={styles.keypadColumn}
               onPress={() => onPress('3')}
               disabled={disabled}
             >
-              <View style={style.keypadColumn}>
-                <Text style={style.keypadKeys}>{s.strings.keypad_three}</Text>
+              <View style={styles.keypadColumn}>
+                <Text style={styles.keypadKeys}>{s.strings.keypad_three}</Text>
               </View>
             </TouchableWithoutFeedback>
           </View>
-          <View style={style.keypadRow}>
+          <View style={styles.keypadRow}>
             <TouchableWithoutFeedback
-              style={style.keypadColumn}
+              style={styles.keypadColumn}
               onPress={() => onPress('4')}
               disabled={disabled}
             >
-              <View style={style.keypadColumn}>
-                <Text style={style.keypadKeys}>{s.strings.keypad_four}</Text>
+              <View style={styles.keypadColumn}>
+                <Text style={styles.keypadKeys}>{s.strings.keypad_four}</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
-              style={style.keypadColumn}
+              style={styles.keypadColumn}
               onPress={() => onPress('5')}
               disabled={disabled}
             >
-              <View style={style.keypadColumn}>
-                <Text style={style.keypadKeys}>{s.strings.keypad_five}</Text>
+              <View style={styles.keypadColumn}>
+                <Text style={styles.keypadKeys}>{s.strings.keypad_five}</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
-              style={style.keypadColumn}
+              style={styles.keypadColumn}
               onPress={() => onPress('6')}
               disabled={disabled}
             >
-              <View style={style.keypadColumn}>
-                <Text style={style.keypadKeys}>{s.strings.keypad_six}</Text>
+              <View style={styles.keypadColumn}>
+                <Text style={styles.keypadKeys}>{s.strings.keypad_six}</Text>
               </View>
             </TouchableWithoutFeedback>
           </View>
-          <View style={style.keypadRow}>
+          <View style={styles.keypadRow}>
             <TouchableWithoutFeedback
-              style={style.keypadColumn}
+              style={styles.keypadColumn}
               onPress={() => onPress('7')}
               disabled={disabled}
             >
-              <View style={style.keypadColumn}>
-                <Text style={style.keypadKeys}>{s.strings.keypad_seven}</Text>
+              <View style={styles.keypadColumn}>
+                <Text style={styles.keypadKeys}>{s.strings.keypad_seven}</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
-              style={style.keypadColumn}
+              style={styles.keypadColumn}
               onPress={() => onPress('8')}
               disabled={disabled}
             >
-              <View style={style.keypadColumn}>
-                <Text style={style.keypadKeys}>{s.strings.keypad_eight}</Text>
+              <View style={styles.keypadColumn}>
+                <Text style={styles.keypadKeys}>{s.strings.keypad_eight}</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
-              style={style.keypadColumn}
+              style={styles.keypadColumn}
               onPress={() => onPress('9')}
               disabled={disabled}
             >
-              <View style={style.keypadColumn}>
-                <Text style={style.keypadKeys}>{s.strings.keypad_nine}</Text>
+              <View style={styles.keypadColumn}>
+                <Text style={styles.keypadKeys}>{s.strings.keypad_nine}</Text>
               </View>
             </TouchableWithoutFeedback>
           </View>
-          <View style={style.keypadRow}>
-            <View style={style.keypadColumnBlank} />
+          <View style={styles.keypadRow}>
+            <View style={styles.keypadColumnBlank} />
             <TouchableWithoutFeedback
-              style={style.keypadColumn}
+              style={styles.keypadColumn}
               onPress={() => onPress('0')}
               disabled={disabled}
             >
-              <View style={style.keypadColumn}>
-                <Text style={style.keypadKeys}>{s.strings.keypad_zero}</Text>
+              <View style={styles.keypadColumn}>
+                <Text style={styles.keypadKeys}>{s.strings.keypad_zero}</Text>
               </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               onPress={() => onPress('back')}
               disabled={disabled}
             >
-              <View style={style.keypadColumnBack}>
-                <MaterialIcon name="backspace" style={style.keypadKeysBack} />
+              <View style={styles.keypadColumnBack}>
+                <MaterialIcon name="backspace" style={styles.keypadKeysBack} />
               </View>
             </TouchableWithoutFeedback>
           </View>
@@ -137,7 +136,7 @@ export class PinKeypad extends React.PureComponent<Props> {
   }
 }
 
-const PinKeypadStyle = {
+const styles = {
   keypadContainer: {
     width: '100%',
     flexDirection: 'row',

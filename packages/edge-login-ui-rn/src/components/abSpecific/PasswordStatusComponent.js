@@ -23,19 +23,19 @@ class PasswordStatusComponent extends React.Component<Props> {
   render() {
     if (this.props.status) {
       return (
-        <View style={style.container}>
-          <View style={style.boxes}>
-            {this.renderStatusList(style, this.props.status)}
+        <View style={styles.container}>
+          <View style={styles.boxes}>
+            {this.renderStatusList(this.props.status)}
           </View>
-          <View style={style.textContainer}>
-            <Text style={style.text}>{this.props.secondsToCrack}</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>{this.props.secondsToCrack}</Text>
           </View>
         </View>
       )
     }
     return (
-      <View style={style.containerWhite}>
-        <Text style={style.instructions}>{s.strings.password_desc}</Text>
+      <View style={styles.containerWhite}>
+        <Text style={styles.instructions}>{s.strings.password_desc}</Text>
       </View>
     )
   }
@@ -44,11 +44,11 @@ class PasswordStatusComponent extends React.Component<Props> {
     // do nothing
   }
 
-  renderStatusList(style: Object, status: PasswordStatusState) {
+  renderStatusList(status: PasswordStatusState) {
     return status.list.map(Item => (
-      <View style={style.checkboxContainer} key={Item.title}>
+      <View style={styles.checkboxContainer} key={Item.title}>
         <Checkbox
-          style={style.checkboxes}
+          style={styles.checkboxes}
           label={Item.title}
           value={Item.value}
           isSelected={false}
@@ -62,7 +62,7 @@ class PasswordStatusComponent extends React.Component<Props> {
   }
 }
 
-const style = {
+const styles = {
   container: {
     height: scale(80 + 48),
     width: '100%',
@@ -121,7 +121,8 @@ const style = {
     checkbox: {
       padding: scale(2),
       marginRight: scale(5)
-    }
+    },
+    labelContainer: {}
   },
   text: {
     textAlign: 'center',
