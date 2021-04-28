@@ -17,9 +17,10 @@ import { connect } from '../services/ReduxStore.js'
 
 const MAX_PIN_LENGTH = 4
 
-type OwnProps = {}
+type OwnProps = {
+  testID?: string
+}
 type StateProps = {
-  testID?: string,
   error: string,
   pin: string,
   username: string,

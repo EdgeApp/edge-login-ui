@@ -6,6 +6,7 @@ import { ActivityIndicator, Text, TouchableHighlight, View } from 'react-native'
 import * as Colors from '../../constants/Colors.js'
 
 type Props = {
+  testID?: string,
   label: string,
   downStyle: Object,
   upStyle: Object,
@@ -65,6 +66,7 @@ class Button extends React.Component<Props, State> {
     if (!this.props.isThinking) {
       return (
         <Text
+          testID={this.props.testID}
           style={[
             this.props.upTextStyle,
             this.state.pressed && this.props.downTextStyle

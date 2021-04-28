@@ -7,6 +7,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 const isIos = Platform.OS === 'ios'
 
 type Props = {
+  testID?: string,
   styles: Object,
   label: string,
   onPress(): void
@@ -21,7 +22,9 @@ class HeaderBackButton extends React.Component<Props> {
           <Entypo name="chevron-left" style={styles.backIconStyle} />
         )}
         {withArrow && !isIos ? null : (
-          <Text style={[styles.sideText]}>{this.props.label}</Text>
+          <Text testID={this.props.testID} style={[styles.sideText]}>
+            {this.props.label}
+          </Text>
         )}
       </TouchableOpacity>
     )

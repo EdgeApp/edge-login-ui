@@ -7,6 +7,7 @@ import { connect } from '../../components/services/ReduxStore.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 
 type OwnProps = {
+  testID?: string,
   onFinish(): void
 }
 
