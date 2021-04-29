@@ -48,10 +48,11 @@ export class LoginScreen extends React.Component<Props> {
   constructor(props: Props) {
     super(props)
 
-    const { fontDescription = {} } = this.props
-    const { regularFontFamily } = fontDescription
-    changeFont(regularFontFamily)
-    updateFontStyles(regularFontFamily)
+    const { fontDescription } = props
+    if (fontDescription != null) {
+      changeFont(fontDescription.regularFontFamily)
+      updateFontStyles(fontDescription.regularFontFamily)
+    }
   }
 
   render() {
