@@ -11,7 +11,7 @@ interface Props {
   onComplete: () => void
 }
 
-export function SecurityAlertsScreen(props: Props): React.ReactNode {
+export function SecurityAlertsScreen(props: Props): JSX.Element {
   const { account, context, onComplete } = props
   useClearOnUnmount()
 

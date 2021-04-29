@@ -12,7 +12,7 @@ interface Props {
   onComplete: () => void
 }
 
-export function ChangePinScreen(props: Props): React.ReactNode {
+export function ChangePinScreen(props: Props): JSX.Element {
   const { account, context, onComplete, showHeader = false } = props
   useClearOnUnmount()
 

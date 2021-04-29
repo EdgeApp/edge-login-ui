@@ -12,7 +12,7 @@ interface Props {
   otpError: OtpError
 }
 
-export function OtpRepairScreen(props: Props): React.ReactNode {
+export function OtpRepairScreen(props: Props): JSX.Element {
   const { account, context, onComplete, otpError } = props
   useClearOnUnmount()
 

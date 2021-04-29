@@ -13,7 +13,7 @@ interface Props {
   onComplete: () => void
 }
 
-export function PasswordRecoveryScreen(props: Props): React.ReactNode {
+export function PasswordRecoveryScreen(props: Props): JSX.Element {
   const { account, context, onComplete, showHeader = false } = props
   useClearOnUnmount()
 

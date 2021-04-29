@@ -20,7 +20,7 @@ interface Props {
  * Consolidates our Redux setup logic into one place.
  */
 export class ReduxStore extends React.Component<Props> {
-  store: Store<RootState, Action>
+  store: Store<RootState>
 
   constructor(props: Props) {
     super(props)
@@ -41,7 +41,6 @@ export class ReduxStore extends React.Component<Props> {
   componentDidUpdate(prev: Props) {
     const { recoveryKey } = this.props.imports
     if (recoveryKey && recoveryKey !== prev.imports.recoveryKey) {
-      // @ts-expect-error Flow doesn't know about thunks at this point.
       this.store.dispatch(launchPasswordRecovery(recoveryKey))
     }
   }
@@ -64,6 +63,5 @@ export function connect<StateProps, DispatchProps, OwnProps>(
   mapStateToProps: (state: RootState, ownProps: OwnProps) => StateProps,
   mapDispatchToProps?: (dispatch: Dispatch, ownProps: OwnProps) => DispatchProps
 ): Connector<StateProps & DispatchProps, OwnProps> {
-  // @ts-expect-error
   return rawConnect(mapStateToProps, mapDispatchToProps)
 }

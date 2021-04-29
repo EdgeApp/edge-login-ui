@@ -143,7 +143,6 @@ const CornerBorder = ({
   )
 }
 
-// @ts-expect-error = forwardRef is not recognize by flow?
 const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
   const {
     // Content options:

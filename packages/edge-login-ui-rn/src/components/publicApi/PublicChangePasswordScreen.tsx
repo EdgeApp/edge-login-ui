@@ -12,7 +12,7 @@ interface Props {
   onComplete: () => void
 }
 
-export function ChangePasswordScreen(props: Props): React.ReactNode {
+export function ChangePasswordScreen(props: Props): JSX.Element {
   const { account, context, onComplete, showHeader = true } = props
   useClearOnUnmount()
 
