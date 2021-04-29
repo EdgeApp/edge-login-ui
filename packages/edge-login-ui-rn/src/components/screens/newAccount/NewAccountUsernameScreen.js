@@ -4,9 +4,11 @@ import * as React from 'react'
 import { View } from 'react-native'
 import { sprintf } from 'sprintf-js'
 
-import { checkUsernameForAvailabilty } from '../../../actions/CreateAccountActions.js'
+import {
+  checkUsernameForAvailabilty,
+  validateUsername
+} from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
-import UsernameConnector from '../../../connectors/componentConnectors/UsernameConnector'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Branding } from '../../../types/Branding.js'
@@ -14,6 +16,7 @@ import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
 import T from '../../common/FormattedText.js'
+import { FormField } from '../../common/FormField.js'
 import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { connect } from '../../services/ReduxStore.js'
@@ -27,7 +30,8 @@ type StateProps = {
 }
 type DispatchProps = {
   checkUsernameForAvailabilty(string): void,
-  onBack(): void
+  onBack(): void,
+  validateUsername(username: string): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -66,10 +70,17 @@ class NewAccountUsernameScreenComponent extends React.Component<Props, State> {
                 )}
               </T>
             </View>
-            <UsernameConnector
-              testID="usernameInput"
+            <FormField
+              autoCorrect={false}
+              autoFocus
+              error={this.props.usernameErrorMessage ?? ''}
+              label={s.strings.username}
+              onChangeText={username => this.props.validateUsername(username)}
+              onSubmitEditing={this.handleNext}
+              returnKeyType="go"
               style={styles.inputBox}
-              onFinish={this.handleNext}
+              testID="usernameInput"
+              value={this.props.username}
             />
             <View style={styles.shim} />
             <Button
@@ -145,6 +156,9 @@ export const NewAccountUsernameScreen = connect<
     },
     checkUsernameForAvailabilty(data: string) {
       dispatch(checkUsernameForAvailabilty(data))
+    },
+    validateUsername(username: string): void {
+      dispatch(validateUsername(username))
     }
   })
 )(NewAccountUsernameScreenComponent)

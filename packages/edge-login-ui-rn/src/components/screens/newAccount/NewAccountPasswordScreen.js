@@ -5,15 +5,17 @@ import * as React from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { validateConfirmPassword } from '../../../actions/CreateAccountActions.js'
+import {
+  validateConfirmPassword,
+  validatePassword
+} from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
-import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
-import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { scale } from '../../../util/scaling.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common/Button.js'
+import { FormField } from '../../common/FormField.js'
 import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { connect } from '../../services/ReduxStore.js'
@@ -21,15 +23,18 @@ import { connect } from '../../services/ReduxStore.js'
 type OwnProps = {}
 type StateProps = {
   confirmPassword: string,
+  confirmPasswordErrorMessage: string,
+  createPasswordErrorMessage: string,
   error: string,
   error2: string,
   password: string,
   passwordStatus: EdgePasswordRules | null
 }
 type DispatchProps = {
-  checkTheConfirmPassword(): void,
   onBack(): void,
-  onDone(): void
+  onDone(): void,
+  validateConfirmPassword(password: string): void,
+  validatePassword(password: string): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -84,19 +89,34 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
     return (
       <View style={styles.innerView}>
         <PasswordStatus />
-        <PasswordConnector
+        <FormField
+          value={this.props.password}
+          error={this.props.createPasswordErrorMessage}
+          secureTextEntry
+          returnKeyType="next"
+          onChangeText={(password: string) =>
+            this.props.validatePassword(password)
+          }
+          onSubmitEditing={this.handleFocusSwitch}
           testID="passwordInput"
           label={s.strings.password}
           style={styles.inputBox}
           autoFocus={this.state.focusFirst}
-          onFinish={this.handleFocusSwitch}
         />
-        <PasswordConfirmConnector
-          testID="confirmPasswordInput"
-          label={s.strings.confirm_password}
-          style={styles.inputBox}
+        <FormField
+          error={this.props.confirmPasswordErrorMessage}
+          returnKeyType="go"
+          secureTextEntry
+          showSecureCheckbox
+          value={this.props.confirmPassword}
           autoFocus={this.state.focusSecond}
-          onFinish={this.handleNext}
+          label={s.strings.confirm_password}
+          onChangeText={(password: string) =>
+            this.props.validateConfirmPassword(password)
+          }
+          onSubmitEditing={this.handleNext}
+          style={styles.inputBox}
+          testID="confirmPasswordInput"
         />
         <View style={styles.passwordShim} />
         <Button
@@ -147,7 +167,7 @@ class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
       this.setState({
         isProcessing: false
       })
-      this.props.checkTheConfirmPassword()
+      this.props.validateConfirmPassword(this.props.confirmPassword)
       global.firebase &&
         global.firebase.analytics().logEvent(`Signup_Password_Invalid`)
       return
@@ -198,20 +218,25 @@ export const NewAccountPasswordScreen = connect<
 >(
   (state: RootState) => ({
     confirmPassword: state.create.confirmPassword || '',
+    confirmPasswordErrorMessage: state.create.confirmPasswordErrorMessage || '',
+    createPasswordErrorMessage: state.create.createPasswordErrorMessage || '',
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
     password: state.create.password || '',
     passwordStatus: state.create.passwordStatus
   }),
   (dispatch: Dispatch) => ({
-    checkTheConfirmPassword() {
-      dispatch(validateConfirmPassword())
-    },
     onBack() {
       dispatch({ type: 'WORKFLOW_BACK' })
     },
     onDone() {
       dispatch({ type: 'WORKFLOW_NEXT' })
+    },
+    validateConfirmPassword(password: string) {
+      dispatch(validateConfirmPassword(password))
+    },
+    validatePassword(password: string) {
+      dispatch(validatePassword(password))
     }
   })
 )(NewAccountPasswordScreenComponent)

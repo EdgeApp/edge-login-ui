@@ -75,21 +75,19 @@ export function validateUsername(data: string) {
     dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
   }
 }
-export function validateConfirmPassword(data?: string) {
+export function validateConfirmPassword(confirmPassword: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
-    const confirmPassword = data !== null ? data : state.create.confirmPassword
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     let error = null
     if (confirmPassword !== state.create.password) {
       error = s.strings.confirm_password_error
     }
-    const obj = {
-      password: confirmPassword,
-      error
-    }
-    dispatch({ type: 'AUTH_UPDATE_CONFIRM_PASSWORD', data: obj })
+    dispatch({
+      type: 'AUTH_UPDATE_CONFIRM_PASSWORD',
+      data: { password: confirmPassword, error }
+    })
   }
 }
 export function validatePassword(data: string) {
@@ -124,13 +122,15 @@ export function validatePassword(data: string) {
       error = s.strings.password_error // TODO localize.
     }
 
-    const obj = {
-      password: data,
-      passwordStatus: passwordEval,
-      passwordCheckString,
-      error: error
-    }
-    dispatch({ type: 'AUTH_UPDATE_PASSWORD', data: obj })
+    dispatch({
+      type: 'AUTH_UPDATE_PASSWORD',
+      data: {
+        password: data,
+        passwordStatus: passwordEval,
+        passwordCheckString,
+        error: error
+      }
+    })
   }
 }
 
