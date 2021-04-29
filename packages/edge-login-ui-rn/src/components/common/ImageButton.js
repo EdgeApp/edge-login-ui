@@ -4,7 +4,7 @@ import { Image, TouchableWithoutFeedback, View } from 'react-native'
 
 type Props = {
   style: { container: any, image: any },
-  source: string,
+  source: any,
   onPress(): void,
   disabled?: boolean
 }

@@ -7,8 +7,8 @@ type Props = {
   testID?: string,
   style: { checkbox: any, container: any, labelContainer: any, text: any },
   label: string,
-  checkedImage: string,
-  uncheckedImage: string,
+  checkedImage: any,
+  uncheckedImage: any,
   value?: boolean,
   disabled?: boolean,
   onChange(boolean): void
