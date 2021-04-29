@@ -109,9 +109,7 @@ const checkAndRequestNotifications = () => async (
   getState: GetState,
   imports: Imports
 ) => {
-  const notificationPermision = await checkNotifications().catch(error =>
-    console.log(error)
-  )
+  const notificationPermision = await checkNotifications()
   const notificationStatus = notificationPermision.status
   const isIos = Platform.OS === 'ios'
   const statusAppRefresh = isIos
