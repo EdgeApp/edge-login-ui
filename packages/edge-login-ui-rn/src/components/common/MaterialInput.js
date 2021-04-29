@@ -16,16 +16,16 @@ type Props = {
   textColor: string,
   errorColor: string,
   titleTextStyle: Object,
-  secureTextEntry: boolean,
+  secureTextEntry?: boolean,
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters',
-  autoCorrect: boolean,
-  autoFocus: boolean,
+  autoCorrect?: boolean,
+  autoFocus?: boolean,
   // eslint-disable-next-line react/no-unused-prop-types
-  forceFocus: boolean,
+  forceFocus?: boolean,
   returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
-  onFocus(): void,
-  onBlur(): void,
-  onChangeText(string): void,
+  onFocus?: () => void,
+  onBlur?: () => void,
+  onChangeText(text: string): void,
   onSubmitEditing(): void
 }
 type State = {
@@ -39,7 +39,7 @@ export class MaterialInput extends React.Component<Props, State> {
     super(props)
     this.state = {
       inputText: '',
-      autoFocus: this.props.autoFocus
+      autoFocus: this.props.autoFocus ?? false
     }
   }
 

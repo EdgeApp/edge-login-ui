@@ -16,36 +16,23 @@ type Props = {
   },
   label: string,
   value: string,
-  autoCorrect: boolean,
-  autoFocus: boolean,
-  forceFocus: boolean,
+  autoCorrect?: boolean,
+  autoFocus?: boolean,
+  forceFocus?: boolean,
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters',
-  secureTextEntry: boolean,
+  secureTextEntry?: boolean,
   returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
   error?: string,
-  onFocus(): void,
-  onBlur(): void,
-  onChangeText(): void,
-  onSubmitEditing(): void
+  onFocus?: () => void,
+  onBlur?: () => void,
+  onChangeText(text: string): void,
+  onSubmitEditing?: () => void
 }
 
-type State = {
-  secure: boolean,
-  autoFocus: boolean
-}
-
-class FormField extends React.Component<Props, State> {
+export class FormField extends React.Component<Props> {
   static defaultProps = {
     value: '',
     returnKeyType: 'done'
-  }
-
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      secure: this.props.secureTextEntry ? this.props.secureTextEntry : false,
-      autoFocus: this.props.autoFocus
-    }
   }
 
   render() {
@@ -65,14 +52,14 @@ class FormField extends React.Component<Props, State> {
         onChangeText={this.props.onChangeText}
         error={this.props.error}
         containerStyle={container}
-        secureTextEntry={this.state.secure}
+        secureTextEntry={this.props.secureTextEntry}
         returnKeyType={this.props.returnKeyType}
         baseColor={baseColor}
         tintColor={tintColor}
         textColor={textColor}
         errorColor={errorColor}
         titleTextStyle={titleTextStyle}
-        autoFocus={this.state.autoFocus}
+        autoFocus={this.props.autoFocus}
         forceFocus={this.props.forceFocus}
         onFocus={this.props.onFocus}
         onBlur={this.props.onBlur}
@@ -89,5 +76,3 @@ class FormField extends React.Component<Props, State> {
     }
   }
 }
-
-export { FormField }
