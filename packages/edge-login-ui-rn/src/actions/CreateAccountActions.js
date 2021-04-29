@@ -11,8 +11,7 @@ import { logEvent } from '../util/analytics.js'
 import { isASCII } from '../util/ASCIIUtil.js'
 import { getPreviousUsers, setMostRecentUsers } from './PreviousUsersActions.js'
 
-export function validatePin(data: Object) {
-  const pin = data.pin
+export function validatePin(pin: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     let error = null
     if (pin.length !== 4) {
@@ -21,12 +20,7 @@ export function validatePin(data: Object) {
     if (pin.length > 4) {
       return
     }
-    const obj = {
-      pin: pin,
-      error: error
-    }
-    dispatch({ type: 'CREATE_UPDATE_PIN', data: obj })
-    // dispatch(updatePin(obj))
+    dispatch({ type: 'CREATE_UPDATE_PIN', data: { pin, error } })
   }
 }
 export function checkUsernameForAvailabilty(data: string) {
