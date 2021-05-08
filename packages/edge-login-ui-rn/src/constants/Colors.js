@@ -31,4 +31,4 @@ export const BUTTON_DEFAULT_DOWN = '#FFFFFF'
 export const BUTTON_DEFAULT_DOWN_TEXT = '#0D2145'
 
 export const TRANSPARENT = 'transparent'
-export const GRADIENT = ['#0E4B75', '#0D2145']
+export const GRADIENT = ['#0D2145', '#0C446A']
