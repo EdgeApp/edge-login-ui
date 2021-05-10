@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.9.2 (2021-05-10)
+
+- rn: Add testID's to various screens.
+- rn: Improve internal type-safety. This should not have any extenally-visible effects.
+
 ## 0.9.1 (2021-04-19)
 
 - rn: Disable the password recovery email on Android. This works around a tricky crash in the React Native rendering code.
