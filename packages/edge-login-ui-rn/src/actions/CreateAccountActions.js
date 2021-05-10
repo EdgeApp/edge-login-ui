@@ -7,11 +7,17 @@ import s from '../common/locales/strings.js'
 import * as Constants from '../constants/index.js'
 import { enableTouchId, isTouchDisabled } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
+import { logEvent } from '../util/analytics.js'
 import { isASCII } from '../util/ASCIIUtil.js'
 import { getPreviousUsers, setMostRecentUsers } from './PreviousUsersActions.js'
 
-export function validatePin(data: Object) {
-  const pin = data.pin
+export type CreateUserData = {
+  username: string,
+  password: string,
+  pin: string
+}
+
+export function validatePin(pin: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     let error = null
     if (pin.length !== 4) {
@@ -20,12 +26,7 @@ export function validatePin(data: Object) {
     if (pin.length > 4) {
       return
     }
-    const obj = {
-      pin: pin,
-      error: error
-    }
-    dispatch({ type: 'CREATE_UPDATE_PIN', data: obj })
-    // dispatch(updatePin(obj))
+    dispatch({ type: 'CREATE_UPDATE_PIN', data: { pin, error } })
   }
 }
 export function checkUsernameForAvailabilty(data: string) {
@@ -42,8 +43,7 @@ export function checkUsernameForAvailabilty(data: string) {
               username: data,
               error: null
             }
-            global.firebase &&
-              global.firebase.analytics().logEvent(`Signup_Username_Available`)
+            logEvent(`Signup_Username_Available`)
             dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
             dispatch({ type: 'WORKFLOW_NEXT' })
             return
@@ -52,8 +52,7 @@ export function checkUsernameForAvailabilty(data: string) {
             username: data,
             error: s.strings.username_exists_error
           }
-          global.firebase &&
-            global.firebase.analytics().logEvent(`Signup_Username_Unavailable`)
+          logEvent(`Signup_Username_Unavailable`)
           dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
         })
         .catch(e => {
@@ -75,21 +74,19 @@ export function validateUsername(data: string) {
     dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
   }
 }
-export function validateConfirmPassword(data?: string) {
+export function validateConfirmPassword(confirmPassword: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const state = getState()
-    const confirmPassword = data !== null ? data : state.create.confirmPassword
     // dispatch(openLoading()) Legacy dealt with state for showing a spinner
     // the timeout is a hack until we put in interaction manager.
     let error = null
     if (confirmPassword !== state.create.password) {
       error = s.strings.confirm_password_error
     }
-    const obj = {
-      password: confirmPassword,
-      error
-    }
-    dispatch({ type: 'AUTH_UPDATE_CONFIRM_PASSWORD', data: obj })
+    dispatch({
+      type: 'AUTH_UPDATE_CONFIRM_PASSWORD',
+      data: { password: confirmPassword, error }
+    })
   }
 }
 export function validatePassword(data: string) {
@@ -124,17 +121,19 @@ export function validatePassword(data: string) {
       error = s.strings.password_error // TODO localize.
     }
 
-    const obj = {
-      password: data,
-      passwordStatus: passwordEval,
-      passwordCheckString,
-      error: error
-    }
-    dispatch({ type: 'AUTH_UPDATE_PASSWORD', data: obj })
+    dispatch({
+      type: 'AUTH_UPDATE_PASSWORD',
+      data: {
+        password: data,
+        passwordStatus: passwordEval,
+        passwordCheckString,
+        error: error
+      }
+    })
   }
 }
 
-export function createUser(data: Object) {
+export function createUser(data: CreateUserData) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context } = imports
     dispatch({ type: 'WORKFLOW_NEXT' })
@@ -157,8 +156,7 @@ export function createUser(data: Object) {
         }
         dispatch({ type: 'CREATE_ACCOUNT_SUCCESS', data: abcAccount })
         dispatch({ type: 'WORKFLOW_NEXT' })
-        global.firebase &&
-          global.firebase.analytics().logEvent('Signup_Create_User_Success')
+        logEvent('Signup_Create_User_Success')
         await setMostRecentUsers(abcAccount.username)
         await abcAccount.dataStore.setItem(
           Constants.OTP_REMINDER_STORE_NAME,

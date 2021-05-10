@@ -1,7 +1,5 @@
 // @flow
 
-import { type Reducer } from 'redux'
-
 import { type WorkflowName, workflows } from '../constants/workflows.js'
 import { type Action } from '../types/ReduxTypes.js'
 
@@ -15,10 +13,10 @@ const initialState: WorkflowState = {
   currentSceneIndex: 0
 }
 
-export const workflow: Reducer<WorkflowState, Action> = function (
-  state = initialState,
-  action
-) {
+export function workflow(
+  state: WorkflowState = initialState,
+  action: Action
+): WorkflowState {
   switch (action.type) {
     // Generic workflow actions:
     case 'WORKFLOW_BACK': {

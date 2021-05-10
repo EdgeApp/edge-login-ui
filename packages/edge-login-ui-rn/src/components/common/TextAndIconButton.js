@@ -14,7 +14,7 @@ type Props = {
     iconContainer: any,
     text: any
   },
-  onPress: Function,
+  onPress: () => void,
   title: string,
   numberOfLines?: number
 }

@@ -18,8 +18,8 @@ import { isIphoneX } from '../../../util/isIphoneX.js'
 import { scale } from '../../../util/scaling.js'
 import { getAccount } from '../../../util/selectors.js'
 import { Button } from '../../common/Button.js'
+import { FormField } from '../../common/FormField.js'
 import { Header } from '../../common/Header.js'
-import { FormField } from '../../common/index.js'
 import { TextRowComponent } from '../../common/ListItems/TextRowComponent.js'
 import { TextAndIconButton } from '../../common/TextAndIconButton.js'
 import { type ButtonInfo, ButtonsModal } from '../../modals/ButtonsModal.js'
@@ -191,7 +191,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   handleEnableEmail = async (): Promise<boolean> => {
     const { account, onDone } = this.props
 
-    const emailAddress = await Airship.show(bridge => (
+    const emailAddress: string | void = await Airship.show(bridge => (
       <TextInputModal
         bridge={bridge}
         title={s.strings.save_recovery_token}

@@ -1,7 +1,5 @@
 // @flow
 
-import { type Reducer } from 'redux'
-
 import { type Action } from '../types/ReduxTypes.js'
 
 export type LoginUserInfo = {
@@ -23,9 +21,9 @@ const initialState: PreviousUsersState = {
   loaded: false
 }
 
-export const previousUsers: Reducer<PreviousUsersState, Action> = function (
-  state = initialState,
-  action
-) {
+export function previousUsers(
+  state: PreviousUsersState = initialState,
+  action: Action
+): PreviousUsersState {
   return action.type === 'SET_PREVIOUS_USERS' ? action.data : state
 }

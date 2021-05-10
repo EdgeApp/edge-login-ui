@@ -23,11 +23,10 @@ type OwnProps = {
 type StateProps = {
   error: string,
   pin: string,
-  username: string,
   wait: number
 }
 type DispatchProps = {
-  onChangeText(data: Object): void
+  onChangeText(pin: string): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -68,7 +67,6 @@ class FourDigitInputComponent extends React.Component<Props> {
           keyboardType="number-pad"
           value={this.props.pin}
           autoFocus
-          keyboardShouldPersistTaps
         />
       )
     }
@@ -97,7 +95,7 @@ class FourDigitInputComponent extends React.Component<Props> {
   handleUpdate = (pin: string) => {
     // Change pin only when input are numbers
     if (/^\d+$/.test(pin) || pin.length === 0) {
-      this.props.onChangeText({ username: this.props.username, pin })
+      this.props.onChangeText(pin)
     }
   }
 }
@@ -166,8 +164,8 @@ export const FourDigitInput = connect<StateProps, DispatchProps, OwnProps>(
     wait: 0
   }),
   (dispatch: Dispatch) => ({
-    onChangeText(data: Object) {
-      dispatch(validatePin(data))
+    onChangeText(pin: string) {
+      dispatch(validatePin(pin))
     }
   })
 )(FourDigitInputComponent)

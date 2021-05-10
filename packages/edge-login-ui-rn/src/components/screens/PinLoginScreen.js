@@ -43,13 +43,13 @@ type StateProps = {
   loginSuccess: boolean,
   pin: string,
   touch: $PropertyType<RootState, 'touch'>,
-  userDetails: Object,
+  userDetails: LoginUserInfo,
   userList: LoginUserInfo[],
   username: string,
   wait: number
 }
 type DispatchProps = {
-  changeUser(string): void,
+  changeUser(username: string): void,
   deleteUserFromDevice(username: string): Promise<void>,
   gotoLoginPage(): void,
   loginWithTouch(username: string): void,
@@ -223,7 +223,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
       .map(user => user.username)
   }
 
-  renderItems = (item: Object) => {
+  renderItems = (item: { item: string }) => {
     return (
       <UserListItem
         data={item.item}
@@ -445,10 +445,10 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     touch: state.touch,
     userDetails: state.previousUsers.userList.find(
       user => user.username === state.login.username
-    ) || {
+    ) ?? {
       username: state.login.username,
-      isPinEnabled: false,
-      isTouchIdEnabled: false
+      pinEnabled: false,
+      touchEnabled: false
     },
     userList: state.previousUsers.userList,
     username: state.login.username,

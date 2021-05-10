@@ -61,7 +61,7 @@ export const initializeLogin = () => async (
     dispatch({ type: 'START_LANDING' })
   } else if (
     startupUser.pinEnabled ||
-    (startupUser.touchEnabled && touch !== 'none')
+    (startupUser.touchEnabled && touch !== false)
   ) {
     dispatch({ type: 'START_PIN_LOGIN' })
   } else {
@@ -109,9 +109,7 @@ const checkAndRequestNotifications = () => async (
   getState: GetState,
   imports: Imports
 ) => {
-  const notificationPermision = await checkNotifications().catch(error =>
-    console.log(error)
-  )
+  const notificationPermision = await checkNotifications()
   const notificationStatus = notificationPermision.status
   const isIos = Platform.OS === 'ios'
   const statusAppRefresh = isIos

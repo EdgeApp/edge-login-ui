@@ -24,7 +24,7 @@ export function makePeriodicTask(
   // The `running` flag will be true in the running state,
   // and `timeout` will have a value in the waiting state.
   let running = false
-  let timeout: $Call<typeof setTimeout, () => void, number> | void
+  let timeout: TimeoutID | void
 
   function run(): void {
     timeout = undefined

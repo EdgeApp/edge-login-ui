@@ -45,8 +45,7 @@ class SecurityAlertsModalComponent extends React.Component<Props> {
     return (
       <AirshipModal
         bridge={bridge}
-        onCancel={() => bridge.resolve()}
-        iconCircle
+        onCancel={() => bridge.resolve(undefined)}
         padding={theme.rem(0.5)}
         underlay={underlay}
         borderRadius={0}
@@ -60,7 +59,7 @@ class SecurityAlertsModalComponent extends React.Component<Props> {
         </View>
         <Text style={styles.titleText}>{s.strings.alert_modal_title}</Text>
         {this.renderList()}
-        <ModalCloseArrow onPress={() => bridge.resolve()} />
+        <ModalCloseArrow onPress={() => bridge.resolve(undefined)} />
       </AirshipModal>
     )
   }
@@ -98,7 +97,7 @@ class SecurityAlertsModalComponent extends React.Component<Props> {
         style={isFirst ? styles.row : styles.rowBorder}
         onPress={() => {
           this.props.selectUser(username)
-          bridge.resolve()
+          bridge.resolve(undefined)
         }}
       >
         <FontAwesome

@@ -11,6 +11,7 @@ import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
+import { logEvent } from '../../../util/analytics.js'
 import { scale } from '../../../util/scaling.js'
 import { Button } from '../../common/Button.js'
 import { Checkbox } from '../../common/Checkbox.js'
@@ -21,9 +22,7 @@ import { connect } from '../../services/ReduxStore.js'
 type OwnProps = {
   branding: Branding
 }
-type StateProps = {
-  terms: Object
-}
+type StateProps = {}
 type DispatchProps = {
   agreeToCondition(): void,
   onBack(): void
@@ -44,18 +43,24 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
   }
 
   renderItems() {
-    const terms = this.changeAppName()
-    return terms.map(Item => (
-      <View style={styles.checkboxContainer} key={Item.title}>
+    const { branding } = this.props
+    const { appName = s.strings.app_name_default } = branding
+    const terms: string[] = [
+      sprintf(s.strings.terms_one, appName),
+      s.strings.terms_two,
+      sprintf(s.strings.terms_three, appName),
+      sprintf(s.strings.terms_four, appName)
+    ]
+    return terms.map(title => (
+      <View style={styles.checkboxContainer} key={title}>
         <Checkbox
           testID="termsCB"
           style={styles.checkboxes}
-          label={Item.title}
+          label={title}
           onChange={this.handleStatusChange}
-          defaultValue={false}
           checkedImage={REVIEW_CHECKED}
           uncheckedImage={REVIEW_UNCHECKED}
-          key={Item.title}
+          key={title}
         />
       </View>
     ))
@@ -135,41 +140,8 @@ class TermsAndConditionsScreenComponent extends React.Component<Props, State> {
   }
 
   handleNextPress = () => {
-    global.firebase &&
-      global.firebase.analytics().logEvent(`Signup_Terms_Agree`)
+    logEvent(`Signup_Terms_Agree`)
     this.props.agreeToCondition()
-  }
-
-  changeAppName = () => {
-    const { terms, branding } = this.props
-    const { appName } = branding
-    if (appName) {
-      return terms.items.map((item, index) => {
-        if (index === 0) {
-          return {
-            title: sprintf(s.strings.terms_one, appName),
-            value: item.value
-          }
-        }
-        if (index === 1) {
-          return item
-        }
-        if (index === 2) {
-          return {
-            title: sprintf(s.strings.terms_three, appName),
-            value: item.value
-          }
-        }
-        if (index === 3) {
-          return {
-            title: sprintf(s.strings.terms_four, appName),
-            value: item.value
-          }
-        }
-        return null
-      })
-    }
-    return terms.items
   }
 }
 
@@ -267,9 +239,7 @@ export const TermsAndConditionsScreen = connect<
   DispatchProps,
   OwnProps
 >(
-  (state: RootState) => ({
-    terms: state.terms
-  }),
+  (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
     agreeToCondition() {
       dispatch(agreeToConditions())

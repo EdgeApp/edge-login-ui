@@ -28,8 +28,8 @@ import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { UserListItem } from '../abSpecific/UserListItem.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
 import { Button } from '../common/Button.js'
+import { FormField } from '../common/FormField.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
-import { FormField } from '../common/index.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
 import { QrCodeModal } from '../modals/QrCodeModal.js'
 import { Airship, showError } from '../services/AirshipInstance.js'
@@ -91,7 +91,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
       loggingIn: true
     })
 
-    const attempt = { type: 'password', username, password }
+    const attempt: LoginAttempt = { type: 'password', username, password }
     login(attempt)
       .catch(error => {
         if (error != null && error.name === 'OtpError') {
@@ -246,7 +246,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
     )
   }
 
-  renderRow = (data: Object) => {
+  renderRow = (data: { item: string }) => {
     return (
       <UserListItem
         data={data.item}

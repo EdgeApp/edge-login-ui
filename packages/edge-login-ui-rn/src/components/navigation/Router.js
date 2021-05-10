@@ -49,7 +49,7 @@ class RouterComponent extends React.Component<Props> {
     const { ScreenStyle } = Styles
     return (
       <ThemeProvider>
-        <Airship avoidAndroidKeyboard statusBarTranslucent>
+        <Airship>
           <View accessible style={ScreenStyle}>
             {this.renderContent()}
           </View>

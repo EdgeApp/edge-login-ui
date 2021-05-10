@@ -46,11 +46,10 @@ class PermissionsAlertModalComponent extends React.PureComponent<Props> {
     return (
       <AirshipModal
         bridge={bridge}
-        onCancel={() => bridge.resolve()}
+        onCancel={() => bridge.resolve(undefined)}
         padding={theme.rem(0.5)}
         borderRadius={theme.rem(1)}
         underlay={underlay}
-        iconCircle
       >
         <View style={styles.iconCircle}>
           <FontAwesome
@@ -72,7 +71,7 @@ class PermissionsAlertModalComponent extends React.PureComponent<Props> {
           onPress={() => bridge.resolve('cancel')}
           marginRem={0.5}
         />
-        <ModalCloseArrow onPress={() => bridge.resolve()} />
+        <ModalCloseArrow onPress={() => bridge.resolve(undefined)} />
       </AirshipModal>
     )
   }

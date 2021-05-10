@@ -30,7 +30,7 @@ export type Action =
   | {
       type: 'AUTH_UPDATE_CONFIRM_PASSWORD',
       data: {
-        password: ?string,
+        password?: string | null,
         error: string | null
       }
     }

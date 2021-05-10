@@ -5,6 +5,7 @@ import * as React from 'react'
 
 import { initializeLogin } from '../../actions/LoginInitActions.js'
 import { updateFontStyles } from '../../constants/Fonts.js'
+import { type ParentButton } from '../../types/Branding.js'
 import { type OnLogin } from '../../types/ReduxTypes.js'
 import { Router } from '../navigation/Router.js'
 import { ReduxStore } from '../services/ReduxStore.js'
@@ -19,7 +20,7 @@ type Props = {
   backgroundImage?: any,
   fontDescription?: { regularFontFamily: string },
   landingScreenText?: string,
-  parentButton?: Object,
+  parentButton?: ParentButton,
   primaryLogo?: any,
   primaryLogoCallback?: () => void,
 
@@ -48,10 +49,11 @@ export class LoginScreen extends React.Component<Props> {
   constructor(props: Props) {
     super(props)
 
-    const { fontDescription = {} } = this.props
-    const { regularFontFamily } = fontDescription
-    changeFont(regularFontFamily)
-    updateFontStyles(regularFontFamily)
+    const { fontDescription } = props
+    if (fontDescription != null) {
+      changeFont(fontDescription.regularFontFamily)
+      updateFontStyles(fontDescription.regularFontFamily)
+    }
   }
 
   render() {

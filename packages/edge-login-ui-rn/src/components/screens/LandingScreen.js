@@ -8,6 +8,7 @@ import * as Constants from '../../constants/index.js'
 import * as Styles from '../../styles/index.js'
 import { type Branding } from '../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { logEvent } from '../../util/analytics.js'
 import { scale } from '../../util/scaling.js'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader.js'
 import { BackgroundImage } from '../common/BackgroundImage.js'
@@ -156,8 +157,7 @@ export const LandingScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch): DispatchProps => ({
     handleCreate() {
-      global.firebase &&
-        global.firebase.analytics().logEvent('Signup_Create_Account')
+      logEvent('Signup_Create_Account')
       dispatch({ type: 'START_CREATE_ACCOUNT' })
     },
     handlePassword() {

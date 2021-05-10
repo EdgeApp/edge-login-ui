@@ -4,11 +4,12 @@ import { type EdgeAccount, type EdgePasswordRules } from 'edge-core-js'
 import * as React from 'react'
 import { Keyboard, KeyboardAvoidingView, ScrollView, View } from 'react-native'
 
-import { validateConfirmPassword } from '../../../actions/CreateAccountActions.js'
+import {
+  validateConfirmPassword,
+  validatePassword
+} from '../../../actions/CreateAccountActions.js'
 import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
-import PasswordConfirmConnector from '../../../connectors/componentConnectors/PasswordConfirmConnector'
-import PasswordConnector from '../../../connectors/componentConnectors/PasswordConnector.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
@@ -16,6 +17,7 @@ import { scale } from '../../../util/scaling.js'
 import { getAccount } from '../../../util/selectors.js'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
 import { Button } from '../../common/Button.js'
+import { FormField } from '../../common/FormField.js'
 import { Header } from '../../common/Header.js'
 import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { ButtonsModal } from '../../modals/ButtonsModal.js'
@@ -28,16 +30,19 @@ type OwnProps = {
 type StateProps = {
   account: EdgeAccount,
   confirmPassword: string,
+  confirmPasswordErrorMessage: string,
+  createPasswordErrorMessage: string,
   error?: string,
   error2?: string,
   password: string,
   passwordStatus: EdgePasswordRules | null
 }
 type DispatchProps = {
-  checkTheConfirmPassword(): void,
   onDone: () => void,
   onBack?: () => void,
-  onSkip?: () => void
+  onSkip?: () => void,
+  validateConfirmPassword(password: string): void,
+  validatePassword(password: string): void
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -77,7 +82,7 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
       this.props.password &&
       this.props.password !== this.props.confirmPassword
     ) {
-      this.props.checkTheConfirmPassword()
+      this.props.validateConfirmPassword(this.props.confirmPassword)
       return
     }
 
@@ -103,19 +108,33 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
     return (
       <View style={styles.innerView}>
         <PasswordStatus />
-        <PasswordConnector
-          style={styles.inputBox}
+        <FormField
           autoFocus={this.state.focusFirst}
+          error={this.props.createPasswordErrorMessage}
           label={s.strings.new_password}
-          onFinish={this.handleFocusSwitch}
+          onChangeText={(password: string) =>
+            this.props.validatePassword(password)
+          }
+          onSubmitEditing={this.handleFocusSwitch}
+          returnKeyType="next"
+          secureTextEntry
+          style={styles.inputBox}
+          value={this.props.password}
         />
         <View style={{ height: scale(20) }} />
-        <PasswordConfirmConnector
-          style={styles.inputBox}
-          label={s.strings.re_enter_new_password}
-          isSelected={this.state.focusSecond}
+        <FormField
           autoFocus={this.state.focusSecond}
-          onFinish={this.handleSubmit}
+          error={this.props.confirmPasswordErrorMessage}
+          returnKeyType="go"
+          secureTextEntry
+          value={this.props.confirmPassword}
+          isSelected={this.state.focusSecond}
+          label={s.strings.re_enter_new_password}
+          onChangeText={(password: string) =>
+            this.props.validateConfirmPassword(password)
+          }
+          onSubmitEditing={this.handleSubmit}
+          style={styles.inputBox}
         />
         <View style={{ height: scale(40) }} />
         <Button
@@ -195,15 +214,14 @@ export const PublicChangePasswordScreen = connect<
   (state: RootState) => ({
     account: getAccount(state),
     confirmPassword: state.create.confirmPassword || '',
+    confirmPasswordErrorMessage: state.create.confirmPasswordErrorMessage ?? '',
+    createPasswordErrorMessage: state.create.createPasswordErrorMessage ?? '',
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
     password: state.create.password || '',
     passwordStatus: state.create.passwordStatus
   }),
   (dispatch: Dispatch) => ({
-    checkTheConfirmPassword() {
-      dispatch(validateConfirmPassword())
-    },
     onDone() {
       Airship.show(bridge => (
         <ButtonsModal
@@ -218,6 +236,12 @@ export const PublicChangePasswordScreen = connect<
     },
     onBack() {
       dispatch(onComplete())
+    },
+    validateConfirmPassword(password: string) {
+      dispatch(validateConfirmPassword(password))
+    },
+    validatePassword(password: string) {
+      dispatch(validatePassword(password))
     }
   })
 )(ChangePasswordScreenComponent)
@@ -230,20 +254,25 @@ export const ResecurePasswordScreen = connect<
   (state: RootState) => ({
     account: getAccount(state),
     confirmPassword: state.create.confirmPassword || '',
+    confirmPasswordErrorMessage: state.create.confirmPasswordErrorMessage ?? '',
+    createPasswordErrorMessage: state.create.createPasswordErrorMessage ?? '',
     error: state.create.confirmPasswordErrorMessage || '',
     error2: state.create.createPasswordErrorMessage || '',
     password: state.create.password || '',
     passwordStatus: state.create.passwordStatus
   }),
   (dispatch: Dispatch) => ({
-    checkTheConfirmPassword() {
-      dispatch(validateConfirmPassword())
-    },
     onDone() {
       dispatch({ type: 'WORKFLOW_NEXT' })
     },
     onSkip() {
       dispatch(dispatch({ type: 'WORKFLOW_NEXT' }))
+    },
+    validateConfirmPassword(password: string) {
+      dispatch(validateConfirmPassword(password))
+    },
+    validatePassword(password: string) {
+      dispatch(validatePassword(password))
     }
   })
 )(ChangePasswordScreenComponent)

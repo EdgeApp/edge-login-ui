@@ -51,7 +51,6 @@ class PasswordStatusComponent extends React.Component<Props> {
           style={styles.checkboxes}
           label={Item.title}
           value={Item.value}
-          isSelected={false}
           onChange={this.handleChange}
           checkedImage={PASSWORD_REQ_CHECKED}
           uncheckedImage={PASSWORD_REQ_UNCHECKED}

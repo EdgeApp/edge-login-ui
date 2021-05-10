@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { connect as rawConnect, Provider } from 'react-redux'
-import { type Store, applyMiddleware, compose, createStore } from 'redux'
+import { type Store, applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
 import { launchPasswordRecovery } from '../../actions/LoginAction.js'
@@ -33,15 +33,10 @@ export class ReduxStore extends React.Component<Props> {
     super(props)
     const { imports } = this.props
 
-    const composeEnhancers =
-      typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ name: 'login-ui' })
-        : compose
-
     this.store = createStore(
       rootReducer,
       undefined,
-      composeEnhancers(applyMiddleware(thunk.withExtraArgument(imports)))
+      applyMiddleware(thunk.withExtraArgument(imports))
     )
 
     new Promise(resolve => {
