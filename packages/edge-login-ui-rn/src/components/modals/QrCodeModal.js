@@ -79,7 +79,8 @@ class QrCodeModalComponent extends React.Component<Props, State> {
   }
 
   async prepareLobby() {
-    const { accountOptions, context } = this.props.getImports()
+    const imports: Imports = this.props.getImports()
+    const { accountOptions, context } = imports
     const out: EdgePendingEdgeLogin = await context.requestEdgeLogin({
       ...accountOptions,
       // These are no longer used in recent core versions:
@@ -102,8 +103,11 @@ class QrCodeModalComponent extends React.Component<Props, State> {
     } else {
       // Older core versions have the callbacks on the context:
       this.cleanups = [
+        // $FlowFixMe
         context.on('login', account => this.handleDone(account)),
+        // $FlowFixMe
         context.on('loginStart', ({ username }) => this.handleStart(username)),
+        // $FlowFixMe
         context.on('loginError', ({ error }) => this.handleError(error))
       ]
     }

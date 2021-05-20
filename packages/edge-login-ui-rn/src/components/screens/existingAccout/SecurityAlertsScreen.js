@@ -36,7 +36,7 @@ type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
 type State = {
   needsResecure: boolean,
-  otpResetDate: string | void,
+  otpResetDate: Date | void,
   pendingVouchers: EdgePendingVoucher[],
   showSkip: boolean,
   spinDeny: boolean,
@@ -55,7 +55,7 @@ export class SecurityAlertsScreenComponent extends React.Component<
     const { otpResetDate, pendingVouchers = [] } = props.account
     this.state = {
       needsResecure: props.account.recoveryLogin,
-      otpResetDate,
+      otpResetDate: otpResetDate != null ? new Date(otpResetDate) : undefined,
       pendingVouchers,
       showSkip: false,
       spinDeny: false,
@@ -67,9 +67,10 @@ export class SecurityAlertsScreenComponent extends React.Component<
   componentDidMount() {
     const { account } = this.props
     this.cleanups = [
-      account.watch('otpResetDate', otpResetDate =>
-        this.setState({ otpResetDate }, this.checkEmpty)
-      ),
+      account.watch('otpResetDate', otpResetDate => {
+        const date = otpResetDate != null ? new Date(otpResetDate) : undefined
+        this.setState({ otpResetDate: date }, this.checkEmpty)
+      }),
       account.watch('pendingVouchers', pendingVouchers =>
         this.setState({ pendingVouchers }, this.checkEmpty)
       )
