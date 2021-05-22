@@ -100,6 +100,10 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
       this.state.question2 === s.strings.choose_recovery_question ||
       this.state.question1 === this.state.question2
 
+    if (this.state.question1 === this.state.question2) {
+      showError(s.strings.change_recovery_same_question)
+    }
+
     this.setState({
       errorOne,
       errorTwo,
