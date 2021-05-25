@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.9.3 (2021-05-25)
+
+- rn: Show error on Change Password Recovery Screen when user selecting the same question
+- rn: Fix spacing issue on create account welcome screen
+- rn: Prepare for future edge-core-js breaking changes
+
 ## 0.9.2 (2021-05-10)
 
 - rn: Add testID's to various screens.
