@@ -83,8 +83,8 @@ const styles = {
     justifyContent: 'flex-start',
     flexDirection: 'row'
   },
-  row2: { width: '100%', flex: 4 },
-  row3: { width: '100%', flex: 3 },
+  row2: { width: '100%', flex: 3 },
+  row3: { width: '100%', flex: 4 },
   row4: { width: '100%', flex: 3 },
   row5: { width: '100%', flex: 1 },
   row6: {
