@@ -268,12 +268,19 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     )
   }
 
+  getQuestions = () => {
+    const { questionsList } = this.props
+    const { focusFirst, focusSecond, question1, question2 } = this.state
+    const questionFilter = focusFirst ? question2 : focusSecond ? question1 : ''
+    return questionsList.filter(item => item.question !== questionFilter)
+  }
+
   renderQuestions = () => {
     return (
       <View style={styles.body}>
         <FlatList
           style={styles.questionsList}
-          data={this.props.questionsList}
+          data={this.getQuestions()}
           renderItem={this.renderItems}
           keyExtractor={(item, index) => index.toString()}
         />
