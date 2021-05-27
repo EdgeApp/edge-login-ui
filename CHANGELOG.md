@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.4 (2021-05-26)
+
+- rn: Prevent user from selecting duplicate recovery questions
+
 ## 0.9.3 (2021-05-25)
 
 - rn: Show error on Change Password Recovery Screen when user selecting the same question
