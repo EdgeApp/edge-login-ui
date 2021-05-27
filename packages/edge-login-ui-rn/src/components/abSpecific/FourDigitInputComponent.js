@@ -43,13 +43,13 @@ class FourDigitInputComponent extends React.Component<Props> {
         <View style={styles.container}>
           <View style={styles.interactiveContainer}>
             {this.renderDotContainer()}
-            {this.renderTextInput()}
           </View>
           <View style={styles.errorContainer}>
             <Text style={styles.errorText} numberOfLines={2}>
               {this.props.error}
             </Text>
           </View>
+          {this.renderTextInput()}
         </View>
       </TouchableWithoutFeedback>
     )
@@ -135,8 +135,8 @@ const styles = {
     position: 'absolute',
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
+    width: 0,
+    height: 0,
     opacity: 0
   },
   circle: {
