@@ -56,5 +56,16 @@ export type Theme = {|
   securityAlertModalDangerIcon: string,
   securityAlertModalWarningIcon: string,
   securityAlertModalRowBorder: string,
-  securityAlertModalText: string
+  securityAlertModalText: string,
+
+  // Lines
+  lineDivider: string,
+  titleLineDivider: string,
+  thinLineWidth: number,
+  mediumLineWidth: number,
+
+  // Font
+  fontFaceDefault: string,
+  fontFaceBold: string,
+  fontFaceSymbols: string
 |}
