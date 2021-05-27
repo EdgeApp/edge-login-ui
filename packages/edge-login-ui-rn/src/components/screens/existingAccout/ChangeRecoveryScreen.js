@@ -97,12 +97,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     const errorQuestionOne =
       this.state.question1 === s.strings.choose_recovery_question
     const errorQuestionTwo =
-      this.state.question2 === s.strings.choose_recovery_question ||
-      this.state.question1 === this.state.question2
-
-    if (this.state.question1 === this.state.question2) {
-      showError(s.strings.change_recovery_same_question)
-    }
+      this.state.question2 === s.strings.choose_recovery_question
 
     this.setState({
       errorOne,
@@ -268,12 +263,19 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
     )
   }
 
+  getQuestions = () => {
+    const { questionsList } = this.props
+    const { focusFirst, focusSecond, question1, question2 } = this.state
+    const questionFilter = focusFirst ? question2 : focusSecond ? question1 : ''
+    return questionsList.filter(item => item.question !== questionFilter)
+  }
+
   renderQuestions = () => {
     return (
       <View style={styles.body}>
         <FlatList
           style={styles.questionsList}
-          data={this.props.questionsList}
+          data={this.getQuestions()}
           renderItem={this.renderItems}
           keyExtractor={(item, index) => index.toString()}
         />
