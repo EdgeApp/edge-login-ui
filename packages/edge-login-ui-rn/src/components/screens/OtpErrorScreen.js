@@ -19,7 +19,7 @@ import { QrCodeModal } from '../modals/QrCodeModal.js'
 import { TextInputModal } from '../modals/TextInputModal.js'
 import { Airship, showError, showToast } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
-import { DividerRow } from '../themed/DividerRow.js'
+import { DividerWithText } from '../themed/DividerWithText.js'
 import { IconHeaderRow } from '../themed/IconHeaderRow.js'
 import { LinkRow } from '../themed/LinkRow.js'
 import { ThemedScene } from '../themed/ThemedScene.js'
@@ -146,13 +146,13 @@ class OtpErrorScreenComponent extends React.Component<Props> {
             </Warning>
           </MessageText>
         </IconHeaderRow>
-        <DividerRow label={s.strings.to_fix} />
+        <DividerWithText label={s.strings.to_fix} />
         <MessageText>{s.strings.otp_screen_approve}</MessageText>
-        <DividerRow />
+        <DividerWithText />
         <LinkRow label={s.strings.otp_screen_qr} onPress={this.handleQrModal} />
         {isIp ? null : (
           <>
-            <DividerRow />
+            <DividerWithText />
             <LinkRow
               label={s.strings.otp_backup_code_modal_title}
               onPress={this.handleBackupModal}
@@ -161,7 +161,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
         )}
         {date == null ? null : (
           <>
-            <DividerRow />
+            <DividerWithText />
             <MessageText>
               {sprintf(s.strings.otp_screen_wait, date.toLocaleString())}
             </MessageText>
@@ -169,7 +169,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
         )}
         {otpError.resetToken == null || date != null ? null : (
           <>
-            <DividerRow />
+            <DividerWithText />
             <LinkRow
               label={s.strings.disable_otp_button_two}
               onPress={() => showResetModal(this.props.requestOtpReset)}

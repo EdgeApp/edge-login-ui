@@ -18,7 +18,7 @@ type Props = {
 /**
  * Renders a horizontal line with text in the middle.
  */
-function DividerRowComponent(props: Props & ThemeProps) {
+function DividerWithTextComponent(props: Props & ThemeProps) {
   const { label = s.strings.or, theme } = props
   const styles = getStyles(theme)
 
@@ -53,4 +53,4 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const DividerRow = withTheme(DividerRowComponent)
+export const DividerWithText = withTheme(DividerWithTextComponent)

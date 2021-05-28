@@ -131,15 +131,11 @@ const strings = {
   confirm_share: 'Confirm & Share',
   welcome: 'Welcome to %s!',
   welcome_advantage_one_title: 'Getting started with %s is easy',
-  welcome_advantage_one_description_1: 'You’ll choose a username and password,',
-  welcome_advantage_one_description_2:
-    'which we’ll use to encrypt your account.',
+  welcome_advantage_one_description:
+    'You’ll choose a username and password, which we’ll use to encrypt your account.',
   welcome_advantage_two_title: 'Your security is key',
-  welcome_advantage_two_description_1:
-    'Not even %s has access to your information,',
-  welcome_advantage_two_description_2:
-    'so you have full complete control over your',
-  welcome_advantage_two_description_3: 'digital assets.',
+  welcome_advantage_two_description:
+    'Not even %s has access to your information, so you have full complete control over your digital assets.',
   start_username: 'Let’s get started with choosing a username',
   get_started: 'Get Started', // button title, not a complete sentence so capitalize first letters
   encrypting: 'Doing the encryption',

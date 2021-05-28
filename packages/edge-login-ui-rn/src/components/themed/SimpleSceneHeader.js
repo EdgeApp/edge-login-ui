@@ -9,6 +9,7 @@ import {
   type ThemeProps,
   withTheme
 } from '../services/ThemeContext'
+import { Divider } from '../themed/Divider'
 import { EdgeText } from '../themed/EdgeText'
 
 type Props = {
@@ -24,24 +25,18 @@ const SimpleSceneHeaderComponent = ({
   return (
     <View style={styles.container}>
       <EdgeText style={styles.text}>{children}</EdgeText>
+      <Divider />
     </View>
   )
 }
 
 const getStyles = cacheStyles((theme: Theme) => ({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    borderBottomWidth: theme.thinLineWidth,
-    borderBottomColor: theme.lineDivider,
-    marginLeft: theme.rem(1),
-    marginBottom: theme.rem(0.5),
-    paddingBottom: theme.rem(1.5)
+    marginLeft: theme.rem(1)
   },
   text: {
     fontSize: theme.rem(1.25),
-    fontFamily: theme.fontFaceBold,
-    flex: 1
+    fontFamily: theme.fontFaceBold
   }
 }))
 

@@ -18,6 +18,7 @@ import {
   type ThemeProps,
   withTheme
 } from '../../services/ThemeContext'
+import { Divider } from '../../themed/Divider'
 import { EdgeText } from '../../themed/EdgeText'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { SecondaryButton } from '../../themed/ThemedButtons'
@@ -57,15 +58,12 @@ const NewAccountWelcomeScreenComponent = ({
             <EdgeText style={styles.advantageTitle}>
               {sprintf(s.strings.welcome_advantage_one_title, appName)}
             </EdgeText>
-            <EdgeText style={styles.advantageDescription}>
-              {s.strings.welcome_advantage_one_description_1}
-            </EdgeText>
-            <EdgeText style={styles.advantageDescription}>
-              {s.strings.welcome_advantage_one_description_2}
+            <EdgeText style={styles.advantageDescription} numberOfLines={2}>
+              {s.strings.welcome_advantage_one_description}
             </EdgeText>
           </View>
         </View>
-        <View style={styles.divider} />
+        <Divider />
         <View style={styles.advantage}>
           <Image
             source={WELCOME_SHIELD_KEY}
@@ -76,14 +74,8 @@ const NewAccountWelcomeScreenComponent = ({
             <EdgeText style={styles.advantageTitle}>
               {s.strings.welcome_advantage_two_title}
             </EdgeText>
-            <EdgeText style={styles.advantageDescription}>
-              {sprintf(s.strings.welcome_advantage_two_description_1, appName)}
-            </EdgeText>
-            <EdgeText style={styles.advantageDescription}>
-              {s.strings.welcome_advantage_two_description_2}
-            </EdgeText>
-            <EdgeText style={styles.advantageDescription}>
-              {s.strings.welcome_advantage_two_description_3}
+            <EdgeText style={styles.advantageDescription} numberOfLines={3}>
+              {sprintf(s.strings.welcome_advantage_two_description, appName)}
             </EdgeText>
           </View>
         </View>
@@ -107,7 +99,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   },
   logo: {
     height: theme.rem(2.25),
-    marginTop: theme.rem(1.75),
+    marginTop: theme.rem(0.75),
     marginBottom: theme.rem(1)
   },
   welcome: {
@@ -137,12 +129,6 @@ const getStyles = cacheStyles((theme: Theme) => ({
   advantageDescription: {
     fontFamily: theme.fontFaceDefault,
     fontSize: theme.rem(0.75)
-  },
-  divider: {
-    width: '100%',
-    borderBottomWidth: theme.thinLineWidth,
-    borderBottomColor: theme.lineDivider,
-    marginVertical: theme.rem(1.5)
   },
   actions: {
     marginTop: theme.rem(4.5)
