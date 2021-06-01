@@ -14,7 +14,7 @@ import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { sprintf } from 'sprintf-js'
 
-import { login } from '../../actions/LoginAction.js'
+import { launchPasswordRecovery, login } from '../../actions/LoginAction.js'
 import { deleteUserFromDevice } from '../../actions/UserActions.js'
 import s from '../../common/locales/strings.js'
 import * as Constants from '../../constants/index.js'
@@ -32,6 +32,7 @@ import { FormField } from '../common/FormField.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
 import { QrCodeModal } from '../modals/QrCodeModal.js'
+import { TextInputModal } from '../modals/TextInputModal.js'
 import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 
@@ -51,7 +52,8 @@ type DispatchProps = {
   gotoPinLoginPage(): void,
   login(attempt: LoginAttempt): Promise<void>,
   saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void,
-  updateUsername(string): void
+  updateUsername(username: string): void,
+  handlePasswordRecovery(recoveryKey: string): Promise<boolean>
 }
 type Props = OwnProps & StateProps & DispatchProps
 
@@ -359,10 +361,12 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   handleForgotPassword = () => {
     Keyboard.dismiss()
     Airship.show(bridge => (
-      <ButtonsModal
+      <TextInputModal
         bridge={bridge}
+        onSubmit={this.props.handlePasswordRecovery}
+        title={s.strings.password_recovery}
         message={s.strings.initiate_password_recovery}
-        buttons={{ ok: { label: s.strings.ok } }}
+        inputLabel={s.strings.recovery_token}
       />
     ))
   }
@@ -541,6 +545,10 @@ export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     },
     updateUsername(data: string) {
       dispatch({ type: 'AUTH_UPDATE_USERNAME', data: data })
+    },
+    handlePasswordRecovery(recoveryKey: string): Promise<boolean> {
+      dispatch(launchPasswordRecovery(recoveryKey))
+      return Promise.resolve(true)
     }
   })
 )(PasswordLoginScreenComponent)

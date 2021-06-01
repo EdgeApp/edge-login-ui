@@ -11,8 +11,9 @@ const strings = {
   back: 'Back',
   forgot_password: 'Forgot Password',
   create_an_account: 'Create an Account', // 'Forgot Password' is capitalized, making consistent
+  recovery_token: 'Recovery Token',
   initiate_password_recovery:
-    'To recover your password, you must have setup password recovery prior. Please find the recovery email you sent yourself and click on the link from this device.',
+    'Enter Recovery Token. You can find the recovery token in an email that was sent from yourself if password recovery was setup prior to losing access.',
   choose_recovery_question: 'Choose recovery question',
   submit: 'Submit',
   save: 'Save',
@@ -114,6 +115,9 @@ const strings = {
   disable_otp_button_two: 'Disable 2 Factor Authentication',
   otp_email_body:
     'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ',
+  otp_email_body2: 'You can also use the Recovery Token displayed below:',
+  otp_email_body3:
+    'Enter or copy and paste the recovery token displayed above inside the Edge app by tapping on Forgot Password at the login screen.',
   otp_email_subject: 'Edge Recovery Token',
   recovery_disabled:
     'Password Recovery has been disabled. You can enable it again by going into Password Recovery anytime',

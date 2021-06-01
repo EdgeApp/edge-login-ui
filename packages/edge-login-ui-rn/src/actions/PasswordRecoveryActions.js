@@ -57,7 +57,14 @@ export function sendRecoveryEmail(
     recoveryKey +
     '<br><br>' +
     'Android https://recovery.edgesecure.co/recovery?token=' +
-    recoveryKey
+    recoveryKey +
+    '<br><br>' +
+    s.strings.otp_email_body2 +
+    '<br><br>' +
+    s.strings.recovery_token +
+    `: ${recoveryKey}` +
+    '<br><br>' +
+    s.strings.otp_email_body3
 
   return new Promise((resolve, reject) =>
     Mailer.mail(
@@ -86,7 +93,14 @@ export async function shareRecovery(
     '\n iOS: edge://recovery?token=' +
     recoveryKey +
     '\n Android: https://recovery.edgesecure.co/recovery?token=' +
-    recoveryKey
+    recoveryKey +
+    '\n' +
+    s.strings.otp_email_body2 +
+    '\n' +
+    s.strings.recovery_token +
+    `: ${recoveryKey}` +
+    '\n' +
+    s.strings.otp_email_body3
 
   await Share.open({ title: s.strings.otp_email_subject, message: body })
 }
