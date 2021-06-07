@@ -37,11 +37,21 @@ type Props = {
 
   // The gap inside the button. Takes 0-4 numbers (top, right, bottom, left),
   // using the same logic as the web `padding` property. Defaults to 0.5.
-  paddingRem?: number[] | number
+  paddingRem?: number[] | number,
+
+  straight?: boolean
 }
 
 export function PrimaryButton(props: Props) {
-  const { children, label, marginRem, onPress, paddingRem, spinner } = props
+  const {
+    children,
+    label,
+    marginRem,
+    onPress,
+    paddingRem,
+    spinner,
+    straight
+  } = props
   const theme = useTheme()
   const styles = getStyles(theme)
 
@@ -51,7 +61,11 @@ export function PrimaryButton(props: Props) {
   }
   return (
     <TouchableOpacity
-      style={[styles.primaryButton, spacingStyles]}
+      style={[
+        styles.primaryButton,
+        spacingStyles,
+        straight ? styles.straight : null
+      ]}
       onPress={onPress}
     >
       {label != null ? <Text style={styles.primaryText}>{label}</Text> : null}
@@ -67,7 +81,15 @@ export function PrimaryButton(props: Props) {
 }
 
 export function SecondaryButton(props: Props) {
-  const { children, label, marginRem, onPress, paddingRem, spinner } = props
+  const {
+    children,
+    label,
+    marginRem,
+    onPress,
+    paddingRem,
+    spinner,
+    straight
+  } = props
   const theme = useTheme()
   const styles = getStyles(theme)
 
@@ -77,7 +99,11 @@ export function SecondaryButton(props: Props) {
   }
   return (
     <TouchableOpacity
-      style={[styles.secondaryButton, spacingStyles]}
+      style={[
+        styles.secondaryButton,
+        spacingStyles,
+        straight ? styles.straight : null
+      ]}
       onPress={onPress}
     >
       {label != null ? <Text style={styles.secondaryText}>{label}</Text> : null}
@@ -100,7 +126,8 @@ export function AlertModalButton(props: Props & AlertModalButtonType) {
     onPress,
     paddingRem,
     spinner,
-    type
+    type,
+    straight
   } = props
   const theme = useTheme()
   const styles = getStyles(theme)
@@ -122,7 +149,10 @@ export function AlertModalButton(props: Props & AlertModalButtonType) {
     ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
   }
   return (
-    <TouchableOpacity style={[buttonStyle, spacingStyles]} onPress={onPress}>
+    <TouchableOpacity
+      style={[buttonStyle, spacingStyles, straight ? styles.straight : null]}
+      onPress={onPress}
+    >
       {label != null ? <Text style={textStyle}>{label}</Text> : null}
       {spinner != null ? (
         <ActivityIndicator color={spinnerColor} style={styles.spinner} />
@@ -188,6 +218,9 @@ const getStyles = cacheStyles((theme: Theme) => {
       color: theme.alertModalTertiaryButtonText
     },
 
-    spinner: { height: theme.rem(2) }
+    spinner: { height: theme.rem(2) },
+    straight: {
+      borderRadius: theme.rem(0.25)
+    }
   }
 })

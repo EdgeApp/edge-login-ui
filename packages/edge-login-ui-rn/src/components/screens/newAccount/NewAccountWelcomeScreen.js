@@ -1,156 +1,150 @@
 // @flow
 
 import * as React from 'react'
-import { View } from 'react-native'
+import { Image, View } from 'react-native'
+import { cacheStyles } from 'react-native-patina'
 import { sprintf } from 'sprintf-js'
 
-import * as Assets from '../../../assets/index.js'
+import { LOGO_BIG, WELCOME_LOCK, WELCOME_SHIELD_KEY } from '../../../assets'
 import s from '../../../common/locales/strings.js'
 import * as Constants from '../../../constants/index.js'
 import * as Styles from '../../../styles/index.js'
 import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { logEvent } from '../../../util/analytics.js'
-import { scale } from '../../../util/scaling.js'
-import { ImageHeaderComponent } from '../../abSpecific/ImageHeaderComponent'
-import { Button } from '../../common/Button.js'
-import T from '../../common/FormattedText.js'
-import { HeaderBackButton } from '../../common/HeaderBackButton.js'
-import SafeAreaView from '../../common/SafeAreaView.js'
 import { connect } from '../../services/ReduxStore.js'
+import {
+  type Theme,
+  type ThemeProps,
+  withTheme
+} from '../../services/ThemeContext'
+import { Divider } from '../../themed/Divider'
+import { EdgeText } from '../../themed/EdgeText'
+import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
+import { SecondaryButton } from '../../themed/ThemedButtons'
+import { ThemedScene } from '../../themed/ThemedScene'
 
 type OwnProps = {
   branding: Branding
 }
 type DispatchProps = {
-  onBack(): void,
   onDone(): void
 }
-type Props = OwnProps & DispatchProps
+type Props = OwnProps & DispatchProps & ThemeProps
 
-type State = {}
+const NewAccountWelcomeScreenComponent = ({
+  theme,
+  branding,
+  onDone
+}: Props) => {
+  const styles = getStyles(theme)
+  const appName = branding.appName || s.strings.app_name_default
 
-class NewAccountWelcomeScreenComponent extends React.Component<Props, State> {
-  render() {
-    return (
-      <SafeAreaView>
-        <View style={styles.screen}>
-          <View style={styles.row1}>
-            <HeaderBackButton
-              testID="exitButton"
-              onPress={this.props.onBack}
-              styles={styles.exitBackButtonStyle}
-              label={s.strings.exit}
-            />
-          </View>
-          <View style={styles.row2}>
-            <ImageHeaderComponent src={Assets.WELCOME} />
-          </View>
-          <View style={styles.row3}>
-            <T style={styles.instructionsText}>
-              {sprintf(
-                s.strings.welcome_one,
-                this.props.branding.appName || s.strings.app_name_default
-              )}
-            </T>
-          </View>
-          <View style={styles.row4} />
-          <View style={styles.row5}>
-            <T style={styles.callToAction}>{s.strings.start_username}</T>
-          </View>
-          <View style={styles.row6}>
-            <Button
-              testID="getStartedButton"
-              onPress={this.props.onDone}
-              downStyle={styles.nextButton.downStyle}
-              downTextStyle={styles.nextButton.downTextStyle}
-              upStyle={styles.nextButton.upStyle}
-              upTextStyle={styles.nextButton.upTextStyle}
-              label={s.strings.get_started}
-            />
+  return (
+    <ThemedScene>
+      <SimpleSceneHeader>{s.strings.get_started}</SimpleSceneHeader>
+      <View style={styles.content}>
+        <Image source={LOGO_BIG} style={styles.logo} resizeMode="contain" />
+        <EdgeText style={styles.welcome}>
+          {sprintf(s.strings.welcome, appName)}
+        </EdgeText>
+        <View style={styles.advantage}>
+          <Image
+            source={WELCOME_LOCK}
+            style={styles.advantageImage}
+            resizeMode="contain"
+          />
+          <View style={styles.advantageTextContainer}>
+            <EdgeText style={styles.advantageTitle}>
+              {sprintf(s.strings.welcome_advantage_one_title, appName)}
+            </EdgeText>
+            <EdgeText style={styles.advantageDescription} numberOfLines={2}>
+              {s.strings.welcome_advantage_one_description}
+            </EdgeText>
           </View>
         </View>
-      </SafeAreaView>
-    )
-  }
+        <Divider />
+        <View style={styles.advantage}>
+          <Image
+            source={WELCOME_SHIELD_KEY}
+            style={styles.advantageImage}
+            resizeMode="contain"
+          />
+          <View style={styles.advantageTextContainer}>
+            <EdgeText style={styles.advantageTitle}>
+              {s.strings.welcome_advantage_two_title}
+            </EdgeText>
+            <EdgeText style={styles.advantageDescription} numberOfLines={3}>
+              {sprintf(s.strings.welcome_advantage_two_description, appName)}
+            </EdgeText>
+          </View>
+        </View>
+        <View style={styles.actions}>
+          <SecondaryButton
+            label={s.strings.get_started}
+            onPress={onDone}
+            straight
+          />
+        </View>
+      </View>
+    </ThemedScene>
+  )
 }
 
-const styles = {
-  screen: { ...Styles.ScreenStyle },
-  row1: {
-    width: '100%',
+const getStyles = cacheStyles((theme: Theme) => ({
+  content: {
     flex: 1,
-    justifyContent: 'flex-start',
-    flexDirection: 'row'
+    alignItems: 'center',
+    marginLeft: theme.rem(0.5)
   },
-  row2: { width: '100%', flex: 3 },
-  row3: { width: '100%', flex: 4 },
-  row4: { width: '100%', flex: 3 },
-  row5: { width: '100%', flex: 1 },
-  row6: {
-    width: '100%',
-    flex: 3,
+  logo: {
+    height: theme.rem(2.25),
+    marginTop: theme.rem(0.75),
+    marginBottom: theme.rem(1)
+  },
+  welcome: {
+    fontFamily: theme.fontFaceBold,
+    color: theme.secondaryText,
+    fontSize: theme.rem(1),
+    marginBottom: theme.rem(2.375)
+  },
+  advantage: {
+    flexDirection: 'row',
     alignItems: 'center'
   },
-  instructionsText: {
-    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
-    fontFamily: Constants.FONTS.fontFamilyRegular,
-    color: Constants.GRAY_2,
-    textAlign: 'center',
-    paddingLeft: scale(20),
-    paddingRight: scale(20)
+  advantageImage: {
+    height: theme.rem(2),
+    width: theme.rem(2),
+    marginRight: theme.rem(1)
   },
-  callToAction: {
-    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
-    fontFamily: Constants.FONTS.fontFamilyRegular,
-    color: Constants.GRAY_2,
-    textAlign: 'center'
+  advantageTextContainer: {
+    flex: 1
   },
-  nextButton: {
-    upStyle: Styles.PrimaryButtonUpScaledStyle,
-    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
-    downStyle: Styles.PrimaryButtonDownScaledStyle
+  advantageTitle: {
+    fontFamily: theme.fontFaceBold,
+    color: Constants.GRAY_4,
+    fontSize: theme.rem(1),
+    marginBottom: theme.rem(0.5)
   },
-  exitButton: {
-    upStyle: { ...Styles.TextOnlyButtonUpScaledStyle, width: null },
-    upTextStyle: Styles.TextOnlyButtonTextUpScaledStyle,
-    downTextStyle: Styles.TextOnlyButtonTextDownScaledStyle,
-    downStyle: Styles.TextOnlyButtonDownScaledStyle
+  advantageDescription: {
+    fontFamily: theme.fontFaceDefault,
+    fontSize: theme.rem(0.75)
   },
-  exitBackButtonStyle: {
-    backButton: {
-      flexDirection: 'row',
-      alignItems: 'center'
-    },
-    backIconStyle: {
-      paddingLeft: scale(10),
-      fontSize: scale(22),
-      color: Constants.SECONDARY
-    },
-    sideText: {
-      color: Constants.SECONDARY,
-      fontSize: scale(18)
-    },
-    icon: {
-      color: Constants.SECONDARY
-    },
-    default: {
-      backgroundColor: Constants.TRANSPARENT,
-      color: Constants.SECONDARY
-    }
-  }
-}
+  actions: {
+    marginTop: theme.rem(4.5)
+  },
+  nextButtonUpStyle: Styles.PrimaryButtonUpScaledStyle,
+  nextButtonUpTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+  nextButtonDownTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
+  nextButtonDownStyle: Styles.PrimaryButtonDownScaledStyle
+}))
 
 export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
-    onBack() {
-      dispatch({ type: 'START_LANDING' })
-    },
     onDone() {
       logEvent(`Signup_Welcome_Next`)
       dispatch({ type: 'WORKFLOW_NEXT' })
     }
   })
-)(NewAccountWelcomeScreenComponent)
+)(withTheme(NewAccountWelcomeScreenComponent))

@@ -10,7 +10,8 @@ const STANDARD_UNCHECKED = require('./icons/standard/password_hide.png')
 const PASSWORD_REQ_CHECKED = require('./icons/passwordRequirements/checked.png')
 const PASSWORD_REQ_UNCHECKED = require('./icons/passwordRequirements/unchecked.png')
 const PERMISSIONS_CAMREA = require('./icons/permissions/permissions-camera.png')
-const WELCOME = require('./icons/welcome/new_account_welcome.png')
+const WELCOME_LOCK = require('./icons/welcome/lock.png')
+const WELCOME_SHIELD_KEY = require('./icons/welcome/shield_key.png')
 const TOUCH = require('./touch/touchid.png')
 const OTP = require('./icons/otp/OTP-badge.png')
 const OTP_SMALL = require('./icons/otp/OTP-badge_sm.png')
@@ -28,7 +29,8 @@ export { STANDARD_UNCHECKED }
 export { PASSWORD_REQ_CHECKED }
 export { PASSWORD_REQ_UNCHECKED }
 export { PERMISSIONS_CAMREA }
-export { WELCOME }
+export { WELCOME_LOCK }
+export { WELCOME_SHIELD_KEY }
 export { TOUCH }
 export { OTP }
 export { OTP_SMALL }

@@ -1,5 +1,7 @@
 // @flow
 
+import { Platform } from 'react-native'
+
 import { type Theme } from '../../types/Theme.js'
 import { scale } from '../../util/scaling.js'
 
@@ -21,11 +23,20 @@ const palette = {
   accentOrange: '#F1AA19',
   blackOp25: 'rgba(0, 0, 0, .25)',
   blackOp50: 'rgba(0, 0, 0, .5)',
+  whiteOp75: 'rgba(255, 255, 255, .75)',
   whiteOp10: 'rgba(255, 255, 255, .1)',
   grayOp80: 'rgba(135, 147, 158, .8)',
   accentOrangeOp30: 'rgba(241, 170, 25, .3)',
   lightGrayOp75: 'rgb(217, 227, 237, .75)',
-  transparent: 'transparent'
+  transparent: 'transparent',
+
+  // Fonts
+  SFUITextRegular: 'SF-UI-Text-Regular',
+  QuicksandLight: 'Quicksand-Light',
+  QuicksandRegular: 'Quicksand-Regular',
+  QuicksandMedium: 'Quicksand-Medium',
+  QuicksandSemiBold: 'Quicksand-SemiBold',
+  QuicksandBold: 'Quicksand-Bold'
 }
 
 export const edgeDark: Theme = {
@@ -86,5 +97,19 @@ export const edgeDark: Theme = {
   securityAlertModalDangerIcon: palette.accentRed,
   securityAlertModalWarningIcon: palette.accentOrange,
   securityAlertModalRowBorder: palette.lightGray,
-  securityAlertModalText: palette.black
+  securityAlertModalText: palette.black,
+
+  // Lines
+  lineDivider: palette.whiteOp10,
+  titleLineDivider: palette.whiteOp75,
+  thinLineWidth: 1,
+  mediumLineWidth: 2,
+
+  // Fonts
+  fontFaceDefault: palette.QuicksandRegular,
+  fontFaceBold: palette.QuicksandBold,
+  fontFaceSymbols:
+    Platform.OS === 'android'
+      ? palette.SFUITextRegular
+      : palette.QuicksandRegular
 }
