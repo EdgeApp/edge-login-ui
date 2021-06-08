@@ -1,5 +1,12 @@
 # edge-login-ui
 
+## 0.9.5 (2021-06-08)
+
+- rn: New themed Create Account scene
+- rn: Reorganize layers and decreased tappable area to prevent text entry in PIN field
+- rn: Allow direct entry of recovery token
+- rn: Update translations
+
 ## 0.9.4 (2021-05-26)
 
 - rn: Prevent user from selecting duplicate recovery questions
