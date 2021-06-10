@@ -66,6 +66,7 @@ export class SecurityAlertsScreenComponent extends React.Component<
 
   componentDidMount() {
     const { account } = this.props
+    this.checkEmpty()
     this.cleanups = [
       account.watch('otpResetDate', otpResetDate => {
         const date = otpResetDate != null ? new Date(otpResetDate) : undefined
