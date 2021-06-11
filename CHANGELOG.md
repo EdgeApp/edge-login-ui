@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.6 (2021-06-11)
+
+- rn: Close the security alerts if the list starts empty
+
 ## 0.9.5 (2021-06-08)
 
 - rn: New themed Create Account scene
