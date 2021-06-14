@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { Image, View } from 'react-native'
+import { Image, TouchableOpacity, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 import { sprintf } from 'sprintf-js'
 
@@ -28,6 +28,7 @@ type OwnProps = {
   branding: Branding
 }
 type DispatchProps = {
+  onExit(): void,
   onDone(): void
 }
 type Props = OwnProps & DispatchProps & ThemeProps
@@ -35,6 +36,7 @@ type Props = OwnProps & DispatchProps & ThemeProps
 const NewAccountWelcomeScreenComponent = ({
   theme,
   branding,
+  onExit,
   onDone
 }: Props) => {
   const styles = getStyles(theme)
@@ -42,6 +44,9 @@ const NewAccountWelcomeScreenComponent = ({
 
   return (
     <ThemedScene>
+      <TouchableOpacity style={styles.exitButton} onPress={onExit}>
+        <EdgeText style={styles.exitText}>{s.strings.exit}</EdgeText>
+      </TouchableOpacity>
       <SimpleSceneHeader>{s.strings.get_started}</SimpleSceneHeader>
       <View style={styles.content}>
         <Image source={LOGO_BIG} style={styles.logo} resizeMode="contain" />
@@ -102,6 +107,14 @@ const getStyles = cacheStyles((theme: Theme) => ({
     marginTop: theme.rem(0.75),
     marginBottom: theme.rem(1)
   },
+  exitButton: {
+    marginLeft: theme.rem(0.5),
+    marginBottom: theme.rem(1)
+  },
+  exitText: {
+    color: theme.primaryButton,
+    fontSize: theme.rem(0.75)
+  },
   welcome: {
     fontFamily: theme.fontFaceBold,
     color: theme.secondaryText,
@@ -142,6 +155,9 @@ const getStyles = cacheStyles((theme: Theme) => ({
 export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
+    onExit() {
+      dispatch({ type: 'START_LANDING' })
+    },
     onDone() {
       logEvent(`Signup_Welcome_Next`)
       dispatch({ type: 'WORKFLOW_NEXT' })
