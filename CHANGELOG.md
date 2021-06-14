@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.7 (2021-06-14)
+
+- rn: Add Exit button to return to the landing screen from registration flow
+
 ## 0.9.6 (2021-06-11)
 
 - rn: Close the security alerts if the list starts empty
