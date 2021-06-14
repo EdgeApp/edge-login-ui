@@ -32,7 +32,7 @@ const SimpleSceneHeaderComponent = ({
 
 const getStyles = cacheStyles((theme: Theme) => ({
   container: {
-    marginLeft: theme.rem(1)
+    marginLeft: theme.rem(0.5)
   },
   text: {
     fontSize: theme.rem(1.25),
