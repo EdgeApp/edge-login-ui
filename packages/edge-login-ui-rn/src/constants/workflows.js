@@ -62,7 +62,7 @@ export const workflows: Workflows = {
   // ----------------------------------------------------------------
   createWF: [
     {
-      // NewAccountWelcomeScreen (no header)
+      // NewAccountWelcomeScreen
       title: '',
       subTitle: ''
     },
@@ -78,8 +78,8 @@ export const workflows: Workflows = {
     },
     {
       // NewAccountPinScreen
-      title: s.strings.set_four_digit_pin,
-      subTitle: s.strings.step_three
+      title: '',
+      subTitle: ''
     },
     {
       // NewAccountWaitScreen (no back button)
