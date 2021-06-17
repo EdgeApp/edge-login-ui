@@ -2,7 +2,7 @@
 
 import { type EdgeAccount, type EdgeRecoveryQuestionChoice } from 'edge-core-js'
 import * as React from 'react'
-import { Dimensions, FlatList, Platform, View } from 'react-native'
+import { Dimensions, FlatList, Keyboard, Platform, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import {
@@ -238,6 +238,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   async disableRecovery(): Promise<void> {
     const { account, onDone } = this.props
     await account.deleteRecovery()
+    Keyboard.dismiss()
     this.setState({
       question1: s.strings.choose_recovery_question,
       question2: s.strings.choose_recovery_question
@@ -319,7 +320,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
         <View style={styles.answerRow}>
           <FormField
             style={form1Style}
-            autoFocus={this.state.focusFirst}
+            autoFocus={this.state.focusFirst || this.props.isEnabled}
             autoCorrect={false}
             autoCapitalize="none"
             onChangeText={this.handleAnswer1}
