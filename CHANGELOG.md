@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.9.8 (2021-06-21)
+
+- rn: Fix Change Recovery Questions modal on large screens
+- rn: Update translations
+
 ## 0.9.7 (2021-06-14)
 
 - rn: Add Exit button to return to the landing screen from registration flow
