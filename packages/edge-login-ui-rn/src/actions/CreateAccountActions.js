@@ -30,36 +30,30 @@ export function validatePin(pin: string) {
   }
 }
 export function checkUsernameForAvailabilty(data: string) {
-  return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
-    const context = imports.context
-    // dispatch(openLoading()) Legacy dealt with state for showing a spinner
-    // the timeout is a hack until we put in interaction manager.
-    setTimeout(() => {
-      context
-        .usernameAvailable(data)
-        .then(async response => {
-          if (response) {
-            const obj = {
-              username: data,
-              error: null
-            }
-            logEvent(`Signup_Username_Available`)
-            dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
-            dispatch({ type: 'WORKFLOW_NEXT' })
-            return
-          }
+  return (dispatch: Dispatch, getState: GetState, imports: Imports) =>
+    imports.context
+      .usernameAvailable(data)
+      .then(async response => {
+        if (response) {
           const obj = {
             username: data,
-            error: s.strings.username_exists_error
+            error: null
           }
-          logEvent(`Signup_Username_Unavailable`)
+          logEvent(`Signup_Username_Available`)
           dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
-        })
-        .catch(e => {
-          console.log(e.message)
-        })
-    }, 300)
-  }
+          dispatch({ type: 'WORKFLOW_NEXT' })
+          return
+        }
+        const obj = {
+          username: data,
+          error: s.strings.username_exists_error
+        }
+        logEvent(`Signup_Username_Unavailable`)
+        dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
+      })
+      .catch(e => {
+        console.log(e.message)
+      })
 }
 
 export function validateUsername(data: string) {
