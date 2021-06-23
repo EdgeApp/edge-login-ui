@@ -69,7 +69,7 @@ export function PrimaryButton(props: Props) {
       onPress={onPress}
     >
       {label != null ? <Text style={styles.primaryText}>{label}</Text> : null}
-      {spinner != null ? (
+      {spinner === true ? (
         <ActivityIndicator
           color={theme.primaryButtonText}
           style={styles.spinner}
@@ -107,7 +107,7 @@ export function SecondaryButton(props: Props) {
       onPress={onPress}
     >
       {label != null ? <Text style={styles.secondaryText}>{label}</Text> : null}
-      {spinner != null ? (
+      {spinner === true ? (
         <ActivityIndicator
           color={theme.secondaryButtonText}
           style={styles.spinner}
@@ -154,7 +154,7 @@ export function AlertModalButton(props: Props & AlertModalButtonType) {
       onPress={onPress}
     >
       {label != null ? <Text style={textStyle}>{label}</Text> : null}
-      {spinner != null ? (
+      {spinner === true ? (
         <ActivityIndicator color={spinnerColor} style={styles.spinner} />
       ) : null}
       {children}
