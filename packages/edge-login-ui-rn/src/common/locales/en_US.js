@@ -75,6 +75,7 @@ const strings = {
   choose_title_password: 'Set a Password', // title of scene
   set_four_digit_pin: 'Set a 4-digit PIN ',
   create_your_account: 'Creating Your Account', // title of scene
+  choose_username_input_placeholder: 'Type Your Username Here',
   write_it_down: 'Write It Down', // Is this smaller green title even necessary?
   quick_review: 'Quick Review',
   recovery: 'Recovery',
