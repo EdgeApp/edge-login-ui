@@ -78,7 +78,9 @@ const strings = {
   create_your_account: 'Creating Your Account', // title of scene
   choose_username_input_placeholder: 'Type Your Username Here',
   write_it_down: 'Write It Down', // Is this smaller green title even necessary?
+  write_and_store: 'Write Down and Store Securely',
   quick_review: 'Quick Review',
+  review: 'Review',
   recovery: 'Recovery',
   account_confirmation: 'Account Confirmation', // title should be regular capitalization, not all uppercase
   otp_header: 'Two Factor Authentication',
