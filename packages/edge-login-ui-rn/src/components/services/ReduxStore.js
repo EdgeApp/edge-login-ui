@@ -69,7 +69,7 @@ type Connector<ExtraProps, OwnProps> = (
  */
 export function connect<StateProps, DispatchProps, OwnProps>(
   mapStateToProps: (state: RootState, ownProps: OwnProps) => StateProps,
-  mapDispatchToProps: (dispatch: Dispatch, ownProps: OwnProps) => DispatchProps
+  mapDispatchToProps?: (dispatch: Dispatch, ownProps: OwnProps) => DispatchProps
 ): Connector<StateProps & DispatchProps, OwnProps> {
   // $FlowFixMe
   return rawConnect(mapStateToProps, mapDispatchToProps)
