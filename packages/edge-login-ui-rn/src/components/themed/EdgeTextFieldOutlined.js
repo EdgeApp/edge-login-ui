@@ -316,6 +316,7 @@ const EdgeTextFieldOutlinedComponent = forwardRef(
 
     const placeholderStyle = useMemo(() => {
       return [...placeholderPaddingStyles, animatedPlaceholderStyles]
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [...placeholderPaddingStyles, animatedPlaceholderStyles])
 
     return (
