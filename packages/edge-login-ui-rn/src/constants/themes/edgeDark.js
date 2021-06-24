@@ -69,6 +69,7 @@ export const edgeDark: Theme = {
   dangerText: palette.accentRed,
   warningText: palette.accentOrange,
   linkText: palette.edgeMint,
+  positiveText: palette.accentGreen,
 
   // tile
   tileBackground: palette.edgeBlue,
