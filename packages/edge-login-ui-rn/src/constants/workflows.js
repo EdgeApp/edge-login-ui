@@ -93,8 +93,8 @@ export const workflows: Workflows = {
     },
     {
       // TermsAndConditionsScreen
-      title: s.strings.quick_review,
-      subTitle: s.strings.account_confirmation
+      title: '',
+      subTitle: ''
     }
   ],
 
