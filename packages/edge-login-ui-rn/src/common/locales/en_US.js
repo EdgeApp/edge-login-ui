@@ -56,6 +56,7 @@ const strings = {
     "Please set up an email client that is default to your device's OS in order to send a token to yourself",
   password_recovery: 'Password Recovery',
   save_recovery_token: 'Save Recovery Token',
+  password_requirements: 'Password Requirements',
   must_ten_characters: 'Must have at least 10 characters',
   must_one_lowercase: 'Must have at least 1 lowercase letter',
   must_one_uppercase: 'Must have at least 1 uppercase letter',
