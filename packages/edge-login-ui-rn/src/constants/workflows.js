@@ -87,9 +87,9 @@ export const workflows: Workflows = {
       subTitle: ''
     },
     {
-      // NewAccountReviewScreen (no back button)
-      title: s.strings.write_it_down,
-      subTitle: s.strings.account_confirmation
+      // NewAccountReviewScreen
+      title: '',
+      subTitle: ''
     },
     {
       // TermsAndConditionsScreen
