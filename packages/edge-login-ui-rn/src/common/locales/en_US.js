@@ -150,7 +150,7 @@ const strings = {
     'Your username will be required to sign in to your %s account on this and other devices.',
   almost_done: "Almost done! Let's write down your account information",
   warning_message:
-    'If you lose your account information, you’ll lose access to your funds permanently. Write down and store it securely.',
+    'If you lose your account information, you’ll lose access to your funds permanently.',
   good_job: 'Good job!',
   hang_tight: 'Hang tight while we create',
   secure_account: 'and secure your account',
