@@ -79,7 +79,7 @@
   "hide_account_info": "Hide account information",
   "password_successfully_changed": "Password Successfully Changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!",
   "otp_hero_scan": "Scan the QR code below using the device that enabled 2FA to give access to the device",
-  "password_desc": "The password is used to login and change sensitive settings",
+  "password_desc": "The password is used to login and change sensitive settings. Don’t forget to write it down.",
   "re_enter_new_password": "Re-enter New Password",
   "new_password": "New Password",
   "pswd_and_pin_changed": "Password and PIN successfully changed.",
