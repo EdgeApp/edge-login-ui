@@ -7,7 +7,7 @@
     "fix": "npm run lint -- --fix",
     "flow": "flow",
     "lint": "eslint .",
-    "precommit": "node localizeLanguage.js && lint-staged && flow",
+    "precommit": "node -r sucrase/register localizeLanguage.js && lint-staged && flow",
     "prepare": "lerna exec yarn prepare"
   },
   "husky": {
@@ -38,6 +38,7 @@
     "husky": "^4.3.0",
     "lerna": "^3.16.4",
     "lint-staged": "^10.5.3",
-    "prettier": "^2.2.0"
+    "prettier": "^2.2.0",
+    "sucrase": "^3.19.0"
   }
 }
