@@ -14,17 +14,17 @@
   "homepage": "https://github.com/EdgeApp/edge-login-ui",
   "license": "SEE LICENSE IN LICENSE",
   "author": "Airbitz, Inc.",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "files": [
-    "android/**",
-    "edge-login-ui-rn.podspec",
-    "ios/**",
-    "LICENSE",
-    "src/**",
-    "README.md"
+    "/android/*",
+    "/edge-login-ui-rn.podspec",
+    "/ios/*",
+    "/lib/*",
+    "/LICENSE",
+    "/README.md"
   ],
   "scripts": {
-    "prepare": "echo nothing to do"
+    "prepare": "rm -r lib && tsc && cp src/index.flow.js lib/index.js.flow && cp -r src/assets lib"
   },
   "resolutions": {
     "scrypt.js": "0.3.0"
