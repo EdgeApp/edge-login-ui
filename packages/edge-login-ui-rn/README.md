@@ -111,7 +111,7 @@ https://developer.airbitz.co
 You'll need an account on the Airbitz Mobile App which you can download for iOS and Android at
 
   [iOS App Store](https://itunes.apple.com/us/app/airbitz-bitcoin-wallet/id843536046)
-  
+
   [Google Play Store](https://play.google.com/store/apps/details?id=com.airbitz)
 
 On the `developer.airbitz.co` page, scan the QR code using the Airbitz Mobile App after signing in and register an email address.
@@ -153,14 +153,18 @@ render () {
 
   // Once the context is ready, we can show the login screen:
   return (
-    <View style={styles.container}>
-      {this.state.context
-        ? <LoginScreen context={this.state.context} onLogin={onLogin} />
-        : <Text style={styles.welcome}>Loading</Text>}
-    </View>
+    <LoginUiProvider>
+      <View style={styles.container}>
+        {this.state.context
+          ? <LoginScreen context={this.state.context} onLogin={onLogin} />
+          : <Text style={styles.welcome}>Loading</Text>}
+      </View>
+    </LoginUiProvider>
   )
 }
 ```
+
+The `LoginUiProvider` component should wrap your entire application, including your top-level router. The edge-login-ui-rn project uses this to display modals, error alerts, and similar floating UI.
 
 In order to customize the experience and integrate with your app, change the `onLogin` function to handle getting back the account information.
 
