@@ -7,6 +7,7 @@ import { type WorkflowState } from '../../reducers/WorkflowReducer.js'
 import * as Styles from '../../styles/index.js'
 import { type Branding } from '../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
+import { MaybeProvideLoginUi } from '../publicApi/LoginUiProvider.js'
 import {
   PublicChangePasswordScreen,
   ResecurePasswordScreen
@@ -31,7 +32,6 @@ import { OtpErrorScreen } from '../screens/OtpErrorScreen.js'
 import { PasswordLoginScreen } from '../screens/PasswordLoginScreen.js'
 import { PinLoginScreen } from '../screens/PinLoginScreen.js'
 import { RecoveryLoginScreen } from '../screens/RecoveryLoginScreen.js'
-import { Airship } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 import { ThemeProvider } from '../services/ThemeContext.js'
 
@@ -49,11 +49,11 @@ class RouterComponent extends React.Component<Props> {
     const { ScreenStyle } = Styles
     return (
       <ThemeProvider>
-        <Airship>
+        <MaybeProvideLoginUi>
           <View accessible style={ScreenStyle}>
             {this.renderContent()}
           </View>
-        </Airship>
+        </MaybeProvideLoginUi>
       </ThemeProvider>
     )
   }

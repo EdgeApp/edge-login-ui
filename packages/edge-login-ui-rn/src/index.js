@@ -2,6 +2,7 @@
 
 import './util/androidFetch.js'
 
+export { LoginUiProvider } from './components/publicApi/LoginUiProvider.js'
 export * from './components/publicApi/PublicChangePasswordScreen.js'
 export * from './components/publicApi/PublicChangePinScreen.js'
 export * from './components/publicApi/PublicChangeRecoveryScreen.js'
