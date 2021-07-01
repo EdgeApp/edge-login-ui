@@ -39,7 +39,9 @@ type Props = {
   // using the same logic as the web `padding` property. Defaults to 0.5.
   paddingRem?: number[] | number,
 
-  straight?: boolean
+  straight?: boolean,
+
+  bold?: boolean
 }
 
 export function PrimaryButton(props: Props) {
@@ -50,7 +52,8 @@ export function PrimaryButton(props: Props) {
     onPress,
     paddingRem,
     spinner,
-    straight
+    straight,
+    bold = false
   } = props
   const theme = useTheme()
   const styles = getStyles(theme)
@@ -68,8 +71,12 @@ export function PrimaryButton(props: Props) {
       ]}
       onPress={onPress}
     >
-      {label != null ? <Text style={styles.primaryText}>{label}</Text> : null}
-      {spinner != null ? (
+      {label != null ? (
+        <Text style={[styles.primaryText, bold && styles.boldText]}>
+          {label}
+        </Text>
+      ) : null}
+      {spinner === true ? (
         <ActivityIndicator
           color={theme.primaryButtonText}
           style={styles.spinner}
@@ -86,16 +93,17 @@ export function SecondaryButton(props: Props) {
     label,
     marginRem,
     onPress,
-    paddingRem,
+    paddingRem = [0.7, 2.2],
     spinner,
-    straight
+    straight,
+    bold = false
   } = props
   const theme = useTheme()
   const styles = getStyles(theme)
 
   const spacingStyles = {
     ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
-    ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
+    ...sidesToPadding(mapSides(fixSides(paddingRem, 0), theme.rem))
   }
   return (
     <TouchableOpacity
@@ -106,8 +114,12 @@ export function SecondaryButton(props: Props) {
       ]}
       onPress={onPress}
     >
-      {label != null ? <Text style={styles.secondaryText}>{label}</Text> : null}
-      {spinner != null ? (
+      {label != null ? (
+        <Text style={[styles.secondaryText, bold && styles.boldText]}>
+          {label}
+        </Text>
+      ) : null}
+      {spinner === true ? (
         <ActivityIndicator
           color={theme.secondaryButtonText}
           style={styles.spinner}
@@ -127,7 +139,8 @@ export function AlertModalButton(props: Props & AlertModalButtonType) {
     paddingRem,
     spinner,
     type,
-    straight
+    straight,
+    bold = false
   } = props
   const theme = useTheme()
   const styles = getStyles(theme)
@@ -153,8 +166,10 @@ export function AlertModalButton(props: Props & AlertModalButtonType) {
       style={[buttonStyle, spacingStyles, straight ? styles.straight : null]}
       onPress={onPress}
     >
-      {label != null ? <Text style={textStyle}>{label}</Text> : null}
-      {spinner != null ? (
+      {label != null ? (
+        <Text style={[textStyle, bold && styles.boldText]}>{label}</Text>
+      ) : null}
+      {spinner === true ? (
         <ActivityIndicator color={spinnerColor} style={styles.spinner} />
       ) : null}
       {children}
@@ -171,9 +186,9 @@ const getStyles = cacheStyles((theme: Theme) => {
     justifyContent: 'center'
   }
   const commonText = {
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1),
-    lineHeight: theme.rem(2),
+    fontFamily: theme.fontFaceDefault,
+    fontSize: theme.rem(0.9),
+    lineHeight: theme.rem(1),
     marginHorizontal: theme.rem(0.5)
   }
 
@@ -221,6 +236,9 @@ const getStyles = cacheStyles((theme: Theme) => {
     spinner: { height: theme.rem(2) },
     straight: {
       borderRadius: theme.rem(0.25)
+    },
+    boldText: {
+      fontFamily: theme.fontFaceBold
     }
   }
 })

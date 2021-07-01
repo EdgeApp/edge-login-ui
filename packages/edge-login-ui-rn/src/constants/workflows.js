@@ -68,8 +68,8 @@ export const workflows: Workflows = {
     },
     {
       // NewAccountUsernameScreen
-      title: s.strings.choose_title_username,
-      subTitle: s.strings.step_one
+      title: '',
+      subTitle: ''
     },
     {
       // NewAccountPasswordScreen
