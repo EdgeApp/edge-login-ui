@@ -97,8 +97,8 @@ const NewAccountUsernameScreenComponent = ({
               handleNext()
             }}
             spinner={isCheckAvailabiltyPending}
-            paddingRem={[0.5, 2]}
             straight
+            bold
           />
         </View>
       </View>
