@@ -22,7 +22,10 @@ class EdgeTextComponent extends React.PureComponent<OwnProps & ThemeProps> {
   render() {
     const { children, style, theme, ...props } = this.props
     const { text } = getStyles(theme)
-    let numberOfLines = this.props.numberOfLines || 1
+    let numberOfLines =
+      typeof this.props.numberOfLines === 'number'
+        ? this.props.numberOfLines
+        : 1
     if (typeof children === 'string' && children.includes('\n')) {
       numberOfLines = numberOfLines + (children.match(/\n/g) || []).length
     }

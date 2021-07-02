@@ -82,14 +82,14 @@ export const workflows: Workflows = {
       subTitle: ''
     },
     {
-      // NewAccountWaitScreen (no back button)
-      title: s.strings.create_your_account,
+      // NewAccountWaitScreen
+      title: '',
       subTitle: ''
     },
     {
-      // NewAccountReviewScreen (no back button)
-      title: s.strings.write_it_down,
-      subTitle: s.strings.account_confirmation
+      // NewAccountReviewScreen
+      title: '',
+      subTitle: ''
     },
     {
       // TermsAndConditionsScreen

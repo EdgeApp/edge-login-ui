@@ -78,7 +78,9 @@ const strings = {
   create_your_account: 'Creating Your Account', // title of scene
   choose_username_input_placeholder: 'Type Your Username Here',
   write_it_down: 'Write It Down', // Is this smaller green title even necessary?
+  write_and_store: 'Write Down and Store Securely',
   quick_review: 'Quick Review',
+  review: 'Review',
   recovery: 'Recovery',
   account_confirmation: 'Account Confirmation', // title should be regular capitalization, not all uppercase
   otp_header: 'Two Factor Authentication',
@@ -150,7 +152,7 @@ const strings = {
     'Your username will be required to sign in to your %s account on this and other devices.',
   almost_done: "Almost done! Let's write down your account information",
   warning_message:
-    'If you lose your account information, you’ll lose access to your funds permanently. Write down and store it securely.',
+    'If you lose your account information, you’ll lose access to your funds permanently.',
   good_job: 'Good job!',
   hang_tight: 'Hang tight while we create',
   secure_account: 'and secure your account',

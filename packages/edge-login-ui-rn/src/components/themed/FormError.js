@@ -15,30 +15,58 @@ import { EdgeText } from './EdgeText'
 
 type OwnProps = {
   children: React.Node,
-  marginRem?: number[] | number
+  title?: string,
+  isWarning?: Boolean,
+  marginRem?: number[] | number,
+  numberOfLines?: number,
+  titleNumberOfLines?: number
 }
 
 const FormErrorComponent = ({
   children,
   theme,
   marginRem,
-  ...props
+  title,
+  numberOfLines,
+  titleNumberOfLines,
+  isWarning
 }: OwnProps & ThemeProps) => {
-  const { container, text } = getStyles(theme)
+  const styles = getStyles(theme)
   const spacings = sidesToMargin(mapSides(fixSides(marginRem, 0.5), theme.rem))
+  const definitiveTitle = title || children
+  const description = definitiveTitle && !title ? '' : children
 
-  if (!children) return null
+  if (!definitiveTitle) return null
 
   return (
-    <View style={[container, spacings]}>
-      <SimpleLineIcons
-        name="info"
-        size={theme.rem(1.1)}
-        color={theme.dangerText}
-      />
-      <EdgeText style={text} {...props}>
-        {children}
-      </EdgeText>
+    <View
+      style={[styles.container, spacings, isWarning && styles.warningContainer]}
+    >
+      <View style={styles.top}>
+        <SimpleLineIcons
+          name="info"
+          size={theme.rem(1.1)}
+          color={isWarning ? theme.warningText : theme.dangerText}
+        />
+        <EdgeText
+          style={[styles.text, styles.title, isWarning && styles.warningText]}
+          numberOfLines={titleNumberOfLines}
+        >
+          {definitiveTitle}
+        </EdgeText>
+      </View>
+      {!!description && (
+        <EdgeText
+          style={[
+            styles.text,
+            styles.description,
+            isWarning && styles.warningText
+          ]}
+          numberOfLines={numberOfLines}
+        >
+          {description}
+        </EdgeText>
+      )}
     </View>
   )
 }
@@ -49,15 +77,29 @@ const getStyles = cacheStyles((theme: Theme) => ({
     borderRadius: theme.rem(0.25),
     borderColor: theme.dangerText,
     padding: theme.rem(1),
-    flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'flex-start'
+  },
+  warningContainer: {
+    borderColor: theme.warningText
+  },
+  top: {
+    flexDirection: 'row'
+  },
+  title: {
+    fontFamily: theme.fontFaceBold,
+    marginLeft: theme.rem(0.75)
+  },
+  description: {
+    marginTop: theme.rem(0.25)
+  },
+  warningText: {
+    color: theme.warningText
   },
   text: {
     flexShrink: 1,
     color: theme.dangerText,
     fontFamily: theme.fontFaceDefault,
-    fontSize: theme.rem(0.75),
-    marginLeft: theme.rem(0.75)
+    fontSize: theme.rem(0.75)
   }
 }))
 

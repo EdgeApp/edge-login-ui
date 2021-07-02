@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { View } from 'react-native'
 
+import s from '../../common/locales/strings'
 import { type WorkflowState } from '../../reducers/WorkflowReducer.js'
 import * as Styles from '../../styles/index.js'
 import { type Branding } from '../../types/Branding.js'
@@ -25,13 +26,13 @@ import { NewAccountPasswordScreen } from '../screens/newAccount/NewAccountPasswo
 import { NewAccountPinScreen } from '../screens/newAccount/NewAccountPinScreen.js'
 import { NewAccountReviewScreen } from '../screens/newAccount/NewAccountReviewScreen.js'
 import { NewAccountUsernameScreen } from '../screens/newAccount/NewAccountUsernameScreen.js'
-import { NewAccountWaitScreen } from '../screens/newAccount/NewAccountWaitScreen.js'
 import { NewAccountWelcomeScreen } from '../screens/newAccount/NewAccountWelcomeScreen.js'
 import { TermsAndConditionsScreen } from '../screens/newAccount/TermsAndConditionsScreen.js'
 import { OtpErrorScreen } from '../screens/OtpErrorScreen.js'
 import { PasswordLoginScreen } from '../screens/PasswordLoginScreen.js'
 import { PinLoginScreen } from '../screens/PinLoginScreen.js'
 import { RecoveryLoginScreen } from '../screens/RecoveryLoginScreen.js'
+import { WaitScreen } from '../screens/WaitScreen'
 import { connect } from '../services/ReduxStore.js'
 import { ThemeProvider } from '../services/ThemeContext.js'
 
@@ -100,7 +101,12 @@ class RouterComponent extends React.Component<Props> {
       case 3:
         return <NewAccountPinScreen />
       case 4:
-        return <NewAccountWaitScreen />
+        return (
+          <WaitScreen
+            title={s.strings.good_job}
+            message={s.strings.hang_tight + '\n' + s.strings.secure_account}
+          />
+        )
       case 5:
         return <NewAccountReviewScreen />
       case 6:
