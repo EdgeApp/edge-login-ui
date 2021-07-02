@@ -1,212 +1,205 @@
 // @flow
 
-import { type EdgePasswordRules } from 'edge-core-js'
 import * as React from 'react'
 import { KeyboardAvoidingView, View } from 'react-native'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { cacheStyles } from 'react-native-patina'
 
 import {
   validateConfirmPassword,
   validatePassword
 } from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
-import * as Styles from '../../../styles/index.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { logEvent } from '../../../util/analytics.js'
-import { scale } from '../../../util/scaling.js'
-import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent.js'
-import { Button } from '../../common/Button.js'
-import { FormField } from '../../common/FormField.js'
-import { Header } from '../../common/Header.js'
-import SafeAreaView from '../../common/SafeAreaViewGradient.js'
+import { useState } from '../../../util/hooks'
 import { connect } from '../../services/ReduxStore.js'
+import {
+  type Theme,
+  type ThemeProps,
+  withTheme
+} from '../../services/ThemeContext'
+import { EdgeText } from '../../themed/EdgeText'
+import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
+import { Fade } from '../../themed/Fade'
+import { FormError } from '../../themed/FormError'
+import { PasswordStatus } from '../../themed/PasswordStatus'
+import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
+import { SecondaryButton } from '../../themed/ThemedButtons'
+import { ThemedScene } from '../../themed/ThemedScene'
 
 type OwnProps = {}
 type StateProps = {
   confirmPassword: string,
   confirmPasswordErrorMessage: string,
   createPasswordErrorMessage: string,
-  error: string,
-  error2: string,
   password: string,
-  passwordStatus: EdgePasswordRules | null
+  isPasswordStatusExists: boolean,
+  isPasswordPassed: boolean
 }
 type DispatchProps = {
-  onBack(): void,
   onDone(): void,
   validateConfirmPassword(password: string): void,
   validatePassword(password: string): void
 }
-type Props = OwnProps & StateProps & DispatchProps
+type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
-type State = {
-  isProcessing: boolean,
-  focusFirst: boolean,
-  focusSecond: boolean
-}
+const NewAccountPasswordScreenComponent = ({
+  confirmPassword,
+  confirmPasswordErrorMessage,
+  createPasswordErrorMessage,
+  password,
+  onDone,
+  validateConfirmPassword,
+  validatePassword,
+  isPasswordStatusExists,
+  isPasswordPassed,
+  theme
+}: Props) => {
+  const styles = getStyles(theme)
+  const [isProcessing, setIsProcessing] = useState<boolean>(false)
+  const [focusFirst, setFocusFirst] = useState<boolean>(true)
+  const [focusSecond, setFocusSecond] = useState<boolean>(false)
 
-class NewAccountPasswordScreenComponent extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      isProcessing: false,
-      focusFirst: true,
-      focusSecond: false
-    }
+  const handleFocusSwitch = () => {
+    setFocusFirst(false)
+    setFocusSecond(true)
   }
 
-  render() {
+  const handleNext = () => {
+    setIsProcessing(true)
+
+    if (!isPasswordStatusExists) {
+      // TODO Skip component
+      setIsProcessing(false)
+      return
+    }
+
+    if (
+      confirmPasswordErrorMessage !== '' ||
+      createPasswordErrorMessage !== ''
+    ) {
+      setIsProcessing(false)
+      logEvent('Signup_Password_Invalid')
+      return
+    }
+
+    if (password && password !== confirmPassword) {
+      setIsProcessing(false)
+      validateConfirmPassword(confirmPassword)
+      logEvent('Signup_Password_Invalid')
+      return
+    }
+
+    logEvent('Signup_Password_Valid')
+    onDone()
+  }
+
+  const renderInterior = () => {
     return (
-      <SafeAreaView>
-        <KeyboardAwareScrollView
-          style={styles.screen}
-          keyboardShouldPersistTaps="always"
-          contentContainerStyle={styles.mainScrollView}
-        >
-          <Header onBack={this.props.onBack} />
-          {this.renderMain()}
-        </KeyboardAwareScrollView>
-      </SafeAreaView>
+      <>
+        {isPasswordStatusExists ? (
+          <PasswordStatus marginRem={[0, 0, 1.25]} />
+        ) : (
+          <>
+            <EdgeText
+              style={styles.subtitle}
+            >{`${s.strings.step_two}: ${s.strings.choose_title_password}`}</EdgeText>
+            <EdgeText style={styles.description} numberOfLines={2}>
+              {s.strings.password_desc}
+            </EdgeText>
+          </>
+        )}
+        <EdgeTextFieldOutlined
+          value={password}
+          secureTextEntry
+          returnKeyType="next"
+          label={s.strings.password}
+          autoFocus={focusFirst}
+          onChangeText={validatePassword}
+          onSubmitEditing={handleFocusSwitch}
+          isClearable
+          showSearchIcon={false}
+          marginRem={[0, 0, 1.25]}
+        />
+        <EdgeTextFieldOutlined
+          value={confirmPassword}
+          secureTextEntry
+          returnKeyType="go"
+          label={s.strings.confirm_password}
+          autoFocus={focusSecond}
+          onChangeText={validateConfirmPassword}
+          onSubmitEditing={handleNext}
+          isClearable
+          showSearchIcon={false}
+          marginRem={0}
+        />
+        <FormError marginRem={[1.25, 0, 0]}>
+          {confirmPasswordErrorMessage || createPasswordErrorMessage}
+        </FormError>
+        <View style={styles.actions}>
+          <Fade
+            visible={
+              isPasswordPassed &&
+              password === confirmPassword &&
+              !confirmPasswordErrorMessage &&
+              !createPasswordErrorMessage
+            }
+            hidden
+          >
+            <SecondaryButton
+              label={s.strings.next_label}
+              onPress={handleNext}
+              spinner={isProcessing}
+              straight
+              bold
+            />
+          </Fade>
+        </View>
+      </>
     )
   }
 
-  renderMain() {
-    if (this.state.focusSecond) {
-      return (
+  return (
+    <ThemedScene>
+      <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
+      {focusSecond ? (
         <KeyboardAvoidingView
           style={styles.pageContainer}
           contentContainerStyle={styles.pageContainer}
           behavior="position"
           keyboardVerticalOffset={-150}
         >
-          {this.renderInterior()}
+          {renderInterior()}
         </KeyboardAvoidingView>
-      )
-    }
-    return <View style={styles.pageContainer}>{this.renderInterior()}</View>
-  }
-
-  renderInterior() {
-    return (
-      <View style={styles.innerView}>
-        <PasswordStatus />
-        <FormField
-          value={this.props.password}
-          error={this.props.createPasswordErrorMessage}
-          secureTextEntry
-          returnKeyType="next"
-          onChangeText={(password: string) =>
-            this.props.validatePassword(password)
-          }
-          onSubmitEditing={this.handleFocusSwitch}
-          testID="passwordInput"
-          label={s.strings.password}
-          style={styles.inputBox}
-          autoFocus={this.state.focusFirst}
-        />
-        <FormField
-          error={this.props.confirmPasswordErrorMessage}
-          returnKeyType="go"
-          secureTextEntry
-          value={this.props.confirmPassword}
-          autoFocus={this.state.focusSecond}
-          label={s.strings.confirm_password}
-          onChangeText={(password: string) =>
-            this.props.validateConfirmPassword(password)
-          }
-          onSubmitEditing={this.handleNext}
-          style={styles.inputBox}
-          testID="confirmPasswordInput"
-        />
-        <View style={styles.passwordShim} />
-        <Button
-          testID="nextButton"
-          onPress={this.handleNext}
-          downStyle={styles.nextButton.downStyle}
-          downTextStyle={styles.nextButton.downTextStyle}
-          upStyle={styles.nextButton.upStyle}
-          upTextStyle={styles.nextButton.upTextStyle}
-          label={s.strings.next_label}
-          isThinking={this.state.isProcessing}
-          doesThink
-        />
-      </View>
-    )
-  }
-
-  handleFocusSwitch = () => {
-    this.setState({
-      focusFirst: false,
-      focusSecond: true
-    })
-  }
-
-  handleNext = () => {
-    this.setState({
-      isProcessing: true
-    })
-    if (!this.props.passwordStatus) {
-      // TODO Skip component
-      this.setState({
-        isProcessing: false
-      })
-      return
-    }
-    if (this.props.error !== '' || this.props.error2 !== '') {
-      this.setState({
-        isProcessing: false
-      })
-      logEvent(`Signup_Password_Invalid`)
-      return
-    }
-    if (
-      this.props.password &&
-      this.props.password !== this.props.confirmPassword
-    ) {
-      this.setState({
-        isProcessing: false
-      })
-      this.props.validateConfirmPassword(this.props.confirmPassword)
-      logEvent(`Signup_Password_Invalid`)
-      return
-    }
-    logEvent(`Signup_Password_Valid`)
-    this.props.onDone()
-  }
+      ) : (
+        <View style={styles.pageContainer}>{renderInterior()}</View>
+      )}
+    </ThemedScene>
+  )
 }
 
-const styles = {
-  screen: { ...Styles.ScreenStyle },
-  mainScrollView: {
-    position: 'relative',
-    width: '100%',
-    height: '100%'
-  },
-  scrollViewContentContainer: {
-    alignItems: 'center'
-  },
+const getStyles = cacheStyles((theme: Theme) => ({
   pageContainer: {
-    width: '100%',
-    alignItems: 'center',
-    flex: 1
+    flex: 1,
+    marginLeft: theme.rem(0.5)
   },
-  innerView: {
-    height: '100%',
-    width: '100%',
-    alignItems: 'center'
+  subtitle: {
+    fontFamily: theme.fontFaceBold,
+    color: theme.secondaryText,
+    fontSize: theme.rem(1),
+    marginBottom: theme.rem(2.25)
   },
-  nextButton: {
-    upStyle: Styles.PrimaryButtonUpScaledStyle,
-    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
-    downStyle: Styles.PrimaryButtonDownScaledStyle
+  description: {
+    fontFamily: theme.fontFaceDefault,
+    fontSize: theme.rem(0.875),
+    marginBottom: theme.rem(3.25)
   },
-  inputBox: {
-    ...Styles.MaterialInputOnWhiteScaled,
-    marginTop: scale(15)
-  },
-  passwordShim: { width: '100%', height: 1, marginTop: scale(35) }
-}
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: theme.rem(5)
+  }
+}))
 
 export const NewAccountPasswordScreen = connect<
   StateProps,
@@ -217,15 +210,13 @@ export const NewAccountPasswordScreen = connect<
     confirmPassword: state.create.confirmPassword || '',
     confirmPasswordErrorMessage: state.create.confirmPasswordErrorMessage || '',
     createPasswordErrorMessage: state.create.createPasswordErrorMessage || '',
-    error: state.create.confirmPasswordErrorMessage || '',
-    error2: state.create.createPasswordErrorMessage || '',
     password: state.create.password || '',
-    passwordStatus: state.create.passwordStatus
+    isPasswordStatusExists: !!state.passwordStatus,
+    isPasswordPassed: Boolean(
+      state.passwordStatus && state.passwordStatus.passed
+    )
   }),
   (dispatch: Dispatch) => ({
-    onBack() {
-      dispatch({ type: 'WORKFLOW_BACK' })
-    },
     onDone() {
       dispatch({ type: 'WORKFLOW_NEXT' })
     },
@@ -236,4 +227,4 @@ export const NewAccountPasswordScreen = connect<
       dispatch(validatePassword(password))
     }
   })
-)(NewAccountPasswordScreenComponent)
+)(withTheme(NewAccountPasswordScreenComponent))

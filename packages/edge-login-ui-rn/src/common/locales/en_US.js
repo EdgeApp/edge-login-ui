@@ -56,6 +56,7 @@ const strings = {
     "Please set up an email client that is default to your device's OS in order to send a token to yourself",
   password_recovery: 'Password Recovery',
   save_recovery_token: 'Save Recovery Token',
+  password_requirements: 'Password Requirements',
   must_ten_characters: 'Must have at least 10 characters',
   must_one_lowercase: 'Must have at least 1 lowercase letter',
   must_one_uppercase: 'Must have at least 1 uppercase letter',
@@ -92,7 +93,8 @@ const strings = {
     'Password Successfully Changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!',
   otp_hero_scan:
     'Scan the QR code below using the device that enabled 2FA to give access to the device',
-  password_desc: 'The password is used to login and change sensitive settings',
+  password_desc:
+    'The password is used to login and change sensitive settings. Don’t forget to write it down.',
   re_enter_new_password: 'Re-enter New Password',
   new_password: 'New Password',
   pswd_and_pin_changed: 'Password and PIN successfully changed.',

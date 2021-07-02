@@ -28,6 +28,7 @@ export type Theme = {|
   dangerText: string,
   warningText: string,
   linkText: string,
+  positiveText: string,
 
   // Tile:
   tileBackground: string,
