@@ -2,7 +2,7 @@
 // copied EdgeText component from 'edge-react-gui'
 
 import * as React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { type Text as TextProps, StyleSheet, Text } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
 import {
@@ -18,7 +18,9 @@ type OwnProps = {
   style?: StyleSheet.Styles
 }
 
-class EdgeTextComponent extends React.PureComponent<OwnProps & ThemeProps> {
+class EdgeTextComponent extends React.PureComponent<
+  OwnProps & TextProps & ThemeProps
+> {
   render() {
     const { children, style, theme, ...props } = this.props
     const { text } = getStyles(theme)
