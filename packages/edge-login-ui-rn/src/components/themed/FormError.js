@@ -21,7 +21,6 @@ type OwnProps = {
 const FormErrorComponent = ({
   children,
   theme,
-  isVisible,
   marginRem,
   ...props
 }: OwnProps & ThemeProps) => {
