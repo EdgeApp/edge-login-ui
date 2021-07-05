@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.9.9 (2021-07-05)
+
+- rn: New themed Create Account flow
+- rn: Update translations
+
 ## 0.9.8 (2021-06-21)
 
 - rn: Fix Change Recovery Questions modal on large screens
