@@ -37,7 +37,8 @@ import { ThemeProvider } from '../services/ThemeContext.js'
 
 type OwnProps = {
   branding: Branding,
-  showHeader: boolean
+  showHeader: boolean,
+  onChangeRecoveryModal?: (status: boolean) => void
 }
 type StateProps = {
   workflow: WorkflowState
@@ -65,7 +66,12 @@ class RouterComponent extends React.Component<Props> {
       case 'changePinWF':
         return <PublicChangePinScreen showHeader={this.props.showHeader} />
       case 'changeRecoveryWF':
-        return <PublicChangeRecoveryScreen showHeader={this.props.showHeader} />
+        return (
+          <PublicChangeRecoveryScreen
+            showHeader={this.props.showHeader}
+            onChangeRecoveryModal={this.props.onChangeRecoveryModal}
+          />
+        )
       case 'createWF':
         return this.getCreateScreen()
       case 'landingWF':
