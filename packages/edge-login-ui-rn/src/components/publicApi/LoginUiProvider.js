@@ -1,9 +1,8 @@
 // @flow
 
 import * as React from 'react'
-// $FlowFixMe
-import { useContext } from 'react'
 
+import { useContext } from '../../util/hooks.js'
 import { Airship } from '../services/AirshipInstance.js'
 
 /**
