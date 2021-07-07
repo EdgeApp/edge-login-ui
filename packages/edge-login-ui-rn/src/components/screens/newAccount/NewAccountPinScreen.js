@@ -18,6 +18,7 @@ import {
   type ThemeProps,
   withTheme
 } from '../../services/ThemeContext'
+import { BackButton } from '../../themed/BackButton'
 import { DigitInput, MAX_PIN_LENGTH } from '../../themed/DigitInput'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
@@ -37,7 +38,8 @@ type StateProps = {
 
 type DispatchProps = {
   createUser(data: CreateUserData): void,
-  clearCreateErrorMessagecircleFilled(): void
+  clearCreateErrorMessagecircleFilled(): void,
+  onBack(): void
 }
 
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
@@ -46,6 +48,7 @@ const NewAccountPinScreenComponent = ({
   username,
   password,
   pin,
+  onBack,
   createUser,
   pinErrorMessage,
   createErrorMessage,
@@ -85,6 +88,7 @@ const NewAccountPinScreenComponent = ({
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
+      <BackButton onPress={onBack} marginRem={[0, 0, 1, 0.5]} />
       <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
       <View style={styles.content}>
         <EdgeText
@@ -150,6 +154,9 @@ export const NewAccountPinScreen = connect<StateProps, DispatchProps, OwnProps>(
   (dispatch: Dispatch) => ({
     createUser(data: CreateUserData) {
       dispatch(createUser(data))
+    },
+    onBack() {
+      dispatch({ type: 'WORKFLOW_BACK' })
     },
     clearCreateErrorMessagecircleFilled() {
       dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })

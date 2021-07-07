@@ -19,6 +19,7 @@ import {
   type ThemeProps,
   withTheme
 } from '../../services/ThemeContext'
+import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { FormError } from '../../themed/FormError'
@@ -35,12 +36,14 @@ type StateProps = {
 }
 type DispatchProps = {
   checkUsernameForAvailabilty(string): Promise<void>,
-  validateUsername(username: string): void
+  validateUsername(username: string): void,
+  onBack(): void
 }
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
 const NewAccountUsernameScreenComponent = ({
   theme,
+  onBack,
   branding,
   username,
   usernameErrorMessage,
@@ -65,6 +68,7 @@ const NewAccountUsernameScreenComponent = ({
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
+      <BackButton onPress={onBack} marginRem={[0, 0, 1, 0.5]} />
       <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
       <View style={styles.content}>
         <EdgeText

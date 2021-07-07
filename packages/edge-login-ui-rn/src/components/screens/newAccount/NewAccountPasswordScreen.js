@@ -18,6 +18,7 @@ import {
   type ThemeProps,
   withTheme
 } from '../../services/ThemeContext'
+import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { Fade } from '../../themed/Fade'
@@ -38,6 +39,7 @@ type StateProps = {
 }
 type DispatchProps = {
   onDone(): void,
+  onBack(): void,
   validateConfirmPassword(password: string): void,
   validatePassword(password: string): void
 }
@@ -49,6 +51,7 @@ const NewAccountPasswordScreenComponent = ({
   createPasswordErrorMessage,
   password,
   onDone,
+  onBack,
   validateConfirmPassword,
   validatePassword,
   isPasswordStatusExists,
@@ -161,6 +164,7 @@ const NewAccountPasswordScreenComponent = ({
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
+      <BackButton onPress={onBack} marginRem={[0, 0, 1, 0.5]} />
       <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
       {focusSecond ? (
         <KeyboardAvoidingView
@@ -219,6 +223,9 @@ export const NewAccountPasswordScreen = connect<
   (dispatch: Dispatch) => ({
     onDone() {
       dispatch({ type: 'WORKFLOW_NEXT' })
+    },
+    onBack() {
+      dispatch({ type: 'WORKFLOW_BACK' })
     },
     validateConfirmPassword(password: string) {
       dispatch(validateConfirmPassword(password))
