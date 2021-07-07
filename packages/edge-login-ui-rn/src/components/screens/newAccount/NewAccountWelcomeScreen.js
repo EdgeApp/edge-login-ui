@@ -43,7 +43,7 @@ const NewAccountWelcomeScreenComponent = ({
   const appName = branding.appName || s.strings.app_name_default
 
   return (
-    <ThemedScene>
+    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
       <TouchableOpacity style={styles.exitButton} onPress={onExit}>
         <EdgeText style={styles.exitText}>{s.strings.exit}</EdgeText>
       </TouchableOpacity>
@@ -68,7 +68,7 @@ const NewAccountWelcomeScreenComponent = ({
             </EdgeText>
           </View>
         </View>
-        <Divider />
+        <Divider marginVertical={1.5} />
         <View style={styles.advantage}>
           <Image
             source={WELCOME_SHIELD_KEY}
@@ -99,8 +99,7 @@ const NewAccountWelcomeScreenComponent = ({
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
-    alignItems: 'center',
-    marginLeft: theme.rem(0.5)
+    alignItems: 'center'
   },
   logo: {
     height: theme.rem(2.25),
@@ -123,7 +122,8 @@ const getStyles = cacheStyles((theme: Theme) => ({
   },
   advantage: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginHorizontal: theme.rem(0.5)
   },
   advantageImage: {
     height: theme.rem(2),
