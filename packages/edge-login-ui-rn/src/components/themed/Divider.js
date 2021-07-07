@@ -18,7 +18,7 @@ type Props = {
  * Renders a horizontal dividing line.
  */
 const DividerComponent = ({
-  marginVertical = 1.5,
+  marginVertical = 1,
   theme
 }: Props & ThemeProps) => {
   const styles = getStyles(theme)
