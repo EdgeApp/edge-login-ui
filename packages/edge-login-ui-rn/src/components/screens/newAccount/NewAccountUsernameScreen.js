@@ -64,7 +64,7 @@ const NewAccountUsernameScreenComponent = ({
   }
 
   return (
-    <ThemedScene>
+    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
       <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
       <View style={styles.content}>
         <EdgeText
@@ -109,7 +109,7 @@ const NewAccountUsernameScreenComponent = ({
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
-    marginLeft: theme.rem(0.5)
+    marginHorizontal: theme.rem(0.5)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,

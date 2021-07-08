@@ -35,6 +35,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     marginLeft: theme.rem(0.5)
   },
   text: {
+    marginRight: theme.rem(0.5),
     fontSize: theme.rem(1.25),
     fontFamily: theme.fontFaceBold
   }
