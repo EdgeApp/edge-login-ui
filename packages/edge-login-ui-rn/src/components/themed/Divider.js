@@ -4,6 +4,7 @@ import * as React from 'react'
 import { View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
+import { fixSides, mapSides, sidesToMargin } from '../../util/sides.js'
 import {
   type Theme,
   type ThemeProps,
@@ -11,28 +12,24 @@ import {
 } from '../services/ThemeContext'
 
 type Props = {
-  marginVertical?: number
+  marginRem?: number[] | number
 }
 
 /**
  * Renders a horizontal dividing line.
  */
-const DividerComponent = ({
-  marginVertical = 1,
-  theme
-}: Props & ThemeProps) => {
+const DividerComponent = ({ marginRem, theme }: Props & ThemeProps) => {
   const styles = getStyles(theme)
-
-  return (
-    <View
-      style={[styles.divider, { marginVertical: theme.rem(marginVertical) }]}
-    />
+  const spacings = sidesToMargin(
+    mapSides(fixSides(marginRem || [1, 0], 0), theme.rem)
   )
+
+  return <View style={[styles.divider, spacings]} />
 }
 
 const getStyles = cacheStyles((theme: Theme) => ({
   divider: {
-    width: '100%',
+    alignSelf: 'stretch',
     borderBottomWidth: theme.thinLineWidth,
     borderBottomColor: theme.lineDivider
   }
