@@ -68,7 +68,7 @@ const NewAccountWelcomeScreenComponent = ({
             </EdgeText>
           </View>
         </View>
-        <Divider marginVertical={1.5} />
+        <Divider marginRem={[1.5, 0, 1.5, 0.5]} />
         <View style={styles.advantage}>
           <Image
             source={WELCOME_SHIELD_KEY}
@@ -123,7 +123,8 @@ const getStyles = cacheStyles((theme: Theme) => ({
   advantage: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: theme.rem(0.5)
+    marginLeft: theme.rem(0.5),
+    marginRight: theme.rem(1)
   },
   advantageImage: {
     height: theme.rem(2),

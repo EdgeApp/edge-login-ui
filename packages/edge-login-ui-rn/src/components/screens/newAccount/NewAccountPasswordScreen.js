@@ -169,14 +169,20 @@ const NewAccountPasswordScreenComponent = ({
       {focusSecond ? (
         <KeyboardAvoidingView
           style={[styles.container, styles.overflowHidden]}
-          contentContainerStyle={[styles.container, styles.overflowHidden]}
+          contentContainerStyle={[
+            styles.container,
+            styles.overflowHidden,
+            styles.containerMargins
+          ]}
           behavior="position"
           keyboardVerticalOffset={-150}
         >
           {renderInterior()}
         </KeyboardAvoidingView>
       ) : (
-        <View style={styles.container}>{renderInterior()}</View>
+        <View style={[styles.container, styles.containerMargins]}>
+          {renderInterior()}
+        </View>
       )}
     </ThemedScene>
   )
@@ -188,6 +194,10 @@ const getStyles = cacheStyles((theme: Theme) => ({
   },
   overflowHidden: {
     overflow: 'hidden'
+  },
+  containerMargins: {
+    marginLeft: theme.rem(0.5),
+    marginRight: theme.rem(1)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,
