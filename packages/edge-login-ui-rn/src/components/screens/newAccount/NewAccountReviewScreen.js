@@ -74,7 +74,8 @@ const NewAccountReviewScreenComponent = ({ onDone, theme }: Props) => {
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
-    marginHorizontal: theme.rem(0.5)
+    marginLeft: theme.rem(0.5),
+    marginRight: theme.rem(1)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,
