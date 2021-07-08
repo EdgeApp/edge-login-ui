@@ -168,24 +168,26 @@ const NewAccountPasswordScreenComponent = ({
       <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
       {focusSecond ? (
         <KeyboardAvoidingView
-          style={styles.pageContainer}
-          contentContainerStyle={styles.pageContainer}
+          style={[styles.container, styles.overflowHidden]}
+          contentContainerStyle={[styles.container, styles.overflowHidden]}
           behavior="position"
           keyboardVerticalOffset={-150}
         >
           {renderInterior()}
         </KeyboardAvoidingView>
       ) : (
-        <View style={styles.pageContainer}>{renderInterior()}</View>
+        <View style={styles.container}>{renderInterior()}</View>
       )}
     </ThemedScene>
   )
 }
 
 const getStyles = cacheStyles((theme: Theme) => ({
-  pageContainer: {
-    flex: 1,
-    marginHorizontal: theme.rem(0.5)
+  container: {
+    flex: 1
+  },
+  overflowHidden: {
+    overflow: 'hidden'
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,
