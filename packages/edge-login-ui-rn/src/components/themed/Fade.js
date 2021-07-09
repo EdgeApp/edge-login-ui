@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Animated, {
   interpolate,
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming
@@ -25,9 +26,17 @@ const FadeComponent = ({ visible: propsVisible, hidden, children }: Props) => {
   const animate = (toValue: number) => {
     if (toValue === 0.5) setVisible(true)
 
-    opacity.value = withTiming(toValue, {
-      duration: 500
-    })
+    opacity.value = withTiming(
+      toValue,
+      {
+        duration: 500
+      },
+      (isComplete: boolean) => {
+        if (!isComplete) return
+
+        runOnJS(setVisible)(toValue === 0.5)
+      }
+    )
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
