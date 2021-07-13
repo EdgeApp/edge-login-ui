@@ -102,8 +102,7 @@ const strings = {
   pswd_and_pin_changed: 'Password and PIN successfully changed.',
   change_pwd_body:
     "Don't forget your password or recovery answers. You will permanently lose access to your funds if you lose your password and recovery answers.",
-  pin_desc:
-    'Your PIN is a 4 digit code used to do quick re-logins into your account.',
+  pin_desc: 'Your PIN is a 4 digit code used to quickly log into your account.',
   recovery_successful:
     'Recovery successful! Please change your password and PIN.',
   recover_by_username:
