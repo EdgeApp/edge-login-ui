@@ -79,8 +79,11 @@ const NewAccountWelcomeScreenComponent = ({
             <EdgeText style={styles.advantageTitle}>
               {s.strings.welcome_advantage_two_title}
             </EdgeText>
-            <EdgeText style={styles.advantageDescription} numberOfLines={3}>
+            <EdgeText style={styles.advantageDescription} numberOfLines={1}>
               {sprintf(s.strings.welcome_advantage_two_description, appName)}
+            </EdgeText>
+            <EdgeText style={styles.advantageDescription} numberOfLines={2}>
+              {sprintf(s.strings.welcome_advantage_three_description, appName)}
             </EdgeText>
           </View>
         </View>
