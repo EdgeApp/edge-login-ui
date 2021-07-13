@@ -67,6 +67,7 @@ export type Theme = {|
   // Lines
   lineDivider: string,
   titleLineDivider: string,
+  reallyThinLineWidth: number,
   thinLineWidth: number,
   mediumLineWidth: number,
 
