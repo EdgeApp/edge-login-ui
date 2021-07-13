@@ -17,6 +17,7 @@ import {
   type ThemeProps,
   withTheme
 } from '../../services/ThemeContext'
+import { BackButton } from '../../themed/BackButton'
 import { Checkbox } from '../../themed/Checkbox'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
@@ -91,6 +92,7 @@ const TermsAndConditionsScreenComponent = ({
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
+      <BackButton marginRem={[0, 0, 1, 0.5]} disabled />
       <SimpleSceneHeader>{s.strings.account_confirmation}</SimpleSceneHeader>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.content}>
         <EdgeText

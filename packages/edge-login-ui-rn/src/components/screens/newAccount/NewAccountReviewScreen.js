@@ -15,6 +15,7 @@ import {
   withTheme
 } from '../../services/ThemeContext'
 import { AccountInfo } from '../../themed/AccountInfo'
+import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
@@ -41,6 +42,7 @@ const NewAccountReviewScreenComponent = ({ onDone, theme }: Props) => {
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
+      <BackButton marginRem={[0, 0, 1, 0.5]} disabled />
       <SimpleSceneHeader>{s.strings.account_confirmation}</SimpleSceneHeader>
       <View style={styles.content}>
         <EdgeText
