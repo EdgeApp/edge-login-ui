@@ -52,23 +52,11 @@ const TermsAndConditionsScreenComponent = ({
   ])
 
   const { appName = s.strings.app_name_default } = branding
-  const terms: Array<{ title: string, numberOfLines: number }> = [
-    {
-      title: sprintf(s.strings.terms_one, appName),
-      numberOfLines: 2
-    },
-    {
-      title: s.strings.terms_two,
-      numberOfLines: 3
-    },
-    {
-      title: sprintf(s.strings.terms_three, appName),
-      numberOfLines: 3
-    },
-    {
-      title: sprintf(s.strings.terms_four, appName),
-      numberOfLines: 6
-    }
+  const terms: string[] = [
+    sprintf(s.strings.terms_one, appName),
+    s.strings.terms_two,
+    sprintf(s.strings.terms_three, appName),
+    sprintf(s.strings.terms_four, appName)
   ]
 
   if (!termValues.includes(false)) {
@@ -99,16 +87,15 @@ const TermsAndConditionsScreenComponent = ({
           style={styles.subtitle}
         >{`${s.strings.review}: ${s.strings.read_understod_2}`}</EdgeText>
         <View style={styles.terms}>
-          {terms.map(({ title, numberOfLines }, index) => (
+          {terms.map((term, index) => (
             <Checkbox
-              key={title}
+              key={index}
               textStyle={styles.term}
               value={termValues[index]}
               onChange={(value: boolean) => handleStatusChange(index, value)}
-              numberOfLines={numberOfLines}
               marginRem={[0, 0, 1.33, 0]}
             >
-              {title}
+              {term}
             </Checkbox>
           ))}
         </View>
@@ -150,17 +137,17 @@ const getStyles = cacheStyles((theme: Theme) => ({
   },
   terms: {},
   term: {
-    fontSize: theme.rem(0.75)
+    fontSize: theme.rem(0.875)
   },
   agreeText: {
-    width: '50%',
+    width: '60%',
     alignSelf: 'center',
     marginTop: theme.rem(1),
     marginHorizontal: theme.rem(2),
-    fontSize: theme.rem(0.75)
+    fontSize: theme.rem(0.875)
   },
   agreeTextLink: {
-    fontSize: theme.rem(0.75),
+    fontSize: theme.rem(0.875),
     color: theme.linkText
   },
   actions: {
