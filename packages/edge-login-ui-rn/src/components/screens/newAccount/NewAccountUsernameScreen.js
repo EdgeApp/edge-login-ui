@@ -83,9 +83,14 @@ const NewAccountUsernameScreenComponent = ({
           value={username}
           isClearable
           showSearchIcon={false}
-          marginRem={[0, 0.75, 1]}
+          marginRem={[0, 0.75]}
         />
-        <FormError marginRem={[1, 0]}>{usernameErrorMessage}</FormError>
+        <FormError
+          marginRem={[1, 0.75]}
+          invisible={usernameErrorMessage == null}
+        >
+          {usernameErrorMessage}
+        </FormError>
         <View style={styles.actions}>
           <PromiseButton
             label={s.strings.next_label}
@@ -118,7 +123,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   actions: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: theme.rem(5)
+    marginTop: theme.rem(0)
   }
 }))
 

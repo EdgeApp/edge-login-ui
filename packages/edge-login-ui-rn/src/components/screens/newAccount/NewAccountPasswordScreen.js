@@ -127,7 +127,12 @@ const NewAccountPasswordScreenComponent = ({
           showSearchIcon={false}
           marginRem={[0, 0.75, 1.25]}
         />
-        <FormError marginRem={[1.25, 0, 0]}>
+        <FormError
+          marginRem={[0, 0.75]}
+          invisible={
+            !(confirmPasswordErrorMessage || createPasswordErrorMessage)
+          }
+        >
           {confirmPasswordErrorMessage || createPasswordErrorMessage}
         </FormError>
         <View style={styles.actions}>
@@ -201,7 +206,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   actions: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: theme.rem(5)
+    marginTop: theme.rem(1)
   }
 }))
 
