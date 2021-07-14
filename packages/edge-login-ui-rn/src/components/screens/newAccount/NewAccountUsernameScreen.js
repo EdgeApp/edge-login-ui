@@ -12,7 +12,6 @@ import {
 import s from '../../../common/locales/strings.js'
 import { type Branding } from '../../../types/Branding.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
-import { useState } from '../../../util/hooks'
 import { connect } from '../../services/ReduxStore.js'
 import {
   type Theme,
@@ -23,8 +22,8 @@ import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { FormError } from '../../themed/FormError'
+import { PromiseButton } from '../../themed/PromiseButton.js'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
-import { SecondaryButton } from '../../themed/ThemedButtons'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 type OwnProps = {
@@ -51,19 +50,12 @@ const NewAccountUsernameScreenComponent = ({
   validateUsername
 }: Props) => {
   const styles = getStyles(theme)
-  const [
-    isCheckAvailabiltyPending,
-    setCheckAvailabiltyPending
-  ] = useState<boolean>(false)
 
   const handleNext = async () => {
     if (usernameErrorMessage || !username) {
       return
     }
-
-    setCheckAvailabiltyPending(true)
     await checkUsernameForAvailabilty(username)
-    setCheckAvailabiltyPending(false)
   }
 
   return (
@@ -95,12 +87,10 @@ const NewAccountUsernameScreenComponent = ({
         />
         <FormError marginRem={[1, 0]}>{usernameErrorMessage}</FormError>
         <View style={styles.actions}>
-          <SecondaryButton
+          <PromiseButton
             label={s.strings.next_label}
-            onPress={() => {
-              handleNext()
-            }}
-            spinner={isCheckAvailabiltyPending}
+            onPress={handleNext}
+            type="secondary"
           />
         </View>
       </View>
