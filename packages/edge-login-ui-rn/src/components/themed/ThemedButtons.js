@@ -12,13 +12,8 @@ import {
 } from '../../util/sides.js'
 import { type Theme, useTheme } from '../services/ThemeContext.js'
 
-export const BUTTON_TYPE = {
-  PRIMARY: 'primary',
-  SECONDARY: 'secondary'
-}
-
 export type AlertModalButtonType = {
-  type: typeof BUTTON_TYPE.PRIMARY | typeof BUTTON_TYPE.SECONDARY
+  type: 'primary' | 'secondary'
 }
 
 type Props = {
@@ -37,24 +32,11 @@ type Props = {
 
   // The gap inside the button. Takes 0-4 numbers (top, right, bottom, left),
   // using the same logic as the web `padding` property. Defaults to 0.5.
-  paddingRem?: number[] | number,
-
-  straight?: boolean,
-
-  bold?: boolean
+  paddingRem?: number[] | number
 }
 
 export function PrimaryButton(props: Props) {
-  const {
-    children,
-    label,
-    marginRem,
-    onPress,
-    paddingRem,
-    spinner,
-    straight,
-    bold = false
-  } = props
+  const { children, label, marginRem, onPress, paddingRem, spinner } = props
   const theme = useTheme()
   const styles = getStyles(theme)
 
@@ -64,18 +46,10 @@ export function PrimaryButton(props: Props) {
   }
   return (
     <TouchableOpacity
-      style={[
-        styles.primaryButton,
-        spacingStyles,
-        straight ? styles.straight : null
-      ]}
+      style={[styles.primaryButton, spacingStyles]}
       onPress={onPress}
     >
-      {label != null ? (
-        <Text style={[styles.primaryText, bold && styles.boldText]}>
-          {label}
-        </Text>
-      ) : null}
+      {label != null ? <Text style={styles.primaryText}>{label}</Text> : null}
       {spinner === true ? (
         <ActivityIndicator
           color={theme.primaryButtonText}
@@ -88,37 +62,20 @@ export function PrimaryButton(props: Props) {
 }
 
 export function SecondaryButton(props: Props) {
-  const {
-    children,
-    label,
-    marginRem,
-    onPress,
-    paddingRem = [0.7, 2.2],
-    spinner,
-    straight,
-    bold = false
-  } = props
+  const { children, label, marginRem, onPress, paddingRem, spinner } = props
   const theme = useTheme()
   const styles = getStyles(theme)
 
   const spacingStyles = {
     ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
-    ...sidesToPadding(mapSides(fixSides(paddingRem, 0), theme.rem))
+    ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
   }
   return (
     <TouchableOpacity
-      style={[
-        styles.secondaryButton,
-        spacingStyles,
-        straight ? styles.straight : null
-      ]}
+      style={[styles.secondaryButton, spacingStyles]}
       onPress={onPress}
     >
-      {label != null ? (
-        <Text style={[styles.secondaryText, bold && styles.boldText]}>
-          {label}
-        </Text>
-      ) : null}
+      {label != null ? <Text style={styles.secondaryText}>{label}</Text> : null}
       {spinner === true ? (
         <ActivityIndicator
           color={theme.secondaryButtonText}
@@ -138,9 +95,7 @@ export function AlertModalButton(props: Props & AlertModalButtonType) {
     onPress,
     paddingRem,
     spinner,
-    type,
-    straight,
-    bold = false
+    type
   } = props
   const theme = useTheme()
   const styles = getStyles(theme)
@@ -162,13 +117,8 @@ export function AlertModalButton(props: Props & AlertModalButtonType) {
     ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
   }
   return (
-    <TouchableOpacity
-      style={[buttonStyle, spacingStyles, straight ? styles.straight : null]}
-      onPress={onPress}
-    >
-      {label != null ? (
-        <Text style={[textStyle, bold && styles.boldText]}>{label}</Text>
-      ) : null}
+    <TouchableOpacity style={[buttonStyle, spacingStyles]} onPress={onPress}>
+      {label != null ? <Text style={textStyle}>{label}</Text> : null}
       {spinner === true ? (
         <ActivityIndicator color={spinnerColor} style={styles.spinner} />
       ) : null}
@@ -180,15 +130,16 @@ export function AlertModalButton(props: Props & AlertModalButtonType) {
 const getStyles = cacheStyles((theme: Theme) => {
   const commonButton = {
     alignItems: 'center',
-    borderRadius: theme.rem(1.5),
+    borderRadius: theme.rem(0.25),
     borderWidth: theme.rem(0.1),
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    minWidth: theme.rem(9)
   }
   const commonText = {
     fontFamily: theme.fontFaceDefault,
-    fontSize: theme.rem(0.9),
-    lineHeight: theme.rem(1),
+    fontSize: theme.rem(1),
+    lineHeight: theme.rem(2),
     marginHorizontal: theme.rem(0.5)
   }
 
@@ -210,7 +161,8 @@ const getStyles = cacheStyles((theme: Theme) => {
     },
     secondaryText: {
       ...commonText,
-      color: theme.secondaryButtonText
+      color: theme.secondaryButtonText,
+      fontFamily: theme.fontFaceBold
     },
 
     alertModalPrimaryButton: {
@@ -233,12 +185,6 @@ const getStyles = cacheStyles((theme: Theme) => {
       color: theme.alertModalTertiaryButtonText
     },
 
-    spinner: { height: theme.rem(2) },
-    straight: {
-      borderRadius: theme.rem(0.25)
-    },
-    boldText: {
-      fontFamily: theme.fontFaceBold
-    }
+    spinner: { height: theme.rem(2) }
   }
 })

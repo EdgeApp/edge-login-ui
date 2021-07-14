@@ -101,8 +101,6 @@ const NewAccountUsernameScreenComponent = ({
               handleNext()
             }}
             spinner={isCheckAvailabiltyPending}
-            straight
-            bold
           />
         </View>
       </View>

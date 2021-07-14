@@ -63,8 +63,6 @@ const NewAccountReviewScreenComponent = ({ onDone, theme }: Props) => {
             <SecondaryButton
               label={s.strings.next_label}
               onPress={handleNext}
-              straight
-              bold
             />
           </Fade>
         </View>

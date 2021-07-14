@@ -110,8 +110,6 @@ const NewAccountPinScreenComponent = ({
               label={s.strings.next_label}
               onPress={handleNext}
               spinner={isProcessing}
-              straight
-              bold
             />
           </Fade>
         </View>
