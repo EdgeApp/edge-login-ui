@@ -1,5 +1,10 @@
 {
+  "extends": [
+    "plugin:react-native/all"
+  ],
   "rules": {
+    "react-native/no-inline-styles": "off",
+    "react-native/no-raw-text": ["error", { "skip": ["EdgeText"] }],
     "flowtype/require-valid-file-annotation": [2, "always"]
   }
 }

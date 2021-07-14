@@ -22,7 +22,7 @@ class HeaderBackButton extends React.Component<Props> {
           <Entypo name="chevron-left" style={styles.backIconStyle} />
         )}
         {withArrow && !isIos ? null : (
-          <Text testID={this.props.testID} style={[styles.sideText]}>
+          <Text testID={this.props.testID} style={styles.sideText}>
             {this.props.label}
           </Text>
         )}
