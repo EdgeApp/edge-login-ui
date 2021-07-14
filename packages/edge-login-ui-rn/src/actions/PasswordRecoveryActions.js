@@ -1,11 +1,12 @@
 // @flow
 
-import { type EdgeAccount, type EdgeRecoveryQuestionChoice } from 'edge-core-js'
+import { type EdgeAccount } from 'edge-core-js'
 import Mailer from 'react-native-mail'
 import Share from 'react-native-share'
 
 import s from '../common/locales/strings.js'
 import { showError } from '../components/services/AirshipInstance.js'
+import { questionsList } from '../constants/recoveryQuestions'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
 
 /**
@@ -17,8 +18,6 @@ export const initializeChangeRecovery = (account: EdgeAccount) => async (
   imports: Imports
 ) => {
   const { context } = imports
-
-  const questionsList: EdgeRecoveryQuestionChoice[] = await context.listRecoveryQuestionChoices()
 
   // Get the user's questions:
   let userQuestions = []

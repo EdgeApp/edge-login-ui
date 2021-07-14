@@ -254,7 +254,31 @@ const strings = {
     'Please enable notifications and background app refresh for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
   notifications_permissions_android:
     'Please enable notifications for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
-  change_recovery_same_question: 'Cannot use the same 2 recovery questions'
+  change_recovery_question: 'Cannot use the same 2 recovery questions',
+  change_recovery_question1:
+    'What is the anniversary date with your first spouse?',
+  change_recovery_question2:
+    'What is the birthdate of the maid/matron of honor at your wedding?',
+  change_recovery_question3:
+    'What is the birthdate of your childhood best friend?',
+  change_recovery_question4:
+    'What was your favorite brand of clothing in high school?',
+  change_recovery_question5:
+    'What is the birthdate of your favorite grand parent?',
+  change_recovery_question6:
+    'What is the birthdate of your favorite niece or nephew?',
+  change_recovery_question7:
+    'What was the first address you remember living in?',
+  change_recovery_question8: 'What was your address in college?',
+  change_recovery_question9:
+    "What was your maternal grandfather's first and last name?",
+  change_recovery_question10:
+    "What was your maternal grandmother's first and last name?",
+  change_recovery_question11:
+    'What is the street address of the first home you remember?',
+  change_recovery_question12:
+    'Name the make, model, and year of your dream car?',
+  change_recovery_question13: 'Who is your childhood sports hero?'
 }
 
 module.exports = strings
