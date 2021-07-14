@@ -113,7 +113,7 @@ const NewAccountPasswordScreenComponent = ({
           onSubmitEditing={handleFocusSwitch}
           isClearable
           showSearchIcon={false}
-          marginRem={[0, 0, 1.25]}
+          marginRem={[0, 0.75, 1.25]}
         />
         <EdgeTextFieldOutlined
           value={confirmPassword}
@@ -125,7 +125,7 @@ const NewAccountPasswordScreenComponent = ({
           onSubmitEditing={handleNext}
           isClearable
           showSearchIcon={false}
-          marginRem={0}
+          marginRem={[0, 0.75, 1.25]}
         />
         <FormError marginRem={[1.25, 0, 0]}>
           {confirmPasswordErrorMessage || createPasswordErrorMessage}

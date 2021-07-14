@@ -83,7 +83,7 @@ const NewAccountUsernameScreenComponent = ({
           value={username}
           isClearable
           showSearchIcon={false}
-          marginRem={0}
+          marginRem={[0, 0.75, 1]}
         />
         <FormError marginRem={[1, 0]}>{usernameErrorMessage}</FormError>
         <View style={styles.actions}>
