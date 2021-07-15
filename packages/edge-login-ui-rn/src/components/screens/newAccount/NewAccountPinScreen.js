@@ -11,7 +11,6 @@ import {
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { logEvent } from '../../../util/analytics.js'
-import { useState } from '../../../util/hooks'
 import { connect } from '../../services/ReduxStore.js'
 import {
   type Theme,
@@ -23,7 +22,7 @@ import { DigitInput, MAX_PIN_LENGTH } from '../../themed/DigitInput'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
-import { SecondaryButton } from '../../themed/ThemedButtons'
+import { SecondaryButton } from '../../themed/ThemedButtons.js'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 type OwnProps = {}
@@ -55,7 +54,6 @@ const NewAccountPinScreenComponent = ({
   clearCreateErrorMessagecircleFilled,
   theme
 }: Props) => {
-  const [isProcessing, setIsProcessing] = useState(false)
   const styles = getStyles(theme)
 
   if (createErrorMessage) {
@@ -68,12 +66,9 @@ const NewAccountPinScreenComponent = ({
   }
 
   const handleNext = () => {
-    setIsProcessing(true)
-
     // validation.
     // is there no error message,
     if (pin.length !== MAX_PIN_LENGTH || pinErrorMessage) {
-      setIsProcessing(false)
       logEvent(`Signup_PIN_Invalid`)
       return
     }
@@ -109,9 +104,6 @@ const NewAccountPinScreenComponent = ({
             <SecondaryButton
               label={s.strings.next_label}
               onPress={handleNext}
-              spinner={isProcessing}
-              straight
-              bold
             />
           </Fade>
         </View>

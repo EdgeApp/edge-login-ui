@@ -13,8 +13,8 @@ type Props<T> = {|
   // The button will show a spinner as long as this is pending.
   // It will not be possible to press the button again while this is the case.
   onPress: () => Promise<T>,
-  onResolve: (result: T) => void,
-  onReject: (error: mixed) => void
+  onResolve?: (result: T) => void,
+  onReject?: (error: mixed) => void
 |}
 type State = {|
   spinning: boolean
@@ -33,11 +33,11 @@ export class PromiseButton<T> extends React.Component<Props<T>, State> {
     onPress().then(
       result => {
         this.setState({ spinning: false })
-        onResolve(result)
+        if (onResolve != null) onResolve(result)
       },
       error => {
         this.setState({ spinning: false })
-        onReject(error)
+        if (onReject != null) onReject(error)
       }
     )
   }

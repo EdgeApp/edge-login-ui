@@ -126,8 +126,6 @@ const TermsAndConditionsScreenComponent = ({
               label={s.strings.confirm_finish}
               onPress={handleNextPress}
               paddingRem={0.7}
-              straight
-              bold
             />
           </Fade>
         </View>

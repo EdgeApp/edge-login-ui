@@ -85,11 +85,7 @@ const NewAccountWelcomeScreenComponent = ({
           </View>
         </View>
         <View style={styles.actions}>
-          <SecondaryButton
-            label={s.strings.get_started}
-            onPress={onDone}
-            straight
-          />
+          <SecondaryButton label={s.strings.get_started} onPress={onDone} />
         </View>
       </View>
     </ThemedScene>

@@ -59,7 +59,6 @@ const NewAccountPasswordScreenComponent = ({
   theme
 }: Props) => {
   const styles = getStyles(theme)
-  const [isProcessing, setIsProcessing] = useState<boolean>(false)
   const [focusFirst, setFocusFirst] = useState<boolean>(true)
   const [focusSecond, setFocusSecond] = useState<boolean>(false)
 
@@ -69,25 +68,17 @@ const NewAccountPasswordScreenComponent = ({
   }
 
   const handleNext = () => {
-    setIsProcessing(true)
-
-    if (!isPasswordStatusExists) {
-      // TODO Skip component
-      setIsProcessing(false)
-      return
-    }
+    if (!isPasswordStatusExists) return
 
     if (
       confirmPasswordErrorMessage !== '' ||
       createPasswordErrorMessage !== ''
     ) {
-      setIsProcessing(false)
       logEvent('Signup_Password_Invalid')
       return
     }
 
     if (password && password !== confirmPassword) {
-      setIsProcessing(false)
       validateConfirmPassword(confirmPassword)
       logEvent('Signup_Password_Invalid')
       return
@@ -152,9 +143,6 @@ const NewAccountPasswordScreenComponent = ({
             <SecondaryButton
               label={s.strings.next_label}
               onPress={handleNext}
-              spinner={isProcessing}
-              straight
-              bold
             />
           </Fade>
         </View>
