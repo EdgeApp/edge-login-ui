@@ -7,10 +7,11 @@ import { sprintf } from 'sprintf-js'
 
 import { agreeToConditions } from '../../../actions/CreateAccountActions'
 import s from '../../../common/locales/strings'
+import { useScrollToEnd } from '../../../hooks/useScrollToEnd.js'
 import { type Branding } from '../../../types/Branding'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
-import { useRef, useState } from '../../../util/hooks'
+import { useState } from '../../../util/hooks'
 import { connect } from '../../services/ReduxStore'
 import {
   type Theme,
@@ -43,13 +44,14 @@ const TermsAndConditionsScreenComponent = ({
   theme
 }: Props) => {
   const styles = getStyles(theme)
-  const scrollViewRef = useRef<ScrollView | null>(null)
   const [termValues, setTermValues] = useState<boolean[]>([
     false,
     false,
     false,
     false
   ])
+  const showNext = !termValues.includes(false)
+  const scrollViewRef = useScrollToEnd(showNext)
 
   const { appName = s.strings.app_name_default } = branding
   const terms: string[] = [
@@ -58,14 +60,6 @@ const TermsAndConditionsScreenComponent = ({
     sprintf(s.strings.terms_three, appName),
     sprintf(s.strings.terms_four, appName)
   ]
-
-  if (!termValues.includes(false)) {
-    setTimeout(() => {
-      if (scrollViewRef.current) {
-        scrollViewRef.current.scrollToEnd({ animated: true })
-      }
-    }, 50)
-  }
 
   const handleStatusChange = (index: number, value: boolean) => {
     const newTermValues = [...termValues]
@@ -110,7 +104,7 @@ const TermsAndConditionsScreenComponent = ({
           </EdgeText>
         </EdgeText>
         <View style={styles.actions}>
-          <Fade visible={!termValues.includes(false)}>
+          <Fade visible={showNext}>
             <SecondaryButton
               label={s.strings.confirm_finish}
               onPress={handleNextPress}
@@ -125,7 +119,6 @@ const TermsAndConditionsScreenComponent = ({
 
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
-    flex: 1,
     marginLeft: theme.rem(0.5),
     marginRight: theme.rem(1)
   },
@@ -153,7 +146,8 @@ const getStyles = cacheStyles((theme: Theme) => ({
   actions: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: theme.rem(2.75)
+    marginTop: theme.rem(2.75),
+    minHeight: theme.rem(3)
   }
 }))
 

@@ -1,10 +1,11 @@
 // @flow
 
 import * as React from 'react'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
 import s from '../../../common/locales/strings'
+import { useScrollToEnd } from '../../../hooks/useScrollToEnd.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { useState } from '../../../util/hooks'
@@ -32,8 +33,10 @@ type DispatchProps = {
 type Props = OwnProps & DispatchProps & ThemeProps
 
 const NewAccountReviewScreenComponent = ({ onDone, theme }: Props) => {
-  const [showNext, setShowNext] = useState(false)
   const styles = getStyles(theme)
+
+  const [showNext, setShowNext] = useState(false)
+  const scrollViewRef = useScrollToEnd(showNext)
 
   const handleNext = () => {
     logEvent(`Signup_Review_Next`)
@@ -44,7 +47,7 @@ const NewAccountReviewScreenComponent = ({ onDone, theme }: Props) => {
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
       <BackButton marginRem={[0, 0, 1, 0.5]} disabled />
       <SimpleSceneHeader>{s.strings.account_confirmation}</SimpleSceneHeader>
-      <View style={styles.content}>
+      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.content}>
         <EdgeText
           style={styles.subtitle}
         >{`${s.strings.review}: ${s.strings.write_it_down}`}</EdgeText>
@@ -68,14 +71,13 @@ const NewAccountReviewScreenComponent = ({ onDone, theme }: Props) => {
             />
           </Fade>
         </View>
-      </View>
+      </ScrollView>
     </ThemedScene>
   )
 }
 
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
-    flex: 1,
     marginLeft: theme.rem(0.5),
     marginRight: theme.rem(1)
   },
@@ -93,7 +95,8 @@ const getStyles = cacheStyles((theme: Theme) => ({
   actions: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: theme.rem(5)
+    marginTop: theme.rem(5),
+    minHeight: theme.rem(3)
   }
 }))
 
