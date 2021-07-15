@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
+import { type TextStyle, TouchableWithoutFeedback, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 
@@ -14,14 +14,14 @@ import {
 import { EdgeText } from './EdgeText'
 
 type Props = {
-  textStyle: StyleSheet.Styles,
+  textStyle: TextStyle,
   children: React.Node,
   value: boolean,
-  ellipsizeMode?: string,
+  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
   numberOfLines?: number,
   disabled?: boolean,
   marginRem?: number[] | number,
-  onChange(boolean): void
+  onChange: (value: boolean) => void
 }
 
 const CheckboxComponent = ({
