@@ -1,5 +1,31 @@
 # edge-login-ui
 
+## 0.9.10 (2021-07-14)
+
+- rn: Put working auto scroll on the account creation screens
+- rn: Fix Next button size and spacing
+- rn: Fix terms confirm button location
+- rn: Fix text input box padding
+- rn: Fix font size on terms and conditions screen
+- rn: Fix account info border widths
+- rn: Update welcome screen text
+- rn: Update PIN description text
+- rn: Change back button icon
+- rn: Fix inconsistent horizontal margins in New Account flow screens
+- rn: Add the ability to set all sides margins in Divider component
+- rn: Add "overflow: 'hidden'" to the styles of KeyboardAvoidingView and inner container
+- rn: Fix spinner bugs in sign up buttons
+- rn: Restore themed buttons to sanity
+- rn: Add eslint-plugin-react-native to the project
+- rn: Fix ability of Fade component to hide children after animation
+- rn: Add Back button to New Account screens
+- rn: Create themed Back button component
+- rn: Change small outlined field padding and font size
+- rn: Change containers paddings/margins in all New Account flow screens to match the current design11:59
+- rn: Add additional margin for title SimpleSceneHeader component to prevent visual glitches
+- rn: Change Divider component marginVertical prop default value
+- rn: Upgrade to react-native-patina v0.1.4
+
 ## 0.9.9 (2021-07-05)
 
 - rn: New themed Create Account flow
