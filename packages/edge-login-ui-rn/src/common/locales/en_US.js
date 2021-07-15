@@ -102,8 +102,7 @@ const strings = {
   pswd_and_pin_changed: 'Password and PIN successfully changed.',
   change_pwd_body:
     "Don't forget your password or recovery answers. You will permanently lose access to your funds if you lose your password and recovery answers.",
-  pin_desc:
-    'Your PIN is a 4 digit code used to do quick re-logins into your account.',
+  pin_desc: 'Your PIN is a 4 digit code used to quickly log into your account.',
   recovery_successful:
     'Recovery successful! Please change your password and PIN.',
   recover_by_username:
@@ -141,10 +140,12 @@ const strings = {
   welcome: 'Welcome to %s!',
   welcome_advantage_one_title: 'Getting started with %s is easy',
   welcome_advantage_one_description:
-    'You’ll choose a username and password, which we’ll use to encrypt your account.',
+    'Choose a username and password which we’ll use to encrypt your account.',
   welcome_advantage_two_title: 'Your security is key',
   welcome_advantage_two_description:
-    'Not even %s has access to your information, so you have full complete control over your digital assets.',
+    'Not even %s has access to your information.',
+  welcome_advantage_three_description:
+    'You have complete control over your digital assets.',
   start_username: 'Let’s get started with choosing a username',
   get_started: 'Get Started', // button title, not a complete sentence so capitalize first letters
   encrypting: 'Doing the encryption',

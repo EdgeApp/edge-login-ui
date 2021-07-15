@@ -60,7 +60,7 @@ const NewAccountUsernameScreenComponent = ({
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, 0.5]} />
+      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
       <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
       <View style={styles.content}>
         <EdgeText
@@ -83,9 +83,14 @@ const NewAccountUsernameScreenComponent = ({
           value={username}
           isClearable
           showSearchIcon={false}
-          marginRem={0}
+          marginRem={[0, 0.75]}
         />
-        <FormError marginRem={[1, 0]}>{usernameErrorMessage}</FormError>
+        <FormError
+          marginRem={[1, 0.75]}
+          invisible={usernameErrorMessage == null}
+        >
+          {usernameErrorMessage}
+        </FormError>
         <View style={styles.actions}>
           <PromiseButton
             label={s.strings.next_label}
@@ -101,7 +106,8 @@ const NewAccountUsernameScreenComponent = ({
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
-    marginHorizontal: theme.rem(0.5)
+    marginLeft: theme.rem(0.5),
+    marginRight: theme.rem(1)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,
@@ -117,7 +123,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   actions: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: theme.rem(5)
+    marginTop: theme.rem(0)
   }
 }))
 

@@ -19,7 +19,8 @@ type OwnProps = {
   isWarning?: Boolean,
   marginRem?: number[] | number,
   numberOfLines?: number,
-  titleNumberOfLines?: number
+  titleNumberOfLines?: number,
+  invisible?: boolean
 }
 
 const FormErrorComponent = ({
@@ -29,18 +30,22 @@ const FormErrorComponent = ({
   title,
   numberOfLines,
   titleNumberOfLines,
-  isWarning
+  isWarning,
+  invisible = false
 }: OwnProps & ThemeProps) => {
   const styles = getStyles(theme)
   const spacings = sidesToMargin(mapSides(fixSides(marginRem, 0.5), theme.rem))
   const definitiveTitle = title || children
   const description = definitiveTitle && !title ? '' : children
 
-  if (!definitiveTitle) return null
-
   return (
     <View
-      style={[styles.container, spacings, isWarning && styles.warningContainer]}
+      style={[
+        styles.container,
+        spacings,
+        isWarning && styles.warningContainer,
+        { opacity: invisible ? 0 : 1 }
+      ]}
     >
       <View style={styles.top}>
         <SimpleLineIcons

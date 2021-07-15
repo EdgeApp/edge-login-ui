@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import { Alert, View } from 'react-native'
+import { Alert, ScrollView, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
 import {
@@ -9,6 +9,7 @@ import {
   createUser
 } from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
+import { useScrollToEnd } from '../../../hooks/useScrollToEnd.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { logEvent } from '../../../util/analytics.js'
 import { connect } from '../../services/ReduxStore.js'
@@ -56,6 +57,10 @@ const NewAccountPinScreenComponent = ({
 }: Props) => {
   const styles = getStyles(theme)
 
+  const showNext =
+    pin.length === MAX_PIN_LENGTH && !pinErrorMessage && !createErrorMessage
+  const scrollViewRef = useScrollToEnd(showNext)
+
   if (createErrorMessage) {
     Alert.alert(
       s.strings.create_account_error_title,
@@ -83,9 +88,9 @@ const NewAccountPinScreenComponent = ({
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, 0.5]} />
+      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
       <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
-      <View style={styles.content}>
+      <ScrollView ref={scrollViewRef} style={styles.content}>
         <EdgeText
           style={styles.subtitle}
         >{`${s.strings.step_three}: ${s.strings.set_four_digit_pin}`}</EdgeText>
@@ -94,20 +99,14 @@ const NewAccountPinScreenComponent = ({
         </EdgeText>
         <DigitInput />
         <View style={styles.actions}>
-          <Fade
-            visible={
-              pin.length === MAX_PIN_LENGTH &&
-              !pinErrorMessage &&
-              !createErrorMessage
-            }
-          >
+          <Fade visible={showNext}>
             <SecondaryButton
               label={s.strings.next_label}
               onPress={handleNext}
             />
           </Fade>
         </View>
-      </View>
+      </ScrollView>
     </ThemedScene>
   )
 }
@@ -115,7 +114,8 @@ const NewAccountPinScreenComponent = ({
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
-    marginHorizontal: theme.rem(0.5)
+    marginLeft: theme.rem(0.5),
+    marginRight: theme.rem(1)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,
@@ -131,7 +131,8 @@ const getStyles = cacheStyles((theme: Theme) => ({
   actions: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: theme.rem(5)
+    marginTop: theme.rem(5),
+    minHeight: theme.rem(3 + 15) // 15 is a hack to avoid the keyboard
   }
 }))
 

@@ -113,7 +113,7 @@ const NewAccountPasswordScreenComponent = ({
           onSubmitEditing={handleFocusSwitch}
           isClearable
           showSearchIcon={false}
-          marginRem={[0, 0, 1.25]}
+          marginRem={[0, 0.75, 1.25]}
         />
         <EdgeTextFieldOutlined
           value={confirmPassword}
@@ -125,9 +125,14 @@ const NewAccountPasswordScreenComponent = ({
           onSubmitEditing={handleNext}
           isClearable
           showSearchIcon={false}
-          marginRem={0}
+          marginRem={[0, 0.75, 1.25]}
         />
-        <FormError marginRem={[1.25, 0, 0]}>
+        <FormError
+          marginRem={[0, 0.75]}
+          invisible={
+            !(confirmPasswordErrorMessage || createPasswordErrorMessage)
+          }
+        >
           {confirmPasswordErrorMessage || createPasswordErrorMessage}
         </FormError>
         <View style={styles.actions}>
@@ -152,28 +157,40 @@ const NewAccountPasswordScreenComponent = ({
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, 0.5]} />
+      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
       <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
       {focusSecond ? (
         <KeyboardAvoidingView
-          style={styles.pageContainer}
-          contentContainerStyle={styles.pageContainer}
+          style={[styles.container, styles.overflowHidden]}
+          contentContainerStyle={[
+            styles.container,
+            styles.overflowHidden,
+            styles.containerMargins
+          ]}
           behavior="position"
           keyboardVerticalOffset={-150}
         >
           {renderInterior()}
         </KeyboardAvoidingView>
       ) : (
-        <View style={styles.pageContainer}>{renderInterior()}</View>
+        <View style={[styles.container, styles.containerMargins]}>
+          {renderInterior()}
+        </View>
       )}
     </ThemedScene>
   )
 }
 
 const getStyles = cacheStyles((theme: Theme) => ({
-  pageContainer: {
-    flex: 1,
-    marginHorizontal: theme.rem(0.5)
+  container: {
+    flex: 1
+  },
+  overflowHidden: {
+    overflow: 'hidden'
+  },
+  containerMargins: {
+    marginLeft: theme.rem(0.5),
+    marginRight: theme.rem(1)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,
@@ -189,7 +206,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   actions: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: theme.rem(5)
+    marginTop: theme.rem(1)
   }
 }))
 

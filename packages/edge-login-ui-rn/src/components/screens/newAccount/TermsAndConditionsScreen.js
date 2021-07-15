@@ -7,16 +7,18 @@ import { sprintf } from 'sprintf-js'
 
 import { agreeToConditions } from '../../../actions/CreateAccountActions'
 import s from '../../../common/locales/strings'
+import { useScrollToEnd } from '../../../hooks/useScrollToEnd.js'
 import { type Branding } from '../../../types/Branding'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
-import { useRef, useState } from '../../../util/hooks'
+import { useState } from '../../../util/hooks'
 import { connect } from '../../services/ReduxStore'
 import {
   type Theme,
   type ThemeProps,
   withTheme
 } from '../../services/ThemeContext'
+import { BackButton } from '../../themed/BackButton'
 import { Checkbox } from '../../themed/Checkbox'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
@@ -42,41 +44,22 @@ const TermsAndConditionsScreenComponent = ({
   theme
 }: Props) => {
   const styles = getStyles(theme)
-  const scrollViewRef = useRef<ScrollView | null>(null)
   const [termValues, setTermValues] = useState<boolean[]>([
     false,
     false,
     false,
     false
   ])
+  const showNext = !termValues.includes(false)
+  const scrollViewRef = useScrollToEnd(showNext)
 
   const { appName = s.strings.app_name_default } = branding
-  const terms: Array<{ title: string, numberOfLines: number }> = [
-    {
-      title: sprintf(s.strings.terms_one, appName),
-      numberOfLines: 2
-    },
-    {
-      title: s.strings.terms_two,
-      numberOfLines: 3
-    },
-    {
-      title: sprintf(s.strings.terms_three, appName),
-      numberOfLines: 3
-    },
-    {
-      title: sprintf(s.strings.terms_four, appName),
-      numberOfLines: 6
-    }
+  const terms: string[] = [
+    sprintf(s.strings.terms_one, appName),
+    s.strings.terms_two,
+    sprintf(s.strings.terms_three, appName),
+    sprintf(s.strings.terms_four, appName)
   ]
-
-  if (!termValues.includes(false)) {
-    setTimeout(() => {
-      if (scrollViewRef.current) {
-        scrollViewRef.current.scrollToEnd({ animated: true })
-      }
-    }, 50)
-  }
 
   const handleStatusChange = (index: number, value: boolean) => {
     const newTermValues = [...termValues]
@@ -91,22 +74,22 @@ const TermsAndConditionsScreenComponent = ({
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
+      <BackButton marginRem={[0, 0, 1, 0.5]} disabled />
       <SimpleSceneHeader>{s.strings.account_confirmation}</SimpleSceneHeader>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.content}>
         <EdgeText
           style={styles.subtitle}
         >{`${s.strings.review}: ${s.strings.read_understod_2}`}</EdgeText>
         <View style={styles.terms}>
-          {terms.map(({ title, numberOfLines }, index) => (
+          {terms.map((term, index) => (
             <Checkbox
-              key={title}
+              key={index}
               textStyle={styles.term}
               value={termValues[index]}
               onChange={(value: boolean) => handleStatusChange(index, value)}
-              numberOfLines={numberOfLines}
               marginRem={[0, 0, 1.33, 0]}
             >
-              {title}
+              {term}
             </Checkbox>
           ))}
         </View>
@@ -121,7 +104,7 @@ const TermsAndConditionsScreenComponent = ({
           </EdgeText>
         </EdgeText>
         <View style={styles.actions}>
-          <Fade visible={!termValues.includes(false)}>
+          <Fade visible={showNext}>
             <SecondaryButton
               label={s.strings.confirm_finish}
               onPress={handleNextPress}
@@ -136,8 +119,8 @@ const TermsAndConditionsScreenComponent = ({
 
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
-    flex: 1,
-    marginHorizontal: theme.rem(0.5)
+    marginLeft: theme.rem(0.5),
+    marginRight: theme.rem(1)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,
@@ -147,23 +130,24 @@ const getStyles = cacheStyles((theme: Theme) => ({
   },
   terms: {},
   term: {
-    fontSize: theme.rem(0.75)
+    fontSize: theme.rem(0.875)
   },
   agreeText: {
-    width: '50%',
+    width: '60%',
     alignSelf: 'center',
     marginTop: theme.rem(1),
     marginHorizontal: theme.rem(2),
-    fontSize: theme.rem(0.75)
+    fontSize: theme.rem(0.875)
   },
   agreeTextLink: {
-    fontSize: theme.rem(0.75),
+    fontSize: theme.rem(0.875),
     color: theme.linkText
   },
   actions: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: theme.rem(5)
+    marginTop: theme.rem(2.75),
+    minHeight: theme.rem(3)
   }
 }))
 
