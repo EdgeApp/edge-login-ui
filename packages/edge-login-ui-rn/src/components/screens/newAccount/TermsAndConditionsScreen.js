@@ -103,7 +103,7 @@ const TermsAndConditionsScreenComponent = ({
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton marginRem={[0, 0, 1, 0.5]} disabled />
+      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
       <SimpleSceneHeader>{s.strings.account_confirmation}</SimpleSceneHeader>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.content}>
         <EdgeText
