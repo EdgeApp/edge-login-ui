@@ -9010,10 +9010,10 @@ react-modal@^3.9.1:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
-react-native-airship@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/react-native-airship/-/react-native-airship-0.2.3.tgz#d027f4eeef7293d1cb171c751ee20997f36acbe6"
-  integrity sha512-ysJHiZtSYialYli5Jf1X5n5myT7W5hpdaU/zit0XFW7XBgTXcXp/rKEt6oDQD5UCG5lXxYn5kxt8HxoPwsgQoA==
+react-native-airship@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/react-native-airship/-/react-native-airship-0.2.6.tgz#ee035570921101edd689f8795d06a486ebc7e2d4"
+  integrity sha512-pa2rVwgef7HuD6NZUWSvFceoyPoALQktSSn9KaSkHj1aexUEvqDavnX7GmfrOabzYGLOdUNy5DYFhveLADF8CA==
   dependencies:
     yavent "^0.1.1"
 
