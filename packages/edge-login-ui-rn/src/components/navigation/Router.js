@@ -101,16 +101,16 @@ class RouterComponent extends React.Component<Props> {
       case 3:
         return <NewAccountPinScreen />
       case 4:
+        return <TermsAndConditionsScreen branding={this.props.branding} />
+      case 5:
         return (
           <WaitScreen
             title={s.strings.good_job}
             message={s.strings.hang_tight + '\n' + s.strings.secure_account}
           />
         )
-      case 5:
-        return <NewAccountReviewScreen />
       case 6:
-        return <TermsAndConditionsScreen branding={this.props.branding} />
+        return <NewAccountReviewScreen />
       default:
         return <NewAccountWelcomeScreen branding={this.props.branding} />
     }

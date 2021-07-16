@@ -1,11 +1,14 @@
 // @flow
 
 import * as React from 'react'
-import { Linking, ScrollView, View } from 'react-native'
+import { Alert, Linking, ScrollView, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 import { sprintf } from 'sprintf-js'
 
-import { agreeToConditions } from '../../../actions/CreateAccountActions'
+import {
+  type CreateUserData,
+  createUser
+} from '../../../actions/CreateAccountActions'
 import s from '../../../common/locales/strings'
 import { useScrollToEnd } from '../../../hooks/useScrollToEnd.js'
 import { type Branding } from '../../../types/Branding'
@@ -30,17 +33,30 @@ type OwnProps = {
   branding: Branding
 }
 
-type StateProps = {}
+type StateProps = {
+  createErrorMessage: string | null,
+  password: string,
+  pin: string,
+  username: string
+}
 
 type DispatchProps = {
-  agreeToCondition(): void
+  agreeToConditionAndCreateUser(data: CreateUserData): void,
+  clearCreateErrorMessagecircleFilled(): void,
+  onBack(): void
 }
 
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
 const TermsAndConditionsScreenComponent = ({
   branding,
-  agreeToCondition,
+  agreeToConditionAndCreateUser,
+  createErrorMessage,
+  clearCreateErrorMessagecircleFilled,
+  onBack,
+  password,
+  pin,
+  username,
   theme
 }: Props) => {
   const styles = getStyles(theme)
@@ -52,6 +68,15 @@ const TermsAndConditionsScreenComponent = ({
   ])
   const showNext = !termValues.includes(false)
   const scrollViewRef = useScrollToEnd(showNext)
+
+  if (createErrorMessage) {
+    Alert.alert(
+      s.strings.create_account_error_title,
+      s.strings.create_account_error_message + '\n' + createErrorMessage,
+      [{ text: s.strings.ok }]
+    )
+    clearCreateErrorMessagecircleFilled()
+  }
 
   const { appName = s.strings.app_name_default } = branding
   const terms: string[] = [
@@ -68,8 +93,12 @@ const TermsAndConditionsScreenComponent = ({
   }
 
   const handleNextPress = () => {
-    logEvent(`Signup_Terms_Agree`)
-    agreeToCondition()
+    logEvent(`Signup_Terms_Agree_and_Create_User`)
+    agreeToConditionAndCreateUser({
+      username,
+      password,
+      pin
+    })
   }
 
   return (
@@ -106,7 +135,7 @@ const TermsAndConditionsScreenComponent = ({
         <View style={styles.actions}>
           <Fade visible={showNext}>
             <SecondaryButton
-              label={s.strings.confirm_finish}
+              label={s.strings.next_label}
               onPress={handleNextPress}
               paddingRem={0.7}
             />
@@ -156,10 +185,21 @@ export const TermsAndConditionsScreen = connect<
   DispatchProps,
   OwnProps
 >(
-  (state: RootState) => ({}),
+  (state: RootState) => ({
+    createErrorMessage: state.create.createErrorMessage,
+    password: state.create.password || '',
+    pin: state.create.pin,
+    username: state.create.username || ''
+  }),
   (dispatch: Dispatch) => ({
-    agreeToCondition() {
-      dispatch(agreeToConditions())
+    agreeToConditionAndCreateUser(data: CreateUserData) {
+      dispatch(createUser(data))
+    },
+    clearCreateErrorMessagecircleFilled() {
+      dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
+    },
+    onBack() {
+      dispatch({ type: 'WORKFLOW_BACK' })
     }
   })
 )(withTheme(TermsAndConditionsScreenComponent))
