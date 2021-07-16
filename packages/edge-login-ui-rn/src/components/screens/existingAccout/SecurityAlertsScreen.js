@@ -284,18 +284,20 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const SecurityAlertsScreen = withTheme(
-  connect<StateProps, DispatchProps, OwnProps & ThemeProps>(
-    (state: RootState) => ({
-      account: getAccount(state)
-    }),
-    (dispatch: Dispatch) => ({
-      startResecure(account) {
-        dispatch({ type: 'START_RESECURE', data: account })
-      },
-      onDone() {
-        dispatch(completeResecure())
-      }
-    })
-  )(SecurityAlertsScreenComponent)
-)
+export const SecurityAlertsScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
+    account: getAccount(state)
+  }),
+  (dispatch: Dispatch) => ({
+    startResecure(account) {
+      dispatch({ type: 'START_RESECURE', data: account })
+    },
+    onDone() {
+      dispatch(completeResecure())
+    }
+  })
+)(withTheme(SecurityAlertsScreenComponent))
