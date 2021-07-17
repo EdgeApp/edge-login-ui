@@ -4,6 +4,7 @@ import { sprintf } from 'sprintf-js'
 import passwordCheck from 'zxcvbn'
 
 import s from '../common/locales/strings.js'
+import { Airship } from '../components/services/AirshipInstance.js'
 import * as Constants from '../constants/index.js'
 import { enableTouchId, isTouchDisabled } from '../keychain.js'
 import type { Dispatch, GetState, Imports } from '../types/ReduxTypes.js'
@@ -180,5 +181,6 @@ export const confirmAndFinish = () => (
   const { onLogin } = imports
   if (account == null) return
 
+  Airship.clear()
   if (onLogin != null) onLogin(account)
 }

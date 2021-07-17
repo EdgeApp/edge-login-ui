@@ -15,7 +15,7 @@ import {
   type RootState
 } from '../../types/ReduxTypes.js'
 import { QrCode } from '../common/QrCode.js'
-import { Airship, showError } from '../services/AirshipInstance.js'
+import { showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
 import {
   type Theme,
@@ -68,7 +68,6 @@ class QrCodeModalComponent extends React.Component<Props, State> {
   handleDone = (account: EdgeAccount): void => {
     const { bridge, completeLogin } = this.props
     completeLogin(account).catch(showError)
-    Airship.clear()
     bridge.resolve()
   }
 

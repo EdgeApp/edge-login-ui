@@ -1,5 +1,6 @@
 // @flow
 
+import { Airship } from '../components/services/AirshipInstance.js'
 import {
   type Dispatch,
   type GetState,
@@ -11,5 +12,6 @@ export const onComplete = () => (
   getState: GetState,
   imports: Imports
 ) => {
+  Airship.clear()
   imports.onComplete()
 }
