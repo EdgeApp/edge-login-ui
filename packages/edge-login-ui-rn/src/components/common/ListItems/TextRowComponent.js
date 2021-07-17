@@ -7,12 +7,10 @@ import { Text, TouchableHighlight } from 'react-native'
 import * as Constants from '../../../constants/index.js'
 import { scale } from '../../../util/scaling.js'
 
-export type OwnProps = {
+type Props = {
   numberOfLines: number,
   title: string,
-  data: EdgeRecoveryQuestionChoice
-}
-export type DispatchProps = {
+  data: EdgeRecoveryQuestionChoice,
   onPress(choice: EdgeRecoveryQuestionChoice): void
 }
 
@@ -20,8 +18,7 @@ type State = {
   pressed: boolean
 }
 
-type Props = OwnProps & DispatchProps
-class TextRowComponent extends React.Component<Props, State> {
+export class TextRowComponent extends React.Component<Props, State> {
   numberOfLines: number
   constructor(props: Props) {
     super(props)
@@ -84,5 +81,3 @@ const styles = {
   },
   underlayColor: Constants.GRAY_3
 }
-
-export { TextRowComponent }

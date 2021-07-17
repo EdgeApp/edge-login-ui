@@ -22,7 +22,7 @@ type State = {
   pressed: boolean
 }
 
-class Button extends React.Component<Props, State> {
+export class Button extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -92,5 +92,3 @@ class Button extends React.Component<Props, State> {
     }
   }
 }
-
-export { Button }

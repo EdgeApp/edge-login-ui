@@ -52,7 +52,7 @@ const AccountInfoComponent = ({
   const spacings = sidesToMargin(mapSides(fixSides(marginRem, 0.5), theme.rem))
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const animatedRef = useAnimatedRef<View>(null)
+  const animatedRef = useAnimatedRef<View>()
   const expanded = useSharedValue(false)
   const rotation = useSharedValue(0)
   const height = useSharedValue(0)

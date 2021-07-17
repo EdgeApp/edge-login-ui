@@ -17,8 +17,8 @@ type IconProps = {
 }
 
 type Props = {
-  enabledIcon: React.Component<IconProps>,
-  disabledIcon: React.Component<IconProps>,
+  enabledIcon: React.ComponentType<IconProps>,
+  disabledIcon: React.ComponentType<IconProps>,
   enabled: boolean
 }
 
@@ -34,13 +34,11 @@ const IconSignalComponent = ({
     <View style={styles.container}>
       <View style={styles.icon}>
         <Fade visible={enabled}>
-          {/* $FlowFixMe */}
           <EnabledIcon size={theme.rem(1.1)} color={theme.positiveText} />
         </Fade>
       </View>
       <View style={styles.icon}>
         <Fade visible={!enabled}>
-          {/* $FlowFixMe */}
           <DisabledIcon size={theme.rem(1.1)} color={theme.warningText} />
         </Fade>
       </View>

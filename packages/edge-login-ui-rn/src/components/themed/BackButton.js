@@ -15,7 +15,7 @@ import {
 const isIos = Platform.OS === 'ios'
 
 type Props = {
-  onPress(): void,
+  onPress?: () => void,
   marginRem?: number[] | number,
   disabled?: boolean
 }

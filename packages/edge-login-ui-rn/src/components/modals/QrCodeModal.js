@@ -153,16 +153,14 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const QrCodeModal = withTheme(
-  connect<StateProps, DispatchProps, OwnProps & ThemeProps>(
-    (state: RootState) => ({}),
-    (dispatch: Dispatch) => ({
-      completeLogin(account) {
-        return dispatch(completeLogin(account))
-      },
-      getImports() {
-        return dispatch((dispatch, getState, imports) => imports)
-      }
-    })
-  )(QrCodeModalComponent)
-)
+export const QrCodeModal = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({}),
+  (dispatch: Dispatch) => ({
+    completeLogin(account) {
+      return dispatch(completeLogin(account))
+    },
+    getImports() {
+      return dispatch((dispatch, getState, imports) => imports)
+    }
+  })
+)(withTheme(QrCodeModalComponent))

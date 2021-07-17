@@ -1,5 +1,6 @@
 // @flow
-const strings = {
+
+export default {
   app_name_default: 'Edge',
   edge_site: 'https://edge.app/',
   login_button: 'Login',
@@ -280,5 +281,3 @@ const strings = {
     'Name the make, model, and year of your dream car?',
   change_recovery_question13: 'Who is your childhood sports hero?'
 }
-
-module.exports = strings

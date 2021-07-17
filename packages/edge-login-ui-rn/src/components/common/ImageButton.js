@@ -8,7 +8,7 @@ type Props = {
   onPress(): void,
   disabled?: boolean
 }
-class ImageButton extends React.Component<Props> {
+export class ImageButton extends React.Component<Props> {
   render() {
     return (
       <TouchableWithoutFeedback
@@ -22,5 +22,3 @@ class ImageButton extends React.Component<Props> {
     )
   }
 }
-
-export { ImageButton }

@@ -128,7 +128,6 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
           returnKeyType="go"
           secureTextEntry
           value={this.props.confirmPassword}
-          isSelected={this.state.focusSecond}
           label={s.strings.re_enter_new_password}
           onChangeText={(password: string) =>
             this.props.validateConfirmPassword(password)
