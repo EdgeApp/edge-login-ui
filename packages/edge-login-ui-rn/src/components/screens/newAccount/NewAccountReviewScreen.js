@@ -4,6 +4,7 @@ import * as React from 'react'
 import { ScrollView, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
+import { confirmAndFinish } from '../../../actions/CreateAccountActions'
 import s from '../../../common/locales/strings'
 import { useScrollToEnd } from '../../../hooks/useScrollToEnd.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes'
@@ -39,7 +40,7 @@ const NewAccountReviewScreenComponent = ({ onDone, theme }: Props) => {
   const scrollViewRef = useScrollToEnd(showNext)
 
   const handleNext = () => {
-    logEvent(`Signup_Review_Next`)
+    logEvent(`Signup_Review_Done`)
     onDone()
   }
 
@@ -66,7 +67,7 @@ const NewAccountReviewScreenComponent = ({ onDone, theme }: Props) => {
         <View style={styles.actions}>
           <Fade visible={showNext}>
             <SecondaryButton
-              label={s.strings.next_label}
+              label={s.strings.confirm_finish}
               onPress={handleNext}
             />
           </Fade>
@@ -104,7 +105,7 @@ export const NewAccountReviewScreen = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
     onDone() {
-      dispatch({ type: 'WORKFLOW_NEXT' })
+      dispatch(confirmAndFinish())
     }
   })
 )(withTheme(NewAccountReviewScreenComponent))

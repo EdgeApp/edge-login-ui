@@ -167,7 +167,7 @@ export function createUser(data: CreateUserData) {
   }
 }
 
-export const agreeToConditions = () => (
+export const confirmAndFinish = () => (
   dispatch: Dispatch,
   getState: GetState,
   imports: Imports

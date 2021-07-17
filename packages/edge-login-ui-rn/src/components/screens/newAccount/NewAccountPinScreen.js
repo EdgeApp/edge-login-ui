@@ -1,13 +1,9 @@
 // @flow
 
 import * as React from 'react'
-import { Alert, ScrollView, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
-import {
-  type CreateUserData,
-  createUser
-} from '../../../actions/CreateAccountActions.js'
 import s from '../../../common/locales/strings.js'
 import { useScrollToEnd } from '../../../hooks/useScrollToEnd.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
@@ -29,46 +25,28 @@ import { ThemedScene } from '../../themed/ThemedScene'
 type OwnProps = {}
 
 type StateProps = {
-  createErrorMessage: string | null,
-  password: string,
   pin: string,
-  pinErrorMessage: string | null,
-  username: string
+  pinErrorMessage: string | null
 }
 
 type DispatchProps = {
-  createUser(data: CreateUserData): void,
-  clearCreateErrorMessagecircleFilled(): void,
+  onDone(): void,
   onBack(): void
 }
 
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
 const NewAccountPinScreenComponent = ({
-  username,
-  password,
+  pinErrorMessage,
   pin,
   onBack,
-  createUser,
-  pinErrorMessage,
-  createErrorMessage,
-  clearCreateErrorMessagecircleFilled,
+  onDone,
   theme
 }: Props) => {
   const styles = getStyles(theme)
 
-  const showNext =
-    pin.length === MAX_PIN_LENGTH && !pinErrorMessage && !createErrorMessage
+  const showNext = pin.length === MAX_PIN_LENGTH && !pinErrorMessage
   const scrollViewRef = useScrollToEnd(showNext)
-
-  if (createErrorMessage) {
-    Alert.alert(
-      s.strings.create_account_error_title,
-      s.strings.create_account_error_message + '\n' + createErrorMessage,
-      [{ text: s.strings.ok }]
-    )
-    clearCreateErrorMessagecircleFilled()
-  }
 
   const handleNext = () => {
     // validation.
@@ -78,12 +56,7 @@ const NewAccountPinScreenComponent = ({
       return
     }
 
-    logEvent(`Signup_Create_User`)
-    createUser({
-      username,
-      password,
-      pin
-    })
+    onDone()
   }
 
   return (
@@ -138,21 +111,15 @@ const getStyles = cacheStyles((theme: Theme) => ({
 
 export const NewAccountPinScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
-    createErrorMessage: state.create.createErrorMessage,
-    password: state.create.password || '',
     pin: state.create.pin,
-    pinErrorMessage: state.create.pinErrorMessage,
-    username: state.create.username || ''
+    pinErrorMessage: state.create.pinErrorMessage
   }),
   (dispatch: Dispatch) => ({
-    createUser(data: CreateUserData) {
-      dispatch(createUser(data))
+    onDone() {
+      dispatch({ type: 'WORKFLOW_NEXT' })
     },
     onBack() {
       dispatch({ type: 'WORKFLOW_BACK' })
-    },
-    clearCreateErrorMessagecircleFilled() {
-      dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
     }
   })
 )(withTheme(NewAccountPinScreenComponent))
