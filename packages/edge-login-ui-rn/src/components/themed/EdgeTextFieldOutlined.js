@@ -29,9 +29,9 @@ import {
   useMemo,
   useRef,
   useState
-} from '../../util/hooks'
-import { fixSides, mapSides, sidesToMargin } from '../../util/sides'
-import { type Theme, useTheme } from '../services/ThemeContext'
+} from '../../util/hooks.js'
+import { fixSides, mapSides, sidesToMargin } from '../../util/sides.js'
+import { type Theme, useTheme } from '../services/ThemeContext.js'
 
 const HINT_Y_PLATFORM_ADJUST = Platform.OS === 'android' ? -2 : 0
 const PADDING_VERTICAL = 1
@@ -214,7 +214,7 @@ const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
     hintLeftMargin
   } = getSizeStyles(theme, size, showSearchIcon)
 
-  const errorState = useCallback(() => error != null, [error])
+  const errorState = useCallback(() => error != null && error !== '', [error])
 
   const handleFocus = () => {
     placeholderMap.value = withTiming(ANIMATION_STATES.FOCUSED)
@@ -236,7 +236,6 @@ const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
 
   const clearText = () => {
     clear()
-
     if (onClear != null) onClear()
   }
 
@@ -382,7 +381,7 @@ const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
             {...inputProps}
             ref={inputRef}
             style={inputStyles}
-            pointerEvents="none"
+            pointerEvents="auto"
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChangeText={handleChangeText}
@@ -553,6 +552,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     flex: 1,
     fontSize: theme.rem(FONT_SIZE),
     fontFamily: theme.fontFaceDefault,
+    paddingVertical: 0,
     color: theme.primaryText
   },
   inputSmall: {
