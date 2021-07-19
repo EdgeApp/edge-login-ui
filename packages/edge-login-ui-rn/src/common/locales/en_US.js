@@ -255,7 +255,6 @@ export default {
     'Please enable notifications and background app refresh for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
   notifications_permissions_android:
     'Please enable notifications for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
-  change_recovery_question: 'Cannot use the same 2 recovery questions',
   change_recovery_question1:
     'What is the anniversary date with your first spouse?',
   change_recovery_question2:
