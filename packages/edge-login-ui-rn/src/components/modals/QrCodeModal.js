@@ -1,6 +1,11 @@
 // @flow
 
-import { type EdgeAccount, type EdgePendingEdgeLogin } from 'edge-core-js'
+import {
+  type EdgeAccount,
+  type EdgeAccountOptions,
+  type EdgeContext,
+  type EdgePendingEdgeLogin
+} from 'edge-core-js'
 import * as React from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { type AirshipBridge } from 'react-native-airship'
@@ -11,12 +16,11 @@ import { completeLogin } from '../../actions/LoginCompleteActions.js'
 import s from '../../common/locales/strings.js'
 import {
   type Dispatch,
-  type Imports,
-  type RootState
+  type GetState,
+  type Imports
 } from '../../types/ReduxTypes.js'
 import { QrCode } from '../common/QrCode.js'
-import { showError } from '../services/AirshipInstance.js'
-import { connect } from '../services/ReduxStore.js'
+import { Airship, showError } from '../services/AirshipInstance.js'
 import {
   type Theme,
   type ThemeProps,
@@ -26,15 +30,34 @@ import { ModalCloseArrow } from '../themed/ModalParts.js'
 import { ThemedModal } from '../themed/ThemedModal.js'
 import { MessageText, TitleText } from '../themed/ThemedText.js'
 
+/**
+ * Dispatch this redux action to launch the QR code modal
+ * with the correct props.
+ */
+export const showQrCodeModal = () => (
+  dispatch: Dispatch,
+  getState: GetState,
+  imports: Imports
+) => {
+  const { context, accountOptions } = imports
+
+  Airship.show(bridge => (
+    <QrCodeModal
+      bridge={bridge}
+      accountOptions={accountOptions}
+      context={context}
+      completeLogin={account => dispatch(completeLogin(account))}
+    />
+  ))
+}
+
 type OwnProps = {
-  bridge: AirshipBridge<void>
+  bridge: AirshipBridge<void>,
+  accountOptions: EdgeAccountOptions,
+  context: EdgeContext,
+  completeLogin: (account: EdgeAccount) => Promise<void>
 }
-type StateProps = {}
-type DispatchProps = {
-  completeLogin: (account: EdgeAccount) => Promise<void>,
-  getImports(): Imports
-}
-type Props = OwnProps & StateProps & DispatchProps & ThemeProps
+type Props = OwnProps & ThemeProps
 
 type State = {
   pendingLogin?: EdgePendingEdgeLogin,
@@ -56,7 +79,7 @@ class QrCodeModalComponent extends React.Component<Props, State> {
   componentWillUnmount() {
     for (const cleanup of this.cleanups) cleanup()
     if (this.state.pendingLogin != null) {
-      // Close the request, ignoring errors (in case it is alrady closed):
+      // Close the request, ignoring errors (in case it is already closed):
       Promise.resolve(this.state.pendingLogin.cancelRequest()).catch(() => {})
     }
   }
@@ -78,8 +101,7 @@ class QrCodeModalComponent extends React.Component<Props, State> {
   }
 
   async prepareLobby() {
-    const imports: Imports = this.props.getImports()
-    const { accountOptions, context } = imports
+    const { accountOptions, context } = this.props
     const out: EdgePendingEdgeLogin = await context.requestEdgeLogin({
       ...accountOptions,
       // These are no longer used in recent core versions:
@@ -102,11 +124,8 @@ class QrCodeModalComponent extends React.Component<Props, State> {
     } else {
       // Older core versions have the callbacks on the context:
       this.cleanups = [
-        // $FlowFixMe
         context.on('login', account => this.handleDone(account)),
-        // $FlowFixMe
         context.on('loginStart', ({ username }) => this.handleStart(username)),
-        // $FlowFixMe
         context.on('loginError', ({ error }) => this.handleError(error))
       ]
     }
@@ -152,14 +171,4 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const QrCodeModal = connect<StateProps, DispatchProps, OwnProps>(
-  (state: RootState) => ({}),
-  (dispatch: Dispatch) => ({
-    completeLogin(account) {
-      return dispatch(completeLogin(account))
-    },
-    getImports() {
-      return dispatch((dispatch, getState, imports) => imports)
-    }
-  })
-)(withTheme(QrCodeModalComponent))
+const QrCodeModal = withTheme(QrCodeModalComponent)

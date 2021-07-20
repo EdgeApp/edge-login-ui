@@ -15,7 +15,7 @@ import { type Dispatch, type RootState } from '../../types/ReduxTypes.js'
 import { type LoginAttempt } from '../../util/loginAttempt.js'
 import { makePeriodicTask } from '../../util/periodicTask.js'
 import { showResetModal } from '../modals/OtpResetModal.js'
-import { QrCodeModal } from '../modals/QrCodeModal.js'
+import { showQrCodeModal } from '../modals/QrCodeModal.js'
 import { TextInputModal } from '../modals/TextInputModal.js'
 import { Airship, showError, showToast } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
@@ -33,6 +33,7 @@ type StateProps = {
 }
 type DispatchProps = {
   onBack(): void,
+  handleQrModal: () => void,
   hasReadyVoucher(otpError: OtpError): Promise<boolean>,
   login(otpAttempt: LoginAttempt, otpKey?: string): Promise<void>,
   requestOtpReset(): Promise<void>,
@@ -112,12 +113,8 @@ class OtpErrorScreenComponent extends React.Component<Props> {
     ))
   }
 
-  handleQrModal = () => {
-    Airship.show(bridge => <QrCodeModal bridge={bridge} />)
-  }
-
   render() {
-    const { otpError, otpResetDate } = this.props
+    const { handleQrModal, otpError, otpResetDate } = this.props
     const isIp = otpError.reason === 'ip'
 
     // Find the automatic login date:
@@ -149,7 +146,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
         <DividerWithText label={s.strings.to_fix} />
         <MessageText>{s.strings.otp_screen_approve}</MessageText>
         <DividerWithText />
-        <LinkRow label={s.strings.otp_screen_qr} onPress={this.handleQrModal} />
+        <LinkRow label={s.strings.otp_screen_qr} onPress={handleQrModal} />
         {isIp ? null : (
           <>
             <DividerWithText />
@@ -192,6 +189,9 @@ export const OtpErrorScreen = connect<StateProps, DispatchProps, OwnProps>(
   (dispatch: Dispatch) => ({
     onBack() {
       dispatch({ type: 'START_PASSWORD_LOGIN' })
+    },
+    handleQrModal() {
+      dispatch(showQrCodeModal())
     },
     hasReadyVoucher(error: OtpError) {
       return dispatch(hasReadyVoucher(error))

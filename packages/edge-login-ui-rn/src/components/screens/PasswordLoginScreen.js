@@ -31,7 +31,7 @@ import { Button } from '../common/Button.js'
 import { FormField } from '../common/FormField.js'
 import { HeaderParentButtons } from '../common/HeaderParentButtons.js'
 import { ButtonsModal } from '../modals/ButtonsModal.js'
-import { QrCodeModal } from '../modals/QrCodeModal.js'
+import { showQrCodeModal } from '../modals/QrCodeModal.js'
 import { TextInputModal } from '../modals/TextInputModal.js'
 import { Airship, showError } from '../services/AirshipInstance.js'
 import { connect } from '../services/ReduxStore.js'
@@ -50,6 +50,7 @@ type DispatchProps = {
   deleteUserFromDevice(username: string): Promise<void>,
   gotoCreatePage(): void,
   gotoPinLoginPage(): void,
+  handleQrModal: () => void,
   login(attempt: LoginAttempt): Promise<void>,
   saveOtpError(otpAttempt: LoginAttempt, otpError: OtpError): void,
   updateUsername(username: string): void,
@@ -135,10 +136,6 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
         return deleteUserFromDevice(username)
       })
       .catch(showError)
-  }
-
-  handleQrModal = () => {
-    Airship.show(bridge => <QrCodeModal bridge={bridge} />)
   }
 
   render() {
@@ -260,6 +257,8 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
   }
 
   renderButtons() {
+    const { handleQrModal } = this.props
+
     return (
       <View style={styles.buttonsBox}>
         <View style={styles.shimTiny} />
@@ -293,7 +292,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
           upStyle={styles.signupButton.upStyle}
           upTextStyle={styles.signupButton.upTextStyle}
         />
-        <TouchableOpacity onPress={this.handleQrModal}>
+        <TouchableOpacity onPress={handleQrModal}>
           <AntDesignIcon
             name="qrcode"
             color={Constants.WHITE}
@@ -536,6 +535,9 @@ export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
     },
     gotoPinLoginPage() {
       dispatch({ type: 'START_PIN_LOGIN' })
+    },
+    handleQrModal() {
+      dispatch(showQrCodeModal())
     },
     login(attempt) {
       return dispatch(login(attempt))
