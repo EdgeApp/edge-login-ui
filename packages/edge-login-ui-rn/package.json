@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@react-native-community/art": "^1.0.2",
-    "edge-core-js": "^0.17.28",
+    "edge-core-js": "^0.18.2",
     "flow-bin": "^0.84.0"
   },
   "peerDependencies": {
