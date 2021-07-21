@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import {
-  type TextInputProps,
   type TextStyle,
   type ViewStyle,
   Platform,
@@ -30,9 +29,9 @@ import {
   useMemo,
   useRef,
   useState
-} from '../../util/hooks'
-import { fixSides, mapSides, sidesToMargin } from '../../util/sides'
-import { type Theme, useTheme } from '../services/ThemeContext'
+} from '../../util/hooks.js'
+import { fixSides, mapSides, sidesToMargin } from '../../util/sides.js'
+import { type Theme, useTheme } from '../services/ThemeContext.js'
 
 const HINT_Y_PLATFORM_ADJUST = Platform.OS === 'android' ? -2 : 0
 const PADDING_VERTICAL = 1
@@ -46,16 +45,42 @@ const ANIMATION_STATES = {
   ERROR: 2
 }
 
-type InputOutlineProps = TextInputProps & {
+type Props = {|
+  // Content options:
   label?: string,
   error?: string,
 
+  // Appearance:
+  isClearable?: boolean,
   marginRem?: number | number[],
-  isClearable: boolean,
-  size?: 'big' | 'small',
   showSearchIcon?: boolean,
-  onClear?: () => void
-}
+  size?: 'big' | 'small',
+
+  // Callbacks:
+  onBlur?: () => void,
+  onChangeText?: (text: string) => void,
+  onClear?: () => void,
+  onFocus?: () => void,
+
+  // Other React Native TextInput properties:
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters',
+  autoCorrect?: boolean,
+  autoFocus?: boolean,
+  inputAccessoryViewID?: string,
+  keyboardType?:
+    | 'default'
+    | 'number-pad'
+    | 'decimal-pad'
+    | 'numeric'
+    | 'email-address'
+    | 'phone-pad',
+  maxLength?: number,
+  onSubmitEditing?: () => void,
+  returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
+  secureTextEntry?: boolean,
+  testID?: string,
+  value?: string
+|}
 
 type CornerBorderProps = {
   theme: Theme,
@@ -121,291 +146,287 @@ const CornerBorder = ({
 }
 
 // $FlowFixMe = forwardRef is not recognize by flow?
-const EdgeTextFieldOutlinedComponent = React.forwardRef(
-  (props: InputOutlineProps, ref) => {
-    const {
-      error,
-      label: placeholder = '',
-      isClearable,
-      marginRem,
-      size = 'big',
-      showSearchIcon = true,
-      onClear,
-      onFocus,
-      onBlur,
+const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
+  const {
+    // Content options:
+    error,
+    label: placeholder = '',
 
-      value = '',
-      onChangeText,
-      ...inputProps
-    } = props
+    // Appearance:
+    isClearable = false,
+    marginRem,
+    size = 'big',
+    showSearchIcon = true,
 
-    const [containerHeight, setContainerHeight] = useState(0)
+    // Callbacks:
+    onBlur,
+    onChangeText,
+    onClear,
+    onFocus,
 
-    // animation
-    const inputRef = useRef<TextInput>(null)
-    const placeholderMap = useSharedValue(
-      value ? ANIMATION_STATES.FOCUSED : ANIMATION_STATES.INIT
-    )
-    const placeholderSize = useSharedValue(ANIMATION_STATES.INIT)
-    const containerWidth = useSharedValue(ANIMATION_STATES.INIT)
-    const colorMap = useSharedValue(ANIMATION_STATES.INIT)
+    // Other React Native TextInput properties:
+    value = '',
+    ...inputProps
+  } = props
 
-    // input methods
-    const focus = () => inputRef.current && inputRef.current.focus()
-    const blur = () => inputRef.current && inputRef.current.blur()
-    const isFocused = () =>
-      Boolean(inputRef.current && inputRef.current.isFocused())
-    const clear = () => {
-      Boolean(inputRef.current && inputRef.current.clear())
-      onChangeText('')
+  const [containerHeight, setContainerHeight] = useState(0)
+
+  // animation
+  const inputRef = useRef<TextInput>(null)
+  const placeholderMap = useSharedValue(
+    value ? ANIMATION_STATES.FOCUSED : ANIMATION_STATES.INIT
+  )
+  const placeholderSize = useSharedValue(ANIMATION_STATES.INIT)
+  const containerWidth = useSharedValue(ANIMATION_STATES.INIT)
+  const colorMap = useSharedValue(ANIMATION_STATES.INIT)
+
+  // input methods
+  const focus = () => inputRef.current && inputRef.current.focus()
+  const blur = () => inputRef.current && inputRef.current.blur()
+  const isFocused = () =>
+    Boolean(inputRef.current && inputRef.current.isFocused())
+  const clear = () => {
+    Boolean(inputRef.current && inputRef.current.clear())
+    if (onChangeText != null) onChangeText('')
+  }
+
+  // styles
+  const theme = useTheme()
+  const styles = getStyles(theme)
+  const spacings = sidesToMargin(mapSides(fixSides(marginRem, 0.5), theme.rem))
+  const placeholderSpacerWidthAdjust = theme.rem(1)
+  const {
+    inactiveColor,
+    activeColor,
+    errorColor,
+    fontSize,
+    placeholderSpacerAdjust,
+    placeholderScale,
+    placeholderSizeScale,
+    paddingVertical,
+    inputStyles,
+    placeholderTextStyles,
+    placeholderPaddingStyles,
+    placeholderSpacerPaddingStyles,
+    inputContainerStyles,
+    prefixStyles,
+    suffixStyles,
+    hintLeftMargin
+  } = getSizeStyles(theme, size, showSearchIcon)
+
+  const errorState = useCallback(() => error != null && error !== '', [error])
+
+  const handleFocus = () => {
+    placeholderMap.value = withTiming(ANIMATION_STATES.FOCUSED)
+    if (!errorState()) colorMap.value = withTiming(ANIMATION_STATES.FOCUSED)
+    focus()
+    if (onFocus != null) onFocus()
+  }
+
+  const handleBlur = () => {
+    if (!value) placeholderMap.value = withTiming(ANIMATION_STATES.INIT) // blur
+    if (!errorState()) colorMap.value = withTiming(ANIMATION_STATES.INIT) // inactive
+    blur()
+    if (onBlur != null) onBlur()
+  }
+
+  const handleChangeText = (text: string) => {
+    if (onChangeText != null) onChangeText(text)
+  }
+
+  const clearText = () => {
+    clear()
+    if (onClear != null) onClear()
+  }
+
+  const handlePlaceholderLayout = useCallback(
+    ({ nativeEvent }) => {
+      const { width } = nativeEvent.layout
+      placeholderSize.value = width
+    },
+    [placeholderSize]
+  )
+
+  const handleContainerLayout = ({ nativeEvent }) => {
+    const { width, height } = nativeEvent.layout
+    containerWidth.value = width
+    setContainerHeight(height)
+  }
+
+  // error handling
+  useEffect(() => {
+    if (errorState()) {
+      colorMap.value = ANIMATION_STATES.ERROR
+    } else {
+      colorMap.value = isFocused()
+        ? ANIMATION_STATES.FOCUSED
+        : ANIMATION_STATES.INIT
     }
+  }, [error, colorMap, errorState])
 
-    // styles
-    const theme = useTheme()
-    const styles = getStyles(theme)
-    const spacings = sidesToMargin(
-      mapSides(fixSides(marginRem, 0.5), theme.rem)
+  const animatedPlaceholderStyles = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: interpolate(
+          placeholderMap.value,
+          [ANIMATION_STATES.INIT, ANIMATION_STATES.FOCUSED],
+          [
+            0,
+            -(paddingVertical + fontSize * placeholderScale) +
+              HINT_Y_PLATFORM_ADJUST
+          ]
+        )
+      },
+      {
+        scale: interpolate(
+          placeholderMap.value,
+          [ANIMATION_STATES.INIT, ANIMATION_STATES.FOCUSED],
+          [1, placeholderScale]
+        )
+      },
+      {
+        translateX: interpolate(
+          placeholderMap.value,
+          [ANIMATION_STATES.INIT, ANIMATION_STATES.FOCUSED],
+          [0, -placeholderSize.value * placeholderSizeScale - hintLeftMargin]
+        )
+      }
+    ]
+  }))
+
+  const animatedPlaceholderTextStyles = useAnimatedStyle(() => ({
+    color: getColor(
+      placeholderSize.value,
+      colorMap.value,
+      { inactiveColor, activeColor, errorColor },
+      true
     )
-    const placeholderSpacerWidthAdjust = theme.rem(1)
-    const {
+  }))
+
+  const animatedPlaceholderSpacerStyles = useAnimatedStyle(() => ({
+    width: interpolate(
+      placeholderMap.value,
+      [ANIMATION_STATES.INIT, ANIMATION_STATES.FOCUSED],
+      [
+        containerWidth.value - placeholderSpacerWidthAdjust,
+        containerWidth.value -
+          placeholderSize.value * placeholderScale -
+          placeholderSpacerAdjust
+      ],
+      Extrapolate.CLAMP
+    ),
+    backgroundColor: getColor(placeholderSize.value, colorMap.value, {
       inactiveColor,
       activeColor,
-      errorColor,
-      fontSize,
-      placeholderSpacerAdjust,
-      placeholderScale,
-      placeholderSizeScale,
-      paddingVertical,
-      inputStyles,
-      placeholderTextStyles,
-      placeholderPaddingStyles,
-      placeholderSpacerPaddingStyles,
-      inputContainerStyles,
-      prefixStyles,
-      suffixStyles,
-      hintLeftMargin
-    } = getSizeStyles(theme, size, showSearchIcon)
-
-    const errorState = useCallback(
-      () => error !== null && error !== undefined,
-      [error]
-    )
-
-    const handleFocus = e => {
-      placeholderMap.value = withTiming(ANIMATION_STATES.FOCUSED)
-      if (!errorState()) colorMap.value = withTiming(ANIMATION_STATES.FOCUSED)
-      focus()
-      if (onFocus) onFocus(e)
-    }
-
-    const handleBlur = e => {
-      if (!value) placeholderMap.value = withTiming(ANIMATION_STATES.INIT) // blur
-      if (!errorState()) colorMap.value = withTiming(ANIMATION_STATES.INIT) // inactive
-      blur()
-      if (onBlur) onBlur(e)
-    }
-
-    const handleChangeText = (text: string) => {
-      onChangeText(text)
-    }
-
-    const clearText = () => {
-      clear()
-
-      if (onClear) {
-        onClear()
-      }
-    }
-
-    const handlePlaceholderLayout = useCallback(
-      ({ nativeEvent }) => {
-        const { width } = nativeEvent.layout
-        placeholderSize.value = width
-      },
-      [placeholderSize]
-    )
-
-    const handleContainerLayout = ({ nativeEvent }) => {
-      const { width, height } = nativeEvent.layout
-      containerWidth.value = width
-      setContainerHeight(height)
-    }
-
-    // error handling
-    useEffect(() => {
-      if (errorState()) {
-        colorMap.value = ANIMATION_STATES.ERROR
-      } else {
-        colorMap.value = isFocused()
-          ? ANIMATION_STATES.FOCUSED
-          : ANIMATION_STATES.INIT
-      }
-    }, [error, colorMap, errorState])
-
-    const animatedPlaceholderStyles = useAnimatedStyle(() => ({
-      transform: [
-        {
-          translateY: interpolate(
-            placeholderMap.value,
-            [ANIMATION_STATES.INIT, ANIMATION_STATES.FOCUSED],
-            [
-              0,
-              -(paddingVertical + fontSize * placeholderScale) +
-                HINT_Y_PLATFORM_ADJUST
-            ]
-          )
-        },
-        {
-          scale: interpolate(
-            placeholderMap.value,
-            [ANIMATION_STATES.INIT, ANIMATION_STATES.FOCUSED],
-            [1, placeholderScale]
-          )
-        },
-        {
-          translateX: interpolate(
-            placeholderMap.value,
-            [ANIMATION_STATES.INIT, ANIMATION_STATES.FOCUSED],
-            [0, -placeholderSize.value * placeholderSizeScale - hintLeftMargin]
-          )
-        }
-      ]
-    }))
-
-    const animatedPlaceholderTextStyles = useAnimatedStyle(() => ({
-      color: getColor(
-        placeholderSize.value,
-        colorMap.value,
-        { inactiveColor, activeColor, errorColor },
-        true
-      )
-    }))
-
-    const animatedPlaceholderSpacerStyles = useAnimatedStyle(() => ({
-      width: interpolate(
-        placeholderMap.value,
-        [ANIMATION_STATES.INIT, ANIMATION_STATES.FOCUSED],
-        [
-          containerWidth.value - placeholderSpacerWidthAdjust,
-          containerWidth.value -
-            placeholderSize.value * placeholderScale -
-            placeholderSpacerAdjust
-        ],
-        Extrapolate.CLAMP
-      ),
-      backgroundColor: getColor(placeholderSize.value, colorMap.value, {
-        inactiveColor,
-        activeColor,
-        errorColor
-      })
-    }))
-    const cornerHeight = { height: containerHeight }
-    const animatedContainerStyle = useAnimatedStyle(() => {
-      const color = getColor(placeholderSize.value, colorMap.value, {
-        inactiveColor,
-        activeColor,
-        errorColor
-      })
-      return {
-        borderBottomColor: color,
-        borderLeftColor: color,
-        borderRightColor: color
-      }
+      errorColor
     })
+  }))
+  const cornerHeight = { height: containerHeight }
+  const animatedContainerStyle = useAnimatedStyle(() => {
+    const color = getColor(placeholderSize.value, colorMap.value, {
+      inactiveColor,
+      activeColor,
+      errorColor
+    })
+    return {
+      borderBottomColor: color,
+      borderLeftColor: color,
+      borderRightColor: color
+    }
+  })
 
-    useImperativeHandle(ref, () => ({
-      focus: handleFocus,
-      blur: handleBlur,
-      isFocused: isFocused(),
-      clear: clear
-    }))
+  useImperativeHandle(ref, () => ({
+    focus: handleFocus,
+    blur: handleBlur,
+    isFocused: isFocused(),
+    clear: clear
+  }))
 
-    const placeholderStyle = useMemo(() => {
-      return [...placeholderPaddingStyles, animatedPlaceholderStyles]
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [...placeholderPaddingStyles, animatedPlaceholderStyles])
+  const placeholderStyle = useMemo(() => {
+    return [...placeholderPaddingStyles, animatedPlaceholderStyles]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...placeholderPaddingStyles, animatedPlaceholderStyles])
 
-    return (
-      <Animated.View
-        style={[styles.container, animatedContainerStyle, spacings]}
-        onLayout={handleContainerLayout}
-      >
-        <CornerBorder
-          theme={theme}
-          corner="left"
-          cornerHeight={cornerHeight}
-          placeholderSize={placeholderSize}
-          colorMap={colorMap}
-        />
-        <CornerBorder
-          theme={theme}
-          corner="right"
-          cornerHeight={cornerHeight}
-          placeholderSize={placeholderSize}
-          colorMap={colorMap}
-        />
-        <TouchableWithoutFeedback onPress={handleFocus}>
-          <View style={inputContainerStyles}>
-            {showSearchIcon ? (
-              <View style={prefixStyles}>
+  return (
+    <Animated.View
+      style={[styles.container, animatedContainerStyle, spacings]}
+      onLayout={handleContainerLayout}
+    >
+      <CornerBorder
+        theme={theme}
+        corner="left"
+        cornerHeight={cornerHeight}
+        placeholderSize={placeholderSize}
+        colorMap={colorMap}
+      />
+      <CornerBorder
+        theme={theme}
+        corner="right"
+        cornerHeight={cornerHeight}
+        placeholderSize={placeholderSize}
+        colorMap={colorMap}
+      />
+      <TouchableWithoutFeedback onPress={handleFocus}>
+        <View style={inputContainerStyles}>
+          {showSearchIcon ? (
+            <View style={prefixStyles}>
+              <AntDesignIcon
+                name="search1"
+                color={theme.iconDeactivated}
+                size={theme.rem(1)}
+              />
+            </View>
+          ) : null}
+          <TextInput
+            {...inputProps}
+            ref={inputRef}
+            style={inputStyles}
+            pointerEvents="auto"
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChangeText={handleChangeText}
+            selectionColor={errorState() ? errorColor : activeColor}
+            placeholder=""
+            value={value}
+          />
+          {isClearable && isFocused() && (
+            <View style={suffixStyles}>
+              <TouchableOpacity
+                onPress={clearText}
+                style={styles.clearContainer}
+              >
                 <AntDesignIcon
-                  name="search1"
-                  color={theme.iconDeactivated}
+                  name="close"
+                  color={theme.icon}
                   size={theme.rem(1)}
                 />
-              </View>
-            ) : null}
-            <TextInput
-              {...inputProps}
-              ref={inputRef}
-              style={inputStyles}
-              pointerEvents="none"
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              onChangeText={handleChangeText}
-              selectionColor={errorState() ? errorColor : activeColor}
-              placeholder=""
-              value={value}
-            />
-            {isClearable && isFocused() && (
-              <View style={suffixStyles}>
-                <TouchableOpacity
-                  onPress={clearText}
-                  style={styles.clearContainer}
-                >
-                  <AntDesignIcon
-                    name="close"
-                    color={theme.icon}
-                    size={theme.rem(1)}
-                  />
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
-        </TouchableWithoutFeedback>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+      </TouchableWithoutFeedback>
 
-        <Animated.View
-          style={[
-            ...placeholderSpacerPaddingStyles,
-            animatedPlaceholderSpacerStyles
-          ]}
-        />
-        <Animated.View
-          style={placeholderStyle}
-          onLayout={handlePlaceholderLayout}
-          pointerEvents="none"
+      <Animated.View
+        style={[
+          ...placeholderSpacerPaddingStyles,
+          animatedPlaceholderSpacerStyles
+        ]}
+      />
+      <Animated.View
+        style={placeholderStyle}
+        onLayout={handlePlaceholderLayout}
+        pointerEvents="none"
+      >
+        <Animated.Text
+          style={[...placeholderTextStyles, animatedPlaceholderTextStyles]}
         >
-          <Animated.Text
-            style={[...placeholderTextStyles, animatedPlaceholderTextStyles]}
-          >
-            {placeholder}
-          </Animated.Text>
-        </Animated.View>
-        {errorState() ? <Text style={styles.errorText}>{error}</Text> : null}
+          {placeholder}
+        </Animated.Text>
       </Animated.View>
-    )
-  }
-)
+      {errorState() ? <Text style={styles.errorText}>{error}</Text> : null}
+    </Animated.View>
+  )
+})
 
 // return depended on size styles and values
 const getSizeStyles = (
@@ -531,6 +552,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     flex: 1,
     fontSize: theme.rem(FONT_SIZE),
     fontFamily: theme.fontFaceDefault,
+    paddingVertical: 0,
     color: theme.primaryText
   },
   inputSmall: {
