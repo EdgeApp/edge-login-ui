@@ -1,24 +1,28 @@
 # edge-login-ui
 
+## 0.9.12 (2021-07-20)
+
+- rn: Added back a couple of "$FlowFixMe" that is needed when this module is used by edge-react-gui
+
 ## 0.9.11 (2021-07-20)
 
-rn: Synchronize outlined text field logic fixes
-rn: Tighten the outlined text field props
-rn: Fix the crash in the QR-login modal
-rn: Run `yarn precommit` to update strings
-rn: Always close modals on the way out the door
-rn: Fix coding errors caught by TypeScript
-rn: Add missing react-native-gesture-handler dependency
-rn: Put `withTheme` after `connect`
-rn: Simplify the `Fade` component
-rn: Move the `isASCII` function to the right file
-rn: Use better export syntax
-rn: Use modern syntax for localization
-rn: Remove unused components & libraries
-rn: Implemented recovery translations
-rn: Add back button to the "TermsAndConditions" screen
-rn: Switch New Account flow screens positions: move "TermsAndConditions" screen after "Pin" screen and before "Wait" screen
-rn: Upgrade to react-native-airship v0.2.6
+- rn: Synchronize outlined text field logic fixes
+- rn: Tighten the outlined text field props
+- rn: Fix the crash in the QR-login modal
+- rn: Run `yarn precommit` to update strings
+- rn: Always close modals on the way out the door
+- rn: Fix coding errors caught by TypeScript
+- rn: Add missing react-native-gesture-handler dependency
+- rn: Put `withTheme` after `connect`
+- rn: Simplify the `Fade` component
+- rn: Move the `isASCII` function to the right file
+- rn: Use better export syntax
+- rn: Use modern syntax for localization
+- rn: Remove unused components & libraries
+- rn: Implemented recovery translations
+- rn: Add back button to the "TermsAndConditions" screen
+- rn: Switch New Account flow screens positions: move "TermsAndConditions" screen after "Pin" screen and before "Wait" screen
+- rn: Upgrade to react-native-airship v0.2.6
 
 ## 0.9.10 (2021-07-14)
 
