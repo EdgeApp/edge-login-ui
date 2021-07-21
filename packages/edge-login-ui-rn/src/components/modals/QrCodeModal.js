@@ -124,8 +124,11 @@ class QrCodeModalComponent extends React.Component<Props, State> {
     } else {
       // Older core versions have the callbacks on the context:
       this.cleanups = [
+        // $FlowFixMe
         context.on('login', account => this.handleDone(account)),
+        // $FlowFixMe
         context.on('loginStart', ({ username }) => this.handleStart(username)),
+        // $FlowFixMe
         context.on('loginError', ({ error }) => this.handleError(error))
       ]
     }
