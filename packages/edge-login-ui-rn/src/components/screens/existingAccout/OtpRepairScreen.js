@@ -9,7 +9,7 @@ import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
 import { showResetModal } from '../../modals/OtpResetModal.js'
-import { QrCodeModal } from '../../modals/QrCodeModal.js'
+import { showQrCodeModal } from '../../modals/QrCodeModal.js'
 import { TextInputModal } from '../../modals/TextInputModal.js'
 import { Airship, showError } from '../../services/AirshipInstance.js'
 import { connect } from '../../services/ReduxStore.js'
@@ -27,6 +27,7 @@ type StateProps = {
 }
 type DispatchProps = {
   onBack(): void,
+  handleQrModal: () => void,
   requestOtpReset(): Promise<void>,
   saveOtpError(account: EdgeAccount, otpError: OtpError): void
 }
@@ -72,12 +73,8 @@ class OtpRepairScreenComponent extends React.Component<Props> {
     ))
   }
 
-  handleQrModal = () => {
-    Airship.show(bridge => <QrCodeModal bridge={bridge} />)
-  }
-
   render() {
-    const { otpError, otpResetDate } = this.props
+    const { handleQrModal, otpError, otpResetDate } = this.props
     const isIp = otpError.reason === 'ip'
 
     // Find the automatic login date:
@@ -110,7 +107,7 @@ class OtpRepairScreenComponent extends React.Component<Props> {
         <DividerWithText label={s.strings.to_fix} />
         <MessageText>{s.strings.otp_screen_approve}</MessageText>
         <DividerWithText />
-        <LinkRow label={s.strings.otp_screen_qr} onPress={this.handleQrModal} />
+        <LinkRow label={s.strings.otp_screen_qr} onPress={handleQrModal} />
         {isIp ? null : (
           <>
             <DividerWithText />
@@ -154,6 +151,9 @@ export const OtpRepairScreen = connect<StateProps, DispatchProps, OwnProps>(
   (dispatch: Dispatch) => ({
     onBack() {
       dispatch(onComplete())
+    },
+    handleQrModal() {
+      dispatch(showQrCodeModal())
     },
     requestOtpReset() {
       return dispatch(this.requestOtpReset())
