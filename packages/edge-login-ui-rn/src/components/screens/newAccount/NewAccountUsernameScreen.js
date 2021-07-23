@@ -78,7 +78,6 @@ const NewAccountUsernameScreenComponent = ({
           label={s.strings.username}
           onChangeText={validateUsername}
           onSubmitEditing={handleNext}
-          placeholder={s.strings.choose_username_input_placeholder}
           returnKeyType="go"
           value={username}
           isClearable
