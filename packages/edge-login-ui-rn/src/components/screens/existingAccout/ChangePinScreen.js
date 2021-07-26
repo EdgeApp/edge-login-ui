@@ -2,148 +2,142 @@
 
 import { type EdgeAccount } from 'edge-core-js'
 import * as React from 'react'
-import { Keyboard, Text, View } from 'react-native'
+import { Keyboard, ScrollView, View } from 'react-native'
+import { cacheStyles } from 'react-native-patina'
 
 import { completeResecure } from '../../../actions/LoginCompleteActions.js'
 import { onComplete } from '../../../actions/WorkflowActions.js'
 import s from '../../../common/locales/strings.js'
-import * as Constants from '../../../constants/index.js'
-import * as Styles from '../../../styles/index.js'
+import { useScrollToEnd } from '../../../hooks/useScrollToEnd.js'
 import { type Dispatch, type RootState } from '../../../types/ReduxTypes.js'
-import { scale } from '../../../util/scaling.js'
+import { logEvent } from '../../../util/analytics.js'
+import { useState } from '../../../util/hooks'
 import { getAccount } from '../../../util/selectors.js'
-import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent.js'
-import { Button } from '../../common/Button.js'
-import { Header } from '../../common/Header.js'
-import SafeAreaView from '../../common/SafeAreaViewGradient.js'
 import { ButtonsModal } from '../../modals/ButtonsModal.js'
 import { Airship, showError } from '../../services/AirshipInstance.js'
 import { connect } from '../../services/ReduxStore.js'
+import {
+  type Theme,
+  type ThemeProps,
+  withTheme
+} from '../../services/ThemeContext'
+import { BackButton } from '../../themed/BackButton'
+import { DigitInput, MAX_PIN_LENGTH } from '../../themed/DigitInput'
+import { EdgeText } from '../../themed/EdgeText'
+import { Fade } from '../../themed/Fade'
+import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
+import { SkipButton } from '../../themed/SkipButton'
+import { SecondaryButton } from '../../themed/ThemedButtons.js'
+import { ThemedScene } from '../../themed/ThemedScene'
 
 type OwnProps = {
   showHeader?: boolean
 }
+
 type StateProps = {
   account: EdgeAccount,
   pin: string,
-  pinError: string
+  pinErrorMessage: string | null
 }
+
 type DispatchProps = {
-  onDone: () => void,
   onBack?: () => void,
-  onSkip?: () => void
-}
-type Props = OwnProps & StateProps & DispatchProps
-
-type State = {
-  isProcessing: boolean,
-  pin: string,
-  username: string,
-  focusOn: string
+  onSkip?: () => void,
+  onDone(): void
 }
 
-class ChangePinScreenComponent extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      username: '',
-      pin: '',
-      isProcessing: false,
-      focusOn: 'pin'
-    }
-  }
+type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
-  renderHeader = () => {
-    if (this.props.showHeader) {
-      return <Header onBack={this.props.onBack} onSkip={this.props.onSkip} />
-    }
-    return null
-  }
+const ChangePinScreenComponent = ({
+  account,
+  pinErrorMessage,
+  pin,
+  onBack,
+  onSkip,
+  onDone,
+  showHeader,
+  theme
+}: Props) => {
+  const [loading, setLoading] = useState<boolean>(false)
 
-  handleSubmit = () => {
-    const { account, pin, pinError, onDone } = this.props
-    if (pin.length !== 4 || pinError) return
+  const styles = getStyles(theme)
+
+  const showNext = pin.length === MAX_PIN_LENGTH && !pinErrorMessage
+  const scrollViewRef = useScrollToEnd(showNext)
+
+  const handleNext = () => {
+    // validation.
+    // is there no error message,
+    if (pin.length !== MAX_PIN_LENGTH || pinErrorMessage) {
+      logEvent(`Signup_PIN_Invalid`)
+      return
+    }
 
     Keyboard.dismiss()
-    this.setState({ isProcessing: true })
+    setLoading(true)
     account
       .changePin({ pin })
       .then(onDone)
       .catch(error => {
-        this.setState({ isProcessing: false })
+        setLoading(false)
         showError(error)
       })
   }
 
-  render() {
-    return (
-      <SafeAreaView>
-        <View style={styles.screen}>
-          {this.renderHeader()}
-          <View style={styles.pageContainer}>
-            <View style={styles.row1}>
-              <Text style={styles.instructions}>{s.strings.pin_desc}</Text>
-            </View>
-            <View style={styles.row2}>
-              <FourDigitInput />
-            </View>
-            <View style={styles.row3}>
-              <Button
-                onPress={this.handleSubmit}
-                downStyle={styles.nextButton.downStyle}
-                downTextStyle={styles.nextButton.downTextStyle}
-                upStyle={styles.nextButton.upStyle}
-                upTextStyle={styles.nextButton.upTextStyle}
-                label={s.strings.done}
-                isThinking={this.state.isProcessing}
-                doesThink
-              />
-            </View>
-          </View>
+  return (
+    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
+      {showHeader && onBack && (
+        <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
+      )}
+      {showHeader && onSkip && (
+        <SkipButton onPress={onSkip} marginRem={[0, -0.5, 1, 0]} />
+      )}
+      {showHeader && (
+        <SimpleSceneHeader>{s.strings.change_pin}</SimpleSceneHeader>
+      )}
+      <ScrollView ref={scrollViewRef} style={styles.content}>
+        <EdgeText style={styles.description} numberOfLines={2}>
+          {s.strings.pin_desc}
+        </EdgeText>
+        <DigitInput />
+        <View style={styles.actions}>
+          <Fade visible={showNext}>
+            <SecondaryButton
+              label={s.strings.next_label}
+              onPress={handleNext}
+              spinner={loading}
+            />
+          </Fade>
         </View>
-      </SafeAreaView>
-    )
-  }
+      </ScrollView>
+    </ThemedScene>
+  )
 }
 
-const styles = {
-  screen: { ...Styles.ScreenStyle },
-  pageContainer: { flex: 1, width: '100%' },
-  row1: {
-    width: '100%',
-    flex: -1,
-    paddingTop: 24,
-    paddingBottom: 12,
-    alignItems: 'center',
-    justifyContent: 'space-around'
+const getStyles = cacheStyles((theme: Theme) => ({
+  content: {
+    flex: 1,
+    marginLeft: theme.rem(0.5),
+    marginRight: theme.rem(1)
   },
-  row2: {
-    width: '100%',
-    paddingVertical: 12,
-    flex: -1,
-    alignItems: 'center'
+  subtitle: {
+    fontFamily: theme.fontFaceBold,
+    color: theme.secondaryText,
+    fontSize: theme.rem(1),
+    marginBottom: theme.rem(2.25)
   },
-  row3: {
-    width: '100%',
-    paddingVertical: 12,
-    flex: -1,
-    alignItems: 'center'
+  description: {
+    fontFamily: theme.fontFaceDefault,
+    fontSize: theme.rem(0.875),
+    marginBottom: theme.rem(3.25)
   },
-  instructions: {
-    position: 'relative',
-    width: '80%',
-    fontSize: scale(Styles.CreateAccountFont.defaultFontSize),
-    fontFamily: Constants.FONTS.fontFamilyRegular,
-    color: Constants.GRAY_2,
-    textAlign: 'center'
-  },
-  nextButton: {
-    upStyle: Styles.PrimaryButtonUpScaledStyle,
-    upTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
-    downTextStyle: Styles.PrimaryButtonUpTextScaledStyle,
-    downStyle: Styles.PrimaryButtonDownScaledStyle
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: theme.rem(5),
+    minHeight: theme.rem(3 + 15) // 15 is a hack to avoid the keyboard
   }
-}
+}))
 
 export const PublicChangePinScreen = connect<
   StateProps,
@@ -153,7 +147,7 @@ export const PublicChangePinScreen = connect<
   (state: RootState) => ({
     account: getAccount(state),
     pin: state.create.pin,
-    pinError: state.create.pinError
+    pinErrorMessage: state.create.pinError
   }),
   (dispatch: Dispatch) => ({
     onDone() {
@@ -172,13 +166,13 @@ export const PublicChangePinScreen = connect<
       dispatch(onComplete())
     }
   })
-)(ChangePinScreenComponent)
+)(withTheme(ChangePinScreenComponent))
 
 export const ResecurePinScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     account: getAccount(state),
     pin: state.create.pin,
-    pinError: state.create.pinError
+    pinErrorMessage: state.create.pinError
   }),
   (dispatch: Dispatch) => ({
     onDone() {
@@ -197,4 +191,4 @@ export const ResecurePinScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch(completeResecure())
     }
   })
-)(ChangePinScreenComponent)
+)(withTheme(ChangePinScreenComponent))
