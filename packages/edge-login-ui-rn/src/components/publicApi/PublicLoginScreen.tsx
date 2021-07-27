@@ -43,45 +43,41 @@ interface Props {
   customPermissionsFunction?: () => void
 }
 
-export class LoginScreen extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props)
-
-    const { fontDescription } = props
+export function LoginScreen(props: Props): JSX.Element {
+  const { fontDescription } = props
+  React.useEffect(() => {
     if (fontDescription != null) {
       changeFont(fontDescription.regularFontFamily)
       updateFontStyles(fontDescription.regularFontFamily)
     }
-  }
+  }, [fontDescription])
 
-  render() {
-    return (
-      <ReduxStore
-        imports={{
-          accountOptions: this.props.accountOptions,
-          context: this.props.context,
-          onComplete: () => {},
-          onLogin: this.props.onLogin,
-          recoveryKey: this.props.recoveryLogin,
-          skipSecurityAlerts: this.props.skipSecurityAlerts,
-          username: this.props.username,
-          customPermissionsFunction: this.props.customPermissionsFunction
+  return (
+    <ReduxStore
+      imports={{
+        accountOptions: props.accountOptions,
+        context: props.context,
+        onComplete: () => {},
+        onLogin: props.onLogin,
+        recoveryKey: props.recoveryLogin,
+        skipSecurityAlerts: props.skipSecurityAlerts,
+        username: props.username,
+        customPermissionsFunction: props.customPermissionsFunction
+      }}
+      initialAction={initializeLogin()}
+    >
+      <Router
+        branding={{
+          appId: props.appId,
+          appName: props.appName,
+          backgroundImage: props.backgroundImage,
+          landingScreenText: props.landingScreenText,
+          parentButton: props.parentButton,
+          primaryLogo: props.primaryLogo,
+          primaryLogoCallback: props.primaryLogoCallback
         }}
-        initialAction={initializeLogin()}
-      >
-        <Router
-          branding={{
-            appId: this.props.appId,
-            appName: this.props.appName,
-            backgroundImage: this.props.backgroundImage,
-            landingScreenText: this.props.landingScreenText,
-            parentButton: this.props.parentButton,
-            primaryLogo: this.props.primaryLogo,
-            primaryLogoCallback: this.props.primaryLogoCallback
-          }}
-          showHeader
-        />
-      </ReduxStore>
-    )
-  }
+        showHeader
+      />
+    </ReduxStore>
+  )
 }
