@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.9.13 (2021-07-27)
+
+- rn: Close modals on scene exit.
+- rn: Add type definitions for TypeScript (this release re-writes the entire codebase into TypeScript, but this should be the only externally-visible difference).
+
 ## 0.9.12 (2021-07-20)
 
 - rn: Added back a couple of "$FlowFixMe" that is needed when this module is used by edge-react-gui
