@@ -11,13 +11,20 @@ interface OwnProps {
   ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip'
   numberOfLines?: number
   style?: TextStyle
+  disableFontScaling?: boolean
 }
 
 class EdgeTextComponent extends React.PureComponent<
   OwnProps & TextProps & ThemeProps
 > {
   render() {
-    const { children, style, theme, ...props } = this.props
+    const {
+      children,
+      style,
+      theme,
+      disableFontScaling = false,
+      ...props
+    } = this.props
     const { text } = getStyles(theme)
     let numberOfLines =
       typeof this.props.numberOfLines === 'number'
@@ -30,8 +37,8 @@ class EdgeTextComponent extends React.PureComponent<
       <Text
         style={[text, style]}
         numberOfLines={numberOfLines}
-        allowFontScaling
-        adjustsFontSizeToFit
+        allowFontScaling={!disableFontScaling}
+        adjustsFontSizeToFit={!disableFontScaling}
         minimumFontScale={0.65}
         {...props}
       >
