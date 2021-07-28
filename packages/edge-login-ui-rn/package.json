@@ -24,7 +24,7 @@
     "/README.md"
   ],
   "scripts": {
-    "prepare": "rm -r lib && tsc && cp src/index.flow.js lib/index.js.flow && cp -r src/assets lib"
+    "prepare": "rimraf lib && tsc && cp src/index.flow.js lib/index.js.flow && cp -r src/assets lib"
   },
   "resolutions": {
     "scrypt.js": "0.3.0"
@@ -55,7 +55,8 @@
     "@types/react-native": "^0.64.4",
     "@types/sprintf-js": "^1.1.2",
     "edge-core-js": "^0.18.2",
-    "flow-bin": "^0.84.0"
+    "flow-bin": "^0.84.0",
+    "rimraf": "^3.0.2"
   },
   "peerDependencies": {
     "@react-native-community/art": "*",
