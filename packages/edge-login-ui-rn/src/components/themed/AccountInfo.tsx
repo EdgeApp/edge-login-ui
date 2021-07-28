@@ -167,7 +167,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     paddingBottom: theme.rem(1)
   },
   text: {
-    fontSize: theme.rem(0.8)
+    fontSize: theme.rem(0.85)
   },
   textMarginBottom: {
     marginBottom: theme.rem(0.5)
