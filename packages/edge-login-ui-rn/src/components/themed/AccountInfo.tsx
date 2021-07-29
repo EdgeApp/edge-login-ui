@@ -74,16 +74,18 @@ const AccountInfoComponent = ({
       <EdgeText
         style={[styles.text, styles.textMarginBottom]}
         numberOfLines={0}
+        disableFontScaling
       >
         {s.strings.username}:&nbsp;{username}
       </EdgeText>
       <EdgeText
         style={[styles.text, styles.textMarginBottom]}
         numberOfLines={0}
+        disableFontScaling
       >
         {s.strings.password}:&nbsp;{password}
       </EdgeText>
-      <EdgeText style={styles.text}>
+      <EdgeText style={styles.text} disableFontScaling>
         {s.strings.pin}:&nbsp;{pin}
       </EdgeText>
     </>
@@ -165,7 +167,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     paddingBottom: theme.rem(1)
   },
   text: {
-    fontSize: theme.rem(0.8)
+    fontSize: theme.rem(0.85)
   },
   textMarginBottom: {
     marginBottom: theme.rem(0.5)
