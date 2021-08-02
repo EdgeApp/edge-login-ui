@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.9.14 (2021-08-02)
+
+- rn: Use hooks for the public login screen
+- rn: Font size consistency fixes
+
 ## 0.9.13 (2021-07-27)
 
 - rn: Close modals on scene exit.
