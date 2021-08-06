@@ -138,7 +138,7 @@ async function twofaReminder(account: EdgeAccount) {
         )
       : null
 
-  const enableOtp = async account => {
+  const enableOtp = async (account: EdgeAccount) => {
     await account.enableOtp()
     return await Airship.show(bridge => (
       <ButtonsModal

@@ -18,7 +18,7 @@ export const initializeChangeRecovery = (account: EdgeAccount) => async (
   const { context } = imports
 
   // Get the user's questions:
-  let userQuestions = []
+  let userQuestions: string[] = []
   const recoveryKey = account.recoveryKey
   if (recoveryKey != null) {
     try {

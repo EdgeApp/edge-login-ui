@@ -8,7 +8,7 @@ const disklet = makeReactNativeDisklet()
 
 type BiometryType = 'Fingerprint' | 'TouchID' | 'FaceID'
 
-function createKeyWithUsername(username) {
+function createKeyWithUsername(username: string) {
   return username + '___key_loginkey'
 }
 

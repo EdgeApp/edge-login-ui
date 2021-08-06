@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {
+  LayoutChangeEvent,
   Platform,
   Text,
   TextInput,
@@ -238,7 +239,7 @@ const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
     [placeholderSize]
   )
 
-  const handleContainerLayout = ({ nativeEvent }) => {
+  const handleContainerLayout = ({ nativeEvent }: LayoutChangeEvent) => {
     const { width, height } = nativeEvent.layout
     containerWidth.value = width
     setContainerHeight(height)
@@ -333,7 +334,7 @@ const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
     clear: clear
   }))
 
-  const placeholderStyle = React.useMemo(() => {
+  const placeholderStyle: ViewStyle[] = React.useMemo(() => {
     return [...placeholderPaddingStyles, animatedPlaceholderStyles]
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...placeholderPaddingStyles, animatedPlaceholderStyles])

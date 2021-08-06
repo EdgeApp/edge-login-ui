@@ -9,7 +9,7 @@ interface Props {
   uncheckedImage: any
   value?: boolean
   disabled?: boolean
-  onChange: (boolean) => void
+  onChange: (value: boolean) => void
 }
 
 interface State {

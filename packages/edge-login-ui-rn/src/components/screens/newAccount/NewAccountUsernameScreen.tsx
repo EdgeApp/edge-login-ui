@@ -28,7 +28,7 @@ interface StateProps {
   usernameErrorMessage: string | null
 }
 interface DispatchProps {
-  checkUsernameForAvailabilty: (string) => Promise<void>
+  checkUsernameForAvailabilty: (username: string) => Promise<void>
   validateUsername: (username: string) => void
   onBack: () => void
 }

@@ -14,8 +14,8 @@ interface Props {
       iconSize: number
     }
   }
-  onClick: (string) => void
-  onDelete: (string) => void
+  onClick: (username: string) => void
+  onDelete: (username: string) => void
 }
 
 export class UserListItem extends React.Component<Props> {
