@@ -31,10 +31,11 @@ interface State {
   autoFocus: boolean
 }
 export class MaterialInput extends React.Component<Props, State> {
-  textInput: TextField
+  textInput: React.RefObject<TextField>
 
   constructor(props: Props) {
     super(props)
+    this.textInput = React.createRef()
     this.state = {
       inputText: '',
       autoFocus: this.props.autoFocus ?? false
@@ -43,7 +44,7 @@ export class MaterialInput extends React.Component<Props, State> {
 
   componentDidMount() {
     if (this.props.autoFocus) {
-      this.textInput.focus()
+      this.textInput.current?.focus()
     }
   }
 
@@ -56,10 +57,10 @@ export class MaterialInput extends React.Component<Props, State> {
       })
     }
     if (nextProps.autoFocus && !this.props.autoFocus) {
-      this.textInput.focus()
+      this.textInput.current?.focus()
     }
     if (nextProps.forceFocus) {
-      this.textInput.focus()
+      this.textInput.current?.focus()
     }
   }
 
@@ -83,7 +84,7 @@ export class MaterialInput extends React.Component<Props, State> {
     return (
       <TextField
         testID={this.props.testID}
-        ref={this.addRef}
+        ref={this.textInput}
         label={this.props.label}
         value={value}
         onChangeText={this.handleChange}
@@ -106,12 +107,6 @@ export class MaterialInput extends React.Component<Props, State> {
         labelFontSize={scale(12)}
       />
     )
-  }
-
-  addRef = (arg: TextField | null) => {
-    if (arg) {
-      this.textInput = arg
-    }
   }
 
   handleChange = (text: string) => {

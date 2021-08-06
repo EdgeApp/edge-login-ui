@@ -29,11 +29,7 @@ interface DispatchProps {
 type Props = OwnProps & StateProps & DispatchProps
 
 class FourDigitInputComponent extends React.Component<Props> {
-  inputRef: TextInput | null
-
-  loadedInput = (ref: TextInput | null) => {
-    this.inputRef = ref
-  }
+  inputRef: React.RefObject<TextInput> = React.createRef()
 
   render() {
     return (
@@ -58,7 +54,7 @@ class FourDigitInputComponent extends React.Component<Props> {
       return (
         <TextInput
           testID={this.props.testID}
-          ref={this.loadedInput}
+          ref={this.inputRef}
           style={styles.input}
           onChangeText={this.handleUpdate}
           maxLength={MAX_PIN_LENGTH}
@@ -72,7 +68,7 @@ class FourDigitInputComponent extends React.Component<Props> {
   }
 
   handleRefocus = () => {
-    if (this.inputRef != null) this.inputRef.focus()
+    if (this.inputRef != null) this.inputRef.current?.focus()
   }
 
   renderDotContainer() {
