@@ -399,18 +399,22 @@ const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
       </TouchableWithoutFeedback>
 
       <Animated.View
-        style={[
-          ...placeholderSpacerPaddingStyles,
-          animatedPlaceholderSpacerStyles
-        ]}
+        style={
+          [
+            ...placeholderSpacerPaddingStyles,
+            animatedPlaceholderSpacerStyles
+          ] as any
+        }
       />
       <Animated.View
-        style={placeholderStyle}
+        style={placeholderStyle as any}
         onLayout={handlePlaceholderLayout}
         pointerEvents="none"
       >
         <Animated.Text
-          style={[...placeholderTextStyles, animatedPlaceholderTextStyles]}
+          style={
+            [...placeholderTextStyles, animatedPlaceholderTextStyles] as any
+          }
         >
           {placeholder}
         </Animated.Text>

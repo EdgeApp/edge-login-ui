@@ -53,7 +53,7 @@ export class MaterialInput extends React.Component<Props, State> {
     if (nextProps.value !== this.state.inputText) {
       this.setState({
         inputText: nextProps.value,
-        autoFocus: nextProps.autoFocus
+        autoFocus: nextProps.autoFocus ?? false
       })
     }
     if (nextProps.autoFocus && !this.props.autoFocus) {

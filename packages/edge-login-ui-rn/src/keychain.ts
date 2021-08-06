@@ -132,7 +132,7 @@ export async function getLoginKey(
     return AbcCoreJsUi.getKeychainStringWithFingerprint(
       loginKeyKey,
       promptString
-    ).catch(error => console.log(error)) // showError?
+    ).catch((error: unknown) => console.log(error)) // showError?
   }
 }
 

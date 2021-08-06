@@ -33,7 +33,7 @@ export class Button extends React.Component<Props, State> {
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isThinking !== this.state.isThinking) {
       this.setState({
-        isThinking: nextProps.isThinking
+        isThinking: nextProps.isThinking ?? false
       })
     }
   }

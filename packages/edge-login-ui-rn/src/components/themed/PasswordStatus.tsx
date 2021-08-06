@@ -23,9 +23,6 @@ interface StateProps {
 
 type Props = OwnProps & StateProps & ThemeProps
 
-const EnabledIcon = props => <FontAwesome {...props} name="check-circle" />
-const DisabledIcon = props => <SimpleLineIcons {...props} name="info" />
-
 const PasswordStatusComponent = ({ status, marginRem, theme }: Props) => {
   const styles = getStyles(theme)
   const spacings = sidesToMargin(mapSides(fixSides(marginRem, 0.5), theme.rem))
@@ -41,8 +38,8 @@ const PasswordStatusComponent = ({ status, marginRem, theme }: Props) => {
       <View style={styles.top}>
         <IconSignal
           enabled={passed}
-          enabledIcon={EnabledIcon}
-          disabledIcon={DisabledIcon}
+          enabledIcon={props => <FontAwesome {...props} name="check-circle" />}
+          disabledIcon={props => <SimpleLineIcons {...props} name="info" />}
         />
         <EdgeText style={[styles.message, passed && styles.passed]}>
           {s.strings.password_requirements}

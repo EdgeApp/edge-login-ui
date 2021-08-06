@@ -28,7 +28,6 @@ export class ReduxStore extends React.Component<Props> {
 
     this.store = createStore(
       rootReducer,
-      undefined,
       applyMiddleware(thunk.withExtraArgument(imports))
     )
 
