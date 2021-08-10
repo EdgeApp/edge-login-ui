@@ -72,7 +72,7 @@ export async function sendRecoveryEmail(
         isHTML: true
       },
       (error, event) => {
-        if (error) reject(error)
+        if (error != null) reject(error)
         if (event === 'sent') resolve()
       }
     )
@@ -99,5 +99,9 @@ export async function shareRecovery(
     '\n' +
     s.strings.otp_email_body3
 
-  await Share.open({ title: s.strings.otp_email_subject, message: body })
+  await Share.open({ title: s.strings.otp_email_subject, message: body }).catch(
+    error => {
+      if (!/User did not/.test(error?.message)) throw error
+    }
+  )
 }
