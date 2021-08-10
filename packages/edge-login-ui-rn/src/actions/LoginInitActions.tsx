@@ -107,7 +107,7 @@ const checkAndRequestNotifications = () => async (
   const notificationStatus = notificationPermision.status
   const isIos = Platform.OS === 'ios'
   const statusAppRefresh = isIos
-    ? await AbcCoreJsUi.backgroundAppRefreshStatus().catch(error =>
+    ? await AbcCoreJsUi.backgroundAppRefreshStatus().catch((error: undefined) =>
         console.log(error)
       )
     : undefined
@@ -134,7 +134,7 @@ const checkAndRequestNotifications = () => async (
         }
         if (result === 'enable' && notificationStatus === RESULTS.DENIED) {
           requestNotifications(
-            isIos ? ['alert', 'badge', 'sound'] : undefined
+            isIos ? ['alert', 'badge', 'sound'] : []
           ).catch(error => console.log(error))
         }
         if (

@@ -28,7 +28,6 @@ export class ReduxStore extends React.Component<Props> {
 
     this.store = createStore(
       rootReducer,
-      undefined,
       applyMiddleware(thunk.withExtraArgument(imports))
     )
 
@@ -47,6 +46,7 @@ export class ReduxStore extends React.Component<Props> {
 
   render() {
     const { children } = this.props
+    // @ts-expect-error: mismatching redux versions.
     return <Provider store={this.store}>{children}</Provider>
   }
 }
@@ -63,5 +63,6 @@ export function connect<StateProps, DispatchProps, OwnProps>(
   mapStateToProps: (state: RootState, ownProps: OwnProps) => StateProps,
   mapDispatchToProps?: (dispatch: Dispatch, ownProps: OwnProps) => DispatchProps
 ): Connector<StateProps & DispatchProps, OwnProps> {
+  // @ts-expect-error
   return rawConnect(mapStateToProps, mapDispatchToProps)
 }

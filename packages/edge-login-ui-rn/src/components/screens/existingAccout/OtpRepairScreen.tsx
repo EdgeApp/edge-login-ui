@@ -3,6 +3,7 @@ import * as React from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { sprintf } from 'sprintf-js'
 
+import { requestOtpReset } from '../../../actions/LoginOtpActions'
 import { onComplete } from '../../../actions/WorkflowActions'
 import s from '../../../common/locales/strings'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
@@ -154,7 +155,7 @@ export const OtpRepairScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch(showQrCodeModal())
     },
     async requestOtpReset() {
-      return await dispatch(this.requestOtpReset())
+      return await dispatch(requestOtpReset())
     },
     saveOtpError(account, error) {
       dispatch({ type: 'START_OTP_REPAIR', data: { account, error } })

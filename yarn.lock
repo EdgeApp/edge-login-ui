@@ -1018,6 +1018,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.9.2":
+  version "7.14.8"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.8.tgz#7119a56f421018852694290b9f9148097391b446"
+  integrity sha512-twj3L8Og5SaCRCErB4x4ajbvBIVV77CGeFglHpeg5WC5FF8TZzBWXtTJ4MqaD9QszLYTtr+IsaAL2rEUevb+eg==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.10.1", "@babel/template@^7.4.4":
   version "7.10.1"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.10.1.tgz#e167154a94cb5f14b28dc58f5356d2162f539811"
@@ -2057,6 +2064,14 @@
   resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.40.tgz#ded0240b6ea1ad7afc1e60374c49087aaea5dbd8"
   integrity sha512-VbjwR1fhsn2h2KXAY4oy1fm7dCxaKy0D+deTb8Ilc3Eo3rc5+5eA4rfYmZaHgNJKxVyI0f6WIXzO2zLkVmQPHA==
 
+"@types/hoist-non-react-statics@^3.3.0":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
+  integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
+  dependencies:
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+
 "@types/json-schema@^7.0.3":
   version "7.0.7"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.7.tgz#98a993516c859eb0d5c4c8f098317a9ea68db9ad"
@@ -2092,12 +2107,38 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@types/react-native@^0.64.4":
+"@types/react-native-share@^3.3.3":
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/@types/react-native-share/-/react-native-share-3.3.3.tgz#95e1087ad1d7972c85223dbfa52450455f604c9c"
+  integrity sha512-aZNKQjXtsuooG21wSsT8WUMkD+TiSNGi6i1XEKHLEFD3CSRUGAJI/PFXPzdWGsPw7Z0z4xW3IDKCbjyu0grRVg==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/react-native-vector-icons@^6.4.8":
+  version "6.4.8"
+  resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.8.tgz#7dd9740f36a71e98c484b9ea12155940c85cedc2"
+  integrity sha512-ImqhwVPHtcWrfwaS4vVrnN/C1mY50+Gjer4wMltUJlkt9pTJ5WXCyn8VFPmxC5h8Zy0DBN2tYdusBZ2xJP14OA==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/react-native@*", "@types/react-native@^0.64.4":
   version "0.64.4"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.4.tgz#9f11bef7dd5520801884829c73b19d75aa42e73c"
   integrity sha512-VqnlmadGkD5usREvnuyVpWDS1W8f6cCz6MP5fZdgONsaZ9/Ijfb9Iq9MZ5O3bnW1OyJixDX9HtSp3COsFSLD8Q==
   dependencies:
     "@types/react" "*"
+
+"@types/react-redux@^7.1.18":
+  version "7.1.18"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.18.tgz#2bf8fd56ebaae679a90ebffe48ff73717c438e04"
+  integrity sha512-9iwAsPyJ9DLTRH+OFeIrm9cAbIj1i2ANL3sKQFATqnPWRbg+jEFXyZOKHiQK/N86pNRXbb4HRxAxo0SIX1XwzQ==
+  dependencies:
+    "@types/hoist-non-react-statics" "^3.3.0"
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+    redux "^4.0.0"
 
 "@types/react@*":
   version "17.0.4"
@@ -2124,6 +2165,11 @@
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@types/sprintf-js/-/sprintf-js-1.1.2.tgz#a4fcb84c7344f39f70dc4eec0e1e7f10a48597a3"
   integrity sha512-hkgzYF+qnIl8uTO8rmUSVSfQ8BIfMXC4yJAF4n8BE758YsKBZvFC4NumnAegj7KmylP0liEZNpb9RRGFMbFejA==
+
+"@types/zxcvbn@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@types/zxcvbn/-/zxcvbn-4.4.1.tgz#46e42cbdcee681b22181478feaf4af2bc4c1abd2"
+  integrity sha512-3NoqvZC2W5gAC5DZbTpCeJ251vGQmgcWIHQJGq2J240HY6ErQ9aWKkwfoKJlHLx+A83WPNTZ9+3cd2ILxbvr1w==
 
 "@typescript-eslint/eslint-plugin@^4.8.2":
   version "4.22.0"
@@ -9211,10 +9257,10 @@ react-native-localize@^2.0.2:
   resolved "https://registry.yarnpkg.com/react-native-localize/-/react-native-localize-2.0.2.tgz#b0df6a88cf9947489deaa828c4c29246681fde16"
   integrity sha512-4Ii7lqiD9iL0LxTWifAiEsDcDPpvos/29fEVkHxgEDD7J5f+NROMkFSFomKgz1Cab1TmN5mau3o8yFmYrPFcnw==
 
-react-native-mail@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-mail/-/react-native-mail-6.0.0.tgz#7e8014cccff794098f8de012fc822c57d28f7d72"
-  integrity sha512-aQjCxKmPIwwX+voC2oK5Lj54Gfuvkodhp9lYFpPMxYYCXXtADuuZMsNWN7jSeqVuQHQzJZvYhgRtYqx0UDoKoQ==
+react-native-mail@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-mail/-/react-native-mail-6.1.0.tgz#cd7fa390824f5d1182fbe0599d135d221d11d205"
+  integrity sha512-u2JqlHe19OKbXPKx3mNhBTuF7LfM4EkpVG/DkpY5i5G+dgOz8rRtBDKvcuJfUQnMBNav3kwvcwArjOG3rZhJZQ==
 
 "react-native-material-textfield@git://github.com/EdgeApp/react-native-material-textfield.git":
   version "0.10.2"
@@ -9488,6 +9534,13 @@ redux@^3.6.0:
     lodash-es "^4.2.1"
     loose-envify "^1.1.0"
     symbol-observable "^1.0.3"
+
+redux@^4.0.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.1.1.tgz#76f1c439bb42043f985fbd9bf21990e60bd67f47"
+  integrity sha512-hZQZdDEM25UY2P493kPYuKqviVwZ58lEmGQNeQ+gXa+U0gYPUBf7NKYazbe3m+bs/DzM/ahN12DbF+NG8i0CWw==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
 
 redux@~3.5.2:
   version "3.5.2"

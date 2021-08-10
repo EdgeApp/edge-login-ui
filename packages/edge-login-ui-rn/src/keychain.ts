@@ -8,7 +8,7 @@ const disklet = makeReactNativeDisklet()
 
 type BiometryType = 'Fingerprint' | 'TouchID' | 'FaceID'
 
-function createKeyWithUsername(username) {
+function createKeyWithUsername(username: string) {
   return username + '___key_loginkey'
 }
 
@@ -132,7 +132,7 @@ export async function getLoginKey(
     return AbcCoreJsUi.getKeychainStringWithFingerprint(
       loginKeyKey,
       promptString
-    ).catch(error => console.log(error)) // showError?
+    ).catch((error: unknown) => console.log(error)) // showError?
   }
 }
 

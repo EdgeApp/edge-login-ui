@@ -14,8 +14,8 @@ interface Props {
       iconSize: number
     }
   }
-  onClick: (string) => void
-  onDelete: (string) => void
+  onClick: (username: string) => void
+  onDelete: (username: string) => void
 }
 
 export class UserListItem extends React.Component<Props> {
@@ -37,28 +37,21 @@ export class UserListItem extends React.Component<Props> {
 
   renderInside() {
     const { style } = this.props
-    if (this.props.onDelete) {
-      return (
-        <View style={style.container}>
-          <View style={style.textComtainer}>
-            <Text style={style.text}>{this.props.data}</Text>
-          </View>
-          <TouchableOpacity
-            style={style.iconButton.container}
-            onPress={this.handleDelete}
-          >
-            <MaterialIcon
-              style={style.iconButton.icon}
-              name="close"
-              size={style.iconButton.iconSize}
-            />
-          </TouchableOpacity>
-        </View>
-      )
-    }
     return (
       <View style={style.container}>
-        <Text style={style.text}>{this.props.data}</Text>
+        <View style={style.textComtainer}>
+          <Text style={style.text}>{this.props.data}</Text>
+        </View>
+        <TouchableOpacity
+          style={style.iconButton.container}
+          onPress={this.handleDelete}
+        >
+          <MaterialIcon
+            style={style.iconButton.icon}
+            name="close"
+            size={style.iconButton.iconSize}
+          />
+        </TouchableOpacity>
       </View>
     )
   }

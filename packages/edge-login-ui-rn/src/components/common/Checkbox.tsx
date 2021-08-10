@@ -9,7 +9,7 @@ interface Props {
   uncheckedImage: any
   value?: boolean
   disabled?: boolean
-  onChange: (boolean) => void
+  onChange: (value: boolean) => void
 }
 
 interface State {
@@ -27,7 +27,7 @@ export class Checkbox extends React.Component<Props, State> {
   UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (this.props.disabled) {
       this.setState({
-        onOff: nextProps.value
+        onOff: nextProps.value ?? false
       })
     }
   }

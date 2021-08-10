@@ -1,5 +1,3 @@
-// @flow
-
 declare module 'react-native-material-textfield' {
   import * as React from 'react'
 

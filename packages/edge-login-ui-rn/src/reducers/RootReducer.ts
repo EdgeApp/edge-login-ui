@@ -26,7 +26,7 @@ export interface RootState {
 }
 
 export const rootReducer: (
-  state: RootState | undefined,
+  state: RootState,
   action: Action
 ) => RootState = combineReducers({
   create,
