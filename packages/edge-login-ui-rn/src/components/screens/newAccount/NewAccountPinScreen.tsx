@@ -51,6 +51,8 @@ const NewAccountPinScreenComponent = ({
   onDone,
   theme
 }: Props) => {
+  const [loading, setLoading] = React.useState<boolean>(false)
+
   const styles = getStyles(theme)
 
   const showNext = pin.length === MAX_PIN_LENGTH && !pinErrorMessage
@@ -66,10 +68,15 @@ const NewAccountPinScreenComponent = ({
 
     if (account != null) {
       Keyboard.dismiss()
+      setLoading(true)
       account
         .changePin({ pin })
-        .then(onDone)
+        .then(() => {
+          setLoading(false)
+          onDone()
+        })
         .catch(error => {
+          setLoading(false)
           showError(error)
         })
     } else {
@@ -107,6 +114,7 @@ const NewAccountPinScreenComponent = ({
             <SecondaryButton
               label={s.strings.next_label}
               onPress={handleNext}
+              spinner={loading}
             />
           </Fade>
         </View>

@@ -67,6 +67,7 @@ const NewAccountPasswordScreenComponent = ({
   const styles = getStyles(theme)
   const [focusFirst, setFocusFirst] = React.useState<boolean>(true)
   const [focusSecond, setFocusSecond] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState<boolean>(false)
 
   const handleFocusSwitch = () => {
     setFocusFirst(false)
@@ -94,13 +95,18 @@ const NewAccountPasswordScreenComponent = ({
 
     if (account != null) {
       Keyboard.dismiss()
+      setLoading(true)
       account
         .changePassword(password)
-        .then(onDone)
+        .then(() => {
+          setLoading(false)
+          onDone()
+        })
         .catch(error => {
+          setLoading(false)
           showError(error)
         })
-    }else {
+    } else {
       onDone()
     }
   }
@@ -167,6 +173,7 @@ const NewAccountPasswordScreenComponent = ({
             <SecondaryButton
               label={s.strings.next_label}
               onPress={handleNext}
+              spinner={loading}
             />
           </Fade>
         </View>
