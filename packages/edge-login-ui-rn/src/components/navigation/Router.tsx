@@ -8,10 +8,6 @@ import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
 import { MaybeProvideLoginUi } from '../publicApi/LoginUiProvider'
 import {
-  PublicChangePasswordScreen,
-  ResecurePasswordScreen
-} from '../screens/existingAccout/ChangePasswordScreen'
-import {
   PublicChangePinScreen,
   ResecurePinScreen
 } from '../screens/existingAccout/ChangePinScreen'
@@ -20,7 +16,11 @@ import { OtpRepairScreen } from '../screens/existingAccout/OtpRepairScreen'
 import { SecurityAlertsScreen } from '../screens/existingAccout/SecurityAlertsScreen'
 import { LandingScreen } from '../screens/LandingScreen'
 import { LoadingScreen } from '../screens/LoadingScreen'
-import { NewAccountPasswordScreen } from '../screens/newAccount/NewAccountPasswordScreen'
+import {
+  NewAccountPasswordScreen,
+  PublicChangePasswordScreen,
+  ResecurePasswordScreen
+} from '../screens/newAccount/NewAccountPasswordScreen'
 import { NewAccountPinScreen } from '../screens/newAccount/NewAccountPinScreen'
 import { NewAccountReviewScreen } from '../screens/newAccount/NewAccountReviewScreen'
 import { NewAccountUsernameScreen } from '../screens/newAccount/NewAccountUsernameScreen'
@@ -95,7 +95,7 @@ class RouterComponent extends React.Component<Props> {
       case 1:
         return <NewAccountUsernameScreen branding={this.props.branding} />
       case 2:
-        return <NewAccountPasswordScreen />
+        return <NewAccountPasswordScreen showHeader />
       case 3:
         return <NewAccountPinScreen />
       case 4:

@@ -1,14 +1,19 @@
+import { EdgeAccount } from 'edge-core-js'
 import * as React from 'react'
-import { KeyboardAvoidingView, View } from 'react-native'
+import { Keyboard, KeyboardAvoidingView, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
 import {
   validateConfirmPassword,
   validatePassword
 } from '../../../actions/CreateAccountActions'
+import { onComplete } from '../../../actions/WorkflowActions'
 import s from '../../../common/locales/strings'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
+import { getAccount } from '../../../util/selectors'
+import { ButtonsModal } from '../../modals/ButtonsModal'
+import { Airship, showError } from '../../services/AirshipInstance'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
 import { BackButton } from '../../themed/BackButton'
@@ -18,11 +23,15 @@ import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
 import { PasswordStatus } from '../../themed/PasswordStatus'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
+import { SkipButton } from '../../themed/SkipButton'
 import { SecondaryButton } from '../../themed/ThemedButtons'
 import { ThemedScene } from '../../themed/ThemedScene'
 
-interface OwnProps {}
+interface OwnProps {
+  showHeader?: boolean
+}
 interface StateProps {
+  account?: EdgeAccount
   confirmPassword: string
   confirmPasswordErrorMessage: string
   createPasswordErrorMessage: string
@@ -32,23 +41,27 @@ interface StateProps {
 }
 interface DispatchProps {
   onDone: () => void
-  onBack: () => void
+  onBack?: () => void
+  onSkip?: () => void
   validateConfirmPassword: (password: string) => void
   validatePassword: (password: string) => void
 }
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
 const NewAccountPasswordScreenComponent = ({
+  account,
   confirmPassword,
   confirmPasswordErrorMessage,
   createPasswordErrorMessage,
   password,
   onDone,
   onBack,
+  onSkip,
   validateConfirmPassword,
   validatePassword,
   isPasswordStatusExists,
   isPasswordPassed,
+  showHeader,
   theme
 }: Props) => {
   const styles = getStyles(theme)
@@ -78,7 +91,18 @@ const NewAccountPasswordScreenComponent = ({
     }
 
     logEvent('Signup_Password_Valid')
-    onDone()
+
+    if (account != null) {
+      Keyboard.dismiss()
+      account
+        .changePassword(password)
+        .then(onDone)
+        .catch(error => {
+          showError(error)
+        })
+    }else {
+      onDone()
+    }
   }
 
   const renderInterior = () => {
@@ -88,9 +112,11 @@ const NewAccountPasswordScreenComponent = ({
           <PasswordStatus marginRem={[0, 0, 1.25]} />
         ) : (
           <>
-            <EdgeText
-              style={styles.subtitle}
-            >{`${s.strings.step_two}: ${s.strings.choose_title_password}`}</EdgeText>
+            {account == null && (
+              <EdgeText
+                style={styles.subtitle}
+              >{`${s.strings.step_two}: ${s.strings.choose_title_password}`}</EdgeText>
+            )}
             <EdgeText style={styles.description} numberOfLines={2}>
               {s.strings.password_desc}
             </EdgeText>
@@ -150,8 +176,19 @@ const NewAccountPasswordScreenComponent = ({
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
-      <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
+      {showHeader && onBack != null && (
+        <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
+      )}
+      {showHeader && onSkip != null && (
+        <SkipButton onPress={onSkip} marginRem={[0, -0.5, 1, 0]} />
+      )}
+      {showHeader && (
+        <SimpleSceneHeader>
+          {account != null
+            ? s.strings.change_password
+            : s.strings.create_your_account}
+        </SimpleSceneHeader>
+      )}
       {focusSecond ? (
         <KeyboardAvoidingView
           style={[styles.container, styles.overflowHidden]}
@@ -224,6 +261,79 @@ export const NewAccountPasswordScreen = connect<
     },
     onBack() {
       dispatch({ type: 'WORKFLOW_BACK' })
+    },
+    validateConfirmPassword(password: string) {
+      dispatch(validateConfirmPassword(password))
+    },
+    validatePassword(password: string) {
+      dispatch(validatePassword(password))
+    }
+  })
+)(withTheme(NewAccountPasswordScreenComponent))
+
+export const PublicChangePasswordScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
+    account: getAccount(state),
+    confirmPassword: state.create.confirmPassword || '',
+    confirmPasswordErrorMessage: state.create.confirmPasswordErrorMessage || '',
+    createPasswordErrorMessage: state.create.createPasswordErrorMessage || '',
+    password: state.create.password || '',
+    isPasswordStatusExists: !!state.passwordStatus,
+    isPasswordPassed: Boolean(
+      state.passwordStatus && state.passwordStatus.passed
+    )
+  }),
+  (dispatch: Dispatch) => ({
+    onDone() {
+      Airship.show(bridge => (
+        <ButtonsModal
+          bridge={bridge}
+          title={s.strings.password_changed}
+          message={s.strings.pwd_change_modal}
+          buttons={{ ok: { label: s.strings.ok } }}
+        />
+      ))
+        .then(() => dispatch(onComplete()))
+        .catch(showError)
+    },
+    onBack() {
+      dispatch(onComplete())
+    },
+    validateConfirmPassword(password: string) {
+      dispatch(validateConfirmPassword(password))
+    },
+    validatePassword(password: string) {
+      dispatch(validatePassword(password))
+    }
+  })
+)(withTheme(NewAccountPasswordScreenComponent))
+
+export const ResecurePasswordScreen = connect<
+  StateProps,
+  DispatchProps,
+  OwnProps
+>(
+  (state: RootState) => ({
+    account: getAccount(state),
+    confirmPassword: state.create.confirmPassword || '',
+    confirmPasswordErrorMessage: state.create.confirmPasswordErrorMessage || '',
+    createPasswordErrorMessage: state.create.createPasswordErrorMessage || '',
+    password: state.create.password || '',
+    isPasswordStatusExists: !!state.passwordStatus,
+    isPasswordPassed: Boolean(
+      state.passwordStatus && state.passwordStatus.passed
+    )
+  }),
+  (dispatch: Dispatch) => ({
+    onDone() {
+      dispatch({ type: 'WORKFLOW_NEXT' })
+    },
+    onSkip() {
+      dispatch(dispatch({ type: 'WORKFLOW_NEXT' }))
     },
     validateConfirmPassword(password: string) {
       dispatch(validateConfirmPassword(password))
