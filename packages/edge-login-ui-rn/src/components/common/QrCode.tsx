@@ -1,4 +1,4 @@
-import { Shape, Surface, Transform } from '@react-native-community/art'
+import { Shape, Surface } from '@react-native-community/art'
 import qrcodeGenerator from 'qrcode-generator'
 import * as React from 'react'
 
@@ -31,11 +31,10 @@ export function QrCode(props: Props) {
 
   // Create a drawing transform to scale QR cells to device pixels:
   const sizeInCells = code.getModuleCount() + 2 * padding
-  const transform = new Transform().scale(size / sizeInCells)
 
   return (
     <Surface height={size} width={size} style={{ backgroundColor }}>
-      <Shape d={path} fill={foregroundColor} transform={transform} />
+      <Shape d={path} fill={foregroundColor} scale={size / sizeInCells} />
     </Surface>
   )
 }
