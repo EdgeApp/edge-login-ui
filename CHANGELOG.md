@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.9.15 (2021-08-18)
+
+- rn: Fix error when cancelling sending
+- rn: Enable Typescript strict mode and fix type definitions
+- rn: Update translations
+
 ## 0.9.14 (2021-08-02)
 
 - rn: Use hooks for the public login screen
