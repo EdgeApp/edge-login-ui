@@ -14,12 +14,10 @@ import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { BackButton } from '../../themed/BackButton'
 import { Checkbox } from '../../themed/Checkbox'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
 import { MainButton } from '../../themed/MainButton'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {
@@ -95,9 +93,7 @@ const TermsAndConditionsSceneComponent = ({
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
-      <SimpleSceneHeader>{s.strings.account_confirmation}</SimpleSceneHeader>
+    <ThemedScene onBack={onBack} title={s.strings.account_confirmation}>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.content}>
         <EdgeText
           style={styles.subtitle}
@@ -142,8 +138,7 @@ const TermsAndConditionsSceneComponent = ({
 
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
+    marginHorizontal: theme.rem(0.5)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,

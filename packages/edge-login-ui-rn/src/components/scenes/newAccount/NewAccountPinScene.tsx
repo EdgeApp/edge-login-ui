@@ -8,12 +8,10 @@ import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { BackButton } from '../../themed/BackButton'
 import { DigitInput, MAX_PIN_LENGTH } from '../../themed/DigitInput'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
 import { MainButton } from '../../themed/MainButton'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {}
@@ -54,9 +52,7 @@ const NewAccountPinSceneComponent = ({
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
-      <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
+    <ThemedScene onBack={onBack} title={s.strings.create_your_account}>
       <ScrollView ref={scrollViewRef} style={styles.content}>
         <EdgeText
           style={styles.subtitle}
@@ -82,8 +78,7 @@ const NewAccountPinSceneComponent = ({
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
+    marginHorizontal: theme.rem(0.5)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,
