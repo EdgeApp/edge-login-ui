@@ -11,13 +11,11 @@ import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
 import { PasswordStatus } from '../../themed/PasswordStatus'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { SecondaryButton } from '../../themed/ThemedButtons'
 import { ThemedScene } from '../../themed/ThemedScene'
 
@@ -149,26 +147,18 @@ const NewAccountPasswordScreenComponent = ({
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
-      <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
+    <ThemedScene onBack={onBack} title={s.strings.create_your_account}>
       {focusSecond ? (
         <KeyboardAvoidingView
           style={[styles.container, styles.overflowHidden]}
-          contentContainerStyle={[
-            styles.container,
-            styles.overflowHidden,
-            styles.containerMargins
-          ]}
+          contentContainerStyle={[styles.container, styles.overflowHidden]}
           behavior="position"
           keyboardVerticalOffset={-150}
         >
           {renderInterior()}
         </KeyboardAvoidingView>
       ) : (
-        <View style={[styles.container, styles.containerMargins]}>
-          {renderInterior()}
-        </View>
+        <View style={styles.container}>{renderInterior()}</View>
       )}
     </ThemedScene>
   )
@@ -176,14 +166,11 @@ const NewAccountPasswordScreenComponent = ({
 
 const getStyles = cacheStyles((theme: Theme) => ({
   container: {
-    flex: 1
+    flex: 1,
+    marginHorizontal: theme.rem(0.5)
   },
   overflowHidden: {
     overflow: 'hidden'
-  },
-  containerMargins: {
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Image, TouchableOpacity, View } from 'react-native'
+import { Image, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 import { sprintf } from 'sprintf-js'
 
@@ -11,9 +11,8 @@ import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { Divider } from '../../themed/Divider'
+import { DividerLine } from '../../themed/DividerLine'
 import { EdgeText } from '../../themed/EdgeText'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { SecondaryButton } from '../../themed/ThemedButtons'
 import { ThemedScene } from '../../themed/ThemedScene'
 
@@ -36,11 +35,7 @@ const NewAccountWelcomeScreenComponent = ({
   const appName = branding.appName || s.strings.app_name_default
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <TouchableOpacity style={styles.exitButton} onPress={onExit}>
-        <EdgeText style={styles.exitText}>{s.strings.exit}</EdgeText>
-      </TouchableOpacity>
-      <SimpleSceneHeader>{s.strings.get_started}</SimpleSceneHeader>
+    <ThemedScene onBack={onExit} title={s.strings.get_started}>
       <View style={styles.content}>
         <Image source={LOGO_BIG} style={styles.logo} resizeMode="contain" />
         <EdgeText style={styles.welcome}>
@@ -61,7 +56,7 @@ const NewAccountWelcomeScreenComponent = ({
             </EdgeText>
           </View>
         </View>
-        <Divider marginRem={[1.5, 0, 1.5, 0.5]} />
+        <DividerLine marginRem={[1.5, 0.5]} />
         <View style={styles.advantage}>
           <Image
             source={WELCOME_SHIELD_KEY}
@@ -98,14 +93,6 @@ const getStyles = cacheStyles((theme: Theme) => ({
     marginTop: theme.rem(0.75),
     marginBottom: theme.rem(1)
   },
-  exitButton: {
-    marginLeft: theme.rem(0.5),
-    marginBottom: theme.rem(1)
-  },
-  exitText: {
-    color: theme.primaryButton,
-    fontSize: theme.rem(0.75)
-  },
   welcome: {
     fontFamily: theme.fontFaceBold,
     color: theme.secondaryText,
@@ -115,13 +102,12 @@ const getStyles = cacheStyles((theme: Theme) => ({
   advantage: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
+    marginHorizontal: theme.rem(0.5)
   },
   advantageImage: {
     height: theme.rem(2),
     width: theme.rem(2),
-    marginRight: theme.rem(1)
+    marginRight: theme.rem(0.5)
   },
   advantageTextContainer: {
     flex: 1

@@ -82,9 +82,7 @@ class OtpRepairScreenComponent extends React.Component<Props> {
 
     return (
       <ThemedScene
-        showHeader
         onBack={this.props.onBack}
-        subTitle=""
         title={s.strings.otp_header_repair}
       >
         <IconHeaderRow
