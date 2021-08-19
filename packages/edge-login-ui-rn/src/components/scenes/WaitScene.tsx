@@ -20,9 +20,7 @@ const WaitSceneComponent = ({ title, message, theme }: Props & ThemeProps) => {
     <ThemedScene>
       <View style={styles.content}>
         <EdgeText style={styles.title}>{title}</EdgeText>
-        <EdgeText style={[styles.message, styles.marginBottom]}>
-          {message}
-        </EdgeText>
+        <EdgeText style={styles.message}>{message}</EdgeText>
         <Image source={loader} style={styles.loaderImage} />
       </View>
     </ThemedScene>
@@ -37,16 +35,14 @@ const getStyles = cacheStyles((theme: Theme) => ({
   },
   title: {
     fontFamily: theme.fontFaceBold,
-    fontSize: theme.rem(1.1),
+    fontSize: theme.rem(1.25),
     marginBottom: theme.rem(1.25)
   },
   message: {
     fontFamily: theme.fontFaceBold,
-    fontSize: theme.rem(0.75),
+    fontSize: theme.rem(1),
+    marginBottom: theme.rem(2),
     textAlign: 'center'
-  },
-  marginBottom: {
-    marginBottom: theme.rem(2.5)
   },
   loaderImage: {
     width: theme.rem(5),
