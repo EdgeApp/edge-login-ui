@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.16 (2021-08-20)
+
+- rn: Fix Change PIN scene losing access to keyboard
+
 ## 0.9.15 (2021-08-18)
 
 - rn: Fix error when cancelling sending
