@@ -68,7 +68,10 @@ class FourDigitInputComponent extends React.Component<Props> {
   }
 
   handleRefocus = () => {
-    if (this.inputRef != null) this.inputRef.current?.focus()
+    if (this.inputRef.current != null) {
+      this.inputRef.current.blur()
+      this.inputRef.current.focus()
+    }
   }
 
   renderDotContainer() {
