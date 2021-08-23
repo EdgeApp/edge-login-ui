@@ -30,9 +30,11 @@ import { OtpErrorScreen } from '../screens/OtpErrorScreen'
 import { PasswordLoginScreen } from '../screens/PasswordLoginScreen'
 import { PinLoginScreen } from '../screens/PinLoginScreen'
 import { RecoveryLoginScreen } from '../screens/RecoveryLoginScreen'
-import { WaitScreen } from '../screens/WaitScreen'
+import { ImageLoader, WaitScreen } from '../screens/WaitScreen'
 import { connect } from '../services/ReduxStore'
 import { ThemeProvider } from '../services/ThemeContext'
+
+const imageLoader = require('../../assets/safeLoader.gif')
 
 interface OwnProps {
   branding: Branding
@@ -105,6 +107,7 @@ class RouterComponent extends React.Component<Props> {
           <WaitScreen
             title={s.strings.good_job}
             message={s.strings.hang_tight + '\n' + s.strings.secure_account}
+            loader={<ImageLoader source={imageLoader} />}
           />
         )
       case 6:
