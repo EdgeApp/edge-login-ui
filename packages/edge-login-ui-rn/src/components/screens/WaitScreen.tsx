@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { ActivityIndicator, Image, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
 import * as Colors from '../../constants/Colors'
@@ -11,6 +11,10 @@ interface Props {
   title: string
   message: string
   loader?: React.ReactNode
+}
+
+interface ImageLoaderProps {
+  source: any
 }
 
 const WaitScreenComponent = ({
@@ -38,6 +42,14 @@ const WaitScreenComponent = ({
   )
 }
 
+const ImageLoaderComponent = ({
+  source,
+  theme
+}: ImageLoaderProps & ThemeProps) => {
+  const styles = getStyles(theme)
+  return <Image source={source} style={styles.loaderImage} />
+}
+
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
@@ -56,7 +68,12 @@ const getStyles = cacheStyles((theme: Theme) => ({
   },
   marginBottom: {
     marginBottom: theme.rem(2.5)
+  },
+  loaderImage: {
+    width: theme.rem(5),
+    height: theme.rem(5)
   }
 }))
 
 export const WaitScreen = withTheme(WaitScreenComponent)
+export const ImageLoader = withTheme(ImageLoaderComponent)
