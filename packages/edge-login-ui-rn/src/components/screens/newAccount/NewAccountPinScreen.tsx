@@ -8,7 +8,6 @@ import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { BackButton } from '../../themed/BackButton'
 import { DigitInput, MAX_PIN_LENGTH } from '../../themed/DigitInput'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
@@ -54,8 +53,7 @@ const NewAccountPinScreenComponent = ({
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
+    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]} onBack={onBack} showHeader>
       <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
       <ScrollView ref={scrollViewRef} style={styles.content}>
         <EdgeText
