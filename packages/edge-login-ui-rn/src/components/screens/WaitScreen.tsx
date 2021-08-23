@@ -10,9 +10,15 @@ import { ThemedScene } from '../themed/ThemedScene'
 interface Props {
   title: string
   message: string
+  loader?: React.ReactNode
 }
 
-const WaitScreenComponent = ({ title, message, theme }: Props & ThemeProps) => {
+const WaitScreenComponent = ({
+  title,
+  loader,
+  message,
+  theme
+}: Props & ThemeProps) => {
   const styles = getStyles(theme)
 
   return (
@@ -22,7 +28,11 @@ const WaitScreenComponent = ({ title, message, theme }: Props & ThemeProps) => {
         <EdgeText style={[styles.message, styles.marginBottom]}>
           {message}
         </EdgeText>
-        <ActivityIndicator color={Colors.ACCENT_MINT} size="large" />
+        {loader != null ? (
+          loader
+        ) : (
+          <ActivityIndicator color={Colors.ACCENT_MINT} size="large" />
+        )}
       </View>
     </ThemedScene>
   )
