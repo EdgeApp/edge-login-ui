@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { Image, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
-import * as Colors from '../../constants/Colors'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 import { EdgeText } from '../themed/EdgeText'
 import { ThemedScene } from '../themed/ThemedScene'
+
+const loader = require('../../assets/safeLoader.gif')
 
 interface Props {
   title: string
@@ -22,7 +23,7 @@ const WaitScreenComponent = ({ title, message, theme }: Props & ThemeProps) => {
         <EdgeText style={[styles.message, styles.marginBottom]}>
           {message}
         </EdgeText>
-        <ActivityIndicator color={Colors.ACCENT_MINT} size="large" />
+        <Image source={loader} style={styles.loaderImage} />
       </View>
     </ThemedScene>
   )
@@ -46,6 +47,10 @@ const getStyles = cacheStyles((theme: Theme) => ({
   },
   marginBottom: {
     marginBottom: theme.rem(2.5)
+  },
+  loaderImage: {
+    width: theme.rem(5),
+    height: theme.rem(5)
   }
 }))
 
