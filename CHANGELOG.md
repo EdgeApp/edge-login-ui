@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.17 (2021-09-14)
+
+- rn: Add gif loader to wait screen
+
 ## 0.9.16 (2021-08-20)
 
 - rn: Fix Change PIN scene losing access to keyboard
