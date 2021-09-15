@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "cleaners": "^0.3.1",
+    "date-fns": "^2.23.0",
     "qrcode-generator": "^1.4.4",
     "react-native-airship": "^0.2.6",
     "react-native-gesture-handler": "^1.10.3",
