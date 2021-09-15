@@ -106,6 +106,7 @@ class ChangeRecoverySceneComponent extends React.Component<Props, State> {
     if (errorOne || errorTwo || errorQuestionOne || errorQuestionTwo) {
       return
     }
+    Keyboard.dismiss()
     this.enableRecovery().catch(showError)
   }
 
