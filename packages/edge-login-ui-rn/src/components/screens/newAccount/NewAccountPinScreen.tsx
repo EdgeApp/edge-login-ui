@@ -110,10 +110,10 @@ export const NewAccountPinScreen = connect<StateProps, DispatchProps, OwnProps>(
   }),
   (dispatch: Dispatch) => ({
     onDone() {
-      dispatch({ type: 'WORKFLOW_NEXT' })
+      dispatch({ type: 'NEW_ACCOUNT_TOS' })
     },
     onBack() {
-      dispatch({ type: 'WORKFLOW_BACK' })
+      dispatch({ type: 'NEW_ACCOUNT_PASSWORD' })
     }
   })
 )(withTheme(NewAccountPinScreenComponent))

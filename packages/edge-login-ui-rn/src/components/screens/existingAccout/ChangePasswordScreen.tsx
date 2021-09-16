@@ -16,7 +16,7 @@ import { getAccount } from '../../../util/selectors'
 import { PasswordStatus } from '../../abSpecific/PasswordStatusComponent'
 import { Button } from '../../common/Button'
 import { FormField } from '../../common/FormField'
-import { Header } from '../../common/Header'
+import { HeaderComponent } from '../../common/Header'
 import SafeAreaView from '../../common/SafeAreaViewGradient'
 import { ButtonsModal } from '../../modals/ButtonsModal'
 import { Airship, showError } from '../../services/AirshipInstance'
@@ -97,7 +97,13 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <Header onBack={this.props.onBack} onSkip={this.props.onSkip} />
+      return (
+        <HeaderComponent
+          onBack={this.props.onBack}
+          onSkip={this.props.onSkip}
+          title={s.strings.change_password}
+        />
+      )
     }
     return null
   }
@@ -260,10 +266,10 @@ export const ResecurePasswordScreen = connect<
   }),
   (dispatch: Dispatch) => ({
     onDone() {
-      dispatch({ type: 'WORKFLOW_NEXT' })
+      dispatch({ type: 'RESECURE_PIN' })
     },
     onSkip() {
-      dispatch(dispatch({ type: 'WORKFLOW_NEXT' }))
+      dispatch(dispatch({ type: 'RESECURE_PIN' }))
     },
     validateConfirmPassword(password: string) {
       dispatch(validateConfirmPassword(password))

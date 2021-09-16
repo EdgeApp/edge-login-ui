@@ -2,7 +2,8 @@ import * as React from 'react'
 import { View } from 'react-native'
 
 import s from '../../common/locales/strings'
-import { WorkflowState } from '../../reducers/WorkflowReducer'
+import { SceneNames } from '../../constants/workflows'
+import { SceneState } from '../../reducers/WorkflowReducer'
 import * as Styles from '../../styles/index'
 import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
@@ -23,9 +24,9 @@ import { LoadingScreen } from '../screens/LoadingScreen'
 import { NewAccountPasswordScreen } from '../screens/newAccount/NewAccountPasswordScreen'
 import { NewAccountPinScreen } from '../screens/newAccount/NewAccountPinScreen'
 import { NewAccountReviewScreen } from '../screens/newAccount/NewAccountReviewScreen'
+import { NewAccountTosScreen as NewAccountTOSScreen } from '../screens/newAccount/NewAccountTosScreen'
 import { NewAccountUsernameScreen } from '../screens/newAccount/NewAccountUsernameScreen'
 import { NewAccountWelcomeScreen } from '../screens/newAccount/NewAccountWelcomeScreen'
-import { TermsAndConditionsScreen } from '../screens/newAccount/TermsAndConditionsScreen'
 import { OtpErrorScreen } from '../screens/OtpErrorScreen'
 import { PasswordLoginScreen } from '../screens/PasswordLoginScreen'
 import { PinLoginScreen } from '../screens/PinLoginScreen'
@@ -39,7 +40,7 @@ interface OwnProps {
   showHeader: boolean
 }
 interface StateProps {
-  workflow: WorkflowState
+  scene: SceneState
 }
 type Props = OwnProps & StateProps
 
@@ -57,76 +58,61 @@ class RouterComponent extends React.Component<Props> {
     )
   }
 
+  // TODO:
   renderContent() {
-    switch (this.props.workflow.currentKey) {
-      case 'changePasswordWF':
+    switch (this.props.scene.currentScene) {
+      case SceneNames.changePasswordScene:
         return <PublicChangePasswordScreen showHeader={this.props.showHeader} />
-      case 'changePinWF':
+      case SceneNames.changePinScene:
         return <PublicChangePinScreen showHeader={this.props.showHeader} />
-      case 'changeRecoveryWF':
+      case SceneNames.changeRecoveryScene:
         return <PublicChangeRecoveryScreen showHeader={this.props.showHeader} />
-      case 'createWF':
-        return this.getCreateScreen()
-      case 'landingWF':
-        return <LandingScreen branding={this.props.branding} />
-      case 'loadingWF':
-        return <LoadingScreen branding={this.props.branding} />
-      case 'otpWF':
-        return <OtpErrorScreen />
-      case 'otpRepairWF':
-        return <OtpRepairScreen />
-      case 'passwordWF':
-        return <PasswordLoginScreen branding={this.props.branding} />
-      case 'pinWF':
-        return <PinLoginScreen branding={this.props.branding} />
-      case 'recoveryLoginWF':
-        return <RecoveryLoginScreen />
-      case 'resecureWF':
-        return this.getResecureScreen()
-      case 'securityAlertWF':
-        return <SecurityAlertsScreen />
-    }
-  }
-
-  getCreateScreen() {
-    switch (this.props.workflow.currentSceneIndex) {
-      case 0:
+      case SceneNames.newAccountWelcomeScene:
         return <NewAccountWelcomeScreen branding={this.props.branding} />
-      case 1:
+      case SceneNames.newAccountUsernameScreen:
         return <NewAccountUsernameScreen branding={this.props.branding} />
-      case 2:
+      case SceneNames.newAccountPasswordScreen:
         return <NewAccountPasswordScreen />
-      case 3:
+      case SceneNames.newAccountPinScreen:
         return <NewAccountPinScreen />
-      case 4:
-        return <TermsAndConditionsScreen branding={this.props.branding} />
-      case 5:
+      case SceneNames.newAccountTOSScreen:
+        return <NewAccountTOSScreen branding={this.props.branding} />
+      case SceneNames.newAccountWaitScreen:
         return (
           <WaitScreen
             title={s.strings.good_job}
             message={s.strings.hang_tight + '\n' + s.strings.secure_account}
           />
         )
-      case 6:
+      case SceneNames.newAccountReviewScreen:
         return <NewAccountReviewScreen />
-      default:
-        return <NewAccountWelcomeScreen branding={this.props.branding} />
-    }
-  }
-
-  getResecureScreen() {
-    switch (this.props.workflow.currentSceneIndex) {
-      case 0:
+      case SceneNames.landingScene:
+        return <LandingScreen branding={this.props.branding} />
+      case SceneNames.loadingScene:
+        return <LoadingScreen branding={this.props.branding} />
+      case SceneNames.otpScene:
+        return <OtpErrorScreen />
+      case SceneNames.otpRepairScene:
+        return <OtpRepairScreen />
+      case SceneNames.passwordScene:
+        return <PasswordLoginScreen branding={this.props.branding} />
+      case SceneNames.pinScene:
+        return <PinLoginScreen branding={this.props.branding} />
+      case SceneNames.recoveryLoginScene:
+        return <RecoveryLoginScreen />
+      case SceneNames.resecurePasswordScreen:
         return <ResecurePasswordScreen showHeader={this.props.showHeader} />
-      case 1:
+      case SceneNames.resecurePinScreen:
         return <ResecurePinScreen showHeader={this.props.showHeader} />
+      case SceneNames.securityAlertScene:
+        return <SecurityAlertsScreen />
     }
   }
 }
 
 export const Router = connect<StateProps, {}, OwnProps>(
   (state: RootState) => ({
-    workflow: state.workflow
+    scene: state.scene
   }),
   (dispatch: Dispatch) => ({})
 )(RouterComponent)

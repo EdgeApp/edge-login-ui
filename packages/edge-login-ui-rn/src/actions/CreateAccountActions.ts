@@ -39,7 +39,7 @@ export function checkUsernameForAvailabilty(data: string) {
           }
           logEvent(`Signup_Username_Available`)
           dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
-          dispatch({ type: 'WORKFLOW_NEXT' })
+          dispatch({ type: 'NEW_ACCOUNT_PASSWORD' })
           return
         }
         const obj = {
@@ -87,6 +87,7 @@ export function validateConfirmPassword(confirmPassword: string) {
   }
 }
 export function validatePassword(data: string) {
+  console.log('validatePassword')
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const context = imports.context
     let error = null
@@ -131,9 +132,11 @@ export function validatePassword(data: string) {
 }
 
 export function createUser(data: CreateUserData) {
+  console.log('createUser')
+
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context } = imports
-    dispatch({ type: 'WORKFLOW_NEXT' })
+    dispatch({ type: 'NEW_ACCOUNT_WAIT' })
     setTimeout(async () => {
       try {
         const abcAccount = await context.createAccount(
@@ -152,7 +155,7 @@ export function createUser(data: CreateUserData) {
           })
         }
         dispatch({ type: 'CREATE_ACCOUNT_SUCCESS', data: abcAccount })
-        dispatch({ type: 'WORKFLOW_NEXT' })
+        dispatch({ type: 'NEW_ACCOUNT_REVIEW' })
         logEvent('Signup_Create_User_Success')
         await setMostRecentUsers(abcAccount.username)
         await abcAccount.dataStore.setItem(
@@ -164,7 +167,7 @@ export function createUser(data: CreateUserData) {
       } catch (e) {
         console.log(e)
         dispatch({ type: 'CREATE_ACCOUNT_FAIL', data: e.message })
-        dispatch({ type: 'WORKFLOW_BACK' })
+        dispatch({ type: 'NEW_ACCOUNT_USERNAME' })
       }
     }, 300)
   }

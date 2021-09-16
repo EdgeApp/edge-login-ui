@@ -1,62 +1,115 @@
-import { WorkflowName, workflows } from '../constants/workflows'
+import { SceneNames } from '../constants/workflows'
 import { Action } from '../types/ReduxTypes'
 
-export interface WorkflowState {
-  readonly currentKey: WorkflowName
-  readonly currentSceneIndex: number
+export interface SceneState {
+  readonly currentScene: SceneNames
 }
 
-const initialState: WorkflowState = {
-  currentKey: 'loadingWF',
-  currentSceneIndex: 0
+const initialState: SceneState = {
+  currentScene: SceneNames.loadingScene
 }
 
-export function workflow(
-  state: WorkflowState = initialState,
+// TODO: remove back/next, update to specific scene
+export function scene(
+  state: SceneState = initialState,
   action: Action
-): WorkflowState {
+): SceneState {
   switch (action.type) {
-    // Generic workflow actions:
-    case 'WORKFLOW_BACK': {
-      let { currentSceneIndex } = state
-      if (currentSceneIndex > 0) {
-        --currentSceneIndex
-      }
-      return { ...state, currentSceneIndex }
-    }
-    case 'WORKFLOW_NEXT': {
-      let { currentSceneIndex } = state
-      if (currentSceneIndex + 1 < workflows[state.currentKey].length) {
-        ++currentSceneIndex
-      }
-      return { ...state, currentSceneIndex }
-    }
-
-    // Actions for launching screens:
     case 'OTP_ERROR':
-      return { ...state, currentKey: 'otpWF', currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentScene: SceneNames.otpScene
+      }
     case 'START_CHANGE_PASSWORD':
-      return { ...state, currentKey: 'changePasswordWF', currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentScene: SceneNames.changePasswordScene
+      }
     case 'START_CHANGE_PIN':
-      return { ...state, currentKey: 'changePinWF', currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentScene: SceneNames.changePinScene
+      }
     case 'START_CHANGE_RECOVERY':
-      return { ...state, currentKey: 'changeRecoveryWF', currentSceneIndex: 0 }
-    case 'START_CREATE_ACCOUNT':
-      return { ...state, currentKey: 'createWF', currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentScene: SceneNames.changeRecoveryScene
+      }
+    case 'NEW_ACCOUNT_WELCOME':
+      return {
+        ...state,
+        currentScene: SceneNames.newAccountWelcomeScene
+      }
+    case 'NEW_ACCOUNT_USERNAME':
+      return {
+        ...state,
+        currentScene: SceneNames.newAccountUsernameScreen
+      }
+    case 'NEW_ACCOUNT_PASSWORD':
+      return {
+        ...state,
+        currentScene: SceneNames.newAccountPasswordScreen
+      }
+    case 'NEW_ACCOUNT_PIN':
+      return {
+        ...state,
+        currentScene: SceneNames.newAccountPinScreen
+      }
+    case 'NEW_ACCOUNT_WAIT':
+      return {
+        ...state,
+        currentScene: SceneNames.newAccountWaitScreen
+      }
+    case 'NEW_ACCOUNT_TOS':
+      return {
+        ...state,
+        currentScene: SceneNames.newAccountTOSScreen
+      }
+    case 'NEW_ACCOUNT_REVIEW':
+      return {
+        ...state,
+        currentScene: SceneNames.newAccountReviewScreen
+      }
     case 'START_LANDING':
-      return { ...state, currentKey: 'landingWF', currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentScene: SceneNames.landingScene
+      }
     case 'START_OTP_REPAIR':
-      return { ...state, currentKey: 'otpRepairWF', currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentScene: SceneNames.otpRepairScene
+      }
     case 'START_PASSWORD_LOGIN':
-      return { ...state, currentKey: 'passwordWF', currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentScene: SceneNames.passwordScene
+      }
     case 'START_PIN_LOGIN':
-      return { ...state, currentKey: 'pinWF', currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentScene: SceneNames.pinScene
+      }
     case 'START_RECOVERY_LOGIN':
-      return { ...state, currentKey: 'recoveryLoginWF', currentSceneIndex: 0 }
-    case 'START_RESECURE':
-      return { ...state, currentKey: 'resecureWF', currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentScene: SceneNames.recoveryLoginScene
+      }
+    case 'RESECURE_PASSWORD':
+      return {
+        ...state,
+        currentScene: SceneNames.resecurePasswordScreen
+      }
+    case 'RESECURE_PIN':
+      return {
+        ...state,
+        currentScene: SceneNames.resecurePinScreen
+      }
     case 'START_SECURITY_ALERT':
-      return { ...state, currentKey: 'securityAlertWF', currentSceneIndex: 0 }
+      return {
+        ...state,
+        currentScene: SceneNames.securityAlertScene
+      }
 
     case 'RESET_APP':
       return initialState

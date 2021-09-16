@@ -529,7 +529,7 @@ export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       return await dispatch(deleteUserFromDevice(username))
     },
     gotoCreatePage() {
-      dispatch({ type: 'START_CREATE_ACCOUNT' })
+      dispatch({ type: 'NEW_ACCOUNT_WELCOME' })
     },
     gotoPinLoginPage() {
       dispatch({ type: 'START_PIN_LOGIN' })

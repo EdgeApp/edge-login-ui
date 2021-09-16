@@ -17,7 +17,7 @@ import { scale } from '../../../util/scaling'
 import { getAccount } from '../../../util/selectors'
 import { Button } from '../../common/Button'
 import { FormField } from '../../common/FormField'
-import { Header } from '../../common/Header'
+import { HeaderComponent } from '../../common/Header'
 import { TextRowComponent } from '../../common/ListItems/TextRowComponent'
 import { TextAndIconButton } from '../../common/TextAndIconButton'
 import { ButtonInfo, ButtonsModal } from '../../modals/ButtonsModal'
@@ -79,7 +79,12 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <Header onBack={this.props.onBack} />
+      return (
+        <HeaderComponent
+          onBack={this.props.onBack}
+          title={s.strings.recovery}
+        />
+      )
     }
     return null
   }

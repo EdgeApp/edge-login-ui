@@ -49,7 +49,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     marginBottom: theme.rem(2.5)
   },
   loaderImage: {
-    width: theme.rem(5),
+    width: theme.rem(5), f fksnf ,ejrbkv 
     height: theme.rem(5)
   }
 }))

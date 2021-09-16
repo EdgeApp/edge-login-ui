@@ -4,12 +4,11 @@ import LinearGradient from 'react-native-linear-gradient'
 
 import s from '../../common/locales/strings'
 import T from '../../components/common/FormattedText'
-import { connect } from '../../components/services/ReduxStore'
+// import { connect } from '../../components/services/ReduxStore'
 import * as Colors from '../../constants/Colors'
 import * as Constants from '../../constants/index'
-import { workflows } from '../../constants/workflows'
 import * as Styles from '../../styles/index'
-import { Dispatch, RootState } from '../../types/ReduxTypes'
+// import { Dispatch, RootState } from '../../types/ReduxTypes'
 import { scale } from '../../util/scaling'
 import { Button } from '../common/Button'
 import { HeaderBackButton } from '../common/HeaderBackButton'
@@ -17,12 +16,12 @@ import { HeaderBackButton } from '../common/HeaderBackButton'
 interface OwnProps {
   onBack?: () => void
   onSkip?: () => void
-}
-interface StateProps {
-  subTitle: string
   title: string
+  subTitle?: string
 }
-type Props = OwnProps & StateProps
+
+// interface StateProps {}
+type Props = OwnProps
 
 /**
  * The raw Header for a scene.
@@ -60,9 +59,6 @@ export class HeaderComponent extends React.Component<Props> {
   renderText() {
     return (
       <View style={styles.center}>
-        {this.props.subTitle !== '' && (
-          <T style={styles.subHeadText}>{this.props.subTitle}</T>
-        )}
         <T style={styles.headlineText}>{this.props.title}</T>
       </View>
     )
@@ -164,14 +160,13 @@ const styles = {
   }
 } as const
 
-export const Header = connect<StateProps, {}, OwnProps>(
-  (state: RootState) => {
-    const { currentKey, currentSceneIndex } = state.workflow
-    const currentScene = workflows[currentKey][currentSceneIndex]
-    return {
-      subTitle: currentScene.subTitle,
-      title: currentScene.title
-    }
-  },
-  (dispatch: Dispatch) => ({})
-)(HeaderComponent)
+// export const Header = connect<StateProps, {}, OwnProps>(
+//   (state: RootState) => {
+//     const { scene: currentScene } = state
+//     return {
+//       subTitle: currentScene.subTitle,
+//       title: currentScene.title
+//     }
+//   },
+//   (dispatch: Dispatch) => ({})
+// )(HeaderComponent)

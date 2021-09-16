@@ -149,7 +149,7 @@ export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
     },
     onDone() {
       logEvent(`Signup_Welcome_Next`)
-      dispatch({ type: 'WORKFLOW_NEXT' })
+      dispatch({ type: 'NEW_ACCOUNT_USERNAME' })
     }
   })
 )(withTheme(NewAccountWelcomeScreenComponent))

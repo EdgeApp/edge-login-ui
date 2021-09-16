@@ -173,11 +173,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const TermsAndConditionsScreen = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps
->(
+export const NewAccountTosScreen = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     createErrorMessage: state.create.createErrorMessage,
     password: state.create.password || '',
@@ -192,7 +188,7 @@ export const TermsAndConditionsScreen = connect<
       dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
     },
     onBack() {
-      dispatch({ type: 'WORKFLOW_BACK' })
+      dispatch({ type: 'NEW_ACCOUNT_PIN' })
     }
   })
 )(withTheme(TermsAndConditionsScreenComponent))

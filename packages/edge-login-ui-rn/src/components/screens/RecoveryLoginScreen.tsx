@@ -10,7 +10,7 @@ import { Dispatch, RootState } from '../../types/ReduxTypes'
 import { LoginAttempt } from '../../util/loginAttempt'
 import { Button } from '../common/Button'
 import { FormField } from '../common/FormField'
-import { Header } from '../common/Header'
+import { HeaderComponent } from '../common/Header'
 import SafeAreaViewGradient from '../common/SafeAreaViewGradient'
 import { connect } from '../services/ReduxStore'
 
@@ -52,7 +52,12 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <Header onBack={this.props.onBack} />
+      return (
+        <HeaderComponent
+          onBack={this.props.onBack}
+          title={s.strings.recovery}
+        />
+      )
     }
     return null
   }

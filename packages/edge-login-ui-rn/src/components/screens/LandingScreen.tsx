@@ -156,7 +156,7 @@ export const LandingScreen = connect<{}, DispatchProps, OwnProps>(
   (dispatch: Dispatch): DispatchProps => ({
     handleCreate() {
       logEvent('Signup_Create_Account')
-      dispatch({ type: 'START_CREATE_ACCOUNT' })
+      dispatch({ type: 'NEW_ACCOUNT_WELCOME' })
     },
     handlePassword() {
       dispatch({ type: 'START_PASSWORD_LOGIN' })

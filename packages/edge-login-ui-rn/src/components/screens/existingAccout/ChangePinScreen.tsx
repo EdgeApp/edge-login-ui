@@ -12,7 +12,7 @@ import { scale } from '../../../util/scaling'
 import { getAccount } from '../../../util/selectors'
 import { FourDigitInput } from '../../abSpecific/FourDigitInputComponent'
 import { Button } from '../../common/Button'
-import { Header } from '../../common/Header'
+import { HeaderComponent } from '../../common/Header'
 import SafeAreaView from '../../common/SafeAreaViewGradient'
 import { ButtonsModal } from '../../modals/ButtonsModal'
 import { Airship, showError } from '../../services/AirshipInstance'
@@ -53,7 +53,13 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <Header onBack={this.props.onBack} onSkip={this.props.onSkip} />
+      return (
+        <HeaderComponent
+          onBack={this.props.onBack}
+          onSkip={this.props.onSkip}
+          title={s.strings.change_pin}
+        />
+      )
     }
     return null
   }
