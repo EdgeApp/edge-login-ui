@@ -53,7 +53,13 @@ class ChangePinSceneComponent extends React.Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <Header onBack={this.props.onBack} onSkip={this.props.onSkip} />
+      return (
+        <Header
+          onBack={this.props.onBack}
+          onSkip={this.props.onSkip}
+          title={s.strings.change_pin}
+        />
+      )
     }
     return null
   }

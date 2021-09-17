@@ -188,7 +188,7 @@ export const NewAccountTosScene = connect<StateProps, DispatchProps, OwnProps>(
       dispatch({ type: 'CLEAR_CREATE_ERROR_MESSAGE' })
     },
     onBack() {
-      dispatch({ type: 'WORKFLOW_BACK' })
+      dispatch({ type: 'NEW_ACCOUNT_PIN' })
     }
   })
 )(withTheme(TermsAndConditionsSceneComponent))

@@ -52,7 +52,7 @@ class RecoveryLoginSceneComponent extends React.Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <Header onBack={this.props.onBack} />
+      return <Header onBack={this.props.onBack} title={s.strings.recovery} />
     }
     return null
   }

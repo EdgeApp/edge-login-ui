@@ -1,62 +1,95 @@
-import { WorkflowName, workflows } from '../constants/workflows'
 import { Action } from '../types/ReduxTypes'
+import { SceneNames } from '../types/Scenes'
 
-export interface WorkflowState {
-  readonly currentKey: WorkflowName
-  readonly currentSceneIndex: number
+export interface SceneState {
+  readonly currentScene: SceneNames
 }
 
-const initialState: WorkflowState = {
-  currentKey: 'loadingWF',
-  currentSceneIndex: 0
+const initialState: SceneState = {
+  currentScene: 'LoadingScene'
 }
 
-export function workflow(
-  state: WorkflowState = initialState,
+export function scene(
+  state: SceneState = initialState,
   action: Action
-): WorkflowState {
+): SceneState {
   switch (action.type) {
-    // Generic workflow actions:
-    case 'WORKFLOW_BACK': {
-      let { currentSceneIndex } = state
-      if (currentSceneIndex > 0) {
-        --currentSceneIndex
-      }
-      return { ...state, currentSceneIndex }
-    }
-    case 'WORKFLOW_NEXT': {
-      let { currentSceneIndex } = state
-      if (currentSceneIndex + 1 < workflows[state.currentKey].length) {
-        ++currentSceneIndex
-      }
-      return { ...state, currentSceneIndex }
-    }
-
-    // Actions for launching scenes:
     case 'OTP_ERROR':
-      return { ...state, currentKey: 'otpWF', currentSceneIndex: 0 }
+      return {
+        currentScene: 'OtpScene'
+      }
     case 'START_CHANGE_PASSWORD':
-      return { ...state, currentKey: 'changePasswordWF', currentSceneIndex: 0 }
+      return {
+        currentScene: 'ChangePasswordScene'
+      }
     case 'START_CHANGE_PIN':
-      return { ...state, currentKey: 'changePinWF', currentSceneIndex: 0 }
+      return {
+        currentScene: 'ChangePinScene'
+      }
     case 'START_CHANGE_RECOVERY':
-      return { ...state, currentKey: 'changeRecoveryWF', currentSceneIndex: 0 }
-    case 'START_CREATE_ACCOUNT':
-      return { ...state, currentKey: 'createWF', currentSceneIndex: 0 }
+      return {
+        currentScene: 'ChangeRecoveryScene'
+      }
+    case 'NEW_ACCOUNT_WELCOME':
+      return {
+        currentScene: 'NewAccountWelcomeScene'
+      }
+    case 'NEW_ACCOUNT_USERNAME':
+      return {
+        currentScene: 'NewAccountUsernameScene'
+      }
+    case 'NEW_ACCOUNT_PASSWORD':
+      return {
+        currentScene: 'NewAccountPasswordScene'
+      }
+    case 'NEW_ACCOUNT_PIN':
+      return {
+        currentScene: 'NewAccountPinScene'
+      }
+    case 'NEW_ACCOUNT_WAIT':
+      return {
+        currentScene: 'NewAccountWaitScene'
+      }
+    case 'NEW_ACCOUNT_TOS':
+      return {
+        currentScene: 'NewAccountTosScene'
+      }
+    case 'NEW_ACCOUNT_REVIEW':
+      return {
+        currentScene: 'NewAccountReviewScene'
+      }
     case 'START_LANDING':
-      return { ...state, currentKey: 'landingWF', currentSceneIndex: 0 }
+      return {
+        currentScene: 'LandingScene'
+      }
     case 'START_OTP_REPAIR':
-      return { ...state, currentKey: 'otpRepairWF', currentSceneIndex: 0 }
+      return {
+        currentScene: 'OtpRepairScene'
+      }
     case 'START_PASSWORD_LOGIN':
-      return { ...state, currentKey: 'passwordWF', currentSceneIndex: 0 }
+      return {
+        currentScene: 'PasswordScene'
+      }
     case 'START_PIN_LOGIN':
-      return { ...state, currentKey: 'pinWF', currentSceneIndex: 0 }
+      return {
+        currentScene: 'PinScene'
+      }
     case 'START_RECOVERY_LOGIN':
-      return { ...state, currentKey: 'recoveryLoginWF', currentSceneIndex: 0 }
-    case 'START_RESECURE':
-      return { ...state, currentKey: 'resecureWF', currentSceneIndex: 0 }
+      return {
+        currentScene: 'RecoveryLoginScene'
+      }
+    case 'RESECURE_PASSWORD':
+      return {
+        currentScene: 'ResecurePasswordScene'
+      }
+    case 'RESECURE_PIN':
+      return {
+        currentScene: 'ResecurePinScene'
+      }
     case 'START_SECURITY_ALERT':
-      return { ...state, currentKey: 'securityAlertWF', currentSceneIndex: 0 }
+      return {
+        currentScene: 'SecurityAlertScene'
+      }
 
     case 'RESET_APP':
       return initialState

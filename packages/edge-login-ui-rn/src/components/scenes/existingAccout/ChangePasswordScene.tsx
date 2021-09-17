@@ -97,7 +97,13 @@ class ChangePasswordSceneComponent extends React.Component<Props, State> {
 
   renderHeader = () => {
     if (this.props.showHeader) {
-      return <Header onBack={this.props.onBack} onSkip={this.props.onSkip} />
+      return (
+        <Header
+          onBack={this.props.onBack}
+          onSkip={this.props.onSkip}
+          title={s.strings.change_password}
+        />
+      )
     }
     return null
   }
@@ -260,10 +266,10 @@ export const ResecurePasswordScene = connect<
   }),
   (dispatch: Dispatch) => ({
     onDone() {
-      dispatch({ type: 'WORKFLOW_NEXT' })
+      dispatch({ type: 'RESECURE_PIN' })
     },
     onSkip() {
-      dispatch(dispatch({ type: 'WORKFLOW_NEXT' }))
+      dispatch(dispatch({ type: 'RESECURE_PIN' }))
     },
     validateConfirmPassword(password: string) {
       dispatch(validateConfirmPassword(password))

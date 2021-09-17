@@ -39,7 +39,7 @@ export function checkUsernameForAvailabilty(data: string) {
           }
           logEvent(`Signup_Username_Available`)
           dispatch({ type: 'CREATE_UPDATE_USERNAME', data: obj })
-          dispatch({ type: 'WORKFLOW_NEXT' })
+          dispatch({ type: 'NEW_ACCOUNT_PASSWORD' })
           return
         }
         const obj = {
@@ -55,15 +55,14 @@ export function checkUsernameForAvailabilty(data: string) {
 }
 
 function isASCII(str: string) {
-  // eslint-disable-next-line no-control-regex
-  return /^[\x00-\x7F]*$/.test(str)
+  return /^[\x20-\x7E]*$/.test(str)
 }
 
 export function validateUsername(data: string) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     // TODO evaluate client side evaluations.
-    let error = data.length > 2 ? null : s.strings.username_3_characters_error // TODO: Localize string
-    error = isASCII(data) ? error : s.strings.username_ascii_error // TODO: localize
+    let error = data.length > 2 ? null : s.strings.username_3_characters_error
+    error = isASCII(data) ? error : s.strings.username_ascii_error
     const obj = {
       username: data,
       error: error
@@ -115,7 +114,7 @@ export function validatePassword(data: string) {
     }
 
     if (!passwordEval.passed) {
-      error = s.strings.password_error // TODO localize.
+      error = s.strings.password_error
     }
 
     dispatch({
@@ -133,7 +132,7 @@ export function validatePassword(data: string) {
 export function createUser(data: CreateUserData) {
   return (dispatch: Dispatch, getState: GetState, imports: Imports) => {
     const { context } = imports
-    dispatch({ type: 'WORKFLOW_NEXT' })
+    dispatch({ type: 'NEW_ACCOUNT_WAIT' })
     setTimeout(async () => {
       try {
         const abcAccount = await context.createAccount(
@@ -152,7 +151,7 @@ export function createUser(data: CreateUserData) {
           })
         }
         dispatch({ type: 'CREATE_ACCOUNT_SUCCESS', data: abcAccount })
-        dispatch({ type: 'WORKFLOW_NEXT' })
+        dispatch({ type: 'NEW_ACCOUNT_REVIEW' })
         logEvent('Signup_Create_User_Success')
         await setMostRecentUsers(abcAccount.username)
         await abcAccount.dataStore.setItem(
@@ -164,7 +163,7 @@ export function createUser(data: CreateUserData) {
       } catch (e) {
         console.log(e)
         dispatch({ type: 'CREATE_ACCOUNT_FAIL', data: e.message })
-        dispatch({ type: 'WORKFLOW_BACK' })
+        dispatch({ type: 'NEW_ACCOUNT_USERNAME' })
       }
     }, 300)
   }
