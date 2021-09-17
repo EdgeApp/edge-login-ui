@@ -41,7 +41,7 @@ interface DispatchProps {
 
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
-const TermsAndConditionsScreenComponent = ({
+const TermsAndConditionsSceneComponent = ({
   branding,
   agreeToConditionAndCreateUser,
   createErrorMessage,
@@ -173,11 +173,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const TermsAndConditionsScreen = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps
->(
+export const NewAccountTosScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     createErrorMessage: state.create.createErrorMessage,
     password: state.create.password || '',
@@ -195,4 +191,4 @@ export const TermsAndConditionsScreen = connect<
       dispatch({ type: 'WORKFLOW_BACK' })
     }
   })
-)(withTheme(TermsAndConditionsScreenComponent))
+)(withTheme(TermsAndConditionsSceneComponent))

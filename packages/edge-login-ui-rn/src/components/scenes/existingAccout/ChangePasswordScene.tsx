@@ -50,7 +50,7 @@ interface State {
   isProcessing: boolean
 }
 
-class ChangePasswordScreenComponent extends React.Component<Props, State> {
+class ChangePasswordSceneComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -167,7 +167,7 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
   render() {
     return (
       <SafeAreaView>
-        <View style={styles.screen}>
+        <View style={styles.scene}>
           {this.renderHeader()}
           <ScrollView keyboardShouldPersistTaps="always">
             {this.renderMain()}
@@ -180,7 +180,7 @@ class ChangePasswordScreenComponent extends React.Component<Props, State> {
 }
 
 const styles = {
-  screen: { ...Styles.ScreenStyle },
+  scene: { ...Styles.SceneStyle },
   pageContainer: {
     width: '100%',
     alignItems: 'center',
@@ -203,7 +203,7 @@ const styles = {
   }
 } as const
 
-export const PublicChangePasswordScreen = connect<
+export const PublicChangePasswordScene = connect<
   StateProps,
   DispatchProps,
   OwnProps
@@ -241,9 +241,9 @@ export const PublicChangePasswordScreen = connect<
       dispatch(validatePassword(password))
     }
   })
-)(ChangePasswordScreenComponent)
+)(ChangePasswordSceneComponent)
 
-export const ResecurePasswordScreen = connect<
+export const ResecurePasswordScene = connect<
   StateProps,
   DispatchProps,
   OwnProps
@@ -272,4 +272,4 @@ export const ResecurePasswordScreen = connect<
       dispatch(validatePassword(password))
     }
   })
-)(ChangePasswordScreenComponent)
+)(ChangePasswordSceneComponent)

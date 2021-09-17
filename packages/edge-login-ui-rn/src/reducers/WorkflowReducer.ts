@@ -32,7 +32,7 @@ export function workflow(
       return { ...state, currentSceneIndex }
     }
 
-    // Actions for launching screens:
+    // Actions for launching scenes:
     case 'OTP_ERROR':
       return { ...state, currentKey: 'otpWF', currentSceneIndex: 0 }
     case 'START_CHANGE_PASSWORD':

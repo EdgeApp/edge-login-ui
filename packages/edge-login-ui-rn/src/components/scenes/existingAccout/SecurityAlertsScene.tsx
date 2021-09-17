@@ -38,7 +38,7 @@ interface State {
   spinVoucher: { [voucherId: string]: boolean }
 }
 
-export class SecurityAlertsScreenComponent extends React.Component<
+export class SecurityAlertsSceneComponent extends React.Component<
   Props,
   State
 > {
@@ -91,12 +91,12 @@ export class SecurityAlertsScreenComponent extends React.Component<
           >
             <MessageText>
               {count > 1
-                ? s.strings.alert_screen_message_many
-                : s.strings.alert_screen_message}
+                ? s.strings.alert_scene_message_many
+                : s.strings.alert_scene_message}
             </MessageText>
           </IconHeaderRow>
           <MessageText>
-            <Warning>{s.strings.alert_screen_warning}</Warning>
+            <Warning>{s.strings.alert_scene_warning}</Warning>
           </MessageText>
           {this.renderVouchers()}
           {this.renderReset()}
@@ -112,7 +112,7 @@ export class SecurityAlertsScreenComponent extends React.Component<
           <PrimaryButton marginRem={1} spinner />
         ) : (
           <PrimaryButton
-            label={s.strings.alert_screen_deny}
+            label={s.strings.alert_scene_deny}
             marginRem={1}
             onPress={this.handleDeny}
           />
@@ -130,9 +130,9 @@ export class SecurityAlertsScreenComponent extends React.Component<
 
     return (
       <View style={styles.tile}>
-        <MessageText>{s.strings.alert_screen_reset_message}</MessageText>
+        <MessageText>{s.strings.alert_scene_reset_message}</MessageText>
         <MessageText>
-          {s.strings.alert_screen_reset_date}
+          {s.strings.alert_scene_reset_date}
           {otpResetDate.toLocaleString()}
         </MessageText>
         {spinReset ? (
@@ -142,7 +142,7 @@ export class SecurityAlertsScreenComponent extends React.Component<
           />
         ) : (
           <LinkRow
-            label={s.strings.alert_screen_approve}
+            label={s.strings.alert_scene_approve}
             onPress={this.handleApproveReset}
             renderIcon={theme => (
               <AntDesignIcon name="check" size={theme.rem(1)} />
@@ -162,13 +162,13 @@ export class SecurityAlertsScreenComponent extends React.Component<
       <View style={styles.tile} key={voucher.voucherId}>
         <MessageText>
           {voucher.deviceDescription != null
-            ? s.strings.alert_screen_device + voucher.deviceDescription + '\n'
+            ? s.strings.alert_scene_device + voucher.deviceDescription + '\n'
             : null}
-          {s.strings.alert_screen_ip + voucher.ipDescription + '\n'}
-          {s.strings.alert_screen_date + voucher.created.toLocaleString()}
+          {s.strings.alert_scene_ip + voucher.ipDescription + '\n'}
+          {s.strings.alert_scene_date + voucher.created.toLocaleString()}
         </MessageText>
         <MessageText>
-          {s.strings.alert_screen_reset_date}
+          {s.strings.alert_scene_reset_date}
           {voucher.activates.toLocaleString()}
         </MessageText>
         {spinVoucher[voucher.voucherId] ? (
@@ -178,7 +178,7 @@ export class SecurityAlertsScreenComponent extends React.Component<
           />
         ) : (
           <LinkRow
-            label={s.strings.alert_screen_approve}
+            label={s.strings.alert_scene_approve}
             onPress={() => this.handleApproveVoucher(voucher.voucherId)}
             renderIcon={theme => (
               <AntDesignIcon name="check" size={theme.rem(1)} />
@@ -278,11 +278,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const SecurityAlertsScreen = connect<
-  StateProps,
-  DispatchProps,
-  OwnProps
->(
+export const SecurityAlertsScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     account: getAccount(state)
   }),
@@ -294,4 +290,4 @@ export const SecurityAlertsScreen = connect<
       dispatch(completeResecure())
     }
   })
-)(withTheme(SecurityAlertsScreenComponent))
+)(withTheme(SecurityAlertsSceneComponent))

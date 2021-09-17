@@ -32,7 +32,7 @@ interface DispatchProps {
 }
 type Props = OwnProps & StateProps & DispatchProps
 
-class OtpRepairScreenComponent extends React.Component<Props> {
+class OtpRepairSceneComponent extends React.Component<Props> {
   handleBackupModal = () => {
     const { account, onBack, saveOtpError } = this.props
 
@@ -104,9 +104,9 @@ class OtpRepairScreenComponent extends React.Component<Props> {
         </IconHeaderRow>
 
         <DividerWithText label={s.strings.to_fix} />
-        <MessageText>{s.strings.otp_screen_approve}</MessageText>
+        <MessageText>{s.strings.otp_scene_approve}</MessageText>
         <DividerWithText />
-        <LinkRow label={s.strings.otp_screen_qr} onPress={handleQrModal} />
+        <LinkRow label={s.strings.otp_scene_qr} onPress={handleQrModal} />
         {isIp ? null : (
           <>
             <DividerWithText />
@@ -120,7 +120,7 @@ class OtpRepairScreenComponent extends React.Component<Props> {
           <>
             <DividerWithText />
             <MessageText>
-              {sprintf(s.strings.otp_screen_wait, date.toLocaleString())}
+              {sprintf(s.strings.otp_scene_wait, date.toLocaleString())}
             </MessageText>
           </>
         )}
@@ -138,12 +138,12 @@ class OtpRepairScreenComponent extends React.Component<Props> {
   }
 }
 
-export const OtpRepairScreen = connect<StateProps, DispatchProps, OwnProps>(
+export const OtpRepairScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => {
     const { account } = state
     const { otpError, otpResetDate } = state.login
     if (account == null || otpError == null) {
-      throw new Error('Missing OtpError for OTP repair screen')
+      throw new Error('Missing OtpError for OTP repair scene')
     }
     return { account, otpError, otpResetDate }
   },
@@ -161,4 +161,4 @@ export const OtpRepairScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch({ type: 'START_OTP_REPAIR', data: { account, error } })
     }
   })
-)(OtpRepairScreenComponent)
+)(OtpRepairSceneComponent)

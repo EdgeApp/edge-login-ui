@@ -36,7 +36,7 @@ interface DispatchProps {
 }
 type Props = OwnProps & StateProps & DispatchProps
 
-class OtpErrorScreenComponent extends React.Component<Props> {
+class OtpErrorSceneComponent extends React.Component<Props> {
   checkVoucher = makePeriodicTask(async () => {
     const {
       hasReadyVoucher,
@@ -49,7 +49,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
     try {
       const result = await hasReadyVoucher(otpError)
       if (result) {
-        showToast(s.strings.otp_screen_retrying)
+        showToast(s.strings.otp_scene_retrying)
         await login(otpAttempt)
       }
     } catch (error) {
@@ -133,15 +133,15 @@ class OtpErrorScreenComponent extends React.Component<Props> {
           <MessageText>
             <Warning>
               {isIp
-                ? s.strings.otp_screen_header_ip
-                : s.strings.otp_screen_header_2fa}
+                ? s.strings.otp_scene_header_ip
+                : s.strings.otp_scene_header_2fa}
             </Warning>
           </MessageText>
         </IconHeaderRow>
         <DividerWithText label={s.strings.to_fix} />
-        <MessageText>{s.strings.otp_screen_approve}</MessageText>
+        <MessageText>{s.strings.otp_scene_approve}</MessageText>
         <DividerWithText />
-        <LinkRow label={s.strings.otp_screen_qr} onPress={handleQrModal} />
+        <LinkRow label={s.strings.otp_scene_qr} onPress={handleQrModal} />
         {isIp ? null : (
           <>
             <DividerWithText />
@@ -155,7 +155,7 @@ class OtpErrorScreenComponent extends React.Component<Props> {
           <>
             <DividerWithText />
             <MessageText>
-              {sprintf(s.strings.otp_screen_wait, date.toLocaleString())}
+              {sprintf(s.strings.otp_scene_wait, date.toLocaleString())}
             </MessageText>
           </>
         )}
@@ -173,11 +173,11 @@ class OtpErrorScreenComponent extends React.Component<Props> {
   }
 }
 
-export const OtpErrorScreen = connect<StateProps, DispatchProps, OwnProps>(
+export const OtpErrorScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => {
     const { otpAttempt, otpError, otpResetDate } = state.login
     if (otpAttempt == null || otpError == null) {
-      throw new Error('Missing OtpError for OTP error screen')
+      throw new Error('Missing OtpError for OTP error scene')
     }
     return { otpAttempt, otpError, otpResetDate }
   },
@@ -201,4 +201,4 @@ export const OtpErrorScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch({ type: 'OTP_ERROR', data: { attempt, error } })
     }
   })
-)(OtpErrorScreenComponent)
+)(OtpErrorSceneComponent)

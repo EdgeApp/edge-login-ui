@@ -3,7 +3,7 @@ import { EdgeAccount } from 'edge-core-js'
 type Unsubscribe = () => void
 
 /**
- * Returns true if the application should show the SecurityAlertsScreen.
+ * Returns true if the application should show the SecurityAlertsScene.
  */
 export function hasSecurityAlerts(account: EdgeAccount): boolean {
   const { otpResetDate, pendingVouchers = [] } = account

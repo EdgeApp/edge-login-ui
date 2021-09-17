@@ -16,7 +16,7 @@ import { connect } from '../services/ReduxStore'
 
 interface OwnProps {
   branding: Branding
-  landingScreenText?: string
+  landingSceneText?: string
 }
 interface DispatchProps {
   handleCreate: () => void
@@ -24,7 +24,7 @@ interface DispatchProps {
 }
 type Props = OwnProps & DispatchProps
 
-class LandingScreenComponent extends React.Component<Props> {
+class LandingSceneComponent extends React.Component<Props> {
   render() {
     return (
       <View style={styles.container}>
@@ -46,7 +46,7 @@ class LandingScreenComponent extends React.Component<Props> {
           <View style={styles.featureBoxContent}>
             <View style={styles.featureBoxDescription}>
               <Text style={styles.tagText}>
-                {this.props.landingScreenText || s.strings.landing_tagline}
+                {this.props.landingSceneText || s.strings.landing_tagline}
               </Text>
             </View>
           </View>
@@ -78,7 +78,7 @@ class LandingScreenComponent extends React.Component<Props> {
 }
 
 const styles = {
-  container: Styles.ScreenStyle,
+  container: Styles.SceneStyle,
   backgroundImage: {
     flex: 1,
     width: null,
@@ -151,7 +151,7 @@ const styles = {
   }
 } as const
 
-export const LandingScreen = connect<{}, DispatchProps, OwnProps>(
+export const LandingScene = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch): DispatchProps => ({
     handleCreate() {
@@ -162,4 +162,4 @@ export const LandingScreen = connect<{}, DispatchProps, OwnProps>(
       dispatch({ type: 'START_PASSWORD_LOGIN' })
     }
   })
-)(LandingScreenComponent)
+)(LandingSceneComponent)

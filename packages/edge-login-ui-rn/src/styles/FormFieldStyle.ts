@@ -1,7 +1,7 @@
 import * as Constants from '../constants/index'
 import { scale } from '../util/scaling'
 
-// Login Screen
+// Login Scene
 const LOGIN_LABEL_WIDTH = '70%'
 const LOGIN_LABEL_HEIGHT = 60
 

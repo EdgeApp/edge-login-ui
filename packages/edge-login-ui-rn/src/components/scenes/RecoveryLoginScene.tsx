@@ -38,7 +38,7 @@ interface State {
   errorMessage: string
 }
 
-class RecoveryLoginScreenComponent extends React.Component<Props, State> {
+class RecoveryLoginSceneComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -119,7 +119,7 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
 
     return (
       <SafeAreaViewGradient>
-        <View style={styles.screen}>
+        <View style={styles.scene}>
           {this.renderHeader()}
           <View style={styles.body}>
             <View style={styles.questionRow}>
@@ -170,8 +170,8 @@ class RecoveryLoginScreenComponent extends React.Component<Props, State> {
 }
 
 const styles = {
-  screen: {
-    ...Styles.ScreenStyle,
+  scene: {
+    ...Styles.SceneStyle,
     marginTop: 5
   },
   body: {
@@ -240,7 +240,7 @@ const styles = {
   }
 } as const
 
-export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
+export const RecoveryLoginScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     question1:
       state.passwordRecovery.userQuestions.length > 0
@@ -265,4 +265,4 @@ export const RecoveryLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch({ type: 'OTP_ERROR', data: { attempt, error } })
     }
   })
-)(RecoveryLoginScreenComponent)
+)(RecoveryLoginSceneComponent)

@@ -55,7 +55,7 @@ interface State {
   errorQuestionTwo: boolean
 }
 
-class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
+class ChangeRecoverySceneComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     const [
@@ -89,7 +89,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
   }
 
   handleSubmit = () => {
-    // Launch Modal full Screen
+    // Launch Modal full Scene
     const errorOne = this.state.answer1.length < 4
     const errorTwo = this.state.answer2.length < 4
     const errorQuestionOne =
@@ -404,7 +404,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
       ? this.renderQuestions()
       : this.renderForm()
     return (
-      <View style={styles.screen}>
+      <View style={styles.scene}>
         {this.renderHeader()}
         {middle}
       </View>
@@ -413,7 +413,7 @@ class ChangeRecoveryScreenComponent extends React.Component<Props, State> {
 }
 
 const styles = {
-  screen: { ...Styles.ScreenStyle },
+  scene: { ...Styles.SceneStyle },
   body: {
     padding: scale(18)
   },
@@ -493,7 +493,7 @@ const styles = {
   }
 } as const
 
-export const PublicChangeRecoveryScreen = connect<
+export const PublicChangeRecoveryScene = connect<
   StateProps,
   DispatchProps,
   OwnProps
@@ -512,4 +512,4 @@ export const PublicChangeRecoveryScreen = connect<
       dispatch(onComplete())
     }
   })
-)(ChangeRecoveryScreenComponent)
+)(ChangeRecoverySceneComponent)

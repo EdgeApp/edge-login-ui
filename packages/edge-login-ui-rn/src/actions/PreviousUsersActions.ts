@@ -49,7 +49,7 @@ export const getPreviousUsers = () => async (
   }
   const userList: LoginUserInfo[] = [...topUsers, ...sortUsers(coreUsers)]
 
-  // Try to find the user requested by the LoginScreen props:
+  // Try to find the user requested by the LoginScene props:
   const requestedUser = userList.find(
     user => user.username === imports.username
   )

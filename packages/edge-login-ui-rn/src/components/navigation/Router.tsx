@@ -8,29 +8,29 @@ import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
 import { MaybeProvideLoginUi } from '../publicApi/LoginUiProvider'
 import {
-  PublicChangePasswordScreen,
-  ResecurePasswordScreen
-} from '../screens/existingAccout/ChangePasswordScreen'
+  PublicChangePasswordScene,
+  ResecurePasswordScene
+} from '../scenes/existingAccout/ChangePasswordScene'
 import {
-  PublicChangePinScreen,
-  ResecurePinScreen
-} from '../screens/existingAccout/ChangePinScreen'
-import { PublicChangeRecoveryScreen } from '../screens/existingAccout/ChangeRecoveryScreen'
-import { OtpRepairScreen } from '../screens/existingAccout/OtpRepairScreen'
-import { SecurityAlertsScreen } from '../screens/existingAccout/SecurityAlertsScreen'
-import { LandingScreen } from '../screens/LandingScreen'
-import { LoadingScreen } from '../screens/LoadingScreen'
-import { NewAccountPasswordScreen } from '../screens/newAccount/NewAccountPasswordScreen'
-import { NewAccountPinScreen } from '../screens/newAccount/NewAccountPinScreen'
-import { NewAccountReviewScreen } from '../screens/newAccount/NewAccountReviewScreen'
-import { NewAccountUsernameScreen } from '../screens/newAccount/NewAccountUsernameScreen'
-import { NewAccountWelcomeScreen } from '../screens/newAccount/NewAccountWelcomeScreen'
-import { TermsAndConditionsScreen } from '../screens/newAccount/TermsAndConditionsScreen'
-import { OtpErrorScreen } from '../screens/OtpErrorScreen'
-import { PasswordLoginScreen } from '../screens/PasswordLoginScreen'
-import { PinLoginScreen } from '../screens/PinLoginScreen'
-import { RecoveryLoginScreen } from '../screens/RecoveryLoginScreen'
-import { WaitScreen } from '../screens/WaitScreen'
+  PublicChangePinScene,
+  ResecurePinScene
+} from '../scenes/existingAccout/ChangePinScene'
+import { PublicChangeRecoveryScene } from '../scenes/existingAccout/ChangeRecoveryScene'
+import { OtpRepairScene } from '../scenes/existingAccout/OtpRepairScene'
+import { SecurityAlertsScene } from '../scenes/existingAccout/SecurityAlertsScene'
+import { LandingScene } from '../scenes/LandingScene'
+import { LoadingScene } from '../scenes/LoadingScene'
+import { NewAccountPasswordScene } from '../scenes/newAccount/NewAccountPasswordScene'
+import { NewAccountPinScene } from '../scenes/newAccount/NewAccountPinScene'
+import { NewAccountReviewScene } from '../scenes/newAccount/NewAccountReviewScene'
+import { NewAccountTosScene } from '../scenes/newAccount/NewAccountTosScene'
+import { NewAccountUsernameScene } from '../scenes/newAccount/NewAccountUsernameScene'
+import { NewAccountWelcomeScene } from '../scenes/newAccount/NewAccountWelcomeScene'
+import { OtpErrorScene } from '../scenes/OtpErrorScene'
+import { PasswordLoginScene } from '../scenes/PasswordLoginScene'
+import { PinLoginScene } from '../scenes/PinLoginScene'
+import { RecoveryLoginScene } from '../scenes/RecoveryLoginScene'
+import { WaitScene } from '../scenes/WaitScene'
 import { connect } from '../services/ReduxStore'
 import { ThemeProvider } from '../services/ThemeContext'
 
@@ -45,11 +45,11 @@ type Props = OwnProps & StateProps
 
 class RouterComponent extends React.Component<Props> {
   render() {
-    const { ScreenStyle } = Styles
+    const { SceneStyle } = Styles
     return (
       <ThemeProvider>
         <MaybeProvideLoginUi>
-          <View accessible style={ScreenStyle}>
+          <View accessible style={SceneStyle}>
             {this.renderContent()}
           </View>
         </MaybeProvideLoginUi>
@@ -60,66 +60,66 @@ class RouterComponent extends React.Component<Props> {
   renderContent() {
     switch (this.props.workflow.currentKey) {
       case 'changePasswordWF':
-        return <PublicChangePasswordScreen showHeader={this.props.showHeader} />
+        return <PublicChangePasswordScene showHeader={this.props.showHeader} />
       case 'changePinWF':
-        return <PublicChangePinScreen showHeader={this.props.showHeader} />
+        return <PublicChangePinScene showHeader={this.props.showHeader} />
       case 'changeRecoveryWF':
-        return <PublicChangeRecoveryScreen showHeader={this.props.showHeader} />
+        return <PublicChangeRecoveryScene showHeader={this.props.showHeader} />
       case 'createWF':
-        return this.getCreateScreen()
+        return this.getCreateScene()
       case 'landingWF':
-        return <LandingScreen branding={this.props.branding} />
+        return <LandingScene branding={this.props.branding} />
       case 'loadingWF':
-        return <LoadingScreen branding={this.props.branding} />
+        return <LoadingScene branding={this.props.branding} />
       case 'otpWF':
-        return <OtpErrorScreen />
+        return <OtpErrorScene />
       case 'otpRepairWF':
-        return <OtpRepairScreen />
+        return <OtpRepairScene />
       case 'passwordWF':
-        return <PasswordLoginScreen branding={this.props.branding} />
+        return <PasswordLoginScene branding={this.props.branding} />
       case 'pinWF':
-        return <PinLoginScreen branding={this.props.branding} />
+        return <PinLoginScene branding={this.props.branding} />
       case 'recoveryLoginWF':
-        return <RecoveryLoginScreen />
+        return <RecoveryLoginScene />
       case 'resecureWF':
-        return this.getResecureScreen()
+        return this.getResecureScene()
       case 'securityAlertWF':
-        return <SecurityAlertsScreen />
+        return <SecurityAlertsScene />
     }
   }
 
-  getCreateScreen() {
+  getCreateScene() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <NewAccountWelcomeScreen branding={this.props.branding} />
+        return <NewAccountWelcomeScene branding={this.props.branding} />
       case 1:
-        return <NewAccountUsernameScreen branding={this.props.branding} />
+        return <NewAccountUsernameScene branding={this.props.branding} />
       case 2:
-        return <NewAccountPasswordScreen />
+        return <NewAccountPasswordScene />
       case 3:
-        return <NewAccountPinScreen />
+        return <NewAccountPinScene />
       case 4:
-        return <TermsAndConditionsScreen branding={this.props.branding} />
+        return <NewAccountTosScene branding={this.props.branding} />
       case 5:
         return (
-          <WaitScreen
+          <WaitScene
             title={s.strings.good_job}
             message={s.strings.hang_tight + '\n' + s.strings.secure_account}
           />
         )
       case 6:
-        return <NewAccountReviewScreen />
+        return <NewAccountReviewScene />
       default:
-        return <NewAccountWelcomeScreen branding={this.props.branding} />
+        return <NewAccountWelcomeScene branding={this.props.branding} />
     }
   }
 
-  getResecureScreen() {
+  getResecureScene() {
     switch (this.props.workflow.currentSceneIndex) {
       case 0:
-        return <ResecurePasswordScreen showHeader={this.props.showHeader} />
+        return <ResecurePasswordScene showHeader={this.props.showHeader} />
       case 1:
-        return <ResecurePinScreen showHeader={this.props.showHeader} />
+        return <ResecurePinScene showHeader={this.props.showHeader} />
     }
   }
 }

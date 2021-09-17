@@ -71,7 +71,7 @@ export function LoginScreen(props: Props): JSX.Element {
           appId: props.appId,
           appName: props.appName,
           backgroundImage: props.backgroundImage,
-          landingScreenText: props.landingScreenText,
+          landingSceneText: props.landingScreenText,
           parentButton: props.parentButton,
           primaryLogo: props.primaryLogo,
           primaryLogoCallback: props.primaryLogoCallback
