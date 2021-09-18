@@ -26,7 +26,7 @@ interface DispatchProps {
 }
 type Props = OwnProps & DispatchProps & ThemeProps
 
-const NewAccountWelcomeScreenComponent = ({
+const NewAccountWelcomeSceneComponent = ({
   theme,
   branding,
   onExit,
@@ -141,7 +141,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
+export const NewAccountWelcomeScene = connect<{}, DispatchProps, OwnProps>(
   (state: RootState) => ({}),
   (dispatch: Dispatch) => ({
     onExit() {
@@ -152,4 +152,4 @@ export const NewAccountWelcomeScreen = connect<{}, DispatchProps, OwnProps>(
       dispatch({ type: 'WORKFLOW_NEXT' })
     }
   })
-)(withTheme(NewAccountWelcomeScreenComponent))
+)(withTheme(NewAccountWelcomeSceneComponent))

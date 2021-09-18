@@ -11,7 +11,7 @@ export interface Branding {
   appId?: string
   appName?: string
   backgroundImage?: any
-  landingScreenText?: string
+  landingSceneText?: string
   parentButton?: ParentButton
   primaryLogo?: any
   primaryLogoCallback?: () => void

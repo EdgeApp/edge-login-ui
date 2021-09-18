@@ -10,7 +10,7 @@ interface Props {
   branding: Branding
 }
 
-export class LoadingScreen extends React.Component<Props> {
+export class LoadingScene extends React.Component<Props> {
   render() {
     return (
       <View style={styles.container}>
@@ -33,7 +33,7 @@ export class LoadingScreen extends React.Component<Props> {
 }
 
 const styles = {
-  container: Styles.ScreenStyle,
+  container: Styles.SceneStyle,
   backgroundImage: {
     flex: 1,
     width: null,

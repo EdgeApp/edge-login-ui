@@ -65,7 +65,7 @@ interface State {
   usernameList: boolean
 }
 
-class PasswordLoginScreenComponent extends React.Component<Props, State> {
+class PasswordLoginSceneComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -374,7 +374,7 @@ class PasswordLoginScreenComponent extends React.Component<Props, State> {
 }
 
 const styles = {
-  container: Styles.ScreenStyle,
+  container: Styles.SceneStyle,
   mainScrollView: {
     position: 'relative',
     width: '100%',
@@ -516,7 +516,7 @@ const styles = {
   }
 } as const
 
-export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
+export const PasswordLoginScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     loginSuccess: state.login.loginSuccess,
     previousUsers: state.previousUsers.userList,
@@ -551,4 +551,4 @@ export const PasswordLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       return await Promise.resolve(true)
     }
   })
-)(PasswordLoginScreenComponent)
+)(PasswordLoginSceneComponent)

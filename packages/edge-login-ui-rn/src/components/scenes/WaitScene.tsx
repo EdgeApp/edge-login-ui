@@ -13,7 +13,7 @@ interface Props {
   message: string
 }
 
-const WaitScreenComponent = ({ title, message, theme }: Props & ThemeProps) => {
+const WaitSceneComponent = ({ title, message, theme }: Props & ThemeProps) => {
   const styles = getStyles(theme)
 
   return (
@@ -54,4 +54,4 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const WaitScreen = withTheme(WaitScreenComponent)
+export const WaitScene = withTheme(WaitSceneComponent)

@@ -38,7 +38,7 @@ interface DispatchProps {
 }
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
-const NewAccountPasswordScreenComponent = ({
+const NewAccountPasswordSceneComponent = ({
   confirmPassword,
   confirmPasswordErrorMessage,
   createPasswordErrorMessage,
@@ -203,7 +203,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const NewAccountPasswordScreen = connect<
+export const NewAccountPasswordScene = connect<
   StateProps,
   DispatchProps,
   OwnProps
@@ -232,4 +232,4 @@ export const NewAccountPasswordScreen = connect<
       dispatch(validatePassword(password))
     }
   })
-)(withTheme(NewAccountPasswordScreenComponent))
+)(withTheme(NewAccountPasswordSceneComponent))

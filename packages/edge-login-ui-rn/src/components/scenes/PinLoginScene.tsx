@@ -60,7 +60,7 @@ interface State {
   focusOn: 'pin' | 'List'
 }
 
-class PinLoginScreenComponent extends React.Component<Props, State> {
+class PinLoginSceneComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -298,7 +298,7 @@ class PinLoginScreenComponent extends React.Component<Props, State> {
 }
 
 const styles = {
-  container: Styles.ScreenStyle,
+  container: Styles.SceneStyle,
   backgroundImage: {
     flex: 1,
     width: null,
@@ -429,7 +429,7 @@ const styles = {
   }
 } as const
 
-export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
+export const PinLoginScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     errorMessage: state.login.errorMessage || '',
     isLoggingInWithPin: state.login.isLoggingInWithPin,
@@ -472,4 +472,4 @@ export const PinLoginScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch({ type: 'AUTH_UPDATE_PIN', data: pin })
     }
   })
-)(PinLoginScreenComponent)
+)(PinLoginSceneComponent)

@@ -40,7 +40,7 @@ interface State {
   focusOn: string
 }
 
-class ChangePinScreenComponent extends React.Component<Props, State> {
+class ChangePinSceneComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -76,7 +76,7 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
   render() {
     return (
       <SafeAreaView>
-        <View style={styles.screen}>
+        <View style={styles.scene}>
           {this.renderHeader()}
           <View style={styles.pageContainer}>
             <View style={styles.row1}>
@@ -105,7 +105,7 @@ class ChangePinScreenComponent extends React.Component<Props, State> {
 }
 
 const styles = {
-  screen: { ...Styles.ScreenStyle },
+  scene: { ...Styles.SceneStyle },
   pageContainer: { flex: 1, width: '100%' },
   row1: {
     width: '100%',
@@ -143,7 +143,7 @@ const styles = {
   }
 } as const
 
-export const PublicChangePinScreen = connect<
+export const PublicChangePinScene = connect<
   StateProps,
   DispatchProps,
   OwnProps
@@ -170,9 +170,9 @@ export const PublicChangePinScreen = connect<
       dispatch(onComplete())
     }
   })
-)(ChangePinScreenComponent)
+)(ChangePinSceneComponent)
 
-export const ResecurePinScreen = connect<StateProps, DispatchProps, OwnProps>(
+export const ResecurePinScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
     account: getAccount(state),
     pin: state.create.pin,
@@ -195,4 +195,4 @@ export const ResecurePinScreen = connect<StateProps, DispatchProps, OwnProps>(
       dispatch(completeResecure())
     }
   })
-)(ChangePinScreenComponent)
+)(ChangePinSceneComponent)

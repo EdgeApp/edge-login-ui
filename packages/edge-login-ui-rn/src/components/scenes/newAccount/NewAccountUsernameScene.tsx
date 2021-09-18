@@ -34,7 +34,7 @@ interface DispatchProps {
 }
 type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
-const NewAccountUsernameScreenComponent = ({
+const NewAccountUsernameSceneComponent = ({
   theme,
   onBack,
   branding,
@@ -120,7 +120,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const NewAccountUsernameScreen = connect<
+export const NewAccountUsernameScene = connect<
   StateProps,
   DispatchProps,
   OwnProps
@@ -140,4 +140,4 @@ export const NewAccountUsernameScreen = connect<
       dispatch(validateUsername(username))
     }
   })
-)(withTheme(NewAccountUsernameScreenComponent))
+)(withTheme(NewAccountUsernameSceneComponent))

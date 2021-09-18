@@ -25,72 +25,72 @@ export type WorkflowName = keyof Workflows
 
 export const workflows: Workflows = {
   // ----------------------------------------------------------------
-  // Settings screens
+  // Settings scenes
   // ----------------------------------------------------------------
   changePasswordWF: [
     {
-      // PublicChangePasswordScreen
+      // PublicChangePasswordScene
       title: s.strings.change_password,
       subTitle: ''
     }
   ],
   changePinWF: [
     {
-      // PublicChangePinScreen
+      // PublicChangePinScene
       title: s.strings.change_pin,
       subTitle: ''
     }
   ],
   changeRecoveryWF: [
     {
-      // PublicChangeRecoveryScreen
+      // PublicChangeRecoveryScene
       title: s.strings.recovery,
       subTitle: ''
     }
-    // This next scene uses `FullScreenModal` instead of workflow:
+    // This next scene uses `FullSceneModal` instead of workflow:
     // {
-    //   // ChangeRecoveryConfirmScreen
+    //   // ChangeRecoveryConfirmScene
     //   title: s.strings.confirm_recovery_questions,
     //   subTitle: ''
     // }
   ],
 
   // ----------------------------------------------------------------
-  // Creation screens
+  // Creation scenes
   // ----------------------------------------------------------------
   createWF: [
     {
-      // NewAccountWelcomeScreen
+      // NewAccountWelcomeScene
       title: '',
       subTitle: ''
     },
     {
-      // NewAccountUsernameScreen
+      // NewAccountUsernameScene
       title: '',
       subTitle: ''
     },
     {
-      // NewAccountPasswordScreen
+      // NewAccountPasswordScene
       title: '',
       subTitle: ''
     },
     {
-      // NewAccountPinScreen
+      // NewAccountPinScene
       title: '',
       subTitle: ''
     },
     {
-      // NewAccountWaitScreen
+      // NewAccountWaitScene
       title: '',
       subTitle: ''
     },
     {
-      // NewAccountReviewScreen
+      // NewAccountReviewScene
       title: '',
       subTitle: ''
     },
     {
-      // TermsAndConditionsScreen
+      // TermsAndConditionsScene
       title: '',
       subTitle: ''
     }
@@ -101,28 +101,28 @@ export const workflows: Workflows = {
   // ----------------------------------------------------------------
   landingWF: [
     {
-      // LandingScreen (no header)
+      // LandingScene (no header)
       title: '',
       subTitle: ''
     }
   ],
   loadingWF: [
     {
-      // LoadingScreen (no header)
+      // LoadingScene (no header)
       title: '',
       subTitle: ''
     }
   ],
   otpWF: [
     {
-      // OtpErrorScreen
+      // OtpErrorScene
       title: s.strings.otp_header,
       subTitle: ''
     }
   ],
   otpRepairWF: [
     {
-      // OtpRepairScreen
+      // OtpRepairScene
       title: s.strings.otp_header,
       subTitle: ''
     }
@@ -133,21 +133,21 @@ export const workflows: Workflows = {
   // ----------------------------------------------------------------
   passwordWF: [
     {
-      // PasswordLoginScreen
+      // PasswordLoginScene
       title: s.strings.change_password,
       subTitle: ''
     }
   ],
   pinWF: [
     {
-      // PinLoginScreen
+      // PinLoginScene
       title: s.strings.change_pin,
       subTitle: ''
     }
   ],
   recoveryLoginWF: [
     {
-      // RecoveryLoginScreen
+      // RecoveryLoginScene
       title: s.strings.recovery_questions_header,
       subTitle: ''
     }
@@ -158,20 +158,20 @@ export const workflows: Workflows = {
   // ----------------------------------------------------------------
   resecureWF: [
     {
-      // ResecurePasswordScreen
+      // ResecurePasswordScene
       title: s.strings.change_password,
       subTitle: ''
     },
     {
-      // ResecurePinScreen
+      // ResecurePinScene
       title: s.strings.change_pin,
       subTitle: ''
     }
   ],
   securityAlertWF: [
     {
-      // SecurityAlertsScreen
-      title: s.strings.alert_screen_title,
+      // SecurityAlertsScene
+      title: s.strings.alert_scene_title,
       subTitle: ''
     }
   ]

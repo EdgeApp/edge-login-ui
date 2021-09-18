@@ -26,7 +26,7 @@ type Props = OwnProps & StateProps
 
 /**
  * The raw Header for a scene.
- * This is exported because ChangeRecoveryConfirmScreen isn't a real screen,
+ * This is exported because ChangeRecoveryConfirmScene isn't a real scene,
  * and pulls this in specially.
  */
 export class HeaderComponent extends React.Component<Props> {

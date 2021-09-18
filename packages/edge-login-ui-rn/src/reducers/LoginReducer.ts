@@ -85,7 +85,7 @@ export function login(
       return { ...initialState, username: username }
     }
 
-    // Actions for launching screens:
+    // Actions for launching scenes:
     case 'START_RECOVERY_LOGIN':
       return {
         ...state,

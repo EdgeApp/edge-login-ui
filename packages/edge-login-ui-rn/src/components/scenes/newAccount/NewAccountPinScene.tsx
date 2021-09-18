@@ -2,65 +2,73 @@ import * as React from 'react'
 import { ScrollView, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
-import { confirmAndFinish } from '../../../actions/CreateAccountActions'
 import s from '../../../common/locales/strings'
 import { useScrollToEnd } from '../../../hooks/useScrollToEnd'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { AccountInfo } from '../../themed/AccountInfo'
 import { BackButton } from '../../themed/BackButton'
+import { DigitInput, MAX_PIN_LENGTH } from '../../themed/DigitInput'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
-import { FormError } from '../../themed/FormError'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { SecondaryButton } from '../../themed/ThemedButtons'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {}
 
-interface DispatchProps {
-  onDone: () => void
+interface StateProps {
+  pin: string
+  pinErrorMessage: string | null
 }
 
-type Props = OwnProps & DispatchProps & ThemeProps
+interface DispatchProps {
+  onDone: () => void
+  onBack: () => void
+}
 
-const NewAccountReviewScreenComponent = ({ onDone, theme }: Props) => {
+type Props = OwnProps & StateProps & DispatchProps & ThemeProps
+
+const NewAccountPinSceneComponent = ({
+  pinErrorMessage,
+  pin,
+  onBack,
+  onDone,
+  theme
+}: Props) => {
   const styles = getStyles(theme)
 
-  const [showNext, setShowNext] = React.useState(false)
+  const showNext = pin.length === MAX_PIN_LENGTH && !pinErrorMessage
   const scrollViewRef = useScrollToEnd(showNext)
 
   const handleNext = () => {
-    logEvent(`Signup_Review_Done`)
+    // validation.
+    // is there no error message,
+    if (pin.length !== MAX_PIN_LENGTH || pinErrorMessage) {
+      logEvent(`Signup_PIN_Invalid`)
+      return
+    }
+
     onDone()
   }
 
   return (
     <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton marginRem={[0, 0, 1, 0.5]} disabled />
-      <SimpleSceneHeader>{s.strings.account_confirmation}</SimpleSceneHeader>
-      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.content}>
+      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
+      <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
+      <ScrollView ref={scrollViewRef} style={styles.content}>
         <EdgeText
           style={styles.subtitle}
-        >{`${s.strings.review}: ${s.strings.write_it_down}`}</EdgeText>
+        >{`${s.strings.step_three}: ${s.strings.set_four_digit_pin}`}</EdgeText>
         <EdgeText style={styles.description} numberOfLines={2}>
-          {s.strings.almost_done}
+          {s.strings.pin_desc}
         </EdgeText>
-        <FormError
-          marginRem={[0, 0, 2]}
-          title={s.strings.write_and_store}
-          numberOfLines={2}
-          isWarning
-        >
-          {s.strings.warning_message}
-        </FormError>
-        <AccountInfo marginRem={[0, 2.5]} onOpen={() => setShowNext(true)} />
+        <DigitInput />
         <View style={styles.actions}>
           <Fade visible={showNext}>
             <SecondaryButton
-              label={s.strings.confirm_finish}
+              label={s.strings.next_label}
               onPress={handleNext}
             />
           </Fade>
@@ -72,6 +80,7 @@ const NewAccountReviewScreenComponent = ({ onDone, theme }: Props) => {
 
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
+    flex: 1,
     marginLeft: theme.rem(0.5),
     marginRight: theme.rem(1)
   },
@@ -79,26 +88,32 @@ const getStyles = cacheStyles((theme: Theme) => ({
     fontFamily: theme.fontFaceBold,
     color: theme.secondaryText,
     fontSize: theme.rem(1),
-    marginBottom: theme.rem(2)
+    marginBottom: theme.rem(2.25)
   },
   description: {
     fontFamily: theme.fontFaceDefault,
     fontSize: theme.rem(0.875),
-    marginBottom: theme.rem(2)
+    marginBottom: theme.rem(3.25)
   },
   actions: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: theme.rem(5),
-    minHeight: theme.rem(3)
+    minHeight: theme.rem(3 + 15) // 15 is a hack to avoid the keyboard
   }
 }))
 
-export const NewAccountReviewScreen = connect<{}, DispatchProps, OwnProps>(
-  (state: RootState) => ({}),
+export const NewAccountPinScene = connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState) => ({
+    pin: state.create.pin,
+    pinErrorMessage: state.create.pinErrorMessage
+  }),
   (dispatch: Dispatch) => ({
     onDone() {
-      dispatch(confirmAndFinish())
+      dispatch({ type: 'WORKFLOW_NEXT' })
+    },
+    onBack() {
+      dispatch({ type: 'WORKFLOW_BACK' })
     }
   })
-)(withTheme(NewAccountReviewScreenComponent))
+)(withTheme(NewAccountPinSceneComponent))
