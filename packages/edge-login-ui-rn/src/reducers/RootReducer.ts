@@ -10,7 +10,7 @@ import {
 } from './PasswordRecoveryReducer'
 import { passwordStatus, PasswordStatusState } from './PasswordStatusReducer'
 import { previousUsers, PreviousUsersState } from './PreviousUsersReducer'
-import { scene, SceneState } from './WorkflowReducer'
+import { scene, SceneState } from './SceneReducer'
 
 export interface RootState {
   create: CreateState

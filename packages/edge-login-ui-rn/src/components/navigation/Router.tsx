@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View } from 'react-native'
 
 import s from '../../common/locales/strings'
-import { SceneState } from '../../reducers/WorkflowReducer'
+import { SceneState } from '../../reducers/SceneReducer'
 import * as Styles from '../../styles/index'
 import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
