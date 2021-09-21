@@ -131,7 +131,7 @@ export const NewAccountUsernameScene = connect<
   }),
   (dispatch: Dispatch) => ({
     onBack() {
-      dispatch({ type: 'WORKFLOW_BACK' })
+      dispatch({ type: 'NEW_ACCOUNT_WELCOME' })
     },
     async checkUsernameForAvailabilty(data: string) {
       return await dispatch(checkUsernameForAvailabilty(data))

@@ -120,7 +120,6 @@ class OtpErrorSceneComponent extends React.Component<Props> {
       <ThemedScene
         showHeader
         onBack={this.props.onBack}
-        subTitle=""
         title={isIp ? s.strings.otp_header_ip : s.strings.otp_header}
       >
         <IconHeaderRow

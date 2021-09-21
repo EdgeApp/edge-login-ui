@@ -220,10 +220,10 @@ export const NewAccountPasswordScene = connect<
   }),
   (dispatch: Dispatch) => ({
     onDone() {
-      dispatch({ type: 'WORKFLOW_NEXT' })
+      dispatch({ type: 'NEW_ACCOUNT_PIN' })
     },
     onBack() {
-      dispatch({ type: 'WORKFLOW_BACK' })
+      dispatch({ type: 'NEW_ACCOUNT_USERNAME' })
     },
     validateConfirmPassword(password: string) {
       dispatch(validateConfirmPassword(password))

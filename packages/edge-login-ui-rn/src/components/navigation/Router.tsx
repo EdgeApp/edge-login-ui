@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View } from 'react-native'
 
 import s from '../../common/locales/strings'
-import { WorkflowState } from '../../reducers/WorkflowReducer'
+import { SceneState } from '../../reducers/SceneReducer'
 import * as Styles from '../../styles/index'
 import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
@@ -39,7 +39,7 @@ interface OwnProps {
   showHeader: boolean
 }
 interface StateProps {
-  workflow: WorkflowState
+  scene: SceneState
 }
 type Props = OwnProps & StateProps
 
@@ -58,75 +58,59 @@ class RouterComponent extends React.Component<Props> {
   }
 
   renderContent() {
-    switch (this.props.workflow.currentKey) {
-      case 'changePasswordWF':
+    switch (this.props.scene.currentScene) {
+      case 'ChangePasswordScene':
         return <PublicChangePasswordScene showHeader={this.props.showHeader} />
-      case 'changePinWF':
+      case 'ChangePinScene':
         return <PublicChangePinScene showHeader={this.props.showHeader} />
-      case 'changeRecoveryWF':
+      case 'ChangeRecoveryScene':
         return <PublicChangeRecoveryScene showHeader={this.props.showHeader} />
-      case 'createWF':
-        return this.getCreateScene()
-      case 'landingWF':
-        return <LandingScene branding={this.props.branding} />
-      case 'loadingWF':
-        return <LoadingScene branding={this.props.branding} />
-      case 'otpWF':
-        return <OtpErrorScene />
-      case 'otpRepairWF':
-        return <OtpRepairScene />
-      case 'passwordWF':
-        return <PasswordLoginScene branding={this.props.branding} />
-      case 'pinWF':
-        return <PinLoginScene branding={this.props.branding} />
-      case 'recoveryLoginWF':
-        return <RecoveryLoginScene />
-      case 'resecureWF':
-        return this.getResecureScene()
-      case 'securityAlertWF':
-        return <SecurityAlertsScene />
-    }
-  }
-
-  getCreateScene() {
-    switch (this.props.workflow.currentSceneIndex) {
-      case 0:
+      case 'NewAccountWelcomeScene':
         return <NewAccountWelcomeScene branding={this.props.branding} />
-      case 1:
+      case 'NewAccountUsernameScene':
         return <NewAccountUsernameScene branding={this.props.branding} />
-      case 2:
+      case 'NewAccountPasswordScene':
         return <NewAccountPasswordScene />
-      case 3:
+      case 'NewAccountPinScene':
         return <NewAccountPinScene />
-      case 4:
+      case 'NewAccountTosScene':
         return <NewAccountTosScene branding={this.props.branding} />
-      case 5:
+      case 'NewAccountWaitScene':
         return (
           <WaitScene
             title={s.strings.good_job}
             message={s.strings.hang_tight + '\n' + s.strings.secure_account}
           />
         )
-      case 6:
+      case 'NewAccountReviewScene':
         return <NewAccountReviewScene />
-      default:
-        return <NewAccountWelcomeScene branding={this.props.branding} />
-    }
-  }
-
-  getResecureScene() {
-    switch (this.props.workflow.currentSceneIndex) {
-      case 0:
+      case 'LandingScene':
+        return <LandingScene branding={this.props.branding} />
+      case 'LoadingScene':
+        return <LoadingScene branding={this.props.branding} />
+      case 'OtpScene':
+        return <OtpErrorScene />
+      case 'OtpRepairScene':
+        return <OtpRepairScene />
+      case 'PasswordScene':
+        return <PasswordLoginScene branding={this.props.branding} />
+      case 'PinScene':
+        return <PinLoginScene branding={this.props.branding} />
+      case 'RecoveryLoginScene':
+        return <RecoveryLoginScene />
+      case 'ResecurePasswordScene':
         return <ResecurePasswordScene showHeader={this.props.showHeader} />
-      case 1:
+      case 'ResecurePinScene':
         return <ResecurePinScene showHeader={this.props.showHeader} />
+      case 'SecurityAlertScene':
+        return <SecurityAlertsScene />
     }
   }
 }
 
 export const Router = connect<StateProps, {}, OwnProps>(
   (state: RootState) => ({
-    workflow: state.workflow
+    scene: state.scene
   }),
   (dispatch: Dispatch) => ({})
 )(RouterComponent)

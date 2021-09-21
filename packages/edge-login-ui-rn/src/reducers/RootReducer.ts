@@ -10,7 +10,7 @@ import {
 } from './PasswordRecoveryReducer'
 import { passwordStatus, PasswordStatusState } from './PasswordStatusReducer'
 import { previousUsers, PreviousUsersState } from './PreviousUsersReducer'
-import { workflow, WorkflowState } from './WorkflowReducer'
+import { scene, SceneState } from './SceneReducer'
 
 export interface RootState {
   create: CreateState
@@ -18,7 +18,7 @@ export interface RootState {
   passwordRecovery: PasswordRecoveryState
   passwordStatus: PasswordStatusState | null
   previousUsers: PreviousUsersState
-  workflow: WorkflowState
+  scene: SceneState
 
   // Local reducers:
   readonly account: EdgeAccount | null
@@ -34,7 +34,7 @@ export const rootReducer: (
   passwordRecovery,
   passwordStatus,
   previousUsers,
-  workflow,
+  scene,
 
   account(
     state: EdgeAccount | null = null,
@@ -42,7 +42,6 @@ export const rootReducer: (
   ): EdgeAccount | null {
     switch (action.type) {
       case 'CREATE_ACCOUNT_SUCCESS':
-        return action.data
       case 'START_CHANGE_PASSWORD':
       case 'START_CHANGE_PIN':
       case 'START_RESECURE':
