@@ -9,6 +9,7 @@ import { completeResecure } from '../../../actions/LoginCompleteActions'
 import s from '../../../common/locales/strings'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { getAccount } from '../../../util/selectors'
+import { toLocalTime } from '../../../util/utils'
 import { showError } from '../../services/AirshipInstance'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
@@ -165,11 +166,10 @@ export class SecurityAlertsSceneComponent extends React.Component<
             ? s.strings.alert_scene_device + voucher.deviceDescription + '\n'
             : null}
           {s.strings.alert_scene_ip + voucher.ipDescription + '\n'}
-          {s.strings.alert_scene_date + voucher.created.toLocaleString()}
+          {s.strings.alert_scene_date + toLocalTime(voucher.created)}
         </MessageText>
         <MessageText>
-          {s.strings.alert_scene_reset_date}
-          {voucher.activates.toLocaleString()}
+          {s.strings.alert_scene_reset_date + toLocalTime(voucher.activates)}
         </MessageText>
         {spinVoucher[voucher.voucherId] ? (
           <ActivityIndicator
