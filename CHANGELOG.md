@@ -1,5 +1,12 @@
 # edge-login-ui
 
+## 0.9.18 (2021-09-22)
+
+- rn: Fix date handling in alert modal
+- rn: Fix keyboard hiding in recovery scene
+- rn: Rename any instance of 'screen' to 'scene'
+- rn: Update translations
+
 ## 0.9.17 (2021-09-14)
 
 - rn: Add gif loader to wait screen
