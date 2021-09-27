@@ -7,6 +7,7 @@ import { requestOtpReset } from '../../../actions/LoginOtpActions'
 import { onComplete } from '../../../actions/WorkflowActions'
 import s from '../../../common/locales/strings'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
+import { toLocalTime } from '../../../util/utils'
 import { showResetModal } from '../../modals/OtpResetModal'
 import { showQrCodeModal } from '../../modals/QrCodeModal'
 import { TextInputModal } from '../../modals/TextInputModal'
@@ -119,7 +120,7 @@ class OtpRepairSceneComponent extends React.Component<Props> {
           <>
             <DividerWithText />
             <MessageText>
-              {sprintf(s.strings.otp_scene_wait, date.toLocaleString())}
+              {sprintf(s.strings.otp_scene_wait, toLocalTime(date))}
             </MessageText>
           </>
         )}
