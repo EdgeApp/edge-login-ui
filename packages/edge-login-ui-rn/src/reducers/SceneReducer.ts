@@ -78,6 +78,7 @@ export function scene(
       return {
         currentScene: 'RecoveryLoginScene'
       }
+    case 'START_RESECURE':
     case 'RESECURE_PASSWORD':
       return {
         currentScene: 'ResecurePasswordScene'
