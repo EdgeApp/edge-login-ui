@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.20 (2021-09-27)
+
+- rn: Fix handling for the START_RESECURE action type.
+
 ## 0.9.19 (2021-09-27)
 
 - rn: Fix date handling in 2FA scenes
