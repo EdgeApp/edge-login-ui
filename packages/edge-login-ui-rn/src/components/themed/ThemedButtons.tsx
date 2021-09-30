@@ -129,7 +129,7 @@ const getStyles = cacheStyles((theme: Theme) => {
   const commonButton = {
     alignItems: 'center',
     borderRadius: theme.rem(0.25),
-    borderWidth: theme.rem(0.1),
+    borderWidth: theme.thinLineWidth,
     flexDirection: 'row',
     justifyContent: 'center',
     minWidth: theme.rem(9)
@@ -159,8 +159,7 @@ const getStyles = cacheStyles((theme: Theme) => {
     },
     secondaryText: {
       ...commonText,
-      color: theme.secondaryButtonText,
-      fontFamily: theme.fontFaceBold
+      color: theme.secondaryButtonText
     },
 
     alertModalPrimaryButton: {
