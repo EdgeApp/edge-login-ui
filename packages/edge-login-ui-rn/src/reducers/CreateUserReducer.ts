@@ -4,6 +4,7 @@ import { Action } from '../types/ReduxTypes'
 
 export interface CreateState {
   readonly confirmPassword: string | null
+  // Should be remove when create, existing account and password recovery is merged into one scene
   readonly confirmPasswordErrorMessage: string | null
   readonly createErrorMessage: string | null
   readonly createPasswordErrorMessage: string | null

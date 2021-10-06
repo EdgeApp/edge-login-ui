@@ -243,6 +243,8 @@ export default {
     'Scan this QR code with another device logged into your account:',
   qr_modal_started: 'Logging into account %s',
 
+  password_confirm_status: 'Must match Password and Confirm Password',
+
   // Alert component:
   alert_dropdown_alert: 'Alert! ',
   alert_dropdown_warning: 'Warning! ',

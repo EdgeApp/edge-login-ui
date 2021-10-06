@@ -19,11 +19,17 @@ interface OwnProps {
 
 interface StateProps {
   status: PasswordStatusState | null
+  isPasswordConfirmed: boolean
 }
 
 type Props = OwnProps & StateProps & ThemeProps
 
-const PasswordStatusComponent = ({ status, marginRem, theme }: Props) => {
+const PasswordStatusComponent = ({
+  status,
+  isPasswordConfirmed,
+  marginRem,
+  theme
+}: Props) => {
   const styles = getStyles(theme)
   const spacings = sidesToMargin(mapSides(fixSides(marginRem, 0.5), theme.rem))
 
@@ -51,6 +57,9 @@ const PasswordStatusComponent = ({ status, marginRem, theme }: Props) => {
           style={[styles.case, value && styles.passed]}
         >{`\u2022 ${title}`}</EdgeText>
       ))}
+      <EdgeText
+        style={[styles.case, isPasswordConfirmed && styles.passed]}
+      >{`\u2022 ${s.strings.password_confirm_status}`}</EdgeText>
     </View>
   )
 }
@@ -95,7 +104,8 @@ const getStyles = cacheStyles((theme: Theme) => ({
 
 export const PasswordStatus = connect<StateProps, {}, OwnProps>(
   (state: RootState) => ({
-    status: state.passwordStatus
+    status: state.passwordStatus,
+    isPasswordConfirmed: state.create.password === state.create.confirmPassword
   }),
   () => ({})
 )(withTheme(PasswordStatusComponent))

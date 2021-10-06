@@ -24,7 +24,6 @@ import { ThemedScene } from '../../themed/ThemedScene'
 interface OwnProps {}
 interface StateProps {
   confirmPassword: string
-  confirmPasswordErrorMessage: string
   createPasswordErrorMessage: string
   password: string
   isPasswordStatusExists: boolean
@@ -40,7 +39,6 @@ type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
 const NewAccountPasswordSceneComponent = ({
   confirmPassword,
-  confirmPasswordErrorMessage,
   createPasswordErrorMessage,
   password,
   onDone,
@@ -63,15 +61,12 @@ const NewAccountPasswordSceneComponent = ({
   const handleNext = () => {
     if (!isPasswordStatusExists) return
 
-    if (
-      confirmPasswordErrorMessage !== '' ||
-      createPasswordErrorMessage !== ''
-    ) {
+    if (createPasswordErrorMessage !== '') {
       logEvent('Signup_Password_Invalid')
       return
     }
 
-    if (password && password !== confirmPassword) {
+    if (password != null && password !== confirmPassword) {
       validateConfirmPassword(confirmPassword)
       logEvent('Signup_Password_Invalid')
       return
@@ -122,19 +117,16 @@ const NewAccountPasswordSceneComponent = ({
         />
         <FormError
           marginRem={[0, 0.75]}
-          invisible={
-            !(confirmPasswordErrorMessage || createPasswordErrorMessage)
-          }
+          invisible={createPasswordErrorMessage === ''}
         >
-          {confirmPasswordErrorMessage || createPasswordErrorMessage}
+          {createPasswordErrorMessage}
         </FormError>
         <View style={styles.actions}>
           <Fade
             visible={
               isPasswordPassed &&
               password === confirmPassword &&
-              !confirmPasswordErrorMessage &&
-              !createPasswordErrorMessage
+              createPasswordErrorMessage === ''
             }
             hidden
           >
@@ -210,7 +202,6 @@ export const NewAccountPasswordScene = connect<
 >(
   (state: RootState) => ({
     confirmPassword: state.create.confirmPassword || '',
-    confirmPasswordErrorMessage: state.create.confirmPasswordErrorMessage || '',
     createPasswordErrorMessage: state.create.createPasswordErrorMessage || '',
     password: state.create.password || '',
     isPasswordStatusExists: !!state.passwordStatus,
