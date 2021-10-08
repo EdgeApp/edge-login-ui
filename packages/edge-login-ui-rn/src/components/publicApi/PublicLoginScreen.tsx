@@ -16,7 +16,10 @@ interface Props {
   appId?: string
   appName?: string
   backgroundImage?: any
-  fontDescription?: { regularFontFamily: string }
+  fontDescription?: {
+    regularFontFamily: string
+    headingFontFamily?: string
+  }
   landingScreenText?: string
   parentButton?: ParentButton
   primaryLogo?: any
@@ -44,13 +47,20 @@ interface Props {
 }
 
 export function LoginScreen(props: Props): JSX.Element {
-  const { fontDescription } = props
-  React.useEffect(() => {
-    if (fontDescription != null) {
-      changeFont(fontDescription.regularFontFamily)
-      updateFontStyles(fontDescription.regularFontFamily)
-    }
-  }, [fontDescription])
+  const { fontDescription = { regularFontFamily: 'System' } } = props
+  const {
+    regularFontFamily,
+    headingFontFamily = regularFontFamily
+  } = fontDescription
+
+  // Always update legacy fonts:
+  updateFontStyles(regularFontFamily, headingFontFamily)
+
+  // Update theme fonts if they are different:
+  React.useEffect(() => changeFont(regularFontFamily, headingFontFamily), [
+    regularFontFamily,
+    headingFontFamily
+  ])
 
   return (
     <ReduxStore

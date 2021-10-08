@@ -111,8 +111,8 @@ export const edgeDark: Theme = {
   mediumLineWidth: 2,
 
   // Fonts
-  fontFaceDefault: palette.QuicksandRegular,
-  fontFaceBold: palette.QuicksandBold,
+  fontFaceDefault: 'System',
+  fontFaceBold: 'System',
   fontFaceSymbols:
     Platform.OS === 'android'
       ? palette.SFUITextRegular

@@ -5,9 +5,13 @@ export let FONTS = {
   fontFamilyBlack: 'System'
 }
 
-export function updateFontStyles(fontFamily: string = 'System') {
+export function updateFontStyles(
+  regularFontFamily: string,
+  headingFontFamily: string
+) {
   FONTS = {
     ...FONTS,
-    fontFamilyRegular: fontFamily
+    fontFamilyBlack: headingFontFamily,
+    fontFamilyRegular: regularFontFamily
   }
 }
