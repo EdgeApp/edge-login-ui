@@ -26,6 +26,7 @@ export default {
   or: 'or',
   to_fix: 'to fix',
   exit: 'Exit',
+  help: 'Help',
   exit_pin: 'Exit PIN', // nothing should be all-caps
   next_label: 'Next',
   next_label_caps: 'NEXT',
