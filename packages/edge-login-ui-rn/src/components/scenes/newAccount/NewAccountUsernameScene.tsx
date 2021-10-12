@@ -86,11 +86,14 @@ const NewAccountUsernameSceneComponent = ({
           {usernameErrorMessage}
         </FormError>
         <View style={styles.actions}>
-          <PromiseButton
-            label={s.strings.next_label}
-            onPress={handleNext}
-            type="secondary"
-          />
+          {username.length > 0 &&
+          (usernameErrorMessage == null || usernameErrorMessage === '') ? (
+            <PromiseButton
+              label={s.strings.next_label}
+              onPress={handleNext}
+              type="secondary"
+            />
+          ) : null}
         </View>
       </View>
     </ThemedScene>
