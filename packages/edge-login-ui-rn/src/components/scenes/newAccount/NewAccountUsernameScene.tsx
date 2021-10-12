@@ -14,6 +14,7 @@ import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
 import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
+import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
 import { MainButton } from '../../themed/MainButton'
 import { ThemedScene } from '../../themed/ThemedScene'
@@ -77,12 +78,20 @@ const NewAccountUsernameSceneComponent = ({
         >
           {usernameErrorMessage}
         </FormError>
-        <MainButton
-          alignSelf="center"
-          label={s.strings.next_label}
-          onPress={handleNext}
-          type="secondary"
-        />
+        <Fade
+          hidden
+          visible={
+            username.length > 0 &&
+            (usernameErrorMessage == null || usernameErrorMessage === '')
+          }
+        >
+          <MainButton
+            alignSelf="center"
+            label={s.strings.next_label}
+            type="secondary"
+            onPress={handleNext}
+          />
+        </Fade>
       </View>
     </ThemedScene>
   )
