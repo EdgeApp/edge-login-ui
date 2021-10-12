@@ -112,6 +112,7 @@ export const edgeDark: Theme = {
 
   // Fonts
   fontFaceDefault: palette.QuicksandRegular,
+  fontFaceMedium: palette.QuicksandMedium,
   fontFaceBold: palette.QuicksandBold,
   fontFaceSymbols:
     Platform.OS === 'android'

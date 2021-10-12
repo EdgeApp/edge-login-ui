@@ -17,21 +17,18 @@ const SimpleSceneHeaderComponent = ({
   const styles = getStyles(theme)
 
   return (
-    <View style={styles.container}>
+    <View>
       <EdgeText style={styles.text}>{children}</EdgeText>
-      <Divider />
+      <Divider marginRem={[1, 0]} />
     </View>
   )
 }
 
 const getStyles = cacheStyles((theme: Theme) => ({
-  container: {
-    marginLeft: theme.rem(0.5)
-  },
   text: {
     marginRight: theme.rem(0.5),
     fontSize: theme.rem(1.25),
-    fontFamily: theme.fontFaceBold
+    fontFamily: theme.fontFaceMedium
   }
 }))
 

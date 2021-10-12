@@ -48,9 +48,7 @@ const BackButtonComponent = ({
 
 const getStyles = cacheStyles((theme: Theme) => ({
   container: {
-    justifyContent: 'center',
-    paddingHorizontal: theme.rem(1),
-    height: 44 // This is a fixed height of the navigation header no matter what screen size. Default by router-flux
+    justifyContent: 'center'
   },
   backIconStyle: {
     marginLeft: theme.rem(-0.25),
