@@ -8,17 +8,16 @@ import {
   validateUsername
 } from '../../../actions/CreateAccountActions'
 import s from '../../../common/locales/strings'
+import { createAccountPaddings } from '../../../constants/themedScenePaddings'
 import { Branding } from '../../../types/Branding'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { FormError } from '../../themed/FormError'
 import { PromiseButton } from '../../themed/PromiseButton'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
-import { ThemedScene } from '../../themed/ThemedScene'
+import { ThemedScene } from '../../themed/ThemedScene2'
 
 interface OwnProps {
   branding: Branding
@@ -44,6 +43,7 @@ const NewAccountUsernameSceneComponent = ({
   validateUsername
 }: Props) => {
   const styles = getStyles(theme)
+  const { paddingRem, innerPaddingRem } = createAccountPaddings
 
   const handleNext = async () => {
     if (usernameErrorMessage || !username) {
@@ -53,13 +53,14 @@ const NewAccountUsernameSceneComponent = ({
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
-      <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
+    <ThemedScene
+      topLeft={{ type: 'back', onClick: onBack }}
+      titleText={s.strings.choose_title_username}
+      paddingRem={paddingRem}
+      innerPaddingRem={innerPaddingRem}
+      showHeader
+    >
       <View style={styles.content}>
-        <EdgeText
-          style={styles.subtitle}
-        >{`${s.strings.step_one}: ${s.strings.choose_title_username}`}</EdgeText>
         <EdgeText style={styles.description} numberOfLines={2}>
           {sprintf(
             s.strings.username_desc,
@@ -98,20 +99,10 @@ const NewAccountUsernameSceneComponent = ({
 
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
-    flex: 1,
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
-  },
-  subtitle: {
-    fontFamily: theme.fontFaceBold,
-    color: theme.secondaryText,
-    fontSize: theme.rem(1),
-    marginBottom: theme.rem(2.25)
+    flex: 1
   },
   description: {
-    fontFamily: theme.fontFaceDefault,
-    fontSize: theme.rem(0.875),
-    marginBottom: theme.rem(3.25)
+    marginBottom: theme.rem(3)
   },
   actions: {
     flexDirection: 'row',
