@@ -8,19 +8,18 @@ import {
   CreateUserData
 } from '../../../actions/CreateAccountActions'
 import s from '../../../common/locales/strings'
+import { createAccountPaddings } from '../../../constants/themedScenePaddings'
 import { useScrollToEnd } from '../../../hooks/useScrollToEnd'
 import { Branding } from '../../../types/Branding'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { BackButton } from '../../themed/BackButton'
 import { Checkbox } from '../../themed/Checkbox'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { SecondaryButton } from '../../themed/ThemedButtons'
-import { ThemedScene } from '../../themed/ThemedScene'
+import { ThemedScene } from '../../themed/ThemedScene2'
 
 interface OwnProps {
   branding: Branding
@@ -53,6 +52,7 @@ const TermsAndConditionsSceneComponent = ({
   theme
 }: Props) => {
   const styles = getStyles(theme)
+  const { paddingRem, innerPaddingRem } = createAccountPaddings
   const [termValues, setTermValues] = React.useState<boolean[]>([
     false,
     false,
@@ -95,21 +95,25 @@ const TermsAndConditionsSceneComponent = ({
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
-      <SimpleSceneHeader>{s.strings.account_confirmation}</SimpleSceneHeader>
-      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.content}>
+    <ThemedScene
+      topLeft={{ type: 'back', onClick: onBack }}
+      titleText={s.strings.account_confirmation}
+      paddingRem={paddingRem}
+      innerPaddingRem={innerPaddingRem}
+      showHeader
+    >
+      <ScrollView ref={scrollViewRef}>
         <EdgeText
           style={styles.subtitle}
         >{`${s.strings.review}: ${s.strings.read_understod_2}`}</EdgeText>
-        <View style={styles.terms}>
+        <View>
           {terms.map((term, index) => (
             <Checkbox
               key={index}
               textStyle={styles.term}
               value={termValues[index]}
               onChange={(value: boolean) => handleStatusChange(index, value)}
-              marginRem={[0, 0, 1.33, 0]}
+              marginRem={[0, 0, 1.5, 0]}
             >
               {term}
             </Checkbox>
@@ -140,17 +144,10 @@ const TermsAndConditionsSceneComponent = ({
 }
 
 const getStyles = cacheStyles((theme: Theme) => ({
-  content: {
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
-  },
   subtitle: {
-    fontFamily: theme.fontFaceBold,
     color: theme.secondaryText,
-    fontSize: theme.rem(1),
-    marginBottom: theme.rem(2)
+    marginBottom: theme.rem(1.5)
   },
-  terms: {},
   term: {
     fontSize: theme.rem(0.875)
   },
