@@ -4,19 +4,18 @@ import { cacheStyles } from 'react-native-patina'
 
 import { confirmAndFinish } from '../../../actions/CreateAccountActions'
 import s from '../../../common/locales/strings'
+import { createAccountPaddings } from '../../../constants/themedScenePaddings'
 import { useScrollToEnd } from '../../../hooks/useScrollToEnd'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
 import { AccountInfo } from '../../themed/AccountInfo'
-import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { SecondaryButton } from '../../themed/ThemedButtons'
-import { ThemedScene } from '../../themed/ThemedScene'
+import { ThemedScene } from '../../themed/ThemedScene2'
 
 interface OwnProps {}
 
@@ -28,6 +27,7 @@ type Props = OwnProps & DispatchProps & ThemeProps
 
 const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
   const styles = getStyles(theme)
+  const { paddingRem, innerPaddingRem } = createAccountPaddings
 
   const [showNext, setShowNext] = React.useState(false)
   const scrollViewRef = useScrollToEnd(showNext)
@@ -38,13 +38,13 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton marginRem={[0, 0, 1, 0.5]} disabled />
-      <SimpleSceneHeader>{s.strings.account_confirmation}</SimpleSceneHeader>
-      <ScrollView ref={scrollViewRef} contentContainerStyle={styles.content}>
-        <EdgeText
-          style={styles.subtitle}
-        >{`${s.strings.review}: ${s.strings.write_it_down}`}</EdgeText>
+    <ThemedScene
+      titleText={s.strings.review}
+      paddingRem={paddingRem}
+      innerPaddingRem={innerPaddingRem}
+      showHeader
+    >
+      <ScrollView ref={scrollViewRef}>
         <EdgeText style={styles.description} numberOfLines={2}>
           {s.strings.almost_done}
         </EdgeText>
@@ -60,7 +60,7 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
         <View style={styles.actions}>
           <Fade visible={showNext}>
             <SecondaryButton
-              label={s.strings.confirm_finish}
+              label={s.strings.next_label}
               onPress={handleNext}
             />
           </Fade>
@@ -71,19 +71,7 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
 }
 
 const getStyles = cacheStyles((theme: Theme) => ({
-  content: {
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
-  },
-  subtitle: {
-    fontFamily: theme.fontFaceBold,
-    color: theme.secondaryText,
-    fontSize: theme.rem(1),
-    marginBottom: theme.rem(2)
-  },
   description: {
-    fontFamily: theme.fontFaceDefault,
-    fontSize: theme.rem(0.875),
     marginBottom: theme.rem(2)
   },
   actions: {
