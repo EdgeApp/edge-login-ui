@@ -31,6 +31,11 @@ interface StateProps {
   pin: string
 }
 
+interface InfoRow {
+  label: string
+  detail: string
+}
+
 type Props = OwnProps & StateProps & ThemeProps
 
 const AccountInfoComponent = ({
@@ -69,26 +74,29 @@ const AccountInfoComponent = ({
     }
   })
 
-  const renderInfoFields = () => (
-    <>
+  const infoRows: InfoRow[] = [
+    { detail: s.strings.username, label: username },
+    { detail: s.strings.password, label: password },
+    { detail: s.strings.pin, label: pin }
+  ]
+
+  const renderInfoRow = (label: string, detail: string, isLastRow: boolean) => (
+    <View style={[styles.row, !isLastRow ? styles.rowMarginBottom : undefined]}>
       <EdgeText
-        style={[styles.text, styles.textMarginBottom]}
+        style={[styles.text, styles.label]}
+        numberOfLines={1}
+        disableFontScaling
+      >
+        {label}:
+      </EdgeText>
+      <EdgeText
+        style={[styles.text, styles.detail]}
         numberOfLines={0}
         disableFontScaling
       >
-        {s.strings.username}:&nbsp;{username}
+        {detail}
       </EdgeText>
-      <EdgeText
-        style={[styles.text, styles.textMarginBottom]}
-        numberOfLines={0}
-        disableFontScaling
-      >
-        {s.strings.password}:&nbsp;{password}
-      </EdgeText>
-      <EdgeText style={styles.text} disableFontScaling>
-        {s.strings.pin}:&nbsp;{pin}
-      </EdgeText>
-    </>
+    </View>
   )
 
   return (
@@ -125,10 +133,14 @@ const AccountInfoComponent = ({
         </Animated.View>
       </TouchableWithoutFeedback>
       <Animated.View style={[styles.info, infoStyle]}>
-        {renderInfoFields()}
+        {infoRows.map(({ detail, label }: InfoRow, index: number) =>
+          renderInfoRow(detail, label, index + 1 === infoRows.length)
+        )}
       </Animated.View>
       <View style={[styles.info, styles.infoHiddenCopy]} ref={animatedRef}>
-        {renderInfoFields()}
+        {infoRows.map(({ detail, label }: InfoRow, index: number) =>
+          renderInfoRow(detail, label, index + 1 === infoRows.length)
+        )}
       </View>
     </View>
   )
@@ -143,14 +155,14 @@ const getStyles = cacheStyles((theme: Theme) => ({
     borderLeftWidth: theme.reallyThinLineWidth,
     borderRightWidth: theme.reallyThinLineWidth,
     paddingHorizontal: theme.rem(1),
-    paddingVertical: theme.rem(0.6),
+    paddingVertical: theme.rem(0.5),
     flexDirection: 'row',
     alignItems: 'center'
   },
   headerText: {
     flex: 1,
     fontFamily: theme.fontFaceBold,
-    fontSize: theme.rem(0.9)
+    fontSize: theme.rem(1)
   },
   headerIcon: {
     alignSelf: 'flex-end'
@@ -166,11 +178,21 @@ const getStyles = cacheStyles((theme: Theme) => ({
     paddingHorizontal: theme.rem(1),
     paddingBottom: theme.rem(1)
   },
-  text: {
-    fontSize: theme.rem(0.85)
+  row: {
+    flexDirection: 'row'
   },
-  textMarginBottom: {
+  rowMarginBottom: {
     marginBottom: theme.rem(0.5)
+  },
+  text: {
+    fontSize: theme.rem(0.75)
+  },
+  label: {
+    flex: 3
+  },
+  detail: {
+    flex: 5,
+    marginLeft: theme.rem(0.5)
   },
   infoHiddenCopy: {
     position: 'absolute',
