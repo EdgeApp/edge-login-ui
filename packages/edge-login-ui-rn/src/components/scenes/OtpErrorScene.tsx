@@ -6,6 +6,7 @@ import { sprintf } from 'sprintf-js'
 import { login } from '../../actions/LoginAction'
 import { hasReadyVoucher, requestOtpReset } from '../../actions/LoginOtpActions'
 import s from '../../common/locales/strings'
+import { otpScenePaddings } from '../../constants/themedScenePaddings'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
 import { LoginAttempt } from '../../util/loginAttempt'
 import { makePeriodicTask } from '../../util/periodicTask'
@@ -18,7 +19,7 @@ import { connect } from '../services/ReduxStore'
 import { DividerWithText } from '../themed/DividerWithText'
 import { IconHeaderRow } from '../themed/IconHeaderRow'
 import { LinkRow } from '../themed/LinkRow'
-import { ThemedScene } from '../themed/ThemedScene'
+import { ThemedScene } from '../themed/ThemedScene2'
 import { MessageText, Warning } from '../themed/ThemedText'
 
 interface OwnProps {}
@@ -110,6 +111,7 @@ class OtpErrorSceneComponent extends React.Component<Props> {
   }
 
   render() {
+    const { paddingRem, innerPaddingRem } = otpScenePaddings
     const { handleQrModal, otpError, otpResetDate } = this.props
     const isIp = otpError.reason === 'ip'
 
@@ -119,9 +121,11 @@ class OtpErrorSceneComponent extends React.Component<Props> {
 
     return (
       <ThemedScene
+        topLeft={{ type: 'back', onClick: this.props.onBack }}
+        topMiddle={isIp ? s.strings.otp_header_ip : s.strings.otp_header}
+        paddingRem={paddingRem}
+        innerPaddingRem={innerPaddingRem}
         showHeader
-        onBack={this.props.onBack}
-        title={isIp ? s.strings.otp_header_ip : s.strings.otp_header}
       >
         <IconHeaderRow
           renderIcon={theme => (
