@@ -4,7 +4,7 @@ import { cacheStyles } from 'react-native-patina'
 
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 import { EdgeText } from '../themed/EdgeText'
-import { ThemedScene } from '../themed/ThemedScene'
+import { ThemedScene } from '../themed/ThemedScene2'
 
 const loader = require('../../assets/safeLoader.gif')
 

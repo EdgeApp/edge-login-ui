@@ -78,7 +78,7 @@ class RouterComponent extends React.Component<Props> {
       case 'NewAccountWaitScene':
         return (
           <WaitScene
-            title={s.strings.good_job}
+            title={s.strings.great_job}
             message={s.strings.hang_tight + '\n' + s.strings.secure_account}
           />
         )
