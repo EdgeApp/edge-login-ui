@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Image, TouchableOpacity, View } from 'react-native'
+import { Image, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 import { sprintf } from 'sprintf-js'
 
@@ -13,9 +13,8 @@ import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
 import { Divider } from '../../themed/Divider'
 import { EdgeText } from '../../themed/EdgeText'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { SecondaryButton } from '../../themed/ThemedButtons'
-import { ThemedScene } from '../../themed/ThemedScene'
+import { ThemedScene } from '../../themed/ThemedScene2'
 
 interface OwnProps {
   branding: Branding
@@ -36,11 +35,13 @@ const NewAccountWelcomeSceneComponent = ({
   const appName = branding.appName || s.strings.app_name_default
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <TouchableOpacity style={styles.exitButton} onPress={onExit}>
-        <EdgeText style={styles.exitText}>{s.strings.exit}</EdgeText>
-      </TouchableOpacity>
-      <SimpleSceneHeader>{s.strings.get_started}</SimpleSceneHeader>
+    <ThemedScene
+      topLeft={{ type: 'exit', onClick: onExit }}
+      titleText={s.strings.get_started}
+      paddingRem={[1, 0, 1, 1]}
+      innerPaddingRem={[1, 0, 0, 0]}
+      showHeader
+    >
       <View style={styles.content}>
         <Image source={LOGO_BIG} style={styles.logo} resizeMode="contain" />
         <EdgeText style={styles.welcome}>
@@ -61,7 +62,9 @@ const NewAccountWelcomeSceneComponent = ({
             </EdgeText>
           </View>
         </View>
-        <Divider marginRem={[1.5, 0, 1.5, 0.5]} />
+      </View>
+      <Divider marginRem={[1.5, 0, 1.5, 0]} />
+      <View style={styles.content}>
         <View style={styles.advantage}>
           <Image
             source={WELCOME_SHIELD_KEY}
@@ -90,8 +93,8 @@ const NewAccountWelcomeSceneComponent = ({
 
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
-    flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginRight: theme.rem(1)
   },
   logo: {
     height: theme.rem(2.25),
