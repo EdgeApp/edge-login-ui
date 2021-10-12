@@ -7,19 +7,18 @@ import {
   validatePassword
 } from '../../../actions/CreateAccountActions'
 import s from '../../../common/locales/strings'
+import { createAccountPaddings } from '../../../constants/themedScenePaddings'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
 import { PasswordStatus } from '../../themed/PasswordStatus'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { SecondaryButton } from '../../themed/ThemedButtons'
-import { ThemedScene } from '../../themed/ThemedScene'
+import { ThemedScene } from '../../themed/ThemedScene2'
 
 interface OwnProps {}
 interface StateProps {
@@ -52,6 +51,7 @@ const NewAccountPasswordSceneComponent = ({
   theme
 }: Props) => {
   const styles = getStyles(theme)
+  const { paddingRem, innerPaddingRem } = createAccountPaddings
   const [focusFirst, setFocusFirst] = React.useState<boolean>(true)
   const [focusSecond, setFocusSecond] = React.useState<boolean>(false)
 
@@ -85,16 +85,11 @@ const NewAccountPasswordSceneComponent = ({
     return (
       <>
         {isPasswordStatusExists ? (
-          <PasswordStatus marginRem={[0, 0, 1.25]} />
+          <PasswordStatus marginRem={[0, 0, 1.5]} />
         ) : (
-          <>
-            <EdgeText
-              style={styles.subtitle}
-            >{`${s.strings.step_two}: ${s.strings.choose_title_password}`}</EdgeText>
-            <EdgeText style={styles.description} numberOfLines={2}>
-              {s.strings.password_desc}
-            </EdgeText>
-          </>
+          <EdgeText style={styles.description} numberOfLines={2}>
+            {s.strings.password_desc}
+          </EdgeText>
         )}
         <EdgeTextFieldOutlined
           value={password}
@@ -106,7 +101,7 @@ const NewAccountPasswordSceneComponent = ({
           onSubmitEditing={handleFocusSwitch}
           isClearable
           showSearchIcon={false}
-          marginRem={[0, 0.75, 1.25]}
+          marginRem={[0, 0.75, 1.5]}
         />
         <EdgeTextFieldOutlined
           value={confirmPassword}
@@ -118,7 +113,7 @@ const NewAccountPasswordSceneComponent = ({
           onSubmitEditing={handleNext}
           isClearable
           showSearchIcon={false}
-          marginRem={[0, 0.75, 1.25]}
+          marginRem={[0, 0.75, 1.5]}
         />
         <FormError
           marginRem={[0, 0.75]}
@@ -149,26 +144,24 @@ const NewAccountPasswordSceneComponent = ({
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
-      <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
+    <ThemedScene
+      topLeft={{ type: 'back', onClick: onBack }}
+      titleText={s.strings.choose_title_password}
+      paddingRem={paddingRem}
+      innerPaddingRem={innerPaddingRem}
+      showHeader
+    >
       {focusSecond ? (
         <KeyboardAvoidingView
           style={[styles.container, styles.overflowHidden]}
-          contentContainerStyle={[
-            styles.container,
-            styles.overflowHidden,
-            styles.containerMargins
-          ]}
+          contentContainerStyle={[styles.container, styles.overflowHidden]}
           behavior="position"
           keyboardVerticalOffset={-150}
         >
           {renderInterior()}
         </KeyboardAvoidingView>
       ) : (
-        <View style={[styles.container, styles.containerMargins]}>
-          {renderInterior()}
-        </View>
+        <View style={styles.container}>{renderInterior()}</View>
       )}
     </ThemedScene>
   )
@@ -181,20 +174,8 @@ const getStyles = cacheStyles((theme: Theme) => ({
   overflowHidden: {
     overflow: 'hidden'
   },
-  containerMargins: {
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
-  },
-  subtitle: {
-    fontFamily: theme.fontFaceBold,
-    color: theme.secondaryText,
-    fontSize: theme.rem(1),
-    marginBottom: theme.rem(2.25)
-  },
   description: {
-    fontFamily: theme.fontFaceDefault,
-    fontSize: theme.rem(0.875),
-    marginBottom: theme.rem(3.25)
+    marginBottom: theme.rem(3)
   },
   actions: {
     flexDirection: 'row',
