@@ -16,7 +16,6 @@ import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { Fade } from '../../themed/Fade'
-import { FormError } from '../../themed/FormError'
 import { PasswordStatus } from '../../themed/PasswordStatus'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { SecondaryButton } from '../../themed/ThemedButtons'
@@ -126,12 +125,6 @@ const NewAccountPasswordSceneComponent = ({
           showSearchIcon={false}
           marginRem={[0, 0.75, 1.25]}
         />
-        <FormError
-          marginRem={[0, 0.75]}
-          invisible={createPasswordErrorMessage === ''}
-        >
-          {createPasswordErrorMessage}
-        </FormError>
         <View style={styles.actions}>
           <Fade
             visible={
