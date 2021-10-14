@@ -6,23 +6,18 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 
 import s from '../../common/locales/strings'
 import { PasswordStatusState } from '../../reducers/PasswordStatusReducer'
-import { RootState } from '../../types/ReduxTypes'
 import { fixSides, mapSides, sidesToMargin } from '../../util/sides'
-import { connect } from '../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 import { EdgeText } from './EdgeText'
 import { IconSignal } from './IconSignal'
 
 interface OwnProps {
+  status: PasswordStatusState | null
+  isPasswordConfirmed: boolean
   marginRem?: number[] | number
 }
 
-interface StateProps {
-  status: PasswordStatusState | null
-  isPasswordConfirmed: boolean
-}
-
-type Props = OwnProps & StateProps & ThemeProps
+type Props = OwnProps & ThemeProps
 
 const PasswordStatusComponent = ({
   status,
@@ -36,18 +31,19 @@ const PasswordStatusComponent = ({
   if (status === null) return null
 
   const { list, passed } = status
+  const fullPassed = passed && isPasswordConfirmed
 
   return (
     <View
-      style={[styles.container, passed && styles.passedContainer, spacings]}
+      style={[styles.container, fullPassed && styles.passedContainer, spacings]}
     >
       <View style={styles.top}>
         <IconSignal
-          enabled={passed}
+          enabled={fullPassed}
           enabledIcon={props => <FontAwesome {...props} name="check-circle" />}
           disabledIcon={props => <SimpleLineIcons {...props} name="info" />}
         />
-        <EdgeText style={[styles.message, passed && styles.passed]}>
+        <EdgeText style={[styles.message, fullPassed && styles.passed]}>
           {s.strings.password_requirements}
         </EdgeText>
       </View>
@@ -102,10 +98,4 @@ const getStyles = cacheStyles((theme: Theme) => ({
   }
 }))
 
-export const PasswordStatus = connect<StateProps, {}, OwnProps>(
-  (state: RootState) => ({
-    status: state.passwordStatus,
-    isPasswordConfirmed: state.create.password === state.create.confirmPassword
-  }),
-  () => ({})
-)(withTheme(PasswordStatusComponent))
+export const PasswordStatus = withTheme(PasswordStatusComponent)

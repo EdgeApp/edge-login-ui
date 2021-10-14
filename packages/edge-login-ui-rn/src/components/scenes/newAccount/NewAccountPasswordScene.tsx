@@ -7,6 +7,7 @@ import {
   validatePassword
 } from '../../../actions/CreateAccountActions'
 import s from '../../../common/locales/strings'
+import { PasswordStatusState } from '../../../reducers/PasswordStatusReducer'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
@@ -28,6 +29,7 @@ interface StateProps {
   password: string
   isPasswordStatusExists: boolean
   isPasswordPassed: boolean
+  status: PasswordStatusState | null
 }
 interface DispatchProps {
   onDone: () => void
@@ -47,6 +49,7 @@ const NewAccountPasswordSceneComponent = ({
   validatePassword,
   isPasswordStatusExists,
   isPasswordPassed,
+  status,
   theme
 }: Props) => {
   const styles = getStyles(theme)
@@ -80,7 +83,15 @@ const NewAccountPasswordSceneComponent = ({
     return (
       <>
         {isPasswordStatusExists ? (
-          <PasswordStatus marginRem={[0, 0, 1.25]} />
+          <PasswordStatus
+            marginRem={[0, 0, 1.25]}
+            status={status}
+            isPasswordConfirmed={
+              password !== '' &&
+              confirmPassword !== '' &&
+              password === confirmPassword
+            }
+          />
         ) : (
           <>
             <EdgeText
@@ -207,7 +218,8 @@ export const NewAccountPasswordScene = connect<
     isPasswordStatusExists: !!state.passwordStatus,
     isPasswordPassed: Boolean(
       state.passwordStatus && state.passwordStatus.passed
-    )
+    ),
+    status: state.passwordStatus
   }),
   (dispatch: Dispatch) => ({
     onDone() {
