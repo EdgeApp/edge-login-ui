@@ -61,23 +61,8 @@ export default {
   must_one_lowercase: 'Must have at least 1 lowercase letter',
   must_one_uppercase: 'Must have at least 1 uppercase letter',
   must_one_number: 'Must have at least 1 number',
-  terms_one:
-    'I understand that my funds are held securely on this device, not by %s',
-  terms_two:
-    'I understand that if I lose this device or uninstall the app, my digital assets can only be recovered with my username and password',
-  terms_three:
-    'I understand that if I lose my username and password, %s will not be able to recover my account, unless I setup password recovery',
-  terms_four:
-    'I understand that I am responsible for safekeeping of my passwords, private key pairs, PIN, and any other codes to access the software. %s is not responsible if my information is compromised or accessed by a 3rd party where funds are lost',
-  step_one: 'Step 1/3',
-  step_two: 'Step 2/3',
-  step_three: 'Step 3/3', // title of scene
-  choose_title_username: 'Choose a Username', // title of scene
-  choose_title_password: 'Set a Password', // title of scene
-  set_four_digit_pin: 'Set a 4-digit PIN ',
   create_your_account: 'Creating Your Account', // title of scene
   write_it_down: 'Write It Down', // Is this smaller green title even necessary?
-  write_and_store: 'Write Down and Store Securely',
   quick_review: 'Quick Review',
   review: 'Review',
   recovery: 'Recovery',
@@ -88,20 +73,15 @@ export default {
   recovery_questions_header: 'Recovery Questions',
   account_info_warning:
     'You did not set your password. We strongly encourage you to create a password and backup your account as soon as possible. You can set a password in the Settings screen in the app.',
-  show_account_info: 'Show account information',
-  hide_account_info: 'Hide account information',
   password_successfully_changed:
     'Password Successfully Changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!',
   otp_hero_scan:
     'Scan the QR code below using the device that enabled 2FA to give access to the device',
-  password_desc:
-    'The password is used to login and change sensitive settings. Don’t forget to write it down.',
   re_enter_new_password: 'Re-enter New Password',
   new_password: 'New Password',
   pswd_and_pin_changed: 'Password and PIN successfully changed.',
   change_pwd_body:
     "Don't forget your password or recovery answers. You will permanently lose access to your funds if you lose your password and recovery answers.",
-  pin_desc: 'Your PIN is a 4 digit code used to quickly log into your account.',
   recovery_successful:
     'Recovery successful! Please change your password and PIN.',
   recover_by_username:
@@ -130,32 +110,13 @@ export default {
   recovery_instructions_complete:
     'To complete account recovery setup you MUST save the recovery token. This is required to recover your account in addition to your username and recovery answers. \n\n Please enter your email to be sent the recovery token.',
   recovery_error: 'The answers you provided are incorrect.',
-  read_understod_1: 'I have read, understood, and agree to the ',
-  read_understod_2: 'Terms of Use',
   last_step_review: 'Last step! Let’s finish with a quick review',
   confirm_finish: 'Confirm & Finish',
   confirm_email: 'Confirm & Email',
   confirm_share: 'Confirm & Share',
-  welcome: 'Welcome to %s!',
-  welcome_advantage_one_title: 'Getting started with %s is easy',
-  welcome_advantage_one_description:
-    'Choose a username and password which we’ll use to encrypt your account.',
-  welcome_advantage_two_title: 'Your security is key',
-  welcome_advantage_two_description:
-    'Not even %s has access to your information.',
-  welcome_advantage_three_description:
-    'You have complete control over your digital assets.',
   start_username: 'Let’s get started with choosing a username',
   get_started: 'Get Started', // button title, not a complete sentence so capitalize first letters
   encrypting: 'Doing the encryption',
-  username_desc:
-    'Your username will be required to sign in to your %s account on this and other devices.',
-  almost_done: "Almost done! Let's write down your account information",
-  warning_message:
-    'If you lose your account information, you’ll lose access to your funds permanently.',
-  great_job: 'Great Job!',
-  hang_tight: 'Hang tight while we create',
-  secure_account: 'and secure your account',
   encrypting_wallet: 'Encrypting wallet...',
   confirm_recovery_questions: 'Confirm Recovery',
   login_with_password: 'Login with password',
@@ -243,6 +204,44 @@ export default {
   qr_modal_message:
     'Scan this QR code with another device logged into your account:',
   qr_modal_started: 'Logging into account %s',
+
+  // Create Account:
+  welcome: 'Welcome to %s!',
+  welcome_advantage_one_title: 'Getting started with %s is easy',
+  welcome_advantage_one_description_1: 'You’ll choose a username and password.',
+  welcome_advantage_one_description_2:
+    'We’ll use these to encrypt your account.',
+  welcome_advantage_two_title: 'Your security is key',
+  welcome_advantage_two_description:
+    'Not even %s has access to your information, so you have full complete control over your digital assets.',
+  choose_title_username: 'Choose Username',
+  username_desc:
+    'Your username will be required to sign into your %s account on this and other devices.',
+  choose_title_password: 'Set Password',
+  password_desc:
+    'The password is used to login and change sensitive settings. Don’t forget to write it down.',
+  set_four_digit_pin: 'Set PIN ',
+  pin_desc:
+    'Your pin is a 4 digit code used to do quick re-logins into your account.',
+  great_job: 'Great Job!',
+  hang_tight: 'Hang tight while we create',
+  secure_account: 'and secure your account',
+  terms_one:
+    'I understand that my funds are held securely on this device, not by %s',
+  terms_two:
+    'I understand that if I lose this device or uninstall the app, my digital assets can only be recovered with my username and password',
+  terms_three:
+    'I understand that if I lose my username and password, %s will not be able to recover my account, unless I setup password recovery',
+  terms_four:
+    'I understand that I am responsible for safekeeping of my passwords, private key pairs, PIN, and any other codes to access the software. %s is not responsible if my information is compromised or accessed by a 3rd party where funds are lost',
+  read_understod_1: 'I have read, understood, and agree to the ',
+  read_understod_2: 'Terms of Use',
+  almost_done: "Almost done! Let's write down your account information",
+  write_and_store: 'Write Down and Store Securely',
+  warning_message:
+    'If you lose your account information, you’ll lose access to your funds permanently.',
+  show_account_info: 'View Account Information',
+  hide_account_info: 'Hide Account Information',
 
   // Alert component:
   alert_dropdown_alert: 'Alert! ',
