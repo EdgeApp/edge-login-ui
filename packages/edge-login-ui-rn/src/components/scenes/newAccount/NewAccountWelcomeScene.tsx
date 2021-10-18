@@ -14,7 +14,7 @@ import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
 import { Divider } from '../../themed/Divider'
 import { EdgeText } from '../../themed/EdgeText'
 import { SecondaryButton } from '../../themed/ThemedButtons'
-import { ThemedScene } from '../../themed/ThemedScene2'
+import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {
   branding: Branding

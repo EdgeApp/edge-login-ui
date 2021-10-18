@@ -17,7 +17,7 @@ import { connect } from '../../services/ReduxStore'
 import { DividerWithText } from '../../themed/DividerWithText'
 import { IconHeaderRow } from '../../themed/IconHeaderRow'
 import { LinkRow } from '../../themed/LinkRow'
-import { ThemedScene } from '../../themed/ThemedScene2'
+import { ThemedScene } from '../../themed/ThemedScene'
 import { MessageText, Warning } from '../../themed/ThemedText'
 
 interface OwnProps {}

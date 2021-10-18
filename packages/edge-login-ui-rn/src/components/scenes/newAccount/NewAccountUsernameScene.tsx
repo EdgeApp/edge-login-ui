@@ -17,7 +17,7 @@ import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { FormError } from '../../themed/FormError'
 import { PromiseButton } from '../../themed/PromiseButton'
-import { ThemedScene } from '../../themed/ThemedScene2'
+import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {
   branding: Branding

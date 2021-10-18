@@ -18,7 +18,7 @@ import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
 import { PasswordStatus } from '../../themed/PasswordStatus'
 import { SecondaryButton } from '../../themed/ThemedButtons'
-import { ThemedScene } from '../../themed/ThemedScene2'
+import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {}
 interface StateProps {

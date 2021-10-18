@@ -13,7 +13,7 @@ import { DigitInput, MAX_PIN_LENGTH } from '../../themed/DigitInput'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
 import { SecondaryButton } from '../../themed/ThemedButtons'
-import { ThemedScene } from '../../themed/ThemedScene2'
+import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {}
 
