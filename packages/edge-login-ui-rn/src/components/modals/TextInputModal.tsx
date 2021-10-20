@@ -3,8 +3,8 @@ import { Platform, View } from 'react-native'
 import { AirshipBridge } from 'react-native-airship'
 
 import s from '../../common/locales/strings'
-import { ThemedTextField } from '../../components/themed/ThemedTextField'
 import { showError } from '../services/AirshipInstance'
+import { EdgeTextFieldOutlined } from '../themed/EdgeTextFieldOutlined'
 import { MainButton } from '../themed/MainButton'
 import { ModalCloseArrow } from '../themed/ModalParts'
 import { ThemedModal } from '../themed/ThemedModal'
@@ -101,7 +101,7 @@ export class TextInputModal extends React.Component<Props, State> {
       <ThemedModal bridge={bridge} onCancel={this.handleCancel}>
         {title != null ? <TitleText>{title}</TitleText> : null}
         {message != null ? <MessageText>{message}</MessageText> : null}
-        <ThemedTextField
+        <EdgeTextFieldOutlined
           // Text input props:
           autoCapitalize={autoCapitalize}
           autoCorrect={autoCorrect}
@@ -112,8 +112,10 @@ export class TextInputModal extends React.Component<Props, State> {
           // Our props:
           autoFocus
           error={errorMessage}
+          marginRem={1}
           onChangeText={this.handleChangeText}
           onSubmitEditing={this.handleSubmit}
+          showSearchIcon={false}
           value={text}
         />
         {
