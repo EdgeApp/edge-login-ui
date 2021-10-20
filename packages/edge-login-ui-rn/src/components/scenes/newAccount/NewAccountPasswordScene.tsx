@@ -16,9 +16,9 @@ import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
+import { MainButton } from '../../themed/MainButton'
 import { PasswordStatus } from '../../themed/PasswordStatus'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
-import { SecondaryButton } from '../../themed/ThemedButtons'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {}
@@ -138,8 +138,9 @@ const NewAccountPasswordSceneComponent = ({
             }
             hidden
           >
-            <SecondaryButton
+            <MainButton
               label={s.strings.next_label}
+              type="secondary"
               onPress={handleNext}
             />
           </Fade>

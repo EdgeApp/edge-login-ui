@@ -5,8 +5,8 @@ import { AirshipBridge } from 'react-native-airship'
 import s from '../../common/locales/strings'
 import { ThemedTextField } from '../../components/themed/ThemedTextField'
 import { showError } from '../services/AirshipInstance'
+import { MainButton } from '../themed/MainButton'
 import { ModalCloseArrow } from '../themed/ModalParts'
-import { PrimaryButton } from '../themed/ThemedButtons'
 import { ThemedModal } from '../themed/ThemedModal'
 import { MessageText, TitleText } from '../themed/ThemedText'
 
@@ -121,9 +121,10 @@ export class TextInputModal extends React.Component<Props, State> {
           Platform.OS === 'android' ? <View style={{ flex: 1 }} /> : null
         }
         {spinning ? (
-          <PrimaryButton marginRem={0.5} spinner />
+          <MainButton alignSelf="center" disabled marginRem={0.5} spinner />
         ) : (
-          <PrimaryButton
+          <MainButton
+            alignSelf="center"
             label={submitLabel}
             marginRem={0.5}
             onPress={this.handleSubmit}

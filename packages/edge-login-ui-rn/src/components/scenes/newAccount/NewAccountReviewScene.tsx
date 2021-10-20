@@ -14,8 +14,8 @@ import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
+import { MainButton } from '../../themed/MainButton'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
-import { SecondaryButton } from '../../themed/ThemedButtons'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {}
@@ -59,8 +59,9 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
         <AccountInfo marginRem={[0, 2.5]} onOpen={() => setShowNext(true)} />
         <View style={styles.actions}>
           <Fade visible={showNext}>
-            <SecondaryButton
+            <MainButton
               label={s.strings.confirm_finish}
+              type="secondary"
               onPress={handleNext}
             />
           </Fade>

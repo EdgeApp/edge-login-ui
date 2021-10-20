@@ -33,58 +33,6 @@ interface Props {
   paddingRem?: number[] | number
 }
 
-export function PrimaryButton(props: Props) {
-  const { children, label, marginRem, onPress, paddingRem, spinner } = props
-  const theme = useTheme()
-  const styles = getStyles(theme)
-
-  const spacingStyles = {
-    ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
-    ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
-  }
-  return (
-    <TouchableOpacity
-      style={[styles.primaryButton, spacingStyles]}
-      onPress={onPress}
-    >
-      {label != null ? <Text style={styles.primaryText}>{label}</Text> : null}
-      {spinner ? (
-        <ActivityIndicator
-          color={theme.primaryButtonText}
-          style={styles.spinner}
-        />
-      ) : null}
-      {children}
-    </TouchableOpacity>
-  )
-}
-
-export function SecondaryButton(props: Props) {
-  const { children, label, marginRem, onPress, paddingRem, spinner } = props
-  const theme = useTheme()
-  const styles = getStyles(theme)
-
-  const spacingStyles = {
-    ...sidesToMargin(mapSides(fixSides(marginRem, 0), theme.rem)),
-    ...sidesToPadding(mapSides(fixSides(paddingRem, 0.5), theme.rem))
-  }
-  return (
-    <TouchableOpacity
-      style={[styles.secondaryButton, spacingStyles]}
-      onPress={onPress}
-    >
-      {label != null ? <Text style={styles.secondaryText}>{label}</Text> : null}
-      {spinner ? (
-        <ActivityIndicator
-          color={theme.secondaryButtonText}
-          style={styles.spinner}
-        />
-      ) : null}
-      {children}
-    </TouchableOpacity>
-  )
-}
-
 export function AlertModalButton(props: Props & AlertModalButtonType) {
   const {
     children,
@@ -142,26 +90,6 @@ const getStyles = cacheStyles((theme: Theme) => {
   } as const
 
   return {
-    primaryButton: {
-      ...commonButton,
-      backgroundColor: theme.primaryButton,
-      borderColor: theme.primaryButtonOutline
-    },
-    primaryText: {
-      ...commonText,
-      color: theme.primaryButtonText
-    },
-
-    secondaryButton: {
-      ...commonButton,
-      backgroundColor: theme.secondaryButton,
-      borderColor: theme.secondaryButtonOutline
-    },
-    secondaryText: {
-      ...commonText,
-      color: theme.secondaryButtonText
-    },
-
     alertModalPrimaryButton: {
       ...commonButton,
       backgroundColor: theme.alertModalPrimaryButton,
