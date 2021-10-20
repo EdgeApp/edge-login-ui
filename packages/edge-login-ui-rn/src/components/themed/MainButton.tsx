@@ -42,6 +42,8 @@ interface Props {
 
   // Which visual style to use. Defaults to primary (solid):
   type?: 'primary' | 'secondary'
+
+  testID?: string
 }
 
 /**
@@ -57,7 +59,8 @@ export function MainButton(props: Props) {
     onPress,
     type = 'primary',
     paddingRem,
-    spinner = false
+    spinner = false,
+    testID
   } = props
 
   // `onPress` promise logic:
@@ -83,6 +86,7 @@ export function MainButton(props: Props) {
     <TouchableOpacity
       disabled={disabled || pending}
       style={[touchableStyle, dynamicStyles]}
+      testID={testID}
       onPress={handlePress}
     >
       {label != null && !pending ? (

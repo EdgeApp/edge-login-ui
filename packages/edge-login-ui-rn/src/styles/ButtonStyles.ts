@@ -50,79 +50,6 @@ export const PrimaryWidthButtonDownStyle = {
   ...PrimaryButtonDownStyle,
   width: '100%'
 }
-export const SecondaryButtonUpStyle = {
-  position: 'relative',
-  backgroundColor: Constants.BUTTON_SECONDARY_UP,
-  width: BUTTON_WIDTH_1,
-  height: scale(BUTTON_HEIGHT),
-  alignItems: 'center',
-  justifyContent: 'space-around',
-  borderRadius: scale(BUTTON_BORDER_RADIUS)
-}
-
-export const SecondaryButtonDownStyle = {
-  position: 'relative',
-  backgroundColor: Constants.BUTTON_SECONDARY_DOWN,
-  width: BUTTON_WIDTH_1,
-  height: scale(BUTTON_HEIGHT),
-  alignItems: 'center',
-  justifyContent: 'space-around',
-  borderRadius: scale(BUTTON_BORDER_RADIUS)
-}
-export const SecondaryButtonUpTextStyle = {
-  position: 'relative',
-  color: Constants.WHITE,
-  fontFamily: Constants.FONTS.fontFamilyRegular,
-  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
-  width: '100%',
-  textAlign: 'center'
-}
-export const SecondaryButtonDownTextStyle = {
-  position: 'relative',
-  color: Constants.WHITE,
-  fontFamily: Constants.FONTS.fontFamilyRegular,
-  fontSize: scale(Constants.FONTS.defaultButtonTextSize),
-  width: '100%',
-  textAlign: 'center'
-}
-
-export const TertiaryButtonUpStyle = {
-  backgroundColor: Constants.TRANSPARENT,
-  width: BUTTON_WIDTH_1,
-  height: scale(BUTTON_HEIGHT),
-  alignItems: 'center',
-  justifyContent: 'space-around',
-  borderRadius: scale(3),
-  borderColor: Constants.ACCENT_MINT,
-  borderWidth: BUTTON_BORDER_STROKE
-}
-
-export const TertiaryButtonTextUpStyle = {
-  color: Constants.ACCENT_MINT,
-  fontSize: scale(22),
-  fontFamily: Constants.FONTS.fontFamilyRegular,
-  width: '100%',
-  textAlign: 'center'
-}
-
-export const TertiaryButtonDownStyle = {
-  backgroundColor: Constants.ACCENT_MINT,
-  width: BUTTON_WIDTH_1,
-  height: scale(BUTTON_HEIGHT),
-  alignItems: 'center',
-  justifyContent: 'space-around',
-  borderRadius: scale(3),
-  borderColor: Constants.ACCENT_MINT,
-  borderWidth: BUTTON_BORDER_STROKE
-}
-
-export const TertiaryButtonTextDownStyle = {
-  color: Constants.PRIMARY,
-  fontSize: scale(22),
-  fontFamily: Constants.FONTS.fontFamilyRegular,
-  width: '100%',
-  textAlign: 'center'
-}
 
 export const DefaultButtonUpStyle = {
   position: 'relative',
@@ -201,65 +128,6 @@ export const TextOnlyButtonTextDownStyle = {
   textAlign: 'center'
 }
 
-export const IconButtonStyle = {
-  container: {
-    width: 40,
-    height: scale(40),
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  icon: {
-    color: Constants.WHITE
-  },
-  iconPressed: {
-    color: Constants.GRAY_2
-  },
-  iconSize: scale(36),
-  underlayColor: Constants.TRANSPARENT
-}
-
-export const TextAndIconButtonStyle = {
-  container: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  centeredContent: {
-    width: '100%',
-    alignItems: 'center'
-  },
-  inner: {
-    position: 'relative',
-    flexDirection: 'row'
-  },
-  textContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-around'
-  },
-  iconContainer: {
-    height: '100%',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  text: {
-    color: Constants.WHITE,
-    fontSize: scale(20)
-  },
-  textPressed: {
-    color: Constants.GRAY_2,
-    fontSize: scale(20)
-  },
-  icon: {
-    color: Constants.WHITE
-  },
-  iconPressed: {
-    color: Constants.GRAY_2
-  },
-  iconSize: scale(25),
-  underlayColor: Constants.TRANSPARENT
-}
 export const TextAndIconButtonAlignEdgesStyle = {
   container: {
     width: '100%',
@@ -314,10 +182,6 @@ export const PrimaryButtonUpScaledStyle = {
   justifyContent: 'space-around',
   borderRadius: scale(BUTTON_BORDER_RADIUS)
 }
-export const PrimaryWidthButtonUpScaledStyle = {
-  ...PrimaryButtonUpStyle,
-  width: '100%'
-}
 export const PrimaryButtonUpTextScaledStyle = {
   position: 'relative',
   color: Constants.WHITE,
@@ -342,10 +206,6 @@ export const PrimaryButtonDownScaledStyle = {
   alignItems: 'center',
   justifyContent: 'space-around',
   borderRadius: scale(BUTTON_BORDER_RADIUS)
-}
-export const PrimaryWidthButtonDownScaledStyle = {
-  ...PrimaryButtonDownStyle,
-  width: '100%'
 }
 
 export const TextOnlyButtonUpScaledStyle = {
@@ -372,47 +232,4 @@ export const TextOnlyButtonTextDownScaledStyle = {
   fontFamily: Constants.FONTS.fontFamilyRegular,
   width: '100%',
   textAlign: 'center'
-}
-
-export const TextAndIconButtonScaledStyle = {
-  container: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  centeredContent: {
-    width: '100%',
-    alignItems: 'center'
-  },
-  inner: {
-    position: 'relative',
-    flexDirection: 'row'
-  },
-  textContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-around'
-  },
-  iconContainer: {
-    height: '100%',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  text: {
-    color: Constants.WHITE,
-    fontSize: scale(20)
-  },
-  textPressed: {
-    color: Constants.GRAY_2,
-    fontSize: scale(20)
-  },
-  icon: {
-    color: Constants.WHITE
-  },
-  iconPressed: {
-    color: Constants.GRAY_2
-  },
-  iconSize: scale(25),
-  underlayColor: Constants.TRANSPARENT
 }

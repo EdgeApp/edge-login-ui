@@ -13,6 +13,7 @@ import { BackgroundImage } from '../common/BackgroundImage'
 import { Button } from '../common/Button'
 import { HeaderParentButtons } from '../common/HeaderParentButtons'
 import { connect } from '../services/ReduxStore'
+import { MainButton } from '../themed/MainButton'
 
 interface OwnProps {
   branding: Branding
@@ -50,17 +51,15 @@ class LandingSceneComponent extends React.Component<Props> {
               </Text>
             </View>
           </View>
-          <View style={styles.featureBoxButtons}>
-            <Button
+          <View style={styles.createButtonBox}>
+            <MainButton
               testID="createAccountButton"
-              onPress={this.props.handleCreate}
               label={s.strings.landing_create_account_button}
-              downStyle={styles.createButton.downStyle}
-              downTextStyle={styles.createButton.downTextStyle}
-              upStyle={styles.createButton.upStyle}
-              upTextStyle={styles.createButton.upTextStyle}
+              type="secondary"
+              onPress={this.props.handleCreate}
             />
-            <View style={styles.shim} />
+          </View>
+          <View style={styles.loginButtonBox}>
             <Button
               testID="alreadyHaveAccountButton"
               onPress={this.props.handlePassword}
@@ -110,13 +109,14 @@ const styles = {
     width: '100%',
     justifyContent: 'flex-end'
   },
-  featureBoxButtons: {
-    // height: scale(186),
-    alignItems: 'center',
-    justifyContent: 'flex-end'
+  createButtonBox: {
+    alignSelf: 'center',
+    width: '70%'
   },
-  shim: {
-    height: scale(28)
+  loginButtonBox: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginTop: scale(28)
   },
   tagText: {
     width: '80%',
@@ -128,12 +128,6 @@ const styles = {
     textAlign: 'center',
     fontSize: scale(14),
     lineHeight: scale(18)
-  },
-  createButton: {
-    upStyle: Styles.TertiaryButtonUpStyle,
-    upTextStyle: Styles.TertiaryButtonTextUpStyle,
-    downTextStyle: Styles.TertiaryButtonTextDownStyle,
-    downStyle: Styles.TertiaryButtonDownStyle
   },
   loginButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
