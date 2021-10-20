@@ -1,5 +1,10 @@
 # edge-login-ui
 
+## 0.9.21 (2021-10-20)
+
+- rn: changed: Match the edge-react-gui button style more closely.
+- rn: fixed: Use the passed-in font on all scenes.
+
 ## 0.9.20 (2021-09-27)
 
 - rn: Fix handling for the START_RESECURE action type.
