@@ -32,7 +32,6 @@ import { PinLoginScene } from '../scenes/PinLoginScene'
 import { RecoveryLoginScene } from '../scenes/RecoveryLoginScene'
 import { WaitScene } from '../scenes/WaitScene'
 import { connect } from '../services/ReduxStore'
-import { ThemeProvider } from '../services/ThemeContext'
 
 interface OwnProps {
   branding: Branding
@@ -47,13 +46,11 @@ class RouterComponent extends React.Component<Props> {
   render() {
     const { SceneStyle } = Styles
     return (
-      <ThemeProvider>
-        <MaybeProvideLoginUi>
-          <View accessible style={SceneStyle}>
-            {this.renderContent()}
-          </View>
-        </MaybeProvideLoginUi>
-      </ThemeProvider>
+      <MaybeProvideLoginUi>
+        <View accessible style={SceneStyle}>
+          {this.renderContent()}
+        </View>
+      </MaybeProvideLoginUi>
     )
   }
 

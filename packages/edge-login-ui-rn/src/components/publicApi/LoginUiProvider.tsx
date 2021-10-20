@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { Airship } from '../services/AirshipInstance'
+import { ThemeProvider } from '../services/ThemeContext'
 
 /**
  * We use this context to determine if `LoginUiProvider` is mounted.
@@ -19,7 +20,9 @@ interface Props {
 export function LoginUiProvider(props: Props): JSX.Element {
   return (
     <loginUiContext.Provider value>
-      <Airship>{props.children}</Airship>
+      <ThemeProvider>
+        <Airship>{props.children}</Airship>
+      </ThemeProvider>
     </loginUiContext.Provider>
   )
 }

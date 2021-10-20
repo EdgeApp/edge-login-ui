@@ -13,8 +13,8 @@ import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
 import { Divider } from '../../themed/Divider'
 import { EdgeText } from '../../themed/EdgeText'
+import { MainButton } from '../../themed/MainButton'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
-import { SecondaryButton } from '../../themed/ThemedButtons'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {
@@ -81,7 +81,11 @@ const NewAccountWelcomeSceneComponent = ({
           </View>
         </View>
         <View style={styles.actions}>
-          <SecondaryButton label={s.strings.get_started} onPress={onDone} />
+          <MainButton
+            label={s.strings.get_started}
+            type="secondary"
+            onPress={onDone}
+          />
         </View>
       </View>
     </ThemedScene>

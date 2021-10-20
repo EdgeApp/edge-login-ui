@@ -33,6 +33,7 @@ import { showQrCodeModal } from '../modals/QrCodeModal'
 import { TextInputModal } from '../modals/TextInputModal'
 import { Airship, showError } from '../services/AirshipInstance'
 import { connect } from '../services/ReduxStore'
+import { MainButton } from '../themed/MainButton'
 
 interface OwnProps {
   branding: Branding
@@ -60,7 +61,6 @@ interface State {
   errorMessage: string
   focusFirst: boolean
   focusSecond: boolean
-  loggingIn: boolean
   password: string
   usernameList: boolean
 }
@@ -72,7 +72,6 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
       errorMessage: '',
       focusFirst: true,
       focusSecond: false,
-      loggingIn: false,
       password: '',
       usernameList: false
     }
@@ -82,28 +81,23 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
     this.setState({ errorMessage: '', password })
   }
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const { login, saveOtpError, username } = this.props
     const { password } = this.state
 
     this.handleBlur()
     Keyboard.dismiss()
-    this.setState({
-      loggingIn: true
-    })
 
     const attempt: LoginAttempt = { type: 'password', username, password }
-    login(attempt)
-      .catch(error => {
-        if (error != null && error.name === 'OtpError') {
-          saveOtpError(attempt, error)
-        } else {
-          console.log(error)
-          const errorMessage = error != null ? error.message : ''
-          this.setState({ errorMessage })
-        }
-      })
-      .then(() => this.setState({ loggingIn: false }))
+    await login(attempt).catch(error => {
+      if (error != null && error.name === 'OtpError') {
+        saveOtpError(attempt, error)
+      } else {
+        console.log(error)
+        const errorMessage = error != null ? error.message : ''
+        this.setState({ errorMessage })
+      }
+    })
   }
 
   handleBlur = () => {
@@ -268,19 +262,14 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
           upStyle={styles.forgotButton.upStyle}
           upTextStyle={styles.forgotButton.upTextStyle}
         />
-        <View style={styles.shimTiny} />
-        <Button
-          testID="loginButton"
-          onPress={this.handleSubmit}
-          label={s.strings.login_button}
-          downStyle={styles.loginButton.downStyle}
-          downTextStyle={styles.loginButton.downTextStyle}
-          upStyle={styles.loginButton.upStyle}
-          upTextStyle={styles.loginButton.upTextStyle}
-          isThinking={this.state.loggingIn}
-          doesThink
-        />
-        <View style={styles.shimTiny} />
+        <View style={styles.loginButtonBox}>
+          <MainButton
+            label={s.strings.login_button}
+            testID="loginButton"
+            type="secondary"
+            onPress={this.handleSubmit}
+          />
+        </View>
         <Button
           testID="createAccountButton"
           onPress={this.handleCreateAccount}
@@ -399,6 +388,10 @@ const styles = {
     width: '100%',
     height: scale(10)
   },
+  loginButtonBox: {
+    marginVertical: scale(10),
+    width: '70%'
+  },
   buttonsBox: {
     width: '100%',
     alignItems: 'center'
@@ -470,12 +463,6 @@ const styles = {
       color: Constants.WHITE
     },
     downStyle: Styles.TextOnlyButtonDownStyle
-  },
-  loginButton: {
-    upStyle: Styles.TertiaryButtonUpStyle,
-    upTextStyle: Styles.TertiaryButtonTextUpStyle,
-    downTextStyle: Styles.TertiaryButtonTextDownStyle,
-    downStyle: Styles.TertiaryButtonDownStyle
   },
   signupButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,

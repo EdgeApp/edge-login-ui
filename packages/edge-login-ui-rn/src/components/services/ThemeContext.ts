@@ -25,11 +25,14 @@ export const {
 /**
  * Changes just the font.
  */
-export function changeFont(fontFamily: string = edgeDark.fontFamily) {
-  if (fontFamily !== lastFont) {
-    lastFont = fontFamily
-    changeTheme({ ...getTheme(), fontFamily })
-  }
+export function changeFont(
+  regularFontFamily: string,
+  headingFontFamily: string
+) {
+  changeTheme({
+    ...getTheme(),
+    fontFamily: regularFontFamily,
+    fontFaceBold: headingFontFamily,
+    fontFaceDefault: regularFontFamily
+  })
 }
-
-let lastFont = edgeDark.fontFamily

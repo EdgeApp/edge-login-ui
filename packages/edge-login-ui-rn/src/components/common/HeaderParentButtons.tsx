@@ -3,6 +3,7 @@ import { Image, Linking, Text, TouchableOpacity, View } from 'react-native'
 
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings'
+import { FONTS } from '../../constants/Fonts'
 import { Branding } from '../../types/Branding'
 import { scale } from '../../util/scaling'
 
@@ -61,6 +62,7 @@ const styles = {
     height: scale(32)
   },
   leftButtonText: {
+    fontFamily: FONTS.fontFamilyRegular,
     color: '#FFF',
     fontSize: 16
   },

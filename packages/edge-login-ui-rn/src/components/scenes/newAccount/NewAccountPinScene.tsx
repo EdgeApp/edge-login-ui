@@ -12,8 +12,8 @@ import { BackButton } from '../../themed/BackButton'
 import { DigitInput, MAX_PIN_LENGTH } from '../../themed/DigitInput'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
+import { MainButton } from '../../themed/MainButton'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
-import { SecondaryButton } from '../../themed/ThemedButtons'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {}
@@ -67,8 +67,9 @@ const NewAccountPinSceneComponent = ({
         <DigitInput />
         <View style={styles.actions}>
           <Fade visible={showNext}>
-            <SecondaryButton
+            <MainButton
               label={s.strings.next_label}
+              type="secondary"
               onPress={handleNext}
             />
           </Fade>

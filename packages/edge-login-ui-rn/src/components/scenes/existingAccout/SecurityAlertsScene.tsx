@@ -15,7 +15,7 @@ import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
 import { IconHeaderRow } from '../../themed/IconHeaderRow'
 import { LinkRow } from '../../themed/LinkRow'
-import { PrimaryButton } from '../../themed/ThemedButtons'
+import { MainButton } from '../../themed/MainButton'
 import { ThemedScene } from '../../themed/ThemedScene'
 import { MessageText, Warning } from '../../themed/ThemedText'
 
@@ -34,7 +34,6 @@ interface State {
   otpResetDate: Date | undefined
   pendingVouchers: EdgePendingVoucher[]
   showSkip: boolean
-  spinDeny: boolean
   spinReset: boolean
   spinVoucher: { [voucherId: string]: boolean }
 }
@@ -53,7 +52,6 @@ export class SecurityAlertsSceneComponent extends React.Component<
       otpResetDate: otpResetDate != null ? new Date(otpResetDate) : undefined,
       pendingVouchers,
       showSkip: false,
-      spinDeny: false,
       spinReset: false,
       spinVoucher: {}
     }
@@ -78,7 +76,7 @@ export class SecurityAlertsSceneComponent extends React.Component<
   }
 
   render() {
-    const { otpResetDate, pendingVouchers, showSkip, spinDeny } = this.state
+    const { otpResetDate, pendingVouchers, showSkip } = this.state
 
     const count = pendingVouchers.length + (otpResetDate != null ? 1 : 0)
 
@@ -109,15 +107,11 @@ export class SecurityAlertsSceneComponent extends React.Component<
             />
           ) : null}
         </ScrollView>
-        {spinDeny ? (
-          <PrimaryButton marginRem={1} spinner />
-        ) : (
-          <PrimaryButton
-            label={s.strings.alert_scene_deny}
-            marginRem={1}
-            onPress={this.handleDeny}
-          />
-        )}
+        <MainButton
+          label={s.strings.alert_scene_deny}
+          marginRem={1}
+          onPress={this.handleDeny}
+        />
       </ThemedScene>
     )
   }
@@ -221,10 +215,10 @@ export class SecurityAlertsSceneComponent extends React.Component<
       )
   }
 
-  handleDeny = () => {
+  handleDeny = async () => {
     const { account } = this.props
     const { otpResetDate, pendingVouchers } = this.state
-    this.setState({ needsResecure: true, spinDeny: true })
+    this.setState({ needsResecure: true })
 
     const { rejectVoucher = nopVoucher } = account
     const promises = pendingVouchers.map(
@@ -234,14 +228,11 @@ export class SecurityAlertsSceneComponent extends React.Component<
       promises.push(account.cancelOtpReset())
     }
 
-    Promise.all(promises)
-      .catch(error => showError(error))
-      .then(() =>
-        this.setState({
-          showSkip: true,
-          spinDeny: false
-        })
-      )
+    try {
+      await Promise.all(promises)
+    } finally {
+      this.setState({ showSkip: true })
+    }
   }
 
   handleSkip = () => {

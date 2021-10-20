@@ -18,8 +18,8 @@ import { BackButton } from '../../themed/BackButton'
 import { Checkbox } from '../../themed/Checkbox'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
+import { MainButton } from '../../themed/MainButton'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
-import { SecondaryButton } from '../../themed/ThemedButtons'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {
@@ -127,10 +127,11 @@ const TermsAndConditionsSceneComponent = ({
         </EdgeText>
         <View style={styles.actions}>
           <Fade visible={showNext}>
-            <SecondaryButton
+            <MainButton
               label={s.strings.next_label}
-              onPress={handleNextPress}
               paddingRem={0.7}
+              type="secondary"
+              onPress={handleNextPress}
             />
           </Fade>
         </View>

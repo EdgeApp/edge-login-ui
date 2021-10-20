@@ -2,15 +2,14 @@ import * as React from 'react'
 import { AirshipBridge } from 'react-native-airship'
 
 import { showError } from '../services/AirshipInstance'
+import { MainButton } from '../themed/MainButton'
 import { ModalCloseArrow } from '../themed/ModalParts'
-import { PromiseButton, PromiseButtonType } from '../themed/PromiseButton'
-import { PrimaryButton, SecondaryButton } from '../themed/ThemedButtons'
 import { ThemedModal } from '../themed/ThemedModal'
 import { MessageText, TitleText } from '../themed/ThemedText'
 
 export interface ButtonInfo {
   label: string
-  type?: PromiseButtonType
+  type?: 'primary' | 'secondary'
 
   // The modal will show a spinner as long as this promise is pending.
   // Returning true will dismiss the modal,
@@ -20,12 +19,23 @@ export interface ButtonInfo {
   onPress?: () => Promise<boolean>
 }
 
+/**
+ * A modal with a title, message, and buttons.
+ * This is an alternative to the native `Alert` component.
+ *
+ * Child components appear between the message and the buttons,
+ * but this feature is only meant for inserting extra message elements,
+ * like images or custom text formatting.
+ *
+ * Build a custom modal component if you need form fields, check boxes,
+ * or other interactive elements.
+ */
 export function ButtonsModal<
   Buttons extends { [key: string]: ButtonInfo }
 >(props: {
-  children?: React.ReactNode
   bridge: AirshipBridge<keyof Buttons | undefined>
   buttons: Buttons
+  children?: React.ReactNode
   closeArrow?: boolean
   message?: string
   title?: string
@@ -41,50 +51,32 @@ export function ButtonsModal<
   const handleCancel = () => bridge.resolve(undefined)
 
   return (
-    <ThemedModal bridge={bridge} onCancel={handleCancel} paddingRem={1}>
+    <ThemedModal bridge={bridge} paddingRem={1} onCancel={handleCancel}>
       {title != null ? <TitleText>{title}</TitleText> : null}
       {message != null ? <MessageText>{message}</MessageText> : null}
       {children}
       {Object.keys(buttons).map(key => {
         const { type = 'primary', label, onPress } = buttons[key]
 
-        if (onPress != null) {
-          return (
-            <PromiseButton
-              key={key}
-              type={buttons[key].type}
-              label={buttons[key].label}
-              onPress={onPress}
-              onReject={showError}
-              onResolve={result => {
-                if (result) bridge.resolve(key)
-              }}
-            />
+        const handlePress = (): void | Promise<void> => {
+          if (onPress == null) return bridge.resolve(key)
+          return onPress().then(
+            result => {
+              if (result) bridge.resolve(key)
+            },
+            error => showError(error)
           )
         }
 
-        switch (type) {
-          case 'primary':
-            return (
-              <PrimaryButton
-                key={key}
-                label={label}
-                onPress={() => bridge.resolve(key)}
-                marginRem={0.5}
-              />
-            )
-          case 'secondary':
-            return (
-              <SecondaryButton
-                key={key}
-                label={label}
-                onPress={() => bridge.resolve(key)}
-                marginRem={0.5}
-              />
-            )
-          default:
-            return null
-        }
+        return (
+          <MainButton
+            key={key}
+            label={label}
+            marginRem={0.5}
+            type={type}
+            onPress={handlePress}
+          />
+        )
       })}
       {closeArrow ? <ModalCloseArrow onPress={handleCancel} /> : null}
     </ThemedModal>

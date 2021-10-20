@@ -16,7 +16,7 @@ import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { FormError } from '../../themed/FormError'
-import { PromiseButton } from '../../themed/PromiseButton'
+import { MainButton } from '../../themed/MainButton'
 import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { ThemedScene } from '../../themed/ThemedScene'
 
@@ -84,13 +84,12 @@ const NewAccountUsernameSceneComponent = ({
         >
           {usernameErrorMessage}
         </FormError>
-        <View style={styles.actions}>
-          <PromiseButton
-            label={s.strings.next_label}
-            onPress={handleNext}
-            type="secondary"
-          />
-        </View>
+        <MainButton
+          alignSelf="center"
+          label={s.strings.next_label}
+          onPress={handleNext}
+          type="secondary"
+        />
       </View>
     </ThemedScene>
   )
@@ -112,11 +111,6 @@ const getStyles = cacheStyles((theme: Theme) => ({
     fontFamily: theme.fontFaceDefault,
     fontSize: theme.rem(0.875),
     marginBottom: theme.rem(3.25)
-  },
-  actions: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: theme.rem(0)
   }
 }))
 
