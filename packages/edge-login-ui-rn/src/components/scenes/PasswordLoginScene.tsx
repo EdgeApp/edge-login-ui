@@ -522,6 +522,7 @@ export const PasswordLoginScene = connect<StateProps, DispatchProps, OwnProps>(
       dispatch({ type: 'START_PIN_LOGIN' })
     },
     handleQrModal() {
+      Keyboard.dismiss()
       dispatch(showQrCodeModal())
     },
     async login(attempt) {
