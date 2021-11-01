@@ -83,16 +83,11 @@ const NewAccountPasswordSceneComponent = ({
     return (
       <>
         {isPasswordStatusExists ? (
-          <PasswordStatus marginRem={[0, 0, 1.25]} />
+          <PasswordStatus marginRem={[0.5, 0, 1.25]} />
         ) : (
-          <>
-            <EdgeText
-              style={styles.subtitle}
-            >{`${s.strings.step_two}: ${s.strings.choose_title_password}`}</EdgeText>
-            <EdgeText style={styles.description} numberOfLines={2}>
-              {s.strings.password_desc}
-            </EdgeText>
-          </>
+          <EdgeText style={styles.description} numberOfLines={2}>
+            {s.strings.password_desc}
+          </EdgeText>
         )}
         <EdgeTextFieldOutlined
           value={password}
@@ -148,7 +143,7 @@ const NewAccountPasswordSceneComponent = ({
   }
 
   return (
-    <ThemedScene onBack={onBack} title={s.strings.create_your_account}>
+    <ThemedScene onBack={onBack} title={s.strings.choose_title_password}>
       {focusSecond ? (
         <KeyboardAvoidingView
           style={styles.container}
@@ -170,16 +165,11 @@ const getStyles = cacheStyles((theme: Theme) => ({
     marginHorizontal: theme.rem(0.5),
     overflow: 'hidden'
   },
-  subtitle: {
-    fontFamily: theme.fontFaceBold,
-    color: theme.secondaryText,
-    fontSize: theme.rem(1),
-    marginBottom: theme.rem(2.25)
-  },
   description: {
     fontFamily: theme.fontFaceDefault,
     fontSize: theme.rem(0.875),
-    marginBottom: theme.rem(3.25)
+    marginBottom: theme.rem(3.25),
+    marginTop: theme.rem(2.25)
   },
   actions: {
     flexDirection: 'row',

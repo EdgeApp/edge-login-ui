@@ -36,11 +36,8 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
   }
 
   return (
-    <ThemedScene title={s.strings.account_confirmation}>
+    <ThemedScene title={s.strings.review}>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.content}>
-        <EdgeText
-          style={styles.subtitle}
-        >{`${s.strings.review}: ${s.strings.write_it_down}`}</EdgeText>
         <EdgeText style={styles.description} numberOfLines={2}>
           {s.strings.almost_done}
         </EdgeText>
@@ -69,13 +66,8 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
 
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
-    marginHorizontal: theme.rem(0.5)
-  },
-  subtitle: {
-    fontFamily: theme.fontFaceBold,
-    color: theme.secondaryText,
-    fontSize: theme.rem(1),
-    marginBottom: theme.rem(2)
+    marginHorizontal: theme.rem(0.5),
+    marginTop: theme.rem(2)
   },
   description: {
     fontFamily: theme.fontFaceDefault,

@@ -52,11 +52,8 @@ const NewAccountPinSceneComponent = ({
   }
 
   return (
-    <ThemedScene onBack={onBack} title={s.strings.create_your_account}>
+    <ThemedScene onBack={onBack} title={s.strings.choose_title_pin}>
       <ScrollView ref={scrollViewRef} style={styles.content}>
-        <EdgeText
-          style={styles.subtitle}
-        >{`${s.strings.step_three}: ${s.strings.set_four_digit_pin}`}</EdgeText>
         <EdgeText style={styles.description} numberOfLines={2}>
           {s.strings.pin_desc}
         </EdgeText>
@@ -78,13 +75,8 @@ const NewAccountPinSceneComponent = ({
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
-    marginHorizontal: theme.rem(0.5)
-  },
-  subtitle: {
-    fontFamily: theme.fontFaceBold,
-    color: theme.secondaryText,
-    fontSize: theme.rem(1),
-    marginBottom: theme.rem(2.25)
+    marginHorizontal: theme.rem(0.5),
+    marginTop: theme.rem(2.25)
   },
   description: {
     fontFamily: theme.fontFaceDefault,
