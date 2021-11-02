@@ -146,8 +146,8 @@ const getStyles = cacheStyles((theme: Theme) => ({
     overflow: 'hidden'
   },
   titleText: {
+    ...theme.headingFont,
     color: theme.securityAlertModalText,
-    fontFamily: theme.fontFamily,
     fontSize: theme.rem(1.2),
     margin: theme.rem(0.5),
     textAlign: 'center'
@@ -168,10 +168,10 @@ const getStyles = cacheStyles((theme: Theme) => ({
     margin: theme.rem(0.5)
   },
   rowText: {
+    ...theme.bodyFont,
     color: theme.securityAlertModalText,
     flexGrow: 1,
     flexShrink: 1,
-    fontFamily: theme.fontFamily,
     fontSize: theme.rem(1),
     margin: theme.rem(0.5)
   },

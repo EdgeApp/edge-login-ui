@@ -93,8 +93,8 @@ const getStyles = cacheStyles((theme: Theme) => ({
     overflow: 'hidden'
   },
   rowText: {
+    ...theme.bodyFont,
     color: theme.securityAlertModalText,
-    fontFamily: theme.fontFamily,
     fontSize: theme.rem(1),
     margin: theme.rem(0.5)
   }
