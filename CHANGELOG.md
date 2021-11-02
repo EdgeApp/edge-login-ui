@@ -1,5 +1,12 @@
 # edge-login-ui
 
+## 0.9.22 (2021-11-02)
+
+- rn: Refactor Create Cccount scenes to use common components
+- rn: Update Create Account scene headers
+- rn: Dismiss keyboard when showing the QR modal
+- rn: Standardize button text to regular with thinner borders
+
 ## 0.9.21 (2021-10-20)
 
 - rn: changed: Match the edge-react-gui button style more closely.
