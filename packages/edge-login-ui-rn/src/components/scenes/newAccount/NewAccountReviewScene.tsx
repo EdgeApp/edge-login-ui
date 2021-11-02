@@ -10,12 +10,10 @@ import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
 import { AccountInfo } from '../../themed/AccountInfo'
-import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
 import { MainButton } from '../../themed/MainButton'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {}
@@ -38,13 +36,8 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton marginRem={[0, 0, 1, 0.5]} disabled />
-      <SimpleSceneHeader>{s.strings.account_confirmation}</SimpleSceneHeader>
+    <ThemedScene title={s.strings.review}>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.content}>
-        <EdgeText
-          style={styles.subtitle}
-        >{`${s.strings.review}: ${s.strings.write_it_down}`}</EdgeText>
         <EdgeText style={styles.description} numberOfLines={2}>
           {s.strings.almost_done}
         </EdgeText>
@@ -73,14 +66,8 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
 
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
-  },
-  subtitle: {
-    fontFamily: theme.fontFaceBold,
-    color: theme.secondaryText,
-    fontSize: theme.rem(1),
-    marginBottom: theme.rem(2)
+    marginHorizontal: theme.rem(0.5),
+    marginTop: theme.rem(2)
   },
   description: {
     fontFamily: theme.fontFaceDefault,

@@ -12,12 +12,10 @@ import { Branding } from '../../../types/Branding'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { BackButton } from '../../themed/BackButton'
 import { EdgeText } from '../../themed/EdgeText'
 import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { FormError } from '../../themed/FormError'
 import { MainButton } from '../../themed/MainButton'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {
@@ -53,13 +51,8 @@ const NewAccountUsernameSceneComponent = ({
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
-      <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
+    <ThemedScene onBack={onBack} title={s.strings.choose_title_username}>
       <View style={styles.content}>
-        <EdgeText
-          style={styles.subtitle}
-        >{`${s.strings.step_one}: ${s.strings.choose_title_username}`}</EdgeText>
         <EdgeText style={styles.description} numberOfLines={2}>
           {sprintf(
             s.strings.username_desc,
@@ -98,14 +91,8 @@ const NewAccountUsernameSceneComponent = ({
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
-  },
-  subtitle: {
-    fontFamily: theme.fontFaceBold,
-    color: theme.secondaryText,
-    fontSize: theme.rem(1),
-    marginBottom: theme.rem(2.25)
+    marginHorizontal: theme.rem(0.5),
+    marginTop: theme.rem(2.25)
   },
   description: {
     fontFamily: theme.fontFaceDefault,

@@ -8,12 +8,10 @@ import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
-import { BackButton } from '../../themed/BackButton'
 import { DigitInput, MAX_PIN_LENGTH } from '../../themed/DigitInput'
 import { EdgeText } from '../../themed/EdgeText'
 import { Fade } from '../../themed/Fade'
 import { MainButton } from '../../themed/MainButton'
-import { SimpleSceneHeader } from '../../themed/SimpleSceneHeader'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {}
@@ -54,13 +52,8 @@ const NewAccountPinSceneComponent = ({
   }
 
   return (
-    <ThemedScene paddingRem={[0.5, 0, 0.5, 0.5]}>
-      <BackButton onPress={onBack} marginRem={[0, 0, 1, -0.5]} />
-      <SimpleSceneHeader>{s.strings.create_your_account}</SimpleSceneHeader>
+    <ThemedScene onBack={onBack} title={s.strings.choose_title_pin}>
       <ScrollView ref={scrollViewRef} style={styles.content}>
-        <EdgeText
-          style={styles.subtitle}
-        >{`${s.strings.step_three}: ${s.strings.set_four_digit_pin}`}</EdgeText>
         <EdgeText style={styles.description} numberOfLines={2}>
           {s.strings.pin_desc}
         </EdgeText>
@@ -82,14 +75,8 @@ const NewAccountPinSceneComponent = ({
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
-    marginLeft: theme.rem(0.5),
-    marginRight: theme.rem(1)
-  },
-  subtitle: {
-    fontFamily: theme.fontFaceBold,
-    color: theme.secondaryText,
-    fontSize: theme.rem(1),
-    marginBottom: theme.rem(2.25)
+    marginHorizontal: theme.rem(0.5),
+    marginTop: theme.rem(2.25)
   },
   description: {
     fontFamily: theme.fontFaceDefault,
