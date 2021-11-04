@@ -67,9 +67,5 @@
     "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-url": "^2.2.2",
     "sass": "^1.32.12"
-  },
-  "resolutions": {
-    "js-yaml": "3.13.1",
-    "scrypt.js": "0.3.0"
   }
 }

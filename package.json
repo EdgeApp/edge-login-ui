@@ -14,7 +14,9 @@
     "*.{js,jsx,ts,tsx}": "eslint"
   },
   "resolutions": {
-    "scrypt.js": "0.3.0"
+    "js-yaml": "3.13.1",
+    "scrypt.js": "0.3.0",
+    "sha3": "2.1.4"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.8.2",
