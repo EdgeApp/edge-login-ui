@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.9.23 (2021-11-17)
+
+- rn: Various visual fixes for account creation process
+- rn: Upgrade sha3 to v2.1.4
+- rn: Upgrade react-native-patina to v0.1.6
+
 ## 0.9.22 (2021-11-02)
 
 - rn: Refactor Create Cccount scenes to use common components
