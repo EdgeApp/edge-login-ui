@@ -53,7 +53,7 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
         <View style={styles.actions}>
           <Fade visible={showNext}>
             <MainButton
-              label={s.strings.confirm_finish}
+              label={s.strings.next_label}
               type="secondary"
               onPress={handleNext}
             />

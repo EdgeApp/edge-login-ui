@@ -98,19 +98,17 @@ const TermsAndConditionsSceneComponent = ({
         <EdgeText
           style={styles.subtitle}
         >{`${s.strings.review}: ${s.strings.read_understod_2}`}</EdgeText>
-        <View style={styles.terms}>
-          {terms.map((term, index) => (
-            <Checkbox
-              key={index}
-              textStyle={styles.term}
-              value={termValues[index]}
-              onChange={(value: boolean) => handleStatusChange(index, value)}
-              marginRem={[0, 0, 1.33, 0]}
-            >
-              {term}
-            </Checkbox>
-          ))}
-        </View>
+        {terms.map((term, index) => (
+          <Checkbox
+            key={index}
+            textStyle={styles.term}
+            value={termValues[index]}
+            onChange={(value: boolean) => handleStatusChange(index, value)}
+            marginRem={[0, 0, 1.33, 0]}
+          >
+            {term}
+          </Checkbox>
+        ))}
         <EdgeText
           style={styles.agreeText}
           numberOfLines={2}
@@ -146,7 +144,6 @@ const getStyles = cacheStyles((theme: Theme) => ({
     fontSize: theme.rem(1),
     marginBottom: theme.rem(2)
   },
-  terms: {},
   term: {
     fontSize: theme.rem(0.875)
   },
