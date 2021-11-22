@@ -122,7 +122,7 @@ const TermsAndConditionsSceneComponent = ({
         <View style={styles.actions}>
           <Fade visible={showNext}>
             <MainButton
-              label={s.strings.next_label}
+              label={s.strings.confirm}
               paddingRem={0.7}
               type="secondary"
               onPress={handleNextPress}
