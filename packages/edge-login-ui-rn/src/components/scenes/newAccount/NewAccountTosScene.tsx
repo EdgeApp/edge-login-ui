@@ -136,13 +136,14 @@ const TermsAndConditionsSceneComponent = ({
 
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
-    marginHorizontal: theme.rem(0.5)
+    marginHorizontal: theme.rem(0.5),
+    marginTop: theme.rem(0.5)
   },
   subtitle: {
     fontFamily: theme.fontFaceBold,
     color: theme.secondaryText,
     fontSize: theme.rem(1),
-    marginBottom: theme.rem(2)
+    marginBottom: theme.rem(1.5)
   },
   term: {
     fontSize: theme.rem(0.875)

@@ -169,7 +169,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     fontFamily: theme.fontFaceDefault,
     fontSize: theme.rem(0.875),
     marginBottom: theme.rem(3.25),
-    marginTop: theme.rem(2.25)
+    marginTop: theme.rem(1.5)
   },
   actions: {
     flexDirection: 'row',

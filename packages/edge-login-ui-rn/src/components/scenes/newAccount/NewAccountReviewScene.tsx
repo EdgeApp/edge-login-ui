@@ -67,7 +67,7 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     marginHorizontal: theme.rem(0.5),
-    marginTop: theme.rem(2)
+    marginTop: theme.rem(1.5)
   },
   description: {
     fontFamily: theme.fontFaceDefault,
