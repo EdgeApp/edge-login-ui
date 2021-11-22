@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.26 (2021-11-22)
+
+- rn: Fix tarball
+
 ## 0.9.25 (2021-11-22)
 
 - rn: Fix tarball
