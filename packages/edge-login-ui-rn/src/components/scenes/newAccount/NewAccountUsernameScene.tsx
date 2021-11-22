@@ -101,7 +101,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     flex: 1,
     marginHorizontal: theme.rem(0.5),
-    marginTop: theme.rem(2.25)
+    marginTop: theme.rem(1.5)
   },
   description: {
     fontFamily: theme.fontFaceDefault,

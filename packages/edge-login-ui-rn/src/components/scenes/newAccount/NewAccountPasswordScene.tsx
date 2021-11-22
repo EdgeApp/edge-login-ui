@@ -85,7 +85,7 @@ const NewAccountPasswordSceneComponent = ({
         {isPasswordStatusExists ? (
           <PasswordStatus marginRem={[0.5, 0, 1.25]} />
         ) : (
-          <EdgeText style={styles.description} numberOfLines={2}>
+          <EdgeText style={styles.description} numberOfLines={4}>
             {s.strings.password_desc}
           </EdgeText>
         )}
@@ -169,7 +169,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     fontFamily: theme.fontFaceDefault,
     fontSize: theme.rem(0.875),
     marginBottom: theme.rem(3.25),
-    marginTop: theme.rem(2.25)
+    marginTop: theme.rem(1.5)
   },
   actions: {
     flexDirection: 'row',

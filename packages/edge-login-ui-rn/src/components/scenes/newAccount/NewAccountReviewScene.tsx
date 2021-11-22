@@ -53,7 +53,7 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
         <View style={styles.actions}>
           <Fade visible={showNext}>
             <MainButton
-              label={s.strings.next_label}
+              label={s.strings.create}
               type="secondary"
               onPress={handleNext}
             />
@@ -67,7 +67,7 @@ const NewAccountReviewSceneComponent = ({ onDone, theme }: Props) => {
 const getStyles = cacheStyles((theme: Theme) => ({
   content: {
     marginHorizontal: theme.rem(0.5),
-    marginTop: theme.rem(2)
+    marginTop: theme.rem(1.5)
   },
   description: {
     fontFamily: theme.fontFaceDefault,

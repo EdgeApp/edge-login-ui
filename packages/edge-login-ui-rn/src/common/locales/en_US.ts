@@ -5,6 +5,8 @@ export default {
   username: 'Username',
   password: 'Password',
   confirm_password: 'Confirm Password',
+  confirm: 'Confirm',
+  create: 'Create',
   pin: 'PIN',
   back_caps: 'BACK',
   back: 'Back',
@@ -90,7 +92,7 @@ export default {
   otp_hero_scan:
     'Scan the QR code below using the device that enabled 2FA to give access to the device',
   password_desc:
-    'The password is used to log in and change sensitive settings. Don’t forget to write it down.',
+    'The password is used to log in and change sensitive settings. Be sure to write it down!',
   re_enter_new_password: 'Re-enter New Password',
   new_password: 'New Password',
   pswd_and_pin_changed: 'Password and PIN successfully changed.',
@@ -133,13 +135,15 @@ export default {
   confirm_share: 'Confirm & Share',
   welcome: 'Welcome to %s!',
   welcome_advantage_one_title: 'Getting started with %s is easy',
-  welcome_advantage_one_description:
-    'You’ll choose a username and password. We’ll use these to encrypt your account.',
+
+  welcome_advantage_one_description_line1:
+    'You’ll choose a username and password.',
+  welcome_advantage_one_description_line2:
+    'We’ll use these to encrypt your account.',
+
   welcome_advantage_two_title: 'Your security is key',
   welcome_advantage_two_description:
-    'Not even %s has access to your information, so you have full complete control over your digital assets.',
-  welcome_advantage_three_description:
-    'You have complete control over your digital assets.',
+    'You have complete control over your digital assets. Not even %s has access to your information.',
   start_username: 'Let’s get started with choosing a username',
   get_started: 'Get Started', // button title, not a complete sentence so capitalize first letters
   encrypting: 'Doing the encryption',
