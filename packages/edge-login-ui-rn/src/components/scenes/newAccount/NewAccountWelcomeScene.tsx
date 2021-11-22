@@ -52,7 +52,10 @@ const NewAccountWelcomeSceneComponent = ({
               {sprintf(s.strings.welcome_advantage_one_title, appName)}
             </EdgeText>
             <EdgeText style={styles.advantageDescription} numberOfLines={2}>
-              {s.strings.welcome_advantage_one_description}
+              {s.strings.welcome_advantage_one_description_line1}
+            </EdgeText>
+            <EdgeText style={styles.advantageDescription} numberOfLines={2}>
+              {s.strings.welcome_advantage_one_description_line2}
             </EdgeText>
           </View>
         </View>
@@ -67,11 +70,8 @@ const NewAccountWelcomeSceneComponent = ({
             <EdgeText style={styles.advantageTitle}>
               {s.strings.welcome_advantage_two_title}
             </EdgeText>
-            <EdgeText style={styles.advantageDescription} numberOfLines={1}>
+            <EdgeText style={styles.advantageDescription} numberOfLines={5}>
               {sprintf(s.strings.welcome_advantage_two_description, appName)}
-            </EdgeText>
-            <EdgeText style={styles.advantageDescription} numberOfLines={2}>
-              {sprintf(s.strings.welcome_advantage_three_description, appName)}
             </EdgeText>
           </View>
         </View>
