@@ -92,7 +92,7 @@ export default {
   otp_hero_scan:
     'Scan the QR code below using the device that enabled 2FA to give access to the device',
   password_desc:
-    'The password is used to log in and change sensitive settings. Don’t forget to write it down.',
+    'The password is used to log in and change sensitive settings. Be sure to write it down!',
   re_enter_new_password: 'Re-enter New Password',
   new_password: 'New Password',
   pswd_and_pin_changed: 'Password and PIN successfully changed.',
