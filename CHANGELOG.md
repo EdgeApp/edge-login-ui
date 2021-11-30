@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.27 (2021-11-30)
+
+- rn: Fix header spacing
+
 ## 0.9.26 (2021-11-22)
 
 - rn: Fix tarball
