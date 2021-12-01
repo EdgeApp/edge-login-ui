@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.28 (2021-12-01)
+
+- rn: Tweak header spacing again
+
 ## 0.9.27 (2021-11-30)
 
 - rn: Fix header spacing
