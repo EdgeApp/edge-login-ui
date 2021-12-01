@@ -51,9 +51,9 @@ export class HeaderParentButtons extends React.Component<Props> {
 
 const styles = {
   container: {
-    marginTop: scale(8),
-    marginLeft: scale(15),
-    marginRight: scale(15),
+    top: scale(24),
+    marginLeft: scale(16),
+    marginRight: scale(16),
     flexDirection: 'row'
   },
   leftButtonContainer: {
