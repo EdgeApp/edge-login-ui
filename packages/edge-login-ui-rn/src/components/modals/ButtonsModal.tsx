@@ -1,3 +1,4 @@
+import { wrap } from 'cavy'
 import * as React from 'react'
 import { AirshipBridge } from 'react-native-airship'
 
@@ -30,16 +31,14 @@ export interface ButtonInfo {
  * Build a custom modal component if you need form fields, check boxes,
  * or other interactive elements.
  */
-export function ButtonsModal<
-  Buttons extends { [key: string]: ButtonInfo }
->(props: {
+const Buttons = <Buttons extends { [key: string]: ButtonInfo }>(props: {
   bridge: AirshipBridge<keyof Buttons | undefined>
   buttons: Buttons
   children?: React.ReactNode
   closeArrow?: boolean
   message?: string
   title?: string
-}) {
+}) => {
   const {
     bridge,
     buttons,
@@ -82,3 +81,5 @@ export function ButtonsModal<
     </ThemedModal>
   )
 }
+
+export const ButtonsModal = wrap(Buttons)

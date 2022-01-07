@@ -1,10 +1,11 @@
+import { wrap } from 'cavy'
 import * as React from 'react'
 
 import s from '../../common/locales/strings'
 import { Airship, showError } from '../services/AirshipInstance'
 import { ButtonsModal } from './ButtonsModal'
 
-export function showResetModal(requestOtpReset: () => Promise<void>): void {
+const showReset = (requestOtpReset: () => Promise<void>): void => {
   Airship.show(bridge => (
     <ButtonsModal
       title={s.strings.disable_otp_header}
@@ -20,3 +21,5 @@ export function showResetModal(requestOtpReset: () => Promise<void>): void {
     />
   )).catch(showError)
 }
+
+export const showResetModal = wrap(showReset)
