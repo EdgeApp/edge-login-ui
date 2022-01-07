@@ -1,8 +1,13 @@
+import { wrap } from 'cavy'
 import * as React from 'react'
-import { ActivityIndicator, Text, TouchableOpacity } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
 import { usePendingPress } from '../../hooks/usePendingPress'
+import {
+  ActivityIndicator,
+  Text,
+  TouchableOpacity
+} from '../../types/wrappedReactNative'
 import {
   fixSides,
   mapSides,
@@ -49,7 +54,7 @@ interface Props {
 /**
  * A stand-alone button to perform the primary action in a modal or scene.
  */
-export function MainButton(props: Props) {
+const MainButtonComponent = (props: Props) => {
   const {
     alignSelf = 'auto',
     children,
@@ -151,3 +156,5 @@ const getStyles = cacheStyles((theme: Theme) => {
     }
   }
 })
+
+export const MainButton = wrap(MainButtonComponent)

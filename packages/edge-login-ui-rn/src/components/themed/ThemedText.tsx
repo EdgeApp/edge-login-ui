@@ -1,3 +1,4 @@
+import { wrap } from 'cavy'
 import * as React from 'react'
 import { Text } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
@@ -23,7 +24,7 @@ interface NativeProps {
  * A lightweight wrapper around the React Native Text component,
  * which simply sets up some default styles.
  */
-export function ThemedText(props: NativeProps) {
+const ThemedTextComponent = (props: NativeProps) => {
   const { style, ...rest } = props
   const theme = useTheme()
   const styles = getStyles(theme)
@@ -33,7 +34,7 @@ export function ThemedText(props: NativeProps) {
 /**
  * A scene or modal title.
  */
-export function TitleText(props: { children: React.ReactNode }) {
+const TitleTextComponent = (props: { children: React.ReactNode }) => {
   const theme = useTheme()
   const styles = getStyles(theme)
   return <Text style={styles.titleText}>{props.children}</Text>
@@ -42,7 +43,7 @@ export function TitleText(props: { children: React.ReactNode }) {
 /**
  * A paragraph of body text within a modal or scene.
  */
-export function MessageText(props: { children: React.ReactNode }) {
+const MessageTextComponent = (props: { children: React.ReactNode }) => {
   const theme = useTheme()
   const styles = getStyles(theme)
   return <Text style={styles.messageText}>{props.children}</Text>
@@ -52,14 +53,14 @@ export function MessageText(props: { children: React.ReactNode }) {
  * Use this component just like its HTML equivalent,
  * to wrap text that is of greater importance (bolder).
  */
-export function Strong(props: { children: React.ReactNode }) {
+const StrongComponent = (props: { children: React.ReactNode }) => {
   return <Text style={{ fontWeight: 'bold' }}>{props.children}</Text>
 }
 
 /**
  * Wraps text that communicates danger, like unusually high fees.
  */
-export function Warning(props: { children: React.ReactNode }) {
+const WarningComponent = (props: { children: React.ReactNode }) => {
   const theme = useTheme()
   const styles = getStyles(theme)
   return <Text style={styles.warning}>{props.children}</Text>
@@ -68,7 +69,7 @@ export function Warning(props: { children: React.ReactNode }) {
 /**
  * Wraps text that communicates a problem, like insufficent funds.
  */
-export function Error(props: { children: React.ReactNode }) {
+const ErrorComponent = (props: { children: React.ReactNode }) => {
   const theme = useTheme()
   const styles = getStyles(theme)
   return <Text style={styles.error}>{props.children}</Text>
@@ -102,3 +103,10 @@ const getStyles = cacheStyles((theme: Theme) => {
     }
   }
 })
+
+export const ThemedText = wrap(ThemedTextComponent)
+export const TitleText = wrap(TitleTextComponent)
+export const MessageText = wrap(MessageTextComponent)
+export const Strong = wrap(StrongComponent)
+export const Warning = wrap(WarningComponent)
+export const Error = wrap(ErrorComponent)

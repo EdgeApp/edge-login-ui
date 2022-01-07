@@ -1,3 +1,4 @@
+import { wrap } from 'cavy'
 import * as React from 'react'
 import { ActivityIndicator, Text, TouchableOpacity } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
@@ -33,7 +34,7 @@ interface Props {
   paddingRem?: number[] | number
 }
 
-export function AlertModalButton(props: Props & AlertModalButtonType) {
+const AlertModalButtonComponent = (props: Props & AlertModalButtonType) => {
   const {
     children,
     label,
@@ -113,3 +114,5 @@ const getStyles = cacheStyles((theme: Theme) => {
     spinner: { height: theme.rem(2) }
   }
 })
+
+export const AlertModalButton = wrap(AlertModalButtonComponent)

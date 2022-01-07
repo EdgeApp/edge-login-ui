@@ -1,3 +1,4 @@
+import { wrap } from 'cavy'
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 import { AirshipBridge, AirshipModal } from 'react-native-airship'
@@ -14,7 +15,7 @@ interface Props<T> {
   paddingRem?: number[] | number
 }
 
-export function ThemedModal<T>(props: Props<T>) {
+function Themed<T>(props: Props<T>) {
   const { bridge, children = null, onCancel, paddingRem } = props
   const theme = useTheme()
 
@@ -45,3 +46,5 @@ export function ThemedModal<T>(props: Props<T>) {
     </AirshipModal>
   )
 }
+
+export const ThemedModal = wrap(Themed)

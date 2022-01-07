@@ -1,10 +1,13 @@
+import { wrap } from 'cavy'
 import * as React from 'react'
-import { Text, TouchableOpacity } from 'react-native'
+import * as ReactNative from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 
+import { TouchableOpacity } from '../../types/wrappedReactNative'
 import { fixSides, mapSides, sidesToPadding } from '../../util/sides'
 import { Theme, useTheme } from '../services/ThemeContext'
+const Text = wrap(ReactNative.Text)
 
 interface Props {
   onPress?: () => void
@@ -20,7 +23,7 @@ interface Props {
   renderIcon?: (theme: Theme) => React.ReactNode
 }
 
-export function LinkRow(props: Props) {
+const LinkRowComponent = (props: Props) => {
   const {
     label,
     marginRem,
@@ -66,3 +69,5 @@ const getStyles = cacheStyles((theme: Theme) => {
     }
   }
 })
+
+export const LinkRow = wrap(LinkRowComponent)

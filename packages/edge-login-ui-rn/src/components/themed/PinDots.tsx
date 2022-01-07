@@ -1,3 +1,4 @@
+import { wrap } from 'cavy'
 import * as React from 'react'
 import { View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
@@ -9,7 +10,7 @@ interface Props {
   maxLength: number
 }
 
-export function PinDots({ maxLength, pinLength }: Props) {
+const PinDotsComponent = ({ maxLength, pinLength }: Props) => {
   const theme = useTheme()
   const styles = getStyles(theme)
 
@@ -42,3 +43,5 @@ const getStyles = cacheStyles((theme: Theme) => ({
     backgroundColor: theme.primaryButton
   }
 }))
+
+export const PinDots = wrap(PinDotsComponent)

@@ -1,3 +1,4 @@
+import { wrap } from 'cavy'
 import * as React from 'react'
 import {
   SafeAreaView,
@@ -28,7 +29,7 @@ interface Props {
   paddingRem?: number | number[]
 }
 
-export function ThemedScene(props: Props) {
+const ThemedSceneComponent = (props: Props) => {
   const {
     children,
     onBack,
@@ -117,3 +118,5 @@ const getStyles = cacheStyles((theme: Theme) => ({
     marginHorizontal: theme.rem(1)
   }
 }))
+
+export const ThemedScene = wrap(ThemedSceneComponent)

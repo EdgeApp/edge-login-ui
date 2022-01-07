@@ -1,3 +1,4 @@
+import { wrap } from 'cavy'
 import * as React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
@@ -5,7 +6,7 @@ import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 
 import { Theme, useTheme } from '../services/ThemeContext'
 
-export function ModalCloseArrow(props: { onPress?: () => void }) {
+const ModalCloseArrowComponent = (props: { onPress?: () => void }) => {
   const theme = useTheme()
   const styles = getStyles(theme)
 
@@ -26,3 +27,5 @@ const getStyles = cacheStyles((theme: Theme) => ({
     paddingTop: theme.rem(1)
   }
 }))
+
+export const ModalCloseArrow = wrap(ModalCloseArrowComponent)
