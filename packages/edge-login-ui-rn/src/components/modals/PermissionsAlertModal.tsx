@@ -1,10 +1,15 @@
 import * as React from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
 import { AirshipBridge, AirshipModal } from 'react-native-airship'
 import { cacheStyles } from 'react-native-patina'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import s from '../../common/locales/strings'
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View
+} from '../../types/wrappedReactNative'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 import { ModalCloseArrow } from '../themed/ModalParts'
 import { AlertModalButton } from '../themed/ThemedButtons'

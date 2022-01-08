@@ -1,9 +1,9 @@
 // copied EdgeText component from 'edge-react-gui'
 
 import * as React from 'react'
-import { Text, TextProps, TextStyle } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
+import { Text, TextProps, TextStyle } from '../../types/wrappedReactNative'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 
 interface OwnProps {

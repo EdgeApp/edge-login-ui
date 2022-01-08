@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { TouchableWithoutFeedback, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 import Animated, {
   measure,
@@ -15,6 +14,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 import s from '../../common/locales/strings'
 import { RootState } from '../../types/ReduxTypes'
+import { TouchableWithoutFeedback, View } from '../../types/wrappedReactNative'
 import { fixSides, mapSides, sidesToMargin } from '../../util/sides'
 import { connect } from '../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'

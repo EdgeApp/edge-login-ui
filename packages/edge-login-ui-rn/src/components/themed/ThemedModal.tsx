@@ -1,8 +1,8 @@
 import { wrap } from 'cavy'
 import * as React from 'react'
-import { StyleSheet } from 'react-native'
 import { AirshipBridge, AirshipModal } from 'react-native-airship'
 
+import { StyleSheet } from '../../types/wrappedReactNative'
 import { fixSides } from '../../util/sides'
 import { useTheme } from '../services/ThemeContext'
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
+import { View } from '../../types/wrappedReactNative'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 import { Fade } from './Fade'
 

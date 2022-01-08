@@ -1,9 +1,13 @@
 import * as React from 'react'
-import { TextInput, TouchableWithoutFeedback, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
 import { validatePin } from '../../actions/CreateAccountActions'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
+import {
+  TextInput,
+  TouchableWithoutFeedback,
+  View
+} from '../../types/wrappedReactNative'
 import { fixSides, mapSides, sidesToMargin } from '../../util/sides'
 import { connect } from '../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'

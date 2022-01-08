@@ -1,17 +1,17 @@
 import { wrap } from 'cavy'
 import * as React from 'react'
+import LinearGradient from 'react-native-linear-gradient'
+import { cacheStyles } from 'react-native-patina'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+
+import s from '../../common/locales/strings'
 import {
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View
-} from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
-import { cacheStyles } from 'react-native-patina'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-
-import s from '../../common/locales/strings'
+} from '../../types/wrappedReactNative'
 import { fixSides, mapSides, sidesToPadding } from '../../util/sides'
 import { Theme, useTheme } from '../services/ThemeContext'
 import { DividerLine } from './DividerLine'

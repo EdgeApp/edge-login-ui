@@ -1,8 +1,8 @@
 import { wrap } from 'cavy'
 import * as React from 'react'
-import { Text } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
+import { Text } from '../../types/wrappedReactNative'
 import { Theme, useTheme } from '../services/ThemeContext'
 
 interface NativeProps {

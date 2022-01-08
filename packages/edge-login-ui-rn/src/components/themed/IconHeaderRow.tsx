@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Text, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 
+import { Text, View } from '../../types/wrappedReactNative'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 
 interface Props {

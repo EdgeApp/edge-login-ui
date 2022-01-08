@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 
+import { View } from '../../types/wrappedReactNative'
 import { fixSides, mapSides, sidesToMargin } from '../../util/sides'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 import { EdgeText } from './EdgeText'

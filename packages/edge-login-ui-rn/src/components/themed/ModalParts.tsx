@@ -1,9 +1,9 @@
 import { wrap } from 'cavy'
 import * as React from 'react'
-import { TouchableOpacity } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 
+import { TouchableOpacity } from '../../types/wrappedReactNative'
 import { Theme, useTheme } from '../services/ThemeContext'
 
 const ModalCloseArrowComponent = (props: { onPress?: () => void }) => {

@@ -1,12 +1,17 @@
 import { EdgeLoginMessages } from 'edge-core-js'
 import * as React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { AirshipBridge, AirshipModal } from 'react-native-airship'
 import { cacheStyles } from 'react-native-patina'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import s from '../../common/locales/strings'
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from '../../types/wrappedReactNative'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 import { ModalCloseArrow } from '../themed/ModalParts'
 

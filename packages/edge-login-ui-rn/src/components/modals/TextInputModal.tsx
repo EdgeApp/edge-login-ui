@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Platform, View } from 'react-native'
 import { AirshipBridge } from 'react-native-airship'
 
 import s from '../../common/locales/strings'
+import { Platform, View } from '../../types/wrappedReactNative'
 import { showError } from '../services/AirshipInstance'
 import { EdgeTextFieldOutlined } from '../themed/EdgeTextFieldOutlined'
 import { MainButton } from '../themed/MainButton'
