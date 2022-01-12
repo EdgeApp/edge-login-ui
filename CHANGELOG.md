@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.29 (2022-01-11)
+
+- Update dependencies to use 'https://' instead of 'git://'
+
 ## 0.9.28 (2021-12-01)
 
 - rn: Tweak header spacing again
