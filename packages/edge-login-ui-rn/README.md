@@ -1,175 +1,91 @@
 # Edge React Native UI
 
-This repo implements a UI layer on top of [edge-core-js](https://github.com/Airbitz/edge-core-js) to provide web applications the interface required to do all the accounts management in just a small handful of Javascript API calls. All UI operates in an overlay iframe on top of the current HTML view.
+This repo implements a UI layer on top of [edge-core-js](https://github.com/Airbitz/edge-core-js) to provide React Native applications with secure account management in just a small handful of Javascript API calls.
 
 ## Basic usage for react native mobile application
 
-Add the Edge libraries to your project:
+Edge expects to work with React Native v0.60.0 or greater.
 
-`npm install --save edge-core-js edge-login-ui-rn`
+First, add the Edge libraries to your project:
 
-Required: Node ^8.2.1 and NPM ^5.3.0
+`yarn add edge-core-js edge-login-ui-rn`
 
-You will also need to install several native libraries that Edge depends on:
+The login UI depends on some extra external native libraries, which you will have to install as well:
 
-```sh
-# Install native support libraries:
-npm install --save react-native-fast-crypto react-native-fs
-npm install --save git://github.com/Airbitz/react-native-randombytes.git
-npm install --save git://github.com/Airbitz/react-native-tcp.git
-npm install --save-dev rn-nodeify
+- disklet
+- @react-native-community/art v1
+- react-native-linear-gradient v2
+- react-native-localize v2
+- react-native-mail v6
+- react-native-permissions v3
+  - Activate the [notification permission for iOS](https://www.npmjs.com/package/react-native-permissions#iOS).
+- react-native-reanimated v2
+  - Follow the [extra installation steps](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/).
+- react-native-share v5 (v7 also works)
+- react-native-vector-icons v7 (v9 also works)
+  - Follow the [extra installation steps](https://www.npmjs.com/package/react-native-vector-icons#installation).
+  - We use AntDesign, Entypo, MaterialIcons, FontAwesome, FontAwesome5, and SimpleLineIcons.
 
-# Set up post install
-add to package.json scripts object
-"postinstall": "sh ./postinstall.sh"
+To initialize the Edge core library, your application needs to mount the `MakeEdgeContext` component and keep it around for the lifetime of the app. This component will create and manage an `EdgeContext` object.
 
-# create post install file
-# in root of project create postinstall.sh
-# add the following lines
+You should also wrap your entire application in a `LoginUiProvider` component, which the login scene needs to display modals, error alerts, and similar floating UI:
 
-#!/bin/bash
-rn-nodeify --hack
+```jsx
+import { MakeEdgeContext } from 'edge-core-js'
+import { LoginUiProvider } from 'edge-login-ui-rn'
+import * as React from 'react'
 
-# Link support libraries into the native project files:
-react-native link react-native-fast-crypto
-react-native link react-native-fs
-react-native link react-native-randombytes
-react-native link react-native-tcp
-react-native link edge-login-ui-rn
+export const App = props => {
+  // Stores the Edge context:
+  const [context, setContext] = React.useState()
 
-# delete node modules and re-install
-rm -rf node_modules
-yarn
-```
-
-## iOS build
-
-  Disable BITCODE in your app's build settings
-
-## Android build
-
-You must be running Android Studio 3.0+. Make the following changes to the Android build files in your React Native app:
-
-### `android/app/build.gradle`
-
-  * `compileSdkVersion 27` or higher
-  * `minSdkVersion 23` or higher
-  * `targetSdkVersion 25` or higher
-  * `buildToolsVersion "25.0.3"` or higher
-
-Add the following:
-
-```
-android {
-      ...
-      compileOptions {
-          sourceCompatibility JavaVersion.VERSION_1_8
-          targetCompatibility JavaVersion.VERSION_1_8
-      }
-      defaultConfig {
-          ...
-          multiDexEnabled true
-      }
-}
-
-dependencies {
-      ...
-      compile 'com.android.support:appcompat-v7:27.0.1'
-}
-```
-
-### `android/build.gradle`
-
-```
-repositories {
-      ...
-      google()
-}
-
-dependencies {
-      ...
-      classpath 'com.android.tools.build:gradle:3.0.1'
-}
-```
-
-### `android/gradle-wrapper.properties`
-
-```
-classpath 'com.android.tools.build:gradle:3.0.0'
-distributionUrl=https://services.gradle.org/distributions/gradle-4.1-all.zip
-android.enableAapt2=false
-android.threadPoolSize=4
-android.useDeprecatedNdk=true
-```
-
-## Using the login component your project
-
-Get an API key from
-
-https://developer.airbitz.co
-
-You'll need an account on the Airbitz Mobile App which you can download for iOS and Android at
-
-  [iOS App Store](https://itunes.apple.com/us/app/airbitz-bitcoin-wallet/id843536046)
-
-  [Google Play Store](https://play.google.com/store/apps/details?id=com.airbitz)
-
-On the `developer.airbitz.co` page, scan the QR code using the Airbitz Mobile App after signing in and register an email address.
-
-To use the component in your app you will need to two airbitz core libraries
-
-```javascript
-import { LoginScreen } from ‘edge-login-ui-rn’
-import { makeEdgeContext } from ‘edge-core-js’
-```
-
-Outside of the component class, in the file that you want to add the login you will need to set up a function to validate your app with Edge.
-
-```javascript
-function setupCore () {
-  return makeEdgeContext({
-    // Replace this with your own API key from https://developer.airbitz.co:
-    apiKey: ‘<your api key >’,
-    appId: 'com.mydomain.myapp',
-    vendorName: ‘<Your vendor name >’,
-    vendorImageUrl: 'https://airbitz.co/go/wp-content/uploads/2016/10/GenericEdgeLoginIcon.png'
-  })
-}
-```
-
-In your component that will utilize the login component add the following code to the constructor method:
-
-```javascript
-this.state = { context: null, account: null }
-// Creating the context is async, so we store it in our state:
-setupCore().then(context => this.setState(state => ({ ...state, context })))
-```
-
-Set up your render function:
-
-```javascript
-render () {
-  const onLogin = account => this.setState(state => ({ ...state, account }))
-
-  // Once the context is ready, we can show the login screen:
   return (
     <LoginUiProvider>
-      <View style={styles.container}>
-        {this.state.context
-          ? <LoginScreen context={this.state.context} onLogin={onLogin} />
-          : <Text style={styles.welcome}>Loading</Text>}
-      </View>
+      <MakeEdgeContext
+        // Get this from our support team:
+        apiKey="..."
+        appId="com.your-app"
+
+        // Called when the core is done loading:
+        onLoad={setContext}
+        onError={showError}
+      />
+      <MainRouterComponent edgeContext={context} />
     </LoginUiProvider>
   )
 }
 ```
 
-The `LoginUiProvider` component should wrap your entire application, including your top-level router. The edge-login-ui-rn project uses this to display modals, error alerts, and similar floating UI.
+Now, you can show or hide the `LoginScreen` component on demand as part of your app's navigation:
 
-In order to customize the experience and integrate with your app, change the `onLogin` function to handle getting back the account information.
+```javascript
+import { LoginScreen } from 'edge-login-ui-rn'
 
+export const MainRouterComponent = props => {
+  const { edgeContext } = props
 
-Use the `account` object to create and restore wallet private keys
+  // Stores the Edge account:
+  const [account, setAccount] = React.useState()
+
+  // Once the context is ready, we can show the login screen.
+  // Once the user logs in, we can show the main app:
+  return edgeContext == null ? (
+    <Text>Loading...</Text>
+  ) : account == null ? (
+    <LoginScreen
+      accountOptions={{}}
+      context={edgeContext}
+      onLogin={setAccount}
+    />
+  ) : (
+    <YourApp edgeAccount={account} />
+  )
+}
+```
+
+Feel free to replace this `MainRouterComponent` example with a proper routing library such as [react-navigation](https://reactnavigation.org/).
+
+You can use the `account` object to create and restore wallet private keys:
 
 ```js
 async function getAppPrivateKey (account) {
@@ -191,6 +107,28 @@ async function getAppPrivateKey (account) {
 }
 ```
 
-## Sample ReactNative App repo
+### Adding core plugins
+
+If you want full wallet functionality, with balances, transactions, and so forth, you need to add one or more currency plugins to your app. To do this, first use NPM to install one of our plugin libraries, such as [edge-currency-accountbased](https://github.com/EdgeApp/edge-currency-accountbased) for Ethereum.
+
+Each plugin library includes a JavaScript bundle that needs to be integrated into your native application. To do this on Android, add a `prepare` script to your app's `package.json` file that copies the file `node_modules/edge-currency-accountbased/lib/react-native/edge-currency-accountbased.js` into your `android/app/src/main/assets/` folder. For iOS, open your App in Xcode and drag the `edge-currency-accountbased.js` file into the `Resources` section of your project.
+
+Finally, you need to tell the Edge core about these plugins. You do this by passing the location of the plugin JS bundle, as well as a config object that specifies which currencies to activate:
+
+```jsx
+<MakeEdgeContext
+  pluginUris={[
+    "edge-currency-accountbased.js"
+  ]}
+  plugins={{
+    'ethereum': true,
+    'eos': false
+  }}
+
+  // Other properties from earlier...
+/>
+```
+
+## Sample React Native App repo
 
 See a sample implementation at [edge-login-ui-rn-demo](https://github.com/EdgeApp/edge-login-ui-rn-demo)
