@@ -5,7 +5,6 @@ import { cacheStyles } from 'react-native-patina'
 import { Theme, useTheme } from '../services/ThemeContext'
 
 interface NativeProps {
-  allowFontScaling?: boolean
   ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip'
   lineBreakMode?: 'head' | 'middle' | 'tail' | 'clip'
   numberOfLines?: number
