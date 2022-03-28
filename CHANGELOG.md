@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.9.31 (2022-03-28)
+
+- rn: Remove allowFontScaling from text components
+
 ## 0.9.30 (2022-03-08)
 
 - rn: Update dependency of react-native-keyboard-aware-scroll-view to 0.9.5 to fix an issue with react-native >= 0.65
