@@ -37,7 +37,6 @@ class EdgeTextComponent extends React.PureComponent<
       <Text
         style={[text, style]}
         numberOfLines={numberOfLines}
-        allowFontScaling={!disableFontScaling}
         adjustsFontSizeToFit={!disableFontScaling}
         minimumFontScale={0.65}
         {...props}
