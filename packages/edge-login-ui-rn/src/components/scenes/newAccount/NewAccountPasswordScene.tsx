@@ -83,7 +83,7 @@ const NewAccountPasswordSceneComponent = ({
     return (
       <>
         {isPasswordStatusExists ? (
-          <PasswordStatus marginRem={[0.5, 0, 1.25]} />
+          <PasswordStatus marginRem={[0.5, 0.5, 1.25]} />
         ) : (
           <EdgeText style={styles.description} numberOfLines={4}>
             {s.strings.password_desc}

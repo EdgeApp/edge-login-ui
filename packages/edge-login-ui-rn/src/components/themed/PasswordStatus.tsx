@@ -46,10 +46,20 @@ const PasswordStatusComponent = ({ status, marginRem, theme }: Props) => {
         </EdgeText>
       </View>
       {list.map(({ title, value }) => (
-        <EdgeText
-          key={title}
-          style={[styles.case, value && styles.passed]}
-        >{`\u2022 ${title}`}</EdgeText>
+        <View style={styles.passwordConditionRow} key={title}>
+          <EdgeText
+            style={[
+              styles.passwordConditionText,
+              styles.passwordConditionDot,
+              value && styles.passed
+            ]}
+          >{`\u2022`}</EdgeText>
+          <EdgeText
+            style={[styles.passwordConditionText, value && styles.passed]}
+          >
+            {title}
+          </EdgeText>
+        </View>
       ))}
     </View>
   )
@@ -76,14 +86,21 @@ const getStyles = cacheStyles((theme: Theme) => ({
     color: theme.warningText,
     fontFamily: theme.fontFaceBold,
     fontSize: theme.rem(0.75),
-    marginLeft: theme.rem(0.75)
+    marginLeft: theme.rem(1)
   },
-  case: {
+  passwordConditionRow: {
+    marginLeft: theme.rem(0.4),
+    flexDirection: 'row'
+  },
+  passwordConditionText: {
     flexShrink: 1,
     color: theme.warningText,
     fontFamily: theme.fontFaceDefault,
     fontSize: theme.rem(0.75),
     marginBottom: theme.rem(0.15)
+  },
+  passwordConditionDot: {
+    marginRight: theme.rem(0.5)
   },
   passed: {
     color: theme.positiveText
