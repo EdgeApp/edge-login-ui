@@ -1,5 +1,11 @@
 # edge-login-ui
 
+## 0.9.32 (2022-04-19)
+
+- rn: Add show/hide toggle to password fields
+- rn: Replace safe loader gif
+- rn: Various visual fixes
+
 ## 0.9.31 (2022-03-28)
 
 - rn: Remove allowFontScaling from text components
