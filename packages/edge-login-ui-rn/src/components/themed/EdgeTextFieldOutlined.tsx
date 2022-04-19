@@ -20,6 +20,7 @@ import Animated, {
   withTiming
 } from 'react-native-reanimated'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
+import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import { fixSides, mapSides, sidesToMargin } from '../../util/sides'
 import { Theme, useTheme } from '../services/ThemeContext'
@@ -156,8 +157,15 @@ const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
 
     // Other React Native TextInput properties:
     value = '',
+    secureTextEntry,
     ...inputProps
   } = props
+
+  // Show/Hide password input:
+  const [hidePassword, setHidePassword] = React.useState(
+    secureTextEntry ?? false
+  )
+  const handleHidePassword = () => setHidePassword(!hidePassword)
 
   const [containerHeight, setContainerHeight] = React.useState(0)
 
@@ -339,6 +347,20 @@ const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...placeholderPaddingStyles, animatedPlaceholderStyles])
 
+  const showPasswordLineStyle = useAnimatedStyle(() => ({
+    backgroundColor: getColor(placeholderSize.value, colorMap.value, {
+      inactiveColor,
+      activeColor,
+      errorColor
+    }),
+    transform: [
+      { rotateZ: '45deg' },
+      {
+        scaleX: withTiming(hidePassword ? 1 : 0, { duration: 300 })
+      }
+    ]
+  }))
+
   return (
     <Animated.View
       style={[styles.container, animatedContainerStyle, spacings]}
@@ -380,8 +402,9 @@ const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
             selectionColor={errorState() ? errorColor : activeColor}
             placeholder=""
             value={value}
+            secureTextEntry={hidePassword}
           />
-          {isClearable && isFocused() && (
+          {isClearable && !secureTextEntry && isFocused() && (
             <View style={suffixStyles}>
               <TouchableOpacity
                 onPress={clearText}
@@ -393,6 +416,18 @@ const EdgeTextFieldOutlinedComponent = React.forwardRef((props: Props, ref) => {
                   size={theme.rem(1)}
                 />
               </TouchableOpacity>
+            </View>
+          )}
+          {secureTextEntry && (
+            <View style={suffixStyles}>
+              <TouchableWithoutFeedback onPress={handleHidePassword}>
+                <View style={styles.clearContainer}>
+                  <Animated.View
+                    style={[styles.eyeIconHideLine, showPasswordLineStyle]}
+                  />
+                  <IonIcon name="eye-outline" style={styles.eyeIcon} />
+                </View>
+              </TouchableWithoutFeedback>
             </View>
           )}
         </View>
@@ -607,7 +642,24 @@ const getStyles = cacheStyles((theme: Theme) => ({
     left: theme.rem(0.75)
   },
   clearContainer: {
-    paddingTop: theme.rem(0.125)
+    marginTop: theme.rem(0.125),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  eyeIcon: {
+    zIndex: 0,
+    color: theme.iconTappable,
+    fontSize: theme.rem(1)
+  },
+  eyeIconHideLine: {
+    borderTopWidth: theme.thinLineWidth,
+    borderTopColor: theme.modal,
+    borderBottomColor: theme.modal,
+    borderBottomWidth: theme.thinLineWidth,
+    position: 'absolute',
+    zIndex: 2,
+    width: '100%',
+    height: theme.thinLineWidth * 3
   }
 }))
 
