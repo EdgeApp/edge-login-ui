@@ -146,7 +146,7 @@ const getStyles = cacheStyles((theme: Theme) => {
 
     // Common styles:
     spinner: {
-      height: theme.rem(2),
+      height: theme.rem(1.875),
       marginHorizontal: theme.rem(0.5)
     }
   }
