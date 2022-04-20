@@ -45,7 +45,6 @@ export const edgeDark: Theme = {
 
   fontFamily: 'System',
   fontWeightBold: 'bold',
-  pressedOpacity: 0.25,
 
   // Icons
   icon: palette.white,
@@ -54,11 +53,9 @@ export const edgeDark: Theme = {
 
   // background
   backgroundGradientColors: [palette.edgeNavy, palette.darkBlue],
-  backgroundGradientRight: palette.darkBlue,
 
   // modal
   modal: palette.edgeNavy,
-  modalShadow: palette.blackOp50,
   modalBlurType: 'light',
 
   // text
@@ -95,9 +92,7 @@ export const edgeDark: Theme = {
   dropdownText: palette.white,
 
   // Security alert modal:
-  securityAlertModalBackground: palette.white,
   securityAlertModalHeaderCircle: palette.accentOrange,
-  securityAlertModalHeaderIcon: palette.white,
   securityAlertModalDangerIcon: palette.accentRed,
   securityAlertModalWarningIcon: palette.accentOrange,
   securityAlertModalRowBorder: palette.lightGray,
@@ -105,7 +100,6 @@ export const edgeDark: Theme = {
 
   // Lines
   lineDivider: palette.whiteOp10,
-  titleLineDivider: palette.whiteOp75,
   reallyThinLineWidth: 0.25,
   thinLineWidth: 1,
   mediumLineWidth: 2,

@@ -15,7 +15,6 @@ export interface Theme {
   // The app scaling factor, which is the height of "normal" text:
   rem: (size: number) => number
 
-  pressedOpacity: number
   fontFamily: string
   fontWeightBold: FontWeight
 
@@ -26,11 +25,9 @@ export interface Theme {
 
   // Background colors:
   backgroundGradientColors: string[]
-  backgroundGradientRight: string
 
   // Modal:
   modal: string
-  modalShadow: string
   modalBlurType: 'light' | 'dark'
 
   // Text colors:
@@ -67,9 +64,7 @@ export interface Theme {
   dropdownText: string
 
   // Security alert modal:
-  securityAlertModalBackground: string
   securityAlertModalHeaderCircle: string
-  securityAlertModalHeaderIcon: string
   securityAlertModalDangerIcon: string
   securityAlertModalWarningIcon: string
   securityAlertModalRowBorder: string
@@ -77,7 +72,6 @@ export interface Theme {
 
   // Lines
   lineDivider: string
-  titleLineDivider: string
   reallyThinLineWidth: number
   thinLineWidth: number
   mediumLineWidth: number
