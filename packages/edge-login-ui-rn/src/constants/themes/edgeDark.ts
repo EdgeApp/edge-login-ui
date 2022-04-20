@@ -100,7 +100,6 @@ export const edgeDark: Theme = {
 
   // Lines
   lineDivider: palette.whiteOp10,
-  reallyThinLineWidth: 0.25,
   thinLineWidth: 1,
   mediumLineWidth: 2,
 

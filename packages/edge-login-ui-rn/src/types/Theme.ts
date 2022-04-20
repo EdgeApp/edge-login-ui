@@ -72,7 +72,6 @@ export interface Theme {
 
   // Lines
   lineDivider: string
-  reallyThinLineWidth: number
   thinLineWidth: number
   mediumLineWidth: number
 
