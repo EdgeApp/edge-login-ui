@@ -43,8 +43,6 @@ export const edgeDark: Theme = {
     return Math.round(scale(16, 0.3) * size)
   },
 
-  fontFamily: 'System',
-  fontWeightBold: 'bold',
   pressedOpacity: 0.25,
 
   // Icons
@@ -111,6 +109,11 @@ export const edgeDark: Theme = {
   mediumLineWidth: 2,
 
   // Fonts
+  bodyFont: { fontFamily: 'System' },
+  headingFont: { fontFamily: 'System' },
+
+  // Deprecated. Do not use, or we will reject your pull request:
+  fontWeightBold: 'bold',
   fontFaceDefault: 'System',
   fontFaceBold: 'System',
   fontFaceSymbols:

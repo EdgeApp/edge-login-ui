@@ -11,13 +11,19 @@ type FontWeight =
   | '800'
   | '900'
 
+/**
+ * A font definition.
+ * We can add weight, kerning, etc. in here for full typography control.
+ */
+interface FontStyle {
+  fontFamily: string
+}
+
 export interface Theme {
   // The app scaling factor, which is the height of "normal" text:
   rem: (size: number) => number
 
   pressedOpacity: number
-  fontFamily: string
-  fontWeightBold: FontWeight
 
   // Icons
   icon: string
@@ -83,7 +89,12 @@ export interface Theme {
   mediumLineWidth: number
 
   // Font
+  bodyFont: FontStyle
+  headingFont: FontStyle
+
+  // Deprecated. Do not use, or we will reject your pull request:
   fontFaceDefault: string
   fontFaceBold: string
   fontFaceSymbols: string
+  fontWeightBold: FontWeight
 }

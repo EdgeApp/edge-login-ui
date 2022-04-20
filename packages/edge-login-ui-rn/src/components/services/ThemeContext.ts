@@ -31,7 +31,11 @@ export function changeFont(
 ) {
   changeTheme({
     ...getTheme(),
-    fontFamily: regularFontFamily,
+
+    bodyFont: { fontFamily: regularFontFamily },
+    headingFont: { fontFamily: headingFontFamily },
+
+    // Deprecated:
     fontFaceBold: headingFontFamily,
     fontFaceDefault: regularFontFamily
   })

@@ -65,7 +65,7 @@ export function Warning(props: { children: React.ReactNode }) {
 }
 
 /**
- * Wraps text that communicates a problem, like insufficent funds.
+ * Wraps text that communicates a problem, like insufficient funds.
  */
 export function Error(props: { children: React.ReactNode }) {
   const theme = useTheme()
@@ -74,22 +74,23 @@ export function Error(props: { children: React.ReactNode }) {
 }
 
 const getStyles = cacheStyles((theme: Theme) => {
-  const themedText = {
-    color: theme.primaryText,
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1)
-  }
-
   return {
-    themedText,
+    themedText: {
+      ...theme.bodyFont,
+      color: theme.primaryText,
+      fontSize: theme.rem(1)
+    },
     titleText: {
-      ...themedText,
+      ...theme.headingFont,
+      color: theme.primaryText,
       fontSize: theme.rem(1.25),
       margin: theme.rem(0.5),
       textAlign: 'center'
     },
     messageText: {
-      ...themedText,
+      ...theme.bodyFont,
+      color: theme.primaryText,
+      fontSize: theme.rem(1),
       margin: theme.rem(0.5),
       textAlign: 'left'
     },

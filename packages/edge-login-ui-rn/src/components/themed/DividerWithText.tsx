@@ -39,7 +39,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     flex: 1
   },
   text: {
-    fontFamily: theme.fontFamily,
+    ...theme.bodyFont,
     fontSize: theme.rem(1),
     color: theme.secondaryText,
     marginHorizontal: theme.rem(0.5),

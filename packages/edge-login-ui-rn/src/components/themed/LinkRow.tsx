@@ -59,9 +59,9 @@ const getStyles = cacheStyles((theme: Theme) => {
       marginLeft: theme.rem(1)
     },
     text: {
+      ...theme.bodyFont,
       color: theme.primaryButton,
       flex: 1,
-      fontFamily: theme.fontFamily,
       fontSize: theme.rem(1)
     }
   }
