@@ -52,7 +52,7 @@ export function ThemedScene(props: Props) {
         style={StyleSheet.absoluteFill}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        colors={[theme.backgroundGradientLeft, theme.backgroundGradientRight]}
+        colors={theme.backgroundGradientColors}
       />
       <SafeAreaView style={{ flex: 1 }}>
         {!hasHeader ? null : (

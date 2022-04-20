@@ -41,7 +41,7 @@ export const BackgroundImage = ({
         style={style}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        colors={[theme.backgroundGradientLeft, theme.backgroundGradientRight]}
+        colors={theme.backgroundGradientColors}
       >
         {content}
       </LinearGradient>

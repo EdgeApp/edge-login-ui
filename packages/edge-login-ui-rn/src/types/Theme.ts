@@ -25,7 +25,7 @@ export interface Theme {
   iconTappable: string
 
   // Background colors:
-  backgroundGradientLeft: string
+  backgroundGradientColors: string[]
   backgroundGradientRight: string
 
   // Modal:

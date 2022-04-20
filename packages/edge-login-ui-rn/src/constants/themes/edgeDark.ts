@@ -53,7 +53,7 @@ export const edgeDark: Theme = {
   iconTappable: palette.edgeMint,
 
   // background
-  backgroundGradientLeft: palette.edgeNavy,
+  backgroundGradientColors: [palette.edgeNavy, palette.darkBlue],
   backgroundGradientRight: palette.darkBlue,
 
   // modal
