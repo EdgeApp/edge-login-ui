@@ -27,7 +27,7 @@
     "prepare": "rimraf lib && tsc && cp src/index.flow.js lib/index.js.flow && cp -r src/assets lib"
   },
   "dependencies": {
-    "cleaners": "^0.3.1",
+    "cleaners": "^0.3.12",
     "date-fns": "^2.23.0",
     "qrcode-generator": "^1.4.4",
     "react-native-airship": "^0.2.6",
