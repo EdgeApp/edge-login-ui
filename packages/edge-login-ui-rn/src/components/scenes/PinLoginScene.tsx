@@ -4,14 +4,18 @@ import {
   Keyboard,
   Platform,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native'
+import { cacheStyles } from 'react-native-patina'
+import { SvgXml } from 'react-native-svg'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { sprintf } from 'sprintf-js'
 
 import { loginWithPin, loginWithTouch } from '../../actions/LoginAction'
 import { deleteUserFromDevice } from '../../actions/UserActions'
-import * as Assets from '../../assets/index'
+import { FaceIdXml } from '../../assets/xml/FaceId'
 import s from '../../common/locales/strings'
 import * as Constants from '../../constants/index'
 import { LoginUserInfo } from '../../reducers/PreviousUsersReducer'
@@ -26,10 +30,10 @@ import { UserListItem } from '../abSpecific/UserListItem'
 import { BackgroundImage } from '../common/BackgroundImage'
 import { Button } from '../common/Button'
 import { HeaderParentButtons } from '../common/HeaderParentButtons'
-import { ImageButton } from '../common/ImageButton'
 import { ButtonsModal } from '../modals/ButtonsModal'
 import { Airship, showError } from '../services/AirshipInstance'
 import { connect } from '../services/ReduxStore'
+import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 
 interface OwnProps {
   branding: Branding
@@ -54,7 +58,7 @@ interface DispatchProps {
   loginWithPin: (username: string, pin: string) => void
   onChangeText: (pin: string) => void
 }
-type Props = OwnProps & StateProps & DispatchProps
+type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
 interface State {
   focusOn: 'pin' | 'List'
@@ -165,8 +169,9 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderBottomHalf() {
-    const { errorMessage, isLoggingInWithPin, pin, wait } = this.props
+    const { errorMessage, isLoggingInWithPin, pin, wait, theme } = this.props
 
+    const styles = getStyles(theme)
     if (this.state.focusOn === 'pin') {
       return (
         <View style={stylesOld.innerView}>
@@ -196,7 +201,7 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
             <View style={stylesOld.spacer} />
           )}
           {this.renderTouchImage()}
-          <Text style={stylesOld.touchImageText}>
+          <Text style={styles.touchImageText}>
             {this.renderTouchImageText()}
           </Text>
         </View>
@@ -257,26 +262,35 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderTouchImage = () => {
-    const { touch, userDetails } = this.props
+    const { touch, userDetails, theme } = this.props
     const { touchEnabled } = userDetails
     if (touchEnabled && touch === 'FaceID') {
       return (
-        <ImageButton
-          style={{ container: {}, image: {} }}
-          source={Assets.FACE_ID}
+        <TouchableOpacity
           onPress={this.handleTouchId}
           disabled={this.props.isTouchIdDisabled}
-        />
+        >
+          <SvgXml
+            xml={FaceIdXml}
+            color={theme.iconTappable}
+            width={theme.rem(3)}
+            height={theme.rem(3)}
+          />
+        </TouchableOpacity>
       )
     }
     if (touchEnabled && touch === 'TouchID') {
       return (
-        <ImageButton
-          style={{ container: {}, image: {} }}
-          source={Assets.TOUCH_ID}
+        <TouchableOpacity
           onPress={this.handleTouchId}
           disabled={this.props.isTouchIdDisabled}
-        />
+        >
+          <MaterialCommunityIcons
+            name="fingerprint"
+            size={theme.rem(3)}
+            color={theme.iconTappable}
+          />
+        </TouchableOpacity>
       )
     }
     if (!touchEnabled || !touch) {
@@ -426,12 +440,15 @@ const stylesOld = {
   spacer_full: {
     flex: 1,
     zIndex: -100
-  },
-  touchImageText: {
-    marginTop: scale(8),
-    color: Constants.ACCENT_MINT
   }
 } as const
+
+const getStyles = cacheStyles((theme: Theme) => ({
+  touchImageText: {
+    marginTop: theme.rem(0.5),
+    color: theme.iconTappable
+  }
+}))
 
 export const PinLoginScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
@@ -476,4 +493,4 @@ export const PinLoginScene = connect<StateProps, DispatchProps, OwnProps>(
       dispatch({ type: 'AUTH_UPDATE_PIN', data: pin })
     }
   })
-)(PinLoginSceneComponent)
+)(withTheme(PinLoginSceneComponent))
