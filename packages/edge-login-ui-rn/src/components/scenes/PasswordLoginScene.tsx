@@ -8,6 +8,7 @@ import {
   View
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { cacheStyles } from 'react-native-patina'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { sprintf } from 'sprintf-js'
@@ -33,6 +34,7 @@ import { showQrCodeModal } from '../modals/QrCodeModal'
 import { TextInputModal } from '../modals/TextInputModal'
 import { Airship, showError } from '../services/AirshipInstance'
 import { connect } from '../services/ReduxStore'
+import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 import { MainButton } from '../themed/MainButton'
 
 interface OwnProps {
@@ -55,7 +57,7 @@ interface DispatchProps {
   updateUsername: (username: string) => void
   handlePasswordRecovery: (recoveryKey: string) => Promise<boolean>
 }
-type Props = OwnProps & StateProps & DispatchProps
+type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
 interface State {
   errorMessage: string
@@ -131,11 +133,14 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 
   render() {
+    const { theme } = this.props
+    const styles = getStyles(theme)
+
     return (
       <KeyboardAwareScrollView
-        style={stylesOld.container}
+        style={styles.container}
         keyboardShouldPersistTaps="always"
-        contentContainerStyle={stylesOld.mainScrollView}
+        contentContainerStyle={styles.mainScrollView}
       >
         <BackgroundImage
           branding={this.props.branding}
@@ -147,6 +152,9 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderOverImage() {
+    const { theme } = this.props
+    const styles = getStyles(theme)
+
     if (this.props.loginSuccess) {
       /* return (
         <View style={style.featureBox}>
@@ -156,13 +164,13 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
       return null
     }
     return (
-      <View style={stylesOld.featureBoxContainer}>
+      <View style={styles.featureBoxContainer}>
         <HeaderParentButtons branding={this.props.branding} />
         <TouchableWithoutFeedback onPress={this.handleBlur}>
-          <View style={stylesOld.featureBox}>
+          <View style={styles.featureBox}>
             <LogoImageHeader branding={this.props.branding} />
             {this.renderUsername()}
-            <View style={stylesOld.shimTiny} />
+            <View style={styles.shimTiny} />
             <FormField
               testID="passwordFormField"
               style={stylesOld.input2}
@@ -185,9 +193,12 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderUsername() {
+    const { theme } = this.props
+    const styles = getStyles(theme)
+
     return (
       <View>
-        <View style={stylesOld.usernameWrapper}>
+        <View style={styles.usernameWrapper}>
           <FormField
             testID="usernameFormField"
             style={stylesOld.input2}
@@ -226,9 +237,12 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderDropdownList() {
+    const { theme } = this.props
+    const styles = getStyles(theme)
+
     return (
       <FlatList
-        style={stylesOld.dropDownList}
+        style={styles.dropDownList}
         data={this.props.usernameOnlyList}
         renderItem={this.renderRow}
         keyExtractor={(item, index) => index.toString()}
@@ -247,11 +261,12 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderButtons() {
-    const { handleQrModal } = this.props
+    const { handleQrModal, theme } = this.props
+    const styles = getStyles(theme)
 
     return (
-      <View style={stylesOld.buttonsBox}>
-        <View style={stylesOld.shimTiny} />
+      <View style={styles.buttonsBox}>
+        <View style={styles.shimTiny} />
         <Button
           onPress={this.handleForgotPassword}
           label={s.strings.forgot_password}
@@ -260,7 +275,7 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
           upStyle={stylesOld.forgotButton.upStyle}
           upTextStyle={stylesOld.forgotButton.upTextStyle}
         />
-        <View style={stylesOld.loginButtonBox}>
+        <View style={styles.loginButtonBox}>
           <MainButton
             label={s.strings.login_button}
             testID="loginButton"
@@ -360,8 +375,13 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 }
 
-const stylesOld = {
-  container: Styles.SceneStyle,
+const getStyles = cacheStyles((theme: Theme) => ({
+  container: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: theme.backgroundGradientColors[0]
+  },
   mainScrollView: {
     position: 'relative',
     width: '100%',
@@ -372,22 +392,33 @@ const stylesOld = {
   },
   featureBox: {
     position: 'relative',
-    top: scale(55),
+    top: theme.rem(3.5),
     width: '100%',
     alignItems: 'center'
   },
   shimTiny: {
     width: '100%',
-    height: scale(10)
+    height: theme.rem(0.75)
   },
   loginButtonBox: {
-    marginVertical: scale(10),
+    marginVertical: theme.rem(0.75),
     width: '70%'
   },
   buttonsBox: {
     width: '100%',
     alignItems: 'center'
   },
+  usernameWrapper: {
+    width: '100%',
+    flexDirection: 'row'
+  },
+  dropDownList: {
+    maxHeight: theme.rem(12.5),
+    backgroundColor: theme.backgroundGradientColors[0]
+  }
+}))
+
+const stylesOld = {
   input2: {
     container: {
       position: 'relative',
@@ -447,14 +478,6 @@ const stylesOld = {
     },
     iconSize: scale(Constants.FONTS.defaultFontSize + 8),
     underlayColor: Constants.TRANSPARENT
-  },
-  usernameWrapper: {
-    width: '100%',
-    flexDirection: 'row'
-  },
-  dropDownList: {
-    maxHeight: scale(200),
-    backgroundColor: '#FFFFFF'
   }
 } as const
 
@@ -494,4 +517,4 @@ export const PasswordLoginScene = connect<StateProps, DispatchProps, OwnProps>(
       return await Promise.resolve(true)
     }
   })
-)(PasswordLoginSceneComponent)
+)(withTheme(PasswordLoginSceneComponent))
