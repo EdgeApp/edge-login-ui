@@ -22,7 +22,7 @@ import { LoginUserInfo } from '../../reducers/PreviousUsersReducer'
 import * as Styles from '../../styles/index'
 import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
-import { scale, scaleH } from '../../util/scaling'
+import { scale } from '../../util/scaling'
 import { FourDigit } from '../abSpecific/FourDigitComponent'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader'
 import { PinKeypad } from '../abSpecific/PinKeypad'
@@ -133,12 +133,14 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderOverImage() {
-    const { pin, wait } = this.props
+    const { pin, wait, theme } = this.props
+    const styles = getStyles(theme)
+
     if (this.props.loginSuccess) {
       return null
     }
     return (
-      <View style={stylesOld.featureBoxContainer}>
+      <View style={styles.featureBoxContainer}>
         <HeaderParentButtons
           branding={{
             ...this.props.branding,
@@ -149,14 +151,12 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
           }}
         />
         <TouchableWithoutFeedback onPress={this.handleHideDrop}>
-          <View style={stylesOld.featureBox}>
+          <View style={styles.featureBox}>
             <LogoImageHeader branding={this.props.branding} />
-            <View style={stylesOld.featureBoxBody}>
-              {this.renderBottomHalf()}
-            </View>
+            <View style={styles.featureBoxBody}>{this.renderBottomHalf()}</View>
           </View>
         </TouchableWithoutFeedback>
-        <View style={stylesOld.spacer_full} />
+        <View style={styles.spacer_full} />
         {this.props.userDetails.pinEnabled && (
           <PinKeypad
             disabled={wait > 0 || pin.length === 4}
@@ -173,7 +173,7 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
     const styles = getStyles(theme)
     if (this.state.focusOn === 'pin') {
       return (
-        <View style={stylesOld.innerView}>
+        <View style={styles.innerView}>
           <TouchableOpacity onPress={this.handleShowDrop}>
             <Text style={styles.usernameButton}>{this.props.username}</Text>
           </TouchableOpacity>
@@ -191,9 +191,7 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
               spinner={wait > 0 || pin.length === 4 || isLoggingInWithPin}
             />
           )}
-          {!this.props.userDetails.pinEnabled && (
-            <View style={stylesOld.spacer} />
-          )}
+          {!this.props.userDetails.pinEnabled && <View style={styles.spacer} />}
           {this.renderTouchImage()}
           <Text style={styles.touchImageText}>
             {this.renderTouchImageText()}
@@ -202,9 +200,9 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
       )
     }
     return (
-      <View style={stylesOld.innerView}>
+      <View style={styles.innerView}>
         <FlatList
-          style={stylesOld.listView}
+          style={styles.listView}
           data={this.getDropdownItems()}
           renderItem={this.renderItems}
           keyExtractor={(item, index) => index.toString()}
@@ -317,46 +315,6 @@ const stylesOld = {
     height: null,
     alignItems: 'center'
   },
-  innerView: {
-    height: '100%',
-    width: '100%',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  featureBoxContainer: {
-    width: '100%',
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-around'
-  },
-  featureBox: {
-    position: 'relative',
-    top: scale(40),
-    width: '100%',
-    alignItems: 'center'
-  },
-  featureBoxBody: {
-    height: scale(240),
-    width: '100%'
-  },
-  thumbprintButton: {
-    container: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      flexDirection: 'column',
-      alignItems: 'flex-end'
-    },
-    image: {
-      position: 'relative',
-      marginRight: '5%'
-    }
-  },
-  listView: {
-    height: scale(250),
-    width: scaleH(160)
-  },
   listItem: {
     container: {
       height: scale(40),
@@ -391,39 +349,36 @@ const stylesOld = {
       fontFamily: Constants.FONTS.fontFamilyRegular,
       fontSize: scale(Constants.FONTS.defaultFontSize)
     }
-  },
-  dropInput: {
-    container: {
-      width: 200,
-      height: scale(30),
-      // backgroundColor: Constants.WHITE,
-      marginBottom: scale(20)
-    }
-  },
-  exitButton: {
-    upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {
-      ...Styles.TextOnlyButtonTextUpStyle,
-      color: Constants.WHITE,
-      fontSize: scale(16)
-    },
-    downTextStyle: {
-      ...Styles.TextOnlyButtonTextDownStyle,
-      color: Constants.WHITE,
-      fontSize: scale(16)
-    },
-    downStyle: Styles.TextOnlyButtonDownStyle
-  },
-  spacer: {
-    marginTop: scale(35)
-  },
-  spacer_full: {
-    flex: 1,
-    zIndex: -100
   }
 } as const
 
 const getStyles = cacheStyles((theme: Theme) => ({
+  listView: {
+    height: theme.rem(16),
+    width: theme.rem(10)
+  },
+  featureBoxContainer: {
+    width: '100%',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around'
+  },
+  featureBox: {
+    position: 'relative',
+    top: theme.rem(2.5),
+    width: '100%',
+    alignItems: 'center'
+  },
+  featureBoxBody: {
+    height: theme.rem(15),
+    width: '100%'
+  },
+  innerView: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
   touchImageText: {
     marginTop: theme.rem(0.5),
     color: theme.iconTappable
@@ -433,6 +388,13 @@ const getStyles = cacheStyles((theme: Theme) => ({
     color: theme.primaryText,
     fontSize: theme.rem(1.5),
     margin: theme.rem(0.5)
+  },
+  spacer: {
+    marginTop: theme.rem(2)
+  },
+  spacer_full: {
+    flex: 1,
+    zIndex: -100
   }
 }))
 
