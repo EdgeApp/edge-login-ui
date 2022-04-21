@@ -119,10 +119,10 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={stylesOld.container}>
         <BackgroundImage
           branding={this.props.branding}
-          style={styles.backgroundImage}
+          style={stylesOld.backgroundImage}
           content={this.renderOverImage()}
         />
       </View>
@@ -135,7 +135,7 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
       return null
     }
     return (
-      <View style={styles.featureBoxContainer}>
+      <View style={stylesOld.featureBoxContainer}>
         <HeaderParentButtons
           branding={{
             ...this.props.branding,
@@ -146,12 +146,14 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
           }}
         />
         <TouchableWithoutFeedback onPress={this.handleHideDrop}>
-          <View style={styles.featureBox}>
+          <View style={stylesOld.featureBox}>
             <LogoImageHeader branding={this.props.branding} />
-            <View style={styles.featureBoxBody}>{this.renderBottomHalf()}</View>
+            <View style={stylesOld.featureBoxBody}>
+              {this.renderBottomHalf()}
+            </View>
           </View>
         </TouchableWithoutFeedback>
-        <View style={styles.spacer_full} />
+        <View style={stylesOld.spacer_full} />
         {this.props.userDetails.pinEnabled && (
           <PinKeypad
             disabled={wait > 0 || pin.length === 4}
@@ -167,14 +169,14 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
 
     if (this.state.focusOn === 'pin') {
       return (
-        <View style={styles.innerView}>
+        <View style={stylesOld.innerView}>
           <Button
             onPress={this.handleShowDrop}
             label={this.props.username}
-            downStyle={styles.usernameButton.downStyle}
-            downTextStyle={styles.usernameButton.downTextStyle}
-            upStyle={styles.usernameButton.upStyle}
-            upTextStyle={styles.usernameButton.upTextStyle}
+            downStyle={stylesOld.usernameButton.downStyle}
+            downTextStyle={stylesOld.usernameButton.downTextStyle}
+            upStyle={stylesOld.usernameButton.upStyle}
+            upTextStyle={stylesOld.usernameButton.upTextStyle}
           />
           {this.props.userDetails.pinEnabled && (
             <FourDigit
@@ -190,18 +192,20 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
               spinner={wait > 0 || pin.length === 4 || isLoggingInWithPin}
             />
           )}
-          {!this.props.userDetails.pinEnabled && <View style={styles.spacer} />}
+          {!this.props.userDetails.pinEnabled && (
+            <View style={stylesOld.spacer} />
+          )}
           {this.renderTouchImage()}
-          <Text style={styles.touchImageText}>
+          <Text style={stylesOld.touchImageText}>
             {this.renderTouchImageText()}
           </Text>
         </View>
       )
     }
     return (
-      <View style={styles.innerView}>
+      <View style={stylesOld.innerView}>
         <FlatList
-          style={styles.listView}
+          style={stylesOld.listView}
           data={this.getDropdownItems()}
           renderItem={this.renderItems}
           keyExtractor={(item, index) => index.toString()}
@@ -225,7 +229,7 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
     return (
       <UserListItem
         data={item.item}
-        style={styles.listItem}
+        style={stylesOld.listItem}
         onClick={this.handleSelectUser}
         onDelete={this.handleDelete}
       />
@@ -297,7 +301,7 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
   }
 }
 
-const styles = {
+const stylesOld = {
   container: Styles.SceneStyle,
   backgroundImage: {
     flex: 1,
