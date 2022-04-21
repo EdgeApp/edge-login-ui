@@ -133,9 +133,9 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   render() {
     return (
       <KeyboardAwareScrollView
-        style={styles.container}
+        style={stylesOld.container}
         keyboardShouldPersistTaps="always"
-        contentContainerStyle={styles.mainScrollView}
+        contentContainerStyle={stylesOld.mainScrollView}
       >
         <BackgroundImage
           branding={this.props.branding}
@@ -156,16 +156,16 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
       return null
     }
     return (
-      <View style={styles.featureBoxContainer}>
+      <View style={stylesOld.featureBoxContainer}>
         <HeaderParentButtons branding={this.props.branding} />
         <TouchableWithoutFeedback onPress={this.handleBlur}>
-          <View style={styles.featureBox}>
+          <View style={stylesOld.featureBox}>
             <LogoImageHeader branding={this.props.branding} />
             {this.renderUsername()}
-            <View style={styles.shimTiny} />
+            <View style={stylesOld.shimTiny} />
             <FormField
               testID="passwordFormField"
-              style={styles.input2}
+              style={stylesOld.input2}
               onChangeText={this.handlePasswordChange}
               value={this.state.password}
               label={s.strings.password}
@@ -187,10 +187,10 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   renderUsername() {
     return (
       <View>
-        <View style={styles.usernameWrapper}>
+        <View style={stylesOld.usernameWrapper}>
           <FormField
             testID="usernameFormField"
-            style={styles.input2}
+            style={stylesOld.input2}
             onChangeText={this.handleChangeUsername}
             value={this.props.username}
             label={s.strings.username}
@@ -202,20 +202,20 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
             onSubmitEditing={this.handleSetNextFocus}
           />
           <TouchableOpacity
-            style={styles.iconButton.container}
+            style={stylesOld.iconButton.container}
             onPress={this.handleToggleUsernameList}
           >
             {this.state.usernameList ? (
               <MaterialIcon
                 name="expand-less"
-                size={styles.iconButton.iconSize}
-                style={styles.iconButton.icon}
+                size={stylesOld.iconButton.iconSize}
+                style={stylesOld.iconButton.icon}
               />
             ) : (
               <MaterialIcon
                 name="expand-more"
-                size={styles.iconButton.iconSize}
-                style={styles.iconButton.icon}
+                size={stylesOld.iconButton.iconSize}
+                style={stylesOld.iconButton.icon}
               />
             )}
           </TouchableOpacity>
@@ -228,7 +228,7 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   renderDropdownList() {
     return (
       <FlatList
-        style={styles.dropDownList}
+        style={stylesOld.dropDownList}
         data={this.props.usernameOnlyList}
         renderItem={this.renderRow}
         keyExtractor={(item, index) => index.toString()}
@@ -250,17 +250,17 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
     const { handleQrModal } = this.props
 
     return (
-      <View style={styles.buttonsBox}>
-        <View style={styles.shimTiny} />
+      <View style={stylesOld.buttonsBox}>
+        <View style={stylesOld.shimTiny} />
         <Button
           onPress={this.handleForgotPassword}
           label={s.strings.forgot_password}
-          downStyle={styles.forgotButton.downStyle}
-          downTextStyle={styles.forgotButton.downTextStyle}
-          upStyle={styles.forgotButton.upStyle}
-          upTextStyle={styles.forgotButton.upTextStyle}
+          downStyle={stylesOld.forgotButton.downStyle}
+          downTextStyle={stylesOld.forgotButton.downTextStyle}
+          upStyle={stylesOld.forgotButton.upStyle}
+          upTextStyle={stylesOld.forgotButton.upTextStyle}
         />
-        <View style={styles.loginButtonBox}>
+        <View style={stylesOld.loginButtonBox}>
           <MainButton
             label={s.strings.login_button}
             testID="loginButton"
@@ -272,10 +272,10 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
           testID="createAccountButton"
           onPress={this.handleCreateAccount}
           label={s.strings.create_an_account}
-          downStyle={styles.signupButton.downStyle}
-          downTextStyle={styles.signupButton.downTextStyle}
-          upStyle={styles.signupButton.upStyle}
-          upTextStyle={styles.signupButton.upTextStyle}
+          downStyle={stylesOld.signupButton.downStyle}
+          downTextStyle={stylesOld.signupButton.downTextStyle}
+          upStyle={stylesOld.signupButton.upStyle}
+          upTextStyle={stylesOld.signupButton.upTextStyle}
         />
         <TouchableOpacity onPress={handleQrModal}>
           <AntDesignIcon
@@ -360,7 +360,7 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 }
 
-const styles = {
+const stylesOld = {
   container: Styles.SceneStyle,
   mainScrollView: {
     position: 'relative',
