@@ -17,12 +17,9 @@ import { loginWithPin, loginWithTouch } from '../../actions/LoginAction'
 import { deleteUserFromDevice } from '../../actions/UserActions'
 import { FaceIdXml } from '../../assets/xml/FaceId'
 import s from '../../common/locales/strings'
-import * as Constants from '../../constants/index'
 import { LoginUserInfo } from '../../reducers/PreviousUsersReducer'
-import * as Styles from '../../styles/index'
 import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
-import { scale } from '../../util/scaling'
 import { FourDigit } from '../abSpecific/FourDigitComponent'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader'
 import { PinKeypad } from '../abSpecific/PinKeypad'
@@ -121,8 +118,10 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
   }
 
   render() {
+    const { theme } = this.props
+    const styles = getStyles(theme)
     return (
-      <View style={stylesOld.container}>
+      <View style={styles.container}>
         <BackgroundImage
           branding={this.props.branding}
           content={this.renderOverImage()}
@@ -225,7 +224,6 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
     return (
       <UserListItem
         data={item.item}
-        style={stylesOld.listItem}
         onClick={this.handleSelectUser}
         onDelete={this.handleDelete}
       />
@@ -306,46 +304,13 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
   }
 }
 
-const stylesOld = {
-  container: Styles.SceneStyle,
-  listItem: {
-    container: {
-      height: scale(40),
-      width: '100%',
-      backgroundColor: Constants.PRIMARY,
-      flexDirection: 'row',
-      alignItems: 'center'
-    },
-    textComtainer: {
-      flex: 25,
-      height: '100%',
-      flexDirection: 'column',
-      justifyContent: 'space-around'
-    },
-    iconButton: {
-      container: {
-        flex: 5,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        height: '100%'
-      },
-      icon: {
-        color: Constants.WHITE
-      },
-      iconSize: scale(Constants.FONTS.defaultFontSize)
-    },
-    text: {
-      paddingLeft: scale(20),
-      color: Constants.WHITE,
-      backgroundColor: Constants.TRANSPARENT,
-      fontFamily: Constants.FONTS.fontFamilyRegular,
-      fontSize: scale(Constants.FONTS.defaultFontSize)
-    }
-  }
-} as const
-
 const getStyles = cacheStyles((theme: Theme) => ({
+  container: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: theme.backgroundGradientColors[0]
+  },
   listView: {
     height: theme.rem(16),
     width: theme.rem(10)

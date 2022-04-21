@@ -1,24 +1,17 @@
 import * as React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
+import { cacheStyles } from 'react-native-patina'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-interface Props {
+import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
+interface OwnProps {
   data: string
-  style: {
-    container: any
-    text: any
-    textComtainer: any
-    iconButton: {
-      container: any
-      icon: any
-      iconSize: number
-    }
-  }
   onClick: (username: string) => void
   onDelete: (username: string) => void
 }
+type Props = OwnProps & ThemeProps
 
-export class UserListItem extends React.Component<Props> {
+class UserListItemComponent extends React.Component<Props> {
   handleDelete = () => {
     this.props.onDelete(this.props.data)
   }
@@ -36,23 +29,60 @@ export class UserListItem extends React.Component<Props> {
   }
 
   renderInside() {
-    const { style } = this.props
+    const { theme } = this.props
+    const styles = getStyles(theme)
+
     return (
-      <View style={style.container}>
-        <View style={style.textComtainer}>
-          <Text style={style.text}>{this.props.data}</Text>
+      <View style={styles.container}>
+        <View style={styles.textComtainer}>
+          <Text style={styles.text}>{this.props.data}</Text>
         </View>
         <TouchableOpacity
-          style={style.iconButton.container}
+          style={styles.iconButtonContainer}
           onPress={this.handleDelete}
         >
           <MaterialIcon
-            style={style.iconButton.icon}
+            style={styles.iconButtonIcon}
             name="close"
-            size={style.iconButton.iconSize}
+            size={theme.rem(1)}
           />
         </TouchableOpacity>
       </View>
     )
   }
 }
+
+export const UserListItem = withTheme(UserListItemComponent)
+
+const getStyles = cacheStyles((theme: Theme) => ({
+  container: {
+    height: theme.rem(2.5),
+    width: '100%',
+    backgroundColor: theme.modal,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  textComtainer: {
+    flex: 25,
+    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'space-around'
+  },
+  iconButtonContainer: {
+    flex: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    height: '100%'
+  },
+  iconButtonIcon: {
+    color: theme.icon
+  },
+  text: {
+    paddingLeft: theme.rem(1.25),
+    color: theme.primaryText,
+    backgroundColor: '#fff0',
+    fontFamily: theme.fontFaceDefault,
+    fontSize: theme.rem(1)
+  }
+}))
