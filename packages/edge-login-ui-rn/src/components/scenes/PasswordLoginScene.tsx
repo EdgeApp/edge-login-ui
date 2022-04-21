@@ -139,7 +139,6 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
       >
         <BackgroundImage
           branding={this.props.branding}
-          style={styles.backgroundImage}
           content={this.renderOverImage()}
           onPress={this.handleBlur}
         />
@@ -366,12 +365,6 @@ const styles = {
   container: Styles.SceneStyle,
   mainScrollView: {
     position: 'relative',
-    width: '100%',
-    height: '100%'
-  },
-  backgroundImage: {
-    flex: 1,
-    alignItems: 'center',
     width: '100%',
     height: '100%'
   },

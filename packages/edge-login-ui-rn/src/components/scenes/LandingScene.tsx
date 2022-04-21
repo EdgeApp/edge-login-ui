@@ -31,7 +31,6 @@ class LandingSceneComponent extends React.Component<Props> {
       <View style={styles.container}>
         <BackgroundImage
           branding={this.props.branding}
-          style={styles.backgroundImage}
           content={this.renderOverImage()}
         />
       </View>
@@ -78,12 +77,6 @@ class LandingSceneComponent extends React.Component<Props> {
 
 const styles = {
   container: Styles.SceneStyle,
-  backgroundImage: {
-    flex: 1,
-    width: null,
-    height: null,
-    alignItems: 'center'
-  },
   inner: {
     position: 'relative',
     flex: 1,

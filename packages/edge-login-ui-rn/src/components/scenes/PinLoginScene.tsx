@@ -125,7 +125,6 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
       <View style={stylesOld.container}>
         <BackgroundImage
           branding={this.props.branding}
-          style={stylesOld.backgroundImage}
           content={this.renderOverImage()}
         />
       </View>
@@ -309,12 +308,6 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
 
 const stylesOld = {
   container: Styles.SceneStyle,
-  backgroundImage: {
-    flex: 1,
-    width: null,
-    height: null,
-    alignItems: 'center'
-  },
   listItem: {
     container: {
       height: scale(40),

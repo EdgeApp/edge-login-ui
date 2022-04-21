@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {
+  FlexStyle,
   ImageBackground,
   Keyboard,
   TouchableWithoutFeedback
@@ -11,7 +12,6 @@ import { useTheme } from '../services/ThemeContext'
 
 interface Props {
   branding: Branding
-  style: any
   content: any
   enableTouch?: boolean
   onPress?: () => void
@@ -19,7 +19,6 @@ interface Props {
 
 export const BackgroundImage = ({
   branding,
-  style,
   content,
   enableTouch = true,
   onPress = () => Keyboard.dismiss()
@@ -29,7 +28,7 @@ export const BackgroundImage = ({
 
   const imageBackground = () => {
     return (
-      <ImageBackground source={src} style={style}>
+      <ImageBackground source={src} style={styles.backgroundImage}>
         {content}
       </ImageBackground>
     )
@@ -38,7 +37,7 @@ export const BackgroundImage = ({
   const gradientBackground = () => {
     return (
       <LinearGradient
-        style={style}
+        style={styles.backgroundImage}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={theme.backgroundGradientColors}
@@ -59,4 +58,13 @@ export const BackgroundImage = ({
   }
 
   return componentBackground
+}
+
+const styles: { backgroundImage: FlexStyle } = {
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    alignItems: 'center'
+  }
 }
