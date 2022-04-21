@@ -43,6 +43,7 @@ export const edgeDark: Theme = {
     return Math.round(scale(16, 0.3) * size)
   },
 
+  preferPrimaryButton: false,
   fontFamily: 'System',
   fontWeightBold: 'bold',
 

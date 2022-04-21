@@ -59,6 +59,7 @@ const TermsAndConditionsSceneComponent = ({
   ])
   const showNext = !termValues.includes(false)
   const scrollViewRef = useScrollToEnd(showNext)
+  const buttonType = theme.preferPrimaryButton ? 'primary' : 'secondary'
 
   if (createErrorMessage) {
     Alert.alert(
@@ -124,7 +125,7 @@ const TermsAndConditionsSceneComponent = ({
             <MainButton
               label={s.strings.confirm}
               paddingRem={0.7}
-              type="secondary"
+              type={buttonType}
               onPress={handleNextPress}
             />
           </Fade>

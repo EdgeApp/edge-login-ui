@@ -1,5 +1,6 @@
 import {
   asArray,
+  asBoolean,
   asNumber,
   asObject,
   asOptional,
@@ -65,6 +66,7 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   // The app scaling factor, which is the height of "normal" text:
   rem: asOptional(asFunction),
 
+  preferPrimaryButton: asOptional(asBoolean),
   fontFamily: asOptional(asString),
   fontWeightBold: asOptional(
     asValue(
@@ -185,6 +187,7 @@ export interface Theme {
   // The app scaling factor, which is the height of "normal" text:
   rem: (size: number) => number
 
+  preferPrimaryButton: boolean
   fontFamily: string
   fontWeightBold: FontWeight
 
