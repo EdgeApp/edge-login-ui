@@ -28,7 +28,6 @@ import { LogoImageHeader } from '../abSpecific/LogoImageHeader'
 import { PinKeypad } from '../abSpecific/PinKeypad'
 import { UserListItem } from '../abSpecific/UserListItem'
 import { BackgroundImage } from '../common/BackgroundImage'
-import { Button } from '../common/Button'
 import { HeaderParentButtons } from '../common/HeaderParentButtons'
 import { ButtonsModal } from '../modals/ButtonsModal'
 import { Airship, showError } from '../services/AirshipInstance'
@@ -175,14 +174,9 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
     if (this.state.focusOn === 'pin') {
       return (
         <View style={stylesOld.innerView}>
-          <Button
-            onPress={this.handleShowDrop}
-            label={this.props.username}
-            downStyle={stylesOld.usernameButton.downStyle}
-            downTextStyle={stylesOld.usernameButton.downTextStyle}
-            upStyle={stylesOld.usernameButton.upStyle}
-            upTextStyle={stylesOld.usernameButton.upTextStyle}
-          />
+          <TouchableOpacity onPress={this.handleShowDrop}>
+            <Text style={styles.usernameButton}>{this.props.username}</Text>
+          </TouchableOpacity>
           {this.props.userDetails.pinEnabled && (
             <FourDigit
               error={
@@ -406,20 +400,6 @@ const stylesOld = {
       marginBottom: scale(20)
     }
   },
-  usernameButton: {
-    upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {
-      ...Styles.TextOnlyButtonTextUpStyle,
-      color: Constants.WHITE,
-      fontSize: scale(24)
-    },
-    downTextStyle: {
-      ...Styles.TextOnlyButtonTextDownStyle,
-      color: Constants.WHITE,
-      fontSize: scale(24)
-    },
-    downStyle: Styles.TextOnlyButtonDownStyle
-  },
   exitButton: {
     upStyle: Styles.TextOnlyButtonUpStyle,
     upTextStyle: {
@@ -447,6 +427,12 @@ const getStyles = cacheStyles((theme: Theme) => ({
   touchImageText: {
     marginTop: theme.rem(0.5),
     color: theme.iconTappable
+  },
+  usernameButton: {
+    fontFamily: theme.fontFaceDefault,
+    color: theme.primaryText,
+    fontSize: theme.rem(1.5),
+    margin: theme.rem(0.5)
   }
 }))
 
