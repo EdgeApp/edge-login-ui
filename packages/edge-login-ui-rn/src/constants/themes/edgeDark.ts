@@ -1,6 +1,6 @@
 import { Platform } from 'react-native'
 
-import { Theme } from '../../types/Theme'
+import { textNoShadow, Theme, themeNoShadow } from '../../types/Theme'
 import { scale } from '../../util/scaling'
 
 const palette = {
@@ -70,13 +70,33 @@ export const edgeDark: Theme = {
   tileBackground: palette.edgeBlue,
 
   // buttons
+  buttonBorderRadiusRem: 0.25,
   primaryButtonOutline: palette.transparent,
-  primaryButton: palette.edgeMint,
+  primaryButtonOutlineWidth: 1,
+  primaryButton: [palette.edgeMint, palette.edgeMint],
+  primaryButtonColorStart: { x: 0, y: 0 },
+  primaryButtonColorEnd: { x: 1, y: 0 },
   primaryButtonText: palette.edgeBlue,
+  primaryButtonTextShadow: textNoShadow,
+  primaryButtonShadow: themeNoShadow,
 
   secondaryButtonOutline: palette.edgeMint,
-  secondaryButton: palette.transparent,
+  secondaryButtonOutlineWidth: 1,
+  secondaryButton: [palette.transparent, palette.transparent],
+  secondaryButtonColorStart: { x: 0, y: 0 },
+  secondaryButtonColorEnd: { x: 1, y: 1 },
   secondaryButtonText: palette.edgeMint,
+  secondaryButtonTextShadow: textNoShadow,
+  secondaryButtonShadow: themeNoShadow,
+
+  escapeButtonOutline: palette.transparent,
+  escapeButtonOutlineWidth: 0,
+  escapeButton: [palette.transparent, palette.transparent],
+  escapeButtonColorStart: { x: 0, y: 0 },
+  escapeButtonColorEnd: { x: 1, y: 1 },
+  escapeButtonText: palette.edgeMint,
+  escapeButtonTextShadow: textNoShadow,
+  escapeButtonShadow: themeNoShadow,
 
   alertModalPrimaryButtonOutline: palette.edgeBlue,
   alertModalPrimaryButton: palette.edgeBlue,

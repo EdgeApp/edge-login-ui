@@ -88,7 +88,7 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   iconTappable: asOptional(asString),
 
   // Background colors:
-  backgroundGradientColors: asArray(asString),
+  backgroundGradientColors: asOptional(asArray(asString)),
 
   // Modal:
   modal: asOptional(asString),
@@ -105,14 +105,35 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   // Tile:
   tileBackground: asOptional(asString),
 
-  // Button colors:
+  // Buttons
+  buttonBorderRadiusRem: asOptional(asNumber),
+
   primaryButtonOutline: asOptional(asString),
-  // primaryButton: asOptional(asString),
+  primaryButtonOutlineWidth: asOptional(asNumber),
+  primaryButton: asOptional(asArray(asString)),
+  primaryButtonColorStart: asOptional(asGradientCoords),
+  primaryButtonColorEnd: asOptional(asGradientCoords),
   primaryButtonText: asOptional(asString),
+  primaryButtonTextShadow: asOptional(asTextShadowParams),
+  primaryButtonShadow: asOptional(asThemeShadowParams),
 
   secondaryButtonOutline: asOptional(asString),
-  // secondaryButton: asOptional(asString),
+  secondaryButtonOutlineWidth: asOptional(asNumber),
+  secondaryButton: asOptional(asArray(asString)),
+  secondaryButtonColorStart: asOptional(asGradientCoords),
+  secondaryButtonColorEnd: asOptional(asGradientCoords),
   secondaryButtonText: asOptional(asString),
+  secondaryButtonTextShadow: asOptional(asTextShadowParams),
+  secondaryButtonShadow: asOptional(asThemeShadowParams),
+
+  escapeButtonOutline: asOptional(asString),
+  escapeButtonOutlineWidth: asOptional(asNumber),
+  escapeButton: asOptional(asArray(asString)),
+  escapeButtonColorStart: asOptional(asGradientCoords),
+  escapeButtonColorEnd: asOptional(asGradientCoords),
+  escapeButtonText: asOptional(asString),
+  escapeButtonTextShadow: asOptional(asTextShadowParams),
+  escapeButtonShadow: asOptional(asThemeShadowParams),
 
   alertModalPrimaryButtonOutline: asOptional(asString),
   alertModalPrimaryButton: asOptional(asString),
@@ -190,14 +211,35 @@ export interface Theme {
   // Tile:
   tileBackground: string
 
-  // Button colors:
+  // Buttons
+  buttonBorderRadiusRem: number
+
   primaryButtonOutline: string
-  primaryButton: string
+  primaryButtonOutlineWidth: number
+  primaryButton: string[]
+  primaryButtonColorStart: GradientCoords
+  primaryButtonColorEnd: GradientCoords
   primaryButtonText: string
+  primaryButtonTextShadow: TextShadowParams
+  primaryButtonShadow: ThemeShadowParams
 
   secondaryButtonOutline: string
-  secondaryButton: string
+  secondaryButtonOutlineWidth: number
+  secondaryButton: string[]
+  secondaryButtonColorStart: GradientCoords
+  secondaryButtonColorEnd: GradientCoords
   secondaryButtonText: string
+  secondaryButtonTextShadow: TextShadowParams
+  secondaryButtonShadow: ThemeShadowParams
+
+  escapeButtonOutline: string
+  escapeButtonOutlineWidth: number
+  escapeButton: string[]
+  escapeButtonColorStart: GradientCoords
+  escapeButtonColorEnd: GradientCoords
+  escapeButtonText: string
+  escapeButtonTextShadow: TextShadowParams
+  escapeButtonShadow: ThemeShadowParams
 
   alertModalPrimaryButtonOutline: string
   alertModalPrimaryButton: string

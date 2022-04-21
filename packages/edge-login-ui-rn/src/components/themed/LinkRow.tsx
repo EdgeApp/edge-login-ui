@@ -54,12 +54,12 @@ const getStyles = cacheStyles((theme: Theme) => {
       flexDirection: 'row'
     },
     icon: {
-      color: theme.primaryButton,
+      color: theme.primaryButton[0],
       fontSize: theme.rem(1),
       marginLeft: theme.rem(1)
     },
     text: {
-      color: theme.primaryButton,
+      color: theme.primaryButton[0],
       flex: 1,
       fontFamily: theme.fontFamily,
       fontSize: theme.rem(1)
