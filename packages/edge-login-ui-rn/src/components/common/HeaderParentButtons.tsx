@@ -1,17 +1,19 @@
 import * as React from 'react'
 import { Image, Linking, Text, TouchableOpacity, View } from 'react-native'
+import { cacheStyles } from 'react-native-patina'
 
 import * as Assets from '../../assets/'
 import s from '../../common/locales/strings'
-import { FONTS } from '../../constants/Fonts'
 import { Branding } from '../../types/Branding'
-import { scale } from '../../util/scaling'
+import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 
-interface Props {
+interface OwnProps {
   branding: Branding
 }
 
-export class HeaderParentButtons extends React.Component<Props> {
+type Props = OwnProps & ThemeProps
+
+class HeaderParentButtonsComponent extends React.Component<Props> {
   handlePress = () => {
     const { parentButton } = this.props.branding
     if (parentButton != null) parentButton.callback()
@@ -20,6 +22,8 @@ export class HeaderParentButtons extends React.Component<Props> {
   render() {
     const { parentButton, appId } = this.props.branding
     const openEdgeSite = () => Linking.openURL(s.strings.edge_site)
+    const styles = getStyles(this.props.theme)
+
     return (
       <View style={styles.container}>
         {parentButton && parentButton.text && (
@@ -35,7 +39,7 @@ export class HeaderParentButtons extends React.Component<Props> {
         {appId && (
           <TouchableOpacity onPress={openEdgeSite}>
             <View style={styles.rightButtonContainer}>
-              <Text style={styles.rightButtonText}>powered by</Text>
+              <Text style={styles.rightButtonText}>{s.strings.powered_by}</Text>
               <Image
                 source={Assets.LOGO_SMALL}
                 resizeMode="contain"
@@ -49,38 +53,40 @@ export class HeaderParentButtons extends React.Component<Props> {
   }
 }
 
-const styles = {
+export const HeaderParentButtons = withTheme(HeaderParentButtonsComponent)
+
+const getStyles = cacheStyles((theme: Theme) => ({
   container: {
-    top: scale(24),
-    marginLeft: scale(16),
-    marginRight: scale(16),
+    top: theme.rem(2),
+    marginLeft: theme.rem(1),
+    marginRight: theme.rem(1),
     flexDirection: 'row'
   },
   leftButtonContainer: {
     justifyContent: 'center',
     alignContents: 'center',
-    height: scale(32)
+    height: theme.rem(2)
   },
   leftButtonText: {
-    fontFamily: FONTS.fontFamilyRegular,
-    color: '#FFF',
-    fontSize: 16
+    fontFamily: theme.fontFaceDefault,
+    color: theme.primaryText,
+    fontSize: theme.rem(1)
   },
   rightButtonContainer: {
     justifyContent: 'flex-end',
     alignContents: 'flex-end',
-    height: scale(32)
+    height: theme.rem(2)
   },
   rightButtonText: {
-    color: '#FFF',
-    fontSize: 10,
+    color: theme.primaryText,
+    fontSize: theme.rem(0.5),
     textAlign: 'right'
   },
   spacer: {
     flex: 1
   },
   image: {
-    width: scale(74),
-    height: scale(20)
+    width: theme.rem(4.5),
+    height: theme.rem(1.25)
   }
-} as const
+}))
