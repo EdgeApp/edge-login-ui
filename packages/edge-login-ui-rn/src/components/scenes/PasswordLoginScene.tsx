@@ -18,7 +18,6 @@ import { deleteUserFromDevice } from '../../actions/UserActions'
 import s from '../../common/locales/strings'
 import * as Constants from '../../constants/index'
 import { LoginUserInfo } from '../../reducers/PreviousUsersReducer'
-import * as Styles from '../../styles/index'
 import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
 import { LoginAttempt } from '../../util/loginAttempt'
@@ -26,7 +25,6 @@ import { scale } from '../../util/scaling'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader'
 import { UserListItem } from '../abSpecific/UserListItem'
 import { BackgroundImage } from '../common/BackgroundImage'
-import { Button } from '../common/Button'
 import { FormField } from '../common/FormField'
 import { HeaderParentButtons } from '../common/HeaderParentButtons'
 import { ButtonsModal } from '../modals/ButtonsModal'
@@ -263,34 +261,28 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   renderButtons() {
     const { handleQrModal, theme } = this.props
     const styles = getStyles(theme)
+    const buttonType = theme.preferPrimaryButton ? 'primary' : 'secondary'
 
     return (
       <View style={styles.buttonsBox}>
-        <View style={styles.shimTiny} />
-        <Button
+        <MainButton
+          type="textOnly"
           onPress={this.handleForgotPassword}
           label={s.strings.forgot_password}
-          downStyle={stylesOld.forgotButton.downStyle}
-          downTextStyle={stylesOld.forgotButton.downTextStyle}
-          upStyle={stylesOld.forgotButton.upStyle}
-          upTextStyle={stylesOld.forgotButton.upTextStyle}
         />
         <View style={styles.loginButtonBox}>
           <MainButton
             label={s.strings.login_button}
             testID="loginButton"
-            type="secondary"
+            type={buttonType}
             onPress={this.handleSubmit}
           />
         </View>
-        <Button
+        <MainButton
+          type="textOnly"
           testID="createAccountButton"
           onPress={this.handleCreateAccount}
           label={s.strings.create_an_account}
-          downStyle={stylesOld.signupButton.downStyle}
-          downTextStyle={stylesOld.signupButton.downTextStyle}
-          upStyle={stylesOld.signupButton.upStyle}
-          upTextStyle={stylesOld.signupButton.upTextStyle}
         />
         <TouchableOpacity onPress={handleQrModal}>
           <AntDesignIcon
@@ -401,7 +393,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     height: theme.rem(0.75)
   },
   loginButtonBox: {
-    marginVertical: theme.rem(0.75),
+    marginVertical: theme.rem(0.25),
     width: '70%'
   },
   buttonsBox: {
@@ -435,34 +427,6 @@ const stylesOld = {
     titleTextStyle: {
       color: Constants.WHITE
     }
-  },
-  forgotButton: {
-    upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {
-      ...Styles.TextOnlyButtonTextUpStyle,
-      fontSize: scale(14),
-      color: Constants.WHITE
-    },
-    downTextStyle: {
-      ...Styles.TextOnlyButtonTextDownStyle,
-      fontSize: scale(14),
-      color: Constants.WHITE
-    },
-    downStyle: Styles.TextOnlyButtonDownStyle
-  },
-  signupButton: {
-    upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {
-      ...Styles.TextOnlyButtonTextUpStyle,
-      fontSize: scale(14),
-      color: Constants.WHITE
-    },
-    downTextStyle: {
-      ...Styles.TextOnlyButtonTextDownStyle,
-      fontSize: scale(14),
-      color: Constants.WHITE
-    },
-    downStyle: Styles.TextOnlyButtonDownStyle
   },
   iconButton: {
     container: {

@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { cacheStyles } from 'react-native-patina'
 
 import { usePendingPress } from '../../hooks/usePendingPress'
+import { textNoShadow, themeNoShadow } from '../../types/Theme'
 import {
   fixSides,
   mapSides,
@@ -42,10 +43,14 @@ interface Props {
   spinner?: boolean
 
   // Which visual style to use. Defaults to primary (solid):
-  type?: 'primary' | 'secondary' | 'escape'
+  type?: 'primary' | 'secondary' | 'escape' | 'textOnly'
 
   testID?: string
 }
+
+const primaryTextColorArray = ['transparent', 'transparent']
+const primaryTextStart = { x: 0, y: 0 }
+const primaryTextEnd = { x: 0, y: 1 }
 
 /**
  * A stand-alone button to perform the primary action in a modal or scene.
@@ -88,6 +93,14 @@ export function MainButton(props: Props) {
     start = theme.secondaryButtonColorStart
     end = theme.secondaryButtonColorEnd
     buttonShadow = styles.secondaryButtonShadow
+  } else if (type === 'textOnly') {
+    touchableStyle = styles.textOnlyButton
+    textStyle = styles.textOnlyText
+    spinnerColor = theme.primaryText
+    colors = primaryTextColorArray
+    start = primaryTextStart
+    end = primaryTextEnd
+    buttonShadow = styles.textOnlyButtonShadow
   } else {
     touchableStyle = styles.escapeButton
     textStyle = styles.escapeText
@@ -182,6 +195,7 @@ const getStyles = cacheStyles((theme: Theme) => {
 
     secondaryText: {
       ...commonText,
+      ...theme.secondaryButtonTextShadow,
       color: theme.secondaryButtonText
     },
 
@@ -194,7 +208,21 @@ const getStyles = cacheStyles((theme: Theme) => {
 
     escapeText: {
       ...commonText,
+      ...theme.escapeButtonTextShadow,
       color: theme.escapeButtonText
+    },
+
+    textOnlyButton: {
+      ...commonButton,
+      borderColor: 'transparent',
+      borderWidth: 0
+    },
+    textOnlyButtonShadow: { ...themeNoShadow },
+
+    textOnlyText: {
+      ...commonText,
+      ...textNoShadow,
+      color: theme.primaryText
     },
 
     // Common styles:
