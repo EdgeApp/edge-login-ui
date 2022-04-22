@@ -16,12 +16,10 @@ import { sprintf } from 'sprintf-js'
 import { launchPasswordRecovery, login } from '../../actions/LoginAction'
 import { deleteUserFromDevice } from '../../actions/UserActions'
 import s from '../../common/locales/strings'
-import * as Constants from '../../constants/index'
 import { LoginUserInfo } from '../../reducers/PreviousUsersReducer'
 import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
 import { LoginAttempt } from '../../util/loginAttempt'
-import { scale } from '../../util/scaling'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader'
 import { UserListItem } from '../abSpecific/UserListItem'
 import { BackgroundImage } from '../common/BackgroundImage'
@@ -209,20 +207,20 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
             onSubmitEditing={this.handleSetNextFocus}
           />
           <TouchableOpacity
-            style={stylesOld.iconButton.container}
+            style={styles.iconContainer}
             onPress={this.handleToggleUsernameList}
           >
             {this.state.usernameList ? (
               <MaterialIcon
                 name="expand-less"
-                size={stylesOld.iconButton.iconSize}
-                style={stylesOld.iconButton.icon}
+                size={theme.rem(1)}
+                style={styles.iconColor}
               />
             ) : (
               <MaterialIcon
                 name="expand-more"
-                size={stylesOld.iconButton.iconSize}
-                style={stylesOld.iconButton.icon}
+                size={theme.rem(1)}
+                style={styles.iconColor}
               />
             )}
           </TouchableOpacity>
@@ -285,8 +283,8 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
         <TouchableOpacity onPress={handleQrModal}>
           <AntDesignIcon
             name="qrcode"
-            color={Constants.WHITE}
-            size={scale(28)}
+            color={theme.icon}
+            size={theme.rem(1.75)}
           />
         </TouchableOpacity>
       </View>
@@ -405,26 +403,19 @@ const getStyles = cacheStyles((theme: Theme) => ({
   dropDownList: {
     maxHeight: theme.rem(12.5),
     backgroundColor: theme.backgroundGradientColors[0]
+  },
+  iconContainer: {
+    position: 'absolute',
+    right: 0,
+    bottom: (theme.rem(16.25) - theme.rem(15.5)) * 1.6
+  },
+  iconColor: {
+    color: theme.icon
+  },
+  iconColorPressed: {
+    color: theme.iconDeactivated
   }
 }))
-
-const stylesOld = {
-  iconButton: {
-    container: {
-      position: 'absolute',
-      right: 0,
-      bottom: (scale(260) - scale(250)) * 1.6
-    },
-    icon: {
-      color: Constants.WHITE
-    },
-    iconPressed: {
-      color: Constants.SECONDARY
-    },
-    iconSize: scale(Constants.FONTS.defaultFontSize + 8),
-    underlayColor: Constants.TRANSPARENT
-  }
-} as const
 
 export const PasswordLoginScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
