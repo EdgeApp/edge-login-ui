@@ -25,7 +25,6 @@ import { scale } from '../../util/scaling'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader'
 import { UserListItem } from '../abSpecific/UserListItem'
 import { BackgroundImage } from '../common/BackgroundImage'
-import { FormField } from '../common/FormField'
 import { HeaderParentButtons } from '../common/HeaderParentButtons'
 import { ButtonsModal } from '../modals/ButtonsModal'
 import { showQrCodeModal } from '../modals/QrCodeModal'
@@ -33,6 +32,7 @@ import { TextInputModal } from '../modals/TextInputModal'
 import { Airship, showError } from '../services/AirshipInstance'
 import { connect } from '../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
+import { LineFormField } from '../themed/LineFormField'
 import { MainButton } from '../themed/MainButton'
 
 interface OwnProps {
@@ -169,9 +169,8 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
             <LogoImageHeader branding={this.props.branding} />
             {this.renderUsername()}
             <View style={styles.shimTiny} />
-            <FormField
+            <LineFormField
               testID="passwordFormField"
-              style={stylesOld.input2}
               onChangeText={this.handlePasswordChange}
               value={this.state.password}
               label={s.strings.password}
@@ -197,9 +196,8 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
     return (
       <View>
         <View style={styles.usernameWrapper}>
-          <FormField
+          <LineFormField
             testID="usernameFormField"
-            style={stylesOld.input2}
             onChangeText={this.handleChangeUsername}
             value={this.props.username}
             label={s.strings.username}
@@ -411,23 +409,6 @@ const getStyles = cacheStyles((theme: Theme) => ({
 }))
 
 const stylesOld = {
-  input2: {
-    container: {
-      position: 'relative',
-      width: '70%',
-      minHeight: scale(60)
-    },
-    baseColor: Constants.WHITE,
-    tintColor: Constants.ACCENT_MINT,
-    errorColor: Constants.ACCENT_RED,
-    textColor: Constants.WHITE,
-    affixTextStyle: {
-      color: Constants.WHITE
-    },
-    titleTextStyle: {
-      color: Constants.WHITE
-    }
-  },
   iconButton: {
     container: {
       position: 'absolute',
