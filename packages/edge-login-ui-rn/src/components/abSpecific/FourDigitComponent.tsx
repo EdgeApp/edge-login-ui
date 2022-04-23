@@ -1,23 +1,26 @@
 import * as React from 'react'
 import { ActivityIndicator, Text, View } from 'react-native'
+import { cacheStyles } from 'react-native-patina'
 
-import * as Colors from '../../constants/Colors'
-import { scale } from '../../util/scaling'
+import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 
-interface Props {
+interface OwnProps {
   error: string | null
   pin: string
   spinner: boolean
 }
 
-export class FourDigit extends React.PureComponent<Props> {
+type Props = OwnProps & ThemeProps
+
+class FourDigitComponent extends React.PureComponent<Props> {
   render() {
-    const { error, spinner } = this.props
+    const { error, spinner, theme } = this.props
+    const styles = getStyles(theme)
     return (
       <View style={styles.container}>
         <View style={styles.interactiveContainer}>
           {spinner ? (
-            <ActivityIndicator color={Colors.ACCENT_MINT} size="large" />
+            <ActivityIndicator color={theme.primaryText} size="large" />
           ) : (
             this.renderDotContainer()
           )}
@@ -32,7 +35,9 @@ export class FourDigit extends React.PureComponent<Props> {
   }
 
   renderDotContainer() {
-    const { pin } = this.props
+    const { pin, theme } = this.props
+    const styles = getStyles(theme)
+
     return (
       <View style={styles.dotContainer}>
         <View style={[styles.circle, pin.length > 0 && styles.circleSected]} />
@@ -44,50 +49,51 @@ export class FourDigit extends React.PureComponent<Props> {
   }
 }
 
-const styles = {
+export const FourDigit = withTheme(FourDigitComponent)
+
+const getStyles = cacheStyles((theme: Theme) => ({
   // used for logging *back in* with PIN
   container: {
-    paddingTop: 12,
+    paddingTop: theme.rem(0.75),
     width: '100%',
-    height: scale(86)
+    height: theme.rem(5.5)
   },
   errorContainer: {
-    height: scale(40),
+    height: theme.rem(2.5),
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around'
   },
   errorText: {
-    color: Colors.ACCENT_RED,
-    backgroundColor: Colors.TRANSPARENT,
+    color: theme.dangerText,
     textAlign: 'center',
-    fontSize: scale(12)
+    fontSize: theme.rem(0.75)
   },
   interactiveContainer: {
-    height: scale(40),
+    height: theme.rem(5.5),
     width: '100%',
     alignItems: 'center'
   },
   dotContainer: {
     height: '100%',
-    width: scale(190),
+    width: theme.rem(12),
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
   circle: {
     borderWidth: 2,
-    borderColor: Colors.WHITE,
-    borderRadius: scale(15),
-    height: scale(30),
-    width: scale(30)
+    borderColor: theme.primaryText,
+    borderRadius: theme.rem(1),
+    height: theme.rem(2),
+    width: theme.rem(2)
   },
   circleSected: {
-    backgroundColor: Colors.ACCENT_MINT,
-    borderWidth: scale(2),
-    borderColor: Colors.WHITE,
-    borderRadius: scale(15),
-    height: scale(30),
-    width: scale(30)
+    backgroundColor: theme.iconTappable,
+    borderWidth: 2,
+    borderColor: theme.primaryText,
+    borderRadius: theme.rem(1),
+    height: theme.rem(2),
+    width: theme.rem(2)
   }
-} as const
+}))
