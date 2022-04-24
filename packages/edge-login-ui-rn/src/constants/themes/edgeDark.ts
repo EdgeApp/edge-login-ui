@@ -53,6 +53,9 @@ export const edgeDark: Theme = {
   // modal
   modal: palette.edgeNavy,
   modalBlurType: 'light',
+  modalBorderColor: palette.transparent,
+  modalBorderWidth: 0,
+  modalBorderRadiusRem: 1,
 
   // text
   primaryText: palette.white,
@@ -126,9 +129,6 @@ export const edgeDark: Theme = {
 
   // Security alert modal:
   securityAlertModalHeaderCircle: palette.accentOrange,
-  securityAlertModalDangerIcon: palette.accentRed,
-  securityAlertModalWarningIcon: palette.accentOrange,
-  securityAlertModalRowBorder: palette.lightGray,
   securityAlertModalText: palette.black,
 
   // Lines

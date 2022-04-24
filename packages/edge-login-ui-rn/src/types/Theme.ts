@@ -95,6 +95,9 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   // Modal:
   modal: asOptional(asString),
   modalBlurType: asOptional(asValue('light', 'dark')),
+  modalBorderColor: asOptional(asString),
+  modalBorderWidth: asOptional(asNumber),
+  modalBorderRadiusRem: asOptional(asNumber),
 
   // Text colors:
   primaryText: asOptional(asString),
@@ -167,13 +170,6 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   dropdownError: asOptional(asString),
   dropdownText: asOptional(asString),
 
-  // Security alert modal:
-  securityAlertModalHeaderCircle: asOptional(asString),
-  securityAlertModalDangerIcon: asOptional(asString),
-  securityAlertModalWarningIcon: asOptional(asString),
-  securityAlertModalRowBorder: asOptional(asString),
-  securityAlertModalText: asOptional(asString),
-
   // Lines
   lineDivider: asOptional(asString),
   thinLineWidth: asOptional(asNumber),
@@ -219,6 +215,9 @@ export interface Theme {
   // Modal:
   modal: string
   modalBlurType: 'light' | 'dark'
+  modalBorderColor: string
+  modalBorderWidth: number
+  modalBorderRadiusRem: number
 
   // Text colors:
   primaryText: string
@@ -293,9 +292,6 @@ export interface Theme {
 
   // Security alert modal:
   securityAlertModalHeaderCircle: string
-  securityAlertModalDangerIcon: string
-  securityAlertModalWarningIcon: string
-  securityAlertModalRowBorder: string
   securityAlertModalText: string
 
   // Lines

@@ -12,6 +12,8 @@ interface Props<T> {
 
   // Control over the content area:
   paddingRem?: number[] | number
+  borderColor?: string
+  borderWidth?: number
 }
 
 export function ThemedModal<T>(props: Props<T>) {
@@ -32,12 +34,17 @@ export function ThemedModal<T>(props: Props<T>) {
       'rgba(0, 0, 0, 0.75)'
     )
 
+  const borderColor = props.borderColor ?? theme.modalBorderColor
+  const borderWidth = props.borderWidth ?? theme.modalBorderWidth
+
   return (
     <AirshipModal
       bridge={bridge}
       onCancel={onCancel}
       backgroundColor={theme.modal}
-      borderRadius={theme.rem(1)}
+      borderRadius={theme.rem(theme.modalBorderRadiusRem)}
+      borderColor={borderColor}
+      borderWidth={borderWidth}
       padding={fixSides(paddingRem, 1).map(theme.rem)}
       underlay={underlay}
     >
