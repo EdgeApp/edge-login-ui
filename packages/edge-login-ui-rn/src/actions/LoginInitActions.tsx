@@ -100,36 +100,82 @@ const checkSecurityMessages = () => async (
   }
 }
 
+//
+// Logic for showing notification/app refresh request
+//
+// 0 = false, 1 = true
+// nr = notifications and app refresh request message
+// r = notifications request message
+// r = app refresh request only message
+//
+// | Notif Enabled |  Notif Block | App Refresh Enabled || Message |
+// |---------------|--------------|---------------------||---------|
+// |       0       |       0      |           0         >>    nr   |
+// |       0       |       0      |           1         >>    n    |
+// |       0       |       1      |           0         >>    r    |
+// |       0       |       1      |           1         >>         |
+// |       1       |       0      |           0         >>    r    |
+// |       1       |       0      |           1         >>         |
+// |       1       |       1      |           0         >>    r    |
+// |       1       |       1      |           1         >>         |
+//
+const isIos = Platform.OS === 'ios'
+
+const logicMap: Array<Array<Array<string | undefined>>> = [
+  [[], []],
+  [[], []]
+]
+
+logicMap[0][0][0] = s.strings.notifications_and_refresh_permissions
+logicMap[0][0][1] = s.strings.notifications_permissions
+logicMap[0][1][0] = s.strings.refresh_permission
+logicMap[0][1][1] = undefined
+logicMap[1][0][0] = s.strings.refresh_permission
+logicMap[1][0][1] = undefined
+logicMap[1][1][0] = s.strings.refresh_permission
+logicMap[1][1][1] = undefined
+
 const checkAndRequestNotifications = (theme: Theme) => async (
   dispatch: Dispatch,
   getState: GetState,
   imports: Imports
 ) => {
-  const notificationPermision = await checkNotifications()
-  const notificationStatus = notificationPermision.status
-  const isIos = Platform.OS === 'ios'
+  const notificationPermission = await checkNotifications()
+  const notificationStatus = notificationPermission.status
+  const notifEnabled =
+    notificationStatus !== RESULTS.BLOCKED &&
+    notificationStatus !== RESULTS.DENIED
+      ? 1
+      : 0
+
   const statusAppRefresh = isIos
     ? await AbcCoreJsUi.backgroundAppRefreshStatus().catch((error: undefined) =>
         console.log(error)
       )
     : undefined
-  const userPermisionStatus = await disklet
+  const refreshEnabled = statusAppRefresh !== RESULTS.BLOCKED ? 1 : 0
+
+  const userPermissionStatus = await disklet
     .getText(permissionsUserFile)
     .catch(error => console.log(error))
-  const isNotificationBlocked = userPermisionStatus
-    ? JSON.parse(userPermisionStatus).isNotificationBlocked
+  const notifBlockedBool = userPermissionStatus
+    ? JSON.parse(userPermissionStatus).isNotificationBlocked
     : false
-  const message =
-    Platform.OS === 'ios'
-      ? s.strings.notifications_permissions_ios
-      : s.strings.notifications_permissions_android
+  const notifBlocked = notifBlockedBool ? 1 : 0
 
-  if (
-    notificationStatus === RESULTS.BLOCKED ||
-    notificationStatus === RESULTS.DENIED ||
-    statusAppRefresh === RESULTS.BLOCKED ||
-    !isNotificationBlocked
-  ) {
+  const permissionMessage = logicMap[notifEnabled][notifBlocked][refreshEnabled]
+
+  console.log(`checkAndRequestNotifications`)
+  console.log(
+    `notificationStatus:${notificationStatus} statusAppRefresh:${statusAppRefresh}`
+  )
+  console.log(
+    `notifEnabled:${notifEnabled} notifBlocked:${notifBlocked} refreshEnabled:${refreshEnabled}`
+  )
+  console.log(`permissionMessage:${permissionMessage}`)
+
+  if (permissionMessage != null) {
+    const message: string = permissionMessage // XXX Typescript hack
     Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}
@@ -144,6 +190,7 @@ const checkAndRequestNotifications = (theme: Theme) => async (
       />
     ))
       .then(async result => {
+        console.log(`checkAndRequestNotifications result ${result}`)
         if (result === 'cancel') {
           return await disklet.setText(
             permissionsUserFile,

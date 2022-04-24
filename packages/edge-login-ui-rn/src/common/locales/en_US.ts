@@ -250,10 +250,12 @@ export default {
   powered_by: 'Powered by',
 
   // Notifications Permissions
-  notifications_permissions_ios:
-    'Please enable notifications and background app refresh for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
-  notifications_permissions_android:
-    'Please enable notifications for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
+  notifications_and_refresh_permissions:
+    'Please enable Notifications and Background App Refresh for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
+  refresh_permission:
+    'Please enable Background App Refresh for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
+  notifications_permissions:
+    'Please enable Notifications for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
   change_recovery_question1:
     'What is the anniversary date with your first spouse?',
   change_recovery_question2:
