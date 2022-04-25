@@ -29,12 +29,7 @@ const palette = {
   transparent: 'transparent',
 
   // Fonts
-  SFUITextRegular: 'SF-UI-Text-Regular',
-  QuicksandLight: 'Quicksand-Light',
-  QuicksandRegular: 'Quicksand-Regular',
-  QuicksandMedium: 'Quicksand-Medium',
-  QuicksandSemiBold: 'Quicksand-SemiBold',
-  QuicksandBold: 'Quicksand-Bold'
+  SFUITextRegular: 'SF-UI-Text-Regular'
 }
 
 export const edgeDark: Theme = {
@@ -72,6 +67,19 @@ export const edgeDark: Theme = {
 
   // buttons
   buttonBorderRadiusRem: 0.25,
+
+  keypadButtonOutline: palette.edgeMint,
+  keypadButtonOutlineWidth: 1,
+  keypadButton: [palette.transparent, palette.transparent],
+  keypadButtonColorStart: { x: 0, y: 0 },
+  keypadButtonColorEnd: { x: 1, y: 1 },
+  keypadButtonText: palette.edgeMint,
+  keypadButtonTextShadow: textNoShadow,
+  keypadButtonShadow: themeNoShadow,
+  keypadButtonBorderRadiusRem: 0.25,
+  keypadButtonFontSizeRem: 1,
+  keypadButtonFont: 'System',
+
   primaryButtonOutline: palette.transparent,
   primaryButtonOutlineWidth: 1,
   primaryButton: [palette.edgeMint, palette.edgeMint],
@@ -128,7 +136,5 @@ export const edgeDark: Theme = {
   fontFaceDefault: 'System',
   fontFaceBold: 'System',
   fontFaceSymbols:
-    Platform.OS === 'android'
-      ? palette.SFUITextRegular
-      : palette.QuicksandRegular
+    Platform.OS === 'android' ? palette.SFUITextRegular : 'System'
 }

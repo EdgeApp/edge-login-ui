@@ -143,7 +143,7 @@ const getStyles = cacheStyles((theme: Theme) => {
     flexDirection: 'row',
     justifyContent: 'center',
     minHeight: theme.rem(3),
-    minWidth: theme.rem(9)
+    minWidth: theme.rem(7)
   } as const
   const commonText = {
     fontFamily: theme.fontFaceDefault,

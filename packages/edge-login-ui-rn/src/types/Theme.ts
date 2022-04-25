@@ -110,6 +110,18 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   // Buttons
   buttonBorderRadiusRem: asOptional(asNumber),
 
+  keypadButtonOutline: asOptional(asString),
+  keypadButtonOutlineWidth: asOptional(asNumber),
+  keypadButton: asOptional(asArray(asString)),
+  keypadButtonColorStart: asOptional(asGradientCoords),
+  keypadButtonColorEnd: asOptional(asGradientCoords),
+  keypadButtonText: asOptional(asString),
+  keypadButtonTextShadow: asOptional(asTextShadowParams),
+  keypadButtonShadow: asOptional(asThemeShadowParams),
+  keypadButtonBorderRadiusRem: asOptional(asNumber),
+  keypadButtonFontSizeRem: asOptional(asNumber),
+  keypadButtonFont: asOptional(asString),
+
   primaryButtonOutline: asOptional(asString),
   primaryButtonOutlineWidth: asOptional(asNumber),
   primaryButton: asOptional(asArray(asString)),
@@ -216,6 +228,18 @@ export interface Theme {
 
   // Buttons
   buttonBorderRadiusRem: number
+
+  keypadButtonOutline: string
+  keypadButtonOutlineWidth: number
+  keypadButton: string[]
+  keypadButtonColorStart: GradientCoords
+  keypadButtonColorEnd: GradientCoords
+  keypadButtonText: string
+  keypadButtonTextShadow: TextShadowParams
+  keypadButtonShadow: ThemeShadowParams
+  keypadButtonBorderRadiusRem: number
+  keypadButtonFontSizeRem: number
+  keypadButtonFont: string
 
   primaryButtonOutline: string
   primaryButtonOutlineWidth: number
