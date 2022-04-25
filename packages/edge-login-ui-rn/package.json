@@ -30,7 +30,7 @@
     "cleaners": "^0.3.12",
     "date-fns": "^2.23.0",
     "qrcode-generator": "^1.4.4",
-    "react-native-airship": "^0.2.6",
+    "react-native-airship": "^0.2.9",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "^2.0.0",
