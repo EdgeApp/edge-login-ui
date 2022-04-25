@@ -1,6 +1,6 @@
 import { Platform } from 'react-native'
 
-import { Theme } from '../../types/Theme'
+import { textNoShadow, Theme, themeNoShadow } from '../../types/Theme'
 import { scale } from '../../util/scaling'
 
 const palette = {
@@ -29,12 +29,7 @@ const palette = {
   transparent: 'transparent',
 
   // Fonts
-  SFUITextRegular: 'SF-UI-Text-Regular',
-  QuicksandLight: 'Quicksand-Light',
-  QuicksandRegular: 'Quicksand-Regular',
-  QuicksandMedium: 'Quicksand-Medium',
-  QuicksandSemiBold: 'Quicksand-SemiBold',
-  QuicksandBold: 'Quicksand-Bold'
+  SFUITextRegular: 'SF-UI-Text-Regular'
 }
 
 export const edgeDark: Theme = {
@@ -43,9 +38,9 @@ export const edgeDark: Theme = {
     return Math.round(scale(16, 0.3) * size)
   },
 
+  preferPrimaryButton: false,
   fontFamily: 'System',
   fontWeightBold: 'bold',
-  pressedOpacity: 0.25,
 
   // Icons
   icon: palette.white,
@@ -53,12 +48,10 @@ export const edgeDark: Theme = {
   iconTappable: palette.edgeMint,
 
   // background
-  backgroundGradientLeft: palette.edgeNavy,
-  backgroundGradientRight: palette.darkBlue,
+  backgroundGradientColors: [palette.edgeNavy, palette.darkBlue],
 
   // modal
   modal: palette.edgeNavy,
-  modalShadow: palette.blackOp50,
   modalBlurType: 'light',
 
   // text
@@ -73,13 +66,46 @@ export const edgeDark: Theme = {
   tileBackground: palette.edgeBlue,
 
   // buttons
+  buttonBorderRadiusRem: 0.25,
+
+  keypadButtonOutline: palette.edgeMint,
+  keypadButtonOutlineWidth: 1,
+  keypadButton: [palette.transparent, palette.transparent],
+  keypadButtonColorStart: { x: 0, y: 0 },
+  keypadButtonColorEnd: { x: 1, y: 1 },
+  keypadButtonText: palette.edgeMint,
+  keypadButtonTextShadow: textNoShadow,
+  keypadButtonShadow: themeNoShadow,
+  keypadButtonBorderRadiusRem: 0.25,
+  keypadButtonFontSizeRem: 1,
+  keypadButtonFont: 'System',
+
   primaryButtonOutline: palette.transparent,
-  primaryButton: palette.edgeMint,
+  primaryButtonOutlineWidth: 1,
+  primaryButton: [palette.edgeMint, palette.edgeMint],
+  primaryButtonColorStart: { x: 0, y: 0 },
+  primaryButtonColorEnd: { x: 1, y: 0 },
   primaryButtonText: palette.edgeBlue,
+  primaryButtonTextShadow: textNoShadow,
+  primaryButtonShadow: themeNoShadow,
 
   secondaryButtonOutline: palette.edgeMint,
-  secondaryButton: palette.transparent,
+  secondaryButtonOutlineWidth: 1,
+  secondaryButton: [palette.transparent, palette.transparent],
+  secondaryButtonColorStart: { x: 0, y: 0 },
+  secondaryButtonColorEnd: { x: 1, y: 1 },
   secondaryButtonText: palette.edgeMint,
+  secondaryButtonTextShadow: textNoShadow,
+  secondaryButtonShadow: themeNoShadow,
+
+  escapeButtonOutline: palette.transparent,
+  escapeButtonOutlineWidth: 0,
+  escapeButton: [palette.transparent, palette.transparent],
+  escapeButtonColorStart: { x: 0, y: 0 },
+  escapeButtonColorEnd: { x: 1, y: 1 },
+  escapeButtonText: palette.edgeMint,
+  escapeButtonTextShadow: textNoShadow,
+  escapeButtonShadow: themeNoShadow,
 
   alertModalPrimaryButtonOutline: palette.edgeBlue,
   alertModalPrimaryButton: palette.edgeBlue,
@@ -95,9 +121,7 @@ export const edgeDark: Theme = {
   dropdownText: palette.white,
 
   // Security alert modal:
-  securityAlertModalBackground: palette.white,
   securityAlertModalHeaderCircle: palette.accentOrange,
-  securityAlertModalHeaderIcon: palette.white,
   securityAlertModalDangerIcon: palette.accentRed,
   securityAlertModalWarningIcon: palette.accentOrange,
   securityAlertModalRowBorder: palette.lightGray,
@@ -105,8 +129,6 @@ export const edgeDark: Theme = {
 
   // Lines
   lineDivider: palette.whiteOp10,
-  titleLineDivider: palette.whiteOp75,
-  reallyThinLineWidth: 0.25,
   thinLineWidth: 1,
   mediumLineWidth: 2,
 
@@ -114,7 +136,5 @@ export const edgeDark: Theme = {
   fontFaceDefault: 'System',
   fontFaceBold: 'System',
   fontFaceSymbols:
-    Platform.OS === 'android'
-      ? palette.SFUITextRegular
-      : palette.QuicksandRegular
+    Platform.OS === 'android' ? palette.SFUITextRegular : 'System'
 }

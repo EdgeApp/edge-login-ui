@@ -33,12 +33,12 @@ const getStyles = cacheStyles((theme: Theme) => ({
   },
   circle: {
     borderWidth: theme.mediumLineWidth,
-    borderColor: theme.primaryButton,
+    borderColor: theme.primaryButton[0],
     borderRadius: theme.rem(1),
     height: theme.rem(2),
     width: theme.rem(2)
   },
   circleFilled: {
-    backgroundColor: theme.primaryButton
+    backgroundColor: theme.primaryButton[0]
   }
 }))

@@ -132,7 +132,7 @@ export class SecurityAlertsSceneComponent extends React.Component<
         </MessageText>
         {spinReset ? (
           <ActivityIndicator
-            color={theme.primaryButton}
+            color={theme.primaryButton[0]}
             style={styles.cardSpinner}
           />
         ) : (
@@ -167,7 +167,7 @@ export class SecurityAlertsSceneComponent extends React.Component<
         </MessageText>
         {spinVoucher[voucher.voucherId] ? (
           <ActivityIndicator
-            color={theme.primaryButton}
+            color={theme.primaryButton[0]}
             style={styles.cardSpinner}
           />
         ) : (

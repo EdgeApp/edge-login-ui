@@ -33,6 +33,7 @@ const NewAccountWelcomeSceneComponent = ({
 }: Props) => {
   const styles = getStyles(theme)
   const appName = branding.appName || s.strings.app_name_default
+  const buttonType = theme.preferPrimaryButton ? 'primary' : 'secondary'
 
   return (
     <ThemedScene onBack={onExit} title={s.strings.get_started}>
@@ -78,7 +79,7 @@ const NewAccountWelcomeSceneComponent = ({
         <View style={styles.actions}>
           <MainButton
             label={s.strings.get_started}
-            type="secondary"
+            type={buttonType}
             onPress={onDone}
           />
         </View>

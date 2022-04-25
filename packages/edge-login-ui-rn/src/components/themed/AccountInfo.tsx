@@ -62,7 +62,7 @@ const AccountInfoComponent = ({
   const headerStyle = useAnimatedStyle(() => ({
     borderBottomLeftRadius: progress.value === 0 ? borderRadius : 0,
     borderBottomRightRadius: progress.value === 0 ? borderRadius : 0,
-    borderBottomWidth: progress.value === 0 ? theme.reallyThinLineWidth : 0
+    borderBottomWidth: progress.value === 0 ? theme.thinLineWidth : 0
   }))
   const infoStyle = useAnimatedStyle(() => ({
     height: height.value * progress.value + 1,
@@ -151,9 +151,9 @@ const getStyles = cacheStyles((theme: Theme) => ({
     borderColor: theme.primaryText,
     borderTopLeftRadius: theme.rem(0.25),
     borderTopRightRadius: theme.rem(0.25),
-    borderTopWidth: theme.reallyThinLineWidth,
-    borderLeftWidth: theme.reallyThinLineWidth,
-    borderRightWidth: theme.reallyThinLineWidth,
+    borderTopWidth: theme.thinLineWidth,
+    borderLeftWidth: theme.thinLineWidth,
+    borderRightWidth: theme.thinLineWidth,
     paddingHorizontal: theme.rem(1),
     paddingVertical: theme.rem(0.5),
     flexDirection: 'row',
@@ -172,9 +172,9 @@ const getStyles = cacheStyles((theme: Theme) => ({
     borderColor: theme.primaryText,
     borderBottomLeftRadius: theme.rem(0.25),
     borderBottomRightRadius: theme.rem(0.25),
-    borderBottomWidth: theme.reallyThinLineWidth,
-    borderLeftWidth: theme.reallyThinLineWidth,
-    borderRightWidth: theme.reallyThinLineWidth,
+    borderBottomWidth: theme.thinLineWidth,
+    borderLeftWidth: theme.thinLineWidth,
+    borderRightWidth: theme.thinLineWidth,
     paddingHorizontal: theme.rem(1),
     paddingBottom: theme.rem(1)
   },
