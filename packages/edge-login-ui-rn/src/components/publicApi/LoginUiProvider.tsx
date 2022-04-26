@@ -19,7 +19,7 @@ interface Props {
  * In the future, this will be our injection point for branding &
  * theme customizations.
  */
-export function LoginUiProvider(props: Props): JSX.Element {
+function LoginUiProviderComponent(props: Props): JSX.Element {
   if (props.themeOverride != null) {
     // Error check the theme but don't use the return value as the cleaner sets missing parameters
     // to undefined which stomps on top of the oldTheme
@@ -43,6 +43,8 @@ export function LoginUiProvider(props: Props): JSX.Element {
     </loginUiContext.Provider>
   )
 }
+
+export const LoginUiProvider = React.memo(LoginUiProviderComponent)
 
 export function MaybeProvideLoginUi(props: {
   children: JSX.Element
