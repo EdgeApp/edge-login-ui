@@ -7,7 +7,7 @@ import { ParentButton } from '../../types/Branding'
 import { OnLogin } from '../../types/ReduxTypes'
 import { Router } from '../navigation/Router'
 import { ReduxStore } from '../services/ReduxStore'
-import { changeFont } from '../services/ThemeContext'
+import { changeFont, useTheme } from '../services/ThemeContext'
 
 interface Props {
   context: EdgeContext
@@ -53,6 +53,8 @@ export function LoginScreen(props: Props): JSX.Element {
     headingFontFamily = regularFontFamily
   } = fontDescription
 
+  const theme = useTheme()
+
   // Always update legacy fonts:
   updateFontStyles(regularFontFamily, headingFontFamily)
 
@@ -74,7 +76,7 @@ export function LoginScreen(props: Props): JSX.Element {
         username: props.username,
         customPermissionsFunction: props.customPermissionsFunction
       }}
-      initialAction={initializeLogin()}
+      initialAction={initializeLogin(theme)}
     >
       <Router
         branding={{

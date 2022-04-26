@@ -9,11 +9,13 @@ import {
   RESULTS
 } from 'react-native-permissions'
 
-import { PermissionsAlertModal } from '../components/modals/PermissionsAlertModal'
+import s from '../common/locales/strings'
+import { ButtonsModal } from '../components/modals/ButtonsModal'
 import { SecurityAlertsModal } from '../components/modals/SecurityAlertsModal'
-import { Airship } from '../components/services/AirshipInstance'
+import { Airship, showError } from '../components/services/AirshipInstance'
 import { getSupportedBiometryType } from '../keychain'
 import { Dispatch, GetState, Imports } from '../types/ReduxTypes'
+import { Theme } from '../types/Theme'
 import { launchPasswordRecovery } from './LoginAction'
 import { getPreviousUsers } from './PreviousUsersActions'
 
@@ -25,7 +27,7 @@ const permissionsUserFile = 'notificationsPermisions.json'
 /**
  * Fires off all the things we need to do to get the login scene up & running.
  */
-export const initializeLogin = () => async (
+export const initializeLogin = (theme: Theme) => async (
   dispatch: Dispatch,
   getState: GetState,
   imports: Imports
@@ -36,7 +38,7 @@ export const initializeLogin = () => async (
   dispatch(checkSecurityMessages()).catch(error => console.log(error))
   customPermissionsFunction
     ? customPermissionsFunction()
-    : dispatch(checkAndRequestNotifications()).catch(error =>
+    : dispatch(checkAndRequestNotifications(theme)).catch(error =>
         console.log(error)
       )
 
@@ -98,7 +100,7 @@ const checkSecurityMessages = () => async (
   }
 }
 
-const checkAndRequestNotifications = () => async (
+const checkAndRequestNotifications = (theme: Theme) => async (
   dispatch: Dispatch,
   getState: GetState,
   imports: Imports
@@ -117,15 +119,31 @@ const checkAndRequestNotifications = () => async (
   const isNotificationBlocked = userPermisionStatus
     ? JSON.parse(userPermisionStatus).isNotificationBlocked
     : false
+  const message =
+    Platform.OS === 'ios'
+      ? s.strings.notifications_permissions_ios
+      : s.strings.notifications_permissions_android
 
   if (
-    (notificationStatus === RESULTS.BLOCKED ||
-      notificationStatus === RESULTS.DENIED ||
-      statusAppRefresh === RESULTS.BLOCKED) &&
+    notificationStatus === RESULTS.BLOCKED ||
+    notificationStatus === RESULTS.DENIED ||
+    statusAppRefresh === RESULTS.BLOCKED ||
     !isNotificationBlocked
   ) {
-    Airship.show(bridge => <PermissionsAlertModal bridge={bridge} />).then(
-      async result => {
+    Airship.show(bridge => (
+      <ButtonsModal
+        bridge={bridge}
+        title={s.strings.alert_modal_title}
+        message={message}
+        borderColor={theme.warningText}
+        borderWidth={4}
+        buttons={{
+          enable: { label: s.strings.enable },
+          cancel: { label: s.strings.cancel, type: 'escape' }
+        }}
+      />
+    ))
+      .then(async result => {
         if (result === 'cancel') {
           return await disklet.setText(
             permissionsUserFile,
@@ -144,8 +162,8 @@ const checkAndRequestNotifications = () => async (
         ) {
           openSettings().catch(error => console.log(error))
         }
-      }
-    )
+      })
+      .catch(showError)
   }
 }
 

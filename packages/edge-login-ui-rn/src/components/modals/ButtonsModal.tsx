@@ -9,7 +9,7 @@ import { MessageText, TitleText } from '../themed/ThemedText'
 
 export interface ButtonInfo {
   label: string
-  type?: 'primary' | 'secondary'
+  type?: 'primary' | 'secondary' | 'escape'
 
   // The modal will show a spinner as long as this promise is pending.
   // Returning true will dismiss the modal,
@@ -39,6 +39,8 @@ export function ButtonsModal<
   closeArrow?: boolean
   message?: string
   title?: string
+  borderColor?: string
+  borderWidth?: number
 }) {
   const {
     bridge,
@@ -51,7 +53,13 @@ export function ButtonsModal<
   const handleCancel = () => bridge.resolve(undefined)
 
   return (
-    <ThemedModal bridge={bridge} paddingRem={1} onCancel={handleCancel}>
+    <ThemedModal
+      bridge={bridge}
+      borderColor={props.borderColor}
+      borderWidth={props.borderWidth}
+      paddingRem={1}
+      onCancel={handleCancel}
+    >
       {title != null ? <TitleText>{title}</TitleText> : null}
       {message != null ? <MessageText>{message}</MessageText> : null}
       {children}

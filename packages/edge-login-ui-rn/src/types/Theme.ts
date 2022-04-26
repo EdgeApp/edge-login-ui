@@ -152,14 +152,6 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   escapeButtonTextShadow: asOptional(asTextShadowParams),
   escapeButtonShadow: asOptional(asThemeShadowParams),
 
-  alertModalPrimaryButtonOutline: asOptional(asString),
-  alertModalPrimaryButton: asOptional(asString),
-  alertModalPrimaryButtonText: asOptional(asString),
-
-  alertModalTertiaryButtonOutline: asOptional(asString),
-  alertModalTertiaryButton: asOptional(asString),
-  alertModalTertiaryButtonText: asOptional(asString),
-
   // Outline Text Input
   outlineTextInputColor: asOptional(asString),
   outlineTextInputTextColor: asOptional(asString),
@@ -272,14 +264,6 @@ export interface Theme {
   escapeButtonTextShadow: TextShadowParams
   escapeButtonShadow: ThemeShadowParams
 
-  alertModalPrimaryButtonOutline: string
-  alertModalPrimaryButton: string
-  alertModalPrimaryButtonText: string
-
-  alertModalTertiaryButtonOutline: string
-  alertModalTertiaryButton: string
-  alertModalTertiaryButtonText: string
-
   // Outline Text Input
   outlineTextInputColor: string
   outlineTextInputTextColor: string
@@ -289,10 +273,6 @@ export interface Theme {
   dropdownWarning: string
   dropdownError: string
   dropdownText: string
-
-  // Security alert modal:
-  securityAlertModalHeaderCircle: string
-  securityAlertModalText: string
 
   // Lines
   lineDivider: string

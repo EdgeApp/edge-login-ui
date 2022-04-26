@@ -110,14 +110,6 @@ export const edgeDark: Theme = {
   escapeButtonTextShadow: textNoShadow,
   escapeButtonShadow: themeNoShadow,
 
-  alertModalPrimaryButtonOutline: palette.edgeBlue,
-  alertModalPrimaryButton: palette.edgeBlue,
-  alertModalPrimaryButtonText: palette.white,
-
-  alertModalTertiaryButtonOutline: palette.transparent,
-  alertModalTertiaryButton: palette.transparent,
-  alertModalTertiaryButtonText: palette.edgeBlue,
-
   outlineTextInputColor: palette.transparent,
   outlineTextInputTextColor: palette.white,
   outlineTextInputBorderWidth: 1,
@@ -126,10 +118,6 @@ export const edgeDark: Theme = {
   dropdownWarning: palette.accentOrange,
   dropdownError: palette.accentRed,
   dropdownText: palette.white,
-
-  // Security alert modal:
-  securityAlertModalHeaderCircle: palette.accentOrange,
-  securityAlertModalText: palette.black,
 
   // Lines
   lineDivider: palette.whiteOp10,
