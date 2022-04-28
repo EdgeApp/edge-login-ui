@@ -12,10 +12,10 @@ import { logEvent } from '../../../util/analytics'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
 import { EdgeText } from '../../themed/EdgeText'
-import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
 import { MainButton } from '../../themed/MainButton'
+import { OutlinedTextInput } from '../../themed/OutlinedTextInput'
 import { PasswordStatus } from '../../themed/PasswordStatus'
 import { ThemedScene } from '../../themed/ThemedScene'
 
@@ -89,7 +89,7 @@ const NewAccountPasswordSceneComponent = ({
             {s.strings.password_desc}
           </EdgeText>
         )}
-        <EdgeTextFieldOutlined
+        <OutlinedTextInput
           value={password}
           secureTextEntry
           returnKeyType="next"
@@ -97,11 +97,11 @@ const NewAccountPasswordSceneComponent = ({
           autoFocus={focusFirst}
           onChangeText={validatePassword}
           onSubmitEditing={handleFocusSwitch}
-          isClearable
-          showSearchIcon={false}
+          clearIcon
+          searchIcon={false}
           marginRem={[0, 0.75, 1.25]}
         />
-        <EdgeTextFieldOutlined
+        <OutlinedTextInput
           value={confirmPassword}
           secureTextEntry
           returnKeyType="go"
@@ -109,8 +109,8 @@ const NewAccountPasswordSceneComponent = ({
           autoFocus={focusSecond}
           onChangeText={validateConfirmPassword}
           onSubmitEditing={handleNext}
-          isClearable
-          showSearchIcon={false}
+          clearIcon
+          searchIcon={false}
           marginRem={[0, 0.75, 1.25]}
         />
         <FormError

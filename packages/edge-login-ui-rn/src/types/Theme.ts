@@ -162,6 +162,10 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   outlineTextInputColor: asOptional(asString),
   outlineTextInputTextColor: asOptional(asString),
   outlineTextInputBorderWidth: asOptional(asNumber),
+  outlineTextInputBorderColor: asOptional(asString),
+  outlineTextInputBorderColorFocused: asOptional(asString),
+  outlineTextInputLabelColor: asOptional(asString),
+  outlineTextInputLabelColorFocused: asOptional(asString),
 
   // Dropdown colors:
   dropdownWarning: asOptional(asString),
@@ -280,6 +284,10 @@ export interface Theme {
   outlineTextInputColor: string
   outlineTextInputTextColor: string
   outlineTextInputBorderWidth: number
+  outlineTextInputBorderColor: string
+  outlineTextInputBorderColorFocused: string
+  outlineTextInputLabelColor: string
+  outlineTextInputLabelColorFocused: string
 
   // Dropdown colors:
   dropdownWarning: string
