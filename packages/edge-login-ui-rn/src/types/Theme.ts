@@ -158,6 +158,18 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   escapeButtonFontSizeRem: asOptional(asNumber),
   escapeButtonFont: asOptional(asString),
 
+  pinUsernameButtonOutline: asOptional(asString),
+  pinUsernameButtonOutlineWidth: asOptional(asNumber),
+  pinUsernameButton: asOptional(asArray(asString)),
+  pinUsernameButtonColorStart: asOptional(asGradientCoords),
+  pinUsernameButtonColorEnd: asOptional(asGradientCoords),
+  pinUsernameButtonText: asOptional(asString),
+  pinUsernameButtonTextShadow: asOptional(asTextShadowParams),
+  pinUsernameButtonShadow: asOptional(asThemeShadowParams),
+  pinUsernameButtonBorderRadiusRem: asOptional(asNumber),
+  pinUsernameButtonFontSizeRem: asOptional(asNumber),
+  pinUsernameButtonFont: asOptional(asString),
+
   // Outline Text Input
   outlineTextInputColor: asOptional(asString),
   outlineTextInputTextColor: asOptional(asString),
@@ -279,6 +291,18 @@ export interface Theme {
   escapeButtonShadow: ThemeShadowParams
   escapeButtonFontSizeRem: number
   escapeButtonFont: string
+
+  pinUsernameButtonOutline: string
+  pinUsernameButtonOutlineWidth: number
+  pinUsernameButton: string[]
+  pinUsernameButtonColorStart: GradientCoords
+  pinUsernameButtonColorEnd: GradientCoords
+  pinUsernameButtonText: string
+  pinUsernameButtonTextShadow: TextShadowParams
+  pinUsernameButtonShadow: ThemeShadowParams
+  pinUsernameButtonBorderRadiusRem: number
+  pinUsernameButtonFontSizeRem: number
+  pinUsernameButtonFont: string
 
   // Outline Text Input
   outlineTextInputColor: string
