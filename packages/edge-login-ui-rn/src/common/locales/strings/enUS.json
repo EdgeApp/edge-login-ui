@@ -192,6 +192,7 @@
   "qr_modal_started": "Logging into account %s",
   "alert_dropdown_alert": "Alert! ",
   "alert_dropdown_warning": "Warning! ",
+  "powered_by": "Powered by",
   "notifications_permissions_ios": "Please enable notifications and background app refresh for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.",
   "notifications_permissions_android": "Please enable notifications for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.",
   "change_recovery_question1": "What is the anniversary date with your first spouse?",

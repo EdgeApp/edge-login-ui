@@ -115,6 +115,10 @@ export const edgeDark: Theme = {
   alertModalTertiaryButton: palette.transparent,
   alertModalTertiaryButtonText: palette.edgeBlue,
 
+  outlineTextInputColor: palette.transparent,
+  outlineTextInputTextColor: palette.white,
+  outlineTextInputBorderWidth: 1,
+
   // Dropdown colors:
   dropdownWarning: palette.accentOrange,
   dropdownError: palette.accentRed,

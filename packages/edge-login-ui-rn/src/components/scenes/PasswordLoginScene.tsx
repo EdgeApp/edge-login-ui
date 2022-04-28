@@ -8,6 +8,7 @@ import {
   View
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { cacheStyles } from 'react-native-patina'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { sprintf } from 'sprintf-js'
@@ -15,24 +16,21 @@ import { sprintf } from 'sprintf-js'
 import { launchPasswordRecovery, login } from '../../actions/LoginAction'
 import { deleteUserFromDevice } from '../../actions/UserActions'
 import s from '../../common/locales/strings'
-import * as Constants from '../../constants/index'
 import { LoginUserInfo } from '../../reducers/PreviousUsersReducer'
-import * as Styles from '../../styles/index'
 import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
 import { LoginAttempt } from '../../util/loginAttempt'
-import { scale } from '../../util/scaling'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader'
 import { UserListItem } from '../abSpecific/UserListItem'
 import { BackgroundImage } from '../common/BackgroundImage'
-import { Button } from '../common/Button'
-import { FormField } from '../common/FormField'
 import { HeaderParentButtons } from '../common/HeaderParentButtons'
 import { ButtonsModal } from '../modals/ButtonsModal'
 import { showQrCodeModal } from '../modals/QrCodeModal'
 import { TextInputModal } from '../modals/TextInputModal'
 import { Airship, showError } from '../services/AirshipInstance'
 import { connect } from '../services/ReduxStore'
+import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
+import { LineFormField } from '../themed/LineFormField'
 import { MainButton } from '../themed/MainButton'
 
 interface OwnProps {
@@ -55,7 +53,7 @@ interface DispatchProps {
   updateUsername: (username: string) => void
   handlePasswordRecovery: (recoveryKey: string) => Promise<boolean>
 }
-type Props = OwnProps & StateProps & DispatchProps
+type Props = OwnProps & StateProps & DispatchProps & ThemeProps
 
 interface State {
   errorMessage: string
@@ -131,6 +129,9 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 
   render() {
+    const { theme } = this.props
+    const styles = getStyles(theme)
+
     return (
       <KeyboardAwareScrollView
         style={styles.container}
@@ -139,7 +140,6 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
       >
         <BackgroundImage
           branding={this.props.branding}
-          style={styles.backgroundImage}
           content={this.renderOverImage()}
           onPress={this.handleBlur}
         />
@@ -148,6 +148,9 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderOverImage() {
+    const { theme } = this.props
+    const styles = getStyles(theme)
+
     if (this.props.loginSuccess) {
       /* return (
         <View style={style.featureBox}>
@@ -164,9 +167,8 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
             <LogoImageHeader branding={this.props.branding} />
             {this.renderUsername()}
             <View style={styles.shimTiny} />
-            <FormField
+            <LineFormField
               testID="passwordFormField"
-              style={styles.input2}
               onChangeText={this.handlePasswordChange}
               value={this.state.password}
               label={s.strings.password}
@@ -186,12 +188,14 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderUsername() {
+    const { theme } = this.props
+    const styles = getStyles(theme)
+
     return (
       <View>
         <View style={styles.usernameWrapper}>
-          <FormField
+          <LineFormField
             testID="usernameFormField"
-            style={styles.input2}
             onChangeText={this.handleChangeUsername}
             value={this.props.username}
             label={s.strings.username}
@@ -203,20 +207,20 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
             onSubmitEditing={this.handleSetNextFocus}
           />
           <TouchableOpacity
-            style={styles.iconButton.container}
+            style={styles.iconContainer}
             onPress={this.handleToggleUsernameList}
           >
             {this.state.usernameList ? (
               <MaterialIcon
                 name="expand-less"
-                size={styles.iconButton.iconSize}
-                style={styles.iconButton.icon}
+                size={theme.rem(1)}
+                style={styles.iconColor}
               />
             ) : (
               <MaterialIcon
                 name="expand-more"
-                size={styles.iconButton.iconSize}
-                style={styles.iconButton.icon}
+                size={theme.rem(1)}
+                style={styles.iconColor}
               />
             )}
           </TouchableOpacity>
@@ -227,6 +231,9 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderDropdownList() {
+    const { theme } = this.props
+    const styles = getStyles(theme)
+
     return (
       <FlatList
         style={styles.dropDownList}
@@ -241,7 +248,6 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
     return (
       <UserListItem
         data={data.item}
-        style={styles.listItem}
         onClick={this.handleSelectUser}
         onDelete={this.handleDelete}
       />
@@ -249,41 +255,36 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 
   renderButtons() {
-    const { handleQrModal } = this.props
+    const { handleQrModal, theme } = this.props
+    const styles = getStyles(theme)
+    const buttonType = theme.preferPrimaryButton ? 'primary' : 'secondary'
 
     return (
       <View style={styles.buttonsBox}>
-        <View style={styles.shimTiny} />
-        <Button
+        <MainButton
+          type="textOnly"
           onPress={this.handleForgotPassword}
           label={s.strings.forgot_password}
-          downStyle={styles.forgotButton.downStyle}
-          downTextStyle={styles.forgotButton.downTextStyle}
-          upStyle={styles.forgotButton.upStyle}
-          upTextStyle={styles.forgotButton.upTextStyle}
         />
         <View style={styles.loginButtonBox}>
           <MainButton
             label={s.strings.login_button}
             testID="loginButton"
-            type="secondary"
+            type={buttonType}
             onPress={this.handleSubmit}
           />
         </View>
-        <Button
+        <MainButton
+          type="textOnly"
           testID="createAccountButton"
           onPress={this.handleCreateAccount}
           label={s.strings.create_an_account}
-          downStyle={styles.signupButton.downStyle}
-          downTextStyle={styles.signupButton.downTextStyle}
-          upStyle={styles.signupButton.upStyle}
-          upTextStyle={styles.signupButton.upTextStyle}
         />
         <TouchableOpacity onPress={handleQrModal}>
           <AntDesignIcon
             name="qrcode"
-            color={Constants.WHITE}
-            size={scale(28)}
+            color={theme.icon}
+            size={theme.rem(1.75)}
           />
         </TouchableOpacity>
       </View>
@@ -362,16 +363,15 @@ class PasswordLoginSceneComponent extends React.Component<Props, State> {
   }
 }
 
-const styles = {
-  container: Styles.SceneStyle,
+const getStyles = cacheStyles((theme: Theme) => ({
+  container: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: theme.backgroundGradientColors[0]
+  },
   mainScrollView: {
     position: 'relative',
-    width: '100%',
-    height: '100%'
-  },
-  backgroundImage: {
-    flex: 1,
-    alignItems: 'center',
     width: '100%',
     height: '100%'
   },
@@ -380,128 +380,42 @@ const styles = {
   },
   featureBox: {
     position: 'relative',
-    top: scale(55),
+    top: theme.rem(3.5),
     width: '100%',
     alignItems: 'center'
   },
   shimTiny: {
     width: '100%',
-    height: scale(10)
+    height: theme.rem(0.75)
   },
   loginButtonBox: {
-    marginVertical: scale(10),
+    marginVertical: theme.rem(0.25),
     width: '70%'
   },
   buttonsBox: {
     width: '100%',
     alignItems: 'center'
   },
-  input2: {
-    container: {
-      position: 'relative',
-      width: '70%',
-      minHeight: scale(60)
-    },
-    baseColor: Constants.WHITE,
-    tintColor: Constants.ACCENT_MINT,
-    errorColor: Constants.ACCENT_RED,
-    textColor: Constants.WHITE,
-    affixTextStyle: {
-      color: Constants.WHITE
-    },
-    titleTextStyle: {
-      color: Constants.WHITE
-    }
-  },
-  listItem: {
-    container: {
-      height: scale(40),
-      width: '100%',
-      backgroundColor: Constants.WHITE,
-      borderBottomColor: Constants.GRAY_4,
-      borderBottomWidth: 1,
-      flexDirection: 'row',
-      alignItems: 'center'
-    },
-    textComtainer: {
-      flex: 9,
-      height: '100%',
-      flexDirection: 'column',
-      justifyContent: 'space-around'
-    },
-    iconButton: {
-      container: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        height: '100%'
-      },
-      icon: {
-        color: Constants.PRIMARY
-      },
-      iconSize: scale(Constants.FONTS.defaultFontSize)
-    },
-    text: {
-      color: Constants.PRIMARY,
-      backgroundColor: Constants.TRANSPARENT,
-      fontFamily: Constants.FONTS.fontFamilyRegular,
-      marginLeft: scale(8),
-      fontSize: scale(Constants.FONTS.defaultFontSize)
-    }
-  },
-  forgotButton: {
-    upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {
-      ...Styles.TextOnlyButtonTextUpStyle,
-      fontSize: scale(14),
-      color: Constants.WHITE
-    },
-    downTextStyle: {
-      ...Styles.TextOnlyButtonTextDownStyle,
-      fontSize: scale(14),
-      color: Constants.WHITE
-    },
-    downStyle: Styles.TextOnlyButtonDownStyle
-  },
-  signupButton: {
-    upStyle: Styles.TextOnlyButtonUpStyle,
-    upTextStyle: {
-      ...Styles.TextOnlyButtonTextUpStyle,
-      fontSize: scale(14),
-      color: Constants.WHITE
-    },
-    downTextStyle: {
-      ...Styles.TextOnlyButtonTextDownStyle,
-      fontSize: scale(14),
-      color: Constants.WHITE
-    },
-    downStyle: Styles.TextOnlyButtonDownStyle
-  },
-  iconButton: {
-    container: {
-      position: 'absolute',
-      right: 0,
-      bottom: (scale(260) - scale(250)) * 1.6
-    },
-    icon: {
-      color: Constants.WHITE
-    },
-    iconPressed: {
-      color: Constants.SECONDARY
-    },
-    iconSize: scale(Constants.FONTS.defaultFontSize + 8),
-    underlayColor: Constants.TRANSPARENT
-  },
   usernameWrapper: {
     width: '100%',
     flexDirection: 'row'
   },
   dropDownList: {
-    maxHeight: scale(200),
-    backgroundColor: '#FFFFFF'
+    maxHeight: theme.rem(12.5),
+    backgroundColor: theme.backgroundGradientColors[0]
+  },
+  iconContainer: {
+    position: 'absolute',
+    right: 0,
+    bottom: (theme.rem(16.25) - theme.rem(15.5)) * 1.6
+  },
+  iconColor: {
+    color: theme.icon
+  },
+  iconColorPressed: {
+    color: theme.iconDeactivated
   }
-} as const
+}))
 
 export const PasswordLoginScene = connect<StateProps, DispatchProps, OwnProps>(
   (state: RootState) => ({
@@ -539,4 +453,4 @@ export const PasswordLoginScene = connect<StateProps, DispatchProps, OwnProps>(
       return await Promise.resolve(true)
     }
   })
-)(PasswordLoginSceneComponent)
+)(withTheme(PasswordLoginSceneComponent))

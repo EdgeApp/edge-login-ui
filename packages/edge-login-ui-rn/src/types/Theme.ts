@@ -157,6 +157,11 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   alertModalTertiaryButton: asOptional(asString),
   alertModalTertiaryButtonText: asOptional(asString),
 
+  // Outline Text Input
+  outlineTextInputColor: asOptional(asString),
+  outlineTextInputTextColor: asOptional(asString),
+  outlineTextInputBorderWidth: asOptional(asNumber),
+
   // Dropdown colors:
   dropdownWarning: asOptional(asString),
   dropdownError: asOptional(asString),
@@ -275,6 +280,11 @@ export interface Theme {
   alertModalTertiaryButtonOutline: string
   alertModalTertiaryButton: string
   alertModalTertiaryButtonText: string
+
+  // Outline Text Input
+  outlineTextInputColor: string
+  outlineTextInputTextColor: string
+  outlineTextInputBorderWidth: number
 
   // Dropdown colors:
   dropdownWarning: string

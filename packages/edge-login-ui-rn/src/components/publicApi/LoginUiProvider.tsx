@@ -10,7 +10,7 @@ import { changeTheme, getTheme, ThemeProvider } from '../services/ThemeContext'
 const loginUiContext = React.createContext(false)
 
 interface Props {
-  overrideTheme?: Theme
+  themeOverride?: Theme
   children: React.ReactNode
 }
 
@@ -19,23 +19,20 @@ interface Props {
  * In the future, this will be our injection point for branding &
  * theme customizations.
  */
-export function LoginUiProvider(props: Props): JSX.Element {
-  if (props.overrideTheme != null) {
+function LoginUiProviderComponent(props: Props): JSX.Element {
+  if (props.themeOverride != null) {
     // Error check the theme but don't use the return value as the cleaner sets missing parameters
     // to undefined which stomps on top of the oldTheme
-    asOptionalTheme(props.overrideTheme)
+    asOptionalTheme(props.themeOverride)
 
-    const overrideTheme = props.overrideTheme
+    const themeOverride = props.themeOverride
     const oldTheme = getTheme()
-    const tsHackTheme: any = { ...oldTheme, ...overrideTheme }
+    const tsHackTheme: any = { ...oldTheme, ...themeOverride }
     const newTheme: Theme = tsHackTheme
 
     if (JSON.stringify(oldTheme) !== JSON.stringify(newTheme)) {
       changeTheme(newTheme)
     }
-    console.log(`oldTheme`, JSON.stringify(oldTheme, null, 2))
-    console.log(`overrideTheme`, JSON.stringify(overrideTheme, null, 2))
-    console.log(`newTheme`, JSON.stringify(newTheme, null, 2))
   }
 
   return (
@@ -46,6 +43,8 @@ export function LoginUiProvider(props: Props): JSX.Element {
     </loginUiContext.Provider>
   )
 }
+
+export const LoginUiProvider = React.memo(LoginUiProviderComponent)
 
 export function MaybeProvideLoginUi(props: {
   children: JSX.Element

@@ -247,6 +247,8 @@ export default {
   alert_dropdown_alert: 'Alert! ',
   alert_dropdown_warning: 'Warning! ',
 
+  powered_by: 'Powered by',
+
   // Notifications Permissions
   notifications_permissions_ios:
     'Please enable notifications and background app refresh for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
