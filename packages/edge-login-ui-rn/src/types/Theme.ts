@@ -133,6 +133,8 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   primaryButtonText: asOptional(asString),
   primaryButtonTextShadow: asOptional(asTextShadowParams),
   primaryButtonShadow: asOptional(asThemeShadowParams),
+  primaryButtonFontSizeRem: asOptional(asNumber),
+  primaryButtonFont: asOptional(asString),
 
   secondaryButtonOutline: asOptional(asString),
   secondaryButtonOutlineWidth: asOptional(asNumber),
@@ -142,6 +144,8 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   secondaryButtonText: asOptional(asString),
   secondaryButtonTextShadow: asOptional(asTextShadowParams),
   secondaryButtonShadow: asOptional(asThemeShadowParams),
+  secondaryButtonFontSizeRem: asOptional(asNumber),
+  secondaryButtonFont: asOptional(asString),
 
   escapeButtonOutline: asOptional(asString),
   escapeButtonOutlineWidth: asOptional(asNumber),
@@ -151,6 +155,8 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   escapeButtonText: asOptional(asString),
   escapeButtonTextShadow: asOptional(asTextShadowParams),
   escapeButtonShadow: asOptional(asThemeShadowParams),
+  escapeButtonFontSizeRem: asOptional(asNumber),
+  escapeButtonFont: asOptional(asString),
 
   // Outline Text Input
   outlineTextInputColor: asOptional(asString),
@@ -245,6 +251,8 @@ export interface Theme {
   primaryButtonText: string
   primaryButtonTextShadow: TextShadowParams
   primaryButtonShadow: ThemeShadowParams
+  primaryButtonFontSizeRem: number
+  primaryButtonFont: string
 
   secondaryButtonOutline: string
   secondaryButtonOutlineWidth: number
@@ -254,6 +262,8 @@ export interface Theme {
   secondaryButtonText: string
   secondaryButtonTextShadow: TextShadowParams
   secondaryButtonShadow: ThemeShadowParams
+  secondaryButtonFontSizeRem: number
+  secondaryButtonFont: string
 
   escapeButtonOutline: string
   escapeButtonOutlineWidth: number
@@ -263,6 +273,8 @@ export interface Theme {
   escapeButtonText: string
   escapeButtonTextShadow: TextShadowParams
   escapeButtonShadow: ThemeShadowParams
+  escapeButtonFontSizeRem: number
+  escapeButtonFont: string
 
   // Outline Text Input
   outlineTextInputColor: string
