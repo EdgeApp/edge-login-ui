@@ -8,12 +8,14 @@ import {
   requestNotifications,
   RESULTS
 } from 'react-native-permissions'
+import { sprintf } from 'sprintf-js'
 
 import s from '../common/locales/strings'
 import { ButtonsModal } from '../components/modals/ButtonsModal'
 import { SecurityAlertsModal } from '../components/modals/SecurityAlertsModal'
 import { Airship, showError } from '../components/services/AirshipInstance'
 import { getSupportedBiometryType } from '../keychain'
+import { Branding } from '../types/Branding'
 import { Dispatch, GetState, Imports } from '../types/ReduxTypes'
 import { Theme } from '../types/Theme'
 import { launchPasswordRecovery } from './LoginAction'
@@ -27,7 +29,7 @@ const permissionsUserFile = 'notificationsPermisions.json'
 /**
  * Fires off all the things we need to do to get the login scene up & running.
  */
-export const initializeLogin = (theme: Theme) => async (
+export const initializeLogin = (theme: Theme, branding: Branding) => async (
   dispatch: Dispatch,
   getState: GetState,
   imports: Imports
@@ -38,7 +40,7 @@ export const initializeLogin = (theme: Theme) => async (
   dispatch(checkSecurityMessages()).catch(error => console.log(error))
   customPermissionsFunction
     ? customPermissionsFunction()
-    : dispatch(checkAndRequestNotifications(theme)).catch(error =>
+    : dispatch(checkAndRequestNotifications(theme, branding)).catch(error =>
         console.log(error)
       )
 
@@ -126,20 +128,19 @@ const logicMap: Array<Array<Array<string | undefined>>> = [
   [[], []]
 ]
 
-logicMap[0][0][0] = s.strings.notifications_and_refresh_permissions
-logicMap[0][0][1] = s.strings.notifications_permissions
-logicMap[0][1][0] = s.strings.refresh_permission
+logicMap[0][0][0] = s.strings.notifications_and_refresh_permissions_branded
+logicMap[0][0][1] = s.strings.notifications_permissions_branded
+logicMap[0][1][0] = s.strings.refresh_permission_branded
 logicMap[0][1][1] = undefined
-logicMap[1][0][0] = s.strings.refresh_permission
+logicMap[1][0][0] = s.strings.refresh_permission_branded
 logicMap[1][0][1] = undefined
-logicMap[1][1][0] = s.strings.refresh_permission
+logicMap[1][1][0] = s.strings.refresh_permission_branded
 logicMap[1][1][1] = undefined
 
-const checkAndRequestNotifications = (theme: Theme) => async (
-  dispatch: Dispatch,
-  getState: GetState,
-  imports: Imports
-) => {
+const checkAndRequestNotifications = (
+  theme: Theme,
+  branding: Branding
+) => async (dispatch: Dispatch, getState: GetState, imports: Imports) => {
   const notificationPermission = await checkNotifications()
   const notificationStatus = notificationPermission.status
   const notifEnabled =
@@ -163,7 +164,13 @@ const checkAndRequestNotifications = (theme: Theme) => async (
     : false
   const notifBlocked = notifBlockedBool ? 1 : 0
 
-  const permissionMessage = logicMap[notifEnabled][notifBlocked][refreshEnabled]
+  const permissionMessage =
+    logicMap[notifEnabled][notifBlocked][refreshEnabled] != null
+      ? sprintf(
+          logicMap[notifEnabled][notifBlocked][refreshEnabled] ?? '',
+          branding.appName
+        )
+      : undefined
 
   console.log(`checkAndRequestNotifications`)
   console.log(

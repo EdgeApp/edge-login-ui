@@ -11,6 +11,7 @@ import { onComplete } from '../../../actions/WorkflowActions'
 import s from '../../../common/locales/strings'
 import * as Colors from '../../../constants/Colors'
 import * as Styles from '../../../styles/index'
+import { Branding } from '../../../types/Branding'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { isIphoneX } from '../../../util/isIphoneX'
 import { scale } from '../../../util/scaling'
@@ -28,6 +29,7 @@ import { MessageText, Strong } from '../../themed/ThemedText'
 
 interface OwnProps {
   showHeader: boolean
+  branding: Branding
 }
 interface StateProps {
   account: EdgeAccount
@@ -206,7 +208,12 @@ class ChangeRecoverySceneComponent extends React.Component<Props, State> {
       [this.state.answer1, this.state.answer2]
     )
     try {
-      await sendRecoveryEmail(emailAddress, account.username, recoveryKey)
+      await sendRecoveryEmail(
+        emailAddress,
+        account.username,
+        recoveryKey,
+        this.props.branding
+      )
     } catch (error) {
       await Airship.show(bridge => (
         <ButtonsModal
@@ -229,7 +236,7 @@ class ChangeRecoverySceneComponent extends React.Component<Props, State> {
       [this.state.question1, this.state.question2],
       [this.state.answer1, this.state.answer2]
     )
-    await shareRecovery(account.username, recoveryKey)
+    await shareRecovery(account.username, recoveryKey, this.props.branding)
     onDone()
     return true
   }

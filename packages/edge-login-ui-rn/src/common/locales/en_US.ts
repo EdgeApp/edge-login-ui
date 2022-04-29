@@ -114,12 +114,12 @@ export default {
   otp_instructions:
     'Sign into your account using the device you setup 2FA with, and go to Settings > 2 Factor Authentication to find the code.',
   disable_otp_button_two: 'Disable 2 Factor Authentication',
-  otp_email_body:
-    'Please click the link below from a mobile device with Edge installed to initiate account recovery for username ',
+  otp_email_body_branded:
+    'Please click the link below from a mobile device with %1$s installed to initiate account recovery for username ',
   otp_email_body2: 'You can also use the Recovery Token displayed below:',
-  otp_email_body3:
-    'Enter or copy and paste the recovery token displayed above inside the Edge app by tapping on Forgot Password at the login screen.',
-  otp_email_subject: 'Edge Recovery Token',
+  otp_email_body3_branded:
+    'Enter or copy and paste the recovery token displayed above inside the %1$s app by tapping on Forgot Password at the login screen.',
+  otp_email_subject_branded: '%1$s Recovery Token',
   recovery_disabled:
     'Password Recovery has been disabled. You can enable it again by going into Password Recovery anytime',
   recovery_what_account:
@@ -231,10 +231,10 @@ export default {
     'Wait until %s when this device will be automatically authorized to log in',
   otp_scene_retrying: 'Retrying login...',
 
-  otp_repair_header_2fa:
-    'This device cannot sync with the Edge servers because it does not have the right 2-factor code',
-  otp_repair_header_ip:
-    'This device cannot sync with the Edge servers due to an unrecognized IP address',
+  otp_repair_header_2fa_branded:
+    'This device cannot sync with the %1$s servers because it does not have the right 2-factor code',
+  otp_repair_header_ip_branded:
+    'This device cannot sync with the %1$s servers due to an unrecognized IP address',
 
   otp_backup_code_modal_title: 'Enter Backup Code',
 
@@ -250,12 +250,12 @@ export default {
   powered_by: 'Powered by',
 
   // Notifications Permissions
-  notifications_and_refresh_permissions:
-    'Please enable Notifications and Background App Refresh for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
-  refresh_permission:
-    'Please enable Background App Refresh for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
-  notifications_permissions:
-    'Please enable Notifications for account security. Edge will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
+  notifications_and_refresh_permissions_branded:
+    'Please enable Notifications and Background App Refresh for account security. %1$s will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
+  refresh_permission_branded:
+    'Please enable Background App Refresh for account security. %1$s will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
+  notifications_permissions_branded:
+    'Please enable Notifications for account security. %1$s will notify you if other devices attempt to access your account and will allow you to accept or reject access.',
   change_recovery_question1:
     'What is the anniversary date with your first spouse?',
   change_recovery_question2:
