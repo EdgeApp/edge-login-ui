@@ -3,11 +3,11 @@ import * as React from 'react'
 
 import { initializeLogin } from '../../actions/LoginInitActions'
 import { updateFontStyles } from '../../constants/Fonts'
-import { ParentButton } from '../../types/Branding'
+import { Branding, ParentButton } from '../../types/Branding'
 import { OnLogin } from '../../types/ReduxTypes'
 import { Router } from '../navigation/Router'
 import { ReduxStore } from '../services/ReduxStore'
-import { changeFont } from '../services/ThemeContext'
+import { changeFont, useTheme } from '../services/ThemeContext'
 
 interface Props {
   context: EdgeContext
@@ -53,6 +53,8 @@ export function LoginScreen(props: Props): JSX.Element {
     headingFontFamily = regularFontFamily
   } = fontDescription
 
+  const theme = useTheme()
+
   // Always update legacy fonts:
   updateFontStyles(regularFontFamily, headingFontFamily)
 
@@ -61,6 +63,16 @@ export function LoginScreen(props: Props): JSX.Element {
     regularFontFamily,
     headingFontFamily
   ])
+
+  const branding: Branding = {
+    appId: props.appId,
+    appName: props.appName,
+    backgroundImage: props.backgroundImage,
+    landingSceneText: props.landingScreenText,
+    parentButton: props.parentButton,
+    primaryLogo: props.primaryLogo,
+    primaryLogoCallback: props.primaryLogoCallback
+  }
 
   return (
     <ReduxStore
@@ -74,20 +86,9 @@ export function LoginScreen(props: Props): JSX.Element {
         username: props.username,
         customPermissionsFunction: props.customPermissionsFunction
       }}
-      initialAction={initializeLogin()}
+      initialAction={initializeLogin(theme, branding)}
     >
-      <Router
-        branding={{
-          appId: props.appId,
-          appName: props.appName,
-          backgroundImage: props.backgroundImage,
-          landingSceneText: props.landingScreenText,
-          parentButton: props.parentButton,
-          primaryLogo: props.primaryLogo,
-          primaryLogoCallback: props.primaryLogoCallback
-        }}
-        showHeader
-      />
+      <Router branding={branding} showHeader />
     </ReduxStore>
   )
 }

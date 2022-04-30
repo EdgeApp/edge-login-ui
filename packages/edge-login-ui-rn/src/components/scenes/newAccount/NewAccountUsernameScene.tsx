@@ -13,10 +13,10 @@ import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { connect } from '../../services/ReduxStore'
 import { Theme, ThemeProps, withTheme } from '../../services/ThemeContext'
 import { EdgeText } from '../../themed/EdgeText'
-import { EdgeTextFieldOutlined } from '../../themed/EdgeTextFieldOutlined'
 import { Fade } from '../../themed/Fade'
 import { FormError } from '../../themed/FormError'
 import { MainButton } from '../../themed/MainButton'
+import { OutlinedTextInput } from '../../themed/OutlinedTextInput'
 import { ThemedScene } from '../../themed/ThemedScene'
 
 interface OwnProps {
@@ -60,7 +60,7 @@ const NewAccountUsernameSceneComponent = ({
             branding.appName || s.strings.app_name_default
           )}
         </EdgeText>
-        <EdgeTextFieldOutlined
+        <OutlinedTextInput
           autoCorrect={false}
           autoFocus
           label={s.strings.username}
@@ -68,8 +68,8 @@ const NewAccountUsernameSceneComponent = ({
           onSubmitEditing={handleNext}
           returnKeyType="go"
           value={username}
-          isClearable
-          showSearchIcon={false}
+          clearIcon
+          searchIcon={false}
           marginRem={[0, 0.75]}
         />
         <FormError

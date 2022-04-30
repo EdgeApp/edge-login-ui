@@ -95,6 +95,9 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   // Modal:
   modal: asOptional(asString),
   modalBlurType: asOptional(asValue('light', 'dark')),
+  modalBorderColor: asOptional(asString),
+  modalBorderWidth: asOptional(asNumber),
+  modalBorderRadiusRem: asOptional(asNumber),
 
   // Text colors:
   primaryText: asOptional(asString),
@@ -130,6 +133,8 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   primaryButtonText: asOptional(asString),
   primaryButtonTextShadow: asOptional(asTextShadowParams),
   primaryButtonShadow: asOptional(asThemeShadowParams),
+  primaryButtonFontSizeRem: asOptional(asNumber),
+  primaryButtonFont: asOptional(asString),
 
   secondaryButtonOutline: asOptional(asString),
   secondaryButtonOutlineWidth: asOptional(asNumber),
@@ -139,6 +144,8 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   secondaryButtonText: asOptional(asString),
   secondaryButtonTextShadow: asOptional(asTextShadowParams),
   secondaryButtonShadow: asOptional(asThemeShadowParams),
+  secondaryButtonFontSizeRem: asOptional(asNumber),
+  secondaryButtonFont: asOptional(asString),
 
   escapeButtonOutline: asOptional(asString),
   escapeButtonOutlineWidth: asOptional(asNumber),
@@ -148,31 +155,34 @@ export const asOptionalTheme = asObject<Partial<Theme>>({
   escapeButtonText: asOptional(asString),
   escapeButtonTextShadow: asOptional(asTextShadowParams),
   escapeButtonShadow: asOptional(asThemeShadowParams),
+  escapeButtonFontSizeRem: asOptional(asNumber),
+  escapeButtonFont: asOptional(asString),
 
-  alertModalPrimaryButtonOutline: asOptional(asString),
-  alertModalPrimaryButton: asOptional(asString),
-  alertModalPrimaryButtonText: asOptional(asString),
-
-  alertModalTertiaryButtonOutline: asOptional(asString),
-  alertModalTertiaryButton: asOptional(asString),
-  alertModalTertiaryButtonText: asOptional(asString),
+  pinUsernameButtonOutline: asOptional(asString),
+  pinUsernameButtonOutlineWidth: asOptional(asNumber),
+  pinUsernameButton: asOptional(asArray(asString)),
+  pinUsernameButtonColorStart: asOptional(asGradientCoords),
+  pinUsernameButtonColorEnd: asOptional(asGradientCoords),
+  pinUsernameButtonText: asOptional(asString),
+  pinUsernameButtonTextShadow: asOptional(asTextShadowParams),
+  pinUsernameButtonShadow: asOptional(asThemeShadowParams),
+  pinUsernameButtonBorderRadiusRem: asOptional(asNumber),
+  pinUsernameButtonFontSizeRem: asOptional(asNumber),
+  pinUsernameButtonFont: asOptional(asString),
 
   // Outline Text Input
   outlineTextInputColor: asOptional(asString),
   outlineTextInputTextColor: asOptional(asString),
   outlineTextInputBorderWidth: asOptional(asNumber),
+  outlineTextInputBorderColor: asOptional(asString),
+  outlineTextInputBorderColorFocused: asOptional(asString),
+  outlineTextInputLabelColor: asOptional(asString),
+  outlineTextInputLabelColorFocused: asOptional(asString),
 
   // Dropdown colors:
   dropdownWarning: asOptional(asString),
   dropdownError: asOptional(asString),
   dropdownText: asOptional(asString),
-
-  // Security alert modal:
-  securityAlertModalHeaderCircle: asOptional(asString),
-  securityAlertModalDangerIcon: asOptional(asString),
-  securityAlertModalWarningIcon: asOptional(asString),
-  securityAlertModalRowBorder: asOptional(asString),
-  securityAlertModalText: asOptional(asString),
 
   // Lines
   lineDivider: asOptional(asString),
@@ -219,6 +229,9 @@ export interface Theme {
   // Modal:
   modal: string
   modalBlurType: 'light' | 'dark'
+  modalBorderColor: string
+  modalBorderWidth: number
+  modalBorderRadiusRem: number
 
   // Text colors:
   primaryText: string
@@ -254,6 +267,8 @@ export interface Theme {
   primaryButtonText: string
   primaryButtonTextShadow: TextShadowParams
   primaryButtonShadow: ThemeShadowParams
+  primaryButtonFontSizeRem: number
+  primaryButtonFont: string
 
   secondaryButtonOutline: string
   secondaryButtonOutlineWidth: number
@@ -263,6 +278,8 @@ export interface Theme {
   secondaryButtonText: string
   secondaryButtonTextShadow: TextShadowParams
   secondaryButtonShadow: ThemeShadowParams
+  secondaryButtonFontSizeRem: number
+  secondaryButtonFont: string
 
   escapeButtonOutline: string
   escapeButtonOutlineWidth: number
@@ -272,31 +289,34 @@ export interface Theme {
   escapeButtonText: string
   escapeButtonTextShadow: TextShadowParams
   escapeButtonShadow: ThemeShadowParams
+  escapeButtonFontSizeRem: number
+  escapeButtonFont: string
 
-  alertModalPrimaryButtonOutline: string
-  alertModalPrimaryButton: string
-  alertModalPrimaryButtonText: string
-
-  alertModalTertiaryButtonOutline: string
-  alertModalTertiaryButton: string
-  alertModalTertiaryButtonText: string
+  pinUsernameButtonOutline: string
+  pinUsernameButtonOutlineWidth: number
+  pinUsernameButton: string[]
+  pinUsernameButtonColorStart: GradientCoords
+  pinUsernameButtonColorEnd: GradientCoords
+  pinUsernameButtonText: string
+  pinUsernameButtonTextShadow: TextShadowParams
+  pinUsernameButtonShadow: ThemeShadowParams
+  pinUsernameButtonBorderRadiusRem: number
+  pinUsernameButtonFontSizeRem: number
+  pinUsernameButtonFont: string
 
   // Outline Text Input
   outlineTextInputColor: string
   outlineTextInputTextColor: string
   outlineTextInputBorderWidth: number
+  outlineTextInputBorderColor: string
+  outlineTextInputBorderColorFocused: string
+  outlineTextInputLabelColor: string
+  outlineTextInputLabelColorFocused: string
 
   // Dropdown colors:
   dropdownWarning: string
   dropdownError: string
   dropdownText: string
-
-  // Security alert modal:
-  securityAlertModalHeaderCircle: string
-  securityAlertModalDangerIcon: string
-  securityAlertModalWarningIcon: string
-  securityAlertModalRowBorder: string
-  securityAlertModalText: string
 
   // Lines
   lineDivider: string

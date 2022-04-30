@@ -1,10 +1,12 @@
 import { EdgeAccount } from 'edge-core-js'
 import Mailer from 'react-native-mail'
 import Share from 'react-native-share'
+import { sprintf } from 'sprintf-js'
 
 import s from '../common/locales/strings'
 import { showError } from '../components/services/AirshipInstance'
 import { questionsList } from '../constants/recoveryQuestions'
+import { Branding } from '../types/Branding'
 import { Dispatch, GetState, Imports } from '../types/ReduxTypes'
 
 /**
@@ -44,10 +46,11 @@ function truncateUsername(username: string): string {
 export async function sendRecoveryEmail(
   emailAddress: string,
   username: string,
-  recoveryKey: string
+  recoveryKey: string,
+  branding: Branding
 ): Promise<void> {
   const body =
-    s.strings.otp_email_body +
+    sprintf(s.strings.otp_email_body_branded, branding.appName) +
     truncateUsername(username) +
     '<br><br>' +
     'iOS <br>edge://recovery?token=' +
@@ -61,12 +64,12 @@ export async function sendRecoveryEmail(
     s.strings.recovery_token +
     `: ${recoveryKey}` +
     '<br><br>' +
-    s.strings.otp_email_body3
+    sprintf(s.strings.otp_email_body3_branded, branding.appName)
 
   return await new Promise((resolve, reject) =>
     Mailer.mail(
       {
-        subject: s.strings.otp_email_subject,
+        subject: sprintf(s.strings.otp_email_subject_branded, branding.appName),
         recipients: [emailAddress],
         body: body,
         isHTML: true
@@ -81,10 +84,11 @@ export async function sendRecoveryEmail(
 
 export async function shareRecovery(
   username: string,
-  recoveryKey: string
+  recoveryKey: string,
+  branding: Branding
 ): Promise<void> {
   const body =
-    s.strings.otp_email_body +
+    sprintf(s.strings.otp_email_body_branded, branding.appName) +
     '\n' +
     truncateUsername(username) +
     '\n iOS: edge://recovery?token=' +
@@ -97,11 +101,11 @@ export async function shareRecovery(
     s.strings.recovery_token +
     `: ${recoveryKey}` +
     '\n' +
-    s.strings.otp_email_body3
+    sprintf(s.strings.otp_email_body3_branded, branding.appName)
 
-  await Share.open({ title: s.strings.otp_email_subject, message: body }).catch(
-    error => {
-      if (!/User did not/.test(error?.message)) throw error
-    }
-  )
+  const title = sprintf(s.strings.otp_email_subject_branded, branding.appName)
+
+  await Share.open({ title, message: body }).catch(error => {
+    if (!/User did not/.test(error?.message)) throw error
+  })
 }

@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
 import { cacheStyles } from 'react-native-patina'
 import { SvgXml } from 'react-native-svg'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -172,8 +173,25 @@ class PinLoginSceneComponent extends React.Component<Props, State> {
     if (this.state.focusOn === 'pin') {
       return (
         <View style={styles.innerView}>
-          <TouchableOpacity onPress={this.handleShowDrop}>
-            <Text style={styles.usernameButton}>{this.props.username}</Text>
+          <TouchableOpacity
+            style={styles.usernameShadow}
+            onPress={this.handleShowDrop}
+          >
+            <LinearGradient
+              colors={theme.pinUsernameButton}
+              start={theme.pinUsernameButtonColorStart}
+              end={theme.pinUsernameButtonColorEnd}
+              style={[styles.linearGradient, styles.usernameButton]}
+            >
+              <Text
+                adjustsFontSizeToFit
+                minimumFontScale={0.75}
+                numberOfLines={1}
+                style={styles.usernameText}
+              >
+                {this.props.username}
+              </Text>
+            </LinearGradient>
           </TouchableOpacity>
           {this.props.userDetails.pinEnabled && (
             <FourDigit
@@ -341,11 +359,23 @@ const getStyles = cacheStyles((theme: Theme) => ({
     marginTop: theme.rem(0.5),
     color: theme.iconTappable
   },
+  usernameText: {
+    fontFamily: theme.pinUsernameButtonFont,
+    color: theme.pinUsernameButtonText,
+    fontSize: theme.rem(theme.pinUsernameButtonFontSizeRem),
+    paddingHorizontal: theme.rem(1),
+    paddingVertical: theme.rem(0.5)
+  },
   usernameButton: {
-    fontFamily: theme.fontFaceDefault,
-    color: theme.primaryText,
-    fontSize: theme.rem(1.5),
-    margin: theme.rem(0.5)
+    borderColor: theme.pinUsernameButtonOutline,
+    borderWidth: theme.pinUsernameButtonOutlineWidth
+  },
+  usernameShadow: { ...theme.pinUsernameButtonShadow },
+  linearGradient: {
+    // flex: 1,
+    paddingLeft: 0,
+    paddingRight: 0,
+    borderRadius: theme.rem(theme.pinUsernameButtonBorderRadiusRem)
   },
   spacer: {
     marginTop: theme.rem(2)

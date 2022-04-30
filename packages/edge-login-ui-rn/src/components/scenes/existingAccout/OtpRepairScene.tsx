@@ -6,6 +6,7 @@ import { sprintf } from 'sprintf-js'
 import { requestOtpReset } from '../../../actions/LoginOtpActions'
 import { onComplete } from '../../../actions/WorkflowActions'
 import s from '../../../common/locales/strings'
+import { Branding } from '../../../types/Branding'
 import { Dispatch, RootState } from '../../../types/ReduxTypes'
 import { toLocalTime } from '../../../util/utils'
 import { showResetModal } from '../../modals/OtpResetModal'
@@ -19,7 +20,9 @@ import { LinkRow } from '../../themed/LinkRow'
 import { ThemedScene } from '../../themed/ThemedScene'
 import { MessageText, Warning } from '../../themed/ThemedText'
 
-interface OwnProps {}
+interface OwnProps {
+  branding: Branding
+}
 interface StateProps {
   account: EdgeAccount
   otpError: OtpError
@@ -96,8 +99,14 @@ class OtpRepairSceneComponent extends React.Component<Props> {
           <MessageText>
             <Warning>
               {isIp
-                ? s.strings.otp_repair_header_ip
-                : s.strings.otp_repair_header_2fa}
+                ? sprintf(
+                    s.strings.otp_repair_header_ip_branded,
+                    this.props.branding.appName
+                  )
+                : sprintf(
+                    s.strings.otp_repair_header_2fa_branded,
+                    this.props.branding.appName
+                  )}
             </Warning>
           </MessageText>
         </IconHeaderRow>

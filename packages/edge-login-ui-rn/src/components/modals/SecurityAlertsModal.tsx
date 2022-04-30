@@ -1,7 +1,7 @@
 import { EdgeLoginMessages } from 'edge-core-js'
 import * as React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { AirshipBridge, AirshipModal } from 'react-native-airship'
+import { Text, TouchableOpacity } from 'react-native'
+import { AirshipBridge } from 'react-native-airship'
 import { cacheStyles } from 'react-native-patina'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -9,6 +9,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import s from '../../common/locales/strings'
 import { Theme, ThemeProps, withTheme } from '../services/ThemeContext'
 import { ModalCloseArrow } from '../themed/ModalParts'
+import { ThemedModal } from '../themed/ThemedModal'
+import { TitleText } from '../themed/ThemedText'
 
 interface OwnProps {
   bridge: AirshipBridge<unknown>
@@ -20,42 +22,18 @@ type Props = OwnProps & ThemeProps
 class SecurityAlertsModalComponent extends React.Component<Props> {
   render() {
     const { bridge, theme } = this.props
-    const styles = getStyles(theme)
 
-    // Since we can't add native dependencies without a major version bump,
-    // we rely on the GUI to sneak this one to us:
-    // @ts-expect-error
-    const { ReactNativeBlurView } = global
-    const underlay =
-      typeof ReactNativeBlurView === 'function' ? (
-        <ReactNativeBlurView
-          blurType={theme.modalBlurType}
-          style={StyleSheet.absoluteFill}
-        />
-      ) : (
-        'rgba(0, 0, 0, 0.75)'
-      )
-
-    // We use AirshipModal directly so we can implement our custom appearance.
     return (
-      <AirshipModal
+      <ThemedModal
+        borderColor={theme.warningText}
+        borderWidth={4}
         bridge={bridge}
         onCancel={() => bridge.resolve(undefined)}
-        padding={theme.rem(0.5)}
-        underlay={underlay}
-        borderRadius={0}
       >
-        <View style={styles.iconCircle}>
-          <FontAwesome
-            name="exclamation-triangle"
-            size={theme.rem(2)}
-            color={theme.primaryText}
-          />
-        </View>
-        <Text style={styles.titleText}>{s.strings.alert_modal_title}</Text>
+        <TitleText>{s.strings.alert_modal_title}</TitleText>
         {this.renderList()}
         <ModalCloseArrow onPress={() => bridge.resolve(undefined)} />
-      </AirshipModal>
+      </ThemedModal>
     )
   }
 
@@ -96,11 +74,7 @@ class SecurityAlertsModalComponent extends React.Component<Props> {
         }}
       >
         <FontAwesome
-          color={
-            isReset
-              ? theme.securityAlertModalDangerIcon
-              : theme.securityAlertModalWarningIcon
-          }
+          color={isReset ? theme.dangerText : theme.warningText}
           name="exclamation-triangle"
           size={theme.rem(1.5)}
           style={styles.rowIcon}
@@ -115,7 +89,7 @@ class SecurityAlertsModalComponent extends React.Component<Props> {
           {s.strings.alert_modal_action}
         </Text>
         <AntDesignIcon
-          color={theme.securityAlertModalText}
+          color={theme.iconTappable}
           name="right"
           size={theme.rem(1)}
           style={styles.rowIcon}
@@ -125,41 +99,15 @@ class SecurityAlertsModalComponent extends React.Component<Props> {
   }
 }
 
-const iconRem = 3.5
-
 const getStyles = cacheStyles((theme: Theme) => ({
-  iconCircle: {
-    // Layout:
-    alignSelf: 'center',
-    marginTop: -theme.rem(0.5 + iconRem / 2),
-    marginBottom: theme.rem(0.5),
-    height: theme.rem(iconRem),
-    width: theme.rem(iconRem),
-
-    // Visuals:
-    backgroundColor: theme.securityAlertModalHeaderCircle,
-    borderRadius: theme.rem(iconRem / 2),
-
-    // Children:
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden'
-  },
-  titleText: {
-    color: theme.securityAlertModalText,
-    fontFamily: theme.fontFamily,
-    fontSize: theme.rem(1.2),
-    margin: theme.rem(0.5),
-    textAlign: 'center'
-  },
   row: {
     alignItems: 'center',
     flexDirection: 'row'
   },
   rowBorder: {
     alignItems: 'center',
-    borderTopColor: theme.securityAlertModalRowBorder,
-    borderTopWidth: theme.rem(0.0625),
+    borderTopColor: theme.lineDivider,
+    borderTopWidth: theme.thinLineWidth,
     flexDirection: 'row',
     marginTop: theme.rem(0.5),
     paddingTop: theme.rem(0.5)
@@ -168,10 +116,10 @@ const getStyles = cacheStyles((theme: Theme) => ({
     margin: theme.rem(0.5)
   },
   rowText: {
-    color: theme.securityAlertModalText,
+    color: theme.primaryText,
     flexGrow: 1,
     flexShrink: 1,
-    fontFamily: theme.fontFamily,
+    fontFamily: theme.fontFaceDefault,
     fontSize: theme.rem(1),
     margin: theme.rem(0.5)
   },

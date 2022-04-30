@@ -53,6 +53,9 @@ export const edgeDark: Theme = {
   // modal
   modal: palette.edgeNavy,
   modalBlurType: 'light',
+  modalBorderColor: palette.transparent,
+  modalBorderWidth: 0,
+  modalBorderRadiusRem: 1,
 
   // text
   primaryText: palette.white,
@@ -88,6 +91,8 @@ export const edgeDark: Theme = {
   primaryButtonText: palette.edgeBlue,
   primaryButtonTextShadow: textNoShadow,
   primaryButtonShadow: themeNoShadow,
+  primaryButtonFontSizeRem: 1,
+  primaryButtonFont: 'System',
 
   secondaryButtonOutline: palette.edgeMint,
   secondaryButtonOutlineWidth: 1,
@@ -97,6 +102,8 @@ export const edgeDark: Theme = {
   secondaryButtonText: palette.edgeMint,
   secondaryButtonTextShadow: textNoShadow,
   secondaryButtonShadow: themeNoShadow,
+  secondaryButtonFontSizeRem: 1,
+  secondaryButtonFont: 'System',
 
   escapeButtonOutline: palette.transparent,
   escapeButtonOutlineWidth: 0,
@@ -106,30 +113,33 @@ export const edgeDark: Theme = {
   escapeButtonText: palette.edgeMint,
   escapeButtonTextShadow: textNoShadow,
   escapeButtonShadow: themeNoShadow,
+  escapeButtonFontSizeRem: 1,
+  escapeButtonFont: 'System',
 
-  alertModalPrimaryButtonOutline: palette.edgeBlue,
-  alertModalPrimaryButton: palette.edgeBlue,
-  alertModalPrimaryButtonText: palette.white,
-
-  alertModalTertiaryButtonOutline: palette.transparent,
-  alertModalTertiaryButton: palette.transparent,
-  alertModalTertiaryButtonText: palette.edgeBlue,
+  pinUsernameButtonOutline: palette.transparent,
+  pinUsernameButtonOutlineWidth: 0,
+  pinUsernameButton: [palette.transparent, palette.transparent],
+  pinUsernameButtonColorStart: { x: 0, y: 0 },
+  pinUsernameButtonColorEnd: { x: 1, y: 1 },
+  pinUsernameButtonText: palette.white,
+  pinUsernameButtonTextShadow: textNoShadow,
+  pinUsernameButtonShadow: themeNoShadow,
+  pinUsernameButtonBorderRadiusRem: 1,
+  pinUsernameButtonFontSizeRem: 1.5,
+  pinUsernameButtonFont: 'System',
 
   outlineTextInputColor: palette.transparent,
   outlineTextInputTextColor: palette.white,
   outlineTextInputBorderWidth: 1,
+  outlineTextInputBorderColor: palette.blueGray,
+  outlineTextInputBorderColorFocused: palette.edgeMint,
+  outlineTextInputLabelColor: palette.blueGray,
+  outlineTextInputLabelColorFocused: palette.edgeMint,
 
   // Dropdown colors:
   dropdownWarning: palette.accentOrange,
   dropdownError: palette.accentRed,
   dropdownText: palette.white,
-
-  // Security alert modal:
-  securityAlertModalHeaderCircle: palette.accentOrange,
-  securityAlertModalDangerIcon: palette.accentRed,
-  securityAlertModalWarningIcon: palette.accentOrange,
-  securityAlertModalRowBorder: palette.lightGray,
-  securityAlertModalText: palette.black,
 
   // Lines
   lineDivider: palette.whiteOp10,

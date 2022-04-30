@@ -61,7 +61,12 @@ class RouterComponent extends React.Component<Props> {
       case 'ChangePinScene':
         return <PublicChangePinScene showHeader={this.props.showHeader} />
       case 'ChangeRecoveryScene':
-        return <PublicChangeRecoveryScene showHeader={this.props.showHeader} />
+        return (
+          <PublicChangeRecoveryScene
+            branding={this.props.branding}
+            showHeader={this.props.showHeader}
+          />
+        )
       case 'NewAccountWelcomeScene':
         return <NewAccountWelcomeScene branding={this.props.branding} />
       case 'NewAccountUsernameScene':
@@ -88,7 +93,7 @@ class RouterComponent extends React.Component<Props> {
       case 'OtpScene':
         return <OtpErrorScene />
       case 'OtpRepairScene':
-        return <OtpRepairScene />
+        return <OtpRepairScene branding={this.props.branding} />
       case 'PasswordScene':
         return <PasswordLoginScene branding={this.props.branding} />
       case 'PinScene':

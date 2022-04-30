@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { Image, View } from 'react-native'
 import { cacheStyles } from 'react-native-patina'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { sprintf } from 'sprintf-js'
 
-import { LOGO_BIG, WELCOME_LOCK, WELCOME_SHIELD_KEY } from '../../../assets'
+import { LOGO_BIG } from '../../../assets'
 import s from '../../../common/locales/strings'
 import * as Constants from '../../../constants/index'
 import { Branding } from '../../../types/Branding'
@@ -34,19 +35,20 @@ const NewAccountWelcomeSceneComponent = ({
   const styles = getStyles(theme)
   const appName = branding.appName || s.strings.app_name_default
   const buttonType = theme.preferPrimaryButton ? 'primary' : 'secondary'
+  const logoSrc = branding.primaryLogo || LOGO_BIG
 
   return (
     <ThemedScene onBack={onExit} title={s.strings.get_started}>
       <View style={styles.content}>
-        <Image source={LOGO_BIG} style={styles.logo} resizeMode="contain" />
+        <Image source={logoSrc} style={styles.logo} resizeMode="contain" />
         <EdgeText style={styles.welcome}>
           {sprintf(s.strings.welcome, appName)}
         </EdgeText>
         <View style={styles.advantage}>
-          <Image
-            source={WELCOME_LOCK}
+          <MaterialCommunityIcons
             style={styles.advantageImage}
-            resizeMode="contain"
+            name="lock"
+            size={theme.rem(2)}
           />
           <View style={styles.advantageTextContainer}>
             <EdgeText style={styles.advantageTitle}>
@@ -62,10 +64,10 @@ const NewAccountWelcomeSceneComponent = ({
         </View>
         <DividerLine marginRem={[1.5, 0.5]} />
         <View style={styles.advantage}>
-          <Image
-            source={WELCOME_SHIELD_KEY}
+          <MaterialCommunityIcons
             style={styles.advantageImage}
-            resizeMode="contain"
+            name="shield-key"
+            size={theme.rem(2)}
           />
           <View style={styles.advantageTextContainer}>
             <EdgeText style={styles.advantageTitle}>
@@ -110,6 +112,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     marginHorizontal: theme.rem(0.5)
   },
   advantageImage: {
+    color: theme.iconTappable,
     height: theme.rem(2),
     width: theme.rem(2),
     marginRight: theme.rem(0.5)
