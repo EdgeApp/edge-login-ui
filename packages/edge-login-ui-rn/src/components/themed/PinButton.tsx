@@ -88,8 +88,8 @@ const getStyles = cacheStyles((theme: Theme) => {
     borderRadius: theme.rem(theme.keypadButtonBorderRadiusRem),
     flexDirection: 'row',
     justifyContent: 'center',
-    minHeight: theme.rem(3),
-    minWidth: theme.rem(7)
+    width: '100%',
+    minHeight: theme.rem(3)
   } as const
   const commonText = {
     fontFamily: theme.keypadButtonFont,
