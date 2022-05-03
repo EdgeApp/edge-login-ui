@@ -1,5 +1,13 @@
 # edge-login-ui
 
+## 0.10.0 (2022-05-02)
+- rn: Allow passing a Theme object to the LoginUiProvider to provide custom theming of colors and fonts.
+- rn: Remove hardcoded uses of "Edge" and use appName parameter
+- rn: Upgrade to cleaners 0.3.12
+- rn: Upgrade Airship to 0.2.9
+- rn: Add dependency on react-native-svg which needs to be installed in parent application
+- rn: Fix incorrect logic for when Notification and Background App Refresh permissions as requested
+-
 ## 0.9.32 (2022-04-19)
 
 - rn: Add show/hide toggle to password fields
