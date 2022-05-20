@@ -20,20 +20,22 @@ interface Props {
  * theme customizations.
  */
 function LoginUiProviderComponent(props: Props): JSX.Element {
-  if (props.themeOverride != null) {
-    // Error check the theme but don't use the return value as the cleaner sets missing parameters
-    // to undefined which stomps on top of the oldTheme
-    asOptionalTheme(props.themeOverride)
+  React.useEffect(() => {
+    if (props.themeOverride != null) {
+      // Error check the theme but don't use the return value as the cleaner sets missing parameters
+      // to undefined which stomps on top of the oldTheme
+      asOptionalTheme(props.themeOverride)
 
-    const themeOverride = props.themeOverride
-    const oldTheme = getTheme()
-    const tsHackTheme: any = { ...oldTheme, ...themeOverride }
-    const newTheme: Theme = tsHackTheme
+      const themeOverride = props.themeOverride
+      const oldTheme = getTheme()
+      const tsHackTheme: any = { ...oldTheme, ...themeOverride }
+      const newTheme: Theme = tsHackTheme
 
-    if (JSON.stringify(oldTheme) !== JSON.stringify(newTheme)) {
-      changeTheme(newTheme)
+      if (JSON.stringify(oldTheme) !== JSON.stringify(newTheme)) {
+        changeTheme(newTheme)
+      }
     }
-  }
+  })
 
   return (
     <loginUiContext.Provider value>
