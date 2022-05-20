@@ -71,7 +71,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
     fontSize: theme.rem(0.75)
   },
   interactiveContainer: {
-    height: theme.rem(5.5),
+    height: theme.rem(2.5),
     width: '100%',
     alignItems: 'center'
   },
