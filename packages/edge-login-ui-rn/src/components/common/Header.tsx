@@ -8,8 +8,8 @@ import * as Colors from '../../constants/Colors'
 import * as Constants from '../../constants/index'
 import * as Styles from '../../styles/index'
 import { scale } from '../../util/scaling'
-import { Button } from '../common/Button'
 import { HeaderBackButton } from '../common/HeaderBackButton'
+import { MainButton } from '../themed/MainButton'
 
 interface OwnProps {
   onBack?: () => void
@@ -64,13 +64,10 @@ export class Header extends React.Component<Props> {
     if (this.props.onSkip == null) return null
 
     return (
-      <Button
+      <MainButton
         onPress={this.props.onSkip}
-        downStyle={styles.textButton.downStyle}
-        downTextStyle={styles.textButton.downTextStyle}
-        upStyle={styles.textButton.upStyle}
-        upTextStyle={styles.textButton.upTextStyle}
         label={s.strings.skip}
+        type="textOnly"
       />
     )
   }

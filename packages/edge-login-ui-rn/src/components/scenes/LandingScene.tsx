@@ -10,7 +10,6 @@ import { logEvent } from '../../util/analytics'
 import { scale } from '../../util/scaling'
 import { LogoImageHeader } from '../abSpecific/LogoImageHeader'
 import { BackgroundImage } from '../common/BackgroundImage'
-import { Button } from '../common/Button'
 import { HeaderParentButtons } from '../common/HeaderParentButtons'
 import { connect } from '../services/ReduxStore'
 import { MainButton } from '../themed/MainButton'
@@ -59,14 +58,11 @@ class LandingSceneComponent extends React.Component<Props> {
             />
           </View>
           <View style={styles.loginButtonBox}>
-            <Button
+            <MainButton
               testID="alreadyHaveAccountButton"
               onPress={this.props.handlePassword}
               label={s.strings.landing_already_have_account}
-              downStyle={styles.loginButton.downStyle}
-              downTextStyle={styles.loginButton.downTextStyle}
-              upStyle={styles.loginButton.upStyle}
-              upTextStyle={styles.loginButton.upTextStyle}
+              type="textOnly"
             />
           </View>
         </View>
