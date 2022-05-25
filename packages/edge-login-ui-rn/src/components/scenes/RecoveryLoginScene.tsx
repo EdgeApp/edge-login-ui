@@ -8,11 +8,11 @@ import * as Constants from '../../constants/index'
 import * as Styles from '../../styles/index'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
 import { LoginAttempt } from '../../util/loginAttempt'
-import { Button } from '../common/Button'
 import { FormField } from '../common/FormField'
 import { Header } from '../common/Header'
 import SafeAreaViewGradient from '../common/SafeAreaViewGradient'
 import { connect } from '../services/ReduxStore'
+import { MainButton } from '../themed/MainButton'
 
 interface OwnProps {
   showHeader?: boolean
@@ -153,12 +153,9 @@ class RecoveryLoginSceneComponent extends React.Component<Props, State> {
             </View>
             <View style={styles.buttonContainer}>
               {this.renderError()}
-              <Button
+              <MainButton
                 onPress={this.handleSubmit}
-                downStyle={styles.submitButton.downStyle}
-                downTextStyle={styles.submitButton.downTextStyle}
-                upStyle={styles.submitButton.upStyle}
-                upTextStyle={styles.submitButton.upTextStyle}
+                type="secondary"
                 label={s.strings.submit}
               />
             </View>
