@@ -1,5 +1,9 @@
 # edge-login-ui
 
+## 0.10.2 (2022-05-26)
+
+- rn: Accept Branding props in OtpRepairScreen and PasswordRecoveryScreen to populate appName
+
 ## 0.10.1 (2022-05-20)
 
 - rn: Fix the pin-login error message height
