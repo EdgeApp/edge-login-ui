@@ -81,7 +81,10 @@ const AccountInfoComponent = ({
   ]
 
   const renderInfoRow = (label: string, detail: string, isLastRow: boolean) => (
-    <View style={[styles.row, !isLastRow ? styles.rowMarginBottom : undefined]}>
+    <View
+      style={[styles.row, !isLastRow ? styles.rowMarginBottom : undefined]}
+      key={label + detail}
+    >
       <EdgeText
         style={[styles.text, styles.label]}
         numberOfLines={1}
