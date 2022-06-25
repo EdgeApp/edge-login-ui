@@ -8,20 +8,20 @@ import { Branding } from '../../types/Branding'
 import { Dispatch, RootState } from '../../types/ReduxTypes'
 import { MaybeProvideLoginUi } from '../publicApi/LoginUiProvider'
 import {
-  PublicChangePasswordScene,
+  ChangePasswordScene,
+  NewAccountPasswordScene,
   ResecurePasswordScene
-} from '../scenes/existingAccout/ChangePasswordScene'
+} from '../scenes/ChangePasswordScene'
 import {
-  PublicChangePinScene,
+  ChangePinScene,
+  NewAccountPinScene,
   ResecurePinScene
-} from '../scenes/existingAccout/ChangePinScene'
+} from '../scenes/ChangePinScene'
 import { PublicChangeRecoveryScene } from '../scenes/existingAccout/ChangeRecoveryScene'
 import { OtpRepairScene } from '../scenes/existingAccout/OtpRepairScene'
 import { SecurityAlertsScene } from '../scenes/existingAccout/SecurityAlertsScene'
 import { LandingScene } from '../scenes/LandingScene'
 import { LoadingScene } from '../scenes/LoadingScene'
-import { NewAccountPasswordScene } from '../scenes/newAccount/NewAccountPasswordScene'
-import { NewAccountPinScene } from '../scenes/newAccount/NewAccountPinScene'
 import { NewAccountReviewScene } from '../scenes/newAccount/NewAccountReviewScene'
 import { NewAccountTosScene } from '../scenes/newAccount/NewAccountTosScene'
 import { NewAccountUsernameScene } from '../scenes/newAccount/NewAccountUsernameScene'
@@ -57,9 +57,9 @@ class RouterComponent extends React.Component<Props> {
   renderContent() {
     switch (this.props.scene.currentScene) {
       case 'ChangePasswordScene':
-        return <PublicChangePasswordScene showHeader={this.props.showHeader} />
+        return <ChangePasswordScene />
       case 'ChangePinScene':
-        return <PublicChangePinScene showHeader={this.props.showHeader} />
+        return <ChangePinScene />
       case 'ChangeRecoveryScene':
         return (
           <PublicChangeRecoveryScene
@@ -101,9 +101,9 @@ class RouterComponent extends React.Component<Props> {
       case 'RecoveryLoginScene':
         return <RecoveryLoginScene />
       case 'ResecurePasswordScene':
-        return <ResecurePasswordScene showHeader={this.props.showHeader} />
+        return <ResecurePasswordScene />
       case 'ResecurePinScene':
-        return <ResecurePinScene showHeader={this.props.showHeader} />
+        return <ResecurePinScene />
       case 'SecurityAlertScene':
         return <SecurityAlertsScene />
     }
