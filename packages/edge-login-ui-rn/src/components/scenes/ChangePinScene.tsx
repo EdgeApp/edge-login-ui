@@ -99,8 +99,8 @@ export const ChangePinScene = () => {
     Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}
-        title={s.strings.pswd_and_pin_changed}
-        message={s.strings.change_pwd_body}
+        title={s.strings.pin_changed}
+        message={s.strings.pin_successfully_changed}
         buttons={{ ok: { label: s.strings.ok } }}
       />
     ))
@@ -182,8 +182,8 @@ export const ResecurePinScene = () => {
     Airship.show(bridge => (
       <ButtonsModal
         bridge={bridge}
-        title={s.strings.pswd_and_pin_changed}
-        message={s.strings.change_pwd_body}
+        title={s.strings.pin_changed}
+        message={s.strings.pin_successfully_changed}
         buttons={{ ok: { label: s.strings.ok } }}
       />
     ))
