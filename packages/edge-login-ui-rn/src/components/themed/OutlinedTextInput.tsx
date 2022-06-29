@@ -48,6 +48,7 @@ interface Props {
   onChangeText?: (text: string) => void
   onClear?: () => void
   onFocus?: () => void
+  onHidePassword?: () => void
 
   // Other React Native TextInput properties:
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' // Defaults to 'sentences'
@@ -65,6 +66,7 @@ interface Props {
   onSubmitEditing?: () => void
   returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send' // Defaults to 'done'
   secureTextEntry?: boolean // Defaults to 'false'
+  hidePassword?: boolean // Defaults to 'false'
   testID?: string
 
   // Unless 'autoFocus' is passed explicitly in the props, Search Bars 'autoFocus' and 'regular' text inputs don't.
@@ -102,12 +104,14 @@ export const OutlinedTextInput = forwardRef(
       marginRem,
       multiline = false,
       searchIcon = false,
+      hidePassword,
 
       // Callbacks:
       onBlur,
       onChangeText,
       onClear,
       onFocus,
+      onHidePassword,
 
       // TextInput:
       autoFocus = !searchIcon,
@@ -124,8 +128,13 @@ export const OutlinedTextInput = forwardRef(
     const hasValue = value !== ''
 
     // Show/Hide password input:
-    const [hidePassword, setHidePassword] = useState(secureTextEntry ?? false)
-    const handleHidePassword = () => setHidePassword(!hidePassword)
+    const [internalHidePassword, setInternalHidePassword] = useState(
+      secureTextEntry ?? false
+    )
+    const handleHidePassword = () => {
+      setInternalHidePassword(!internalHidePassword)
+      if (onHidePassword != null) onHidePassword()
+    }
 
     // Imperative methods:
     const inputRef = useRef<TextInput>(null)
@@ -408,7 +417,7 @@ export const OutlinedTextInput = forwardRef(
             style={[styles.textInput, textInputStyle]}
             textAlignVertical="top"
             value={value}
-            secureTextEntry={hidePassword}
+            secureTextEntry={hidePassword ?? internalHidePassword}
             // Callbacks:
             onBlur={handleBlur}
             onChangeText={onChangeText}
