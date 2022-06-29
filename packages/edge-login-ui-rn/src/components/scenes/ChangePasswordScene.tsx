@@ -9,6 +9,7 @@ import {
 } from '../../actions/CreateAccountActions'
 import { onComplete } from '../../actions/WorkflowActions'
 import s from '../../common/locales/strings'
+import { useHandler } from '../../hooks/useHandler.js'
 import { RootState } from '../../types/ReduxTypes'
 import { logEvent } from '../../util/analytics'
 import { ButtonsModal } from '../modals/ButtonsModal'
@@ -23,21 +24,17 @@ import { PasswordStatus } from '../themed/PasswordStatus'
 import { ThemedScene } from '../themed/ThemedScene'
 
 interface Props {
-  title: string | undefined
-  onBack: (() => void) | undefined
-  onNext: () => void
-  mainButtonLabel: string
-  mainButtonType: 'primary' | 'secondary'
-  noUnderline: boolean
+  title?: string | undefined
+  onBack?: (() => void) | undefined
+  onSubmit: () => void
+  mainButtonLabel?: string
 }
 
 const ChangePasswordSceneComponent = ({
   title,
   onBack,
-  onNext,
-  mainButtonLabel,
-  mainButtonType,
-  noUnderline
+  onSubmit,
+  mainButtonLabel = s.strings.done
 }: Props) => {
   const theme = useTheme()
   const styles = getStyles(theme)
@@ -107,7 +104,7 @@ const ChangePasswordSceneComponent = ({
           label={s.strings.confirm_password}
           autoFocus={focusSecond}
           onChangeText={validateConfirmPasswordDispatch}
-          onSubmitEditing={onNext}
+          onSubmitEditing={onSubmit}
           clearIcon
           searchIcon={false}
           marginRem={[0, 0.75, 1.25]}
@@ -132,8 +129,8 @@ const ChangePasswordSceneComponent = ({
           >
             <MainButton
               label={mainButtonLabel}
-              type={mainButtonType}
-              onPress={onNext}
+              type="secondary"
+              onPress={onSubmit}
             />
           </Fade>
         </View>
@@ -142,7 +139,7 @@ const ChangePasswordSceneComponent = ({
   }
 
   return (
-    <ThemedScene onBack={onBack} title={title} noUnderline={noUnderline}>
+    <ThemedScene onBack={onBack} title={title}>
       {focusSecond ? (
         <KeyboardAvoidingView
           style={styles.container}
@@ -180,6 +177,7 @@ const getStyles = cacheStyles((theme: Theme) => ({
 // The scene for existing users to change their password
 export const ChangePasswordScene = () => {
   const dispatch = useDispatch()
+
   const confirmPassword =
     useSelector((state: RootState) => state.create.confirmPassword) ?? ''
   const error =
@@ -196,56 +194,35 @@ export const ChangePasswordScene = () => {
     useSelector((state: RootState) => state.create.passwordStatus) ?? ''
   const account = useSelector((state: RootState) => state.account ?? undefined)
 
-  const validateConfirmPassword = (password: string) => {
-    dispatch(validateConfirmPassword(password))
-  }
-
-  const handleBack = () => {
-    dispatch(onComplete())
-  }
-
-  const handleDone = () => {
-    Airship.show(bridge => (
-      <ButtonsModal
-        bridge={bridge}
-        title={s.strings.password_changed}
-        message={s.strings.pwd_change_modal}
-        buttons={{ ok: { label: s.strings.ok } }}
-      />
-    ))
-      .then(handleBack)
-      .catch(showError)
-  }
-
-  const handleNext = () => {
+  const handleSubmit = useHandler(() => {
     if (!passwordStatus || error !== '' || error2 !== '') {
       return
     }
     if (password && password !== confirmPassword) {
-      validateConfirmPassword(confirmPassword)
+      dispatch(validateConfirmPassword(confirmPassword))
       return
     }
     Keyboard.dismiss()
     if (account) {
       return account
         .changePassword(password)
-        .then(handleDone)
-        .catch(error => {
-          showError(error)
-        })
+        .then(
+          async () =>
+            await Airship.show(bridge => (
+              <ButtonsModal
+                bridge={bridge}
+                title={s.strings.password_changed}
+                message={s.strings.pwd_change_modal}
+                buttons={{ ok: { label: s.strings.ok } }}
+              />
+            ))
+        )
+        .then(() => dispatch(onComplete()))
+        .catch(showError)
     }
-  }
+  })
 
-  return (
-    <ChangePasswordSceneComponent
-      onBack={undefined}
-      onNext={handleNext}
-      title={undefined}
-      mainButtonLabel={s.strings.done}
-      mainButtonType="primary"
-      noUnderline
-    />
-  )
+  return <ChangePasswordSceneComponent onSubmit={handleSubmit} />
 }
 
 // The scene for new users to create a password
@@ -266,19 +243,11 @@ export const NewAccountPasswordScene = () => {
     (state: RootState) => !!state.passwordStatus
   )
 
-  const validateConfirmPasswordDispatch = (password: string) => {
-    dispatch(validateConfirmPassword(password))
-  }
-
-  const handleBack = () => {
+  const handleBack = useHandler(() => {
     dispatch({ type: 'NEW_ACCOUNT_USERNAME' })
-  }
+  })
 
-  const handleDone = () => {
-    dispatch({ type: 'NEW_ACCOUNT_PIN' })
-  }
-
-  const handleNext = () => {
+  const handleSubmit = useHandler(() => {
     if (!isPasswordStatusExists) return
 
     if (
@@ -290,23 +259,21 @@ export const NewAccountPasswordScene = () => {
     }
 
     if (password && password !== confirmPassword) {
-      validateConfirmPasswordDispatch(confirmPassword ?? '')
+      dispatch(validateConfirmPassword(confirmPassword ?? ''))
       logEvent('Signup_Password_Invalid')
       return
     }
 
     logEvent('Signup_Password_Valid')
-    handleDone()
-  }
+    dispatch({ type: 'NEW_ACCOUNT_PIN' })
+  })
 
   return (
     <ChangePasswordSceneComponent
       onBack={handleBack}
-      onNext={handleNext}
+      onSubmit={handleSubmit}
       title={s.strings.choose_title_password}
       mainButtonLabel={s.strings.next_label}
-      mainButtonType="secondary"
-      noUnderline={false}
     />
   )
 }
@@ -329,20 +296,12 @@ export const ResecurePasswordScene = () => {
   )
   const account = useSelector((state: RootState) => state.account ?? undefined)
 
-  const validateConfirmPasswordDispatch = (password: string) => {
-    dispatch(validateConfirmPassword(password))
-  }
-
-  const handleDone = () => {
-    dispatch({ type: 'RESECURE_PIN' })
-  }
-
-  const handleNext = () => {
+  const handleSubmit = useHandler(() => {
     if (!passwordStatus || error !== '' || error2 !== '') {
       return
     }
     if (password && password !== confirmPassword) {
-      validateConfirmPasswordDispatch(confirmPassword ?? '')
+      dispatch(validateConfirmPassword(confirmPassword ?? ''))
       return
     }
 
@@ -351,21 +310,10 @@ export const ResecurePasswordScene = () => {
     if (account) {
       return account
         .changePassword(password ?? '')
-        .then(handleDone)
-        .catch(error => {
-          showError(error)
-        })
+        .then(() => dispatch({ type: 'RESECURE_PIN' }))
+        .catch(showError)
     }
-  }
+  })
 
-  return (
-    <ChangePasswordSceneComponent
-      onBack={undefined}
-      onNext={handleNext}
-      title={undefined}
-      mainButtonLabel={s.strings.done}
-      mainButtonType="primary"
-      noUnderline
-    />
-  )
+  return <ChangePasswordSceneComponent onSubmit={handleSubmit} />
 }
