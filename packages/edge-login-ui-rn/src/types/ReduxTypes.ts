@@ -1,4 +1,5 @@
 import { EdgeAccount, EdgeAccountOptions, EdgeContext } from 'edge-core-js'
+import * as ReactRedux from 'react-redux'
 
 import { RootState } from '../reducers/RootReducer'
 import { Action } from './ReduxActions'
@@ -29,3 +30,11 @@ export type Dispatch = <Return>(
     | Action
     | ((dispatch: Dispatch, getState: GetState, i: Imports) => Return)
 ) => Return
+
+type UseDispatch = () => Dispatch
+
+type UseSelector = <T>(select: (state: RootState) => T) => T
+
+export const useDispatch: UseDispatch = ReactRedux.useDispatch
+
+export const useSelector: UseSelector = ReactRedux.useSelector
