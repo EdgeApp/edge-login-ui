@@ -1,5 +1,3 @@
-import { EdgePasswordRules } from 'edge-core-js'
-
 import { Action } from '../types/ReduxTypes'
 
 export interface CreateState {
@@ -8,9 +6,7 @@ export interface CreateState {
   readonly createErrorMessage: string | null
   readonly createPasswordErrorMessage: string | null
   readonly password: string | null
-  readonly passwordStatus: EdgePasswordRules | null
   readonly pin: string
-  readonly pinError: string
   readonly pinErrorMessage: string | null
   readonly username: string | null
   readonly usernameErrorMessage: string | null
@@ -21,8 +17,6 @@ const initialState: CreateState = {
   password: null,
   confirmPassword: null,
   pin: '',
-  pinError: '',
-  passwordStatus: null,
   createPasswordErrorMessage: null,
   confirmPasswordErrorMessage: null,
   pinErrorMessage: null,
@@ -55,7 +49,6 @@ export function create(
       return {
         ...state,
         password: action.data.password,
-        passwordStatus: action.data.passwordStatus,
         createPasswordErrorMessage: action.data.error
       }
     case 'AUTH_UPDATE_CONFIRM_PASSWORD':

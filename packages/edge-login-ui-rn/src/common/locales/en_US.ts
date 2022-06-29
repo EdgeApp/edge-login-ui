@@ -8,7 +8,6 @@ export default {
   confirm: 'Confirm',
   create: 'Create',
   pin: 'PIN',
-  back_caps: 'BACK',
   back: 'Back',
   forgot_password: 'Forgot Password',
   create_an_account: 'Create an Account', // 'Forgot Password' is capitalized, making consistent
@@ -30,22 +29,16 @@ export default {
   exit: 'Exit',
   exit_pin: 'Exit PIN', // nothing should be all-caps
   next_label: 'Next',
-  next_label_caps: 'NEXT',
   delete: 'Delete',
   done: 'Done',
   skip: 'SKIP',
   skip_button: 'Skip',
-  done_caps: 'DONE',
   cancel: 'Cancel',
-  cancel_caps: 'CANCEL',
   enable: 'Enable',
   continue: 'Continue',
-  change_password: 'Change Password',
-  change_pin: 'Change PIN',
   pin_changed: 'PIN Changed',
   delete_account: 'Delete Account?',
   pin_successfully_changed: 'PIN Successfully Changed',
-  delete_account_header: 'Delete Account',
   delete_username_account:
     'Delete %1$s on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.',
   disable_otp_header: 'Are you sure you want to disable 2FA?',
@@ -73,31 +66,17 @@ export default {
   choose_title_username: 'Choose Username', // title of scene
   choose_title_password: 'Set Password', // title of scene
   choose_title_pin: 'Set PIN',
-  create_your_account: 'Creating Your Account', // title of scene
   write_and_store: 'Write Down and Store Securely',
-  quick_review: 'Quick Review',
   review: 'Review',
   recovery: 'Recovery',
   account_confirmation: 'Account Confirmation', // title should be regular capitalization, not all uppercase
   otp_header: 'Two Factor Authentication',
   otp_header_ip: 'Authorize Device',
   otp_header_repair: 'Two Factor Repair',
-  recovery_questions_header: 'Recovery Questions',
-  account_info_warning:
-    'You did not set your password. We strongly encourage you to create a password and backup your account as soon as possible. You can set a password in the Settings screen in the app.',
   show_account_info: 'View account information',
   hide_account_info: 'Hide account information',
-  password_successfully_changed:
-    'Password Successfully Changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!',
-  otp_hero_scan:
-    'Scan the QR code below using the device that enabled 2FA to give access to the device',
   password_desc:
     'The password is used to log in and change sensitive settings. Be sure to write it down!',
-  re_enter_new_password: 'Re-enter New Password',
-  new_password: 'New Password',
-  pswd_and_pin_changed: 'Password and PIN successfully changed.',
-  change_pwd_body:
-    "Don't forget your password or recovery answers. You will permanently lose access to your funds if you lose your password and recovery answers.",
   pin_desc:
     'Your PIN is a 4 digit code used to quickly log back into your account.',
   recovery_successful:
@@ -109,8 +88,6 @@ export default {
   your_answer_label: 'Your Answer',
   answer_case_sensitive: 'Answers are case sensitive',
   answers_four_chanracters: 'Answers should be minimum of 4 characters',
-  otp_dispable_req_sent:
-    "2FA disable request has been sent. You'll be able to login with your username and password after 7 days.",
   otp_instructions:
     'Sign into your account using the device you setup 2FA with, and go to Settings > 2 Factor Authentication to find the code.',
   disable_otp_button_two: 'Disable 2 Factor Authentication',
@@ -122,15 +99,12 @@ export default {
   otp_email_subject_branded: '%1$s Recovery Token',
   recovery_disabled:
     'Password Recovery has been disabled. You can enable it again by going into Password Recovery anytime',
-  recovery_what_account:
-    'Please enter the username of the account you want to recover.',
   email_address: 'Email Address',
   recovery_instructions_complete:
     'To complete account recovery setup you MUST save the recovery token. This is required to recover your account in addition to your username and recovery answers. \n\n Please enter your email to be sent the recovery token.',
   recovery_error: 'The answers you provided are incorrect.',
   read_understod_1: 'I have read, understood, and agree to the ',
   read_understod_2: 'Terms of Use',
-  last_step_review: 'Last step! Let’s finish with a quick review',
   confirm_email: 'Confirm & Email',
   confirm_share: 'Confirm & Share',
   welcome: 'Welcome to %s!',
@@ -144,9 +118,7 @@ export default {
   welcome_advantage_two_title: 'Your security is key',
   welcome_advantage_two_description:
     'You have complete control over your digital assets. Not even %s has access to your information.',
-  start_username: 'Let’s get started with choosing a username',
   get_started: 'Get Started', // button title, not a complete sentence so capitalize first letters
-  encrypting: 'Doing the encryption',
   username_desc:
     'Your username will be required to sign in to your %s account on this and other devices.',
   almost_done: "Almost done! Let's write down your account information",
@@ -155,7 +127,6 @@ export default {
   great_job: 'Great Job!',
   hang_tight: 'Hang tight while we create',
   secure_account: 'and secure your account',
-  encrypting_wallet: 'Encrypting wallet...',
   confirm_recovery_questions: 'Confirm Recovery',
   login_with_password: 'Login with password',
   landing_tagline:
@@ -179,7 +150,6 @@ export default {
   create_account_error_title: 'Error occurred creating account',
   create_account_error_message:
     'An error occurred creating your account. This may have been due to a slow network connection or network interruption. Please retry and if you receive another error that the account already exists, please restart the app and login with your username and password.',
-  try_again: 'Try Again',
   otp_reset_modal_header: 'Secure Your Account',
   otp_reset_modal_message:
     'Two factor authentication (2FA) prevents unauthorized access from other devices, even if your username and password is compromised. You can scan a QR code or type in an authentication code to seamlessly authorize other devices. Would you like to enable 2FA?',
@@ -206,7 +176,6 @@ export default {
   alert_modal_voucher: 'Login request for new device for account ',
   alert_modal_action: '\nPlease log in to approve or deny this alert',
 
-  alert_scene_title: 'Security Center',
   alert_scene_message: 'A new device would like to log in to your account.',
   alert_scene_message_many:
     'Several new devices would like to log in to your account.',
