@@ -1,5 +1,16 @@
 # edge-login-ui
 
+## 0.10.3 (2022-06-29)
+
+- rn: Create a UI2 ChangePinScene and reuse it for creating, changing and resecuring the pin code
+- rn: Create a UI2 ChangePasswordScene and reuse it for creating, changing and resecuring the password
+- rn: Sync password eyes
+- rn: remove unused strings
+- rn: remove unused redux states
+- rn: Update "react-redux" to version 7.2.4
+- rn: Add properly typed redux hooks
+- rn: Add the useHandler hook from edge-react-gui
+
 ## 0.10.2 (2022-05-26)
 
 - rn: Accept Branding props in OtpRepairScreen and PasswordRecoveryScreen to populate appName
